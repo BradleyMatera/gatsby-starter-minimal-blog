@@ -32,6 +32,11 @@ const config: GatsbyConfig = {
             title: `About`,
             slug: `/about`,
           },
+
+          {
+            title: `Projects`,
+            slug: `/projects`,
+          },
         ],
         externalLinks: [
           {
