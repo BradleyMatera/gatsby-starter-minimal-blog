@@ -5,7 +5,7 @@ tags:
   - Code
 ---
 
-import SpotifyPlayer from "./SpotifyPlayer";
+import SpotifyPlayer from "./SpotifyPlayer"
 
 Here will a React component go:
 
@@ -15,22 +15,20 @@ Here will a normal code block go:
 
 ```js
 (function() {
-
-var cache = {};
-var form = $('form');
-var minified = true;
-
-var dependencies = {};
-
-var treeURL = 'https://api.github.com/repos/PrismJS/prism/git/trees/gh-pages?recursive=1';
-var treePromise = new Promise(function(resolve) {
-  $u.xhr({
-    url: treeURL,
-    callback: function(xhr) {
-      if (xhr.status < 400) {
-        resolve(JSON.parse(xhr.responseText).tree);
+  var cache = {};
+  var form = $('form');
+  var minified = true;
+  var dependencies = {};
+  var treeURL = 'https://api.github.com/repos/PrismJS/prism/git/trees/gh-pages?recursive=1';
+  var treePromise = new Promise(function(resolve) {
+    $u.xhr({
+      url: treeURL,
+      callback: function(xhr) {
+        if (xhr.status < 400) {
+          resolve(JSON.parse(xhr.responseText).tree);
+        }
       }
-    }
+    });
   });
 });
 ```
@@ -51,13 +49,10 @@ const getValue = (input, rootFontSize = 16) => {
   if (typeof input === `number`) {
     return input / rootFontSize;
   }
-
   const isPxValue = input.slice(-2) === `px`;
-
   if (isPxValue) {
     return parseFloat(input.slice(0, -2));
   }
-
   return parseFloat(input.slice(0, -3));
 };
 
@@ -86,7 +81,7 @@ export default Layout
 
 Code block with code highlighting:
 
-```jsx title=src/components/post.jsx highlight=5-7,10
+```jsx
 import * as React from "react";
 
 const Post = ({ data: { post } }) => (
@@ -133,31 +128,31 @@ Harry Potter and the Philosopher's Stone
 
 Code block with lineNumbers (and lang):
 
-```text withLineNumbers
+```text
 Harry Potter and the Chamber of Secrets
 ```
 
 Code block with lineNumbers (and without lang):
 
-```none withLineNumbers
+```
 Harry Potter and the Chamber of Secrets
 ```
 
 Code block with only the title:
 
-```none title=src/utils/scream.js
+```js
 const scream = (input) => window.alert(input)
 ```
 
 Code block with only the title and with lineNumbers:
 
-```none title=src/utils/scream.js withLineNumbers
+```js
 const scream = (input) => window.alert(input)
 ```
 
 Line highlighting without code title:
 
-```js highlight=2,4-5
+```js
 const test = 3;
 const foo = "bar";
 const harry = "potter";
@@ -165,38 +160,35 @@ const hermione = "granger";
 const ron = "weasley";
 ```
 
-Here will `inline code` go, just inside the text. Wow!
+Here will inline code go, just inside the text. `Wow!`
 
 Code block with line numbers, highlighting, language, and title:
 
+```jsx
 <div data-testid="code-block">
+  import * as React from "react";
 
-```tsx title=src/components/blog.tsx highlight=7-8,19,21 withLineNumbers
-import * as React from "react";
+  const Blog = ({ posts }: PostsProps) => {
+    const { tagsPath, basePath } = useSiteMetadata();
+    return (
+      <Layout>
+        <Flex sx={{ alignItems: `center`, justifyContent: `space-between` }}>
+          <Heading variant="h2" as="h2">
+            Blog
+          </Heading>
+          <Styled.a
+            as={Link}
+            sx={{ variant: `links.secondary` }}
+            to={`/${basePath}/${tagsPath}`.replace(/\/\/+/g, `/`)}
+          >
+            View all tags
+          </Styled.a>
+        </Flex>
+        <Listing posts={posts} sx={{ mt: [4, 5] }} />
+      </Layout>
+    );
+  };
 
-const Blog = ({ posts }: PostsProps) => {
-  const { tagsPath, basePath } = useSiteMetadata();
-
-  return (
-    <Layout>
-      <Flex sx={{ alignItems: `center`, justifyContent: `space-between` }}>
-        <Heading variant="h2" as="h2">
-          Blog
-        </Heading>
-        <Styled.a
-          as={Link}
-          sx={{ variant: `links.secondary` }}
-          to={`/${basePath}/${tagsPath}`.replace(/\/\/+/g, `/`)}
-        >
-          View all tags
-        </Styled.a>
-      </Flex>
-      <Listing posts={posts} sx={{ mt: [4, 5] }} />
-    </Layout>
-  );
-};
-
-export default Blog;
-```
-
+  export default Blog;
 </div>
+```
