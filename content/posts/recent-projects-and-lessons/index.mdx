@@ -1,0 +1,51 @@
+---
+title: "Exploring Recent Projects: APIs, React, and Lessons Learned"
+date: 2024-12-04
+slug: "/recent-projects-and-lessons"
+tags:
+  - Projects
+  - APIs
+  - React
+  - Best Practices
+---
+
+# 🚀 Recent Projects and Lessons Learned
+
+Hi, everyone! Bradley Matera here, and I’m excited to share some highlights from my latest projects and the insights I've gained along the way. It’s been a whirlwind of coding, deploying, and refining, but the journey has been both rewarding and educational.
+
+---
+
+## 🌐 Building and Deploying an API: My Journey
+
+One of my most recent projects involved building and deploying a RESTful API to manage a simple task-tracking application. The project served as a playground to practice API design principles and deployment strategies. Here’s what I tackled:
+
+### Key Features:
+1. **CRUD Operations**: Users can create, read, update, and delete tasks.
+2. **Authentication**: Implemented JWT-based authentication for secure API access.
+3. **Database Integration**: Utilized MongoDB to store task data.
+
+### Deployment Insights:
+- **Platform**: I deployed the API using Heroku (though I'm exploring Docker-based deployments next).
+- **Challenges**: Learning to handle environment variables securely during deployment was a valuable lesson.
+- **Outcome**: The API works flawlessly and scales as expected for a small application.
+
+---
+
+## 🎨 Best Practices for Using APIs in React
+
+Working with APIs in React taught me some crucial lessons:
+1. **Error Handling**: Always account for failed API calls with user-friendly error messages.
+2. **State Management**: Using `React Query` simplified data fetching and caching.
+3. **Separation of Concerns**: Abstracting API calls into a dedicated `services` folder kept the codebase clean and maintainable.
+
+Example of a custom hook I used for fetching data:
+```javascript
+import { useQuery } from "react-query";
+import { fetchTasks } from "../services/api";
+
+export const useTasks = () => {
+  return useQuery("tasks", fetchTasks, {
+    retry: 3, // Retry failed requests up to 3 times
+    refetchOnWindowFocus: false, // Prevent refetching when the window regains focus
+  });
+};
