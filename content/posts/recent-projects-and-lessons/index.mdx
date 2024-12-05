@@ -1,51 +1,127 @@
 ---
-title: "Exploring Recent Projects: APIs, React, and Lessons Learned"
+title: "Exploring My Recent Project: BasicServerSetup"
 date: 2024-12-04
-slug: "/recent-projects-and-lessons"
+slug: "/recent-project-basicserversetup"
 tags:
   - Projects
   - APIs
-  - React
-  - Best Practices
+  - Backend
 ---
 
-# 🚀 Recent Projects and Lessons Learned
+# 🕒✨ BasicServerSetup: A Time Tracking Application
 
-Hi, everyone! Bradley Matera here, and I’m excited to share some highlights from my latest projects and the insights I've gained along the way. It’s been a whirlwind of coding, deploying, and refining, but the journey has been both rewarding and educational.
+Hi everyone! Today, I'm excited to share one of my recent projects, **BasicServerSetup**, a robust and user-friendly solution for tracking employee work hours. This project was a fantastic opportunity to dive deep into API design, frontend-backend integration, and deployment strategies.
 
----
+## 🌟 Features
 
-## 🌐 Building and Deploying an API: My Journey
+Here's a quick overview of what BasicServerSetup offers:
 
-One of my most recent projects involved building and deploying a RESTful API to manage a simple task-tracking application. The project served as a playground to practice API design principles and deployment strategies. Here’s what I tackled:
+- **🔒 User Authentication**: Secure registration and login functionality.
+- **⏱️ Time Tracking**: Users can clock in and clock out effortlessly.
+- **📅 Timesheet Management**: View and manage your work sessions with ease.
+- **🌐 Sleek Frontend**: A clean and responsive interface built with HTML and Tailwind CSS.
+- **🚀 Backend API**: A powerful RESTful API developed using Express.js.
+- **🔄 CORS Enabled**: Ensuring seamless cross-origin requests.
+- **💾 In-Memory Storage**: Simplified for demonstration purposes.
 
-### Key Features:
-1. **CRUD Operations**: Users can create, read, update, and delete tasks.
-2. **Authentication**: Implemented JWT-based authentication for secure API access.
-3. **Database Integration**: Utilized MongoDB to store task data.
+## 🛠️ The Tech Stack
 
-### Deployment Insights:
-- **Platform**: I deployed the API using Heroku (though I'm exploring Docker-based deployments next).
-- **Challenges**: Learning to handle environment variables securely during deployment was a valuable lesson.
-- **Outcome**: The API works flawlessly and scales as expected for a small application.
+- **Backend**: Node.js, Express.js
+- **Frontend**: HTML, Tailwind CSS
+- **Other Tools**: Nodemon, http-server, and GitHub Pages for deployment.
 
----
+This stack allowed me to focus on functionality while keeping the setup straightforward and manageable.
 
-## 🎨 Best Practices for Using APIs in React
+## 📋 Project Structure
 
-Working with APIs in React taught me some crucial lessons:
-1. **Error Handling**: Always account for failed API calls with user-friendly error messages.
-2. **State Management**: Using `React Query` simplified data fetching and caching.
-3. **Separation of Concerns**: Abstracting API calls into a dedicated `services` folder kept the codebase clean and maintainable.
+Here's a look at the project layout:
 
-Example of a custom hook I used for fetching data:
-```javascript
-import { useQuery } from "react-query";
-import { fetchTasks } from "../services/api";
+```plaintext
+BasicServerSetup/
+├── 📄 .env
+├── 📄 package.json
+├── 📁 app/
+│   ├── 📄 app.js
+│   ├── 📁 models/
+│   │   ├── 📄 userModel.js
+│   │   └── 📄 timeEntryModel.js
+│   ├── 📁 controllers/
+│   │   ├── 📄 userController.js
+│   │   └── 📄 timeController.js
+│   ├── 📁 routes/
+│   │   └── 📄 index.js
+│   └── 📁 utils/
+│       └── 📄 authMiddleware.js
+└── 📁 frontend/
+    └── 📄 index.html
+```
 
-export const useTasks = () => {
-  return useQuery("tasks", fetchTasks, {
-    retry: 3, // Retry failed requests up to 3 times
-    refetchOnWindowFocus: false, // Prevent refetching when the window regains focus
-  });
-};
+This structure separates backend logic (in app/) from the frontend files, making the project modular and easy to navigate.
+
+## 🌐 Key Endpoints
+
+Here are some of the core API endpoints I developed:
+
+### 📝 Register
+- POST /register
+- Body: `{ "username": "your_username", "password": "your_password" }`
+
+### 🔐 Login
+- POST /login
+- Body: `{ "username": "your_username", "password": "your_password" }`
+
+### 🟢 Clock In
+- POST /clockin
+- Headers: `x-user-id: YOUR_USER_ID`
+
+### 🔴 Clock Out
+- POST /clockout
+- Headers: `x-user-id: YOUR_USER_ID`
+
+### 📅 View Timesheet
+- GET /timesheet
+- Headers: `x-user-id: YOUR_USER_ID`
+
+These endpoints showcase the core functionality of the application and were designed with clarity and scalability in mind.
+
+## 🚀 Deployment Highlights
+
+One of the most exciting parts of this project was deploying it. Here's how I approached it:
+
+1. **Backend Deployment**:
+   - Hosted the backend API on Heroku, ensuring it was publicly accessible for testing.
+2. **Frontend Deployment**:
+   - Used GitHub Pages to host the static frontend, with a custom domain for added professionalism.
+
+Setting up CORS for secure communication between the frontend and backend was a great learning experience.
+
+## 🎯 Future Improvements
+
+Although the project is fully functional, there are a few areas I'd like to enhance:
+
+1. 🗄️ **Persistent Storage**: Replace in-memory storage with a database like MongoDB.
+2. 🔑 **Token-Based Authentication**: Implement JWT for enhanced security.
+3. 🎨 **Frontend Revamp**: Upgrade the frontend using React or Next.js.
+4. 📱 **Responsive Design**: Make the UI fully mobile-friendly.
+5. ✅ **Unit Testing**: Add automated tests to ensure reliability.
+
+## 💻 Lessons Learned
+
+This project taught me the importance of:
+- Structuring code for maintainability.
+- Clear and concise API documentation.
+- Streamlining deployment workflows with tools like GitHub Pages and Heroku.
+
+It was also a reminder that no matter how small a project is, there's always room for improvement and growth.
+
+## 📬 Let's Connect!
+
+I'd love to hear your thoughts on this project! Check out the repo on [GitHub](https://github.com/yourusername/BasicServerSetup).
+
+Feel free to reach out or collaborate with me on similar projects. You can find me on:
+- [GitHub](https://github.com/yourusername)
+- [LinkedIn](https://linkedin.com/in/yourusername)
+
+Thanks for reading! Stay tuned for more updates and projects. 😊
+
+*Bradley Matera*
