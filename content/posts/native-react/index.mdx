@@ -1,0 +1,160 @@
+---
+title: "Building a React Native CRUD App with an Anime API"
+date: 2024-12-13
+slug: "/projects/react-native-anime-crud-app"
+tags:
+  - Projects
+  - React Native
+  - APIs
+  - CRUD
+---
+
+
+# 🎨 Building a React Native Anime CRUD App
+
+Welcome to the journey of creating my React Native CRUD application! This project brought together multiple APIs and a dynamic mobile app interface to deliver a seamless experience for anime enthusiasts. Here's a complete breakdown of how I built the project from the ground up.
+
+---
+
+## 🛠️ **Project Overview**
+
+This app serves two main purposes:
+1. Fetching random anime data from the [Jikan API](https://jikan.moe/).
+2. Allowing users to manage an anime character database (CRUD operations) via my custom RESTful API hosted on Heroku.
+
+Key features include:
+- Fetching random anime with detailed synopsis and an eye-catching background.
+- A dynamic list of characters pulled from my API.
+- Full CRUD functionality: Add, update, and delete characters directly from the app.
+
+---
+
+## 🌟 **Tech Stack**
+
+- **Frontend**: React Native (Expo)
+- **Backend**: Node.js, Express, MongoDB
+- **API Integration**: Jikan API and my custom API
+- **Deployment**: Hosted using Heroku and Expo Go for mobile preview.
+
+---
+
+## 🎨 **User Interface**
+
+### Homepage Layout:
+- A **random anime** title and synopsis, complete with a dynamically updated background image.
+- A **scrollable list** of characters fetched from the API.
+- **Forms** for adding and updating characters.
+- **Delete buttons** for easy removal of unwanted entries.
+
+### Highlights:
+The app seamlessly combines data from two sources, presenting users with a visually appealing and highly interactive interface.
+
+---
+
+## 📁 **Project Structure**
+
+Here's how the app is organized:
+
+```plaintext
+ReactJSMobileApp/
+├── 📄 App.js                  # Main app logic
+├── 📁 componants/             # UI components
+│   ├── 📄 Heading.js          # Displays titles
+│   ├── 📄 ListContainer.js    # Handles character listing
+├── 📁 assets/                 # Image assets
+│   ├── 📄 adaptive-icon.png
+│   ├── 📄 splash-icon.png
+├── 📄 package.json            # Project metadata and dependencies
+├── 📄 app.json                # Expo configuration
+└── 📄 README.md               # Project documentation
+```
+
+## 🌐 **Backend API Routes**
+
+I built a custom REST API to handle character management:
+- Fetch all characters: GET /animeCharacters
+- Fetch a specific character: GET /animeCharacters/:id
+- Add a character: POST /animeCharacters
+- Update a character: PATCH /animeCharacters/:id
+- Delete a character: DELETE /animeCharacters/:id
+
+Each route is designed for smooth integration with the React Native app.
+
+## 🔧 **React Native Features**
+
+The app leverages React Native's strengths for building a dynamic mobile experience:
+
+### Fetching Random Anime Data:
+
+```javascript
+useEffect(() => {
+  fetch('https://api.jikan.moe/v4/random/anime')
+    .then((res) => res.json())
+    .then((data) => {
+      if (data?.data) {
+        setAnimeData(data.data);
+        setBackgroundImage(data.data.images.jpg.large_image_url);
+      }
+    })
+    .catch((err) => console.error(err));
+}, []);
+```
+
+### CRUD Functionality:
+
+Here's an example of the addCharacter function for creating a new character:
+
+```javascript
+const addCharacter = () => {
+  fetch('https://bradleycruddemo-1b86f27b4c16.herokuapp.com/api/v1/animeCharacters', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(newCharacter),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      setCharacters([...characters, data]);
+      setNewCharacter({ name: '', anime: '', powerLevel: '' });
+    })
+    .catch((err) => console.error(err));
+};
+```
+
+### Dynamic UI:
+- Forms: TextInput fields for adding and updating characters.
+- ListContainer Component: Displays characters with delete functionality.
+
+## 🚀 **Deployment**
+
+### Backend:
+- Deployed using Heroku, with the MongoDB database hosted on Atlas.
+
+### Frontend:
+- Used Expo for smooth development and testing.
+- Published the app via Expo's QR code system for instant mobile preview.
+
+## 💡 **Lessons Learned**
+1. API Integration: Handling multiple APIs in a single app requires careful planning and state management.
+2. Error Handling: Adding robust error messages improved both debugging and user experience.
+3. Mobile Styling: React Native demands attention to responsive layouts, especially with dynamic data.
+
+## 🔮 **Future Improvements**
+1. Authentication: Add secure user authentication to the API.
+2. Pagination: Enable pagination for large character lists.
+3. Offline Support: Use local storage to handle data without internet connectivity.
+4. Enhanced UI: Improve the overall design with animations and custom components.
+
+## 📬 **Conclusion**
+
+This project has been a thrilling journey, blending anime fandom with mobile app development. By combining React Native and Express, I've created a powerful tool for anime enthusiasts to explore and manage their favorite characters.
+
+Let me know what you think of this project, and feel free to check it out on my GitHub.
+
+Stay tuned for more updates! 🚀
+
+Bradley Matera
+
+### Next Steps for Gatsby:
+- Use Gatsby's Image API to optimize the banner image.
+- Add MDX for interactive code samples.
+- Implement GraphQL to fetch blog metadata dynamically.
