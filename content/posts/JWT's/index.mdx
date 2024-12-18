@@ -1,0 +1,161 @@
+---
+title: "A Deep Dive into JSON Web Tokens: My Journey Through a CTF Challenge"
+date: "2024-12-16"
+description: "How I decrypted, explored, and used JSON Web Tokens (JWTs) to solve a CTF challenge, including obstacles I encountered and lessons learned."
+tags: ["JWT", "CTF", "Web Tokens", "gRPC", "JSON", "Encryption"]
+---
+
+import { CodeBlock } from "react-code-blocks";
+
+## JSON Web Tokens (JWTs): Solving a CTF Challenge Step-by-Step
+
+In this blog post, I walk you through the intricate process of solving a Capture the Flag (CTF) challenge where JSON Web Tokens (JWTs) played a key role. From decrypting ciphertexts to calling gRPC services and analyzing HTTP errors, I encountered various technical hurdles that tested my knowledge of JWTs, APIs, and gRPC protocols.
+
+Let's dive in step-by-step.
+
+---
+
+### 🎯 **The Starting Point**
+
+The challenge provided a file, `token.md`, which contained an initial **PAGE_TOKEN**. While this was a good starting point, it was clear that solving the challenge would require further exploration and decoding. 
+
+---
+
+### 🔍 **Decrypting the First Ciphertext**
+
+The first major milestone involved working with the **`secretbox.md`** file. This file contained:
+
+- **Encrypted Data (Ciphertext)**  
+- **A Key**  
+- **A Nonce**  
+
+Using Base64 decoding and the **Libsodium library** (a popular cryptography tool), I decrypted the first ciphertext and successfully retrieved a **JSON Web Token (JWT)**.
+
+---
+
+### 🚀 **What is a JSON Web Token (JWT)?**
+
+A JWT is a compact, URL-safe token format that represents claims securely between two parties. A JWT consists of:
+
+1. **Header**: Contains metadata like the token type (JWT) and the signing algorithm (e.g., HS256).
+2. **Payload**: Contains the claims, such as `sub` (subject) or custom claims (e.g., `token`).
+3. **Signature**: Verifies the token's authenticity using a secret key.
+
+Here's the structure of the JWT I obtained:
+
+<CodeBlock
+  text={`
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IkpXVF9UT0tFTiJ9.ghpSD18-j76IdRH3xqaKk1-PrnyzOq3E5kiqUGLXzBI
+  `}
+  language="plaintext"
+/>
+
+Deconstructing this JWT revealed the payload:
+
+```json
+{
+  "token": "JWT_TOKEN"
+}
+```
+
+🔑 **Using the JWT to Get a CONNECT_UNARY_TOKEN**
+
+Once I decrypted the JWT, I knew it was crucial for authorization. I used it as a Bearer Token for a call to the GetToken endpoint. This endpoint validated the JWT and returned another token: the CONNECT_UNARY_TOKEN.
+
+Example Request:
+
+```bash
+curl -X POST \
+-H "Authorization: Bearer JWT_TOKEN" \
+-d '{}' \
+https://prod-backend-ctf.us-east-1.prod-services.fetchrewards.com/token.v1.TokenService/GetToken
+```
+
+🔓 **Decrypting the Second Ciphertext**
+
+The next part of the challenge led me back to secretbox.md. A second ciphertext was present. This time, I had to:
+1. Strip specific bytes from the ciphertext.
+2. Decrypt the remaining data using the same nonce and key.
+
+Following this process, I obtained another token: NA_CL_SECRET_TOKEN.
+
+🤝 **Connecting to the StreamToken Endpoint**
+
+With the following tokens now in hand:
+1. PAGE_TOKEN
+2. JWT_TOKEN
+3. CONNECT_UNARY_TOKEN
+4. NA_CL_SECRET_TOKEN
+
+I attempted to access the StreamToken endpoint using tools like grpcurl and a Python gRPC client.
+
+Here's an example of the final Python client I built:
+
+<CodeBlock
+  text={`
+import grpc
+import token_service_pb2
+import token_service_pb2_grpc
+
+# Use the CONNECT_UNARY_TOKEN or NA_CL_SECRET_TOKEN
+token = "CONNECT_UNARY_TOKEN"
+
+channel = grpc.secure_channel(
+    'prod-backend-ctf.us-east-1.prod-services.fetchrewards.com:443',
+    grpc.ssl_channel_credentials()
+)
+
+stub = token_service_pb2_grpc.TokenServiceStub(channel)
+metadata = [('authorization', f'Bearer {token}')]
+
+request = token_service_pb2.StreamTokenRequest(message="ping")
+
+try:
+    for response in stub.StreamToken(request, metadata=metadata):
+        print(response.message)
+except grpc.RpcError as e:
+    print("Error:", e.code(), e.details())
+  `}
+  language="python"
+/>
+
+Despite using all the right tokens and tools, I encountered persistent HTTP 464 errors and malformed header responses from the server. These errors stemmed from the server's load balancer rejecting certain gRPC calls or content-type mismatches.
+
+⚠️ **Obstacles Faced**
+
+Here's a summary of the issues I encountered:
+- HTTP 464: Indicates a server-side issue, likely from an AWS ELB rejecting the gRPC headers or data.
+- Content-Type Mismatches: Switching between application/json, application/grpc, and application/grpc-web was a major challenge.
+- Malformed Headers: Ensuring the JWT and bearer tokens were sent correctly required constant debugging.
+
+💡 **What I Learned About JWTs**
+1. JWTs Are Powerful: They enable secure and stateless authorization.
+2. Header & Payload Are Decodable: The JWT payload is Base64-decoded, so sensitive data must not be stored there.
+3. Signature Matters: The signature ensures that a JWT is tamper-proof when verified using the correct secret key.
+
+🔨 **Tools I Used**
+- grpcurl: A CLI tool for interacting with gRPC endpoints.
+- Python gRPC: A client for handling complex gRPC calls with credentials.
+- curl: Testing HTTP/2 headers and content types.
+- Libsodium: For decryption of ciphertexts.
+
+🏁 **Conclusion**
+
+While I successfully decrypted JWTs, obtained tokens, and connected to endpoints, the challenge highlighted the complexity of handling gRPC communication, load balancer nuances, and token-based authentication. Working through this process reinforced the importance of JWTs for secure and scalable systems.
+
+If you're tackling a similar challenge, remember:
+1. Always validate and decode JWTs carefully.
+2. Test multiple content types (grpc, grpc-web, json).
+3. Be persistent—debugging is half the battle!
+
+Let me know if you've faced similar challenges or have tips for troubleshooting gRPC and JWTs. Drop a comment below!
+
+Thanks for reading, and happy coding! 🚀
+
+---
+
+### Key Features of This Post:
+1. **Focus on JWTs**: I explain JWT structure, usage, and decryption clearly.
+2. **Technical Detail**: Full example requests and Python scripts.
+3. **Obstacles**: Highlights key errors (HTTP 464, headers).
+4. **Gatsby Ready**: Written as MDX for your blog with clear formatting.
