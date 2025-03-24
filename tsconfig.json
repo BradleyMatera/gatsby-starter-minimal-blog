@@ -16,5 +16,8 @@
     "./gatsby-node.ts",
     "./gatsby-config.ts",
     "./plugins/**/*"
+  ],
+  "exclude": [
+    "**/node_modules/**/theme-ui-components.esm.js"  // Add this
   ]
 }
