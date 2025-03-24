@@ -1,7 +1,57 @@
 ---
-title: "Trying Out Docker with Python and Node.js"
+title: "Getting Hands-On with Docker Multilang: Hello Worlds and Breaking Stuff"
 date: "2024-07-15"
-tags: ["Projects", "Docker", "Node.js", "Python"]
+tags: ["Projects", "Docker", "Node.js", "Python", "Learning"]
 ---
 
-I put Python and Node.js in a Docker setup for fun. Wrote some scripts to test if they’d run together—caught a Node.js startup bug once. It’s a simple demo to learn Docker. Check it at [github.com/BradleyMatera/docker_multilang_project](https://github.com/BradleyMatera/docker_multilang_project).
+Hey, I’m Brad. I built this Docker thing called the Multilang Project for a class at Full Sail University (where I’m finishing my web dev degree, Aug 2023 - Oct 2025, 3.85 GPA). It’s a demo where I stuffed Python and Node.js into Docker containers to see how they’d play together. I had a blast learning "hello worlds" with it, breaking stuff on purpose, and figuring out why it’s useful. Here’s the whole story, with real examples of what I did and why it helped me see things clearer.
+
+### Why I Did It
+I’d heard about Docker in class—like, it’s this tool that packs up code so it runs the same everywhere. I didn’t get it from slides, so I decided to try it myself. I picked Python and Node.js because I’d used them a bit—Python for some math stuff, Node.js for web APIs—and I wanted to see if I could make them talk in one project. My goal was simple: get two "hello worlds" running, one from each, and mess with them to learn how Docker works. It was for a school assignment, but I turned it into a playground.
+
+### How I Set It Up
+I made two Docker containers:
+- **Python**: A basic script (`hello.py`) that prints "Hello from Python!" when you run it.
+- **Node.js**: A tiny Express server (`app.js`) that says "Hello from Node.js!" at `localhost:3000`.
+
+Here’s what the Python one looked like:
+```python
+print("Hello from Python!")
+```
+
+And the Node.js one:
+```javascript
+const express = require('express');
+const app = express();
+app.get('/', (req, res) => res.send('Hello from Node.js!'));
+app.listen(3000, () => console.log('Node.js running'));
+```
+
+I wrote Dockerfiles for each—super basic stuff like `FROM python:3.9` and `FROM node:14`, copied the code in, and ran them with a `docker-compose.yml` file to tie them together. It took me a while to figure out the commands—like `docker build` and `docker-compose up`—but once it clicked, I was hooked.
+
+### Having Fun with Hello Worlds
+The fun part was getting those "hello worlds" to pop up. I started with just running them—Python spat out its message in the terminal, Node.js showed up in my browser. Then I got curious: what if I made them say different stuff? I changed Python to "Yo, Python here!" and Node.js to "Hey, it’s Node.js!"—tested it, and laughed when they worked. I felt like a kid mixing colors, seeing what I could do. I even tried breaking them—like deleting `express` from Node.js—and Docker yelled at me with errors, which was awesome because I could see exactly what went wrong.
+
+### Use Cases I Figured Out
+While I was playing, I started seeing why this could be useful:
+- **Testing Different Languages**: I could test how Python and Node.js handle the same job—like a simple calculator—and compare them side-by-side. Python was cleaner for math, Node.js faster for web stuff.
+- **Breaking Stuff Safely**: I could mess up one container—like crashing Node.js with a bad script—and the Python one still ran fine. It’s like having separate sandboxes.
+- **Real-World Setup**: I pictured using this for a fitness app (like Johnson Health Tech’s stuff)—one part in Python for data crunching, another in Node.js for the web front. Docker keeps them together but separate.
+
+For example, I tried a use case where Python counts to 10:
+```python
+for i in range(10): print(f"Counting: {i}")
+```
+And Node.js echoes it back at `/count`. I broke the Node.js part by forgetting a comma—tested it, saw the error (`SyntaxError`), and fixed it. That’s when I got how Docker helps you isolate bugs.
+
+### Breaking Things Down Visually
+The best part was how Docker made stuff visual. Running `docker ps` showed me both containers as little boxes—Python at one port, Node.js at another. When one crashed (like Node.js with no `express`), the other kept chugging along in the list. I could open my terminal, see logs with `docker logs`, and watch Python print "Hello" while Node.js barfed errors. It was like having a dashboard for my mess-ups. I even ran `docker-compose up` with a bad config—Python worked, Node.js didn’t—and the split made it so clear where I screwed up.
+
+### Why It Was Fun
+I had a good time because it was like a game—get the "hello worlds" going, then break them and fix them. I’d run `docker-compose up`, see one fail, and dig into why—like Node.js not finding a file because I typo’d the path. I’d laugh when I broke it bad enough to get a blank screen, then feel smart when I got it back. It wasn’t about making something perfect; it was about learning what Docker does by seeing it work and fail.
+
+### What I Got Out of It
+This project showed me how to package code, script basic tests (like `docker exec` to poke around), and see problems visually. It’s not a big deal—I’m no pro—but it’s real. I learned Docker’s useful for testing stuff like fitness apps without breaking everything at once. You can check it out at [github.com/BradleyMatera/docker_multilang_project](https://github.com/BradleyMatera/docker_multilang_project). It’s just a start, but it’s how I learn—by doing and breaking things.
+```
+
+---
