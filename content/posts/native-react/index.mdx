@@ -1,53 +1,57 @@
 ---
-title: "Building a React Native CRUD App with an Anime API"
-date: 2024-12-13
-slug: "/projects/react-native-anime-crud-app"
+title: "Building a React CRUD App with AWS API Gateway"
+date: 2024-05-16
+slug: "/projects/react-anime-crud-app"
 tags:
   - Projects
-  - React Native
-  - APIs
+  - React
+  - AWS API Gateway
   - CRUD
 ---
 
+# 🎨 Building a React Anime Characters Database
 
-# 🎨 Building a React Native Anime CRUD App
+Welcome to the journey of creating my React CRUD application! This project integrates with AWS API Gateway and external anime APIs to create a comprehensive anime character database. Here's a detailed breakdown of how I built this project from scratch.
 
-Welcome to the journey of creating my React Native CRUD application! This project brought together multiple APIs and a dynamic mobile app interface to deliver a seamless experience for anime enthusiasts. Here's a complete breakdown of how I built the project from the ground up.
+🔗 **Live Demo**: [Anime Characters Database](https://cruddemo-one.vercel.app/)
 
 ---
 
 ## 🛠️ **Project Overview**
 
-This app serves two main purposes:
-1. Fetching random anime data from the [Jikan API](https://jikan.moe/).
-2. Allowing users to manage an anime character database (CRUD operations) via my custom RESTful API hosted on Heroku.
+This web application serves as a comprehensive anime character database with:
+1. Integration with my AWS API Gateway backend for character storage and management
+2. External data fetching from the [Jikan API](https://jikan.moe/) for popular anime information
+3. Complete CRUD (Create, Read, Update, Delete) functionality for character management
 
 Key features include:
-- Fetching random anime with detailed synopsis and an eye-catching background.
-- A dynamic list of characters pulled from my API.
-- Full CRUD functionality: Add, update, and delete characters directly from the app.
+- Character management with detailed information (stats, voice actors, abilities)
+- Category filtering (hero, villain, support)
+- Popular anime showcase with ratings and episode information
+- Dynamic character search
 
 ---
 
 ## 🌟 **Tech Stack**
 
-- **Frontend**: React Native (Expo)
-- **Backend**: Node.js, Express, MongoDB
-- **API Integration**: Jikan API and my custom API
-- **Deployment**: Hosted using Heroku and Expo Go for mobile preview.
+- **Frontend**: React.js with Webpack
+- **Backend**: AWS API Gateway with Lambda functions
+- **API Integration**: Custom AWS API and Jikan API (MyAnimeList)
+- **Deployment**: Vercel for frontend hosting
+- **State Management**: React Hooks (useState, useEffect, useCallback)
 
 ---
 
 ## 🎨 **User Interface**
 
-### Homepage Layout:
-- A **random anime** title and synopsis, complete with a dynamically updated background image.
-- A **scrollable list** of characters fetched from the API.
-- **Forms** for adding and updating characters.
-- **Delete buttons** for easy removal of unwanted entries.
+### Application Layout:
+- A **responsive navbar** with search functionality and category filtering
+- A **character creation form** with detailed fields for comprehensive character data
+- A **character grid** displaying all characters with edit and delete functionality
+- A **popular anime section** showing current top-rated series
 
 ### Highlights:
-The app seamlessly combines data from two sources, presenting users with a visually appealing and highly interactive interface.
+The application features a clean, intuitive interface with an anime-inspired design that makes character management enjoyable and visually appealing.
 
 ---
 
@@ -57,104 +61,189 @@ Here's how the app is organized:
 
 ```plaintext
 ReactJSMobileApp/
-├── 📄 App.js                  # Main app logic
-├── 📁 componants/             # UI components
-│   ├── 📄 Heading.js          # Displays titles
-│   ├── 📄 ListContainer.js    # Handles character listing
-├── 📁 assets/                 # Image assets
-│   ├── 📄 adaptive-icon.png
-│   ├── 📄 splash-icon.png
-├── 📄 package.json            # Project metadata and dependencies
-├── 📄 app.json                # Expo configuration
-└── 📄 README.md               # Project documentation
+├── 📄 src/
+│   ├── 📄 App.js            # Main application component 
+│   ├── 📄 App.css           # Application styling
+│   ├── 📄 api.js            # API integration functions
+│   ├── 📄 index.js          # Application entry point
+│   ├── 📄 setupProxy.js     # API proxy configuration
+│   ├── 📁 hooks/            # Custom React hooks
+│   │   ├── 📄 useFetch.js   # Data fetching hook
+│   ├── 📁 components/       # UI components
+├── 📄 webpack.config.js     # Webpack configuration
+├── 📄 package.json          # Dependencies and scripts
+├── 📄 vercel.json           # Vercel deployment configuration
 ```
 
-## 🌐 **Backend API Routes**
+---
 
-I built a custom REST API to handle character management:
-- Fetch all characters: GET /animeCharacters
-- Fetch a specific character: GET /animeCharacters/:id
-- Add a character: POST /animeCharacters
-- Update a character: PATCH /animeCharacters/:id
-- Delete a character: DELETE /animeCharacters/:id
+## 🌐 **AWS API Integration**
 
-Each route is designed for smooth integration with the React Native app.
+I built a custom RESTful API using AWS API Gateway and Lambda functions:
+- GET /api/characters - Fetch all characters
+- GET /api/characters/:id - Fetch specific character
+- POST /api/characters - Create a new character
+- PUT /api/characters/:id - Update an existing character
+- DELETE /api/characters/:id - Remove a character
 
-## 🔧 **React Native Features**
+The API is secured with an API key and handles complex character data including nested objects for stats, voice actors, and relationships.
 
-The app leverages React Native's strengths for building a dynamic mobile experience:
+---
 
-### Fetching Random Anime Data:
+## 🔧 **React Features Implemented**
+
+### Efficient Data Fetching with AbortController:
 
 ```javascript
 useEffect(() => {
-  fetch('https://api.jikan.moe/v4/random/anime')
-    .then((res) => res.json())
-    .then((data) => {
-      if (data?.data) {
-        setAnimeData(data.data);
-        setBackgroundImage(data.data.images.jpg.large_image_url);
+  let isMounted = true;
+  
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const data = await getCharacters();
+      
+      // Only update state if component is still mounted
+      if (isMounted) {
+        setCharacters(data);
+        setLoading(false);
       }
-    })
-    .catch((err) => console.error(err));
+    } catch (error) {
+      if (isMounted) {
+        console.error('Error fetching characters:', error);
+        setError('Failed to load characters. Please try again later.');
+        setLoading(false);
+      }
+    }
+  };
+  
+  fetchData();
+  
+  // Cleanup function to prevent state updates after unmounting
+  return () => {
+    isMounted = false;
+  };
 }, []);
 ```
 
-### CRUD Functionality:
-
-Here's an example of the addCharacter function for creating a new character:
+### Character Update Functionality:
 
 ```javascript
-const addCharacter = () => {
-  fetch('https://bradleycruddemo-1b86f27b4c16.herokuapp.com/api/v1/animeCharacters', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(newCharacter),
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      setCharacters([...characters, data]);
-      setNewCharacter({ name: '', anime: '', powerLevel: '' });
-    })
-    .catch((err) => console.error(err));
+const handleUpdate = async (updatedCharacter) => {
+  try {
+    // First update in local state for immediate UI feedback
+    setCharacters(prevChars => 
+      prevChars.map(char => 
+        char.id === updatedCharacter.id ? updatedCharacter : char
+      )
+    );
+    
+    // Close the modal BEFORE the API call
+    setShowUpdateModal(false);
+    
+    // Then make the API call
+    await updateCharacter(updatedCharacter.id, updatedCharacter);
+    
+  } catch (error) {
+    console.error('Error updating character:', error);
+  }
 };
 ```
 
-### Dynamic UI:
-- Forms: TextInput fields for adding and updating characters.
-- ListContainer Component: Displays characters with delete functionality.
+### Custom Filter Logic:
+
+```javascript
+const filterCharacters = useCallback(() => {
+  if (selectedCategory === 'all') {
+    return characters;
+  } else {
+    // Check both category and role fields
+    return characters.filter(character => 
+      (character.category && character.category.toLowerCase() === selectedCategory.toLowerCase()) ||
+      (character.role && character.role.toLowerCase() === selectedCategory.toLowerCase())
+    );
+  }
+}, [characters, selectedCategory]);
+```
+
+### Dynamic Form with Complex Data Structure:
+
+The form handles complex nested data including:
+- Character stats with sliders
+- Voice actor information
+- Comma-separated abilities lists
+- Japanese and English name variations
+
+---
 
 ## 🚀 **Deployment**
 
-### Backend:
-- Deployed using Heroku, with the MongoDB database hosted on Atlas.
+The application is deployed using Vercel with a custom configuration to handle API proxying:
 
-### Frontend:
-- Used Expo for smooth development and testing.
-- Published the app via Expo's QR code system for instant mobile preview.
+```json
+{
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "https://i0p044nu8c.execute-api.us-east-1.amazonaws.com/prod/$1",
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept, Authorization, x-api-key",
+        "x-api-key": "w5nPK8oNtVjhowDldi276O0dKa1BuyMcfZf8z960"
+      }
+    }
+  ]
+}
+```
 
-## 💡 **Lessons Learned**
-1. API Integration: Handling multiple APIs in a single app requires careful planning and state management.
-2. Error Handling: Adding robust error messages improved both debugging and user experience.
-3. Mobile Styling: React Native demands attention to responsive layouts, especially with dynamic data.
+This configuration ensures seamless communication between the React frontend and AWS API Gateway backend.
+
+The application is live at:
+- Primary URL: [https://cruddemo-one.vercel.app/](https://cruddemo-one.vercel.app/)
+- Alternate URL: [https://cruddemo-9g7w9btyn-bradleymateras-projects.vercel.app](https://cruddemo-9g7w9btyn-bradleymateras-projects.vercel.app)
+
+---
+
+## 💡 **Challenges Overcome**
+
+1. **CORS Configuration**: I implemented a robust solution for handling cross-origin requests between my frontend and AWS API.
+
+2. **Complex Data Handling**: Created a system for managing nested character data with proper validation and error handling.
+
+3. **API Security**: Implemented API key authentication to secure backend endpoints while maintaining frontend accessibility.
+
+4. **Webpack Configuration**: Customized the webpack setup to handle proxying, build optimization, and development experience.
+
+5. **Error Handling**: Built comprehensive error handling with fallbacks for network issues and API failures.
+
+---
 
 ## 🔮 **Future Improvements**
-1. Authentication: Add secure user authentication to the API.
-2. Pagination: Enable pagination for large character lists.
-3. Offline Support: Use local storage to handle data without internet connectivity.
-4. Enhanced UI: Improve the overall design with animations and custom components.
+
+1. **Authentication System**: Add user accounts for personalized character collections.
+
+2. **Advanced Filtering**: Implement multi-criteria filtering and sorting options.
+
+3. **Character Relationships**: Create visual relationship maps between characters.
+
+4. **Image Upload**: Add direct image upload functionality instead of URL references.
+
+5. **Offline Support**: Implement service workers for offline data access.
+
+---
 
 ## 📬 **Conclusion**
 
-This project has been a thrilling journey, blending anime fandom with mobile app development. By combining React Native and Express, I've created a powerful tool for anime enthusiasts to explore and manage their favorite characters.
+Building this React application was an exciting journey into full-stack development with AWS services. The project demonstrates how modern React can be leveraged with cloud services to create responsive, dynamic web applications with complex data requirements.
 
-Let me know what you think of this project, and feel free to check it out on my GitHub.
+The combination of React hooks for state management, AWS API Gateway for backend services, and Vercel for deployment created an efficient development workflow that allowed me to focus on building features rather than infrastructure.
 
-Stay tuned for more updates! 🚀
+Feel free to explore the [live application](https://cruddemo-one.vercel.app/) and check out the GitHub repository for the complete source code!
 
 Bradley Matera
 
 ### Next Steps for Gatsby:
-- Use Gatsby's Image API to optimize the banner image.
-- Add MDX for interactive code samples.
-- Implement GraphQL to fetch blog metadata dynamically.
+- Use Gatsby's Image API to optimize character images
+- Add MDX for interactive code samples
+- Implement GraphQL to fetch blog metadata dynamically 
