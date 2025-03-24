@@ -1,0 +1,45 @@
+---
+title: "How I Learn by Doing: My CodePen Journey"
+date: "2025-03-22"
+tags: ["Projects", "JavaScript", "React", "CSS", "Learning", "CodePen"]
+---
+
+Hey, I’m Brad. I’ve been messing around with web stuff for a couple years now, mostly because I’m a student at Full Sail University finishing my web dev degree (started Aug 2023, 3.85 GPA, done Oct 2025). I don’t really get computer science from books—I learn by doing. CodePen’s been my playground for that. I’ve built a bunch of things there, some for school, some just for fun, and every one’s taught me something real. Here’s everything I’ve done on CodePen, with legit examples of what I figured out along the way.
+
+### JavaScript Garbage Collection Tutorial
+- **Link**: [codepen.io/student-account-bradley-matera/pen/ZYzoWpL](https://codepen.io/student-account-bradley-matera/pen/ZYzoWpL)
+- **What It Is**: A demo I made for a class to show how JavaScript cleans up memory. You click to add green blocks (memory) and trigger red garbage cleanup.
+- **What I Learned**: I didn’t get memory management at first—like, how does JavaScript know what to toss? Building this showed me the “mark-and-sweep” idea. I tested it by adding too many blocks—found a loop that didn’t stop and fixed it by resetting the count. It’s basic, but it clicked for me.
+
+### React Calculator
+- **Link**: [codepen.io/student-account-bradley-matera/pen/ogvGZjJ](https://codepen.io/student-account-bradley-matera/pen/ogvGZjJ)
+- **What It Is**: A calculator I built with React for a school project. It adds, subtracts, multiplies, divides—normal stuff.
+- **What I Learned**: This was my first real React thing. I learned hooks like `useState` by making the numbers update live. I broke it with decimals at first—kept getting NaN—so I tested and added a check to stop that. It’s not perfect, but I got how React keeps things moving.
+
+### Sound Machine
+- **Link**: [codepen.io/student-account-bradley-matera/details/dPbVvoa](https://codepen.io/student-account-bradley-matera/details/dPbVvoa)
+- **What It Is**: A soundboard I made for fun with JavaScript. Click buttons or press keys (Q, W, E, etc.) to play drum sounds.
+- **What I Learned**: I figured out event listeners here—clicks and keydowns. Sounds overlapped at first, which was annoying, so I tested it and added `audio.currentTime = 0` to reset them. It’s simple, but I learned how to debug audio stuff by breaking it on purpose.
+
+### Markdown Previewer
+- **Link**: [codepen.io/student-account-bradley-matera/pen/ZYzXeEJ](https://codepen.io/student-account-bradley-matera/pen/ZYzXeEJ)
+- **What It Is**: A tool I built with JavaScript and marked.js to type Markdown and see HTML live, done for a class.
+- **What I Learned**: I got how libraries like marked.js work—plug it in, and it does the heavy lifting. I tested it with weird inputs—empty text crashed it—so I added a fallback to show nothing instead. It’s my first real-time thing, and I learned to watch for edge cases.
+
+### Random Quote Machine
+- **Link**: [codepen.io/student-account-bradley-matera/pen/azoLpeG](https://codepen.io/student-account-bradley-matera/pen/azoLpeG)
+- **What It Is**: A JavaScript quote generator with a button to get new quotes and tweet them, made for school.
+- **What I Learned**: I learned arrays and random picks here—just a list of quotes I pulled online. The tweet button broke with long quotes, so I tested and cut them down to fit Twitter’s limit. It’s basic, but I got how to hook up buttons to actions.
+
+### Random Quote Generator
+- **Link**: [codepen.io/student-account-bradley-matera/pen/PwYJWMY](https://codepen.io/student-account-bradley-matera/pen/PwYJWMY)
+- **What It Is**: Another JavaScript quote thing I did for fun, styled nicer with a tweet option too.
+- **What I Learned**: This was me playing with CSS more—made it look decent. It froze if I clicked too fast, so I tested and added a delay to stop that. I learned I could reuse ideas from the last quote thing but make it better by breaking it first.
+
+### Data Visualization
+- **Link**: [codepen.io/student-account-bradley-matera/details/dyEYbPO](https://codepen.io/student-account-bradley-matera/details/dyEYbPO)
+- **What It Is**: A Canvas bar chart I made for a class. You pick a number range, and it shows random bars.
+- **What I Learned**: Canvas was new—I had to figure out how to draw stuff with JavaScript. Bars went off-screen at first, so I tested big numbers and scaled them down. It’s not fancy, but I learned to test visuals, not just code.
+
+### How I Learn
+I don’t sit and read about this stuff—I build it, break it, and fix it. Like, I didn’t know what `useState` was until I made the calculator crash and had to figure it out. Or how audio works until the soundboard sounded like garbage. Every CodePen’s a little mess I clean up, and that’s how I’ve gotten okay at JavaScript, React, and CSS over two years. I’m not a pro—I’ve got no job experience—but I’ve learned a ton by doing, and I’m ready to keep going with real testing at a place like Johnson Health Tech. All my CodePen stuff’s at [codepen.io/student-account-bradley-matera](https://codepen.io/student-account-bradley-matera) if you want to see it.
