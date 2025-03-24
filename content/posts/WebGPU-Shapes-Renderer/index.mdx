@@ -1,7 +1,111 @@
 ---
-title: "Messing with WebGPU Shapes Renderer"
+title: "Messing with WebGPU Shapes Renderer: Learning a New Library"
 date: "2024-06-01"
-tags: ["Projects", "WebGPU", "JavaScript", "Tailwind CSS"]
+tags: ["Projects", "WebGPU", "JavaScript", "Tailwind CSS", "Learning"]
 ---
 
-I forked a WebGPU project that draws shapes like triangles and squares on a canvas. Added my own tweaks with JavaScript and Tailwind CSS. Tested it to make sure each shape showed up right—caught a glitch where the diamond looked off. It’s a fun demo I played with for school. See it at [bradleymatera.github.io/leaf-js/](https://bradleymatera.github.io/leaf-js/) or [github.com/BradleyMatera/leaf-js](https://github.com/BradleyMatera/leaf-js).
+Hey, I’m Brad. I forked this WebGPU Shapes Renderer project called `leaf-js` from [deondreE/leaf-js](https://github.com/deondreE/leaf-js) for a class at Full Sail University (where I’m finishing my web dev degree, Aug 2023 - Oct 2025, 3.85 GPA). I didn’t build the core stuff—that’s all deondreE’s work. I just made a front-end to display the shapes and played around to learn WebGPU and how their library works. It draws shapes like triangles and squares on a canvas using WebGPU, and I added some tweaks with JavaScript and Tailwind CSS. Here’s why I did it, what I messed with, and what I learned. You can see it live at [bradleymatera.github.io/leaf-js/](https://bradleymatera.github.io/leaf-js/) or on my fork at [github.com/BradleyMatera/leaf-js/tree/buildingshapes](https://github.com/BradleyMatera/leaf-js/tree/buildingshapes).
+
+### Why I Forked It
+I’d never touched WebGPU before—it’s this new thing for browser graphics, faster than WebGL, and I wanted to learn it. The original `leaf-js` by deondreE had the heavy lifting done: WebGPU setup, shaders, rendering pipelines. I wasn’t ready to build that myself, so I forked it to study how it works. My class project was about experimenting with a new library, and I picked this because I like visuals—shapes sounded fun. I didn’t contribute back to the original author; this was just me messing around to learn, not to make something new for them.
+
+### What I Did: Building a Front-End
+The original project rendered shapes, but you had to uncomment code in `main.ts` to switch between them—like `initTriangle()` or `initSquare()`. I wanted to make it easier to see all the shapes without digging into the code, so I built a front-end in `index.html`. I added a dropdown to pick shapes and styled it with Tailwind CSS. Here’s what I started with:
+```html
+<select id="shape-selector" class="p-2 border rounded bg-gray-100">
+  <option value="triangle">Triangle</option>
+  <option value="square">Square</option>
+  <option value="pentagon">Pentagon</option>
+  <option value="diamond">Diamond</option>
+  <option value="hexagon">Hexagon</option>
+</select>
+<canvas id="canvas" class="w-full h-96 border"></canvas>
+```
+I tied it to the library’s code in `main.ts` by mapping the dropdown to the shape functions:
+```javascript
+import initTriangle from './test-triangle';
+import initSquare from './test-square';
+import initPentagon from './test-pentagon';
+import initDiamond from './test-diamond';
+import initHexagon from './test-hexagon';
+
+const shapes = {
+  triangle: initTriangle,
+  square: initSquare,
+  pentagon: initPentagon,
+  diamond: initDiamond,
+  hexagon: initHexagon,
+};
+
+const selector = document.getElementById('shape-selector');
+selector.addEventListener('change', (e) => {
+  const context = canvas.getContext('webgpu');
+  const device = navigator.gpu.requestAdapter().then(adapter => adapter.requestDevice());
+  shapes[e.target.value](context, device);
+});
+```
+I tested it—picked "diamond," but it looked off, like squished. Turns out the vertex shader (`diamond.vert.wgsl`) had weird coordinates. I didn’t fix the shader (that’s deondreE’s code), but I logged the vertices to understand them:
+```wgsl
+var pos = array<vec2<f32>, 4>(
+  vec2(0.0, 0.5),  // Top
+  vec2(-0.5, 0.0), // Left
+  vec2(0.0, -0.5), // Bottom
+  vec2(0.5, 0.0)   // Right
+);
+```
+I saw the issue—uneven spacing—but left it as-is to focus on my front-end.
+
+### Learning the Library
+The whole point was to figure out how `leaf-js` works. I dug into the shaders—like `triangle.vert.wgsl`—and saw how WebGPU uses WGSL (kinda like GLSL but with math tweaks):
+```wgsl
+@vertex
+fn main(@builtin(vertex_index) VertexIndex: u32) -> @builtin(position) vec4<f32> {
+  var pos = array<vec2<f32>, 3>(
+    vec2(0.0, 0.5),  // Top
+    vec2(-0.5, -0.5), // Bottom left
+    vec2(0.5, -0.5)  // Bottom right
+  );
+  return vec4<f32>(pos[VertexIndex], 0.0, 1.0);
+}
+```
+I learned that WebGPU maps these points to the canvas—`vec4` sets the position, and the fragment shader (`red.frag.wgsl`) colors it. I broke it by changing `0.5` to `2.0`—the triangle flew off-screen, which taught me the -1.0 to 1.0 range.
+
+I also studied the render pipeline in `test-triangle.ts`:
+```javascript
+const pipeline = device.createRenderPipeline({
+  vertex: {
+    module: device.createShaderModule({ code: shapeVertWGSL }),
+    entryPoint: 'main',
+  },
+  fragment: {
+    module: device.createShaderModule({ code: fragWGSL }),
+    entryPoint: 'main',
+    targets: [{ format: presentationFormat }],
+  },
+  primitive: { topology: 'triangle-list' },
+});
+```
+This showed me how WebGPU sets up drawing—way lower-level than Canvas or WebGL. I tested it by switching `triangle-list` to `line-list`—got lines instead of a filled shape, which was cool to see.
+
+### Adding My Tweaks
+Besides the dropdown, I made it more usable:
+- **Responsive Design**: Used Tailwind to make the canvas fit any screen—`w-full h-96`—and tested it on my phone. Fixed a stretch issue with `max-w-full`.
+- **Accessibility**: Added ARIA labels to the dropdown:
+  ```html
+  <select id="shape-selector" aria-label="Select a shape to render">
+  ```
+  Tested with my keyboard—worked fine after I added `tabindex="0"`.
+- **Deployment**: Set up GitHub Pages with a workflow in `.github/workflows/`. Tested the live site—shapes loaded, but the canvas flickered on mobile. Didn’t fix that yet.
+
+### What I Learned
+This was all about learning for me, not building something new. Here’s what I got:
+- **WebGPU Basics**: It’s faster than WebGL because it’s closer to the GPU—learned that from the pipeline setup and WGSL shaders. Breaking the topology helped me see how shapes are drawn.
+- **Library Structure**: `leaf-js` taught me how to organize a renderer—shaders in one folder, init logic in another. I’d never seen that before.
+- **Front-End Stuff**: I got better at Tailwind—`grid`, `p-2`, `bg-gray-100`—and tested responsive layouts. Accessibility was new too; ARIA labels make sense now.
+- **Testing**: I broke stuff on purpose—like changing coordinates or topology—to see what happens. Found that diamond glitch but learned more by leaving it and studying why.
+
+It’s not perfect—I didn’t touch the core library or fix bugs like the mobile flicker. But I had fun messing with it, and I get WebGPU a bit better now.
+
+### Why It Matters
+I’m not a graphics pro—this was me dipping my toes into WebGPU and learning a library by poking at it. It’s a small step, but it’s how I learn: build, break, fix, repeat. Maybe I’ll dig deeper into WebGPU later—add my own shapes or fix that flicker—but for now, it’s a solid start. Check it out at [bradleymatera.github.io/leaf-js/](https://bradleymatera.github.io/leaf-js/) or my fork at [github.com/BradleyMatera/leaf-js/tree/buildingshapes](https://github.com/BradleyMatera/leaf-js/tree/buildingshapes).
+```

@@ -1,7 +1,76 @@
 ---
-title: "Building an Interactive Pokedex"
+title: "Building My Interactive Pokedex: Learning APIs and Web Stuff"
 date: "2024-09-01"
-tags: ["Projects", "JavaScript", "Tailwind CSS", "APIs"]
+tags: ["Projects", "JavaScript", "Tailwind CSS", "APIs", "Learning"]
 ---
 
-I built a Pokedex with JavaScript and Tailwind CSS for a class. It pulls Pokémon data from APIs. I tested searches—caught a crash from bad data and fixed it. It’s live at [bradleymatera.github.io/Interactive-Pokedex/](https://bradleymatera.github.io/Interactive-Pokedex/) and on [github.com/BradleyMatera/Interactive-Pokedex](https://github.com/BradleyMatera/Interactive-Pokedex).
+Hey, I’m Brad. I built this Interactive Pokedex thing back in mid-2024 for a class at Full Sail University (where I’m finishing my web dev degree, Aug 2023 - Oct 2025, 3.85 GPA). It’s a web app that pulls Pokémon data with JavaScript, styles it with Tailwind CSS, and makes it fun to mess with. I didn’t know much about APIs or web apps when I started, so this was me figuring it out by doing. Here’s why I made it, how I got it working, and what I learned along the way. You can check it out live at [bradleymatera.github.io/Interactive-Pokedex/](https://bradleymatera.github.io/Interactive-Pokedex/) or on [github.com/BradleyMatera/Interactive-Pokedex](https://github.com/BradleyMatera/Interactive-Pokedex).
+
+### Why I Built It
+I’d messed with HTML and CSS before, but APIs were new. Class wanted us to use one, and I picked Pokémon because I grew up with it—thought it’d be cool to search for Pikachu or whatever. The goal was simple: grab data from the Pokémon API (PokeAPI) and show it in a way that didn’t suck. I added the Pokémon TCG API later because cards sounded fun too. It wasn’t about making something perfect—it was about learning how web stuff talks to servers and looks decent.
+
+### How I Got It Going
+I started with basic HTML in `index.html`—a search bar and a spot for cards. Tailwind CSS made it look okay fast, like this bit:
+```html
+<input type="text" id="searchInput" placeholder="Search Pokémon..." class="p-2 border rounded">
+<div id="pokemonContainer" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+```
+Then I dug into JavaScript in `js/main.js`. I used `fetch` to hit PokeAPI ([https://pokeapi.co/api/v2/pokemon/](https://pokeapi.co/api/v2/pokemon/))—here’s a chunk I started with:
+```javascript
+async function searchPokemon(query) {
+  const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${query.toLowerCase()}`);
+  const data = await response.json();
+  displayPokemon(data);
+}
+```
+I typed "pikachu" in the search, and it worked—showed name, type, stats. But I wanted more, so I added a card list for all Pokémon up to 151 (Gen 1). That broke it—too many calls—so I tested and switched to a limit:
+```javascript
+async function loadPokemonList(limit = 151) {
+  const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}`);
+  const data = await response.json();
+  data.results.forEach(pokemon => fetchPokemon(pokemon.name));
+}
+```
+I threw in the TCG API ([https://api.pokemontcg.io/](https://api.pokemontcg.io/)) for cards too—tested it with "charizard" and got cool images.
+
+### Breaking and Fixing Stuff
+It wasn’t smooth. First, bad searches—like "pikachoo"—crashed it. I added a check:
+```javascript
+if (!response.ok) {
+  document.getElementById('pokemonContainer').innerHTML = "Oops, that Pokémon doesn’t exist!";
+  return;
+}
+```
+Then the UI sucked on my phone—cards stacked weird. I tested Tailwind’s grid (`md:grid-cols-3`) and tweaked it until it looked right. The TCG API gave me junk data once—no images—so I filtered it:
+```javascript
+if (card.images && card.images.small) {
+  cardImg.src = card.images.small;
+}
+```
+I even broke it on purpose—like spamming the search—to see how it held up. Fixed a lag by adding a delay between calls.
+
+### What I Learned
+This was my first real API project, and I learned a ton:
+- **APIs Aren’t Magic**: PokeAPI’s just a URL I can hit—tested it with `fetch` and saw how JSON comes back. Like, `data.types[0].type.name` gets "electric" for Pikachu.
+- **Testing Matters**: I found bugs—like no error message for bad searches—and fixed them by trying dumb inputs. It’s why I’d be good at testing stuff.
+- **Tailwind’s Quick**: I styled cards fast with `p-4 bg-gray-100 rounded`, tested it on my phone, and learned responsive grids hands-on.
+- **Breaking Helps**: Crashing it taught me more than reading docs—like how to handle 404s or slow networks.
+
+Here’s a bit of the display code I tested:
+```javascript
+function displayPokemon(data) {
+  const container = document.getElementById('pokemonContainer');
+  container.innerHTML += `
+    <div class="p-4 bg-gray-100 rounded">
+      <h2>${data.name}</h2>
+      <img src="${data.sprites.front_default}" alt="${data.name}">
+      <p>Type: ${data.types.map(t => t.type.name).join(', ')}</p>
+    </div>
+  `;
+}
+```
+It’s basic, but I broke it with weird names (e.g., "mr-mime") and fixed the capitalization.
+
+### Why It’s Cool
+It’s not just a Pokedex—it’s me learning. I added a quiz for fun—tested it with type questions like “What’s Pikachu?”—and TCG cards to show off. It’s live at [bradleymatera.github.io/Interactive-Pokedex/](https://bradleymatera.github.io/Interactive-Pokedex/), and the code’s at [github.com/BradleyMatera/Interactive-Pokedex](https://github.com/BradleyMatera/Interactive-Pokedex). I didn’t know APIs or grids before this, but I do now because I built it, broke it, and fixed it. That’s how I roll—learning by doing.
+```
