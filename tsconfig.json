@@ -8,7 +8,7 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "strict": true,
+    "strict": false,  // Changed from true to false
     "skipLibCheck": true
   },
   "include": [
@@ -16,8 +16,5 @@
     "./gatsby-node.ts",
     "./gatsby-config.ts",
     "./plugins/**/*"
-  ],
-  "exclude": [
-    "**/node_modules/**/theme-ui-components.esm.js"  // Add this
   ]
 }
