@@ -1,12 +1,19 @@
-import * as React from "react"
-import type { PageProps } from "gatsby"
-import Layout from "@lekoarts/gatsby-theme-minimal-blog/src/components/layout"
+// src/pages/404.tsx
+import React from 'react';
+import { ColorModeProvider } from '@theme-ui/color-modes';
+import { PageProps } from 'gatsby';
 
-const NotFound = (_props: PageProps) => (
-  <Layout>
-    <h1>404 - Page Not Found</h1>
-    <p>Unfortunately we couldn't find what you were looking for :(</p>
-  </Layout>
-)
+const NotFoundPage = (props: PageProps) => (
+  <div>
+    <h1>404: Not Found</h1>
+    <p>Sorry, that page doesn’t exist.</p>
+  </div>
+);
 
-export default NotFound
+export default function WrappedNotFoundPage(props: PageProps) {
+  return (
+    <ColorModeProvider>
+      <NotFoundPage {...props} />
+    </ColorModeProvider>
+  );
+}
