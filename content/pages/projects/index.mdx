@@ -156,7 +156,7 @@ import { motion } from "framer-motion";
   >
     <div className="section-hero">
       <img
-        src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&q=80&w=1600&h=600"
+        src="https://images.unsplash.com/photo-1581092919535-7146ff1a590b?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         alt="Tools Background"
         className="section-hero-img h-64 md:h-80 object-cover rounded-xl"
       />
@@ -187,6 +187,30 @@ import { motion } from "framer-motion";
           bgColor="bg-slate-800"
         />
       </motion.div>
+    </div>
+  </motion.section>
+</div>
+
+<div className="section-wrapper py-12">
+  <motion.section
+    initial={{ opacity: 0, y: 50 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8 }}
+    id="funprojects"
+    className="section py-12"
+  >
+    <div className="section-hero">
+      <img
+        src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&q=80&w=1600&h=600"
+        alt="Fun Projects Background"
+        className="section-hero-img h-64 md:h-80 object-cover rounded-xl"
+      />
+      <div className="section-hero-overlay">
+        <h2 className="text-4xl md:text-5xl font-bold text-center mb-6">🎮 Fun Interactive Projects</h2>
+        <p className="text-lg md:text-xl text-gray-300">Practice projects focused on front-end interaction and UI playfulness</p>
+      </div>
+    </div>
+    <div className="projects-grid grid grid-cols-1 md:grid-cols-2 gap-8">
       <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
         <ProjectCard
           title="🎮 Pong_Deluxe"
@@ -280,6 +304,20 @@ import { motion } from "framer-motion";
         <div className="bg-gray-800 hover:bg-gray-700 rounded-xl p-6 transition">
           <a href="https://codepen.io/student-account-bradley-matera/details/dyEYbPO" className="text-blue-400 hover:underline text-lg font-semibold block">
             Data Visualization Demo
+          </a>
+        </div>
+      </motion.div>
+      <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
+        <div className="bg-gray-800 hover:bg-gray-700 rounded-xl p-6 transition">
+          <a href="https://codepen.io/student-account-bradley-matera/full/WbbvPKY" className="text-blue-400 hover:underline text-lg font-semibold block">
+            Squirtle's MySpace
+          </a>
+        </div>
+      </motion.div>
+      <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
+        <div className="bg-gray-800 hover:bg-gray-700 rounded-xl p-6 transition">
+          <a href="https://codepen.io/student-account-bradley-matera/full/bNNdzgv" className="text-blue-400 hover:underline text-lg font-semibold block">
+            Color System Preview Tool
           </a>
         </div>
       </motion.div>
