@@ -1,0 +1,223 @@
+/* Custom styles for the projects page */
+.projects-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Navigation styles */
+.nav-container {
+  position: sticky;
+  top: 5rem;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.nav-link {
+  color: white;
+  background-color: #334155;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  background-color: #1e40af;
+}
+
+/* Section styles */
+.section {
+  margin-bottom: 6rem;
+}
+
+.section-hero {
+  position: relative;
+  height: 12rem;
+  width: 100%;
+}
+
+.section-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(75%);
+  border-radius: 1rem;
+}
+
+.section-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+.section-hero-title {
+  font-size: 4.5rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: white;
+}
+
+.section-hero-subtitle {
+  font-size: 1.875rem;
+  font-weight: 300;
+  color: #d1d5db;
+  margin-top: 0.5rem;
+}
+
+/* Grid for project cards */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2.5rem;
+  margin-top: 3rem;
+}
+
+/* Project card styles */
+.project-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 200px;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 1rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 2rem;
+  color: white;
+}
+
+.project-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.project-card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.project-card-description {
+  font-size: 1rem;
+  color: #d1d5db;
+  margin-bottom: 1rem;
+}
+
+.project-card-technologies {
+  font-size: 0.875rem;
+  color: #9ca3af;
+  margin-bottom: 1rem;
+}
+
+.project-card-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.project-card-button {
+  background-color: #2563eb;
+  color: white;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.project-card-button:hover {
+  background-color: #1d4ed8;
+}
+
+.project-card-github {
+  background-color: #1f2937;
+}
+
+.project-card-github:hover {
+  background-color: #111827;
+}
+
+.project-card-status {
+  color: #34d399;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* CodePen section specific styles */
+.codepen-intro {
+  position: relative;
+  z-index: 10;
+  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: #9ca3af;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1.5rem;
+  margin-top: 3rem;
+}
+
+.codepen-list {
+  list-style-type: disc;
+  list-style-position: inside;
+  margin-bottom: 4rem;
+  font-size: 1.125rem;
+  font-weight: 300;
+  color: #d1d5db;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1.5rem;
+}
+
+.codepen-list-item {
+  margin-bottom: 0.5rem;
+}
+
+.codepen-link {
+  color: #60a5fa;
+  text-decoration: none;
+}
+
+.codepen-link:hover {
+  text-decoration: underline;
+}
+
+/* Background color rotations for project cards */
+.bg-slate-800 {
+  background-color: #1e293b;
+}
+
+.bg-indigo-900 {
+  background-color: #312e81;
+}
+
+.bg-blue-900 {
+  background-color: #1e3a8a;
+}
+
+.bg-gray-800 {
+  background-color: #1f2937;
+}
+
+.bg-purple-900 {
+  background-color: #581c87;
+}

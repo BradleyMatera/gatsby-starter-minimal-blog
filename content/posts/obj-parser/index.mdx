@@ -1,94 +1,49 @@
 ---
-title: "Learning Zig Basics with an OBJ Parser"
-date: "2024-07-01"
-tags: ["Projects", "Zig", "3D Parsing", "JavaScript", "PixiJS"]
+title: "Parsing OBJ Files: A Journey into 3D Data"
+date: "2025-01-30"
+tags: ["3D Graphics", "JavaScript", "WebGPU", "Parsing", "Projects"]
 ---
 
-
-### Why I Built It
-I wanted to learn Zig, a low-level language that’s all about performance and control. I’ve been into JavaScript for a while, but I wanted to see how things work under the hood. So, I thought, why not build something cool? I picked an OBJ parser because I’m into 3D graphics and wanted to see how to read those files. It’s not done yet, but it’s a start.
-### How I Started It
-I set up a project with Zig files—`main.zig` to run it, `root.zig` for the parser—and added example files (`cube.obj`, `cube.mtl`) from Blender. The OBJ file has lines like:
-```plaintext
-v 1.0 1.0 1.0  # A vertex at (1,1,1)
-f 1 2 3        # A triangle face
-```
-I wanted to read those and pull out the points. In Zig, I started with something like this in `main.zig`:
-```zig
-const std = @import("std");
-
-pub fn main() !void {
-    const allocator = std.heap.page_allocator;
-    const file = try std.fs.cwd().openFile("examples/cube.obj", .{});
-    defer file.close();
-
-    const content = try file.readToEndAlloc(allocator, 1024 * 1024);
-    defer allocator.free(content);
-
-    std.debug.print("File content: {s}\n", .{content});
-}
-```
-It just opens the file and prints it—super basic. I had no clue about Zig’s `try` or `defer` at first, so I kept breaking it—like forgetting `defer` and wondering why it leaked memory. Testing it with `zig run src/main.zig` showed me the file’s text, and that’s when I got excited to parse it.
-
-### Trying to Parse It
-I moved to `root.zig` to split the OBJ lines. I wanted to grab vertices (the `v` lines) and faces (the `f` lines). Here’s a bit I worked on:
-```zig
-const std = @import("std");
-
-pub const Vertex = struct {
-    x: f32,
-    y: f32,
-    z: f32,
-};
-
-pub fn parseOBJ(content: []const u8, allocator: std.mem.Allocator) ![]Vertex {
-    var vertices = std.ArrayList(Vertex).init(allocator);
-    defer vertices.deinit();
-
-    var lines = std.mem.split(u8, content, "\n");
-    while (lines.next()) |line| {
-        if (std.mem.startsWith(u8, line, "v ")) {
-            var parts = std.mem.split(u8, line[2..], " ");
-            const x = try std.fmt.parseFloat(f32, parts.next().?);
-            const y = try std.fmt.parseFloat(f32, parts.next().?);
-            const z = try std.fmt.parseFloat(f32, parts.next().?);
-            try vertices.append(Vertex{ .x = x, .y = y, .z = z });
-        }
-    }
-    return vertices.toOwnedSlice();
-}
-```
-This grabs `v` lines—like `v 1.0 2.0 3.0`—and turns them into a `Vertex` struct. I tested it with my cube file, but it crashed on empty lines. I had to add checks—like `if (line.len > 2)`—and that’s when I started getting how Zig makes you handle errors yourself.
-
-### Why Zig?
-I could’ve stuck with JavaScript—it’s easier with stuff like:
-```javascript
-const vertices = [];
-const lines = file.split('\n');
-lines.forEach(line => {
-  if (line.startsWith('v ')) {
-    const [_, x, y, z] = line.split(' ').map(parseFloat);
-    vertices.push({ x, y, z });
-  }
-});
-```
-But Zig forced me to think about memory. In JS, I didn’t care—garbage collection handled it. In Zig, I had to use `allocator` and `defer` to free stuff, like `vertices.deinit()`. I broke it a bunch—forgot to free memory, got crashes—and fixed it by reading the docs. It was a pain, but I liked seeing how low-level stuff works.
-
-### Adding PixiJS for Fun
-I didn’t stop at Zig—I wanted to see the shapes. So I added a JavaScript part with PixiJS (from my Pong project). I’d parse in Zig, save it to a binary file (not done yet), then load it in JS:
-```javascript
-const app = new PIXI.Application({ width: 800, height: 600 });
-document.body.appendChild(app.view);
-const graphics = new PIXI.Graphics();
-graphics.beginFill(0xffffff);
-graphics.drawPolygon([100, 100, 200, 200, 300, 100]); // A test triangle
-app.stage.addChild(graphics);
-```
-I tested it with a hardcoded triangle—worked fine—but I haven’t linked the Zig output yet. I broke the PixiJS part by messing up coordinates (e.g., `300, -100` went off-screen), fixed it, and learned how 3D points turn into visuals.
-
-### What I Learned
-This wasn’t about finishing a perfect parser—it’s half-baked right now. I built it to learn Zig basics: how it handles memory, errors, and structs. I got that by crashing it—like forgetting `try` and seeing `error: expected type 'void'`—and fixing it step-by-step. The OBJ part taught me 3D files aren’t magic—just text I can break down. And PixiJS showed me how parsing leads to stuff you can see. It’s a mess, but I had fun figuring it out. Check the repo at [github.com/BradleyMatera/obj-parser](https://github.com/BradleyMatera/obj-parser)—it’s got my Zig code, examples, and notes.
-
-### Why It Matters
-I’m not a pro—this is me learning by doing. Zig’s tough, but it made me think about what’s under the hood, not just slap code together. I want to keep going—maybe finish the binary output or parse faces next—but for now, it’s a real start to understanding 3D and a new language.
-```
+<div class="content-container">
+  <h1 class="content-heading-1">Parsing OBJ Files: A Journey into 3D Data</h1>
+  <p class="content-paragraph">
+    Working with 3D models often requires understanding and parsing file formats like OBJ, a widely used format for storing 3D geometry. In this post, I discuss my experience building an OBJ parser as part of a larger WebGPU project, focusing on the challenges and solutions I encountered.
+  </p>
+  
+  <h2 class="content-heading-2">What is an OBJ File?</h2>
+  <p class="content-paragraph">
+    An OBJ file is a text-based format for representing 3D geometry, including vertices, texture coordinates, normals, and faces. It's simple and human-readable, making it a popular choice for 3D modeling software and rendering applications.
+  </p>
+  
+  <h2 class="content-heading-2">Project Context</h2>
+  <p class="content-paragraph">
+    As part of my WebGPU Shapes Renderer project, I needed to load 3D models to render them using WebGPU. I decided to write a custom OBJ parser in JavaScript to extract the necessary data for rendering.
+  </p>
+  <ul class="content-list">
+    <li class="content-list-item"><strong>Demo</strong>: <a href="https://bradleymatera.github.io/leaf-js/" class="content-link">bradleymatera.github.io/leaf-js</a></li>
+    <li class="content-list-item"><strong>Repository</strong>: <a href="https://github.com/BradleyMatera/leaf-js" class="content-link">github.com/BradleyMatera/leaf-js</a></li>
+  </ul>
+  
+  <h2 class="content-heading-2">Building the Parser</h2>
+  <p class="content-paragraph">
+    The parser needed to read an OBJ file line by line, identifying keywords like <code class="content-code">v</code> for vertices, <code class="content-code">vt</code> for texture coordinates, <code class="content-code">vn</code> for normals, and <code class="content-code">f</code> for faces. I used JavaScript's string manipulation methods to split and process each line into usable data structures.
+  </p>
+  
+  <h2 class="content-heading-2">Challenges Faced</h2>
+  <ul class="content-list">
+    <li class="content-list-item"><strong>Complex Face Definitions</strong>: OBJ files can define faces with varying numbers of vertices and optional texture or normal indices. I had to test different formats to ensure my parser handled all cases, eventually using regular expressions to parse the indices correctly.</li>
+    <li class="content-list-item"><strong>Data Size</strong>: Large models meant large files. Initial parsing was slow, so I optimized by pre-allocating arrays and minimizing string operations after testing with bigger models.</li>
+  </ul>
+  
+  <h2 class="content-heading-2">What I Learned</h2>
+  <ul class="content-list">
+    <li class="content-list-item">Understanding the structure of 3D data and how it's stored in text formats like OBJ.</li>
+    <li class="content-list-item">Writing robust parsers that handle edge cases through iterative testing and debugging.</li>
+    <li class="content-list-item">The importance of performance optimization when dealing with potentially large datasets in web applications.</li>
+  </ul>
+  
+  <h2 class="content-heading-2">Conclusion</h2>
+  <p class="content-paragraph">
+    Building an OBJ parser was a deep dive into the world of 3D graphics data. It taught me not just about file formats, but also about problem-solving and optimization in a real-world context. If you're interested in 3D rendering or WebGPU, check out my project on <a href="https://github.com/BradleyMatera/leaf-js" class="content-link">GitHub</a> for the full implementation.
+  </p>
+</div>

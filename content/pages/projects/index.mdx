@@ -3,131 +3,242 @@ title: Projects
 slug: "/projects"
 ---
 
+export const page = {
+  title: "Projects",
+};
+
+import { ProjectCard } from "../../components/ProjectCard";
+import { motion } from "framer-motion";
+
 # 🚀 My Projects
 
-This page highlights the real projects I’ve been working on, ranging from frontend applications and backend APIs to local tools and experiments. Each project reflects what I'm building and learning as I grow my skills in web development and cloud basics.
+<div class="nav-container">
+  <a href="#web" class="nav-link">🖥️ Web Dev</a>
+  <a href="#fullstack" class="nav-link">⚙️ Full Stack</a>
+  <a href="#tools" class="nav-link">🛠️ Tools</a>
+  <a href="#codepen" class="nav-link">🧪 Demos</a>
+</div>
 
-## 🌐 Web Development Projects
+<motion.section
+  initial={{ opacity: 0, y: 50 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8 }}
+  id="web"
+  class="section"
+>
+  <div class="section-hero">
+    <img
+      src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1920&q=80"
+      alt="Web Dev Background"
+      class="section-hero-img"
+    />
+    <div class="section-hero-overlay">
+      <h2 class="section-hero-title">🌐 Web Development Projects</h2>
+      <p class="section-hero-subtitle">Frontend applications and UI designs</p>
+    </div>
+  </div>
+  <div class="projects-grid">
+    <ProjectCard
+      title="🖥️ WebGPU Shapes Renderer"
+      description="Demo of 2D shape rendering using WebGPU and Canvas. (Chrome required.)"
+      technologies="WebGPU, JavaScript, Canvas"
+      demoLink="https://bradleymatera.github.io/leaf-js/"
+      githubLink="https://github.com/BradleyMatera/leaf-js"
+      status="Live"
+      bgColor="bg-slate-800"
+    />
+    <ProjectCard
+      title="📖 Gatsby Starter Minimal Blog"
+      description="React-based blog pulling from a custom Express API."
+      technologies="React.js, Gatsby, Node.js, Express, Netlify"
+      demoLink="https://bradleysgatsbyblog.netlify.app/"
+      githubLink="https://github.com/BradleyMatera/gatsby-starter-minimal-blog"
+      status="Live"
+      bgColor="bg-indigo-900"
+    />
+    <ProjectCard
+      title="🎮 Interactive Pokedex"
+      description="Searchable dynamic Pokémon data app."
+      technologies="HTML5, Tailwind CSS, JavaScript, Pokémon API"
+      demoLink="https://bradleymatera.github.io/Interactive-Pokedex/"
+      githubLink="https://github.com/BradleyMatera/Interactive-Pokedex"
+      status="Live"
+      bgColor="bg-blue-900"
+    />
+    <ProjectCard
+      title="🖥️ Professional Portfolio Website"
+      description="Responsive portfolio built with vanilla HTML, CSS, JavaScript."
+      technologies="HTML5, CSS3, JavaScript"
+      demoLink="https://bradleymatera.github.io/Professional-Portfolio-Website/"
+      githubLink="https://github.com/BradleyMatera/Professional-Portfolio-Website"
+      status="Live"
+      bgColor="bg-slate-800"
+    />
+  </div>
+</motion.section>
 
-### 🖥️ **WebGPU Shapes Renderer**
-A demo of 2D shape rendering using WebGPU and Canvas, forked and expanded from an original project. (Chrome required.)  
-- **Technologies**: WebGPU, JavaScript, Canvas  
-- **Links**: [Demo](https://bradleymatera.github.io/leaf-js/) | [GitHub](https://github.com/BradleyMatera/leaf-js)  
-- **Status**: ![Live](https://img.shields.io/badge/-Live-00cc00?style=flat-square)
+<motion.section
+  initial={{ opacity: 0, y: 50 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8 }}
+  id="fullstack"
+  class="section"
+>
+  <div class="section-hero">
+    <img
+      src="https://images.unsplash.com/photo-1581093588401-9e2ac7a58817?auto=format&fit=crop&w=1920&q=80"
+      alt="Full Stack Background"
+      class="section-hero-img"
+    />
+    <div class="section-hero-overlay">
+      <h2 class="section-hero-title">⚙️ Full-Stack Applications</h2>
+      <p class="section-hero-subtitle">Backend services and full-stack projects</p>
+    </div>
+  </div>
+  <div class="projects-grid">
+    <ProjectCard
+      title="🔄 React Native Anime CRUD App"
+      description="Mobile CRUD application for anime data."
+      technologies="React Native, Node.js, MongoDB, Heroku, Vercel"
+      demoLink="https://cruddemo-one.vercel.app/"
+      status="Live"
+      bgColor="bg-indigo-900"
+    />
+    <ProjectCard
+      title="🔄 RESTful Routes Using ExpressJS"
+      description="Basic REST API demo using Express."
+      technologies="Node.js, Express.js"
+      githubLink="https://github.com/BradleyMatera/RESTfulRoutesUsingExpressJS"
+      status="Repository"
+      bgColor="bg-blue-900"
+    />
+    <ProjectCard
+      title="🤖 Convo-Ai - Local Conversational AI"
+      description="Local voice/text AI chat app with FastAPI and Ollama."
+      technologies="Python, FastAPI, Whisper.cpp, Ollama, XTTS v2"
+      githubLink="https://github.com/BradleyMatera/Convo-Ai"
+      status="Repository"
+      bgColor="bg-slate-800"
+    />
+    <ProjectCard
+      title="💬 ProjectHub - AI-Powered Portfolio Chat Bot"
+      description="Integrates into any site to showcase projects and skills."
+      technologies="JavaScript, HTML, Modular Web Scripts"
+      demoLink="https://codepen.io/student-account-bradley-matera/full/yyLmYKR"
+      githubLink="https://github.com/BradleyMatera/ProjectHub"
+      status="Live"
+      bgColor="bg-indigo-900"
+    />
+  </div>
+</motion.section>
 
----
+<motion.section
+  initial={{ opacity: 0, y: 50 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8 }}
+  id="tools"
+  class="section"
+>
+  <div class="section-hero">
+    <img
+      src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1920&q=80"
+      alt="Tools Background"
+      class="section-hero-img"
+    />
+    <div class="section-hero-overlay">
+      <h2 class="section-hero-title">🛠️ Tools & Libraries</h2>
+      <p class="section-hero-subtitle">Utility libraries and development tools</p>
+    </div>
+  </div>
+  <div class="projects-grid">
+    <ProjectCard
+      title="🧀 CheeseMath Jest Tests"
+      description="Math utilities module with Jest unit testing."
+      technologies="JavaScript, Jest"
+      demoLink="https://cheese-math.vercel.app/"
+      githubLink="https://github.com/BradleyMatera/CheeseMath-Jest-Tests/tree/main/CheeseMath"
+      status="Live"
+      bgColor="bg-blue-900"
+    />
+    <ProjectCard
+      title="🐳 Docker Multilang Project"
+      description="Containerize apps across multiple languages."
+      technologies="Docker, Python, Node.js"
+      githubLink="https://github.com/BradleyMatera/docker_multilang_project"
+      status="Repository"
+      bgColor="bg-slate-800"
+    />
+    <ProjectCard
+      title="🎮 Pong_Deluxe"
+      description="Classic Pong recreation with PixiJS rendering."
+      technologies="JavaScript, PixiJS"
+      demoLink="https://pongdeluxe.netlify.app/"
+      githubLink="https://github.com/BradleyMatera/Pong-Deluxe"
+      status="Live"
+      bgColor="bg-indigo-900"
+    />
+    <ProjectCard
+      title="🐾 Animal Sounds"
+      description="Plays animal sounds through button interactions."
+      technologies="JavaScript, HTML5, CSS3"
+      demoLink="https://bradleymatera.github.io/AnimalSounds/"
+      githubLink="https://github.com/BradleyMatera/AnimalSounds"
+      status="Live"
+      bgColor="bg-blue-900"
+    />
+  </div>
+</motion.section>
 
-### 📖 **Gatsby Starter Minimal Blog**
-A React-based blog site pulling content from a custom Express API, deployed on Netlify.  
-- **Technologies**: React.js, Gatsby, Node.js, Express, Netlify  
-- **Links**: [Demo](https://bradleysgatsbyblog.netlify.app/) | [GitHub](https://github.com/BradleyMatera/gatsby-starter-minimal-blog)  
-- **Status**: ![Live](https://img.shields.io/badge/-Live-00cc00?style=flat-square)
+<motion.section
+  initial={{ opacity: 0, y: 50 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8 }}
+  id="codepen"
+  class="section"
+>
+  <div class="section-hero">
+    <img
+      src="https://images.unsplash.com/photo-1531497865142-4874b90d627b?auto=format&fit=crop&w=1920&q=80"
+      alt="CodePen Demos Background"
+      class="section-hero-img"
+    />
+    <div class="section-hero-overlay">
+      <h2 class="section-hero-title">🧪 CodePen Demos</h2>
+      <p class="section-hero-subtitle">Smaller projects, experiments, and tutorials built live in CodePen</p>
+    </div>
+  </div>
+  <motion.div
+    initial={{ y: 20, opacity: 0 }}
+    animate={{ y: 0, opacity: 1 }}
+    transition={{ delay: 0.2, duration: 0.8 }}
+    class="codepen-intro"
+  >
+    These are smaller projects, experiments, or tutorials built live in CodePen:
+  </motion.div>
 
----
-
-### 🎮 **Interactive Pokedex**
-A web app using the Pokémon API to display searchable and dynamic Pokémon data.  
-- **Technologies**: HTML5, Tailwind CSS, JavaScript, Pokémon API  
-- **Links**: [Demo](https://bradleymatera.github.io/Interactive-Pokedex/) | [GitHub](https://github.com/BradleyMatera/Interactive-Pokedex)  
-- **Status**: ![Live](https://img.shields.io/badge/-Live-00cc00?style=flat-square)
-
----
-
-### 🖥️ **Professional Portfolio Website**
-A responsive portfolio site built with HTML, CSS, and JavaScript to showcase skills, projects, and education.  
-- **Technologies**: HTML5, CSS3, JavaScript  
-- **Links**: [Demo](https://bradleymatera.github.io/Professional-Portfolio-Website/) | [GitHub](https://github.com/BradleyMatera/Professional-Portfolio-Website)  
-- **Status**: ![Live](https://img.shields.io/badge/-Live-00cc00?style=flat-square)
-
----
-
-## ⚙️ Full-Stack Applications
-
-### 🔄 **React Native Anime CRUD App**
-A mobile CRUD application for anime data built with React Native, Node.js, and MongoDB.  
-- **Technologies**: React Native, Node.js, MongoDB, Heroku, Vercel  
-- **Links**: [Demo](https://cruddemo-one.vercel.app/)  
-- **Status**: ![Live](https://img.shields.io/badge/-Live-00cc00?style=flat-square)
-
----
-
-### 🔄 **RESTful Routes Using ExpressJS**
-A basic REST API project demonstrating CRUD operations with Node.js and Express.  
-- **Technologies**: Node.js, Express.js  
-- **Links**: [GitHub](https://github.com/BradleyMatera/RESTfulRoutesUsingExpressJS)  
-- **Status**: ![Repository](https://img.shields.io/badge/-Repository-FFDD57?style=flat-square)
-
----
-
-### 🤖 **Convo-Ai - Local Conversational AI**
-A fully local conversational AI system with voice and text input, built using Python, FastAPI, Ollama, and XTTS v2. Supports speech-to-text, text-to-speech, conversation logging, and web interface interaction.  
-- **Technologies**: Python, FastAPI, Whisper.cpp, Ollama, XTTS v2, WebSocket  
-- **Links**: [GitHub](https://github.com/BradleyMatera/Convo-Ai)  
-- **Status**: ![Repository](https://img.shields.io/badge/-Repository-FFDD57?style=flat-square)
-
----
-
-### 💬 **ProjectHub - AI-Powered Portfolio Chat Bot**
-A chat bot that integrates with any website to showcase projects, CodePens, skills, and profile information. Built modularly to handle custom queries while steering conversations toward a web development portfolio.  
-- **Technologies**: JavaScript, HTML, Modular Web Scripts  
-- **Links**: [GitHub](https://github.com/BradleyMatera/ProjectHub) | [Live Demo](https://codepen.io/student-account-bradley-matera/full/yyLmYKR)  
-- **Status**: ![Live](https://img.shields.io/badge/-Live-00cc00?style=flat-square)
-
----
-## 🛠️ Tools & Libraries
-
-### 🧀 **CheeseMath Jest Tests**
-A math utilities module built in JavaScript, with full unit testing using Jest.  
-- **Technologies**: JavaScript, Jest  
-- **Links**: [Demo](https://cheese-math.vercel.app/) | [GitHub](https://github.com/BradleyMatera/CheeseMath-Jest-Tests/tree/main/CheeseMath)  
-- **Status**: ![Live](https://img.shields.io/badge/-Live-00cc00?style=flat-square)
-
----
-
-### 🐳 **Docker Multilang Project**
-A project showing how to containerize applications written in different programming languages using Docker.  
-- **Technologies**: Docker, Python, Node.js  
-- **Links**: [GitHub](https://github.com/BradleyMatera/docker_multilang_project)  
-- **Status**: ![Repository](https://img.shields.io/badge/-Repository-FFDD57?style=flat-square)
-
----
-
-### 🎮 **Pong_Deluxe**
-A classic Pong game recreation using PixiJS for real-time graphics rendering.  
-- **Technologies**: JavaScript, PixiJS  
-- **Links**: [Demo](https://pongdeluxe.netlify.app/) | [GitHub](https://github.com/BradleyMatera/Pong-Deluxe)  
-- **Status**: ![Live](https://img.shields.io/badge/-Live-00cc00?style=flat-square)
-
----
-
-### 🐾 **Animal Sounds**
-A simple app that plays animal sounds through button interactions.  
-- **Technologies**: JavaScript, HTML5, CSS3  
-- **Links**: [Demo](https://bradleymatera.github.io/AnimalSounds/) | [GitHub](https://github.com/BradleyMatera/AnimalSounds)  
-- **Status**: ![Live](https://img.shields.io/badge/-Live-00cc00?style=flat-square)
-
----
-
-## 🧪 CodePen Demos
-
-These are smaller projects, experiments, or tutorials built live in CodePen:
-
-- [JavaScript Garbage Collection Tutorial](https://codepen.io/student-account-bradley-matera/pen/ZYzoWpL)  
-- [React Calculator](https://codepen.io/student-account-bradley-matera/pen/ogvGZjJ)  
-- [Sound Machine](https://codepen.io/student-account-bradley-matera/details/dPbVvoa)  
-- [Markdown Previewer](https://codepen.io/student-account-bradley-matera/pen/ZYzXeEJ)  
-- [Random Quote Machine](https://codepen.io/student-account-bradley-matera/pen/azoLpeG)  
-- [Random Quote Generator](https://codepen.io/student-account-bradley-matera/pen/PwYJWMY)  
-- [Data Visualization Demo](https://codepen.io/student-account-bradley-matera/details/dyEYbPO)
-
-### 🎨 **Color System Preview Tool**
-An interactive tool for generating and previewing color palettes based on a base HSL or hex color. Includes real-time updates for UI components like buttons, alerts, and badges.  
-- **Technologies**: React.js, Tailwind CSS, iro.js (color picker library)  
-- **Links**: [Live Demo](https://codepen.io/student-account-bradley-matera/pen/bNNdzgv)  
-- **Status**: ![Live](https://img.shields.io/badge/-Live-00cc00?style=flat-square)
-
----
-
-## 🌟 What's Next?
-I’m continuing to work on new projects to expand my skills, especially around cloud services, infrastructure, and backend development.  
-You can check out more on my [GitHub](https://github.com/BradleyMatera) or connect with me on [LinkedIn](https://linkedin.com/in/championingempatheticwebsolutionsthroughcode).
+  <ul class="codepen-list">
+    <li class="codepen-list-item">
+      <a href="https://codepen.io/student-account-bradley-matera/pen/ZYzoWpL" class="codepen-link">
+        JavaScript Garbage Collection Tutorial
+      </a>
+    </li>
+    <li class="codepen-list-item">
+      <a href="https://codepen.io/student-account-bradley-matera/pen/ogvGZjJ" class="codepen-link">React Calculator</a>
+    </li>
+    <li class="codepen-list-item">
+      <a href="https://codepen.io/student-account-bradley-matera/details/dPbVvoa" class="codepen-link">Sound Machine</a>
+    </li>
+    <li class="codepen-list-item">
+      <a href="https://codepen.io/student-account-bradley-matera/pen/ZYzXeEJ" class="codepen-link">Markdown Previewer</a>
+    </li>
+    <li class="codepen-list-item">
+      <a href="https://codepen.io/student-account-bradley-matera/pen/azoLpeG" class="codepen-link">Random Quote Machine</a>
+    </li>
+    <li class="codepen-list-item">
+      <a href="https://codepen.io/student-account-bradley-matera/pen/PwYJWMY" class="codepen-link">Random Quote Generator</a>
+    </li>
+    <li class="codepen-list-item">
+      <a href="https://codepen.io/student-account-bradley-matera/details/dyEYbPO" class="codepen-link">Data Visualization Demo</a>
+    </li>
+  </ul>
+</motion.section>
