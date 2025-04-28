@@ -234,3 +234,41 @@
 .bg-purple-900 {
   background-color: #581c87;
 }
+
+
+/* Mobile responsiveness */
+@media (max-width: 640px) {
+  .projects-container {
+    padding: 0 1rem;
+  }
+
+  .nav-container {
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .section-hero {
+    height: 12rem;
+  }
+
+  .section-hero-title {
+    font-size: 2rem;
+  }
+
+  .section-hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .codepen-intro,
+  .codepen-list {
+    padding: 0 1rem;
+    font-size: 1rem;
+  }
+}
