@@ -9,6 +9,7 @@ const components = {
   pre: (props: { children?: React.ReactNode; className?: string }) => <Code {...props} />,
   Text,
   Title: Heading,
+  p: (props: { children?: React.ReactNode; className?: string }) => <p {...props} />,
 };
 
 export default components;
