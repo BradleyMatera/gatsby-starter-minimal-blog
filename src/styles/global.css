@@ -1,0 +1,257 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================= */
+/* Layout Containers             */
+/* ============================= */
+
+.content-container {
+    max-width: 1280px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: linear-gradient(to bottom right, #1a202c, #2d3748, #1a202c);
+    border-radius: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.hero-container {
+    max-width: 1536px;
+    margin: 3rem auto;
+    padding: 3rem;
+    background: linear-gradient(to bottom right, #111827, #1f2937, #111827);
+    border-radius: 1.25rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    text-align: center;
+}
+
+/* ============================= */
+/* Section Styling               */
+/* ============================= */
+
+.section {
+    margin: 4rem 0;
+    padding: 2rem;
+    background: linear-gradient(to bottom right, #1f2937, #374151, #1f2937);
+    border-radius: 1.25rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* ============================= */
+/* Typography                    */
+/* ============================= */
+
+.content-heading-2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.content-heading-3 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #e2e8f0;
+    margin: 2rem 0 1.5rem;
+    text-align: center;
+}
+
+.content-heading-4 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #d1d5db;
+    margin: 1.5rem 0 1rem;
+    text-align: center;
+}
+
+.content-paragraph {
+    font-size: 1.125rem;
+    line-height: 1.75;
+    color: #cbd5e1;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+/* ============================= */
+/* Lists and Links               */
+/* ============================= */
+
+.content-list {
+    list-style-type: disc;
+    padding-left: 2rem;
+    margin: 2rem auto;
+    color: #9ca3af;
+    font-size: 1.125rem;
+    max-width: 800px;
+}
+
+.content-list-item {
+    margin-bottom: 0.5rem;
+}
+
+.content-link {
+    color: #60a5fa;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: color 0.3s ease;
+}
+
+.content-link:hover {
+    color: #89b4fa;
+}
+
+/* ============================= */
+/* Buttons and UI Components     */
+/* ============================= */
+
+.hero-button,
+.project-card-button {
+    display: inline-block;
+    background-color: #2563eb;
+    color: white;
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+    border-radius: 9999px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.hero-button:hover,
+.project-card-button:hover {
+    background-color: #1d4ed8;
+    transform: scale(1.05);
+}
+
+.project-card-github {
+    background-color: #1f2937;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.project-card-github:hover {
+    background-color: #111827;
+}
+
+/* ============================= */
+/* Images and Code Blocks        */
+/* ============================= */
+
+.content-image {
+    max-width: 100%;
+    height: auto;
+    margin: 2rem 0;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.content-image:hover {
+    transform: scale(1.02);
+}
+
+.content-code,
+.content-code-block {
+    background-color: #1e293b;
+    color: #f8fafc;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.875rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+}
+
+.content-code-block {
+    margin: 2rem 0;
+    border-left: 4px solid #2563eb;
+}
+
+/* ============================= */
+/* Project Card Grid             */
+/* ============================= */
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+    padding: 1rem;
+}
+
+.project-card {
+    background-color: #111827;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 25px 30px -5px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================= */
+/* Navigation                    */
+/* ============================= */
+
+.nav-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 3rem auto;
+    padding: 1rem;
+}
+
+.nav-link {
+    background-color: #334155;
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 9999px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: #2563eb;
+}
+
+/* ============================= */
+/* CodePen Section               */
+/* ============================= */
+
+.codepen-intro {
+    text-align: center;
+    margin: 2rem 0;
+    font-size: 1.25rem;
+    color: #6b7280;
+}
+
+.codepen-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    color: #9ca3af;
+    font-size: 1.125rem;
+    margin: 2rem auto 4rem;
+    max-width: 800px;
+    padding-left: 0;
+}
+
+.codepen-list-item {
+    list-style-type: none;
+}
+
+.codepen-link {
+    color: #3b82f6;
+    text-decoration: none;
+    transition: text-decoration 0.3s ease;
+}
+
+.codepen-link:hover {
+    text-decoration: underline;
+}

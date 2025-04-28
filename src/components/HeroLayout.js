@@ -1,7 +1,7 @@
 import React from "react";
-import "../global-style.css";
+import "../styles/global.css";
 
-export default function Layout({ children }) {
+export default function HeroLayout({ children }) {
   return (
     <div className="content-container">
       {children}

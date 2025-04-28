@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 /* Custom styles for the projects page */
 .projects-container {
   max-width: 1280px;
@@ -26,7 +31,7 @@
 }
 
 .nav-link:hover {
-  background-color: #1e40af;
+  background-color: #2563eb;
 }
 
 /* Section styles */
@@ -36,7 +41,8 @@
 
 .section-hero {
   position: relative;
-  height: 12rem;
+  height: 16rem;
+  min-height: 12rem;
   width: 100%;
 }
 
@@ -65,14 +71,14 @@
 }
 
 .section-hero-title {
-  font-size: 4.5rem;
+  font-size: 2.75rem;
   font-weight: 800;
   letter-spacing: -0.025em;
   color: white;
 }
 
 .section-hero-subtitle {
-  font-size: 1.875rem;
+  font-size: 1.125rem;
   font-weight: 300;
   color: #d1d5db;
   margin-top: 0.5rem;
@@ -98,11 +104,12 @@
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   padding: 2rem;
+  gap: 1rem;
   color: white;
 }
 
 .project-card:hover {
-  transform: scale(1.05);
+  transform: scale(1.04) rotate(1deg);
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
@@ -164,7 +171,7 @@
 .codepen-intro {
   position: relative;
   z-index: 10;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   font-size: 1.25rem;
   font-weight: 400;
   color: #9ca3af;
@@ -172,7 +179,7 @@
   margin-left: auto;
   margin-right: auto;
   padding: 0 1.5rem;
-  margin-top: 3rem;
+  margin-top: 2rem;
 }
 
 .codepen-list {
@@ -190,6 +197,12 @@
 
 .codepen-list-item {
   margin-bottom: 0.5rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+}
+
+.codepen-list-item:hover {
+  background-color: #374151;
 }
 
 .codepen-link {

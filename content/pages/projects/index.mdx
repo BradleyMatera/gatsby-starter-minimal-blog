@@ -12,11 +12,11 @@ import { motion } from "framer-motion";
 
 # 🚀 My Projects
 
-<div class="nav-container">
-  <a href="#web" class="nav-link">🖥️ Web Dev</a>
-  <a href="#fullstack" class="nav-link">⚙️ Full Stack</a>
-  <a href="#tools" class="nav-link">🛠️ Tools</a>
-  <a href="#codepen" class="nav-link">🧪 Demos</a>
+<div className="nav-container">
+  <a href="#web" className="nav-link bg-gray-700 hover:bg-gray-600 text-xs md:text-sm px-3 py-2 rounded-full">🖥️ Web Dev</a>
+  <a href="#fullstack" className="nav-link bg-gray-700 hover:bg-gray-600 text-xs md:text-sm px-3 py-2 rounded-full">⚙️ Full Stack</a>
+  <a href="#tools" className="nav-link bg-gray-700 hover:bg-gray-600 text-xs md:text-sm px-3 py-2 rounded-full">🛠️ Tools</a>
+  <a href="#codepen" className="nav-link bg-gray-700 hover:bg-gray-600 text-xs md:text-sm px-3 py-2 rounded-full">🧪 Demos</a>
 </div>
 
 <motion.section
@@ -24,56 +24,64 @@ import { motion } from "framer-motion";
   whileInView={{ opacity: 1, y: 0 }}
   transition={{ duration: 0.8 }}
   id="web"
-  class="section"
+  className="section"
 >
-  <div class="section-hero">
+  <div className="section-hero">
     <img
       src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1920&q=80"
       alt="Web Dev Background"
-      class="section-hero-img"
+      className="section-hero-img h-64 md:h-80 object-cover rounded-xl"
     />
-    <div class="section-hero-overlay">
-      <h2 class="section-hero-title">🌐 Web Development Projects</h2>
-      <p class="section-hero-subtitle">Frontend applications and UI designs</p>
+    <div className="section-hero-overlay">
+      <h2 className="text-4xl md:text-5xl font-bold">🌐 Web Development Projects</h2>
+      <p className="text-lg md:text-xl text-gray-300">Frontend applications and UI designs</p>
     </div>
   </div>
-  <div class="projects-grid">
-    <ProjectCard
-      title="🖥️ WebGPU Shapes Renderer"
-      description="Demo of 2D shape rendering using WebGPU and Canvas. (Chrome required.)"
-      technologies="WebGPU, JavaScript, Canvas"
-      demoLink="https://bradleymatera.github.io/leaf-js/"
-      githubLink="https://github.com/BradleyMatera/leaf-js"
-      status="Live"
-      bgColor="bg-slate-800"
-    />
-    <ProjectCard
-      title="📖 Gatsby Starter Minimal Blog"
-      description="React-based blog pulling from a custom Express API."
-      technologies="React.js, Gatsby, Node.js, Express, Netlify"
-      demoLink="https://bradleysgatsbyblog.netlify.app/"
-      githubLink="https://github.com/BradleyMatera/gatsby-starter-minimal-blog"
-      status="Live"
-      bgColor="bg-indigo-900"
-    />
-    <ProjectCard
-      title="🎮 Interactive Pokedex"
-      description="Searchable dynamic Pokémon data app."
-      technologies="HTML5, Tailwind CSS, JavaScript, Pokémon API"
-      demoLink="https://bradleymatera.github.io/Interactive-Pokedex/"
-      githubLink="https://github.com/BradleyMatera/Interactive-Pokedex"
-      status="Live"
-      bgColor="bg-blue-900"
-    />
-    <ProjectCard
-      title="🖥️ Professional Portfolio Website"
-      description="Responsive portfolio built with vanilla HTML, CSS, JavaScript."
-      technologies="HTML5, CSS3, JavaScript"
-      demoLink="https://bradleymatera.github.io/Professional-Portfolio-Website/"
-      githubLink="https://github.com/BradleyMatera/Professional-Portfolio-Website"
-      status="Live"
-      bgColor="bg-slate-800"
-    />
+  <div className="projects-grid grid grid-cols-1 md:grid-cols-2 gap-6">
+    <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
+      <ProjectCard
+        title="🖥️ WebGPU Shapes Renderer"
+        description="Demo of 2D shape rendering using WebGPU and Canvas. (Chrome required.)"
+        technologies="WebGPU, JavaScript, Canvas"
+        demoLink="https://bradleymatera.github.io/leaf-js/"
+        githubLink="https://github.com/BradleyMatera/leaf-js"
+        status="Live"
+        bgColor="bg-slate-800"
+      />
+    </motion.div>
+    <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
+      <ProjectCard
+        title="📖 Gatsby Starter Minimal Blog"
+        description="React-based blog pulling from a custom Express API."
+        technologies="React.js, Gatsby, Node.js, Express, Netlify"
+        demoLink="https://bradleysgatsbyblog.netlify.app/"
+        githubLink="https://github.com/BradleyMatera/gatsby-starter-minimal-blog"
+        status="Live"
+        bgColor="bg-indigo-900"
+      />
+    </motion.div>
+    <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
+      <ProjectCard
+        title="🎮 Interactive Pokedex"
+        description="Searchable dynamic Pokémon data app."
+        technologies="HTML5, Tailwind CSS, JavaScript, Pokémon API"
+        demoLink="https://bradleymatera.github.io/Interactive-Pokedex/"
+        githubLink="https://github.com/BradleyMatera/Interactive-Pokedex"
+        status="Live"
+        bgColor="bg-blue-900"
+      />
+    </motion.div>
+    <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
+      <ProjectCard
+        title="🖥️ Professional Portfolio Website"
+        description="Responsive portfolio built with vanilla HTML, CSS, JavaScript."
+        technologies="HTML5, CSS3, JavaScript"
+        demoLink="https://bradleymatera.github.io/Professional-Portfolio-Website/"
+        githubLink="https://github.com/BradleyMatera/Professional-Portfolio-Website"
+        status="Live"
+        bgColor="bg-slate-800"
+      />
+    </motion.div>
   </div>
 </motion.section>
 
@@ -82,53 +90,61 @@ import { motion } from "framer-motion";
   whileInView={{ opacity: 1, y: 0 }}
   transition={{ duration: 0.8 }}
   id="fullstack"
-  class="section"
+  className="section"
 >
-  <div class="section-hero">
+  <div className="section-hero">
     <img
       src="https://images.unsplash.com/photo-1581093588401-9e2ac7a58817?auto=format&fit=crop&w=1920&q=80"
       alt="Full Stack Background"
-      class="section-hero-img"
+      className="section-hero-img h-64 md:h-80 object-cover rounded-xl"
     />
-    <div class="section-hero-overlay">
-      <h2 class="section-hero-title">⚙️ Full-Stack Applications</h2>
-      <p class="section-hero-subtitle">Backend services and full-stack projects</p>
+    <div className="section-hero-overlay">
+      <h2 className="text-4xl md:text-5xl font-bold">⚙️ Full-Stack Applications</h2>
+      <p className="text-lg md:text-xl text-gray-300">Backend services and full-stack projects</p>
     </div>
   </div>
-  <div class="projects-grid">
-    <ProjectCard
-      title="🔄 React Native Anime CRUD App"
-      description="Mobile CRUD application for anime data."
-      technologies="React Native, Node.js, MongoDB, Heroku, Vercel"
-      demoLink="https://cruddemo-one.vercel.app/"
-      status="Live"
-      bgColor="bg-indigo-900"
-    />
-    <ProjectCard
-      title="🔄 RESTful Routes Using ExpressJS"
-      description="Basic REST API demo using Express."
-      technologies="Node.js, Express.js"
-      githubLink="https://github.com/BradleyMatera/RESTfulRoutesUsingExpressJS"
-      status="Repository"
-      bgColor="bg-blue-900"
-    />
-    <ProjectCard
-      title="🤖 Convo-Ai - Local Conversational AI"
-      description="Local voice/text AI chat app with FastAPI and Ollama."
-      technologies="Python, FastAPI, Whisper.cpp, Ollama, XTTS v2"
-      githubLink="https://github.com/BradleyMatera/Convo-Ai"
-      status="Repository"
-      bgColor="bg-slate-800"
-    />
-    <ProjectCard
-      title="💬 ProjectHub - AI-Powered Portfolio Chat Bot"
-      description="Integrates into any site to showcase projects and skills."
-      technologies="JavaScript, HTML, Modular Web Scripts"
-      demoLink="https://codepen.io/student-account-bradley-matera/full/yyLmYKR"
-      githubLink="https://github.com/BradleyMatera/ProjectHub"
-      status="Live"
-      bgColor="bg-indigo-900"
-    />
+  <div className="projects-grid grid grid-cols-1 md:grid-cols-2 gap-6">
+    <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
+      <ProjectCard
+        title="🔄 React Native Anime CRUD App"
+        description="Mobile CRUD application for anime data."
+        technologies="React Native, Node.js, MongoDB, Heroku, Vercel"
+        demoLink="https://cruddemo-one.vercel.app/"
+        status="Live"
+        bgColor="bg-indigo-900"
+      />
+    </motion.div>
+    <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
+      <ProjectCard
+        title="🔄 RESTful Routes Using ExpressJS"
+        description="Basic REST API demo using Express."
+        technologies="Node.js, Express.js"
+        githubLink="https://github.com/BradleyMatera/RESTfulRoutesUsingExpressJS"
+        status="Repository"
+        bgColor="bg-blue-900"
+      />
+    </motion.div>
+    <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
+      <ProjectCard
+        title="🤖 Convo-Ai - Local Conversational AI"
+        description="Local voice/text AI chat app with FastAPI and Ollama."
+        technologies="Python, FastAPI, Whisper.cpp, Ollama, XTTS v2"
+        githubLink="https://github.com/BradleyMatera/Convo-Ai"
+        status="Repository"
+        bgColor="bg-slate-800"
+      />
+    </motion.div>
+    <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
+      <ProjectCard
+        title="💬 ProjectHub - AI-Powered Portfolio Chat Bot"
+        description="Integrates into any site to showcase projects and skills."
+        technologies="JavaScript, HTML, Modular Web Scripts"
+        demoLink="https://codepen.io/student-account-bradley-matera/full/yyLmYKR"
+        githubLink="https://github.com/BradleyMatera/ProjectHub"
+        status="Live"
+        bgColor="bg-indigo-900"
+      />
+    </motion.div>
   </div>
 </motion.section>
 
@@ -137,55 +153,63 @@ import { motion } from "framer-motion";
   whileInView={{ opacity: 1, y: 0 }}
   transition={{ duration: 0.8 }}
   id="tools"
-  class="section"
+  className="section"
 >
-  <div class="section-hero">
+  <div className="section-hero">
     <img
       src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1920&q=80"
       alt="Tools Background"
-      class="section-hero-img"
+      className="section-hero-img h-64 md:h-80 object-cover rounded-xl"
     />
-    <div class="section-hero-overlay">
-      <h2 class="section-hero-title">🛠️ Tools & Libraries</h2>
-      <p class="section-hero-subtitle">Utility libraries and development tools</p>
+    <div className="section-hero-overlay">
+      <h2 className="text-4xl md:text-5xl font-bold">🛠️ Tools & Libraries</h2>
+      <p className="text-lg md:text-xl text-gray-300">Utility libraries and development tools</p>
     </div>
   </div>
-  <div class="projects-grid">
-    <ProjectCard
-      title="🧀 CheeseMath Jest Tests"
-      description="Math utilities module with Jest unit testing."
-      technologies="JavaScript, Jest"
-      demoLink="https://cheese-math.vercel.app/"
-      githubLink="https://github.com/BradleyMatera/CheeseMath-Jest-Tests/tree/main/CheeseMath"
-      status="Live"
-      bgColor="bg-blue-900"
-    />
-    <ProjectCard
-      title="🐳 Docker Multilang Project"
-      description="Containerize apps across multiple languages."
-      technologies="Docker, Python, Node.js"
-      githubLink="https://github.com/BradleyMatera/docker_multilang_project"
-      status="Repository"
-      bgColor="bg-slate-800"
-    />
-    <ProjectCard
-      title="🎮 Pong_Deluxe"
-      description="Classic Pong recreation with PixiJS rendering."
-      technologies="JavaScript, PixiJS"
-      demoLink="https://pongdeluxe.netlify.app/"
-      githubLink="https://github.com/BradleyMatera/Pong-Deluxe"
-      status="Live"
-      bgColor="bg-indigo-900"
-    />
-    <ProjectCard
-      title="🐾 Animal Sounds"
-      description="Plays animal sounds through button interactions."
-      technologies="JavaScript, HTML5, CSS3"
-      demoLink="https://bradleymatera.github.io/AnimalSounds/"
-      githubLink="https://github.com/BradleyMatera/AnimalSounds"
-      status="Live"
-      bgColor="bg-blue-900"
-    />
+  <div className="projects-grid grid grid-cols-1 md:grid-cols-2 gap-6">
+    <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
+      <ProjectCard
+        title="🧀 CheeseMath Jest Tests"
+        description="Math utilities module with Jest unit testing."
+        technologies="JavaScript, Jest"
+        demoLink="https://cheese-math.vercel.app/"
+        githubLink="https://github.com/BradleyMatera/CheeseMath-Jest-Tests/tree/main/CheeseMath"
+        status="Live"
+        bgColor="bg-blue-900"
+      />
+    </motion.div>
+    <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
+      <ProjectCard
+        title="🐳 Docker Multilang Project"
+        description="Containerize apps across multiple languages."
+        technologies="Docker, Python, Node.js"
+        githubLink="https://github.com/BradleyMatera/docker_multilang_project"
+        status="Repository"
+        bgColor="bg-slate-800"
+      />
+    </motion.div>
+    <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
+      <ProjectCard
+        title="🎮 Pong_Deluxe"
+        description="Classic Pong recreation with PixiJS rendering."
+        technologies="JavaScript, PixiJS"
+        demoLink="https://pongdeluxe.netlify.app/"
+        githubLink="https://github.com/BradleyMatera/Pong-Deluxe"
+        status="Live"
+        bgColor="bg-indigo-900"
+      />
+    </motion.div>
+    <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
+      <ProjectCard
+        title="🐾 Animal Sounds"
+        description="Plays animal sounds through button interactions."
+        technologies="JavaScript, HTML5, CSS3"
+        demoLink="https://bradleymatera.github.io/AnimalSounds/"
+        githubLink="https://github.com/BradleyMatera/AnimalSounds"
+        status="Live"
+        bgColor="bg-blue-900"
+      />
+    </motion.div>
   </div>
 </motion.section>
 
@@ -194,51 +218,55 @@ import { motion } from "framer-motion";
   whileInView={{ opacity: 1, y: 0 }}
   transition={{ duration: 0.8 }}
   id="codepen"
-  class="section"
+  className="section"
 >
-  <div class="section-hero">
+  <div className="section-hero">
     <img
       src="https://images.unsplash.com/photo-1531497865142-4874b90d627b?auto=format&fit=crop&w=1920&q=80"
       alt="CodePen Demos Background"
-      class="section-hero-img"
+      className="section-hero-img"
     />
-    <div class="section-hero-overlay">
-      <h2 class="section-hero-title">🧪 CodePen Demos</h2>
-      <p class="section-hero-subtitle">Smaller projects, experiments, and tutorials built live in CodePen</p>
+    <div className="section-hero-overlay">
+      <h2 className="section-hero-title">🧪 CodePen Demos</h2>
+      <p className="section-hero-subtitle">Smaller projects, experiments, and tutorials built live in CodePen</p>
     </div>
   </div>
-  <motion.div
-    initial={{ y: 20, opacity: 0 }}
-    animate={{ y: 0, opacity: 1 }}
-    transition={{ delay: 0.2, duration: 0.8 }}
-    class="codepen-intro"
-  >
-    These are smaller projects, experiments, or tutorials built live in CodePen:
-  </motion.div>
 
-  <ul class="codepen-list">
-    <li class="codepen-list-item">
-      <a href="https://codepen.io/student-account-bradley-matera/pen/ZYzoWpL" class="codepen-link">
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+    <div className="bg-gray-800 hover:bg-gray-700 rounded-lg p-4 transition">
+      <a href="https://codepen.io/student-account-bradley-matera/pen/ZYzoWpL" className="text-blue-400 hover:underline text-lg font-semibold">
         JavaScript Garbage Collection Tutorial
       </a>
-    </li>
-    <li class="codepen-list-item">
-      <a href="https://codepen.io/student-account-bradley-matera/pen/ogvGZjJ" class="codepen-link">React Calculator</a>
-    </li>
-    <li class="codepen-list-item">
-      <a href="https://codepen.io/student-account-bradley-matera/details/dPbVvoa" class="codepen-link">Sound Machine</a>
-    </li>
-    <li class="codepen-list-item">
-      <a href="https://codepen.io/student-account-bradley-matera/pen/ZYzXeEJ" class="codepen-link">Markdown Previewer</a>
-    </li>
-    <li class="codepen-list-item">
-      <a href="https://codepen.io/student-account-bradley-matera/pen/azoLpeG" class="codepen-link">Random Quote Machine</a>
-    </li>
-    <li class="codepen-list-item">
-      <a href="https://codepen.io/student-account-bradley-matera/pen/PwYJWMY" class="codepen-link">Random Quote Generator</a>
-    </li>
-    <li class="codepen-list-item">
-      <a href="https://codepen.io/student-account-bradley-matera/details/dyEYbPO" class="codepen-link">Data Visualization Demo</a>
-    </li>
-  </ul>
+    </div>
+    <div className="bg-gray-800 hover:bg-gray-700 rounded-lg p-4 transition">
+      <a href="https://codepen.io/student-account-bradley-matera/pen/ogvGZjJ" className="text-blue-400 hover:underline text-lg font-semibold">
+        React Calculator
+      </a>
+    </div>
+    <div className="bg-gray-800 hover:bg-gray-700 rounded-lg p-4 transition">
+      <a href="https://codepen.io/student-account-bradley-matera/details/dPbVvoa" className="text-blue-400 hover:underline text-lg font-semibold">
+        Sound Machine
+      </a>
+    </div>
+    <div className="bg-gray-800 hover:bg-gray-700 rounded-lg p-4 transition">
+      <a href="https://codepen.io/student-account-bradley-matera/pen/ZYzXeEJ" className="text-blue-400 hover:underline text-lg font-semibold">
+        Markdown Previewer
+      </a>
+    </div>
+    <div className="bg-gray-800 hover:bg-gray-700 rounded-lg p-4 transition">
+      <a href="https://codepen.io/student-account-bradley-matera/pen/azoLpeG" className="text-blue-400 hover:underline text-lg font-semibold">
+        Random Quote Machine
+      </a>
+    </div>
+    <div className="bg-gray-800 hover:bg-gray-700 rounded-lg p-4 transition">
+      <a href="https://codepen.io/student-account-bradley-matera/pen/PwYJWMY" className="text-blue-400 hover:underline text-lg font-semibold">
+        Random Quote Generator
+      </a>
+    </div>
+    <div className="bg-gray-800 hover:bg-gray-700 rounded-lg p-4 transition">
+      <a href="https://codepen.io/student-account-bradley-matera/details/dyEYbPO" className="text-blue-400 hover:underline text-lg font-semibold">
+        Data Visualization Demo
+      </a>
+    </div>
+  </div>
 </motion.section>
