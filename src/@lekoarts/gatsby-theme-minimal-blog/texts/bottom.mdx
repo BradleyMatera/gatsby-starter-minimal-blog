@@ -10,9 +10,11 @@ import { motion } from "framer-motion";
   <h2 className="content-heading-2 text-center">🤖 Bradley Matera's ProjectHub Chat Bot</h2>
   <div className="w-full flex flex-col items-center">
     <div className="text-gray-300 text-base max-w-2xl text-center mb-8">
-      This chat bot is designed to answer questions about my web development projects, CodePens, and background. Feel free to ask it about anything I've built or learned!
+      This chat bot is designed to answer questions about my web development projects, CodePens, and background. It is accessible throughout the site to assist you at any time. Please note that the chat bot is still in beta, and I'm continuously improving its capabilities. Feel free to ask it about anything I've built or learned!
     </div>
     <div className="w-full flex justify-center"></div>
   </div>
-  <div dangerouslySetInnerHTML={{ __html: '<script src="https://bradleymatera.github.io/ProjectHub/ProjectHub.js"></script>' }} />
+  {typeof window !== 'undefined' && (
+    <div dangerouslySetInnerHTML={{ __html: '<script src="https://bradleymatera.github.io/ProjectHub/ProjectHub.js"></script>' }} />
+  )}
 </motion.section>
