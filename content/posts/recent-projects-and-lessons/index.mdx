@@ -1,56 +1,152 @@
 ---
-title: "Recent Projects and Lessons Learned"
-date: "2025-04-01"
-tags: ["Projects", "Web Development", "Learning", "Full Stack"]
+title: "Exploring My Recent Project: BasicServerSetup"
+date: 2024-12-04
+slug: "/recent-project-basicserversetup"
+tags:
+  - Projects
+  - APIs
+  - Backend
+banner: ./background.jpg
 ---
 
-<div class="content-container">
-  <h1 class="content-heading-1">Recent Projects and Lessons Learned</h1>
-  <p class="content-paragraph">
-    Over the past few months, I've been working on a variety of projects that have pushed my skills in web development and full-stack engineering. This post reflects on some of the most impactful projects, the challenges I faced, and the key lessons I learned through hands-on experience.
-  </p>
-  
-  <h2 class="content-heading-2">Project Highlights</h2>
-  
-  <h3 class="content-heading-3">WebGPU Shapes Renderer</h3>
-  <p class="content-paragraph">
-    A demo of 2D shape rendering using WebGPU and Canvas, showcasing the power of modern web graphics APIs. This project required learning WebGPU from scratch and implementing an OBJ parser for 3D data.
-  </p>
-  <ul class="content-list">
-    <li class="content-list-item"><strong>Demo</strong>: <a href="https://bradleymatera.github.io/leaf-js/" class="content-link">bradleymatera.github.io/leaf-js</a></li>
-    <li class="content-list-item"><strong>Repository</strong>: <a href="https://github.com/BradleyMatera/leaf-js" class="content-link">github.com/BradleyMatera/leaf-js</a></li>
-    <li class="content-list-item"><strong>Lesson Learned</strong>: Diving into WebGPU taught me about low-level graphics programming on the web. I struggled with buffer management initially, but testing different data structures helped me optimize rendering performance.</li>
-  </ul>
-  
-  <h3 class="content-heading-3">React Native Anime CRUD App</h3>
-  <p class="content-paragraph">
-    A mobile CRUD application for anime data, integrating a Node.js backend with MongoDB. This was my first foray into mobile development with React Native.
-  </p>
-  <ul class="content-list">
-    <li class="content-list-item"><strong>Demo</strong>: <a href="https://cruddemo-one.vercel.app/" class="content-link">cruddemo-one.vercel.app</a></li>
-    <li class="content-list-item"><strong>Lesson Learned</strong>: State management in mobile apps differs from web apps. I broke the UI with async data issues, but testing with React hooks like <code class="content-code">useEffect</code> helped me sync data properly.</li>
-  </ul>
-  
-  <h3 class="content-heading-3">Docker Multilang Project</h3>
-  <p class="content-paragraph">
-    A project focused on containerizing applications across multiple languages using Docker and Docker Compose, demonstrating portability and environment consistency.
-  </p>
-  <ul class="content-list">
-    <li class="content-list-item"><strong>Repository</strong>: <a href="https://github.com/BradleyMatera/docker_multilang_project" class="content-link">github.com/BradleyMatera/docker_multilang_project</a></li>
-    <li class="content-list-item"><strong>Lesson Learned</strong>: Networking between containers was a hurdle. I tested various configurations, breaking setups intentionally to understand Docker networking, which led to a robust multi-container environment.</li>
-  </ul>
-  
-  <h2 class="content-heading-2">Key Takeaways</h2>
-  <ul class="content-list">
-    <li class="content-list-item"><strong>Learning by Doing</strong>: Each project reinforced that I learn best by building, breaking, and fixing. Theoretical knowledge only clicks when I apply it practically.</li>
-    <li class="content-list-item"><strong>Testing is Crucial</strong>: Intentionally pushing projects to their limits—whether overloading an API or testing large datasets—revealed weaknesses I could address before they became real issues.</li>
-    <li class="content-list-item"><strong>Adaptability</strong>: Working across web, mobile, and container technologies showed me the importance of adapting to different environments and toolsets.</li>
-  </ul>
-  
-  <h2 class="content-heading-2">What's Next</h2>
-  <p class="content-paragraph">
-    I'm currently job hunting for roles in web development or full-stack engineering where I can apply these lessons. I'm also exploring more advanced topics like WebAssembly and machine learning integrations. If you have feedback or opportunities, connect with me on <a href="https://github.com/BradleyMatera" class="content-link">GitHub</a>.
-  </p>
-  
-  <img src="./backround.jpg" alt="Project Background" class="content-image" />
-</div>
+
+![Banner](./background.jpg)
+
+OR
+
+![Banner](/background.jpg)
+
+
+# 🕒✨ BasicServerSetup: A Time Tracking Application
+
+Hi everyone! Today, I'm excited to share one of my recent projects, **BasicServerSetup**, a robust and user-friendly solution for tracking employee work hours. This project was a fantastic opportunity to dive deep into API design, frontend-backend integration, and deployment strategies.
+
+## 🌟 Features
+
+Here's a quick overview of what BasicServerSetup offers:
+
+- **🔒 User Authentication**: Secure registration and login functionality.
+- **⏱️ Time Tracking**: Users can clock in and clock out effortlessly.
+- **📅 Timesheet Management**: View and manage your work sessions with ease.
+- **🌐 Sleek Frontend**: A clean and responsive interface built with HTML and Tailwind CSS.
+- **🚀 Backend API**: A powerful RESTful API developed using Express.js.
+- **🔄 CORS Enabled**: Ensuring seamless cross-origin requests.
+- **💾 In-Memory Storage**: Simplified for demonstration purposes.
+
+## 🛠️ The Tech Stack
+
+- **Backend**: Node.js, Express.js
+- **Frontend**: HTML, Tailwind CSS
+- **Other Tools**: Nodemon, http-server, and GitHub Pages for deployment.
+
+This stack allowed me to focus on functionality while keeping the setup straightforward and manageable.
+
+## 📋 Project Structure
+
+Here's a look at the project layout:
+
+```plaintext
+BasicServerSetup/
+├── 📄 .env
+├── 📄 package.json
+├── 📁 app/
+│   ├── 📄 app.js
+│   ├── 📁 models/
+│   │   ├── 📄 userModel.js
+│   │   └── 📄 timeEntryModel.js
+│   ├── 📁 controllers/
+│   │   ├── 📄 userController.js
+│   │   └── 📄 timeController.js
+│   ├── 📁 routes/
+│   │   └── 📄 index.js
+│   └── 📁 utils/
+│       └── 📄 authMiddleware.js
+└── 📁 frontend/
+    └── 📄 index.html
+```
+
+This structure separates backend logic (in app/) from the frontend files, making the project modular and easy to navigate.
+
+## 🌐 Key Endpoints
+
+Here are some of the core API endpoints I developed:
+
+### 📝 Register
+- POST /register
+- Body: `{ "username": "your_username", "password": "your_password" }`
+
+### 🔐 Login
+- POST /login
+- Body: `{ "username": "your_username", "password": "your_password" }`
+
+### 🟢 Clock In
+- POST /clockin
+- Headers: `x-user-id: YOUR_USER_ID`
+
+### 🔴 Clock Out
+- POST /clockout
+- Headers: `x-user-id: YOUR_USER_ID`
+
+### 📅 View Timesheet
+- GET /timesheet
+- Headers: `x-user-id: YOUR_USER_ID`
+
+These endpoints showcase the core functionality of the application and were designed with clarity and scalability in mind.
+
+## 🚀 Deployment Highlights
+
+One of the most exciting parts of this project was deploying it. Here's how I approached it:
+
+1. **Backend Deployment**:
+   - Hosted the backend API on Heroku, ensuring it was publicly accessible for testing.
+2. **Frontend Deployment**:
+   - Used GitHub Pages to host the static frontend, with a custom domain for added professionalism.
+
+Setting up CORS for secure communication between the frontend and backend was a great learning experience.
+
+## 🎯 Future Improvements
+
+Although the project is fully functional, there are a few areas I'd like to enhance:
+
+1. 🗄️ **Persistent Storage**: Replace in-memory storage with a database like MongoDB.
+2. 🔑 **Token-Based Authentication**: Implement JWT for enhanced security.
+3. 🎨 **Frontend Revamp**: Upgrade the frontend using React or Next.js.
+4. 📱 **Responsive Design**: Make the UI fully mobile-friendly.
+5. ✅ **Unit Testing**: Add automated tests to ensure reliability.
+
+## 💻 Lessons Learned
+
+This project taught me the importance of:
+- Structuring code for maintainability.
+- Clear and concise API documentation.
+- Streamlining deployment workflows with tools like GitHub Pages and Heroku.
+
+It was also a reminder that no matter how small a project is, there's always room for improvement and growth.
+
+## 📬 Let's Connect!
+
+I'd love to hear your thoughts on this project! Check out the repo on GitHub.
+
+Feel free to reach out or collaborate with me on similar projects. You can find me on:
+- GitHub
+- LinkedIn
+
+Thanks for reading! Stay tuned for more updates and projects. 😊
+
+*Bradley Matera*
+
+---
+
+### What Was Fixed?
+
+1. **YAML Formatting**:
+   - Ensure `banner` aligns with the rest of the frontmatter.
+   - Removed extra spaces in frontmatter entry.
+
+2. **Image Path**:
+   - Ensure `background.jpg` exists in the same directory as the MDX file.
+
+### Debugging Tips
+
+1. **Check File Path**: Ensure `./background.jpg` exists in the same folder as the MDX file.
+2. **Gatsby Develop**: Always test with `gatsby develop` after fixing the frontmatter.
