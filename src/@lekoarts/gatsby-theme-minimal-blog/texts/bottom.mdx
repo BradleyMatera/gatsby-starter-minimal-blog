@@ -15,6 +15,12 @@ import { motion } from "framer-motion";
     <div className="w-full flex justify-center"></div>
   </div>
   {typeof window !== 'undefined' && (
-    <div dangerouslySetInnerHTML={{ __html: '<script src="https://bradleymatera.github.io/ProjectHub/ProjectHub.js"></script>' }} />
+    <script dangerouslySetInnerHTML={{ __html: `
+      document.addEventListener('DOMContentLoaded', function() {
+        var script = document.createElement('script');
+        script.src = 'https://bradleymatera.github.io/ProjectHub/ProjectHub.js';
+        document.body.appendChild(script);
+      });
+    ` }} />
   )}
 </motion.section>
