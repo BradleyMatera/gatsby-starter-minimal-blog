@@ -1,17 +1,18 @@
-<Title text="Featured Projects" />
+import { motion } from "framer-motion";
 
-- [**Professional Portfolio Website**](https://bradleymatera.github.io/Professional-Portfolio-Website/):  
-  A responsive portfolio site built with HTML, CSS, and JavaScript to showcase skills, project links, and education.  
-  ![Portfolio Badge](https://img.shields.io/badge/-Demo-FF5F5F?style=for-the-badge&logo=appveyor)
-
-- [**Interactive Pokedex**](https://github.com/BradleyMatera/Interactive-Pokedex):  
-  A vanilla JavaScript project using the Pokémon API to display searchable, dynamic Pokémon data with interactive UI features.  
-  ![Pokedex Badge](https://img.shields.io/badge/-Repository-FFDD57?style=for-the-badge&logo=github)
-
-- [**RESTful Routes with Express.js**](https://github.com/BradleyMatera/RESTfulRoutesUsingExpressJS):  
-  A Node.js and Express project demonstrating how to set up basic RESTful APIs and CRUD operations for backend applications.  
-  ![REST API Badge](https://img.shields.io/badge/-Repository-FFDD57?style=for-the-badge&logo=github)
-
-- [**Docker Multilang Project**](https://github.com/BradleyMatera/docker_multilang_project):  
-  A Docker setup project showing how to run applications in different programming languages inside containers.  
-  ![Docker Badge](https://img.shields.io/badge/-Repository-FFDD57?style=for-the-badge&logo=github)
+<motion.section
+  initial={{ opacity: 0, y: 50 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8 }}
+  viewport={{ once: true, amount: 0.3 }}
+  className="content-container mt-16 flex flex-col items-center"
+>
+  <h2 className="content-heading-2 text-center">🤖 Bradley Matera's ProjectHub Chat Bot</h2>
+  <div className="w-full flex flex-col items-center">
+    <div className="text-gray-300 text-base max-w-2xl text-center mb-8">
+      This chat bot is designed to answer questions about my web development projects, CodePens, and background. Feel free to ask it about anything I've built or learned!
+    </div>
+    <div className="w-full flex justify-center"></div>
+  </div>
+  <div dangerouslySetInnerHTML={{ __html: '<script src="https://bradleymatera.github.io/ProjectHub/ProjectHub.js"></script>' }} />
+</motion.section>

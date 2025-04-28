@@ -17,61 +17,102 @@ import { motion } from "framer-motion";
       Hi, I’m Bradley Matera. I’m a web developer and student at Full Sail University, working toward my B.S. in Web Development (GPA: 3.8, expected October 2025). I focus on building functional, user-centered web applications. Before starting my journey in tech, I served as a combat medic in the U.S. Army and later worked in security, construction, and animal rescue. Those experiences shaped how I approach problem-solving, teamwork, and building projects that actually work.
     </p>
 
-    <h2 className="content-heading-2 mb-6">My Mission</h2>
-    <p className="content-paragraph mb-8">
-      I believe technology should make things simpler, not harder. My goal is to build websites and applications that are straightforward, accessible, and reliable—whether that's a clean portfolio, a dynamic API-driven app, or a tool that solves a real problem. Good code should feel natural to use, and I aim to build with that in mind.
-    </p>
+    <motion.div
+      initial={{ opacity: 0, x: -100 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true, amount: 0.3 }}
+    >
+      <h2 className="content-heading-2 mb-6">My Mission</h2>
+      <p className="content-paragraph mb-8">
+        I believe technology should make things simpler, not harder. My goal is to build websites and applications that are straightforward, accessible, and reliable—whether that's a clean portfolio, a dynamic API-driven app, or a tool that solves a real problem. Good code should feel natural to use, and I aim to build with that in mind.
+      </p>
+    </motion.div>
 
-    <h2 className="content-heading-2 mb-6">Skills & Expertise</h2>
-    <h3 className="content-heading-3 mb-4">Technical Skills</h3>
-    <ul className="content-list mb-8">
-      <li className="content-list-item">Languages: HTML5, CSS3, JavaScript (ES6+), SQL, TypeScript (learning)</li>
-      <li className="content-list-item">Frameworks & Libraries: React.js, Next.js, Gatsby, Node.js, Express.js, Tailwind CSS</li>
-      <li className="content-list-item">Databases: MongoDB, MySQL</li>
-      <li className="content-list-item">Tools: Git, Docker, Postman, Vercel, Netlify, Heroku, Expo, Jest</li>
-      <li className="content-list-item">Focus Areas: Responsive Design, Web Accessibility (WCAG standards), API Integration, Unit Testing, SEO basics</li>
-    </ul>
+    <motion.div
+      initial={{ opacity: 0, x: 100 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true, amount: 0.3 }}
+    >
+      <h2 className="content-heading-2 mb-6">Skills & Expertise</h2>
+      <h3 className="content-heading-3 mb-4">Technical Skills</h3>
+      <ul className="content-list mb-8">
+        <li className="content-list-item">Languages: HTML5, CSS3, JavaScript (ES6+), SQL, TypeScript (learning)</li>
+        <li className="content-list-item">Frameworks & Libraries: React.js, Next.js, Gatsby, Node.js, Express.js, Tailwind CSS</li>
+        <li className="content-list-item">Databases: MongoDB, MySQL</li>
+        <li className="content-list-item">Tools: Git, Docker, Postman, Vercel, Netlify, Heroku, Expo, Jest</li>
+        <li className="content-list-item">Focus Areas: Responsive Design, Web Accessibility (WCAG standards), API Integration, Unit Testing, SEO basics</li>
+      </ul>
 
-    <h3 className="content-heading-3 mb-4">Soft Skills</h3>
-    <ul className="content-list mb-8">
-      <li className="content-list-item">Leadership: Built through military service and case management work, where clear thinking under pressure was necessary.</li>
-      <li className="content-list-item">Problem-Solving: Applied daily, from real-world logistics to debugging issues in code.</li>
-      <li className="content-list-item">Collaboration: Comfortable working across teams from a wide range of backgrounds.</li>
-    </ul>
+      <h3 className="content-heading-3 mb-4">Soft Skills</h3>
+      <ul className="content-list mb-8">
+        <li className="content-list-item">Leadership: Built through military service and case management work, where clear thinking under pressure was necessary.</li>
+        <li className="content-list-item">Problem-Solving: Applied daily, from real-world logistics to debugging issues in code.</li>
+        <li className="content-list-item">Collaboration: Comfortable working across teams from a wide range of backgrounds.</li>
+      </ul>
+    </motion.div>
 
-    <h2 className="content-heading-2 mb-6">Education</h2>
-    <p className="content-paragraph mb-8">
-      B.S. in Web Development<br />
-      <em>Full Sail University</em> | August 2023 – October 2025 (Expected)<br />
-      GPA: 3.8<br />
-      Coursework: Frontend Development (React, JavaScript), Backend Systems (Node.js, Express), Database Design (MongoDB, SQL), UI/UX Basics
-    </p>
+    <motion.div
+      initial={{ opacity: 0, x: -100 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true, amount: 0.3 }}
+    >
+      <h2 className="content-heading-2 mb-6">Education</h2>
+      <p className="content-paragraph mb-8">
+        B.S. in Web Development<br />
+        <em>Full Sail University</em> | August 2023 – October 2025 (Expected)<br />
+        GPA: 3.8<br />
+        Coursework: Frontend Development (React, JavaScript), Backend Systems (Node.js, Express), Database Design (MongoDB, SQL), UI/UX Basics
+      </p>
+    </motion.div>
 
-    <h2 className="content-heading-2 mb-6">Experience & Background</h2>
-    <ul className="content-list mb-8">
-      <li className="content-list-item">Combat Medic, U.S. Army | 2011–2014 — Provided emergency medical care under pressure; learned to stay focused and adaptable, skills I now apply to development and troubleshooting.</li>
-      <li className="content-list-item">Case Manager | 2022 — Helped people organize goals and plans, strengthening my ability to design solutions that meet real needs.</li>
-      <li className="content-list-item">Volunteer, Mason County Kitten Rescue | 2020–2022 — Worked in a team-focused environment, managing logistics and support efforts—building discipline and coordination skills that carry into my coding work.</li>
-    </ul>
+    <motion.div
+      initial={{ opacity: 0, x: 100 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true, amount: 0.3 }}
+    >
+      <h2 className="content-heading-2 mb-6">Experience & Background</h2>
+      <ul className="content-list mb-8">
+        <li className="content-list-item">Combat Medic, U.S. Army | 2011–2014 — Provided emergency medical care under pressure; learned to stay focused and adaptable, skills I now apply to development and troubleshooting.</li>
+        <li className="content-list-item">Case Manager | 2022 — Helped people organize goals and plans, strengthening my ability to design solutions that meet real needs.</li>
+        <li className="content-list-item">Volunteer, Mason County Kitten Rescue | 2020–2022 — Worked in a team-focused environment, managing logistics and support efforts—building discipline and coordination skills that carry into my coding work.</li>
+      </ul>
+    </motion.div>
 
-    <h2 className="content-heading-2 mb-6">What Sets Me Apart</h2>
-    <ul className="content-list mb-8">
-      <li className="content-list-item">Real-World Approach: I focus on building things that work well and are easy to maintain.</li>
-      <li className="content-list-item">Problem-Solving from Different Fields: My background gives me a practical mindset for dealing with unexpected issues and finding solutions.</li>
-      <li className="content-list-item">Always Learning: I'm continually working to sharpen my backend, AWS, TypeScript, and infrastructure knowledge while maintaining strong frontend and API skills.</li>
-    </ul>
+    <motion.div
+      initial={{ opacity: 0, x: -100 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true, amount: 0.3 }}
+    >
+      <h2 className="content-heading-2 mb-6">What Sets Me Apart</h2>
+      <ul className="content-list mb-8">
+        <li className="content-list-item">Real-World Approach: I focus on building things that work well and are easy to maintain.</li>
+        <li className="content-list-item">Problem-Solving from Different Fields: My background gives me a practical mindset for dealing with unexpected issues and finding solutions.</li>
+        <li className="content-list-item">Always Learning: I'm continually working to sharpen my backend, AWS, TypeScript, and infrastructure knowledge while maintaining strong frontend and API skills.</li>
+      </ul>
+    </motion.div>
 
-    <h2 className="content-heading-2 mb-6">Let’s Connect</h2>
-    <p className="content-paragraph">
-      If you'd like to see some of my work, visit my <a href="/projects" className="content-link">Projects</a> page.<br />
-      You can also find me here:
-    </p>
-
-    <ul className="content-list">
-      <li className="content-list-item"><a href="https://github.com/BradleyMatera" className="content-link">GitHub</a></li>
-      <li className="content-list-item"><a href="https://linkedin.com/in/championingempatheticwebsolutionsthroughcode" className="content-link">LinkedIn</a></li>
-      <li className="content-list-item"><a href="https://www.youtube.com/@bradmatera" className="content-link">YouTube</a></li>
-    </ul>
+    <motion.div
+      initial={{ opacity: 0, x: 100 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true, amount: 0.3 }}
+    >
+      <h2 className="content-heading-2 mb-6">Let’s Connect</h2>
+      <p className="content-paragraph">
+        If you'd like to see some of my work, visit my <a href="/projects" className="content-link">Projects</a> page.<br />
+        You can also find me here:
+      </p>
+      <ul className="content-list">
+        <li className="content-list-item"><a href="https://github.com/BradleyMatera" className="content-link">GitHub</a></li>
+        <li className="content-list-item"><a href="https://linkedin.com/in/championingempatheticwebsolutionsthroughcode" className="content-link">LinkedIn</a></li>
+        <li className="content-list-item"><a href="https://www.youtube.com/@bradmatera" className="content-link">YouTube</a></li>
+      </ul>
+    </motion.div>
 
     <p className="content-paragraph mt-8 text-center">Thanks for checking out my page.</p>
   </motion.div>

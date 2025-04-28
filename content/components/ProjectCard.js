@@ -5,7 +5,10 @@ import "../../src/components/style.css";
 export function ProjectCard({ title, description, technologies, demoLink, githubLink, status, bgColor }) {
   return (
     <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
       whileHover={{ scale: 1.04, rotate: 1 }}
+      viewport={{ once: true }}
       className={`rounded-2xl shadow-2xl hover:shadow-3xl transition-transform duration-500 ease-in-out ${bgColor} p-8 project-card`}
     >
       <div>
