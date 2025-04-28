@@ -14,7 +14,7 @@ import { motion } from "framer-motion";
     </div>
     <div className="w-full flex justify-center"></div>
   </div>
-  {typeof window !== 'undefined' && window.location.pathname === '/' && (
+  {typeof window !== 'undefined' && (
     <div dangerouslySetInnerHTML={{ __html: '<script src="https://bradleymatera.github.io/ProjectHub/ProjectHub.js"></script>' }} />
   )}
 </motion.section>
