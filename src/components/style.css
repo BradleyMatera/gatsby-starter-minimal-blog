@@ -1,3 +1,20 @@
+/* Make all about page text lighter for readability */
+.about-card,
+.about-card h1,
+.about-card h2,
+.about-card h3,
+.about-card h4,
+.about-card h5,
+.about-card h6,
+.about-card p,
+.about-card ul,
+.about-card li,
+.about-card a,
+.about-card span,
+.about-card em,
+.about-card strong {
+  color: #fff !important;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,6 +25,12 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 1.5rem;
+}
+
+/* Universal text color reset for palette uniformity */
+h1, h2, h3, h4, h5, h6, p, span, a, li, label, .text, .title, .subtitle {
+  color: #132A13 !important;
+  font-family: Helvetica, Arial, ui-sans-serif, system-ui !important;
 }
 
 /* Navigation styles */
@@ -22,8 +45,9 @@
 }
 
 .nav-link {
-  color: white;
-  background-color: #334155;
+  color: #ECF39E;
+  background-color: #132A13;
+  font-family: Helvetica, Arial, ui-sans-serif, system-ui;
   padding: 0.5rem 1rem;
   border-radius: 9999px;
   transition: background-color 0.3s ease;
@@ -31,7 +55,7 @@
 }
 
 .nav-link:hover {
-  background-color: #2563eb;
+  background-color: #31572C;
 }
 
 /* Section styles */
@@ -74,13 +98,15 @@
   font-size: 2.75rem;
   font-weight: 800;
   letter-spacing: -0.025em;
-  color: white;
+  color: #ECF39E !important;
+  font-family: Helvetica, Arial, ui-sans-serif, system-ui !important;
 }
 
 .section-hero-subtitle {
   font-size: 1.125rem;
   font-weight: 300;
-  color: #d1d5db;
+  color: #90A955 !important;
+  font-family: Helvetica, Arial, ui-sans-serif, system-ui !important;
   margin-top: 0.5rem;
 }
 
@@ -105,7 +131,9 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   padding: 2rem;
   gap: 1rem;
-  color: white;
+  color: #fff !important;
+  background-color: #3a5d3a;
+  font-family: Helvetica, Arial, ui-sans-serif, system-ui;
 }
 
 .project-card:hover {
@@ -117,18 +145,21 @@
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
-  color: white;
+  color: #fff !important;
+  font-family: Helvetica, Arial, ui-sans-serif, system-ui !important;
 }
 
 .project-card-description {
   font-size: 1rem;
-  color: #d1d5db;
+  color: #fff !important;
+  font-family: Helvetica, Arial, ui-sans-serif, system-ui !important;
   margin-bottom: 1rem;
 }
 
 .project-card-technologies {
   font-size: 0.875rem;
-  color: #9ca3af;
+  color: #fff !important;
+  font-family: Helvetica, Arial, ui-sans-serif, system-ui !important;
   margin-bottom: 1rem;
 }
 
@@ -140,8 +171,9 @@
 }
 
 .project-card-button {
-  background-color: #2563eb;
-  color: white;
+  background-color: #4F772D;
+  background-color: #132A13;
+  color: #ECF39E !important;
   font-size: 0.875rem;
   padding: 0.5rem 1rem;
   border-radius: 9999px;
@@ -150,21 +182,38 @@
 }
 
 .project-card-button:hover {
-  background-color: #1d4ed8;
+  background-color: #31572C;
 }
 
 .project-card-github {
-  background-color: #1f2937;
+  background-color: #132A13;
 }
 
 .project-card-github:hover {
-  background-color: #111827;
+  background-color: #31572C;
 }
 
 .project-card-status {
-  color: #34d399;
   font-size: 0.75rem;
   font-weight: 700;
+  color: #fff !important;
+  font-family: Helvetica, Arial, ui-sans-serif, system-ui !important;
+}
+
+/* Subtitle for project cards */
+.project-card-subtitle {
+  font-size: 1rem;
+  color: #fff !important;
+  font-family: Helvetica, Arial, ui-sans-serif, system-ui !important;
+  margin-bottom: 0.5rem;
+}
+
+/* Focused section for project cards */
+.project-card-focused {
+  font-size: 1rem;
+  color: #fff !important;
+  font-family: Helvetica, Arial, ui-sans-serif, system-ui !important;
+  margin-bottom: 0.5rem;
 }
 
 /* CodePen section specific styles */
@@ -174,7 +223,6 @@
   margin-bottom: 1rem;
   font-size: 1.25rem;
   font-weight: 400;
-  color: #9ca3af;
   max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
@@ -188,7 +236,6 @@
   margin-bottom: 4rem;
   font-size: 1.125rem;
   font-weight: 300;
-  color: #d1d5db;
   max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
@@ -202,11 +249,12 @@
 }
 
 .codepen-list-item:hover {
-  background-color: #374151;
+  background-color: #31572C;
 }
 
 .codepen-link {
-  color: #60a5fa;
+  color: #4F772D !important;
+  font-family: Helvetica, Arial, ui-sans-serif, system-ui !important;
   text-decoration: none;
 }
 
@@ -216,23 +264,23 @@
 
 /* Background color rotations for project cards */
 .bg-slate-800 {
-  background-color: #1e293b;
+  background-color: #132A13;
 }
 
 .bg-indigo-900 {
-  background-color: #312e81;
+  background-color: #31572C;
 }
 
 .bg-blue-900 {
-  background-color: #1e3a8a;
+  background-color: #4F772D;
 }
 
 .bg-gray-800 {
-  background-color: #1f2937;
+  background-color: #90A955;
 }
 
 .bg-purple-900 {
-  background-color: #581c87;
+  background-color: #ECF39E;
 }
 
 
@@ -250,14 +298,20 @@
 
   .section-hero {
     height: 12rem;
+    color: black;
+    text-decoration-color: black;
   }
 
   .section-hero-title {
     font-size: 2rem;
+    color: black;
+    text-decoration-color: black;
   }
 
   .section-hero-subtitle {
     font-size: 1rem;
+    color: black;
+    text-decoration-color: black;
   }
 
   .projects-grid {
@@ -271,4 +325,6 @@
     padding: 0 1rem;
     font-size: 1rem;
   }
+
+  
 }

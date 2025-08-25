@@ -8,6 +8,16 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        primary: '#132A13',
+        secondary: '#31572C',
+        accent: '#4F772D',
+        highlight: '#90A955',
+        background: '#ECF39E',
+      },
+      fontFamily: {
+        sans: ['Helvetica', 'Arial', 'ui-sans-serif', 'system-ui'],
+      },
       maxWidth: {
         'screen-xl': '1280px',
       },

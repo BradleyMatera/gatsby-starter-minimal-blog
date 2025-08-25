@@ -8,17 +8,47 @@ import { motion } from "framer-motion";
     initial={{ opacity: 0, y: 50 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 1 }}
-    className="px-8 py-20 p-12 md:p-16 max-w-5xl mx-auto text-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-2xl shadow-2xl"
+  className="px-8 py-20 p-12 md:p-16 max-w-5xl mx-auto text-center bg-[#132A13] rounded-2xl shadow-2xl font-sans"
   >
     <div className="content-container">
 
-    <h1 className="hero-title font-extrabold text-white mb-8 drop-shadow-lg" style={{ fontSize: '3rem', marginBottom: '2rem' }}>
-      Code, Projects, and Constant Learning
-    </h1>
+  <h1 className="hero-title font-extrabold text-[#ECF39E] mb-8 drop-shadow-lg font-sans" style={{ fontSize: '3rem', marginBottom: '2rem' }}>
+    Bradley Matera: Code, Projects, and Constant Learning
+  </h1>
 
-    <div className="content-paragraph text-gray-300 leading-relaxed mb-8">
-      Welcome to my site. I’m Bradley Matera, a web developer currently studying Web Development at Full Sail University (B.S., GPA 3.8). This is where I document my projects, experiments, and the skills I’m working on. I focus on building fast, accessible, and functional web applications using tools like React, Node.js, MongoDB, and Docker.
+  <div className="content-paragraph text-[#90A955] leading-relaxed mb-8 font-sans">
+    Welcome! I’m Bradley Matera, a Full Stack Software Engineer and a student at Full Sail University (B.S. in Web Development, expected October 2025, GPA ~3.8). Here you’ll find my projects, experiments, and the skills I’m working on, focused on building fast, accessible, and functional web applications using React, Node.js, MongoDB, Docker, and more.
+    <br />
+    <span className="text-[#ECF39E] font-bold">Want my full story, background, and skills?</span> <a href="/about" className="content-link text-[#90A955] underline">Check out my About page</a>.
+  </div>
+
+  <motion.div
+    initial={{ opacity: 0, x: -100 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.6 }}
+    viewport={{ once: true, amount: 0.3 }}
+  >
+    <h2 className="hero-subtitle font-bold text-[#4F772D] mt-20 mb-10 uppercase tracking-wide font-sans">What I Focus On</h2>
+    <div className="content-paragraph text-[#90A955] leading-relaxed mb-8 font-sans">
+      I build real applications that combine clean frontend design with practical backend functionality. Whether it's a responsive UI, API integration, or a custom tool, I make sure everything works as intended. <a href="/projects" className="content-link text-blue-400 hover:text-blue-300 underline decoration-dotted transition-all duration-200">See my Projects</a>.
     </div>
+  </motion.div>
+
+  <motion.div
+    initial={{ opacity: 0, x: 100 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.6 }}
+    viewport={{ once: true, amount: 0.3 }}
+  >
+    <h2 className="hero-subtitle font-bold text-[#4F772D] mt-20 mb-10 uppercase tracking-wide font-sans">Quick Overview</h2>
+
+    <ul className="content-list list-none text-center text-[#ECF39E] space-y-6 mb-12 px-6 font-sans">
+      <li><div className="bg-[#31572C] p-6 rounded-lg shadow-md hover:shadow-lg transition font-sans"><strong>Currently</strong>: Studying at Full Sail University, building new projects alongside coursework.</div></li>
+      <li><div className="bg-[#31572C] p-6 rounded-lg shadow-md hover:shadow-lg transition font-sans"><strong>Background</strong>: Army veteran, problem-solver, and team player (see <a href="/about" className="content-link text-[#90A955] underline">About</a> for more).</div></li>
+      <li><div className="bg-[#31572C] p-6 rounded-lg shadow-md hover:shadow-lg transition font-sans"><strong>Technical Focus</strong>: Full-stack JavaScript, cloud basics, and continuous improvement.</div></li>
+      <li><div className="bg-[#31572C] p-6 rounded-lg shadow-md hover:shadow-lg transition font-sans"><strong>Recent</strong>: Completed AWS Cloud Support Internship (Summer 2025, Seattle).</div></li>
+    </ul>
+  </motion.div>
 
     <motion.div
       initial={{ opacity: 0, x: -100 }}
@@ -26,49 +56,21 @@ import { motion } from "framer-motion";
       transition={{ duration: 0.6 }}
       viewport={{ once: true, amount: 0.3 }}
     >
-      <h2 className="hero-subtitle font-bold text-indigo-300 mt-20 mb-10 uppercase tracking-wide">What I Focus On</h2>
+  <h2 className="hero-subtitle font-bold text-[#4F772D] mt-20 mb-10 uppercase tracking-wide font-sans">Projects to Check Out</h2>
 
-      <div className="content-paragraph text-gray-300 leading-relaxed mb-8">
-        I work on building real applications that combine clean frontend design with practical backend functionality. Whether it's a responsive UI, an API integration, or a simple tool built from scratch, I focus on making sure everything works the way it should. You can check out examples of my projects on the <a href="/projects" className="content-link text-blue-400 hover:text-blue-300 underline decoration-dotted transition-all duration-200">Projects</a> page.
-      </div>
-    </motion.div>
-
-    <motion.div
-      initial={{ opacity: 0, x: 100 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: true, amount: 0.3 }}
-    >
-      <h2 className="hero-subtitle font-bold text-indigo-300 mt-20 mb-10 uppercase tracking-wide">Quick Overview</h2>
-
-      <ul className="content-list list-none text-center text-gray-400 space-y-6 mb-12 px-6">
-        <li><div className="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition"><strong>Currently</strong>: Studying at Full Sail University, building new projects alongside coursework.</div></li>
-        <li><div className="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition"><strong>Background</strong>: Army veteran with a focus on problem-solving, teamwork, and attention to detail.</div></li>
-        <li><div className="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition"><strong>Technical Focus</strong>: Full-stack JavaScript development, cloud basics, and continuous improvement.</div></li>
-      </ul>
-    </motion.div>
-
-    <motion.div
-      initial={{ opacity: 0, x: -100 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: true, amount: 0.3 }}
-    >
-      <h2 className="hero-subtitle font-bold text-indigo-300 mt-20 mb-10 uppercase tracking-wide">Projects to Check Out</h2>
-
-      <ul className="content-list list-none text-center text-gray-400 space-y-6 mb-12 px-6">
+  <ul className="content-list list-none text-center text-[#ECF39E] space-y-6 mb-12 px-6 font-sans">
         <li>
-          <div className="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition">
+          <div className="bg-[#31572C] p-6 rounded-lg shadow-md hover:shadow-lg transition font-sans">
             <strong>Anime CRUD Demo</strong>: Full-stack app for managing anime data (<a href="https://cruddemo-one.vercel.app/" className="content-link text-blue-400 hover:text-blue-300 underline decoration-dotted transition-all duration-200">Live</a>).
           </div>
         </li>
         <li>
-          <div className="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition">
-            <strong>Ethics Engine</strong>: Adding batch processing and Enhance Ollama Model Loading and Configuration in UI (<a href="https://github.com/BradleyMatera/ethicsengine_enterprise" className="content-link text-blue-400 hover:text-blue-300 underline decoration-dotted transition-all duration-200">Live</a>).
+          <div className="bg-[#31572C] p-6 rounded-lg shadow-md hover:shadow-lg transition font-sans">
+            <strong>Ethics Engine</strong>: Adding batch processing and enhanced Ollama model loading and configuration in the UI (<a href="https://github.com/BradleyMatera/ethicsengine_enterprise" className="content-link text-blue-400 hover:text-blue-300 underline decoration-dotted transition-all duration-200">Live</a>).
           </div>
         </li>
         <li>
-          <div className="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition">
+          <div className="bg-[#31572C] p-6 rounded-lg shadow-md hover:shadow-lg transition font-sans">
             <strong>Pokedex</strong>: Interactive project using vanilla JavaScript (<a href="https://github.com/BradleyMatera/Interactive-Pokedex" className="content-link text-blue-400 hover:text-blue-300 underline decoration-dotted transition-all duration-200">GitHub</a>).
           </div>
         </li>
@@ -81,9 +83,9 @@ import { motion } from "framer-motion";
       transition={{ duration: 0.6 }}
       viewport={{ once: true, amount: 0.3 }}
     >
-      <h2 className="hero-subtitle font-bold text-indigo-300 mt-20 mb-10 uppercase tracking-wide">Why I Build</h2>
+  <h2 className="hero-subtitle font-bold text-[#4F772D] mt-20 mb-10 uppercase tracking-wide font-sans">Why I Build</h2>
 
-      <div className="content-paragraph text-gray-300 leading-relaxed mb-8">
+  <div className="content-paragraph text-[#90A955] leading-relaxed mb-8 font-sans">
         I focus on making things that are reliable, accessible, and practical. Every project is an opportunity to improve and learn something new, whether it’s a framework, a database, or a cloud service. I approach development with the same mindset I used in past roles: work steadily, fix problems directly, and keep moving forward.
       </div>
     </motion.div>
@@ -94,16 +96,16 @@ import { motion } from "framer-motion";
       transition={{ duration: 0.6 }}
       viewport={{ once: true, amount: 0.3 }}
     >
-      <h2 className="hero-subtitle font-bold text-indigo-300 mt-20 mb-10 uppercase tracking-wide">Connect</h2>
+  <h2 className="hero-subtitle font-bold text-[#4F772D] mt-20 mb-10 uppercase tracking-wide font-sans">Connect</h2>
 
-      <ul className="content-list list-none text-center text-gray-400 space-y-6 mb-12 px-6">
-        <li><div className="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition"><a href="https://github.com/BradleyMatera" className="content-link text-blue-400 hover:text-blue-300 underline decoration-dotted transition-all duration-200">GitHub</a> – Project repos and code.</div></li>
-        <li><div className="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition"><a href="https://linkedin.com/in/championingempatheticwebsolutionsthroughcode" className="content-link text-blue-400 hover:text-blue-300 underline decoration-dotted transition-all duration-200">LinkedIn</a> – Professional profile and updates.</div></li>
-        <li><div className="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition"><a href="https://www.youtube.com/@bradmatera" className="content-link text-blue-400 hover:text-blue-300 underline decoration-dotted transition-all duration-200">YouTube</a> – Development walkthroughs and experiments.</div></li>
+  <ul className="content-list list-none text-center text-[#ECF39E] space-y-6 mb-12 px-6 font-sans">
+  <li><div className="bg-[#31572C] p-6 rounded-lg shadow-md hover:shadow-lg transition font-sans"><a href="https://github.com/BradleyMatera" className="content-link text-[#ECF39E] hover:text-[#90A955] underline decoration-dotted transition-all duration-200 font-sans">GitHub</a> – Project repos and code.</div></li>
+  <li><div className="bg-[#31572C] p-6 rounded-lg shadow-md hover:shadow-lg transition font-sans"><a href="https://linkedin.com/in/championingempatheticwebsolutionsthroughcode" className="content-link text-[#ECF39E] hover:text-[#90A955] underline decoration-dotted transition-all duration-200 font-sans">LinkedIn</a> – Professional profile and updates.</div></li>
+  <li><div className="bg-[#31572C] p-6 rounded-lg shadow-md hover:shadow-lg transition font-sans"><a href="https://www.youtube.com/@bradmatera" className="content-link text-[#ECF39E] hover:text-[#90A955] underline decoration-dotted transition-all duration-200 font-sans">YouTube</a> – Development walkthroughs and experiments.</div></li>
       </ul>
     </motion.div>
 
-    <div className="content-paragraph text-gray-300 leading-relaxed mb-8 text-center">
+  <div className="content-paragraph text-[#90A955] leading-relaxed mb-8 text-center font-sans">
       Thanks for visiting.
     </div>
 

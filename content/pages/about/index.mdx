@@ -6,114 +6,185 @@ slug: "/about"
 import { motion } from "framer-motion";
 
 <div className="content-container">
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5 }}
-  >
-    <h1 className="content-heading-main mb-8">About Me</h1>
+  <div className="about-card bg-[#132A13] rounded-2xl shadow-2xl p-6 md:p-10 max-w-3xl mx-auto mt-8 mb-8 border border-[#31572C] flex flex-col md:flex-row gap-8 items-start">
+    <div className="flex-1">
+      {/* Main about content (existing) */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <p className="content-paragraph mb-8">
+          Hi, I’m Bradley Matera. I’m a Full Stack Software Engineer and a student at Full Sail University, working toward my B.S. in Web Development (expected October 2025, GPA ~3.8). I build practical, user-centered applications and focus on cloud, DevOps, and full-stack development. Before tech, I served as a combat medic in the U.S. Army and later worked in security, case management, construction, warehouses, and animal rescue. Those experiences shaped how I approach problem-solving, teamwork, and building projects that actually work.
+        </p>
 
-    <p className="content-paragraph mb-8">
-      Hi, I’m Bradley Matera. I’m a web developer and student at Full Sail University, working toward my B.S. in Web Development (GPA: 3.8, expected October 2025). I focus on building functional, user-centered web applications. Before starting my journey in tech, I served as a combat medic in the U.S. Army and later worked in security, construction, and animal rescue. Those experiences shaped how I approach problem-solving, teamwork, and building projects that actually work.
-    </p>
+        <motion.div
+          initial={{ opacity: 0, x: -100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <h2 className="content-heading-2 mb-6">My Mission</h2>
+          <p className="content-paragraph mb-8">
+            I believe technology should make life easier, not harder. My goal is to create tools and applications that are straightforward, reliable, and accessible—whether it’s a polished portfolio site, a scalable backend system, or an AI-driven platform that solves a real problem. Good software should feel natural to use, and I aim to build with that in mind.
+          </p>
+        </motion.div>
 
-    <motion.div
-      initial={{ opacity: 0, x: -100 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: true, amount: 0.3 }}
-    >
-      <h2 className="content-heading-2 mb-6">My Mission</h2>
-      <p className="content-paragraph mb-8">
-        I believe technology should make things simpler, not harder. My goal is to build websites and applications that are straightforward, accessible, and reliable—whether that's a clean portfolio, a dynamic API-driven app, or a tool that solves a real problem. Good code should feel natural to use, and I aim to build with that in mind.
-      </p>
-    </motion.div>
+        <motion.div
+          initial={{ opacity: 0, x: 100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <h2 className="content-heading-2 mb-6">Skills & Expertise</h2>
+          <h3 className="content-heading-3 mb-4">Technical Skills</h3>
+          <ul className="content-list mb-8">
+            <li className="content-list-item">Languages: HTML5, CSS3, JavaScript (ES6+), SQL, Python, TypeScript (learning)</li>
+            <li className="content-list-item">Frameworks & Libraries: React.js, Next.js, Node.js, Express.js, Gatsby, Tailwind CSS</li>
+            <li className="content-list-item">Cloud & Infrastructure: AWS (EC2, S3, RDS, DynamoDB, Lambda, CloudFront, IAM, Secrets Manager), Docker, GitHub Actions</li>
+            <li className="content-list-item">Databases: MongoDB, MySQL</li>
+            <li className="content-list-item">Tools: Git, Docker, Postman, Netlify, Vercel, Heroku, Jest</li>
+            <li className="content-list-item">Focus Areas: Cloud support, cost optimization, responsive design, accessibility, API integration, testing, DevOps basics</li>
+          </ul>
 
-    <motion.div
-      initial={{ opacity: 0, x: 100 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: true, amount: 0.3 }}
-    >
-      <h2 className="content-heading-2 mb-6">Skills & Expertise</h2>
-      <h3 className="content-heading-3 mb-4">Technical Skills</h3>
-      <ul className="content-list mb-8">
-        <li className="content-list-item">Languages: HTML5, CSS3, JavaScript (ES6+), SQL, TypeScript (learning)</li>
-        <li className="content-list-item">Frameworks & Libraries: React.js, Next.js, Gatsby, Node.js, Express.js, Tailwind CSS</li>
-        <li className="content-list-item">Databases: MongoDB, MySQL</li>
-        <li className="content-list-item">Tools: Git, Docker, Postman, Vercel, Netlify, Heroku, Expo, Jest</li>
-        <li className="content-list-item">Focus Areas: Responsive Design, Web Accessibility (WCAG standards), API Integration, Unit Testing, SEO basics</li>
+          <h3 className="content-heading-3 mb-4">Soft Skills</h3>
+          <ul className="content-list mb-8">
+            <li className="content-list-item">Leadership: Developed through Army service and case management, where clear decisions under pressure were necessary.</li>
+            <li className="content-list-item">Problem-Solving: Applied daily, from field medicine and logistics to debugging and optimizing cloud systems.</li>
+            <li className="content-list-item">Collaboration: Comfortable working across diverse teams and contributing in community and open-source projects.</li>
+          </ul>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: -100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <h2 className="content-heading-2 mb-6">Education</h2>
+          <p className="content-paragraph mb-8">
+            B.S. in Web Development<br />
+            <em>Full Sail University</em> | Aug 2023 – Oct 2025 (Expected)<br />
+            GPA ~3.8<br />
+            Relevant work: frontend (React, JavaScript), backend (Node.js, Express), databases (MongoDB, SQL), AWS cloud labs, accessibility, and testing
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: 100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <h2 className="content-heading-2 mb-6">Internship Highlights</h2>
+          <p className="content-paragraph mb-4">
+            Completed Cloud Support Associate Internship, Amazon (Seattle, WA · On-site) — May 2025 to Aug 2025
+          </p>
+          <h3 className="content-heading-3 mb-3">Key Verified Completions</h3>
+          <ul className="content-list mb-6">
+            <li className="content-list-item">AWS Cloud Quest — Cloud Practitioner (12 hrs), Solutions Architect (27 hrs)</li>
+            <li className="content-list-item">Amazon Bedrock Getting Started; Amazon Q Business Getting Started; AI for Medical Diagnosis (SimuLearn)</li>
+            <li className="content-list-item">Essentials of Prompt Engineering; Developing Machine Learning Solutions; AWS Foundations (Cloud Essentials)</li>
+          </ul>
+          <h3 className="content-heading-3 mb-3">Recognition</h3>
+          <ul className="content-list mb-6">
+            <li className="content-list-item">Extra Mile Awards for Learn and Be Curious; Are Right, A Lot; Bias for Action</li>
+            <li className="content-list-item">Active participation in AWS community groups during the internship</li>
+          </ul>
+          <h3 className="content-heading-3 mb-3">Skills Gained</h3>
+          <ul className="content-list mb-6">
+            <li className="content-list-item">AWS architecture fundamentals; troubleshooting at scale; customer-focused support workflows</li>
+            <li className="content-list-item">Bedrock and Q Business AI tooling; HIPAA/ASA compliance exposure; hands-on lab problem solving</li>
+          </ul>
+          <p className="content-paragraph mb-8">
+            Badge: <a href="https://www.credly.com/badges/c585d7ac-44f9-41fe-87e6-c46f9998bb6a/public_url" className="content-link">AWS Tech Fest 2025 – Amazonian Training Completion</a>
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: 100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <h2 className="content-heading-2 mb-6">Experience & Background</h2>
+          <ul className="content-list mb-8">
+            <li className="content-list-item">Completed Cloud Support Associate Internship, Amazon AWS | Summer 2025 — Worked on real AWS services, dashboards, and troubleshooting while learning cost optimization and customer support at scale.</li>
+            <li className="content-list-item">Combat Medic, U.S. Army | 2011–2014 — Emergency medical care under pressure; developed adaptability, focus, and resilience.</li>
+            <li className="content-list-item">Case Manager, Veterans/Drug/Mental Health Court | 2022 — Helped people build plans and goals, teaching me how to design solutions that meet real needs.</li>
+            <li className="content-list-item">Volunteer, Mason County Kitten Rescue | 2020–2022 — Team-based logistics and care work that built discipline and coordination skills.</li>
+            <li className="content-list-item">Other Roles: Security, construction, warehouse, and roofing—each shaped how I approach systems, resilience, and problem-solving.</li>
+          </ul>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: -100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <h2 className="content-heading-2 mb-6">Licenses &amp; Certifications</h2>
+          <ul className="content-list mb-8">
+            <li className="content-list-item">AWS Certified AI Practitioner — Issued Aug 2025 — <a href="https://www.credly.com/badges/fcbb3120-f086-4784-9cb5-80daca9fb61a/linked_in_profile" className="content-link">View credential</a></li>
+            <li className="content-list-item">AWS Certified Solutions Architect – Associate — Issued Jul 2025 — <a href="https://www.credly.com/badges/fe12a8a4-dacf-43cb-bfe1-c8c75e20585f/linked_in_profile" className="content-link">View credential</a></li>
+            <li className="content-list-item">freeCodeCamp — Foundational C# with Microsoft (Jan 2025) — <a href="https://www.freecodecamp.org/certification/BradleyMatera/foundational-c-sharp-with-microsoft" className="content-link">View</a></li>
+            <li className="content-list-item">freeCodeCamp — JavaScript Algorithms and Data Structures (Dec 2024) — <a href="https://www.freecodecamp.org/certification/BradleyMatera/javascript-algorithms-and-data-structures-v8" className="content-link">View</a></li>
+            <li className="content-list-item">freeCodeCamp — Responsive Web Design (Dec 2024) — <a href="https://www.freecodecamp.org/certification/BradleyMatera/responsive-web-design" className="content-link">View</a></li>
+            <li className="content-list-item">LinkedIn Learning — Creating Your Personal Brand (Sep 2024)</li>
+            <li className="content-list-item">LinkedIn Learning — Getting Things Done (Sep 2024)</li>
+            <li className="content-list-item">LinkedIn Learning — Interpersonal Communication (2020) (Sep 2024)</li>
+            <li className="content-list-item">LinkedIn Learning — Professional Networking (Sep 2024)</li>
+          </ul>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: -100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <h2 className="content-heading-2 mb-6">What Sets Me Apart</h2>
+          <ul className="content-list mb-8">
+            <li className="content-list-item">Real-World Approach: I build projects meant to work in practice, not just on paper.</li>
+            <li className="content-list-item">Diverse Background: My military and civilian jobs give me a pragmatic way of tackling unexpected issues.</li>
+            <li className="content-list-item">Always Learning: Expanding into TypeScript, AWS, and infrastructure while keeping sharp in frontend, APIs, and testing.</li>
+          </ul>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: 100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <h2 className="content-heading-2 mb-6">Let’s Connect</h2>
+          <p className="content-paragraph">
+            If you’d like to see my work, check out my <a href="/projects" className="content-link">Projects</a> page.<br />
+            You can also find me here:
+          </p>
+          <ul className="content-list">
+            <li className="content-list-item"><a href="https://github.com/BradleyMatera" className="content-link">GitHub</a></li>
+            <li className="content-list-item"><a href="https://linkedin.com/in/championingempatheticwebsolutionsthroughcode" className="content-link">LinkedIn</a></li>
+            <li className="content-list-item"><a href="https://www.youtube.com/@bradmatera" className="content-link">YouTube</a></li>
+          </ul>
+        </motion.div>
+
+        <p className="content-paragraph mt-8 text-center">Thanks for checking out my page.</p>
+      </motion.div>
+    </div>
+    <div className="min-w-[260px] max-w-[340px] rounded-xl shadow-lg p-6 flex flex-col justify-center items-center text-[#fff] self-start" style={{ maxHeight: 'fit-content' }}>
+      <h2 className="text-lg font-bold text-[#fff] mb-2">Quick Stats</h2>
+      <ul className="text-sm mb-4 list-none text-center">
+        <li><span className="font-bold text-[#ECF39E]">Recent:</span> AWS Cloud Support Internship (May–Aug 2025, Seattle)</li>
+        <li><span className="font-bold text-[#ECF39E]">Major Skills:</span> React, Node.js, AWS, Docker</li>
+        <li><span className="font-bold text-[#ECF39E]">Certifications:</span> AWS SAA-C03; AWS AI Practitioner</li>
       </ul>
-
-      <h3 className="content-heading-3 mb-4">Soft Skills</h3>
-      <ul className="content-list mb-8">
-        <li className="content-list-item">Leadership: Built through military service and case management work, where clear thinking under pressure was necessary.</li>
-        <li className="content-list-item">Problem-Solving: Applied daily, from real-world logistics to debugging issues in code.</li>
-        <li className="content-list-item">Collaboration: Comfortable working across teams from a wide range of backgrounds.</li>
-      </ul>
-    </motion.div>
-
-    <motion.div
-      initial={{ opacity: 0, x: -100 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: true, amount: 0.3 }}
-    >
-      <h2 className="content-heading-2 mb-6">Education</h2>
-      <p className="content-paragraph mb-8">
-        B.S. in Web Development<br />
-        <em>Full Sail University</em> | August 2023 – October 2025 (Expected)<br />
-        GPA: 3.8<br />
-        Coursework: Frontend Development (React, JavaScript), Backend Systems (Node.js, Express), Database Design (MongoDB, SQL), UI/UX Basics
-      </p>
-    </motion.div>
-
-    <motion.div
-      initial={{ opacity: 0, x: 100 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: true, amount: 0.3 }}
-    >
-      <h2 className="content-heading-2 mb-6">Experience & Background</h2>
-      <ul className="content-list mb-8">
-        <li className="content-list-item">Combat Medic, U.S. Army | 2011–2014 — Provided emergency medical care under pressure; learned to stay focused and adaptable, skills I now apply to development and troubleshooting.</li>
-        <li className="content-list-item">Case Manager | 2022 — Helped people organize goals and plans, strengthening my ability to design solutions that meet real needs.</li>
-        <li className="content-list-item">Volunteer, Mason County Kitten Rescue | 2020–2022 — Worked in a team-focused environment, managing logistics and support efforts—building discipline and coordination skills that carry into my coding work.</li>
-      </ul>
-    </motion.div>
-
-    <motion.div
-      initial={{ opacity: 0, x: -100 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: true, amount: 0.3 }}
-    >
-      <h2 className="content-heading-2 mb-6">What Sets Me Apart</h2>
-      <ul className="content-list mb-8">
-        <li className="content-list-item">Real-World Approach: I focus on building things that work well and are easy to maintain.</li>
-        <li className="content-list-item">Problem-Solving from Different Fields: My background gives me a practical mindset for dealing with unexpected issues and finding solutions.</li>
-        <li className="content-list-item">Always Learning: I'm continually working to sharpen my backend, AWS, TypeScript, and infrastructure knowledge while maintaining strong frontend and API skills.</li>
-      </ul>
-    </motion.div>
-
-    <motion.div
-      initial={{ opacity: 0, x: 100 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: true, amount: 0.3 }}
-    >
-      <h2 className="content-heading-2 mb-6">Let’s Connect</h2>
-      <p className="content-paragraph">
-        If you'd like to see some of my work, visit my <a href="/projects" className="content-link">Projects</a> page.<br />
-        You can also find me here:
-      </p>
-      <ul className="content-list">
-        <li className="content-list-item"><a href="https://github.com/BradleyMatera" className="content-link">GitHub</a></li>
-        <li className="content-list-item"><a href="https://linkedin.com/in/championingempatheticwebsolutionsthroughcode" className="content-link">LinkedIn</a></li>
-        <li className="content-list-item"><a href="https://www.youtube.com/@bradmatera" className="content-link">YouTube</a></li>
-      </ul>
-    </motion.div>
-
-    <p className="content-paragraph mt-8 text-center">Thanks for checking out my page.</p>
-  </motion.div>
+      <h2 className="text-lg font-bold text-[#fff] mb-2">Featured Links</h2>
+      <div className="flex flex-col gap-2 w-full">
+        <a href="/resume.pdf" className="text-[#ECF39E] hover:text-[#90A955] underline font-bold">Resume</a>
+        <a href="/projects" className="text-[#ECF39E] hover:text-[#90A955] underline font-bold">Portfolio</a>
+        <a href="mailto:bradleymatera@gmail.com" className="text-[#ECF39E] hover:text-[#90A955] underline font-bold">Contact</a>
+      </div>
+    </div>
+  </div>
 </div>

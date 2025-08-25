@@ -8,145 +8,125 @@ tags:
   - Backend
 banner: ./background.jpg
 ---
+# BasicServerSetup: A Time Tracking Application
 
+BasicServerSetup is a time tracking application I built to work through backend and frontend integration, API design, and deployment. The idea was simple: let users register, log in, clock in, clock out, and review their timesheet. I kept it lightweight but structured it in a way that shows how a real app would be built.
 
-![Banner](./background.jpg)
+## Features
 
-OR
+- User authentication with registration and login
+- Clock in and clock out functionality
+- Timesheet view to review work sessions
+- Frontend built with HTML and Tailwind CSS
+- Backend built with Node.js and Express.js
+- CORS enabled for frontend-backend communication
+- In-memory data store for the demo, easy to swap with a real database later
 
-![Banner](/background.jpg)
+## Tech Stack
 
+- Backend: Node.js, Express.js
+- Frontend: HTML, Tailwind CSS
+- Tools: Nodemon for development, http-server for frontend, GitHub Pages for hosting
 
-# 🕒✨ BasicServerSetup: A Time Tracking Application
+I used Heroku for the backend API and GitHub Pages with a custom domain for the frontend. That made the deployment easy to test and share.
 
-Hi everyone! Today, I'm excited to share one of my recent projects, **BasicServerSetup**, a robust and user-friendly solution for tracking employee work hours. This project was a fantastic opportunity to dive deep into API design, frontend-backend integration, and deployment strategies.
+## Prerequisites and Setup
 
-## 🌟 Features
+- Node.js and npm
+- (Optional) Git for cloning the repo
 
-Here's a quick overview of what BasicServerSetup offers:
+Steps:
 
-- **🔒 User Authentication**: Secure registration and login functionality.
-- **⏱️ Time Tracking**: Users can clock in and clock out effortlessly.
-- **📅 Timesheet Management**: View and manage your work sessions with ease.
-- **🌐 Sleek Frontend**: A clean and responsive interface built with HTML and Tailwind CSS.
-- **🚀 Backend API**: A powerful RESTful API developed using Express.js.
-- **🔄 CORS Enabled**: Ensuring seamless cross-origin requests.
-- **💾 In-Memory Storage**: Simplified for demonstration purposes.
+1. Clone the repo  
+   `git clone https://github.com/BradleyMatera/BasicServerSetup.git`
+2. Go into the project folder  
+   `cd BasicServerSetup`
+3. Install backend dependencies  
+   `npm install`
+4. Add a `.env` file in the root with:  
+   `PORT=3000`
 
-## 🛠️ The Tech Stack
+### Running the Backend
 
-- **Backend**: Node.js, Express.js
-- **Frontend**: HTML, Tailwind CSS
-- **Other Tools**: Nodemon, http-server, and GitHub Pages for deployment.
+- Development with Nodemon: `npm run dev`
+- Production: `npm start`
+- Runs on `http://localhost:3000`
 
-This stack allowed me to focus on functionality while keeping the setup straightforward and manageable.
+### Running the Frontend
 
-## 📋 Project Structure
+Option 1: with http-server  
+- Install: `npm install -g http-server`  
+- Go into `frontend/` and run `http-server -c-1`  
+- Open `http://localhost:8080`
 
-Here's a look at the project layout:
+Option 2: with VS Code Live Server  
+- Install the extension  
+- Open `frontend/index.html` and choose “Open with Live Server”  
+
+## Project Structure
 
 ```plaintext
 BasicServerSetup/
-├── 📄 .env
-├── 📄 package.json
-├── 📁 app/
-│   ├── 📄 app.js
-│   ├── 📁 models/
-│   │   ├── 📄 userModel.js
-│   │   └── 📄 timeEntryModel.js
-│   ├── 📁 controllers/
-│   │   ├── 📄 userController.js
-│   │   └── 📄 timeController.js
-│   ├── 📁 routes/
-│   │   └── 📄 index.js
-│   └── 📁 utils/
-│       └── 📄 authMiddleware.js
-└── 📁 frontend/
-    └── 📄 index.html
+├── .env
+├── package.json
+├── app/
+│   ├── app.js
+│   ├── models/
+│   │   ├── userModel.js
+│   │   └── timeEntryModel.js
+│   ├── controllers/
+│   │   ├── userController.js
+│   │   └── timeController.js
+│   ├── routes/
+│   │   └── index.js
+│   └── utils/
+│       └── authMiddleware.js
+└── frontend/
+    └── index.html
 ```
 
-This structure separates backend logic (in app/) from the frontend files, making the project modular and easy to navigate.
+The backend handles auth, clock in/out, and timesheet logic. The frontend is a simple HTML + Tailwind setup that makes requests to the API.
 
-## 🌐 Key Endpoints
+## API Endpoints
 
-Here are some of the core API endpoints I developed:
+- Register: `POST /register` with `{ "username": "your_username", "password": "your_password" }`
+- Login: `POST /login` with `{ "username": "your_username", "password": "your_password" }`
+- Clock In: `POST /clockin` with `x-user-id` header
+- Clock Out: `POST /clockout` with `x-user-id` header
+- View Timesheet: `GET /timesheet` with `x-user-id` header
 
-### 📝 Register
-- POST /register
-- Body: `{ "username": "your_username", "password": "your_password" }`
+Base URL when running locally: `http://localhost:3000`
 
-### 🔐 Login
-- POST /login
-- Body: `{ "username": "your_username", "password": "your_password" }`
+## Frontend Usage
 
-### 🟢 Clock In
-- POST /clockin
-- Headers: `x-user-id: YOUR_USER_ID`
+1. Open the frontend in your browser  
+2. Register a new user  
+3. Log in with that user  
+4. Use the Clock In and Clock Out buttons  
+5. View the timesheet to see entries  
+6. Logout when done  
 
-### 🔴 Clock Out
-- POST /clockout
-- Headers: `x-user-id: YOUR_USER_ID`
+## Future Improvements
 
-### 📅 View Timesheet
-- GET /timesheet
-- Headers: `x-user-id: YOUR_USER_ID`
+- Replace in-memory storage with MongoDB
+- Use JWT for authentication
+- Add input validation and better error handling
+- Improve mobile design
+- Add unit tests
+- Possibly rebuild the frontend with React or Next.js
 
-These endpoints showcase the core functionality of the application and were designed with clarity and scalability in mind.
+## Lessons Learned
 
-## 🚀 Deployment Highlights
+- Keep the backend and frontend separated but connected cleanly
+- Use simple deployments (Heroku + GitHub Pages) to focus on the code
+- Even a small project benefits from organization and documentation
+- Building out API endpoints and testing them early saves time
 
-One of the most exciting parts of this project was deploying it. Here's how I approached it:
+## Connect
 
-1. **Backend Deployment**:
-   - Hosted the backend API on Heroku, ensuring it was publicly accessible for testing.
-2. **Frontend Deployment**:
-   - Used GitHub Pages to host the static frontend, with a custom domain for added professionalism.
+Repo is available on GitHub. I’m open to feedback or collaboration.
 
-Setting up CORS for secure communication between the frontend and backend was a great learning experience.
-
-## 🎯 Future Improvements
-
-Although the project is fully functional, there are a few areas I'd like to enhance:
-
-1. 🗄️ **Persistent Storage**: Replace in-memory storage with a database like MongoDB.
-2. 🔑 **Token-Based Authentication**: Implement JWT for enhanced security.
-3. 🎨 **Frontend Revamp**: Upgrade the frontend using React or Next.js.
-4. 📱 **Responsive Design**: Make the UI fully mobile-friendly.
-5. ✅ **Unit Testing**: Add automated tests to ensure reliability.
-
-## 💻 Lessons Learned
-
-This project taught me the importance of:
-- Structuring code for maintainability.
-- Clear and concise API documentation.
-- Streamlining deployment workflows with tools like GitHub Pages and Heroku.
-
-It was also a reminder that no matter how small a project is, there's always room for improvement and growth.
-
-## 📬 Let's Connect!
-
-I'd love to hear your thoughts on this project! Check out the repo on GitHub.
-
-Feel free to reach out or collaborate with me on similar projects. You can find me on:
-- GitHub
+- [GitHub Repo](https://github.com/BradleyMatera/BasicServerSetup)
 - LinkedIn
 
-Thanks for reading! Stay tuned for more updates and projects. 😊
-
 *Bradley Matera*
-
----
-
-### What Was Fixed?
-
-1. **YAML Formatting**:
-   - Ensure `banner` aligns with the rest of the frontmatter.
-   - Removed extra spaces in frontmatter entry.
-
-2. **Image Path**:
-   - Ensure `background.jpg` exists in the same directory as the MDX file.
-
-### Debugging Tips
-
-1. **Check File Path**: Ensure `./background.jpg` exists in the same folder as the MDX file.
-2. **Gatsby Develop**: Always test with `gatsby develop` after fixing the frontmatter.

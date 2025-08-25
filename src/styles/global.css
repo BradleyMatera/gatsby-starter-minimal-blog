@@ -1,85 +1,69 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ============================= */
-/* Layout Containers             */
-/* ============================= */
+body {
+    background-color: #ECF39E;
+    color: #132A13;
+    font-family: Helvetica, Arial, ui-sans-serif, system-ui;
+}
+
+
+    footer, .site-footer {
+        background-color: #132A13 !important;
+        color: #ECF39E !important;
+    }
 
 .content-container {
     max-width: 1280px;
     margin: 2rem auto;
     padding: 1.5rem;
-    background: linear-gradient(to bottom right, #1a202c, #2d3748, #1a202c);
+    background-color: #ECF39E;
     border-radius: 1rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.10);
 }
-
-@media (max-width: 768px) {
-    .content-container {
-        padding: 1rem;
+    .content-heading-main {
+        font-size: 2.75rem;
+        font-weight: 900;
+        color: #132A13;
+        margin-bottom: 2.5rem;
+        text-align: center;
+        font-family: Helvetica, Arial, system-ui, sans-serif;
     }
-}
+        .content-heading-1 {
+            font-size: 2.75rem;
+            font-weight: 900;
+            color: #132A13;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            font-family: Helvetica, Arial, system-ui, sans-serif;
+        }
 
 .hero-container {
     max-width: 1536px;
     margin: 3rem auto;
     padding: 3rem;
-    background: linear-gradient(to bottom right, #111827, #1f2937, #111827);
+    background-color: #132A13;
     border-radius: 1.25rem;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
     text-align: center;
+    color: #ECF39E;
 }
-
-@media (max-width: 768px) {
-    .hero-container {
-        padding: 2rem 1rem;
-    }
-}
-
-/* ============================= */
-/* Section Styling               */
-/* ============================= */
 
 .section {
     margin: 4rem 0;
     padding: 2rem;
-    background: linear-gradient(to bottom right, #1f2937, #374151, #1f2937);
+    background-color: #31572C;
     border-radius: 1.25rem;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.10);
+    color: #ECF39E;
 }
-
-/* ============================= */
-/* Scroll Animation Classes      */
-/* ============================= */
-
-.slide-in-left {
-    opacity: 0;
-    transform: translateX(-50px);
-    transition: all 0.6s ease-out;
-}
-
-.slide-in-right {
-    opacity: 0;
-    transform: translateX(50px);
-    transition: all 0.6s ease-out;
-}
-
-.slide-in-left.active,
-.slide-in-right.active {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-/* ============================= */
-/* Typography                    */
-/* ============================= */
 
 .content-heading-2 {
     font-size: 2.5rem;
     font-weight: 800;
-    color: #ffffff;
+    color: #132A13;
     margin-bottom: 2rem;
     text-align: center;
 }
@@ -87,7 +71,7 @@
 .content-heading-3 {
     font-size: 2rem;
     font-weight: 700;
-    color: #e2e8f0;
+    color: #132A13;
     margin: 2rem 0 1.5rem;
     text-align: center;
 }
@@ -95,7 +79,7 @@
 .content-heading-4 {
     font-size: 1.5rem;
     font-weight: 600;
-    color: #d1d5db;
+    color: #132A13;
     margin: 1.5rem 0 1rem;
     text-align: center;
 }
@@ -103,30 +87,28 @@
 .content-paragraph {
     font-size: 1.125rem;
     line-height: 1.75;
-    color: #cbd5e1;
+    color: #618a61;
     margin-bottom: 1.5rem;
     text-align: center;
 }
-
-/* ============================= */
-/* Lists and Links               */
-/* ============================= */
 
 .content-list {
     list-style-type: disc;
     padding-left: 2rem;
     margin: 2rem auto;
-    color: #9ca3af;
+    color: #6c9f6c;
     font-size: 1.125rem;
     max-width: 800px;
 }
-
-.content-list-item {
-    margin-bottom: 0.5rem;
-}
+    .content-list-item {
+        color: #132A13;
+        font-family: Helvetica, Arial, system-ui, sans-serif;
+        font-size: 1.125rem;
+        margin-bottom: 0.75rem;
+    }
 
 .content-link {
-    color: #60a5fa;
+    color: #132A13;
     font-weight: 600;
     text-decoration: underline;
     text-underline-offset: 4px;
@@ -134,18 +116,14 @@
 }
 
 .content-link:hover {
-    color: #89b4fa;
+    color: #31572C;
 }
-
-/* ============================= */
-/* Buttons and UI Components     */
-/* ============================= */
 
 .hero-button,
 .project-card-button {
     display: inline-block;
-    background-color: #2563eb;
-    color: white;
+    background-color: #4F772D;
+    color: #ECF39E;
     font-weight: 600;
     padding: 0.75rem 2rem;
     border-radius: 9999px;
@@ -154,13 +132,13 @@
 
 .hero-button:hover,
 .project-card-button:hover {
-    background-color: #1d4ed8;
+    background-color: #31572C;
     transform: scale(1.05);
 }
 
 .project-card-github {
-    background-color: #1f2937;
-    color: white;
+    background-color: #132A13;
+    color: #ECF39E;
     padding: 0.5rem 1rem;
     border-radius: 9999px;
     text-decoration: none;
@@ -168,30 +146,13 @@
 }
 
 .project-card-github:hover {
-    background-color: #111827;
-}
-
-/* ============================= */
-/* Images and Code Blocks        */
-/* ============================= */
-
-.content-image {
-    max-width: 100%;
-    height: auto;
-    margin: 2rem 0;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease;
-}
-
-.content-image:hover {
-    transform: scale(1.02);
+    background-color: #31572C;
 }
 
 .content-code,
 .content-code-block {
-    background-color: #1e293b;
-    color: #f8fafc;
+    background-color: #132A13;
+    color: #ECF39E;
     font-family: 'Consolas', 'Courier New', monospace;
     font-size: 0.875rem;
     padding: 1rem;
@@ -201,12 +162,8 @@
 
 .content-code-block {
     margin: 2rem 0;
-    border-left: 4px solid #2563eb;
+    border-left: 4px solid #4F772D;
 }
-
-/* ============================= */
-/* Project Card Grid             */
-/* ============================= */
 
 .projects-grid {
     display: grid;
@@ -217,21 +174,18 @@
 }
 
 .project-card {
-    background-color: #111827;
+    background-color: #4F772D;
+    color: #ECF39E;
     padding: 2rem;
     border-radius: 1.5rem;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.10);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .project-card:hover {
     transform: scale(1.02);
-    box-shadow: 0 25px 30px -5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 25px 30px -5px rgba(0, 0, 0, 0.15);
 }
-
-/* ============================= */
-/* Navigation                    */
-/* ============================= */
 
 .nav-container {
     display: flex;
@@ -243,8 +197,8 @@
 }
 
 .nav-link {
-    background-color: #334155;
-    color: white;
+    background-color: #132A13;
+    color: #132A13;
     padding: 0.5rem 1.25rem;
     border-radius: 9999px;
     text-decoration: none;
@@ -252,56 +206,34 @@
 }
 
 .nav-link:hover {
-    background-color: #2563eb;
+    background-color: #31572C;
 }
-
-/* ============================= */
-/* CodePen Section               */
-/* ============================= */
 
 .codepen-intro {
     text-align: center;
     margin: 2rem 0;
     font-size: 1.25rem;
-    color: #6b7280;
+    color: #4F772D;
 }
 
 .codepen-list {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-    color: #9ca3af;
+    color: #4F772D;
     font-size: 1.125rem;
     margin: 2rem auto 4rem;
     max-width: 90%;
     padding-left: 0;
 }
 
-@media (max-width: 640px) {
-    .content-heading-2 {
-        font-size: 2rem;
-    }
-    .content-heading-3 {
-        font-size: 1.75rem;
-    }
-    .content-heading-4 {
-        font-size: 1.25rem;
-    }
-    .content-paragraph {
-        font-size: 1rem;
-    }
-}
-
-.codepen-list-item {
-    list-style-type: none;
-}
-
 .codepen-link {
-    color: #3b82f6;
+    color: #4F772D;
     text-decoration: none;
     transition: text-decoration 0.3s ease;
 }
 
 .codepen-link:hover {
+    color: #90A955;
     text-decoration: underline;
 }
