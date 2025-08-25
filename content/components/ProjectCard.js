@@ -16,27 +16,29 @@ export function ProjectCard({ title, description, technologies, demoLink, github
         <p className="project-card-description mb-4">{description}</p>
         <p className="project-card-technologies mb-4">{technologies}</p>
       </div>
-      <div className="flex flex-wrap gap-3 mt-4">
-        {demoLink && (
-          <a
-            href={demoLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="project-card-button"
-          >
-            🚀 Demo
-          </a>
-        )}
-        {githubLink && (
-          <a
-            href={githubLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="project-card-github"
-          >
-            🐙 GitHub
-          </a>
-        )}
+        <div className="flex flex-wrap gap-3 mt-4 project-card-buttons">
+          {demoLink && (
+            <a
+              href={demoLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="project-card-button"
+            >
+              <img src="https://cdn.simpleicons.org/chromium/ffffff" alt="demo icon" aria-hidden="true" />
+              <span>Demo</span>
+            </a>
+          )}
+          {githubLink && (
+            <a
+              href={githubLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="project-card-github"
+            >
+              <img src="https://cdn.simpleicons.org/github/ffffff" alt="github icon" aria-hidden="true" />
+              <span>GitHub</span>
+            </a>
+          )}
         {status && (
           <span className="project-card-status">{status}</span>
         )}
