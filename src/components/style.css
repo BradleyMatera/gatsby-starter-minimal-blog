@@ -4,27 +4,73 @@
 
 /* Design tokens - central palette & typography */
 :root {
-  --color-bg-900: #0f2212; /* deep */
-  --color-bg-800: #132A13; /* darkest brand */
-  --color-primary: #31572C; /* primary */
-  --color-secondary: #4F772D; /* secondary */
-  --color-accent: #90A955; /* accent */
-  --color-highlight: #ECF39E; /* highlight */
-  --text-on-dark: #ffffff;
-  --text-muted: #cfe3b4;
-  --glass: rgba(255,255,255,0.04);
+  /* Central palette - tuned for high contrast dark cards */
+  --page-bg: #041e16; /* deep page background */
+  --card-bg: #072a20; /* panel background for content cards */
+  --card-bg-2: #05241b; /* alternate panel */
+  --accent: #57c06a;
+  --muted: #9fcaa0;
+  --card-text: #f5fff9; /* bright text on cards */
+  --page-text: #dff7e7; /* body text */
+  --text-on-dark: var(--card-text);
+  --text-muted: #9bbf9e;
+  --color-highlight: #7be58a;
+  --color-accent: #57c06a;
+  --color-primary: #1f6b3b;
+  --color-secondary: #114d2e;
+  --color-bg-900: #022916;
+  --glass: rgba(255,255,255,0.03);
 }
 
 /* Global typography */
 html, body {
   font-family: Helvetica, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", system-ui;
-  color: var(--text-on-dark);
-  background-color: var(--color-bg-900);
+  color: var(--page-text);
+  background-color: var(--page-bg);
 }
 
-/* Make about page content readable */
-.about-card, .about-card * {
-  color: var(--text-on-dark) !important;
+/* Unified Hero & About: flat background + text color, no chrome (rounded/shadow/border)
+   Keep padding/margins for layout, but let global tokens control visuals.
+*/
+.section-hero,
+.about-card {
+  /* allow normal backgrounds; keep flattened chrome via other rules when needed */
+  color: var(--page-text) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 2rem 0 !important;
+  margin: 0 auto 1.5rem !important;
+  display: block !important;
+}
+
+/* Neutralize internal Tailwind background and chrome utilities inside hero/about */
+.section-hero .bg-slate-800, .section-hero .bg-indigo-900, .section-hero .bg-blue-900, .section-hero .bg-gray-800, .section-hero .bg-purple-900,
+.about-card .bg-slate-800, .about-card .bg-indigo-900, .about-card .bg-blue-900, .about-card .bg-gray-800, .about-card .bg-purple-900 {
+  background: transparent !important;
+}
+
+/* Neutralize rounded/shadow/padding/border helper classes within the sections */
+.section-hero .rounded-xl, .section-hero .rounded-2xl, .section-hero .shadow-2xl, .section-hero .shadow-lg,
+.about-card .rounded-xl, .about-card .rounded-2xl, .about-card .shadow-2xl, .about-card .shadow-lg {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+.section-hero .p-6, .section-hero .p-4, .section-hero .p-8, .section-hero .md\:p-10, .section-hero .p-12,
+.about-card .p-6, .about-card .p-4, .about-card .p-8, .about-card .md\:p-10, .about-card .p-12 {
+  padding: 0 !important;
+}
+.section-hero .border, .section-hero .border-indigo-900, .about-card .border, .about-card .border-indigo-900 {
+  border: none !important;
+}
+
+/* Neutralize bracket-escaped width helpers used on the sidebar */
+.about-card .min-w-\[260px\], .about-card .max-w-\[340px\], .about-card .min-w-\[260px\] * {
+  min-width: 0 !important;
+  max-width: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 
 /* Page container */
@@ -69,31 +115,76 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, label, .text, .title, .subtitle {
 /* Section styles */
 .section { margin-bottom: 4.5rem; }
 
-.section-hero { position: relative; height: 16rem; min-height: 12rem; width: 100%; }
+/* Hero: simplified to only background color and text color
+   (removes rounded boxes, shadows, backdrop blur)
+*/
+.section-hero {
+  background-color: var(--color-bg-800);
+  color: var(--text-on-dark);
+}
 
-.section-hero-img { width: 100%; height: 100%; object-fit: cover; border-radius: 1rem; }
+/* Ensure hero images are constrained and consistently cropped */
+.section-hero {
+  position: relative;
+  overflow: hidden;
+}
+.section-hero-img {
+  display: block;
+  width: 100%;
+  height: 16rem; /* default mobile height */
+  max-height: 40vh;
+  object-fit: cover;
+  object-position: center center;
+  margin: 0 auto;
+}
+@media (min-width: 768px) {
+  .section-hero-img { height: 20rem; }
+}
 
-.section-hero-overlay { position: absolute; inset: 0; display:flex; align-items:center; justify-content:center; text-align:center; padding:2rem; border-radius:1rem; background: linear-gradient(180deg, rgba(7,15,8,0.55), rgba(7,15,8,0.65)); }
+/* Constrain any images that appear inside project cards so thumbnails are uniform */
+.project-card img:not(.project-card-button img):not(.project-card-github img) {
+  width: 100%;
+  height: 10rem;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+}
 
-.section-hero-title { font-size: 2.75rem; font-weight: 800; letter-spacing: -0.02em; color: var(--color-highlight); }
+/* Keep a lightweight content container but avoid extra visual chrome */
+.content-container { max-width: 56rem; margin: 0 auto; padding: 0 0.5rem; }
 
-.section-hero-subtitle { font-size: 1.125rem; font-weight: 400; color: var(--text-muted); margin-top: 0.5rem; }
+/* Card-like wrapper for content blocks to improve readability */
+/* Card-like wrapper for content blocks used on Home and About
+   Force a dark, high-contrast panel and neutralize in-card utility backgrounds
+   so editors' utility classes don't produce pale boxes (e.g. bg-purple-900). */
+.terminal-root {
+  background: linear-gradient(180deg, var(--card-bg), var(--card-bg-2)) !important;
+  color: var(--card-text) !important;
+  border: 0 !important;
+  box-shadow: 0 8px 26px rgba(0,0,0,0.65) !important;
+  padding: 1.5rem 1.75rem !important;
+  border-radius: 12px !important;
+  max-width: 56rem;
+  margin: 0 auto 1.5rem;
+}
 
-  .section-hero { position: relative; height: 16rem; min-height: 12rem; width: 100%; }
+/* Make sure any utility background classes inside a terminal-root are neutralized so
+   they don't produce a different (pale) background color. Preserve text legibility. */
+.terminal-root [class*="bg-"] {
+  background: transparent !important;
+  background-image: none !important;
+  color: inherit !important;
+}
 
-  .section-hero-img { width: 100%; height: 100%; object-fit: cover; border-radius: 1rem; }
+/* Links and inline highlights inside the terminal card should be visible */
+.terminal-root a { color: var(--color-highlight) !important; text-decoration: underline; }
 
-  .section-hero-overlay {
-    position: absolute; inset: 0; display:flex; align-items:center; justify-content:center; text-align:center;
-    padding: 2rem; border-radius: 1rem;
-    background: linear-gradient(180deg, rgba(7,15,8,0.55), rgba(7,15,8,0.65));
-  }
+/* Minimal text/link treatments; let global tokens control color */
+.section-hero .content-paragraph,
+.section-hero .content-link,
+.section-hero-title,
+.section-hero-subtitle { color: inherit; }
 
-  .section-hero-title {
-    font-size: 2.75rem; font-weight: 800; letter-spacing: -0.02em; color: var(--color-highlight);
-  }
-
-  .section-hero-subtitle { font-size: 1.125rem; font-weight: 400; color: var(--text-muted); margin-top: 0.5rem; }
 
   /* Grid for project cards */
   .projects-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap:2rem; margin-top:1.75rem }
@@ -101,11 +192,10 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, label, .text, .title, .subtitle {
   /* Project card styles */
   .project-card {
     display:flex; flex-direction:column; justify-content:space-between; min-height:220px; width:100%; box-sizing:border-box;
-    border-radius: 14px; padding: 1.5rem; gap:1rem; color: var(--text-on-dark);
-    background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(0,0,0,0.05));
-    box-shadow: 0 8px 20px rgba(3,7,2,0.45); transition: transform 0.28s cubic-bezier(.22,.9,.2,1), box-shadow 0.28s ease;
-    -webkit-backdrop-filter: blur(6px);
-    backdrop-filter: blur(6px);
+    border-radius: 14px; padding: 1.5rem; gap:1rem;
+    color: var(--card-text);
+    background: linear-gradient(180deg, rgba(12,52,34,0.95), rgba(10,42,28,0.95));
+    box-shadow: 0 10px 30px rgba(2,6,3,0.55); transition: transform 0.28s cubic-bezier(.22,.9,.2,1), box-shadow 0.28s ease;
   }
 
   .project-card:hover { transform: translateY(-6px) scale(1.01); box-shadow: 0 22px 50px rgba(3,7,2,0.6); }
@@ -132,11 +222,12 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, label, .text, .title, .subtitle {
   .project-card-status { font-size:0.75rem; font-weight:700; color: var(--color-accent); }
 
   /* Subtle variants for background tokens - map class names used by pages */
-  .bg-slate-800 { background: linear-gradient(135deg, #132A13 0%, #0f2212 100%); }
-  .bg-indigo-900 { background: linear-gradient(135deg, #2a5a31 0%, #31572C 100%); }
+  .bg-slate-800 { background: linear-gradient(135deg, #071e16 0%, #0f2212 100%); }
+  .bg-indigo-900 { background: linear-gradient(135deg, #357e40 0%, #48a33c 100%); }
   .bg-blue-900 { background: linear-gradient(135deg, #3b6f38 0%, #4F772D 100%); }
   .bg-gray-800 { background: linear-gradient(135deg, #8aa86b 0%, #90A955 100%); }
-  .bg-purple-900 { background: linear-gradient(135deg, #f0f6c2 0%, #ECF39E 100%); color:var(--color-bg-900); }
+  /* Adjusted utility mappings to dark green tones to avoid accidental pale/yellow panels */
+  .bg-purple-900 { background: linear-gradient(135deg, #153627 0%, #0f3124 100%); color:var(--card-text); }
 
   /* CodePen section specific styles */
   .codepen-intro { position:relative; z-index:10; margin-bottom:1rem; font-size:1.12rem; font-weight:400; max-width:1280px; margin-left:auto; margin-right:auto; padding:0 1.5rem; margin-top:1.75rem }
@@ -156,3 +247,22 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, label, .text, .title, .subtitle {
     .projects-grid { grid-template-columns:1fr; gap:1.25rem; margin-top:1.25rem }
     .codepen-intro, .codepen-list { padding:0 1rem; font-size:1rem }
   }
+
+  /* Terminal / hacker look used only on Home and About via TerminalWrapper */
+  /* legacy terminal styles are toned down; static card look used */
+  .terminal-root { position: relative; }
+  /* Show original content so users can scroll and read immediately; overlay is cosmetic */
+  .terminal-original { display:block; }
+  .terminal-overlay { display:none !important; }
+  /* header-overlay sits only at the top where the heading is and won't cover full content */
+  /* header-overlay removed: TerminalSection now renders static boxes without overlays */
+  /* remove blinking cursor styling */
+  @keyframes blink { 50% { opacity: 0 } }
+  .terminal-done::after { display: inline-block; }
+
+  /* Place overlay above original but allow pointer events to pass through so users can scroll/read while typing */
+  .terminal-root { position: relative; }
+  /* reveal animation */
+  /* smoother, slightly faster reveal for a cleaner feel */
+  .reveal { opacity: 0; transform: translateY(10px); transition: opacity 420ms cubic-bezier(.22,.9,.2,1), transform 420ms cubic-bezier(.22,.9,.2,1); }
+  .reveal.active { opacity: 1; transform: translateY(0); }
