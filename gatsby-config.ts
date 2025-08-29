@@ -26,7 +26,7 @@ const config: GatsbyConfig = {
           { title: `Blog`, slug: `/blog` },
         ],
         externalLinks: [
-          { name: `LinkedIn`, url: `https://linkedin.com/in/championingempatheticwebsolutionsthroughcode` },
+          { name: `LinkedIn`, url: `https://www.linkedin.com/in/bradmatera` },
           { name: `GitHub`, url: `https://github.com/BradleyMatera` },
           { name: `YouTube`, url: `https://www.youtube.com/@bradmatera` },
         ],
