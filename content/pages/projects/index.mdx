@@ -3,335 +3,214 @@ title: Projects
 slug: "/projects"
 ---
 
-export const page = {
-  title: "Projects",
-};
+import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
 
-import { ProjectCard } from "../../components/ProjectCard";
-import { motion } from "framer-motion";
+<Section
+  eyebrow="Projects"
+  title="Hands-on builds that mix accessible UI with dependable engineering."
+  description="Here are some of my projects. I included the ones that are complete or usable. Some are still work in progress, noted where that's the case."
+>
+  <div className="callout">
+    <span className="callout__icon">ℹ</span>
+    <div className="callout__body">
+      Want more details on any of these? Reach out on LinkedIn or GitHub. I can share code walkthroughs or answer questions.
+    </div>
+  </div>
+</Section>
 
+<AnchorNav
+  items={[
+    { id: "featured", label: "Featured" },
+    { id: "frontend", label: "Front-End" },
+    { id: "fullstack", label: "Full-Stack & APIs" },
+    { id: "tools", label: "Tools & Infrastructure" },
+  ]}
+/>
 
+<Section
+  id="featured"
+  eyebrow="Featured"
+  title="Projects that show my full process."
+>
+  <div className="grid-two project-gallery">
+    <ProjectCard
+      title="Car-Match"
+      meta="Full stack web app"
+      summary="A site for car enthusiasts with user profiles, forums, messaging, and events. Built with real authentication and admin features."
+      impact="Complete and functional. Users can sign up, post, and interact."
+      stack={["React", "Node.js", "Express", "MongoDB"]}
+      links={[
+        { label: "GitHub", href: "https://github.com/BradleyMatera/car-match", external: true }
+      ]}
+    />
+    <ProjectCard
+      title="Interactive Pokedex"
+      meta="Data exploration tool"
+      summary="Searchable list of Pokemon with details and images. Pulls from PokeAPI."
+      impact="Complete. You can search and view Pokemon info."
+      stack={["HTML", "CSS", "JavaScript", "PokeAPI"]}
+      links={[
+        { label: "Live demo", href: "https://bradleymatera.github.io/Interactive-Pokedex/", variant: "primary", external: true },
+        { label: "GitHub", href: "https://github.com/BradleyMatera/Pokedex", external: true }
+      ]}
+    />
+    <ProjectCard
+      title="CIRIS AI Contributions"
+      meta="Backend and infrastructure"
+      summary="Worked on APIs, authentication, and testing for an AI ethics engine. Added endpoints, tests, and Docker setup."
+      impact="Contributions merged. Helped build the backend for Ethics Engine Enterprise."
+      stack={["Node.js", "Express", "MongoDB", "Docker", "JWT"]}
+      links={[
+        { label: "Organization", href: "https://github.com/CIRISAI", external: true }
+      ]}
+    />
+  </div>
+</Section>
 
+<Section
+  id="frontend"
+  eyebrow="Front-End"
+  title="UI projects focused on interaction and design."
+>
+  <div className="grid-two project-gallery">
+    <ProjectCard
+      title="Animal Sounds Soundboard"
+      meta="Audio demo"
+      summary="Click animals to hear sounds. Simple UI to test animations and controls."
+      impact="Complete. Works in browser."
+      stack={["HTML", "CSS", "JavaScript"]}
+      links={[
+        { label: "Live demo", href: "https://bradleymatera.github.io/AnimalSounds/", variant: "primary", external: true },
+        { label: "GitHub", href: "https://github.com/BradleyMatera/AnimalSounds", external: true }
+      ]}
+    />
+    <ProjectCard
+      title="Professional Portfolio Website"
+      meta="Static site"
+      summary="Basic portfolio with semantic HTML and accessible design."
+      impact="Complete."
+      stack={["HTML", "CSS", "JavaScript"]}
+      links={[
+        { label: "Live site", href: "https://bradleymatera.github.io/Professional-Portfolio-Website/", variant: "primary", external: true },
+        { label: "GitHub", href: "https://github.com/BradleyMatera/Professional-Portfolio-Website", external: true }
+      ]}
+    />
+    <ProjectCard
+      title="CodePen Projects"
+      meta="Various demos"
+      summary="Collection of small projects on CodePen, like UI components and experiments."
+      impact="Various complete snippets."
+      stack={["HTML", "CSS", "JavaScript"]}
+      links={[
+        { label: "CodePen", href: "https://codepen.io/student-account-bradley-matera", external: true } // Replace with actual if known
+      ]}
+    />
+  </div>
+</Section>
 
-<div className="section-wrapper py-12">
-  <motion.section
-    initial={{ opacity: 0, y: 50 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.8 }}
-    id="web"
-    className="section py-12"
-  >
-    <div className="section-hero">
-      <img
-        src="https://images.unsplash.com/photo-1509395176047-4a66953fd231?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&q=80&w=1600&h=600"
-        alt="Web Dev Background"
-        className="section-hero-img h-64 md:h-80 object-cover rounded-xl"
-      />
-      <div className="section-hero-overlay">
-  <h2 className="text-4xl md:text-5xl font-bold text-center mb-6">Front-End Projects</h2>
-        <div className="text-center text-gray-400 text-sm md:text-base mb-8">
-          Focused on frontend development and basic application building.
-        </div>
-        <div className="text-lg md:text-xl text-gray-300">Focused on building the UI and frontend functionality.</div>
-      </div>
-    </div>
-    <div className="projects-grid grid grid-cols-1 md:grid-cols-2 gap-8">
-      <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
-        <ProjectCard
-          title="WebGPU Shapes Renderer"
-          description="Demo of 2D shape rendering using WebGPU and Canvas. (Chrome required.)"
-          technologies="WebGPU, JavaScript, Canvas"
-          demoLink="https://bradleymatera.github.io/leaf-js/"
-          githubLink="https://github.com/BradleyMatera/leaf-js"
-          status="Live"
-          bgColor="bg-slate-800"
-        />
-      </motion.div>
-      <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
-        <ProjectCard
-          title="Gatsby Starter Minimal Blog"
-          description="React-based blog pulling from a custom Express API."
-          technologies="React.js, Gatsby, Node.js, Express, Netlify"
-          demoLink="https://bradleysgatsbyblog.netlify.app/"
-          githubLink="https://github.com/BradleyMatera/gatsby-starter-minimal-blog"
-          status="Live"
-          bgColor="bg-indigo-900"
-        />
-      </motion.div>
-      <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
-        <ProjectCard
-          title="Interactive Pokedex"
-          description="Searchable dynamic Pokémon data app."
-          technologies="HTML5, Tailwind CSS, JavaScript, Pokémon API"
-          demoLink="https://bradleymatera.github.io/Interactive-Pokedex/"
-          githubLink="https://github.com/BradleyMatera/Interactive-Pokedex"
-          status="Live"
-          bgColor="bg-blue-900"
-        />
-      </motion.div>
-      <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
-        <ProjectCard
-          title="Professional Portfolio Website"
-          description="Responsive portfolio built with vanilla HTML, CSS, JavaScript."
-          technologies="HTML5, CSS3, JavaScript"
-          demoLink="https://bradleymatera.github.io/Professional-Portfolio-Website/"
-          githubLink="https://github.com/BradleyMatera/Professional-Portfolio-Website"
-          status="Live"
-          bgColor="bg-slate-800"
-        />
-      </motion.div>
-    </div>
-  </motion.section>
-</div>
+<Section
+  id="fullstack"
+  eyebrow="Full-Stack & APIs"
+  title="Projects connecting UI to backends and data."
+>
+  <div className="grid-two project-gallery">
+    <ProjectCard
+      title="Convo-Ai"
+      meta="Local AI chat"
+      summary="Offline conversational AI with voice support using FastAPI and Ollama."
+      impact="Complete and usable locally."
+      stack={["Python", "FastAPI", "Ollama"]}
+      links={[
+        { label: "GitHub", href: "https://github.com/BradleyMatera/Convo-Ai", external: true }
+      ]}
+    />
+    <ProjectCard
+      title="ProjectHub"
+      meta="AI chat embed"
+      summary="Script to add AI chat to websites. Half finished, but basic function works."
+      impact="Work in progress. Core chat works."
+      stack={["JavaScript"]}
+      links={[
+        { label: "GitHub", href: "https://github.com/BradleyMatera/ProjectHub", external: true }
+      ]}
+    />
+    <ProjectCard
+      title="ShellCompany"
+      meta="AI tool"
+      summary="Work in progress AI project."
+      impact="Not complete yet."
+      stack={["JavaScript"]}
+      links={[
+        { label: "GitHub", href: "https://github.com/BradleyMatera/ShellCompany", external: true }
+      ]}
+    />
+  </div>
+</Section>
 
-<div className="section-wrapper py-12">
-  <motion.section
-    initial={{ opacity: 0, y: 50 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.8 }}
-    id="fullstack"
-    className="section py-12"
-  >
-    <div className="section-hero">
-      <img
-        src="https://images.unsplash.com/photo-1573164574572-cb89e39749b4?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&q=80&w=1600&h=600"
-        alt="Full Stack Background"
-        className="section-hero-img h-64 md:h-80 object-cover rounded-xl"
-      />
-      <div className="section-hero-overlay">
-  <h2 className="text-4xl md:text-5xl font-bold text-center mb-6">Full-Stack Applications</h2>
-        <div className="text-center text-gray-400 text-sm md:text-base mb-8">
-          Backend and API experiments. Not production full-stack apps, but good learning projects.
-        </div>
-      </div>
-    </div>
-    <div className="projects-grid grid grid-cols-1 md:grid-cols-2 gap-8">
-      <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
-        <ProjectCard
-          title="React Native Anime CRUD App"
-          description="Mobile CRUD application for anime data."
-          technologies="React Native, Node.js, MongoDB, Heroku, Vercel"
-          demoLink="https://cruddemo-one.vercel.app/"
-          status="Live"
-          bgColor="bg-indigo-900"
-        />
-      </motion.div>
-      <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
-        <ProjectCard
-          title="RESTful Routes Using ExpressJS"
-          description="Basic REST API demo using Express."
-          technologies="Node.js, Express.js"
-          githubLink="https://github.com/BradleyMatera/RESTfulRoutesUsingExpressJS"
-          status="Repository"
-          bgColor="bg-blue-900"
-        />
-      </motion.div>
-      <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
-        <ProjectCard
-          title="Convo-Ai - Local Conversational AI"
-          description="Local voice/text AI chat app with FastAPI and Ollama."
-          technologies="Python, FastAPI, Whisper.cpp, Ollama, XTTS v2"
-          githubLink="https://github.com/BradleyMatera/Convo-Ai"
-          status="Repository"
-          bgColor="bg-slate-800"
-        />
-      </motion.div>
-      <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
-        <ProjectCard
-          title="ProjectHub - AI-Powered Portfolio Chat Bot"
-          description="Integrates into any site to showcase projects and skills."
-          technologies="JavaScript, HTML, Modular Web Scripts"
-          demoLink="https://codepen.io/student-account-bradley-matera/full/yyLmYKR"
-          githubLink="https://github.com/BradleyMatera/ProjectHub"
-          status="Live"
-          bgColor="bg-indigo-900"
-        />
-      </motion.div>
-    </div>
-  </motion.section>
-</div>
+<Section
+  id="tools"
+  eyebrow="Tools & Infrastructure"
+  title="Utilities for development and testing."
+>
+  <div className="grid-two project-gallery">
+    <ProjectCard
+      title="Docker Multilang Project"
+      meta="Container setup"
+      summary="Docker for multi-language projects with shared scripts."
+      impact="Complete."
+      stack={["Docker", "Python", "Node.js"]}
+      links={[
+        { label: "GitHub", href: "https://github.com/BradleyMatera/docker_multilang_project", external: true }
+      ]}
+    />
+    <ProjectCard
+      title="CheeseMath Jest Tests"
+      meta="Testing library"
+      summary="Math utils with Jest tests."
+      impact="Complete."
+      stack={["JavaScript", "Jest"]}
+      links={[
+        { label: "GitHub", href: "https://github.com/BradleyMatera/CheeseMath-Jest-Tests", external: true }
+      ]}
+    />
+    <ProjectCard
+      title="OBJ Parser"
+      meta="Geometry parser"
+      summary="Parser for OBJ/MTL files in Zig."
+      impact="Complete."
+      stack={["Zig"]}
+      links={[
+        { label: "GitHub", href: "https://github.com/BradleyMatera/obj-parser", external: true }
+      ]}
+    />
+    <ProjectCard
+      title="WebGPU Shapes Renderer"
+      meta="Graphics demo"
+      summary="Renders shapes using WebGPU."
+      impact="Complete."
+      stack={["WebGPU", "JavaScript"]}
+      links={[
+        { label: "GitHub", href: "https://github.com/BradleyMatera/Rune", external: true } // Assuming Rune is this
+      ]}
+    />
+  </div>
+</Section>
 
-<div className="section-wrapper py-12">
-  <motion.section
-    initial={{ opacity: 0, y: 50 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.8 }}
-    id="tools"
-    className="section py-12"
-  >
-    <div className="section-hero">
-      <img
-        src="https://images.unsplash.com/photo-1581092919535-7146ff1a590b?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        alt="Tools Background"
-        className="section-hero-img h-64 md:h-80 object-cover rounded-xl"
-      />
-      <div className="section-hero-overlay">
-  <h2 className="text-4xl md:text-5xl font-bold text-center mb-6">Tools & Libraries</h2>
-        <div className="text-center text-gray-400 text-sm md:text-base mb-8">
-          Personal utility projects and early backend experiments. Not production libraries yet.
-        </div>
-      </div>
+<Section
+  eyebrow="Need more context?"
+  title="Let's talk through the roadmap, metrics, and code."
+>
+  <div className="surface-card surface-card--outline">
+    <div className="feature-card__body">
+      I'm happy to schedule a walkthrough, record a demo, or share repo access so you can see the code quality, testing, and documentation.
     </div>
-    <div className="projects-grid grid grid-cols-1 md:grid-cols-2 gap-8">
-      <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
-        <ProjectCard
-          title="CheeseMath Jest Tests"
-          description="Math utilities module with Jest unit testing."
-          technologies="JavaScript, Jest"
-          demoLink="https://cheese-math.vercel.app/"
-          githubLink="https://github.com/BradleyMatera/CheeseMath-Jest-Tests/tree/main/CheeseMath"
-          status="Live"
-          bgColor="bg-blue-900"
-        />
-      </motion.div>
-      <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
-        <ProjectCard
-          title="Docker Multilang Project"
-          description="Containerize apps across multiple languages."
-          technologies="Docker, Python, Node.js"
-          githubLink="https://github.com/BradleyMatera/docker_multilang_project"
-          status="Repository"
-          bgColor="bg-slate-800"
-        />
-      </motion.div>
+    <div className="hero-actions">
+      <a data-variant="primary" href="https://www.linkedin.com/in/bradmatera" target="_blank" rel="noopener noreferrer">
+        Book a conversation
+      </a>
+      <a data-variant="ghost" href="https://github.com/BradleyMatera" target="_blank" rel="noopener noreferrer">
+        Browse GitHub repositories
+      </a>
     </div>
-  </motion.section>
-</div>
-
-<div className="section-wrapper py-12">
-  <motion.section
-    initial={{ opacity: 0, y: 50 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.8 }}
-    id="funprojects"
-    className="section py-12"
-  >
-    <div className="section-hero">
-      <img
-        src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&q=80&w=1600&h=600"
-        alt="Fun Projects Background"
-        className="section-hero-img h-64 md:h-80 object-cover rounded-xl"
-      />
-      <div className="section-hero-overlay">
-  <h2 className="text-4xl md:text-5xl font-bold text-center mb-6">Fun Interactive Projects</h2>
-        <div className="text-center text-gray-400 text-sm md:text-base mb-8">
-          Lightweight, playful frontend projects focused on interaction, UI, and browser events.
-        </div>
-      </div>
-    </div>
-    <div className="projects-grid grid grid-cols-1 md:grid-cols-2 gap-8">
-      <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
-        <ProjectCard
-          title="Pong_Deluxe"
-          description="Classic Pong recreation with PixiJS rendering."
-          technologies="JavaScript, PixiJS"
-          demoLink="https://pongdeluxe.netlify.app/"
-          githubLink="https://github.com/BradleyMatera/Pong-Deluxe"
-          status="Live"
-          bgColor="bg-indigo-900"
-        />
-      </motion.div>
-      <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
-        <ProjectCard
-          title="Animal Sounds"
-          description="Plays animal sounds through button interactions."
-          technologies="JavaScript, HTML5, CSS3"
-          demoLink="https://bradleymatera.github.io/AnimalSounds/"
-          githubLink="https://github.com/BradleyMatera/AnimalSounds"
-          status="Live"
-          bgColor="bg-blue-900"
-        />
-      </motion.div>
-    </div>
-  </motion.section>
-</div>
-
-<div className="section-wrapper py-12">
-  <motion.section
-    initial={{ opacity: 0, y: 50 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.8 }}
-    id="codepen"
-    className="section py-12"
-  >
-    <div className="section-hero">
-      <img
-        src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&q=80&w=1600&h=600"
-        alt="CodePen Demos Background"
-        className="section-hero-img h-64 md:h-80 object-cover rounded-xl"
-      />
-      <div className="section-hero-overlay">
-  <h2 className="text-4xl md:text-5xl font-bold text-center mb-6">CodePen Demos</h2>
-        <div className="text-center text-gray-400 text-sm md:text-base mb-8">
-          Small demos, experiments, and practice UI components built live in CodePen.
-        </div>
-      </div>
-    </div>
-
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-      <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
-        <div className="terminal-root p-6">
-          <a href="https://codepen.io/student-account-bradley-matera/pen/ZYzoWpL" className="content-link hover:underline text-lg font-semibold block">
-            JavaScript Garbage Collection Tutorial
-          </a>
-        </div>
-      </motion.div>
-      <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
-        <div className="terminal-root p-6">
-          <a href="https://codepen.io/student-account-bradley-matera/pen/ogvGZjJ" className="content-link hover:underline text-lg font-semibold block">
-            React Calculator
-          </a>
-        </div>
-      </motion.div>
-      <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
-        <div className="terminal-root p-6">
-          <a href="https://codepen.io/student-account-bradley-matera/details/dPbVvoa" className="content-link hover:underline text-lg font-semibold block">
-            Sound Machine
-          </a>
-        </div>
-      </motion.div>
-      <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
-        <div className="terminal-root p-6">
-          <a href="https://codepen.io/student-account-bradley-matera/pen/ZYzXeEJ" className="content-link hover:underline text-lg font-semibold block">
-            Markdown Previewer
-          </a>
-        </div>
-      </motion.div>
-      <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
-        <div className="terminal-root p-6">
-          <a href="https://codepen.io/student-account-bradley-matera/pen/azoLpeG" className="content-link hover:underline text-lg font-semibold block">
-            Random Quote Machine
-          </a>
-        </div>
-      </motion.div>
-      <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
-        <div className="terminal-root p-6">
-          <a href="https://codepen.io/student-account-bradley-matera/pen/PwYJWMY" className="content-link hover:underline text-lg font-semibold block">
-            Random Quote Generator
-          </a>
-        </div>
-      </motion.div>
-      <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
-        <div className="terminal-root p-6">
-          <a href="https://codepen.io/student-account-bradley-matera/details/dyEYbPO" className="content-link hover:underline text-lg font-semibold block">
-            Data Visualization Demo
-          </a>
-        </div>
-      </motion.div>
-      <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
-        <div className="terminal-root p-6">
-          <a href="https://codepen.io/student-account-bradley-matera/full/WbbvPKY" className="content-link hover:underline text-lg font-semibold block">
-            Squirtle's MySpace
-          </a>
-        </div>
-      </motion.div>
-      <motion.div whileHover={{ scale: 1.05, rotate: 1 }}>
-        <div className="terminal-root p-6">
-          <a href="https://codepen.io/student-account-bradley-matera/full/bNNdzgv" className="content-link hover:underline text-lg font-semibold block">
-            Color System Preview Tool
-          </a>
-        </div>
-      </motion.div>
-    </div>
-  </motion.section>
-</div>
+  </div>
+</Section>

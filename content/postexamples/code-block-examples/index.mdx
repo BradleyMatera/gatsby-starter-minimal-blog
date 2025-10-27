@@ -4,30 +4,38 @@ date: "2025-01-05"
 tags: ["Code", "Examples", "Syntax Highlighting"]
 ---
 
-<div class="content-container">
-  <h1 class="content-heading-1">Code Block Examples: Showcasing Syntax Highlighting</h1>
-  <p class="content-paragraph">
+<div className="content-container">
+  <h1 className="content-heading-1">Code Block Examples: Showcasing Syntax Highlighting</h1>
+  <div className="content-paragraph">
     This post serves as an example of how to include and style code blocks in content. Below are various code snippets in different languages to demonstrate syntax highlighting and formatting.
-  </p>
+  </div>
   
-  <h2 class="content-heading-2">JavaScript Example</h2>
-  <p class="content-paragraph">
+  <h2 className="content-heading-2">JavaScript Example</h2>
+  <div className="content-paragraph">
     Here's a simple JavaScript function to calculate the factorial of a number:
-  </p>
-  <pre><code>function factorial(n) {
+  </div>
+</div>
+
+```javascript
+function factorial(n) {
   if (n === 0 || n === 1) {
     return 1;
   }
   return n * factorial(n - 1);
 }
 
-console.log(factorial(5)); // Output: 120</code></pre>
-  
-  <h2 class="content-heading-2">Python Example</h2>
-  <p class="content-paragraph">
+console.log(factorial(5)); // Output: 120
+```
+
+<div className="content-container">
+  <h2 className="content-heading-2">Python Example</h2>
+  <div className="content-paragraph">
     Below is a Python script for a basic calculator:
-  </p>
-  <pre><code>def calculator(a, b, operation):
+  </div>
+</div>
+
+```python
+def calculator(a, b, operation):
     if operation == 'add':
         return a + b
     elif operation == 'subtract':
@@ -39,13 +47,18 @@ console.log(factorial(5)); // Output: 120</code></pre>
     else:
         return "Invalid operation"
 
-print(calculator(10, 5, 'multiply'))  # Output: 50</code></pre>
-  
-  <h2 class="content-heading-2">CSS Example</h2>
-  <p class="content-paragraph">
+print(calculator(10, 5, 'multiply'))  # Output: 50
+```
+
+<div className="content-container">
+  <h2 className="content-heading-2">CSS Example</h2>
+  <div className="content-paragraph">
     Here's an example of CSS for styling a button:
-  </p>
-  <pre><code>.button {
+  </div>
+</div>
+
+```css
+.button {
   background-color: #2563eb;
   color: white;
   padding: 0.5rem 1rem;
@@ -57,10 +70,12 @@ print(calculator(10, 5, 'multiply'))  # Output: 50</code></pre>
 
 .button:hover {
   background-color: #1d4ed8;
-}</code></pre>
-  
-  <h2 class="content-heading-2">Conclusion</h2>
-  <p class="content-paragraph">
-    Code blocks are essential for sharing snippets in technical content. Proper styling and syntax highlighting make code readable and engaging. If you have questions or want to see more examples, reach out on <a href="https://github.com/BradleyMatera" class="content-link">GitHub</a>.
-  </p>
+}
+```
+
+<div className="content-container">
+  <h2 className="content-heading-2">Conclusion</h2>
+  <div className="content-paragraph">
+    Code blocks are essential for sharing snippets in technical content. Proper styling and syntax highlighting make code readable and engaging. If you have questions or want to see more examples, reach out on <a href="https://github.com/BradleyMatera" className="content-link">GitHub</a>.
+  </div>
 </div>

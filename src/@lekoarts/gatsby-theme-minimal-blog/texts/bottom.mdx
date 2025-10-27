@@ -1,3 +1,24 @@
-import { motion } from "framer-motion";
+<>
+import { Section } from "../../../components/ui";
+import { Link } from "gatsby";
 
-
+<Section
+  eyebrow="Keep exploring"
+  title="Curious about the process behind these projects?"
+>
+  <div className="section-lead">The blog breaks down what I learn from each build—architecture decisions, accessibility wins, and what I'd improve next time.</div>
+  <div className="surface-card surface-card--muted">
+    <div className="hero-description">
+      Skim the latest posts below or dive into the archives to see how each project has evolved. I include code snippets, diagrams, and checklists so you can reuse the patterns in your own work.
+    </div>
+    <div className="hero-actions">
+      <Link data-variant="primary" to="/blog">
+        Browse all articles
+      </Link>
+      <Link data-variant="ghost" to="/about">
+        View my playbook
+      </Link>
+    </div>
+  </div>
+</Section>
+</>

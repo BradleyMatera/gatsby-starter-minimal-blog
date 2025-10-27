@@ -1,0 +1,53 @@
+---
+title: "Roles"
+slug: "/roles"
+---
+
+import { Section, Card } from "../../../src/components/ui";
+import { Link } from "gatsby";
+
+<Section
+  eyebrow="Roles"
+  title="Where I fit on a team"
+  description="Each role below links to the skills, workflows, and proof that I can ship in that lane."
+/>
+
+<Section title="Pick a focus">
+  <div className="grid-two">
+    <Card>
+      <h3 className="feature-card__title">Cloud Engineer</h3>
+      <div className="feature-card__body">AWS infrastructure, staging/production automation, logging, and cost-aware design.</div>
+      <div className="card-actions">
+        <Link data-variant="primary" to="/roles/cloud-engineer">View role</Link>
+      </div>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">DevOps Engineer</h3>
+      <div className="feature-card__body">CI/CD pipelines, branch protections, and deployment guardrails that prevent mistakes.</div>
+      <div className="card-actions">
+        <Link data-variant="primary" to="/roles/devops-engineer">View role</Link>
+      </div>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">Backend Engineer</h3>
+      <div className="feature-card__body">Node.js APIs, authentication, and data modeling supported by tests and instrumentation.</div>
+      <div className="card-actions">
+        <Link data-variant="primary" to="/roles/backend-engineer">View role</Link>
+      </div>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">Full-Stack Engineer</h3>
+      <div className="feature-card__body">React + Node experiences that stay stable from dev to production.</div>
+      <div className="card-actions">
+        <Link data-variant="primary" to="/roles/full-stack-engineer">View role</Link>
+      </div>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">AI / Automation Engineer</h3>
+      <div className="feature-card__body">Automation workflows and AI-driven tooling that accelerate delivery.</div>
+      <div className="card-actions">
+        <Link data-variant="primary" to="/roles/ai-automation-engineer">View role</Link>
+      </div>
+    </Card>
+  </div>
+</Section>

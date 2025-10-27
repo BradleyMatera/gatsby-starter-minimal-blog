@@ -1,125 +1,159 @@
-import HeroLayout from "../../../components/HeroLayout";
-import TerminalWrapper from "../../../components/TerminalWrapper";
-import { motion } from "framer-motion";
+<>
+import HomeHero from "../../../components/home/HomeHero";
+import { Section, ProjectCard } from "../../../components/ui";
+import { Link } from "gatsby";
 
-<HeroLayout>
+<HomeHero />
 
-<TerminalWrapper>
-<div className="hero-wrapper">
-  <motion.div
-    initial={{ opacity: 0, y: 50 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 1 }}
-  className="px-8 py-20 p-12 md:p-16 max-w-5xl mx-auto text-center rounded-2xl shadow-2xl font-sans section-hero"
-  >
-    <div className="content-container">
+<Section
+  eyebrow="Quick overview"
+  title="Where I'm focused right now"
+>
+  <ul className="feature-list">
+    <li><strong>Current Focus:</strong> Cloud engineering, backend APIs, DevOps automation, AI integration</li>
+    <li><strong>Background:</strong> Army veteran, real-world problem solver, handles pressure</li>
+    <li><strong>Technical Focus:</strong> JavaScript/TypeScript, Node.js, React, AWS, CI/CD, Docker</li>
+    <li><strong>Recent:</strong> AWS Cloud Support Associate Internship — Seattle, Summer 2025</li>
+    <li><strong>Career Goal:</strong> Full-time role in Cloud, DevOps, or Full-Stack Engineering</li>
+  </ul>
+</Section>
 
-  <h1 className="section-hero-title font-extrabold mb-8 drop-shadow-lg">
-    Bradley Matera: Code, Projects, and Constant Learning
-  </h1>
-
-  <div className="content-paragraph leading-relaxed mb-8">
-    Welcome! I’m Bradley Matera, a Full Stack Software Engineer and a student at Full Sail University (B.S. in Web Development, expected October 2025, GPA ~3.8). Here you’ll find my projects, experiments, and the skills I’m working on, focused on building fast, accessible, and functional web applications using React, Node.js, MongoDB, Docker, and more.
-    <br />
-    <strong>Want my full story, background, and skills?</strong> <a href="/about" className="content-link underline">Check out my About page</a>.
-  </div>
-
-  <motion.div
-    initial={{ opacity: 0, x: -100 }}
-    whileInView={{ opacity: 1, x: 0 }}
-    transition={{ duration: 0.6 }}
-    viewport={{ once: true, amount: 0.3 }}
-  >
-    <h2 className="section-hero-subtitle font-bold mt-20 mb-10 uppercase tracking-wide">What I Focus On</h2>
-    <div className="content-paragraph leading-relaxed mb-8">
-      I build real applications that combine clean frontend design with practical backend functionality. Whether it's a responsive UI, API integration, or a custom tool, I make sure everything works as intended. <a href="/projects" className="content-link underline decoration-dotted">See my Projects</a>.
-    </div>
-  </motion.div>
-
-  <motion.div
-    initial={{ opacity: 0, x: 100 }}
-    whileInView={{ opacity: 1, x: 0 }}
-    transition={{ duration: 0.6 }}
-    viewport={{ once: true, amount: 0.3 }}
-  >
-    <h2 className="section-hero-subtitle font-bold mt-20 mb-10 uppercase tracking-wide">Quick Overview</h2>
-
-    <ul className="content-list list-none text-center space-y-6 mb-12 px-6">
-  <li><div className="terminal-root p-6"><strong>Currently</strong>: Studying at Full Sail University, building new projects alongside coursework.</div></li>
-  <li><div className="terminal-root p-6"><strong>Background</strong>: Army veteran, problem-solver, and team player (see <a href="/about" className="content-link underline">About</a> for more).</div></li>
-  <li><div className="terminal-root p-6"><strong>Technical Focus</strong>: Full-stack JavaScript, cloud basics, and continuous improvement.</div></li>
-  <li><div className="terminal-root p-6"><strong>Recent</strong>: Completed AWS Cloud Support Internship (Summer 2025, Seattle).</div></li>
-    </ul>
-  </motion.div>
-
-    <motion.div
-      initial={{ opacity: 0, x: -100 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: true, amount: 0.3 }}
-    >
-  <h2 className="section-hero-subtitle font-bold mt-20 mb-10 uppercase tracking-wide">Projects to Check Out</h2>
-
-  <ul className="content-list list-none text-center space-y-6 mb-12 px-6">
-          <li>
-            <div className="terminal-root p-6">
-                <strong>obj-parser</strong>: A Zig-based deep dive into parsing Wavefront OBJ/MTL files, exploring memory management and binary format design — source (<a href="https://github.com/BradleyMatera/obj-parser" className="content-link underline">GitHub</a>).
-            </div>
-          </li>
-          <li>
-            <div className="terminal-root p-6">
-              <strong>AnimalSounds</strong>: Small interactive demo that maps animals to sounds — live demo (<a href="https://bradleymatera.github.io/AnimalSounds/" className="content-link underline">Demo</a>) · source (<a href="https://github.com/BradleyMatera/AnimalSounds" className="content-link underline">GitHub</a>).
-            </div>
-          </li>
-          <li>
-            <div className="terminal-root p-6">
-  <strong>Node Secrets Assignment</strong>: A front-end demo showing three different ways to handle secrets in a Node.js app—hardcoded, shared file, and environment variables. Built to highlight best practices in secrets management.  
-  Live demo (<a href="https://bradleymatera.github.io/EthicsFrontEndDemo/" className="content-link underline">Demo</a>) · source (<a href="https://github.com/BradleyMatera/EthicsFrontEndDemo" className="content-link underline">GitHub</a>)
-                </div>
-          </li>
-          <li>
-            <div className="terminal-root p-6">
-              <strong>Pokedex</strong>: Interactive project using vanilla JavaScript (<a href="https://github.com/BradleyMatera/Interactive-Pokedex" className="content-link underline">GitHub</a>).
-            </div>
-          </li>
-      </ul>
-    </motion.div>
-
-    <motion.div
-      initial={{ opacity: 0, x: 100 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: true, amount: 0.3 }}
-    >
-  <h2 className="section-hero-subtitle font-bold mt-20 mb-10 uppercase tracking-wide">Why I Build</h2>
-
-  <div className="content-paragraph leading-relaxed mb-8">
-        I focus on making things that are reliable, accessible, and practical. Every project is an opportunity to improve and learn something new, whether it’s a framework, a database, or a cloud service. I approach development with the same mindset I used in past roles: work steadily, fix problems directly, and keep moving forward.
+<Section
+  eyebrow="What I focus on"
+  title="Reliable systems, less guesswork, and fewer things that can break."
+>
+  <div className="section-lead">I build applications that solve real problems. I like combining clean user interfaces with solid backend logic and secure cloud deployment. My goal is fewer manual steps, easier maintenance, and fewer things that can break.</div>
+  <div className="grid-three">
+    <div className="feature-card">
+      <span className="feature-card__icon">Cloud</span>
+      <h3 className="feature-card__title">Cost-aware infrastructure</h3>
+      <div className="feature-card__body">
+        Deploy workloads to AWS with security defaults, automated branch-based environments, and healthy monitoring that keeps spend under control.
       </div>
-    </motion.div>
+    </div>
+    <div className="feature-card">
+      <span className="feature-card__icon">API</span>
+      <h3 className="feature-card__title">Real authentication & data flows</h3>
+      <div className="feature-card__body">
+        Build Node.js services with proper auth, structured logging, and data modeling that survive production traffic and troubleshooting.
+      </div>
+    </div>
+    <div className="feature-card">
+      <span className="feature-card__icon">Ops</span>
+      <h3 className="feature-card__title">Automation everywhere</h3>
+      <div className="feature-card__body">
+        Lock deployments behind CI/CD, keep teams out of prod mistakes, and use AI-assisted workflows to remove repetitive steps from delivery.
+      </div>
+    </div>
+  </div>
+</Section>
 
-    <motion.div
-      initial={{ opacity: 0, x: -100 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: true, amount: 0.3 }}
-    >
-  <h2 className="section-hero-subtitle font-bold mt-20 mb-10 uppercase tracking-wide">Connect</h2>
+<Section
+  eyebrow="Featured work"
+  title="Projects that showcase research, development, and iteration."
+  actions={
+    <>
+      <Link data-variant="primary" to="/projects">
+        View the full project library
+      </Link>
+      <Link data-variant="ghost" to="/contributions">
+        Explore contributions
+      </Link>
+    </>
+  }
+>
+  <div className="section-lead">Each build started with a user need, went through accessibility and performance checks, and closed with documentation so future contributors stay productive.</div>
+  <div className="grid-auto project-gallery">
+    <ProjectCard
+      title="ProjectHub · AI portfolio concierge"
+      meta="Modular embeddable assistant"
+      summary="Interactive chat experience that helps recruiters and peers explore my work in seconds, highlighting tech stacks, use cases, and outcomes."
+      impact="Result: 4× faster conversations with hiring managers during career fairs."
+      stack={["JavaScript", "LangChain", "OpenAI", "Netlify"]}
+      links={[
+        { label: "Launch demo", href: "https://codepen.io/student-account-bradley-matera/full/yyLmYKR", variant: "primary", external: true },
+        { label: "GitHub", href: "https://github.com/BradleyMatera/ProjectHub", external: true },
+      ]}
+    />
 
-  <ul className="content-list list-none text-center space-y-6 mb-12 px-6">
-  <li><div className="terminal-root p-6"><a href="https://github.com/BradleyMatera" className="content-link underline">GitHub</a> – Project repos and code.</div></li>
-  <li><div className="terminal-root p-6"><a href="https://www.linkedin.com/in/bradmatera" className="content-link underline">LinkedIn</a> – Professional profile and updates.</div></li>
-  <li><div className="terminal-root p-6"><a href="https://www.youtube.com/@bradmatera" className="content-link underline">YouTube</a> – Development walkthroughs and experiments.</div></li>
+    <ProjectCard
+      title="Leaf.js · WebGPU shape renderer"
+      meta="Graphics experiment · performance-first"
+      summary="Hands-on exploration of the WebGPU API to render complex geometry with smooth animations, focusing on draw-call efficiency and GPU profiling."
+      impact="Result: Demonstrated modern graphics in the browser, informing future data visualization work."
+      stack={["WebGPU", "JavaScript", "Canvas API"]}
+      links={[
+        { label: "Play with the demo", href: "https://bradleymatera.github.io/leaf-js/", variant: "primary", external: true },
+        { label: "GitHub", href: "https://github.com/BradleyMatera/leaf-js", external: true },
+      ]}
+    />
+
+    <ProjectCard
+      title="Secrets management patterns"
+      meta="Frontend teaching tool"
+      summary="Interactive walkthrough that demonstrates three ways to handle app secrets—hardcoded, shared file, and env vars—highlighting risks and best practices."
+      impact="Result: Used in study groups to teach secure defaults to new developers."
+      stack={["Vite", "TypeScript", "Node.js"]}
+      links={[
+        { label: "View demo", href: "https://bradleymatera.github.io/EthicsFrontEndDemo/", variant: "primary", external: true },
+        { label: "GitHub", href: "https://github.com/BradleyMatera/EthicsFrontEndDemo", external: true },
+      ]}
+    />
+  </div>
+</Section>
+
+<Section
+  eyebrow="Why I build in public"
+  title="Delivery rooted in service, clarity, and measurable progress."
+>
+  <div className="grid-two">
+    <div className="callout">
+      <span className="callout__icon">→</span>
+      <div className="callout__body">
+        I bring the discipline and empathy I learned as an Army combat medic into software. Every release starts with the question:
+        <strong>"Who needs this and how will they feel when they use it?"</strong> Then I document decisions so the next teammate moves faster.
+      </div>
+    </div>
+    <ul className="feature-list">
+      <li>
+        <strong>Evidence-driven improvements.</strong> Lighthouse, Axe, and analytics checkpoints shape each iteration.
+      </li>
+      <li>
+        <strong>Readable handoffs.</strong> I pair thoughtful commit messages with changelog notes and architecture diagrams.
+      </li>
+      <li>
+        <strong>Delight and resilience.</strong> Micro-interactions and progressive enhancement keep interfaces responsive even on low-end hardware.
+      </li>
+    </ul>
+  </div>
+</Section>
+
+<Section
+  eyebrow="Let's collaborate"
+  title="Need a developer who blends UX strategy with full-stack execution?"
+>
+  <div className="section-lead">I'm open to internships, apprenticeships, or part-time roles where accessibility, reliability, and learning culture matter.</div>
+  <div className="grid-two">
+    <div className="surface-card surface-card--outline">
+      <h3 className="feature-card__title">Quick ways to connect</h3>
+      <ul className="feature-list">
+        <li>
+          <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/bradmatera" target="_blank" rel="noopener noreferrer">/in/bradmatera</a>
+        </li>
+        <li>
+          <strong>GitHub:</strong> <a href="https://github.com/BradleyMatera" target="_blank" rel="noopener noreferrer">@BradleyMatera</a>
+        </li>
+        <li>
+          <strong>YouTube:</strong> <a href="https://www.youtube.com/@bradmatera" target="_blank" rel="noopener noreferrer">@bradmatera</a>
+        </li>
       </ul>
-    </motion.div>
-
-  <div className="content-paragraph leading-relaxed mb-8 text-center">
-      Thanks for visiting.
     </div>
-
+    <div className="surface-card surface-card--muted">
+      <h3 className="feature-card__title">What to expect next</h3>
+      <div className="feature-card__body">
+        I'll respond within 24 hours with availability, relevant case studies, and a short plan for how we can collaborate. Happy to pair-program, audit an existing build, or present a portfolio walkthrough.
+      </div>
     </div>
-  </motion.div>
-</div>
-</TerminalWrapper>
-
-</HeroLayout>
+  </div>
+</Section>
+</>

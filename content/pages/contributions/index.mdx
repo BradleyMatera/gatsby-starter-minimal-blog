@@ -1,0 +1,64 @@
+---
+title: "Contributions"
+slug: "/contributions"
+---
+
+import { Section, Card } from "../../../src/components/ui";
+import Link from "../../../src/components/ui/Link";
+
+<Section
+  eyebrow="Contributions"
+  title="Collaboration and community work"
+>
+  <div>These are the teams, clubs, and events where I help ship code, unblock people, and keep projects moving.</div>
+</Section>
+
+<Section
+  eyebrow="Projects"
+  title="Where I contribute"
+>
+  <div className="grid-three">
+    <Card>
+      <h3 className="feature-card__title">CIRIS AI</h3>
+      <details>
+        <summary>8 backend PRs merged</summary>
+        <ul className="feature-list">
+          <li><Link to="https://github.com/CIRISAI/CIRISNode/pull/1" external>finalises Phase 2</Link> - Completed the core API with Matrix integration, DID issuance, and Docker setup.</li>
+          <li><Link to="https://github.com/CIRISAI/CIRISNode/pull/2" external>Enhance benchmark and DID routes</Link> - Added JWT authentication, route logging, and environment variables for security.</li>
+          <li><Link to="https://github.com/CIRISAI/CIRISNode/pull/3" external>CIRISNode EEE Backend: Route completion</Link> - Built the main backend with authentication, handlers, and 51 automated tests.</li>
+          <li><Link to="https://github.com/CIRISAI/CIRISNode/pull/4" external>EEE Backend and Front End mockup</Link> - Created the first working backend + frontend demo for the Ethics Engine.</li>
+          <li><Link to="https://github.com/CIRISAI/CIRISNode/pull/5" external>Refactor deferral handling</Link> - Cleaned up logic so only “defer” actions are accepted by the API.</li>
+          <li><Link to="https://github.com/CIRISAI/CIRISNode/pull/6" external>Refactor API routes and models</Link> - Simplified benchmark routes, added Matrix support, and improved error handling.</li>
+          <li><Link to="https://github.com/CIRISAI/CIRISNode/pull/8" external>Deferral System</Link> - Added new endpoints and automated tests for managing deferred tasks.</li>
+          <li><Link to="https://github.com/CIRISAI/CIRIS-Covenant.github.io/pull/3" external>added working /apply form</Link> - Built a client-side application form using the Next.js App Router for new contributors.</li>
+        </ul>
+      </details>
+      <ul className="feature-list">
+        <li>Improved structure, error handling, and security</li>
+        <li>Demo environment built for EEE backend</li>
+      </ul>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">Tech Talk Club — Full Sail</h3>
+      <ul className="feature-list">
+        <li>Weekly Agile standups</li>
+        <li>Peer code reviews and solution planning</li>
+      </ul>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">Game Jam — Fallen Knight: Requiem of Honor</h3>
+      <ul className="feature-list">
+        <li>Ranked #9 Artstyle — KAJAM 2023</li>
+        <li>Built gameplay systems under strict deadline</li>
+        <li><Link to="https://tech-talk-fs.itch.io/test-runner" external>Test Runner</Link> - Game Jam entry</li>
+      </ul>
+    </Card>
+  </div>
+</Section>
+
+<Section
+  eyebrow="Contributions - Section tags"
+  title="Organizer-friendly search terms"
+>
+  <div>Open Source Contributor, Team Contributor, Technical Projects, Academic Projects, Game Jam Contributor</div>
+</Section>

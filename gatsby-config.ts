@@ -5,11 +5,11 @@ const shouldAnalyseBundle = process.env.ANALYSE_BUNDLE;
 
 const config: GatsbyConfig = {
   siteMetadata: {
-    siteTitle: `Bradley's Portfolio`,
-    siteTitleAlt: `Bradley's Dev Blog & Portfolio`,
-    siteHeadline: `Bradley Matera - Web Developer Extraordinaire`,
-    siteUrl: `https://nimble-kringle-0fc65a.netlify.app`, // Your deployed site URL
-    siteDescription: `Showcasing user-centered web development, professional insights, and educational content by Bradley Matera, a Full Sail University Web Development student.`,
+    siteTitle: `Bradley Matera · Portfolio & Blog`,
+    siteTitleAlt: `Bradley Matera — Accessible web developer & AWS intern`,
+    siteHeadline: `Bradley Matera · Building accessible, cloud-ready web experiences`,
+    siteUrl: `https://bradleysgatsbyblog.netlify.app`,
+    siteDescription: `Insights, projects, and field notes from Bradley Matera — blending design systems, full-stack engineering, and AWS operations to ship inclusive products.`,
     siteImage: `/banner.jpg`,
     siteLanguage: `en`,
     author: `@bradleymatera`,
@@ -23,6 +23,8 @@ const config: GatsbyConfig = {
           { title: `Home`, slug: `/` },
           { title: `About`, slug: `/about` },
           { title: `Projects`, slug: `/projects` },
+          { title: `Roles`, slug: `/roles` },
+          { title: `Contributions`, slug: `/contributions` },
           { title: `Blog`, slug: `/blog` },
         ],
         externalLinks: [
@@ -113,6 +115,10 @@ const config: GatsbyConfig = {
       options: {
         trackingId: `G-V5RJ4522VW`, // Your Google Analytics Measurement ID
         head: true, // Ensures the script is loaded in the <head> section
+        respectDNT: true,
+        pageTransitionDelay: 0,
+        enableWebVitalsTracking: true,
+        cookieFlags: `SameSite=None;Secure`,
       },
     },
     {

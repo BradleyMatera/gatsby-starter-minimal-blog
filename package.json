@@ -16,6 +16,8 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
+    "@fontsource-variable/inter": "^5.1.0",
+    "@fontsource-variable/space-grotesk": "^5.1.0",
     "@lekoarts/gatsby-theme-minimal-blog": "^6.2.1",
     "@tailwindcss/postcss": "^4.1.4",
     "@theme-ui/color-modes": "^0.16.2",
