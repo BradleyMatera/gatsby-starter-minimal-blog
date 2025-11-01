@@ -1,229 +1,99 @@
-<p align="center">
-  <a href="https://minimal-blog.lekoarts.de">
-    <img alt="LekoArts" src="https://img.lekoarts.de/gatsby/gatsby-site-illustration.png" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby Starter: Minimal Blog
-</h1>
+# Bradley Matera · Portfolio & Blog
 
-<p align="center">
-  <a href="https://github.com/LekoArts/gatsby-starter-minimal-blog/blob/master/LICENSE">
-    <img src="https://img.shields.io/badge/license-0BSD-blue.svg" alt="Minimal Blog is released under the 0BSD license." />
-  </a>
-  <a href="https://github.com/sponsors/LekoArts">
-    <img alt="GitHub Sponsors" src="https://img.shields.io/github/sponsors/LekoArts">
-  </a>
-  <a href="https://www.lekoarts.de?utm_source=minimal-blog&utm_medium=Starter">
-    <img alt="Website" src="https://img.shields.io/badge/-website-blue">
-  </a>
-  <a href="https://twitter.com/intent/follow?screen_name=lekoarts_de">
-    <img src="https://img.shields.io/twitter/follow/lekoarts_de.svg?label=Follow%20@lekoarts_de" alt="Follow @lekoarts_de" />
-  </a>
-</p>
+Custom Gatsby site that powers Bradley Matera’s public portfolio, career pages, and MDX blog. The starter from LekoArts has been heavily shadowed to add bespoke layout blocks, richer navigation, and a tailored dark/light design system.
 
-Typography driven, feature-rich blogging theme with minimal aesthetics. Includes tags/categories support and extensive features for code blocks such as live preview, line numbers, and line highlighting. Using the Gatsby Theme [`@lekoarts/gatsby-theme-minimal-blog`](https://github.com/LekoArts/gatsby-themes/tree/main/themes/gatsby-theme-minimal-blog).
-
-[**Demo Website**](https://minimal-blog.lekoarts.de)
-
-Also be sure to check out other [Free & Open Source Gatsby Themes](https://themes.lekoarts.de) and my [Personal Website](https://www.lekoarts.de?utm_source=minimal-blog&utm_medium=Starter).
-
-## ✨ Features
-
-- MDX
-- Fully customizable through the usage of Gatsby Themes (and Theme UI)
-- Light Mode / Dark Mode
-- Typography driven, minimal style
-- Tags/Categories support
-- Code highlighting with [prism-react-renderer](https://github.com/FormidableLabs/prism-react-renderer). Also allows adding line numbers, line highlighting, language tabs, and file titles.
-- RSS Feed for blog posts
-- SEO (Sitemap, OpenGraph tags, Twitter tags)
-- WebApp Manifest
-
-## ⏱️ Quick Start
-
-Deploy this starter with one click on [Netlify](https://app.netlify.com/signup):
-
-[<img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify" />](https://app.netlify.com/start/deploy?repository=https://github.com/LekoArts/gatsby-starter-minimal-blog)
-
-## 🚀 Getting Started
-
-### 1. **Create a Gatsby site.**
-
-Use the Gatsby CLI to clone the site and install dependencies:
-
-```sh
-npx gatsby new gatsby-starter-minimal-blog https://github.com/LekoArts/gatsby-starter-minimal-blog
-```
-
-### 2. **Navigate to your new project.**
-
-```sh
-cd gatsby-starter-minimal-blog
-```
-
-### 3. **Open the code and start customizing!**
-
-Start the site by running `npm run develop`.
-
-Your site is now running at `http://localhost:8000`!
-
-If you want to learn more about how you can use a Gatsby starter that is configured with a Gatsby theme, you can check out this [shorter](https://www.gatsbyjs.com/docs/how-to/plugins-and-themes/using-a-gatsby-theme/) or [longer](https://www.gatsbyjs.com/tutorial/using-a-theme/) tutorial. The tutorials don't exactly apply to this starter however the concepts are the same.
-
-## 📝 Using and modifying this starter
-
-**Important Note:** Please read the guide [Shadowing in Gatsby Themes](https://www.gatsbyjs.com/docs/how-to/plugins-and-themes/shadowing/) to understand how to customize the underlying theme!
-
-This starter creates a new Gatsby site that installs and configures the theme [`@lekoarts/gatsby-theme-minimal-blog`](https://github.com/LekoArts/gatsby-themes/tree/main/themes/gatsby-theme-minimal-blog).
-
-Have a look at the theme's README and files to see what options are available and how you can shadow the various components including Theme UI. Generally speaking you will want to place your files into `src/@lekoarts/gatsby-theme-minimal-blog/` to shadow/override files. The Theme UI config can be configured by shadowing its files in `src/gatsby-plugin-theme-ui/`.
-
-### Code Highlighting
-
-Since the underlying theme ships with [prism-react-renderer](https://github.com/FormidableLabs/prism-react-renderer) certain additional features were added to code blocks. You can find an overview / usage example in the [example repository](https://github.com/LekoArts/gatsby-themes/tree/main/examples/minimal-blog/content/posts/fantastic-beasts-and-where-to-find-them/index.mdx)! If you want to change certain code styles or add additional language tabs, you need to shadow the file `src/@lekoarts/gatsby-theme-minimal-blog/styles/code.js`.
-
-**Language tabs:**
-
-When you add a language (such as e.g. `js` or `javascript`) to the code block, a little tab will appear at the top left corner.
-
-````
-```js
-// code goes here
-```
-````
-
-**Code titles:**
-
-You can display a title (e.g. the file path) above the code block.
-
-````
-```jsx title=your-title
-// code goes here
-```
-````
-
-Or without a specific language:
-
-````
-```none title=your-title
-// code goes here
-```
-````
-
-**Line highlighting:**
-
-You can highlight single or multiple (or both) lines in a code block. You need to add a language.
-
-````
-```js highlight=2,4-5
-const test = 3
-const foo = 'bar'
-const harry = 'potter'
-const hermione = 'granger'
-const ron = 'weasley'
-```
-````
-
-**Show line numbers:**
-
-If you want to show line numbers you can either globally enable them (see theme options) or on a block-by-block basis. You can also combine that with the other attributes.
-
-````
-```js withLineNumbers
-// code goes here
-```
-````
-
-### Adding content
-
-#### Adding a new blog post
-
-New blog posts will be shown on the index page (the three most recent ones) of this theme and on the blog overview page. They can be added by creating MDX files inside `content/posts`. General setup:
-
-1. Create a new folder inside `content/posts`
-1. Create a new `index.mdx` file, and add the frontmatter
-1. Add images to the created folder (from step 1) you want to reference in your blog post
-1. Reference an image as your `banner` in the frontmatter
-1. Write your content below the frontmatter
-1. Add a `slug` to the frontmatter to use a custom slug, e.g. `slug: "/my-slug"` (Optional)
-1. Use `defer` to opt-in into Deferred Static Generation (DSG) (optional)
-
-**Frontmatter reference:**
-
-```md
 ---
-title: Introduction to "Defence against the Dark Arts"
-date: 2019-11-07
-description: Defence Against the Dark Arts (abbreviated as DADA) is a subject taught at Hogwarts School of Witchcraft and Wizardry and Ilvermorny School of Witchcraft and Wizardry.
-defer: false
-tags:
-  - Tutorial
-  - Dark Arts
-banner: ./defence-against-the-dark-arts.jpg
-canonicalUrl: https://random-blog-about-curses.com/curses-counter-curses-and-more
+
+- **Live site:** https://bradleysgatsbyblog.netlify.app
+- **Tech focus:** Gatsby 5 · React 18 · TypeScript · Theme UI · Tailwind/PostCSS · MDX
+
 ---
+
+## Highlights
+
+- Opinionated homepage composed from reusable React sections (`HomeHero`, `Section`, `Card`, `ProjectCard`).
+- Role-specific landing pages (`/roles/...`) and project/contribution indexes driven by MDX.
+- Custom blog listing with keyword + tag filters, plus typography and accessibility tweaks on top of the upstream theme.
+- Express proxy (`projecthub-proxy`) that forwards ProjectHub chat requests to the xAI Grok API without exposing credentials.
+
+## Project Structure
+
+```
+├── content/                   # MDX sources (pages, roles, posts, assets)
+├── src/
+│   ├── components/            # Custom React components used across MDX
+│   │   ├── home/HomeHero.tsx
+│   │   └── ui/                # Sections, cards, links, etc.
+│   ├── @lekoarts/gatsby-theme-minimal-blog/
+│   │   ├── components/        # Shadowed theme components (layout, blog, post)
+│   │   └── texts/             # Homepage sections authored in MDX
+│   ├── styles/global.css      # Main design language applied site-wide
+│   └── utils/                 # Small helpers (e.g., `cx`)
+├── projecthub-proxy/          # Optional Node server for ProjectHub chat
+├── gatsby-config.ts           # Site metadata + plugin configuration
+├── tailwind.config.js         # Tailwind tokens used inside custom CSS
+└── docs/                      # Supplemental documentation for this repo
 ```
 
-**The fields `description`, `banner`, `defer` and `canonicalUrl` are optional!** If no description is provided, an excerpt of the blog post will be used. If no banner is provided, the default `siteImage` (from `siteMetadata`) is used. If no `canonicalUrl` is provided, it will not be included in the header.
+## Getting Started
 
-The `date` field has to be written in the format `YYYY-MM-DD`!
+Prerequisites: Node 18+ (Gatsby 5), npm or yarn.
 
-#### Adding a new page
-
-Additional pages can be created by placing MDX files inside `contents/pages`, e.g. an "About" or "Contact" page. You'll manually need to link to those pages, for example by adding them to the navigation (in `siteMetadata`). General instructions:
-
-1. Create a new folder inside `content/pages`
-1. Create a new `index.mdx` file, and add the frontmatter
-1. Write your content below the frontmatter
-1. Optionally add files/images to the folder you want to reference from the page
-1. Use `defer` to opt-in into Deferred Static Generation (DSG) (optional)
-
-**Frontmatter reference:**
-
-```md
----
-title: About
-slug: "/about"
-defer: false
----
+```bash
+npm install          # install dependencies
+npm run develop      # start Gatsby dev server at http://localhost:8000
+npm run build        # create production bundle in ./public
+npm run serve        # preview the production build locally
+npm run clean        # clear Gatsby caches
 ```
 
-### Changing the "Hero" text
+When running locally the theme forces the light palette. The color-mode toggle is currently disabled (`colormode-toggle.tsx` returns `null`) to avoid flicker; re-enable it if you want dark mode switching.
 
-To edit the hero text ("Hi, I'm Lupin...), create a file at `src/@lekoarts/gatsby-theme-minimal-blog/texts/hero.mdx` to edit the text.
+## Authoring Content
 
-### Changing the "Projects" part
+- Pages live in `content/pages/**/index.mdx`. They can import React components from `src/components/ui`.
+- Blog posts live in `content/posts/<slug>/index.mdx`. Each folder may include local assets (images, etc).
+- Frontmatter fields (`title`, `slug`, `date`, `tags`, `banner`, etc.) are consumed by the theme’s GraphQL queries.
+- The homepage pulls most copy from `src/@lekoarts/gatsby-theme-minimal-blog/texts/hero.mdx` and `texts/bottom.mdx`, with the main hero unit defined in `src/components/home/HomeHero.tsx`.
 
-To edit the projects part below "Latest posts", create a file at `src/@lekoarts/gatsby-theme-minimal-blog/texts/bottom.mdx` to edit the contents.
+See `docs/content-authoring.md` for detailed guidance on MDX structure, shortcodes, and imports.
 
-### Extending the footer of the post
+## Styling System
 
-Inside the [`<Post />` component](https://github.com/LekoArts/gatsby-themes/blob/main/themes/gatsby-theme-minimal-blog/src/components/post.tsx) there's also a `<PostFooter />` component that you can shadow to display elements between the end of the post and the global footer. By default it returns `null`. Create a file at `src/@lekoarts/gatsby-theme-minimal-blog/components/post-footer.jsx` to edit this section. The `<PostFooter />` component receives the complete `post` prop that `<Post />` also receives.
+There are three complementary layers:
 
-### Change your `static` folder
+1. **Theme UI theme overrides** (`src/@lekoarts/.../gatsby-plugin-theme-ui/index.ts`) redefine tokens, shadows, and component presets for the shadowed theme components.
+2. **Global CSS** (`src/styles/global.css`) establishes the visual system for navigation, cards, layouts, and typography—including the custom dark/light palettes.
+3. **Tailwind tokens** (`tailwind.config.js` + `src/components/style.css`) supply utility classes inside legacy components. Tailwind is processed through PostCSS using `@tailwindcss/postcss`.
 
-The `static` folder contains the icons, social media images and `robots.txt`. Don't forget to change these files, too! You can use [Real Favicon Generator](https://realfavicongenerator.net/) to generate the image files inside `static`.
+Refer to `docs/styling.md` for examples of where each layer applies and how to extend them safely.
 
-## 🤔 Questions or problems?
+## Development Notes
 
-If you have general questions or need help with Gatsby, please go to one of the [support platforms](https://www.gatsbyjs.com/contributing/community/#where-to-get-support) mentioned in Gatsby's documentation. If you have a specific question about this project, you can head to the [GitHub Discussions](https://github.com/LekoArts/gatsby-themes/discussions) of the repository.
+- **TypeScript:** `tsconfig.json` enables `strict` mode. Shadowed files from the theme remain `.tsx`; older helper components under `src/components` are still JavaScript.
+- **Analytics:** Google Analytics v4 is configured via `gatsby-plugin-google-analytics` with Measurement ID `G-V5RJ4522VW`.
+- **RSS + SEO:** The feed, sitemap, and manifest plugins reuse the metadata in `gatsby-config.ts`.
+- **Bundle inspection:** Set `ANALYSE_BUNDLE=1` before running `npm run build` to emit Statoscope reports under `public/.statoscope/`.
 
-## 🎓 Learning Gatsby
+Development workflow, testing, and deployment guidance lives in `docs/development.md`.
 
-Looking for more guidance? Full documentation for Gatsby lives [on Gatsby's website](https://www.gatsbyjs.com/).
+## ProjectHub Proxy (Optional)
 
-### Themes
+`projecthub-proxy/server.js` exposes `POST /api/chat` and relays requests to the xAI Grok API:
 
-To learn more about Gatsby themes specifically, I recommend checking out the [theme docs](https://www.gatsbyjs.com/docs/themes/).
+```bash
+XAI_API_KEY=<token> PORT=3000 node projecthub-proxy/server.js
+```
 
-### General
+Deploy it separately (e.g., Render, Fly, or a small EC2 instance) and point the ProjectHub front-end at the hosted endpoint. Rate limiting is set to 100 requests / 15 minutes; adjust as needed.
 
-- **For most developers, I recommend starting with the [in-depth tutorial for creating a site with Gatsby](https://www.gatsbyjs.com/docs/tutorial/).** It starts with zero assumptions about your level of ability and walks through every step of the process.
+## Additional Documentation
 
-- **To dive straight into code samples, head [to Gatsby's documentation](https://www.gatsbyjs.com/docs/).** In particular, check out the _How-to Guides_ and _Reference_ items in the primary navigation.
+Further detail is available under `docs/`:
 
-## 🌟 Supporting me
+- `docs/development.md` – local tooling, scripts, environment variables, and deployment recommendations.
+- `docs/content-authoring.md` – how to write MDX pages/posts, embed components, and manage assets.
+- `docs/styling.md` – explanation of Theme UI overrides, CSS architecture, and Tailwind usage.
+- `docs/architecture.md` – component map and data flow between the theme, custom UI, and content layers.
 
-Thanks for using this project! I'm always interested in seeing what people do with my projects, so don't hesitate to tag me on [Twitter](https://twitter.com/lekoarts_de) and share the project with me.
-
-Please star this project, share it on Social Media or consider supporting me on [GitHub Sponsors](https://github.com/sponsors/LekoArts)!
+Keep these files current when you change workflows or add new features so future contributors can ramp up quickly.
