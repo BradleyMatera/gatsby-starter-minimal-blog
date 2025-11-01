@@ -1,67 +1,51 @@
 ---
-title: "Lessons from My Amazon Internship: Troubleshooting at Scale"
-date: "2025-04-15"
-slug: "/amazon-internship-troubleshooting"
-tags: ["Career", "AWS", "Reliability", "Internship"]
-description: "What an AWS Cloud Support Engineer internship taught me about customer obsession, large-scale debugging, and communicating under pressure."
+title: "My AWS Internship: Learning Cloud Support the Right Way"
+date: "2025-08-01"
+slug: "/aws-internship-cloud-support"
+tags: ["AWS", "Internship", "Cloud Support", "DevOps", "AI", "Bedrock", "Q Business", "Career Growth"]
+description: "A training-first look at the AWS Cloud Support Associate internship—certifications, hands-on labs, and the capstone project that pulled it all together."
 ---
+
+Tags: #AWS #Internship #CloudSupport #DevOps #AI #Bedrock #QBusiness #CareerGrowth
 
 ## Introduction
 
-In spring 2025 I joined Amazon Web Services as a Cloud Support Engineer intern. Our team handled production incidents for customers building everything from CI/CD pipelines to machine learning workloads. The internship forced me to blend deep technical investigation with steady communication—every ticket represented a company under stress. This post distils the experience into the tools we used, the workflows that kept us aligned, and the lessons I am bringing into future reliability efforts.
+When I arrived in Seattle as a Cloud Support Associate (CSA) intern, the goal was clear: master AWS before ever touching a production workload. The twelve-week programme operated like a technical bootcamp, immersing us in certifications, structured service labs, and mentorship so we could think like AWS engineers. No live tickets, no customer data—just a deep dive into how the platform works and how to design with reliability in mind.
 
-## Tooling That Scales with Customers
+## Daily Rhythm at the Oscar Building
 
-| Tool | Purpose | Why it mattered |
-| --- | --- | --- |
-| Amazon CloudWatch | Centralised metrics, logs, alarms, and ServiceLens traces.[^cloudwatch] | Helped us separate symptom from cause when latency, throttling, or lambda errors surfaced. |
-| AWS CloudTrail | API activity history across accounts and regions.[^cloudtrail] | Made it possible to confirm when a customer (or automation) changed IAM permissions or deleted resources. |
-| AWS Trusted Advisor | Automated best-practice checks on cost, security, fault tolerance, and performance.[^trusted-advisor] | Offered quick wins—flagging underutilised instances or missing multi-AZ configurations before they escalated. |
-| SSM Session Manager | Secure shell access without opening inbound ports. | Allowed reproducible troubleshooting sessions with full audit trails. |
+Each day started with the walk to the Oscar building and a quick stand-up with mentors. Mornings were dedicated to learning blocks—guided modules, certification prep, and architectural reviews. Afternoons shifted into lab time where we applied the morning’s concepts by building and breaking mock environments. That cadence kept the focus tight: learn deliberately, then reinforce through hands-on practice.
 
-The key was to combine these signals rather than chase a single dashboard. A CloudWatch alarm might tell me latency spiked, but correlating the same window in CloudTrail often revealed an IAM policy edit that throttled access to a dependent service.
+## Weeks 1–7: Certification and Core Services
 
-## Working a High-Stakes Case
+The first half of the internship zeroed in on foundational skills:
 
-Trouble tickets followed a predictable arc:
+- **AWS Cloud Quest** (Cloud Practitioner & Solutions Architect) missions to solidify service fundamentals and best practices.  
+- **AI Practitioner preparation** with Amazon Bedrock and Q Business labs to understand generative AI integrations.  
+- **Linux and PSI fundamentals** covering permissions, shell scripting, and system introspection.  
+- **Networking and IAM deep dives** that mapped out architectures, routing decisions, and least-privilege policy design.  
+- **Compliance and automation modules** combining HIPAA/ASA requirements with CloudFormation exercises to emphasise governance and repeatability.
 
-1. **Intake and scoping.** Confirm the business impact, affected regions, and account IDs. Translate the customer’s narrative into clear reproduction steps.  
-2. **Hypothesis building.** Form a decision tree of causes—permissions, quotas, service limits, deployments, or infrastructure drift.  
-3. **Evidence gathering.** Pull CloudWatch metrics, inspect CloudTrail events, review IAM analyses, and, if warranted, establish a Session Manager shell for targeted log capture.  
-4. **Mitigate first, then optimise.** If the customer is down, find a safe workaround (revert a configuration, raise a quota, shift traffic). Document the workaround before moving on to the root cause.  
-5. **Document and communicate.** After the incident is stable, write a post-investigation summary referencing artefacts, mitigation steps, and follow-up actions.
+By the end of week seven we were expected to explain what each core service did, how it interacted with adjacent components, and why it belonged in a given architecture.
 
-During one escalation an enterprise customer reported failing blue/green deployments. We traced the issue to a recently tightened IAM condition that blocked CodeDeploy from assuming its role. Restoring the prior policy cleared the backlog within minutes; the long-term fix was to add a condition that still enforced MFA without breaking automation. The lesson: always validate IAM edits against automation roles before deploying to production.
+## Capstone Project: DynamoDB Metadata Extractor
 
-## Communication Under Pressure
+The final phase culminated in a capstone where every intern designed an AWS environment from scratch. My build focused on a cost-aware media metadata pipeline:
 
-Amazon’s leadership principles emphasise customer obsession and ownership.[^leadership] In practice that meant:
+- **Ingestion:** Users uploaded media assets into S3.  
+- **Processing:** Lambda functions extracted format, resolution, timestamps, and size details, storing results in DynamoDB.  
+- **Presentation:** A static HTML/CSS/JS dashboard surfaced the metadata in a clean, accessible interface.  
+- **Cost visibility:** Embedded pricing and usage metrics kept service spend transparent without leaving the app.
 
-- **Status updates every 30–60 minutes.** Even when we were still gathering data, short updates kept customers calm and showed progress.  
-- **Plain-language explanations.** Avoiding jargon helped customers relay updates to their own stakeholders.  
-- **Partnering across teams.** When an issue touched internal service teams (for example, an EC2 capacity shortage), we looped them in early and copied the customer on the joint plan.  
-- **Documenting reusable runbooks.** Any novel fix became the seed for a runbook entry, helping the next engineer solve it faster.
+The project reinforced Amazon’s emphasis on modular design, automation, and cost awareness—critical habits for anyone supporting cloud systems at scale.
 
-## Lessons I’m Bringing Forward
+## What I Learned
 
-- **Instrument everything.** Observability is not optional. I now treat metrics, structured logs, and tracing as first-class requirements in my own projects.  
-- **Reproduce locally when possible.** I built small Terraform/AWS SAM sandboxes mirroring customer environments so I could validate hypotheses safely.  
-- **Empathy accelerates resolution.** Customers mirror your tone; staying calm and collaborative keeps the focus on the fix.  
-- **Retrospectives matter.** Writing post-incident analyses helped codify patterns—misconfigured IAM conditions, expired TLS certificates, quota exhaustion—and informed proactive guidance for other customers.
+- **Service fluency:** Understanding how compute, storage, networking, security, and AI services interlock under the hood.  
+- **Safe automation:** Using CloudFormation and scripted workflows to provision and tear down environments predictably.  
+- **Operational awareness:** Monitoring cost, performance, and compliance signals as first-class metrics.  
+- **Clear communication:** Presenting architectures visually and verbally, tailoring technical depth to mentors and peers.
 
-## What’s Next
+## Takeaway
 
-The internship solidified my goal of working on cloud reliability teams. Since returning to my portfolio projects I’ve doubled down on:
-
-- Automating deployment checks with GitHub Actions to catch regressions before they hit production.  
-- Building self-serve runbooks that blend technical steps with communication templates.  
-- Expanding my AWS certifications to include the DevOps Engineer – Professional exam.
-
-Troubleshooting at scale is never just about the fix—it is about guiding people through uncertainty. The internship sharpened my ability to do both, and it continues to shape how I design and operate systems today.
-
-## References
-
-[^cloudwatch]: AWS Documentation, “What Is Amazon CloudWatch?,” accessed May 2025, https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html.  
-[^cloudtrail]: AWS Documentation, “What Is AWS CloudTrail?,” accessed May 2025, https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html.  
-[^trusted-advisor]: AWS Documentation, “AWS Trusted Advisor,” accessed May 2025, https://docs.aws.amazon.com/archives/trusted-advisor/latest/user/getting-started.html.  
-[^leadership]: Amazon, “Amazon’s Leadership Principles,” accessed May 2025, https://www.aboutamazon.com/about-us/leadership-principles.
+I finished the internship with multiple AWS certifications, a deployed serverless solution, and genuine fluency in cloud architecture, DevOps fundamentals, AI/ML integrations, and network troubleshooting. More importantly, I left understanding how AWS engineers approach problems—precise, curious, and relentlessly focused on reliability and scale. This programme wasn’t about customer tickets; it was about building the foundation to support the systems that make AWS run.
