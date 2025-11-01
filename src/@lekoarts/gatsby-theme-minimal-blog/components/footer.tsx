@@ -24,10 +24,10 @@ const Footer = () => {
           {description ? <p className="footer__description">{description}</p> : null}
           <div className="hero-actions">
             <Link data-variant="primary" to={replaceSlashes(`/${basePath}/projects`)}>
-              View projects
+              View project portfolio
             </Link>
             <Link data-variant="ghost" to={replaceSlashes(`/${basePath}/blog`)}>
-              Latest writing
+              Read latest blog posts
             </Link>
           </div>
         </div>

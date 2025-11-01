@@ -190,7 +190,7 @@ const Blog = ({ posts }: MBBlogProps) => {
               to={replaceSlashes(`/${basePath}/${tagsPath}`)}
               style={{ marginLeft: "auto" }}
             >
-              View all tags →
+              Browse all blog tags →
             </Link>
           </div>
         ) : null}

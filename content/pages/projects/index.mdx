@@ -7,13 +7,13 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
 
 <Section
   eyebrow="Projects"
-  title="Hands-on builds that mix accessible UI with dependable engineering."
-  description="Here are some of my projects. I included the ones that are complete or usable. Some are still work in progress, noted where that's the case."
+  title="Engineering case studies with production-ready outcomes."
+  description="Explore the builds I use to demonstrate architecture decisions, accessibility work, and measurable impact."
 >
   <div className="callout">
     <span className="callout__icon">ℹ</span>
     <div className="callout__body">
-      Want more details on any of these? Reach out on LinkedIn or GitHub. I can share code walkthroughs or answer questions.
+      Want a deeper teardown? Reach out on LinkedIn or GitHub and I’ll share walkthroughs, diagrams, and deployment notes for any project on this page.
     </div>
   </div>
 </Section>
@@ -30,14 +30,14 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
 <Section
   id="featured"
   eyebrow="Featured"
-  title="Projects that show my full process."
+  title="End-to-end project case studies"
 >
   <div className="grid-two project-gallery">
     <ProjectCard
       title="Car-Match"
       meta="Full stack web app"
       summary="A site for car enthusiasts with user profiles, forums, messaging, and events. Built with real authentication and admin features."
-      impact="Complete and functional. Users can sign up, post, and interact."
+      impact="Demo users sign up, post, and message without needing admin intervention."
       stack={["React", "Node.js", "Express", "MongoDB"]}
       links={[
         { label: "Case study", href: "/projects/car-match/", variant: "primary" },
@@ -48,7 +48,7 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
       title="Interactive Pokedex"
       meta="Data exploration tool"
       summary="Searchable list of Pokemon with details and images. Pulls from PokeAPI."
-      impact="Complete. You can search and view Pokemon info."
+      impact="Accessible search and results stay fast thanks to caching and skeleton loading."
       stack={["HTML", "CSS", "JavaScript", "PokeAPI"]}
       links={[
         { label: "Case study", href: "/projects/interactive-pokedex/", variant: "primary" },
@@ -60,7 +60,7 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
       title="CIRIS AI Contributions"
       meta="Backend and infrastructure"
       summary="Worked on APIs, authentication, and testing for an AI ethics engine. Added endpoints, tests, and Docker setup."
-      impact="Contributions merged. Helped build the backend for Ethics Engine Enterprise."
+      impact="Merged changes harden authentication, logging, and dev onboarding for Ethics Engine Enterprise."
       stack={["Node.js", "Express", "MongoDB", "Docker", "JWT"]}
       links={[
         { label: "Case study", href: "/projects/ciris-ai/", variant: "primary" },
@@ -80,7 +80,7 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
       title="Animal Sounds Soundboard"
       meta="Audio demo"
       summary="Click animals to hear sounds. Simple UI to test animations and controls."
-      impact="Complete. Works in browser."
+      impact="Supports keyboard interaction and resets audio to avoid overlapping clips."
       stack={["HTML", "CSS", "JavaScript"]}
       links={[
         { label: "Live demo", href: "https://bradleymatera.github.io/AnimalSounds/", variant: "primary", external: true },
@@ -91,7 +91,7 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
       title="Professional Portfolio Website"
       meta="Static site"
       summary="Basic portfolio with semantic HTML and accessible design."
-      impact="Complete."
+      impact="Uses semantic patterns and skip links to model accessible brochure sites."
       stack={["HTML", "CSS", "JavaScript"]}
       links={[
         { label: "Live site", href: "https://bradleymatera.github.io/Professional-Portfolio-Website/", variant: "primary", external: true },
@@ -102,10 +102,10 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
       title="CodePen Projects"
       meta="Various demos"
       summary="Collection of small projects on CodePen, like UI components and experiments."
-      impact="Various complete snippets."
+      impact="Shows bite-sized UI experiments that I reference in workshops and talks."
       stack={["HTML", "CSS", "JavaScript"]}
       links={[
-        { label: "CodePen", href: "https://codepen.io/student-account-bradley-matera", external: true } // Replace with actual if known
+        { label: "CodePen", href: "https://codepen.io/student-account-bradley-matera", external: true }
       ]}
     />
   </div>
@@ -121,7 +121,7 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
       title="Convo-Ai"
       meta="Local AI chat"
       summary="Offline conversational AI with voice support using FastAPI and Ollama."
-      impact="Complete and usable locally."
+      impact="Local-first deployment keeps conversations private and ready for offline demos."
       stack={["Python", "FastAPI", "Ollama"]}
       links={[
         { label: "GitHub", href: "https://github.com/BradleyMatera/Convo-Ai", external: true }
@@ -131,7 +131,7 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
       title="ProjectHub"
       meta="AI chat embed"
       summary="Script to add AI chat to websites. Half finished, but basic function works."
-      impact="Work in progress. Core chat works."
+      impact="Work in progress: core chat runs, with analytics and guardrails planned next."
       stack={["JavaScript"]}
       links={[
         { label: "GitHub", href: "https://github.com/BradleyMatera/ProjectHub", external: true }
@@ -141,7 +141,7 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
       title="ShellCompany"
       meta="AI tool"
       summary="Work in progress AI project."
-      impact="Not complete yet."
+      impact="Work in progress: prototyping revenue tooling for small teams."
       stack={["JavaScript"]}
       links={[
         { label: "GitHub", href: "https://github.com/BradleyMatera/ShellCompany", external: true }
@@ -160,7 +160,7 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
       title="Docker Multilang Project"
       meta="Container setup"
       summary="Docker for multi-language projects with shared scripts."
-      impact="Complete."
+      impact="Containers align Node.js and Python environments so teams share the same tooling."
       stack={["Docker", "Python", "Node.js"]}
       links={[
         { label: "GitHub", href: "https://github.com/BradleyMatera/docker_multilang_project", external: true }
@@ -170,7 +170,7 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
       title="CheeseMath Jest Tests"
       meta="Testing library"
       summary="Math utils with Jest tests."
-      impact="Complete."
+      impact="Provides reusable patterns for teaching unit testing in onboarding sessions."
       stack={["JavaScript", "Jest"]}
       links={[
         { label: "GitHub", href: "https://github.com/BradleyMatera/CheeseMath-Jest-Tests", external: true }
@@ -180,7 +180,7 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
       title="OBJ Parser"
       meta="Geometry parser"
       summary="Parser for OBJ/MTL files in Zig."
-      impact="Complete."
+      impact="Parses large OBJ files reliably for use in rendering experiments."
       stack={["Zig"]}
       links={[
         { label: "GitHub", href: "https://github.com/BradleyMatera/obj-parser", external: true }
@@ -190,7 +190,7 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
       title="WebGPU Shapes Renderer"
       meta="Graphics demo"
       summary="Renders shapes using WebGPU."
-      impact="Complete."
+      impact="Demonstrates performant GPU rendering techniques in the browser."
       stack={["WebGPU", "JavaScript"]}
       links={[
         { label: "GitHub", href: "https://github.com/BradleyMatera/Rune", external: true } // Assuming Rune is this

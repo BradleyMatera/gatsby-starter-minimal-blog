@@ -66,7 +66,7 @@ This report reflects the current state of Bradley Matera’s Gatsby-powered port
 
 ## 8. Opportunities
 
-- **Structured data:** add JSON-LD for Person and Article entities to improve search visibility.  
+- **Structured data:** Person schema now ships via the SEO component; add JSON-LD for individual articles and case studies to unlock rich snippets.  
 - **Project storytelling:** consider expanding remaining projects (e.g., Convo-Ai, ProjectHub) with similar deep-dive pages.  
 - **Image strategy:** when adding media, provide responsive `srcset` and descriptive alt text to retain accessibility gains.  
 - **Breadcrumbs:** long-form case studies or role pages could benefit from breadcrumb navigation for additional context.  

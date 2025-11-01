@@ -14,14 +14,14 @@ const HomeHero = () => (
           at Amazon where I troubleshot live environments and worked with real customer workloads.
         </p>
         <p className="hero-description">
-          Here are the tools and projects that show how I build fast, secure, and functional applications.
+          Explore the case studies, sprint retros, and tooling guides I use to deliver secure, accessible applications from discovery to deployment.
         </p>
         <div className="hero-actions">
           <Link data-variant="primary" to="/projects">
-            Explore featured projects
+            Browse project case studies
           </Link>
           <Link data-variant="ghost" to="/roles/cloud-engineer">
-            View engineering roles
+            Explore engineering role playbooks
           </Link>
         </div>
 

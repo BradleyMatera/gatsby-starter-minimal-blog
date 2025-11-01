@@ -30,6 +30,7 @@ description: "Short SEO summary"   # optional override
 - **Pages**: `slug` should include leading and trailing slashes (e.g., `/projects`). It feeds the navigation config defined in `gatsby-config.ts`.
 - **Posts**: The folder name becomes the slug unless overridden with `slug` frontmatter. Include ISO dates so GraphQL sorting works.
 - **Tags**: Tag names are title-case strings; they appear in the blog filter chips and per-post metadata.
+- **Description**: Write a concise 150–160 character summary. It becomes the meta description and powers the search and social preview text.
 
 ## Importing Components
 
