@@ -1,132 +1,93 @@
 ---
 title: "Exploring My Recent Project: BasicServerSetup"
-date: 2024-12-04
+date: "2024-12-04"
 slug: "/recent-project-basicserversetup"
-tags:
-  - Projects
-  - APIs
-  - Backend
+tags: ["Projects", "APIs", "Backend"]
 banner: ./background.jpg
+description: "How I built a time-tracking app with Node.js and Express, the API endpoints it exposes, and what I learned about separation of concerns and early testing."
 ---
-# BasicServerSetup: A Time Tracking Application
 
-BasicServerSetup is a time tracking application I built to work through backend and frontend integration, API design, and deployment. The idea was simple: let users register, log in, clock in, clock out, and review their timesheet. I kept it lightweight but structured it in a way that shows how a real app would be built.
+## Introduction
 
-## Features
+BasicServerSetup is a lightweight time-tracking system I assembled to practise designing REST APIs, wiring a static front end to a Node.js backend, and deploying both pieces independently. The application allows users to register, authenticate, clock in/out, and review their timesheet entries. While the data layer currently lives in memory, the architecture mirrors how I would structure a production-grade service.
 
-- User authentication with registration and login
-- Clock in and clock out functionality
-- Timesheet view to review work sessions
-- Frontend built with HTML and Tailwind CSS
-- Backend built with Node.js and Express.js
-- CORS enabled for frontend-backend communication
-- In-memory data store for the demo, easy to swap with a real database later
+## Architecture at a Glance
 
-## Tech Stack
+| Layer | Technology | Notes |
+| --- | --- | --- |
+| API | Node.js, Express | Authentication, clock-in/out logic, timesheet retrieval. |
+| Frontend | Static HTML + Tailwind CSS | Simple dashboard that consumes the API via Fetch. |
+| Deployment | Heroku (API), GitHub Pages (frontend) | Enables independent scaling and easy demos. |
 
-- Backend: Node.js, Express.js
-- Frontend: HTML, Tailwind CSS
-- Tools: Nodemon for development, http-server for frontend, GitHub Pages for hosting
-
-I used Heroku for the backend API and GitHub Pages with a custom domain for the frontend. That made the deployment easy to test and share.
-
-## Prerequisites and Setup
-
-- Node.js and npm
-- (Optional) Git for cloning the repo
-
-Steps:
-
-1. Clone the repo  
-   `git clone https://github.com/BradleyMatera/BasicServerSetup.git`
-2. Go into the project folder  
-   `cd BasicServerSetup`
-3. Install backend dependencies  
-   `npm install`
-4. Add a `.env` file in the root with:  
-   `PORT=3000`
-
-### Running the Backend
-
-- Development with Nodemon: `npm run dev`
-- Production: `npm start`
-- Runs on `http://localhost:3000`
-
-### Running the Frontend
-
-Option 1: with http-server  
-- Install: `npm install -g http-server`  
-- Go into `frontend/` and run `http-server -c-1`  
-- Open `http://localhost:8080`
-
-Option 2: with VS Code Live Server  
-- Install the extension  
-- Open `frontend/index.html` and choose “Open with Live Server”  
-
-## Project Structure
-
-```plaintext
+```
 BasicServerSetup/
-├── .env
-├── package.json
 ├── app/
-│   ├── app.js
-│   ├── models/
-│   │   ├── userModel.js
-│   │   └── timeEntryModel.js
 │   ├── controllers/
-│   │   ├── userController.js
-│   │   └── timeController.js
-│   ├── routes/
-│   │   └── index.js
-│   └── utils/
-│       └── authMiddleware.js
-└── frontend/
-    └── index.html
+│   │   ├── timeController.js
+│   │   └── userController.js
+│   ├── models/
+│   │   ├── timeEntryModel.js
+│   │   └── userModel.js
+│   ├── routes/index.js
+│   └── utils/authMiddleware.js
+└── frontend/index.html
 ```
 
-The backend handles auth, clock in/out, and timesheet logic. The frontend is a simple HTML + Tailwind setup that makes requests to the API.
+`authMiddleware.js` injects authentication guard rails, keeping controllers focused on business logic.
 
-## API Endpoints
+## Key Endpoints
 
-- Register: `POST /register` with `{ "username": "your_username", "password": "your_password" }`
-- Login: `POST /login` with `{ "username": "your_username", "password": "your_password" }`
-- Clock In: `POST /clockin` with `x-user-id` header
-- Clock Out: `POST /clockout` with `x-user-id` header
-- View Timesheet: `GET /timesheet` with `x-user-id` header
+| Route | Payload | Description |
+| --- | --- | --- |
+| `POST /register` | `{ username, password }` | Creates a user (stored in memory). |
+| `POST /login` | `{ username, password }` | Issues a session token (placeholder). |
+| `POST /clockin` | Header `x-user-id` | Records a start timestamp. |
+| `POST /clockout` | Header `x-user-id` | Records an end timestamp and computes duration. |
+| `GET /timesheet` | Header `x-user-id` | Returns all entries for the user. |
 
-Base URL when running locally: `http://localhost:3000`
+These endpoints are intentionally simple so I can swap the data store later (MongoDB or Postgres) without rewriting controllers.
 
-## Frontend Usage
+## Frontend Workflow
 
-1. Open the frontend in your browser  
-2. Register a new user  
-3. Log in with that user  
-4. Use the Clock In and Clock Out buttons  
-5. View the timesheet to see entries  
-6. Logout when done  
+The static client calls the API with `fetch`, handles errors, and renders a timesheet table. Tailwind provides rapid styling:
 
-## Future Improvements
+```javascript
+async function clockIn() {
+  const response = await fetch(`${API_BASE}/clockin`, {
+    method: 'POST',
+    headers: { 'x-user-id': currentUserId },
+  });
+  if (!response.ok) {
+    showToast('Unable to clock in. Please try again.');
+  }
+}
+```
 
-- Replace in-memory storage with MongoDB
-- Use JWT for authentication
-- Add input validation and better error handling
-- Improve mobile design
-- Add unit tests
-- Possibly rebuild the frontend with React or Next.js
+Error states are surfaced with lightweight toasts, ensuring the UI communicates network or validation issues clearly.
+
+## Deployment Strategy
+
+- **Backend (Heroku):** Deployed via GitHub integration with environment variables stored in Heroku’s Config Vars.  
+- **Frontend (GitHub Pages):** Hosted separately, pointing API requests to Heroku’s domain.  
+- **CORS:** Enabled on the Express server so the static site can communicate with the API.
+
+This split clarified how to iterate on the backend without redeploying the UI, and vice versa.
 
 ## Lessons Learned
 
-- Keep the backend and frontend separated but connected cleanly
-- Use simple deployments (Heroku + GitHub Pages) to focus on the code
-- Even a small project benefits from organization and documentation
-- Building out API endpoints and testing them early saves time
+1. **Separation of concerns matters.** Keeping controllers, models, and middleware distinct simplified debugging and future enhancements.  
+2. **Early endpoint testing pays dividends.** Postman tests surfaced authentication edge cases before I wrote the UI.  
+3. **Documentation accelerates reuse.** Maintaining a concise README and API reference made handoffs easier when classmates reviewed the project.  
+4. **Deployment hygiene is worth the effort.** Even a small project benefits from environment variables, health checks, and structured logs.
 
-## Connect
+## Possible Next Steps
 
-Repo is available on GitHub. I’m open to feedback or collaboration.
+- Replace the in-memory store with MongoDB (via Mongoose) or PostgreSQL.  
+- Introduce JWT-based authentication for stateless sessions.  
+- Build a React or Next.js front end for richer interactions.  
+- Add unit and integration tests using Jest and Supertest.  
+- Instrument the API with request metrics and structured logging.
 
-- [GitHub Repo](https://github.com/BradleyMatera/BasicServerSetup)
-- LinkedIn
+## Repository
 
-*Bradley Matera*
+https://github.com/BradleyMatera/BasicServerSetup

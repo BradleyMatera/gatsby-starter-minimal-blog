@@ -1,0 +1,82 @@
+---
+title: "Building Resilient, Cloud-Ready Web Experiences"
+date: "2025-06-23"
+slug: "/cloud-ready-web-experiences"
+tags: ["Architecture", "Accessibility", "DevOps", "Cloud"]
+description: "Principles and practices I follow to ship accessible, resilient applications that scale gracefully on modern cloud platforms."
+---
+
+## Introduction
+
+“Accessible, cloud-ready web experiences” is more than a tagline on my homepage—it is the north star for every project I ship. Accessibility ensures everyone can use what I build. Cloud readiness ensures the product withstands real-world load, failures, and operational constraints. This post outlines the pillars that unite those goals and the checklists I rely on before declaring an application production-ready.
+
+## Pillar 1: Accessibility First
+
+### Semantic Foundations
+- Use native HTML elements (`button`, `nav`, `main`) to provide structure out of the box.  
+- Wrap dynamic components with appropriate ARIA labels only when native semantics are insufficient.[^aria]
+
+### Inclusive Interactions
+- Guarantee keyboard navigation with logical tab order and visible focus states.  
+- Provide descriptive alt text and captions for multimedia.  
+- Validate colour contrast against WCAG 2.1 AA using tools such as axe-core and manual audits.[^wcag]
+
+### Performance for Everyone
+- Optimise bundle size and reduce layout shift so visitors on low-end devices are not penalised.  
+- Implement “prefers-reduced-motion” media queries for users sensitive to animation.
+
+## Pillar 2: Cloud-Ready Architecture
+
+### Design for Horizontal Scaling
+- Prefer stateless services behind load balancers (AWS ALB/ELB) to allow easy scaling.  
+- Externalise session state to Redis or DynamoDB so instances can be replaced without data loss.
+
+### Embrace Infrastructure as Code
+- Terraform and AWS CDK templates keep environments reproducible and align with the AWS Well-Architected Framework pillars of operational excellence and reliability.[^well-architected]  
+- Version-controlled IaC enables peer review before changes reach production.
+
+### Monitoring and Alerting
+- Instrument critical paths with structured logs (JSON) and correlate them in CloudWatch or OpenTelemetry collectors.  
+- Define SLOs/SLIs early—latency, error rate, throughput—and configure alerts before launch.
+
+## Pillar 3: Resilience and Recovery
+
+### Defensive Coding
+- Gracefully handle API failures with retries, exponential backoff, and circuit breakers.  
+- Model failure scenarios with chaos experiments or load tests to validate assumptions.
+
+### Progressive Delivery
+- Use feature flags and staged rollouts to detect regressions early.  
+- Automate rollbacks via GitHub Actions workflows that can be triggered manually or on health-check failure.
+
+### Disaster Readiness
+- Automate backups (database snapshots, S3 versioning) and rehearse restores quarterly.  
+- Document runbooks with play-by-play mitigation steps and communication templates.
+
+## Bringing It Together: Checklist
+
+| Category | Key Questions |
+| --- | --- |
+| Accessibility | Are headings logical? Do screen readers convey the correct order? Are focus indicators visible? |
+| Performance | Is the Largest Contentful Paint under target across devices? Have images been compressed and served via CDN? |
+| Reliability | Are there automated smoke tests post-deploy? Do CloudWatch alarms map to documented runbooks? |
+| Security | Are secrets stored in AWS Secrets Manager or GitHub Actions secrets? Are third-party scripts audited? |
+| Cost | Have budgets or alerts been configured to catch runaway spend? |
+
+## Case Study: Interactive Pokedex
+
+Applying these pillars resulted in a Pokedex app that:
+- Served static assets from CloudFront with Lambda@Edge caching.  
+- Stored API keys in AWS Secrets Manager and proxied requests through API Gateway.  
+- Passed automated axe accessibility checks and manual screen reader testing.  
+- Logged core events to CloudWatch, enabling dashboards for error tracking.
+
+## Conclusion
+
+Resilience, accessibility, and cloud readiness are intertwined. Design choices that serve one pillar often support the others—for example, semantic HTML aids accessibility and reduces JavaScript payloads, while stateless services improve scalability and recovery. By codifying these practices into checklists and pipelines, I ensure the experience remains robust as features evolve.
+
+## References
+
+[^aria]: W3C, “Using WAI-ARIA,” accessed May 2025, https://www.w3.org/WAI/ARIA/apg/practices/using-aria/.  
+[^wcag]: W3C, “Web Content Accessibility Guidelines (WCAG) 2.1,” accessed May 2025, https://www.w3.org/TR/WCAG21/.  
+[^well-architected]: AWS, “AWS Well-Architected Framework,” accessed May 2025, https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html.

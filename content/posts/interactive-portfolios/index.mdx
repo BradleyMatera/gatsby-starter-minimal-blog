@@ -1,0 +1,65 @@
+---
+title: "Interactive Portfolios: Balancing Fun with Recruiter Expectations"
+date: "2025-07-21"
+slug: "/interactive-portfolios-recruiter-expectations"
+tags: ["Portfolio", "Career", "UX"]
+description: "When and how to use interactive resumes and demos without overwhelming recruiters who still expect traditional application materials."
+---
+
+## Introduction
+
+I love building playful demos—single-page resumes with animated timelines, WebGPU canvases, and embedded code samples. They showcase technical range, but I learned the hard way that not every recruiter wants to explore an interactive playground. Many still expect a concise PDF and quick access to core qualifications. This post outlines how I balance both worlds: delighting curious reviewers without alienating busy hiring teams.
+
+## Why Interactive Experiences Still Matter
+
+- **Demonstrate front-end skills.** Interactive portfolios prove you can craft UI/UX, handle accessibility, and ship polished experiences.  
+- **Tell richer stories.** Animations and embedded demos make it easier to highlight outcomes, not just bullet points.  
+- **Stand out in niche roles.** Design, creative technology, and graphics positions often appreciate bespoke presentations.[^visualcv]
+
+## Common Pitfalls
+
+- **Maintenance overhead.** Interactive resumes require updates with every job change. Neglected demos hurt credibility.  
+- **ATS incompatibility.** Applicant tracking systems rarely parse single-page apps, so a plain PDF is still necessary.[^the-muse]  
+- **Accessibility gaps.** Fancy animation without keyboard support or alt text sends the wrong signal.  
+- **Decision fatigue.** Too many clickable elements can overwhelm a recruiter who just wants contact info and experience.
+
+## My Dual-Track Approach
+
+| Asset | Purpose | Content |
+| --- | --- | --- |
+| PDF résumé | ATS submission, quick review | One page, role-focused bullet points, quantifiable metrics. |
+| Interactive SPA | Portfolio deep dive | Animated sections, live demos, CTA to download the PDF, analytics instrumentation. |
+| Blog case studies | Context | Narrative breakdowns with architecture diagrams and lessons learned. |
+
+Every job application includes the PDF and a link to the interactive experience. The SPA explicitly states that the PDF remains the canonical résumé, and call-to-action buttons surface it within one click.
+
+## Designing Interactives with Recruiters in Mind
+
+1. **Prioritise navigation.** Sticky menus, skip links, and jump-to-section buttons make it easy to skim.  
+2. **Provide accessibility affordances.** Semantic HTML, ARIA labels, reduced motion settings, and high-contrast themes demonstrate empathy.  
+3. **Instrument usage.** Lightweight analytics show which sections get attention; I adjust layout accordingly.  
+4. **Offer context for each demo.** Explain the technology, problem solved, and role played so visitors are not guessing.  
+5. **Allow printing.** Custom CSS ensures the SPA renders cleanly when printed or saved as PDF.
+
+## When to Iterate or Retire a Demo
+
+- **Outdated tech stack.** If a project highlights libraries I no longer use, I archive it or append a note describing what I would do differently today.  
+- **Unclear value.** If analytics show a section has high exit rates, I either refine it or remove it.  
+- **Recruiter feedback.** After informational interviews, I update sections recruiters found confusing (for example, reducing jargon in tooltips).
+
+## Best Practices Checklist
+
+- Provide a PDF fallback and make it prominent.  
+- Include contact details in the first view—do not bury them behind animation.  
+- Document when the portfolio was last updated.  
+- Optimise load times; a sluggish SPA undermines the point.  
+- Test with screen readers and keyboard-only navigation.
+
+## Conclusion
+
+Interactive portfolios should amplify your story, not replace essential materials. By pairing polished demos with accessible design and recruiter-friendly PDFs, you can showcase creativity while respecting hiring workflows. Treat every interactive element as evidence of skill, backed by measurable outcomes and easy navigation.
+
+## References
+
+[^visualcv]: VisualCV, “Should You Make an Interactive Resume?,” accessed May 2025, https://www.visualcv.com/blog/interactive-resume/.  
+[^the-muse]: The Muse, “When (and When Not) to Use an Interactive Resume,” accessed May 2025, https://www.themuse.com/advice/when-and-when-not-to-use-an-interactive-resume.

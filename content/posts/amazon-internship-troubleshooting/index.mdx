@@ -1,0 +1,67 @@
+---
+title: "Lessons from My Amazon Internship: Troubleshooting at Scale"
+date: "2025-04-15"
+slug: "/amazon-internship-troubleshooting"
+tags: ["Career", "AWS", "Reliability", "Internship"]
+description: "What an AWS Cloud Support Engineer internship taught me about customer obsession, large-scale debugging, and communicating under pressure."
+---
+
+## Introduction
+
+In spring 2025 I joined Amazon Web Services as a Cloud Support Engineer intern. Our team handled production incidents for customers building everything from CI/CD pipelines to machine learning workloads. The internship forced me to blend deep technical investigation with steady communication—every ticket represented a company under stress. This post distils the experience into the tools we used, the workflows that kept us aligned, and the lessons I am bringing into future reliability efforts.
+
+## Tooling That Scales with Customers
+
+| Tool | Purpose | Why it mattered |
+| --- | --- | --- |
+| Amazon CloudWatch | Centralised metrics, logs, alarms, and ServiceLens traces.[^cloudwatch] | Helped us separate symptom from cause when latency, throttling, or lambda errors surfaced. |
+| AWS CloudTrail | API activity history across accounts and regions.[^cloudtrail] | Made it possible to confirm when a customer (or automation) changed IAM permissions or deleted resources. |
+| AWS Trusted Advisor | Automated best-practice checks on cost, security, fault tolerance, and performance.[^trusted-advisor] | Offered quick wins—flagging underutilised instances or missing multi-AZ configurations before they escalated. |
+| SSM Session Manager | Secure shell access without opening inbound ports. | Allowed reproducible troubleshooting sessions with full audit trails. |
+
+The key was to combine these signals rather than chase a single dashboard. A CloudWatch alarm might tell me latency spiked, but correlating the same window in CloudTrail often revealed an IAM policy edit that throttled access to a dependent service.
+
+## Working a High-Stakes Case
+
+Trouble tickets followed a predictable arc:
+
+1. **Intake and scoping.** Confirm the business impact, affected regions, and account IDs. Translate the customer’s narrative into clear reproduction steps.  
+2. **Hypothesis building.** Form a decision tree of causes—permissions, quotas, service limits, deployments, or infrastructure drift.  
+3. **Evidence gathering.** Pull CloudWatch metrics, inspect CloudTrail events, review IAM analyses, and, if warranted, establish a Session Manager shell for targeted log capture.  
+4. **Mitigate first, then optimise.** If the customer is down, find a safe workaround (revert a configuration, raise a quota, shift traffic). Document the workaround before moving on to the root cause.  
+5. **Document and communicate.** After the incident is stable, write a post-investigation summary referencing artefacts, mitigation steps, and follow-up actions.
+
+During one escalation an enterprise customer reported failing blue/green deployments. We traced the issue to a recently tightened IAM condition that blocked CodeDeploy from assuming its role. Restoring the prior policy cleared the backlog within minutes; the long-term fix was to add a condition that still enforced MFA without breaking automation. The lesson: always validate IAM edits against automation roles before deploying to production.
+
+## Communication Under Pressure
+
+Amazon’s leadership principles emphasise customer obsession and ownership.[^leadership] In practice that meant:
+
+- **Status updates every 30–60 minutes.** Even when we were still gathering data, short updates kept customers calm and showed progress.  
+- **Plain-language explanations.** Avoiding jargon helped customers relay updates to their own stakeholders.  
+- **Partnering across teams.** When an issue touched internal service teams (for example, an EC2 capacity shortage), we looped them in early and copied the customer on the joint plan.  
+- **Documenting reusable runbooks.** Any novel fix became the seed for a runbook entry, helping the next engineer solve it faster.
+
+## Lessons I’m Bringing Forward
+
+- **Instrument everything.** Observability is not optional. I now treat metrics, structured logs, and tracing as first-class requirements in my own projects.  
+- **Reproduce locally when possible.** I built small Terraform/AWS SAM sandboxes mirroring customer environments so I could validate hypotheses safely.  
+- **Empathy accelerates resolution.** Customers mirror your tone; staying calm and collaborative keeps the focus on the fix.  
+- **Retrospectives matter.** Writing post-incident analyses helped codify patterns—misconfigured IAM conditions, expired TLS certificates, quota exhaustion—and informed proactive guidance for other customers.
+
+## What’s Next
+
+The internship solidified my goal of working on cloud reliability teams. Since returning to my portfolio projects I’ve doubled down on:
+
+- Automating deployment checks with GitHub Actions to catch regressions before they hit production.  
+- Building self-serve runbooks that blend technical steps with communication templates.  
+- Expanding my AWS certifications to include the DevOps Engineer – Professional exam.
+
+Troubleshooting at scale is never just about the fix—it is about guiding people through uncertainty. The internship sharpened my ability to do both, and it continues to shape how I design and operate systems today.
+
+## References
+
+[^cloudwatch]: AWS Documentation, “What Is Amazon CloudWatch?,” accessed May 2025, https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html.  
+[^cloudtrail]: AWS Documentation, “What Is AWS CloudTrail?,” accessed May 2025, https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html.  
+[^trusted-advisor]: AWS Documentation, “AWS Trusted Advisor,” accessed May 2025, https://docs.aws.amazon.com/archives/trusted-advisor/latest/user/getting-started.html.  
+[^leadership]: Amazon, “Amazon’s Leadership Principles,” accessed May 2025, https://www.aboutamazon.com/about-us/leadership-principles.

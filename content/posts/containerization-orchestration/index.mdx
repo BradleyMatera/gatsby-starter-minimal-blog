@@ -1,0 +1,121 @@
+---
+title: "Beyond Hello World: Containerization and Orchestration"
+date: "2025-08-04"
+slug: "/containerization-and-orchestration"
+tags: ["Docker", "Kubernetes", "DevOps", "Infrastructure"]
+description: "How I progressed from single-container demos to multi-service deployments orchestrated with Docker Compose and Amazon EKS."
+---
+
+## Introduction
+
+My first Docker experiment ran “Hello World” in Python and Node.js containers. Useful, but it barely scratched the surface of real-world workloads. Over the past year I pushed further—building multi-service stacks, introducing persistent storage, and deploying to Amazon Elastic Kubernetes Service (EKS). This post documents that progression and the patterns I now apply when containerising applications for production.
+
+## From Single Containers to Compose
+
+I expanded the original project into a three-service stack:
+
+| Service | Role | Key Config |
+| --- | --- | --- |
+| `frontend` | React SPA served via Nginx | Multi-stage build to keep images small. |
+| `api` | Node.js/Express backend | Health checks, environment-based configuration. |
+| `db` | PostgreSQL | Persistent volume claim for data durability. |
+
+### docker-compose.yml Highlights
+
+```yaml
+version: "3.9"
+services:
+  api:
+    build: ./api
+    env_file: .env.api
+    depends_on: [db]
+    ports: ["4000:4000"]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4000/healthz"]
+      interval: 30s
+      retries: 3
+
+  frontend:
+    build:
+      context: ./frontend
+      target: production
+    ports: ["8080:80"]
+    depends_on: [api]
+
+  db:
+    image: postgres:15
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+volumes:
+  pgdata:
+```
+
+Compose made it easy to reproduce the stack locally and share a single command (`docker compose up`) with teammates.[^compose]
+
+## Observability and Resilience
+
+- **Structured logging.** All services log in JSON with correlation IDs, allowing Logstash or CloudWatch to aggregate requests.  
+- **Readiness vs. liveness probes.** The API exposes `/healthz` and `/ready` endpoints so orchestrators know when to route traffic.  
+- **Chaos drills.** I use `docker compose kill api` during tests to confirm the frontend handles errors gracefully.
+
+## Moving to Kubernetes (Amazon EKS)
+
+To test production-grade orchestration I deployed the stack to EKS:
+
+- **Infrastructure provisioning.** Terraform templates create the EKS cluster, node groups, VPC networking, and IAM roles.  
+- **Deployment manifests.** Each service has a Deployment, Service, and HorizontalPodAutoscaler. ConfigMaps store non-sensitive configuration; Secrets hold credentials.  
+- **Ingress.** AWS Load Balancer Controller provisions an Application Load Balancer with TLS termination.  
+- **Observability.** Prometheus scrapes metrics; Grafana dashboards track response times and resource utilisation. Fluent Bit ships logs to CloudWatch.
+
+### Sample Deployment Snippet
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+        - name: api
+          image: $ECR_URI/api:${GITHUB_SHA}
+          ports:
+            - containerPort: 4000
+          envFrom:
+            - secretRef:
+                name: api-secrets
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 4000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+```
+
+Horizontal pod autoscaling kept latency stable during load tests, and managed node groups simplified cluster upgrades.
+
+## Lessons Learned
+
+1. **Start with Compose, graduate to Kubernetes.** Compose is ideal for local development and can even power small deployments. Kubernetes introduces autoscaling, rolling updates, and self-healing when you need them.[^kubernetes]  
+2. **Keep images lean.** Multi-stage builds and distroless base images reduce attack surface and speed up deploys.  
+3. **Automate everything.** CI pipelines build images, run security scans (Trivy), push to ECR, and apply manifests via `kubectl` or Argo CD.  
+4. **Watch costs.** Managed clusters incur hourly charges; I use autoscaling groups with spot instances where appropriate.
+
+## Conclusion
+
+Moving beyond “Hello World” required embracing orchestration concepts: health checks, immutable releases, observability, and infrastructure as code. These patterns make container workloads maintainable whether they run on a laptop or an EKS cluster. The next frontier for me is service mesh experimentation (AWS App Mesh) and policy-as-code guardrails to enforce best practices automatically.
+
+## References
+
+[^compose]: Docker Documentation, “Overview of Docker Compose,” accessed May 2025, https://docs.docker.com/compose/.  
+[^kubernetes]: Kubernetes Documentation, “Production Considerations,” accessed May 2025, https://kubernetes.io/docs/setup/production-environment/.

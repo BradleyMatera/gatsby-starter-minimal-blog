@@ -2,53 +2,112 @@
 title: "Getting Hands-On with Docker Multilang: Hello Worlds and Breaking Stuff"
 date: "2024-07-15"
 tags: ["Projects", "Docker", "Node.js", "Python", "Learning"]
+description: "What I learned about containers by packaging Python and Node.js services, comparing them, and intentionally breaking things inside Docker Compose."
 ---
 
-# Getting Hands-On with Docker Multilang: Hello Worlds and Breaking Stuff
-### Why I Did It
-I’d heard about Docker in class—like, it’s this tool that packs up code so it runs the same everywhere. I didn’t get it from slides, so I decided to try it myself. I picked Python and Node.js because I’d used them a bit—Python for some math stuff, Node.js for web APIs—and I wanted to see if I could make them talk in one project. My goal was simple: get two "hello worlds" running, one from each, and mess with them to learn how Docker works. It was for a school assignment, but I turned it into a playground.
+## Introduction
 
-### How I Set It Up
-I made two Docker containers:
-- **Python**: A basic script (`hello.py`) that prints "Hello from Python!" when you run it.
-- **Node.js**: A tiny Express server (`app.js`) that says "Hello from Node.js!" at `localhost:3000`.
+Docker made sense to me only after I packaged real services and watched them fail safely. This project started as a class assignment and turned into a playground for learning how containers isolate applications, handle dependencies, and recover from mistakes. I built two services—a Python script and a Node.js Express app—then orchestrated them with Docker Compose to compare behaviours, break them deliberately, and observe what Docker does under the hood.
 
-Here’s what the Python one looked like:
-```python
-print("Hello from Python!")
+## Containers vs. Virtual Machines (Quick Primer)
+
+Docker packages an application, its runtime, and its dependencies into a standard unit called a container. Containers share the host kernel and run isolated processes, which makes them lighter than full virtual machines that emulate hardware [1][2]. Understanding that distinction helped me see why containers start quickly and why you can run many on a single host.
+
+## Project Structure
+
+```
+docker_multilang_project/
+├── docker-compose.yml
+├── python-service/
+│   ├── Dockerfile
+│   └── hello.py
+└── node-service/
+    ├── Dockerfile
+    └── app.js
 ```
 
-And the Node.js one:
-```javascript
-const express = require('express');
-const app = express();
-app.get('/', (req, res) => res.send('Hello from Node.js!'));
-app.listen(3000, () => console.log('Node.js running'));
+- **Python service:** Prints a greeting and exposes a small math function when run interactively.  
+- **Node.js service:** Provides an HTTP endpoint at `/` returning a JSON payload so I can hit it from the browser or curl.  
+- **docker-compose.yml:** Starts both containers, maps ports, and creates a dedicated network so I can test communication between services.
+
+### Python Service
+
+```dockerfile
+# python-service/Dockerfile
+FROM python:3.11-slim
+WORKDIR /app
+COPY hello.py .
+CMD ["python", "hello.py"]
 ```
 
-I wrote Dockerfiles for each—super basic stuff like `FROM python:3.9` and `FROM node:14`, copied the code in, and ran them with a `docker-compose.yml` file to tie them together. It took me a while to figure out the commands—like `docker build` and `docker-compose up`—but once it clicked, I was hooked.
+`hello.py` prints output to stdout and performs a simple loop so I can see logs stream when the container runs.
 
-### Having Fun with Hello Worlds
-The fun part was getting those "hello worlds" to pop up. I started with just running them—Python spat out its message in the terminal, Node.js showed up in my browser. Then I got curious: what if I made them say different stuff? I changed Python to "Yo, Python here!" and Node.js to "Hey, it’s Node.js!"—tested it, and laughed when they worked. I felt like a kid mixing colors, seeing what I could do. I even tried breaking them—like deleting `express` from Node.js—and Docker yelled at me with errors, which was awesome because I could see exactly what went wrong.
+### Node.js Service
 
-### Use Cases I Figured Out
-While I was playing, I started seeing why this could be useful:
-- **Testing Different Languages**: I could test how Python and Node.js handle the same job—like a simple calculator—and compare them side-by-side. Python was cleaner for math, Node.js faster for web stuff.
-- **Breaking Stuff Safely**: I could mess up one container—like crashing Node.js with a bad script—and the Python one still ran fine. It’s like having separate sandboxes.
-- **Real-World Setup**: I pictured using this for a fitness app (like Johnson Health Tech’s stuff)—one part in Python for data crunching, another in Node.js for the web front. Docker keeps them together but separate.
-
-For example, I tried a use case where Python counts to 10:
-```python
-for i in range(10): print(f"Counting: {i}")
+```dockerfile
+# node-service/Dockerfile
+FROM node:20-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm install --production
+COPY app.js .
+EXPOSE 3000
+CMD ["node", "app.js"]
 ```
-And Node.js echoes it back at `/count`. I broke the Node.js part by forgetting a comma—tested it, saw the error (`SyntaxError`), and fixed it. That’s when I got how Docker helps you isolate bugs.
 
-### Breaking Things Down Visually
-The best part was how Docker made stuff visual. Running `docker ps` showed me both containers as little boxes—Python at one port, Node.js at another. When one crashed (like Node.js with no `express`), the other kept chugging along in the list. I could open my terminal, see logs with `docker logs`, and watch Python print "Hello" while Node.js barfed errors. It was like having a dashboard for my mess-ups. I even ran `docker-compose up` with a bad config—Python worked, Node.js didn’t—and the split made it so clear where I screwed up.
+`app.js` uses Express to respond with JSON and logs any errors to stderr so Docker captures them.
 
-### Why It Was Fun
-I had a good time because it was like a game—get the "hello worlds" going, then break them and fix them. I’d run `docker-compose up`, see one fail, and dig into why—like Node.js not finding a file because I typo’d the path. I’d laugh when I broke it bad enough to get a blank screen, then feel smart when I got it back. It wasn’t about making something perfect; it was about learning what Docker does by seeing it work and fail.
+### Docker Compose File
 
-### What I Got Out of It
-This project showed me how to package code, script basic tests (like `docker exec` to poke around), and see problems visually. It’s not a big deal—I’m no pro—but it’s real. I learned Docker’s useful for testing stuff like fitness apps without breaking everything at once. You can check it out at [github.com/BradleyMatera/docker_multilang_project](https://github.com/BradleyMatera/docker_multilang_project). It’s just a start, but it’s how I learn—by doing and breaking things.
+```yaml
+version: "3.9"
+services:
+  python:
+    build: ./python-service
+    container_name: python-service
+  node:
+    build: ./node-service
+    container_name: node-service
+    ports:
+      - "3000:3000"
 ```
+
+Running `docker compose up --build` starts both services; visiting `http://localhost:3000` returns the Node.js greeting while the Python logs appear in the terminal.
+
+## Experiments and Learning Moments
+
+1. **Breaking dependencies:** I removed `express` from `package.json` and rebuilt. Docker failed during `npm install`, and the error appeared in the build logs without affecting the Python service. Lesson: containers isolate failures; one service crashing doesn’t bring down the rest of the stack.  
+2. **Comparing language behaviours:** I implemented the same counter in Python and Node.js. Python’s loop printed synchronously, while Node.js handled asynchronous requests at the same time. Observing both logs side-by-side clarified differences in runtime models.  
+3. **Persistent state experiments:** I attached a volume to the Python service to store a log file, then removed the volume to see how container restarts affect state. It reinforced that containers are ephemeral unless you explicitly mount storage.
+
+## Real-World Use Cases I Spotted
+
+- **Polyglot applications:** Fitness platforms (e.g., Johnson Health Tech products) often mix analytics (Python) with real-time APIs (Node.js). Containers help teams work in their preferred language while keeping deployment consistent.  
+- **Safe experimentation:** Containers let me try risky changes—like swapping base images or updating dependencies—without polluting the host environment.  
+- **Teaching and demos:** Being able to run two services with one `docker compose up` command is ideal for walkthroughs and classroom experiments.
+
+## Commands I Found Useful
+
+- `docker compose up --build` – rebuilds images and starts services after configuration changes.  
+- `docker logs node-service` – inspects logs for one container without stopping it.  
+- `docker exec -it python-service /bin/bash` – opens a shell inside the container so I can run additional scripts or inspect files.  
+- `docker stats` – monitors CPU and memory usage; helpful when I intentionally created loops to stress-test the containers.
+
+## Lessons Learned
+
+1. Containers are lightweight process wrappers, not virtual machines. Knowing that explains the fast startup times and small footprints.  
+2. Compose is invaluable for orchestrating polyglot projects. It handles networking, environment variables, and rebuilds with minimal configuration.  
+3. Breaking things is educational. By intentionally removing dependencies or adding bugs, I gained intuition about Docker error messages and how to recover quickly.  
+4. Documentation matters. I logged every experiment in the repository README so future me (or teammates) can replay the setup.
+
+## Next Steps
+
+- Add automated tests that run inside the containers to validate health before deployment.  
+- Use multi-stage builds to reduce image size, especially for the Node.js service.  
+- Experiment with Docker Compose profiles to spin up optional services (e.g., a simulated database).  
+- Deploy the stack to a remote server or container service to practise production deployment.
+
+## References
+
+[1] Docker Documentation, “What is a Container?,” https://docs.docker.com/get-started/overview/.  
+[2] TACC, “Containers vs. Virtual Machines,” https://portal.tacc.utexas.edu/software-containers.

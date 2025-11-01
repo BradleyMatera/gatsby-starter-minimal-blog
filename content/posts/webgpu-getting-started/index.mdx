@@ -1,0 +1,118 @@
+---
+title: "Getting Started with WebGPU: Harnessing the Power of the GPU"
+date: "2025-09-01"
+slug: "/webgpu-getting-started"
+tags: ["WebGPU", "Graphics", "Learning"]
+description: "A practical guide to building a simple WebGPU renderer, understanding the pipeline, and avoiding common pitfalls when transitioning from WebGL."
+---
+
+## Introduction
+
+WebGPU is the new graphics and compute API for the web, designed as the successor to WebGL with modern GPU features, lower CPU overhead, and first-class support for general-purpose compute workloads.[^mdn-webgpu] I dove into WebGPU while rebuilding my shapes renderer and learned a few lessons that anyone moving from Canvas or WebGL should know. This post shares the essentials: initialisation, pipeline setup, debugging tips, and next steps.
+
+## Initialising WebGPU
+
+```ts
+async function createDevice() {
+  if (!navigator.gpu) {
+    throw new Error("WebGPU not supported in this browser");
+  }
+
+  const adapter = await navigator.gpu.requestAdapter();
+  if (!adapter) {
+    throw new Error("No GPU adapter found");
+  }
+
+  return await adapter.requestDevice();
+}
+```
+
+- **Adapters vs. devices.** The adapter represents a physical or logical GPU; the device is your handle to create resources and command queues.  
+- **Feature negotiation.** Request optional features (e.g., `textureCompressionBC`) up front; fall back gracefully if unavailable.
+
+## Building the Render Pipeline
+
+```ts
+const pipeline = device.createRenderPipeline({
+  layout: "auto",
+  vertex: {
+    module: device.createShaderModule({ code: vertexShader }),
+    buffers: [{
+      arrayStride: 4 * 2, // 2 floats
+      attributes: [{ shaderLocation: 0, format: "float32x2", offset: 0 }],
+    }],
+  },
+  fragment: {
+    module: device.createShaderModule({ code: fragmentShader }),
+    targets: [{ format: presentationFormat }],
+  },
+  primitive: {
+    topology: "line-strip",
+    stripIndexFormat: "uint16",
+  },
+});
+```
+
+- **WGSL shaders.** WebGPU uses WGSL (WebGPU Shading Language) with strong validation, catching errors earlier than GLSL.  
+- **Topology control.** Switching topology from `triangle-list` to `line-list` or `line-strip` enabled wireframe rendering in my shapes project.  
+- **Auto layout.** Starting with `"auto"` is fine, but complex apps benefit from explicit pipeline layouts.
+
+## Rendering Loop Basics
+
+```ts
+const context = canvas.getContext("webgpu");
+context.configure({ device, format: presentationFormat });
+
+function frame() {
+  const commandEncoder = device.createCommandEncoder();
+  const textureView = context.getCurrentTexture().createView();
+
+  const pass = commandEncoder.beginRenderPass({
+    colorAttachments: [{
+      view: textureView,
+      loadOp: "clear",
+      clearValue: { r: 0.05, g: 0.08, b: 0.2, a: 1 },
+      storeOp: "store",
+    }],
+  });
+
+  pass.setPipeline(pipeline);
+  pass.setVertexBuffer(0, vertexBuffer);
+  pass.draw(vertexCount, 1, 0, 0);
+  pass.end();
+
+  device.queue.submit([commandEncoder.finish()]);
+  requestAnimationFrame(frame);
+}
+```
+
+Key concepts:
+- **Command encoder.** Records GPU commands; nothing happens until `queue.submit`.  
+- **Render passes.** Each pass clears buffers, binds pipelines, and issues draw calls.  
+- **RequestAnimationFrame.** The browser still orchestrates timing; keep work per frame minimal.
+
+## Debugging Tips
+
+- **Enable validation.** Chrome’s `chrome://flags/#enable-unsafe-webgpu` (when required) and Firefox Nightly’s WebGPU inspector catch validation issues.  
+- **Use `navigator.gpu.getPreferredCanvasFormat()`.** Hard-coding formats can break across devices.  
+- **Inspect shaders.** Syntax errors surface at pipeline creation; keep shaders in dedicated `.wgsl` files for better tooling.  
+- **Fallbacks.** Detect when WebGPU is unsupported and provide WebGL or static fallbacks to maintain reach.
+
+## Accessibility and UI Enhancements
+
+- Provide keyboard shortcuts to change shapes or toggle wireframes.  
+- Respect `prefers-reduced-motion` by disabling rapid camera sweeps.  
+- Expose ARIA labels for canvas controls so screen readers announce context.
+
+## Next Steps
+
+1. **Uniform buffers.** Animate transformations by updating matrices every frame.  
+2. **Compute shaders.** Experiment with particle systems or physics simulations to leverage WebGPU’s compute pipeline.  
+3. **Integration with WebGPU libraries.** Explore frameworks like `wgpu-matrix` or `regl-gpu` equivalents as they mature.
+
+WebGPU unlocks capabilities previously limited to native APIs like Vulkan, Metal, or Direct3D 12.[^webgpu-spec] With careful abstraction and accessible UI, it can power rich interactive experiences directly in the browser.
+
+## References
+
+[^mdn-webgpu]: MDN Web Docs, “WebGPU API,” accessed May 2025, https://developer.mozilla.org/docs/Web/API/WebGPU_API.  
+[^webgpu-spec]: W3C, “WebGPU Specification,” Editor’s Draft, accessed May 2025, https://gpuweb.github.io/gpuweb/.

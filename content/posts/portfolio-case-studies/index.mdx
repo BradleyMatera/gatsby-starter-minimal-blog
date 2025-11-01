@@ -1,0 +1,96 @@
+---
+title: "Merging CodePens and GitHub Projects into a Cohesive Portfolio"
+date: "2025-06-09"
+slug: "/portfolio-case-studies"
+tags: ["Portfolio", "Storytelling", "Career"]
+description: "How I organised dozens of CodePen demos and GitHub repos into narrative case studies that highlight outcomes instead of isolated experiments."
+---
+
+## Introduction
+
+When I started learning to code my portfolio was a chaotic wall of CodePen embeds and GitHub links. Recruiters rarely clicked past the first project because there was no connective tissue—no explanation of why each experiment mattered. Over the last year I reorganised those snippets into case studies that explain context, decisions, and results. Here’s the process I followed and the templates you can adapt.
+
+## Why Case Studies Beat Link Dumps
+
+- **Context over code.** Hiring managers want to understand the problem, constraints, and reasoning behind technical choices.[^nng-portfolios]  
+- **Evidence of iteration.** Grouping related experiments shows how ideas evolve (e.g., from a CodePen prototype to a production-ready feature).  
+- **Accessible storytelling.** Text summaries with clear headings guide busy reviewers better than auto-playing demos.
+
+## Step 1: Audit the Inventory
+
+I catalogued every artifact in a spreadsheet:
+
+| Column | Example |
+| --- | --- |
+| Project | WebGPU Shapes Renderer |
+| Asset Type | GitHub repo, CodePen demo |
+| Primary Skill | Graphics programming, performance profiling |
+| Outcome | Fixed index ordering bug, added accessibility controls |
+| Links | Repo URL, live demo, blog post |
+
+Tagging each project by skill and outcome made it obvious where stories overlapped. The WebGPU renderer, sound machine, and garbage collection demos, for example, all supported a broader theme of “learning through interactive experiments.”
+
+## Step 2: Define Narrative Buckets
+
+I grouped related work into themes:
+
+- **Learning by Experimentation.** CodePen demos that explore memory management, UI patterns, and audio.  
+- **Production Case Studies.** GitHub projects deployed to real users (Interactive Pokedex, BasicServerSetup).  
+- **Infrastructure & Automation.** Docker orchestration labs, GitHub Actions pipelines, and AWS IaC templates.
+
+Each theme received its own landing page section with an overview and links to deep dives.
+
+## Step 3: Write Story-Focused Summaries
+
+For each case study I follow a repeatable outline:
+
+1. **Context.** Who was the user? What pain point were we solving?  
+2. **Constraints.** Deadlines, resource limitations, security requirements.  
+3. **Approach.** Architecture diagrams, technology rationale, testing strategy.  
+4. **Outcomes.** Metrics, anecdotes, or lessons learned.  
+5. **Artifacts.** Repo links, demos, documentation.
+
+### Example: “Learning Through Play” Case Study
+- **Context:** Document how micro-projects taught me complex concepts faster than theoretical study alone.  
+- **Artifacts:** Garbage collection visualiser, React calculator, sound machine.  
+- **Outcome:** Led to a blog post and improved onboarding conversations with hiring managers.  
+- **Next steps:** Extend the series with WebAssembly experiments.
+
+## Step 4: Design for Scannability
+
+- **Use consistent visuals.** Each case study uses the same layout, typography, and call-to-action buttons for GitHub/CodePen links.  
+- **Highlight roles.** Labels like “Solo build” or “Team project” clarify responsibilities quickly.  
+- **Embed selective demos.** Instead of embedding every CodePen, I showcase one GIF and link out for deeper exploration.  
+- **Add TL;DR panels.** Summaries at the top help recruiters decide whether to dive deeper.
+
+## Step 5: Measure and Iterate
+
+I track clicks and reading time using privacy-friendly analytics. When recruiters consistently skipped long technical sections, I split them into “deep dive” tabs so the main narrative stays approachable. Feedback from mentors triggered additional revisions—e.g., adding success metrics (“Reduced deployment time by 60%”) instead of generic statements.
+
+## Templates You Can Reuse
+
+```markdown
+## Project Overview
+- **Role:** Solo developer  
+- **Timeframe:** Jan–Mar 2025  
+- **Problem:** <one-sentence goal>  
+- **Stack:** React, Node.js, AWS Lambda  
+
+## What I Delivered
+- Feature 1  
+- Feature 2  
+
+## Results
+- Metric 1  
+- Lesson learned
+```
+
+Publishing reusable templates lowers the barrier to keeping the portfolio current—every new project starts with the same skeleton.
+
+## Conclusion
+
+Consolidating CodePens and GitHub repos into narratives transformed my portfolio from a list of links into a coherent story. Recruiters now understand how experiments led to production-ready solutions, and I have a repeatable process for future projects. If you are curating your own portfolio, organise by outcomes, not technologies. A little storytelling goes a long way.
+
+## Reference
+
+[^nng-portfolios]: Nielsen Norman Group, “UX Portfolios: Managers Want Communicated Value,” accessed May 2025, https://www.nngroup.com/articles/ux-portfolios/.

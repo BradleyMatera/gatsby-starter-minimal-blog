@@ -1,0 +1,100 @@
+---
+title: "Automating Deployment with GitHub Actions and AWS"
+date: "2025-07-07"
+slug: "/github-actions-aws-automation"
+tags: ["CI/CD", "GitHub Actions", "AWS", "Automation"]
+description: "A breakdown of the GitHub Actions workflows I use to test, build, and ship applications to AWS with minimal manual intervention."
+---
+
+## Introduction
+
+Manual deployments are risky and slow. After a few late-night releases, I standardised on GitHub Actions for continuous integration and delivery across my projects. This post walks through the baseline workflow I apply to static sites, Node.js APIs, and containerised services running on AWS. It covers branching strategy, secret management, environment promotion, and observability.
+
+## Baseline Workflow
+
+```yaml
+name: CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+
+      - run: npm ci
+      - run: npm test
+      - run: npm run lint
+      - run: npm run build
+
+      - name: Sync front-end to S3
+        if: github.ref == 'refs/heads/main'
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl public-read --delete
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_REGION: us-east-1
+
+      - name: Invalidate CloudFront cache
+        if: github.ref == 'refs/heads/main'
+        uses: chetan/invalidate-cloudfront-action@v2
+        env:
+          DISTRIBUTION: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
+          PATHS: "/*"
+          AWS_REGION: us-east-1
+```
+
+Key features:
+
+- **Immutable builds.** `npm ci` ensures dependencies match `package-lock.json`.  
+- **Test gate.** The deploy steps run only when tests pass on the main branch.  
+- **Cache busting.** CloudFront invalidations keep users from being stuck with stale assets.
+
+## Managing Secrets and Environments
+
+- **GitHub Environments.** I use `staging` and `production` environments that require manual approval for critical branches. Secrets scoped to each environment (different S3 buckets, API endpoints) prevent cross-contamination.  
+- **OIDC Federation.** Wherever possible, I replace long-lived IAM keys with GitHub’s OpenID Connect provider so workflows assume an IAM role instead of storing secrets.[^oidc]  
+- **Parameter Store / Secrets Manager.** Sensitive configuration (API keys, JWT secrets) lives in AWS, and the workflow fetches them via the CLI when needed.
+
+## Deploying Serverless and Containers
+
+- **Lambda (SAM / Serverless Framework).** Additional steps run `sam build` and `sam deploy --no-confirm-changeset`, promoting artifacts through dev → staging → prod with change set approvals.  
+- **ECS or EKS.** Workflows build Docker images, push them to Amazon ECR, then trigger rolling updates via the AWS CLI (`aws ecs update-service`) or `kubectl rollout`.
+
+## Observability and Rollbacks
+
+- **Post-deploy smoke tests.** After deployment, a follow-up job hits `/healthz` endpoints and key user flows using Playwright or a lightweight curl script. Failures auto-trigger rollback jobs.  
+- **ChatOps notifications.** GitHub Actions emits status messages to Slack via webhooks, giving the team visibility into each stage.  
+- **Version tagging.** Successful deployments tag the commit (`vYYYY.MM.DD.N`) so we can correlate logs with specific releases.
+
+## Governance and Cost Control
+
+- **Branch protections.** Required status checks ensure no one merges without passing tests.  
+- **Cost awareness.** CloudWatch dashboards track S3 and Lambda usage post-deploy. If costs spike after a release, I can roll back or investigate quickly.  
+- **Drift detection.** Nightly workflows run `terraform plan` or `cdk diff` in read-only mode to surface manual changes.
+
+## Lessons Learned
+
+1. **Keep workflows modular.** Reusable actions (lint, test, deploy) make it easy to compose pipelines for new projects.  
+2. **Fail fast.** Early steps should validate formatting, dependencies, and secrets to avoid wasting minutes on builds that will never deploy.  
+3. **Document every step.** Each workflow resides alongside a README explaining required secrets, IAM roles, and rollback procedures.
+
+Automation does not eliminate operational responsibility, but it reduces toil and makes deployments predictable. The more I can trust the pipeline, the more I can focus on building features.
+
+## References
+
+[^oidc]: GitHub Docs, “Configuring OpenID Connect in GitHub Actions,” accessed May 2025, https://docs.github.com/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-github-actions.

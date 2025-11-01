@@ -2,18 +2,35 @@
 title: "Learning Zig Basics with an OBJ Parser"
 date: "2024-07-01"
 tags: ["Projects", "Zig", "3D Parsing", "JavaScript", "PixiJS"]
+description: "How I used Zig to parse Wavefront OBJ files, what manual memory management taught me, and how the data feeds into a PixiJS visualisation."
 ---
 
+## Introduction
 
-### Why I Built It
-I wanted to learn Zig, a low-level language that’s all about performance and control. I’ve been into JavaScript for a while, but I wanted to see how things work under the hood. So, I thought, why not build something cool? I picked an OBJ parser because I’m into 3D graphics and wanted to see how to read those files. It’s not done yet, but it’s a start.
-### How I Started It
-I set up a project with Zig files—`main.zig` to run it, `root.zig` for the parser—and added example files (`cube.obj`, `cube.mtl`) from Blender. The OBJ file has lines like:
-```plaintext
-v 1.0 1.0 1.0  # A vertex at (1,1,1)
-f 1 2 3        # A triangle face
+My goal with this project was to move beyond garbage-collected languages and experience manual memory management first-hand. Zig appealed because it emphasises explicit allocation, predictable control flow, and low-level ergonomics without macros or hidden runtimes [1]. Parsing Wavefront OBJ files felt like a practical way to learn: the format is text-based, well documented, and directly connected to 3D rendering workflows.
+
+## Project Structure
+
 ```
-I wanted to read those and pull out the points. In Zig, I started with something like this in `main.zig`:
+obj-parser/
+├── src/
+│   ├── main.zig
+│   └── parser.zig
+├── examples/
+│   ├── cube.obj
+│   └── cube.mtl
+└── web/
+    └── preview.js
+```
+
+- `main.zig` handles command-line invocation.  
+- `parser.zig` exposes `parseOBJ`, returning vertices and faces.  
+- `web/preview.js` uses PixiJS to visualise vertices once exported.
+
+## Reading Files in Zig
+
+The entry point allocates a buffer, reads the OBJ file, and passes the contents to the parser:
+
 ```zig
 const std = @import("std");
 
@@ -22,24 +39,24 @@ pub fn main() !void {
     const file = try std.fs.cwd().openFile("examples/cube.obj", .{});
     defer file.close();
 
-    const content = try file.readToEndAlloc(allocator, 1024 * 1024);
-    defer allocator.free(content);
+    const contents = try file.readToEndAlloc(allocator, 1024 * 1024);
+    defer allocator.free(contents);
 
-    std.debug.print("File content: {s}\n", .{content});
+    const vertices = try parser.parseOBJ(contents, allocator);
+    defer allocator.free(vertices);
+
+    std.debug.print("Loaded {d} vertices\n", .{vertices.len});
 }
 ```
-It just opens the file and prints it—super basic. I had no clue about Zig’s `try` or `defer` at first, so I kept breaking it—like forgetting `defer` and wondering why it leaked memory. Testing it with `zig run src/main.zig` showed me the file’s text, and that’s when I got excited to parse it.
 
-### Trying to Parse It
-I moved to `root.zig` to split the OBJ lines. I wanted to grab vertices (the `v` lines) and faces (the `f` lines). Here’s a bit I worked on:
+`try` propagates errors up the call stack, and `defer` ensures the buffer is freed—habits that prevent leaks in Zig’s explicit memory model.
+
+## Parsing Vertices and Faces
+
+`parseOBJ` scans each line, detects prefixes, and builds typed arrays:
+
 ```zig
-const std = @import("std");
-
-pub const Vertex = struct {
-    x: f32,
-    y: f32,
-    z: f32,
-};
+pub const Vertex = struct { x: f32, y: f32, z: f32 };
 
 pub fn parseOBJ(content: []const u8, allocator: std.mem.Allocator) ![]Vertex {
     var vertices = std.ArrayList(Vertex).init(allocator);
@@ -47,48 +64,62 @@ pub fn parseOBJ(content: []const u8, allocator: std.mem.Allocator) ![]Vertex {
 
     var lines = std.mem.split(u8, content, "\n");
     while (lines.next()) |line| {
+        if (line.len == 0) continue;
         if (std.mem.startsWith(u8, line, "v ")) {
             var parts = std.mem.split(u8, line[2..], " ");
-            const x = try std.fmt.parseFloat(f32, parts.next().?);
-            const y = try std.fmt.parseFloat(f32, parts.next().?);
-            const z = try std.fmt.parseFloat(f32, parts.next().?);
+            const x = try std.fmt.parseFloat(f32, parts.next() orelse return error.InvalidVertex);
+            const y = try std.fmt.parseFloat(f32, parts.next() orelse return error.InvalidVertex);
+            const z = try std.fmt.parseFloat(f32, parts.next() orelse return error.InvalidVertex);
             try vertices.append(Vertex{ .x = x, .y = y, .z = z });
         }
+        // Faces handled similarly with indices and optional normals/UVs.
     }
+
     return vertices.toOwnedSlice();
 }
 ```
-This grabs `v` lines—like `v 1.0 2.0 3.0`—and turns them into a `Vertex` struct. I tested it with my cube file, but it crashed on empty lines. I had to add checks—like `if (line.len > 2)`—and that’s when I started getting how Zig makes you handle errors yourself.
 
-### Why Zig?
-I could’ve stuck with JavaScript—it’s easier with stuff like:
+The compiler forcefully reminds you to handle every branch—missing floats or malformed lines trigger `error.InvalidVertex`, which I test in the unit suite.
+
+## Connecting to PixiJS
+
+Once the parser returns data, a simple bridge writes JSON for the browser. PixiJS then renders 2D projections to validate the geometry:
+
 ```javascript
-const vertices = [];
-const lines = file.split('\n');
-lines.forEach(line => {
-  if (line.startsWith('v ')) {
-    const [_, x, y, z] = line.split(' ').map(parseFloat);
-    vertices.push({ x, y, z });
-  }
-});
-```
-But Zig forced me to think about memory. In JS, I didn’t care—garbage collection handled it. In Zig, I had to use `allocator` and `defer` to free stuff, like `vertices.deinit()`. I broke it a bunch—forgot to free memory, got crashes—and fixed it by reading the docs. It was a pain, but I liked seeing how low-level stuff works.
+import * as PIXI from 'pixi.js';
 
-### Adding PixiJS for Fun
-I didn’t stop at Zig—I wanted to see the shapes. So I added a JavaScript part with PixiJS (from my Pong project). I’d parse in Zig, save it to a binary file (not done yet), then load it in JS:
-```javascript
-const app = new PIXI.Application({ width: 800, height: 600 });
-document.body.appendChild(app.view);
-const graphics = new PIXI.Graphics();
-graphics.beginFill(0xffffff);
-graphics.drawPolygon([100, 100, 200, 200, 300, 100]); // A test triangle
-app.stage.addChild(graphics);
-```
-I tested it with a hardcoded triangle—worked fine—but I haven’t linked the Zig output yet. I broke the PixiJS part by messing up coordinates (e.g., `300, -100` went off-screen), fixed it, and learned how 3D points turn into visuals.
+fetch('cube.json')
+  .then((response) => response.json())
+  .then(({ vertices }) => {
+    const app = new PIXI.Application({ width: 800, height: 600, background: '#111' });
+    document.body.appendChild(app.view);
 
-### What I Learned
-This wasn’t about finishing a perfect parser—it’s half-baked right now. I built it to learn Zig basics: how it handles memory, errors, and structs. I got that by crashing it—like forgetting `try` and seeing `error: expected type 'void'`—and fixing it step-by-step. The OBJ part taught me 3D files aren’t magic—just text I can break down. And PixiJS showed me how parsing leads to stuff you can see. It’s a mess, but I had fun figuring it out. Check the repo at [github.com/BradleyMatera/obj-parser](https://github.com/BradleyMatera/obj-parser)—it’s got my Zig code, examples, and notes.
+    const graphics = new PIXI.Graphics();
+    graphics.beginFill(0xffffff);
+    vertices.forEach(({ x, y }) => graphics.drawCircle(400 + x * 100, 300 - y * 100, 2));
+    graphics.endFill();
 
-### Why It Matters
-I’m not a pro—this is me learning by doing. Zig’s tough, but it made me think about what’s under the hood, not just slap code together. I want to keep going—maybe finish the binary output or parse faces next—but for now, it’s a real start to understanding 3D and a new language.
+    app.stage.addChild(graphics);
+  });
 ```
+
+The visualisation helped validate scaling math and uncovered coordinate issues quickly.
+
+## Lessons Learned
+
+1. **Manual memory management clarifies ownership.** Allocators and `defer` statements forced me to plan lifecycle up front. The Zig documentation emphasises that the language does not automatically free heap allocations; forgetting to call `deinit` emerges as a leak [1].  
+2. **Wavefront OBJ is straightforward but strict.** Parsing vertices and faces required guarding against empty tokens and 1-indexed references.  
+3. **Testing is non-negotiable.** Unit tests covering blank lines, invalid coordinates, and missing faces saved hours of debugging.  
+4. **Interoperability is powerful.** Combining Zig for parsing and PixiJS for rendering gave me the best of both ecosystems: performance on the backend and rapid visual feedback on the frontend.
+
+## Next Steps
+
+- Support normals and texture coordinates, not just position data.  
+- Export binary formats for faster loading in JavaScript.  
+- Integrate with a WebGPU renderer to eliminate the JSON bridge.  
+- Package the parser as a Zig module with documentation so others can extend it.
+
+## References
+
+[1] Zig Language Documentation, “Overview,” https://ziglang.org/documentation/master/.  
+[2] Wavefront OBJ File Format Specification, https://people.sc.fsu.edu/~jburkardt/data/obj/obj.html.

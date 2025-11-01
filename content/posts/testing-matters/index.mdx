@@ -1,0 +1,69 @@
+---
+title: "Why Testing Matters: From Jest to Integration Tests"
+date: "2025-09-29"
+slug: "/why-testing-matters"
+tags: ["Testing", "Quality", "DevOps"]
+description: "How I layer unit, integration, and end-to-end tests across front-end and back-end projects to ship changes with confidence."
+---
+
+## Introduction
+
+My earliest JavaScript projects shipped with minimal safety nets. A few `console.log` statements and manual clicks were all I had. That changed when a regression slipped into production and broke a friend’s demo. Since then I have invested in an end-to-end testing strategy—unit tests, integration tests, contract tests, and automated smoke tests. This post outlines the testing pyramid I rely on and the tooling that keeps my projects stable.
+
+## The Testing Pyramid in Practice
+
+| Layer | What it covers | Tools | Cadence |
+| --- | --- | --- | --- |
+| Unit tests | Pure functions, utilities, React hooks | Jest, Vitest | Run on every save via watch mode. |
+| Component tests | UI behaviour in isolation | React Testing Library, Storybook test runner | Run in CI and before merging UI changes. |
+| Integration tests | API endpoints, database interactions | Supertest, Prisma test DB, LocalStack | Run on every pull request. |
+| Contract tests | API request/response contracts | Pact, OpenAPI schema validation | Nightly or pre-release. |
+| End-to-end tests | Full user flows | Playwright, Cypress | Scheduled runs and pre-deploy smoke suites. |
+
+Unit tests are cheap and fast; end-to-end tests are slower but verify the full stack. Balancing both prevents brittle suites while still catching real-world failures.
+
+## Unit and Component Tests
+
+- **Utility functions.** Projects like CheeseMath rely on Jest snapshots and property-based testing to confirm edge cases (e.g., negative inputs, floating-point rounding).[^jest]  
+- **React components.** React Testing Library focuses on user behaviour: queries use accessible roles (`getByRole`, `getByLabelText`) rather than implementation details.[^rtl]  
+- **Mock strategy.** I mock network calls with MSW (Mock Service Worker) to exercise loading, success, and error states consistently.
+
+## Integration Tests
+
+- **API validation.** Supertest spins up Express apps in memory, calling routes with realistic payloads. Each test seeds an ephemeral PostgreSQL database (Docker container) and tears it down afterward.  
+- **AWS services.** LocalStack simulates S3, DynamoDB, and SNS so I can test infrastructure interactions without live AWS charges.  
+- **Data migrations.** Integration suites verify database migrations run cleanly, catching issues before deploys.
+
+## End-to-End Coverage
+
+- **Playwright flows.** Scripts cover authentication, CRUD operations, and accessibility spot checks (e.g., verifying focus order).  
+- **Visual diffs.** Percy integration detects unexpected UI shifts after CSS refactors.  
+- **Performance budgets.** Lighthouse CI runs in GitHub Actions, failing builds if LCP or CLS regress beyond thresholds.
+
+## Keeping Tests Fast and Reliable
+
+- **Parallelisation.** Workers are isolated with per-test databases (`test_db_${process.pid}`) to avoid cross-contamination.  
+- **Deterministic data.** Factories generate fixtures with predictable IDs, reducing flaky assertions.  
+- **Selective retries.** Only end-to-end tests get limited retries to mitigate transient network blips.  
+- **Continuous pruning.** I audit failing tests monthly and remove ones that duplicate coverage.
+
+## Automation Pipeline
+
+1. Pre-commit hooks run lint and unit tests.  
+2. Pull requests trigger the full suite (unit + component + integration).  
+3. Main branch merges kick off end-to-end tests and deploy previews.  
+4. Nightly jobs run contract tests against staging to catch breaking API changes before users do.
+
+## Lessons Learned
+
+- Tests are documentation. Reading them exposes the expected behaviour faster than scanning implementation code.  
+- Small, focused tests are easier to maintain than expansive “god tests.”  
+- Invest early. Retroactively adding tests is harder than building them alongside features.  
+- Include designers and PMs. Reviewing acceptance criteria together ensures tests capture real user needs.
+
+Comprehensive testing is the backbone of my deployment confidence. It lets me ship quickly, refactor boldly, and sleep through the night knowing automation will flag regressions before customers do.
+
+## References
+
+[^jest]: Jest Documentation, “Getting Started,” accessed May 2025, https://jestjs.io/docs/getting-started.  
+[^rtl]: Testing Library, “Guiding Principles,” accessed May 2025, https://testing-library.com/docs/guiding-principles.

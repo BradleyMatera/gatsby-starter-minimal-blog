@@ -1,184 +1,42 @@
 ---
 title: "Building a React CRUD App with AWS API Gateway"
-date: 2024-05-16
+date: "2024-05-16"
 slug: "/projects/react-anime-crud-app"
-tags:
-  - Projects
-  - React
-  - AWS API Gateway
-  - CRUD
+tags: ["Projects", "React", "AWS API Gateway", "CRUD"]
+description: "How I wired a React SPA to AWS API Gateway and Lambda, secured the endpoints, and handled rich character data with client-side filtering and error recovery."
 ---
 
-# Building a React Anime Characters Database
+## Introduction
 
-Welcome to the journey of creating my React CRUD application! This project integrates with AWS API Gateway and external anime APIs to create a comprehensive anime character database. Here's a detailed breakdown of how I built this project from scratch.
+Anime CRUD is a single-page React application that lets users catalogue characters, filter by roles, and pull reference data from the public Jikan API. The project demonstrates how a React front end can coexist with a serverless backend built on AWS API Gateway and Lambda. I deployed the UI to Vercel, proxied API requests to AWS, and focused on resilient data handling, security, and developer experience.
 
-🔗 **Live Demo**: [Anime Characters Database](https://cruddemo-one.vercel.app/)
+- **Live demo:** https://cruddemo-one.vercel.app/  
+- **Source code:** https://github.com/BradleyMatera/ReactJSMobileApp (private repo; structure summarised below)
 
----
+## Architecture Overview
 
-## Project Overview
+| Layer | Technology | Notes |
+| --- | --- | --- |
+| Frontend | React 18, Hooks, Vite/Webpack | Form handling, modals, filtering, optimistic updates. |
+| Backend | AWS API Gateway + Lambda (Node.js) | CRUD endpoints (`/characters`) storing records in DynamoDB. |
+| External data | [Jikan API](https://jikan.moe/) | Fetches trending anime metadata. |
+| Hosting | Vercel (frontend) + AWS | Vercel proxy routes API calls to API Gateway with custom headers. |
 
-This web application serves as a comprehensive anime character database with:
-1. Integration with my AWS API Gateway backend for character storage and management
-2. External data fetching from the [Jikan API](https://jikan.moe/) for popular anime information
-3. Complete CRUD (Create, Read, Update, Delete) functionality for character management
-
-Key features include:
-- Character management with detailed information (stats, voice actors, abilities)
-- Category filtering (hero, villain, support)
-- Popular anime showcase with ratings and episode information
-- Dynamic character search
-
----
-
-## Tech Stack
-
-- **Frontend**: React.js with Webpack
-- **Backend**: AWS API Gateway with Lambda functions
-- **API Integration**: Custom AWS API and Jikan API (MyAnimeList)
-- **Deployment**: Vercel for frontend hosting
-- **State Management**: React Hooks (useState, useEffect, useCallback)
-
----
-
-## User Interface
-
-### Application Layout:
-- A **responsive navbar** with search functionality and category filtering
-- A **character creation form** with detailed fields for comprehensive character data
-- A **character grid** displaying all characters with edit and delete functionality
-- A **popular anime section** showing current top-rated series
-
-### Highlights:
-The application features a clean, intuitive interface with an anime-inspired design that makes character management enjoyable and visually appealing.
-
----
-
-## Project Structure
-
-Here's how the app is organized:
-
-```plaintext
+```
 ReactJSMobileApp/
 ├── src/
-│   ├── App.js            # Main application component 
-│   ├── App.css           # Application styling
-│   ├── api.js            # API integration functions
-│   ├── index.js          # Application entry point
-│   ├── setupProxy.js     # API proxy configuration
-│   ├── hooks/            # Custom React hooks
-│   │   ├── useFetch.js   # Data fetching hook
-│   ├── components/       # UI components
-├── webpack.config.js     # Webpack configuration
-├── package.json          # Dependencies and scripts
-├── vercel.json           # Vercel deployment configuration
+│   ├── App.js           # Routes and layout
+│   ├── api.js           # REST client (Axios)
+│   ├── components/      # Cards, forms, modals
+│   └── hooks/
+│       └── useFetch.js  # Reusable data-fetching hook
+├── vercel.json          # Proxy configuration
+└── webpack.config.js    # Build pipeline
 ```
 
----
+## Securing the Serverless API
 
-## AWS API Integration
-
-I built a custom RESTful API using AWS API Gateway and Lambda functions:
-- GET /api/characters - Fetch all characters
-- GET /api/characters/:id - Fetch specific character
-- POST /api/characters - Create a new character
-- PUT /api/characters/:id - Update an existing character
-- DELETE /api/characters/:id - Remove a character
-
-The API is secured with an API key and handles complex character data including nested objects for stats, voice actors, and relationships.
-
----
-
-## React Features Implemented
-
-### Efficient Data Fetching with AbortController:
-
-```javascript
-useEffect(() => {
-  let isMounted = true;
-  
-  const fetchData = async () => {
-    try {
-      setLoading(true);
-      const data = await getCharacters();
-      
-      // Only update state if component is still mounted
-      if (isMounted) {
-        setCharacters(data);
-        setLoading(false);
-      }
-    } catch (error) {
-      if (isMounted) {
-        console.error('Error fetching characters:', error);
-        setError('Failed to load characters. Please try again later.');
-        setLoading(false);
-      }
-    }
-  };
-  
-  fetchData();
-  
-  // Cleanup function to prevent state updates after unmounting
-  return () => {
-    isMounted = false;
-  };
-}, []);
-```
-
-### Character Update Functionality:
-
-```javascript
-const handleUpdate = async (updatedCharacter) => {
-  try {
-    // First update in local state for immediate UI feedback
-    setCharacters(prevChars => 
-      prevChars.map(char => 
-        char.id === updatedCharacter.id ? updatedCharacter : char
-      )
-    );
-    
-    // Close the modal BEFORE the API call
-    setShowUpdateModal(false);
-    
-    // Then make the API call
-    await updateCharacter(updatedCharacter.id, updatedCharacter);
-    
-  } catch (error) {
-    console.error('Error updating character:', error);
-  }
-};
-```
-
-### Custom Filter Logic:
-
-```javascript
-const filterCharacters = useCallback(() => {
-  if (selectedCategory === 'all') {
-    return characters;
-  } else {
-    // Check both category and role fields
-    return characters.filter(character => 
-      (character.category && character.category.toLowerCase() === selectedCategory.toLowerCase()) ||
-      (character.role && character.role.toLowerCase() === selectedCategory.toLowerCase())
-    );
-  }
-}, [characters, selectedCategory]);
-```
-
-### Dynamic Form with Complex Data Structure:
-
-The form handles complex nested data including:
-- Character stats with sliders
-- Voice actor information
-- Comma-separated abilities lists
-- Japanese and English name variations
-
----
-
-## Deployment
-
-The application is deployed using Vercel with a custom configuration to handle API proxying:
+AWS API Gateway fronts five Lambda handlers (GET/POST/PUT/DELETE). Each route enforces an API key, throttling, and input validation:
 
 ```json
 {
@@ -187,63 +45,112 @@ The application is deployed using Vercel with a custom configuration to handle A
       "src": "/api/(.*)",
       "dest": "https://i0p044nu8c.execute-api.us-east-1.amazonaws.com/prod/$1",
       "headers": {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-        "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept, Authorization, x-api-key",
-        "x-api-key": "w5nPK8oNtVjhowDldi276O0dKa1BuyMcfZf8z960"
+        "x-api-key": "${API_GATEWAY_KEY}"
       }
     }
   ]
 }
 ```
 
-This configuration ensures seamless communication between the React frontend and AWS API Gateway backend.
+The key is injected at build time via Vercel environment variables, keeping secrets out of the client bundle. Lambda functions validate payloads, normalise category strings, and return structured errors so the front end can respond gracefully.
 
-The application is live at:
-- Primary URL: [https://cruddemo-one.vercel.app/](https://cruddemo-one.vercel.app/)
-- Alternate URL: [https://cruddemo-9g7w9btyn-bradleymateras-projects.vercel.app](https://cruddemo-9g7w9btyn-bradleymateras-projects.vercel.app)
+## Client-Side Data Flow
 
----
+### Fetching Characters
 
-## Challenges Overcome
+```javascript
+useEffect(() => {
+  let isMounted = true;
 
-1. **CORS Configuration**: I implemented a robust solution for handling cross-origin requests between my frontend and AWS API.
+  const fetchCharacters = async () => {
+    try {
+      setLoading(true);
+      const response = await api.get('/api/characters');
+      if (isMounted) {
+        setCharacters(response.data);
+      }
+    } catch (err) {
+      if (isMounted) {
+        setError('Unable to load characters right now.');
+      }
+    } finally {
+      if (isMounted) setLoading(false);
+    }
+  };
 
-2. **Complex Data Handling**: Created a system for managing nested character data with proper validation and error handling.
+  fetchCharacters();
+  return () => {
+    isMounted = false;
+  };
+}, []);
+```
 
-3. **API Security**: Implemented API key authentication to secure backend endpoints while maintaining frontend accessibility.
+The hook guards against state updates after unmounting, which prevents React warnings when navigating away mid-request.
 
-4. **Webpack Configuration**: Customized the webpack setup to handle proxying, build optimization, and development experience.
+### Optimistic Updates
 
-5. **Error Handling**: Built comprehensive error handling with fallbacks for network issues and API failures.
+```javascript
+const handleUpdate = async (character) => {
+  setCharacters((prev) =>
+    prev.map((item) => (item.id === character.id ? character : item))
+  );
+  setShowUpdateModal(false);
 
----
+  try {
+    await api.put(`/api/characters/${character.id}`, character);
+  } catch (error) {
+    setError('Could not save changes. Reverting.');
+    setCharacters((prev) => prevCache); // prevCache captured before optimistic update
+  }
+};
+```
 
-## Future Improvements
+By applying local changes first and rolling back on failure, the UI feels responsive even when Lambda cold starts add latency.
 
-1. **Authentication System**: Add user accounts for personalized character collections.
+### Filtering and Search
 
-2. **Advanced Filtering**: Implement multi-criteria filtering and sorting options.
+```javascript
+const filteredCharacters = useMemo(() => {
+  if (selectedCategory === 'all') return characters;
+  return characters.filter((character) => {
+    const category = character.category?.toLowerCase();
+    const role = character.role?.toLowerCase();
+    return category === selectedCategory || role === selectedCategory;
+  });
+}, [characters, selectedCategory]);
+```
 
-3. **Character Relationships**: Create visual relationship maps between characters.
+Combining `useMemo` with controlled inputs keeps the grid responsive even with large datasets.
 
-4. **Image Upload**: Add direct image upload functionality instead of URL references.
+## Integration with Jikan API
 
-5. **Offline Support**: Implement service workers for offline data access.
+The app fetches trending anime titles from Jikan once per session, caches the results in state, and displays the top twelve entries with ratings, episodes, and cover art. Jikan’s rate limits are generous, but the client respects `Retry-After` headers and handles 429 responses by backing off.
 
----
+## Deployment Notes
 
-## Conclusion
+- **Vercel proxying** avoids CORS preflight complexity; headers are set server-side.  
+- **Webpack customisations** provide path aliases and bundle analysis.  
+- **Environment management** uses `.env.production` and `.env.development` files loaded through Vercel’s Secrets UI and AWS Parameter Store respectively.
 
-Building this React application was an exciting journey into full-stack development with AWS services. The project demonstrates how modern React can be leveraged with cloud services to create responsive, dynamic web applications with complex data requirements.
+## Challenges and Resolutions
 
-The combination of React hooks for state management, AWS API Gateway for backend services, and Vercel for deployment created an efficient development workflow that allowed me to focus on building features rather than infrastructure.
+| Challenge | Resolution | Impact |
+| --- | --- | --- |
+| CORS errors between Vercel and API Gateway | Proxy routes in `vercel.json`; API Gateway configured with `Access-Control-Allow-*` headers | Stable cross-origin communication |
+| Exposing API keys in front-end | Injected `x-api-key` via Vercel server-side headers | Prevented client leaks | 
+| Managing nested character data | Built controlled forms with JSON schema validation | Reduced runtime errors | 
+| Slow cold starts | Added optimistic UI updates and loading skeletons | Improved perceived performance |
 
-Feel free to explore the [live application](https://cruddemo-one.vercel.app/) and check out the GitHub repository for the complete source code!
+## Future Enhancements
 
-Bradley Matera
+1. Add Cognito-based authentication so users manage personal lists.  
+2. Implement S3-backed image upload instead of relying on external URLs.  
+3. Introduce serverless Offline support with DynamoDB Streams and caching.  
+4. Replace Axios with the Fetch API and Suspense to simplify data flow.  
+5. Publish infrastructure as Terraform modules for repeatable environments.
 
-### Next Steps for Gatsby:
-- Use Gatsby's Image API to optimize character images
-- Add MDX for interactive code samples
-- Implement GraphQL to fetch blog metadata dynamically 
+## References
+
+- AWS, “Protecting REST APIs with API Keys,” https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-key.html.  
+- AWS, “Using AWS Lambda with Amazon API Gateway,” https://docs.aws.amazon.com/lambda/latest/dg/services-apigateway.html.  
+- Jikan Documentation, “Rate Limiting,” https://docs.api.jikan.moe/#section/Information/Rate-Limiting.

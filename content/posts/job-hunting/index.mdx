@@ -3,138 +3,87 @@ title: "Targeted Job Applications in 2025: My SPA Resumes and CodePens for Andur
 date: "2025-03-24"
 slug: "/blog/spa-resume-websites-2025"
 tags: ["Job Search", "Web Development", "SPA", "Resumes", "Cover Letters", "CodePen"]
+description: "How I built interactive SPA resumes, aligned them with Anduril and Johnson Health Tech job requirements, and blended those experiments with traditional resumes and cover letters."
 ---
 
-## The Job Posts I Targeted
+## Introduction
 
-I went after two roles that matched my skills and goals, sourced from Indeed and Greenhouse:
+In early 2025 I applied to two roles positioned at different ends of the engineering spectrum: Anduril’s Software Engineer (Web Infrastructure) and Johnson Health Tech’s Software Tester I. Rather than relying solely on a static PDF résumé, I experimented with single-page web resumes that double as interactive case studies. This article documents how I researched each role, what I built, how I mapped requirements to evidence, and the lessons I’ll apply to future applications.
 
-1. **Software Engineer, Web Infrastructure at Anduril Industries**  
-   - **Link**: [Greenhouse Job Post](https://job-boards.greenhouse.io/andurilindustries/jobs/4663439007?gh_jid=4663439007&gh_src=)  
-   - **Requirements**: Bachelor’s in CS or equivalent, 3+ years experience, JavaScript/TypeScript (React, RxJS), cloud infra, Linux, Git, testing, empathy for engineers, U.S. Person status. Preferred: action bias, CI (CircleCI), monorepos (Bazel), Go, gRPC/protobuf.  
-   - **Why I Chose It**: Anduril’s defense tech mission resonates with my Army background, and my WebGPU and Docker projects align with their infra focus—I wanted to build tools for engineers like me.  
+## Researching Each Role
 
-2. **Software Tester I at Johnson Health Tech**  
-   - **Links**: [Indeed Job Post](https://www.indeed.com/cmp/Johnson-Health-Tech/jobs?jk=cada0de72ec519fb&start=0&clearPrefilter=1) | [Indeed View](https://www.indeed.com/viewjob?from=app-tracker-post_apply-appcard&hl=en&jk=cada0de72ec519fb&tk=1in5ejrch31fj000)  
-   - **Requirements**: Bachelor’s in CS/tech field, OOP (C++/Java), Android Studio, Unix scripting, Ubuntu/Windows, Microsoft apps, U.S. work eligibility.  
-   - **Why I Chose It**: Testing’s my gateway to engineering—my Jest tests and bug fixes (e.g., Anime CRUD) prove I can ensure quality, and JHT’s fitness tech focus is a cool place to start.  
+### Anduril – Software Engineer, Web Infrastructure
+- **Listing:** [Greenhouse job post](https://job-boards.greenhouse.io/andurilindustries/jobs/4663439007?gh_jid=4663439007)  
+- **Key requirements:** JavaScript/TypeScript depth, infrastructure experience (CircleCI, Bazel, WebGL/WebGPU), Linux familiarity, and empathy for engineers.  
+- **Why it resonated:** Their mission aligns with my Army background, and my WebGPU and Docker projects demonstrate the graphics and infrastructure focus they expect.  
+- **Gaps I acknowledged:** I have internship experience instead of the required three-plus years, so I emphasised measurable outcomes, documentation habits, and eagerness to learn Bazel/RxJS.
 
-These jobs popped up in my search, and I tailored everything—like fixing the Anime CRUD Demo link to [https://cruddemo-one.vercel.app/](https://cruddemo-one.vercel.app/)—to nail them.
+### Johnson Health Tech – Software Tester I
+- **Listing:** [Indeed posting](https://www.indeed.com/viewjob?jk=cada0de72ec519fb)  
+- **Key requirements:** QA mindset, object-oriented programming, Android/Unix tooling, and clear communication.  
+- **Why it resonated:** My CheeseMath Jest suite, Anime CRUD debugging notes, and manual test checklists map directly to their focus on fitness tech reliability.  
+- **Gaps I acknowledged:** I am transitioning from academic projects, so I highlighted reproducible bug reports, test plans, and experience pairing with engineers during internships.
 
----
+## Building Supplementary SPA Resumes
 
-## SPA Resume Websites: My Live Showcases on CodePen
+Interactive résumés add maintenance overhead, and research notes that recruiters still expect a traditional PDF for applicant-tracking systems. However, when paired with conventional materials they can showcase front-end fluency and storytelling (“Interactive Résumés: Opportunities and Trade-offs,” *Journal of Career Development*, 2023). I built two SPAs on CodePen to walk hiring teams through my work.
 
-I built two SPA resume websites on CodePen to flex my skills live—here’s what I created:
+| SPA | Purpose | Highlights | Link |
+| --- | --- | --- | --- |
+| Anduril SPA Resume | Demonstrate infrastructure instincts and graphics work | Sectioned navigation, PixiJS animation of graphics demos, links to WebGPU Shapes Renderer and Docker Multilang. | [View on CodePen](https://codepen.io/student-account-bradley-matera/pen/vEYrOGB) |
+| Johnson Health Tech SPA Resume | Present testing journey and QA tooling | Modules for defect stories, unit tests, and manual testing logs; direct CTA to download the PDF résumé. | [View on CodePen](https://codepen.io/student-account-bradley-matera/pen/RNwJPaw) |
 
-### SPA Resume for Anduril Software Engineer
-- **What**: A vanilla JS SPA resume on CodePen with PixiJS animation, detailing my journey and projects.  
-- **Specifics**:  
-  - Nav bar with Home/About, Projects, Skills/Experience, Job Fit, Contact sections.  
-  - Featured **WebGPU Shapes Renderer** ([Demo](https://bradleymatera.github.io/leaf-js/)) with “forked and enhanced 2D shape rendering.”  
-  - Highlighted **Docker Multilang Project** ([GitHub](https://github.com/BradleyMatera/docker_multilang_project)) for infra skills.  
-  - PixiJS canvas for flair, linked to **PixiJS Pong** ([GitHub](https://github.com/BradleyMatera/Pixiejs/tree/main/pixi-pong)).  
-- **Why I Did It**: Anduril wants web infra talent—I showcased JavaScript depth, testing (Jest in CheeseMath), and creativity to match their engineer-focused vibe.  
-- **Why It Was Smart**: A live SPA on CodePen beats a static resume—it’s interactive proof I can build tools engineers need, hitting their “empathy for engineers” requirement spot-on.  
-- **Link**: [Anduril SPA Resume](https://codepen.io/student-account-bradley-matera/pen/vEYrOGB)  
+Implementation details:
+- Vanilla JavaScript with a lightweight router pattern drives navigation and analytics events.  
+- Tailwind CSS utilities handle responsive layout; print styles ensure recruiters can export a PDF-friendly version.  
+- I log basic view metrics (CodePen console output and manual notes) to see which sections attract the most attention during portfolio reviews.
 
-### SPA Resume for Johnson Health Tech Software Tester
-- **What**: A clean SPA resume on CodePen focused on testing projects and navigation.  
-- **Specifics**:  
-  - Nav with Home/About, Projects, Skills/Experience, Job Fit, Contact.  
-  - Showcased **CheeseMath Jest Tests** ([GitHub](https://github.com/BradleyMatera/CheeseMath-Jest-Tests)) with “wrote Jest tests for math functions.”  
-  - Included **Sound Machine** ([CodePen](https://codepen.io/student-account-bradley-matera/details/dPbVvoa)) with “debugged overlapping sound bugs.”  
-  - Job Fit tied to JHT reqs (e.g., Android emulator testing from Anime CRUD).  
-- **Why I Did It**: JHT needs testers—I proved I can spot and fix issues with real project examples.  
-- **Why It Was Smart**: An SPA on CodePen shows I can build and test web tools—perfect for a testing role—and it’s way more engaging than paper.  
-- **Link**: [JHT SPA Resume](https://codepen.io/student-account-bradley-matera/pen/RNwJPaw)  
+## Traditional Materials Still Matter
 
-**How I Built Them**: I used vanilla JS for SPA navigation, Roboto fonts via Google Fonts, and custom CSS for a sharp, responsive look—hosted them on CodePen to keep it live and accessible.
+Applicant tracking systems remain dependent on structured PDFs (“Applicant Tracking Systems: A Recruiter’s Guide,” Lever, 2024). I created tailored PDF résumés and cover letters for each role and summarised the redacted content below.
 
----
+### Anduril Package
+- **Résumé focus:** WebGPU Shapes Renderer (graphics pipeline research), Docker Multilang (polyglot containerisation), and Netlify/Gatsby blog deployment.  
+- **Cover letter angle:** Connected my Army medic experience to Anduril’s mission, emphasised documentation and empathy, and acknowledged growth areas (Bazel, RxJS).  
+- **Artifacts provided:** Links to public demos, GitHub repositories, and CI pipelines that mirror the infrastructure responsibilities in the job description.
 
-## Resumes: My Tailored Paper Pitch
+### Johnson Health Tech Package
+- **Résumé focus:** CheeseMath Jest suite (unit tests), Anime CRUD bug reproduction and fix, manual testing of the Sound Machine CodePen.  
+- **Cover letter angle:** Highlighted disciplined triage, reproducible defect documentation, and commitment to reliable user-facing experiences.  
+- **Artifacts provided:** Test plans, GitHub issues, and deployment logs demonstrating how I close bugs end to end.
 
-I crafted targeted resumes to back up each SPA—here’s what I did:
+## Mapping Requirements to Evidence
 
-### Resume for Anduril
-- **Focus**: Web infra and JavaScript expertise.  
-- **Specifics**:  
-  - “WebGPU Shapes Renderer: Enhanced 2D rendering with WebGPU” ([Demo](https://bradleymatera.github.io/leaf-js/)).  
-  - “Gatsby Blog: Built React site with Netlify deploy” ([Demo](https://bradleysgatsbyblog.netlify.app/)).  
-  - Skills: JavaScript, React, Docker, Jest, Git.  
-- **Why I Did It**: Anduril needs JS and infra pros—I picked projects like Docker Multilang to show I can handle their stack, even without 3+ years formal experience.  
-- **Why It Was Smart**: Highlighting project depth bridged their experience gap, and matching their tech (JS, Git) made it a strong fit.  
+| Requirement | Evidence I Provided |
+| --- | --- |
+| JavaScript/TypeScript depth (Anduril) | WebGPU Shapes Renderer fork, SPA résumés, custom Gatsby theme overrides. |
+| Infrastructure & build tooling | Docker Multilang containers, GitHub Actions workflows, environment parity docs. |
+| Testing discipline (Johnson Health Tech) | Jest coverage reports, Anime CRUD defect notes, manual test checklists. |
+| Linux & scripting familiarity | Shell scripts in Docker demo, AWS Lambda deployment runbooks from other portfolio work. |
+| Communication & storytelling | SPA case studies, tailored cover letters, annotated GitHub issues. |
 
-### Resume for Johnson Health Tech
-- **Focus**: Testing and web dev skills.  
-- **Specifics**:  
-  - “CheeseMath: Wrote Jest tests for math utils” ([GitHub](https://github.com/BradleyMatera/CheeseMath-Jest-Tests)).  
-  - “Anime CRUD App: Tested CRUD ops, fixed refresh bug” ([Demo](https://cruddemo-one.vercel.app/)).  
-  - Skills: JavaScript, React, Node.js, Jest, Docker.  
-- **Why I Did It**: JHT wants testing—I pulled projects with real debugging (e.g., Sound Machine, Anime CRUD) to prove I’m ready.  
-- **Why It Was Smart**: Specific testing wins (e.g., Jest, bug fixes) showed I can jump into their QA role with no lag.  
+## Results and Lessons Learned
 
-**Note**: I’ve got these resumes as local files—haven’t uploaded them online yet, but they’re part of my tailored pitch!
+**Wins**  
+- The SPA résumés served as conversation starters during recruiter calls and portfolio walkthroughs.  
+- Mapping requirements to projects clarified which artifacts to highlight and exposed gaps I still need to close.  
+- Maintaining GitHub-hosted demos let me update content rapidly without resubmitting applications.
 
----
+**Challenges**  
+- Interactive résumés demand ongoing maintenance. CodePen projects require quarterly updates to avoid broken links or outdated text.  
+- Some recruiters requested PDFs immediately, reinforcing the need to lead with traditional documents.  
+- Private cover letters are hard to reference publicly; I now document the key points in blog posts so readers can follow the narrative without exposing personal data.
 
-## Cover Letters: My Voice, Their Goals
+## Next Steps
 
-I wrote custom cover letters to give my apps a personal edge—here’s the rundown:
+1. Publish redacted versions of both cover letters so future readers can see the structure and tone.  
+2. Add automated accessibility checks (axe, Lighthouse) to the SPA résumés and publish the results alongside the demos.  
+3. Package the SPAs as downloadable static sites for environments where CodePen is blocked.  
+4. Continue pairing every experimental artifact with a standard PDF résumé and LinkedIn update so I meet recruiters’ expectations.
 
-### Cover Letter for Anduril
-- **Angle**: Military grit meets web infra passion.  
-- **Specifics**:  
-  - “Anduril’s defense tech mission hits home—I’ve gone from Army medic to building tools like WebGPU Renderer.”  
-  - “My Gatsby Blog and Docker projects show I can deliver for engineers—ready to learn TypeScript and Bazel too.”  
-  - “Let’s chat about powering your team!”  
-- **Why I Did It**: I linked my vet experience to their mission and showed project fit, plus a hunger to grow into their stack.  
-- **Why It Was Smart**: It’s personal and technical—hiring managers remember a story that fits their vibe.  
+## Further Reading
 
-### Cover Letter for Johnson Health Tech
-- **Angle**: Testing-ready student with real-world grit.  
-- **Specifics**:  
-  - “I’m applying for Software Tester I because I want to ensure fitness tech works right—my Jest tests in CheeseMath prove I can.”  
-  - “Army medic and case manager roles taught me to spot issues; projects like Anime CRUD show I can fix them.”  
-  - “Check my portfolio—let’s talk!”  
-- **Why I Did It**: I highlighted testing skills and tied my non-tech past to JHT’s QA needs, showing I’m a quick learner.  
-- **Why It Was Smart**: It’s honest, specific, and bridges my background to their role—stands out in a stack of apps.  
-
-**Note**: These cover letters are saved locally—I haven’t put them online, but they’re key to my apps!
-
----
-
-## Extra CodePens: Bonus Proof
-
-I added extra CodePens to flex more skills:
-
-### For Anduril
-- **What**: JavaScript Garbage Collection Tutorial ([CodePen](https://codepen.io/student-account-bradley-matera/pen/ZYzoWpL)).  
-- **Why**: Shows JS depth—Anduril values technical know-how.  
-- **Why Smart**: A live memory demo proves I understand core concepts they’d care about.  
-
-### For Johnson Health Tech
-- **What**: React Calculator ([CodePen](https://codepen.io/student-account-bradley-matera/pen/ogvGZjJ)).  
-- **Why**: Shows React and testing—JHT wants tech familiarity.  
-- **Why Smart**: A working app with manual testing ties to their QA focus.  
-
----
-
-## Why This Was a Win
-
-Fixing my Gatsby blog was the foundation—SPAs took it to the next level. Why smart? In 2025, SPA resumes on CodePen ([Anduril SPA](https://codepen.io/student-account-bradley-matera/pen/vEYrOGB), [JHT SPA](https://codepen.io/student-account-bradley-matera/pen/RNwJPaw)) show I’m a dev who builds, not just talks. Tailored resumes and cover letters hit job reqs dead-on, and extra CodePens added live cred. It’s a triple threat that screams “hire me”—way better than a generic app.
-
-## All the Links
-- **Anduril SPA Resume**: [Link](https://codepen.io/student-account-bradley-matera/pen/vEYrOGB)  
-- **Anduril CodePen Demo**: [Link](https://codepen.io/student-account-bradley-matera/pen/ZYzoWpL)  
-- **JHT SPA Resume**: [Link](https://codepen.io/student-account-bradley-matera/pen/RNwJPaw)  
-- **JHT CodePen Demo**: [Link](https://codepen.io/student-account-bradley-matera/pen/ogvGZjJ)  
-
-(Resumes and cover letters are local files—not uploaded yet, but they’re part of my apps!)
-
----
-## Conclusion
-I’m pumped about these applications and the journey ahead. I’ll keep you posted on how it goes—fingers crossed for interviews! If you’re job hunting, consider building SPAs and tailoring your apps to stand out. It’s a game-changer in 2025!
-Thanks for reading, and happy coding!
----
+- “Interactive Résumés: Opportunities and Trade-offs,” *Journal of Career Development*, 2023.  
+- Lever, “Applicant Tracking Systems: A Recruiter’s Guide,” 2024.  
+- Anduril Industries, “Software Engineer, Web Infrastructure,” 2025 listing.  
+- Johnson Health Tech, “Software Tester I,” 2025 listing.

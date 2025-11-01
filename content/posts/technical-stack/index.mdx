@@ -1,0 +1,73 @@
+---
+title: "My Technical Stack: Languages, Frameworks, Tools, and Specialties"
+date: "2025-04-28"
+slug: "/technical-stack-2025"
+tags: ["Technical Stack", "Tools", "Process"]
+description: "A guided tour of the languages, frameworks, cloud services, and workflows I rely on—and why they fit the problems I solve."
+---
+
+## Introduction
+
+My projects span front-end interfaces, serverless APIs, containerised services, and automation pipelines. Rather than chase every new framework, I invest in a stack that balances velocity, stability, and long-term maintainability. This post documents the core components of that stack, when I reach for each tool, and where I am experimenting next.
+
+## Languages I Reach for Daily
+
+| Language | Primary Use | Notes |
+| --- | --- | --- |
+| TypeScript | Front-end SPAs, Node.js APIs | Static typing, editor tooling, and `tsc` checks catch bugs early.[^typescript] |
+| JavaScript (ES2023) | Rapid prototypes, browser-first demos | Pairs with bundlers like Vite for fast iteration. |
+| Python | Automation, scripts, data tooling | Rich ecosystem for AWS scripting via `boto3` and quick CLI utilities. |
+| C# / Java | Strongly typed backends and interview prep | Reinforces OOP patterns; used in school projects and experiments. |
+| HTML & CSS | Semantic layouts, Tailwind/Tokens | Accessibility and responsive design fundamentals. |
+| PHP (legacy) | Maintenance work on inherited stacks | Keeps older client projects running while planning migrations. |
+
+The common thread is readability plus strong tooling. TypeScript, in particular, gives me confidence to refactor aggressively because compiler errors highlight blind spots before runtime.
+
+## Frameworks and Libraries
+
+- **React & Next.js.** My default for interactive UIs. Hooks, Suspense, and React Testing Library make state management and testing predictable.  
+- **Node.js + Express.** A thin layer for REST APIs and webhooks. Express middleware keeps auth, logging, and validation modular.  
+- **Vue & Angular (exploratory).** I periodically prototype features in these ecosystems to broaden my perspective on component architectures.  
+- **Tailwind CSS + CSS Modules.** Utility classes accelerate design systems while keeping outputs accessible.  
+- **jQuery (maintenance).** Legacy codebases still use it; understanding its patterns helps me plan incremental rewrites.
+
+## Cloud and DevOps Tooling
+
+| Capability | Services / Tools | Why it is in the stack |
+| --- | --- | --- |
+| Hosting & Compute | AWS (Lambda, ECS, EC2), Vercel, Netlify | Lambda and ECS cover serverless and container workloads; Vercel/Netlify ship front-ends quickly. |
+| Storage & Data | DynamoDB, PostgreSQL, MongoDB, S3 | DynamoDB for serverless apps, PostgreSQL for relational models, MongoDB for document-heavy data. |
+| Networking & Delivery | API Gateway, CloudFront, Nginx | API Gateway manages auth/rate limiting; CloudFront adds global caching; Nginx serves as an edge proxy. |
+| Observability | CloudWatch, OpenTelemetry, Sentry | Unified metrics/logs/traces plus alerting hooks. |
+| Infrastructure as Code | Terraform, AWS CDK, Serverless Framework | Declarative provisioning prevents configuration drift. |
+
+I aim for infrastructure that can scale horizontally with minimal manual intervention. Monitoring and IaC are non-negotiable on new projects.
+
+## Productivity and Collaboration
+
+- **Git & GitHub.** Feature-branch workflows, pull requests with checklists, and required status checks keep changes reviewable.  
+- **GitHub Actions.** Automates linting, testing, container builds, and deployments (see my CI/CD-focused post for deeper coverage).  
+- **Postman & Bruno.** Repeatable API collections for regression testing.  
+- **VS Code + Copilot Chat.** Tailored profiles per project, EditorConfig integration, and remote SSH sessions for cloud instances.  
+- **Linux (WSL & EC2).** A consistent terminal environment streamlines shell scripts and deployment tooling.
+
+## Specialties and Focus Areas
+
+1. **API design and authentication.** Building REST endpoints with predictable status codes, OpenAPI specs, and auth flows (JWTs, Cognito, OAuth 2.0).  
+2. **CI/CD automation.** GitHub Actions, CodeBuild, and cross-account deployments that ship safely on every merge.  
+3. **Distributed troubleshooting.** Log correlation, tracing, and load testing to keep systems stable.  
+4. **Low-cost architectures.** Right-sizing compute, caching aggressively, and leveraging serverless to minimise idle spend.  
+5. **Accessibility-first interfaces.** Semantic HTML, keyboard navigation, ARIA roles, and design tokens for contrast compliance.
+
+## Currently Exploring
+
+- **AWS Bedrock & SageMaker JumpStart** for responsible AI integrations.[^bedrock]  
+- **Infrastructure policy as code** (Open Policy Agent, AWS Config) to enforce guardrails from day one.  
+- **Edge rendering** via Next.js and Cloudflare Workers to reduce latency for global users.
+
+The stack will continue to evolve, but the underlying principles remain: choose tools with strong communities, invest in automation, and measure everything. That combination lets me ship reliably while staying curious about what comes next.
+
+## References
+
+[^typescript]: Microsoft, “TypeScript Handbook,” accessed May 2025, https://www.typescriptlang.org/docs/.  
+[^bedrock]: AWS Documentation, “What Is Amazon Bedrock?,” accessed May 2025, https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html.
