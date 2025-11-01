@@ -1,5 +1,6 @@
 import * as React from "react";
 import { HeadFC, Link } from "gatsby";
+import { useLocation } from "@reach/router";
 import Layout from "./layout";
 import Listing from "./listing";
 import useMinimalBlogConfig from "../hooks/use-minimal-blog-config";
@@ -28,21 +29,59 @@ export type MBBlogProps = {
 };
 
 const Blog = ({ posts }: MBBlogProps) => {
-  const { tagsPath, basePath } = useMinimalBlogConfig();
+  const { tagsPath, basePath, blogPath } = useMinimalBlogConfig();
+  const location = useLocation();
   const [query, setQuery] = React.useState("");
   const [activeTag, setActiveTag] = React.useState<string | null>(null);
 
   const tags = React.useMemo(() => {
-    const all = new Map<string, number>();
+    const all = new Map<
+      string,
+      {
+        name: string;
+        slug: string;
+        count: number;
+      }
+    >();
     posts.forEach((post) => {
       post.tags?.forEach((tag) => {
-        all.set(tag.name, (all.get(tag.name) ?? 0) + 1);
+        const existing = all.get(tag.slug);
+        if (existing) {
+          existing.count += 1;
+        } else {
+          all.set(tag.slug, { name: tag.name, slug: tag.slug, count: 1 });
+        }
       });
     });
-    return Array.from(all.entries())
-      .sort((a, b) => b[1] - a[1])
-      .map(([name, count]) => ({ name, count }));
+    return Array.from(all.values()).sort((a, b) => b.count - a.count);
   }, [posts]);
+
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const initialQuery = params.get("q") ?? "";
+    const initialTag = params.get("tag");
+    setQuery(initialQuery);
+    setActiveTag(initialTag);
+  }, []);
+
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    if (query) {
+      params.set("q", query);
+    } else {
+      params.delete("q");
+    }
+    if (activeTag) {
+      params.set("tag", activeTag);
+    } else {
+      params.delete("tag");
+    }
+    const search = params.toString();
+    const url = search ? `${location.pathname}?${search}` : location.pathname;
+    window.history.replaceState({}, "", url);
+  }, [query, activeTag, location.pathname]);
 
   React.useEffect(() => {
     const term = query.trim();
@@ -63,7 +102,7 @@ const Blog = ({ posts }: MBBlogProps) => {
   const filtered = React.useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
     return posts.filter((post) => {
-      const matchesTag = activeTag ? post.tags?.some((tag) => tag.name === activeTag) : true;
+      const matchesTag = activeTag ? post.tags?.some((tag) => tag.slug === activeTag) : true;
       if (!matchesTag) return false;
       if (!normalizedQuery) return true;
       const haystack = [post.title, post.description, post.excerpt, post.tags?.map((tag) => tag.name).join(" ")]
@@ -73,6 +112,14 @@ const Blog = ({ posts }: MBBlogProps) => {
       return haystack.includes(normalizedQuery);
     });
   }, [posts, query, activeTag]);
+
+  const handleTagLinkClick = (event: React.MouseEvent<HTMLAnchorElement>, tagSlug: string | null) => {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) {
+      return;
+    }
+    event.preventDefault();
+    setActiveTag(tagSlug);
+  };
 
   return (
     <Layout>
@@ -85,7 +132,16 @@ const Blog = ({ posts }: MBBlogProps) => {
       </header>
 
       <div className="surface-card surface-card--muted" style={{ marginBottom: "clamp(1.5rem, 3vw, 2.5rem)" }}>
-        <div className="search-bar" role="search">
+        <form
+          className="search-bar"
+          role="search"
+          onSubmit={(event) => {
+            event.preventDefault();
+            const formData = new FormData(event.currentTarget);
+            const value = formData.get("q");
+            setQuery(typeof value === "string" ? value : "");
+          }}
+        >
           <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24">
             <path
               fill="currentColor"
@@ -97,32 +153,37 @@ const Blog = ({ posts }: MBBlogProps) => {
           </label>
           <input
             id="blog-search"
+            name="q"
             type="search"
             placeholder="Search posts by topic, technology, or keyword"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
           />
-        </div>
+        </form>
         {tags.length > 0 ? (
           <div className="project-gallery__filters" style={{ marginTop: "1rem" }}>
-            <button
-              type="button"
+            <Link
+              to={replaceSlashes(`/${basePath}/${blogPath}`)}
               className="filter-pill"
               data-active={!activeTag}
-              onClick={() => setActiveTag(null)}
+              aria-current={!activeTag ? "page" : undefined}
+              onClick={(event) => handleTagLinkClick(event, null)}
             >
               All topics ({posts.length})
-            </button>
+            </Link>
             {tags.map((tag) => (
-              <button
-                key={tag.name}
-                type="button"
+              <Link
+                key={tag.slug}
+                to={replaceSlashes(`/${basePath}/${tagsPath}/${tag.slug}`)}
                 className="filter-pill"
-                data-active={activeTag === tag.name}
-                onClick={() => setActiveTag((current) => (current === tag.name ? null : tag.name))}
+                data-active={activeTag === tag.slug}
+                aria-current={activeTag === tag.slug ? "page" : undefined}
+                onClick={(event) =>
+                  handleTagLinkClick(event, activeTag === tag.slug ? null : tag.slug)
+                }
               >
                 {tag.name} ({tag.count})
-              </button>
+              </Link>
             ))}
             <Link
               className="card-link"
@@ -142,6 +203,14 @@ const Blog = ({ posts }: MBBlogProps) => {
           No posts match your filters yet. Try a different keyword or explore the tag directory.
         </p>
       ) : null}
+      <noscript>
+        <p className="section-lead" style={{ marginTop: "1.5rem" }}>
+          JavaScript is disabled, so interactive filtering is unavailable. Browse all tags instead:
+          <a className="card-link" href={replaceSlashes(`/${basePath}/${tagsPath}`)}>
+            View all tags →
+          </a>
+        </p>
+      </noscript>
     </Layout>
   );
 };

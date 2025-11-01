@@ -1,0 +1,87 @@
+---
+title: "Interactive Pokédex Case Study"
+slug: "/projects/interactive-pokedex"
+---
+
+import { Section, Card, AnchorNav, Link } from "../../../src/components/ui";
+
+<Section
+  eyebrow="Case Study"
+  title="Interactive Pokédex · Data-rich search UI powered by the PokéAPI"
+  description="Front-end project focused on accessible search, responsive layouts, and clean API integration for a public dataset."
+/>
+
+<AnchorNav
+  items={[
+    { id: "goal", label: "Goal" },
+    { id: "interface", label: "Interface design" },
+    { id: "engineering", label: "Engineering decisions" },
+    { id: "lessons", label: "Lessons & roadmap" },
+  ]}
+/>
+
+<Section id="goal" eyebrow="Why build it?" title="Helping learners explore Pokémon data quickly">
+  <p>
+    I used the PokéAPI to build a responsive interface that lets fans search Pokémon by name or ID, view stats, and inspect abilities without leaving the page. The goal was to practise data fetching, state management, and accessibility on a project with a playful vibe.
+  </p>
+</Section>
+
+<Section id="interface" eyebrow="Experience" title="Interface highlights">
+  <div className="grid-two">
+    <Card>
+      <h3 className="feature-card__title">Adaptive layouts</h3>
+      <ul className="feature-list">
+        <li>Card layout scales from mobile to desktop using CSS Grid.</li>
+        <li>Sticky search bar keeps primary action accessible.</li>
+        <li>High-contrast theme ensures text remains legible over sprite backdrops.</li>
+      </ul>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">Accessible interactions</h3>
+      <ul className="feature-list">
+        <li>Search input uses ARIA status messages to announce results for screen readers.</li>
+        <li>Keyboard navigation is supported across the entire interface.</li>
+        <li>Loading states rely on skeleton cards instead of spinner-only indicators.</li>
+      </ul>
+    </Card>
+  </div>
+</Section>
+
+<Section id="engineering" eyebrow="Implementation" title="Technical decisions">
+  <div className="grid-two">
+    <Card>
+      <h3 className="feature-card__title">Stack</h3>
+      <div className="project-card__stack">
+        <span>HTML5</span>
+        <span>CSS Grid</span>
+        <span>JavaScript</span>
+        <span>PokéAPI</span>
+      </div>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">Key patterns</h3>
+      <ul className="feature-list">
+        <li>Fetch wrapper caches requests to avoid duplicate network calls.</li>
+        <li>Error states provide human-friendly fallback messaging.</li>
+        <li>Utility helpers normalise API responses before rendering.</li>
+      </ul>
+    </Card>
+  </div>
+  <div className="card-actions">
+    <Link data-variant="primary" href="https://bradleymatera.github.io/Interactive-Pokedex/" external>
+      View live demo
+    </Link>
+    <Link href="https://github.com/BradleyMatera/Pokedex" external>
+      Inspect source
+    </Link>
+  </div>
+</Section>
+
+<Section id="lessons" eyebrow="Reflection" title="What changed and what's next">
+  <ul className="feature-list">
+    <li>Refined debounced search after discovering unnecessary API calls during user tests.</li>
+    <li>Added offline fallback messaging to handle API rate limits gracefully.</li>
+    <li>Future iteration: swap to a service worker to cache sprites locally.</li>
+    <li>Potential extension: compare Pokémon stats side-by-side for competitive planning.</li>
+  </ul>
+</Section>

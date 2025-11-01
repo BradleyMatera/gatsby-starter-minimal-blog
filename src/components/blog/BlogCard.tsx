@@ -29,18 +29,24 @@ const formatExcerpt = (excerpt: string, maxLength = 180) => {
 
 const BlogCard = ({ post, showTags = true }: BlogCardProps) => {
   const { tagsPath, basePath } = useMinimalBlogConfig();
+  const initial = post.title ? post.title.charAt(0).toUpperCase() : "•";
 
   return (
     <article className="blog-card">
-      <header>
-        <Link to={post.slug} className="blog-card__title">
-          {post.title}
-        </Link>
-        <div className="blog-card__meta">
-          <span>
-            <time dateTime={post.date}>{post.date}</time>
-          </span>
-          {typeof post.timeToRead === "number" ? <span>{post.timeToRead} min read</span> : null}
+      <header className="blog-card__header">
+        <span className="blog-card__avatar" aria-hidden="true">
+          {initial}
+        </span>
+        <div className="blog-card__heading">
+          <Link to={post.slug} className="blog-card__title">
+            {post.title}
+          </Link>
+          <div className="blog-card__meta">
+            <span>
+              <time dateTime={post.date}>{post.date}</time>
+            </span>
+            {typeof post.timeToRead === "number" ? <span>{post.timeToRead} min read</span> : null}
+          </div>
         </div>
       </header>
       <p className="blog-card__excerpt">{formatExcerpt(post.description || post.excerpt)}</p>

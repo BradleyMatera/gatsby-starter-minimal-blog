@@ -26,6 +26,7 @@ const config: GatsbyConfig = {
           { title: `Roles`, slug: `/roles` },
           { title: `Contributions`, slug: `/contributions` },
           { title: `Blog`, slug: `/blog` },
+          { title: `Contact`, slug: `/contact` },
         ],
         externalLinks: [
           { name: `LinkedIn`, url: `https://www.linkedin.com/in/bradmatera` },

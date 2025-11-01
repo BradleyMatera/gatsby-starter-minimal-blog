@@ -1,0 +1,87 @@
+---
+title: "CIRIS AI Backend Contributions"
+slug: "/projects/ciris-ai"
+---
+
+import { Section, Card, AnchorNav, Link } from "../../../src/components/ui";
+
+<Section
+  eyebrow="Case Study"
+  title="CIRIS AI · Ethics Engine Enterprise backend contributions"
+  description="Eight merged pull requests hardened authentication, benchmarking routes, and developer experience for the CIRIS AI Ethics Engine."
+/>
+
+<AnchorNav
+  items={[
+    { id: "context", label: "Context" },
+    { id: "work", label: "Key contributions" },
+    { id: "impact", label: "Impact" },
+    { id: "followup", label: "Follow-up" },
+  ]}
+/>
+
+<Section id="context" eyebrow="Team mission" title="Building trustable AI decisions">
+  <p>
+    CIRIS AI is developing an Ethics Engine that collects decision data from distributed AI systems. I joined to help mature the Node.js backend, enforce secure defaults, and lay the groundwork for automated testing before expanding the contributor pool.
+  </p>
+</Section>
+
+<Section id="work" eyebrow="Engineering work" title="Highlights from eight merged pull requests">
+  <div className="grid-three">
+    <Card>
+      <h3 className="feature-card__title">Authentication & security</h3>
+      <ul className="feature-list">
+        <li>Implemented JWT verification with rotation-ready signing keys.</li>
+        <li>Added request logging + correlation IDs to trace decisions.</li>
+        <li>Locked down deferral routes so only whitelisted actions pass validation.</li>
+      </ul>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">Matrix & DID integration</h3>
+      <ul className="feature-list">
+        <li>Extended benchmarking routes to post events into the Matrix room.</li>
+        <li>Issued Decentralized Identifiers (DIDs) to map AI agents to audit logs.</li>
+        <li>Added failure handling so upstream outages fail safe.</li>
+      </ul>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">Developer experience</h3>
+      <ul className="feature-list">
+        <li>Docker Compose setup for backend + Matrix + MongoDB.</li>
+        <li>51 automated tests cover routing and data-path variants.</li>
+        <li>Documentation for onboarding, environment variables, and smoke tests.</li>
+      </ul>
+    </Card>
+  </div>
+</Section>
+
+<Section id="impact" eyebrow="Outcomes" title="Impact across the team">
+  <div className="grid-two">
+    <Card>
+      <h3 className="feature-card__title">Stability</h3>
+      <p className="feature-card__body">
+        API error rates dropped after adding validation, logging, and circuit-breaker logic. Contributors now receive actionable logs when downstream services fail.
+      </p>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">Momentum</h3>
+      <p className="feature-card__body">
+        The demo environment allowed non-backend teammates to exercise flows quickly, which accelerated feature vetting and stakeholder demos.
+      </p>
+    </Card>
+  </div>
+  <div className="card-actions">
+    <Link data-variant="primary" href="https://github.com/CIRISAI/CIRISNode/pulls?q=is%3Apr+author%3ABradleyMatera" external>
+      Review merged pull requests
+    </Link>
+  </div>
+</Section>
+
+<Section id="followup" eyebrow="Next steps" title="Where I'd take it next">
+  <ul className="feature-list">
+    <li>Introduce background jobs for long-running benchmark tasks.</li>
+    <li>Add synthetic monitoring to catch regressions in DID issuance.</li>
+    <li>Formalise API versioning before onboarding external integrators.</li>
+    <li>Expand security auditing around Matrix message payloads.</li>
+  </ul>
+</Section>

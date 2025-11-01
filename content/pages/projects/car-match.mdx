@@ -1,0 +1,95 @@
+---
+title: "Car-Match Case Study"
+slug: "/projects/car-match"
+---
+
+import { Section, Card, AnchorNav, Link } from "../../../src/components/ui";
+
+<Section
+  eyebrow="Case Study"
+  title="Car-Match · Enthusiast community with real authentication and social features"
+  description="Full-stack web application that helps car enthusiasts find meetups, share builds, and organise events. Built as a production-style project to demonstrate end-to-end delivery."
+/>
+
+<AnchorNav
+  items={[
+    { id: "overview", label: "Overview" },
+    { id: "architecture", label: "Architecture" },
+    { id: "delivery", label: "Delivery & Outcomes" },
+    { id: "next", label: "Next Steps" },
+  ]}
+/>
+
+<Section id="overview" eyebrow="Project overview" title="What problem it solves">
+  <div className="project-card__stack">
+    <span>User accounts & profiles</span>
+    <span>Forums and messaging</span>
+    <span>Event planning</span>
+    <span>Administration tools</span>
+  </div>
+  <p>
+    Car-Match started as a way to practise building a community platform that feels like a real SaaS product. Members can register, confirm their email, and create a garage profile with the specs of their build. From there they join discussions, send direct messages, and RSVP to events hosted by moderators.
+  </p>
+</Section>
+
+<Section id="architecture" eyebrow="Architecture" title="Tech stack & noteworthy decisions">
+  <div className="grid-two">
+    <Card>
+      <h3 className="feature-card__title">Frontend</h3>
+      <ul className="feature-list">
+        <li>React with React Router to manage authenticated routes.</li>
+        <li>Context + reducers for session state so refreshes are resilient.</li>
+        <li>Reusable UI primitives (forms, feed cards, chat bubbles) with accessible focus management.</li>
+      </ul>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">Backend & Ops</h3>
+      <ul className="feature-list">
+        <li>Express.js API with layered controllers/services for maintainability.</li>
+        <li>MongoDB for user, forum, and event data, indexed by location and tags.</li>
+        <li>JSON Web Tokens with refresh tokens and rotating secrets to protect sessions.</li>
+        <li>Docker Compose scripts for local parity between API, MongoDB, and seed jobs.</li>
+      </ul>
+    </Card>
+  </div>
+  <Card variant="muted" className="reveal">
+    <h3 className="feature-card__title">Instrumentation & safeguards</h3>
+    <ul className="feature-list">
+      <li>Structured logging wraps each request with user & route metadata.</li>
+      <li>Rate limiting on auth routes defends against brute-force attacks.</li>
+      <li>Role-based access control separates moderators from members.</li>
+      <li>CI script runs ESLint and Jest suites before deployment.</li>
+    </ul>
+  </Card>
+</Section>
+
+<Section id="delivery" eyebrow="Outcomes" title="Delivery highlights">
+  <div className="grid-two">
+    <Card>
+      <h3 className="feature-card__title">Reliability</h3>
+      <p className="feature-card__body">
+        End-to-end tests validate sign up, login, posting, and messaging flows. Session refresh logic was hardened after uncovering a race-condition bug during testing.
+      </p>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">Documentation</h3>
+      <p className="feature-card__body">
+        README includes API reference, environment setup, and deployment runbooks so teammates can contribute quickly.
+      </p>
+    </Card>
+  </div>
+  <div className="card-actions">
+    <Link data-variant="primary" href="https://github.com/BradleyMatera/car-match" external>
+      View repository
+    </Link>
+  </div>
+</Section>
+
+<Section id="next" eyebrow="Roadmap" title="What I would build next">
+  <ul className="feature-list">
+    <li>Build a moderation dashboard with audit logs for reported posts.</li>
+    <li>Add full-text search over projects and events.</li>
+    <li>Deploy a production instance with GitHub Actions + container hosting.</li>
+    <li>Introduce automated accessibility checks for community-generated content.</li>
+  </ul>
+</Section>

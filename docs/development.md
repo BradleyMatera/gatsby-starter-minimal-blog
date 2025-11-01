@@ -48,6 +48,13 @@ node server.js
 
 The proxy exposes `POST /api/chat` and can be consumed by local demos or deployed separately. Rate limiting defaults to 100 requests per 15 minutes.
 
+## Netlify Forms
+
+- The contact page (`content/pages/contact/index.mdx`) posts to Netlify using `data-netlify="true"`.  
+- When deploying to Netlify, ensure the build step runs so the platform can parse the form HTML.  
+- Submissions appear under the site’s “Forms” dashboard. You can enable email notifications or webhooks from there.  
+- The honeypot field (`bot-field`) blocks most basic spam; add reCAPTCHA or Akismet if junk volume increases.
+
 ## Testing & Quality
 
 No automated test suites are configured yet. Recommended manual checks:

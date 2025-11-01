@@ -7,6 +7,8 @@ All site content is authored in MDX. You can interleave Markdown with React comp
 | Type | Location | URL | Notes |
 | ---- | -------- | --- | ----- |
 | Pages | `content/pages/<slug>/index.mdx` | `/slug/` | Used for About, Projects, Roles, Contributions, etc. |
+| Case studies | `content/pages/projects/<slug>.mdx` | `/projects/<slug>/` | Deep dives linked from the project index (e.g., Car-Match, Interactive Pokédex). |
+| Contact form | `content/pages/contact/index.mdx` | `/contact/` | Netlify-backed form + alternate contact methods. |
 | Blog posts | `content/posts/<slug>/index.mdx` | `/blog/<slug>/` (generated) | Supports tags, excerpts, banners, and blog listing metadata. |
 
 Each folder can include local assets (images, downloads). Reference them with relative paths inside the MDX file.
@@ -55,6 +57,7 @@ import Link from "../../../src/components/ui/Link";
       summary="Profiles, forums, messaging, events."
       stack={["React", "Node.js", "MongoDB"]}
       links={[
+        { label: "Case study", href: "/projects/car-match/", variant: "primary" },
         { label: "GitHub", href: "https://github.com/BradleyMatera/car-match", external: true }
       ]}
     />
@@ -89,6 +92,14 @@ Use class names from `src/styles/global.css` (e.g., `feature-list`, `surface-car
 - Place images or files alongside the MDX file (`content/posts/my-post/diagram.png`).
 - Reference them with relative links: `![Alt text](./diagram.png)`.
 - Gatsby automatically processes images referenced in Markdown/MDX frontmatter when using `banner`.
+
+When adding new media, include meaningful `alt` text so screen readers and search engines understand the content.
+
+## Forms
+
+- The contact page form is parsed by Netlify. Include `form-name` and honeypot fields exactly as shown in `content/pages/contact/index.mdx`.  
+- Update the `action` attribute if you create alternative success routes.  
+- For quick links, supplement the form with a `mailto:` link so users can reach out directly.
 
 ## Navigation Updates
 
