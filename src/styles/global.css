@@ -295,7 +295,7 @@ img {
 .primary-nav a[aria-current="page"] {
   background: var(--color-primary);
   color: var(--color-text-inverse);
-  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.18);
+  box-shadow: 0 10px 20px rgba(220, 38, 38, 0.18);
 }
 
 .header-actions {
@@ -695,7 +695,7 @@ img {
 
 .section-title {
   font-family: "Montserrat", "Space Grotesk Variable", "Space Grotesk", "Inter", "Segoe UI", sans-serif;
-  font-size: clamp(4rem, 6vw, 6rem);
+  font-size: clamp(2rem, 4vw, 4rem);
   font-weight: 700;
   letter-spacing: -0.02em;
   margin: 0;
@@ -1328,7 +1328,7 @@ img {
 
 .hero-headline {
   font-family: "Montserrat", "Space Grotesk Variable", "Space Grotesk", sans-serif;
-  font-size: clamp(4rem, 6vw, 6rem);
+  font-size: clamp(2rem, 4vw, 4rem);
   font-weight: 700;
   margin: 0;
   line-height: 1.1;
@@ -1765,6 +1765,14 @@ img {
   scroll-margin-top: 6.5rem;
 }
 
+.post-content h2 {
+  font-size: clamp(1.5rem, 1vw + 1.2rem, 2rem);
+  line-height: 1.28;
+  margin: 2.5rem 0 1.1rem;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+}
+
 .post-content > *:first-child {
   margin-top: 0;
 }
@@ -1820,7 +1828,7 @@ img {
 .nav-search__input:focus {
   outline: none;
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.16);
 }
 
 .search-results {
@@ -1920,6 +1928,7 @@ img {
 
 .section-title {
   color: var(--color-text) !important;
+  font: 600 1.5rem "Space Grotesk Variable", "Space Grotesk", sans-serif !important;
 }
 
 .css-13l18 {
