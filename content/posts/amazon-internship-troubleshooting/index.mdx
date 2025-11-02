@@ -3,14 +3,16 @@ title: "AWS Cloud Support Internship: Mastering Troubleshooting and Architecture
 date: "2025-08-01"
 tags: ["AWS", "Internship", "Cloud Support", "DevOps", "AI", "Bedrock", "Career Development"]
 description: "Insights from my AWS Cloud Support Associate internship, focusing on certifications, hands-on labs, troubleshooting techniques, and a capstone project in media processing."
+theme: "Cloud & DevOps"
 ---
 
-## Introduction
+import { Section, Callout, Aside, Tip } from "../../../src/@lekoarts/gatsby-theme-minimal-blog/components/mdx-components";
 
+<Section title="Introduction">
 As a Cloud Support Associate intern at AWS in Seattle, I participated in a structured 12-week program designed to build deep technical expertise before engaging with real customer issues. The internship emphasized training through certifications, simulated environments, and mentorship, aligning with AWS's commitment to operational excellence and customer obsession [^aws-careers]. This case study outlines the program structure, key learnings, and my capstone project—a serverless media metadata extractor—highlighting how it prepared me for cloud engineering roles.
+</Section>
 
-## Program Structure and Daily Routine
-
+<Section title="Program Structure and Daily Routine">
 Based in the Oscar building, the internship followed a bootcamp-style format:
 - **Morning Sessions**: Lectures on AWS services, certification prep (e.g., Cloud Practitioner, Solutions Architect), and architecture reviews.
 - **Afternoon Labs**: Hands-on exercises building and troubleshooting mock setups using tools like CloudFormation and AWS CLI.
@@ -18,8 +20,12 @@ Based in the Oscar building, the internship followed a bootcamp-style format:
 
 This rhythm ensured theoretical knowledge was immediately applied, fostering retention and practical skills [^aws-training].
 
-## Foundational Training (Weeks 1-7)
+<Callout type="info">
+Key takeaway: Daily labs bridged theory and practice effectively.
+</Callout>
+</Section>
 
+<Section title="Foundational Training (Weeks 1-7)">
 The early weeks focused on core competencies:
 - **Certifications**: Completed AWS Cloud Quest for Practitioner and Architect paths, covering EC2, S3, VPC, and IAM fundamentals.
 - **AI and ML**: Labs with Amazon Bedrock for generative AI and Amazon Q Business for enterprise search, including prompt engineering and integration patterns [^bedrock-docs].
@@ -29,8 +35,12 @@ The early weeks focused on core competencies:
 
 By week 7, interns could diagram multi-tier applications and explain trade-offs in service selection.
 
-## Capstone Project: Serverless Media Metadata Extractor
+<Aside>
+Note: Focus on IAM early—it's foundational for secure architectures.
+</Aside>
+</Section>
 
+<Section title="Capstone Project: Serverless Media Metadata Extractor">
 The program culminated in an individual project to design and implement an AWS solution. I built a cost-optimized pipeline for extracting metadata from uploaded media files:
 
 - **Architecture**:
@@ -78,26 +88,36 @@ The program culminated in an individual project to design and implement an AWS s
 
 This project demonstrated end-to-end serverless design, integrating 8+ AWS services while prioritizing cost and scalability.
 
-## Measurable Outcomes
+<Tip>
+Use Step Functions for orchestrating complex workflows in serverless apps.
+</Tip>
+</Section>
+
+<Section title="Measurable Outcomes">
 - **Certifications Earned**: AWS Certified Cloud Practitioner and Solutions Architect – Associate.
 - **Project Metrics**: Processed 1,000+ files with 99.9% success rate; average cost per 100 files under $0.01.
 - **Skill Growth**: Improved troubleshooting efficiency by 40% through lab simulations, measured via timed exercises.
+</Section>
 
-## Lessons Learned and Challenges
+<Section title="Lessons Learned and Challenges">
 - **Troubleshooting Mindset**: Always start with logs and metrics—CloudWatch became my first stop for issues.
 - **Cost Awareness**: Implementing budgets early prevented surprises; serverless isn't "free" without monitoring [^aws-cost].
 - **Challenge Overcome**: Integrating Bedrock for AI metadata enhancement required handling asynchronous invocations; solved with Step Functions.
 - **Accuracy Note**: Unlike casual overviews, AWS internships focus on simulations, not live tickets, to build safe expertise [^aws-intern].
+</Section>
 
-## Next Steps and Recommendations
+<Section title="Next Steps and Recommendations">
 - Pursue Developer Associate certification.
 - Explore advanced AI with SageMaker.
 - For aspiring interns: Focus on fundamentals—VPC, IAM, and Lambda form the core.
 
 This internship solidified my cloud skills and passion for reliable systems.
+</Section>
 
+<Section title="References">
 [^aws-careers]: AWS. "Careers at AWS." Accessed October 2025. https://aws.amazon.com/careers/.
 [^aws-training]: AWS Training. "Cloud Practitioner Essentials." Accessed October 2025. https://aws.amazon.com/training/.
 [^bedrock-docs]: AWS. "Amazon Bedrock Documentation." Accessed October 2025. https://docs.aws.amazon.com/bedrock/.
 [^aws-cost]: AWS. "Cost Management Best Practices." Accessed October 2025. https://aws.amazon.com/architecture/cost-management/.
 [^aws-intern]: AWS Blogs. "Inside AWS Internships." 2024.
+</Section>

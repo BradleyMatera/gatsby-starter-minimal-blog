@@ -4,14 +4,16 @@ date: "2025-05-12"
 slug: "/certifications-continuous-learning"
 tags: ["Learning", "Certifications", "Career Growth"]
 description: "How I structure exam prep, online courses, and ongoing practice to stay sharp in a fast-moving industry."
+theme: "Cloud & DevOps"
 ---
 
-## Introduction
+import { Section, Callout, Aside, Tip } from "../../../src/@lekoarts/gatsby-theme-minimal-blog/components/mdx-components";
 
+<Section title="Introduction">
 Technology shifts quickly, so I treat learning as an ongoing practice instead of a once-a-year goal. Over the last twelve months I earned new AWS certifications, completed freeCodeCamp programmes, and logged time in LinkedIn Learning courses. This post explains how I choose certifications, structure study plans, and fold the results back into day-to-day engineering work.
+</Section>
 
-## Recent Credentials
-
+<Section title="Recent Credentials">
 | Credential | Issued | Expires | Focus |
 | --- | --- | --- | --- |
 | AWS Solutions Architect – Associate | Aug 2024 | Aug 2027 | Designing resilient, cost-optimised AWS architectures.[^saa] |
@@ -22,8 +24,12 @@ Technology shifts quickly, so I treat learning as an ongoing practice instead of
 
 I track upcoming expirations in Notion and schedule refreshers at least six months before the renewal window closes.
 
-## How I Study
+<Callout type="info">
+Certifications validate skills but projects demonstrate application.
+</Callout>
+</Section>
 
+<Section title="How I Study">
 ### Start with Exam Guides
 AWS publishes detailed exam guides outlining domains, weightings, and sample questions.[^exam-guide] I turn these into a spreadsheet with status columns (`Unreviewed`, `In Progress`, `Confident`). This creates a checklist I revisit weekly.
 
@@ -35,22 +41,31 @@ AWS publishes detailed exam guides outlining domains, weightings, and sample que
 ### Reflect After the Exam
 Immediately after testing I document which topics felt shaky and plan mini-projects to solidify them. Completing the AI Practitioner exam, for example, led me to prototype an Amazon Bedrock Lambda integration that generates accessibility copy for my portfolio.
 
-## Integrating Continuous Learning into Projects
+<Aside>
+Combine study with real-world application for better retention.
+</Aside>
+</Section>
 
+<Section title="Integrating Continuous Learning into Projects">
 - **Applying AWS SA lessons to side projects.** I now default to multi-AZ RDS deployments, IaC templates, and well-architected reviews before declaring a project “done.”  
 - **Using freeCodeCamp algorithms in interviews.** The exercises sharpened my ability to express data structures clearly, which translates into faster whiteboard sessions.  
 - **Soft-skill courses feeding documentation.** Communication and personal branding modules improved how I structure retrospectives, stakeholder emails, and portfolio case studies.
 
-## Keeping Momentum
+<Tip>
+Apply new knowledge immediately to reinforce learning.
+</Tip>
+</Section>
 
+<Section title="Keeping Momentum">
 1. **Quarterly themes.** Each quarter I pick a focus (e.g., security automation, data engineering) and align reading lists, courses, and side projects accordingly.  
 2. **Accountability.** I post progress updates on LinkedIn and within a small study group of peers preparing for similar exams.  
 3. **Balance depth with breadth.** Certifications validate foundational knowledge, while exploratory projects (Zig, WebGPU) keep me curious and adaptable.
 
 Continuous learning is less about collecting badges and more about tightening the feedback loop between study, practice, and teaching. As long as I am incorporating new insights into real systems, the investment continues to pay dividends.
+</Section>
 
-## References
-
+<Section title="References">
 [^saa]: AWS Certification, “AWS Certified Solutions Architect – Associate,” accessed May 2025, https://aws.amazon.com/certification/certified-solutions-architect-associate/.  
 [^ai-practitioner]: AWS Certification, “AWS Certified AI Practitioner,” accessed May 2025, https://aws.amazon.com/certification/certified-ai-practitioner/.  
 [^exam-guide]: AWS Certification, “Exam Guides and Sample Questions,” accessed May 2025, https://aws.amazon.com/certification/certification-prep/guide/.
+</Section>

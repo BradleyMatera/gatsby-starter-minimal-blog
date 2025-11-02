@@ -1,9 +1,39 @@
 // src/@lekoarts/gatsby-theme-minimal-blog/components/mdx-components.tsx
 import React from "react";
 import { Text, Heading } from "@theme-ui/components";
-import OriginalComponents from "@lekoarts/gatsby-theme-minimal-blog/src/components/mdx-components";
 import Code from "./code";
-import { Section, Card, Link } from "../../../components/ui";
+import { Section, Card, Link, Badge } from "../../../components/ui";
+
+interface CalloutProps {
+  children: React.ReactNode;
+  type?: string;
+}
+
+const Callout: React.FC<CalloutProps> = ({ children, type = "info" }) => (
+  <div className={`callout callout--${type}`}>
+    {children}
+  </div>
+);
+
+interface AsideProps {
+  children: React.ReactNode;
+}
+
+const Aside: React.FC<AsideProps> = ({ children }) => (
+  <aside className="aside">
+    {children}
+  </aside>
+);
+
+interface TipProps {
+  children: React.ReactNode;
+}
+
+const Tip: React.FC<TipProps> = ({ children }) => (
+  <div className="tip">
+    <strong>Tip:</strong> {children}
+  </div>
+);
 
 const components = {
   Section,
@@ -12,6 +42,11 @@ const components = {
   Text,
   Title: Heading,
   a: Link,
+  Callout,
+  Aside,
+  Tip,
+  Badge,
 };
 
+export { Callout, Aside, Tip, Section, Badge };
 export default components;

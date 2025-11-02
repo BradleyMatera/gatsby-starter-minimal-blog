@@ -9,14 +9,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#072a20',
-        secondary: '#05241b',
-        accent: '#57c06a',
-        highlight: '#7be58a',
-        background: '#041e16',
+        navy: '#001E3C',      // Primary background
+        'dark-gray': '#0A253E', // Secondary backgrounds
+        'success-green': '#00CC66', // Status indicators
+        'blue-accent': '#0073BB',   // Accents and CTAs
+        coral: '#FF7F50',     // Highlight for CTAs or warnings
+        'light-gray': '#E0E0E0',    // Text and subtle elements
       },
       fontFamily: {
-        sans: ['Helvetica', 'Arial', 'ui-sans-serif', 'system-ui'],
+        sans: ['Inter', 'Helvetica', 'Arial', 'ui-sans-serif', 'system-ui'],
+      },
+      lineHeight: {
+        'relaxed': '1.6',
       },
       maxWidth: {
         'screen-xl': '1280px',

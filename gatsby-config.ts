@@ -131,6 +131,7 @@ const config: GatsbyConfig = {
     {
       resolve: `gatsby-plugin-image`,
     },
+    `gatsby-plugin-offline`,
     shouldAnalyseBundle && {
       resolve: `gatsby-plugin-webpack-statoscope`,
       options: {
