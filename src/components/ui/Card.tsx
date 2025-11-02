@@ -16,9 +16,16 @@ const variantClassMap: Record<CardVariant, string> = {
   outline: "surface-card surface-card--outline",
 };
 
+import TinyDotClusterAccent from "../TinyDotClusterAccent";
+
 const Card = ({ as: Tag = "div", variant = "default", className, children }: CardProps) => {
   const variantClass = variantClassMap[variant] ?? variantClassMap.default;
-  return <Tag className={cx(variantClass, className)}>{children}</Tag>;
+  return (
+    <Tag className={cx(variantClass, className)} style={{ position: "relative" }}>
+      <TinyDotClusterAccent />
+      {children}
+    </Tag>
+  );
 };
 
 export default Card;

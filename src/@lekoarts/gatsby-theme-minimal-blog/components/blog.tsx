@@ -6,6 +6,7 @@ import Listing from "./listing";
 import useMinimalBlogConfig from "../hooks/use-minimal-blog-config";
 import replaceSlashes from "../utils/replaceSlashes";
 import Seo from "./seo";
+import BlogAccent from "../../../components/BlogAccent";
 
 declare global {
   interface Window {
@@ -123,6 +124,7 @@ const Blog = ({ posts }: MBBlogProps) => {
 
   return (
     <Layout>
+      <BlogAccent />
       <header className="section-shell__header" style={{ marginBottom: "1.5rem" }}>
         <span className="eyebrow">Blog</span>
         <h1 className="section-title">Field notes, experiments, and project retrospectives</h1>

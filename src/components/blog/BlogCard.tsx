@@ -2,6 +2,7 @@ import * as React from "react";
 import { Link } from "gatsby";
 import useMinimalBlogConfig from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-minimal-blog-config";
 import replaceSlashes from "../../@lekoarts/gatsby-theme-minimal-blog/utils/replaceSlashes";
+import TinyDotClusterAccent from "../TinyDotClusterAccent";
 
 type BlogTag = {
   name: string;
@@ -32,7 +33,8 @@ const BlogCard = ({ post, showTags = true }: BlogCardProps) => {
   const initial = post.title ? post.title.charAt(0).toUpperCase() : "•";
 
   return (
-    <article className="blog-card">
+    <article className="blog-card" style={{ position: "relative" }}>
+      <TinyDotClusterAccent />
       <header className="blog-card__header">
         <span className="blog-card__avatar" aria-hidden="true">
           {initial}

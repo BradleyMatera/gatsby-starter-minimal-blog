@@ -11,6 +11,8 @@ import { visuallyHidden } from "../styles/utils";
 import Seo from "./seo";
 import Hero from "../texts/hero.mdx";
 import Bottom from "../texts/bottom.mdx";
+import HeroSystemScene from "../../../components/HeroSystemScene";
+import TinyTriangleAccent from "../../../components/TinyTriangleAccent";
 
 export type MBHomepageProps = {
   posts: {
@@ -33,13 +35,17 @@ const Homepage = ({ posts }: MBHomepageProps) => {
 
   return (
     <Layout>
+      <HeroSystemScene />
       <h1 sx={visuallyHidden}>{siteTitle}</h1>
       <section sx={{ mb: [5, 6, 7] }}>
         <Hero />
       </section>
-      <Title text="Latest writing">
-        <Link to={replaceSlashes(`/${basePath}/${blogPath}`)}>Browse the archive</Link>
-      </Title>
+      <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+        <TinyTriangleAccent />
+        <Title text="Latest writing">
+          <Link to={replaceSlashes(`/${basePath}/${blogPath}`)}>Browse the archive</Link>
+        </Title>
+      </div>
       <Listing posts={posts} id="latest-posts" showTags={false} />
       <section sx={{ mt: [5, 6, 7] }}>
         <Bottom />
