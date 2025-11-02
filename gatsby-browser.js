@@ -1,7 +1,7 @@
+
 import "@fontsource-variable/inter";
 import "@fontsource-variable/space-grotesk";
 import "./src/styles/global.css";
-import "./src/components/style.css"; // <-- Ensure this is imported for production!
 
 export const onClientEntry = () => {
   if (typeof window === "undefined") return;
