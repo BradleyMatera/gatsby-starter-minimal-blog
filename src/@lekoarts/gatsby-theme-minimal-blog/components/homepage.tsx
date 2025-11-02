@@ -37,7 +37,7 @@ const Homepage = ({ posts }: MBHomepageProps) => {
     <Layout>
       <HeroSystemScene />
       <h1 sx={visuallyHidden}>{siteTitle}</h1>
-      <section sx={{ mb: [5, 6, 7] }}>
+      <section sx={{ mb: [3, 4, 5] }}>
         <Hero />
       </section>
       <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>

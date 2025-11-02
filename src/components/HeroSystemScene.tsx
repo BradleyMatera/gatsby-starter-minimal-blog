@@ -249,6 +249,7 @@ const HeroSystemScene: React.FC = () => {
       height: `${height}px`,
       maxWidth: "100vw",
       margin: "0 auto",
+      marginBottom: "20px",
       background: BG_COLOR,
       borderRadius: "12px",
       overflow: "hidden",
@@ -265,8 +266,7 @@ const HeroSystemScene: React.FC = () => {
         letterSpacing: "-0.02em",
         textShadow: "0 2px 12px #fff"
       }}>
-        Web Development (B.S.) | Cloud Computing | AWS | Full-Stack | JavaScript | Python | AI Workflows
-      </div>
+Web Development (B.S.) | Cloud Computing | AWS | Full-Stack | JavaScript | Python | AI Workflows      </div>
     </div>
   );
 };

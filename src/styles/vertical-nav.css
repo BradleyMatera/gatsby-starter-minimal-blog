@@ -175,23 +175,28 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.5rem 1rem;
+  padding: 0.7rem 1.2rem;
   min-width: 0;
   background: none;
-  border-radius: 999px;
+  border-radius: 0;
   font-size: 1rem;
   font-weight: 600;
   color: var(--color-text, #222);
-  transition: background 0.18s, color 0.18s;
+  transition: color 0.18s;
   text-decoration: none;
-  line-height: 1.2;
+  line-height: 1;
   position: relative;
 }
 .vertical-nav--top .vertical-nav__link:hover,
 .vertical-nav--top .vertical-nav__link--active {
-  background: var(--color-accent-soft, #fbeaea);
-  color: var(--color-accent, #e05a5a);
-  box-shadow: 0 2px 8px rgba(224,90,90,0.08);
+  background: none;
+  color: #e05a5a;
+  border-radius: 0;
+  padding: 0.7rem 1.2rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  box-shadow: none;
 }
 .vertical-nav--top .vertical-nav__icon {
   font-size: 1.1rem;
@@ -317,17 +322,7 @@
   position: relative;
 }
 
-.vertical-nav__link::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 3px;
-  height: 0;
-  background: var(--color-accent);
-  transition: height 0.2s ease;
-}
+/* removed pill pseudo-element from top nav links */
 
 .vertical-nav__link:hover,
 .vertical-nav__link--active {
@@ -336,7 +331,7 @@
 
 .vertical-nav__link:hover::before,
 .vertical-nav__link--active::before {
-  height: 60%;
+  height: 100%;
 }
 
 .vertical-nav__icon {
