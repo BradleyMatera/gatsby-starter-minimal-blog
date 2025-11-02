@@ -10,6 +10,11 @@ import TinyMedalAccent from "../components/TinyMedalAccent";
 import TinyGearAccent from "../components/TinyGearAccent";
 import TinyNodeAccent from "../components/TinyNodeAccent";
 import TinyGoalAccent from "../components/TinyGoalAccent";
+import TinyDotClusterAccent from "../../../components/TinyDotClusterAccent";
+import TinyTriangleAccent from "../../../components/TinyTriangleAccent";
+import BlogAccent from "../../../components/BlogAccent";
+import NavSystemBadge from "../../../components/NavSystemBadge";
+import StatusRow from "../../../components/ui/StatusRow";
 
 <Section
   eyebrow={<span style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}><TinyCloudAccent />Quick overview</span>}
@@ -17,22 +22,26 @@ import TinyGoalAccent from "../components/TinyGoalAccent";
 >
   <p>Cloud engineering, backend APIs, DevOps automation, and AI integration.</p>
   <ul className="feature-list">
-    <li style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
-      <TinyMedalAccent />
-      <strong>Background:</strong> Army veteran, real-world problem solver, handles pressure
-    </li>
-    <li style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
-      <TinyGearAccent />
-      <strong>Technical Focus:</strong> JavaScript/TypeScript, Node.js, React, AWS, CI/CD, Docker
-    </li>
-    <li style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
-      <TinyNodeAccent />
-      <strong>Recent:</strong> AWS Cloud Support Associate Internship — Seattle, Summer 2025
-    </li>
-    <li style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
-      <TinyGoalAccent />
-      <strong>Career Goal:</strong> Full-time role in Cloud, DevOps, or Full-Stack Engineering
-    </li>
+    <StatusRow
+      icon={<TinyMedalAccent />}
+      label="Background:"
+      text="Army veteran, real-world problem solver, handles pressure"
+    />
+    <StatusRow
+      icon={<TinyGearAccent />}
+      label="Technical Focus:"
+      text="JavaScript/TypeScript, Node.js, React, AWS, CI/CD, Docker"
+    />
+    <StatusRow
+      icon={<TinyNodeAccent />}
+      label="Recent:"
+      text="AWS Cloud Support Associate Internship — Seattle, Summer 2025"
+    />
+    <StatusRow
+      icon={<TinyGoalAccent />}
+      label="Career Goal:"
+      text="Full-time role in Cloud, DevOps, or Full-Stack Engineering"
+    />
   </ul>
 </Section>
 
@@ -132,17 +141,20 @@ import TinyGoalAccent from "../components/TinyGoalAccent";
         <strong>"Who needs this and how will they feel when they use it?"</strong> Then I document decisions so the next teammate moves faster.
       </div>
     </div>
-    <ul className="feature-list">
-      <li>
-        <strong>Evidence-driven improvements.</strong> Lighthouse, Axe, and analytics checkpoints shape each iteration.
-      </li>
-      <li>
-        <strong>Readable handoffs.</strong> I pair thoughtful commit messages with changelog notes and architecture diagrams.
-      </li>
-      <li>
-        <strong>Delight and resilience.</strong> Micro-interactions and progressive enhancement keep interfaces responsive even on low-end hardware.
-      </li>
-    </ul>
+<ul className="feature-list">
+  <li className="reveal" style={{ transitionDelay: "0.1s", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+    <TinyTriangleAccent />
+    <strong>Evidence-driven improvements.</strong> Lighthouse, Axe, and analytics checkpoints shape each iteration.
+  </li>
+  <li className="reveal" style={{ transitionDelay: "0.2s", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+    <TinyDotClusterAccent />
+    <strong>Readable handoffs.</strong> I pair thoughtful commit messages with changelog notes and architecture diagrams.
+  </li>
+  <li className="reveal" style={{ transitionDelay: "0.3s", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+    <BlogAccent />
+    <strong>Delight and resilience.</strong> Micro-interactions and progressive enhancement keep interfaces responsive even on low-end hardware.
+  </li>
+</ul>
   </div>
 </Section>
 
@@ -151,27 +163,30 @@ import TinyGoalAccent from "../components/TinyGoalAccent";
   title="Need a developer who blends UX strategy with full-stack execution?"
 >
   <div className="section-lead">I'm open to internships, apprenticeships, or part-time roles where accessibility, reliability, and learning culture matter.</div>
-  <div className="grid-two">
-    <div className="surface-card surface-card--outline">
-      <h3 className="feature-card__title">Quick ways to connect</h3>
-      <ul className="feature-list">
-        <li>
-          <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/bradmatera" target="_blank" rel="noopener noreferrer">/in/bradmatera</a>
-        </li>
-        <li>
-          <strong>GitHub:</strong> <a href="https://github.com/BradleyMatera" target="_blank" rel="noopener noreferrer">@BradleyMatera</a>
-        </li>
-        <li>
-          <strong>YouTube:</strong> <a href="https://www.youtube.com/@bradmatera" target="_blank" rel="noopener noreferrer">@bradmatera</a>
-        </li>
-      </ul>
-    </div>
-    <div className="surface-card surface-card--muted">
-      <h3 className="feature-card__title">What to expect next</h3>
-      <div className="feature-card__body">
-        I'll respond within 24 hours with availability, relevant case studies, and a short plan for how we can collaborate. Happy to pair-program, audit an existing build, or present a portfolio walkthrough.
-      </div>
+<div className="grid-two">
+  <div className="surface-card surface-card--outline reveal" style={{ transitionDelay: "0.1s" }}>
+    <h3 className="feature-card__title">Quick ways to connect</h3>
+    <ul className="feature-list">
+      <li className="reveal" style={{ transitionDelay: "0.2s", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+        <NavSystemBadge />
+        <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/bradmatera" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" style={{ transition: "transform 0.2s" }}> /in/bradmatera </a>
+      </li>
+      <li className="reveal" style={{ transitionDelay: "0.3s", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+        <TinyTriangleAccent />
+        <strong>GitHub:</strong> <a href="https://github.com/BradleyMatera" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile" style={{ transition: "transform 0.2s" }}> @BradleyMatera </a>
+      </li>
+      <li className="reveal" style={{ transitionDelay: "0.4s", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+        <TinyDotClusterAccent />
+        <strong>YouTube:</strong> <a href="https://www.youtube.com/@bradmatera" target="_blank" rel="noopener noreferrer" aria-label="YouTube channel" style={{ transition: "transform 0.2s" }}> @bradmatera </a>
+      </li>
+    </ul>
+  </div>
+  <div className="surface-card surface-card--muted reveal" style={{ transitionDelay: "0.2s" }}>
+    <h3 className="feature-card__title">What to expect next</h3>
+    <div className="feature-card__body">
+      I'll respond within 24 hours with availability, relevant case studies, and a short plan for how we can collaborate. Happy to pair-program, audit an existing build, or present a portfolio walkthrough.
     </div>
   </div>
+</div>
 </Section>
 </>

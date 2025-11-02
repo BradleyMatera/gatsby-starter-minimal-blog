@@ -1,6 +1,7 @@
 import * as React from "react";
 import cx from "../../utils/cx";
 import Link from "./Link";
+import { useScrollReveal } from "../home/useScrollReveal";
 
 type ProjectLink = {
   label: string;
@@ -21,9 +22,18 @@ type ProjectCardProps = {
 
 const ProjectCard = ({ title, meta, summary, impact, stack, links, className }: ProjectCardProps) => {
   const initial = title ? title.charAt(0).toUpperCase() : "•";
+  const { ref, revealed } = useScrollReveal(0);
 
   return (
-    <article className={cx("project-card", className)}>
+    <article
+      ref={ref as React.RefObject<HTMLElement>}
+      className={cx("project-card", className)}
+      style={{
+        opacity: revealed ? 1 : 0,
+        transform: revealed ? "translateY(0)" : "translateY(32px)",
+        transition: "opacity 0.7s cubic-bezier(.22,.9,.2,1), transform 0.7s cubic-bezier(.22,.9,.2,1)",
+      }}
+    >
       <div className="project-card__header">
         <span className="project-card__avatar" aria-hidden="true">
           {initial}

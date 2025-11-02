@@ -626,7 +626,7 @@ img {
 
 .surface-card:hover,
 .surface-card:focus-within {
-  transform: translateY(-4px) rotate(1deg);
+  transform: translateY(-4px);
   box-shadow: 0 25px 60px rgba(15, 23, 42, 0.12);
 }
 

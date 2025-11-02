@@ -62,7 +62,8 @@ Shadowed components reuse these queries (no manual GraphQL files in this repo). 
 ## Extending the Architecture
 
 1. **New Layout Sections**: Create a React component under `src/components/` and import it inside an MDX file (e.g., append a section in `texts/hero.mdx`) to include it on the homepage.
-2. **Additional Pages**: Add `content/pages/<slug>/index.mdx` with frontmatter. Use the UI primitives for consistent styling.
-3. **Custom GraphQL Data**: Add a Gatsby source plugin or modify `gatsby-node.js` (not currently used). Shadow theme components to query and render the new data.
+2. **Interactive Overview Section**: See [docs/overview-section.md](./overview-section.md) for a full walkthrough of the “Quick overview / Where I’m focused right now” implementation, including StatusRow, scroll-reveal, and animation details.
+3. **Additional Pages**: Add `content/pages/<slug>/index.mdx` with frontmatter. Use the UI primitives for consistent styling.
+4. **Custom GraphQL Data**: Add a Gatsby source plugin or modify `gatsby-node.js` (not currently used). Shadow theme components to query and render the new data.
 
 Remember to update the documentation alongside any structural change so future contributors understand the flow.
