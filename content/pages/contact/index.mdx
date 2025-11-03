@@ -1,89 +1,39 @@
----
 title: "Contact"
 slug: "/contact"
----
+export const title = "Contact";
 
 import { Section, Card } from "../../../src/components/ui";
 
 <Section
-  eyebrow="Get in touch"
-  title="Let’s talk about your next cloud or product milestone."
-  description="Prefer email? Reach me at [bradmatera@gmail.com](mailto:bradmatera@gmail.com). You can also send a note with the form below and I'll respond within one business day."
-/>
-
-<Section title="Send a message">
+  eyebrow="Contact"
+  title="Start a project with a quick email"
+  description={
+    <>
+      Email is the most reliable way to reach me. Outline the project and I’ll reply within one business day with next steps.
+      <br />
+      <strong>
+        Reach me at <a href="mailto:bradmatera@gmail.com">bradmatera@gmail.com</a>
+      </strong>
+    </>
+  }
+>
   <Card className="contact-card">
-    <form
-      name="portfolio-contact"
-      method="post"
-      data-netlify="true"
-      data-netlify-honeypot="bot-field"
-      action="/contact/success/"
-      className="contact-form"
-    >
-      <input type="hidden" name="form-name" value="portfolio-contact" />
-      <div hidden>
-        <label>
-          Don’t fill this out if you’re human:
-          <input name="bot-field" />
-        </label>
-      </div>
-      <label className="contact-form__label" htmlFor="contact-name">
-        Name
-      </label>
-      <input
-        className="contact-form__input"
-        id="contact-name"
-        name="name"
-        type="text"
-        required
-        autoComplete="name"
-      />
-      <label className="contact-form__label" htmlFor="contact-email">
-        Email
-      </label>
-      <input
-        className="contact-form__input"
-        id="contact-email"
-        name="email"
-        type="email"
-        required
-        autoComplete="email"
-      />
-      <label className="contact-form__label" htmlFor="contact-message">
-        How can I help?
-      </label>
-      <textarea
-        className="contact-form__textarea"
-        id="contact-message"
-        name="message"
-        rows="6"
-        required
-      />
-      <button className="contact-form__submit" type="submit">
-        Send message
-      </button>
-    </form>
+    <div className="contact-info">
+      <h3 className="contact-info__headline">Outline the essentials</h3>
+      <ul className="contact-info__list">
+        <li>The problem you want solved or feature you need</li>
+        <li>Your ideal timeline or milestones</li>
+        <li>Constraints such as stack, budget, or stakeholders</li>
+      </ul>
+      <a className="contact-info__cta" href="mailto:bradmatera@gmail.com">
+        <span>Email Bradley</span>
+        <span>bradmatera@gmail.com</span>
+      </a>
+      <p className="contact-info__note">
+        Just email me directly. No contact form needed!
+      </p>
+    </div>
   </Card>
 </Section>
 
-<Section title="Other ways to connect">
-  <div className="grid-two">
-    <Card>
-      <h3 className="feature-card__title">LinkedIn</h3>
-      <div className="feature-card__body">
-        <a href="https://www.linkedin.com/in/bradmatera" target="_blank" rel="noopener noreferrer">
-          linkedin.com/in/bradmatera
-        </a>
-      </div>
-    </Card>
-    <Card>
-      <h3 className="feature-card__title">GitHub</h3>
-      <div className="feature-card__body">
-        <a href="https://github.com/BradleyMatera" target="_blank" rel="noopener noreferrer">
-          github.com/BradleyMatera
-        </a>
-      </div>
-    </Card>
-  </div>
-</Section>
+// ...existing code...

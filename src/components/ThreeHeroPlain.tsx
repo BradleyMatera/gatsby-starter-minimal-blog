@@ -147,9 +147,27 @@ const ThreeHeroPlain: React.FC = () => {
         textShadow: "0 2px 12px #fff"
       }}>
         Bradley Matera — Full Stack Software Engineer / Cloud Architect.
-      </div>
-    </div>
-  );
-};
-
-export default ThreeHeroPlain;
+        <a
+          href="/contact"
+          style={{
+            fontSize: '1rem',
+            padding: '0.2rem 0.7rem',
+            borderRadius: '1rem',
+            background: '#fff',
+            color: '#333',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+            border: 'none',
+            cursor: 'pointer',
+            marginLeft: '1rem',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.4rem',
+            height: '1.8rem',
+            lineHeight: '1',
+            textDecoration: 'none',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          <span aria-hidden="true">✉</span>
+          <span>Email me!</span>
+        </a>

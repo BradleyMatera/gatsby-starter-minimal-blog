@@ -378,11 +378,27 @@
 }
 
 .vertical-nav__cta-text {
-  font-size: 0.65rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 1.25;
+  max-width: 160px;
+}
+
+.vertical-nav__cta-label {
+  font-size: 0.78rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  line-height: 1.2;
-  max-width: 60px;
+  letter-spacing: 0.04em;
+}
+
+.vertical-nav__cta-note {
+  font-size: 0.65rem;
+  font-weight: 500;
+  opacity: 0.85;
 }
 
 /* Mobile Styles */
@@ -462,4 +478,20 @@
     border-radius: 6px;
     justify-content: center;
   }
+}
+.vertical-nav--top .vertical-nav__cta-text {
+  align-items: flex-start;
+  text-align: left;
+  max-width: none;
+}
+
+.vertical-nav--top .vertical-nav__cta-label {
+  font-size: 0.95rem;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.vertical-nav--top .vertical-nav__cta-note {
+  font-size: 0.75rem;
+  opacity: 0.85;
 }
