@@ -51,21 +51,30 @@ import StatusRow from "../../../components/ui/StatusRow";
 >
   <div className="section-lead">I build applications that solve real problems. I like combining clean user interfaces with solid backend logic and secure cloud deployment. My goal is fewer manual steps, easier maintenance, and fewer things that can break.</div>
   <div className="grid-three">
-    <div className="feature-card">
+    <div className="feature-card" style={{ position: "relative", overflow: "hidden" }}>
+      <div style={{ position: "absolute", top: "1rem", right: "1rem", opacity: 0.15, pointerEvents: "none" }}>
+        <TinyCloudAccent />
+      </div>
       <span className="feature-card__icon">Cloud</span>
       <h3 className="feature-card__title">Cost-aware infrastructure</h3>
       <div className="feature-card__body">
         Deploy workloads to AWS with security defaults, automated branch-based environments, and healthy monitoring that keeps spend under control.
       </div>
     </div>
-    <div className="feature-card">
+    <div className="feature-card" style={{ position: "relative", overflow: "hidden" }}>
+      <div style={{ position: "absolute", top: "1rem", right: "1rem", opacity: 0.15, pointerEvents: "none" }}>
+        <TinyNodeAccent />
+      </div>
       <span className="feature-card__icon">API</span>
       <h3 className="feature-card__title">Real authentication & data flows</h3>
       <div className="feature-card__body">
         Build Node.js services with proper auth, structured logging, and data modeling that survive production traffic and troubleshooting.
       </div>
     </div>
-    <div className="feature-card">
+    <div className="feature-card" style={{ position: "relative", overflow: "hidden" }}>
+      <div style={{ position: "absolute", top: "1rem", right: "1rem", opacity: 0.15, pointerEvents: "none" }}>
+        <TinyGearAccent />
+      </div>
       <span className="feature-card__icon">Ops</span>
       <h3 className="feature-card__title">Automation everywhere</h3>
       <div className="feature-card__body">
@@ -169,10 +178,12 @@ import StatusRow from "../../../components/ui/StatusRow";
   <div className="surface-card surface-card--outline reveal" style={{ transitionDelay: "0.1s" }}>
     <h3 className="feature-card__title">Quick ways to connect</h3>
     <ul className="feature-list">
-      <li className="reveal" style={{ transitionDelay: "0.2s" }}>
+      <li className="reveal" style={{ transitionDelay: "0.2s", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+        <NavSystemBadge />
         <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/bradmatera" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" style={{ transition: "transform 0.2s" }}>/in/bradmatera</a>
       </li>
-      <li className="reveal" style={{ transitionDelay: "0.3s" }}>
+      <li className="reveal" style={{ transitionDelay: "0.3s", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+        <TinyTriangleAccent />
         <strong>GitHub:</strong> <a href="https://github.com/BradleyMatera" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile" style={{ transition: "transform 0.2s" }}>@BradleyMatera</a>
       </li>
       <li className="reveal" style={{ transitionDelay: "0.4s" }}>

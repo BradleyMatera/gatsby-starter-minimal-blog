@@ -28,16 +28,21 @@ const HeroSystemScene: React.FC = () => {
   const mountRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // --- Responsive orbit count ---
-    const isMobile = typeof window !== "undefined" && window.innerWidth < 700;
-    const orbitCount = isMobile ? MOBILE_ORBIT_COUNT : DESKTOP_ORBIT_COUNT;
+    if (!mountRef.current) return;
 
-    // --- Setup ---
-    const width = mountRef.current?.clientWidth || 900;
-    const height = mountRef.current?.clientHeight || 400;
+    let frameId: number;
 
-    // Scene
-    const scene = new THREE.Scene();
+    try {
+      // --- Responsive orbit count ---
+      const isMobile = typeof window !== "undefined" && window.innerWidth < 700;
+      const orbitCount = isMobile ? MOBILE_ORBIT_COUNT : DESKTOP_ORBIT_COUNT;
+
+      // --- Setup ---
+      const width = mountRef.current.clientWidth || 900;
+      const height = mountRef.current.clientHeight || 400;
+
+      // Scene
+      const scene = new THREE.Scene();
     scene.background = new THREE.Color(BG_COLOR);
 
     // Camera
@@ -143,7 +148,6 @@ const HeroSystemScene: React.FC = () => {
     // --- Animation Loop ---
     let mouseX = 0, mouseY = 0;
     let targetX = 0, targetY = 0;
-    let frameId: number;
     let time = 0;
 
     const animate = () => {
@@ -237,8 +241,19 @@ const HeroSystemScene: React.FC = () => {
       renderer.domElement.removeEventListener("mousemove", handlePointerMove);
       renderer.domElement.removeEventListener("touchmove", handlePointerMove);
       window.removeEventListener("resize", handleResize);
-      mountRef.current?.removeChild(renderer.domElement);
+      if (mountRef.current && renderer.domElement) {
+        mountRef.current.removeChild(renderer.domElement);
+      }
       renderer.dispose();
+    };
+    } catch (error) {
+      console.error("Error initializing Three.js scene:", error);
+    }
+
+    return () => {
+      if (frameId) {
+        cancelAnimationFrame(frameId);
+      }
     };
   }, []);
 

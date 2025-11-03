@@ -584,7 +584,7 @@ img {
   flex: 1;
   width: 100%;
   margin: 0;
-  padding: clamp(1.5rem, 4vw, 3rem) clamp(1.5rem, 5vw, 3.5rem);
+  padding: clamp(1rem, 3vw, 2rem) clamp(1.5rem, 5vw, 3.5rem);
 }
 
 .site-content {
@@ -644,10 +644,10 @@ img {
 }
 
 .section-shell {
-  margin-block: clamp(3.25rem, 7vw, 5.75rem);
+  margin-block: clamp(2rem, 4vw, 3.5rem);
   display: flex;
   flex-direction: column;
-  gap: clamp(1.75rem, 2.5vw, 2.9rem);
+  gap: clamp(1.25rem, 2vw, 2rem);
   scroll-margin-top: 6.5rem;
   width: 100%;
 }
@@ -735,7 +735,7 @@ img {
 }
 
 .section-shell + .section-shell {
-  margin-top: clamp(2.25rem, 4.5vw, 3.75rem);
+  margin-top: clamp(1.5rem, 3vw, 2.5rem);
 }
 
 .grid-auto {
