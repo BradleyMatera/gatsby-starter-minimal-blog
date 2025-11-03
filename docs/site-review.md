@@ -74,3 +74,38 @@ This report reflects the current state of Bradley Matera’s Gatsby-powered port
 ## 9. Conclusion
 
 The portfolio presents a cohesive narrative with consistent styling, accessible navigation, and well-structured content. Recent feature work strengthened the blog UX, enabled dark mode, and added contact and storytelling routes. Continuing to invest in structured data, richer case studies, and media accessibility will keep the site recruiter-ready.
+
+---
+
+## Noteworthy/Unusual Aspects
+
+- Theme shadowing for custom layout, navigation, and blog features.
+- MDX everywhere: all content authored in MDX, React components imported for rich layouts.
+- Express proxy for xAI Grok API (optional, not part of Gatsby build).
+- Three-layer design system: Theme UI, global CSS, Tailwind utilities.
+- Accessibility: semantic headings, skip nav, focus-visible outlines, aria labels, dark-mode infrastructure.
+- Performance: static HTML/JS, CDN hosting, bundle analysis via Statoscope.
+- Security: external links use `rel="noopener noreferrer"`, Netlify forms use honeypot, proxy is rate-limited.
+- Docs-first: every major feature, workflow, and design decision is documented in detail.
+
+## Recommendations for Lean Efficiency
+
+- Keep docs current with every workflow, content, or design change.
+- Group content using tags/themes in MDX frontmatter for filtering and series.
+- Audit assets for descriptive alt text and responsive formats.
+- Expand case studies for all major projects.
+- Add JSON-LD for articles/case studies for SEO (see `docs/structured-data.md`).
+- Consider breadcrumbs for long-form content and role pages (see `docs/breadcrumbs.md`).
+
+## See Also
+
+- [README.md](../README.md): Entry point and documentation map.
+- [Architecture](./architecture.md): Technical structure, Gatsby layers, component map.
+- [Development](./development.md): Workflow, scripts, troubleshooting, deployment.
+- [Content Authoring](./content-authoring.md): MDX structure, frontmatter, imports.
+- [Styling](./styling.md): Theme UI, global CSS, Tailwind, design system.
+- [Overview Section](./overview-section.md): Homepage interactive section.
+- [Redesign Concept](./redesign-concept.md): Visual/UX philosophy, wireframes.
+- [Audit Inventory](./audit-inventory.md): Content themes, gaps, recommendations.
+- [Breadcrumbs](./breadcrumbs.md): Navigation strategy (new).
+- [Structured Data](./structured-data.md): SEO and rich snippets (new).

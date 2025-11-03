@@ -101,3 +101,40 @@ Further detail is available under `docs/`:
 - `docs/site-review.md` – living review of UX, performance, and outstanding opportunities.
 
 Keep these files current when you change workflows or add new features so future contributors can ramp up quickly.
+
+---
+
+## Noteworthy/Unusual Aspects
+
+- **Theme shadowing:** Extensive use of Gatsby theme shadowing for custom layout, navigation, and blog features.
+- **MDX everywhere:** All content (pages, posts, roles, projects) authored in MDX, with React components imported for rich layouts.
+- **Express proxy:** Optional Node.js proxy for xAI Grok API, not part of Gatsby build.
+- **Design system:** Three-layer styling (Theme UI, global CSS, Tailwind utilities) for maximum flexibility and consistency.
+- **Accessibility:** Semantic headings, skip nav, focus-visible outlines, aria labels, and dark-mode infrastructure (toggle currently disabled).
+- **Performance:** Static HTML/JS output, CDN hosting, bundle analysis via Statoscope.
+- **Security:** All external links use `rel="noopener noreferrer"`, Netlify forms use honeypot, proxy is rate-limited.
+- **Docs-first:** Every major feature, workflow, and design decision is documented in detail.
+
+## Recommendations for Lean Efficiency
+
+- **Keep docs current:** Update documentation with every workflow, content, or design change.
+- **Group content:** Use tags/themes in MDX frontmatter for filtering and series.
+- **Audit assets:** Ensure all images have descriptive alt text and responsive formats.
+- **Expand case studies:** Add deep-dive pages for all major projects.
+- **Structured data:** Add JSON-LD for articles and case studies for SEO (see `docs/structured-data.md`).
+- **Breadcrumbs:** Consider for long-form content and role pages (see `docs/breadcrumbs.md`).
+
+## Documentation Map & Cross-links
+
+- [Architecture](docs/architecture.md): Technical structure, Gatsby layers, component map.
+- [Development](docs/development.md): Workflow, scripts, troubleshooting, deployment.
+- [Content Authoring](docs/content-authoring.md): MDX structure, frontmatter, imports.
+- [Styling](docs/styling.md): Theme UI, global CSS, Tailwind, design system.
+- [Site Review](docs/site-review.md): UX, accessibility, performance, opportunities.
+- [Overview Section](docs/overview-section.md): Homepage interactive section.
+- [Redesign Concept](docs/redesign-concept.md): Visual/UX philosophy, wireframes.
+- [Audit Inventory](docs/audit-inventory.md): Content themes, gaps, recommendations.
+- [Breadcrumbs](docs/breadcrumbs.md): Navigation strategy (new).
+- [Structured Data](docs/structured-data.md): SEO and rich snippets (new).
+
+See each doc for further cross-links and details. Keep this README as the entry point for all documentation.
