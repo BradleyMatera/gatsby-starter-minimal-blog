@@ -5,16 +5,43 @@ export function useScrollReveal(delay = 0) {
   const [revealed, setRevealed] = useState(false);
 
   useEffect(() => {
+    if (typeof window === "undefined") {
+      setRevealed(true);
+      return;
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      setRevealed(true);
+      return;
+    }
+
+    const element = ref.current;
+    if (!element) {
+      setRevealed(true);
+      return;
+    }
+
+    let timeoutId: number | null = null;
     const observer = new window.IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setTimeout(() => setRevealed(true), delay);
+          timeoutId = window.setTimeout(() => {
+            setRevealed(true);
+            observer.unobserve(entry.target);
+          }, delay);
         }
       },
       { threshold: 0.3 }
     );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
+
+    observer.observe(element);
+
+    return () => {
+      if (timeoutId !== null) {
+        window.clearTimeout(timeoutId);
+      }
+      observer.disconnect();
+    };
   }, [delay]);
 
   return { ref, revealed };

@@ -4,12 +4,14 @@ import { useScrollReveal } from "../home/useScrollReveal";
 
 type SectionProps = {
   id?: string;
-  eyebrow?: string;
+  eyebrow?: React.ReactNode;
   title?: string;
   description?: React.ReactNode;
   titleAs?: keyof JSX.IntrinsicElements;
   actions?: React.ReactNode;
   className?: string;
+  disableReveal?: boolean;
+  revealDelay?: number;
   children: React.ReactNode;
 };
 
@@ -21,9 +23,12 @@ const Section = ({
   titleAs: TitleTag = "h2",
   actions,
   className,
+  disableReveal = false,
+  revealDelay = 0,
   children,
 }: SectionProps) => {
-  const { ref, revealed } = useScrollReveal(0);
+  const { ref, revealed } = useScrollReveal(revealDelay);
+  const isVisible = disableReveal || revealed;
   let descriptionMarkup: React.ReactNode = null;
 
   if (description) {
@@ -36,8 +41,8 @@ const Section = ({
       ref={ref as React.RefObject<HTMLElement>}
       className={cx("section-shell", className)}
       style={{
-        opacity: revealed ? 1 : 0,
-        transform: revealed ? "translateY(0)" : "translateY(32px)",
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? "translateY(0)" : "translateY(32px)",
         transition: "opacity 0.7s cubic-bezier(.22,.9,.2,1), transform 0.7s cubic-bezier(.22,.9,.2,1)",
       }}
     >

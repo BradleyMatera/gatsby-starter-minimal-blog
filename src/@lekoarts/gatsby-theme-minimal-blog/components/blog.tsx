@@ -7,6 +7,7 @@ import useMinimalBlogConfig from "../hooks/use-minimal-blog-config";
 import replaceSlashes from "../utils/replaceSlashes";
 import Seo from "./seo";
 import BlogAccent from "../../../components/BlogAccent";
+import { Section } from "../../../components/ui";
 
 declare global {
   interface Window {
@@ -56,6 +57,11 @@ const Blog = ({ posts }: MBBlogProps) => {
     });
     return Array.from(all.values()).sort((a, b) => b.count - a.count);
   }, [posts]);
+
+  const activeTagMeta = React.useMemo(() => {
+    if (!activeTag) return null;
+    return tags.find((tag) => tag.slug === activeTag) ?? null;
+  }, [activeTag, tags]);
 
   React.useEffect(() => {
     if (typeof window === "undefined") return;
@@ -122,97 +128,122 @@ const Blog = ({ posts }: MBBlogProps) => {
     setActiveTag(tagSlug);
   };
 
+  const trimmedQuery = query.trim();
+  const resultCount = filtered.length;
+  const resultLabel = resultCount === 1 ? "article" : "articles";
+  const listingTitle = activeTagMeta
+    ? `Posts tagged #${activeTagMeta.name}`
+    : trimmedQuery
+    ? "Search results"
+    : "Latest articles";
+  const listingDescription = trimmedQuery || activeTagMeta
+    ? `Showing ${resultCount} ${resultLabel}${trimmedQuery ? ` matching "${trimmedQuery}"` : ""}${activeTagMeta ? ` in #${activeTagMeta.name}` : ""}.`
+    : "Latest writing on accessible cloud systems, production tooling, and field experiments.";
+
   return (
     <Layout>
-      <BlogAccent />
-      <header className="section-shell__header" style={{ marginBottom: "1.5rem" }}>
-        <span className="eyebrow">Blog</span>
-        <h1 className="section-title">Field notes, experiments, and project retrospectives</h1>
-        <p className="section-lead">
-          I write quick breakdowns of problems I solve and cool tech I’m learning. Nothing long. No spam. If something breaks and I fix it, I write about it.
-        </p>
-      </header>
-
-      <div className="surface-card surface-card--muted" style={{ marginBottom: "clamp(1.5rem, 3vw, 2.5rem)" }}>
-        <form
-          className="search-bar"
-          role="search"
-          onSubmit={(event) => {
-            event.preventDefault();
-            const formData = new FormData(event.currentTarget);
-            const value = formData.get("q");
-            setQuery(typeof value === "string" ? value : "");
-          }}
-        >
-          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24">
-            <path
-              fill="currentColor"
-              d="M15.5 14h-.79l-.28-.27a6 6 0 10-.71.71l.27.28v.79l5 5a1 1 0 001.41-1.41zm-5.5 0a4 4 0 114-4 4 4 0 01-4 4z"
+      <Section
+        className="blog-intro"
+        eyebrow="Blog"
+        title="Field notes, experiments, and project retrospectives"
+        disableReveal
+        description={
+          <p className="section-lead">
+            I write quick breakdowns of problems I solve and cool tech I’m learning. Nothing long. No spam. If something breaks and I fix it, I write about it.
+          </p>
+        }
+      >
+        <div className="blog-search-accent">
+          <BlogAccent />
+        </div>
+        <div className="surface-card surface-card--muted blog-search-card">
+          <form
+            className="search-bar"
+            role="search"
+            onSubmit={(event) => {
+              event.preventDefault();
+              const formData = new FormData(event.currentTarget);
+              const value = formData.get("q");
+              setQuery(typeof value === "string" ? value : "");
+            }}
+          >
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+              <path
+                fill="currentColor"
+                d="M15.5 14h-.79l-.28-.27a6 6 0 10-.71.71l.27.28v.79l5 5a1 1 0 001.41-1.41zm-5.5 0a4 4 0 114-4 4 4 0 01-4 4z"
+              />
+            </svg>
+            <label htmlFor="blog-search" className="sr-only">
+              Search blog posts
+            </label>
+            <input
+              id="blog-search"
+              name="q"
+              type="search"
+              placeholder="Search posts by topic, technology, or keyword"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
             />
-          </svg>
-          <label htmlFor="blog-search" className="sr-only">
-            Search blog posts
-          </label>
-          <input
-            id="blog-search"
-            name="q"
-            type="search"
-            placeholder="Search posts by topic, technology, or keyword"
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-          />
-        </form>
-        {tags.length > 0 ? (
-          <div className="project-gallery__filters" style={{ marginTop: "1rem" }}>
-            <Link
-              to={replaceSlashes(`/${basePath}/${blogPath}`)}
-              className="filter-pill"
-              data-active={!activeTag}
-              aria-current={!activeTag ? "page" : undefined}
-              onClick={(event) => handleTagLinkClick(event, null)}
-            >
-              All topics ({posts.length})
-            </Link>
-            {tags.map((tag) => (
+          </form>
+          {tags.length > 0 ? (
+            <div className="project-gallery__filters blog-filter-list">
               <Link
-                key={tag.slug}
-                to={replaceSlashes(`/${basePath}/${tagsPath}/${tag.slug}`)}
+                to={replaceSlashes(`/${basePath}/${blogPath}`)}
                 className="filter-pill"
-                data-active={activeTag === tag.slug}
-                aria-current={activeTag === tag.slug ? "page" : undefined}
-                onClick={(event) =>
-                  handleTagLinkClick(event, activeTag === tag.slug ? null : tag.slug)
-                }
+                data-active={!activeTag}
+                aria-current={!activeTag ? "page" : undefined}
+                onClick={(event) => handleTagLinkClick(event, null)}
               >
-                {tag.name} ({tag.count})
+                All topics ({posts.length})
               </Link>
-            ))}
-            <Link
-              className="card-link"
-              to={replaceSlashes(`/${basePath}/${tagsPath}`)}
-              style={{ marginLeft: "auto" }}
-            >
-              Browse all blog tags →
-            </Link>
-          </div>
+              {tags.map((tag) => (
+                <Link
+                  key={tag.slug}
+                  to={replaceSlashes(`/${basePath}/${tagsPath}/${tag.slug}`)}
+                  className="filter-pill"
+                  data-active={activeTag === tag.slug}
+                  aria-current={activeTag === tag.slug ? "page" : undefined}
+                  onClick={(event) =>
+                    handleTagLinkClick(event, activeTag === tag.slug ? null : tag.slug)
+                  }
+                >
+                  {tag.name} ({tag.count})
+                </Link>
+              ))}
+              <Link
+                className="card-link blog-filter-more"
+                to={replaceSlashes(`/${basePath}/${tagsPath}`)}
+              >
+                Browse all blog tags →
+              </Link>
+            </div>
+          ) : null}
+        </div>
+      </Section>
+
+      <Section
+        id="latest-articles"
+        title={listingTitle}
+        description={<p className="section-lead">{listingDescription}</p>}
+        className="blog-listing-section"
+        disableReveal
+      >
+        <Listing posts={filtered} className="blog-listing" />
+
+        {filtered.length === 0 ? (
+          <p className="section-lead">
+            No posts match your filters yet. Try a different keyword or explore the tag directory.
+          </p>
         ) : null}
-      </div>
-
-      <Listing posts={filtered} id="latest-articles" />
-
-      {filtered.length === 0 ? (
-        <p className="section-lead" style={{ marginTop: "1.5rem" }}>
-          No posts match your filters yet. Try a different keyword or explore the tag directory.
-        </p>
-      ) : null}
-      <noscript>
-        <p className="section-lead" style={{ marginTop: "1.5rem" }}>
-          JavaScript is disabled, so interactive filtering is unavailable. Browse all tags instead:
-          <a className="card-link" href={replaceSlashes(`/${basePath}/${tagsPath}`)}>
-            View all tags →
-          </a>
-        </p>
-      </noscript>
+        <noscript>
+          <p className="section-lead">
+            JavaScript is disabled, so interactive filtering is unavailable. Browse all tags instead:
+            <a className="card-link" href={replaceSlashes(`/${basePath}/${tagsPath}`)}>
+              View all tags →
+            </a>
+          </p>
+        </noscript>
+      </Section>
     </Layout>
   );
 };

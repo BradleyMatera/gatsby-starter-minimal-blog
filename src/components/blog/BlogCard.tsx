@@ -3,6 +3,7 @@ import { Link } from "gatsby";
 import useMinimalBlogConfig from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-minimal-blog-config";
 import replaceSlashes from "../../@lekoarts/gatsby-theme-minimal-blog/utils/replaceSlashes";
 import TinyDotClusterAccent from "../TinyDotClusterAccent";
+import { useScrollReveal } from "../home/useScrollReveal";
 
 type BlogTag = {
   name: string;
@@ -31,9 +32,19 @@ const formatExcerpt = (excerpt: string, maxLength = 180) => {
 const BlogCard = ({ post, showTags = true }: BlogCardProps) => {
   const { tagsPath, basePath } = useMinimalBlogConfig();
   const initial = post.title ? post.title.charAt(0).toUpperCase() : "•";
+  const { ref, revealed } = useScrollReveal(0);
 
   return (
-    <article className="blog-card" style={{ position: "relative" }}>
+    <article
+      ref={ref as React.RefObject<HTMLElement>}
+      className="blog-card"
+      style={{
+        position: "relative",
+        opacity: revealed ? 1 : 0,
+        transform: revealed ? "translateY(0)" : "translateY(32px)",
+        transition: "opacity 0.7s cubic-bezier(.22,.9,.2,1), transform 0.7s cubic-bezier(.22,.9,.2,1)",
+      }}
+    >
       <TinyDotClusterAccent />
       <header className="blog-card__header">
         <span className="blog-card__avatar" aria-hidden="true">

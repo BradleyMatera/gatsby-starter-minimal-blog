@@ -6,6 +6,8 @@ import Layout from "./layout";
 import ItemTags from "./item-tags";
 import Seo from "./seo";
 import PostFooter from "./post-footer";
+import BlogAccent from "../../../components/BlogAccent";
+import { Section } from "../../../components/ui";
 
 export type MBPostProps = {
   post: {
@@ -54,45 +56,50 @@ const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({ data:
 
   return (
     <Layout>
-      <article className="surface-card" itemScope itemType="http://schema.org/Article">
-        <header sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-          <span className="eyebrow">Blog post</span>
-          <Heading as="h1" className="section-title" sx={{ mb: 0 }} itemProp="headline">
-            {post.title}
-          </Heading>
-          <div className="post-meta">
-            <span>
-              <time dateTime={post.date} itemProp="datePublished">
-                {post.date}
-              </time>
-            </span>
-            {typeof post.timeToRead === "number" ? <span>{post.timeToRead} min read</span> : null}
-            {post.tags ? <ItemTags tags={post.tags} /> : null}
-          </div>
-        </header>
-
-        <div className="post-layout">
-          <section className="post-content" itemProp="articleBody">
-            {children}
-          </section>
-          {tocItems.length > 1 ? (
-            <aside className="toc" aria-label="Table of contents">
-              <p className="toc__title">On this page</p>
-              <nav>
-                <ul className="toc__list">
-                  {tocItems.map((item) => (
-                    <li key={item.id} style={{ paddingLeft: item.level === 3 ? "0.75rem" : 0 }}>
-                      <a href={`#${item.id}`}>{item.text}</a>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-            </aside>
-          ) : null}
+      <Section className="post-entry" disableReveal>
+        <div className="blog-search-accent">
+          <BlogAccent />
         </div>
+        <article className="surface-card" itemScope itemType="http://schema.org/Article">
+          <header sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+            <span className="eyebrow">Blog post</span>
+            <Heading as="h1" className="section-title" sx={{ mb: 0 }} itemProp="headline">
+              {post.title}
+            </Heading>
+            <div className="post-meta">
+              <span>
+                <time dateTime={post.date} itemProp="datePublished">
+                  {post.date}
+                </time>
+              </span>
+              {typeof post.timeToRead === "number" ? <span>{post.timeToRead} min read</span> : null}
+              {post.tags ? <ItemTags tags={post.tags} /> : null}
+            </div>
+          </header>
 
-        <PostFooter post={post} />
-      </article>
+          <div className="post-layout">
+            <section className="post-content" itemProp="articleBody">
+              {children}
+            </section>
+            {tocItems.length > 1 ? (
+              <aside className="toc" aria-label="Table of contents">
+                <p className="toc__title">On this page</p>
+                <nav>
+                  <ul className="toc__list">
+                    {tocItems.map((item) => (
+                      <li key={item.id} style={{ paddingLeft: item.level === 3 ? "0.75rem" : 0 }}>
+                        <a href={`#${item.id}`}>{item.text}</a>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              </aside>
+            ) : null}
+          </div>
+
+          <PostFooter post={post} />
+        </article>
+      </Section>
     </Layout>
   );
 };
