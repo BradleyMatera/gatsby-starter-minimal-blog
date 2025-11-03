@@ -1,9 +1,6 @@
-<>
 import HomeHero from "../../../components/home/HomeHero";
 import { Section, ProjectCard } from "../../../components/ui";
 import { Link } from "gatsby";
-
-<HomeHero />
 
 import TinyCloudAccent from "../components/TinyCloudAccent";
 import TinyMedalAccent from "../components/TinyMedalAccent";
@@ -13,8 +10,11 @@ import TinyGoalAccent from "../components/TinyGoalAccent";
 import TinyDotClusterAccent from "../../../components/TinyDotClusterAccent";
 import TinyTriangleAccent from "../../../components/TinyTriangleAccent";
 import BlogAccent from "../../../components/BlogAccent";
-import NavSystemBadge from "../../../components/NavSystemBadge";
 import StatusRow from "../../../components/ui/StatusRow";
+
+<>
+
+<HomeHero />
 
 <Section
   eyebrow={<span style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}><TinyCloudAccent />Quick overview</span>}
@@ -178,16 +178,24 @@ import StatusRow from "../../../components/ui/StatusRow";
   <div className="surface-card surface-card--outline reveal" style={{ transitionDelay: "0.1s" }}>
     <h3 className="feature-card__title">Quick ways to connect</h3>
     <ul className="feature-list">
-      <li className="reveal" style={{ transitionDelay: "0.2s", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-        <NavSystemBadge />
-        <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/bradmatera" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" style={{ transition: "transform 0.2s" }}>/in/bradmatera</a>
+      <li className="reveal" style={{ transitionDelay: "0.2s" }}>
+        <strong>LinkedIn:</strong>{" "}
+        <a href="https://www.linkedin.com/in/bradmatera" target="_blank" rel="noopener noreferrer">
+          /in/bradmatera
+        </a>
       </li>
-      <li className="reveal" style={{ transitionDelay: "0.3s", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-        <TinyTriangleAccent />
-        <strong>GitHub:</strong> <a href="https://github.com/BradleyMatera" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile" style={{ transition: "transform 0.2s" }}>@BradleyMatera</a>
+      <li className="reveal" style={{ transitionDelay: "0.3s" }}>
+        <strong>GitHub:</strong>{" "}
+        <a href="https://github.com/BradleyMatera" target="_blank" rel="noopener noreferrer">
+          @BradleyMatera
+        </a>
       </li>
       <li className="reveal" style={{ transitionDelay: "0.4s" }}>
         <strong>YouTube:</strong> <a href="https://www.youtube.com/@bradmatera" target="_blank" rel="noopener noreferrer" aria-label="YouTube channel" style={{ transition: "transform 0.2s" }}>@bradmatera</a>
+      </li>
+      <li className="reveal" style={{ transitionDelay: "0.5s" }}>
+        <strong>Email:</strong>{" "}
+        <a href="mailto:bradmatera@gmail.com">bradmatera@gmail.com</a>
       </li>
     </ul>
   </div>

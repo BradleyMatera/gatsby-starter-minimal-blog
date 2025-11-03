@@ -11,53 +11,69 @@ const TinyMedalAccent: React.FC = () => {
   const mountRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const width = 32;
-    const height = 32;
+    if (!mountRef.current) {
+      return;
+    }
 
-    // Scene
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(BG_COLOR);
-
-    // Camera
-    const camera = new THREE.OrthographicCamera(0, width, height, 0, -10, 10);
-
-    // Renderer
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
-    renderer.setSize(width, height);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    mountRef.current?.appendChild(renderer.domElement);
-
-    // Medal: circle + ribbon
-    const medalGeo = new THREE.CircleGeometry(10, 24);
-    const medalMat = new THREE.MeshBasicMaterial({ color: ACCENT_GOLD });
-    const medal = new THREE.Mesh(medalGeo, medalMat);
-    medal.position.set(16, 16, 0);
-    scene.add(medal);
-
-    // Ribbon
-    const ribbonGeo = new THREE.BoxGeometry(4, 10, 1);
-    const ribbonMat = new THREE.MeshBasicMaterial({ color: "#e23b2d" });
-    const ribbon = new THREE.Mesh(ribbonGeo, ribbonMat);
-    ribbon.position.set(16, 26, 0);
-    scene.add(ribbon);
-
-    // Animation loop
+    const mountNode = mountRef.current;
     let frameId: number;
-    let time = 0;
-    const animate = () => {
-      time += 0.016;
-      medal.position.y = 16 + Math.sin(time * 1.2) * 1.2;
-      ribbon.position.y = 26 + Math.cos(time * 1.4) * 1.1;
-      renderer.render(scene, camera);
-      frameId = requestAnimationFrame(animate);
-    };
-    animate();
+    let renderer: THREE.WebGLRenderer;
 
-    // Cleanup
+    try {
+      const width = 32;
+      const height = 32;
+
+      if (mountNode.clientWidth === 0 || mountNode.clientHeight === 0) {
+        console.warn("TinyMedalAccent: mount node has zero dimensions.");
+        return;
+      }
+
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(BG_COLOR);
+
+      const camera = new THREE.OrthographicCamera(0, width, height, 0, -10, 10);
+
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: "high-performance" });
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(window.devicePixelRatio);
+      mountNode.appendChild(renderer.domElement);
+
+      const medalGeo = new THREE.CircleGeometry(10, 24);
+      const medalMat = new THREE.MeshBasicMaterial({ color: ACCENT_GOLD });
+      const medal = new THREE.Mesh(medalGeo, medalMat);
+      medal.position.set(16, 16, 0);
+      scene.add(medal);
+
+      const ribbonGeo = new THREE.BoxGeometry(4, 10, 1);
+      const ribbonMat = new THREE.MeshBasicMaterial({ color: "#e23b2d" });
+      const ribbon = new THREE.Mesh(ribbonGeo, ribbonMat);
+      ribbon.position.set(16, 26, 0);
+      scene.add(ribbon);
+
+      let time = 0;
+      const animate = () => {
+        time += 0.016;
+        medal.position.y = 16 + Math.sin(time * 1.2) * 1.2;
+        ribbon.position.y = 26 + Math.cos(time * 1.4) * 1.1;
+        renderer.render(scene, camera);
+        frameId = requestAnimationFrame(animate);
+      };
+      animate();
+
+    } catch (error) {
+      console.error("Error initializing TinyMedalAccent scene:", error);
+    }
+
     return () => {
-      cancelAnimationFrame(frameId);
-      mountRef.current?.removeChild(renderer.domElement);
-      renderer.dispose();
+      if (frameId) {
+        cancelAnimationFrame(frameId);
+      }
+      if (renderer) {
+        if (renderer.domElement.parentNode === mountNode) {
+          mountNode.removeChild(renderer.domElement);
+        }
+        renderer.dispose();
+      }
     };
   }, []);
 
