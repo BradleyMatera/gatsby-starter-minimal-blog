@@ -31,10 +31,12 @@ export type MBBlogProps = {
 };
 
 const Blog = ({ posts }: MBBlogProps) => {
+  const PAGE_SIZE = 5;
   const { tagsPath, basePath, blogPath } = useMinimalBlogConfig();
   const location = useLocation();
   const [query, setQuery] = React.useState("");
   const [activeTag, setActiveTag] = React.useState<string | null>(null);
+  const [page, setPage] = React.useState(1);
 
   const tags = React.useMemo(() => {
     const all = new Map<
@@ -68,8 +70,15 @@ const Blog = ({ posts }: MBBlogProps) => {
     const params = new URLSearchParams(window.location.search);
     const initialQuery = params.get("q") ?? "";
     const initialTag = params.get("tag");
+    const initialPage = params.get("page");
     setQuery(initialQuery);
-    setActiveTag(initialTag);
+    setActiveTag(initialTag || null);
+    if (initialPage) {
+      const parsed = parseInt(initialPage, 10);
+      if (!Number.isNaN(parsed) && parsed > 0) {
+        setPage(parsed);
+      }
+    }
   }, []);
 
   React.useEffect(() => {
@@ -85,10 +94,15 @@ const Blog = ({ posts }: MBBlogProps) => {
     } else {
       params.delete("tag");
     }
+    if (page > 1) {
+      params.set("page", String(page));
+    } else {
+      params.delete("page");
+    }
     const search = params.toString();
     const url = search ? `${location.pathname}?${search}` : location.pathname;
     window.history.replaceState({}, "", url);
-  }, [query, activeTag, location.pathname]);
+  }, [query, activeTag, location.pathname, page]);
 
   React.useEffect(() => {
     const term = query.trim();
@@ -120,13 +134,18 @@ const Blog = ({ posts }: MBBlogProps) => {
     });
   }, [posts, query, activeTag]);
 
-  const handleTagLinkClick = (event: React.MouseEvent<HTMLAnchorElement>, tagSlug: string | null) => {
-    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) {
-      return;
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+
+  React.useEffect(() => {
+    if (page > totalPages) {
+      setPage(totalPages);
     }
-    event.preventDefault();
-    setActiveTag(tagSlug);
-  };
+  }, [page, totalPages]);
+
+  const paginated = React.useMemo(() => {
+    const start = (page - 1) * PAGE_SIZE;
+    return filtered.slice(start, start + PAGE_SIZE);
+  }, [filtered, page]);
 
   const trimmedQuery = query.trim();
   const resultCount = filtered.length;
@@ -136,9 +155,17 @@ const Blog = ({ posts }: MBBlogProps) => {
     : trimmedQuery
     ? "Search results"
     : "Latest articles";
-  const listingDescription = trimmedQuery || activeTagMeta
-    ? `Showing ${resultCount} ${resultLabel}${trimmedQuery ? ` matching "${trimmedQuery}"` : ""}${activeTagMeta ? ` in #${activeTagMeta.name}` : ""}.`
-    : "Latest writing on accessible cloud systems, production tooling, and field experiments.";
+  const displayStart = resultCount === 0 ? 0 : (page - 1) * PAGE_SIZE + 1;
+  const displayEnd = resultCount === 0 ? 0 : Math.min(resultCount, displayStart + paginated.length - 1);
+  const qualifiers = [
+    trimmedQuery ? `matching "${trimmedQuery}"` : "",
+    activeTagMeta ? `in #${activeTagMeta.name}` : "",
+  ].filter(Boolean);
+  const listingDescription = resultCount === 0
+    ? trimmedQuery || activeTagMeta
+      ? `No ${resultLabel} ${qualifiers.join(" ")}.`
+      : "No articles available yet."
+    : `${`Showing ${displayStart}–${displayEnd} of ${resultCount} ${resultLabel}`}${qualifiers.length ? ` ${qualifiers.join(" ")}` : ""}.`;
 
   return (
     <Layout>
@@ -157,14 +184,18 @@ const Blog = ({ posts }: MBBlogProps) => {
           <BlogAccent />
         </div>
         <div className="surface-card surface-card--muted blog-search-card">
-          <form
-            className="search-bar"
+          <div className="blog-filter-controls">
+            <form
+              className="search-bar blog-filter-controls__search"
             role="search"
             onSubmit={(event) => {
               event.preventDefault();
               const formData = new FormData(event.currentTarget);
               const value = formData.get("q");
-              setQuery(typeof value === "string" ? value : "");
+              if (typeof value === "string") {
+                setQuery(value);
+                setPage(1);
+              }
             }}
           >
             <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24">
@@ -182,42 +213,42 @@ const Blog = ({ posts }: MBBlogProps) => {
               type="search"
               placeholder="Search posts by topic, technology, or keyword"
               value={query}
-              onChange={(event) => setQuery(event.target.value)}
+              onChange={(event) => {
+                setQuery(event.target.value);
+                setPage(1);
+              }}
             />
-          </form>
-          {tags.length > 0 ? (
-            <div className="project-gallery__filters blog-filter-list">
-              <Link
-                to={replaceSlashes(`/${basePath}/${blogPath}`)}
-                className="filter-pill"
-                data-active={!activeTag}
-                aria-current={!activeTag ? "page" : undefined}
-                onClick={(event) => handleTagLinkClick(event, null)}
-              >
-                All topics ({posts.length})
-              </Link>
-              {tags.map((tag) => (
-                <Link
-                  key={tag.slug}
-                  to={replaceSlashes(`/${basePath}/${tagsPath}/${tag.slug}`)}
-                  className="filter-pill"
-                  data-active={activeTag === tag.slug}
-                  aria-current={activeTag === tag.slug ? "page" : undefined}
-                  onClick={(event) =>
-                    handleTagLinkClick(event, activeTag === tag.slug ? null : tag.slug)
-                  }
+            </form>
+            {tags.length > 0 ? (
+              <div className="blog-filter-controls__select">
+                <label htmlFor="blog-tag-select" className="sr-only">
+                  Filter by tag
+                </label>
+                <select
+                  id="blog-tag-select"
+                  value={activeTag ?? ""}
+                  onChange={(event) => {
+                    const value = event.target.value;
+                    setActiveTag(value ? value : null);
+                    setPage(1);
+                  }}
                 >
-                  {tag.name} ({tag.count})
-                </Link>
-              ))}
-              <Link
-                className="card-link blog-filter-more"
-                to={replaceSlashes(`/${basePath}/${tagsPath}`)}
-              >
-                Browse all blog tags →
-              </Link>
-            </div>
-          ) : null}
+                  <option value="">All topics ({posts.length})</option>
+                  {tags.map((tag) => (
+                    <option key={tag.slug} value={tag.slug}>
+                      {`${tag.name} (${tag.count})`}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            ) : null}
+            <Link
+              className="card-link blog-filter-more"
+              to={replaceSlashes(`/${basePath}/${tagsPath}`)}
+            >
+              Browse all blog tags →
+            </Link>
+          </div>
         </div>
       </Section>
 
@@ -228,12 +259,33 @@ const Blog = ({ posts }: MBBlogProps) => {
         className="blog-listing-section"
         disableReveal
       >
-        <Listing posts={filtered} className="blog-listing" />
+        <Listing posts={paginated} className="blog-listing" />
 
         {filtered.length === 0 ? (
           <p className="section-lead">
             No posts match your filters yet. Try a different keyword or explore the tag directory.
           </p>
+        ) : null}
+        {filtered.length > 0 && totalPages > 1 ? (
+          <nav className="blog-pagination" aria-label="Pagination">
+            <button
+              type="button"
+              onClick={() => setPage((prev) => Math.max(1, prev - 1))}
+              disabled={page === 1}
+            >
+              Previous
+            </button>
+            <span>
+              Page {page} of {totalPages}
+            </span>
+            <button
+              type="button"
+              onClick={() => setPage((prev) => Math.min(totalPages, prev + 1))}
+              disabled={page === totalPages}
+            >
+              Next
+            </button>
+          </nav>
         ) : null}
         <noscript>
           <p className="section-lead">

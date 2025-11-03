@@ -1583,20 +1583,204 @@ img {
   display: grid;
   gap: clamp(0.85rem, 1.8vw, 1.4rem);
 }
-
-.blog-filter-list {
-  width: 100%;
+.blog-filter-controls {
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  margin-top: 0.5rem;
-  gap: clamp(0.6rem, 1.4vw, 0.9rem);
+  gap: 0.75rem;
+}
+
+.blog-filter-controls__search {
+  flex: 1 1 220px;
+  max-width: 420px;
+  width: 100%;
+}
+
+.blog-filter-controls__search input {
+  width: 100%;
+}
+
+.blog-filter-controls__select {
+  flex: 0 1 220px;
+  position: relative;
+}
+
+.blog-filter-controls__select select {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-weight: 600;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.blog-filter-controls__select select:focus-visible {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
 }
 
 .blog-filter-more {
   margin-left: auto;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .blog-filter-controls {
+    align-items: stretch;
+  }
+  .blog-filter-controls__search,
+  .blog-filter-controls__select,
+  .blog-filter-more {
+    flex: 1 1 100%;
+  }
+  .blog-filter-more {
+    display: inline-flex;
+    justify-content: flex-end;
+  }
 }
 
 .blog-listing-section .section-content {
   gap: clamp(1.5rem, 2.4vw, 2.4rem);
+}
+
+.blog-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: clamp(1rem, 1.5vw, 1.5rem);
+}
+
+.blog-pagination button {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  padding: 0.55rem 1.2rem;
+  border-radius: 999px;
+  font-weight: 600;
+  transition: border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+  cursor: pointer;
+}
+
+.blog-pagination button:hover:enabled,
+.blog-pagination button:focus-visible {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  outline: none;
+}
+
+.blog-pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 640px) {
+  .blog-pagination {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .blog-pagination span {
+    text-align: center;
+  }
+}
+
+.blog-accent {
+  width: 100%;
+  height: 48px;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  overflow: hidden;
+  background: linear-gradient(90deg, rgba(226, 59, 45, 0.08), rgba(226, 59, 45, 0.02));
+  position: relative;
+}
+
+.blog-accent__wave {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0,
+    transparent 12px,
+    rgba(226, 59, 45, 0.35) 12px,
+    rgba(226, 59, 45, 0.35) 14px
+  );
+  opacity: 0.75;
+  animation: blogAccentDrift 6s linear infinite;
+}
+
+@keyframes blogAccentDrift {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-24px);
+  }
+}
+
+.tiny-dot-cluster {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: #fff;
+  overflow: hidden;
+  display: block;
+}
+
+.tiny-dot-cluster span {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #cbd5f5;
+  animation: tinyDotFloat 3s ease-in-out infinite;
+}
+
+.tiny-dot-cluster span:nth-child(1) {
+  background: rgba(226, 59, 45, 0.85);
+  top: 10px;
+  left: 6px;
+  animation-delay: 0s;
+}
+
+.tiny-dot-cluster span:nth-child(2) {
+  top: 6px;
+  left: 13px;
+  animation-delay: 0.2s;
+}
+
+.tiny-dot-cluster span:nth-child(3) {
+  top: 15px;
+  left: 18px;
+  animation-delay: 0.4s;
+}
+
+.tiny-dot-cluster span:nth-child(4) {
+  top: 20px;
+  left: 10px;
+  animation-delay: 0.6s;
+}
+
+.tiny-dot-cluster span:nth-child(5) {
+  top: 8px;
+  left: 22px;
+  animation-delay: 0.8s;
+}
+
+@keyframes tinyDotFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
 }
 
 .contact-card {
