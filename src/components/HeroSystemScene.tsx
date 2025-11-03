@@ -48,6 +48,11 @@ const HeroSystemScene: React.FC = () => {
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(width, height);
     renderer.setPixelRatio(window.devicePixelRatio);
+    // Force canvas to stay contained
+    renderer.domElement.style.position = 'relative';
+    renderer.domElement.style.display = 'block';
+    renderer.domElement.style.maxWidth = '100%';
+    renderer.domElement.style.maxHeight = '100%';
     mountRef.current?.appendChild(renderer.domElement);
 
     // Lighting
@@ -242,31 +247,39 @@ const HeroSystemScene: React.FC = () => {
 
   return (
     <div style={{
-      display: "flex",
-      flexDirection: "row",
-      alignItems: "center",
+      position: "relative",
+      overflow: "hidden",
       width: "100%",
       height: `${height}px`,
-      maxWidth: "100vw",
-      margin: "0 auto",
-      marginBottom: "20px",
-      background: BG_COLOR,
-      borderRadius: "12px",
-      overflow: "hidden",
-      boxShadow: "0 4px 16px rgba(0,0,0,0.06)",
-      gap: "2rem"
+      marginTop: "8px",
+      marginBottom: "16px"
     }}>
-      <div ref={mountRef} style={{ width: "96px", height: "96px", flexShrink: 0 }} />
       <div style={{
-        textAlign: "left",
-        color: "#000",
-        fontFamily: "'Space Grotesk Variable', 'Montserrat', sans-serif",
-        fontWeight: 700,
-        fontSize: "1.6rem",
-        letterSpacing: "-0.02em",
-        textShadow: "0 2px 12px #fff"
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        width: "100%",
+        height: `${height}px`,
+        maxWidth: "100vw",
+        margin: "0 auto",
+        background: BG_COLOR,
+        borderRadius: "12px",
+        overflow: "hidden",
+        boxShadow: "0 4px 16px rgba(0,0,0,0.06)",
+        gap: "2rem"
       }}>
-Web Development (B.S.) | Cloud Computing | AWS | Full-Stack | JavaScript | Python | AI Workflows      </div>
+        <div ref={mountRef} style={{ width: "96px", height: "96px", flexShrink: 0, position: "relative", overflow: "hidden" }} />
+        <div style={{
+          textAlign: "left",
+          color: "#000",
+          fontFamily: "'Space Grotesk Variable', 'Montserrat', sans-serif",
+          fontWeight: 700,
+          fontSize: "1.6rem",
+          letterSpacing: "-0.02em",
+          textShadow: "0 2px 12px #fff"
+        }}>
+Web Development (B.S.) | Cloud Computing | AWS | Full-Stack | JavaScript | Python | AI Workflows        </div>
+      </div>
     </div>
   );
 };

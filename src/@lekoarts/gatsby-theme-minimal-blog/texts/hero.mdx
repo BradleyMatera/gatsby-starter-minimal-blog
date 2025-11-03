@@ -146,9 +146,11 @@ import StatusRow from "../../../components/ui/StatusRow";
     <TinyTriangleAccent />
     <strong>Evidence-driven improvements.</strong> Lighthouse, Axe, and analytics checkpoints shape each iteration.
   </li>
-  <li className="reveal" style={{ transitionDelay: "0.2s", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-    <TinyDotClusterAccent />
-    <strong>Readable handoffs.</strong> I pair thoughtful commit messages with changelog notes and architecture diagrams.
+  <li className="reveal" style={{ transitionDelay: "0.2s", position: "relative", paddingRight: "3rem" }}>
+    <div><strong>Readable handoffs.</strong> I pair thoughtful commit messages with changelog notes and architecture diagrams.</div>
+    <div style={{ position: "absolute", right: "1rem", top: "50%", transform: "translateY(-50%)" }}>
+      <TinyDotClusterAccent />
+    </div>
   </li>
   <li className="reveal" style={{ transitionDelay: "0.3s", display: "flex", alignItems: "center", gap: "0.5rem" }}>
     <BlogAccent />
@@ -167,17 +169,14 @@ import StatusRow from "../../../components/ui/StatusRow";
   <div className="surface-card surface-card--outline reveal" style={{ transitionDelay: "0.1s" }}>
     <h3 className="feature-card__title">Quick ways to connect</h3>
     <ul className="feature-list">
-      <li className="reveal" style={{ transitionDelay: "0.2s", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-        <NavSystemBadge />
-        <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/bradmatera" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" style={{ transition: "transform 0.2s" }}> /in/bradmatera </a>
+      <li className="reveal" style={{ transitionDelay: "0.2s" }}>
+        <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/bradmatera" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" style={{ transition: "transform 0.2s" }}>/in/bradmatera</a>
       </li>
-      <li className="reveal" style={{ transitionDelay: "0.3s", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-        <TinyTriangleAccent />
-        <strong>GitHub:</strong> <a href="https://github.com/BradleyMatera" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile" style={{ transition: "transform 0.2s" }}> @BradleyMatera </a>
+      <li className="reveal" style={{ transitionDelay: "0.3s" }}>
+        <strong>GitHub:</strong> <a href="https://github.com/BradleyMatera" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile" style={{ transition: "transform 0.2s" }}>@BradleyMatera</a>
       </li>
-      <li className="reveal" style={{ transitionDelay: "0.4s", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-        <TinyDotClusterAccent />
-        <strong>YouTube:</strong> <a href="https://www.youtube.com/@bradmatera" target="_blank" rel="noopener noreferrer" aria-label="YouTube channel" style={{ transition: "transform 0.2s" }}> @bradmatera </a>
+      <li className="reveal" style={{ transitionDelay: "0.4s" }}>
+        <strong>YouTube:</strong> <a href="https://www.youtube.com/@bradmatera" target="_blank" rel="noopener noreferrer" aria-label="YouTube channel" style={{ transition: "transform 0.2s" }}>@bradmatera</a>
       </li>
     </ul>
   </div>
