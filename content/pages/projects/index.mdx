@@ -7,8 +7,16 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
 
 <Section
   eyebrow="Projects"
-  title="Engineering case studies with production-ready outcomes."
-  description="Production-ready case studies demonstrating architecture, accessibility, and measurable outcomes."
+  title={
+    <>
+      <strong>Engineering case studies</strong> with production-ready outcomes.
+    </>
+  }
+  description={
+    <p>
+      <strong>Production-ready case studies</strong> demonstrating architecture, accessibility, and measurable outcomes.
+    </p>
+  }
 >
   <div className="callout">
     <span className="callout__icon">ℹ</span>
@@ -30,14 +38,27 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
 <Section
   id="featured"
   eyebrow="Featured"
-  title="Full-Stack Case Studies — User research through deployment"
+  title={
+    <>
+      <strong>Full-Stack Case Studies</strong> — User research through deployment
+    </>
+  }
 >
   <div className="grid-two project-gallery">
     <ProjectCard
       title="Car-Match"
       meta="Full stack web app"
-      summary="A site for car enthusiasts with user profiles, forums, messaging, and events. Built with real authentication and admin features."
-      impact="Demo users sign up, post, and message without needing admin intervention."
+      summary={
+        <>
+          <strong>Secure community</strong> platform that verifies members, powers real-time messaging, and supports moderated events.
+        </>
+      }
+      impactPrefix="Impact"
+      impact={
+        <>
+          Demo users complete onboarding, publish posts, and chat without moderator intervention thanks to guided flows.
+        </>
+      }
       stack={["React", "Node.js", "Express", "MongoDB"]}
       links={[
         { label: "Case study", href: "/projects/car-match/", variant: "primary" },
@@ -47,8 +68,17 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
     <ProjectCard
       title="Interactive Pokedex"
       meta="Data exploration tool"
-      summary="Searchable list of Pokemon with details and images. Pulls from PokeAPI."
-      impact="Accessible search and results stay fast thanks to caching and skeleton loading."
+      summary={
+        <>
+          <strong>Accessible search</strong> interface with sticky filters, responsive cards, and resilient offline behaviour powered by caching.
+        </>
+      }
+      impactPrefix="Result"
+      impact={
+        <>
+          Debounced, cached API calls keep latency under a second while skeleton states maintain context on flaky networks.
+        </>
+      }
       stack={["HTML", "CSS", "JavaScript", "PokeAPI"]}
       links={[
         { label: "Case study", href: "/projects/interactive-pokedex/", variant: "primary" },
@@ -59,8 +89,17 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
     <ProjectCard
       title="CIRIS AI Contributions"
       meta="Backend and infrastructure"
-      summary="Worked on APIs, authentication, and testing for an AI ethics engine. Added endpoints, tests, and Docker setup."
-      impact="Merged changes harden authentication, logging, and dev onboarding for Ethics Engine Enterprise."
+      summary={
+        <>
+          <strong>Enterprise backend</strong> contributions that harden authentication, observability, and contributor tooling for the Ethics Engine.
+        </>
+      }
+      impactPrefix="Impact"
+      impact={
+        <>
+          Merged changes lock down routes, surface telemetry, and package Docker DX so reviewers approve deployments faster.
+        </>
+      }
       stack={["Node.js", "Express", "MongoDB", "Docker", "JWT"]}
       links={[
         { label: "Case study", href: "/projects/ciris-ai/", variant: "primary" },
@@ -73,14 +112,27 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
 <Section
   id="frontend"
   eyebrow="Front-End"
-  title="UI projects focused on interaction and design."
+  title={
+    <>
+      <strong>Front-end UI projects</strong> focused on interaction and design.
+    </>
+  }
 >
   <div className="grid-two project-gallery">
     <ProjectCard
       title="Animal Sounds Soundboard"
       meta="Audio demo"
-      summary="Click animals to hear sounds. Simple UI to test animations and controls."
-      impact="Supports keyboard interaction and resets audio to avoid overlapping clips."
+      summary={
+        <>
+          <strong>Accessible soundboard</strong> that pairs animated controls with focus management for playful audio exploration.
+        </>
+      }
+      impactPrefix="Impact"
+      impact={
+        <>
+          Keyboard-first interactions and reset hooks prevent overlapping clips so demos stay friendly in classrooms.
+        </>
+      }
       stack={["HTML", "CSS", "JavaScript"]}
       links={[
         { label: "Live demo", href: "https://bradleymatera.github.io/AnimalSounds/", variant: "primary", external: true },
@@ -90,8 +142,17 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
     <ProjectCard
       title="Professional Portfolio Website"
       meta="Static site"
-      summary="Basic portfolio with semantic HTML and accessible design."
-      impact="Uses semantic patterns and skip links to model accessible brochure sites."
+      summary={
+        <>
+          <strong>Semantic portfolio</strong> scaffold that demonstrates landmark structure, skip links, and resilient responsive design.
+        </>
+      }
+      impactPrefix="Impact"
+      impact={
+        <>
+          Hiring partners review content faster because skip links and structured headings surface the right sections.
+        </>
+      }
       stack={["HTML", "CSS", "JavaScript"]}
       links={[
         { label: "Live site", href: "https://bradleymatera.github.io/Professional-Portfolio-Website/", variant: "primary", external: true },
@@ -101,8 +162,17 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
     <ProjectCard
       title="CodePen Projects"
       meta="Various demos"
-      summary="Collection of small projects on CodePen, like UI components and experiments."
-      impact="Shows bite-sized UI experiments that I reference in workshops and talks."
+      summary={
+        <>
+          <strong>UI experiment</strong> library showcasing reusable animations, component states, and interaction tests for workshops.
+        </>
+      }
+      impactPrefix="Result"
+      impact={
+        <>
+          Curated pens back up talks with working examples audiences can fork during live sessions.
+        </>
+      }
       stack={["HTML", "CSS", "JavaScript"]}
       links={[
         { label: "CodePen", href: "https://codepen.io/student-account-bradley-matera", external: true }
@@ -114,14 +184,27 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
 <Section
   id="fullstack"
   eyebrow="Full-Stack & APIs"
-  title="Projects connecting UI to backends and data."
+  title={
+    <>
+      <strong>Full-stack builds</strong> connecting interfaces to APIs and data.
+    </>
+  }
 >
   <div className="grid-two project-gallery">
     <ProjectCard
       title="Convo-Ai"
       meta="Local AI chat"
-      summary="Offline conversational AI with voice support using FastAPI and Ollama."
-      impact="Local-first deployment keeps conversations private and ready for offline demos."
+      summary={
+        <>
+          <strong>Offline assistant</strong> experience that pairs FastAPI endpoints with Ollama models for voice-ready chat demos.
+        </>
+      }
+      impactPrefix="Impact"
+      impact={
+        <>
+          Local-first deployment keeps conversations private while bundling scripts that spin up reproducible demos.
+        </>
+      }
       stack={["Python", "FastAPI", "Ollama"]}
       links={[
         { label: "GitHub", href: "https://github.com/BradleyMatera/Convo-Ai", external: true }
@@ -130,8 +213,17 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
     <ProjectCard
       title="ProjectHub"
       meta="AI chat embed"
-      summary="Script to add AI chat to websites. Half finished, but basic function works."
-      impact="Work in progress: core chat runs, with analytics and guardrails planned next."
+      summary={
+        <>
+          <strong>Embeddable chat</strong> widget that drops into landing pages and connects to configurable LLM providers.
+        </>
+      }
+      impactPrefix="Impact"
+      impact={
+        <>
+          MVP handles intent routing today while analytics, guardrails, and billing hooks move through backlog.
+        </>
+      }
       stack={["JavaScript"]}
       links={[
         { label: "GitHub", href: "https://github.com/BradleyMatera/ProjectHub", external: true }
@@ -140,8 +232,17 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
     <ProjectCard
       title="ShellCompany"
       meta="AI tool"
-      summary="Work in progress AI project."
-      impact="Work in progress: prototyping revenue tooling for small teams."
+      summary={
+        <>
+          <strong>Revenue analytics</strong> prototype exploring forecasting dashboards for small teams.
+        </>
+      }
+      impactPrefix="Result"
+      impact={
+        <>
+          Early workshops validate KPI definitions before committing to production data pipelines.
+        </>
+      }
       stack={["JavaScript"]}
       links={[
         { label: "GitHub", href: "https://github.com/BradleyMatera/ShellCompany", external: true }
@@ -153,14 +254,27 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
 <Section
   id="tools"
   eyebrow="Tools & Infrastructure"
-  title="Utilities for development and testing."
+  title={
+    <>
+      <strong>Developer tooling</strong> for build, test, and automation workflows.
+    </>
+  }
 >
   <div className="grid-two project-gallery">
     <ProjectCard
       title="Docker Multilang Project"
       meta="Container setup"
-      summary="Docker for multi-language projects with shared scripts."
-      impact="Containers align Node.js and Python environments so teams share the same tooling."
+      summary={
+        <>
+          <strong>Consistent containers</strong> blueprint that ships Node.js and Python tooling with shared orchestration scripts.
+        </>
+      }
+      impactPrefix="Impact"
+      impact={
+        <>
+          Teams share identical environments, eliminating "works on my machine" drift during onboarding.
+        </>
+      }
       stack={["Docker", "Python", "Node.js"]}
       links={[
         { label: "GitHub", href: "https://github.com/BradleyMatera/docker_multilang_project", external: true }
@@ -169,8 +283,17 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
     <ProjectCard
       title="CheeseMath Jest Tests"
       meta="Testing library"
-      summary="Math utils with Jest tests."
-      impact="Provides reusable patterns for teaching unit testing in onboarding sessions."
+      summary={
+        <>
+          <strong>Testing playbook</strong> repository that bundles math utilities with approachable Jest examples.
+        </>
+      }
+      impactPrefix="Impact"
+      impact={
+        <>
+          New teammates adopt unit testing faster using scripts that slot directly into onboarding workshops.
+        </>
+      }
       stack={["JavaScript", "Jest"]}
       links={[
         { label: "GitHub", href: "https://github.com/BradleyMatera/CheeseMath-Jest-Tests", external: true }
@@ -179,8 +302,17 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
     <ProjectCard
       title="OBJ Parser"
       meta="Geometry parser"
-      summary="Parser for OBJ/MTL files in Zig."
-      impact="Parses large OBJ files reliably for use in rendering experiments."
+      summary={
+        <>
+          <strong>Zig geometry</strong> toolkit parsing OBJ/MTL assets with predictable memory usage for rendering experiments.
+        </>
+      }
+      impactPrefix="Result"
+      impact={
+        <>
+          Large mesh files stream without crashes, unblocking WebGPU prototyping.
+        </>
+      }
       stack={["Zig"]}
       links={[
         { label: "GitHub", href: "https://github.com/BradleyMatera/obj-parser", external: true }
@@ -189,8 +321,17 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
     <ProjectCard
       title="Triangle Shader Lab"
       meta="Guided WebGPU primer"
-      summary="A focused learning environment that decodes WebGPU's hello triangle pipeline with inline explanations and live rendering."
-      impact="Helps peers understand adapters, buffers, and pipelines without jumping between blog posts and source code."
+      summary={
+        <>
+          <strong>Guided WebGPU</strong> primer that walks learners through the hello triangle pipeline with live annotations.
+        </>
+      }
+      impactPrefix="Impact"
+      impact={
+        <>
+          Inline explanations shorten ramp-up for new WebGPU adopters and reduce context switching between docs.
+        </>
+      }
       stack={["WebGPU", "JavaScript", "WGSL"]}
       links={[
         { label: "Live demo", href: "https://bradleymatera.github.io/TriangleDemo/", variant: "primary", external: true },

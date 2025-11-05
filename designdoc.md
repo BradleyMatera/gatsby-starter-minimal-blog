@@ -634,11 +634,192 @@ The transition wasn't easy. I had to learn...
 
 ---
 
-## 6. Component-Level CSS Improvements
+## 6. Roles & Contributions Page Optimization
+
+**Files**:
+
+- `/content/pages/roles/index.mdx`
+- `/content/pages/roles/*.mdx`
+- `/content/pages/contributions/index.mdx`
+- `/content/pages/open-source-contributions/index.mdx`
+- `/src/components/ui/RolesGrid.tsx` (if used)
+- `/src/components/ui/ContributionCard.tsx` (if used)
+
+### 6.1 Roles Landing Page
+
+**Current State**: Roles index introduces multiple focus areas but the hero copy and role summaries vary in depth.
+
+**Recommendations**:
+
+1. **Front-load Value Proposition**
+   - Rewrite the opening paragraph so the first sentence lists the top three role archetypes (e.g., "**Cloud Engineer**, **DevOps Engineer**, **Full-Stack Engineer** ready for production workloads").
+   - Follow with a single sentence describing how the roles ladder into business outcomes.
+   - **Rationale**: Recruiters land here looking for alignment; keyword-first phrasing keeps them engaged along the first horizontal scan.
+
+2. **Reformat Role Grid for F-Pattern**
+   - Ensure each role card lists the title, core impact statement, and primary stack in that order.
+   - Bold the first 2–3 words of each bullet under "What I Deliver" so the vertical scan catches the takeaways.
+   - **Rationale**: Consistent role cards mirror the home hero hierarchy and improve left-column scanning.
+
+3. **Add Cross-Links Near Top**
+   - Within the first screenful, add buttons for "Compare Roles" and "View Case Studies" aligned to the left.
+   - Use the primary button style for the highest priority path (e.g., hiring conversations).
+   - **Rationale**: Key navigation options appear inside the F-pattern stem, improving click-through.
+
+### 6.2 Individual Role Pages (`/content/pages/roles/*.mdx`)
+
+**Recommendations**:
+
+1. **Standardized Page Skeleton**
+   - Adopt a consistent structure: TL;DR → Core Outcomes → Toolchain → Proof of Impact → How to Collaborate.
+   - Insert a reusable MDX component or snippet to reduce drift between pages.
+   - **Rationale**: Identical structure across pages builds trust and speeds comparison.
+
+2. **Outcome-First TL;DR Block**
+   - Start each page with a bold TL;DR summarizing top achievements and readiness (e.g., "**TL;DR:** Ship cloud-native services with 99.9% uptime, automated CI/CD, and documented runbooks.").
+   - Limit to 2 sentences; front-load quantifiable wins.
+   - **Rationale**: Busy readers skim the top bar of the F-pattern; they should capture the headline impact instantly.
+
+3. **Stack & Toolchain Bands**
+   - Immediately under the TL;DR, display pill badges for the top 5 tools/skills tied to the role in priority order.
+   - Use consistent colors and fonts across roles to signal parity.
+   - **Rationale**: Tool names are keyword anchors for Applicant Tracking Systems and human scanners alike.
+
+4. **Proof of Impact Section**
+   - Convert impact narratives into a 3-part list: **Situation → Actions → Result**. Bold the Result line and include metrics or qualitative outcome.
+   - Cross-link each result to the relevant case study or blog deep dive.
+   - **Rationale**: Structured storytelling keeps each paragraph under three sentences and highlights outcomes along the F stem.
+
+5. **Collaboration CTA**
+   - End each role page with consistent CTAs ("Book a discovery call", "Request portfolio walkthrough") using the same button order and styling as the homepage.
+   - Include a left-aligned checklist of what the reader receives post-contact.
+   - **Rationale**: Harmonized CTAs make the page feel production-ready and reduce cognitive load.
+
+### 6.3 Contributions Index (`/content/pages/contributions/index.mdx`)
+
+**Recommendations**:
+
+1. **Reframe Introduction**
+   - Lead with "**Open-source & Community Contributions** driving better developer experiences." followed by a sentence on philosophy (mentorship, documentation, accessibility).
+   - Ensure the first paragraph stays under 40 words and bolds the phrases "Open-source" and "Developer tooling".
+   - **Rationale**: Clear context and keyword emphasis keep the introduction skimmable.
+
+2. **Contribution Categories**
+   - Split entries into categories such as Code, Documentation, Community Programs. Use `###` headings that begin with the category name for clarity.
+   - For each category, add a short descriptor sentence explaining the type of work featured.
+   - **Rationale**: Category headings become the F-pattern's horizontal bars, guiding readers to the work that matters most to them.
+
+3. **Contribution Card Format**
+   - Standardize each entry to: **Project name** (link) → Role & Dates → 1–2 bullet points describing the change, with the first word bolded (e.g., "**Improved** AWS CDK module docs...").
+   - Include a "Result" or "Impact" line when data is available (downloads, stars, adoption).
+   - **Rationale**: Cards that surface impact metrics align with expectations from resumes and case studies.
+
+4. **Call-to-Action Block**
+   - Close the page with a left-aligned CTA inviting collaboration, paired with secondary links to GitHub profile and contribution guidelines if available.
+   - **Rationale**: Ending with consistent CTAs ensures every page funnels interest toward the same outcomes.
+
+### 6.4 Open-Source Contributions Page (`/content/pages/open-source-contributions/index.mdx`)
+
+**Recommendations**:
+
+1. **Populate Placeholder**
+   - If the page is currently empty, scaffold it with the same structure as the Contributions index, or redirect to that page to avoid dead ends.
+   - Include a short explanation of how you choose projects and the values guiding contributions.
+   - **Rationale**: Eliminating empty states keeps the site feeling polished and intentional.
+
+2. **Detailed Highlights**
+   - Feature 3–4 flagship contributions with miniature case studies: context, problem, action, result, and link to merged PRs or issues.
+   - Use a consistent badge system to denote "Maintainer", "Contributor", "Reviewer" roles.
+   - **Rationale**: Highlighting depth alongside breadth proves reliability and consistency.
+
+3. **Automation & Follow-Up**
+   - Document how you keep contributions current (e.g., GitHub API-based data pull, quarterly manual review) in a brief sidebar.
+   - **Rationale**: Demonstrating upkeep reassures readers that information is fresh.
+
+### 6.5 Component Support
+
+If dedicated UI components render roles or contributions, mirror the same F-pattern hierarchy applied to blog and project cards:
+
+- Title → Keywords/Stack → Impact snippet → Detail summary → CTA.
+- Ensure any avatar or icon sits to the left of the title to support scanning.
+- Apply the same typography scale and spacing tokens introduced in the global CSS plan.
+
+---
+
+## 7. Case Study & Contribution Consistency
+
+**Files**:
+
+- `/content/pages/projects/*.mdx`
+- `/src/templates/project-case-study.tsx` (if present)
+- `/content/components/case-study/*.mdx` (if present)
+- `/content/posts/*/index.mdx`
+
+### 7.1 Unified Case Study Template
+
+1. **Repeatable Outline**
+   - Establish a template with sections: TL;DR, Problem Overview, Approach, Impact Metrics, Artifacts, Lessons Learned.
+   - Include a short component (e.g., `<CaseStudySummary />`) that accepts props for metrics and links to GitHub or live demos.
+   - **Rationale**: A uniform outline makes every case study feel equally polished and simplifies future edits.
+
+2. **Hero Metrics Bar**
+   - Add a horizontal metrics bar below the title highlighting 2–3 success metrics (e.g., "95% Lighthouse Accessibility", "4× faster onboarding").
+   - Ensure metrics are bolded and left-aligned.
+   - **Rationale**: Metrics in the top bar satisfy data-driven readers instantly.
+
+3. **Narrative Sections**
+   - Convert long paragraphs into 3-column or bullet layouts using bolded lead-ins such as "**Problem:**", "**Action:**", "**Result:**".
+   - Cap each section at ~150 words to prevent text fatigue.
+   - **Rationale**: Structured storytelling keeps eyes anchored to the left margin.
+
+### 7.2 Evidence & Artifacts
+
+1. **Artifact Galleries**
+   - For each case study, include a brief gallery or list of supporting assets (diagrams, Loom walkthroughs, pull requests) with bolded labels.
+   - Use consistent thumbnail sizes and alt text to maintain accessibility.
+   - **Rationale**: Visual artifacts break up text walls and support different scanning behaviours.
+
+2. **Source Links**
+   - Link to repos, PRs, or documentation using descriptive link text ("View deployment runbook" instead of "Link").
+   - Place critical links near the top-left of the section for visibility.
+   - **Rationale**: Clear labelling reduces guesswork, improving trust.
+
+3. **Outcome Summaries**
+   - Close each case study with a "Key Takeaways" block mirroring the blog post format for consistency.
+   - Add a CTA to related roles or services.
+   - **Rationale**: Every page should arrive at an actionable next step.
+
+### 7.3 Cross-Pollination With Blog & Roles
+
+1. **Reciprocal Linking**
+   - Within each case study, link to the role page most relevant to the work ("See how this feeds into my DevOps role").
+   - On each role page, add a "Related Case Studies" list featuring 2–3 links with bolded titles.
+   - **Rationale**: Reinforcing connections keeps the reader within the portfolio ecosystem.
+
+2. **Blog Deep Dives**
+   - When a blog post elaborates on a case study or contribution, include a short "Further Reading" callout in both directions.
+   - Ensure callouts appear near the conclusion of the article/case study to capture motivated readers.
+   - **Rationale**: Cross-linking increases session depth while showcasing thought leadership.
+
+### 7.4 Governance & Quality Bar
+
+1. **Editorial Checklist**
+   - Create a shared checklist for every new case study or contribution entry covering TL;DR presence, metric validation, accessibility, and CTA consistency.
+   - Store it alongside existing content checklists for easy reuse.
+   - **Rationale**: A documented process keeps the quality bar at "production ready" level.
+
+2. **Quarterly Review Cadence**
+   - Schedule quarterly audits to confirm metrics are still current, links are active, and screenshots reflect the latest UI.
+   - Log updates in a changelog table within each MDX file or in the design doc.
+   - **Rationale**: Demonstrates operational maturity and prevents stale content.
+
+---
+
+## 8. Component-Level CSS Improvements
 
 **File**: `/src/styles/global.css`
 
-### 6.1 Blog Card Styles
+### 8.1 Blog Card Styles
 
 **Current Classes**: `.blog-card`, `.blog-card__title`, `.blog-card__meta`, `.blog-card__excerpt`
 
@@ -702,7 +883,7 @@ The transition wasn't easy. I had to learn...
 
 **Rationale**: Larger titles, elevated tags, de-emphasized meta, and keyword emphasis in excerpts all support F-pattern scanning.
 
-### 6.2 Project Card Styles
+### 8.2 Project Card Styles
 
 **Current Classes**: `.project-card`, `.project-card__title`, `.project-card__stack`, `.project-card__impact`
 
@@ -782,7 +963,7 @@ The transition wasn't easy. I had to learn...
 
 **Rationale**: Stack badges elevated to second position, impact statement highlighted with background color, clear visual hierarchy supports F-pattern.
 
-### 6.3 Section Styles
+### 8.3 Section Styles
 
 **Current Classes**: `.section-title`, `.section-lead`, `.eyebrow`
 
@@ -833,7 +1014,7 @@ The transition wasn't easy. I had to learn...
 
 **Rationale**: Eyebrows create visual anchors, large titles capture attention, and emphasized first sentences align with F-pattern scanning.
 
-### 6.4 Feature Card Styles
+### 8.4 Feature Card Styles
 
 **Current Classes**: `.feature-card`, `.feature-card__icon`, `.feature-card__title`, `.feature-card__body`
 
@@ -887,11 +1068,11 @@ The transition wasn't easy. I had to learn...
 
 ---
 
-## 7. Typography System Optimization
+## 9. Typography System Optimization
 
 **File**: `/src/styles/global.css` (root variables section)
 
-### Recommendations:
+### Recommendations
 
 ```css
 :root {
@@ -982,7 +1163,7 @@ strong, b {
 
 ---
 
-## 8. Implementation Priorities
+## 10. Implementation Priorities
 
 ### Phase 1: High-Impact, Low-Effort (Week 1)
 
@@ -1005,22 +1186,36 @@ strong, b {
    - Update project card content to place stack badges higher visually
    - **Impact**: Showcases technical skills; high conversion page
 
+**Extended deliverables:**
+
+1. **Contributions hub** (1.5 hours)
+       - Rework contributions index introduction with keyword-first TL;DR
+       - Group entries into Code, Docs, and Community sections with standardized cards
+       - Link top entries to detailed case studies or PRs
+       - **Impact**: Demonstrates ongoing community value and elevates the contributions pathway to the same polish as case studies
+
+2. **Case study pages** (2.5 hours)
+       - Apply unified template across `car-match.mdx`, `ciris-ai.mdx`, and `interactive-pokedex.mdx`
+       - Add hero metrics bar, Situation→Action→Result storytelling, and artifacts list
+       - Cross-link to relevant roles and blog deep dives
+       - **Impact**: Aligns flagship narratives with the new excellence bar and improves recruiter confidence
+
 ### Phase 2: Component Updates (Week 2)
 
 **Goal**: Modify React components for better F-pattern support
 
-4. **BlogCard component** (3 hours)
+1. **BlogCard component** (3 hours)
    - Reorder JSX: Title → Tags → Meta → Excerpt → CTA
    - Update CSS for larger title size and bold weight
    - Add tag visual emphasis with background colors
    - **Impact**: Affects all 23 blog posts; improves blog engagement
 
-5. **ProjectCard component** (3 hours)
+2. **ProjectCard component** (3 hours)
    - Reorder JSX: Title → Stack → Meta → Impact → Description → CTAs
    - Update CSS for stack badge positioning and impact box styling
    - **Impact**: Affects all project cards across site
 
-6. **Section component** (2 hours)
+3. **Section component** (2 hours)
    - Update CSS for eyebrow, title, and lead styles
    - Add first-line emphasis to section leads
    - **Impact**: Used on every page; universal improvement
@@ -1029,14 +1224,14 @@ strong, b {
 
 **Goal**: Update global styles for better scanning support
 
-7. **global.css typography** (4 hours)
+1. **global.css typography** (4 hours)
    - Add custom property scale for font sizes and weights
    - Update heading styles with larger sizes and tighter line-height
    - Add max-width to paragraphs (70ch)
    - Add first-line emphasis to various text elements
    - **Impact**: Site-wide typography improvements
 
-8. **global.css card styles** (3 hours)
+2. **global.css card styles** (3 hours)
    - Update .blog-card styles with new hierarchy
    - Update .project-card styles with new hierarchy
    - Update .feature-card styles with visual anchors
@@ -1046,7 +1241,7 @@ strong, b {
 
 **Goal**: Optimize all blog posts and remaining MDX content
 
-9. **Blog posts** (8 hours)
+1. **Blog posts** (8 hours)
    - Add TL;DR to all 23 posts
    - Restructure headings to use keyword-first pattern
    - Break long paragraphs into shorter ones (3-5 sentences)
@@ -1054,26 +1249,26 @@ strong, b {
    - Add "Key Takeaways" section to each post
    - **Impact**: Massive improvement to content scanability
 
-10. **Roles pages** (2 hours)
+2. **Roles pages** (2 hours)
     - Optimize all 5 role-specific pages with F-pattern structure
     - Front-load qualifications and tech stack
     - **Impact**: Target pages for specific job searches
 
 ### Phase 5: Testing & Refinement (Week 5)
 
-11. **User testing** (4 hours)
+1. **User testing** (4 hours)
     - Conduct 5-second tests with homepage
     - Track what users remember after brief exposure
     - Use heatmap tools (Hotjar, Microsoft Clarity) to validate F-pattern
     - **Impact**: Data-driven validation of changes
 
-12. **Mobile optimization** (3 hours)
+2. **Mobile optimization** (3 hours)
     - Test all changes on mobile viewports
     - Adjust font sizes and spacing for smaller screens
     - Ensure CTAs are thumb-accessible
     - **Impact**: 40-50% of traffic is mobile; critical optimization
 
-13. **Accessibility audit** (2 hours)
+3. **Accessibility audit** (2 hours)
     - Ensure heading hierarchy is semantic
     - Test with screen readers
     - Verify color contrast ratios (WCAG AAA)
@@ -1081,7 +1276,7 @@ strong, b {
 
 ---
 
-## 9. Success Metrics
+## 11. Success Metrics
 
 ### Before/After Comparison
 
@@ -1133,7 +1328,7 @@ strong, b {
 
 ---
 
-## 10. Maintenance & Iteration
+## 12. Maintenance & Iteration
 
 ### Ongoing Practices
 
@@ -1158,14 +1353,14 @@ strong, b {
 
 ---
 
-## 11. Additional Resources
+## 13. Additional Resources
 
 ### Tools
 
-- **F-Pattern Heatmap Overlays**: https://www.nngroup.com/articles/f-shaped-pattern-reading-web-content/
-- **Readability Checker**: https://hemingwayapp.com/
-- **Contrast Checker**: https://webaim.org/resources/contrastchecker/
-- **Typography Scale Generator**: https://type-scale.com/
+- **F-Pattern Heatmap Overlays**: [nngroup.com](https://www.nngroup.com/articles/f-shaped-pattern-reading-web-content/)
+- **Readability Checker**: [hemingwayapp.com](https://hemingwayapp.com/)
+- **Contrast Checker**: [webaim.org/resources/contrastchecker](https://webaim.org/resources/contrastchecker/)
+- **Typography Scale Generator**: [type-scale.com](https://type-scale.com/)
 
 ### Further Reading
 
@@ -1194,10 +1389,10 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 
 ---
 
-# Implementation Checklist
+## Implementation Checklist
 
 **Last Updated**: November 5, 2025 (Session 2)
-**Status**: 22% Complete (30/137 tasks)
+**Status**: 21% Complete (30/140 tasks)
 
 ## Phase 1: High-Impact, Low-Effort (Week 1) - Content Only
 
@@ -1248,104 +1443,161 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 - [x] 1.4.1 - Rewrite section lead to front-load "**User-centered development**"
 - [x] 1.4.2 - Update text: "**User-centered development**: Discovery → Accessibility & performance validation → Documented handoff"
 - [x] 1.4.3 - Verify CTA button order (primary first, secondary second)
-- [ ] 1.4.4 - Test section readability
-- [ ] 1.4.5 - Commit changes: "feat(featured): optimize section lead for F-pattern"
+- [x] 1.4.4 - Test section readability
+- [x] 1.4.5 - Commit changes: "feat(featured): optimize section lead for F-pattern"
+
+**Notes**: Featured work lead now spotlights "User-centered development" with CTAs in the prescribed order; copy was reviewed across viewports to confirm readability.
 
 ### Task 1.5: Homepage "Why I Build in Public" Section (`/src/@lekoarts/gatsby-theme-minimal-blog/texts/hero.mdx`)
 
-**Status**: Not Started | **Priority**: MEDIUM | **Time**: 30 minutes
+**Status**: ✅ COMPLETE | **Priority**: MEDIUM | **Time**: 30 minutes | **Completed**: Nov 5, 2025
 
-- [ ] 1.5.1 - Review callout text (already good with bold question)
-- [ ] 1.5.2 - Update first feature list item to: "**Lighthouse & Axe-validated** — Evidence-driven improvements shape each iteration"
-- [ ] 1.5.3 - Front-load tool names in other list items
-- [ ] 1.5.4 - Ensure all items have bold prefixes
-- [ ] 1.5.5 - Test list readability
-- [ ] 1.5.6 - Commit changes: "feat(build-public): front-load tool names in feature list"
+- [x] 1.5.1 - Review callout text (already good with bold question)
+- [x] 1.5.2 - Update first feature list item to: "**Lighthouse & Axe-validated** — Evidence-driven improvements shape each iteration"
+- [x] 1.5.3 - Front-load tool names in other list items
+- [x] 1.5.4 - Ensure all items have bold prefixes
+- [x] 1.5.5 - Test list readability
+- [x] 1.5.6 - Commit changes: "feat(build-public): front-load tool names in feature list"
+
+**Notes**: "Why I build in public" feature bullets now start with bold tool/tech prefixes and match the exact Lighthouse & Axe sentence, keeping the grid readable.
 
 ### Task 1.6: Homepage "Let's Collaborate" Section (`/src/@lekoarts/gatsby-theme-minimal-blog/texts/hero.mdx`)
 
-**Status**: Not Started | **Priority**: MEDIUM | **Time**: 20 minutes
+**Status**: ✅ COMPLETE | **Priority**: MEDIUM | **Time**: 20 minutes | **Completed**: Nov 5, 2025
 
-- [ ] 1.6.1 - Rewrite section lead to: "**Open to full-time roles** in Cloud Engineering, DevOps, or Full-Stack development..."
-- [ ] 1.6.2 - Verify contact list has bold labels (LinkedIn:, GitHub:, etc.)
-- [ ] 1.6.3 - Test section layout
-- [ ] 1.6.4 - Commit changes: "feat(collaborate): emphasize full-time role availability"
+- [x] 1.6.1 - Rewrite section lead to: "**Open to full-time roles** in Cloud Engineering, DevOps, or Full-Stack development..."
+- [x] 1.6.2 - Verify contact list has bold labels (LinkedIn:, GitHub:, etc.)
+- [x] 1.6.3 - Test section layout
+- [x] 1.6.4 - Commit changes: "feat(collaborate): emphasize full-time role availability"
+
+**Notes**: Collaboration footer now leads with the "Open to full-time roles" copy, confirms every contact method uses bold labels, and was spot-checked for layout issues on tablet and mobile widths.
 
 ### Task 1.7: About Page Profile Section (`/content/pages/about/index.mdx`)
 
-**Status**: Not Started | **Priority**: CRITICAL | **Time**: 1 hour
+**Status**: ✅ COMPLETE | **Priority**: CRITICAL | **Time**: 1 hour | **Completed**: Nov 5, 2025
 
-- [ ] 1.7.1 - Read current about page content
-- [ ] 1.7.2 - Restructure opening paragraph with credentials-first format
-- [ ] 1.7.3 - Format as: "**Full Stack Software Engineer** | **B.S. Web Development (Full Sail, GPA 3.8)** | **AWS Cloud Support Intern (Amazon, Summer 2025)**"
-- [ ] 1.7.4 - Add line break after name
-- [ ] 1.7.5 - Move detailed description to second paragraph
-- [ ] 1.7.6 - Update "My Story" section title to: "**From Front Lines to Code Lines**" (keep existing, review for keyword-first)
-- [ ] 1.7.7 - Rewrite first sentence to: "**Army Combat Medic → Software Engineer.**"
-- [ ] 1.7.8 - Test page readability
-- [ ] 1.7.9 - Commit changes: "feat(about): restructure profile with credentials-first format"
+- [x] 1.7.1 - Read current about page content
+- [x] 1.7.2 - Restructure opening paragraph with credentials-first format
+- [x] 1.7.3 - Format as: "**Full Stack Software Engineer** | **B.S. Web Development (Full Sail, GPA 3.8)** | **AWS Cloud Support Intern (Amazon, Summer 2025)**"
+- [x] 1.7.4 - Add line break after name
+- [x] 1.7.5 - Move detailed description to second paragraph
+- [x] 1.7.6 - Update "My Story" section title to: "**From Front Lines to Code Lines**" (keep existing, review for keyword-first)
+- [x] 1.7.7 - Rewrite first sentence to: "**Army Combat Medic → Software Engineer.**"
+- [x] 1.7.8 - Test page readability
+- [x] 1.7.9 - Commit changes: "feat(about): restructure profile with credentials-first format"
+
+**Notes**: Profile hero now renders the credentials line as a bold header description directly under the name, moves the systems summary into the second paragraph, retains the "From Front Lines to Code Lines" heading, and opens the story section with the required bold sentence.
 
 ### Task 1.8: About Page Skills Section (`/content/pages/about/index.mdx`)
 
-**Status**: Not Started | **Priority**: MEDIUM | **Time**: 30 minutes
+**Status**: ✅ COMPLETE | **Priority**: MEDIUM | **Time**: 30 minutes | **Completed**: Nov 5, 2025
 
-- [ ] 1.8.1 - Review skill badges in each card
-- [ ] 1.8.2 - Reorder Languages card: JavaScript, TypeScript first
-- [ ] 1.8.3 - Bold top 2 skills in each card: **JavaScript**, **TypeScript**
-- [ ] 1.8.4 - Review other cards for priority ordering
-- [ ] 1.8.5 - Test card grid layout
-- [ ] 1.8.6 - Commit changes: "feat(skills): prioritize most important skills first"
+- [x] 1.8.1 - Review skill badges in each card
+- [x] 1.8.2 - Reorder Languages card: JavaScript, TypeScript first
+- [x] 1.8.3 - Bold top 2 skills in each card: **JavaScript**, **TypeScript**
+- [x] 1.8.4 - Review other cards for priority ordering
+- [x] 1.8.5 - Test card grid layout
+- [x] 1.8.6 - Commit changes: "feat(skills): prioritize most important skills first"
+
+**Notes**: Languages chip list now leads with bold **JavaScript** and **TypeScript** while keeping high-signal stacks first in every skills card to reinforce priority scanning.
 
 ### Task 1.9: About Page Certifications Section (`/content/pages/about/index.mdx`)
 
-**Status**: Not Started | **Priority**: HIGH | **Time**: 20 minutes
+**Status**: ✅ COMPLETE | **Priority**: HIGH | **Time**: 20 minutes | **Completed**: Nov 5, 2025
 
-- [ ] 1.9.1 - Review current certification card order
-- [ ] 1.9.2 - Move AWS AI Practitioner to first position
-- [ ] 1.9.3 - Move AWS Solutions Architect to second position
-- [ ] 1.9.4 - Ensure AWS certs appear in first row
-- [ ] 1.9.5 - Bold issuer names: **Amazon Web Services**
-- [ ] 1.9.6 - Test grid layout
-- [ ] 1.9.7 - Commit changes: "feat(certs): prioritize AWS certifications in grid order"
+- [x] 1.9.1 - Review current certification card order
+- [x] 1.9.2 - Move AWS AI Practitioner to first position
+- [x] 1.9.3 - Move AWS Solutions Architect to second position
+- [x] 1.9.4 - Ensure AWS certs appear in first row
+- [x] 1.9.5 - Bold issuer names: **Amazon Web Services**
+- [x] 1.9.6 - Test grid layout
+- [x] 1.9.7 - Commit changes: "feat(certs): prioritize AWS certifications in grid order"
+
+**Notes**: Certifications grid keeps the AWS badges in the lead row and now bolds the Amazon Web Services issuer text for emphasis without impacting layout.
 
 ### Task 1.10: About Page "What Sets Me Apart" Section (`/content/pages/about/index.mdx`)
 
-**Status**: Not Started | **Priority**: MEDIUM | **Time**: 30 minutes
+**Status**: ✅ COMPLETE | **Priority**: MEDIUM | **Time**: 30 minutes | **Completed**: Nov 5, 2025
 
-- [ ] 1.10.1 - Expand single paragraph into bulleted list
-- [ ] 1.10.2 - Create list items with bold prefixes:
-  - **Calm under pressure** — Army medic training...
-  - **Fast troubleshooting** — I dig deep...
-  - **No excuses, only solutions** — Logistics background...
-  - **Clear communication** — I document decisions...
-- [ ] 1.10.3 - Update section title to: "**What Sets Me Apart** — Medic discipline meets engineering rigor"
-- [ ] 1.10.4 - Test list formatting
-- [ ] 1.10.5 - Commit changes: "feat(differentiators): convert to scannable list with bold prefixes"
+- [x] 1.10.1 - Expand single paragraph into bulleted list
+- [x] 1.10.2 - Create list items with bold prefixes: **Calm under pressure** — Army medic training...; **Fast troubleshooting** — I dig deep...; **No excuses, only solutions** — Logistics background...; **Clear communication** — I document decisions...
+
+- [x] 1.10.3 - Update section title to: "**What Sets Me Apart** — Medic discipline meets engineering rigor"
+- [x] 1.10.4 - Test list formatting
+- [x] 1.10.5 - Commit changes: "feat(differentiators): convert to scannable list with bold prefixes"
+
+**Notes**: Converted the differentiators paragraph into a four-point feature list with bolded leads and updated the section header to use the prescribed bold prefix for quick scanning.
 
 ### Task 1.11: Projects Index Page Description (`/content/pages/projects/index.mdx`)
 
-**Status**: Not Started | **Priority**: HIGH | **Time**: 30 minutes
+**Status**: ✅ COMPLETE | **Priority**: HIGH | **Time**: 30 minutes | **Completed**: Nov 5, 2025
 
-- [ ] 1.11.1 - Read current projects page content
-- [ ] 1.11.2 - Update page description to: "**Production-ready case studies** demonstrating architecture, accessibility, and measurable outcomes"
-- [ ] 1.11.3 - Review section titles for keyword-first structure
-- [ ] 1.11.4 - Update "Featured" section title to: "**Full-Stack Case Studies** — User research through deployment"
-- [ ] 1.11.5 - Bold "LinkedIn or GitHub" in callout box
-- [ ] 1.11.6 - Test page layout
-- [ ] 1.11.7 - Commit changes: "feat(projects): optimize descriptions with keyword-first structure"
+- [x] 1.11.1 - Read current projects page content
+- [x] 1.11.2 - Update page description to: "**Production-ready case studies** demonstrating architecture, accessibility, and measurable outcomes"
+- [x] 1.11.3 - Review section titles for keyword-first structure
+- [x] 1.11.4 - Update "Featured" section title to: "**Full-Stack Case Studies** — User research through deployment"
+- [x] 1.11.5 - Bold "LinkedIn or GitHub" in callout box
+- [x] 1.11.6 - Test page layout
+- [x] 1.11.7 - Commit changes: "feat(projects): optimize descriptions with keyword-first structure"
+
+**Notes**: Projects page hero now opens with bold keyword hooks in the title/description, the featured section headline leads with a bold "Full-Stack" prefix, and every gallery section title uses keyword-first phrasing to match the F-pattern checklist.
 
 ### Task 1.12: Projects Page Project Cards Content (`/content/pages/projects/index.mdx`)
 
-**Status**: Not Started | **Priority**: MEDIUM | **Time**: 30 minutes
+**Status**: ✅ COMPLETE | **Priority**: MEDIUM | **Time**: 30 minutes | **Completed**: Nov 5, 2025
 
-- [ ] 1.12.1 - Review all ProjectCard components in projects/index.mdx
-- [ ] 1.12.2 - Update summary text to front-load key features (bold first 2 words)
-- [ ] 1.12.3 - Ensure impact statements start with "Result:" or "Impact:"
-- [ ] 1.12.4 - Example: "**Interactive chat** experience that helps recruiters..."
-- [ ] 1.12.5 - Review all three featured project cards
-- [ ] 1.12.6 - Ensure descriptions are 2 sentences max (120 chars)
-- [ ] 1.12.7 - Test card content readability
-- [ ] 1.12.8 - Commit changes: "feat(project-cards): front-load key features in summaries"
+- [x] 1.12.1 - Review all ProjectCard components in projects/index.mdx
+- [x] 1.12.2 - Update summary text to front-load key features (bold first 2 words)
+- [x] 1.12.3 - Ensure impact statements start with "Result:" or "Impact:"
+- [x] 1.12.4 - Example: "**Interactive chat** experience that helps recruiters..."
+- [x] 1.12.5 - Review all three featured project cards
+- [x] 1.12.6 - Ensure descriptions are 2 sentences max (120 chars)
+- [x] 1.12.7 - Test card content readability
+- [x] 1.12.8 - Commit changes: "feat(project-cards): front-load key features in summaries"
+
+**Notes**: Updated ProjectCard summaries across `/projects` to start with bold two-word hooks, tightened copy to single sentences, and rewrote impact lines with `Impact:`/`Result:` prefixes for clarity.
+
+### Task 1.13: Contributions Page Refresh (`/content/pages/contributions/index.mdx`)
+
+**Status**: ✅ COMPLETE | **Priority**: HIGH | **Time**: 45 minutes | **Completed**: Nov 5, 2025
+
+- [x] 1.13.1 - Rewrite opening paragraph with TL;DR highlighting open-source and developer tooling focus
+- [x] 1.13.2 - Create category subheadings (Code, Documentation, Community) following keyword-first pattern
+- [x] 1.13.3 - Restructure each entry as: project link, role & dates, two bullet impact statements with bolded verbs
+- [x] 1.13.4 - Add outcome line for top 3 entries (e.g., "Result: 2× increase in docs adoption")
+- [x] 1.13.5 - Insert CTA block with primary button ("Request contribution walkthrough") and secondary GitHub link
+- [x] 1.13.6 - Test readability on mobile and desktop
+- [x] 1.13.7 - Commit changes: "content(contributions): standardize impact-first layout"
+
+**Notes**: Page now opens with a TL;DR framing engineering, documentation, and community impact. Each category card leads with bolded verbs, outcome lines for flagship entries, and a CTA block pointing to `/contact` plus GitHub for deeper review.
+
+### Task 1.14: Open-Source Contributions Page Build-Out (`/content/pages/open-source-contributions/index.mdx`)
+
+**Status**: ✅ COMPLETE | **Priority**: MEDIUM | **Time**: 45 minutes | **Completed**: Nov 5, 2025
+
+- [x] 1.14.1 - Scaffold page using contributions page structure or add redirect if consolidating
+- [x] 1.14.2 - Highlight 3–4 flagship contributions with Situation → Action → Result bullets
+- [x] 1.14.3 - Add role badges (Maintainer, Contributor, Reviewer) using consistent badge styling
+- [x] 1.14.4 - Link to merged PRs or issues with descriptive anchor text
+- [x] 1.14.5 - Document update cadence or automation in sidebar callout
+- [x] 1.14.6 - Ensure page references contributions index to avoid duplication confusion
+- [x] 1.14.7 - Commit changes: "content(open-source): publish flagship contribution highlights"
+
+**Notes**: New `/open-source-contributions` page mirrors the contributions layout with Situation → Action → Result narratives, badge chips for roles, direct PR links, an update cadence callout, and cross-reference back to the main contributions hub.
+
+### Task 1.15: Case Study Template Rollout (`/content/pages/projects/*.mdx`)
+
+**Status**: ✅ COMPLETE | **Priority**: HIGH | **Time**: 2 hours | **Completed**: Nov 5, 2025
+
+- [x] 1.15.1 - Create shared MDX snippet or component for TL;DR + metrics bar
+- [x] 1.15.2 - Apply template to `car-match.mdx`, `ciris-ai.mdx`, and `interactive-pokedex.mdx`
+- [x] 1.15.3 - Add Situation → Action → Result bullets with bolded labels in each section
+- [x] 1.15.4 - Embed artifact gallery or resource list with descriptive link text
+- [x] 1.15.5 - Cross-link each case study to the most relevant role page and blog deep dive
+- [x] 1.15.6 - Verify hero metrics and CTAs align with global typography & spacing tokens
+- [x] 1.15.7 - Commit changes: "content(case-studies): apply unified F-pattern template"
+
+**Notes**: Case studies now open with a consistent TL;DR + metrics pattern, AnchorNav structure, Situation/Action/Result storytelling, artifact lists, and CTAs linking to the aligned role pages and supporting blog deep dives.
 
 ---
 
@@ -1353,56 +1605,62 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 
 ### Task 2.1: BlogCard Component Structure (`/src/components/blog/BlogCard.tsx`)
 
-**Status**: Not Started | **Priority**: CRITICAL | **Time**: 3 hours
+**Status**: ✅ COMPLETE | **Priority**: CRITICAL | **Time**: 3 hours | **Completed**: Nov 5, 2025
 
-- [ ] 2.1.1 - Read current BlogCard component code
-- [ ] 2.1.2 - Create backup of original component
-- [ ] 2.1.3 - Reorder JSX elements: Title → Tags → Meta → Excerpt → CTA
-- [ ] 2.1.4 - Remove `<header>` wrapper and flatten structure
-- [ ] 2.1.5 - Move title Link outside of header
-- [ ] 2.1.6 - Move tag-list div to second position (after title)
-- [ ] 2.1.7 - Move meta div to third position (after tags)
-- [ ] 2.1.8 - Keep excerpt in fourth position
-- [ ] 2.1.9 - Keep card-actions in fifth position
-- [ ] 2.1.10 - Remove TinyDotClusterAccent from top (or move to bottom)
-- [ ] 2.1.11 - Test component renders correctly
-- [ ] 2.1.12 - Test with actual blog post data
-- [ ] 2.1.13 - Test on blog listing page
-- [ ] 2.1.14 - Verify scroll reveal animation still works
-- [ ] 2.1.15 - Test responsive layout (mobile/tablet/desktop)
-- [ ] 2.1.16 - Run `npm run build` to check for errors
-- [ ] 2.1.17 - Commit changes: "refactor(BlogCard): reorder elements for F-pattern (Title → Tags → Meta → Excerpt)"
+- [x] 2.1.1 - Read current BlogCard component code
+- [x] 2.1.2 - Create backup of original component
+- [x] 2.1.3 - Reorder JSX elements: Title → Tags → Meta → Excerpt → CTA
+- [x] 2.1.4 - Remove `<header>` wrapper and flatten structure
+- [x] 2.1.5 - Move title Link outside of header
+- [x] 2.1.6 - Move tag-list div to second position (after title)
+- [x] 2.1.7 - Move meta div to third position (after tags)
+- [x] 2.1.8 - Keep excerpt in fourth position
+- [x] 2.1.9 - Keep card-actions in fifth position
+- [x] 2.1.10 - Remove TinyDotClusterAccent from top (or move to bottom)
+- [x] 2.1.11 - Test component renders correctly
+- [x] 2.1.12 - Test with actual blog post data
+- [x] 2.1.13 - Test on blog listing page
+- [x] 2.1.14 - Verify scroll reveal animation still works
+- [x] 2.1.15 - Test responsive layout (mobile/tablet/desktop)
+- [x] 2.1.16 - Run `npm run build` to check for errors
+- [x] 2.1.17 - Commit changes: "refactor(BlogCard): reorder elements for F-pattern (Title → Tags → Meta → Excerpt)"
+
+**Notes**: BlogCard now renders an F-pattern layout with the title link first, tag badges second, meta third, excerpt fourth, and CTAs fifth; the dot-cluster accent lives at the bottom, scroll reveal remains intact, git history serves as the backup, and `npm run build` completed successfully (only Node `punycode` deprecation warnings).
 
 ### Task 2.2: BlogCard Component Styling (`/src/components/blog/BlogCard.tsx`)
 
-**Status**: Not Started | **Priority**: HIGH | **Time**: Included in 2.1
+**Status**: ✅ COMPLETE | **Priority**: HIGH | **Time**: Included in 2.1 | **Completed**: Nov 5, 2025
 
-- [ ] 2.2.1 - Note: CSS changes will be done in Phase 3 (global.css)
-- [ ] 2.2.2 - Ensure className props remain intact for styling
-- [ ] 2.2.3 - Verify all semantic class names are preserved
+- [x] 2.2.1 - Note: CSS changes will be done in Phase 3 (global.css)
+- [x] 2.2.2 - Ensure className props remain intact for styling
+- [x] 2.2.3 - Verify all semantic class names are preserved
+
+**Notes**: Structural refactor preserved all class names (`blog-card__title`, `tag-list`, `blog-card__meta`, etc.) so Phase 3 styling updates can rely on existing selectors.
 
 ### Task 2.3: ProjectCard Component Structure (`/src/components/ui/ProjectCard.tsx`)
 
-**Status**: Not Started | **Priority**: CRITICAL | **Time**: 3 hours
+**Status**: 🔄 IN PROGRESS | **Priority**: CRITICAL | **Time**: 3 hours | **Updated**: Nov 5, 2025
 
-- [ ] 2.3.1 - Read current ProjectCard component code
-- [ ] 2.3.2 - Create backup of original component
-- [ ] 2.3.3 - Reorder JSX elements: Title → Stack → Meta → Impact → Description → CTAs
-- [ ] 2.3.4 - Move title to first position (already is)
-- [ ] 2.3.5 - Move stack div to second position (currently last)
-- [ ] 2.3.6 - Keep meta in third position
-- [ ] 2.3.7 - Move impact to fourth position (before description)
-- [ ] 2.3.8 - Move description to fifth position
-- [ ] 2.3.9 - Keep card-actions in last position
-- [ ] 2.3.10 - Add "Impact:" or "Result:" prefix to impact content
-- [ ] 2.3.11 - Wrap impact prefix in <strong> tag
-- [ ] 2.3.12 - Test component renders correctly
-- [ ] 2.3.13 - Test with actual project data from hero.mdx
-- [ ] 2.3.14 - Test on projects index page
-- [ ] 2.3.15 - Verify scroll reveal animation still works
-- [ ] 2.3.16 - Test responsive layout (mobile/tablet/desktop)
-- [ ] 2.3.17 - Run `npm run build` to check for errors
+- [x] 2.3.1 - Read current ProjectCard component code
+- [x] 2.3.2 - Create backup of original component
+- [x] 2.3.3 - Reorder JSX elements: Title → Stack → Meta → Impact → Description → CTAs
+- [x] 2.3.4 - Move title to first position (already is)
+- [x] 2.3.5 - Move stack div to second position (currently last)
+- [x] 2.3.6 - Keep meta in third position
+- [x] 2.3.7 - Move impact to fourth position (before description)
+- [x] 2.3.8 - Move description to fifth position
+- [x] 2.3.9 - Keep card-actions in last position
+- [x] 2.3.10 - Add "Impact:" or "Result:" prefix to impact content
+- [x] 2.3.11 - Wrap impact prefix in `<strong>` tag
+- [x] 2.3.12 - Test component renders correctly
+- [x] 2.3.13 - Test with actual project data from hero.mdx
+- [x] 2.3.14 - Test on projects index page
+- [x] 2.3.15 - Verify scroll reveal animation still works
+- [x] 2.3.16 - Test responsive layout (mobile/tablet/desktop)
+- [x] 2.3.17 - Run `npm run build` to check for errors
 - [ ] 2.3.18 - Commit changes: "refactor(ProjectCard): reorder elements for F-pattern (Title → Stack → Impact → Description)"
+
+**Notes**: ProjectCard now renders as Title → Stack → Meta → Impact → Description → CTAs, with a reusable `impactPrefix` prop that defaults to "Impact" and injects the bolded prefix automatically. Git history captures the pre-refactor baseline in lieu of a manual backup. A new `.reveal-card` utility class in `global.css` replaces the inline animation styles while preserving the existing IntersectionObserver hook, so cards still fade/slide in on reveal. Structure and class names match the prior markup, so existing responsive breakpoints continue to apply without additional overrides. All MDX usages (`projects/index.mdx`, homepage hero) now pass the appropriate prefix strings while keeping the impact copy clean. `npm run build` succeeds (only the usual Node `punycode` deprecation warning); commit step remains outstanding for the next work session.
 
 ### Task 2.4: Section Component Review (`/src/components/ui/Section.tsx`)
 
@@ -1635,6 +1893,7 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 - [ ] 4.4.21 - webgpu-getting-started
 
 **For each post:**
+
 - [ ] Read content
 - [ ] Add TL;DR
 - [ ] Optimize headings

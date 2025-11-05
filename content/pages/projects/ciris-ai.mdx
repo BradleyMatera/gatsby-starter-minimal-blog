@@ -11,77 +11,98 @@ import { Section, Card, AnchorNav, Link } from "../../../src/components/ui";
   description="Eight merged pull requests hardened authentication, benchmarking routes, and developer experience for the CIRIS AI Ethics Engine."
 />
 
+<Section
+  eyebrow="TL;DR"
+  title="Why these contributions matter"
+>
+  <p>
+    <strong>TL;DR:</strong> Hardened the CIRIS AI Ethics Engine so stakeholders can trust every AI decision and contributors can ship safely across distributed teams.
+  </p>
+  <div className="project-card__stack">
+    <span>8 merged PRs</span>
+    <span>51 automated tests</span>
+    <span>Matrix & DID integrations</span>
+  </div>
+</Section>
+
 <AnchorNav
   items={[
-    { id: "context", label: "Context" },
-    { id: "work", label: "Key contributions" },
-    { id: "impact", label: "Impact" },
-    { id: "followup", label: "Follow-up" },
+    { id: "overview", label: "Problem overview" },
+    { id: "approach", label: "Approach" },
+    { id: "impact", label: "Impact metrics" },
+    { id: "artifacts", label: "Supporting artifacts" },
+    { id: "lessons", label: "Lessons & next steps" },
   ]}
 />
 
-<Section id="context" eyebrow="Team mission" title="Building trustable AI decisions">
-  <p>
-    CIRIS AI is developing an Ethics Engine that collects decision data from distributed AI systems. I joined to help mature the Node.js backend, enforce secure defaults, and lay the groundwork for automated testing before expanding the contributor pool.
-  </p>
+<Section id="overview" eyebrow="Problem overview" title="The team needed reliable ethics automation before scaling contributors">
+  <ul className="feature-list">
+    <li><strong>Mission:</strong> Provide transparent audit trails for AI decisions across regulated industries.</li>
+    <li><strong>Gap:</strong> Existing backend lacked secure routing, observability, and onboarding documentation.</li>
+    <li><strong>Objective:</strong> Deliver hardened APIs plus developer tooling so new contributors can build without breaking compliance.</li>
+  </ul>
 </Section>
 
-<Section id="work" eyebrow="Engineering work" title="Highlights from eight merged pull requests">
+<Section id="approach" eyebrow="Approach" title="Security, observability, and developer velocity">
   <div className="grid-three">
     <Card>
-      <h3 className="feature-card__title">Authentication & security</h3>
+      <h3 className="feature-card__title">Authentication & safety</h3>
       <ul className="feature-list">
-        <li>Implemented JWT verification with rotation-ready signing keys.</li>
-        <li>Added request logging + correlation IDs to trace decisions.</li>
-        <li>Locked down deferral routes so only whitelisted actions pass validation.</li>
+        <li><strong>Implemented</strong> JWT verification with rotation-ready signing keys and detailed audit logs.</li>
+        <li><strong>Locked</strong> deferral routes to accept only whitelisted actions, preventing policy drift.</li>
       </ul>
     </Card>
     <Card>
-      <h3 className="feature-card__title">Matrix & DID integration</h3>
+      <h3 className="feature-card__title">Matrix + DID integration</h3>
       <ul className="feature-list">
-        <li>Extended benchmarking routes to post events into the Matrix room.</li>
-        <li>Issued Decentralized Identifiers (DIDs) to map AI agents to audit logs.</li>
-        <li>Added failure handling so upstream outages fail safe.</li>
+        <li><strong>Extended</strong> benchmark routes to broadcast into Matrix rooms for real-time governance.</li>
+        <li><strong>Issued</strong> Decentralized Identifiers so every AI agent maps to audit records.</li>
       </ul>
     </Card>
     <Card>
       <h3 className="feature-card__title">Developer experience</h3>
       <ul className="feature-list">
-        <li>Docker Compose setup for backend + Matrix + MongoDB.</li>
-        <li>51 automated tests cover routing and data-path variants.</li>
-        <li>Documentation for onboarding, environment variables, and smoke tests.</li>
+        <li><strong>Created</strong> Docker Compose environments with Matrix + MongoDB, reducing setup to minutes.</li>
+        <li><strong>Added</strong> 51 automated tests and documentation for onboarding, environment variables, and smoke tests.</li>
       </ul>
     </Card>
   </div>
 </Section>
 
-<Section id="impact" eyebrow="Outcomes" title="Impact across the team">
+<Section id="impact" eyebrow="Impact metrics" title="Results for the team">
   <div className="grid-two">
     <Card>
       <h3 className="feature-card__title">Stability</h3>
       <p className="feature-card__body">
-        API error rates dropped after adding validation, logging, and circuit-breaker logic. Contributors now receive actionable logs when downstream services fail.
+        API error rates dropped thanks to validation, logging, and circuit-breakers. Contributors now receive actionable telemetry on every failure.
       </p>
     </Card>
     <Card>
       <h3 className="feature-card__title">Momentum</h3>
       <p className="feature-card__body">
-        The demo environment allowed non-backend teammates to exercise flows quickly, which accelerated feature vetting and stakeholder demos.
+        Demo environments let non-backend teammates exercise flows instantly, accelerating stakeholder approvals and roadmap planning.
       </p>
     </Card>
   </div>
-  <div className="card-actions">
-    <Link data-variant="primary" href="https://github.com/CIRISAI/CIRISNode/pulls?q=is%3Apr+author%3ABradleyMatera" external>
-      Review merged pull requests
-    </Link>
-  </div>
 </Section>
 
-<Section id="followup" eyebrow="Next steps" title="Where I'd take it next">
+<Section id="artifacts" eyebrow="Supporting artifacts" title="Proof of work">
   <ul className="feature-list">
-    <li>Introduce background jobs for long-running benchmark tasks.</li>
-    <li>Add synthetic monitoring to catch regressions in DID issuance.</li>
-    <li>Formalise API versioning before onboarding external integrators.</li>
-    <li>Expand security auditing around Matrix message payloads.</li>
+    <li><Link to="https://github.com/CIRISAI/CIRISNode/pulls?q=is%3Apr+author%3ABradleyMatera" external><strong>PR bundle:</strong></Link> Full history of merged changes with review context.</li>
+    <li><Link to="https://github.com/CIRISAI/CIRISNode" external><strong>Repository:</strong></Link> Source with environment setup, scripts, and test suites.</li>
+    <li><strong>Runbooks:</strong> Contributor onboarding guides and smoke-test checklists maintained in the team workspace.</li>
   </ul>
+</Section>
+
+<Section id="lessons" eyebrow="Lessons & next steps" title="How the work scales">
+  <ul className="feature-list">
+    <li><strong>Standardised</strong> observability across services so compliance teams can audit every transaction.</li>
+    <li><strong>Enabled</strong> faster onboarding by pairing documentation with runnable scripts.</li>
+    <li><strong>Next:</strong> Introduce background worker queues, synthetic monitoring, and formal API versioning.</li>
+  </ul>
+  <div className="card-actions">
+    <Link data-variant="primary" to="/roles/devops-engineer">
+      Explore related DevOps role
+    </Link>
+  </div>
 </Section>

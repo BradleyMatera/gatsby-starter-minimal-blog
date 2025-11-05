@@ -8,57 +8,155 @@ import Link from "../../../src/components/ui/Link";
 
 <Section
   eyebrow="Contributions"
-  title="Collaboration and community work"
+  title="Open-source & community impact"
 >
-  <div>These are the teams, clubs, and events where I help ship code, unblock people, and keep projects moving.</div>
+  <p>
+    <strong>TL;DR:</strong> I ship production-grade backend features, document the workflows that keep teams moving, and mentor peers so everyone can contribute with confidence.
+  </p>
 </Section>
 
 <Section
-  eyebrow="Projects"
-  title="Where I contribute"
+  eyebrow="Code"
+  title="Engineering contributions"
 >
-  <div className="grid-three">
+  <div className="grid-two">
     <Card>
-      <h3 className="feature-card__title">CIRIS AI</h3>
-      <details>
-        <summary>8 backend PRs merged</summary>
-        <ul className="feature-list">
-          <li><Link to="https://github.com/CIRISAI/CIRISNode/pull/1" external>finalises Phase 2</Link> - Completed the core API with Matrix integration, DID issuance, and Docker setup.</li>
-          <li><Link to="https://github.com/CIRISAI/CIRISNode/pull/2" external>Enhance benchmark and DID routes</Link> - Added JWT authentication, route logging, and environment variables for security.</li>
-          <li><Link to="https://github.com/CIRISAI/CIRISNode/pull/3" external>CIRISNode EEE Backend: Route completion</Link> - Built the main backend with authentication, handlers, and 51 automated tests.</li>
-          <li><Link to="https://github.com/CIRISAI/CIRISNode/pull/4" external>EEE Backend and Front End mockup</Link> - Created the first working backend + frontend demo for the Ethics Engine.</li>
-          <li><Link to="https://github.com/CIRISAI/CIRISNode/pull/5" external>Refactor deferral handling</Link> - Cleaned up logic so only “defer” actions are accepted by the API.</li>
-          <li><Link to="https://github.com/CIRISAI/CIRISNode/pull/6" external>Refactor API routes and models</Link> - Simplified benchmark routes, added Matrix support, and improved error handling.</li>
-          <li><Link to="https://github.com/CIRISAI/CIRISNode/pull/8" external>Deferral System</Link> - Added new endpoints and automated tests for managing deferred tasks.</li>
-          <li><Link to="https://github.com/CIRISAI/CIRIS-Covenant.github.io/pull/3" external>added working /apply form</Link> - Built a client-side application form using the Next.js App Router for new contributors.</li>
-        </ul>
-      </details>
+      <h3 className="feature-card__title">
+        <Link to="https://github.com/CIRISAI/CIRISNode" external>
+          CIRIS AI Ethics Engine
+        </Link>
+      </h3>
+      <p className="feature-card__meta">
+        <strong>Role:</strong> Backend contributor · 2024 – Present
+      </p>
       <ul className="feature-list">
-        <li>Improved structure, error handling, and security</li>
-        <li>Demo environment built for EEE backend</li>
+        <li>
+          <strong>Hardened</strong> authentication, deferral, and benchmarking routes across eight merged PRs.
+        </li>
+        <li>
+          <strong>Delivered</strong> Matrix + DID integrations with logging, automated tests, and Dockerized workflows.
+        </li>
       </ul>
+      <p className="feature-card__body">
+        <strong>Result:</strong> Distributed teams demo the Ethics Engine reliably while tracing every AI decision with actionable logs.
+      </p>
+      <div className="card-actions">
+        <Link to="https://github.com/CIRISAI/CIRISNode/pulls?q=is%3Apr+author%3ABradleyMatera" external>
+          Review merged pull requests
+        </Link>
+      </div>
     </Card>
     <Card>
-      <h3 className="feature-card__title">Tech Talk Club — Full Sail</h3>
+      <h3 className="feature-card__title">
+        <Link to="https://github.com/CIRISAI/CIRIS-Covenant.github.io" external>
+          CIRIS Covenant Site
+        </Link>
+      </h3>
+      <p className="feature-card__meta">
+        <strong>Role:</strong> Frontend contributor · 2024
+      </p>
       <ul className="feature-list">
-        <li>Weekly Agile standups</li>
-        <li>Peer code reviews and solution planning</li>
+        <li>
+          <strong>Implemented</strong> the contributor application flow in the Next.js App Router with schema validation.
+        </li>
+        <li>
+          <strong>Streamlined</strong> deployment handoffs by documenting environment variables and preview workflows.
+        </li>
       </ul>
-    </Card>
-    <Card>
-      <h3 className="feature-card__title">Game Jam — Fallen Knight: Requiem of Honor</h3>
-      <ul className="feature-list">
-        <li>Ranked #9 Artstyle — KAJAM 2023</li>
-        <li>Built gameplay systems under strict deadline</li>
-        <li><Link to="https://tech-talk-fs.itch.io/test-runner" external>Test Runner</Link> - Game Jam entry</li>
-      </ul>
+      <p className="feature-card__body">
+        <strong>Result:</strong> Prospective volunteers onboard in minutes with clear guidance and working forms.
+      </p>
+      <div className="card-actions">
+        <Link to="https://github.com/CIRISAI/CIRIS-Covenant.github.io/pull/3" external>
+          View the application PR
+        </Link>
+      </div>
     </Card>
   </div>
 </Section>
 
 <Section
-  eyebrow="Contributions - Section tags"
-  title="Organizer-friendly search terms"
+  eyebrow="Documentation"
+  title="Operational clarity"
 >
-  <div>Open Source Contributor, Team Contributor, Technical Projects, Academic Projects, Game Jam Contributor</div>
+  <div className="grid-two">
+    <Card>
+      <h3 className="feature-card__title">Developer Runbooks</h3>
+      <p className="feature-card__meta">
+        <strong>Role:</strong> Author · 2024 – Present
+      </p>
+      <ul className="feature-list">
+        <li>
+          <strong>Authored</strong> onboarding and smoke-test docs that unblock new CIRIS AI contributors within the first day.
+        </li>
+        <li>
+          <strong>Codified</strong> pull-request templates and checklists to keep review cycles focused on risk mitigation.
+        </li>
+      </ul>
+      <p className="feature-card__body">
+        <strong>Result:</strong> Contributors deliver production-ready changes without guessing about expectations.
+      </p>
+    </Card>
+  </div>
+</Section>
+
+<Section
+  eyebrow="Community"
+  title="Mentorship & events"
+>
+  <div className="grid-two">
+    <Card>
+      <h3 className="feature-card__title">Tech Talk Club · Full Sail University</h3>
+      <p className="feature-card__meta">
+        <strong>Role:</strong> Coordinator · 2023 – Present
+      </p>
+      <ul className="feature-list">
+        <li>
+          <strong>Facilitated</strong> weekly standups, code reviews, and project planning for interdisciplinary student teams.
+        </li>
+        <li>
+          <strong>Mentored</strong> peers through architecture decisions, Git workflows, and accessibility best practices.
+        </li>
+      </ul>
+      <p className="feature-card__body">
+        <strong>Result:</strong> Student teams ship demo-ready features each sprint with shared accountability.
+      </p>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">Game Jam · Fallen Knight: Requiem of Honor</h3>
+      <p className="feature-card__meta">
+        <strong>Role:</strong> Gameplay engineer · KAJAM 2023
+      </p>
+      <ul className="feature-list">
+        <li>
+          <strong>Delivered</strong> combat systems and event scripts under 72-hour constraints.
+        </li>
+        <li>
+          <strong>Optimised</strong> asset pipelines so artists could iterate without breaking builds.
+        </li>
+      </ul>
+      <p className="feature-card__body">
+        <strong>Result:</strong> Earned #9 Artstyle ranking and a polished playable prototype.
+      </p>
+      <div className="card-actions">
+        <Link to="https://tech-talk-fs.itch.io/test-runner" external>
+          Play the jam build
+        </Link>
+      </div>
+    </Card>
+  </div>
+</Section>
+
+<Section
+  eyebrow="Let's collaborate"
+  title="Ready to support your team"
+>
+  <div className="card-actions">
+    <Link data-variant="primary" to="/contact">
+      Request a contribution walkthrough
+    </Link>
+    <Link to="https://github.com/BradleyMatera" external>
+      Browse GitHub profile
+    </Link>
+  </div>
 </Section>

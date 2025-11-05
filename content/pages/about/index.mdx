@@ -7,15 +7,24 @@ import { Section, AnchorNav, Card } from "../../../src/components/ui";
 
 <Section
   eyebrow="Profile"
-  title="Hi, I'm Bradley Matera."
-  description="Full Stack Software Engineer | B.S. Web Development (Full Sail University, GPA 3.8) | AWS Cloud Support Intern (Amazon, Summer 2025)"
+  title={
+    <>
+      Hi, I'm Bradley Matera.
+      <br />
+    </>
+  }
+  description={
+    <p>
+      <strong>Full Stack Software Engineer</strong> | <strong>B.S. Web Development (Full Sail, GPA 3.8)</strong> | <strong>AWS Cloud Support Intern (Amazon, Summer 2025)</strong>
+    </p>
+  }
 >
-  <div>
+  <p>
     I build production-ready systems with scalable backend services and strong cloud architecture. Hands-on experience troubleshooting live AWS environments and optimizing customer workflows.
-  </div>
-  <div>
+  </p>
+  <p>
     <strong>Army Combat Medic → Software Engineer.</strong> Before tech, I served as a medic in the U.S. Army, worked in security, case management, construction, and animal rescue. Those jobs taught me discipline, communication, and how to adapt under pressure. Now I approach engineering the same way: identify the issue, fix it, keep things stable.
-  </div>
+  </p>
 </Section>
 
 <AnchorNav
@@ -43,8 +52,8 @@ import { Section, AnchorNav, Card } from "../../../src/components/ui";
     <Card>
       <h3 className="feature-card__title">Languages</h3>
       <div className="project-card__stack">
-        <span>JavaScript</span>
-        <span>TypeScript</span>
+        <span><strong>JavaScript</strong></span>
+        <span><strong>TypeScript</strong></span>
         <span>Python</span>
         <span>HTML</span>
         <span>CSS</span>
@@ -129,12 +138,12 @@ import { Section, AnchorNav, Card } from "../../../src/components/ui";
   <div className="grid-three">
     <Card>
       <h3>AWS Certified AI Practitioner</h3>
-      <p>Amazon Web Services (AWS)</p>
+      <p><strong>Amazon Web Services (AWS)</strong></p>
       <p>Issued Aug 2025, Expires Aug 2028</p>
     </Card>
     <Card>
       <h3>AWS Certified Solutions Architect – Associate</h3>
-      <p>Amazon Web Services (AWS)</p>
+      <p><strong>Amazon Web Services (AWS)</strong></p>
       <p>Issued Jul 2025, Expires Jul 2028</p>
     </Card>
     <Card>
@@ -190,7 +199,11 @@ import { Section, AnchorNav, Card } from "../../../src/components/ui";
 <Section
   id="differentiators"
   eyebrow="What sets me apart"
-  title="What Sets Me Apart — Medic discipline meets engineering rigor"
+  title={
+    <>
+      <strong>What Sets Me Apart</strong> — Medic discipline meets engineering rigor
+    </>
+  }
 >
   <ul className="feature-list">
     <li><strong>Calm under pressure</strong> — Army medic training prepared me for high-stakes environments where quick decisions matter.</li>

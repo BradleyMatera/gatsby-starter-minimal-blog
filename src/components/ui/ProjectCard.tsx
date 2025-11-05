@@ -13,26 +13,25 @@ type ProjectLink = {
 type ProjectCardProps = {
   title: string;
   meta?: string;
-  summary?: string;
-  impact?: string;
+  summary?: React.ReactNode;
+  impact?: React.ReactNode;
+  impactPrefix?: string;
   stack?: string[];
   links?: ProjectLink[];
   className?: string;
 };
 
-const ProjectCard = ({ title, meta, summary, impact, stack, links, className }: ProjectCardProps) => {
+const ProjectCard = ({ title, meta, summary, impact, impactPrefix = "Impact", stack, links, className }: ProjectCardProps) => {
   const { ref, revealed } = useScrollReveal(0);
+  const articleClassName = cx(
+    "project-card",
+    "reveal-card",
+    className,
+    revealed ? "is-revealed" : undefined
+  );
 
   return (
-    <article
-      ref={ref as React.RefObject<HTMLElement>}
-      className={cx("project-card", className)}
-      style={{
-        opacity: revealed ? 1 : 0,
-        transform: revealed ? "translateY(0)" : "translateY(32px)",
-        transition: "opacity 0.7s cubic-bezier(.22,.9,.2,1), transform 0.7s cubic-bezier(.22,.9,.2,1)",
-      }}
-    >
+    <article ref={ref as React.RefObject<HTMLElement>} className={articleClassName}>
       {/* Title - Top horizontal bar (F-pattern first fixation) */}
       <h3 className="project-card__title">{title}</h3>
 
@@ -49,7 +48,11 @@ const ProjectCard = ({ title, meta, summary, impact, stack, links, className }: 
       {meta ? <p className="project-card__meta">{meta}</p> : null}
 
       {/* Impact - Bolded outcome/result */}
-      {impact ? <p className="project-card__impact">{impact}</p> : null}
+      {impact ? (
+        <p className="project-card__impact">
+          <strong>{impactPrefix}:</strong> {impact}
+        </p>
+      ) : null}
 
       {/* Description - Body content */}
       {summary ? <p className="project-card__description">{summary}</p> : null}

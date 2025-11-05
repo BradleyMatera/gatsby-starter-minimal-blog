@@ -104,7 +104,8 @@ import StatusRow from "../../../components/ui/StatusRow";
       title="ProjectHub · AI portfolio concierge"
       meta="Modular embeddable assistant"
       summary="Interactive chat experience that helps recruiters and peers explore my work in seconds, highlighting tech stacks, use cases, and outcomes."
-      impact="Result: 4× faster conversations with hiring managers during career fairs."
+      impactPrefix="Result"
+      impact="4× faster conversations with hiring managers during career fairs."
       stack={["JavaScript", "LangChain", "OpenAI", "Netlify"]}
       links={[
         { label: "Launch demo", href: "https://codepen.io/student-account-bradley-matera/full/yyLmYKR", variant: "primary", external: true },
@@ -116,7 +117,8 @@ import StatusRow from "../../../components/ui/StatusRow";
       title="Triangle Shader Lab"
       meta="Guided WebGPU primer"
       summary="Interactive walkthrough that keeps the hello triangle render front and center while explaining adapters, pipelines, and draw calls step by step."
-      impact="Result: Turned a canonical demo into a reusable teaching aid for teammates learning WebGPU fundamentals."
+      impactPrefix="Result"
+      impact="Turned a canonical demo into a reusable teaching aid for teammates learning WebGPU fundamentals."
       stack={["WebGPU", "JavaScript", "WGSL"]}
       links={[
         { label: "Explore the lab", href: "https://bradleymatera.github.io/TriangleDemo/", variant: "primary", external: true },
@@ -128,7 +130,8 @@ import StatusRow from "../../../components/ui/StatusRow";
       title="Secrets management patterns"
       meta="Frontend teaching tool"
       summary="Interactive walkthrough that demonstrates three ways to handle app secrets—hardcoded, shared file, and env vars—highlighting risks and best practices."
-      impact="Result: Used in study groups to teach secure defaults to new developers."
+      impactPrefix="Result"
+      impact="Used in study groups to teach secure defaults to new developers."
       stack={["Vite", "TypeScript", "Node.js"]}
       links={[
         { label: "View demo", href: "https://bradleymatera.github.io/EthicsFrontEndDemo/", variant: "primary", external: true },
@@ -150,22 +153,22 @@ import StatusRow from "../../../components/ui/StatusRow";
         <strong>"Who needs this and how will they feel when they use it?"</strong> Then I document decisions so the next teammate moves faster.
       </div>
     </div>
-<ul className="feature-list">
-  <li className="reveal" style={{ transitionDelay: "0.1s", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-    <TinyTriangleAccent />
-    <div><strong>Lighthouse & Axe-validated</strong> — Evidence-driven improvements shape each iteration using analytics checkpoints.</div>
-  </li>
-  <li className="reveal" style={{ transitionDelay: "0.2s", position: "relative", paddingRight: "3rem" }}>
-    <div><strong>Git-first documentation</strong> — Thoughtful commit messages paired with changelog notes and architecture diagrams for readable handoffs.</div>
-    <div style={{ position: "absolute", right: "1rem", top: "50%", transform: "translateY(-50%)" }}>
-      <TinyDotClusterAccent />
-    </div>
-  </li>
-  <li className="reveal" style={{ transitionDelay: "0.3s", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-    <BlogAccent />
-    <div><strong>Progressive enhancement</strong> — Micro-interactions and graceful degradation keep interfaces responsive even on low-end hardware.</div>
-  </li>
-</ul>
+    <ul className="feature-list">
+      <li className="reveal" style={{ transitionDelay: "0.1s", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+        <TinyTriangleAccent />
+        <div><strong>Lighthouse & Axe-validated</strong> — Evidence-driven improvements shape each iteration.</div>
+      </li>
+      <li className="reveal" style={{ transitionDelay: "0.2s", position: "relative", paddingRight: "3rem" }}>
+        <div><strong>Git-first documentation</strong> — Commit messages, changelog notes, and diagrams keep handoffs readable.</div>
+        <div style={{ position: "absolute", right: "1rem", top: "50%", transform: "translateY(-50%)" }}>
+          <TinyDotClusterAccent />
+        </div>
+      </li>
+      <li className="reveal" style={{ transitionDelay: "0.3s", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+        <BlogAccent />
+        <div><strong>Progressive enhancement</strong> — Micro-interactions and graceful degradation keep interfaces responsive on low-end hardware.</div>
+      </li>
+    </ul>
   </div>
 </Section>
 

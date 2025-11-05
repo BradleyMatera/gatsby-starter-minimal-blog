@@ -5,7 +5,7 @@ import { useScrollReveal } from "../home/useScrollReveal";
 type SectionProps = {
   id?: string;
   eyebrow?: React.ReactNode;
-  title?: string;
+  title?: React.ReactNode;
   description?: React.ReactNode;
   titleAs?: keyof JSX.IntrinsicElements;
   actions?: React.ReactNode;
