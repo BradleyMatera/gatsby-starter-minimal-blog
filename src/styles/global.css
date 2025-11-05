@@ -17,6 +17,17 @@
   --section-spacing: clamp(100px, 15vw, 200px);
   --font-primary: "Montserrat", "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-heading: "Space Grotesk Variable", "Space Grotesk", "Inter", "Segoe UI", sans-serif;
+  --heading-h1-size: clamp(2.5rem, 1.5vw + 2.05rem, 3.25rem);
+  --heading-h2-size: clamp(2rem, 1.1vw + 1.6rem, 2.5rem);
+  --heading-h3-size: clamp(1.5rem, 0.9vw + 1.3rem, 2rem);
+  --heading-h4-size: clamp(1.25rem, 0.7vw + 1.1rem, 1.5rem);
+  --heading-h1-line: 1.05;
+  --heading-h2-line: 1.1;
+  --heading-h3-line: 1.2;
+  --heading-h4-line: 1.3;
+  --heading-letter-tight: -0.02em;
+  --heading-letter-snug: -0.01em;
+  --heading-letter-relaxed: -0.005em;
   
   /* Alias old variables to new ones */
   --color-primary: var(--color-accent);
@@ -79,10 +90,10 @@ body {
 h1,
 .h1 {
   font-family: var(--font-heading);
-  font-size: var(--text-4xl);
+  font-size: var(--heading-h1-size);
   font-weight: var(--weight-bold);
-  line-height: var(--leading-tight);
-  letter-spacing: -0.02em;
+  line-height: var(--heading-h1-line);
+  letter-spacing: var(--heading-letter-tight);
   color: var(--color-text);
   margin: 0 0 1rem;
 }
@@ -90,10 +101,10 @@ h1,
 h2,
 .h2 {
   font-family: var(--font-heading);
-  font-size: var(--text-3xl);
+  font-size: var(--heading-h2-size);
   font-weight: var(--weight-bold);
-  line-height: var(--leading-tight);
-  letter-spacing: -0.02em;
+  line-height: var(--heading-h2-line);
+  letter-spacing: var(--heading-letter-tight);
   color: var(--color-text);
   margin: 0 0 0.85rem;
 }
@@ -101,10 +112,10 @@ h2,
 h3,
 .h3 {
   font-family: var(--font-heading);
-  font-size: var(--text-2xl);
+  font-size: var(--heading-h3-size);
   font-weight: var(--weight-semibold);
-  line-height: var(--leading-snug);
-  letter-spacing: -0.01em;
+  line-height: var(--heading-h3-line);
+  letter-spacing: var(--heading-letter-snug);
   color: var(--color-text);
   margin: 0 0 0.75rem;
 }
@@ -112,10 +123,10 @@ h3,
 h4,
 .h4 {
   font-family: var(--font-heading);
-  font-size: var(--text-xl);
+  font-size: var(--heading-h4-size);
   font-weight: var(--weight-semibold);
-  line-height: var(--leading-snug);
-  letter-spacing: -0.005em;
+  line-height: var(--heading-h4-line);
+  letter-spacing: var(--heading-letter-relaxed);
   color: var(--color-text);
   margin: 0 0 0.65rem;
 }

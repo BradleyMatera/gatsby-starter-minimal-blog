@@ -1736,7 +1736,7 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 
 ### Task 3.2: Heading Hierarchy Styles (`/src/styles/global.css`)
 
-**Status**: 🔄 IN PROGRESS | **Priority**: HIGH | **Time**: 1 hour | **Updated**: Nov 5, 2025
+**Status**: ✅ COMPLETE | **Priority**: HIGH | **Time**: 1 hour | **Updated**: Nov 5, 2025
 
 - [x] 3.2.1 - Update h1 styles with new custom properties
 - [x] 3.2.2 - Update h2 styles with new custom properties
@@ -1746,9 +1746,9 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 - [x] 3.2.6 - Add letter-spacing to headings (-0.02em for h1/h2)
 - [x] 3.2.7 - Test heading hierarchy across pages
 - [x] 3.2.8 - Verify responsive font sizing works
-- [ ] 3.2.9 - Commit changes: "feat(css): update heading hierarchy with custom properties"
+- [x] 3.2.9 - Commit changes: "feat(css): update heading hierarchy with custom properties"
 
-**Notes**: Heading elements now draw from the shared `--font-heading` stack with updated weight, spacing, and size tokens. Spot-checked homepage, blog index, and projects index in `gatsby develop` to confirm hierarchy renders correctly. Verified responsive scaling at 1280px, 768px, and 375px viewports; clamp settings keep headline sizing balanced across breakpoints.
+**Notes**: Heading elements now draw from the shared `--font-heading` stack with updated weight, spacing, and size tokens. Spot-checked homepage, blog index, and projects index in `gatsby develop` to confirm hierarchy renders correctly. Verified responsive scaling at 1280px, 768px, and 375px viewports; clamp settings keep headline sizing balanced across breakpoints. Commit `feat(css): update heading hierarchy with custom properties` captures the variable rollout.
 
 ### Task 3.3: Paragraph & Body Text Styles (`/src/styles/global.css`)
 
@@ -2153,14 +2153,14 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 
 **Phase 1 Status**: 16/16 tasks complete (100%)
 **Phase 2 Status**: 5/5 tasks complete (100%)
-**Phase 3 Status**: 3/7 tasks complete (43%)
+**Phase 3 Status**: 4/7 tasks complete (57%)
 **Phase 4 Status**: 0/7 tasks complete (0%)
 **Phase 5 Status**: 0/8 tasks complete (0%)
 **Final Tasks**: 0/2 task groups complete (0%)
 
-**Overall Progress**: 24/45 tasks complete (~53%)
+**Overall Progress**: 25/45 tasks complete (~56%)
 
-**Next Task**: Task 3.2.9 - Commit changes: "feat(css): update heading hierarchy with custom properties"
+**Next Task**: Task 3.3.7 - Test paragraph readability across pages
 
 ---
 
