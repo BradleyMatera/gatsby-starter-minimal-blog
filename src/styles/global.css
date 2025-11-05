@@ -597,8 +597,7 @@ img {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  margin-bottom: clamp(3rem, 6vw, 5rem);
-  z-index: 5;
+  margin-bottom: clamp(5rem, 10vw, 8rem);
   width: fit-content;
   max-width: min(100%, 500px);
 }
@@ -607,15 +606,6 @@ img {
   display: flex;
   flex-wrap: wrap;
   gap: 0.65rem;
-}
-
-@media (min-width: 960px) {
-  .inpage-nav {
-    position: sticky;
-    top: 6.4rem;
-    z-index: 12;
-    align-self: flex-start;
-  }
 }
 
 .surface-card {
