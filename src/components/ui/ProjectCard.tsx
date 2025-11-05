@@ -33,14 +33,10 @@ const ProjectCard = ({ title, meta, summary, impact, stack, links, className }: 
         transition: "opacity 0.7s cubic-bezier(.22,.9,.2,1), transform 0.7s cubic-bezier(.22,.9,.2,1)",
       }}
     >
-      <div className="project-card__header">
-        <div className="project-card__heading">
-          <h3 className="project-card__title">{title}</h3>
-          {meta ? <p className="project-card__meta">{meta}</p> : null}
-        </div>
-      </div>
-      {summary ? <p className="project-card__description">{summary}</p> : null}
-      {impact ? <p className="project-card__impact">{impact}</p> : null}
+      {/* Title - Top horizontal bar (F-pattern first fixation) */}
+      <h3 className="project-card__title">{title}</h3>
+
+      {/* Stack - Second horizontal bar (scannable keywords) */}
       {stack && stack.length > 0 ? (
         <div className="project-card__stack">
           {stack.map((item) => (
@@ -48,6 +44,17 @@ const ProjectCard = ({ title, meta, summary, impact, stack, links, className }: 
           ))}
         </div>
       ) : null}
+
+      {/* Meta - De-emphasized context */}
+      {meta ? <p className="project-card__meta">{meta}</p> : null}
+
+      {/* Impact - Bolded outcome/result */}
+      {impact ? <p className="project-card__impact">{impact}</p> : null}
+
+      {/* Description - Body content */}
+      {summary ? <p className="project-card__description">{summary}</p> : null}
+
+      {/* CTAs - Call to action links */}
       {links && links.length > 0 ? (
         <div className="card-actions">
           {links.map((link) => (
