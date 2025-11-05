@@ -29,6 +29,12 @@ const Section = ({
 }: SectionProps) => {
   const { ref, revealed } = useScrollReveal(revealDelay);
   const isVisible = disableReveal || revealed;
+  const sectionClassName = cx(
+    "section-shell",
+    disableReveal ? undefined : "reveal-card",
+    className,
+    isVisible ? "is-revealed" : undefined
+  );
   let descriptionMarkup: React.ReactNode = null;
 
   if (description) {
@@ -39,12 +45,7 @@ const Section = ({
     <section
       id={id}
       ref={ref as React.RefObject<HTMLElement>}
-      className={cx("section-shell", className)}
-      style={{
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? "translateY(0)" : "translateY(32px)",
-        transition: "opacity 0.7s cubic-bezier(.22,.9,.2,1), transform 0.7s cubic-bezier(.22,.9,.2,1)",
-      }}
+      className={sectionClassName}
     >
       {(eyebrow || title || description || actions) && (
         <header className="section-shell__header">
