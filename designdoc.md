@@ -1787,10 +1787,12 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 - [x] 3.4.16 - Test blog card appearance on blog listing page
 - [x] 3.4.17 - Test responsive layout
 - [x] 3.4.18 - Verify hover states work
-- [ ] 3.4.19 - Run Lighthouse audit on blog page
+- [x] 3.4.19 - Run Lighthouse audit on blog page
+  - Desktop scores: Performance 67, Accessibility 100, Best Practices 96, SEO 100 (`lighthouse-blog.json`)
+  - Key findings: LCP 5.16s (section-lead copy), CLS 0.26 from blog card shifts; plan optimizations in upcoming pass
 - [ ] 3.4.20 - Commit changes: "feat(css): optimize blog card visual hierarchy for F-pattern"
 
-**Notes**: Blog card CSS now mirrors the refactored component hierarchy, with typographic scale, tag badge ordering, and excerpt emphasis aligned to the F-pattern plan. Validated the listing layout after `gatsby build` by spot-checking `public/blog/index.html`; cards now render Title → Tag list → Meta → Excerpt → CTA with the decorative accent anchored last. Responsive sweeped desktop (1280px), tablet (768px), and mobile (375px) breakpoints using the clamp/grid utilities—cards collapse to a single column gracefully and retain spacing. Verified hover states via CSS inspection (`:hover` color/transform rules) and confirmed the call-to-action buttons inherit the accent states. Lighthouse audit still pending before closing the task.
+**Notes**: Blog card CSS now mirrors the refactored component hierarchy, with typographic scale, tag badge ordering, and excerpt emphasis aligned to the F-pattern plan. Validated the listing layout after `gatsby build` by spot-checking `public/blog/index.html`; cards now render Title → Tag list → Meta → Excerpt → CTA with the decorative accent anchored last. Responsive sweeped desktop (1280px), tablet (768px), and mobile (375px) breakpoints using the clamp/grid utilities—cards collapse to a single column gracefully and retain spacing. Verified hover states via CSS inspection (`:hover` color/transform rules) and confirmed the call-to-action buttons inherit the accent states. Lighthouse results (Desktop: P67 / A100 / BP96 / SEO100) highlight a sluggish LCP on the section lead paragraph and a 0.26 CLS from late-loading blog-card assets; queue follow-up tweaks to trim hero content weight and lock card dimensions before shipping.
 
 ### Task 3.5: Project Card Styles (`/src/styles/global.css`)
 
@@ -2160,7 +2162,7 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 
 **Overall Progress**: 29/45 tasks complete (~64%)
 
-**Next Task**: Task 3.4.19 - Run Lighthouse audit on blog page
+**Next Task**: Task 3.4.20 - Commit blog card styling updates
 
 ---
 
