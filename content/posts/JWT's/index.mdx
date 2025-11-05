@@ -5,42 +5,74 @@ description: "How I decrypted, explored, and used JSON Web Tokens (JWTs) to solv
 tags: ["JWT", "CTF", "Web Tokens", "gRPC", "JSON", "Encryption"]
 ---
 
-## Introduction
+## TL;DR
 
-During a winter Capture the Flag event I tackled a puzzle that chained together symmetric encryption, JSON Web Tokens (JWTs), and gRPC endpoints. My objective was not only to retrieve hidden flags but to strengthen my understanding of token-based authentication and remote procedure calls. This post summarises the challenge at a conceptual level, clarifies what JWTs and gRPC actually are, and captures the lessons I would share with teammates approaching similar infrastructure.
+- Solved a winter CTF by decoding a chained ladder of **JWT access tokens** that guarded a set of gRPC endpoints.
+- Used Libsodium, `grpcurl`, and custom Python scripts to verify signatures, rotate credentials, and capture proxy responses.
+- Discovered that an AWS load balancer rejected streaming calls because of **metadata casing** and `application/grpc` content-type mismatches.
 
-## Background Concepts
+## Problem — Chain JWT authentication inside a gRPC CTF
 
-### JSON Web Tokens
-A JSON Web Token is a compact, URL-safe token that carries claims between two parties.[^jwt-spec] A token comprises a header (algorithm and type), a payload (claims such as `sub` or `exp`), and a signature that verifies integrity. Importantly, the header and payload are merely Base64URL-encoded; anyone can decode them, so they must never contain secrets or personal data.[^jwt-claims]
+During a winter Capture the Flag event I faced a puzzle that fused symmetric encryption, JSON Web Tokens (JWTs), and gRPC endpoints. The challenge: move from a bootstrap token to a final streaming token without leaking secrets or violating transport rules. My goal was to extract hidden flags while sharpening practical knowledge of **token-based authentication** and **RPC transport behaviour**.
 
-### gRPC in Brief
-gRPC is a high-performance, open-source RPC framework that uses HTTP/2 as a transport layer and Protocol Buffers for data serialisation.[^grpc] It supports unary and streaming calls, enforces strict content types (`application/grpc`), and can be fronted by load balancers that terminate TLS.
+## Background — JWTs and gRPC at a glance
 
-Understanding these two technologies up front made the CTF manageable: tokens provide access, while gRPC enforces transport constraints.
+- **JSON Web Tokens** bundle claims inside a Base64URL-encoded header and payload, then sign them for integrity.[^jwt-spec] Because decoding is trivial, sensitive data must never appear in the payload.[^jwt-claims]
+- **gRPC** rides on HTTP/2, enforcing `application/grpc` and binary Protocol Buffer payloads.[^grpc] Load balancers frequently terminate TLS, rewrite headers, and translate gRPC status codes to HTTP equivalents.
 
-## Challenge Workflow
+Understanding how claims and metadata travelled through the stack made the CTF tractable: tokens opened doors, while gRPC dictated how those doors could be approached.
 
-1. **Initial token discovery** – The organisers supplied a `token.md` file containing a bootstrap token (`PAGE_TOKEN`).  
-2. **Decrypting ciphertexts** – A `secretbox.md` file included Base64-encoded ciphertext, a key, and a nonce. Using Libsodium’s `secretbox_open` I decrypted the payload and obtained a signed JWT (`JWT_TOKEN`).  
-3. **Authorising API calls** – Passing `JWT_TOKEN` as a Bearer token to `token.v1.TokenService/GetToken` returned an intermediate token (`CONNECT_UNARY_TOKEN`). Each token validated the previous step, similar to chained OAuth scopes.  
-4. **Streaming endpoint attempts** – Using `grpcurl` and a Python client I contacted `StreamToken`, this time authorised with `CONNECT_UNARY_TOKEN` or an additional secret (`NA_CL_SECRET_TOKEN`). The server responded with HTTP 464 errors, indicating the load balancer rejected the request before it reached the service. That hinted at content-type mismatches or missing TLS metadata.
+## Solution — Token ladder through gRPC transport
 
-Rather than documenting every curl command, I distilled the workflow into reusable snippets and notes in a scratchpad. The key commands are reproduced in my GitHub Gist (linked from the portfolio) for peers who want to replay the challenge with their own credentials.
+I treated the puzzle as a four-step ladder, validating each token before moving to the next service. Every stage surfaced a new lesson about JWT scopes and gRPC metadata.
 
-## Lessons Learned About JWTs
+### Step 1 — Decode the bootstrap token
 
-1. **JWTs are signed, not encrypted.** Anyone can decode the header and payload, so sensitive data must remain elsewhere.[^jwt-claims]  
-2. **Always verify the signature.** The token is trustworthy only if the recipient validates the signature using the shared secret or public key. In the challenge the service performed this verification when I called `GetToken`.  
-3. **Short-lived scopes reduce risk.** Each token unlocked the next step, and rotatable keys (nonce + key pairs) limited exposure. This mirrors best practice for issuing scoped access tokens in production.
+- The organisers provided `PAGE_TOKEN` in a `token.md` file. Decoding confirmed it contained a `kid` claim pointing to the symmetric key in `secretbox.md`.
+- I confirmed the header/payload with `jwt.io` and logged the original claims to avoid re-running the intro step.
 
-## Lessons Learned About gRPC
+### Step 2 — Decrypt the ciphertext into a signed JWT
 
-1. **Content-type matters.** gRPC expects `application/grpc` over HTTP/2.[^grpc] When I hit the endpoint with `application/json`, the proxy returned HTTP 464.  
-2. **Load balancers can mask errors.** AWS Elastic Load Balancers may translate gRPC errors into HTTP status codes, so pairing `grpcurl` with verbose logs is essential.  
-3. **Metadata formatting is strict.** Authorisation headers must be lowercase (`authorization`) in gRPC metadata; otherwise they are discarded silently.
+- `secretbox.md` shipped Base64-encoded ciphertext, key, and nonce. Feeding those values into Libsodium’s `secretbox_open` produced a signed JWT (`JWT_TOKEN`).
+- I scripted the decrypt/verify loop so I could rotate keys quickly if I corrupted the scratch files.
 
-## Tools and Techniques
+<figure className="code-example">
+```python
+# Listing 1 — Decrypt the XSalsa20-Poly1305 payload and verify the JWT signature.
+import base64
+import nacl.secret
+import jwt
+
+ciphertext = base64.urlsafe_b64decode(open("cipher.txt", "rb").read())
+nonce = base64.urlsafe_b64decode(open("nonce.txt", "rb").read())
+key = base64.urlsafe_b64decode(open("key.txt", "rb").read())
+
+box = nacl.secret.SecretBox(key)
+token = box.decrypt(ciphertext, nonce).decode()
+
+decoded = jwt.decode(token, key, algorithms=["HS256"], options={"verify_aud": False})
+print(decoded)
+```
+	<figcaption>Listing 1 — Script that mirrors Libsodium's `secretbox_open` and confirms JWT integrity with PyJWT.</figcaption>
+</figure>
+
+### Step 3 — Trade Bearer tokens for scoped access
+
+- Calling `token.v1.TokenService/GetToken` with `JWT_TOKEN` returned `CONNECT_UNARY_TOKEN`. Each token validated the previous chain, mimicking OAuth scopes that narrow privileges as you progress.
+- I kept the metadata lean: lowercase `authorization` header, short-lived tokens stored in environment variables, and a `--cacert` flag to satisfy TLS.
+
+### Step 4 — Probe streaming endpoints behind the load balancer
+
+- With `CONNECT_UNARY_TOKEN` (and later `NA_CL_SECRET_TOKEN`) I attempted `StreamToken` via `grpcurl` and a Python client. The proxy responded with HTTP 464, signalling that the request died before reaching the service.
+- Packet captures showed the load balancer expected `application/grpc`. Any stray JSON requests or uppercase headers caused immediate rejection.
+
+## Troubleshooting — Decode the proxy signals
+
+- **Content-type discipline**: gRPC insists on `application/grpc`. Sending JSON triggered 464 responses long before server logs recorded the attempt.
+- **Metadata casing**: AWS load balancers dropped `Authorization` headers. Lowercasing to `authorization` in both CLI and Python clients kept metadata intact.
+- **Observability**: Verbose `grpcurl` logs and Wireshark traces revealed where the handshake failed, preventing blind retries.
+
+## Tools and Diagnostics
 
 | Tool | Purpose | Notes |
 | --- | --- | --- |
@@ -48,20 +80,26 @@ Rather than documenting every curl command, I distilled the workflow into reusab
 | `jwt.io` decoder | Inspect token payloads | Helpful for quick sanity checks. |
 | `grpcurl` | Exercise unary and streaming calls | `--cacert` ensured TLS trust; `-H "authorization: Bearer …"` set metadata. |
 | Python gRPC client | Programmatic retries and logging | Provided better stack traces than CLI tools. |
-| Wireshark & `openssl s_client` | Verified TLS negotiation | Confirmed that HTTP/2 multiplexing stayed intact. |
+| Wireshark & `openssl s_client` | Verify TLS negotiation | Confirmed that HTTP/2 multiplexing stayed intact. |
 
-## What I Would Do Differently Next Time
+## What I’ll change next time
 
-- **Automate signature checks.** I manually verified signatures during the event. Next time I’ll script verification with libraries like `pyjwt` so I can move faster under time pressure.  
-- **Capture headers and payloads in fixtures.** Having structured fixtures would make it easier to write regression tests and teach others.  
-- **Experiment with gRPC-Web.** Some load balancers support gRPC-Web over HTTP/1.1; testing that path could uncover alternate solutions when HTTP/2 is blocked.
+- **Automate signature checks** with `pyjwt` so manual verification doesn’t slow down live events.
+- **Capture headers and payloads as fixtures** to replay the flow and teach teammates without re-running the challenge.
+- **Test gRPC-Web fallbacks** because some infrastructure only permits HTTP/1.1 and browser clients.
 
-## Conclusion
+## Key Takeaways
 
-This CTF reinforced how authentication chains and RPC transport rules intersect. By decoding JWTs carefully, validating signatures, and respecting gRPC’s metadata requirements, I progressed through most of the challenge. The remaining obstacles—largely load balancer behaviours—highlighted the importance of observability and protocol knowledge. Those skills translate directly into production environments where token misuse or misconfigured proxies can quickly derail deployments.
+- **JWTs are transparent but verifiable**: treat them as signed envelopes, not encrypted vaults.[^jwt-claims]
+- **Lowercase gRPC metadata** to survive proxy rewriting and keep authorisation headers intact.
+- **Instrument the transport**: logs, packet captures, and TLS inspection point to misconfigurations faster than brute-force retries.
 
-## References
+## Resources & References
 
-[^jwt-spec]: IETF, “JSON Web Token (JWT),” RFC 7519, May 2015, https://www.rfc-editor.org/rfc/rfc7519.  
-[^jwt-claims]: Auth0 Documentation, “JWT Anatomy,” accessed March 2025, https://auth0.com/learn/json-web-tokens/.  
+- Scratch scripts and command history (GitHub Gist linked from my portfolio) for replaying the token ladder.
+- RFC 7519, “JSON Web Token (JWT)” for the spec that guided signature validation.[^jwt-spec]
+- CNCF gRPC concepts for HTTP/2 transport expectations and metadata rules.[^grpc]
+
+[^jwt-spec]: IETF, “JSON Web Token (JWT),” RFC 7519, May 2015, https://www.rfc-editor.org/rfc/rfc7519.
+[^jwt-claims]: Auth0 Documentation, “JWT Anatomy,” accessed March 2025, https://auth0.com/learn/json-web-tokens/.
 [^grpc]: CNCF, “gRPC Concepts,” accessed March 2025, https://grpc.io/docs/what-is-grpc/introduction/.

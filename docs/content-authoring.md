@@ -72,6 +72,15 @@ Standard Markdown syntax is supported for headings, lists, emphasis, code blocks
 
 Headings (`##`, `###`) gain anchors in blog posts, feeding the table of contents on the right. Avoid skipping heading levels to keep the TOC readable.
 
+## Blog Post Template & Scannability Checklist
+
+- Start every new post from `docs/blog-post-template.mdx`. It already includes frontmatter placeholders, a TL;DR list, keyword-first headings, and a Key Takeaways section.
+- **TL;DR block**: keep the opening bullets under ~12 words. Lead with the outcome, follow with proof, end with a call-to-action or next step.
+- **Keyword-first headings**: structure body sections as `## Problem — Keyword`, `## Solution — Tool`, then granular `### Step` headings. Put the primary search term at the beginning of each heading so it appears in the eye-tracking "F" stem and the generated table of contents.
+- **Paragraphs vs. lists**: if the explanation exceeds four sentences or contains three or more commas, convert it into an ordered/ unordered list. Use numbered lists when order matters and bullets when it does not.
+- **Code captions**: wrap important snippets in a `<figure>` with `<figcaption>` (see the template). Summarise what the reader should notice, e.g., "Listing 1 — Deploy build artifacts to Amazon S3 via the AWS CLI."
+- **Key Takeaways**: close with a three-item bullet list of actionable lessons. Each bullet should pair an action with an outcome metric or link.
+
 ## Embedding HTML or JSX
 
 Any valid JSX is allowed inside MDX:

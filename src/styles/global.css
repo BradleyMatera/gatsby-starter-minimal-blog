@@ -1567,23 +1567,31 @@ img {
   align-items: center;
   justify-content: center;
   border-radius: 14px;
-  background: var(--color-primary-soft);
-  color: var(--color-primary);
-  font-weight: 600;
-  font-size: 1.1rem;
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .feature-card__title {
   margin: 0;
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-size: 1.25rem;
+  font-weight: 700;
   color: var(--color-text);
 }
 
 .feature-card__body {
   margin: 0;
   color: var(--color-text-subtle);
-  font-size: 0.98rem;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.feature-card__body::first-line {
+  font-weight: 600;
+  color: var(--color-text);
 }
 
 .reveal-card {
@@ -2235,6 +2243,72 @@ img {
 .post-content {
   display: grid;
   gap: clamp(1.5rem, 2vw, 2.25rem);
+  max-width: 75ch;
+}
+
+.post-content > * {
+  width: 100%;
+}
+
+.post-content figure,
+.post-content pre,
+.post-content blockquote {
+  margin: 0;
+}
+
+.post-content figure {
+  display: grid;
+  gap: 0.75rem;
+  padding: clamp(1rem, 2vw, 1.5rem);
+  border-radius: 18px;
+  background: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+}
+
+.code-example {
+  background: var(--color-surface-muted);
+  border: 1px solid var(--color-border-strong);
+}
+
+.post-content figure pre {
+  background: #0f172a;
+  color: #f8fafc;
+  padding: clamp(1rem, 1.5vw, 1.4rem);
+  border-radius: 14px;
+  overflow-x: auto;
+  box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.35);
+}
+
+.post-content figcaption {
+  font-size: 0.9rem;
+  color: var(--color-text-subtle);
+}
+
+.post-content table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 16px 35px rgba(15, 23, 42, 0.12);
+}
+
+.post-content table th,
+.post-content table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+  text-align: left;
+  font-size: 0.98rem;
+}
+
+.post-content table th {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.post-content table tr:last-of-type td {
+  border-bottom: none;
 }
 
 .post-content p {
@@ -2266,6 +2340,10 @@ img {
   letter-spacing: -0.01em;
   line-height: 1.75;
   margin: 0 0 1.35rem !important;
+}
+
+.css-8alcrq {
+  color: var(--color-text) !important;
 }
 
 

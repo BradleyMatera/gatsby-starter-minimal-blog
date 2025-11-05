@@ -1844,18 +1844,20 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 
 ### Task 3.7: Feature Card Styles (`/src/styles/global.css`)
 
-**Status**: Not Started | **Priority**: MEDIUM | **Time**: 1 hour
+**Status**: In Progress | **Priority**: MEDIUM | **Time**: 1 hour
 
-- [ ] 3.7.1 - Locate existing .feature-card styles
-- [ ] 3.7.2 - Update .feature-card__icon styles
-- [ ] 3.7.3 - Ensure icon is uppercase with accent color
-- [ ] 3.7.4 - Update .feature-card__title font-size to 1.25rem
-- [ ] 3.7.5 - Set title font-weight: 700
-- [ ] 3.7.6 - Update .feature-card__body styles
-- [ ] 3.7.7 - Add first-line emphasis to body
+- [x] 3.7.1 - Locate existing .feature-card styles
+- [x] 3.7.2 - Update .feature-card__icon styles
+- [x] 3.7.3 - Ensure icon is uppercase with accent color
+- [x] 3.7.4 - Update .feature-card__title font-size to 1.25rem
+- [x] 3.7.5 - Set title font-weight: 700
+- [x] 3.7.6 - Update .feature-card__body styles
+- [x] 3.7.7 - Add first-line emphasis to body
 - [ ] 3.7.8 - Test feature cards on homepage
 - [ ] 3.7.9 - Verify responsive layout
 - [ ] 3.7.10 - Commit changes: "feat(css): optimize feature card visual hierarchy"
+
+**Notes**: Accent-backed icon badge now carries uppercase label, title/body align to the typography spec, and the intro sentence pops via first-line emphasis. Need homepage/regression sweeps before closing.
 
 ---
 
@@ -1863,29 +1865,33 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 
 ### Task 4.1: Blog Post Template & Guidelines
 
-**Status**: Not Started | **Priority**: HIGH | **Time**: 1 hour
+**Status**: In Progress | **Priority**: HIGH | **Time**: 1 hour
 
-- [ ] 4.1.1 - Create blog post template file with TL;DR pattern
-- [ ] 4.1.2 - Document keyword-first heading structure
-- [ ] 4.1.3 - Create "Key Takeaways" section template
-- [ ] 4.1.4 - Add code block caption examples
-- [ ] 4.1.5 - Document list vs paragraph guidelines
-- [ ] 4.1.6 - Save template for future blog posts
+- [x] 4.1.1 - Create blog post template file with TL;DR pattern
+- [x] 4.1.2 - Document keyword-first heading structure
+- [x] 4.1.3 - Create "Key Takeaways" section template
+- [x] 4.1.4 - Add code block caption examples
+- [x] 4.1.5 - Document list vs paragraph guidelines
+- [x] 4.1.6 - Save template for future blog posts
+
+**Notes**: Added `docs/blog-post-template.mdx` (with TL;DR, Problem/Solution headings, figure-based code captions, and Key Takeaways) and expanded `docs/content-authoring.md` with the scannability checklist. Ready to roll this into the writing workflow once we validate the first optimized post.
 
 ### Task 4.2: Optimize "JWT's" Post (`/content/posts/JWT's/index.mdx`)
 
-**Status**: Not Started | **Priority**: MEDIUM | **Time**: 20 minutes
+**Status**: In Progress | **Priority**: MEDIUM | **Time**: 20 minutes
 
-- [ ] 4.2.1 - Read current post content
-- [ ] 4.2.2 - Add TL;DR at the beginning
-- [ ] 4.2.3 - Update headings to keyword-first structure
-- [ ] 4.2.4 - Break long paragraphs (3-5 sentences max)
-- [ ] 4.2.5 - Convert prose to lists where applicable
-- [ ] 4.2.6 - Add captions before code blocks
-- [ ] 4.2.7 - Add "Key Takeaways" section at end
-- [ ] 4.2.8 - Bold key terms in paragraphs
+- [x] 4.2.1 - Read current post content
+- [x] 4.2.2 - Add TL;DR at the beginning
+- [x] 4.2.3 - Update headings to keyword-first structure
+- [x] 4.2.4 - Break long paragraphs (3-5 sentences max)
+- [x] 4.2.5 - Convert prose to lists where applicable
+- [x] 4.2.6 - Add captions before code blocks
+- [x] 4.2.7 - Add "Key Takeaways" section at end
+- [x] 4.2.8 - Bold key terms in paragraphs
 - [ ] 4.2.9 - Test post readability
 - [ ] 4.2.10 - Commit changes: "content(jwt): optimize for F-pattern scanning"
+
+**Notes**: Post now follows the TL;DR → Problem/Solution → Step ladder structure, includes figure-captioned code, and surfaces transport lessons in bulleted sections. Need to preview on the blog, perform the readability scan, then stage/commit.
 
 ### Task 4.3: Optimize "From Medic to Engineer" Post
 
@@ -1956,6 +1962,32 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 - [ ] 4.5.9 - Optimize full-stack-engineer.mdx
 - [ ] 4.5.10 - Test all roles pages
 - [ ] 4.5.11 - Commit changes: "content(roles): optimize all role pages for F-pattern"
+
+### Task 4.6: Blog Content CSS & Theme Consistency (`/src/styles/global.css`)
+
+**Status**: In Progress | **Priority**: HIGH | **Time**: 2 hours
+
+- [x] 4.6.1 - Audit JWT post overflow issues and capture layout fixes needed
+- [x] 4.6.2 - Add `.post-content` max-width + spacing guard to prevent text from falling off the page
+- [x] 4.6.3 - Style `<figure class="code-example">` blocks with themed background, border, and captions
+- [x] 4.6.4 - Harmonize table styling for blog posts with site card colors
+- [ ] 4.6.5 - Align blockquote, TL;DR, and callout colors with accent tokens
+- [ ] 4.6.6 - Regression test blog posts on desktop/tablet/mobile for overflow and contrast
+- [ ] 4.6.7 - Document blog CSS standards (figures, tables, callouts) in `docs/content-authoring.md`
+- [ ] 4.6.8 - Commit changes: "feat(css): standardize blog content theming"
+
+**Notes**: Blog layout now enforces a 75ch width cap, figure/code blocks share the muted surface styling, and auto-generated heading class `.css-8alcrq` is forced to the primary text color for contrast. Still need to normalize blockquotes/TL;DR styling and document the standards before closing.
+
+### Task 4.7: Sitewide Theme Regression & Color Audit
+
+**Status**: Not Started | **Priority**: MEDIUM | **Time**: 3 hours
+
+- [ ] 4.7.1 - Inventory color/token usage across nav, cards, posts, and CTAs
+- [ ] 4.7.2 - Define acceptable accent/background combinations (primary vs muted surfaces)
+- [ ] 4.7.3 - Verify light-theme contrast ratios on key pages (home, blog, projects, contact)
+- [ ] 4.7.4 - Spot-check scroll reveal and hover animations for consistency
+- [ ] 4.7.5 - Capture issues/screenshots and update brand/theme guidelines
+- [ ] 4.7.6 - Commit fixes: "chore(theme): align sitewide styling with design spec"
 
 ---
 
