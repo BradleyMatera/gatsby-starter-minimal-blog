@@ -1015,23 +1015,9 @@ img {
 
 .blog-card__header {
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
-  gap: 0.9rem;
-}
-
-.blog-card__avatar {
-  width: 2.3rem;
-  height: 2.3rem;
-  border-radius: 0.8rem;
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.18), rgba(248, 113, 113, 0.18));
-  color: var(--color-primary);
-  font-family: "Space Grotesk Variable", "Space Grotesk", sans-serif;
-  font-weight: 600;
-  font-size: 1.05rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.12);
+  gap: 0.55rem;
 }
 
 .blog-card__heading {
@@ -1047,6 +1033,7 @@ img {
   color: var(--color-text);
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -1482,23 +1469,9 @@ img {
 
 .project-card__header {
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
-  gap: 0.9rem;
-}
-
-.project-card__avatar {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 0.9rem;
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.16), rgba(14, 165, 233, 0.12));
-  color: var(--color-primary);
-  font-family: "Space Grotesk Variable", "Space Grotesk", sans-serif;
-  font-weight: 600;
-  font-size: 1.15rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.12);
+  gap: 0.5rem;
 }
 
 .project-card:hover,
@@ -1521,6 +1494,7 @@ img {
   letter-spacing: -0.01em;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -2120,6 +2094,26 @@ img {
 .post-content h4 {
   scroll-margin-top: 6.5rem;
 }
+.mdx-paragraph {
+  color: var(--color-text-subtle);
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+  line-height: 1.75;
+  margin: 0 0 1.35rem;
+}
+
+.mdx-paragraph strong {
+  color: var(--color-text);
+}
+
+.css-1gmfn3e {
+  color: var(--color-text-subtle) !important;
+  font-size: 1.1rem !important;
+  letter-spacing: -0.01em;
+  line-height: 1.75;
+  margin: 0 0 1.35rem !important;
+}
+
 
 .post-content h2 {
   font-size: clamp(1.5rem, 1vw + 1.2rem, 2rem);
@@ -2138,15 +2132,6 @@ img {
   margin: 0 0 1.25rem;
   padding-left: 1.1rem;
 }
-
-.post-content li {
-  margin-bottom: 0.75rem;
-}
-
-.post-content strong {
-  color: var(--color-text);
-}
-
 .external-icon {
   display: inline-flex;
   align-items: center;

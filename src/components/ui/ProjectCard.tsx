@@ -21,7 +21,6 @@ type ProjectCardProps = {
 };
 
 const ProjectCard = ({ title, meta, summary, impact, stack, links, className }: ProjectCardProps) => {
-  const initial = title ? title.charAt(0).toUpperCase() : "•";
   const { ref, revealed } = useScrollReveal(0);
 
   return (
@@ -35,9 +34,6 @@ const ProjectCard = ({ title, meta, summary, impact, stack, links, className }: 
       }}
     >
       <div className="project-card__header">
-        <span className="project-card__avatar" aria-hidden="true">
-          {initial}
-        </span>
         <div className="project-card__heading">
           <h3 className="project-card__title">{title}</h3>
           {meta ? <p className="project-card__meta">{meta}</p> : null}

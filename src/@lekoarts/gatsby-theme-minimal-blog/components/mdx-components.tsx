@@ -3,6 +3,7 @@ import React from "react";
 import { Text, Heading } from "@theme-ui/components";
 import Code from "./code";
 import { Section, Card, Link, Badge } from "../../../components/ui";
+import cx from "../../../utils/cx";
 
 interface CalloutProps {
   children: React.ReactNode;
@@ -35,6 +36,12 @@ const Tip: React.FC<TipProps> = ({ children }) => (
   </div>
 );
 
+type ParagraphProps = React.HTMLAttributes<HTMLParagraphElement>;
+
+const Paragraph: React.FC<ParagraphProps> = ({ className, ...props }) => (
+  <p className={cx("mdx-paragraph", className)} {...props} />
+);
+
 const components = {
   Section,
   Card,
@@ -42,6 +49,7 @@ const components = {
   Text,
   Title: Heading,
   a: Link,
+  p: Paragraph,
   Callout,
   Aside,
   Tip,
