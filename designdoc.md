@@ -1971,12 +1971,12 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 - [x] 4.6.2 - Add `.post-content` max-width + spacing guard to prevent text from falling off the page
 - [x] 4.6.3 - Style `<figure class="code-example">` blocks with themed background, border, and captions
 - [x] 4.6.4 - Harmonize table styling for blog posts with site card colors
-- [ ] 4.6.5 - Align blockquote, TL;DR, and callout colors with accent tokens
+- [x] 4.6.5 - Align blockquote, TL;DR, and callout colors with accent tokens
 - [ ] 4.6.6 - Regression test blog posts on desktop/tablet/mobile for overflow and contrast
-- [ ] 4.6.7 - Document blog CSS standards (figures, tables, callouts) in `docs/content-authoring.md`
+- [x] 4.6.7 - Document blog CSS standards (figures, tables, callouts) in `docs/content-authoring.md`
 - [ ] 4.6.8 - Commit changes: "feat(css): standardize blog content theming"
 
-**Notes**: Blog layout now enforces a 75ch width cap, figure/code blocks share the muted surface styling, and auto-generated heading class `.css-8alcrq` is forced to the primary text color for contrast. Still need to normalize blockquotes/TL;DR styling and document the standards before closing.
+**Notes**: Blog layout now enforces a 75ch width cap, figure/code blocks share the muted surface styling, TL;DR and blockquotes pull from the accent palette, and auto-generated heading class `.css-8alcrq` is forced to the primary text color for contrast. Need full responsive QA before shipping the CSS batch.
 
 ### Task 4.7: Sitewide Theme Regression & Color Audit
 

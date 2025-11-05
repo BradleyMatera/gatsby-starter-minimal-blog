@@ -75,11 +75,12 @@ Headings (`##`, `###`) gain anchors in blog posts, feeding the table of contents
 ## Blog Post Template & Scannability Checklist
 
 - Start every new post from `docs/blog-post-template.mdx`. It already includes frontmatter placeholders, a TL;DR list, keyword-first headings, and a Key Takeaways section.
-- **TL;DR block**: keep the opening bullets under ~12 words. Lead with the outcome, follow with proof, end with a call-to-action or next step.
+- **TL;DR block**: keep the opening bullets under ~12 words. Wrap them in `<div className="tldr-card">…</div>` (as shown in the template) so the accent background and spacing render consistently.
 - **Keyword-first headings**: structure body sections as `## Problem — Keyword`, `## Solution — Tool`, then granular `### Step` headings. Put the primary search term at the beginning of each heading so it appears in the eye-tracking "F" stem and the generated table of contents.
 - **Paragraphs vs. lists**: if the explanation exceeds four sentences or contains three or more commas, convert it into an ordered/ unordered list. Use numbered lists when order matters and bullets when it does not.
 - **Code captions**: wrap important snippets in a `<figure>` with `<figcaption>` (see the template). Summarise what the reader should notice, e.g., "Listing 1 — Deploy build artifacts to Amazon S3 via the AWS CLI."
 - **Key Takeaways**: close with a three-item bullet list of actionable lessons. Each bullet should pair an action with an outcome metric or link.
+- **Blockquotes & citations**: use standard Markdown `>` syntax. The stylesheet adds an accent border, so keep quoted copy short (2–3 sentences) and add `— Name` or `<cite>` when attribution matters.
 
 ## Embedding HTML or JSX
 
