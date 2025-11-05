@@ -816,29 +816,36 @@ img {
 }
 
 
+/* F-pattern: Tag list - Second horizontal bar (scannable keywords) */
 .tag-list {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  margin-bottom: 0.75rem;
 }
+
 .tag-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  font-size: clamp(0.82rem, 0.24vw + 0.78rem, 0.9rem);
-  font-weight: 600;
+  font-size: clamp(0.85rem, 0.24vw + 0.8rem, 0.95rem);
+  font-weight: 700;
   border-radius: 999px;
-  padding: 0.38rem clamp(0.75rem, 2vw, 1rem);
+  padding: 0.4rem clamp(0.8rem, 2vw, 1.1rem);
   background: var(--chip-bg-1);
   color: var(--chip-text);
   white-space: nowrap;
-  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.1);
+  text-decoration: none;
 }
 
 .tag-badge:hover,
 .tag-badge:focus-visible {
   background: var(--color-primary-soft);
   color: var(--color-primary);
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.12);
+  transition: all 0.2s ease;
 }
 
 .tag-badge:visited {
