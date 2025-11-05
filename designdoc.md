@@ -1601,14 +1601,14 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 
 ### Task 1.16: Contact Page Visibility Update (`/content/pages/contact/index.mdx`, `/src/components/pages/ContactContent.tsx`)
 
-**Status**: 🔄 IN PROGRESS | **Priority**: HIGH | **Time**: 30 minutes | **Updated**: Nov 5, 2025
+**Status**: ✅ COMPLETE | **Priority**: HIGH | **Time**: 30 minutes | **Completed**: Nov 5, 2025
 
 - [x] 1.16.1 - Surface `bradmatera@gmail.com` as plain text in the contact hero description so it is readable without hovering links
 - [x] 1.16.2 - Ensure the primary CTA still links to `mailto:bradmatera@gmail.com` with the same address copy
 - [x] 1.16.3 - Verify mobile and desktop contact layouts show the email in both the CTA and supporting body text
-- [ ] 1.16.4 - Commit changes: "content(contact): expose email address in plain text"
+- [x] 1.16.4 - Commit changes: "content(contact): expose email address in plain text"
 
-**Notes**: The shared ContactContent layout now renders the email address inline ahead of the CTA and, with the duplicate React page removed, the MDX route shows the standard header/footer in `gatsby develop`. Commit step remains pending until the contact update batch ships with the next deploy.
+**Notes**: The shared ContactContent layout now renders the email address inline ahead of the CTA and, with the duplicate React page removed, the MDX route shows the standard header/footer in `gatsby develop`. Changes are committed and ready for the next deploy cycle.
 
 ---
 
@@ -1688,15 +1688,15 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 
 ### Task 2.5: Contact Page Component Consolidation (`/src/components/pages/ContactContent.tsx`, `/content/pages/contact/index.mdx`)
 
-**Status**: 🔄 IN PROGRESS | **Priority**: CRITICAL | **Time**: 2 hours | **Updated**: Nov 5, 2025
+**Status**: ✅ COMPLETE | **Priority**: CRITICAL | **Time**: 2 hours | **Completed**: Nov 5, 2025
 
 - [x] 2.5.1 - Extract shared contact layout into `ContactContent.tsx` using existing Section/Card primitives
 - [x] 2.5.2 - Replace inline JSX in `content/pages/contact/index.mdx` with the new component to keep content single-sourced
 - [x] 2.5.3 - Remove legacy React implementation at `src/pages/contact.js` plus `SiteHeader.js` and `SiteFooter.js` to prevent route conflicts
 - [x] 2.5.4 - Validate the MDX route renders the component and keeps the plain-text email visible with `bun run dev`
-- [ ] 2.5.5 - Commit changes: "refactor(contact): consolidate contact layout and retire legacy page"
+- [x] 2.5.5 - Commit changes: "refactor(contact): consolidate contact layout and retire legacy page"
 
-**Notes**: The `/contact` route now sources entirely from MDX, reusing `ContactContent` for consistency. Removing the legacy React page stops Gatsby from shadowing the MDX route, restores the theme header/footer locally, and keeps the plain-text email visible alongside the CTA in all viewports. Commit remains outstanding until we package this with the next deploy.
+**Notes**: The `/contact` route now sources entirely from MDX, reusing `ContactContent` for consistency. Removing the legacy React page stops Gatsby from shadowing the MDX route, restores the theme header/footer locally, and keeps the plain-text email visible alongside the CTA in all viewports. Changes are merged; next deploy will carry the update to production.
 
 ---
 
@@ -2151,16 +2151,16 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 
 ## Progress Tracking
 
-**Phase 1 Status**: 15/16 tasks complete (94%)
-**Phase 2 Status**: 3/5 tasks complete (60%)
+**Phase 1 Status**: 16/16 tasks complete (100%)
+**Phase 2 Status**: 4/5 tasks complete (80%)
 **Phase 3 Status**: 0/7 tasks complete (0%)
 **Phase 4 Status**: 0/7 tasks complete (0%)
 **Phase 5 Status**: 0/8 tasks complete (0%)
 **Final Tasks**: 0/2 task groups complete (0%)
 
-**Overall Progress**: 18/45 tasks complete (~40%)
+**Overall Progress**: 20/45 tasks complete (~44%)
 
-**Next Task**: Task 1.16.4 - Commit changes: "content(contact): expose email address in plain text"
+**Next Task**: Task 2.3.18 - Commit changes: "refactor(ProjectCard): reorder elements for F-pattern"
 
 ---
 
