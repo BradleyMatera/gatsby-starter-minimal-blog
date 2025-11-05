@@ -161,7 +161,7 @@ interface IPost {
   timeToRead: number;
   wordCount: number;
   tags: Array<IPostTag>;
-  banner: any;
+  banner: unknown;
   description: string;
   canonicalUrl: string;
 }

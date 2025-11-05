@@ -9,7 +9,7 @@ export default function ContactPage() {
       <main style={{ padding: "2rem", maxWidth: 600, margin: "0 auto", fontFamily: "inherit" }}>
         <h1 style={{ color: "#e23b2d", fontWeight: 700, fontSize: "2rem", marginBottom: "1.2rem" }}>Contact Bradley Matera</h1>
         <p style={{ fontSize: "1.1rem", marginBottom: "1.5rem" }}>
-          Email is the best way to reach me. Please send your project details and I'll reply within one business day.
+          Email is the best way to reach me. Please send your project details and I&apos;ll reply within one business day.
         </p>
         <a href="mailto:bradmatera@gmail.com" style={{
           display: "inline-flex",

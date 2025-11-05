@@ -5,23 +5,6 @@ import { useScrollReveal } from "./useScrollReveal";
 const HeroActions = () => {
   const { ref, revealed } = useScrollReveal(150);
   const emailAddress = "bradmatera@gmail.com";
-  const emailSubject = encodeURIComponent("Project inquiry for Bradley Matera");
-  const emailBody = encodeURIComponent(
-    [
-      "Hi Bradley,",
-      "",
-      "I came across your portfolio and would love to chat about working together.",
-      "Here are a few notes about the project:",
-      "",
-      "- Goals:",
-      "- Timeline:",
-      "- Helpful context:",
-      "",
-      "Talk soon!"
-    ].join("\n")
-  );
-  const emailHref = `mailto:${emailAddress}?subject=${emailSubject}&body=${emailBody}`;
-
   return (
     <div
       ref={ref as React.RefObject<HTMLDivElement>}

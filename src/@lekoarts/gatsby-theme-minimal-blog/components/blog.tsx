@@ -11,7 +11,7 @@ import { Section } from "../../../components/ui";
 
 declare global {
   interface Window {
-    gtag?: (...args: any[]) => void;
+    gtag?: (...args: unknown[]) => void;
   }
 }
 
@@ -32,7 +32,7 @@ export type MBBlogProps = {
 
 const Blog = ({ posts }: MBBlogProps) => {
   const PAGE_SIZE = 5;
-  const { tagsPath, basePath, blogPath } = useMinimalBlogConfig();
+  const { tagsPath, basePath } = useMinimalBlogConfig();
   const location = useLocation();
   const [query, setQuery] = React.useState("");
   const [activeTag, setActiveTag] = React.useState<string | null>(null);

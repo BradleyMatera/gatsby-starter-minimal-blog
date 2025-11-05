@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const express = require("express");
 const cors = require("cors");
 const rateLimit = require("express-rate-limit");

@@ -2,23 +2,26 @@ import { useRef, useEffect, useState } from "react";
 
 export function useScrollReveal(delay = 0) {
   const ref = useRef<HTMLElement | null>(null);
-  const [revealed, setRevealed] = useState(false);
+  const [revealed, setRevealed] = useState(() => typeof window === "undefined");
 
   useEffect(() => {
+    if (revealed) {
+      return undefined;
+    }
+
     if (typeof window === "undefined") {
-      setRevealed(true);
-      return;
+      return undefined;
     }
 
     if (!("IntersectionObserver" in window)) {
-      setRevealed(true);
-      return;
+      const timeout = globalThis.setTimeout(() => setRevealed(true), 0);
+      return () => globalThis.clearTimeout(timeout);
     }
 
     const element = ref.current;
     if (!element) {
-      setRevealed(true);
-      return;
+      const timeout = globalThis.setTimeout(() => setRevealed(true), 0);
+      return () => globalThis.clearTimeout(timeout);
     }
 
     let timeoutId: number | null = null;
@@ -42,7 +45,7 @@ export function useScrollReveal(delay = 0) {
       }
       observer.disconnect();
     };
-  }, [delay]);
+  }, [delay, revealed]);
 
   return { ref, revealed };
 }

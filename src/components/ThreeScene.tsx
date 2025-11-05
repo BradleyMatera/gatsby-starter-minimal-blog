@@ -3,11 +3,16 @@ import React, { useRef, useEffect } from "react";
 import * as THREE from "three";
 
 const ThreeScene = () => {
-  const mountRef = useRef(null);
+  const mountRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const width = mountRef.current.clientWidth;
-    const height = mountRef.current.clientHeight;
+    const mountNode = mountRef.current;
+    if (!mountNode) {
+      return undefined;
+    }
+
+    const width = mountNode.clientWidth;
+    const height = mountNode.clientHeight;
 
     // Scene
     const scene = new THREE.Scene();
@@ -20,7 +25,7 @@ const ThreeScene = () => {
     // Renderer
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(width, height);
-    mountRef.current.appendChild(renderer.domElement);
+  mountNode.appendChild(renderer.domElement);
 
     // Cube
     const geometry = new THREE.BoxGeometry();
@@ -34,7 +39,7 @@ const ThreeScene = () => {
     scene.add(light);
 
     // Animation
-    let frameId;
+  let frameId: number;
     const animate = () => {
       cube.rotation.x += 0.01;
       cube.rotation.y += 0.01;
@@ -47,7 +52,7 @@ const ThreeScene = () => {
     return () => {
       cancelAnimationFrame(frameId);
       renderer.dispose();
-      mountRef.current.removeChild(renderer.domElement);
+      mountNode.removeChild(renderer.domElement);
     };
   }, []);
 

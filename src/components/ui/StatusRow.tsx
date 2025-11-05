@@ -24,7 +24,6 @@ const StatusRow = ({ icon, label, text }: StatusRowProps) => {
     <li
       ref={ref}
       className={`status-row${active ? " status-row--active" : ""}`}
-      tabIndex={0}
       style={{
         display: "inline-flex",
         alignItems: "center",
@@ -33,10 +32,7 @@ const StatusRow = ({ icon, label, text }: StatusRowProps) => {
         boxShadow: active ? "0 2px 12px rgba(0,32,64,0.08)" : "none",
         background: active ? "var(--color-bg-soft, #f7f8fa)" : "none",
         borderRadius: "1rem",
-        outline: "none",
       }}
-      onFocus={() => setActive(true)}
-      onBlur={() => setActive(false)}
       onMouseEnter={() => setActive(true)}
       onMouseLeave={() => setActive(false)}
     >

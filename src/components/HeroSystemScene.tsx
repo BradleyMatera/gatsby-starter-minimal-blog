@@ -155,7 +155,7 @@ const HeroSystemScene: React.FC = () => {
         }
 
         for (let i = 0; i < linkPulseSpheres.length; i++) {
-          let pulse = linkPulseSpheres[i];
+          const pulse = linkPulseSpheres[i];
           pulse.t += 0.012 * pulse.speed * pulse.direction;
           if (pulse.t > 1) { pulse.direction = -1; pulse.t = 1; }
           if (pulse.t < 0) { pulse.direction = 1; pulse.t = 0; }

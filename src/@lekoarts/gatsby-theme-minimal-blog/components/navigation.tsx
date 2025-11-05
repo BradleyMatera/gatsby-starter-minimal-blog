@@ -26,6 +26,10 @@ const Navigation = ({
   onNavigate,
   isCollapsible = false,
 }: NavigationProps) => {
+  if (!nav || nav.length === 0) {
+    return null;
+  }
+
   const { basePath } = useMinimalBlogConfig();
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
   const [themeDropdownOpen, setThemeDropdownOpen] = React.useState(false); // Added for themes
@@ -56,14 +60,15 @@ const Navigation = ({
   const ariaHiddenValue = ariaHidden ? 'true' : undefined; // Omit if not true
 
   // Fix ARIA attributes to be strings
-  const ariaExpanded = (open: boolean) => open ? 'true' : 'false';
-
-  if (!nav || nav.length === 0) {
-    return null;
-  }
+  type SearchResult = {
+    title: string;
+    slug: string;
+    excerpt?: string | null;
+    type: "post" | "page" | "project" | "role";
+  };
 
   const [searchQuery, setSearchQuery] = React.useState("");
-  const [searchResults, setSearchResults] = React.useState<any[]>([]);
+  const [searchResults, setSearchResults] = React.useState<SearchResult[]>([]);
   const [showSearchResults, setShowSearchResults] = React.useState(false);
   const searchRef = React.useRef<HTMLLIElement>(null);
 
@@ -110,24 +115,40 @@ const Navigation = ({
     }
 
     const searchLower = query.toLowerCase();
-    const posts = data.allPost.nodes.filter((post: any) => 
+    type PostNode = {
+      title: string;
+      slug: string;
+      excerpt?: string | null;
+      tags?: Array<{ name: string }> | null;
+    };
+
+    const posts = (data.allPost.nodes as PostNode[]).filter((post) =>
       post.title.toLowerCase().includes(searchLower) ||
       post.excerpt?.toLowerCase().includes(searchLower) ||
-      post.tags?.some((tag: any) => tag.name.toLowerCase().includes(searchLower))
+      post.tags?.some((tag) => tag.name.toLowerCase().includes(searchLower))
     );
 
-    const pages = data.allPage.nodes.filter((page: any) =>
+    type PageNode = {
+      title: string;
+      slug: string;
+      excerpt?: string | null;
+    };
+
+    const pages = (data.allPage.nodes as PageNode[]).filter((page) =>
       page.title.toLowerCase().includes(searchLower) ||
       page.excerpt?.toLowerCase().includes(searchLower)
     );
 
-    const results = [
-      ...posts.map((p: any) => ({ ...p, type: 'post' })),
-      ...pages.map((p: any) => ({ 
-        ...p, 
-        type: p.slug.includes('/projects/') ? 'project' : 
-              p.slug.includes('/roles/') ? 'role' : 'page' 
-      }))
+    const results: SearchResult[] = [
+      ...posts.map((post) => ({ ...post, type: "post" as const })),
+      ...pages.map((page) => ({
+        ...page,
+        type: page.slug.includes("/projects/")
+          ? ("project" as const)
+          : page.slug.includes("/roles/")
+          ? ("role" as const)
+          : ("page" as const),
+      })),
     ].slice(0, 8);
 
     setSearchResults(results);
@@ -163,20 +184,19 @@ const Navigation = ({
                 <button
                   type="button"
                   className="nav-dropdown__button"
-                  aria-haspopup="menu"
-                  aria-expanded={ariaExpanded(dropdownOpen)}
+                  aria-haspopup="true"
+                  aria-expanded={dropdownOpen ? "true" : "false"}
                   aria-controls="roles-menu"
                   onClick={() => setDropdownOpen((open) => !open)}
                 >
                   {item.title}
                   <span aria-hidden="true">▼</span>
                 </button>
-                <ul id="roles-menu" role="menu" className="nav-dropdown__menu" data-open={dropdownOpen}>
+                <ul id="roles-menu" className="nav-dropdown__menu" data-open={dropdownOpen}>
                   {roleLinks.map((role) => (
-                    <li key={role.slug} role="presentation">
+                    <li key={role.slug}>
                       <Link
                         to={role.slug}
-                        role="menuitem"
                         className="nav-dropdown__link"
                         activeClassName="is-active"
                         onClick={handleNavigate}
@@ -200,20 +220,19 @@ const Navigation = ({
                 <button
                   type="button"
                   className="nav-dropdown__button"
-                  aria-haspopup="menu"
-                  aria-expanded={ariaExpanded(themeDropdownOpen)}
+                  aria-haspopup="true"
+                  aria-expanded={themeDropdownOpen ? "true" : "false"}
                   aria-controls="themes-menu"
                   onClick={() => setThemeDropdownOpen((open) => !open)}
                 >
                   {item.title}
                   <span aria-hidden="true">▼</span>
                 </button>
-                <ul id="themes-menu" role="menu" className="nav-dropdown__menu" data-open={themeDropdownOpen}>
+                <ul id="themes-menu" className="nav-dropdown__menu" data-open={themeDropdownOpen}>
                   {themeLinks.map((theme) => (
-                    <li key={theme.slug} role="presentation">
+                    <li key={theme.slug}>
                       <Link
                         to={theme.slug}
-                        role="menuitem"
                         className="nav-dropdown__link"
                         activeClassName="is-active"
                         onClick={handleNavigate}
@@ -256,8 +275,8 @@ const Navigation = ({
           {showSearchResults && searchResults.length > 0 && (
             <div className="search-results">
               <ul role="listbox" aria-label="Search results">
-                {searchResults.map((result: any) => (
-                  <li key={result.slug} role="option">
+                {searchResults.map((result) => (
+                  <li key={result.slug} role="option" aria-selected="false">
                     <Link 
                       to={result.slug} 
                       onClick={handleSearchResultClick}

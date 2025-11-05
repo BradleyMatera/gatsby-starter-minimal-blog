@@ -39,14 +39,20 @@ Custom Gatsby site that powers Bradley Matera’s public portfolio, career pages
 
 ## Getting Started
 
-Prerequisites: Node 18+ (Gatsby 5), npm or yarn.
+Prerequisites: Node 18+ (Gatsby 5). You can work with Bun 1.1+ (preferred) or stick with npm/yarn if you already have them configured.
 
 ```bash
-npm install          # install dependencies
-npm run develop      # start Gatsby dev server at http://localhost:8000
-npm run build        # create production bundle in ./public
-npm run serve        # preview the production build locally
-npm run clean        # clear Gatsby caches
+# Bun workflow (recommended)
+bun install          # install dependencies via Bun
+bun dev              # start Gatsby dev server at http://localhost:8000
+bun run build        # create production bundle in ./public
+bun run serve        # preview the production build locally
+bun run clean        # clear Gatsby caches
+bun lint             # run ESLint across JS/TS sources
+
+# npm fallback
+npm install
+npm run develop
 ```
 
 When running locally you can toggle between light and dark themes with the header control. Gatsby stores the chosen palette in `localStorage`.

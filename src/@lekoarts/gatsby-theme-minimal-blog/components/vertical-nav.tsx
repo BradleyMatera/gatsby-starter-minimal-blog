@@ -26,23 +26,6 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
     if (!isMobile) setMobileDrawerOpen(false);
   }, [isMobile]);
 
-  const emailAddress = "bradmatera@gmail.com";
-  const emailSubject = encodeURIComponent("Project inquiry via bradmatera.com");
-  const emailBody = encodeURIComponent(
-    [
-      "Hi Bradley,",
-      "",
-      "I'm reaching out from your portfolio. Here's a quick summary of what I have in mind:",
-      "",
-      "- Goals:",
-      "- Timeline:",
-      "- Budget / constraints:",
-      "",
-      "Looking forward to collaborating!"
-    ].join("\n")
-  );
-  const emailHref = `mailto:${emailAddress}?subject=${emailSubject}&body=${emailBody}`;
-
   // Filter to core links only: Home, Projects, About, Contact, Roles, Contributions, Blog
   const coreLinks = nav.filter(item =>
     ["/", "/projects", "/about", "/roles", "/contributions", "/posts"].includes(item.slug)
@@ -122,7 +105,7 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
             );
           })}
         </ul>
-        <a href="/contact" className="vertical-nav__cta" style={{display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '1rem', padding: '0.2rem 0.7rem', borderRadius: '1rem', background: '#fff', color: '#333', boxShadow: '0 2px 8px rgba(0,0,0,0.08)', textDecoration: 'none', whiteSpace: 'nowrap', height: '1.8rem'}}>
+        <a href="/contact" className="vertical-nav__cta vertical-nav__cta--inline">
           <span className="vertical-nav__cta-icon" aria-hidden="true">✉</span>
           <span>Email me!</span>
         </a>
@@ -182,7 +165,7 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
           );
         })}
       </ul>
-        <a href="/contact" className="vertical-nav__cta" style={{display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '1rem', padding: '0.2rem 0.7rem', borderRadius: '1rem', background: '#fff', color: '#333', boxShadow: '0 2px 8px rgba(0,0,0,0.08)', textDecoration: 'none', whiteSpace: 'nowrap', height: '1.8rem'}}>
+        <a href="/contact" className="vertical-nav__cta">
           <span className="vertical-nav__cta-icon" aria-hidden="true">✉</span>
           <span>Email me!</span>
         </a>

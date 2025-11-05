@@ -3,29 +3,41 @@
 
 import React, { useRef, useEffect } from "react";
 import * as THREE from "three";
+import cx from "../utils/cx";
 
 const ACCENT_RED = "#e23b2d";
-const BG_COLOR = "#fff";
+const DEFAULT_BG = "#ffffff";
 
-const TinyTriangleAccent: React.FC = () => {
+type TinyTriangleAccentProps = {
+  className?: string;
+};
+
+const TinyTriangleAccent: React.FC<TinyTriangleAccentProps> = ({ className }) => {
   const mountRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const width = 32;
-    const height = 32;
+    const mountNode = mountRef.current;
+    if (!mountNode) {
+      return undefined;
+    }
+
+  const width = 32;
+  const height = 32;
+  const canvasBg = window.getComputedStyle(mountNode).backgroundColor || DEFAULT_BG;
 
     // Scene
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(BG_COLOR);
+  scene.background = new THREE.Color(canvasBg);
 
     // Camera
     const camera = new THREE.OrthographicCamera(0, width, height, 0, -10, 10);
 
     // Renderer
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     renderer.setSize(width, height);
     renderer.setPixelRatio(window.devicePixelRatio);
-    mountRef.current?.appendChild(renderer.domElement);
+  renderer.setClearColor(canvasBg, 1);
+    mountNode.appendChild(renderer.domElement);
 
     // Animated triangle points
     const baseY = 24;
@@ -65,25 +77,14 @@ const TinyTriangleAccent: React.FC = () => {
     // Cleanup
     return () => {
       cancelAnimationFrame(frameId);
-      mountRef.current?.removeChild(renderer.domElement);
+      mountNode.removeChild(renderer.domElement);
       renderer.dispose();
     };
   }, []);
 
   return (
-    <div
-      style={{
-        width: "32px",
-        height: "32px",
-        display: "inline-block",
-        verticalAlign: "middle",
-        background: BG_COLOR,
-        borderRadius: "6px",
-        overflow: "hidden",
-        marginRight: "0.5rem"
-      }}
-    >
-      <div ref={mountRef} style={{ width: "100%", height: "100%" }} />
+    <div className={cx("tiny-triangle-accent", className)}>
+      <div ref={mountRef} className="tiny-triangle-accent__canvas" />
     </div>
   );
 };

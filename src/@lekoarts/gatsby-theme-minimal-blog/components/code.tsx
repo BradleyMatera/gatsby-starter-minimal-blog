@@ -23,13 +23,17 @@ const Code: React.FC<{ children?: React.ReactNode; className?: string }> = ({ ch
     >
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <pre className={`${className} custom-pre`} style={{ ...style, padding: '10px', overflow: 'auto' }}>
-          {tokens.map((line, i) => (
-            <div {...getLineProps({ line, key: i })}>
-              {line.map((token, key) => (
-                <span {...getTokenProps({ token, key })} />
-              ))}
-            </div>
-          ))}
+          {tokens.map((line, lineIndex) => {
+            const lineProps = getLineProps({ line, key: lineIndex });
+            return (
+              <div key={lineIndex} {...lineProps}>
+                {line.map((token, tokenIndex) => {
+                  const tokenProps = getTokenProps({ token, key: tokenIndex });
+                  return <span key={tokenIndex} {...tokenProps} />;
+                })}
+              </div>
+            );
+          })}
         </pre>
       )}
     </Highlight>

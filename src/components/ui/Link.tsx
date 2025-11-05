@@ -5,10 +5,9 @@ type LinkProps = {
   href: string;
   children: React.ReactNode;
   activeClassName?: string;
-  external?: boolean;
 } & React.AnchorHTMLAttributes<HTMLAnchorElement>;
 
-const Link = ({ href, children, target, rel, className, external, ...rest }: LinkProps) => {
+const Link = ({ href, children, target, rel, className, ...rest }: LinkProps) => {
   const isInternal = /^\/(?!\/)/.test(href);
   if (isInternal) {
     return (

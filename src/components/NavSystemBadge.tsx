@@ -25,6 +25,11 @@ const NavSystemBadge: React.FC = () => {
   const mountRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const mountNode = mountRef.current;
+    if (!mountNode) {
+      return undefined;
+    }
+
     // --- Setup ---
     const badgeHeight = 48; // px
     const badgeWidth = 120; // px
@@ -42,7 +47,7 @@ const NavSystemBadge: React.FC = () => {
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     renderer.setSize(badgeWidth, badgeHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
-    mountRef.current?.appendChild(renderer.domElement);
+  mountNode.appendChild(renderer.domElement);
 
     // Lighting: minimal, crisp
     scene.add(new THREE.AmbientLight(0xffffff, 0.7));
@@ -154,7 +159,7 @@ const NavSystemBadge: React.FC = () => {
 
       // Animate data pulses along lines (async intervals)
       for (let i = 0; i < linkPulseSpheres.length; i++) {
-        let pulse = linkPulseSpheres[i];
+        const pulse = linkPulseSpheres[i];
         pulse.t += 0.012 * pulse.speed * pulse.direction;
         if (pulse.t > 1) {
           pulse.direction = -1;
@@ -200,7 +205,7 @@ const NavSystemBadge: React.FC = () => {
       cancelAnimationFrame(frameId);
       document.removeEventListener("visibilitychange", handleVisibility);
       window.removeEventListener("resize", handleResize);
-      mountRef.current?.removeChild(renderer.domElement);
+      mountNode.removeChild(renderer.domElement);
       renderer.dispose();
     };
   }, []);
