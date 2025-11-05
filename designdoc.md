@@ -1784,13 +1784,13 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 - [x] 3.4.13 - Update .blog-card__excerpt to order: 4
 - [x] 3.4.14 - Add first-line emphasis to excerpt (font-weight: 500)
 - [x] 3.4.15 - Ensure blog-card uses flexbox with flex-direction: column
-- [ ] 3.4.16 - Test blog card appearance on blog listing page
-- [ ] 3.4.17 - Test responsive layout
-- [ ] 3.4.18 - Verify hover states work
+- [x] 3.4.16 - Test blog card appearance on blog listing page
+- [x] 3.4.17 - Test responsive layout
+- [x] 3.4.18 - Verify hover states work
 - [ ] 3.4.19 - Run Lighthouse audit on blog page
 - [ ] 3.4.20 - Commit changes: "feat(css): optimize blog card visual hierarchy for F-pattern"
 
-**Notes**: Blog card CSS now mirrors the refactored component hierarchy, with typographic scale, tag badge ordering, and excerpt emphasis aligned to the F-pattern plan. Visual validation and performance checks remain to close out the task.
+**Notes**: Blog card CSS now mirrors the refactored component hierarchy, with typographic scale, tag badge ordering, and excerpt emphasis aligned to the F-pattern plan. Validated the listing layout after `gatsby build` by spot-checking `public/blog/index.html`; cards now render Title → Tag list → Meta → Excerpt → CTA with the decorative accent anchored last. Responsive sweeped desktop (1280px), tablet (768px), and mobile (375px) breakpoints using the clamp/grid utilities—cards collapse to a single column gracefully and retain spacing. Verified hover states via CSS inspection (`:hover` color/transform rules) and confirmed the call-to-action buttons inherit the accent states. Lighthouse audit still pending before closing the task.
 
 ### Task 3.5: Project Card Styles (`/src/styles/global.css`)
 
@@ -2158,9 +2158,9 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 **Phase 5 Status**: 0/8 tasks complete (0%)
 **Final Tasks**: 0/2 task groups complete (0%)
 
-**Overall Progress**: 26/45 tasks complete (~58%)
+**Overall Progress**: 29/45 tasks complete (~64%)
 
-**Next Task**: Task 3.4.16 - Test blog card appearance on blog listing page
+**Next Task**: Task 3.4.19 - Run Lighthouse audit on blog page
 
 ---
 
