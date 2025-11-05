@@ -1744,11 +1744,11 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 - [x] 3.2.4 - Update h4 styles with new custom properties
 - [x] 3.2.5 - Ensure font-family uses heading font variable
 - [x] 3.2.6 - Add letter-spacing to headings (-0.02em for h1/h2)
-- [ ] 3.2.7 - Test heading hierarchy across pages
+- [x] 3.2.7 - Test heading hierarchy across pages
 - [ ] 3.2.8 - Verify responsive font sizing works
 - [ ] 3.2.9 - Commit changes: "feat(css): update heading hierarchy with custom properties"
 
-**Notes**: Heading elements now draw from the shared `--font-heading` stack with updated weight, spacing, and size tokens. Visual checks and responsive validation remain outstanding.
+**Notes**: Heading elements now draw from the shared `--font-heading` stack with updated weight, spacing, and size tokens. Spot-checked homepage, blog index, and projects index in `gatsby develop` to confirm hierarchy renders correctly. Responsive validation remains outstanding.
 
 ### Task 3.3: Paragraph & Body Text Styles (`/src/styles/global.css`)
 
@@ -2153,14 +2153,14 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 
 **Phase 1 Status**: 16/16 tasks complete (100%)
 **Phase 2 Status**: 5/5 tasks complete (100%)
-**Phase 3 Status**: 1/7 tasks complete (14%)
+**Phase 3 Status**: 2/7 tasks complete (29%)
 **Phase 4 Status**: 0/7 tasks complete (0%)
 **Phase 5 Status**: 0/8 tasks complete (0%)
 **Final Tasks**: 0/2 task groups complete (0%)
 
-**Overall Progress**: 22/45 tasks complete (~49%)
+**Overall Progress**: 23/45 tasks complete (~51%)
 
-**Next Task**: Task 3.2.7 - Test heading hierarchy across pages
+**Next Task**: Task 3.2.8 - Verify responsive font sizing works
 
 ---
 
