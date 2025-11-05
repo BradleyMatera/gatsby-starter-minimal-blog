@@ -15,6 +15,8 @@
   --color-shadow: rgba(0, 0, 0, 0.08);
   --nav-width: 80px;
   --section-spacing: clamp(100px, 15vw, 200px);
+  --font-primary: "Montserrat", "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-heading: "Space Grotesk Variable", "Space Grotesk", "Inter", "Segoe UI", sans-serif;
   
   /* Alias old variables to new ones */
   --color-primary: var(--color-accent);
@@ -64,7 +66,7 @@
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: "Montserrat", "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: var(--font-primary);
   font-size: 1rem;
   line-height: 1.6;
   letter-spacing: -0.011em;
@@ -72,6 +74,72 @@ body {
   color: var(--color-text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+.h1 {
+  font-family: var(--font-heading);
+  font-size: var(--text-4xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  margin: 0 0 1rem;
+}
+
+h2,
+.h2 {
+  font-family: var(--font-heading);
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  margin: 0 0 0.85rem;
+}
+
+h3,
+.h3 {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+  margin: 0 0 0.75rem;
+}
+
+h4,
+.h4 {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  letter-spacing: -0.005em;
+  color: var(--color-text);
+  margin: 0 0 0.65rem;
+}
+
+p {
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text);
+  margin: 0 0 1.25rem;
+  max-width: 70ch;
+}
+
+section > p:first-of-type,
+.section-lead {
+  font-size: var(--text-lg);
+  line-height: var(--leading-relaxed);
+  font-weight: var(--weight-medium);
+  max-width: 65ch;
+}
+
+strong,
+b {
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
 }
 
 body:focus-visible {
@@ -710,10 +778,10 @@ img {
 
 .eyebrow {
   text-transform: uppercase;
-  font-size: 0.85rem;
-  letter-spacing: 0.22em;
+  font-size: 0.8125rem;
+  letter-spacing: 0.24em;
   font-weight: 600;
-  color: var(--color-text);
+  color: var(--color-accent);
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -721,9 +789,10 @@ img {
 
 .section-title {
   font-family: "Montserrat", "Space Grotesk Variable", "Space Grotesk", "Inter", "Segoe UI", sans-serif;
-  font-size: clamp(2rem, 4vw, 4rem);
+  font-size: clamp(2.25rem, 2vw + 2rem, 3.75rem);
   font-weight: 700;
   letter-spacing: -0.02em;
+  line-height: 1.1;
   margin: 0;
   color: var(--color-text) !important;
 }
@@ -732,9 +801,13 @@ img {
   display: grid;
   gap: 0.75rem;
   margin: 0;
-  font-size: clamp(1.05rem, 0.6vw + 1rem, 1.2rem);
+  font-size: 1.125rem;
   color: var(--color-text-subtle);
-  max-width: 60ch;
+  max-width: 65ch;
+}
+
+.section-lead::first-line {
+  font-weight: 600;
 }
 
 .section-lead > p {
@@ -1027,7 +1100,7 @@ img {
   box-shadow: 0 22px 48px rgba(15, 23, 42, 0.12);
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.25rem;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -1037,13 +1110,13 @@ img {
   box-shadow: 0 26px 60px rgba(15, 23, 42, 0.12);
 }
 
-/* F-pattern: Title - Top horizontal bar (first fixation) */
 .blog-card__title {
-  font-family: "Space Grotesk Variable", "Space Grotesk", sans-serif;
-  font-size: clamp(1.4rem, 0.6vw + 1.3rem, 1.7rem);
-  font-weight: 700;
-  line-height: 1.3;
-  margin: 0 0 0.75rem 0;
+  font-family: var(--font-heading);
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: -0.02em;
+  margin: 0 0 0.75rem;
   color: var(--color-text);
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -1051,28 +1124,64 @@ img {
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 .blog-card__title:hover {
   color: var(--color-primary);
 }
 
-/* F-pattern: Meta - De-emphasized context */
-.blog-card__meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  align-items: center;
-  font-size: 0.875rem;
-  color: var(--color-text-muted);
-  opacity: 0.8;
+.blog-card .tag-list {
+  order: 2;
   margin-bottom: 0.5rem;
 }
 
-.blog-card__excerpt {
-  margin: 0;
+.blog-card .tag-badge {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  padding: 0.3rem 0.85rem;
+  background: var(--chip-bg-1);
+  color: var(--chip-text);
+}
+
+.blog-card .tag-badge:nth-child(2) {
+  background: var(--chip-bg-2);
+}
+
+.blog-card .tag-badge:nth-child(3) {
+  background: var(--chip-bg-3);
+}
+
+.blog-card__meta {
+  order: 3;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: var(--text-sm);
   color: var(--color-text-subtle);
-  font-size: 1rem;
+  margin: 0 0 0.75rem;
+}
+
+.blog-card__excerpt {
+  order: 4;
+  margin: 0 0 1.5rem;
+  color: var(--color-text);
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+}
+
+.blog-card__excerpt::first-line {
+  font-weight: var(--weight-medium);
+}
+
+.blog-card .card-actions {
+  order: 5;
+  margin-top: auto;
+}
+
+.blog-card .card-actions a[data-variant="ghost"] {
+  font-weight: var(--weight-semibold);
 }
 
 .toc {
@@ -1509,12 +1618,13 @@ img {
 
 /* F-pattern: Title - Top horizontal bar (first fixation) */
 .project-card__title {
+  order: 1;
   margin: 0 0 1rem 0;
-  font-size: clamp(1.35rem, 0.5vw + 1.3rem, 1.6rem);
+  font-size: 1.5rem;
   font-weight: 700;
   line-height: 1.3;
   font-family: "Space Grotesk Variable", "Space Grotesk", sans-serif;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
   color: var(--color-text);
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -1525,22 +1635,26 @@ img {
 
 /* F-pattern: Meta - De-emphasized context */
 .project-card__meta {
+  order: 3;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  color: var(--color-text-muted);
-  opacity: 0.75;
+  color: var(--color-text-subtle);
+  opacity: 0.8;
   font-size: 0.875rem;
   margin-bottom: 0.5rem;
+  font-style: italic;
 }
 
 .project-card__description {
+  order: 5;
   margin: 0;
   color: var(--color-text-subtle);
 }
 
 /* F-pattern: Stack - Second horizontal bar (scannable keywords) */
 .project-card__stack {
+  order: 2;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
@@ -1582,11 +1696,20 @@ img {
 
 /* F-pattern: Impact - Emphasized outcome/result */
 .project-card__impact {
+  order: 4;
   margin: 0 0 0.75rem 0;
+  padding: 0.75rem 1rem;
   font-size: 1rem;
   color: var(--color-text);
   font-weight: 600;
   line-height: 1.5;
+  background: var(--color-accent-soft);
+  border-left: 3px solid var(--color-accent);
+  border-radius: 16px;
+}
+
+.project-card__impact strong {
+  color: var(--color-accent);
 }
 
 .project-gallery {

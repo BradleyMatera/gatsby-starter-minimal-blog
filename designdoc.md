@@ -1599,6 +1599,17 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 
 **Notes**: Case studies now open with a consistent TL;DR + metrics pattern, AnchorNav structure, Situation/Action/Result storytelling, artifact lists, and CTAs linking to the aligned role pages and supporting blog deep dives.
 
+### Task 1.16: Contact Page Visibility Update (`/content/pages/contact/index.mdx`, `/src/components/pages/ContactContent.tsx`)
+
+**Status**: 🔄 IN PROGRESS | **Priority**: HIGH | **Time**: 30 minutes | **Updated**: Nov 5, 2025
+
+- [x] 1.16.1 - Surface `bradmatera@gmail.com` as plain text in the contact hero description so it is readable without hovering links
+- [x] 1.16.2 - Ensure the primary CTA still links to `mailto:bradmatera@gmail.com` with the same address copy
+- [x] 1.16.3 - Verify mobile and desktop contact layouts show the email in both the CTA and supporting body text
+- [ ] 1.16.4 - Commit changes: "content(contact): expose email address in plain text"
+
+**Notes**: The shared ContactContent layout now renders the email address inline ahead of the CTA, giving visitors immediate visibility even if link styling fails. Commit step remains pending until the broader bundle of contact updates is finalized.
+
 ---
 
 ## Phase 2: Component Updates (Week 2) - React & JSX
@@ -1675,6 +1686,18 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 
 **Notes**: Section continues to emit semantic `<section>` and `<header>` markup, with eyebrow/title/description/actions props wiring unchanged. Inline scroll-reveal styles are now replaced by the shared `.reveal-card` utility so the animation matches other components while respecting the `disableReveal` flag. Because Section wraps nearly every page hero and list, rebuilding the site (`npm run build`) exercises representative usages without runtime errors. Phase 3 will handle any visual styling adjustments.
 
+### Task 2.5: Contact Page Component Consolidation (`/src/components/pages/ContactContent.tsx`, `/content/pages/contact/index.mdx`)
+
+**Status**: 🔄 IN PROGRESS | **Priority**: CRITICAL | **Time**: 2 hours | **Updated**: Nov 5, 2025
+
+- [x] 2.5.1 - Extract shared contact layout into `ContactContent.tsx` using existing Section/Card primitives
+- [x] 2.5.2 - Replace inline JSX in `content/pages/contact/index.mdx` with the new component to keep content single-sourced
+- [x] 2.5.3 - Remove legacy React implementation at `src/pages/contact.js` plus `SiteHeader.js` and `SiteFooter.js` to prevent route conflicts
+- [x] 2.5.4 - Validate the MDX route renders the component and keeps the plain-text email visible with `bun run dev`
+- [ ] 2.5.5 - Commit changes: "refactor(contact): consolidate contact layout and retire legacy page"
+
+**Notes**: The `/contact` route now sources entirely from MDX, reusing `ContactContent` for consistency. Deleting the legacy page ensures Gatsby no longer preempts the MDX version, and the plain-text email line surfaces alongside the CTA in all viewports. Commit remains outstanding until the current development batch is finalized.
+
 ---
 
 ## Phase 3: CSS Visual Hierarchy (Week 3) - Global Styles
@@ -1713,101 +1736,111 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 
 ### Task 3.2: Heading Hierarchy Styles (`/src/styles/global.css`)
 
-**Status**: Not Started | **Priority**: HIGH | **Time**: 1 hour
+**Status**: 🔄 IN PROGRESS | **Priority**: HIGH | **Time**: 1 hour | **Updated**: Nov 5, 2025
 
-- [ ] 3.2.1 - Update h1 styles with new custom properties
-- [ ] 3.2.2 - Update h2 styles with new custom properties
-- [ ] 3.2.3 - Update h3 styles with new custom properties
-- [ ] 3.2.4 - Update h4 styles with new custom properties
-- [ ] 3.2.5 - Ensure font-family uses heading font variable
-- [ ] 3.2.6 - Add letter-spacing to headings (-0.02em for h1/h2)
+- [x] 3.2.1 - Update h1 styles with new custom properties
+- [x] 3.2.2 - Update h2 styles with new custom properties
+- [x] 3.2.3 - Update h3 styles with new custom properties
+- [x] 3.2.4 - Update h4 styles with new custom properties
+- [x] 3.2.5 - Ensure font-family uses heading font variable
+- [x] 3.2.6 - Add letter-spacing to headings (-0.02em for h1/h2)
 - [ ] 3.2.7 - Test heading hierarchy across pages
 - [ ] 3.2.8 - Verify responsive font sizing works
 - [ ] 3.2.9 - Commit changes: "feat(css): update heading hierarchy with custom properties"
 
+**Notes**: Heading elements now draw from the shared `--font-heading` stack with updated weight, spacing, and size tokens. Visual checks and responsive validation remain outstanding.
+
 ### Task 3.3: Paragraph & Body Text Styles (`/src/styles/global.css`)
 
-**Status**: Not Started | **Priority**: MEDIUM | **Time**: 30 minutes
+**Status**: 🔄 IN PROGRESS | **Priority**: MEDIUM | **Time**: 30 minutes | **Updated**: Nov 5, 2025
 
-- [ ] 3.3.1 - Update p (paragraph) styles
-- [ ] 3.3.2 - Add max-width: 70ch to paragraphs
-- [ ] 3.3.3 - Update first paragraph styles (section > p:first-of-type)
-- [ ] 3.3.4 - Make first paragraphs larger (--text-lg)
-- [ ] 3.3.5 - Update strong/bold element styles
-- [ ] 3.3.6 - Ensure high contrast for bold text
+- [x] 3.3.1 - Update p (paragraph) styles
+- [x] 3.3.2 - Add max-width: 70ch to paragraphs
+- [x] 3.3.3 - Update first paragraph styles (section > p:first-of-type)
+- [x] 3.3.4 - Make first paragraphs larger (--text-lg)
+- [x] 3.3.5 - Update strong/bold element styles
+- [x] 3.3.6 - Ensure high contrast for bold text
 - [ ] 3.3.7 - Test paragraph readability across pages
 - [ ] 3.3.8 - Commit changes: "feat(css): optimize paragraph styles for readability"
 
+**Notes**: Base paragraphs now use the new typography tokens with 70ch width limits, and lead paragraphs receive the enlarged style. Site-wide readability checks still need to run before closing the task.
+
 ### Task 3.4: Blog Card Styles (`/src/styles/global.css`)
 
-**Status**: Not Started | **Priority**: CRITICAL | **Time**: 2 hours
+**Status**: 🔄 IN PROGRESS | **Priority**: CRITICAL | **Time**: 2 hours | **Updated**: Nov 5, 2025
 
-- [ ] 3.4.1 - Locate existing .blog-card styles in global.css
-- [ ] 3.4.2 - Update .blog-card__title font-size to 1.75rem
-- [ ] 3.4.3 - Update .blog-card__title font-weight to 700
-- [ ] 3.4.4 - Add letter-spacing: -0.02em to title
-- [ ] 3.4.5 - Increase title margin-bottom to 0.75rem
-- [ ] 3.4.6 - Add .blog-card .tag-list styles (if not exists)
-- [ ] 3.4.7 - Set tag-list order: 2
-- [ ] 3.4.8 - Add tag-list margin-bottom: 0.5rem
-- [ ] 3.4.9 - Style .blog-card .tag-badge with background color
-- [ ] 3.4.10 - Update .blog-card__meta to order: 3
-- [ ] 3.4.11 - Reduce meta font-size to 0.875rem
-- [ ] 3.4.12 - Use subtle color for meta (--color-text-subtle)
-- [ ] 3.4.13 - Update .blog-card__excerpt to order: 4
-- [ ] 3.4.14 - Add first-line emphasis to excerpt (font-weight: 500)
-- [ ] 3.4.15 - Ensure blog-card uses flexbox with flex-direction: column
+- [x] 3.4.1 - Locate existing .blog-card styles in global.css
+- [x] 3.4.2 - Update .blog-card__title font-size to 1.75rem
+- [x] 3.4.3 - Update .blog-card__title font-weight to 700
+- [x] 3.4.4 - Add letter-spacing: -0.02em to title
+- [x] 3.4.5 - Increase title margin-bottom to 0.75rem
+- [x] 3.4.6 - Add .blog-card .tag-list styles (if not exists)
+- [x] 3.4.7 - Set tag-list order: 2
+- [x] 3.4.8 - Add tag-list margin-bottom: 0.5rem
+- [x] 3.4.9 - Style .blog-card .tag-badge with background color
+- [x] 3.4.10 - Update .blog-card__meta to order: 3
+- [x] 3.4.11 - Reduce meta font-size to 0.875rem
+- [x] 3.4.12 - Use subtle color for meta (--color-text-subtle)
+- [x] 3.4.13 - Update .blog-card__excerpt to order: 4
+- [x] 3.4.14 - Add first-line emphasis to excerpt (font-weight: 500)
+- [x] 3.4.15 - Ensure blog-card uses flexbox with flex-direction: column
 - [ ] 3.4.16 - Test blog card appearance on blog listing page
 - [ ] 3.4.17 - Test responsive layout
 - [ ] 3.4.18 - Verify hover states work
 - [ ] 3.4.19 - Run Lighthouse audit on blog page
 - [ ] 3.4.20 - Commit changes: "feat(css): optimize blog card visual hierarchy for F-pattern"
 
+**Notes**: Blog card CSS now mirrors the refactored component hierarchy, with typographic scale, tag badge ordering, and excerpt emphasis aligned to the F-pattern plan. Visual validation and performance checks remain to close out the task.
+
 ### Task 3.5: Project Card Styles (`/src/styles/global.css`)
 
-**Status**: Not Started | **Priority**: CRITICAL | **Time**: 2 hours
+**Status**: In Progress | **Priority**: CRITICAL | **Time**: 2 hours
 
-- [ ] 3.5.1 - Locate existing .project-card styles in global.css
-- [ ] 3.5.2 - Update .project-card__title font-size to 1.5rem
-- [ ] 3.5.3 - Update .project-card__title font-weight to 700
-- [ ] 3.5.4 - Add letter-spacing: -0.02em to title
-- [ ] 3.5.5 - Update .project-card__stack to order: 2
-- [ ] 3.5.6 - Ensure stack uses flexbox with flex-wrap
-- [ ] 3.5.7 - Add gap: 0.5rem to stack
-- [ ] 3.5.8 - Style stack badges with rotating background colors
-- [ ] 3.5.9 - Add nth-child selectors for chip-bg-1 through chip-bg-5
-- [ ] 3.5.10 - Update .project-card__meta to order: 3
-- [ ] 3.5.11 - Make meta italic and subtle color
-- [ ] 3.5.12 - Update .project-card__impact to order: 4
-- [ ] 3.5.13 - Add background color to impact (--color-accent-soft)
-- [ ] 3.5.14 - Add border-left: 3px solid var(--color-accent) to impact
-- [ ] 3.5.15 - Add padding to impact (0.75rem 1rem)
-- [ ] 3.5.16 - Style impact strong elements with accent color
-- [ ] 3.5.17 - Update .project-card__description to order: 5
-- [ ] 3.5.18 - Ensure project-card uses flexbox with flex-direction: column
+- [x] 3.5.1 - Locate existing .project-card styles in global.css
+- [x] 3.5.2 - Update .project-card__title font-size to 1.5rem
+- [x] 3.5.3 - Update .project-card__title font-weight to 700
+- [x] 3.5.4 - Add letter-spacing: -0.02em to title
+- [x] 3.5.5 - Update .project-card__stack to order: 2
+- [x] 3.5.6 - Ensure stack uses flexbox with flex-wrap
+- [x] 3.5.7 - Add gap: 0.5rem to stack
+- [x] 3.5.8 - Style stack badges with rotating background colors
+- [x] 3.5.9 - Add nth-child selectors for chip-bg-1 through chip-bg-5
+- [x] 3.5.10 - Update .project-card__meta to order: 3
+- [x] 3.5.11 - Make meta italic and subtle color
+- [x] 3.5.12 - Update .project-card__impact to order: 4
+- [x] 3.5.13 - Add background color to impact (--color-accent-soft)
+- [x] 3.5.14 - Add border-left: 3px solid var(--color-accent) to impact
+- [x] 3.5.15 - Add padding to impact (0.75rem 1rem)
+- [x] 3.5.16 - Style impact strong elements with accent color
+- [x] 3.5.17 - Update .project-card__description to order: 5
+- [x] 3.5.18 - Ensure project-card uses flexbox with flex-direction: column
 - [ ] 3.5.19 - Test project card appearance on projects page
 - [ ] 3.5.20 - Test responsive layout
 - [ ] 3.5.21 - Verify hover states and animations
 - [ ] 3.5.22 - Run Lighthouse audit on projects page
 - [ ] 3.5.23 - Commit changes: "feat(css): optimize project card visual hierarchy for F-pattern"
 
+**Notes**: CSS updates now mirror the F-pattern (title, stack, meta, impact, description) with accent-backed impact callouts and italic meta text. Need to run the responsive/hover checks, capture screenshots, and log a Lighthouse pass before closing the task.
+
 ### Task 3.6: Section Component Styles (`/src/styles/global.css`)
 
-**Status**: Not Started | **Priority**: HIGH | **Time**: 1 hour
+**Status**: In Progress | **Priority**: HIGH | **Time**: 1 hour
 
-- [ ] 3.6.1 - Locate existing .eyebrow styles
-- [ ] 3.6.2 - Update eyebrow font-size to 0.8125rem
-- [ ] 3.6.3 - Ensure eyebrow is uppercase with letter-spacing
-- [ ] 3.6.4 - Set eyebrow color to --color-accent
-- [ ] 3.6.5 - Locate existing .section-title styles
-- [ ] 3.6.6 - Update section-title with clamp() for responsive sizing
-- [ ] 3.6.7 - Set font-weight: 700 and line-height: 1.1
-- [ ] 3.6.8 - Locate existing .section-lead styles
-- [ ] 3.6.9 - Update section-lead font-size to 1.125rem
-- [ ] 3.6.10 - Add max-width: 65ch to section-lead
-- [ ] 3.6.11 - Add first-line emphasis (font-weight: 600)
+- [x] 3.6.1 - Locate existing .eyebrow styles
+- [x] 3.6.2 - Update eyebrow font-size to 0.8125rem
+- [x] 3.6.3 - Ensure eyebrow is uppercase with letter-spacing
+- [x] 3.6.4 - Set eyebrow color to --color-accent
+- [x] 3.6.5 - Locate existing .section-title styles
+- [x] 3.6.6 - Update section-title with clamp() for responsive sizing
+- [x] 3.6.7 - Set font-weight: 700 and line-height: 1.1
+- [x] 3.6.8 - Locate existing .section-lead styles
+- [x] 3.6.9 - Update section-lead font-size to 1.125rem
+- [x] 3.6.10 - Add max-width: 65ch to section-lead
+- [x] 3.6.11 - Add first-line emphasis (font-weight: 600)
 - [ ] 3.6.12 - Test section styles across all pages
 - [ ] 3.6.13 - Commit changes: "feat(css): enhance section component styles for hierarchy"
+
+**Notes**: Section typography now uses accent eyebrow, tightened title clamp with 1.1 line-height, and lead paragraphs push keywords to the first line. Need responsive sweeps and cross-page spot checks before we commit the section work.
 
 ### Task 3.7: Feature Card Styles (`/src/styles/global.css`)
 
