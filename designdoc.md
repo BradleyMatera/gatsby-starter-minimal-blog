@@ -1608,7 +1608,7 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 - [x] 1.16.3 - Verify mobile and desktop contact layouts show the email in both the CTA and supporting body text
 - [ ] 1.16.4 - Commit changes: "content(contact): expose email address in plain text"
 
-**Notes**: The shared ContactContent layout now renders the email address inline ahead of the CTA, giving visitors immediate visibility even if link styling fails. Commit step remains pending until the broader bundle of contact updates is finalized.
+**Notes**: The shared ContactContent layout now renders the email address inline ahead of the CTA and, with the duplicate React page removed, the MDX route shows the standard header/footer in `gatsby develop`. Commit step remains pending until the contact update batch ships with the next deploy.
 
 ---
 
@@ -1696,7 +1696,7 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 - [x] 2.5.4 - Validate the MDX route renders the component and keeps the plain-text email visible with `bun run dev`
 - [ ] 2.5.5 - Commit changes: "refactor(contact): consolidate contact layout and retire legacy page"
 
-**Notes**: The `/contact` route now sources entirely from MDX, reusing `ContactContent` for consistency. Deleting the legacy page ensures Gatsby no longer preempts the MDX version, and the plain-text email line surfaces alongside the CTA in all viewports. Commit remains outstanding until the current development batch is finalized.
+**Notes**: The `/contact` route now sources entirely from MDX, reusing `ContactContent` for consistency. Removing the legacy React page stops Gatsby from shadowing the MDX route, restores the theme header/footer locally, and keeps the plain-text email visible alongside the CTA in all viewports. Commit remains outstanding until we package this with the next deploy.
 
 ---
 
@@ -2151,16 +2151,16 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 
 ## Progress Tracking
 
-**Phase 1 Status**: 0/12 tasks complete (0%)
-**Phase 2 Status**: 0/3 tasks complete (0%)
+**Phase 1 Status**: 15/16 tasks complete (94%)
+**Phase 2 Status**: 3/5 tasks complete (60%)
 **Phase 3 Status**: 0/7 tasks complete (0%)
-**Phase 4 Status**: 0/5 tasks complete (0%)
+**Phase 4 Status**: 0/7 tasks complete (0%)
 **Phase 5 Status**: 0/8 tasks complete (0%)
 **Final Tasks**: 0/2 task groups complete (0%)
 
-**Overall Progress**: 0/137 tasks complete (0%)
+**Overall Progress**: 18/45 tasks complete (~40%)
 
-**Next Task**: Task 1.1 - Homepage Hero Section
+**Next Task**: Task 1.16.4 - Commit changes: "content(contact): expose email address in plain text"
 
 ---
 
