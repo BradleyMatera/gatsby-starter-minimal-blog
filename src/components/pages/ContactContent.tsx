@@ -11,9 +11,12 @@ const ContactContent = () => (
         </>
       }
       description={
-        <p>
-          <strong>Send the essentials up front</strong> - the problem, desired outcomes, and any constraints - and I will reply within one business day with the next steps.
-        </p>
+        <>
+          <p>
+            <strong>Send the essentials up front</strong> - the problem, desired outcomes, and any constraints - and I will reply within one business day with the next steps.
+          </p>
+          <p>bradmatera@gmail.com</p>
+        </>
       }
     >
       <Card className="contact-card reveal-card">
