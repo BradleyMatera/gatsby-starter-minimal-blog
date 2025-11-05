@@ -7,65 +7,59 @@ description: "How I structure exam prep, online courses, and ongoing practice to
 theme: "Cloud & DevOps"
 ---
 
-import { Section, Callout, Aside, Tip } from "../../../src/@lekoarts/gatsby-theme-minimal-blog/components/mdx-components";
+## TL;DR
 
-<Section title="Introduction">
-Technology shifts quickly, so I treat learning as an ongoing practice instead of a once-a-year goal. Over the last twelve months I earned new AWS certifications, completed freeCodeCamp programmes, and logged time in LinkedIn Learning courses. This post explains how I choose certifications, structure study plans, and fold the results back into day-to-day engineering work.
-</Section>
+- **Learning is a permanent sprint.** I mix certifications, free courses, and experiments so knowledge compounds instead of expiring.  
+- **Roadmaps come from exam guides.** AWS blueprints become checklists that steer weekly study and reveal gaps fast [^exam-guide].  
+- **Practice beats memorisation.** Labs, flashcards, and teach-backs force me to apply concepts before exam day.  
+- **Credentials feed real work.** Each badge pushes improvements into architecture reviews, interview drills, and documentation habits.
 
-<Section title="Recent Credentials">
-| Credential | Issued | Expires | Focus |
-| --- | --- | --- | --- |
-| AWS Solutions Architect – Associate | Aug 2024 | Aug 2027 | Designing resilient, cost-optimised AWS architectures.[^saa] |
-| AWS Certified AI Practitioner | Feb 2025 | Feb 2028 | Responsible AI usage, foundation models, and deployment patterns.[^ai-practitioner] |
-| freeCodeCamp JavaScript Algorithms & Data Structures | Dec 2024 | N/A | Algorithmic thinking with vanilla JavaScript. |
-| freeCodeCamp Responsive Web Design | Nov 2024 | N/A | Accessible layouts, CSS grids, and flexbox. |
-| LinkedIn Learning (Communication, Personal Branding, GTD) | 2024–2025 | N/A | Soft skills that support client and stakeholder collaboration. |
+## Recent Credentials & Focus Areas
 
-I track upcoming expirations in Notion and schedule refreshers at least six months before the renewal window closes.
+- **AWS Solutions Architect – Associate (Aug 2024 → Aug 2027):** Architect resilient, cost-aware AWS workloads; schedule renewal six months early [^saa].  
+- **AWS Certified AI Practitioner (Feb 2025 → Feb 2028):** Grounded responsible AI usage and Bedrock deployment patterns [^ai-practitioner].  
+- **freeCodeCamp JavaScript Algorithms & Data Structures (Dec 2024):** Sharpened algorithmic thinking with vanilla JS challenges.  
+- **freeCodeCamp Responsive Web Design (Nov 2024):** Reinforced accessible layouts, flexbox, and grid fluency.  
+- **LinkedIn Learning soft-skill tracks (2024–2025):** Communication, branding, and GTD coursework to level up stakeholder collaboration.
 
-<Callout type="info">
-Certifications validate skills but projects demonstrate application.
-</Callout>
-</Section>
+I log expirations in Notion, add reminders six months ahead, and pair each renewal with a project to prove retention.
 
-<Section title="How I Study">
-### Start with Exam Guides
-AWS publishes detailed exam guides outlining domains, weightings, and sample questions.[^exam-guide] I turn these into a spreadsheet with status columns (`Unreviewed`, `In Progress`, `Confident`). This creates a checklist I revisit weekly.
+## Study System
 
-### Mix Theory with Practice
-- **Hands-on labs.** I use AWS Skill Builder labs and build throwaway environments in my personal AWS account to reinforce muscle memory.  
-- **Flashcards & spaced repetition.** Anki decks help drill acronyms (e.g., RPO/RTO, WCU/RCU) and service limits.  
-- **Teach-backs.** I record short Loom videos explaining topics to future-me. If I cannot articulate it clearly, I add it back to the study queue.
+### Start with the guide
 
-### Reflect After the Exam
-Immediately after testing I document which topics felt shaky and plan mini-projects to solidify them. Completing the AI Practitioner exam, for example, led me to prototype an Amazon Bedrock Lambda integration that generates accessibility copy for my portfolio.
+- Download the official exam outline, convert domains to a status spreadsheet, and revisit progress weekly [^exam-guide].
 
-<Aside>
-Combine study with real-world application for better retention.
-</Aside>
-</Section>
+### Blend theory with reps
 
-<Section title="Integrating Continuous Learning into Projects">
-- **Applying AWS SA lessons to side projects.** I now default to multi-AZ RDS deployments, IaC templates, and well-architected reviews before declaring a project “done.”  
-- **Using freeCodeCamp algorithms in interviews.** The exercises sharpened my ability to express data structures clearly, which translates into faster whiteboard sessions.  
-- **Soft-skill courses feeding documentation.** Communication and personal branding modules improved how I structure retrospectives, stakeholder emails, and portfolio case studies.
+- **Hands-on labs:** Run AWS Skill Builder scenarios and spin up disposable environments to build intuition.  
+- **Spaced repetition:** Maintain Anki decks for acronyms, service limits, and scenario cues.  
+- **Teach-backs:** Record Loom explainers; if the story is fuzzy, loop the topic back into study sessions.
 
-<Tip>
-Apply new knowledge immediately to reinforce learning.
-</Tip>
-</Section>
+### Reflect immediately
 
-<Section title="Keeping Momentum">
-1. **Quarterly themes.** Each quarter I pick a focus (e.g., security automation, data engineering) and align reading lists, courses, and side projects accordingly.  
-2. **Accountability.** I post progress updates on LinkedIn and within a small study group of peers preparing for similar exams.  
-3. **Balance depth with breadth.** Certifications validate foundational knowledge, while exploratory projects (Zig, WebGPU) keep me curious and adaptable.
+- Post-exam, capture weak topics, schedule mini-projects (e.g., Bedrock-powered accessibility copy) to convert notes into working code.
 
-Continuous learning is less about collecting badges and more about tightening the feedback loop between study, practice, and teaching. As long as I am incorporating new insights into real systems, the investment continues to pay dividends.
-</Section>
+## Ship What You Learn
 
-<Section title="References">
-[^saa]: AWS Certification, “AWS Certified Solutions Architect – Associate,” accessed May 2025, https://aws.amazon.com/certification/certified-solutions-architect-associate/.  
-[^ai-practitioner]: AWS Certification, “AWS Certified AI Practitioner,” accessed May 2025, https://aws.amazon.com/certification/certified-ai-practitioner/.  
+- **Side projects:** Apply well-architected reviews, multi-AZ defaults, and IaC templates before marking anything "done."  
+- **Interview prep:** Reuse algorithm drills to narrate data-structure choices quickly.  
+- **Documentation:** Soft-skill courses influence retrospectives, stakeholder email templates, and portfolio narratives.
+
+## Keep Momentum Alive
+
+1. **Quarterly themes:** Choose a focus (security automation, data engineering) to align books, courses, and experiments.  
+2. **Accountability:** Share progress with a study circle and LinkedIn posts so goals stay visible.  
+3. **Depth + breadth:** Earn badges for fundamentals while exploring emerging tech like Zig and WebGPU for curiosity.
+
+Continuous learning works when study, practice, and teaching form a tight loop. Every credential is a prompt to ship something better.
+
+## Key Takeaways
+
+- **Map the exam before you open the book.** A checklist keeps studying intentional.  
+- **Reps create recall.** Labs, flashcards, and teach-backs embed concepts deeper than rereading.  
+- **Translate credentials into impact.** Document how each course or exam changes your architecture, communication, or interview game.
+
+[^saa]: AWS Certification, “AWS Certified Solutions Architect – Associate,” accessed May 2025, https://aws.amazon.com/certification/certified-solutions-architect-associate/.
+[^ai-practitioner]: AWS Certification, “AWS Certified AI Practitioner,” accessed May 2025, https://aws.amazon.com/certification/certified-ai-practitioner/.
 [^exam-guide]: AWS Certification, “Exam Guides and Sample Questions,” accessed May 2025, https://aws.amazon.com/certification/certification-prep/guide/.
-</Section>

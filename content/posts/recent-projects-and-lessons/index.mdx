@@ -7,11 +7,23 @@ banner: ./background.jpg
 description: "How I built a time-tracking app with Node.js and Express, the API endpoints it exposes, and what I learned about separation of concerns and early testing."
 ---
 
-## Introduction
+## TL;DR
 
-BasicServerSetup is a lightweight time-tracking system I assembled to practise designing REST APIs, wiring a static front end to a Node.js backend, and deploying both pieces independently. The application allows users to register, authenticate, clock in/out, and review their timesheet entries. While the data layer currently lives in memory, the architecture mirrors how I would structure a production-grade service.
+- **Lightweight time-tracking API with real separation.** Node.js + Express handles auth, clock events, and timesheet retrieval while a static Tailwind UI consumes the endpoints.
+- **Independent deploys reduce friction.** Heroku hosts the API, GitHub Pages hosts the client, letting me ship UI tweaks without touching backend builds.
+- **Testing and docs came first.** Postman suites and concise READMEs surfaced edge cases and made peer reviews faster.
+- **Ready for persistence upgrades.** Controllers stay thin so swapping the in-memory store for MongoDB or Postgres is low-risk.
 
-## Architecture at a Glance
+## Project Goals
+
+- Practice designing a REST API that cleanly separates controllers, models, and middleware.
+- Build a static dashboard that interacts with the API using accessible feedback patterns.
+- Deploy backend and frontend independently to mirror production pipelines on a smaller scale.
+- Capture lessons about documentation, testing, and deployment hygiene along the way.
+
+## Implementation Highlights
+
+### Architecture snapshot
 
 | Layer | Technology | Notes |
 | --- | --- | --- |
@@ -35,7 +47,7 @@ BasicServerSetup/
 
 `authMiddleware.js` injects authentication guard rails, keeping controllers focused on business logic.
 
-## Key Endpoints
+### Core endpoints stay focused
 
 | Route | Payload | Description |
 | --- | --- | --- |
@@ -47,7 +59,7 @@ BasicServerSetup/
 
 These endpoints are intentionally simple so I can swap the data store later (MongoDB or Postgres) without rewriting controllers.
 
-## Frontend Workflow
+### Frontend workflow keeps feedback tight
 
 The static client calls the API with `fetch`, handles errors, and renders a timesheet table. Tailwind provides rapid styling:
 
@@ -65,13 +77,19 @@ async function clockIn() {
 
 Error states are surfaced with lightweight toasts, ensuring the UI communicates network or validation issues clearly.
 
-## Deployment Strategy
+### Deployment strategy mirrors production workflows
 
 - **Backend (Heroku):** Deployed via GitHub integration with environment variables stored in Heroku’s Config Vars.  
 - **Frontend (GitHub Pages):** Hosted separately, pointing API requests to Heroku’s domain.  
 - **CORS:** Enabled on the Express server so the static site can communicate with the API.
 
 This split clarified how to iterate on the backend without redeploying the UI, and vice versa.
+
+## Results
+
+- **Controllers stayed database agnostic.** Keeping logic in models means moving to MongoDB or PostgreSQL requires minimal rewiring.
+- **Independent deploys sped up iteration.** Shipping UI copy updates or styling never blocked on API redeploys.
+- **Documentation shortened reviews.** Teammates could clone the repo and hit Postman collections without hand-holding.
 
 ## Lessons Learned
 
@@ -80,13 +98,19 @@ This split clarified how to iterate on the backend without redeploying the UI, a
 3. **Documentation accelerates reuse.** Maintaining a concise README and API reference made handoffs easier when classmates reviewed the project.  
 4. **Deployment hygiene is worth the effort.** Even a small project benefits from environment variables, health checks, and structured logs.
 
-## Possible Next Steps
+## Next Steps
 
 - Replace the in-memory store with MongoDB (via Mongoose) or PostgreSQL.  
 - Introduce JWT-based authentication for stateless sessions.  
 - Build a React or Next.js front end for richer interactions.  
 - Add unit and integration tests using Jest and Supertest.  
 - Instrument the API with request metrics and structured logging.
+
+## Key Takeaways
+
+- **Thin controllers make future database swaps painless.**
+- **Independent frontend/backend deploys mimic real-world pipelines.**
+- **Investing in docs and tests early keeps feedback cycles short.**
 
 ## Repository
 

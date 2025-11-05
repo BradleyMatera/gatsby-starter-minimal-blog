@@ -6,24 +6,26 @@ description: "Optimizing a Zig-based OBJ parser for large models with streaming 
 theme: "Low-Level Experiments"
 ---
 
-## Introduction
+## TL;DR
 
-Zig's design prioritizes explicit control over memory and performance, making it ideal for systems-level tasks without the overhead of garbage collection [^zig-docs]. Building on my initial OBJ parser, this phase focused on handling larger 3D models efficiently. OBJ files can exceed 20MB for detailed assets, so I implemented streaming parsing, custom allocators, and a zero-copy bridge to PixiJS for visualization. This case study covers the techniques, challenges, and results, demonstrating Zig's strengths in resource-constrained environments.
+- **Zig’s control over memory makes heavy OBJ parsing feasible.** Streaming I/O and allocator tuning kept RAM usage low even on 50MB files [^zig-docs].  
+- **Custom allocators cut fragmentation.** Arena + GPA + fixed buffers shaved 20% off parse times [^zig-alloc-guide].  
+- **Zero-copy export feeds the web faster.** Binary bridges from Zig to PixiJS avoid duplication and speed up rendering.  
+- **Testing catches regressions early.** Fuzz cases and coverage targets kept safety high while optimising.
 
-## Project Goal and Scope
+## Project Goals
 
-The objective was to enhance the parser to:
-- Process large files without loading everything into memory.
-- Minimize allocations using tailored strategies.
-- Export data directly to a web renderer with minimal overhead.
-- Maintain high performance and safety through tests.
+- **Handle large models:** Parse without loading entire files into memory.  
+- **Optimise allocations:** Use the right allocator per workload.  
+- **Bridge to web:** Deliver data to PixiJS without extra copies.  
+- **Stay safe:** Maintain high test coverage and explicit error handling.  
+- **Code:** [github.com/BradleyMatera/obj-parser](https://github.com/BradleyMatera/obj-parser).
 
-The updated parser supports real-world 3D workflows, with code on [GitHub](https://github.com/BradleyMatera/obj-parser).
+## Implementation Highlights
 
-## Technical Implementation
+### Streaming parser
 
-### Streaming Parsing
-Shifted from full-file loading to buffered reading for scalability:
+**Buffered parse loop:**
 
 ```zig
 pub fn parse(allocator: std.mem.Allocator, reader: anytype) !Model {
@@ -40,15 +42,9 @@ pub fn parse(allocator: std.mem.Allocator, reader: anytype) !Model {
 }
 ```
 
-- **Benefits**: Reduces peak memory by 90% for large files; processes line-by-line.
-- **Error Handling**: Custom errors for invalid formats, with cleanup via `errdefer`.
+- Line-by-line parsing reduced peak memory roughly 90%, stayed faithful to the OBJ spec, and introduced precise error reporting with `errdefer` cleanups [^obj-spec].
 
-### Custom Allocator Strategy
-Used a multi-allocator approach for efficiency:
-
-- **ArenaAllocator**: For temporary line buffers—single deinit frees all.
-- **GeneralPurposeAllocator**: For model data (vertices/faces)—leak detection in debug.
-- **FixedBufferAllocator**: For token splitting—deterministic, no heap pressure.
+### Allocator strategy
 
 ```zig
 var arena = std.heap.ArenaAllocator.init(allocator);
@@ -56,10 +52,14 @@ defer arena.deinit();
 const temp_alloc = arena.allocator();
 ```
 
-This cut parse time by 20% on 10MB files by reducing fragmentation [^zig-alloc-guide].
+- **ArenaAllocator:** Handles transient buffers with single deallocation.  
+- **GeneralPurposeAllocator:** Stores model vertices/faces with leak detection.  
+- **FixedBufferAllocator:** Splits tokens in hot loops without hitting the heap.  
+- Result: 20% faster parses on 10MB models thanks to fewer allocations [^zig-alloc-guide].
 
-### Zero-Copy Export to PixiJS
-Exported binary data for direct use in JavaScript:
+### Zero-copy to PixiJS
+
+**Binary export from Zig:**
 
 ```zig
 pub fn exportBinary(model: Model, writer: anytype) !void {
@@ -67,38 +67,43 @@ pub fn exportBinary(model: Model, writer: anytype) !void {
     for (model.vertices) |v| {
         try writer.writeAll(std.mem.asBytes(&v));
     }
-    // Similar for faces
 }
 ```
 
-In PixiJS:
+**PixiJS consumption:**
 
 ```js
 const buffer = await (await fetch('model.bin')).arrayBuffer();
 const vertices = new Float32Array(buffer, 0, vertexCount * 3);
-const graphics = new PIXI.Graphics();
-graphics.drawShape(vertices); // Custom draw function
+graphics.drawShape(vertices);
 ```
 
-- **Zero-Copy**: Views the same buffer, avoiding data duplication and improving load times by 40%.
+- Shared buffers eliminated extra copies and improved load times by roughly 40%.
 
-## Measurable Outcomes
-- **Performance**: Parsed 50MB OBJ in 150ms (vs. 800ms in JS), 5x faster due to native speed.
-- **Memory Usage**: Peak 5MB for large files, thanks to streaming.
-- **Test Coverage**: 90%, including fuzz tests for robustness.
+## Results
 
-## Lessons Learned and Challenges
-- **Allocator Choices Matter**: Arenas excelled for transients, but fixed buffers prevented overruns in hot loops—initial versions leaked without careful deinit.
-- **Streaming Challenges**: Handling variable line lengths required bounded buffers to avoid OOM; solved with fixed-size arrays.
-- **Interoperability**: Aligning Zig structs with JS typed arrays ensured seamless data flow, but endianness needed explicit handling.
-- **Accuracy Note**: Zig isn't "faster Rust"—it avoids borrow checker for simpler safety, suiting parsing tasks [^zig-vs-rust].
+- **Performance:** 50MB OBJ parsed in ~150ms versus ~800ms in JavaScript.  
+- **Memory:** Peak usage near 5MB due to streaming instead of full-file loads.  
+- **Quality:** ~90% coverage including fuzz tests, ensuring resilience under malformed input.
 
-## Next Steps and Recommendations
-- Add MTL parsing and texture support.
-- Integrate with WebGPU for full 3D rendering.
-- Explore WASM compilation for browser-side parsing.
+## Lessons Learned
 
-Zig shines for efficient, low-level tasks—start with small projects to master its memory model.
+- **Allocator choice is architecture.** The right mix prevents leaks and keeps latency low.  
+- **Streaming needs guardrails.** Fixed-size buffers prevent runaway allocations when lines spike.  
+- **Interop requires precision:** Endianness and struct alignment must be explicit for JS typed arrays.  
+- **Reality check:** Zig is not a “faster Rust”; its explicit memory model simply fits this parsing workload [^zig-vs-rust].
+
+## Next Steps
+
+- Add MTL parsing + texture handling to enrich models.  
+- Experiment with WebGPU rendering and GPU-friendly layouts.  
+- Compile to WASM for browser-side parsing to remove network round-trips.
+
+## Key Takeaways
+
+- **Stream before you optimise.** Avoid loading huge files wholesale when a reader will do.  
+- **Pick the right allocator for each job.** Arenas, GPA, and fixed buffers complement each other.  
+- **Design for interoperability up front.** Binary formats and typed arrays unlock zero-copy pipelines.
 
 [^zig-docs]: "Zig Language Reference." Zig Documentation. Accessed October 2025. https://ziglang.org/documentation/master/.
 [^obj-spec]: "OBJ File Format." Paul Bourke. Accessed October 2025. http://paulbourke.net/dataformats/obj/.

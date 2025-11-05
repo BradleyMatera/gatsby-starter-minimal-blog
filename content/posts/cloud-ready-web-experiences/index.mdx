@@ -7,99 +7,52 @@ description: "Join me on a journey through the principles and practices I use to
 theme: "Cloud & DevOps"
 ---
 
-import { Section, Callout, Aside, Tip } from "../../../src/@lekoarts/gatsby-theme-minimal-blog/components/mdx-components";
+## TL;DR
 
-<Section title="Embarking on the Journey">
-Imagine navigating a vast digital landscape where every user, regardless of ability or device, can explore without barriers. "Accessible, cloud-ready web experiences" isn't just my homepage tagline—it's the compass guiding every project I undertake. Accessibility opens the path for all adventurers, while cloud readiness ensures the terrain can handle storms of traffic and unexpected pitfalls. In this post, I'll map out the key pillars of this approach and share my pre-launch checklist to help you build resilient apps that thrive in the wild.
-</Section>
+- **Accessibility is the north star.** Semantic HTML, ARIA restraint, and WCAG-aligned contrast make every feature usable for all [^aria][^wcag].  
+- **Cloud readiness demands observability.** Stateless services, IaC, and early SLOs keep infrastructure elastic and predictable [^well-architected].  
+- **Resilience comes from rehearsal.** Chaos drills, progressive delivery, and tested backups turn outages into practice runs.  
+- **Checklists prevent drift.** A pre-launch review spans accessibility, performance, reliability, security, and cost before anything ships.
 
-<Section title="Pillar 1: Accessibility - Paving an Inclusive Path">
-Accessibility is the foundation of any great web adventure—ensuring no one is left behind. Here's how I build it in from the start:
+## Accessibility First
 
-### Semantic Foundations
-- Leverage native HTML elements like `button`, `nav`, and `main` for built-in structure and meaning.  
-- Apply ARIA labels to dynamic components only when native options fall short, keeping things simple and effective.[^aria]
+- **Semantic structure:** Reach for native elements (`nav`, `main`, `button`) and add ARIA only when the platform cannot express intent [^aria].  
+- **Inclusive interactions:** Guarantee keyboard navigation, visible focus states, and descriptive alt/captions so the whole journey is explorable.  
+- **Performance for everyone:** Trim bundles, minimise layout shifts, and respect `prefers-reduced-motion` so slower devices stay comfortable.
 
-### Inclusive Interactions
-- Ensure full keyboard navigation with intuitive tab order and clear focus indicators.  
-- Add meaningful alt text and captions to images and videos, making content accessible to all.  
-- Check color contrast against WCAG 2.1 AA standards using tools like axe-core, plus hands-on audits.[^wcag]
+## Architect for Scale & Insight
 
-### Performance for Everyone
-- Optimize bundle sizes and minimize layout shifts to keep the experience smooth on any device.  
-- Respect "prefers-reduced-motion" queries to avoid discomfort for users sensitive to animations.
+- **Design stateless services:** Pair load balancers with external session stores (Redis, DynamoDB) for horizontal scaling.  
+- **Commit infrastructure as code:** Use Terraform or CDK, version control templates, and review changes with the AWS Well-Architected lens [^well-architected].  
+- **Instrument early:** Capture JSON logs, layer in OpenTelemetry traces, and define SLIs/SLOs before traffic spikes.
 
-<Callout type="info">
-Accessibility isn't just a feature—it's a fundamental right that enriches the journey for everyone.
-</Callout>
-</Section>
+## Build for Resilience
 
-<Section title="Pillar 2: Cloud-Ready Architecture - Building for the Horizon">
-To conquer the cloud's vast expanse, your architecture must be scalable and observant. Here's my blueprint for success:
+- **Defensive coding:** Bake in retries, exponential backoff, and circuit breakers; run chaos experiments to validate assumptions.  
+- **Progressive delivery:** Lean on feature flags, canaries, and automated rollbacks inside GitHub Actions.  
+- **Disaster readiness:** Schedule snapshots, enable S3 versioning, and rehearse runbooks so recovery steps are muscle memory.
 
-### Design for Horizontal Scaling
-- Build stateless services fronted by load balancers like AWS ALB or ELB for seamless growth.  
-- Store session state externally in Redis or DynamoDB, allowing instances to swap out without losing progress.
+## Pre-Launch Checklist
 
-### Embrace Infrastructure as Code
-- Use Terraform or AWS CDK to define reproducible environments, adhering to the AWS Well-Architected Framework for excellence and reliability.[^well-architected]  
-- Keep IaC version-controlled for collaborative reviews before deploying changes.
+- **Accessibility:** Logical heading order, screen-reader flow, and focus states verified.  
+- **Performance:** Largest Contentful Paint meets targets; media optimised and cached.  
+- **Reliability:** Post-deploy smoke tests automated; alerts mapped to actionable runbooks.  
+- **Security:** Secrets tucked into Secrets Manager or GitHub; third-party scripts reviewed.  
+- **Cost:** Budgets in place, alerts firing before spend spikes.
 
-### Monitoring and Alerting
-- Instrument key paths with JSON-structured logs, funneled into CloudWatch or OpenTelemetry for deep insights.  
-- Set SLOs and SLIs early—tracking latency, errors, and throughput—with proactive alerts to stay ahead of issues.
+## Case Study: Interactive Pokédex
 
-<Aside>
-True cloud readiness begins with keen observability, like having a map of the stars to guide your way.
-</Aside>
-</Section>
+- **Delivery:** CloudFront + Lambda@Edge served static assets quickly worldwide.  
+- **Security:** API keys stored in Secrets Manager, proxied through API Gateway.  
+- **Accessibility:** Automated axe scans plus screen-reader passes caught regressions.  
+- **Observability:** CloudWatch dashboards tracked latency, error rates, and provided incident breadcrumbs.
 
-<Section title="Pillar 3: Resilience and Recovery - Weathering the Storms">
-In the unpredictable cloud wilderness, resilience turns potential disasters into mere detours. Here's how I fortify my builds:
+## Key Takeaways
 
-### Defensive Coding
-- Handle API hiccups gracefully using retries, exponential backoff, and circuit breakers.  
-- Simulate chaos with experiments and load tests to pressure-test assumptions and uncover weaknesses.
+- **Accessibility, resilience, and scale reinforce each other.** Semantic choices often reduce bundle weight and ease scaling.  
+- **Observability is table stakes.** Instrument everything before launch so future-you can troubleshoot.  
+- **Test the safety nets.** Backups, rollbacks, and playbooks only work if you rehearse them.
 
-### Progressive Delivery
-- Deploy with feature flags and canary releases to spot issues before they affect everyone.  
-- Set up automated rollbacks in GitHub Actions, triggerable manually or by failed health checks.
-
-### Disaster Readiness
-- Schedule automatic backups like database snapshots and S3 versioning, with quarterly restore drills.  
-- Create detailed runbooks outlining step-by-step recovery and clear communication plans.
-
-<Tip>
-Always test your backups— an unproven safety net is no net at all.
-</Tip>
-</Section>
-
-<Section title="Your Pre-Launch Checklist: Charting the Course">
-Before setting sail, I run through this checklist to ensure everything is shipshape:
-
-| Category | Key Questions |
-| --- | --- |
-| Accessibility | Are headings structured logically? Does the screen reader flow make sense? Are focus states clear and visible? |
-| Performance | Is Largest Contentful Paint meeting targets on all devices? Are images optimized and delivered via CDN? |
-| Reliability | Have post-deploy smoke tests been automated? Do alerts tie into clear runbooks? |
-| Security | Are secrets secured in AWS Secrets Manager or GitHub? Have third-party scripts been vetted? |
-| Cost | Are budgets and alerts in place to monitor and prevent overspending? |
-</Section>
-
-<Section title="Case Study: The Interactive Pokedex Expedition">
-Putting these principles into action, my Interactive Pokedex project became a prime example of resilient design:
-- Static assets flew from CloudFront, accelerated by Lambda@Edge caching for lightning-fast access.  
-- API keys were safely stowed in AWS Secrets Manager, with requests routed securely through API Gateway.  
-- It aced automated axe checks and hands-on screen reader tests, ensuring an inclusive adventure.  
-- Core events were logged to CloudWatch, powering dashboards that helped track and resolve issues swiftly.
-</Section>
-
-<Section title="Charting Your Own Path">
-Resilience, accessibility, and cloud readiness aren't separate trails—they weave together into a stronger journey. Choices like semantic HTML boost accessibility while trimming JS bloat, and stateless designs enhance both scale and recovery. By embedding these into checklists and automated pipelines, I keep my projects adventure-ready, no matter how they grow.
-</Section>
-
-<Section title="References">
-[^aria]: W3C, “Using WAI-ARIA,” accessed May 2025, https://www.w3.org/WAI/ARIA/apg/practices/using-aria/.  
-[^wcag]: W3C, “Web Content Accessibility Guidelines (WCAG) 2.1,” accessed May 2025, https://www.w3.org/TR/WCAG21/.  
+[^aria]: W3C, “Using WAI-ARIA,” accessed May 2025, https://www.w3.org/WAI/ARIA/apg/practices/using-aria/.
+[^wcag]: W3C, “Web Content Accessibility Guidelines (WCAG) 2.1,” accessed May 2025, https://www.w3.org/TR/WCAG21/.
 [^well-architected]: AWS, “AWS Well-Architected Framework,” accessed May 2025, https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html.
-</Section>

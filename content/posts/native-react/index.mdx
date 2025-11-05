@@ -7,37 +7,38 @@ description: "How I wired a React SPA to AWS API Gateway and Lambda, secured the
 theme: "Front-End & Full-Stack"
 ---
 
-## Introduction
+## TL;DR
 
-Anime CRUD is a single-page React application that lets users catalogue characters, filter by roles, and pull reference data from the public Jikan API. The project demonstrates how a React front end can coexist with a serverless backend built on AWS API Gateway and Lambda. I deployed the UI to Vercel, proxied API requests to AWS, and focused on resilient data handling, security, and developer experience.
+- **Anime CRUD pairs React with AWS API Gateway + Lambda.** The SPA catalogs anime characters, while serverless endpoints handle persistence.  
+- **Security starts at the edge.** Vercel injects API keys server-side; Lambda validates payloads and throttles misuse.  
+- **UX stays responsive via optimistic updates and memoised filters.** Users see changes instantly even during cold starts.  
+- **Future roadmap:** Auth, S3 uploads, offline support, and Terraform modules.
 
 - **Live demo:** https://cruddemo-one.vercel.app/  
-- **Source code:** https://github.com/BradleyMatera/ReactJSMobileApp (private repo; structure summarised below)
+- **Code tour:** https://github.com/BradleyMatera/ReactJSMobileApp (private repo; structure below)
 
-## Architecture Overview
+## Architecture Snapshot
 
-| Layer | Technology | Notes |
-| --- | --- | --- |
-| Frontend | React 18, Hooks, Vite/Webpack | Form handling, modals, filtering, optimistic updates. |
-| Backend | AWS API Gateway + Lambda (Node.js) | CRUD endpoints (`/characters`) storing records in DynamoDB. |
-| External data | [Jikan API](https://jikan.moe/) | Fetches trending anime metadata. |
-| Hosting | Vercel (frontend) + AWS | Vercel proxy routes API calls to API Gateway with custom headers. |
+- **Frontend:** React 18 with hooks, Vite/Webpack bundling, controlled forms, modals, filtering, optimistic updates.  
+- **Backend:** AWS API Gateway routes to Lambda (Node.js) for CRUD against DynamoDB.  
+- **External data:** [Jikan API](https://jikan.moe/) supplies trending metadata.  
+- **Hosting:** Vercel for the SPA, AWS for serverless endpoints; proxy keeps API calls on the same origin.
 
 ```
 ReactJSMobileApp/
 ├── src/
-│   ├── App.js           # Routes and layout
-│   ├── api.js           # REST client (Axios)
-│   ├── components/      # Cards, forms, modals
-│   └── hooks/
-│       └── useFetch.js  # Reusable data-fetching hook
-├── vercel.json          # Proxy configuration
-└── webpack.config.js    # Build pipeline
+│   ├── App.js
+│   ├── api.js
+│   ├── components/
+│   └── hooks/useFetch.js
+├── vercel.json
+└── webpack.config.js
 ```
 
 ## Securing the Serverless API
 
-AWS API Gateway fronts five Lambda handlers (GET/POST/PUT/DELETE). Each route enforces an API key, throttling, and input validation:
+- API Gateway fronts five Lambda handlers (GET/POST/PUT/DELETE) with API keys, throttles, and schema validation.  
+- Vercel injects headers server-side so secrets stay out of the bundle.
 
 ```json
 {
@@ -53,11 +54,11 @@ AWS API Gateway fronts five Lambda handlers (GET/POST/PUT/DELETE). Each route en
 }
 ```
 
-The key is injected at build time via Vercel environment variables, keeping secrets out of the client bundle. Lambda functions validate payloads, normalise category strings, and return structured errors so the front end can respond gracefully.
+- Lambda normalises payloads, returns structured errors, and logs request IDs for tracing.
 
-## Client-Side Data Flow
+## Client Data Flow
 
-### Fetching Characters
+### Fetch characters safely
 
 ```javascript
 useEffect(() => {
@@ -67,13 +68,9 @@ useEffect(() => {
     try {
       setLoading(true);
       const response = await api.get('/api/characters');
-      if (isMounted) {
-        setCharacters(response.data);
-      }
+      if (isMounted) setCharacters(response.data);
     } catch (err) {
-      if (isMounted) {
-        setError('Unable to load characters right now.');
-      }
+      if (isMounted) setError('Unable to load characters right now.');
     } finally {
       if (isMounted) setLoading(false);
     }
@@ -86,9 +83,9 @@ useEffect(() => {
 }, []);
 ```
 
-The hook guards against state updates after unmounting, which prevents React warnings when navigating away mid-request.
+- Guards prevent state updates after unmounts, eliminating React warnings.
 
-### Optimistic Updates
+### Optimistic updates with rollback
 
 ```javascript
 const handleUpdate = async (character) => {
@@ -101,14 +98,14 @@ const handleUpdate = async (character) => {
     await api.put(`/api/characters/${character.id}`, character);
   } catch (error) {
     setError('Could not save changes. Reverting.');
-    setCharacters((prev) => prevCache); // prevCache captured before optimistic update
+    setCharacters((prev) => prevCache);
   }
 };
 ```
 
-By applying local changes first and rolling back on failure, the UI feels responsive even when Lambda cold starts add latency.
+- Perceived speed stays high even when Lambda cold starts introduce latency.
 
-### Filtering and Search
+### Filter with memoised selectors
 
 ```javascript
 const filteredCharacters = useMemo(() => {
@@ -121,34 +118,39 @@ const filteredCharacters = useMemo(() => {
 }, [characters, selectedCategory]);
 ```
 
-Combining `useMemo` with controlled inputs keeps the grid responsive even with large datasets.
+- Controlled inputs + `useMemo` keep the grid responsive for larger datasets.
 
 ## Integration with Jikan API
 
-The app fetches trending anime titles from Jikan once per session, caches the results in state, and displays the top twelve entries with ratings, episodes, and cover art. Jikan’s rate limits are generous, but the client respects `Retry-After` headers and handles 429 responses by backing off.
+- Fetch trending titles once per session, cache in state, display top twelve with art and ratings.  
+- Respect `Retry-After` headers and back off on 429s, logging rate-limit metrics.
 
 ## Deployment Notes
 
-- **Vercel proxying** avoids CORS preflight complexity; headers are set server-side.  
-- **Webpack customisations** provide path aliases and bundle analysis.  
-- **Environment management** uses `.env.production` and `.env.development` files loaded through Vercel’s Secrets UI and AWS Parameter Store respectively.
+- Vercel proxying avoids CORS headaches; headers set server-side.  
+- Webpack customisations add path aliases and bundle analysis.  
+- Environment management uses `.env.*` files synced via Vercel Secrets and AWS Parameter Store.
 
-## Challenges and Resolutions
+## Challenges & Resolutions
 
-| Challenge | Resolution | Impact |
-| --- | --- | --- |
-| CORS errors between Vercel and API Gateway | Proxy routes in `vercel.json`; API Gateway configured with `Access-Control-Allow-*` headers | Stable cross-origin communication |
-| Exposing API keys in front-end | Injected `x-api-key` via Vercel server-side headers | Prevented client leaks | 
-| Managing nested character data | Built controlled forms with JSON schema validation | Reduced runtime errors | 
-| Slow cold starts | Added optimistic UI updates and loading skeletons | Improved perceived performance |
+- **CORS conflicts:** Solved with Vercel proxy routes and API Gateway CORS headers.  
+- **Exposed keys risk:** Server-injected `x-api-key` keeps secrets off the client.  
+- **Nested data management:** Controlled forms + JSON schema validation reduced runtime errors.  
+- **Cold starts:** Optimistic UI updates and skeleton loaders smoothed perceived performance.
 
 ## Future Enhancements
 
-1. Add Cognito-based authentication so users manage personal lists.  
-2. Implement S3-backed image upload instead of relying on external URLs.  
-3. Introduce serverless Offline support with DynamoDB Streams and caching.  
-4. Replace Axios with the Fetch API and Suspense to simplify data flow.  
-5. Publish infrastructure as Terraform modules for repeatable environments.
+1. Layer in Cognito authentication so users own personalised lists.  
+2. Add S3-backed image uploads instead of relying on external URLs.  
+3. Explore DynamoDB Streams + offline caching for faster refreshes.  
+4. Replace Axios with Fetch + Suspense to simplify data flow.  
+5. Publish Terraform modules that reproduce the environment quickly.
+
+## Key Takeaways
+
+- **Serverless pairs well with React when edge security and error handling are deliberate.**  
+- **Optimistic UI design cushions latency and keeps users engaged.**  
+- **Operational maturity (proxies, env management, observability) matters as much as component code.**
 
 ## References
 

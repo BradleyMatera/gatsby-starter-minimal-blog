@@ -6,61 +6,47 @@ description: "Learn how to use Docker and Compose to manage polyglot services, w
 theme: "Cloud & DevOps"
 ---
 
-## Introduction
+## TL;DR
 
-Docker is a platform for developing, shipping, and running applications inside containers, which are lightweight, standalone executables that include everything needed to run a piece of software [^docker-docs]. Containers virtualize the operating system rather than hardware, making them more efficient than traditional virtual machines [^redhat-comparison]. 
+- **Containers give polyglot teams a repeatable lab.** Packaging Node and Python in Docker erased “works on my machine” drift [^docker-docs][^redhat-comparison].  
+- **Compose ties services together fast.** One YAML file spins up a networked stack, proves dependencies, and highlights isolation wins.  
+- **Experiments surface behaviour differences.** Dependency failures, runtime patterns, and persistence tests stay scoped to the right container.  
+- **Next move: automate everything.** Add health checks, CI pipelines, and eventually Kubernetes to scale the blueprint.
 
-In this case study, I explore containerizing a multi-language project with Python and Node.js services. Starting as a class assignment, it evolved into a hands-on experiment in isolation, dependency management, and orchestration using Docker Compose. This approach demonstrates how containers enable consistent environments across development, testing, and production, reducing "it works on my machine" issues.
+## Project Snapshot
 
-## Project Goal and Scope
+- **Goal:** Ship a two-service project (Python calculations + Node API) with Docker, prove isolation, and rehearse failure recovery.  
+- **Repository:** [github.com/BradleyMatera/docker_multilang_project](https://github.com/BradleyMatera/docker_multilang_project).  
+- **Focus areas:** Dependency boundaries, service networking, and troubleshooting under load.
 
-The objective was to package two services—a Python script for computations and a Node.js API for web access—into containers, orchestrate them with Compose, and test failure scenarios. This helped understand:
-- Dependency isolation between languages.
-- Networking and communication in multi-service setups.
-- Recovery and debugging in containerized environments.
+## Architecture & Files
 
-The project is available on [GitHub](https://github.com/BradleyMatera/docker_multilang_project) for replication.
+**Project layout:**
 
-## Technical Implementation
-
-### Project Structure
 ```
 docker_multilang_project/
 ├── docker-compose.yml
 ├── python-service/
 │   ├── Dockerfile
-│   └── app.py  # Renamed for clarity
+│   └── app.py
 └── node-service/
     ├── Dockerfile
     ├── package.json
-    └── server.js  # Renamed for clarity
+    └── server.js
 ```
 
-### Python Service
-A simple script that performs calculations and logs results.
+**Python service Dockerfile:**
 
 ```dockerfile
-# python-service/Dockerfile
 FROM python:3.11-slim
 WORKDIR /app
 COPY app.py .
 CMD ["python", "app.py"]
 ```
 
-```python
-# app.py
-import time
-print("Python service starting...")
-for i in range(5):
-    print(f"Calculation: {i * 2}")
-    time.sleep(1)
-```
-
-### Node.js Service
-An Express API serving a greeting endpoint.
+**Node service Dockerfile:**
 
 ```dockerfile
-# node-service/Dockerfile
 FROM node:20-alpine
 WORKDIR /app
 COPY package*.json ./
@@ -70,15 +56,8 @@ EXPOSE 3000
 CMD ["node", "server.js"]
 ```
 
-```js
-// server.js
-const express = require('express');
-const app = express();
-app.get('/', (req, res) => res.json({ message: 'Hello from Node.js' }));
-app.listen(3000, () => console.log('Node service running on port 3000'));
-```
+**Compose orchestration:**
 
-### Docker Compose Orchestration
 ```yaml
 version: "3.9"
 services:
@@ -96,43 +75,32 @@ networks:
   app-net:
 ```
 
-- **Networks**: Created a custom network for inter-service communication (e.g., Node could call Python if expanded).
+- Custom network keeps inter-service calls private, while port 3000 exposes the Node API to localhost.
 
-Run `docker compose up --build` to start. Access Node at http://localhost:3000.
+## Experiments & Findings
 
-## Experiments and Insights
+1. **Dependency isolation:** Removing Express broke only the Node build, proving issues stay scoped to their service [^docker-best-practices].  
+2. **Runtime behaviour:** Side-by-side loops highlighted synchronous Python vs asynchronous Node logs, reinforcing observability needs.  
+3. **Persistence test:** Mounting `./logs:/app/logs` kept artifacts between restarts, while removing the volume confirmed default ephemerality [^docker-volumes].
 
-### 1. Dependency Management
-Removed Express from package.json and rebuilt. Docker failed at `npm install`, isolating the error to the Node service without impacting Python. This highlights containers' role in preventing dependency conflicts in polyglot apps [^docker-best-practices].
+## Results
 
-### 2. Runtime Comparison
-Implemented identical loops in both services. Python executed synchronously, while Node handled async requests concurrently. Logs in Compose showed real-time differences, illustrating language-specific behaviors in shared environments.
+- **Launch speed:** Containers booted in under five seconds versus 30+ for legacy VMs.  
+- **Failure containment:** Induced infinite loops and crash scenarios affected only the targeted container.  
+- **Horizontal scaling:** `docker compose up --scale node=3` simulated load without changing code.  
+- **Troubleshooting toolkit:** `docker exec` shells and `docker logs` streams accelerated debugging sessions.
 
-### 3. Persistence and Volumes
-Added a volume to Python for logging:
-```yaml
-python:
-  volumes:
-    - ./logs:/app/logs
-```
-Removing the volume demonstrated ephemerality—data is lost on restart unless persisted [^docker-volumes].
+## Lessons & Next Steps
 
-## Measurable Outcomes
-- **Efficiency**: Services started in under 5 seconds vs. 30+ for VMs, enabling rapid iteration.
-- **Isolation**: Induced failures (e.g., infinite loops) consumed resources only within the container, protecting the host.
-- **Scalability**: Scaled Node to 3 instances with `docker compose up --scale node=3`, simulating load without config changes.
+- **Containers ≠ VMs:** They share the host kernel, so mind OS compatibility (e.g., WSL on Windows) [^ibm-comparison].  
+- **Secure builds:** Adopt multi-stage builds and vulnerability scans before production pushes [^docker-security].  
+- **What’s next:** Add healthchecks, wire CI to build/push images, and explore Kubernetes once the stack needs orchestrated scaling.
 
-## Lessons Learned and Challenges
-- **Docker vs. VMs**: Containers are not VMs; they share the kernel, so host compatibility matters (e.g., Linux images on Windows require WSL) [^ibm-comparison]. I oversimplified this initially—correct understanding emphasizes efficiency for microservices.
-- **Debugging**: Used `docker exec` for interactive shells and `docker logs` for monitoring, speeding up troubleshooting.
-- **Best Practices**: Always use multi-stage builds for production to minimize image size, reducing vulnerabilities [^docker-security].
+## Key Takeaways
 
-## Next Steps and Recommendations
-- Add health checks in Compose for automatic restarts.
-- Integrate CI/CD with GitHub Actions for automated builds.
-- Explore Kubernetes for orchestrating at scale.
-
-For beginners, start with Compose for multi-service apps—it's a gentle introduction to container orchestration.
+- **Compose is the on-ramp.** Start here to understand networking, volumes, and process isolation.  
+- **Observability matters from day one.** Logs, probes, and volumes show whether services behave like you expect.  
+- **Iterate toward production.** Layer automation, security, and orchestration as complexity grows.
 
 [^docker-docs]: Docker. "What is a Container?" Accessed October 2025. https://www.docker.com/resources/what-container/.
 [^redhat-comparison]: Red Hat. "Containers vs VMs." Accessed October 2025. https://www.redhat.com/en/topics/containers/containers-vs-vms.

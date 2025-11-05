@@ -6,9 +6,26 @@ tags: ["Job Search", "Web Development", "SPA", "Resumes", "Cover Letters", "Code
 description: "How I built interactive SPA resumes, aligned them with Anduril and Johnson Health Tech job requirements, and blended those experiments with traditional resumes and cover letters."
 ---
 
-## Introduction
+## TL;DR
 
-In early 2025 I applied to two roles positioned at different ends of the engineering spectrum: Anduril’s Software Engineer (Web Infrastructure) and Johnson Health Tech’s Software Tester I. Rather than relying solely on a static PDF résumé, I experimented with single-page web resumes that double as interactive case studies. This article documents how I researched each role, what I built, how I mapped requirements to evidence, and the lessons I’ll apply to future applications.
+- **Targeted applications beat generic blasts.** I built role-specific SPA résumés plus traditional PDFs for Anduril and Johnson Health Tech.  
+- **Research drives artifacts.** Each requirement mapped to a project, demo, or document proving the skill.  
+- **Interactivity complements, not replaces, PDFs.** Recruiters still asked for formatted résumés immediately.  
+- **Maintenance matters.** Interactive assets require ongoing updates, analytics, and accessibility checks.
+
+## Roles Targeted
+
+- **Anduril – Software Engineer, Web Infrastructure**  
+	- Requirements: JavaScript/TypeScript depth, infrastructure tooling (CircleCI, Bazel), graphics/WebGPU, Linux comfort, empathetic communication.  
+	- Resonance: Army background aligns with mission; Triangle Shader Lab + Docker projects showcase graphics and infrastructure alignment.  
+	- Gaps: Industry tenure (internship vs 3+ years) → highlighted documentation habits and willingness to ramp on Bazel/RxJS.
+
+- **Johnson Health Tech – Software Tester I**  
+	- Requirements: QA mindset, OOP fundamentals, Android/Unix fluency, communication.  
+	- Resonance: CheeseMath Jest suite, Anime CRUD debugging docs, and manual testing logs align with reliability focus.  
+	- Gaps: Transitioning from academia → emphasised reproducible bug reports and collaboration during internships.
+
+Listings: [Anduril](https://job-boards.greenhouse.io/andurilindustries/jobs/4663439007?gh_jid=4663439007) • [Johnson Health Tech](https://www.indeed.com/viewjob?jk=cada0de72ec519fb)
 
 ## Researching Each Role
 
@@ -26,60 +43,50 @@ In early 2025 I applied to two roles positioned at different ends of the enginee
 
 ## Building Supplementary SPA Resumes
 
-Interactive résumés add maintenance overhead, and research notes that recruiters still expect a traditional PDF for applicant-tracking systems. However, when paired with conventional materials they can showcase front-end fluency and storytelling (“Interactive Résumés: Opportunities and Trade-offs,” *Journal of Career Development*, 2023). I built two SPAs on CodePen to walk hiring teams through my work.
+- **Anduril SPA résumé:** Infrastructure-focused navigation, PixiJS animations of graphics demos, direct links to Triangle Shader Lab and Docker Multilang. [CodePen](https://codepen.io/student-account-bradley-matera/pen/vEYrOGB)  
+- **Johnson Health Tech SPA résumé:** Modules for defect stories, unit tests, manual testing logs, and a prominent PDF download CTA. [CodePen](https://codepen.io/student-account-bradley-matera/pen/RNwJPaw)
 
-| SPA | Purpose | Highlights | Link |
-| --- | --- | --- | --- |
-| Anduril SPA Resume | Demonstrate infrastructure instincts and graphics work | Sectioned navigation, PixiJS animation of graphics demos, links to Triangle Shader Lab and Docker Multilang. | [View on CodePen](https://codepen.io/student-account-bradley-matera/pen/vEYrOGB) |
-| Johnson Health Tech SPA Resume | Present testing journey and QA tooling | Modules for defect stories, unit tests, and manual testing logs; direct CTA to download the PDF résumé. | [View on CodePen](https://codepen.io/student-account-bradley-matera/pen/RNwJPaw) |
-
-Implementation details:
-- Vanilla JavaScript with a lightweight router pattern drives navigation and analytics events.  
-- Tailwind CSS utilities handle responsive layout; print styles ensure recruiters can export a PDF-friendly version.  
-- I log basic view metrics (CodePen console output and manual notes) to see which sections attract the most attention during portfolio reviews.
+Implementation notes: Vanilla JS with a lightweight router, Tailwind CSS for responsive layouts + print styles, and simple analytics (console logs/manual notes) to monitor section engagement. Research confirms recruiters still expect PDFs for ATS compatibility (“Interactive Résumés: Opportunities and Trade-offs,” *Journal of Career Development*, 2023).
 
 ## Traditional Materials Still Matter
 
-Applicant tracking systems remain dependent on structured PDFs (“Applicant Tracking Systems: A Recruiter’s Guide,” Lever, 2024). I created tailored PDF résumés and cover letters for each role and summarised the redacted content below.
+- **Anduril package:** Résumé spotlighted Triangle Shader Lab, Docker Multilang, and Netlify/Gatsby deployments; cover letter tied Army medic experience to Anduril’s mission and outlined growth plans for Bazel/RxJS; artifacts included public demos, GitHub links, and CI pipelines.  
+- **Johnson Health Tech package:** Résumé emphasised CheeseMath Jest suite, Anime CRUD bug fixes, and manual testing notes; cover letter stressed disciplined triage and documentation; artifacts included test plans, GitHub issues, and deploy logs.
 
-### Anduril Package
-- **Résumé focus:** Triangle Shader Lab (WebGPU fundamentals teardown), Docker Multilang (polyglot containerisation), and Netlify/Gatsby blog deployment.  
-- **Cover letter angle:** Connected my Army medic experience to Anduril’s mission, emphasised documentation and empathy, and acknowledged growth areas (Bazel, RxJS).  
-- **Artifacts provided:** Links to public demos, GitHub repositories, and CI pipelines that mirror the infrastructure responsibilities in the job description.
-
-### Johnson Health Tech Package
-- **Résumé focus:** CheeseMath Jest suite (unit tests), Anime CRUD bug reproduction and fix, manual testing of the Sound Machine CodePen.  
-- **Cover letter angle:** Highlighted disciplined triage, reproducible defect documentation, and commitment to reliable user-facing experiences.  
-- **Artifacts provided:** Test plans, GitHub issues, and deployment logs demonstrating how I close bugs end to end.
+Applicant tracking systems remain PDF-centric (Lever, “Applicant Tracking Systems: A Recruiter’s Guide,” 2024), so traditional documents ship with every application.
 
 ## Mapping Requirements to Evidence
 
-| Requirement | Evidence I Provided |
-| --- | --- |
-| JavaScript/TypeScript depth (Anduril) | Triangle Shader Lab walkthrough, SPA résumés, custom Gatsby theme overrides. |
-| Infrastructure & build tooling | Docker Multilang containers, GitHub Actions workflows, environment parity docs. |
-| Testing discipline (Johnson Health Tech) | Jest coverage reports, Anime CRUD defect notes, manual test checklists. |
-| Linux & scripting familiarity | Shell scripts in Docker demo, AWS Lambda deployment runbooks from other portfolio work. |
-| Communication & storytelling | SPA case studies, tailored cover letters, annotated GitHub issues. |
+- **JavaScript/TypeScript depth:** Triangle Shader Lab walkthroughs, SPA résumés, custom Gatsby theme overrides.  
+- **Infrastructure & tooling:** Docker Multilang containers, GitHub Actions workflows, environment parity documentation.  
+- **Testing discipline:** Jest coverage reports, Anime CRUD defect narratives, manual checklists.  
+- **Linux & scripting:** Shell scripts embedded in Docker demos, AWS Lambda runbooks.  
+- **Communication & storytelling:** SPA case studies, tailored cover letters, annotated GitHub issues.
 
-## Results and Lessons Learned
+## Results & Lessons Learned
 
 **Wins**  
-- The SPA résumés served as conversation starters during recruiter calls and portfolio walkthroughs.  
-- Mapping requirements to projects clarified which artifacts to highlight and exposed gaps I still need to close.  
-- Maintaining GitHub-hosted demos let me update content rapidly without resubmitting applications.
+- SPA résumés sparked richer recruiter conversations and portfolio walkthroughs.  
+- Requirement-to-evidence mapping clarified which artifacts to foreground and where skills were thin.  
+- Hosting demos on GitHub enabled rapid updates without resubmitting applications.
 
 **Challenges**  
-- Interactive résumés demand ongoing maintenance. CodePen projects require quarterly updates to avoid broken links or outdated text.  
-- Some recruiters requested PDFs immediately, reinforcing the need to lead with traditional documents.  
-- Private cover letters are hard to reference publicly; I now document the key points in blog posts so readers can follow the narrative without exposing personal data.
+- Interactive résumés require quarterly upkeep to avoid stale copy or broken embeds.  
+- Many recruiters immediately asked for PDFs, reinforcing that interactivity is supplementary.  
+- Private cover letters are hard to share publicly; I now capture key themes in blog posts without exposing sensitive details.
 
 ## Next Steps
 
-1. Publish redacted versions of both cover letters so future readers can see the structure and tone.  
-2. Add automated accessibility checks (axe, Lighthouse) to the SPA résumés and publish the results alongside the demos.  
-3. Package the SPAs as downloadable static sites for environments where CodePen is blocked.  
-4. Continue pairing every experimental artifact with a standard PDF résumé and LinkedIn update so I meet recruiters’ expectations.
+1. Publish redacted cover letter templates to guide future candidates.  
+2. Add automated accessibility audits (axe, Lighthouse) to SPA résumés and share results.  
+3. Bundle SPAs as downloadable static sites for environments where CodePen is blocked.  
+4. Continue pairing every experimental artifact with a canonical PDF résumé and LinkedIn update.
+
+## Key Takeaways
+
+- **Lead with clarity, support with creativity.** PDFs satisfy ATS requirements; SPAs provide narrative depth.  
+- **Evidence beats claims.** Map every job requirement to a tangible project, metric, or document.  
+- **Maintain what you ship.** Treat interactive résumés like live products with analytics, accessibility, and update cadences.
 
 ## Further Reading
 

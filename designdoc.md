@@ -1898,45 +1898,49 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 
 ### Task 4.3: Optimize "From Medic to Engineer" Post
 
-**Status**: Not Started | **Priority**: HIGH | **Time**: 20 minutes
+- **Status**: In Progress | **Priority**: HIGH | **Time**: 20 minutes
 
-- [ ] 4.3.1 - Read current post content
-- [ ] 4.3.2 - Add TL;DR at beginning
-- [ ] 4.3.3 - Update title to: "**Combat Medic → Software Engineer** — An unconventional path"
-- [ ] 4.3.4 - Create timeline list: Army Background, Career Pivot, Software Engineering
-- [ ] 4.3.5 - Convert skills section to comparison lists (Medic vs Engineer)
-- [ ] 4.3.6 - Add "Key Takeaways" section
-- [ ] 4.3.7 - Bold all key terms and transitions
+- [x] 4.3.1 - Read current post content
+- [x] 4.3.2 - Add TL;DR at beginning
+- [x] 4.3.3 - Update title to: "**Combat Medic → Software Engineer** — An unconventional path"
+- [x] 4.3.4 - Create timeline list: Army Background, Career Pivot, Software Engineering
+- [x] 4.3.5 - Convert skills section to comparison lists (Medic vs Engineer)
+- [x] 4.3.6 - Add "Key Takeaways" section
+- [x] 4.3.7 - Bold all key terms and transitions
 - [ ] 4.3.8 - Test post readability
 - [ ] 4.3.9 - Commit changes: "content(medic-to-engineer): restructure with F-pattern optimization"
 
+**Notes**: Replaced the comparison table with medic-versus-engineer bullet lists, inserted a TL;DR and timeline, and closed with Key Takeaways. Readability test and commit stay queued until we resume audits/tests.
+
 ### Task 4.4: Optimize Remaining 21 Blog Posts
 
-**Status**: Not Started | **Priority**: MEDIUM | **Time**: 6 hours
+**Status**: In Progress | **Priority**: MEDIUM | **Time**: 6 hours
 
 **For each of the following posts, apply the same optimization pattern (TL;DR, headings, lists, takeaways):**
 
-- [ ] 4.4.1 - amazon-internship-troubleshooting
-- [ ] 4.4.2 - balancing-school-work-projects
-- [ ] 4.4.3 - certifications-continuous-learning
-- [ ] 4.4.4 - cloud-ready-web-experiences
-- [ ] 4.4.5 - containerization-orchestration
-- [ ] 4.4.6 - docker-multilang-proj
-- [ ] 4.4.7 - exploring-zig-efficient-parsing
-- [ ] 4.4.8 - full-sail-university
-- [ ] 4.4.9 - github-actions-aws
-- [ ] 4.4.10 - how-i-learn-by-doing
-- [ ] 4.4.11 - interactive-portfolios
-- [ ] 4.4.12 - job-hunting
-- [ ] 4.4.13 - native-react
-- [ ] 4.4.14 - obj-parser
-- [ ] 4.4.15 - pokedex
-- [ ] 4.4.16 - portfolio-case-studies
-- [ ] 4.4.17 - recent-projects-and-lessons
+- [x] 4.4.1 - amazon-internship-troubleshooting
+- [x] 4.4.2 - balancing-school-work-projects
+- [x] 4.4.3 - certifications-continuous-learning
+- [x] 4.4.4 - cloud-ready-web-experiences
+- [x] 4.4.5 - containerization-orchestration
+- [x] 4.4.6 - docker-multilang-proj
+- [x] 4.4.7 - exploring-zig-efficient-parsing
+- [x] 4.4.8 - full-sail-university
+- [x] 4.4.9 - github-actions-aws
+- [x] 4.4.10 - how-i-learn-by-doing
+- [x] 4.4.11 - interactive-portfolios
+- [x] 4.4.12 - job-hunting
+- [x] 4.4.13 - native-react
+- [x] 4.4.14 - obj-parser
+- [x] 4.4.15 - pokedex
+- [x] 4.4.16 - portfolio-case-studies
+- [x] 4.4.17 - recent-projects-and-lessons
 - [ ] 4.4.18 - secure-authentication-cognito-react
 - [ ] 4.4.19 - technical-stack
 - [ ] 4.4.20 - testing-matters
 - [ ] 4.4.21 - webgpu-getting-started
+
+**Progress Notes**: Posts 4.4.1 through 4.4.17 now follow the TL;DR → structured sections → Key Takeaways pattern. Readability scans and per-post commits remain deferred until audits resume.
 
 **For each post:**
 
