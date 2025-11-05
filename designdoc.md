@@ -1704,7 +1704,7 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 
 ### Task 3.1: Typography System Variables (`/src/styles/global.css`)
 
-**Status**: 🔄 IN PROGRESS | **Priority**: CRITICAL | **Time**: 2 hours | **Updated**: Nov 5, 2025
+**Status**: ✅ COMPLETE | **Priority**: CRITICAL | **Time**: 2 hours | **Completed**: Nov 5, 2025
 
 - [x] 3.1.1 - Read current global.css file (first 200 lines)
 - [x] 3.1.2 - Create backup of original global.css
@@ -1730,9 +1730,9 @@ This comprehensive F-pattern optimization plan provides a structured approach to
   - `--leading-relaxed: 1.6;`
   - `--leading-loose: 1.8;`
 - [x] 3.1.6 - Test site builds successfully
-- [ ] 3.1.7 - Commit changes: "feat(css): add typography custom properties system"
+- [x] 3.1.7 - Commit changes: "feat(css): add typography custom properties system"
 
-**Notes**: Introduced typography tokens (sizes, weights, line heights) under `:root` so subsequent Phase 3 updates can consume consistent values. Git history acts as the temporary backup until changes are committed. `npm run build` passes with only the recurring Node `punycode` deprecation warning.
+**Notes**: Introduced typography tokens (sizes, weights, line heights) under `:root` so subsequent Phase 3 updates can consume consistent values. `npm run build` passes with only the recurring Node `punycode` deprecation warning. Commit e42b5da captured the token additions earlier today.
 
 ### Task 3.2: Heading Hierarchy Styles (`/src/styles/global.css`)
 
@@ -2153,14 +2153,14 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 
 **Phase 1 Status**: 16/16 tasks complete (100%)
 **Phase 2 Status**: 5/5 tasks complete (100%)
-**Phase 3 Status**: 0/7 tasks complete (0%)
+**Phase 3 Status**: 1/7 tasks complete (14%)
 **Phase 4 Status**: 0/7 tasks complete (0%)
 **Phase 5 Status**: 0/8 tasks complete (0%)
 **Final Tasks**: 0/2 task groups complete (0%)
 
-**Overall Progress**: 21/45 tasks complete (~47%)
+**Overall Progress**: 22/45 tasks complete (~49%)
 
-**Next Task**: Task 3.1.7 - Commit changes: "feat(css): add typography custom properties system"
+**Next Task**: Task 3.2.7 - Test heading hierarchy across pages
 
 ---
 
