@@ -8,19 +8,26 @@ import { Section, Card } from "../../../src/components/ui";
 
 <Section
   eyebrow="Cloud Engineer"
-  title="I set up cloud systems on AWS that are secure and don't cost much to run."
-/>
+  title="Design cost-aware AWS environments with guardrails"
+  description="Plan, provision, and maintain cloud infrastructure that stays secure, observable, and affordable."
+>
+  <ul className="list-disc space-y-2 pl-5">
+    <li><strong>Secure defaults:</strong> IAM least-privilege, VPC segmentation, and automated compliance checks.</li>
+    <li><strong>Operational excellence:</strong> Blue/green deploys, runbooks, and on-call ready dashboards.</li>
+    <li><strong>Cost control:</strong> Usage monitoring, rightsizing, and lifecycle policies that keep bills predictable.</li>
+  </ul>
+</Section>
 
 <Section
   eyebrow="What I do"
   title="Day to day work"
 >
   <ul className="feature-list">
-    <li>Put services on AWS with good security</li>
-    <li>Set up automatic deploys</li>
-    <li>Handle staging and production environments</li>
-    <li>Check logs and fix issues</li>
-    <li>Keep costs low</li>
+    <li><strong>Provisioning:</strong> Terraform/CDK stacks for multi-account AWS environments with CI validation.</li>
+    <li><strong>Deployment automation:</strong> GitHub Actions + CodeDeploy pipelines with canary/blue-green strategies.</li>
+    <li><strong>Environment management:</strong> Staging/production parity, secrets rotation, and drift detection.</li>
+    <li><strong>Observability:</strong> CloudWatch, OpenTelemetry, and incident dashboards wired to PagerDuty/Slack.</li>
+    <li><strong>Cost optimisation:</strong> Budgets, anomaly detection, and lifecycle policies for storage and compute.</li>
   </ul>
 </Section>
 
@@ -32,18 +39,17 @@ import { Section, Card } from "../../../src/components/ui";
     <Card>
       <h3 className="feature-card__title">Amazon Cloud Support</h3>
       <ul className="feature-list">
-        <li>Worked on AWS services like EC2, S3, DynamoDB</li>
-        <li>Helped with troubleshooting and customer support</li>
-        <li>Used IAM for access control</li>
+        <li>Troubleshot EC2, S3, and DynamoDB production incidents under SLA.</li>
+        <li>Authored IAM remediation guides adopted by 20+ customers.</li>
+        <li>Captured runbooks that reduced escalations across the pod.</li>
       </ul>
     </Card>
     <Card>
       <h3 className="feature-card__title">CIRIS AI Infrastructure</h3>
       <ul className="feature-list">
-        <li>Used Docker for deployments</li>
-        <li>Set up secure routing</li>
-        <li>Added logging for problems</li>
-        <li>Merged 8 PRs for backend</li>
+        <li>ECS + Fargate containers with private networking and WAF protection.</li>
+        <li>GitHub Actions pipeline builds images, scans for CVEs, and deploys automatically.</li>
+        <li>Centralised logging/metrics with CloudWatch and structured alerts.</li>
       </ul>
     </Card>
   </div>
@@ -55,15 +61,20 @@ import { Section, Card } from "../../../src/components/ui";
 >
   <div className="project-card__stack">
     <span>AWS</span>
+    <span>Organizations</span>
     <span>EC2</span>
+    <span>ECS / Fargate</span>
+    <span>Lambda</span>
     <span>S3</span>
     <span>DynamoDB</span>
-    <span>CloudFront</span>
     <span>RDS</span>
-    <span>SageMaker</span>
+    <span>CloudFront</span>
     <span>Bedrock</span>
+    <span>Terraform</span>
+    <span>AWS CDK</span>
     <span>Docker</span>
     <span>GitHub Actions</span>
+    <span>CodeDeploy</span>
   </div>
 </Section>
 
@@ -71,5 +82,16 @@ import { Section, Card } from "../../../src/components/ui";
   eyebrow="Job titles"
   title="Terms for recruiters"
 >
-  <div>Cloud Engineer, Cloud Support Engineer, Solutions Engineer (Cloud), Platform Engineer, Infrastructure Engineer, AWS Engineer</div>
+  <div>Cloud Engineer, Cloud Support Engineer, Platform Engineer, Infrastructure Engineer, AWS Engineer, Site Reliability Engineer (cloud focus)</div>
+</Section>
+
+<Section
+  eyebrow="Partnering"
+  title="How I engage"
+>
+  <ul className="feature-list">
+    <li>Kick off with threat models and cost forecasts so stakeholders know trade-offs.</li>
+    <li>Document architecture runbooks and onboarding checklists for new engineers.</li>
+    <li>Review observability dashboards weekly to keep MTTR low and budgets on track.</li>
+  </ul>
 </Section>

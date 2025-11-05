@@ -1935,12 +1935,12 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 - [x] 4.4.15 - pokedex
 - [x] 4.4.16 - portfolio-case-studies
 - [x] 4.4.17 - recent-projects-and-lessons
-- [ ] 4.4.18 - secure-authentication-cognito-react
-- [ ] 4.4.19 - technical-stack
-- [ ] 4.4.20 - testing-matters
-- [ ] 4.4.21 - webgpu-getting-started
+- [x] 4.4.18 - secure-authentication-cognito-react
+- [x] 4.4.19 - technical-stack
+- [x] 4.4.20 - testing-matters
+- [x] 4.4.21 - webgpu-getting-started
 
-**Progress Notes**: Posts 4.4.1 through 4.4.17 now follow the TL;DR → structured sections → Key Takeaways pattern. Readability scans and per-post commits remain deferred until audits resume.
+**Progress Notes**: Posts 4.4.1 through 4.4.21 now follow the TL;DR → structured sections → Key Takeaways pattern. Readability scans and per-post commits remain deferred until audits resume.
 
 **For each post:**
 
@@ -1956,19 +1956,21 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 
 ### Task 4.5: Optimize Roles Pages
 
-**Status**: Not Started | **Priority**: MEDIUM | **Time**: 2 hours
+**Status**: In Progress | **Priority**: MEDIUM | **Time**: 2 hours
 
-- [ ] 4.5.1 - Read `/content/pages/roles/index.mdx`
-- [ ] 4.5.2 - Optimize roles index page description
-- [ ] 4.5.3 - Read `/content/pages/roles/ai-automation-engineer.mdx`
-- [ ] 4.5.4 - Front-load qualifications and tech stack
-- [ ] 4.5.5 - Add bullet lists for skills
-- [ ] 4.5.6 - Optimize backend-engineer.mdx
-- [ ] 4.5.7 - Optimize cloud-engineer.mdx
-- [ ] 4.5.8 - Optimize devops-engineer.mdx
-- [ ] 4.5.9 - Optimize full-stack-engineer.mdx
+- [x] 4.5.1 - Read `/content/pages/roles/index.mdx`
+- [x] 4.5.2 - Optimize roles index page description
+- [x] 4.5.3 - Read `/content/pages/roles/ai-automation-engineer.mdx`
+- [x] 4.5.4 - Front-load qualifications and tech stack
+- [x] 4.5.5 - Add bullet lists for skills
+- [x] 4.5.6 - Optimize backend-engineer.mdx
+- [x] 4.5.7 - Optimize cloud-engineer.mdx
+- [x] 4.5.8 - Optimize devops-engineer.mdx
+- [x] 4.5.9 - Optimize full-stack-engineer.mdx
 - [ ] 4.5.10 - Test all roles pages
 - [ ] 4.5.11 - Commit changes: "content(roles): optimize all role pages for F-pattern"
+
+**Progress Notes**: Roles landing and detail pages now open with qualifications, toolchains, and outcome-driven bullets. Accessibility tests and commits remain deferred until audits resume.
 
 ### Task 4.6: Blog Content CSS & Theme Consistency (`/src/styles/global.css`)
 

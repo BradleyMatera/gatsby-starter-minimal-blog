@@ -6,11 +6,21 @@ tags: ["Technical Stack", "Tools", "Process"]
 description: "A guided tour of the languages, frameworks, cloud services, and workflows I rely on—and why they fit the problems I solve."
 ---
 
-## Introduction
+## TL;DR
 
-My projects span front-end interfaces, serverless APIs, containerised services, and automation pipelines. Rather than chase every new framework, I invest in a stack that balances velocity, stability, and long-term maintainability. This post documents the core components of that stack, when I reach for each tool, and where I am experimenting next.
+- **Stable stack beats shiny stack.** I prioritise tools with strong ecosystems, predictable upgrade paths, and automation hooks.[^typescript]
+- **Serverless + containers cover the workload spectrum.** AWS Lambda, ECS, and managed front-end hosts let me scale from prototype to production fast.
+- **Observability and IaC stay non-negotiable.** CloudWatch, OpenTelemetry, and Terraform prevent blind spots and configuration drift.
+- **Curiosity stays scoped.** I experiment with AI services, policy-as-code, and edge rendering without disrupting the proven baseline.[^bedrock]
 
-## Languages I Reach for Daily
+## Stack Goals
+
+- Balance delivery speed with maintainability across front end, backend, and infrastructure.
+- Choose tooling that supports accessibility, automation, and collaborative workflows.
+- Keep costs predictable through right-sized compute, serverless defaults, and observability.
+- Allocate time for targeted experiments that may evolve into next-year staples.
+
+## Core Languages
 
 | Language | Primary Use | Notes |
 | --- | --- | --- |
@@ -23,7 +33,7 @@ My projects span front-end interfaces, serverless APIs, containerised services, 
 
 The common thread is readability plus strong tooling. TypeScript, in particular, gives me confidence to refactor aggressively because compiler errors highlight blind spots before runtime.
 
-## Frameworks and Libraries
+## Frameworks & Libraries
 
 - **React & Next.js.** My default for interactive UIs. Hooks, Suspense, and React Testing Library make state management and testing predictable.  
 - **Node.js + Express.** A thin layer for REST APIs and webhooks. Express middleware keeps auth, logging, and validation modular.  
@@ -31,7 +41,7 @@ The common thread is readability plus strong tooling. TypeScript, in particular,
 - **Tailwind CSS + CSS Modules.** Utility classes accelerate design systems while keeping outputs accessible.  
 - **jQuery (maintenance).** Legacy codebases still use it; understanding its patterns helps me plan incremental rewrites.
 
-## Cloud and DevOps Tooling
+## Cloud & DevOps Stack
 
 | Capability | Services / Tools | Why it is in the stack |
 | --- | --- | --- |
@@ -43,7 +53,7 @@ The common thread is readability plus strong tooling. TypeScript, in particular,
 
 I aim for infrastructure that can scale horizontally with minimal manual intervention. Monitoring and IaC are non-negotiable on new projects.
 
-## Productivity and Collaboration
+## Productivity & Collaboration
 
 - **Git & GitHub.** Feature-branch workflows, pull requests with checklists, and required status checks keep changes reviewable.  
 - **GitHub Actions.** Automates linting, testing, container builds, and deployments (see my CI/CD-focused post for deeper coverage).  
@@ -51,7 +61,7 @@ I aim for infrastructure that can scale horizontally with minimal manual interve
 - **VS Code + Copilot Chat.** Tailored profiles per project, EditorConfig integration, and remote SSH sessions for cloud instances.  
 - **Linux (WSL & EC2).** A consistent terminal environment streamlines shell scripts and deployment tooling.
 
-## Specialties and Focus Areas
+## Specialties & Focus Areas
 
 1. **API design and authentication.** Building REST endpoints with predictable status codes, OpenAPI specs, and auth flows (JWTs, Cognito, OAuth 2.0).  
 2. **CI/CD automation.** GitHub Actions, CodeBuild, and cross-account deployments that ship safely on every merge.  
@@ -65,7 +75,29 @@ I aim for infrastructure that can scale horizontally with minimal manual interve
 - **Infrastructure policy as code** (Open Policy Agent, AWS Config) to enforce guardrails from day one.  
 - **Edge rendering** via Next.js and Cloudflare Workers to reduce latency for global users.
 
-The stack will continue to evolve, but the underlying principles remain: choose tools with strong communities, invest in automation, and measure everything. That combination lets me ship reliably while staying curious about what comes next.
+## Results
+
+- **Faster feature delivery.** TypeScript + React + GitHub Actions pipeline shortens PR-to-production cycles to under an hour.
+- **Predictable infrastructure.** Terraform and CDK keep environments repeatable, reducing configuration drift incidents.
+- **Lower operational cost.** Serverless-first choices (Lambda, DynamoDB) cut idle spend while still meeting performance goals.
+
+## Lessons Learned
+
+- **Tooling discipline beats trend chasing.** Investing in well-supported frameworks yields fewer rewrites.
+- **Observability pays back immediately.** CloudWatch dashboards and tracing expose bottlenecks before users do.
+- **Accessibility scales as a habit.** Keeping semantic HTML and design tokens central prevents expensive retrofits.
+
+## Next Steps
+
+- Pilot Bedrock-backed features with clear guardrails before broader rollout.
+- Expand policy-as-code coverage to include cost anomaly detection and tagging enforcement.
+- Experiment with edge rendering for data-light pages to improve global Lighthouse scores.
+
+## Key Takeaways
+
+- **Stable, observable stacks help teams ship faster with fewer surprises.**
+- **Serverless, containers, and IaC cover most workload shapes without heavy ops overhead.**
+- **Intentional experimentation keeps the stack modern without risking production stability.**
 
 ## References
 

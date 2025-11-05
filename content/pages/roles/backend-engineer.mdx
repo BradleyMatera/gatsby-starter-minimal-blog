@@ -8,19 +8,26 @@ import { Section, Card } from "../../../src/components/ui";
 
 <Section
   eyebrow="Backend Engineer"
-  title="I make APIs that work fast with good security and data handling."
-/>
+  title="Ship resilient APIs with clear contracts and observability"
+  description="Design REST services, enforce authentication, and ship with the tooling that production teams rely on."
+>
+  <ul className="list-disc space-y-2 pl-5">
+    <li><strong>Secure foundations:</strong> JWT/OAuth flows with refresh strategies, rate limiting, and audit logs.</li>
+    <li><strong>Observable services:</strong> Structured logs, metrics, and tracing wired into dashboards from day one.</li>
+    <li><strong>Reliable releases:</strong> Contract tests, migration plans, and rollback steps baked into every deployment.</li>
+  </ul>
+</Section>
 
 <Section
   eyebrow="What I do"
   title="Backend tasks"
 >
   <ul className="feature-list">
-    <li>Build Node.js APIs</li>
-    <li>Set up JWT auth</li>
-    <li>Add OAuth</li>
-    <li>Improve speed</li>
-    <li>Model data in MongoDB</li>
+    <li><strong>API design:</strong> Node.js/Express services with OpenAPI contracts, versioning, and consistent status codes.</li>
+    <li><strong>Auth & sessions:</strong> JWT, OAuth 2.0, and Cognito integrations with refresh and device trust policies.</li>
+    <li><strong>Performance tuning:</strong> Profiling hot paths, caching responses, and right-sizing indexes.</li>
+    <li><strong>Data modeling:</strong> MongoDB and PostgreSQL schemas built with migrations and referential integrity.</li>
+    <li><strong>Reliability drills:</strong> Load tests, chaos scenarios, and runbooks for rapid remediation.</li>
   </ul>
 </Section>
 
@@ -32,18 +39,17 @@ import { Section, Card } from "../../../src/components/ui";
     <Card>
       <h3 className="feature-card__title">CIRISNode Backend</h3>
       <ul className="feature-list">
-        <li>Built over 50 endpoints</li>
-        <li>Added 51 tests</li>
-        <li>Integrated DID and Matrix</li>
-        <li>Improved security and logs</li>
+        <li>Designed 50+ endpoints with OpenAPI + Pact contract tests.</li>
+        <li>Integrated decentralized identity (DID) and Matrix messaging with audit logs.</li>
+        <li>51 Jest + Supertest suites catch regressions before deploys.</li>
       </ul>
     </Card>
     <Card>
       <h3 className="feature-card__title">Car-Match Backend</h3>
       <ul className="feature-list">
-        <li>Set up Express server</li>
-        <li>Handled user auth and messaging</li>
-        <li>Used MongoDB for data</li>
+        <li>Express API with socket-powered messaging and JWT auth.</li>
+        <li>MongoDB models tuned with compound indexes for search latency.</li>
+        <li>CI workflow seeds test data and runs smoke suites automatically.</li>
       </ul>
     </Card>
   </div>
@@ -56,9 +62,15 @@ import { Section, Card } from "../../../src/components/ui";
   <div className="project-card__stack">
     <span>Node.js</span>
     <span>Express</span>
+    <span>Fastify</span>
     <span>MongoDB</span>
+    <span>PostgreSQL</span>
+    <span>Prisma</span>
     <span>JWT</span>
+    <span>Cognito</span>
+    <span>OpenAPI</span>
     <span>Postman</span>
+    <span>k6</span>
   </div>
 </Section>
 
@@ -66,5 +78,16 @@ import { Section, Card } from "../../../src/components/ui";
   eyebrow="Job titles"
   title="Terms for recruiters"
 >
-  <div>Backend Engineer, Software Engineer (Backend), API Engineer, Node.js Engineer, Platform Backend Engineer, Server-side Engineer</div>
+  <div>Backend Engineer, Software Engineer (Backend), API Engineer, Platform Engineer, Node.js Engineer, Server-side Engineer</div>
+</Section>
+
+<Section
+  eyebrow="Partnering"
+  title="How I work with teams"
+>
+  <ul className="feature-list">
+    <li>Start with sequence diagrams and acceptance tests so product, UX, and API docs align.</li>
+    <li>Ship behind feature flags, backed by observability dashboards and clear rollback plans.</li>
+    <li>Pair with SRE/SecOps to threat-model new endpoints before launch.</li>
+  </ul>
 </Section>

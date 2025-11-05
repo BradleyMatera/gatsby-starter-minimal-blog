@@ -7,62 +7,88 @@ description: "How I layer unit, integration, and end-to-end tests across front-e
 theme: "Front-End & Full-Stack"
 ---
 
-## Introduction
+## TL;DR
 
-My earliest JavaScript projects shipped with minimal safety nets. A few `console.log` statements and manual clicks were all I had. That changed when a regression slipped into production and broke a friend’s demo. Since then I have invested in an end-to-end testing strategy—unit tests, integration tests, contract tests, and automated smoke tests. This post outlines the testing pyramid I rely on and the tooling that keeps my projects stable.
+- **Layered suites keep risk low.** Unit, component, integration, contract, and E2E tests provide coverage where it counts without burning velocity.[^jest]
+- **Production-like tooling matters.** MSW, LocalStack, Playwright, and Percy mirror real infrastructure so regressions surface early.[^rtl]
+- **Automation guards every merge.** Git hooks, CI pipelines, and nightly contract checks keep quality gates consistent across teams.
+- **Maintenance beats flaky retries.** Deterministic fixtures, isolated databases, and monthly pruning preserve trust in the suite.
 
-## The Testing Pyramid in Practice
+## Testing Goals
+
+- Catch regressions at the smallest scope possible while validating real user paths.
+- Give developers rapid, actionable feedback during local development and CI runs.
+- Align automated checks with acceptance criteria crafted alongside designers and PMs.
+- Keep suites resilient so they scale with the codebase instead of becoming a bottleneck.
+
+## Testing Pyramid in Practice
 
 | Layer | What it covers | Tools | Cadence |
 | --- | --- | --- | --- |
-| Unit tests | Pure functions, utilities, React hooks | Jest, Vitest | Run on every save via watch mode. |
-| Component tests | UI behaviour in isolation | React Testing Library, Storybook test runner | Run in CI and before merging UI changes. |
-| Integration tests | API endpoints, database interactions | Supertest, Prisma test DB, LocalStack | Run on every pull request. |
+| Unit tests | Pure functions, utilities, React hooks | Jest, Vitest | Watch mode on every save. |
+| Component tests | UI behaviour in isolation | React Testing Library, Storybook test runner | CI + pre-merge on UI changes. |
+| Integration tests | API endpoints, database interactions | Supertest, Prisma test DB, LocalStack | Every pull request. |
 | Contract tests | API request/response contracts | Pact, OpenAPI schema validation | Nightly or pre-release. |
-| End-to-end tests | Full user flows | Playwright, Cypress | Scheduled runs and pre-deploy smoke suites. |
+| End-to-end tests | Full user flows | Playwright, Cypress | Scheduled runs + pre-deploy smoke suites. |
 
-Unit tests are cheap and fast; end-to-end tests are slower but verify the full stack. Balancing both prevents brittle suites while still catching real-world failures.
+Unit tests stay fast while end-to-end tests mimic production flows. Balancing both prevents brittle suites and ensures real issues get caught.
 
-## Unit and Component Tests
+## Unit & Component Tests
 
-- **Utility functions.** Projects like CheeseMath rely on Jest snapshots and property-based testing to confirm edge cases (e.g., negative inputs, floating-point rounding).[^jest]  
-- **React components.** React Testing Library focuses on user behaviour: queries use accessible roles (`getByRole`, `getByLabelText`) rather than implementation details.[^rtl]  
-- **Mock strategy.** I mock network calls with MSW (Mock Service Worker) to exercise loading, success, and error states consistently.
+- **Utility functions.** Projects like CheeseMath use Jest snapshots and property-based testing to cover negative inputs and floating-point quirks.[^jest]  
+- **React components.** React Testing Library asserts against accessible roles (`getByRole`, `getByLabelText`) so tests match user interactions.[^rtl]  
+- **Mock strategy.** MSW intercepts network calls, guaranteeing consistent loading, success, and error coverage without brittle mocks.
 
 ## Integration Tests
 
-- **API validation.** Supertest spins up Express apps in memory, calling routes with realistic payloads. Each test seeds an ephemeral PostgreSQL database (Docker container) and tears it down afterward.  
-- **AWS services.** LocalStack simulates S3, DynamoDB, and SNS so I can test infrastructure interactions without live AWS charges.  
-- **Data migrations.** Integration suites verify database migrations run cleanly, catching issues before deploys.
+- **API validation.** Supertest spins up Express apps in memory, hitting routes with realistic payloads while seeding a disposable PostgreSQL DB (Docker).  
+- **AWS services.** LocalStack emulates S3, DynamoDB, and SNS to confirm infrastructure wiring without incurring cloud costs.  
+- **Data migrations.** Suites run migrations against throwaway databases to catch schema drift before production deploys.
 
 ## End-to-End Coverage
 
-- **Playwright flows.** Scripts cover authentication, CRUD operations, and accessibility spot checks (e.g., verifying focus order).  
-- **Visual diffs.** Percy integration detects unexpected UI shifts after CSS refactors.  
-- **Performance budgets.** Lighthouse CI runs in GitHub Actions, failing builds if LCP or CLS regress beyond thresholds.
+- **Playwright flows.** Scripts cover auth, CRUD, and accessibility spot checks (focus order, keyboard navigation).  
+- **Visual diffs.** Percy snapshots detect unexpected UI shifts after CSS or component refactors.  
+- **Performance budgets.** Lighthouse CI enforces LCP/CLS thresholds inside GitHub Actions to prevent regressions.
 
-## Keeping Tests Fast and Reliable
+## Keeping Tests Fast & Reliable
 
-- **Parallelisation.** Workers are isolated with per-test databases (`test_db_${process.pid}`) to avoid cross-contamination.  
-- **Deterministic data.** Factories generate fixtures with predictable IDs, reducing flaky assertions.  
-- **Selective retries.** Only end-to-end tests get limited retries to mitigate transient network blips.  
-- **Continuous pruning.** I audit failing tests monthly and remove ones that duplicate coverage.
+- **Parallelisation.** Per-worker databases (`test_db_${process.pid}`) avoid cross-test contamination.  
+- **Deterministic data.** Factories generate predictable fixtures, reducing flaky assertions.  
+- **Targeted retries.** Only E2E suites get limited retries to smooth over transient network blips.  
+- **Continuous pruning.** Monthly audits remove redundant tests and flag noisy assertions.
 
 ## Automation Pipeline
 
 1. Pre-commit hooks run lint and unit tests.  
-2. Pull requests trigger the full suite (unit + component + integration).  
-3. Main branch merges kick off end-to-end tests and deploy previews.  
-4. Nightly jobs run contract tests against staging to catch breaking API changes before users do.
+2. Pull requests trigger unit, component, and integration suites in CI.  
+3. Merges to main kick off end-to-end smoke tests and deploy previews.  
+4. Nightly jobs execute contract tests against staging to catch breaking API changes.
+
+## Results
+
+- **Post-release incidents dropped.** Automated gates slashed regression frequency and cut hotfixes to rare events.
+- **Faster feedback loops.** Watch-mode unit tests and Playwright smoke suites surface issues minutes after code changes.
+- **Better cross-team collaboration.** Contract tests and shared acceptance criteria keep frontend and backend iterations in sync.
 
 ## Lessons Learned
 
-- Tests are documentation. Reading them exposes the expected behaviour faster than scanning implementation code.  
-- Small, focused tests are easier to maintain than expansive “god tests.”  
-- Invest early. Retroactively adding tests is harder than building them alongside features.  
-- Include designers and PMs. Reviewing acceptance criteria together ensures tests capture real user needs.
+- Tests double as documentation when written from the user’s perspective.  
+- Small, focused tests outlive sprawling “god tests” and are easier to refactor.  
+- Building coverage alongside features is cheaper than retrofitting it later.  
+- Including designers and PMs in acceptance reviews ensures suites reflect real user needs.
 
-Comprehensive testing is the backbone of my deployment confidence. It lets me ship quickly, refactor boldly, and sleep through the night knowing automation will flag regressions before customers do.
+## Next Steps
+
+- Expand contract coverage to event-driven systems (SNS/SQS payloads and schemas).
+- Integrate automated axe-core accessibility checks into component pipelines.
+- Pilot Playwright Component Testing to bridge the gap between story-level and browser-level coverage.
+
+## Key Takeaways
+
+- **Layered suites catch regressions early without sacrificing speed.**
+- **Production-like test harnesses keep results trustworthy.**
+- **Routine maintenance turns testing from overhead into a force multiplier.**
 
 ## References
 

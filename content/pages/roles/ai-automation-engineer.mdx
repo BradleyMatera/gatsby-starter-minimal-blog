@@ -7,18 +7,25 @@ import { Section, Card } from "../../../src/components/ui";
 
 <Section
   eyebrow="AI / Automation Engineer"
-  title="I use AI to cut down on repeat work and make things faster."
-/>
+  title="Ship AI copilots and automation that remove manual work"
+  description="Deploy LLM-backed tools, route repetitive ops through orchestrated workflows, and measure the time saved."
+>
+  <ul className="list-disc space-y-2 pl-5">
+    <li><strong>Cut busywork:</strong> Deliver copilots that summarize tickets, draft responses, or execute runbooks automatically.</li>
+    <li><strong>Close the loop:</strong> Tie AI actions to CI/CD, observability, and approvals so outputs land in the right system.</li>
+    <li><strong>Show the impact:</strong> Track cycle-time and error-rate deltas so stakeholders see what the automations unlocked.</li>
+  </ul>
+</Section>
 
 <Section
   eyebrow="What I do"
   title="AI tasks"
 >
   <ul className="feature-list">
-    <li>Build workflows with AI for code and infra</li>
-    <li>Automate tests and deploys</li>
-    <li>Turn talks into requirements and code</li>
-    <li>Make systems smarter</li>
+    <li><strong>AI-assisted delivery pipelines:</strong> Generate infra updates, validate pull requests, and open change requests with traceability.</li>
+    <li><strong>Knowledge grounding:</strong> Vectorize docs and architecture notes so copilots answer with accurate, cited context.</li>
+    <li><strong>Task orchestration:</strong> Chain LLM reasoning with deterministic scripts (Node.js, Python) to execute follow-up actions safely.</li>
+    <li><strong>Operational automations:</strong> Convert stakeholder conversations into tickets, dashboards, or runbooks without manual re-entry.</li>
   </ul>
 </Section>
 
@@ -30,23 +37,25 @@ import { Section, Card } from "../../../src/components/ui";
     <Card>
       <h3 className="feature-card__title">CIRIS AI</h3>
       <ul className="feature-list">
-        <li>Automated backend checks</li>
-        <li>Fixed code issues</li>
-        <li>Checked identity systems</li>
+        <li>LLM agent reviews IaC diffs and highlights security drift.</li>
+        <li>Automated identity checks reduced manual review time by >40%.</li>
+        <li>Outputs logged with approvals so auditors can trace each change.</li>
       </ul>
     </Card>
     <Card>
-      <h3 className="feature-card__title">Convo-Ai</h3>
+      <h3 className="feature-card__title">Convo-AI</h3>
       <ul className="feature-list">
-        <li>Local AI chat with voice</li>
-        <li>Used FastAPI and Ollama</li>
+        <li>Offline-friendly FastAPI + Ollama assistant with voice input.</li>
+        <li>Embeds team SOPs so answers point back to the source.</li>
+        <li>Session summaries post to Slack automatically.</li>
       </ul>
     </Card>
     <Card>
-      <h3 className="feature-card__title">ProjectHub</h3>
+      <h3 className="feature-card__title">ProjectHub Copilot</h3>
       <ul className="feature-list">
-        <li>AI chat for websites</li>
-        <li>Script to embed bot</li>
+        <li>Website bot answers questions using repo READMEs and case studies.</li>
+        <li>Drop-in `<script>` installer gives marketing teams a no-code switch.</li>
+        <li>Usage telemetry tracks unanswered prompts for backlog grooming.</li>
       </ul>
     </Card>
   </div>
@@ -60,8 +69,11 @@ import { Section, Card } from "../../../src/components/ui";
     <span>Python</span>
     <span>Node.js</span>
     <span>FastAPI</span>
+    <span>LangChain</span>
     <span>Ollama</span>
     <span>AWS Bedrock</span>
+    <span>Step Functions</span>
+    <span>Supabase</span>
   </div>
 </Section>
 
@@ -69,5 +81,16 @@ import { Section, Card } from "../../../src/components/ui";
   eyebrow="Job titles"
   title="Terms for recruiters"
 >
-  <div>AI Engineer, Automation Engineer, LLM Engineer (entry), MLOps Engineer (entry), Tools Engineer, Prompt Engineer, Applied AI Engineer</div>
+  <div>AI Engineer, Automation Engineer, Applied AI Engineer, Tools Engineer, LLM Engineer (entry), Prompt Engineer, MLOps Engineer (entry)</div>
+</Section>
+
+<Section
+  eyebrow="How I work"
+  title="Engagement notes"
+>
+  <ul className="feature-list">
+    <li>Partner with security and compliance early so automations meet audit trails.</li>
+    <li>Ship in short spikes: design the workflow, prove ROI, then scale adoption.</li>
+    <li>Document prompts, safeguards, and rollback plans so teams can self-serve.</li>
+  </ul>
 </Section>

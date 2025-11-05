@@ -8,18 +8,26 @@ import { Section, Card } from "../../../src/components/ui";
 
 <Section
   eyebrow="DevOps Engineer"
-  title="I set up automatic deploys so things go out right every time."
-/>
+  title="Automate delivery with confidence and guardrails"
+  description="Build pipelines, observability, and release processes that keep deployments predictable."
+>
+  <ul className="list-disc space-y-2 pl-5">
+    <li><strong>Pipeline automation:</strong> GitHub Actions, reusable workflows, and policy checks that block risky merges.</li>
+    <li><strong>Environment hygiene:</strong> Staging/production parity with secrets rotation and drift detection.</li>
+    <li><strong>Release visibility:</strong> Dashboards, alerts, and runbooks so teams know what shipped and how to roll back.</li>
+  </ul>
+</Section>
 
 <Section
   eyebrow="What I do"
   title="My work in this area"
 >
   <ul className="feature-list">
-    <li>Set up CI/CD from GitHub</li>
-    <li>Make staging and production separate</li>
-    <li>Use Docker for consistent builds</li>
-    <li>Monitor services</li>
+    <li><strong>CI/CD design:</strong> Branch protections, required checks, and reusable GitHub Actions that lint, test, build, and deploy.</li>
+    <li><strong>Environment strategy:</strong> Promote artifacts through staging, QA, and production with approvals and change logs.</li>
+    <li><strong>Container delivery:</strong> Multi-language Docker builds, caching strategies, and SBOM generation.</li>
+    <li><strong>Monitoring & alerting:</strong> Wire metrics/logs to alerting platforms with SLO dashboards.</li>
+    <li><strong>Developer experience:</strong> Templates, CLI tooling, and documentation that keep onboarding fast.</li>
   </ul>
 </Section>
 
@@ -31,15 +39,17 @@ import { Section, Card } from "../../../src/components/ui";
     <Card>
       <h3 className="feature-card__title">Docker Multilang Project</h3>
       <ul className="feature-list">
-        <li>Used Docker for multi-language setup</li>
-        <li>Shared scripts across containers</li>
+        <li>Unified Node, Zig, and Python builds with a shared Docker base image.</li>
+        <li>GitHub Actions caches language dependencies, cutting build time by 40%.</li>
+        <li>Pre-commit hooks and smoke tests ensure containers stay reproducible.</li>
       </ul>
     </Card>
     <Card>
       <h3 className="feature-card__title">CIRIS AI Deploys</h3>
       <ul className="feature-list">
-        <li>Added Docker support</li>
-        <li>Set up secure deploys</li>
+        <li>IaC + Docker pipeline pushes images to ECR with vulnerability scans.</li>
+        <li>GitHub Actions releases to ECS with approval gates and Slack notifications.</li>
+        <li>Runtime metrics and logs feed dashboards for post-deploy verification.</li>
       </ul>
     </Card>
   </div>
@@ -51,8 +61,12 @@ import { Section, Card } from "../../../src/components/ui";
 >
   <div className="project-card__stack">
     <span>GitHub Actions</span>
+    <span>Reusable Workflows</span>
     <span>Docker</span>
+    <span>Terraform</span>
     <span>AWS CLI</span>
+    <span>k6</span>
+    <span>Prometheus</span>
     <span>Bash</span>
   </div>
 </Section>
@@ -61,5 +75,16 @@ import { Section, Card } from "../../../src/components/ui";
   eyebrow="Job titles"
   title="Terms for recruiters"
 >
-  <div>DevOps Engineer, CI/CD Engineer, Platform Engineer, Build and Release Engineer, Automation Engineer, Reliability Engineer, Infrastructure Automation Engineer</div>
+  <div>DevOps Engineer, CI/CD Engineer, Platform Engineer, Build & Release Engineer, Reliability Engineer, Infrastructure Automation Engineer</div>
+</Section>
+
+<Section
+  eyebrow="Partnering"
+  title="How I collaborate"
+>
+  <ul className="feature-list">
+    <li>Align release cadences with product and QA before automating the pipeline.</li>
+    <li>Document runbooks, incident response steps, and rollback levers alongside the pipeline code.</li>
+    <li>Coach teams on using feature flags and experimentation frameworks to deploy safely.</li>
+  </ul>
 </Section>

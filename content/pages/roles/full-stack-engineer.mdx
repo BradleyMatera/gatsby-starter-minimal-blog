@@ -8,18 +8,26 @@ import { Section, Card } from "../../../src/components/ui";
 
 <Section
   eyebrow="Full-Stack Engineer"
-  title="I build apps that cover front and back end."
-/>
+  title="Deliver user-facing features backed by production-ready APIs"
+  description="Own the full stack—from React experiences to Node services and deployments that keep both sides in sync."
+>
+  <ul className="list-disc space-y-2 pl-5">
+    <li><strong>Aligned UX + API design:</strong> Translate journeys into accessible UIs and documented endpoints.</li>
+    <li><strong>Secure by default:</strong> Authentication, authorization, and data validation wired end to end.</li>
+    <li><strong>Deployment ready:</strong> CI/CD, infrastructure, and observability handled alongside feature work.</li>
+  </ul>
+</Section>
 
 <Section
   eyebrow="What I do"
   title="Full stack tasks"
 >
   <ul className="feature-list">
-    <li>Connect React to Node backends</li>
-    <li>Make UI that works after refresh</li>
-    <li>Add secure login</li>
-    <li>Set up from code to deploy</li>
+    <li><strong>Front-end delivery:</strong> React/Next.js apps with state management, routing, and accessibility baked in.</li>
+    <li><strong>API integration:</strong> Node/Express services, GraphQL endpoints, and data fetching strategies (SWR, TanStack Query).</li>
+    <li><strong>Authentication:</strong> Cognito, Auth0, or custom JWT flows with protected routes and refresh logic.</li>
+    <li><strong>Dev-to-prod pipeline:</strong> Dockerized builds, environment configs, and preview deployments.</li>
+    <li><strong>Quality gates:</strong> Component tests, integration tests, and Lighthouse performance budgets.</li>
   </ul>
 </Section>
 
@@ -29,19 +37,19 @@ import { Section, Card } from "../../../src/components/ui";
 >
   <div className="grid-two">
     <Card>
-      <h3 className="feature-card__title">Car-Match</h3>
+      <h3 className="feature-card__title">Car-Match Platform</h3>
       <ul className="feature-list">
-        <li>User profiles, forums, messaging</li>
-        <li>Auth and admin controls</li>
-        <li>Deployed with docs</li>
+        <li>React UI with real-time messaging and role-based admin controls.</li>
+        <li>Express API + MongoDB models supporting search, reviews, and profiles.</li>
+        <li>Documentation + Docker compose file for one-command onboarding.</li>
       </ul>
     </Card>
     <Card>
-      <h3 className="feature-card__title">CIRIS AI Backend and Frontend</h3>
+      <h3 className="feature-card__title">CIRIS AI Portal</h3>
       <ul className="feature-list">
-        <li>Built backend with endpoints</li>
-        <li>Added frontend demo</li>
-        <li>Used Docker for setup</li>
+        <li>Node backend exposes AI-supported endpoints with auth and logging.</li>
+        <li>Frontend demo showcases prompts, usage analytics, and error states.</li>
+        <li>Containerized stack deploys through GitHub Actions into staging.</li>
       </ul>
     </Card>
   </div>
@@ -53,10 +61,16 @@ import { Section, Card } from "../../../src/components/ui";
 >
   <div className="project-card__stack">
     <span>React</span>
+    <span>Next.js</span>
+    <span>TypeScript</span>
     <span>Node.js</span>
     <span>Express</span>
+    <span>GraphQL</span>
     <span>MongoDB</span>
+    <span>PostgreSQL</span>
+    <span>Prisma</span>
     <span>Docker</span>
+    <span>Playwright</span>
   </div>
 </Section>
 
@@ -64,5 +78,16 @@ import { Section, Card } from "../../../src/components/ui";
   eyebrow="Job titles"
   title="Terms for recruiters"
 >
-  <div>Full Stack Engineer, Software Engineer (Full Stack), Web Developer, JavaScript Engineer, React Developer, Frontend and Backend Engineer</div>
+  <div>Full Stack Engineer, Software Engineer (Full Stack), Web Developer, JavaScript Engineer, React Developer, Frontend + Backend Engineer</div>
+</Section>
+
+<Section
+  eyebrow="Partnering"
+  title="How I collaborate"
+>
+  <ul className="feature-list">
+    <li>Run design + API reviews together so UI states and contracts stay aligned.</li>
+    <li>Ship behind feature flags with analytics to measure real-world adoption.</li>
+    <li>Document architecture decisions and handoff notes for the next iteration.</li>
+  </ul>
 </Section>
