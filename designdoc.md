@@ -1681,11 +1681,11 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 
 ### Task 3.1: Typography System Variables (`/src/styles/global.css`)
 
-**Status**: Not Started | **Priority**: CRITICAL | **Time**: 2 hours
+**Status**: 🔄 IN PROGRESS | **Priority**: CRITICAL | **Time**: 2 hours | **Updated**: Nov 5, 2025
 
-- [ ] 3.1.1 - Read current global.css file (first 200 lines)
-- [ ] 3.1.2 - Create backup of original global.css
-- [ ] 3.1.3 - Add font size custom properties to :root
+- [x] 3.1.1 - Read current global.css file (first 200 lines)
+- [x] 3.1.2 - Create backup of original global.css
+- [x] 3.1.3 - Add font size custom properties to :root
   - `--text-xs: 0.75rem;`
   - `--text-sm: 0.875rem;`
   - `--text-base: 1rem;`
@@ -1694,20 +1694,22 @@ This comprehensive F-pattern optimization plan provides a structured approach to
   - `--text-2xl: 1.5rem;`
   - `--text-3xl: 1.875rem;`
   - `--text-4xl: 2.25rem;`
-- [ ] 3.1.4 - Add font weight custom properties to :root
+- [x] 3.1.4 - Add font weight custom properties to :root
   - `--weight-normal: 400;`
   - `--weight-medium: 500;`
   - `--weight-semibold: 600;`
   - `--weight-bold: 700;`
   - `--weight-extrabold: 800;`
-- [ ] 3.1.5 - Add line height custom properties to :root
+- [x] 3.1.5 - Add line height custom properties to :root
   - `--leading-tight: 1.1;`
   - `--leading-snug: 1.3;`
   - `--leading-normal: 1.5;`
   - `--leading-relaxed: 1.6;`
   - `--leading-loose: 1.8;`
-- [ ] 3.1.6 - Test site builds successfully
+- [x] 3.1.6 - Test site builds successfully
 - [ ] 3.1.7 - Commit changes: "feat(css): add typography custom properties system"
+
+**Notes**: Introduced typography tokens (sizes, weights, line heights) under `:root` so subsequent Phase 3 updates can consume consistent values. Git history acts as the temporary backup until changes are committed. `npm run build` passes with only the recurring Node `punycode` deprecation warning.
 
 ### Task 3.2: Heading Hierarchy Styles (`/src/styles/global.css`)
 
