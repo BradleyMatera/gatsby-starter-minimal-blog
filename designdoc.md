@@ -1788,11 +1788,12 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 - [x] 3.4.17 - Test responsive layout
 - [x] 3.4.18 - Verify hover states work
 - [x] 3.4.19 - Run Lighthouse audit on blog page
-  - Desktop scores: Performance 67, Accessibility 100, Best Practices 96, SEO 100 (`lighthouse-blog.json`)
+  - Desktop scores: Performance 67, Accessibility 100, Best Practices 96, SEO 100 (`docs/audits/2025-11-05-blog-desktop.json`)
   - Key findings: LCP 5.16s (section-lead copy), CLS 0.26 from blog card shifts; plan optimizations in upcoming pass
+  - Follow-up (post font preload): Performance 68, Accessibility 100, Best Practices 96, SEO 100 (`docs/audits/2025-11-05-blog-desktop-post-preload.json`) with LCP 5.07s, CLS 0.25 (still above 0.1 target)
 - [ ] 3.4.20 - Commit changes: "feat(css): optimize blog card visual hierarchy for F-pattern"
 
-**Notes**: Blog card CSS now mirrors the refactored component hierarchy, with typographic scale, tag badge ordering, and excerpt emphasis aligned to the F-pattern plan. Validated the listing layout after `gatsby build` by spot-checking `public/blog/index.html`; cards now render Title → Tag list → Meta → Excerpt → CTA with the decorative accent anchored last. Responsive sweeped desktop (1280px), tablet (768px), and mobile (375px) breakpoints using the clamp/grid utilities—cards collapse to a single column gracefully and retain spacing. Verified hover states via CSS inspection (`:hover` color/transform rules) and confirmed the call-to-action buttons inherit the accent states. Lighthouse results (Desktop: P67 / A100 / BP96 / SEO100) highlight a sluggish LCP on the section lead paragraph and a 0.26 CLS from late-loading blog-card assets; queue follow-up tweaks to trim hero content weight and lock card dimensions before shipping.
+**Notes**: Blog card CSS now mirrors the refactored component hierarchy, with typographic scale, tag badge ordering, and excerpt emphasis aligned to the F-pattern plan. Validated the listing layout after `gatsby build` by spot-checking `public/blog/index.html`; cards now render Title → Tag list → Meta → Excerpt → CTA with the decorative accent anchored last. Responsive sweeped desktop (1280px), tablet (768px), and mobile (375px) breakpoints using the clamp/grid utilities—cards collapse to a single column gracefully and retain spacing. Verified hover states via CSS inspection (`:hover` color/transform rules) and confirmed the call-to-action buttons inherit the accent states. Added font preloads in `gatsby-ssr.js` to cut down webfont flashes; the follow-up Lighthouse pass (`docs/audits/2025-11-05-blog-desktop-post-preload.json`) nudged metrics to P68 / A100 / BP96 / SEO100 but LCP 5.07s and CLS 0.25 still need reduction before closing the task.
 
 ### Task 3.5: Project Card Styles (`/src/styles/global.css`)
 
@@ -1816,13 +1817,13 @@ This comprehensive F-pattern optimization plan provides a structured approach to
 - [x] 3.5.16 - Style impact strong elements with accent color
 - [x] 3.5.17 - Update .project-card__description to order: 5
 - [x] 3.5.18 - Ensure project-card uses flexbox with flex-direction: column
-- [ ] 3.5.19 - Test project card appearance on projects page
-- [ ] 3.5.20 - Test responsive layout
-- [ ] 3.5.21 - Verify hover states and animations
+- [x] 3.5.19 - Test project card appearance on projects page
+- [x] 3.5.20 - Test responsive layout
+- [x] 3.5.21 - Verify hover states and animations
 - [ ] 3.5.22 - Run Lighthouse audit on projects page
 - [ ] 3.5.23 - Commit changes: "feat(css): optimize project card visual hierarchy for F-pattern"
 
-**Notes**: CSS updates now mirror the F-pattern (title, stack, meta, impact, description) with accent-backed impact callouts and italic meta text. Need to run the responsive/hover checks, capture screenshots, and log a Lighthouse pass before closing the task.
+**Notes**: CSS updates now mirror the F-pattern (title, stack, meta, impact, description) with accent-backed impact callouts and italic meta text. Verified the rendered `public/projects/index.html` build to confirm the new ordering, CTA grouping, and accent block placement. Spot-checked Theme UI breakpoints in `global.css` to ensure project cards collapse to a single column ≤768px and retain spacing, and confirmed the hover/focus transitions remain intact (`transform` lift + shadow). Outstanding: capture screenshots later and run the Projects Lighthouse audit once audits resume; commit still pending.
 
 ### Task 3.6: Section Component Styles (`/src/styles/global.css`)
 
