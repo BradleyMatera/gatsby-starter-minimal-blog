@@ -18,7 +18,7 @@ import { Section, Card } from "../../../src/components/ui";
 >
   <ul className="feature-list">
     <li>AWS Cloud Support internship (Summer 2025): lab exercises, CloudWatch dashboards, IAM investigations, runbook writing.</li>
-    <li>Personal prototypes (Car-Match, ProjectHub proxy) deployed to Netlify/Render with simple CI—no multi-account infrastructure yet.</li>
+    <li>Personal prototypes (Car-Match, ProjectHub proxy) deployed to Netlify/Render with simple CI—Car-Match’s backend cold-starts for ~5 minutes on free Render.</li>
     <li>Blog posts documenting how I configure budgets, monitor bills, and keep honesty logs of what’s broken.</li>
     <li>AI pair-programming in almost every session; prompts + reviews live in the repos.</li>
   </ul>
@@ -40,7 +40,7 @@ import { Section, Card } from "../../../src/components/ui";
     <Card>
       <h3 className="feature-card__title">Portfolio prototypes</h3>
       <ul className="feature-list">
-        <li>Car-Match + Docker Multilang repos show how I structure env vars, README runbooks, and TODOs.</li>
+        <li>Car-Match + Docker Multilang repos show how I structure env vars, README runbooks, and TODOs (including Render cold-start expectations).</li>
         <li>Netlify/GitHub Pages deployments include manual smoke test checklists instead of automated suites (noted in docs).</li>
       </ul>
     </Card>

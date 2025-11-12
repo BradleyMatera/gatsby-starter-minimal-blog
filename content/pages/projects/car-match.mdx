@@ -9,7 +9,7 @@ import { Section, Card, AnchorNav, Link } from "../../../src/components/ui";
 <Section
   eyebrow="Case Study"
   title="Car-Match · Personal learning project"
-  description="React + Node prototype built to practice forms, routing, and a basic Express API. No public deployment or production traffic."
+  description="React + Node prototype deployed as a demo (frontend on GitHub Pages, backend on Render + MongoDB Atlas). It works end-to-end once the free backend wakes up, but cold starts take ~5 minutes so I still label it a learning project."
 />
 
 <Section
@@ -17,10 +17,10 @@ import { Section, Card, AnchorNav, Link } from "../../../src/components/ui";
   title="What actually shipped"
 >
   <p>
-    <strong>TL;DR:</strong> A solo capstone project that lets me experiment with profile cards, event listings, and simple auth flows. Many advanced features (real-time chat, Dockerized deployments, load testing) remain TODOs documented in the repo.
+    <strong>TL;DR:</strong> A solo capstone project that lets me experiment with profile cards, event listings, forums, and simple auth flows. The frontend is always up on GitHub Pages; the Express/Mongo backend is on Render’s free tier, so the first login or forum hit can take ~5 minutes while it cold-starts. Once it’s warm, posts/events/forums persist via MongoDB Atlas. Real-time chat, Dockerized deployments, and load testing are still TODOs.
   </p>
   <div className="project-card__stack">
-    <span>Prototype only — runs locally</span>
+    <span>Demo: GitHub Pages + Render + MongoDB Atlas</span>
     <span>Guided by tutorials + AI prompts</span>
     <span>Used to learn React Router + Express controllers</span>
   </div>
@@ -39,7 +39,7 @@ import { Section, Card, AnchorNav, Link } from "../../../src/components/ui";
 <Section id="overview" eyebrow="Project context" title="Why I built it">
   <ul className="feature-list">
     <li><strong>Purpose:</strong> Give myself a safe place to practice React Router, protected routes, and basic CRUD patterns.</li>
-    <li><strong>Scope:</strong> Profiles, event listings, and simple forms. Messaging, moderation, and Docker setups are listed as future work but not implemented.</li>
+    <li><strong>Scope:</strong> Profiles, event listings, forums, and simple messaging notes. Messaging/notifications are basic; moderation + Dockerized infra are still future work.</li>
     <li><strong>Support:</strong> Built with heavy guidance from tutorials, StackOverflow answers, and AI pair-programming.</li>
   </ul>
 </Section>
@@ -49,7 +49,7 @@ import { Section, Card, AnchorNav, Link } from "../../../src/components/ui";
     <Card>
       <h3 className="feature-card__title">Experience layer</h3>
       <ul className="feature-list">
-        <li>React pages with context for auth state (mocked JWTs).</li>
+        <li>React pages with context for auth state (JWTs issued by the Render backend once it’s awake).</li>
         <li>Reusable cards/lists generated with Copilot, then refactored manually.</li>
         <li>Accessibility pass (manual + Axe) documented in the README.</li>
       </ul>
@@ -57,8 +57,8 @@ import { Section, Card, AnchorNav, Link } from "../../../src/components/ui";
     <Card>
       <h3 className="feature-card__title">Platform layer</h3>
       <ul className="feature-list">
-        <li>Express API with basic CRUD routes (no production security).</li>
-        <li>MongoDB models for posts/events; no aggregation magic yet.</li>
+        <li>Express API deployed to Render (free tier). Health checks + `/healthz` endpoint warm it up; first request after inactivity takes minutes.</li>
+        <li>MongoDB Atlas handles events/forums. Collections persist as long as Atlas is configured; otherwise it falls back to mock data.</li>
         <li>Postman collection + prompt log describing how AI helped.</li>
       </ul>
     </Card>
@@ -85,6 +85,6 @@ import { Section, Card, AnchorNav, Link } from "../../../src/components/ui";
 <Section id="artifacts" eyebrow="Supporting artifacts" title="Links & disclosures">
   <ul className="feature-list">
     <li><Link to="https://github.com/BradleyMatera/car-match" external><strong>Repository:</strong></Link> includes AI prompt logs, TODOs, and setup instructions.</li>
-    <li><strong>Live demo:</strong> none — runs locally only.</li>
+    <li><strong>Live demo:</strong> Frontend at <Link to="https://bradleymatera.github.io/car-match/#/login" external>https://bradleymatera.github.io/car-match/#/login</Link>. Backend spins up on Render; expect ~5 minutes on first login while the free instance starts.</li>
   </ul>
 </Section>

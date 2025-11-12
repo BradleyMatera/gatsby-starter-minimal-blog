@@ -47,16 +47,16 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
   <div className="grid-two project-gallery">
     <ProjectCard
       title="Car-Match"
-      meta="Personal capstone prototype"
+      meta="Personal capstone prototype (GitHub Pages + Render)"
       summary={
         <>
-          <strong>Practice build</strong> that let me explore React forms, simple profile cards, and an Express API with help from tutorials + AI scaffolding.
+          <strong>Practice build</strong> that let me explore React forms, profile cards, and an Express API (MongoDB Atlas + Render) with help from tutorials + AI scaffolding.
         </>
       }
       impactPrefix="Reality"
       impact={
         <>
-          Not deployed publicly. It taught me routing, auth basics, and how to document TODOs for features (chat, moderation) that don’t exist yet.
+          Frontend runs on GitHub Pages and the backend spins up on Render & Atlas, but cold starts take ~5 minutes before login/chat/forums respond. Events, profiles, and forums do persist once the free instance wakes up, so I call it a demo rather than a production app.
         </>
       }
       stack={["React", "Node.js", "Express", "MongoDB"]}

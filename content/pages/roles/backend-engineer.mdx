@@ -17,7 +17,7 @@ import { Section, Card } from "../../../src/components/ui";
   title="Where I actually spend time"
 >
   <ul className="feature-list">
-    <li>Node/Express APIs powering Car-Match, ProjectHub, and tutorial repos (mostly local-only).</li>
+    <li>Node/Express APIs powering Car-Match, ProjectHub, and tutorial repos (Car-Match runs on Render/Atlas but still feels like a demo because of cold starts).</li>
     <li>FastAPI experiments for Convo-AI to understand Python services.</li>
     <li>README honesty logs that spell out missing pieces: auth hardening, load tests, observability.</li>
     <li>AI pair-programming in every session; prompts + edits included in the repo so reviewers can trace them.</li>
@@ -32,9 +32,9 @@ import { Section, Card } from "../../../src/components/ui";
     <Card>
       <h3 className="feature-card__title">Car-Match API</h3>
       <ul className="feature-list">
-        <li>Express + MongoDB CRUD routes with mocked JWT guards.</li>
+        <li>Express + MongoDB CRUD routes deployed to Render; JWT auth works once the free instance wakes up (expect ~5 minute cold starts).</li>
         <li>API docs live in Postman + README tables; no OpenAPI generator yet.</li>
-        <li>Repository issues list missing features (rate limiting, proper logging).</li>
+        <li>Repository issues list missing pieces (rate limiting, structured logging, faster startup paths).</li>
       </ul>
     </Card>
     <Card>
