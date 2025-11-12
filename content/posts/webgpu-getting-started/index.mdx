@@ -11,6 +11,8 @@ theme: "Low-Level Experiments"
 > **AI assist:** ChatGPT + Copilot helped scaffold the initial WGSL + TypeScript snippets; I iterated and documented them here.  
 > **Status:** Performance numbers come from my laptop (Chrome Canary); treat them as anecdotal guidance.
 
+Triangle Shader Lab itself is a small Next.js + TypeScript site running on Bun/Tailwind. It simply hosts the rebuilt Hello Triangle and Textured Cube samples with added commentary pulled from the WebGPU docs—nothing more advanced than that.
+
 ## TL;DR
 
 - **WebGPU renders faster than WebGL when the pipeline is structured right.** Precompiled pipelines and command encoders delivered 2× speedups in my shapes renderer.[^mdn-webgpu]
