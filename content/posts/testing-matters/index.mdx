@@ -3,98 +3,70 @@ title: "Why Testing Matters: From Jest to Integration Tests"
 date: "2025-09-29"
 slug: "/why-testing-matters"
 tags: ["Testing", "Quality", "DevOps"]
-description: "How I layer unit, integration, and end-to-end tests across front-end and back-end projects to ship changes with confidence."
+description: "The test pyramid I use across my projects—tools, cadence, and the honest gaps."
 theme: "Front-End & Full-Stack"
 ---
 
-> **Context:** Student-level test strategy I use on my own repos and internship labs; I haven’t owned QA for a production org yet.  
-> **AI assist:** ChatGPT helped outline the pyramid; I filled it with tools I actually touch (and labeled which ones are still labs).  
-> **Status:** Honest view of what’s automated today vs. what’s aspirational (contract testing is still in pilot).
+> **Context:** Early-career developer documenting the test strategy I actually run on my repos (Car-Match, CheeseMath, BasicServerSetup, AWS labs). No production on-call experience yet.  
+> **AI assist:** ChatGPT helped me reorder notes; every tool listed below is in use today (or clearly labeled “pilot”).  
+> **Status:** Snapshot, not perfection. Contract testing + accessibility automation still need work.
 
-## TL;DR
+## Reality snapshot
 
-- **Layered suites keep risk low.** Unit, component, integration, contract, and E2E tests provide coverage where it counts without burning velocity.[^jest]
-- **Production-like tooling matters.** MSW, LocalStack, Playwright, and Percy mirror real infrastructure so regressions surface early.[^rtl]
-- **Automation guards every merge.** Git hooks, CI pipelines, and nightly contract checks keep quality gates consistent across teams.
-- **Maintenance beats flaky retries.** Deterministic fixtures, isolated databases, and monthly pruning preserve trust in the suite.
+- **Unit/component tests:** Jest/Vitest + Testing Library. Run locally (watch mode) and in CI on every PR.  
+- **Integration tests:** Supertest + Dockerized Postgres/Mongo + LocalStack for AWS services. Run on PRs touching backend code.  
+- **End-to-end:** Playwright smoke tests on Netlify deploy previews, Percy (pilot) for Gatsby visual diffs.  
+- **Contract tests:** Pact/OpenAPI schema checks run manually before major refactors—automation coming soon.  
+- **Observability:** Test runs push results to GitHub Checks + Slack notifications. Failures block merges.
 
-## Testing Goals
+## Pyramid breakdown
 
-- Catch regressions at the smallest scope possible while validating real user paths.
-- Give developers rapid, actionable feedback during local development and CI runs.
-- Align automated checks with acceptance criteria crafted alongside designers and PMs.
-- Keep suites resilient so they scale with the codebase instead of becoming a bottleneck.
+| Layer | Scope | Tools | Cadence | Status |
+| --- | --- | --- | --- | --- |
+| Unit | Pure functions, hooks | Jest, Vitest | Watch + PR | ✅ |
+| Component | React UI, accessibility | Testing Library, Storybook test runner | PR + nightly | ✅ |
+| Integration | API + DB, AWS mocks | Supertest, LocalStack, Docker Compose | PRs touching backend | ✅ |
+| Contract | API request/response contracts | Pact, OpenAPI validators | Manual before breaking changes | 🧪 Pilot |
+| End-to-end | User flows | Playwright, Cypress (legacy), Percy (visual) | Main merges + scheduled | ✅ / 🧪 |
 
-## Testing Pyramid in Practice
+## Tooling details
 
-| Layer | What it covers | Tools | Cadence |
-| --- | --- | --- | --- |
-| Unit tests | Pure functions, utilities, React hooks | Jest, Vitest | Watch mode on every save. |
-| Component tests | UI behaviour in isolation | React Testing Library, Storybook test runner | CI + pre-merge on UI changes. |
-| Integration tests | API endpoints, database interactions | Supertest, Prisma test DB, LocalStack | Every pull request (personal projects). |
-| Contract tests | API request/response contracts | Pact, OpenAPI schema validation | Pilot stage—run manually before bigger refactors. |
-| End-to-end tests | Full user flows | Playwright, Cypress | Scheduled runs + pre-deploy smoke suites for Netlify deploys.
+- **Jest/Vitest:** Cover utility modules (date math, data transforms), React hooks, and components. Mocks replaced with MSW where possible.  
+- **Testing Library:** Queries by role/label to ensure accessibility. If a component is hard to test, it’s usually poorly structured.  
+- **Supertest + Docker Compose:** Spins up Express + Postgres containers, seeds data, runs API tests, tears everything down.  
+- **LocalStack:** Emulates S3/DynamoDB/SNS for AWS labs. Lets me test IaC templates without hitting real AWS (saves $$).  
+- **Playwright:** Automates login → CRUD → logout. Runs on Netlify deploy previews so I can review failures before shipping.  
+- **Percy (pilot):** Visual snapshots for this Gatsby site. Still deciding if the cost is worth it.
 
-Unit tests stay fast while end-to-end tests mimic production flows. Balancing both prevents brittle suites and ensures real issues get caught.
+## Reliability practices
 
-## Unit & Component Tests
+- Each test suite uses isolated data (per-worker DB, temporary DynamoDB tables).  
+- Factories generate deterministic fixtures to avoid flaky assertions.  
+- Only end-to-end tests have retries (max 2) to handle occasional network hiccups.  
+- Monthly “test hygiene” session: delete redundant tests, update snapshots, document new commands.
 
-- **Utility functions.** Projects like CheeseMath use Jest snapshots and property-based testing to cover negative inputs and floating-point quirks.[^jest]  
-- **React components.** React Testing Library asserts against accessible roles (`getByRole`, `getByLabelText`) so tests match user interactions.[^rtl]  
-- **Mock strategy.** MSW intercepts network calls, guaranteeing consistent loading, success, and error coverage without brittle mocks.
+## Workflow
 
-## Integration Tests
+1. **Pre-commit:** Lint + unit tests via Husky.  
+2. **Pull request:** Unit, component, integration suites run in GitHub Actions.  
+3. **Deploy preview (Netlify/Render):** Playwright smoke suite + optional Percy run.  
+4. **Main merge:** Deploy + regressions checks, nightly contract suite.  
+5. **Weekly:** Manual contract tests (until automated) + accessibility spot checks.
 
-- **API validation.** Supertest spins up Express apps in memory, hitting routes with realistic payloads while seeding a disposable PostgreSQL DB (Docker).  
-- **AWS services.** LocalStack emulates S3, DynamoDB, and SNS to confirm infrastructure wiring without incurring cloud costs.  
-- **Data migrations.** Suites run migrations against throwaway databases to catch schema drift before production deploys.
+## Known gaps
 
-## End-to-End Coverage
+- Contract tests aren’t automated yet. I run them before schema changes, but a nightly job is on the roadmap.  
+- Accessibility checks only run manually; I want axe in CI for components/pages.  
+- Mobile end-to-end tests are limited—need to add Playwright mobile viewports.  
+- Observability for Playwright runs is basic (GitHub logs). Would like better dashboards.
 
-- **Playwright flows.** Scripts cover auth, CRUD, and accessibility spot checks (focus order, keyboard navigation).  
-- **Visual diffs.** Percy snapshots are in pilot mode for this Gatsby site to catch unexpected UI shifts.  
-- **Performance budgets.** Lighthouse CI enforces LCP/CLS thresholds inside GitHub Actions to prevent regressions.
+## Links
 
-## Keeping Tests Fast & Reliable
-
-- **Parallelisation.** Per-worker databases (`test_db_${process.pid}`) avoid cross-test contamination.  
-- **Deterministic data.** Factories generate predictable fixtures, reducing flaky assertions.  
-- **Targeted retries.** Only E2E suites get limited retries to smooth over transient network blips.  
-- **Continuous pruning.** Monthly audits remove redundant tests and flag noisy assertions.
-
-## Automation Pipeline
-
-1. Pre-commit hooks run lint and unit tests.  
-2. Pull requests trigger unit, component, and integration suites in CI.  
-3. Merges to main kick off end-to-end smoke tests and deploy previews.  
-4. Nightly jobs (or manual runs when I’m iterating quickly) execute contract tests against staging to catch breaking API changes.
-
-## Results
-
-- **Fewer regressions in side projects.** Automated gates catch most issues before I publish updates to Netlify/GitHub Pages, so hotfixes are rare.  
-- **Faster feedback loops.** Watch-mode unit tests and Playwright smoke suites surface issues minutes after code changes.  
-- **Better collaboration.** Even on student teams, sharing acceptance criteria + early contract tests keeps frontend and backend iterations aligned.
-
-## Lessons Learned
-
-- Tests double as documentation when written from the user’s perspective.  
-- Small, focused tests outlive sprawling “god tests” and are easier to refactor.  
-- Building coverage alongside features is cheaper than retrofitting it later.  
-- Including designers and PMs in acceptance reviews ensures suites reflect real user needs.
-
-## Next Steps
-
-- Expand contract coverage to event-driven systems (SNS/SQS payloads and schemas).
-- Integrate automated axe-core accessibility checks into component pipelines.
-- Pilot Playwright Component Testing to bridge the gap between story-level and browser-level coverage.
-
-## Key Takeaways
-
-- **Layered suites catch regressions early without sacrificing speed.**
-- **Production-like test harnesses keep results trustworthy.**
-- **Routine maintenance turns testing from overhead into a force multiplier.**
+- Testing templates: [https://github.com/BradleyMatera/testing-templates](https://github.com/BradleyMatera/testing-templates)  
+- Example suites: Car-Match (`tests/`), BasicServerSetup (`postman/`), CheeseMath (`__tests__/`).  
+- Prompt logs + retros: `notes/testing-journal.md`
 
 ## References
 
-[^jest]: Jest Documentation, “Getting Started,” accessed May 2025, https://jestjs.io/docs/getting-started.  
-[^rtl]: Testing Library, “Guiding Principles,” accessed May 2025, https://testing-library.com/docs/guiding-principles.
+[^jest]: Jest Documentation, “Getting Started,” https://jestjs.io/docs/getting-started  
+[^rtl]: Testing Library, “Guiding Principles,” https://testing-library.com/docs/guiding-principles

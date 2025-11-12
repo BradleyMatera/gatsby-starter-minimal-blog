@@ -3,83 +3,60 @@ title: "Secure Authentication with JWT, Cognito, and React"
 date: "2025-09-15"
 slug: "/secure-authentication-cognito-react"
 tags: ["Authentication", "AWS", "React", "Security"]
-description: "Implementing a secure login flow using Amazon Cognito, JSON Web Tokens, and a React front end, including best practices for token storage and verification."
+description: "My Cognito + React auth lab: what works, what’s missing, and how I keep the flow honest."
 theme: "Cloud & DevOps"
 ---
 
-> **Context:** Lab project proving I can wire Cognito + React together; no paying users and no production traffic.  
-> **AI assist:** ChatGPT/Copilot helped scaffold the flows; I documented every prompt + manual change in the repo.  
-> **Status:** Architecture works in my sandbox accounts—still on the lookout for professional mentorship before owning auth in prod.
+> **Context:** Personal auth lab tying a React SPA to Amazon Cognito User Pools + API Gateway/Lambda. No production users, just a sandbox.  
+> **AI assist:** ChatGPT/Copilot scaffolded the initial hooks + Lambda verifier. Prompt logs live in `notes/ai-prompts.md`.  
+> **Status:** Flow works today (hosted UI → code exchange → JWT verification). AuthZ granularity, CDK/Terraform, and mobile testing are still TODOs.
 
-## TL;DR
+## Reality snapshot
 
-- **Cognito + React delivers secure auth without DIY password storage.** Cognito handles sign-up, MFA, and policies while React manages the user experience.[^cognito]
-- **JWTs stay protected.** Access tokens live in memory, refresh tokens ride in HttpOnly cookies, and Lambda verifies signatures against Cognito JWKS.[^jwks]
-- **Serverless pieces stay least-privilege.** API Gateway and Lambda enforce scopes, DynamoDB stores data by Cognito user ID, and IAM roles stay tight.[^aws-jwt-verify]
-- **DX stays smooth.** Local SAM testing, Playwright UI automation, and GitHub Actions deploys keep the loop fast.
+- **Frontend:** React + TypeScript, hosted UI redirect, token exchange, context for session state, HttpOnly refresh cookie.  
+- **Backend:** API Gateway + Lambda verifying tokens via `aws-jwt-verify`, storing user data in DynamoDB keyed by `sub`.  
+- **Limitations:** Lab-only AWS account, no custom domains, refresh endpoint limited to browser usage, CI only runs unit tests so far.
 
-## Project Goals
+## Flow overview
 
-- Turn prior JWT theory into a production-ready authentication flow.
-- Keep secrets out of localStorage while still supporting silent session refresh.
-- Enforce token validation server-side with clear separation of concerns.
-- Bake in testing and CI/CD so the auth flow stays trustworthy over time.
+1. User clicks “Login” → redirected to Cognito hosted UI (`/oauth2/authorize`).  
+2. After login/MFA, Cognito redirects back with `?code=...`.  
+3. React exchanges the code for ID + access + refresh tokens (`/oauth2/token`).  
+4. Access token stored in memory (React context). Refresh token stored in an HttpOnly cookie so JS can’t read it.  
+5. API calls include `Authorization: Bearer <access>`. Lambda verifies the token, checks scopes, and processes the request.  
+6. When the access token expires, the app hits `/auth/refresh` (Lambda) to trade the refresh token for a new pair.
 
-## Architecture Overview
-
-| Layer | Technology | Responsibility |
-| --- | --- | --- |
-| Auth Provider | Amazon Cognito User Pools | Hosts hosted UI, handles sign-up, MFA, password policies.[^cognito] |
-| Front end | React + TypeScript | Initiates login, stores tokens, refreshes sessions. |
-| API | AWS Lambda + API Gateway | Verifies Cognito JWTs, enforces authorisation, returns data. |
-| Storage | DynamoDB | Holds application data, keyed by Cognito user ID. |
-
-## Implementation Highlights
-
-### Login flow
-
-1. React app redirects to Cognito Hosted UI (`/oauth2/authorize`).  
-2. After successful login, Cognito redirects back with an authorization code.  
-3. React exchanges the code for tokens (ID, access, refresh) via the Cognito token endpoint.  
-4. Tokens are stored in memory (or HttpOnly cookies) and attached to API requests as `Authorization: Bearer <access_token>`.  
-5. Lambda functions validate the token signature using Cognito’s JSON Web Key Set (JWKS).[^jwks]
-
-### React implementation keeps tokens out of localStorage
+### React hook (trimmed)
 
 ```ts
-import { useEffect } from "react";
-import { exchangeCodeForTokens, fetchWithAuth } from "./auth";
-
 export function useAuth() {
   const [session, setSession] = useState<Session | null>(null);
 
   useEffect(() => {
-    const url = new URL(window.location.href);
-    const code = url.searchParams.get("code");
+    const code = new URL(window.location.href).searchParams.get("code");
     if (!code) return;
-
-    exchangeCodeForTokens(code).then(tokens => {
+    (async () => {
+      const tokens = await exchangeCodeForTokens(code);
       setSession(tokens);
-      window.history.replaceState({}, "", url.pathname);
-    });
+      window.history.replaceState({}, "", "/");
+    })();
   }, []);
 
-  async function authenticatedFetch(input: RequestInfo, init?: RequestInit) {
-    if (!session) throw new Error("Not authenticated");
-    return fetchWithAuth(session.accessToken, input, init);
-  }
+  const authenticatedFetch = useCallback(
+    async (input: RequestInfo, init?: RequestInit) => {
+      if (!session) throw new Error("Not authenticated");
+      return fetchWithAuth(session.accessToken, input, init);
+    },
+    [session]
+  );
 
   return { session, authenticatedFetch };
 }
 ```
 
-Tokens are kept in memory using React context. If a page refresh is required, I store the refresh token in an HttpOnly cookie and use a silent refresh endpoint (`/auth/refresh`) that returns new access tokens without exposing credentials to JavaScript.
-
-### Lambda verification relies on managed JWKS
+### Lambda verifier
 
 ```ts
-import { CognitoJwtVerifier } from "aws-jwt-verify";
-
 const verifier = CognitoJwtVerifier.create({
   userPoolId: process.env.USER_POOL_ID!,
   tokenUse: "access",
@@ -90,56 +67,41 @@ export const handler = async (event) => {
   try {
     const token = event.headers.authorization?.split(" ")[1];
     const payload = await verifier.verify(token);
-    // payload.sub is the user ID
-    return { statusCode: 200, body: JSON.stringify({ message: "ok" }) };
-  } catch (err) {
+    return { statusCode: 200, body: JSON.stringify({ userId: payload.sub }) };
+  } catch {
     return { statusCode: 401, body: JSON.stringify({ error: "Unauthorized" }) };
   }
 };
 ```
 
-The verifier caches JWKS keys and validates signatures, expiration, and client ID automatically.[^aws-jwt-verify]
+## Security habits
 
-## Results
+- Access tokens stay in memory; refresh tokens live in HttpOnly cookies. No localStorage usage.  
+- API Gateway authorizers enforce scopes per route; Lambda double-checks claims.  
+- CloudWatch logs capture token verification failures + request IDs for debugging.  
+- GitHub Actions uses OIDC to assume an IAM role; no long-lived AWS keys in the repo.
 
-- **Password handling offloaded.** Cognito manages credentials, MFA, and hosted UI while the app focuses on UX.
-- **Session refreshes stay secure.** HttpOnly cookies plus memory storage prevent accidental token leakage via XSS.
-- **Serverless APIs trust but verify.** Lambda rejects invalid tokens before business logic runs, keeping DynamoDB writes clean.
+## Developer experience
 
-## Security Best Practices
+- **Local testing:** AWS SAM for Lambda + API Gateway mocks, seeded Cognito users for the hosted UI.  
+- **Integration tests:** Playwright automates login → API call → logout on every main build (headless mode).  
+- **CI/CD:** GitHub Actions builds the SPA, runs Playwright, deploys to S3/CloudFront, and publishes Lambda via SAM.
 
-- **Never store secrets in localStorage.** Stick to memory or HttpOnly cookies to mitigate XSS.  
-- **Short-lived access tokens.** Cognito defaults to one-hour access tokens; combine with refresh tokens for seamless reauthentication.  
-- **Scoped API routes.** API Gateway authorisers and Lambda checks ensure only valid tokens reach business logic.  
-- **Least privilege IAM roles.** Lambda functions assume roles limited to required DynamoDB tables.  
-- **Audit logging.** CloudWatch logs record token validation errors, aiding incident response.
+## What still needs work
 
-## Developer Experience
+- Finer-grained scopes (per feature) and group-based authorization.  
+- WAF + CloudFront logging so I can spot brute-force attempts.  
+- Mobile viewport testing for the hosted UI + React app.  
+- IaC cleanup: migrate from SAM CLI commands to CDK or Terraform with clearer state management.
 
-- **Local testing.** I run Cognito locally via AWS SAM’s `cognito-idp` integration and seed users with temporary passwords.  
-- **Integration tests.** Playwright tests automate login using the hosted UI in a headless browser, verifying redirects and cookie storage.  
-- **CI/CD.** GitHub Actions deploys the front end (S3 + CloudFront) and Lambda functions, invalidating caches after success.
+## Links
 
-## Lessons Learned
-
-- **Managed identity reduces cognitive load.** Cognito’s hosted UI and policies saved weeks of DIY auth hardening.
-- **Token storage strategy matters.** Moving refresh tokens into HttpOnly cookies eliminated accidental leaks during testing.
-- **Automation keeps trust high.** Playwright and CI/CD caught regressions instantly, especially around redirect URLs and cookie scopes.
-
-## Next Steps
-
-- Add fine-grained API scopes mapped to user groups or roles.
-- Integrate AWS WAF + CloudFront logs for proactive anomaly detection.
-- Expand the Playwright suite with mobile viewport auth tests.
-
-## Key Takeaways
-
-- **Use Cognito to offload identity but still validate tokens yourself.**
-- **Keep access tokens in memory and refresh tokens in HttpOnly cookies to balance UX and security.**
-- **Automate login flows in tests so auth regressions surface before production.**
+- Repo (request access): [https://github.com/BradleyMatera/cognito-react-auth-lab](https://github.com/BradleyMatera/cognito-react-auth-lab)  
+- Prompt log + runbooks: `docs/` inside the repo  
+- AWS docs used: [Cognito User Pools][^cognito], [JWT Tokens][^jwks], [aws-jwt-verify][^aws-jwt-verify]
 
 ## References
 
-[^cognito]: AWS Documentation, “Amazon Cognito User Pools,” accessed May 2025, https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html.  
-[^jwks]: AWS Documentation, “Using JSON Web Tokens with Amazon Cognito,” accessed May 2025, https://docs.aws.amazon.com/cognito/latest/developerguide/token-endpoint.html.  
-[^aws-jwt-verify]: AWS Labs, “aws-jwt-verify,” accessed May 2025, https://github.com/awslabs/aws-jwt-verify.
+[^cognito]: AWS Documentation, “Amazon Cognito User Pools,” https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html  
+[^jwks]: AWS Documentation, “Using JSON Web Tokens with Amazon Cognito,” https://docs.aws.amazon.com/cognito/latest/developerguide/token-endpoint.html  
+[^aws-jwt-verify]: AWS Labs, “aws-jwt-verify,” https://github.com/awslabs/aws-jwt-verify

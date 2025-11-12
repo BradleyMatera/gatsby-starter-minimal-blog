@@ -4,118 +4,68 @@ date: "2024-12-04"
 slug: "/recent-project-basicserversetup"
 tags: ["Projects", "APIs", "Backend"]
 banner: ./background.jpg
-description: "How I built a time-tracking app with Node.js and Express, the API endpoints it exposes, and what I learned about separation of concerns and early testing."
+description: "Breaking down BasicServerSetup—a time-tracking API + static dashboard I use to practice separation of concerns, docs, and deploy hygiene."
+theme: "Front-End & Full-Stack"
 ---
 
-> **Context:** BasicServerSetup is a solo practice project (in-memory store, Heroku hobby dyno) I use to learn REST patterns—no paying customers rely on it.  
-> **AI assist:** ChatGPT + Copilot drafted some controller/README text; I edited it before publishing this case study.  
-> **Status:** Honest overview of what works today and what’s still TODO (JWT auth, persistent DB, automated tests).
+> **Context:** BasicServerSetup is my sandbox for REST patterns. Backend (Node/Express) runs on a Heroku hobby dyno; frontend (Tailwind/Vanilla JS) lives on GitHub Pages. No customers rely on it.  
+> **AI assist:** ChatGPT/Copilot drafted some controller and README boilerplate; I annotated everything and logged prompts in `docs/ai-prompts.md`.  
+> **Status:** Demo works, but auth is mocked, data lives in memory, and automated tests are still on the backlog.
 
-## TL;DR
+## Reality snapshot
 
-- **Lightweight time-tracking API with real separation.** Node.js + Express handles auth, clock events, and timesheet retrieval while a static Tailwind UI consumes the endpoints.
-- **Independent deploys reduce friction.** Heroku hosts the API, GitHub Pages hosts the client, letting me ship UI tweaks without touching backend builds.
-- **Testing and docs came first.** Postman suites and concise READMEs surfaced edge cases and made peer reviews faster.
-- **Ready for persistence upgrades.** Controllers stay thin so swapping the in-memory store for MongoDB or Postgres is low-risk.
+- API handles `/register`, `/login`, `/clockin`, `/clockout`, `/timesheet`. Data is in-memory today, but controllers are ready for Mongo/Postgres once I wire them up.  
+- Frontend displays current status, basic charts, and toast notifications. Built as a static bundle so I can host it anywhere.  
+- Deployment split (Heroku + GitHub Pages) forces me to treat front/back deploys separately, like a mini production flow.
 
-## Project Goals
-
-- Practice designing a REST API that cleanly separates controllers, models, and middleware.
-- Build a static dashboard that interacts with the API using accessible feedback patterns.
-- Deploy backend and frontend independently to mirror production pipelines on a smaller scale.
-- Capture lessons about documentation, testing, and deployment hygiene along the way.
-
-## Implementation Highlights
-
-### Architecture snapshot
-
-| Layer | Technology | Notes |
-| --- | --- | --- |
-| API | Node.js, Express | Authentication, clock-in/out logic, timesheet retrieval. |
-| Frontend | Static HTML + Tailwind CSS | Simple dashboard that consumes the API via Fetch. |
-| Deployment | Heroku (API), GitHub Pages (frontend) | Enables independent scaling and easy demos. |
+## Architecture
 
 ```
 BasicServerSetup/
 ├── app/
 │   ├── controllers/
-│   │   ├── timeController.js
-│   │   └── userController.js
 │   ├── models/
-│   │   ├── timeEntryModel.js
-│   │   └── userModel.js
-│   ├── routes/index.js
-│   └── utils/authMiddleware.js
-└── frontend/index.html
+│   ├── routes/
+│   └── utils/
+├── tests/
+│   └── postman-collection.json
+└── frontend/
+    └── index.html
 ```
 
-`authMiddleware.js` injects authentication guard rails, keeping controllers focused on business logic.
+- `authMiddleware.js` injects a lightweight token check (mocked JWT).  
+- `timeController.js` coordinates clock-ins/outs and calculates durations.  
+- `frontend/` uses Fetch to call the API, shows skeletons, and displays errors via toasts.
 
-### Core endpoints stay focused
+## Deployment flow
 
-| Route | Payload | Description |
+| Layer | Platform | Notes |
 | --- | --- | --- |
-| `POST /register` | `{ username, password }` | Creates a user (stored in memory). |
-| `POST /login` | `{ username, password }` | Issues a session token (placeholder). |
-| `POST /clockin` | Header `x-user-id` | Records a start timestamp. |
-| `POST /clockout` | Header `x-user-id` | Records an end timestamp and computes duration. |
-| `GET /timesheet` | Header `x-user-id` | Returns all entries for the user. |
+| API | Heroku hobby dyno | GitHub integration auto-deploys `main`. ENV vars stored in Config Vars. `/healthz` used for smoke tests. |
+| Frontend | GitHub Pages | Actions workflow builds + deploys on merge. `config.js` stores API base URL. |
+| CI | GitHub Actions | Runs `npm run lint` + `npm run test` (placeholder until I add Jest). |
 
-These endpoints are intentionally simple so I can swap the data store later (MongoDB or Postgres) without rewriting controllers.
+## Docs & testing
 
-### Frontend workflow keeps feedback tight
+- README + `docs/runbook.md` explain start/stop steps, env vars, and TODOs.  
+- Postman collection covers CRUD flows; I run it manually after deploys until automated tests exist.  
+- Smoke script (`scripts/smoke.sh`) pings `/healthz`, `/timesheet`, and verifies response codes.
 
-The static client calls the API with `fetch`, handles errors, and renders a timesheet table. Tailwind provides rapid styling:
+## Lessons so far
 
-```javascript
-async function clockIn() {
-  const response = await fetch(`${API_BASE}/clockin`, {
-    method: 'POST',
-    headers: { 'x-user-id': currentUserId },
-  });
-  if (!response.ok) {
-    showToast('Unable to clock in. Please try again.');
-  }
-}
-```
+- **Separation of concerns:** Controllers stay thin; models handle business logic. Swapping data stores later will be straightforward.  
+- **Docs first:** Writing the runbook forced me to think about failure modes before they happened.  
+- **Independent deploys:** Shipping UI tweaks without touching the API (and vice versa) keeps iteration fast.  
+- **TODOs remain:** JWT auth, persistent DB, integration tests, and structured logging are still in progress. READMEs list each gap so nobody assumes it’s production-ready.
 
-Error states are surfaced with lightweight toasts, ensuring the UI communicates network or validation issues clearly.
+## Next steps
 
-### Deployment strategy mirrors production workflows
+- Wire up MongoDB Atlas (or Postgres) + Mongoose.  
+- Replace mock auth with real JWTs.  
+- Add Jest + Supertest coverage, then automate the Postman collection in CI.  
+- Move deployment from Heroku to Render or Fly.io for more control (and to align with other projects).  
+- Publish the repo once secrets + docs are cleaned up.
 
-- **Backend (Heroku):** Deployed via GitHub integration with environment variables stored in Heroku’s Config Vars.  
-- **Frontend (GitHub Pages):** Hosted separately, pointing API requests to Heroku’s domain.  
-- **CORS:** Enabled on the Express server so the static site can communicate with the API.
+## Repo
 
-This split clarified how to iterate on the backend without redeploying the UI, and vice versa.
-
-## Results
-
-- **Controllers stayed database agnostic.** Keeping logic in models means moving to MongoDB or PostgreSQL requires minimal rewiring.
-- **Independent deploys sped up iteration.** Shipping UI copy updates or styling never blocked on API redeploys.
-- **Documentation shortened reviews.** Teammates could clone the repo and hit Postman collections without hand-holding.
-
-## Lessons Learned
-
-1. **Separation of concerns matters.** Keeping controllers, models, and middleware distinct simplified debugging and future enhancements.  
-2. **Early endpoint testing pays dividends.** Postman tests surfaced authentication edge cases before I wrote the UI.  
-3. **Documentation accelerates reuse.** Maintaining a concise README and API reference made handoffs easier when classmates reviewed the project.  
-4. **Deployment hygiene is worth the effort.** Even a small project benefits from environment variables, health checks, and structured logs.
-
-## Next Steps
-
-- Replace the in-memory store with MongoDB (via Mongoose) or PostgreSQL.  
-- Introduce JWT-based authentication for stateless sessions.  
-- Build a React or Next.js front end for richer interactions.  
-- Add unit and integration tests using Jest and Supertest.  
-- Instrument the API with request metrics and structured logging.
-
-## Key Takeaways
-
-- **Thin controllers make future database swaps painless.**
-- **Independent frontend/backend deploys mimic real-world pipelines.**
-- **Investing in docs and tests early keeps feedback cycles short.**
-
-## Repository
-
-https://github.com/BradleyMatera/BasicServerSetup
+- [https://github.com/BradleyMatera/BasicServerSetup](https://github.com/BradleyMatera/BasicServerSetup)

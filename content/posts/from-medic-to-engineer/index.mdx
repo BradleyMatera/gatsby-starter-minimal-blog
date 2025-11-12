@@ -3,57 +3,58 @@ title: "Combat Medic → Software Engineer — An unconventional path"
 date: "2025-04-01"
 slug: "/from-medic-to-engineer"
 tags: ["Career", "Soft Skills", "Leadership"]
-description: "How lessons from Army medicine, case management, construction, and animal rescue translate into resilient engineering practices."
+description: "How my Army medic background, service roles, and student projects intersect—and where I still need help."
+theme: "Career"
 ---
 
-> **Context:** I served as a U.S. Army combat medic (82nd Airborne) before pivoting into web development; I’m now a Full Sail graduate still searching for my first paid dev role.  
-> **AI assist:** Drafted with ChatGPT using my own stories/interview notes, then edited on 2025-10-15.  
-> **Status:** Reflection meant to explain how my background shapes student projects and internships—not a claim that I’ve already run production incident response.
+> **Context:** Former U.S. Army combat medic (82nd Airborne) now studying web development (Full Sail B.S., graduation Oct 2025) and interning in AWS Cloud Support. No paid SWE role yet.  
+> **AI assist:** ChatGPT helped me organise interview stories into this outline; every anecdote comes from my journals and mentor feedback.  
+> **Status:** Reflection, not a victory lap. I’m documenting the throughline so hiring managers know what’s real.
 
-## TL;DR
+## Reality snapshot
 
-- **Army discipline fuels my approach to technical incidents—even in class projects.** Triage mindset keeps me calm when debugging and deciding what to fix first.  
-- **Service roles sharpened stakeholder communication.** Case management, security, and rescue work taught me to translate technical detail into plain-language next steps.  
-- **Hands-on trades built adaptability.** Construction schedules and scarce resources mirror feature pivots, so I plan for change instead of fighting it.  
-- **Engineering is an evolution, not a reset.** Every previous job now powers how I model systems, lead crews, and build resilient products.
+- Military experience = 3.5 years triaging casualties, coordinating medevacs, and running aid stations.  
+- Civilian roles (case management, security, construction, animal rescue) reinforced empathy, logistics, and practical problem solving.  
+- Today’s work = student projects (Car-Match, Triangle Shader Lab, CheeseMath), AWS internship labs, and an honesty-first portfolio.
 
-## Career Timeline
+## Transferable muscles
 
-1. **Army Background:** Trained as a combat medic, triaged casualties in the field, and led teams through high-stress emergencies.  
-2. **Career Pivot:** Shifted into security, case management, construction, and animal rescue—roles that demanded empathy, logistics, and steady communication.  
-3. **Software Engineering:** Formalised technical skills, built end-to-end products, and now channel the same mission-first mindset into shipping reliable software.
+| Past role | What I actually did | How it shows up now |
+| --- | --- | --- |
+| Combat medic | Stabilized multiple patients, prioritized severity, called in specialists, documented everything | Incident triage mindset: reproduce bugs fast, label severity, route owners, capture postmortem notes (Car-Match runbooks, AWS lab retros) |
+| Case manager | Tracked complex cases, aligned families/providers, maintained daily status reports | Stakeholder comms: weekly updates to professors, internship mentors, and project collaborators |
+| Construction | Worked from blueprints, adapted when materials/weather shifted, led small crews | Product agility: roadmap Car-Match features, adjust scope when Render cold starts or Atlas limits pop up |
+| Animal rescue | Stayed calm with limited gear, made humane but tough calls, logged each event | Pragmatic delivery: cut scope when exhaustion rises, focus on user impact (accessibility, reliability) over “shiny” features |
 
-## Transferable Skills (Medic vs Engineer)
+## How it translates to engineering work
 
-- **Medic → Incident Response**  
-	- *Medic:* Stabilise multiple patients, label severity, and loop in specialists fast.  
-	- *Engineer:* Orchestrate production triage, classify alerts, and route fixes to the right owners.  
-- **Case Manager → Stakeholder Alignment**  
-	- *Case Manager:* Keep patients, families, and providers aligned through clear updates.  
-	- *Engineer:* Communicate root causes, mitigation timelines, and trade-offs with product, design, and leadership.  
-- **Construction Worker → Adaptive Planning**  
-	- *Construction:* Work from blueprints yet adapt when materials or weather shift.  
-	- *Engineer:* Iterate on architecture when constraints surface, refactor safely, and preserve launch objectives.  
-- **Animal Rescue → Pragmatic Delivery**  
-	- *Rescuer:* Stay calm with limited gear and make decisions that protect lives.  
-	- *Engineer:* Deliver customer impact under pressure, simplify scope, and triage backlog items to keep momentum.
+### Triage before heroics
+When Car-Match’s backend sleeps on Render, I stabilize first (wake instance, log downtime on the site) before exploring cron jobs or paid tiers. Same with AWS labs: collect signals → narrow blast radius → document the fix.
 
-## How the Mindset Shows Up in Engineering
+### Story-first communication
+Patient charts demanded “Situation → Background → Assessment → Recommendation.” I use the same format in pull requests, runbooks, and status updates so teammates can act quickly.
 
-- **Stabilise first, then automate.** Field medicine ingrained the habit of prioritising life-saving moves before long-term fixes. In software, I collect signals, confirm the blast radius, and restore service before chasing automation. Runbooks and service-level objectives are my digital triage tags.  
-- **Communicate the story, not just the data.** Patient charts taught me to capture what happened, what changed, and what comes next. Now I structure incident write-ups, pull-request summaries, and handoff notes the same way so teammates can act fast.  
-- **Plan for surprises.** Construction sites rarely go to plan, so guardrails and contingency plays matter. I scope features with “if this, then that” branches, validate assumptions early, and treat feedback as part of the blueprint.  
-- **Lead with empathy.** Animal rescue reinforced that calm leadership wins trust. During outages or code reviews, I acknowledge stress, set the tone, and guide teams toward the next right move.
+### Planning with contingencies
+Military logistics = backups for everything. In software that means fallback content, cached API responses, or documented manual overrides. My READMEs call out cold starts, feature flags, and “if this breaks, do that” steps.
 
-## Advice for Career-Changers
+### Empathy under pressure
+Calm tone during outages, demos, or tough feedback sessions matters. I learned that rescuing animals and sustaining morale on long missions. Now I use it to facilitate study groups, run peer reviews, and keep honesty logs even when the results aren’t flattering.
 
-- **Catalogue transferable skills.** Map each prior responsibility to an engineering scenario—incident drills, sprint cadences, or stakeholder rituals.  
-- **Build on strengths.** If you excel at crisis management, propose improvements to on-call runbooks; if logistics is your superpower, own project timelines.  
-- **Invest in technical foundations.** Certifications, degrees, bootcamps, and self-led labs provide the vocabulary to pair your soft skills with hard skills.  
-- **Tell your story with intent.** Frame your pivot as a continuation of service. Explain the moment you chose software and how your background unlocks outcomes for users.
+## Proof points
 
-## Key Takeaways
+- **Runbooks & retros:** `/docs/runbooks` in most repos + AWS internship notes show the triage/comms habit in action.  
+- **Honesty updates:** `honesty.md` + `honestplan.md` document every copy change and limitation on my portfolio—transparency born from medic-level accountability.  
+- **Community work:** Tech Talk Club coordination + CIRIS documentation contributions rely on the same skills as managing aid-station crews.
 
-- **Your previous career is an asset, not baggage.** Translate the language of your past roles into engineering outcomes.  
-- **Calm, empathetic leadership scales across industries.** Use it to anchor teams during incidents, launches, and retrospectives.  
-- **Flexibility beats perfection.** Adapt plans with the same grit you used in the field; resilient systems emerge from resilient people.
+## Where I still need mentorship
+
+- Deep CS topics (algorithms, distributed systems).  
+- Running real on-call rotations with customers on the line.  
+- Leading cross-functional engineering projects (beyond student teams).  
+- Translating empathy into scalable processes (incident response, accessibility reviews, documentation ops).
+
+## Takeaways for other career-changers
+
+- Catalog your previous playbooks. You probably already know how to triage, document, and communicate—just reframe it.  
+- Stay honest about gaps. I say “student-level” every chance I get so expectations match reality.  
+- Keep serving. Whether it’s open-source docs, study groups, or honest portfolios, the service mindset still applies.

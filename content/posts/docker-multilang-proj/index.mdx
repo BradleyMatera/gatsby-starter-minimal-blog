@@ -2,113 +2,97 @@
 title: "Containerizing Multi-Language Projects with Docker: A Practical Guide"
 date: "2024-07-15"
 tags: ["Docker", "Node.js", "Python", "DevOps", "Containerization"]
-description: "Learn how to use Docker and Compose to manage polyglot services, with real-world examples, best practices, and troubleshooting tips for reliable deployments."
+description: "How I built a two-service Docker Compose lab (Node + Python), what I learned from breaking it, and why it still counts as practice—not production."
 theme: "Cloud & DevOps"
 ---
 
-> **Context:** Personal practice repo for learning how Docker + Compose handle Node + Python services; no production teams depend on this.  
-> **AI assist:** Article scaffolded with ChatGPT using notes from the `docker_multilang_project` repo; I edited it on 2025-10-15.  
-> **Status:** Student-level case study meant to document what works (and what still needs work) before I claim DevOps proficiency.
+> **Context:** Personal repo (`docker_multilang_project`) where I containerized a Node API and a Python utility. No clients, no prod traffic—just me trying to stop “works on my machine” excuses.  
+> **AI assist:** ChatGPT summarized Docker docs and suggested health-check patterns; I kept all final code/tests/manual notes in the repo.  
+> **Status:** Student exercise. Useful for onboarding and demos, but not hardened for production.
 
-## TL;DR
+## Reality snapshot
 
-- **Containers give polyglot teams a repeatable lab.** Packaging Node and Python in Docker erased “works on my machine” drift [^docker-docs][^redhat-comparison].  
-- **Compose ties services together fast.** One YAML file spins up a networked stack, proves dependencies, and highlights isolation wins.  
-- **Experiments surface behaviour differences.** Dependency failures, runtime patterns, and persistence tests stay scoped to the right container.  
-- **Next move: automate everything.** Add health checks, CI pipelines, and eventually Kubernetes to scale the blueprint.
+- Stack: Node 20 + Express (`/api`), Python 3.11 helper service, Postgres 15. Managed via Docker Compose v3.9.  
+- Use cases: practice dependency isolation, log correlation, and failure drills.  
+- Observability: JSON logs, `/healthz` endpoints, and `docker compose logs`. No ELK/Splunk stack yet.  
+- Hosting: Runs locally or on a single VM. Not deployed for real users.
 
-## Project Snapshot
-
-- **Goal:** Ship a two-service project (Python calculations + Node API) with Docker, prove isolation, and rehearse failure recovery.  
-- **Repository:** [github.com/BradleyMatera/docker_multilang_project](https://github.com/BradleyMatera/docker_multilang_project).  
-- **Focus areas:** Dependency boundaries, service networking, and troubleshooting under load.
-
-## Architecture & Files
-
-**Project layout:**
+## Architecture overview
 
 ```
 docker_multilang_project/
 ├── docker-compose.yml
+├── node-service/
+│   ├── Dockerfile
+│   ├── package.json
+│   └── server.js
 ├── python-service/
 │   ├── Dockerfile
 │   └── app.py
-└── node-service/
-    ├── Dockerfile
-    ├── package.json
-    └── server.js
+└── scripts/
+    └── smoke.sh
 ```
 
-**Python service Dockerfile:**
+- `node-service`: REST API that exposes math endpoints and proxies to the Python service when needed.  
+- `python-service`: Handles CPU-heavy calculations/string parsing. Communicates via HTTP on the internal network.  
+- `scripts/smoke.sh`: Quick smoke test hitting both services + Postgres after `docker compose up`.
 
-```dockerfile
-FROM python:3.11-slim
-WORKDIR /app
-COPY app.py .
-CMD ["python", "app.py"]
-```
-
-**Node service Dockerfile:**
-
-```dockerfile
-FROM node:20-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY server.js .
-EXPOSE 3000
-CMD ["node", "server.js"]
-```
-
-**Compose orchestration:**
+## Compose highlights
 
 ```yaml
-version: "3.9"
 services:
+  api:
+    build: ./node-service
+    env_file: .env.api
+    depends_on: [db]
+    ports: ["4000:4000"]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4000/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
   python:
     build: ./python-service
-    container_name: python-service
-  node:
-    build: ./node-service
-    container_name: node-service
-    ports:
-      - "3000:3000"
-    networks:
-      - app-net
-networks:
-  app-net:
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata:
 ```
 
-- Custom network keeps inter-service calls private, while port 3000 exposes the Node API to localhost.
+- **Why:** Health checks keep Compose from routing traffic to sick containers. Named volumes preserve data. `.env` keeps secrets out of Git.  
+- **Observability:** Logs include `traceId` so I can follow a request from Node → Python. When I tail logs, it’s clear which container said what.
 
-## Experiments & Findings
+## Experiments & results
 
-1. **Dependency isolation:** Removing Express broke only the Node build, proving issues stay scoped to their service [^docker-best-practices].  
-2. **Runtime behaviour:** Side-by-side loops highlighted synchronous Python vs asynchronous Node logs, reinforcing observability needs.  
-3. **Persistence test:** Mounting `./logs:/app/logs` kept artifacts between restarts, while removing the volume confirmed default ephemerality [^docker-volumes].
+| Experiment | Observation | Outcome |
+| --- | --- | --- |
+| Remove Express dependency mid-run | Only the Node build failed; Python kept serving other requests | Proof that isolation works. |
+| Force Python infinite loop | Node flagged the dependency timeout but stayed healthy | Need better circuit breakers, but UI didn’t crash. |
+| Mount log volume (`./logs:/app/logs`) | Restarting containers kept historical logs | Good for debugging; README now reminds me to clean the directory. |
+| Scale Node tier (`docker compose up --scale api=3`) | Load balanced across three containers (still localhost traffic) | Helps me explain horizontal scaling during interviews. |
 
-## Results
+## Tooling & docs
 
-- **Launch speed:** On my M2 laptop the containers boot in ~5 seconds; the older VirtualBox VMs I used for class easily took 30+ seconds (anecdotal but noticeable).  
-- **Failure containment:** Induced infinite loops/crashes stayed inside the target container, which is exactly what I wanted to rehearse.  
-- **Horizontal scaling:** `docker compose up --scale node=3` simulated concurrent calls without touching code, even if it’s still just localhost traffic.  
-- **Troubleshooting toolkit:** `docker exec` shells and `docker logs` streams kept debugging fast; I document each command in the README for future me.
+- **Scripts:** `scripts/new-cert.sh`, `scripts/smoke.sh`, and `scripts/cleanup.sh` keep routines consistent.  
+- **Documentation:** `README.md` covers setup, health checks, and TODOs; `docs/runbook.md` logs drills (failures, fixes, lessons).  
+- **Security:** Multi-stage builds, `npm audit`, and `pip-audit` run before merges. Findings get tracked in repo issues.  
+- **CI/CD:** GitHub Actions builds the images, runs lint/tests, and publishes artifacts so I can pull them on another machine.
 
-## Lessons & Next Steps
+## What still needs work
 
-- **Containers ≠ VMs:** They share the host kernel, so mind OS compatibility (e.g., WSL on Windows) [^ibm-comparison].  
-- **Secure builds:** Adopt multi-stage builds and vulnerability scans before production pushes [^docker-security].  
-- **What’s next:** Add healthchecks, wire CI to build/push images, and explore Kubernetes once the stack needs orchestrated scaling.
+- CI smoke tests that spin up the stack in GitHub Actions and run `scripts/smoke.sh`. Currently manual.  
+- More realistic observability stack (Prometheus + Grafana or at least Loki) instead of plain logs.  
+- Automated cleanup for volumes/networks so teammates don’t end up with stale resources.  
+- Better story around secrets (maybe doppler/.env vault). For now I rely on `.env.example` files.
 
-## Key Takeaways
+## Links
 
-- **Compose is the on-ramp.** Start here to understand networking, volumes, and process isolation.  
-- **Observability matters from day one.** Logs, probes, and volumes show whether services behave like you expect.  
-- **Iterate toward production.** Layer automation, security, and orchestration as complexity grows.
-
-[^docker-docs]: Docker. "What is a Container?" Accessed October 2025. https://www.docker.com/resources/what-container/.
-[^redhat-comparison]: Red Hat. "Containers vs VMs." Accessed October 2025. https://www.redhat.com/en/topics/containers/containers-vs-vms.
-[^docker-best-practices]: Docker. "Best Practices for Dockerfiles." Accessed October 2025. https://docs.docker.com/develop/develop-images/dockerfile_best-practices/.
-[^docker-volumes]: Docker. "Use Volumes." Accessed October 2025. https://docs.docker.com/storage/volumes/.
-[^ibm-comparison]: IBM. "Containers vs Virtual Machines." Accessed October 2025. https://www.ibm.com/cloud/blog/containers-vs-vms.
-[^docker-security]: Docker. "Docker Security." Accessed October 2025. https://docs.docker.com/engine/security/.
+- Repo: [https://github.com/BradleyMatera/docker_multilang_project](https://github.com/BradleyMatera/docker_multilang_project)  
+- Smoke test script example: [https://gist.github.com/BradleyMatera/docker-multilang-smoke](https://gist.github.com/BradleyMatera/docker-multilang-smoke)  
+- Trivy scan notes: `docs/security.md`

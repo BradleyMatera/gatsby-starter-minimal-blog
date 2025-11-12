@@ -3,67 +3,72 @@ title: "Certifications and Continuous Learning"
 date: "2025-05-12"
 slug: "/certifications-continuous-learning"
 tags: ["Learning", "Certifications", "Career Growth"]
-description: "How I structure exam prep, online courses, and ongoing practice to stay sharp in a fast-moving industry."
+description: "The playbook I use to prep for AWS exams, ship supporting projects, and keep myself accountable between renewals."
 theme: "Cloud & DevOps"
 ---
 
-> **Context:** My personal certification/study system as an early-career developer (Full Sail grad, AWS intern, no paid SWE role yet).  
-> **AI assist:** ChatGPT helped outline this article; I edited on 2025-10-15 using my actual study tracker.  
-> **Status:** Student playbook—not official AWS training guidance—so treat the timelines and tactics as my own experience.
+> **Context:** Full Sail B.S. student + AWS intern documenting how I study. These tactics come from my Notion tracker, not an official training team.  
+> **AI assist:** ChatGPT helped outline the sections and summarize Study Hall notes; I reconciled everything with my actual tracker on 2025-10-15.  
+> **Status:** Early-career roadmap. Certifications prove I can learn, but they don’t replace production experience—so I pair every badge with a project.
 
-## TL;DR
+## Reality snapshot
 
-- **Learning is a permanent sprint.** I mix certifications, free courses, and experiments so knowledge compounds instead of expiring.  
-- **Roadmaps come from exam guides.** AWS blueprints become checklists that steer weekly study and reveal gaps fast [^exam-guide].  
-- **Practice beats memorisation.** Labs, flashcards, and teach-backs force me to apply concepts before exam day.  
-- **Credentials feed real work.** Each badge pushes improvements into architecture reviews, interview drills, and documentation habits.
+- Active certs: **AWS Solutions Architect – Associate (Aug 2024–Aug 2027)** and **AWS Certified AI Practitioner (Feb 2025–Feb 2028)**.  
+- Supporting coursework: freeCodeCamp JS Algorithms + Responsive Web Design, plus LinkedIn Learning soft skills (communication, GTD, personal branding).  
+- Tracker: Notion database with columns for domain, study hours, lab status, exam date, renewal reminders, and “paired project” (the thing I’ll build to prove it).
 
-## Recent Credentials & Focus Areas
+## My study pipeline
 
-- **AWS Solutions Architect – Associate (Aug 2024 → Aug 2027):** Architect resilient, cost-aware AWS workloads; schedule renewal six months early [^saa].  
-- **AWS Certified AI Practitioner (Feb 2025 → Feb 2028):** Grounded responsible AI usage and Bedrock deployment patterns [^ai-practitioner].  
-- **freeCodeCamp JavaScript Algorithms & Data Structures (Dec 2024):** Sharpened algorithmic thinking with vanilla JS challenges.  
-- **freeCodeCamp Responsive Web Design (Nov 2024):** Reinforced accessible layouts, flexbox, and grid fluency.  
-- **LinkedIn Learning soft-skill tracks (2024–2025):** Communication, branding, and GTD coursework to level up stakeholder collaboration.
+### 1. Start with the exam guide
 
-I log expirations in Notion, add reminders six months ahead, and pair each renewal with a project to prove retention.
+- Copy the official outline into Notion. I color-code each domain: **green** (confident), **yellow** (needs lab), **red** (needs deep dive).  
+- Add sample question links + whitepapers per domain. If I can’t explain the whitepaper to a friend, it stays red.
 
-## Study System
+### 2. Plan the reps
 
-### Start with the guide
+| Practice type | Tools | Notes |
+| --- | --- | --- |
+| **Hands-on labs** | AWS Skill Builder, Sandbox accounts | Spin up services, break them on purpose, then fix using CloudWatch + docs. |
+| **Flashcards** | Anki decks per domain | Focus on limits, IAM condition keys, service integrations. Spaced repetition handles the rest. |
+| **Teach-backs** | Loom recordings, study group | If I can’t explain a topic in 5 minutes, I haven’t learned it. I re-record after each round. |
+| **Mock exams** | Tutorials Dojo, AWS practice tests | Take them cold once per week. Anything below 80% becomes next week’s lab. |
 
-- Download the official exam outline, convert domains to a status spreadsheet, and revisit progress weekly [^exam-guide].
+### 3. Pair a project with each badge
 
-### Blend theory with reps
+- **SAA-C03:** Built a Well-Architected checklist into Car-Match + the AWS internship capstone. Every section (Ops, Security, Reliability, Performance, Cost) gets a bullet in the repo README.  
+- **AI Practitioner:** Logged every Bedrock experiment (prompt templates, guardrails, cost estimates) in `notes/bedrock/`. The goal wasn’t to become an ML engineer—just to show I can wire AI responsibly.  
+- **freeCodeCamp certificates:** Used the JS Algorithms work to refresh LeetCode patterns and the Responsive Web Design course to audit this portfolio’s layout.
 
-- **Hands-on labs:** Run AWS Skill Builder scenarios and spin up disposable environments to build intuition.  
-- **Spaced repetition:** Maintain Anki decks for acronyms, service limits, and scenario cues.  
-- **Teach-backs:** Record Loom explainers; if the story is fuzzy, loop the topic back into study sessions.
+### 4. Close the loop
 
-### Reflect immediately
+- **Retro doc:** After each exam, I write a short postmortem: what worked, what didn’t, what to revisit in 3/6/12 months. Lives in `notes/certs/<exam>.md`.  
+- **Renewal reminders:** Notion triggers at T-6 months, T-3 months, and T-1 month. Each reminder includes the “paired project” I’ll refresh (e.g., re-run cost optimization labs, rebuild a CI/CD pipeline).  
+- **Public accountability:** One LinkedIn post per milestone. Not for clout—just to keep friends/mentors in the loop.
 
-- Post-exam, capture weak topics, schedule mini-projects (e.g., Bedrock-powered accessibility copy) to convert notes into working code.
+## Current roadmap
 
-## Ship What You Learn
+| Milestone | Target | Supporting project |
+| --- | --- | --- |
+| AWS Developer Associate | Feb 2026 | Rebuild CheeseMath backend with AWS SAM + full test coverage. |
+| AWS Security Specialty (stretch) | Late 2026 | Document IAM guardrails + incident drills for personal projects. |
+| Zig + WebGPU deep dives | Ongoing | Expand Triangle Shader Lab and OBJ Parser with performance benchmarks + wasm builds. |
+| Soft skills refresh | Quarterly | Run peer workshops on documentation, async updates, and honesty audits. |
 
-- **Side projects:** Apply well-architected reviews, multi-AZ defaults, and IaC templates before marking anything "done."  
-- **Interview prep:** Reuse algorithm drills to narrate data-structure choices quickly.  
-- **Documentation:** Soft-skill courses influence retrospectives, stakeholder email templates, and portfolio narratives.
+## Evidence & templates
 
-## Keep Momentum Alive
+- **Certification tracker (Notion template):** [https://www.notion.so/bradleymatera/cert-tracker](https://www.notion.so/bradleymatera/cert-tracker) (duplicate-friendly).  
+- **Lab notes repo:** [https://github.com/BradleyMatera/learning-journal](https://github.com/BradleyMatera/learning-journal) (contains study logs, mock exam scores, lab scripts).  
+- **Prompt logs:** `notes/ai-prompts.md` documents when AI helped with study summaries.  
+- **Project tie-ins:** Check the READMEs for Car-Match, CheeseMath, and the AWS internship capstone—they call out which exam domain they reinforce.
 
-1. **Quarterly themes:** Choose a focus (security automation, data engineering) to align books, courses, and experiments.  
-2. **Accountability:** Share progress with a study circle and LinkedIn posts so goals stay visible.  
-3. **Depth + breadth:** Earn badges for fundamentals while exploring emerging tech like Zig and WebGPU for curiosity.
+## Lessons learned
 
-Continuous learning works when study, practice, and teaching form a tight loop. Every credential is a prompt to ship something better.
+- The exam isn’t the finish line; the project you ship afterward is.  
+- Honest notes matter more than badges. Tracking energy, sleep, and morale kept me from cramming myself into burnout.  
+- Share the playbook. Letting classmates copy my Notion setup keeps us all accountable and surfaces gaps I missed.
 
-## Key Takeaways
+## References
 
-- **Map the exam before you open the book.** A checklist keeps studying intentional.  
-- **Reps create recall.** Labs, flashcards, and teach-backs embed concepts deeper than rereading.  
-- **Translate credentials into impact.** Document how each course or exam changes your architecture, communication, or interview game.
-
-[^saa]: AWS Certification, “AWS Certified Solutions Architect – Associate,” accessed May 2025, https://aws.amazon.com/certification/certified-solutions-architect-associate/.
-[^ai-practitioner]: AWS Certification, “AWS Certified AI Practitioner,” accessed May 2025, https://aws.amazon.com/certification/certified-ai-practitioner/.
-[^exam-guide]: AWS Certification, “Exam Guides and Sample Questions,” accessed May 2025, https://aws.amazon.com/certification/certification-prep/guide/.
+[^saa]: AWS Certification, “AWS Certified Solutions Architect – Associate,” accessed May 2025.  
+[^ai-practitioner]: AWS Certification, “AWS Certified AI Practitioner,” accessed May 2025.  
+[^exam-guide]: AWS Certification, “Exam Guides and Sample Questions,” accessed May 2025.

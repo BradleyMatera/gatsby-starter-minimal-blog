@@ -2,119 +2,105 @@
 title: "Developing an Interactive Pokédex: API Integration and Responsive Design"
 date: "2024-09-01"
 tags: ["JavaScript", "APIs", "Tailwind CSS", "Accessibility", "Web Development"]
-description: "A case study on building a searchable Pokédex using PokeAPI and Pokémon TCG API, with emphasis on data fetching, error handling, and user experience."
+description: "How I built a Gen 1 Pokédex with PokeAPI + Pokémon TCG API, the trade-offs I made, and what’s still missing."
 theme: "Front-End & Full-Stack"
 ---
 
-> **Context:** Personal front-end practice app that consumes public APIs; no login, no production users.  
-> **AI assist:** ChatGPT + Copilot drafted sections of the UI and fetch logic; I kept the prompt log in the repo.  
-> **Status:** Metrics below come from Chrome DevTools on my laptop—they’re directional, not production SLAs.
+> **Context:** Personal side project hosted on GitHub Pages. No auth, no production users—just a learning sandbox for API integration and accessibility.  
+> **AI assist:** ChatGPT/Copilot generated some UI skeletons and fetch helpers. Every AI-assisted file is noted in the repo.  
+> **Status:** Live demo works today; offline mode, tests, and Gen 2+ support remain future work.
 
-## TL;DR
+## Reality snapshot
 
-- **API mashup delivers fast answers (for a side project).** PokeAPI + Pokémon TCG API data loads quickly on my machine thanks to caching + defensive fetch logic [^pokeapi-docs][^tcg-docs].  
-- **Accessibility is built-in.** Semantic HTML, `aria-live` announcements, and keyboard traps prevented late-stage fixes [^wcag-guidelines].  
-- **Responsive layout stays snappy.** Utility classes keep cards readable from mobile to desktop.  
-- **Try it live:** [Interactive Pokédex](https://bradleymatera.github.io/Interactive-Pokedex) · [GitHub repo](https://github.com/BradleyMatera/Interactive-Pokedex).
+- Two API sources: PokeAPI (stats/types/sprites) and Pokémon TCG API (card art).  
+- Stack: Vanilla JS + Tailwind CSS + small helper modules.  
+- Hosting: GitHub Pages with GitHub Actions handling lint/build/deploy.  
+- Limitations: Only Gen 1 (151 Pokémon), no service worker, rate limits show “please try again” warnings during heavy testing.
 
-## Project Goals
+## Architecture & data flow
 
-- Combine multiple public APIs into a single, searchable Pokédex experience.
-- Keep the UI responsive and touch-friendly across breakpoints.
-- Ship with accessibility support (screen readers, keyboard, contrast) built in.
-- Fail gracefully when fetches error or rate limits trigger.
-
-Limited to the first 151 Pokémon, the app stayed focused on API-driven development techniques.
-
-## Implementation Highlights
-
-### Data sources & flow
-
-- **PokeAPI** supplies stats, types, sprites, and evolution data via REST endpoints [^pokeapi-docs].
-- **Pokémon TCG API** adds card art and metadata, giving each Pokémon a trading-card styled panel [^tcg-docs].
-- Responses land in a `Map` cache keyed by query to avoid duplicate network requests.
-
-### Architecture & UI
-
-- **Semantic HTML** wraps each panel with labels and ARIA hooks so screen readers announce context.
-- **Tailwind CSS** utilities (`grid-cols-1 md:grid-cols-3`, `sr-only`, `focus-visible:outline`) keep layout and focus styling consistent.
-- **Module split**: search logic, card rendering, and the bonus type-quiz each live in their own ES module for clarity.
-- **GitHub Pages deploy** runs through Actions to lint, build, and publish automatically on main merges.
-
-### Search, caching & rendering
-
-The search form exposes the intent to assistive tech and keeps controls grouped:
-
-```html
-<form id="searchForm" class="flex gap-2" aria-label="Search for a Pokémon">
-  <label for="searchInput" class="sr-only">Pokémon name or ID</label>
-  <input
-    id="searchInput"
-    type="search"
-    placeholder="Search Pokémon..."
-    class="p-2 border rounded grow"
-    autocomplete="off"
-    required
-  />
-  <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded">Search</button>
-</form>
+```
+interactive-pokedex/
+├── src/
+│   ├── app.js
+│   ├── api.js
+│   ├── ui/
+│   └── utils/
+├── public/
+│   └── index.html
+└── .github/workflows/deploy.yml
 ```
 
-Debounced fetches reuse cached data when possible and surface helpful errors when they cannot:
+- `api.js` handles PokeAPI + TCG fetches, caches results in a `Map`, and exposes a single `getPokemon(query)` function.  
+- `app.js` wires the search form, results grid, and error states.  
+- `deploy.yml` lints, builds, and publishes to Pages on every merge to `main`.
 
-```js
-const cache = new Map();
+## Accessibility & UX decisions
 
-async function searchPokemon(query) {
-  if (cache.has(query)) {
-    renderPokemon(cache.get(query));
-    return;
-  }
+- Semantic HTML: `main`, `section`, `article`, etc. Each card has a descriptive heading + region label.  
+- Forms: search input has a `<label>` (visually hidden via `sr-only`). Buttons announce state changes via `aria-live="polite"`.  
+- Keyboard navigation: `tabindex`, `focus-visible` styles, and skip links help keyboard-only users.  
+- Color contrast + dark mode: Tailwind tokens ensure 4.5:1 contrast minimum; `prefers-color-scheme` toggles styles automatically.  
+- Error messaging: rate-limit or network failures show inline notices + instructions to retry.
 
-  try {
-    const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${query.toLowerCase()}`);
-    if (!res.ok) throw new Error('Pokémon not found');
-    const data = await res.json();
-    cache.set(query, data);
-    renderPokemon(data);
-  } catch (error) {
-    showError(error.message);
-  }
-}
+## Performance considerations
+
+- Warm-cache searches respond in under one second on my laptop; throttled 3G loads around two seconds (Chrome DevTools numbers).  
+- Simple caching layer (Map + sessionStorage) avoids duplicate API calls.  
+- Images lazy-load via `loading="lazy"`; sprites have width/height attributes to prevent layout shifts.  
+- Lighthouse scores ~98–100 for accessibility/performance locally; I log scores in the repo issues backlog.
+
+## Deployment workflow
+
+```yaml
+name: deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - uses: actions/deploy-pages@v4
 ```
 
-### Error handling & accessibility
+- Keeps build artifacts immutable. Failures in lint/tests stop the deploy before it hits Pages.
 
-- Fallback messaging covers 404s, rate limits, and offline states before handing back cached data.
-- An `aria-live="polite"` region announces search results and errors without hijacking focus.
-- Keyboard shortcuts and `focus-visible` styling keep card grids navigable without a mouse.
-- Alternate high-contrast theme keeps the interface usable for low-vision visitors [^wcag-guidelines].
+## What’s next
 
-## Results
+- Add Service Worker caching so Gen 1 data works offline.  
+- Expand beyond Gen 1 with pagination + infinite scroll (needs better caching + UI).  
+- Write Jest tests for fetch logic and use Playwright for end-to-end flows.  
+- Document rate-limit handling clearly on the site (currently only in README).
 
-- **Latency:** Chrome DevTools shows warm-cache searches returning in well under a second on my laptop; mobile-first load hovers around 2s when throttled.  
-- **Accessibility:** Lighthouse accessibility scores hover around 98–100 locally, and manual keyboard testing confirms focus order.  
-- **User validation:** Informal tests with a handful of classmates ensured the search flow made sense; I still want broader feedback.
+## Links
 
-## Lessons Learned
+- Live demo: [https://bradleymatera.github.io/Interactive-Pokedex/](https://bradleymatera.github.io/Interactive-Pokedex/)  
+- Repo: [https://github.com/BradleyMatera/Interactive-Pokedex](https://github.com/BradleyMatera/Interactive-Pokedex)  
+- Prompt log + runbooks: see `/docs/` inside the repo
 
-- **Respect API limits early.** Caching plus throttled fetches stopped rate-limit spikes during classroom demos.
-- **Responsive grids need UX testing.** Tailwind utilities accelerated layout work, but verifying card order and heights on tablets still required iteration.
-- **Bake accessibility in.** Wiring ARIA and screen-reader text before styling avoided painful retrofits.
-- **Accuracy matters.** Proper pagination handling kept the dataset complete instead of assuming single-page responses.
+## References
 
-## Next Steps
-
-- Expand beyond Gen 1 with infinite scrolling and lazy loading.
-- Ship offline support with Service Workers to cache the first 151 records.
-- Add unit tests around fetch orchestration and error branches.
-
-## Key Takeaways
-
-- **Layering APIs is powerful when you cache aggressively.**
-- **Accessibility and performance are easier when prioritized at project kickoff.**
-- **Responsive utility-first CSS still needs usability validation across devices.**
-
-[^pokeapi-docs]: PokeAPI. "Documentation." Accessed October 2025. https://pokeapi.co/docs/v2.
-[^tcg-docs]: Pokémon TCG Developers. "API Reference." Accessed October 2025. https://docs.pokemontcg.io/.
-[^wcag-guidelines]: W3C. "WCAG 2.1 Guidelines." Accessed October 2025. https://www.w3.org/TR/WCAG21/.
+[^pokeapi-docs]: PokeAPI, “Documentation,” https://pokeapi.co/docs/v2  
+[^tcg-docs]: Pokémon TCG Developers, “API Reference,” https://docs.pokemontcg.io/  
+[^wcag-guidelines]: W3C, “WCAG 2.1 Guidelines,” https://www.w3.org/TR/WCAG21/

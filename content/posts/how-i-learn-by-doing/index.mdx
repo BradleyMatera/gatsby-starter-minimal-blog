@@ -2,85 +2,61 @@
 title: "How I Learn by Doing: My CodePen Journey"
 date: "2025-03-22"
 tags: ["Projects", "JavaScript", "React", "CSS", "Learning", "CodePen"]
-description: "What a series of CodePen experiments taught me about JavaScript memory management, React state, event handling, and visualisation."
+description: "A tour of the CodePen experiments I rely on to practice front-end skills, break things safely, and document the fix."
+theme: "Front-End & Full-Stack"
 ---
 
-> **Context:** CodePen is where I practice front-end concepts while I finish school and internships—I haven’t shipped these as client work.  
-> **AI assist:** Some pens started as ChatGPT or Copilot scaffolds; I label that in each pen description and edited this post on 2025-10-15.  
-> **Status:** Learning log meant to show how I iterate, not proof of production experience.
+> **Context:** CodePen is my low-stakes playground while I knock out school and internship work. None of these pens are production apps—they’re teaching myself out loud.  
+> **AI assist:** Copilot/ChatGPT sometimes generated starter components or regex patterns. Each pen description and this post label where AI helped.  
+> **Status:** Learning log, not a portfolio of client projects.
 
-## TL;DR
+## Why CodePen?
 
-- **I learn best by shipping tiny experiments.** CodePen lets me prototype ideas, break them safely, and document the fix.  
-- **Each pen targets one skill.** Garbage collection visuals, React state, audio handling, Markdown rendering, and canvas maths all earned their own sandbox.  
-- **Iterate, instrument, document.** Logs, edge-case tests, and inline notes turn experiments into reusable references.  
-- **Next step: productionise.** Move the most valuable pens to GitHub repos with accessibility checks and READMEs.
+- **Instant feedback:** No local setup; I can prototype an idea in minutes.  
+- **Safe failure:** Breaking a pen doesn’t take down Netlify or a Render backend.  
+- **Documentation:** Every pen description now includes a “Reality” block (what works, what doesn’t, what AI wrote).
 
-## Why CodePen Works
+## Anchor pens & lessons
 
-- Live previews encourage quick iterations instead of giant refactors.  
-- Breaking features on purpose reveals how APIs fail, not just how they succeed.  
-- Documenting lessons inside each pen makes future refreshers fast.
+| Pen | Link | Focus | Reality snapshot |
+| --- | --- | --- | --- |
+| Garbage Collection Visualizer | [https://codepen.io/student-account-bradley-matera/pen/ZYzoWpL](https://codepen.io/student-account-bradley-matera/pen/ZYzoWpL) | Mark-and-sweep animation using vanilla JS + CSS transitions | Helps me explain GC interviews. Numbers are illustrative, not actual engine data. |
+| React Calculator | [https://codepen.io/student-account-bradley-matera/pen/ogvGZjJ](https://codepen.io/student-account-bradley-matera/pen/ogvGZjJ) | Controlled inputs + `useState` patterns | Tests edge cases (multiple decimals, divide by zero). Keyboard support still TODO. |
+| Sound Machine | [https://codepen.io/student-account-bradley-matera/details/dPbVvoa](https://codepen.io/student-account-bradley-matera/details/dPbVvoa) | Keyboard accessibility + audio APIs | Resetting `audio.currentTime` prevents overlapping sounds; mobile support is limited. |
+| Markdown Previewer | [https://codepen.io/student-account-bradley-matera/pen/ZYzXeEJ](https://codepen.io/student-account-bradley-matera/pen/ZYzXeEJ) | 3rd-party libs (`marked`) + sanitization | Handles malformed input gracefully; still need unit tests before promoting to GitHub. |
+| Regex Analyzer | [https://codepen.io/student-account-bradley-matera/details/dyEYbPO](https://codepen.io/student-account-bradley-matera/details/dyEYbPO) | Regex visualisation + copy-to-clipboard flow | Highlights matches, explains capture groups. Heavy use of AI-generated starter text. |
+| Random Quote Generator v1/v2 | [https://codepen.io/student-account-bradley-matera/pen/azoLpeG](https://codepen.io/student-account-bradley-matera/pen/azoLpeG) / [https://codepen.io/student-account-bradley-matera/pen/PwYJWMY](https://codepen.io/student-account-bradley-matera/pen/PwYJWMY) | Async fetches, debouncing, design iteration | Shows how I go from “functional” to “nicer UX” in public. |
 
-## Project Highlights
+## Learning pattern
 
-### JavaScript Garbage Collection Demo
-- **CodePen:** [View the demo](https://codepen.io/student-account-bradley-matera/pen/ZYzoWpL)  
-- **Goal:** Visualise the mark-and-sweep garbage collection algorithm used by modern JavaScript engines (described in MDN’s “Memory Management” guide).  
-- **Implementation:** Users click buttons to allocate “green” blocks. When capacity is exceeded, the simulation marks unreachable nodes in red and removes them, mirroring how the engine deallocates unreachable objects.  
-- **Lesson:** Understanding the mark-and-sweep cycle explains why long-lived references can cause leaks even in garbage-collected languages.
+1. **Set a hypothesis:** e.g., “Can I explain garbage collection visually?” or “Can I mask card numbers accessibly?”  
+2. **Clone a pen or start blank:** Add a `Reality` block at the top describing scope + AI involvement.  
+3. **Instrument early:** `console.table` logs, accessible live regions, or overlays help me debug without leaving the pen.  
+4. **Break it on purpose:** Try invalid inputs, rapid keyboard events, or network failures. Log what broke and why.  
+5. **Document:** Notes go in the pen description + my `codepen-journal.md` file (repo: `learning-journal`).  
+6. **Promote (if deserving):** Once a pen stays stable, I move it into a GitHub repo with tests + accessibility checks (CheeseMath started this way).
 
-### React Calculator
-- **CodePen:** [Try the calculator](https://codepen.io/student-account-bradley-matera/pen/ogvGZjJ)  
-- **Goal:** Practise React hooks and controlled components.  
-- **Implementation:** A functional component stores operands and operators with `useState`. Guard clauses prevent invalid decimal entries, and the UI updates on every state change.  
-- **Lesson:** `useState` preserves values between renders, and guarding against invalid input prevents `NaN` cascades.
+## Example: Card Obscurer (CheeseMath)
 
-### Sound Machine
-- **CodePen:** [Launch the soundboard](https://codepen.io/student-account-bradley-matera/details/dPbVvoa)  
-- **Goal:** Learn keyboard accessibility and HTML5 audio controls.  
-- **Implementation:** Key events trigger audio playback. Resetting `audio.currentTime` before replay ensures samples do not overlap.  
-- **Lesson:** Event listeners and media APIs must handle rapid user interaction; resetting the playhead keeps the experience clean and accessible.
+- Built to practice credit card masking/validation.  
+- Live demo sits at [https://bradleymatera.github.io/CheeseMath-Jest-Tests/](https://bradleymatera.github.io/CheeseMath-Jest-Tests/); pen version shows the original concept.  
+- Lessons learned: regex alone isn’t enough; I added Luhn checks and clear error messaging.  
+- Next steps: integrate axe/Lighthouse audits before calling it “done.”
 
-### Markdown Previewer
-- **CodePen:** [Open the previewer](https://codepen.io/student-account-bradley-matera/pen/ZYzXeEJ)  
-- **Goal:** Explore integrating third-party libraries into a reactive UI.  
-- **Implementation:** The app uses the `marked` library to convert Markdown into HTML in real time. Fallback logic prevents crashes when the user submits malformed text.  
-- **Lesson:** Libraries accelerate development, but defensive programming (try/catch, input validation) keeps the experience resilient.
+## How I keep myself honest
 
-### Random Quote Generators
-- **CodePens:** [Version 1](https://codepen.io/student-account-bradley-matera/pen/azoLpeG) and [Version 2](https://codepen.io/student-account-bradley-matera/pen/PwYJWMY)  
-- **Goal:** Strengthen familiarity with arrays, randomisation, and async patterns.  
-- **Implementation:** The first version uses a static quote list and ensures tweets respect the 280-character limit. The second iteration adds UI polish and debounced button handlers.  
-- **Lesson:** Iterating on a project teaches reuse, performance tweaks, and the value of small design refinements.
+- **AI disclosure:** Pen descriptions state what Copilot/ChatGPT generated. If a section is mostly AI, I mark it “Needs manual review.”  
+- **Backlog:** `codepen-ideas.md` lists upcoming experiments and links to research (MDN, WCAG, etc.).  
+- **Retros:** At the end of each month I log “Pens that graduated to GitHub” vs “Pens that stalled.” Helps me avoid hoarding half-baked demos.
 
-### Canvas Data Visualisation
-- **CodePen:** [Inspect the chart](https://codepen.io/student-account-bradley-matera/details/dyEYbPO)  
-- **Goal:** Practice drawing with the `<canvas>` API and scaling numeric data.  
-- **Implementation:** Users pick a range, the script generates random values, and bars are scaled to fit the canvas height.  
-- **Lesson:** Canvas coordinates start at the top-left, so translating values and constraining heights is critical for accurate charts.
+## Next steps
 
-## Learning Patterns
+- Convert top-performing pens (Garbage Collection, Sound Machine, Regex Analyzer) into GitHub repos with tests + CI.  
+- Add automated axe/Lighthouse checks via GitHub Actions for the pens I embed into the portfolio.  
+- Build a “skills index” page mapping each pen to the concepts it reinforces—useful for interview prep and peer mentoring.
 
-1. **Set a hypothesis.** Decide what you want to observe (“How does garbage collection work?” “How do controlled inputs behave?”).  
-2. **Prototype quickly.** CodePen’s live preview encourages small, incremental changes rather than large refactors.  
-3. **Instrument and test.** I log outputs, try edge cases, and purposely break functionality to discover hidden bugs.  
-4. **Document in place.** Each pen now includes a short summary and relevant documentation links so future revisits are faster.
+## References
 
-## Next Steps
-
-- Convert the most useful pens into GitHub repositories with README notes and basic tests.  
-- Add automated accessibility checks (axe, Lighthouse) to the soundboard and calculator.  
-- Build a blog index mapping each pen to the skill it reinforces for interview prep and mentorship.
-
-## Key Takeaways
-
-- **Make learning visible.** Each experiment includes notes, resource links, and logs so future-me remembers the “why.”  
-- **Test edge cases deliberately.** Triggering rapid audio playback or broken Markdown surfaces hidden bugs.  
-- **Promote what works.** Pens that add lasting value graduate to repos with tests, accessibility checks, and documentation.
-
-## Selected Resources
-
-- MDN Web Docs, “Memory Management,” https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Memory_management.  
-- React Documentation, “State and Lifecycle,” https://react.dev/learn/state-a-components-memory.  
-- MDN Web Docs, “HTMLMediaElement,” https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement.
+- MDN Web Docs, “Memory Management,” https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Memory_management  
+- React Docs, “State and Lifecycle,” https://react.dev/learn/state-a-components-memory  
+- MDN Web Docs, “HTMLMediaElement,” https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement

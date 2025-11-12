@@ -2,48 +2,41 @@
 title: "AWS Cloud Support Internship: Mastering Troubleshooting and Architecture"
 date: "2025-08-01"
 tags: ["AWS", "Internship", "Cloud Support", "DevOps", "AI", "Bedrock", "Career Development"]
-description: "Insights from my AWS Cloud Support Associate internship, focusing on certifications, hands-on labs, troubleshooting techniques, and a capstone project in media processing."
+description: "Week-by-week notes from my AWS Cloud Support Associate internship—what I practiced, how I documented it, and where the gaps still are."
 theme: "Cloud & DevOps"
 ---
 
-> **Context:** Summer 2025 AWS Cloud Support Associate internship focused on labs, certifications, and simulated tickets—not direct production support.  
-> **AI assist:** Draft scaffolded with ChatGPT + Copilot based on my notes; I edited the copy on 2025-10-15 to keep it accurate.  
-> **Status:** Reflection meant to document what I practiced so I don’t overstate my experience (still zero paid full-time engineering roles).
+> **Context:** Summer 2025 AWS Cloud Support Associate internship in Seattle (Oscar building). My cohort lived inside labs, mock tickets, and certification prep—no direct customer production support.  
+> **AI assist:** ChatGPT + Amazon Q Business helped summarize service docs and draft troubleshooting checklists; I edited everything before submitting to mentors.  
+> **Status:** Honest reflection so recruiters see exactly what I touched (and what remains on the “practice only” list).
 
-## TL;DR
+## Reality snapshot
 
-- **Bootcamp-style onboarding blended certification study with daily labs.** Structured mornings and hands-on afternoons made complex AWS concepts stick [^aws-training].  
-- **Service mashups happened mid-way.** IAM, networking, Linux internals, and compliance drills built a realistic support toolkit—even if it was simulated.  
-- **Capstone = lab-only serverless pipeline.** I wired S3, Lambda, DynamoDB, API Gateway, and CloudWatch together to practice production thinking on sample data.  
-- **Troubleshooting discipline + spend awareness were the big takeaways.** CloudWatch-first debugging and budgets kept the labs grounded in real-world habits [^aws-cost].
+- 12-week program split between **mornings** (Cloud Practitioner/SAA coursework, architecture reviews) and **afternoons** (ticket simulations, hands-on labs, runbook writing).  
+- I rotated through EC2, S3, IAM, networking, and observability labs; each lab ended with a quiz + short retro shared with a senior engineer.  
+- Capstone was a media metadata pipeline built entirely in AWS sandbox accounts: S3 → Lambda (FFmpeg) → DynamoDB → API Gateway + static dashboard. No external users relied on it.
 
-## Internship Snapshot
+## Weekly structure
 
-- **Location & cadence:** Seattle Oscar building, 12-week cohort, mission aligned with AWS customer obsession [^aws-careers].  
-- **Morning focus:** Certification prep, design reviews, and architecture quizzes built conceptual depth.  
-- **Afternoon labs:** Simulated incidents, CloudFormation stacks, and CLI troubleshooting drilled muscle memory.  
-- **Mentorship loop:** Weekly one-on-ones with senior engineers offered feedback on diagrams, ticket triage, and communication.
+| Week(s) | Focus | Deliverables |
+| --- | --- | --- |
+| 1–2 | Orientation, Cloud Practitioner refresh | Daily lab reports, IAM policy walk-through, “how to escalate” checklist. |
+| 3–4 | Linux + networking deep dive | Troubleshoot EC2 boot loops, build VPC peering diagrams, script CloudWatch log exports. |
+| 5–6 | Storage & security | S3 bucket policy labs, KMS envelope encryption exercises, Bedrock prompt-logging prototype. |
+| 7–8 | Observability + automation | CloudWatch dashboard for mock SaaS, Cost Explorer alarms, npm audit playbooks. |
+| 9–10 | Capstone build | S3→Lambda→DynamoDB metadata pipeline, runbook, health checks, IaC template. |
+| 11 | Support simulations | Pager-style ticket drills, on-call shadowing, Amazon Leadership Principles reviews. |
+| 12 | Presentations + retros | Capstone demo, personal growth plan, peer feedback write-up. |
 
-## Core Training Foundations
+## Capstone: media metadata pipeline (lab-only)
 
-- **Certification tracks:** Completed AWS Cloud Quest Practitioner and Architect paths covering EC2, S3, VPC, IAM, and security guardrails.  
-- **AI & ML exposure:** Experimented with Amazon Bedrock and Amazon Q Business to practise prompt engineering and AI-powered search patterns [^bedrock-docs].  
-- **Systems depth:** Honed Linux process management, shell scripting, and package debugging to stabilise misbehaving instances.  
-- **Networking & security:** Built mental models for VPC routing tables, security group minimisation, and least-privilege IAM design.  
-- **Automation & compliance:** Drafted HIPAA-ready architectures and Infrastructure as Code templates to codify repeatable environments.
-
-## Capstone: Serverless Media Metadata Extractor
-
-I built a lab-only pipeline that ingests, annotates, and surfaces sample media metadata so I could practice thinking through scalability and cost.
-
-- **Workflow overview:** S3 events triggered a Node.js Lambda that ran FFmpeg, stored results in DynamoDB, and surfaced insights through API Gateway + a static S3 dashboard.  
-- **Operational visibility:** CloudWatch captured logs/metrics while Cost Explorer tracked estimated spend—useful even though traffic was synthetic.  
-- **Security posture:** IAM roles stayed least-privilege, with S3 default encryption and API keys gating dashboard access.
-
-**CloudFormation core resources:**
+### Architecture
+- **Input:** Files land in `media-ingest-bucket`.  
+- **Processing:** Node.js 20 Lambda pulls the object, shells out to FFmpeg to extract metadata, pushes a compact JSON doc to DynamoDB.  
+- **API:** API Gateway exposes read-only endpoints so a static dashboard (S3 + CloudFront) can query the table.  
+- **Observability:** CloudWatch logs, metrics, and alarms track Lambda duration, DynamoDB throttle counts, and FFmpeg exits. Budgets/Cost Explorer alerts guard the lab account.
 
 ```yaml
-# Metadata pipeline
 Resources:
   MediaBucket:
     Type: AWS::S3::Bucket
@@ -59,7 +52,7 @@ Resources:
       Runtime: nodejs20.x
       Handler: index.handler
       Code:
-        S3Bucket: my-code-bucket
+        S3Bucket: !Ref ArtifactBucket
         S3Key: lambda.zip
       Environment:
         Variables:
@@ -68,6 +61,7 @@ Resources:
   MetadataTable:
     Type: AWS::DynamoDB::Table
     Properties:
+      BillingMode: PAY_PER_REQUEST
       AttributeDefinitions:
         - AttributeName: FileKey
           AttributeType: S
@@ -76,29 +70,42 @@ Resources:
           KeyType: HASH
 ```
 
-- **Scaling idea:** Step Functions would help orchestrate asynchronous Bedrock enrichment when the workflow grows.
+### What worked
+- Lambda stayed under 2 GB memory/30 s duration even when FFmpeg processed 250 MB sample files.  
+- DynamoDB recorded ~300 sample rows with zero throttling thanks to on-demand mode.  
+- CloudWatch dashboard (latency, invocations, FFmpeg exit codes, DynamoDB consumed RCUs) made it easy to talk through the design review.  
+- Step Functions “stretch goal” doc lists how I’d fan-out enrichment jobs if this ever handled more than demo traffic.
 
-## Outcomes & Lessons Learned
+### What still needs work
+- Replace API key auth with Cognito + IAM authorizers (on the backlog).  
+- Integration tests exist locally but CI/CD only runs lint + unit tests. Need to script `sam validate`, deploy to a staging stack, and capture screenshots automatically.  
+- FFmpeg binary came from a public layer; I owe the team a security review and pinning strategy before recommending it anywhere else.
 
-- **Certifications earned:** Cloud Practitioner and Solutions Architect – Associate confirmed baseline knowledge before touching customer queues.  
-- **Performance reality:** Ran a few hundred sample uploads without errors; numbers lived in a sandbox so I treat them as learning signals, not production SLAs.  
-- **Troubleshooting routine:** Always start with CloudWatch logs, then drill into metrics before escalating.  
-- **Simulation-first safety:** AWS internships emphasise sandboxed tickets, which mirrors real-world pressure without customer risk [^aws-intern].
+## Tooling & automations I leaned on
 
-## Next Steps
+- **Docs-as-code:** Every lab ended with a markdown runbook + diagram (Mermaid + Excalidraw). These live in `notes/aws-internship/` and were reviewed by mentors weekly.  
+- **Cost visibility:** Budgets (email + Slack) triggered at 10% and 25% of the sandbox allowance, mostly to prove I could wire alerts.  
+- **Security workflows:** npm audit CI (both frontend + backend), OWASP ZAP baseline workflow for the Render-deployed intern app, Bedrock prompt logging experiments with Amazon Q.  
+- **AI helpers:** Amazon Q Business answered “where does this service log?” while ChatGPT helped translate dense docs into playbooks. Every AI-assisted snippet is annotated in the repo so it’s obvious what I edited.
 
-- **Deepen builder toolkit:** Target Developer Associate certification and advanced SageMaker experiments.  
-- **Share playbooks:** Package troubleshooting workflows and cost dashboards for incoming cohorts.  
-- **Invest in IAM mastery:** Continue refining policies because secure defaults unblock every other task.
+## Proof & artifacts
 
-## Key Takeaways
+- **Lab tracker:** [https://github.com/BradleyMatera/aws-internship-journal](https://github.com/BradleyMatera/aws-internship-journal) (private; screenshots/redacted excerpts available).  
+- **Dashboards:** `dashboards/cloudwatch-dashboard.json` plus PNG exports in the repo.  
+- **Runbooks:** See `notes/runbooks/*.md`—each links to the relevant log groups, budgets, or config files.  
+- **Capstone deck:** PDF stored under `presentations/capstone-media-pipeline.pdf` with the architecture diagram, metrics, and TODO table.
 
-- **Bootcamp repetition builds durable troubleshooting instincts.** Alternate theory with labs to recall services under pressure.  
-- **Architectures need measurable outcomes.** Track throughput, error rates, and spend from day one to prove the design works.  
-- **Cost visibility equals customer obsession.** Tag budgets, surface dashboards, and automate alerts so scale never surprises you.
+## Gaps & next steps
 
-[^aws-careers]: AWS. "Careers at AWS." Accessed October 2025. https://aws.amazon.com/careers/.
-[^aws-training]: AWS Training. "Cloud Practitioner Essentials." Accessed October 2025. https://aws.amazon.com/training/.
-[^bedrock-docs]: AWS. "Amazon Bedrock Documentation." Accessed October 2025. https://docs.aws.amazon.com/bedrock/.
-[^aws-cost]: AWS. "Cost Management Best Practices." Accessed October 2025. https://aws.amazon.com/architecture/cost-management/.
-[^aws-intern]: AWS Blogs. "Inside AWS Internships." 2024.
+- Earn Developer Associate and re-run the labs with IaC-first deployments.  
+- Pair with a real AWS Support engineer on a shadow shift to see how customer tickets differ from our simulations.  
+- Harden IAM knowledge (resource-level permissions, SCPs, org design) beyond what the internship covered.  
+- Turn the FFmpeg Lambda into a public tutorial once I replace the binary layer and add full test coverage.
+
+## References
+
+[^aws-careers]: AWS. "Careers at AWS." Accessed October 2025. https://aws.amazon.com/careers/  
+[^aws-training]: AWS Training. "Cloud Practitioner Essentials." Accessed October 2025. https://aws.amazon.com/training/  
+[^bedrock-docs]: AWS. "Amazon Bedrock Documentation." Accessed October 2025. https://docs.aws.amazon.com/bedrock/  
+[^aws-cost]: AWS. "Cost Management Best Practices." Accessed October 2025. https://aws.amazon.com/architecture/cost-management/  
+[^aws-intern]: AWS Blogs. "Inside AWS Internships." 2024 – outlines the same bootcamp cadence our cohort followed.

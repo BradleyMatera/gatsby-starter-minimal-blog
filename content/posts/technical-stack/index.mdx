@@ -3,107 +3,76 @@ title: "My Technical Stack: Languages, Frameworks, Tools, and Specialties"
 date: "2025-04-28"
 slug: "/technical-stack-2025"
 tags: ["Technical Stack", "Tools", "Process"]
-description: "A guided tour of the languages, frameworks, cloud services, and workflows I rely on—and why they fit the problems I solve."
+description: "A candid inventory of the tools I use—what I’m comfortable with, what I’m learning, and what’s purely experimental."
+theme: "Front-End & Full-Stack"
 ---
 
-> **Context:** Snapshot of the tools I actually touch as an early-career developer (Full Sail grad, AWS intern, still pre-first dev job).  
-> **AI assist:** ChatGPT helped organise this list; I filled in the comfort levels on 2025-10-15.  
-> **Status:** Everything below notes whether I’m comfortable, still learning, or just exploring so nobody mistakes breadth for mastery.
+> **Context:** Full Sail grad + AWS intern, still pre-first SWE job. This stack reflects the tech I touch in portfolio projects (Car-Match, Triangle Shader Lab, CheeseMath, AWS labs).  
+> **AI assist:** ChatGPT helped group the tools and reminded me to tag comfort levels.  
+> **Status:** Living document. I update it whenever my habits change.
 
-## TL;DR
+## Languages & comfort levels
 
-- **Stable stack beats shiny stack.** I prioritise tools with strong ecosystems, predictable upgrade paths, and automation hooks.[^typescript]
-- **Serverless + containers cover the workload spectrum.** AWS Lambda, ECS, and managed front-end hosts let me scale from prototype to production fast.
-- **Observability and IaC stay non-negotiable.** CloudWatch, OpenTelemetry, and Terraform prevent blind spots and configuration drift.
-- **Curiosity stays scoped.** I experiment with AI services, policy-as-code, and edge rendering without disrupting the proven baseline.[^bedrock]
-
-## Stack Goals
-
-- Balance delivery speed with maintainability across front end, backend, and infrastructure.
-- Choose tooling that supports accessibility, automation, and collaborative workflows.
-- Keep costs predictable through right-sized compute, serverless defaults, and observability.
-- Allocate time for targeted experiments that may evolve into next-year staples.
-
-## Core Languages
-
-| Language | Primary Use | Notes |
+| Language | Primary use | Status |
 | --- | --- | --- |
-| TypeScript | Front-end SPAs, Node.js APIs | Comfortable for prototypes; still lean on docs for advanced generics.[^typescript] |
-| JavaScript (ES2023) | Rapid prototypes, browser-first demos | Daily driver for CodePen + Gatsby work; AI helps scaffold tricky pieces. |
-| Python | Automation, scripts, data tooling | Used in AWS internship labs + FastAPI demos; practicing TDD habits. |
-| C# / Java | Strongly typed backends and interview prep | Coursework + LeetCode practice only; not production-ready yet. |
-| HTML & CSS | Semantic layouts, Tailwind/Tokens | Confident with semantics/accessibility; still learning advanced CSS art direction. |
-| PHP (legacy) | Maintenance work on inherited stacks | Light exposure through school assignments; rarely used now.
+| **TypeScript** | React SPAs, Node APIs | Comfortable for prototypes. Generics/utility types still require docs. |
+| **JavaScript (ES2023)** | CodePens, Gatsby/Vite builds | Daily driver. Async patterns + DOM APIs feel natural. |
+| **Python** | AWS labs, automation scripts, FastAPI demos | Learning. Comfortable with scripting; still new to larger apps. |
+| **HTML/CSS** | Semantic layouts, Tailwind tokens | Comfortable. Accessibility/language semantics baked into every project. |
+| **C#/Java** | Coursework + interview prep | Exploring. No production experience. |
+| **PHP** | Legacy coursework | Rarely used now. |
 
-The common thread is readability plus strong tooling. TypeScript, in particular, gives me confidence to refactor aggressively because compiler errors highlight blind spots before runtime.
+## Frameworks & libraries
 
-## Frameworks & Libraries
+- **React / Next.js / Gatsby:** Main UI stack (this site, SPA résumés, CheeseMath). Hooks + context + Suspense for state management.  
+- **Node.js + Express:** Lightweight REST APIs (BasicServerSetup, Car-Match backend).  
+- **FastAPI:** Local experiments for Convo-AI. Still prototyping.  
+- **Tailwind CSS:** Default styling approach (consistent tokens, responsive utilities).  
+- **PixiJS / Three.js:** Used in Triangle Shader Lab + other visual experiments. AI helps me reason through graphics math.  
+- **Testing:** Jest/Supertest (backend), Testing Library (frontend), Playwright (auth labs).
 
-- **React & Next.js.** My default for interactive UIs. Hooks, Suspense, and React Testing Library make state management and testing predictable.  
-- **Node.js + Express.** A thin layer for REST APIs and webhooks. Express middleware keeps auth, logging, and validation modular.  
-- **Vue & Angular (exploratory).** I periodically prototype features in these ecosystems to broaden my perspective on component architectures.  
-- **Tailwind CSS + CSS Modules.** Utility classes accelerate design systems while keeping outputs accessible.  
-- **jQuery (maintenance).** Legacy codebases still use it; understanding its patterns helps me plan incremental rewrites.
+## Cloud/DevOps toolkit
 
-## Cloud & DevOps Stack
-
-| Capability | Services / Tools | Why it is in the stack |
+| Area | Tools | Notes |
 | --- | --- | --- |
-| Hosting & Compute | AWS (Lambda, ECS, EC2), Vercel, Netlify | Lambda demos + Netlify/GitHub Pages host my portfolios; ECS/EC2 used in labs but not yet in prod. |
-| Storage & Data | DynamoDB, PostgreSQL, MongoDB, S3 | DynamoDB + S3 power serverless prototypes; relational/document stores still in learning rotation. |
-| Networking & Delivery | API Gateway, CloudFront, Nginx | API Gateway handles auth/rate limiting in labs; CloudFront/Nginx knowledge comes from coursework + experiments. |
-| Observability | CloudWatch, OpenTelemetry, Sentry | CloudWatch dashboards/logs are real; OTel/Sentry currently limited to sandbox repos. |
-| Infrastructure as Code | Terraform, AWS CDK, Serverless Framework | Terraform + Serverless manage personal projects; CDK usage limited to AWS workshops for now. |
+| Hosting & deploys | Netlify, GitHub Pages, Render, AWS (Lambda, API Gateway, EKS labs) | Netlify/Pages host most sites. Render handles Car-Match backend (free tier). AWS used for labs + serverless experiments. |
+| Data | DynamoDB, MongoDB Atlas, PostgreSQL | DynamoDB for serverless labs, Mongo for Car-Match, Postgres for BasicServerSetup prototypes. |
+| Containers | Docker Compose, ECR, EKS labs | Compose for daily usage, EKS for workshops. No production clusters yet. |
+| IaC | Terraform, SAM/Serverless Framework | Terraform for EKS labs, SAM for serverless APIs. CDK still experimental. |
+| Observability | CloudWatch, Netlify analytics, simple `/healthz` endpoints | Need to add Sentry/OTel eventually. |
 
-I aim for infrastructure that can scale horizontally with minimal manual intervention. Monitoring and IaC are non-negotiable on new projects.
+## Productivity stack
 
-## Productivity & Collaboration
+- **GitHub Actions:** CI/CD for all repos (lint, test, build, deploy).  
+- **Notion + Obsidian:** Project tracking, honesty logs, study notes.  
+- **VS Code + Copilot Chat:** Editor + AI pair programming.  
+- **Postman/Bruno:** API testing collections.  
+- **Slack + Loom:** Async updates to mentors/recruiters.  
+- **Apple Health/Whoop:** Sleep/stress data that feeds planning decisions.
 
-- **Git & GitHub.** Feature-branch workflows, pull requests with checklists, and required status checks keep changes reviewable.  
-- **GitHub Actions.** Automates linting, testing, container builds, and deployments (see my CI/CD-focused post for deeper coverage).  
-- **Postman & Bruno.** Repeatable API collections for regression testing.  
-- **VS Code + Copilot Chat.** Tailored profiles per project, EditorConfig integration, and remote SSH sessions for cloud instances.  
-- **Linux (WSL & EC2).** A consistent terminal environment streamlines shell scripts and deployment tooling.
+## Focus areas
 
-## Specialties & Focus Areas
+1. **Accessibility-first UI:** Semantic HTML, skip links, screen reader testing, color contrast.  
+2. **API design + auth:** Building JWT/Cognito flows, documenting endpoints, writing runbooks.  
+3. **CI/CD automation:** GitHub Actions templates for Netlify/Render/AWS deploys.  
+4. **Cost-aware architectures:** Serverless + free-tier hosting keep demos affordable.  
+5. **Honesty + documentation:** `honesty.md`, README “Reality” sections, and runbooks for every project.
 
-1. **API design and authentication (learning).** Building REST endpoints with predictable status codes + auth flows (JWTs, Cognito) in personal projects.  
-2. **CI/CD automation (comfortable).** GitHub Actions pipelines deploy this portfolio + lab apps; still exploring CodeBuild/cross-account IAM.  
-3. **Distributed troubleshooting (learning).** Practice correlating logs/metrics in CloudWatch; tracing/OpenTelemetry still in the sandbox.  
-4. **Low-cost architectures (comfortable for prototypes).** Serverless defaults + budget alerts keep hobby projects inexpensive.  
-5. **Accessibility-first interfaces (comfortable).** Semantic HTML, keyboard navigation, ARIA roles, and design tokens for contrast compliance.
+## Currently exploring
 
-## Currently Exploring
+- **AWS Bedrock / Q Business:** Responsible AI workflows, prompt logging, access controls.  
+- **Policy-as-code:** OPA + AWS Config for guardrails (still lab-only).  
+- **Edge rendering:** Next.js + Cloudflare Workers experiments for faster global delivery.  
+- **Zig + WebGPU:** Low-level performance practice (Triangle Shader Lab, OBJ Parser).
 
-- **AWS Bedrock & SageMaker JumpStart** for responsible AI integrations.[^bedrock]  
-- **Infrastructure policy as code** (Open Policy Agent, AWS Config) to enforce guardrails from day one.  
-- **Edge rendering** via Next.js and Cloudflare Workers to reduce latency for global users.
+## Next steps
 
-## Results
-
-- **Faster feature delivery:** On personal projects, TypeScript + React + GitHub Actions pipelines push changes to Netlify/GitHub Pages in under an hour (small teams = just me).  
-- **Predictable infrastructure:** Terraform + Serverless keep dev/prod parity for my demos; CDK is still in lab mode.  
-- **Lower operational cost:** Serverless-first choices (Lambda, DynamoDB, Vercel/Netlify free tiers) keep experimentation affordable.
-
-## Lessons Learned
-
-- **Tooling discipline beats trend chasing.** Investing in well-supported frameworks yields fewer rewrites.
-- **Observability pays back immediately.** CloudWatch dashboards and tracing expose bottlenecks before users do.
-- **Accessibility scales as a habit.** Keeping semantic HTML and design tokens central prevents expensive retrofits.
-
-## Next Steps
-
-- Pilot Bedrock-backed features with clear guardrails before broader rollout.
-- Expand policy-as-code coverage to include cost anomaly detection and tagging enforcement.
-- Experiment with edge rendering for data-light pages to improve global Lighthouse scores.
-
-## Key Takeaways
-
-- **Stable, observable stacks help teams ship faster with fewer surprises.**
-- **Serverless, containers, and IaC cover most workload shapes without heavy ops overhead.**
-- **Intentional experimentation keeps the stack modern without risking production stability.**
+- Deepen AWS Developer Associate prep (tie it to CheeseMath backend).  
+- Add tracing/log aggregation to personal projects (maybe OpenTelemetry + Grafana Cloud).  
+- Harden Car-Match backend (Mongo Atlas, Render, Ops docs) so it remains honest even when folks poke at it.  
+- Publish my GitHub Actions templates + Notion trackers so others can reuse them.
 
 ## References
 
-[^typescript]: Microsoft, “TypeScript Handbook,” accessed May 2025, https://www.typescriptlang.org/docs/.  
-[^bedrock]: AWS Documentation, “What Is Amazon Bedrock?,” accessed May 2025, https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html.
+[^typescript]: Microsoft, “TypeScript Handbook,” https://www.typescriptlang.org/docs/  
+[^bedrock]: AWS, “What Is Amazon Bedrock?,” https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html

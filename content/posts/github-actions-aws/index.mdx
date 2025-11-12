@@ -3,27 +3,25 @@ title: "Automating Deployment with GitHub Actions and AWS"
 date: "2025-07-07"
 slug: "/github-actions-aws-automation"
 tags: ["CI/CD", "GitHub Actions", "AWS", "Automation"]
-description: "A breakdown of the GitHub Actions workflows I use to test, build, and ship applications to AWS with minimal manual intervention."
+description: "My current CI/CD stack for portfolio projects—what runs, where it deploys, and how I keep it honest."
 theme: "Cloud & DevOps"
 ---
 
-> **Context:** Student-level pipelines for this Gatsby site + AWS lab projects; I don’t run enterprise-scale CI/CD yet.  
-> **AI assist:** ChatGPT helped outline this post using my `ci.yml` experiments and Skill Builder notes.  
-> **Status:** Everything here is reproducible in my repos, but some steps (S3/CloudFront) live in lab accounts instead of customer environments.
+> **Context:** These workflows power this Gatsby site (Netlify), Car-Match (GitHub Pages frontend + Render backend), CheeseMath (GitHub Pages), and AWS labs. No enterprise-scale systems—just my projects.  
+> **AI assist:** ChatGPT helped me structure the write-up; the YAML snippets come straight from the repos.  
+> **Status:** Everything described here runs today. Some AWS deploys still live in lab accounts, and I call that out below.
 
-## TL;DR
+## Reality snapshot
 
-- **Standardise pipelines to sleep better.** GitHub Actions replaces late-night manual deploys with predictable automation.  
-- **One workflow covers multiple targets.** Static sites, APIs, and containers share the same lint → test → build → deploy flow.  
-- **OIDC removes long-lived AWS keys.** Actions assume roles securely instead of storing secrets in GitHub [^oidc].  
-- **Observability and rollback steps make deploys reversible.** Smoke tests, tagging, and alerts close the loop.
+- **Static apps:** Gatsby/React/Vite sites build via Yarn/Bun, lint/test, then deploy to Netlify or GitHub Pages.  
+- **APIs:** Express apps build Docker images, push to GHCR/ECR, and deploy to Render or EKS labs.  
+- **Serverless:** SAM/Serverless Framework packages functions, assumes AWS roles via OIDC, and deploys to sandbox accounts.  
+- **Observability:** Slack webhooks for success/failure, `/healthz` smoke tests, version tags (`vYYYY.MM.DD.N`). No on-call, but I check logs daily.
 
-## Baseline CI/CD Workflow
-
-**Workflow core:**
+## Baseline workflow (static site example)
 
 ```yaml
-name: CI/CD
+name: ci-static
 
 on:
   push:
@@ -34,71 +32,81 @@ on:
 jobs:
   build-test-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write   # for OIDC when targeting AWS
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
           cache: npm
       - run: npm ci
-      - run: npm test
       - run: npm run lint
+      - run: npm run test --if-present
       - run: npm run build
-      - name: Sync front-end to S3
+      - name: Deploy to Netlify
         if: github.ref == 'refs/heads/main'
-        uses: jakejarvis/s3-sync-action@master
+        uses: netlify/actions/cli@v4
         with:
-          args: --acl public-read --delete
+          args: deploy --dir=public --prod
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-          AWS_REGION: us-east-1
-      - name: Invalidate CloudFront cache
-        if: github.ref == 'refs/heads/main'
-        uses: chetan/invalidate-cloudfront-action@v2
-        env:
-          DISTRIBUTION: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
-          PATHS: "/*"
-          AWS_REGION: us-east-1
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
 ```
 
-- Immutable installs via `npm ci`, enforced test gates, and CloudFront invalidations keep releases safe and fresh.
+- **Why it works:** Immutable installs (`npm ci`), lint/tests enforced before builds, and deployments happen only on main. Pull requests stop after the build so reviewers see artifacts fast.
 
-## Secrets & Environments
+## AWS deployments (labs + future hosting)
 
-- **GitHub Environments:** Stage, staging, and production approvals with scoped secrets protect against misdeploys.  
-- **OIDC federation:** Replace IAM access keys with short-lived role assumption using GitHub’s identity provider [^oidc].  
-- **AWS Parameter Store / Secrets Manager:** Fetch sensitive values at runtime instead of embedding them in GitHub secrets.
+```yaml
+  deploy-aws:
+    needs: build-test-deploy
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::123456789012:role/github-actions
+          role-session-name: github-actions
+          aws-region: us-east-1
+      - run: sam build
+      - run: sam deploy --no-confirm-changeset --stack-name media-pipeline --region us-east-1
+```
 
-## Deploying Different Targets
+- OIDC means I don’t store long-lived AWS keys in GitHub.  
+- Stacks deploy to AWS Academy / sandbox accounts; README files state that clearly so nobody assumes it’s production.
 
-- **Serverless (SAM/Serverless Framework):** Run `sam build` + `sam deploy --no-confirm-changeset` with promotion gates per environment—currently limited to lab/sample apps.  
-- **Containers (ECS/EKS):** Build + scan Docker images, push to ECR, and roll services via `aws ecs update-service` or `kubectl rollout` inside AWS workshops.  
-- **Static sites:** For this portfolio I deploy to Netlify, but I also keep an S3/CloudFront workflow (above) in case I host from AWS later.
+## Containers & Render deploys
 
-## Observability & Rollbacks
+- Build + scan images (`docker build`, `docker scan`, Trivy).  
+- Push to GitHub Container Registry.  
+- Trigger Render via webhook (free tier for Car-Match backend). README warns about 5-minute cold starts.
 
-- **Smoke tests:** Post-deploy checks hit `/healthz` and scripted user flows; failures trigger rollback jobs.  
-- **ChatOps:** Webhooks post status updates in Slack so everyone sees deploy progress.  
-- **Version tagging:** Auto-tag releases (`vYYYY.MM.DD.N`) to correlate logs and dashboards.
+## Observability & rollback habits
 
-## Governance & Cost Control
+- Smoke tests (`scripts/smoke.sh`) hit `/healthz` + a basic user flow post-deploy. Failures run `scripts/rollback.sh` to redeploy the previous artifact.  
+- Slack notifications (success/failure) include commit SHA, author, and deploy URL.  
+- Tags like `v2025.10.15.1` map to Netlify deploy IDs and Render releases, making it easy to diff.
 
-- **Branch protections:** Required checks and approvals prevent bypassing the pipeline.  
-- **Cost dashboards:** Monitor S3, Lambda, and bandwidth after releases; flag anomalies quickly.  
-- **Drift detection:** Nightly `terraform plan` / `cdk diff` runs reveal manual infra changes.
+## Governance & cost guardrails
 
-## Lessons Learned
+- Branch protections: lint/test/build must pass before merging.  
+- Secrets live in GitHub environments (dev/stage/prod) with required reviewers.  
+- Nightly `npm audit` + `pip-audit` workflows log findings; high severity issues block merging until resolved.  
+- Cost dashboards (Netlify, Render, Mongo Atlas, AWS Budgets) alert via email when spend crosses thresholds—even if it’s only a few dollars.
 
-1. **Compose modular jobs.** Reusable lint/test/deploy actions bootstrap new repos fast.  
-2. **Fail early.** Validate formatting, dependencies, and secrets before the expensive deploy steps.  
-3. **Document prerequisites.** Each workflow ships with a README describing secrets, IAM roles, and recovery playbooks.
+## To-do list
 
-## Key Takeaways
+- Add Playwright-based synthetic tests that run automatically after deploys.  
+- Publish my workflow templates so classmates can fork them instead of copying snippets.  
+- Experiment with Checkly/Upptime for external monitoring.  
+- Migrate more workloads to the AWS adapter (S3/CloudFront) once I clean up the sharp install process.
 
-- **Automation reduces toil, not responsibility.** Pipelines make releases repeatable so engineers can focus on building.  
-- **Security posture matters.** Least-privilege roles and OIDC ensure CI runs stay locked down.  
-- **Always close the loop.** Observability, alerts, and tags prove the deploy worked and tell you when it doesn’t.
+## References
 
-[^oidc]: GitHub Docs, “Configuring OpenID Connect in GitHub Actions,” accessed May 2025, https://docs.github.com/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-github-actions.
+[^oidc]: GitHub Docs, “Configuring OpenID Connect in GitHub Actions,” https://docs.github.com/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-github-actions

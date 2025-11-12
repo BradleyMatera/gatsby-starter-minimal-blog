@@ -3,60 +3,74 @@ title: "Crafting Cloud-Ready Web Adventures: Resilient and Accessible for All"
 date: "2025-06-23"
 slug: "/cloud-ready-web-experiences"
 tags: ["Architecture", "Accessibility", "DevOps", "Cloud"]
-description: "Join me on a journey through the principles and practices I use to build web experiences that are accessible, resilient, and ready to scale in the cloud."
+description: "The real checklist I use before shipping a demo to GitHub Pages, Netlify, or Render—accessibility, deploys, and honesty included."
 theme: "Cloud & DevOps"
 ---
 
-> **Context:** Personal checklist for the small demos I build (GitHub Pages, Netlify, Render)—I haven’t launched enterprise systems yet.  
-> **AI assist:** ChatGPT helped structure this article; I filled it with the actual habits/tools I use today.  
-> **Status:** Student perspective meant to keep me honest about what’s real vs. aspirational.
+> **Context:** These practices apply to my small projects (Car-Match, Interactive Pokédex, Triangle Shader Lab, CheeseMath). They run on GitHub Pages, Netlify, or Render—not on enterprise infra.  
+> **AI assist:** ChatGPT helped reorganize my scattered checklists into readable sections; every item maps to real repos and docs.  
+> **Status:** Student perspective. Think “personal SRE playbook” more than “platform engineering manifesto.”
 
-## TL;DR
+## Reality snapshot
 
-- **Accessibility is the north star.** Semantic HTML, ARIA restraint, axe scans, and manual screen-reader passes keep even my tiny demos usable [^aria][^wcag].  
-- **Cloud readiness (for me) = clean deploys + basic observability.** Netlify/GitHub Pages builds, environment docs, and sanity dashboards keep prototypes predictable [^well-architected].  
-- **Resilience is rehearsed, even locally.** Feature flags, smoke tests, and backup scripts let me recover when something breaks—even if the audience is just me.  
-- **Checklists prevent drift.** A pre-launch review covers accessibility, performance, reliability, security, and cost before publishing.
+- **Front ends:** GitHub Pages (PWA/React/Vite builds) or Netlify (Gatsby). Build logs live in Actions + Netlify dashboards.  
+- **Back ends / APIs:** Render free tier (Express + Mongo Atlas) or small serverless functions. Cold starts are real, so every README states the wake-up delay.  
+- **Observability:** DevTools, Netlify analytics, basic CloudWatch dashboards, and manual smoke tests. No PagerDuty, no multi-region failover.  
+- **Goal:** Publish demos that anyone can run, show how I think about resilience, and be transparent about what’s missing.
 
-## Accessibility First
+## My five-part pre-launch checklist
 
-- **Semantic structure:** Reach for native elements (`nav`, `main`, `button`) and add ARIA only when the platform cannot express intent [^aria].  
-- **Inclusive interactions:** Guarantee keyboard navigation, visible focus states, and descriptive alt/captions so the whole journey is explorable.  
-- **Performance for everyone:** Trim bundles, minimise layout shifts, and respect `prefers-reduced-motion` so slower devices stay comfortable.
+### 1. Accessibility
+- Semantic HTML (`main`, `nav`, `button`) before considering ARIA.  
+- Keyboard walkthrough recorded before each deploy (tab through, ensure focus outlines, confirm skip links).  
+- Automated scans: axe CLI + Lighthouse (desktop + mobile). Failures block the release.  
+- Manual screen reader pass (VoiceOver on Mac). I note rough edges in the repo if I can’t fix them immediately.
 
-## Architect for Scale & Insight
+### 2. Performance
+- Bundle budgets in Vite/Gatsby (`performanceBudget` file). If LCP > 2.5 s locally, I trim images/fonts before publishing.  
+- Lazy-load heavy sections (Three.js demos, code examples) and respect `prefers-reduced-motion`.  
+- Use Netlify deploy previews to test throttled 3G speeds. I log actual numbers in the PR description.
 
-- **Design stateless services:** Pair load balancers with external session stores (Redis, DynamoDB) for horizontal scaling.  
-- **Commit infrastructure as code:** Use Terraform or CDK, version control templates, and review changes with the AWS Well-Architected lens [^well-architected].  
-- **Instrument early:** Capture JSON logs, layer in OpenTelemetry traces, and define SLIs/SLOs before traffic spikes.
+### 3. Reliability
+- GitHub Actions handles lint/tests/builds. Netlify + Render webhooks notify Slack so I see failures quickly.  
+- Each repo has a `/healthz` endpoint (backend) or `/status.json` file (frontend) describing what “healthy” means.  
+- Feature flags live in JSON or env vars to hide in-progress sections while still deploying often.
 
-## Build for Resilience
+### 4. Security
+- Secrets live in GitHub Actions secrets or Render dashboard. READMEs show exactly what to set (`REACT_APP_API_BASE_URL`, `MONGODB_URI`, etc.).  
+- npm audit + OWASP ZAP baseline workflows run at least weekly. Issues get logged, even if the fix is “upgrade when maintainer releases patch.”  
+- If a project uses third-party scripts, I document why and add subresource integrity hashes when possible.
 
-- **Defensive coding:** Bake in retries, exponential backoff, and circuit breakers; run chaos experiments to validate assumptions.  
-- **Progressive delivery:** Lean on feature flags, canaries, and automated rollbacks inside GitHub Actions.  
-- **Disaster readiness:** Schedule snapshots, enable S3 versioning, and rehearse runbooks so recovery steps are muscle memory.
+### 5. Cost & honesty
+- Keep a tiny Notion table of monthly spend (Render free tier, Atlas, Netlify). Anything that risks a charge gets an alert.  
+- README “Reality Check” section spells out cold starts, missing features, and TODOs so nobody mistakes a demo for production.  
+- When something’s down (e.g., Render sleeping), the site tells you up front. No silent failures.
 
-## Pre-Launch Checklist
+## Case study: Interactive Pokédex (GitHub Pages)
 
-- **Accessibility:** Logical heading order, screen-reader flow, and focus states verified.  
-- **Performance:** Largest Contentful Paint meets targets; media optimised and cached.  
-- **Reliability:** Post-deploy smoke tests automated; alerts mapped to actionable runbooks.  
-- **Security:** Secrets tucked into Secrets Manager or GitHub; third-party scripts reviewed.  
-- **Cost:** Budgets in place, alerts firing before spend spikes.
+| Area | What I did | Where it lives |
+| --- | --- | --- |
+| Accessibility | axe + manual screen reader pass; swap out decorative sprites for `role="img"` w/ descriptive labels | `content/posts/pokedex/index.mdx` + repo README |
+| Performance | IndexedDB cache for most recent results, `localStorage` for user preferences, throttled tests recorded in PR | `pokedex/README.md` |
+| Reliability | Netlify analytics for referring traffic + error rates; manual smoke test script in `scripts/smoke.sh` | repo `scripts/` |
+| Security | No secrets (public PokeAPI). README includes rate-limit handling tips. | README |
+| Honesty | “Reality” block on the project page outlines missing offline mode and limited dataset. | `/projects/interactive-pokedex/` |
 
-## Case Study: Interactive Pokédex (GitHub Pages demo)
+## Other examples
 
-- **Delivery:** Hosted on GitHub Pages with a lightweight caching layer (IndexedDB + `localStorage`)—no CloudFront yet.  
-- **Security:** PokeAPI is public, so there are no secrets; I call it directly from the browser and document rate-limit handling.  
-- **Accessibility:** Automated axe scans plus manual VoiceOver/keyboard passes before each publish.  
-- **Observability:** DevTools + Netlify analytics (for the Gatsby site linking to it) show basic latency/error info; no CloudWatch dashboards in play yet.
+- **Car-Match:** Frontend on Pages, backend on Render/Atlas. README and `/projects/car-match/` warn about 5-minute cold starts. Health checks + logs in Render dashboard show when the API is up.  
+- **Triangle Shader Lab:** Static Next.js site on GitHub Pages. Observability is a simple log overlay + Netlify analytics—enough for a study project.  
+- **CheeseMath:** Next.js demo + Jest practice repo. Accessibility checklist stored in `docs/a11y.md`, deploys automated via GitHub Actions → Pages.
 
-## Key Takeaways
+## What still needs work
 
-- **Accessibility, resilience, and scale reinforce each other.** Semantic choices often reduce bundle weight and ease scaling.  
-- **Observability is table stakes.** Instrument everything before launch so future-you can troubleshoot.  
-- **Test the safety nets.** Backups, rollbacks, and playbooks only work if you rehearse them.
+- End-to-end synthetic tests that run after each deployment (Playwright/Checkly). Right now smoke tests are manual.  
+- Better logging for front-end demos (would love to send errors to Sentry or a lightweight endpoint).  
+- Document cost impacts when I experiment with larger datasets or GPU workloads.  
+- Expand the checklist into a real template repo so I stop copy/pasting between projects.
 
-[^aria]: W3C, “Using WAI-ARIA,” accessed May 2025, https://www.w3.org/WAI/ARIA/apg/practices/using-aria/.
-[^wcag]: W3C, “Web Content Accessibility Guidelines (WCAG) 2.1,” accessed May 2025, https://www.w3.org/TR/WCAG21/.
-[^well-architected]: AWS, “AWS Well-Architected Framework,” accessed May 2025, https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html.
+## References
+
+[^aria]: W3C, “Using WAI-ARIA,” accessed May 2025, https://www.w3.org/WAI/ARIA/apg/practices/using-aria/  
+[^wcag]: W3C, “Web Content Accessibility Guidelines (WCAG) 2.1,” accessed May 2025, https://www.w3.org/TR/WCAG21/  
+[^well-architected]: AWS, “AWS Well-Architected Framework,” accessed May 2025, https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html

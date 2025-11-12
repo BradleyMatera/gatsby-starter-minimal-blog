@@ -3,117 +3,92 @@ title: "Building a React CRUD App with AWS API Gateway"
 date: "2024-05-16"
 slug: "/projects/react-anime-crud-app"
 tags: ["Projects", "React", "AWS API Gateway", "CRUD"]
-description: "How I wired a React SPA to AWS API Gateway and Lambda, secured the endpoints, and handled rich character data with client-side filtering and error recovery."
+description: "What my Anime CRUD experiment really does: React front end, AWS API Gateway + Lambda backend, and the gaps I still need to close."
 theme: "Front-End & Full-Stack"
 ---
 
-> **Context:** Personal React + AWS API Gateway experiment (private repo) I built to practise CRUD flows—no paying users, just lab traffic.  
-> **AI assist:** ChatGPT + Copilot scaffolded some components/endpoints; I kept a prompt log in the repo.  
-> **Status:** Honest case study: the project runs, but features like auth/uploads/infra modules remain TODOs.
+> **Context:** Personal React + AWS API Gateway prototype (private repo). Built to practice CRUD flows, optimistic UI, and serverless deploys. No production users.  
+> **AI assist:** ChatGPT/Copilot scaffolded some components and Lambda handlers. Prompt logs live in the repo so it’s clear what code I edited.  
+> **Status:** Demo runs on Vercel (frontend) + AWS API Gateway/Lambda/DynamoDB (backend). Auth, uploads, and Terraform modules are still TODOs.
 
-## TL;DR
+## Reality snapshot
 
-- **Anime CRUD pairs React with AWS API Gateway + Lambda.** The SPA catalogs anime characters, while serverless endpoints handle persistence.  
-- **Security starts at the edge.** Vercel injects API keys server-side; Lambda validates payloads and throttles misuse.  
-- **UX stays responsive via optimistic updates and memoised filters.** Users see changes instantly even during cold starts.  
-- **Future roadmap:** Auth, S3 uploads, offline support, and Terraform modules.
+- **Frontend:** React 18 + Vite, controlled forms, modals, context for auth state, optimistic updates. Hosted on Vercel.  
+- **Backend:** AWS API Gateway → Lambda (Node 20) → DynamoDB. API keys + throttling guard the endpoints.  
+- **External data:** Jikan API provides trending anime metadata. Cached per session to avoid hitting rate limits.  
+- **Limitations:** Auth is mocked, backend cold starts add ~2 s sometimes, and the repo is private until I scrub secrets.
 
-- **Live demo:** https://cruddemo-one.vercel.app/  
-- **Code tour:** https://github.com/BradleyMatera/ReactJSMobileApp (private repo; structure below)
-
-## Architecture Snapshot
-
-- **Frontend:** React 18 with hooks, Vite/Webpack bundling, controlled forms, modals, filtering, optimistic updates.  
-- **Backend:** AWS API Gateway routes to Lambda (Node.js) for CRUD against DynamoDB.  
-- **External data:** [Jikan API](https://jikan.moe/) supplies trending metadata.  
-- **Hosting:** Vercel for the SPA, AWS for serverless endpoints; proxy keeps API calls on the same origin.
+## Architecture
 
 ```
 ReactJSMobileApp/
 ├── src/
-│   ├── App.js
+│   ├── App.jsx
 │   ├── api.js
 │   ├── components/
 │   └── hooks/useFetch.js
-├── vercel.json
-└── webpack.config.js
+├── amplify/ (legacy)
+├── lambda/
+│   ├── createCharacter.js
+│   ├── listCharacters.js
+│   ├── updateCharacter.js
+│   └── deleteCharacter.js
+└── vercel.json
 ```
 
-## Securing the Serverless API
+- `vercel.json` proxies `/api/*` requests to API Gateway, injecting the API key server-side so the browser never sees it.  
+- Lambda functions share a thin validation layer and log request IDs for tracing.
 
-- API Gateway fronts five Lambda handlers (GET/POST/PUT/DELETE) with API keys, throttles, and schema validation.  
-- Vercel injects headers server-side so secrets stay out of the bundle.
+## Client flow highlights
 
-```json
-{
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "https://i0p044nu8c.execute-api.us-east-1.amazonaws.com/prod/$1",
-      "headers": {
-        "x-api-key": "${API_GATEWAY_KEY}"
-      }
-    }
-  ]
-}
-```
+### Fetch & cache characters
 
-- Lambda normalises payloads, returns structured errors, and logs request IDs for tracing.
-
-## Client Data Flow
-
-### Fetch characters safely
-
-```javascript
+```tsx
 useEffect(() => {
-  let isMounted = true;
-
-  const fetchCharacters = async () => {
+  let active = true;
+  (async () => {
+    setLoading(true);
     try {
-      setLoading(true);
-      const response = await api.get('/api/characters');
-      if (isMounted) setCharacters(response.data);
-    } catch (err) {
-      if (isMounted) setError('Unable to load characters right now.');
+      const { data } = await api.get("/api/characters");
+      if (active) setCharacters(data);
+    } catch (error) {
+      if (active) setError("Unable to load characters right now.");
     } finally {
-      if (isMounted) setLoading(false);
+      if (active) setLoading(false);
     }
-  };
-
-  fetchCharacters();
+  })();
   return () => {
-    isMounted = false;
+    active = false;
   };
 }, []);
 ```
 
-- Guards prevent state updates after unmounts, eliminating React warnings.
+- Guards prevent state updates after unmount. Errors bubble into a toast + log entry.
 
-### Optimistic updates with rollback
+### Optimistic updates
 
-```javascript
+```tsx
 const handleUpdate = async (character) => {
+  const snapshot = characters;
   setCharacters((prev) =>
     prev.map((item) => (item.id === character.id ? character : item))
   );
-  setShowUpdateModal(false);
-
   try {
     await api.put(`/api/characters/${character.id}`, character);
-  } catch (error) {
-    setError('Could not save changes. Reverting.');
-    setCharacters((prev) => prevCache);
+  } catch {
+    setError("Could not save changes. Reverting.");
+    setCharacters(snapshot);
   }
 };
 ```
 
-- Perceived speed stays high even when Lambda cold starts introduce latency.
+- Keeps the UI responsive even when API Gateway cold starts. Rollback path restores prior state if Lambda fails.
 
-### Filter with memoised selectors
+### Filtering with memoized selectors
 
-```javascript
+```tsx
 const filteredCharacters = useMemo(() => {
-  if (selectedCategory === 'all') return characters;
+  if (selectedCategory === "all") return characters;
   return characters.filter((character) => {
     const category = character.category?.toLowerCase();
     const role = character.role?.toLowerCase();
@@ -122,42 +97,32 @@ const filteredCharacters = useMemo(() => {
 }, [characters, selectedCategory]);
 ```
 
-- Controlled inputs + `useMemo` keep the grid responsive for larger datasets.
+- Prevents unnecessary renders when the dataset grows.
 
-## Integration with Jikan API
+## Deployment + security notes
 
-- Fetch trending titles once per session, cache in state, display top twelve with art and ratings.  
-- Respect `Retry-After` headers and back off on 429s, logging rate-limit metrics.
+- Vercel Routes proxy requests to API Gateway, injecting `x-api-key`. Rate limits + throttles configured in API Gateway.  
+- Lambda validates payloads with `ajv`, normalizes responses, and logs structured JSON.  
+- Terraform/SAM scripts exist but aren’t production-ready—still manual deployments via `sam deploy`.  
+- Environment variables live in Vercel secrets + AWS Parameter Store.
 
-## Deployment Notes
+## Challenges & fixes
 
-- Vercel proxying avoids CORS headaches; headers set server-side.  
-- Webpack customisations add path aliases and bundle analysis.  
-- Environment management uses `.env.*` files synced via Vercel Secrets and AWS Parameter Store.
+- **CORS headaches:** Solved by proxying through Vercel and enabling CORS on API Gateway.  
+- **Slow cold starts:** Mitigated with optimistic UI + skeleton loaders. Future improvement = provisioned concurrency or scheduled warmers.  
+- **Schema drift:** Added JSON schema validation + Jest tests so the frontend can’t send malformed payloads.  
+- **Rate limiting:** Respect `Retry-After` from Jikan; UI shows a friendly message and caches the last successful response.
 
-## Challenges & Resolutions
+## TODO list
 
-- **CORS conflicts:** Solved with Vercel proxy routes and API Gateway CORS headers.  
-- **Exposed keys risk:** Server-injected `x-api-key` keeps secrets off the client.  
-- **Nested data management:** Controlled forms + JSON schema validation reduced runtime errors.  
-- **Cold starts:** Optimistic UI updates and skeleton loaders smoothed perceived performance.
+- Add Cognito auth + user-specific lists.  
+- Upload images to S3 instead of relying on remote URLs.  
+- Finish Terraform modules (VPC, API Gateway, DynamoDB) and publish them.  
+- Write Playwright tests covering the top flows.  
+- Sanitize the repo so I can make it public without leaking secrets.
 
-## Future Enhancements
+## Links
 
-1. Layer in Cognito authentication so users own personalised lists.  
-2. Add S3-backed image uploads instead of relying on external URLs.  
-3. Explore DynamoDB Streams + offline caching for faster refreshes.  
-4. Replace Axios with Fetch + Suspense to simplify data flow.  
-5. Publish Terraform modules that reproduce the environment quickly.
-
-## Key Takeaways
-
-- **Serverless pairs well with React when edge security and error handling are deliberate.**  
-- **Optimistic UI design cushions latency and keeps users engaged.**  
-- **Operational maturity (proxies, env management, observability) matters as much as component code.**
-
-## References
-
-- AWS, “Protecting REST APIs with API Keys,” https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-key.html.  
-- AWS, “Using AWS Lambda with Amazon API Gateway,” https://docs.aws.amazon.com/lambda/latest/dg/services-apigateway.html.  
-- Jikan Documentation, “Rate Limiting,” https://docs.api.jikan.moe/#section/Information/Rate-Limiting.
+- Live demo: [https://cruddemo-one.vercel.app/](https://cruddemo-one.vercel.app/) (backend sleeps when unused; expect a short delay).  
+- Repo (request access): [https://github.com/BradleyMatera/ReactJSMobileApp](https://github.com/BradleyMatera/ReactJSMobileApp)  
+- Prompt log + runbook: `docs/` folder inside the repo describes every feature, limitation, and AI assist.

@@ -3,42 +3,35 @@ title: "Venturing Beyond Hello World: Mastering Containerization and Orchestrati
 date: "2025-08-04"
 slug: "/containerization-and-orchestration"
 tags: ["Docker", "Kubernetes", "DevOps", "Infrastructure"]
-description: "Embark on my journey from simple container experiments to orchestrating complex, production-ready deployments with Docker Compose and Amazon EKS."
+description: "How I moved from single-container demos to multi-service Docker Compose stacks and AWS EKS labs—what works today and what still scares me."
 theme: "Cloud & DevOps"
 ---
 
-> **Context:** Personal journal of how I moved from “docker run hello-world” to multi-service Compose stacks and beginner-friendly Amazon EKS labs. I haven’t owned production containers yet.  
-> **AI assist:** ChatGPT helped organise my notes; I edited on 2025-10-15 to match my actual repos (Docker Multilang, ProjectHub proxy).  
-> **Status:** Student-level experience—treat any “production-ready” phrasing as goals, not resume claims.
+> **Context:** Everything here lives in personal repos (docker_multilang_project, Car-Match backend, ProjectHub proxy). I’ve never owned production containers.  
+> **AI assist:** ChatGPT condensed my Docker/EKS notes; I validated each callout against the actual repos and AWS lab scripts on 2025-10-15.  
+> **Status:** Learning log. Use it to gauge my current level, not as evidence of SRE tenure.
 
-## TL;DR
+## Reality snapshot
 
-- **Compose first, Kubernetes later (in labs).** I keep daily work in Docker Compose and spin up EKS only when I want to learn how autoscaling works [^compose][^kubernetes].  
-- **Observability = logs + basic probes.** Structured logging, `/healthz` endpoints, and deliberate “kill the container” drills catch most mistakes before anyone else sees them.  
-- **Infrastructure as code (for me) = Compose files + Terraform playgrounds.** Everything is versioned so I can reproduce the environment quickly.  
-- **Lean images matter.** Multi-stage builds, security scans, and automation keep local dev snappy and hosting costs low when I deploy to Render/Netlify.
+- Day-to-day dev happens in Docker Compose (Node + Python + Postgres or Mongo).  
+- When I want to stretch, I follow AWS workshops to stand up an EKS cluster with Terraform, deploy the same services, and watch how health checks + autoscaling behave.  
+- Observability equals `stdout` JSON logs, `/healthz` routes, and occasionally Prometheus/Grafana during labs. No 24/7 pager yet.
 
-## From Hello World to Fleet Operations
+## Compose: my default sandbox
 
-- Began with single-container Python and Node demos, then expanded into a three-service stack (`frontend`, `api`, `db`).  
-- Optimised each image with multi-stage builds, health checks, and persistent volumes to keep local resilience high.  
-- Sharing the environment became trivial—classmates (or future-me) can run `docker compose up` to match the exact same setup [^compose].
-
-## Compose Foundations
-
-**docker-compose.yml highlights:**
+### Stack anatomy
 
 ```yaml
-version: "3.9"
 services:
   api:
     build: ./api
     env_file: .env.api
-    depends_on: [db]
     ports: ["4000:4000"]
+    depends_on: [db]
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:4000/healthz"]
       interval: 30s
+      timeout: 5s
       retries: 3
 
   frontend:
@@ -50,30 +43,33 @@ services:
 
   db:
     image: postgres:15
-    volumes:
-      - pgdata:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
 volumes:
   pgdata:
 ```
 
-- Health checks gate traffic, Postgres volumes persist data, and env files keep secrets out of the compose file.
+- **Why it works:** Health checks gate traffic, `.env` files keep secrets out of the compose file, and named volumes preserve data between runs.  
+- **Observability:** Services log JSON with request IDs so `docker compose logs api` stitches calls together.  
+- **Chaos drills:** I kill containers with `docker compose kill api` to verify the frontend fails gracefully and recovers once the container restarts.
 
-## Observability & Resilience
+### Lessons
 
-- **Structured logging:** JSON logs with trace IDs stream to stdout so `docker compose logs` (or CloudWatch in labs) can stitch requests together.  
-- **Health probes:** Separate readiness/liveness endpoints tell Compose, k6 scripts, or EKS when to route traffic.  
-- **Chaos drills:** Kill containers with `docker compose kill api` or `kubectl delete pod` to validate graceful degradation paths.
+- Multi-stage builds keep images small (e.g., `node:20-alpine` + `npm ci` in builder stage).  
+- Mounting local certs into containers makes HTTPS dev possible without messing with the host.  
+- Documenting every command (`docs/dev-runbook.md`) stops classmates from asking, “why doesn’t this container start?”
 
-## Kubernetes on Amazon EKS (Lab work)
+## EKS labs: leveling up (still sandboxed)
 
-- **Provision with Terraform:** AWS Workshops + Skill Builder labs walk through defining clusters, node groups, VPCs, and IAM roles as code so I can rehearse the motions.  
-- **Deploy with manifests:** I templated Deployments/Services/ConfigMaps for my three-service demo, but these only saw synthetic traffic.  
-- **Ingress & security:** Used AWS Load Balancer Controller in the lab to set up TLS; secrets still lived in AWS Secrets Manager with sample data.  
-- **Observability stack:** Followed workshop steps to install Prometheus + Grafana; no real customers, just metrics from test pods.
+### What I practice
 
-**Deployment snippet:**
+1. **Terraform provisioning** – VPC, node groups, IAM roles. All lives in `labs/eks/terraform`.  
+2. **Deployments & services** – Basic `Deployment` + `Service` manifests, ConfigMaps for environment variables, Secrets for credentials.  
+3. **Ingress** – AWS Load Balancer Controller with TLS certs for the sample domain.  
+4. **Observability** – Prometheus + Grafana via Helm, scraping the demo pods.  
+5. **Autoscaling & rolling updates** – HPA based on CPU + custom metrics, `kubectl rollout status` demos.
 
 ```yaml
 apiVersion: apps/v1
@@ -106,20 +102,26 @@ spec:
             periodSeconds: 10
 ```
 
-- Autoscaling and rolling upgrades behaved well in the sandbox; I still need mentorship before promising the same in production.
+### Honest caveats
 
-## Lessons from the Voyage
+- Traffic is synthetic (k6 scripts + curl). No paying customers.  
+- IAM roles follow workshop defaults. Before touching production I’d need a full review.  
+- I rely on AWS Cloud9 + workshop accounts. Costs are low, but I still tear everything down immediately after lab time.
 
-1. **Compose is the sandbox; Kubernetes is the stadium.** Start small, then upgrade once you need automation and autoscaling [^kubernetes].  
-2. **Slim images matter.** Multi-stage builds and distroless bases shrink attack surfaces and boost cold-start speed.  
-3. **Automate deployments.** CI pipelines build, scan (Trivy), push to ECR, and deploy via `kubectl` or Argo CD.  
-4. **Monitor costs.** Track node-hours, enable autoscaling, and mix in spot capacity to avoid surprise invoices.
+## Tooling & guardrails
 
-## Key Takeaways
+- **Container builds:** `npm run build:docker` or `scripts/docker-build.sh` ensure multi-stage builds use the same base images.  
+- **Security:** `npm audit`, `docker scan`, and occasional Trivy runs keep dependencies honest. Findings go in the repo issues list.  
+- **Docs:** Every repo has `docs/runbook.md` (start/stop commands, health checks, log locations, TODOs). For EKS labs I add Terraform diagrams + `destroy` instructions.
 
-- **Documentation is your map.** Write runbooks, diagrams, and README updates before the next storm hits.  
-- **Health signals prevent firefights.** Treat logs, metrics, and probes as critical application features.  
-- **Future focus:** Explore App Mesh and policy-as-code to standardise reliability and security across the fleet.
+## What I’m working on next
 
-[^compose]: Docker Documentation, “Overview of Docker Compose,” accessed May 2025, https://docs.docker.com/compose/.
-[^kubernetes]: Kubernetes Documentation, “Production Considerations,” accessed May 2025, https://kubernetes.io/docs/setup/production-environment/.
+- Add automated smoke tests (k6 or Playwright) that hit the running Compose stack on CI before merging.  
+- Package Terraform/EKS lab into a repeatable template so I can spin it up faster (and share with classmates).  
+- Explore App Mesh or Linkerd to understand service meshes before I make claims about them.  
+- Figure out how to shrink cold-start time on the Render backend (Car-Match) without leaving the free tier.
+
+## References
+
+[^compose]: Docker Documentation, “Overview of Docker Compose,” accessed May 2025, https://docs.docker.com/compose/  
+[^kubernetes]: Kubernetes Documentation, “Production Considerations,” accessed May 2025, https://kubernetes.io/docs/setup/production-environment/

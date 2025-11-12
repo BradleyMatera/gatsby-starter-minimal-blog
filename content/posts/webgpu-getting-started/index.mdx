@@ -3,154 +3,75 @@ title: "Getting Started with WebGPU: A Practical Guide for Web Developers"
 date: "2025-09-01"
 slug: "/webgpu-getting-started"
 tags: ["WebGPU", "Graphics", "Web Development", "Performance"]
-description: "Explore WebGPU as a modern successor to WebGL, with step-by-step setup, pipeline creation, and best practices for building performant graphics in the browser."
+description: "Notes from Triangle Shader Lab—how I rebuilt the Hello Triangle/Textured Cube demos with Next.js, TypeScript, and Bun."
 theme: "Low-Level Experiments"
 ---
 
-> **Context:** Notes from my Triangle Shader Lab / WebGPU experiments—self-study work, not a production graphics engine.  
-> **AI assist:** ChatGPT + Copilot helped scaffold the initial WGSL + TypeScript snippets; I iterated and documented them here.  
-> **Status:** Performance numbers come from my laptop (Chrome Canary); treat them as anecdotal guidance.
+> **Context:** Triangle Shader Lab is a small Next.js + TypeScript study site deployed to GitHub Pages. It hosts two demos (Hello Triangle + Textured Cube) with annotated copy.  
+> **AI assist:** ChatGPT/Copilot helped with WGSL snippets, adapter/device explanations, and code comments. I cite them directly on the site.  
+> **Status:** Learning tool only. It adapts public WebGPU samples, adds notes, and keeps expectations low.
 
-Triangle Shader Lab itself is a small Next.js + TypeScript site running on Bun/Tailwind. It simply hosts the rebuilt Hello Triangle and Textured Cube samples with added commentary pulled from the WebGPU docs—nothing more advanced than that.
+## Reality snapshot
 
-## TL;DR
+- Built with Next.js 14, Bun, Tailwind, and MDX. No custom engine—just readable wrappers around the official WebGPU samples.  
+- Goal: understand adapter requests, pipeline creation, buffers, and render loops, then share the notes publicly.  
+- Limitations: Works where WebGPU is enabled (Chrome Canary, Edge with flags). No WebGL fallback, no production features.
 
-- **WebGPU renders faster than WebGL when the pipeline is structured right.** Precompiled pipelines and command encoders delivered 2× speedups in my shapes renderer.[^mdn-webgpu]
-- **WGSL enforces type safety.** Early validation caught shader mistakes before runtime, avoiding WebGL-style silent failures.[^webgpu-spec]
-- **Fallbacks still matter.** Feature detection, graceful WebGL fallback, and accessibility controls kept the demo usable for the 20% of browsers without WebGPU.[^caniuse]
-- **Device lifecycle adds complexity.** Handling device loss and context reinitialisation prevents mysterious blank canvases mid-session.
+## Architecture
 
-## Project Goals
-
-- Rebuild a WebGL shapes renderer using WebGPU primitives to understand the new mental model.
-- Keep the demo performant (60 FPS with 10k+ vertices) on mid-range hardware.
-- Maintain accessible controls and provide a safe fallback path when WebGPU is unavailable.
-- Document pitfalls and practices for future WebGPU experiments (particles, compute shaders).
-
-## Implementation Highlights
-
-### Initialization and device setup
-WebGPU requires asynchronous setup to request a GPU adapter and device. Always check for support to avoid errors:
-
-```ts
-async function initWebGPU(canvas: HTMLCanvasElement) {
-  if (!navigator.gpu) {
-    console.error("WebGPU not supported");
-    // Fallback to WebGL or static content
-    return null;
-  }
-
-  const adapter = await navigator.gpu.requestAdapter();
-  if (!adapter) {
-    throw new Error("No GPU adapter available");
-  }
-
-  const device = await adapter.requestDevice();
-  const context = canvas.getContext("webgpu");
-  const format = navigator.gpu.getPreferredCanvasFormat();
-
-  context.configure({ device, format, alphaMode: "opaque" });
-  return { device, context, format };
-}
+```
+triangle-shader-lab/
+├── pages/
+│   ├── index.mdx
+│   ├── hello-triangle.mdx
+│   └── textured-cube.mdx
+├── components/
+│   ├── DemoWrapper.tsx
+│   └── CodeBlock.tsx
+├── lib/
+│   └── webgpu.ts
+└── public/
+    └── shaders/
 ```
 
-- **Key difference from WebGL:** Adapter/device negotiation lets you pick specific GPUs or feature sets.
-- **Best practice:** Use `getPreferredCanvasFormat()` for broad compatibility across drivers and surfaces.[^webgpu-spec]
+- `DemoWrapper` handles feature detection (`navigator.gpu`), adapter/device negotiation, and fallback messaging.  
+- Each demo page includes: overview, code, “Reality check” block (what’s working/missing), and proof links.
 
-### Shader and pipeline creation
-WebGPU uses WGSL for shaders, which is more type-safe than GLSL. Here's a basic vertex/fragment pair for rendering colored vertices:
+## Demo breakdown
 
-```wgsl
-// vertex.wgsl
-@vertex
-fn vs_main(@location(0) position: vec2<f32>) -> @builtin(position) vec4<f32> {
-  return vec4<f32>(position, 0.0, 1.0);
-}
+### Hello Triangle
+- Rebuilds the canonical sample. WGSL shaders render a single triangle with color interpolation.  
+- Notes explain `requestAdapter`, `requestDevice`, swap chain configuration, and command encoder setup.  
+- Users can toggle debugging overlays to see pipeline state (bind groups, buffers) in real time.
 
-// fragment.wgsl
-@fragment
-fn fs_main() -> @location(0) vec4<f32> {
-  return vec4<f32>(1.0, 0.5, 0.0, 1.0); // Orange
-}
-```
+### Textured Cube
+- Adds vertex buffers, indices, textures, uniform buffers, and a basic rotation matrix.  
+- Highlights the extra state needed (samplers, bind group layouts) and warns about missing features (lighting, depth testing).  
+- Links back to the original sample so readers know I didn’t invent it.
 
-Create the pipeline:
+## Tooling
 
-```ts
-function createPipeline(device: GPUDevice, format: GPUTextureFormat) {
-  const shaderModule = device.createShaderModule({ code: /* WGSL code */ });
+- **Next.js 14 + MDX:** Lets me combine prose + code.  
+- **Bun:** Fast dev server, zero-config TypeScript support.  
+- **Tailwind:** Provides consistent typography/layout.  
+- **Netlify analytics:** Tracks which sections get the most attention; I use that data to prioritize updates.  
+- **Honesty log:** Each page includes “Reality snapshot” + AI disclosure.
 
-  return device.createRenderPipeline({
-    layout: 'auto',
-    vertex: { module: shaderModule, entryPoint: 'vs_main' },
-    fragment: { module: shaderModule, entryPoint: 'fs_main', targets: [{ format }] },
-    primitive: { topology: 'triangle-list' },
-  });
-}
-```
+## Lessons learned
 
-- **Improvement over WebGL:** Pipelines compile ahead of time, reducing runtime stalls and simplifying topology swaps (e.g., `line-strip`).
-- **Pitfall avoided:** WGSL validation fails loudly—run validators during build to spot syntax issues before the app boots.
+- Feature detection + honest fallbacks matter. If WebGPU isn’t available, I show a clear message instead of a blank canvas.  
+- Annotated copy helps more than fancy effects. Recruiters appreciated that I call it a study site, not a framework.  
+- Sharing prompt logs builds trust. I include links to AI conversations so engineers know where I got help.
 
-### Rendering loop and buffers
-Upload vertex data to GPU buffers and encode commands:
+## TODOs
 
-```ts
-const vertices = new Float32Array([/* vertex data */]);
-const vertexBuffer = device.createBuffer({
-  size: vertices.byteLength,
-  usage: GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST,
-});
-device.queue.writeBuffer(vertexBuffer, 0, vertices);
+- Add WebGPU flag instructions for each browser.  
+- Record Loom walkthroughs to explain the demos verbally.  
+- Experiment with WebGPU compute shaders and document those notes the same way.  
+- Publish the repo publicly (currently private while I scrub assets).
 
-function render(device: GPUDevice, context: GPUCanvasContext, pipeline: GPURenderPipeline) {
-  const encoder = device.createCommandEncoder();
-  const pass = encoder.beginRenderPass({
-    colorAttachments: [{
-      view: context.getCurrentTexture().createView(),
-      clearValue: { r: 0.1, g: 0.1, b: 0.1, a: 1.0 },
-      loadOp: 'clear',
-      storeOp: 'store',
-    }],
-  });
+## Links
 
-  pass.setPipeline(pipeline);
-  pass.setVertexBuffer(0, vertexBuffer);
-  pass.draw(3); // For a triangle
-  pass.end();
-
-  device.queue.submit([encoder.finish()]);
-}
-```
-
-- **Performance note:** Command encoders batch draws efficiently, outperforming WebGL’s immediate mode on complex scenes.[^gpu-benchmarks]
-- **In this project:** The loop held 60 FPS on mid-range hardware, leaving headroom for future compute-driven geometry updates.
-
-## Results
-
-- **60 FPS with 10k+ vertices (on my MacBook).** Reduced CPU–GPU sync overhead yielded roughly 2× the throughput of my prior WebGL demo.  
-- **92% Lighthouse accessibility.** Keyboard shortcuts and ARIA status updates kept controls usable even during intensive rendering.  
-- **20% broader support via fallback.** WebGL gracefully handles unsupported browsers while notifying users how to enable WebGPU.[^caniuse]
-
-## Lessons Learned
-
-- **WebGPU demands deliberate buffer management.** Getting usage flags wrong led to validation errors until I mirrored native GPU patterns.
-- **Debugging tools are essential.** Chrome’s WebGPU inspector surfaced pipeline and binding issues faster than console logging.
-- **Device loss is real.** Tabs that sleep or GPUs that reset require reinitialising the context; skipping this left a blank canvas mid-demo.
-
-## Next Steps
-
-- Prototype compute shaders for particle effects and physics simulations.
-- Experiment with Babylon.js and other higher-level abstractions to speed team onboarding.
-- Track WebGPU adoption and flag requirements in build docs so testers know how to enable support.[^mdn-webgpu]
-
-## Key Takeaways
-
-- **Start with feature detection and fallbacks—WebGPU isn’t universal yet.**
-- **Precompile pipelines and validate WGSL to save hours of runtime debugging.**
-- **Treat device lifecycle events as first-class citizens to keep demos resilient.**
-
-[^mdn-webgpu]: MDN Web Docs. "WebGPU API." Accessed October 2025. https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API.
-[^webgpu-spec]: W3C. "WebGPU Specification." Accessed October 2025. https://gpuweb.github.io/gpuweb/.
-[^gpu-benchmarks]: Khronos Group. "WebGL vs WebGPU Performance Comparison." 2024.
-[^caniuse]: CanIUse. "WebGPU Support." Accessed October 2025. https://caniuse.com/webgpu.
+- Live demo: [https://bradleymatera.github.io/TriangleDemo/](https://bradleymatera.github.io/TriangleDemo/)  
+- GitHub repo: [https://github.com/BradleyMatera/TriangleDemo](https://github.com/BradleyMatera/TriangleDemo)  
+- Prompt log: `notes/webgpu-prompts.md`

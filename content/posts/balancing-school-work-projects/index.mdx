@@ -2,82 +2,80 @@
 title: "Balancing School, Work, and Side Projects: Strategies for Sustainable Productivity"
 date: "2025-10-13"
 tags: ["Productivity", "Time Management", "Career Development", "Wellness"]
-description: "Proven systems and routines for managing a full-time degree, internship, and personal projects while avoiding burnout, based on real experiences and research-backed methods."
+description: "How I kept a Full Sail course load, an AWS internship, and portfolio builds moving without burning out—and where the system still cracks."
+theme: "Career"
 ---
 
-> **Context:** Personal playbook I used while finishing my Full Sail B.S., completing an AWS internship, and building portfolio projects (I still haven’t held a paid web-dev role).  
-> **AI assist:** Outline + section drafts generated with ChatGPT, then edited on 2025-10-12 using my actual calendars/journals.  
-> **Status:** Student-level retrospective; numbers below come from my planner/health logs, not corporate KPIs.
+> **Context:** Final year of my Web Development B.S. (Oct 2025 grad), AWS Cloud Support internship, and a rotating set of portfolio projects (Car-Match, Triangle Shader Lab, CheeseMath). No paid SWE role yet—this is a student playbook.  
+> **AI assist:** ChatGPT helped outline the sections and reword calendar notes into readable prose. I fed it real data from Google Calendar, Notion, Apple Health, and Obsidian before editing everything on 2025-10-12.  
+> **Status:** Honest retrospective, not a productivity gospel. The numbers below are personal logs, not company KPIs.
 
-## TL;DR
+## Reality snapshot
 
-- **Sustainable beats brute force.** Time-blocking, automation, and recovery rituals kept school/internship/projects moving without sacrificing health [^newport-deepwork].  
-- **Three priorities per week guard focus.** Sunday reviews + an Eisenhower Matrix let me triage work like an incident commander [^timeblocking-technique][^eisenhower-matrix].  
-- **Automation saved a few hours.** GitHub Actions, templates, and scripts removed repetitive setup so energy stayed on deep work [^github-actions].  
-- **Rest was intentional.** Energy audits, accountability, and device-free nights kept burnout at bay [^energy-audit][^recovery-science].
+- Weekly time budget averaged **55–60 hrs** (25 hrs school, 20–25 hrs internship, 10–12 hrs portfolio). Anything beyond that spilled into sleep or weekends, so I guarded the cap.  
+- I tracked every commitment in three places: Google Calendar (time blocks), Notion (tasks + Eisenhower view), and Obsidian (journaling + energy audits). If it didn’t show up in all three, it usually didn’t happen.  
+- Automation + templates saved roughly **8–10 hrs/week** (GitHub Actions deploys, README templates, VS Code snippets). Still, I’m the bottleneck; when I skipped rest, quality dipped immediately.
 
-## Goal & Operating Principles
+## Weekly operating system
 
-- **Aim:** Finish a B.S., excel in an AWS internship, and build portfolio work without sacrificing health.  
-- **Principles:** Prioritise critical tasks, automate the repeatable, schedule recovery, and borrow triage tactics from military experience.
+### Sunday reset (60–90 min)
+1. **Review commitments:** peek at Canvas deadlines, internship sprint board, Netlify deploy queue.  
+2. **Three priorities rule:** pick one academic deliverable, one internship milestone, one portfolio goal. Everything else is optional.  
+3. **Time block:** drop those priorities (and recovery time) onto Google Calendar. Use distinct colors per area.  
+4. **Buffer:** leave 20–30 minute gaps between focus blocks. If something overruns, I flex there instead of cannibalizing sleep.  
+5. **Reality check:** compare plan vs last week’s execution in Obsidian. If I missed >20% of blocks, shrink this week’s commitments before Monday.
 
-## Weekly Planning Framework
+### Daily cadence
+- **06:30–08:00** – Deep work (course labs, internship prep, or tricky code). Phone stays in “Focus” mode.  
+- **09:00–17:00** – Internship hours. Notes live in `notes/aws-internship/daily.md`. When the shift ends I close Slack, update the Kanban, and log a one-line retro.  
+- **18:00–20:00** – Portfolio or class group projects. I stop when the block ends—even if TODOs remain—so I can journal, stretch, and eat something that isn’t instant ramen.  
+- **21:00** – Shutdown ritual (James Clear-style): review tomorrow’s blocks, jot lessons in Obsidian, queue GitHub drafts if needed, then read fiction until lights out.
 
-- **Sunday reset:** Review commitments, block time on Google Calendar, and flag conflicts early [^timeblocking-technique].  
-- **Three must-dos:** Stack-rank the week’s outcomes, then map supporting tasks beneath each goal.  
-- **Eisenhower lens:** Sort urgent vs important to protect deep work windows [^eisenhower-matrix].  
-- **Buffer zones:** Insert 20–30 minute cushions so overruns do not cascade.
+## Tooling + automation stack
 
-## Daily Operating System
+| Tool | Purpose | Notes |
+| --- | --- | --- |
+| **Google Calendar** | Time blocking | Color-coded (blue = school, green = internship, yellow = portfolio, purple = recovery). Shared with accountability partner weekly. |
+| **Notion** | Task + Eisenhower board | Filters by course/internship/project. “Delegated” means “park until we talk about it.” |
+| **Obsidian** | Journal + energy audits | Template logs sleep, mood (1–5), highlights, friction. Charts in Dataview let me spot burnout before it hits. |
+| **GitHub Actions** | Automated deploys/tests | Keeps Netlify/GitHub Pages builds off my plate; logs errors to Slack if something breaks. |
+| **CLI scripts** | Repo scaffolding | `scripts/new-post.sh`, `scripts/branch.sh`, etc., prevent rabbit holes when I create new work. |
+| **Apple Health + Whoop** | Sleep/stress signals | I export weekly CSVs to Obsidian. If sleep dips below 7 hrs for three nights, I trim tasks immediately. |
 
-- **06:30–08:00 – Deep focus:** Code, study, or write while energy peaks.  
-- **09:00–17:00 – Internship:** Honor professional commitments without context switching.  
-- **18:00–20:00 – Projects or training:** Alternate between portfolio work and exercise to balance mental/physical load.  
-- **21:00 – Shutdown ritual:** Close loops, plan tomorrow, and log insights so sleep is restorative [^shutdown-ritual].
+## Burnout prevention habits
 
-## Automation & Tooling Stack
+1. **Energy audit Fridays:** Rate mental/physical energy (1–5). Anything ≤2 triggers a lighter weekend schedule and “no new projects” rule.  
+2. **Accountability partner:** Another Full Sail student reviews my Sunday plan. If it looks unrealistic, they call it out. I do the same for them.  
+3. **Device-free nights:** Minimum one per week (usually Wednesday). No code, no socials, just a walk or analog hobby. Apple Health screenshots keep me honest.  
+4. **Quarterly PTO days (even as a student):** Once a quarter I mark a weekday as “admin day”—handle doctors, errands, or nothing. If internships can plan maint windows, so can I.
 
-- **CI/CD guardrails:** GitHub Actions deploys portfolio projects automatically, keeping evenings free [^github-actions].  
-- **Reusable scripts:** Node.js scaffolds and environment setup scripts cut ramp-up time by roughly 50%.  
-- **Productivity kit:** Notion (tasks), Google Calendar (blocks), Obsidian (journal), and distraction blockers held the system together.
+## Cross-discipline lessons
 
-## Burnout Prevention Habits
+- **Army medic triage → task triage:** Stabilize critical items first (due this week, or block others). “Nice to haves” move to the backlog until capacity returns.  
+- **Logistics mindset:** Always prep “Plan B” and “Plan C” for labs, devices, or teammates flaking. Spare laptop charger and offline docs saved me multiple times.  
+- **Empathetic communication:** Weekly update email (professors/intership mentors) + Loom walkthroughs for group projects avoided last-minute panic.
 
-- **Energy audits:** Document highs/lows weekly to schedule shallow work during dips [^energy-audit].  
-- **Accountability partners:** Peer check-ins flag overload early and celebrate wins.  
-- **Recovery rules:** At least one device-free evening each week aligns with recovery science [^recovery-science].
+## Outcomes (with honest caveats)
 
-## Cross-Discipline Lessons
+- **Academics:** Stayed on track for Oct 2025 graduation (current GPA ~3.8). Two assignments slipped, but I owned it early and negotiated new dates.  
+- **Internship:** Met every lab requirement, presented capstone on time, and captured a handbook-worth of runbooks. Still no production pager duty experience.  
+- **Portfolio:** Shipped major honesty updates (Car-Match, Triangle Shader Lab, CheeseMath). Skipped two earlier goals (public CI template, bigger Zig post) to keep sleep intact.  
+- **Wellness:** Average sleep 7h05m (Apple Health). Stress flagged red twice; both times correlated with ignoring device-free nights. Lesson learned.
 
-- **Military triage:** Treat tasks like patients—stabilise critical work before electives.  
-- **Logistics mindset:** Build fallback plans so slips do not derail momentum.  
-- **Empathetic communication:** Proactive updates keep professors, managers, and teammates aligned.
+## Gaps & next steps
 
-## Outcomes & Iterations
+- Add habit tracking + rolling averages to Notion so I don’t rely on manual CSV imports.  
+- Experiment with Pomodoro for late-night study blocks (current approach drifts after 30 minutes).  
+- Share this template with younger cohorts; maybe turn it into a Notion kit so others don’t start from scratch.  
+- Build a “no weekend work” rule at least once per month. Still a work in progress.
 
-- **Productivity:** Stayed on track to graduate (Oct 2025), met internship objectives, and documented five-ish portfolio projects.  
-- **Wellness:** Apple Health + Whoop logs hovered around seven hours of sleep when I followed the plan; stress dipped when I defended device-free nights.  
-- **Efficiency:** Planner audits show automation/templating freed roughly 8–10 hours most weeks (self-reported, not laboratory precise).  
-- **Learning loop:** Overcommitting still caused fatigue, so I narrowed priorities and embraced planned rest [^rest-productivity].
+## References & influences
 
-## Next Steps
-
-- Layer on habit tracking to spot drift early.  
-- Experiment with Pomodoro intervals for late-day focus blocks [^pomodoro].  
-- Share playbooks with peers navigating similar load.
-
-## Key Takeaways
-
-- **Intentional planning beats hustle culture.** Decide once on priorities, then follow the calendar.  
-- **Automation is self-care.** Offload repetitive work to protect brainpower for deep tasks.  
-- **Recovery is a task.** Schedule rest with the same seriousness as deliverables.
-
-[^newport-deepwork]: Newport, Cal. "Deep Work." 2016.
-[^timeblocking-technique]: "Time Blocking 101." Todoist. Accessed October 2025. https://todoist.com/productivity-methods/time-blocking.
-[^eisenhower-matrix]: "Eisenhower Matrix." MindTools. Accessed October 2025. https://www.mindtools.com/pages/article/newHTE_91.htm.
-[^shutdown-ritual]: Clear, James. "Atomic Habits." 2018.
-[^github-actions]: GitHub. "Actions Documentation." Accessed October 2025. https://docs.github.com/actions.
-[^energy-audit]: "Energy Management." Harvard Business Review. 2023.
-[^recovery-science]: Sonnentag, Sabine. "Psychological Detachment from Work." Journal of Organizational Behavior, 2006.
-[^rest-productivity]: "The Power of Rest." Stanford Medicine. 2024.
-[^pomodoro]: Cirillo, Francesco. "The Pomodoro Technique." 2006.
+[^newport-deepwork]: Cal Newport, “Deep Work,” 2016.  
+[^timeblocking-technique]: Todoist, “Time Blocking 101,” Accessed Oct 2025.  
+[^eisenhower-matrix]: MindTools, “Eisenhower Matrix,” Accessed Oct 2025.  
+[^shutdown-ritual]: James Clear, “Atomic Habits,” 2018.  
+[^energy-audit]: Harvard Business Review, “Energy Management,” 2023.  
+[^recovery-science]: Sabine Sonnentag, “Psychological Detachment from Work,” Journal of Organizational Behavior, 2006.  
+[^rest-productivity]: Stanford Medicine, “The Power of Rest,” 2024.  
+[^pomodoro]: Francesco Cirillo, “The Pomodoro Technique,” 2006.
