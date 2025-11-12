@@ -4,12 +4,14 @@ type ScrollRevealOptions = {
   threshold?: number;
   rootMargin?: string;
   failSafeDelay?: number;
+  initiallyVisible?: boolean;
 };
 
 export function useScrollReveal(delay = 0, options?: ScrollRevealOptions) {
   const ref = useRef<HTMLElement | null>(null);
-  const [revealed, setRevealed] = useState(() => typeof window === "undefined");
-  const { threshold = 0.1, rootMargin = "0px 0px -10% 0px", failSafeDelay = 1200 } = options ?? {};
+  const isServer = typeof window === "undefined";
+  const { threshold = 0.1, rootMargin = "0px 0px -10% 0px", failSafeDelay = 1200, initiallyVisible = false } = options ?? {};
+  const [revealed, setRevealed] = useState(() => isServer || initiallyVisible);
 
   useEffect(() => {
     if (revealed || typeof window === "undefined") {

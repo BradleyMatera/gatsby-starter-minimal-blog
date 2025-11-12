@@ -14,7 +14,7 @@ const stats: Stat[] = [
 import { useScrollReveal } from "./useScrollReveal";
 
 const StatsGrid = () => {
-  const { ref, revealed } = useScrollReveal(300);
+  const { ref, revealed } = useScrollReveal(300, { initiallyVisible: true });
 
   return (
     <div

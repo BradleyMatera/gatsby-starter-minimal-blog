@@ -27,7 +27,7 @@ const features: Feature[] = [
 import { useScrollReveal } from "./useScrollReveal";
 
 const FeatureCardList = () => {
-  const { ref, revealed } = useScrollReveal(450);
+  const { ref, revealed } = useScrollReveal(450, { initiallyVisible: true });
 
   return (
     <div

@@ -3,7 +3,7 @@ import { Link } from "gatsby";
 import { useScrollReveal } from "./useScrollReveal";
 
 const HeroActions = () => {
-  const { ref, revealed } = useScrollReveal(150);
+  const { ref, revealed } = useScrollReveal(150, { initiallyVisible: true });
   const emailAddress = "bradmatera@gmail.com";
   return (
     <div

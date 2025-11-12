@@ -2,7 +2,7 @@ import * as React from "react";
 import { useScrollReveal } from "./useScrollReveal";
 
 const HeroHeadline = () => {
-  const { ref, revealed } = useScrollReveal(0);
+  const { ref, revealed } = useScrollReveal(0, { initiallyVisible: true });
 
   return (
     <div
