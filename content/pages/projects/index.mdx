@@ -274,20 +274,21 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
     />
     <ProjectCard
       title="CheeseMath Jest Tests"
-      meta="Testing library"
+      meta="Calculator & Jest demo"
       summary={
         <>
-          <strong>Jest practice repo</strong> where I wrote simple math utilities and snapshot tests (many generated via AI) to learn the tooling.
+          <strong>Dual demo:</strong> A GitHub Pages UI (Next.js 16 + NextUI) showcasing the calculator features described in the README, plus the Jest practice repo that backs the basic math utilities. Built with heavy AI help for the copy and components.
         </>
       }
       impactPrefix="Reality"
       impact={
         <>
-          Not a production library—just a reference I use when I forget Jest syntax.
+          Lives at <code>https://bradleymatera.github.io/CheeseMath-Jest-Tests/</code> as a front-end demo. The Jest repo is still a practice reference (not production-ready), but the live site lets folks try the calculator, regex tester, and card obscurer without cloning the code.
         </>
       }
       stack={["JavaScript", "Jest"]}
       links={[
+        { label: "Live demo", href: "https://bradleymatera.github.io/CheeseMath-Jest-Tests/", variant: "primary", external: true },
         { label: "GitHub", href: "https://github.com/BradleyMatera/CheeseMath-Jest-Tests", external: true }
       ]}
     />
