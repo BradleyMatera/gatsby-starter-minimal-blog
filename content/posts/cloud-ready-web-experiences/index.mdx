@@ -7,12 +7,16 @@ description: "Join me on a journey through the principles and practices I use to
 theme: "Cloud & DevOps"
 ---
 
+> **Context:** Personal checklist for the small demos I build (GitHub Pages, Netlify, Render)—I haven’t launched enterprise systems yet.  
+> **AI assist:** ChatGPT helped structure this article; I filled it with the actual habits/tools I use today.  
+> **Status:** Student perspective meant to keep me honest about what’s real vs. aspirational.
+
 ## TL;DR
 
-- **Accessibility is the north star.** Semantic HTML, ARIA restraint, and WCAG-aligned contrast make every feature usable for all [^aria][^wcag].  
-- **Cloud readiness demands observability.** Stateless services, IaC, and early SLOs keep infrastructure elastic and predictable [^well-architected].  
-- **Resilience comes from rehearsal.** Chaos drills, progressive delivery, and tested backups turn outages into practice runs.  
-- **Checklists prevent drift.** A pre-launch review spans accessibility, performance, reliability, security, and cost before anything ships.
+- **Accessibility is the north star.** Semantic HTML, ARIA restraint, axe scans, and manual screen-reader passes keep even my tiny demos usable [^aria][^wcag].  
+- **Cloud readiness (for me) = clean deploys + basic observability.** Netlify/GitHub Pages builds, environment docs, and sanity dashboards keep prototypes predictable [^well-architected].  
+- **Resilience is rehearsed, even locally.** Feature flags, smoke tests, and backup scripts let me recover when something breaks—even if the audience is just me.  
+- **Checklists prevent drift.** A pre-launch review covers accessibility, performance, reliability, security, and cost before publishing.
 
 ## Accessibility First
 
@@ -40,12 +44,12 @@ theme: "Cloud & DevOps"
 - **Security:** Secrets tucked into Secrets Manager or GitHub; third-party scripts reviewed.  
 - **Cost:** Budgets in place, alerts firing before spend spikes.
 
-## Case Study: Interactive Pokédex
+## Case Study: Interactive Pokédex (GitHub Pages demo)
 
-- **Delivery:** CloudFront + Lambda@Edge served static assets quickly worldwide.  
-- **Security:** API keys stored in Secrets Manager, proxied through API Gateway.  
-- **Accessibility:** Automated axe scans plus screen-reader passes caught regressions.  
-- **Observability:** CloudWatch dashboards tracked latency, error rates, and provided incident breadcrumbs.
+- **Delivery:** Hosted on GitHub Pages with a lightweight caching layer (IndexedDB + `localStorage`)—no CloudFront yet.  
+- **Security:** PokeAPI is public, so there are no secrets; I call it directly from the browser and document rate-limit handling.  
+- **Accessibility:** Automated axe scans plus manual VoiceOver/keyboard passes before each publish.  
+- **Observability:** DevTools + Netlify analytics (for the Gatsby site linking to it) show basic latency/error info; no CloudWatch dashboards in play yet.
 
 ## Key Takeaways
 

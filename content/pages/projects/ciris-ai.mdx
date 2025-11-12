@@ -7,21 +7,21 @@ import { Section, Card, AnchorNav, Link } from "../../../src/components/ui";
 
 <Section
   eyebrow="Case Study"
-  title="CIRIS AI · Ethics Engine Enterprise backend contributions"
-  description="Eight merged pull requests hardened authentication, benchmarking routes, and developer experience for the CIRIS AI Ethics Engine."
+  title="CIRIS AI · Volunteer contributor notes"
+  description="Documentation-focused, small-scale contributions to the CIRIS Ethics Engine repositories. This is a learning engagement, not full-time ownership."
 />
 
 <Section
   eyebrow="TL;DR"
-  title="Why these contributions matter"
+  title="What I actually contributed"
 >
   <p>
-    <strong>TL;DR:</strong> Hardened the CIRIS AI Ethics Engine so stakeholders can trust every AI decision and contributors can ship safely across distributed teams.
+    <strong>TL;DR:</strong> I opened a handful of PRs (docs updates, lint fixes, onboarding notes) and spent time in forks experimenting with backend workflows. I am not a core maintainer, and I call that out whenever this project comes up.
   </p>
   <div className="project-card__stack">
-    <span>8 merged PRs</span>
-    <span>51 automated tests</span>
-    <span>Matrix & DID integrations</span>
+    <span>Minor docs + DX fixes merged</span>
+    <span>Larger features live in personal forks</span>
+    <span>Pull request list linked below for transparency</span>
   </div>
 </Section>
 
@@ -35,74 +35,46 @@ import { Section, Card, AnchorNav, Link } from "../../../src/components/ui";
   ]}
 />
 
-<Section id="overview" eyebrow="Problem overview" title="The team needed reliable ethics automation before scaling contributors">
+<Section id="overview" eyebrow="Project context" title="Where I fit in">
   <ul className="feature-list">
-    <li><strong>Mission:</strong> Provide transparent audit trails for AI decisions across regulated industries.</li>
-    <li><strong>Gap:</strong> Existing backend lacked secure routing, observability, and onboarding documentation.</li>
-    <li><strong>Objective:</strong> Deliver hardened APIs plus developer tooling so new contributors can build without breaking compliance.</li>
+    <li><strong>Role:</strong> Community contributor (nights/weekends) focused on docs and onboarding issues.</li>
+    <li><strong>Scope:</strong> Updating readmes, fixing lint/test issues, and prototyping ideas in forks before opening discussions.</li>
+    <li><strong>Transparency:</strong> I do not manage the production infrastructure—any future employer should view this as learning experience, not enterprise ownership.</li>
   </ul>
 </Section>
 
-<Section id="approach" eyebrow="Approach" title="Security, observability, and developer velocity">
-  <div className="grid-three">
-    <Card>
-      <h3 className="feature-card__title">Authentication & safety</h3>
-      <ul className="feature-list">
-        <li><strong>Implemented</strong> JWT verification with rotation-ready signing keys and detailed audit logs.</li>
-        <li><strong>Locked</strong> deferral routes to accept only whitelisted actions, preventing policy drift.</li>
-      </ul>
-    </Card>
-    <Card>
-      <h3 className="feature-card__title">Matrix + DID integration</h3>
-      <ul className="feature-list">
-        <li><strong>Extended</strong> benchmark routes to broadcast into Matrix rooms for real-time governance.</li>
-        <li><strong>Issued</strong> Decentralized Identifiers so every AI agent maps to audit records.</li>
-      </ul>
-    </Card>
-    <Card>
-      <h3 className="feature-card__title">Developer experience</h3>
-      <ul className="feature-list">
-        <li><strong>Created</strong> Docker Compose environments with Matrix + MongoDB, reducing setup to minutes.</li>
-        <li><strong>Added</strong> 51 automated tests and documentation for onboarding, environment variables, and smoke tests.</li>
-      </ul>
-    </Card>
-  </div>
-</Section>
-
-<Section id="impact" eyebrow="Impact metrics" title="Results for the team">
+<Section id="approach" eyebrow="Approach" title="Small but useful contributions">
   <div className="grid-two">
     <Card>
-      <h3 className="feature-card__title">Stability</h3>
-      <p className="feature-card__body">
-        API error rates dropped thanks to validation, logging, and circuit-breakers. Contributors now receive actionable telemetry on every failure.
-      </p>
+      <h3 className="feature-card__title">Docs & onboarding</h3>
+      <ul className="feature-list">
+        <li>Clarified environment setup steps (Matrix, MongoDB) based on my own struggles.</li>
+        <li>Recorded Loom walkthroughs for other new contributors.</li>
+        <li>Kept all edits AI-assisted, then reviewed line by line before submitting.</li>
+      </ul>
     </Card>
     <Card>
-      <h3 className="feature-card__title">Momentum</h3>
-      <p className="feature-card__body">
-        Demo environments let non-backend teammates exercise flows instantly, accelerating stakeholder approvals and roadmap planning.
-      </p>
+      <h3 className="feature-card__title">Code tweaks</h3>
+      <ul className="feature-list">
+        <li>Filed and fixed minor bugs (typos, lint errors, small API responses).</li>
+        <li>Opened discussion issues for bigger topics (auth, observability) but haven’t shipped them.</li>
+        <li>Maintained a PR list so anyone can verify what merged.</li>
+      </ul>
     </Card>
   </div>
 </Section>
 
-<Section id="artifacts" eyebrow="Supporting artifacts" title="Proof of work">
+<Section id="impact" eyebrow="What I learned" title="Outcomes">
   <ul className="feature-list">
-    <li><Link to="https://github.com/CIRISAI/CIRISNode/pulls?q=is%3Apr+author%3ABradleyMatera" external><strong>PR bundle:</strong></Link> Full history of merged changes with review context.</li>
-    <li><Link to="https://github.com/CIRISAI/CIRISNode" external><strong>Repository:</strong></Link> Source with environment setup, scripts, and test suites.</li>
-    <li><strong>Runbooks:</strong> Contributor onboarding guides and smoke-test checklists maintained in the team workspace.</li>
+    <li>Improved onboarding docs for the next contributor.</li>
+    <li>Learned how to work asynchronously with an open-source team, including owning the fact that my contributions are small.</li>
+    <li>Set expectations with recruiters by linking directly to the PR list instead of implying large-scale ownership.</li>
   </ul>
 </Section>
 
-<Section id="lessons" eyebrow="Lessons & next steps" title="How the work scales">
+<Section id="artifacts" eyebrow="Supporting artifacts" title="Links">
   <ul className="feature-list">
-    <li><strong>Standardised</strong> observability across services so compliance teams can audit every transaction.</li>
-    <li><strong>Enabled</strong> faster onboarding by pairing documentation with runnable scripts.</li>
-    <li><strong>Next:</strong> Introduce background worker queues, synthetic monitoring, and formal API versioning.</li>
+    <li><Link to="https://github.com/CIRISAI/CIRISNode/pulls?q=is%3Apr+author%3ABradleyMatera" external><strong>PR list:</strong></Link> shows exactly what merged.</li>
+    <li><strong>Forks:</strong> linked in the README for transparency even if they never merged.</li>
   </ul>
-  <div className="card-actions">
-    <Link data-variant="primary" to="/roles/devops-engineer">
-      Explore related DevOps role
-    </Link>
-  </div>
 </Section>

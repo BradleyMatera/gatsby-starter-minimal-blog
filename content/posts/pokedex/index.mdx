@@ -6,11 +6,15 @@ description: "A case study on building a searchable Pokédex using PokeAPI and P
 theme: "Front-End & Full-Stack"
 ---
 
+> **Context:** Personal front-end practice app that consumes public APIs; no login, no production users.  
+> **AI assist:** ChatGPT + Copilot drafted sections of the UI and fetch logic; I kept the prompt log in the repo.  
+> **Status:** Metrics below come from Chrome DevTools on my laptop—they’re directional, not production SLAs.
+
 ## TL;DR
 
-- **API mashup delivers fast answers.** PokeAPI + Pokémon TCG API data loads in about 500ms thanks to caching and defensive fetch logic [^pokeapi-docs][^tcg-docs].
-- **Accessibility baked in from day one.** Semantic HTML, `aria-live` announcements, and keyboard traps prevented late-stage fixes [^wcag-guidelines].
-- **Responsive layouts stay snappy.** Tailwind utility classes keep cards readable from mobile to desktop without layout thrash.
+- **API mashup delivers fast answers (for a side project).** PokeAPI + Pokémon TCG API data loads quickly on my machine thanks to caching + defensive fetch logic [^pokeapi-docs][^tcg-docs].  
+- **Accessibility is built-in.** Semantic HTML, `aria-live` announcements, and keyboard traps prevented late-stage fixes [^wcag-guidelines].  
+- **Responsive layout stays snappy.** Utility classes keep cards readable from mobile to desktop.  
 - **Try it live:** [Interactive Pokédex](https://bradleymatera.github.io/Interactive-Pokedex) · [GitHub repo](https://github.com/BradleyMatera/Interactive-Pokedex).
 
 ## Project Goals
@@ -88,9 +92,9 @@ async function searchPokemon(query) {
 
 ## Results
 
-- **Sub-500ms search latency** on warm cache; initial loads remain under 2s on mid-range mobile.
-- **98% Lighthouse accessibility** with zero contrast regressions and full keyboard coverage.
-- **User validation:** 50-person hallway test showed 85% could locate stats and cards within 30 seconds.
+- **Latency:** Chrome DevTools shows warm-cache searches returning in well under a second on my laptop; mobile-first load hovers around 2s when throttled.  
+- **Accessibility:** Lighthouse accessibility scores hover around 98–100 locally, and manual keyboard testing confirms focus order.  
+- **User validation:** Informal tests with a handful of classmates ensured the search flow made sense; I still want broader feedback.
 
 ## Lessons Learned
 

@@ -7,6 +7,10 @@ description: "How I layer unit, integration, and end-to-end tests across front-e
 theme: "Front-End & Full-Stack"
 ---
 
+> **Context:** Student-level test strategy I use on my own repos and internship labs; I haven’t owned QA for a production org yet.  
+> **AI assist:** ChatGPT helped outline the pyramid; I filled it with tools I actually touch (and labeled which ones are still labs).  
+> **Status:** Honest view of what’s automated today vs. what’s aspirational (contract testing is still in pilot).
+
 ## TL;DR
 
 - **Layered suites keep risk low.** Unit, component, integration, contract, and E2E tests provide coverage where it counts without burning velocity.[^jest]
@@ -27,9 +31,9 @@ theme: "Front-End & Full-Stack"
 | --- | --- | --- | --- |
 | Unit tests | Pure functions, utilities, React hooks | Jest, Vitest | Watch mode on every save. |
 | Component tests | UI behaviour in isolation | React Testing Library, Storybook test runner | CI + pre-merge on UI changes. |
-| Integration tests | API endpoints, database interactions | Supertest, Prisma test DB, LocalStack | Every pull request. |
-| Contract tests | API request/response contracts | Pact, OpenAPI schema validation | Nightly or pre-release. |
-| End-to-end tests | Full user flows | Playwright, Cypress | Scheduled runs + pre-deploy smoke suites. |
+| Integration tests | API endpoints, database interactions | Supertest, Prisma test DB, LocalStack | Every pull request (personal projects). |
+| Contract tests | API request/response contracts | Pact, OpenAPI schema validation | Pilot stage—run manually before bigger refactors. |
+| End-to-end tests | Full user flows | Playwright, Cypress | Scheduled runs + pre-deploy smoke suites for Netlify deploys.
 
 Unit tests stay fast while end-to-end tests mimic production flows. Balancing both prevents brittle suites and ensures real issues get caught.
 
@@ -48,7 +52,7 @@ Unit tests stay fast while end-to-end tests mimic production flows. Balancing bo
 ## End-to-End Coverage
 
 - **Playwright flows.** Scripts cover auth, CRUD, and accessibility spot checks (focus order, keyboard navigation).  
-- **Visual diffs.** Percy snapshots detect unexpected UI shifts after CSS or component refactors.  
+- **Visual diffs.** Percy snapshots are in pilot mode for this Gatsby site to catch unexpected UI shifts.  
 - **Performance budgets.** Lighthouse CI enforces LCP/CLS thresholds inside GitHub Actions to prevent regressions.
 
 ## Keeping Tests Fast & Reliable
@@ -63,13 +67,13 @@ Unit tests stay fast while end-to-end tests mimic production flows. Balancing bo
 1. Pre-commit hooks run lint and unit tests.  
 2. Pull requests trigger unit, component, and integration suites in CI.  
 3. Merges to main kick off end-to-end smoke tests and deploy previews.  
-4. Nightly jobs execute contract tests against staging to catch breaking API changes.
+4. Nightly jobs (or manual runs when I’m iterating quickly) execute contract tests against staging to catch breaking API changes.
 
 ## Results
 
-- **Post-release incidents dropped.** Automated gates slashed regression frequency and cut hotfixes to rare events.
-- **Faster feedback loops.** Watch-mode unit tests and Playwright smoke suites surface issues minutes after code changes.
-- **Better cross-team collaboration.** Contract tests and shared acceptance criteria keep frontend and backend iterations in sync.
+- **Fewer regressions in side projects.** Automated gates catch most issues before I publish updates to Netlify/GitHub Pages, so hotfixes are rare.  
+- **Faster feedback loops.** Watch-mode unit tests and Playwright smoke suites surface issues minutes after code changes.  
+- **Better collaboration.** Even on student teams, sharing acceptance criteria + early contract tests keeps frontend and backend iterations aligned.
 
 ## Lessons Learned
 

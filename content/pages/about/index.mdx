@@ -15,21 +15,22 @@ import { Section, AnchorNav, Card } from "../../../src/components/ui";
   }
   description={
     <p>
-      <strong>Full Stack Software Engineer</strong> | <strong>B.S. Web Development (Full Sail, GPA 3.8)</strong> | <strong>AWS Cloud Support Intern (Amazon, Summer 2025)</strong>
+      <strong>Systems-focused web developer</strong> | <strong>B.S. Web Development, Full Sail University (Oct 2025)</strong>
     </p>
   }
 >
   <p>
-    I build production-ready systems with scalable backend services and strong cloud architecture. Hands-on experience troubleshooting live AWS environments and optimizing customer workflows.
+    I came into tech after serving as a U.S. Army combat medic with the 82nd Airborne. That background makes me a calm debugger: I study the system in front of me, find the pressure point, and keep moving.
   </p>
   <p>
-    <strong>Army Combat Medic → Software Engineer.</strong> Before tech, I served as a medic in the U.S. Army, worked in security, case management, construction, and animal rescue. Those jobs taught me discipline, communication, and how to adapt under pressure. Now I approach engineering the same way: identify the issue, fix it, keep things stable.
+    I’m not a “blank-page” coder. I use AI tools like ChatGPT and Copilot in almost every coding session to scaffold ideas, surface explanations, and spot bugs. Then I adapt, document, and ship the work. This site is my running log of the demos, prototypes, and notes that process produces.
   </p>
 </Section>
 
 <AnchorNav
   items={[
     { id: "skills", label: "Technical Skills" },
+    { id: "how-i-build", label: "How I Build" },
     { id: "certifications", label: "Licenses & Certifications" },
     { id: "education", label: "Education" },
     { id: "differentiators", label: "What Sets Me Apart" },
@@ -40,92 +41,75 @@ import { Section, AnchorNav, Card } from "../../../src/components/ui";
   eyebrow="My Story"
   title="From Front Lines to Code Lines"
 >
-  <p>Before diving into tech, I served as a medic in the U.S. Army, managing high-stakes situations that demanded quick thinking and precision. My time in security, case management, construction, and animal rescue honed my ability to adapt and solve problems under pressure. These experiences shape my engineering approach: identify the core issue, implement reliable fixes, and ensure systems stay resilient. It's why I prioritize scalable, secure solutions in every project.</p>
+  <p>Before diving into tech, I served as a medic in the U.S. Army, managing high-stakes situations that demanded quick thinking and precision. My time in security, case management, construction, and animal rescue honed my ability to adapt and solve problems under pressure. These experiences shape my engineering approach: identify the core issue, implement reliable fixes, and ensure systems stay resilient.</p>
+  <p>In 2025 I completed an AWS Cloud Support internship. It wasn’t glamorous—I spent my days working through labs, documenting troubleshooting steps, building CloudWatch dashboards, and automating repetitive support workflows. But it taught me how AWS services fit together and reminded me that even internal tools deserve clear runbooks.</p>
 </Section>
 
 <Section
   id="skills"
   eyebrow="Technical Skills"
-  title="The stack I work with every day"
+  title="Where I'm confident vs. where I'm still learning"
 >
   <div className="grid-two">
     <Card>
-      <h3 className="feature-card__title">Languages</h3>
+      <h3 className="feature-card__title">Comfortable today</h3>
       <div className="project-card__stack">
-        <span><strong>JavaScript</strong></span>
-        <span><strong>TypeScript</strong></span>
-        <span>Python</span>
-        <span>HTML</span>
-        <span>CSS</span>
-        <span>C#</span>
-        <span>Java</span>
-        <span>PHP</span>
+        <span>HTML & CSS layouts</span>
+        <span>JavaScript fundamentals + React basics</span>
+        <span>Git / GitHub</span>
+        <span>Deploying demos to Netlify / GitHub Pages</span>
+        <span>Express + simple Node APIs</span>
+        <span>Writing docs / changelogs</span>
       </div>
+      <p>I can navigate these on my own (with AI pair-programming for momentum) and point to shipped demos that prove it.</p>
     </Card>
     <Card>
-      <h3 className="feature-card__title">Frameworks & Libraries</h3>
+      <h3 className="feature-card__title">Actively learning</h3>
       <div className="project-card__stack">
-        <span>React.js</span>
-        <span>Node.js</span>
-        <span>Express.js</span>
-        <span>Next.js</span>
-        <span>Vue.js</span>
-        <span>Angular.js</span>
-        <span>jQuery</span>
+        <span>React hooks & state modeling</span>
+        <span>Next.js routing / data fetching</span>
+        <span>GitHub Actions & basic CI</span>
+        <span>Docker dev containers</span>
+        <span>AWS CloudWatch, IAM, and automation labs</span>
+        <span>WebGPU + graphics foundations</span>
       </div>
+      <p>These are in-progress reps—you’ll see them referenced in blog posts and TODOs. I still lean heavily on tutorials and AI explanations.</p>
     </Card>
     <Card variant="muted">
-      <h3 className="feature-card__title">Cloud & DevOps</h3>
+      <h3 className="feature-card__title">Exploring / curious</h3>
       <div className="project-card__stack">
-        <span>Amazon Web Services (AWS)</span>
-        <span>AWS SageMaker</span>
-        <span>AWS Bedrock</span>
-        <span>Amazon EC2</span>
-        <span>Amazon S3</span>
-        <span>Amazon DynamoDB</span>
-        <span>Amazon CloudFront</span>
-        <span>Amazon RDS</span>
-        <span>Docker</span>
-        <span>GitHub Actions</span>
-        <span>Nginx</span>
+        <span>Vue / Angular experiments</span>
+        <span>FastAPI + Python tooling</span>
+        <span>Server-side auth patterns</span>
+        <span>Zig + lower-level parsing</span>
+        <span>Advanced AWS services (beyond labs)</span>
+        <span>Accessibility audits at scale</span>
       </div>
+      <p>These show up in prototypes, not production work. Expect notes about what was AI-generated and what I still need help with.</p>
+    </Card>
+  </div>
+</Section>
+
+<Section
+  id="how-i-build"
+  eyebrow="Workflow"
+  title="How I build (and what I still need help with)"
+>
+  <div className="grid-two">
+    <Card>
+      <h3 className="feature-card__title">AI-assisted, builder mindset</h3>
+      <p>I prompt ChatGPT and Copilot to scaffold components, write tests, or explain APIs. Then I read every line, adapt it to my project, and document what changed. I keep prompt logs so the collaboration is transparent.</p>
+      <p>Most projects on this site were assembled this way. If something was heavily AI-generated, the project page states it outright.</p>
     </Card>
     <Card variant="muted">
-      <h3 className="feature-card__title">Databases</h3>
-      <div className="project-card__stack">
-        <span>MongoDB</span>
-        <span>PostgreSQL</span>
-        <span>MySQL</span>
-        <span>SQL Databases</span>
-      </div>
-    </Card>
-    <Card variant="muted">
-      <h3 className="feature-card__title">Tools</h3>
-      <div className="project-card__stack">
-        <span>Git</span>
-        <span>Postman</span>
-        <span>Linux</span>
-        <span>Vercel</span>
-        <span>Netlify</span>
-        <span>CloudWatch</span>
-        <span>VS Code</span>
-        <span>Adobe Creative Cloud</span>
-      </div>
-    </Card>
-    <Card variant="muted">
-      <h3 className="feature-card__title">Specialties</h3>
-      <div className="project-card__stack">
-        <span>API Development</span>
-        <span>Authentication</span>
-        <span>CI/CD Automation</span>
-        <span>Distributed Troubleshooting</span>
-        <span>Low-cost Infrastructure</span>
-        <span>Artificial Intelligence (AI)</span>
-        <span>Back-end Operations</span>
-        <span>Test Automation</span>
-        <span>Automated Support Workflow</span>
-        <span>U.S. Health Insurance Portability and Accountability Act (HIPAA)</span>
-      </div>
+      <h3 className="feature-card__title">Limits I'm working through</h3>
+      <ul className="feature-list">
+        <li>Algorithms / data structures (I’m still at the basics).</li>
+        <li>Low-level languages and systems design.</li>
+        <li>Whiteboard-style problem solving without references.</li>
+        <li>Large production deployments (my experience is in demos and labs).</li>
+      </ul>
+      <p>I’m looking for teams that value honest status updates and mentorship so I can keep closing these gaps.</p>
     </Card>
   </div>
 </Section>
@@ -206,9 +190,9 @@ import { Section, AnchorNav, Card } from "../../../src/components/ui";
   }
 >
   <ul className="feature-list">
-    <li><strong>Calm under pressure</strong> — Army medic training prepared me for high-stakes environments where quick decisions matter.</li>
-    <li><strong>Fast troubleshooting</strong> — I dig deep until I fully understand root causes, not just symptoms.</li>
-    <li><strong>No excuses, only solutions</strong> — Logistics and operations background taught me accountability and ownership.</li>
-    <li><strong>Clear communication</strong> — I document decisions so teams move faster and knowledge doesn't get lost.</li>
+    <li><strong>Calm under pressure</strong> — Army medic training -> steady nerves when prototypes break.</li>
+    <li><strong>Transparent process</strong> — Every project page calls out what AI/tuts helped and what’s still unfinished.</li>
+    <li><strong>Systems thinking</strong> — I map flows, write runbooks, and treat even small demos like they deserve documentation.</li>
+    <li><strong>Growth mindset</strong> — I’m upfront about gaps (algorithms, low-level work) and look for mentors who can help me close them.</li>
   </ul>
 </Section>

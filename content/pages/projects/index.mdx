@@ -9,19 +9,19 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
   eyebrow="Projects"
   title={
     <>
-      <strong>Engineering case studies</strong> with production-ready outcomes.
+      <strong>Practice projects</strong> and volunteer work with full transparency.
     </>
   }
   description={
     <p>
-      <strong>Production-ready case studies</strong> demonstrating architecture, accessibility, and measurable outcomes.
+      These are student/volunteer case studies. They run locally or on small hosts, they lean on AI scaffolding, and each card explains what’s real versus still on the roadmap.
     </p>
   }
 >
   <div className="callout">
     <span className="callout__icon">ℹ</span>
     <div className="callout__body">
-      Want a deeper teardown? Reach out on <strong>LinkedIn</strong> or <strong>GitHub</strong> and I'll share walkthroughs, diagrams, and deployment notes for any project on this page.
+      Want a deeper teardown? Reach out on <strong>LinkedIn</strong> or <strong>GitHub</strong> and I’ll walk through repos, TODO lists, and prompt logs so you can see the current state before assuming production polish.
     </div>
   </div>
 </Section>
@@ -47,16 +47,16 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
   <div className="grid-two project-gallery">
     <ProjectCard
       title="Car-Match"
-      meta="Full stack web app"
+      meta="Personal capstone prototype"
       summary={
         <>
-          <strong>Secure community</strong> platform that verifies members, powers real-time messaging, and supports moderated events.
+          <strong>Practice build</strong> that let me explore React forms, simple profile cards, and an Express API with help from tutorials + AI scaffolding.
         </>
       }
-      impactPrefix="Impact"
+      impactPrefix="Reality"
       impact={
         <>
-          Demo users complete onboarding, publish posts, and chat without moderator intervention thanks to guided flows.
+          Not deployed publicly. It taught me routing, auth basics, and how to document TODOs for features (chat, moderation) that don’t exist yet.
         </>
       }
       stack={["React", "Node.js", "Express", "MongoDB"]}
@@ -67,16 +67,16 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
     />
     <ProjectCard
       title="Interactive Pokedex"
-      meta="Data exploration tool"
+      meta="Front-end practice app"
       summary={
         <>
-          <strong>Accessible search</strong> interface with sticky filters, responsive cards, and resilient offline behaviour powered by caching.
+          <strong>Simple client</strong> that consumes the public Pokémon API so I can keep practicing search, filtering, and responsive layout basics.
         </>
       }
-      impactPrefix="Result"
+      impactPrefix="Reality"
       impact={
         <>
-          Debounced, cached API calls keep latency under a second while skeleton states maintain context on flaky networks.
+          Implements keyboard navigation and basic skeleton states. There’s no offline mode or advanced caching yet—this is purely a learning sandbox.
         </>
       }
       stack={["HTML", "CSS", "JavaScript", "PokeAPI"]}
@@ -88,16 +88,16 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
     />
     <ProjectCard
       title="CIRIS AI Contributions"
-      meta="Backend and infrastructure"
+      meta="Volunteer OSS participation"
       summary={
         <>
-          <strong>Enterprise backend</strong> contributions that harden authentication, observability, and contributor tooling for the Ethics Engine.
+          <strong>Student contributor</strong> making docs updates, small fixes, and experimental branches for the CIRIS Ethics Engine repos.
         </>
       }
-      impactPrefix="Impact"
+      impactPrefix="Reality"
       impact={
         <>
-          Merged changes lock down routes, surface telemetry, and package Docker DX so reviewers approve deployments faster.
+          A few minor PRs merged; most work happens in forks while I learn. I’m transparent about scope so maintainers know where I’m still getting up to speed.
         </>
       }
       stack={["Node.js", "Express", "MongoDB", "Docker", "JWT"]}
@@ -114,7 +114,7 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
   eyebrow="Front-End"
   title={
     <>
-      <strong>Front-end UI projects</strong> focused on interaction and design.
+      <strong>Front-end UI projects</strong> focused on interaction and design practice.
     </>
   }
 >
@@ -124,13 +124,13 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
       meta="Audio demo"
       summary={
         <>
-          <strong>Accessible soundboard</strong> that pairs animated controls with focus management for playful audio exploration.
+          <strong>Front-end warm-up</strong> (built with AI prompt scaffolding) that let me practice keyboard handling, audio resets, and small delightful details.
         </>
       }
-      impactPrefix="Impact"
+      impactPrefix="Reality"
       impact={
         <>
-          Keyboard-first interactions and reset hooks prevent overlapping clips so demos stay friendly in classrooms.
+          Focus management and reset hooks work in modern browsers; it’s a CodePen-style experiment, not a shipped classroom tool.
         </>
       }
       stack={["HTML", "CSS", "JavaScript"]}
@@ -141,16 +141,16 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
     />
     <ProjectCard
       title="Professional Portfolio Website"
-      meta="Static site"
+      meta="Static site template"
       summary={
         <>
-          <strong>Semantic portfolio</strong> scaffold that demonstrates landmark structure, skip links, and resilient responsive design.
+          <strong>Semantic template</strong> I built (with heavy AI help) to practice landmark structure, skip links, and responsive typography.
         </>
       }
-      impactPrefix="Impact"
+      impactPrefix="Reality"
       impact={
         <>
-          Hiring partners review content faster because skip links and structured headings surface the right sections.
+          Hosted at <code>bradleymatera.github.io/Professional-Portfolio-Website/</code> as a demo that links into this Gatsby/Netlify portfolio (<code>https://bradleysgatsbyblog.netlify.app</code>). It’s a reference template, not a separate product.
         </>
       }
       stack={["HTML", "CSS", "JavaScript"]}
@@ -164,13 +164,13 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
       meta="Various demos"
       summary={
         <>
-          <strong>UI experiment</strong> library showcasing reusable animations, component states, and interaction tests for workshops.
+          <strong>UI experiment log</strong> where I stash pens generated with AI prompts + manual tweaks so I can reference patterns later.
         </>
       }
-      impactPrefix="Result"
+      impactPrefix="Reality"
       impact={
         <>
-          Curated pens back up talks with working examples audiences can fork during live sessions.
+          Primarily for my own study sessions. I link to specific pens from blog posts so readers know which snippets were AI-assisted.
         </>
       }
       stack={["HTML", "CSS", "JavaScript"]}
@@ -184,25 +184,21 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
 <Section
   id="fullstack"
   eyebrow="Full-Stack & APIs"
-  title={
-    <>
-      <strong>Full-stack builds</strong> connecting interfaces to APIs and data.
-    </>
-  }
+      title="Full-stack practice builds (no production traffic)"
 >
   <div className="grid-two project-gallery">
     <ProjectCard
       title="Convo-Ai"
-      meta="Local AI chat"
+      meta="Local AI chat experiment"
       summary={
         <>
-          <strong>Offline assistant</strong> experience that pairs FastAPI endpoints with Ollama models for voice-ready chat demos.
+          <strong>FastAPI + Ollama playground</strong> for testing local chat flows, env variables, and prompt templates on my laptop.
         </>
       }
-      impactPrefix="Impact"
+      impactPrefix="Reality"
       impact={
         <>
-          Local-first deployment keeps conversations private while bundling scripts that spin up reproducible demos.
+          Runs locally only; still uses AI scaffolding for most of the backend code. Great for learning infrastructure, not ready for users.
         </>
       }
       stack={["Python", "FastAPI", "Ollama"]}
@@ -215,13 +211,13 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
       meta="AI chat embed"
       summary={
         <>
-          <strong>Embeddable chat</strong> widget that drops into landing pages and connects to configurable LLM providers.
+          <strong>Work-in-progress embed</strong> that lets me experiment with prompting, simple Express proxies, and UI hand-offs for chat assistants (most scaffolding from Copilot/ChatGPT).
         </>
       }
-      impactPrefix="Impact"
+      impactPrefix="Reality"
       impact={
         <>
-          MVP handles intent routing today while analytics, guardrails, and billing hooks move through backlog.
+          Currently supports a single endpoint and a handful of scripts. Analytics/guardrails/billing are ideas in the backlog, not shipped features, and I call out which parts were generated vs. hand-written in the README.
         </>
       }
       stack={["JavaScript"]}
@@ -234,13 +230,13 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
       meta="AI tool"
       summary={
         <>
-          <strong>Revenue analytics</strong> prototype exploring forecasting dashboards for small teams.
+          <strong>Static dashboard mock</strong> that let me test layout ideas for an internal analytics concept.
         </>
       }
-      impactPrefix="Result"
+      impactPrefix="Reality"
       impact={
         <>
-          Early workshops validate KPI definitions before committing to production data pipelines.
+          Powered entirely by mocked data and AI-generated copy. Useful for storytelling, not hooked to real metrics.
         </>
       }
       stack={["JavaScript"]}
@@ -254,11 +250,7 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
 <Section
   id="tools"
   eyebrow="Tools & Infrastructure"
-  title={
-    <>
-      <strong>Developer tooling</strong> for build, test, and automation workflows.
-    </>
-  }
+      title="Developer tooling experiments"
 >
   <div className="grid-two project-gallery">
     <ProjectCard
@@ -266,13 +258,13 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
       meta="Container setup"
       summary={
         <>
-          <strong>Consistent containers</strong> blueprint that ships Node.js and Python tooling with shared orchestration scripts.
+          <strong>Personal exercise</strong> to learn how Docker Compose can spin up Node + Python tooling with similar scripts.
         </>
       }
-      impactPrefix="Impact"
+      impactPrefix="Reality"
       impact={
         <>
-          Teams share identical environments, eliminating "works on my machine" drift during onboarding.
+          Built for my own onboarding, not adopted by teams. The README calls out what still needs polishing before anyone else could rely on it.
         </>
       }
       stack={["Docker", "Python", "Node.js"]}
@@ -285,13 +277,13 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
       meta="Testing library"
       summary={
         <>
-          <strong>Testing playbook</strong> repository that bundles math utilities with approachable Jest examples.
+          <strong>Jest practice repo</strong> where I wrote simple math utilities and snapshot tests (many generated via AI) to learn the tooling.
         </>
       }
-      impactPrefix="Impact"
+      impactPrefix="Reality"
       impact={
         <>
-          New teammates adopt unit testing faster using scripts that slot directly into onboarding workshops.
+          Not a production library—just a reference I use when I forget Jest syntax.
         </>
       }
       stack={["JavaScript", "Jest"]}
@@ -304,13 +296,13 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
       meta="Geometry parser"
       summary={
         <>
-          <strong>Zig geometry</strong> toolkit parsing OBJ/MTL assets with predictable memory usage for rendering experiments.
+          <strong>Zig learning repo</strong> where I parse OBJ/MTL files to understand memory management and file I/O outside of JavaScript.
         </>
       }
-      impactPrefix="Result"
+      impactPrefix="Reality"
       impact={
         <>
-          Large mesh files stream without crashes, unblocking WebGPU prototyping.
+          Handles small meshes today; larger files still surface TODOs in the README.
         </>
       }
       stack={["Zig"]}
@@ -323,13 +315,13 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
       meta="Guided WebGPU primer"
       summary={
         <>
-          <strong>Guided WebGPU</strong> primer that walks learners through the hello triangle pipeline with live annotations.
+          <strong>Hello triangle notes</strong> compiled while I poked at WebGPU with AI-generated snippets and browser docs.
         </>
       }
-      impactPrefix="Impact"
+      impactPrefix="Reality"
       impact={
         <>
-          Inline explanations shorten ramp-up for new WebGPU adopters and reduce context switching between docs.
+          Published so future-me (and anyone curious) can see how I reasoned through adapters, pipelines, and draw calls.
         </>
       }
       stack={["WebGPU", "JavaScript", "WGSL"]}
@@ -343,11 +335,11 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
 
 <Section
   eyebrow="Need more context?"
-  title="Let's talk through the roadmap, metrics, and code."
+  title="Need more context before you trust a student project?"
 >
   <div className="surface-card surface-card--outline">
     <div className="feature-card__body">
-      I'm happy to schedule a walkthrough, record a demo, or share repo access so you can see the code quality, testing, and documentation.
+      I’m happy to schedule a walkthrough, record a demo, or share repo access so you can see the code quality, test coverage (or lack thereof), and open TODOs for any project listed here.
     </div>
     <div className="hero-actions">
       <a data-variant="primary" href="https://www.linkedin.com/in/bradmatera" target="_blank" rel="noopener noreferrer">

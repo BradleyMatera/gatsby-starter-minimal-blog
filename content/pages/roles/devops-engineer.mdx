@@ -8,83 +8,71 @@ import { Section, Card } from "../../../src/components/ui";
 
 <Section
   eyebrow="DevOps Engineer"
-  title="Automate delivery with confidence and guardrails"
-  description="Build pipelines, observability, and release processes that keep deployments predictable."
->
-  <ul className="list-disc space-y-2 pl-5">
-    <li><strong>Pipeline automation:</strong> GitHub Actions, reusable workflows, and policy checks that block risky merges.</li>
-    <li><strong>Environment hygiene:</strong> Staging/production parity with secrets rotation and drift detection.</li>
-    <li><strong>Release visibility:</strong> Dashboards, alerts, and runbooks so teams know what shipped and how to roll back.</li>
-  </ul>
-</Section>
+  title="Learning DevOps by automating my own projects"
+  description="I haven't held a DevOps title yet. This page documents the guardrails I've actually built, what still breaks, and where mentorship would help."
+/>
 
 <Section
-  eyebrow="What I do"
-  title="My work in this area"
+  eyebrow="Reality snapshot"
+  title="What 'DevOps' means in my world today"
 >
   <ul className="feature-list">
-    <li><strong>CI/CD design:</strong> Branch protections, required checks, and reusable GitHub Actions that lint, test, build, and deploy.</li>
-    <li><strong>Environment strategy:</strong> Promote artifacts through staging, QA, and production with approvals and change logs.</li>
-    <li><strong>Container delivery:</strong> Multi-language Docker builds, caching strategies, and SBOM generation.</li>
-    <li><strong>Monitoring & alerting:</strong> Wire metrics/logs to alerting platforms with SLO dashboards.</li>
-    <li><strong>Developer experience:</strong> Templates, CLI tooling, and documentation that keep onboarding fast.</li>
+    <li>GitHub Actions pipelines for this Gatsby site + side projects (lint, type-check, deploy to Netlify/GitHub Pages).</li>
+    <li>Docker Compose labs (Docker Multilang) to keep Node, Python, and Zig tooling aligned on my laptop.</li>
+    <li>AWS internship exposure to ticket triage + CloudWatch dashboards—not production change ownership.</li>
+    <li>Every script was scaffolded with AI prompts; I keep those logs in the repos so reviewers know the origin.</li>
   </ul>
 </Section>
 
 <Section
-  eyebrow="Work"
-  title="DevOps stuff I've done"
+  eyebrow="Work samples"
+  title="Evidence (student/volunteer level)"
 >
   <div className="grid-two">
     <Card>
-      <h3 className="feature-card__title">Docker Multilang Project</h3>
+      <h3 className="feature-card__title">Docker Multilang</h3>
       <ul className="feature-list">
-        <li>Unified Node, Zig, and Python builds with a shared Docker base image.</li>
-        <li>GitHub Actions caches language dependencies, cutting build time by 40%.</li>
-        <li>Pre-commit hooks and smoke tests ensure containers stay reproducible.</li>
+        <li>Compose file standardizes Node, Python, and Zig tooling for onboarding.</li>
+        <li>Manual smoke tests replace automated suites; README lists missing health checks.</li>
+        <li>Pipeline: GitHub Actions builds images + runs linting; still figuring out caching best practices.</li>
       </ul>
     </Card>
     <Card>
-      <h3 className="feature-card__title">CIRIS AI Deploys</h3>
+      <h3 className="feature-card__title">Portfolio deploys</h3>
       <ul className="feature-list">
-        <li>IaC + Docker pipeline pushes images to ECR with vulnerability scans.</li>
-        <li>GitHub Actions releases to ECS with approval gates and Slack notifications.</li>
-        <li>Runtime metrics and logs feed dashboards for post-deploy verification.</li>
+        <li>Netlify + GitHub Pages workflows validate builds before publishing this honesty site and the static template.</li>
+        <li>Release notes + honesty logs replace formal change-management because there’s no team yet.</li>
+        <li>Accessibility + Lighthouse checks run via CLI scripts; failures block deploys until fixed.</li>
       </ul>
     </Card>
   </div>
 </Section>
 
 <Section
-  eyebrow="Tools"
-  title="Tools I use"
+  eyebrow="Tools in rotation"
+  title="What I'm practicing (always with AI pair-programming)"
 >
   <div className="project-card__stack">
     <span>GitHub Actions</span>
-    <span>Reusable Workflows</span>
-    <span>Docker</span>
-    <span>Terraform</span>
-    <span>AWS CLI</span>
-    <span>k6</span>
-    <span>Prometheus</span>
-    <span>Bash</span>
+    <span>Netlify CLI</span>
+    <span>Docker / Docker Compose</span>
+    <span>AWS CLI labs</span>
+    <span>Bash scripting</span>
+    <span>Terraform tutorials</span>
+    <span>k6 smoke tests (local only)</span>
   </div>
+  <p>Each repo documents which of these tools is “working,” “rough draft,” or “on deck” so readers know what to trust.</p>
 </Section>
 
 <Section
-  eyebrow="Job titles"
-  title="Terms for recruiters"
->
-  <div>DevOps Engineer, CI/CD Engineer, Platform Engineer, Build & Release Engineer, Reliability Engineer, Infrastructure Automation Engineer</div>
-</Section>
-
-<Section
-  eyebrow="Partnering"
-  title="How I collaborate"
+  eyebrow="Help wanted"
+  title="Where I still need guidance"
 >
   <ul className="feature-list">
-    <li>Align release cadences with product and QA before automating the pipeline.</li>
-    <li>Document runbooks, incident response steps, and rollback levers alongside the pipeline code.</li>
-    <li>Coach teams on using feature flags and experimentation frameworks to deploy safely.</li>
+    <li>Designing CI/CD for teams bigger than me, including approvals and rollbacks.</li>
+    <li>Monitoring stacks beyond Lighthouse + console logs (e.g., Prometheus, Grafana).</li>
+    <li>Hardening secrets management and policy-as-code beyond `.env` files.</li>
+    <li>Incident response drills in real production environments.</li>
   </ul>
+  <p>If you’re hiring for junior DevOps/platform roles and can coach through these gaps, I’d love to connect.</p>
 </Section>

@@ -7,55 +7,41 @@ import { Section, Card } from "../../../src/components/ui";
 
 <Section
   eyebrow="AI / Automation Engineer"
-  title="Ship AI copilots and automation that remove manual work"
-  description="Deploy LLM-backed tools, route repetitive ops through orchestrated workflows, and measure the time saved."
->
-  <ul className="list-disc space-y-2 pl-5">
-    <li><strong>Cut busywork:</strong> Deliver copilots that summarize tickets, draft responses, or execute runbooks automatically.</li>
-    <li><strong>Close the loop:</strong> Tie AI actions to CI/CD, observability, and approvals so outputs land in the right system.</li>
-    <li><strong>Show the impact:</strong> Track cycle-time and error-rate deltas so stakeholders see what the automations unlocked.</li>
-  </ul>
-</Section>
+  title="Practicing AI + automation with transparent limits"
+  description="I haven’t launched AI copilots for paying customers. These prototypes document how I learn with ChatGPT, Copilot, and local LLMs."
+/>
 
 <Section
-  eyebrow="What I do"
-  title="AI tasks"
+  eyebrow="Reality snapshot"
+  title="Current focus"
 >
   <ul className="feature-list">
-    <li><strong>AI-assisted delivery pipelines:</strong> Generate infra updates, validate pull requests, and open change requests with traceability.</li>
-    <li><strong>Knowledge grounding:</strong> Vectorize docs and architecture notes so copilots answer with accurate, cited context.</li>
-    <li><strong>Task orchestration:</strong> Chain LLM reasoning with deterministic scripts (Node.js, Python) to execute follow-up actions safely.</li>
-    <li><strong>Operational automations:</strong> Convert stakeholder conversations into tickets, dashboards, or runbooks without manual re-entry.</li>
+    <li>Local-first chat experiments (Convo-AI) that run FastAPI + Ollama on my laptop.</li>
+    <li>Website embeds (ProjectHub) that pull from documentation to answer basic questions.</li>
+    <li>Prompt libraries + README honesty logs that show how much AI wrote vs. what I edited.</li>
+    <li>No production integrations, no enterprise telemetry—just learning projects with clear TODOs.</li>
   </ul>
 </Section>
 
 <Section
-  eyebrow="Work"
-  title="AI work I've done"
+  eyebrow="Work samples"
+  title="Proof on GitHub"
 >
   <div className="grid-two">
     <Card>
-      <h3 className="feature-card__title">CIRIS AI</h3>
-      <ul className="feature-list">
-        <li>LLM agent reviews IaC diffs and highlights security drift.</li>
-        <li>Automated identity checks reduced manual review time by >40%.</li>
-        <li>Outputs logged with approvals so auditors can trace each change.</li>
-      </ul>
-    </Card>
-    <Card>
       <h3 className="feature-card__title">Convo-AI</h3>
       <ul className="feature-list">
-        <li>Offline-friendly FastAPI + Ollama assistant with voice input.</li>
-        <li>Embeds team SOPs so answers point back to the source.</li>
-        <li>Session summaries post to Slack automatically.</li>
+        <li>FastAPI backend + simple UI for local chat flows.</li>
+        <li>Uses Ollama models and environment variables documented in the repo.</li>
+        <li>Disclosure: AI wrote the first draft of most endpoints; I kept prompts + edits in the README.</li>
       </ul>
     </Card>
     <Card>
       <h3 className="feature-card__title">ProjectHub Copilot</h3>
       <ul className="feature-list">
-        <li>Website bot answers questions using repo READMEs and case studies.</li>
-        <li>Drop-in `<script>` installer gives marketing teams a no-code switch.</li>
-        <li>Usage telemetry tracks unanswered prompts for backlog grooming.</li>
+        <li>Express proxy + lightweight widget that surfaces answers from my own case studies.</li>
+        <li>Currently supports a single route and manual deployments.</li>
+        <li>Backlog items (usage analytics, guardrails) are documented as future work.</li>
       </ul>
     </Card>
   </div>
@@ -63,34 +49,29 @@ import { Section, Card } from "../../../src/components/ui";
 
 <Section
   eyebrow="Tools"
-  title="Tools I use"
+  title="What I’m experimenting with"
 >
   <div className="project-card__stack">
-    <span>Python</span>
-    <span>Node.js</span>
-    <span>FastAPI</span>
-    <span>LangChain</span>
-    <span>Ollama</span>
-    <span>AWS Bedrock</span>
-    <span>Step Functions</span>
-    <span>Supabase</span>
+    <span>Python + FastAPI (learning)</span>
+    <span>Node.js / Express (comfortable for prototypes)</span>
+    <span>LangChain (exploring)</span>
+    <span>Ollama + local LLMs</span>
+    <span>OpenAI / Anthropic APIs</span>
+    <span>Supabase (learning for vector stores)</span>
+    <span>GitHub Actions for small deploys</span>
   </div>
+  <p>Every repo labels what’s working vs. what’s aspirational so collaborators know the maturity level.</p>
 </Section>
 
 <Section
-  eyebrow="Job titles"
-  title="Terms for recruiters"
->
-  <div>AI Engineer, Automation Engineer, Applied AI Engineer, Tools Engineer, LLM Engineer (entry), Prompt Engineer, MLOps Engineer (entry)</div>
-</Section>
-
-<Section
-  eyebrow="How I work"
-  title="Engagement notes"
+  eyebrow="Help wanted"
+  title="What I still need to learn"
 >
   <ul className="feature-list">
-    <li>Partner with security and compliance early so automations meet audit trails.</li>
-    <li>Ship in short spikes: design the workflow, prove ROI, then scale adoption.</li>
-    <li>Document prompts, safeguards, and rollback plans so teams can self-serve.</li>
+    <li>Responsible AI guardrails (policy checks, escalation paths) in production environments.</li>
+    <li>Measuring ROI beyond “this feels faster on my laptop.”</li>
+    <li>Scaling prompt orchestration with queues, storage, and audit requirements.</li>
+    <li>Security/privacy reviews for AI features before they reach real users.</li>
   </ul>
+  <p>If you mentor junior engineers on applied AI/automation, I’d appreciate pairing sessions.</p>
 </Section>

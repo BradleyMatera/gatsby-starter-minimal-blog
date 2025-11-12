@@ -6,12 +6,16 @@ description: "Insights from my AWS Cloud Support Associate internship, focusing 
 theme: "Cloud & DevOps"
 ---
 
+> **Context:** Summer 2025 AWS Cloud Support Associate internship focused on labs, certifications, and simulated tickets—not direct production support.  
+> **AI assist:** Draft scaffolded with ChatGPT + Copilot based on my notes; I edited the copy on 2025-10-15 to keep it accurate.  
+> **Status:** Reflection meant to document what I practiced so I don’t overstate my experience (still zero paid full-time engineering roles).
+
 ## TL;DR
 
-- **Bootcamp-style onboarding blended certification study with daily labs.** Structured mornings and hands-on afternoons made complex AWS concepts stick fast [^aws-training].  
-- **Multiple service areas came together by week seven.** IAM, VPC networking, Linux internals, and compliance practices turned into a full-stack support toolkit.  
-- **Capstone proved end-to-end serverless design skills.** A media metadata pipeline connected S3, Lambda, DynamoDB, API Gateway, and CloudWatch while staying cost-aware.  
-- **Troubleshooting discipline and cost visibility stood out.** CloudWatch-first debugging and budgets kept performance high without runaway spend [^aws-cost].
+- **Bootcamp-style onboarding blended certification study with daily labs.** Structured mornings and hands-on afternoons made complex AWS concepts stick [^aws-training].  
+- **Service mashups happened mid-way.** IAM, networking, Linux internals, and compliance drills built a realistic support toolkit—even if it was simulated.  
+- **Capstone = lab-only serverless pipeline.** I wired S3, Lambda, DynamoDB, API Gateway, and CloudWatch together to practice production thinking on sample data.  
+- **Troubleshooting discipline + spend awareness were the big takeaways.** CloudWatch-first debugging and budgets kept the labs grounded in real-world habits [^aws-cost].
 
 ## Internship Snapshot
 
@@ -30,10 +34,10 @@ theme: "Cloud & DevOps"
 
 ## Capstone: Serverless Media Metadata Extractor
 
-I shipped an end-to-end pipeline that ingests, annotates, and surfaces media metadata while emphasising scalability and cost efficiency.
+I built a lab-only pipeline that ingests, annotates, and surfaces sample media metadata so I could practice thinking through scalability and cost.
 
-- **Workflow overview:** S3 events triggered a Node.js Lambda that ran FFmpeg, stored results in DynamoDB, and surfaced insights through API Gateway and a static S3 dashboard.  
-- **Operational visibility:** CloudWatch captured logs and metrics while Cost Explorer tracked daily spend to enforce guardrails.  
+- **Workflow overview:** S3 events triggered a Node.js Lambda that ran FFmpeg, stored results in DynamoDB, and surfaced insights through API Gateway + a static S3 dashboard.  
+- **Operational visibility:** CloudWatch captured logs/metrics while Cost Explorer tracked estimated spend—useful even though traffic was synthetic.  
 - **Security posture:** IAM roles stayed least-privilege, with S3 default encryption and API keys gating dashboard access.
 
 **CloudFormation core resources:**
@@ -76,8 +80,8 @@ Resources:
 
 ## Outcomes & Lessons Learned
 
-- **Certifications earned:** Cloud Practitioner and Solutions Architect – Associate confirmed readiness for customer-facing queues.  
-- **Performance metrics:** Processed 1,000+ uploads with 99.9% success; cost stayed under $0.01 per 100 files.  
+- **Certifications earned:** Cloud Practitioner and Solutions Architect – Associate confirmed baseline knowledge before touching customer queues.  
+- **Performance reality:** Ran a few hundred sample uploads without errors; numbers lived in a sandbox so I treat them as learning signals, not production SLAs.  
 - **Troubleshooting routine:** Always start with CloudWatch logs, then drill into metrics before escalating.  
 - **Simulation-first safety:** AWS internships emphasise sandboxed tickets, which mirrors real-world pressure without customer risk [^aws-intern].
 

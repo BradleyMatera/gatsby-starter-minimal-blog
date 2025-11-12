@@ -8,21 +8,21 @@ import { Section, Card, AnchorNav, Link } from "../../../src/components/ui";
 
 <Section
   eyebrow="Case Study"
-  title="Interactive Pokédex · Data-rich search UI powered by the PokéAPI"
-  description="Front-end project focused on accessible search, responsive layouts, and clean API integration for a public dataset."
+  title="Interactive Pokédex · Front-end practice app"
+  description="A lightweight PokéAPI client I use to practice forms, filtering, and basic accessibility. Built with AI assistance."
 />
 
 <Section
   eyebrow="TL;DR"
-  title="High-speed, accessible search for a playful dataset"
+  title="What it is (and what it isn't)"
 >
   <p>
-    <strong>TL;DR:</strong> Built a responsive Pokédex with sub-second searches, accessibility baked in, and resilient offline behaviour so learners can explore data without friction.
+    <strong>TL;DR:</strong> This is a responsive front-end demo with search and filter UI. It does not have offline caching, complex performance tuning, or analytics—just honest code and notes about what I’m learning.
   </p>
   <div className="project-card__stack">
-    <span>95% Lighthouse accessibility</span>
-    <span>&lt;1s search latency</span>
-    <span>70% fewer API calls</span>
+    <span>Runs on GitHub Pages</span>
+    <span>Accessibility checks documented in README</span>
+    <span>AI-generated scaffolding noted in repo</span>
   </div>
 </Section>
 
@@ -36,69 +36,46 @@ import { Section, Card, AnchorNav, Link } from "../../../src/components/ui";
   ]}
 />
 
-<Section id="overview" eyebrow="Problem overview" title="Pokémon fans needed fast, accessible data exploration">
+<Section id="overview" eyebrow="Project context" title="Why I built it">
   <ul className="feature-list">
-    <li><strong>Audience:</strong> Learners and fans who want to inspect stats without battling PokéAPI rate limits.</li>
-    <li><strong>Opportunity:</strong> Create a polished front-end playground to practise accessibility and API performance techniques.</li>
-    <li><strong>Requirement:</strong> Ship a deployable demo with documented patterns and responsive design.</li>
+    <li><strong>Audience:</strong> Me! It’s a personal playground to keep my React/vanilla JS muscle memory fresh.</li>
+    <li><strong>Assistance:</strong> Layouts and some utility helpers were generated with Copilot; README notes the prompts I used.</li>
+    <li><strong>Scope:</strong> Search + filter UI, basic skeleton loaders, manual accessibility passes.</li>
   </ul>
 </Section>
 
-<Section id="approach" eyebrow="Approach" title="Interface and engineering patterns">
+<Section id="approach" eyebrow="Approach" title="Implementation notes">
   <div className="grid-two">
     <Card>
       <h3 className="feature-card__title">Experience design</h3>
       <ul className="feature-list">
-        <li><strong>Crafted</strong> adaptive card layouts with CSS Grid and a sticky search bar for constant access.</li>
-        <li><strong>Ensured</strong> high-contrast themes and sprite-safe backgrounds that pass WCAG checks.</li>
-        <li><strong>Supported</strong> keyboard navigation and live region updates for screen readers.</li>
+        <li>Sticky search input + CSS Grid cards.</li>
+        <li>Keyboard navigation and focus outlines verified manually.</li>
+        <li>Sprites fetched directly from the PokéAPI (no image optimization yet).</li>
       </ul>
     </Card>
     <Card>
       <h3 className="feature-card__title">Engineering decisions</h3>
       <ul className="feature-list">
-        <li><strong>Wrapped</strong> fetch calls with caching and debouncing to avoid rate-limit spikes.</li>
-        <li><strong>Normalised</strong> API responses with utility helpers so components render predictable data.</li>
-        <li><strong>Instrumented</strong> loading skeletons and error states to keep the UI informative.</li>
+        <li>Simple fetch + debounce helper (documented in repo).</li>
+        <li>Graceful error messaging when the API rate limits me.</li>
+        <li>No offline mode or aggressive caching—documented as future work.</li>
       </ul>
     </Card>
   </div>
 </Section>
 
-<Section id="impact" eyebrow="Impact metrics" title="Measurable outcomes">
-  <div className="grid-two">
-    <Card>
-      <h3 className="feature-card__title">Performance</h3>
-      <p className="feature-card__body">
-        Searches resolve in under one second, even after 500+ sequential API requests, by batching and caching results locally.
-      </p>
-    </Card>
-    <Card>
-      <h3 className="feature-card__title">Accessibility</h3>
-      <p className="feature-card__body">
-        Lighthouse audits consistently score 95%+, backed by ARIA announcements, focus management, and colour contrast validation.
-      </p>
-    </Card>
-  </div>
-</Section>
-
-<Section id="artifacts" eyebrow="Supporting artifacts" title="Proof of work">
+<Section id="impact" eyebrow="What I gained" title="Outcomes">
   <ul className="feature-list">
-    <li><Link to="https://bradleymatera.github.io/Interactive-Pokedex/" external><strong>Live demo:</strong></Link> Deployed experience showcasing the responsive UI.</li>
-    <li><Link to="https://github.com/BradleyMatera/Pokedex" external><strong>Repository:</strong></Link> Source code with documentation and utility helpers.</li>
-    <li><strong>Accessibility checklist:</strong> Manual testing notes covering keyboard navigation and screen-reader output.</li>
+    <li><strong>Practice hours:</strong> Reinforced responsive design + accessibility basics.</li>
+    <li><strong>Transparency:</strong> Learned to call out AI contributions in the README so visitors know what to expect.</li>
+    <li><strong>Next:</strong> Explore service workers + sprite caching once I’m ready to tackle offline UX.</li>
   </ul>
 </Section>
 
-<Section id="lessons" eyebrow="Lessons & next steps" title="What I refined and where I’m heading">
+<Section id="artifacts" eyebrow="Supporting artifacts" title="Links & notes">
   <ul className="feature-list">
-    <li><strong>Reduced</strong> unnecessary API calls by 70% after user testing highlighted redundant fetches.</li>
-    <li><strong>Improved</strong> offline tolerance with graceful fallback messaging when rate limits trigger.</li>
-    <li><strong>Next:</strong> Add service workers for sprite caching and enable stat comparisons for competitive planning.</li>
+    <li><Link to="https://bradleymatera.github.io/Interactive-Pokedex/" external><strong>Live demo:</strong></Link> Front-end only, no auth or offline mode.</li>
+    <li><Link to="https://github.com/BradleyMatera/Pokedex" external><strong>Repository:</strong></Link> Includes AI prompt log + manual accessibility checklist.</li>
   </ul>
-  <div className="card-actions">
-    <Link data-variant="primary" to="/roles/frontend-engineer">
-      Explore related front-end role
-    </Link>
-  </div>
 </Section>

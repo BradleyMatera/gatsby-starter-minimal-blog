@@ -6,6 +6,10 @@ description: "Learn how to use Docker and Compose to manage polyglot services, w
 theme: "Cloud & DevOps"
 ---
 
+> **Context:** Personal practice repo for learning how Docker + Compose handle Node + Python services; no production teams depend on this.  
+> **AI assist:** Article scaffolded with ChatGPT using notes from the `docker_multilang_project` repo; I edited it on 2025-10-15.  
+> **Status:** Student-level case study meant to document what works (and what still needs work) before I claim DevOps proficiency.
+
 ## TL;DR
 
 - **Containers give polyglot teams a repeatable lab.** Packaging Node and Python in Docker erased “works on my machine” drift [^docker-docs][^redhat-comparison].  
@@ -85,10 +89,10 @@ networks:
 
 ## Results
 
-- **Launch speed:** Containers booted in under five seconds versus 30+ for legacy VMs.  
-- **Failure containment:** Induced infinite loops and crash scenarios affected only the targeted container.  
-- **Horizontal scaling:** `docker compose up --scale node=3` simulated load without changing code.  
-- **Troubleshooting toolkit:** `docker exec` shells and `docker logs` streams accelerated debugging sessions.
+- **Launch speed:** On my M2 laptop the containers boot in ~5 seconds; the older VirtualBox VMs I used for class easily took 30+ seconds (anecdotal but noticeable).  
+- **Failure containment:** Induced infinite loops/crashes stayed inside the target container, which is exactly what I wanted to rehearse.  
+- **Horizontal scaling:** `docker compose up --scale node=3` simulated concurrent calls without touching code, even if it’s still just localhost traffic.  
+- **Troubleshooting toolkit:** `docker exec` shells and `docker logs` streams kept debugging fast; I document each command in the README for future me.
 
 ## Lessons & Next Steps
 

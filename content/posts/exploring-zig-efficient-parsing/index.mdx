@@ -6,12 +6,16 @@ description: "Optimizing a Zig-based OBJ parser for large models with streaming 
 theme: "Low-Level Experiments"
 ---
 
+> **Context:** Personal Zig learning project; I’m still brand-new to systems programming and haven’t shipped this parser in a paid setting.  
+> **AI assist:** ChatGPT/Copilot generated starter code snippets that I hardened + documented in `obj-parser`.  
+> **Status:** All performance numbers come from my M2 laptop with sample files; treat them as learning notes, not production benchmarks.
+
 ## TL;DR
 
-- **Zig’s control over memory makes heavy OBJ parsing feasible.** Streaming I/O and allocator tuning kept RAM usage low even on 50MB files [^zig-docs].  
-- **Custom allocators cut fragmentation.** Arena + GPA + fixed buffers shaved 20% off parse times [^zig-alloc-guide].  
-- **Zero-copy export feeds the web faster.** Binary bridges from Zig to PixiJS avoid duplication and speed up rendering.  
-- **Testing catches regressions early.** Fuzz cases and coverage targets kept safety high while optimising.
+- **Zig’s control over memory makes heavy OBJ parsing practical for me.** Streaming I/O + allocator tuning kept RAM usage predictable on 50MB test files [^zig-docs].  
+- **Custom allocators cut fragmentation.** Arena + GPA + fixed buffers shaved ~20% off my local parse times [^zig-alloc-guide].  
+- **Zero-copy export feeds the web faster.** Binary bridges from Zig to PixiJS avoid duplication and sped up rendering in my demos.  
+- **Testing catches regressions early.** Fuzz cases + coverage goals keep me honest while optimising.
 
 ## Project Goals
 
@@ -82,9 +86,9 @@ graphics.drawShape(vertices);
 
 ## Results
 
-- **Performance:** 50MB OBJ parsed in ~150ms versus ~800ms in JavaScript.  
-- **Memory:** Peak usage near 5MB due to streaming instead of full-file loads.  
-- **Quality:** ~90% coverage including fuzz tests, ensuring resilience under malformed input.
+- **Performance:** 50MB OBJ parsed in roughly 150ms on an M2 Max versus ~800ms in my old JavaScript parser (DevTools timeline; not lab-grade).  
+- **Memory:** Peak usage hovered around 5MB thanks to streaming; I log numbers via Zig’s `std.heap.GeneralPurposeAllocator` diagnostics.  
+- **Quality:** `zig test` + fuzz cases cover most code paths; coverage reports fluctuate around 90%, but I still treat crash reproductions as the real proof.
 
 ## Lessons Learned
 

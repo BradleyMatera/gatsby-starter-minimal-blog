@@ -7,6 +7,10 @@ description: "A breakdown of the GitHub Actions workflows I use to test, build, 
 theme: "Cloud & DevOps"
 ---
 
+> **Context:** Student-level pipelines for this Gatsby site + AWS lab projects; I don’t run enterprise-scale CI/CD yet.  
+> **AI assist:** ChatGPT helped outline this post using my `ci.yml` experiments and Skill Builder notes.  
+> **Status:** Everything here is reproducible in my repos, but some steps (S3/CloudFront) live in lab accounts instead of customer environments.
+
 ## TL;DR
 
 - **Standardise pipelines to sleep better.** GitHub Actions replaces late-night manual deploys with predictable automation.  
@@ -69,9 +73,9 @@ jobs:
 
 ## Deploying Different Targets
 
-- **Serverless (SAM/Serverless Framework):** Run `sam build` + `sam deploy --no-confirm-changeset` with promotion gates per environment.  
-- **Containers (ECS/EKS):** Build + scan Docker images, push to ECR, and roll services via `aws ecs update-service` or `kubectl rollout`.  
-- **Static sites:** Sync artefacts to S3, invalidate CloudFront, and log the distribution ID for traceability.
+- **Serverless (SAM/Serverless Framework):** Run `sam build` + `sam deploy --no-confirm-changeset` with promotion gates per environment—currently limited to lab/sample apps.  
+- **Containers (ECS/EKS):** Build + scan Docker images, push to ECR, and roll services via `aws ecs update-service` or `kubectl rollout` inside AWS workshops.  
+- **Static sites:** For this portfolio I deploy to Netlify, but I also keep an S3/CloudFront workflow (above) in case I host from AWS later.
 
 ## Observability & Rollbacks
 

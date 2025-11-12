@@ -8,86 +8,71 @@ import { Section, Card } from "../../../src/components/ui";
 
 <Section
   eyebrow="Backend Engineer"
-  title="Ship resilient APIs with clear contracts and observability"
-  description="Design REST services, enforce authentication, and ship with the tooling that production teams rely on."
->
-  <ul className="list-disc space-y-2 pl-5">
-    <li><strong>Secure foundations:</strong> JWT/OAuth flows with refresh strategies, rate limiting, and audit logs.</li>
-    <li><strong>Observable services:</strong> Structured logs, metrics, and tracing wired into dashboards from day one.</li>
-    <li><strong>Reliable releases:</strong> Contract tests, migration plans, and rollback steps baked into every deployment.</li>
-  </ul>
-</Section>
+  title="How I currently practice backend engineering"
+  description="I haven’t been paid as a backend engineer yet; these are student projects and volunteer experiments with clear limits."
+/>
 
 <Section
-  eyebrow="What I do"
-  title="Backend tasks"
+  eyebrow="Reality snapshot"
+  title="Where I actually spend time"
 >
   <ul className="feature-list">
-    <li><strong>API design:</strong> Node.js/Express services with OpenAPI contracts, versioning, and consistent status codes.</li>
-    <li><strong>Auth & sessions:</strong> JWT, OAuth 2.0, and Cognito integrations with refresh and device trust policies.</li>
-    <li><strong>Performance tuning:</strong> Profiling hot paths, caching responses, and right-sizing indexes.</li>
-    <li><strong>Data modeling:</strong> MongoDB and PostgreSQL schemas built with migrations and referential integrity.</li>
-    <li><strong>Reliability drills:</strong> Load tests, chaos scenarios, and runbooks for rapid remediation.</li>
+    <li>Node/Express APIs powering Car-Match, ProjectHub, and tutorial repos (mostly local-only).</li>
+    <li>FastAPI experiments for Convo-AI to understand Python services.</li>
+    <li>README honesty logs that spell out missing pieces: auth hardening, load tests, observability.</li>
+    <li>AI pair-programming in every session; prompts + edits included in the repo so reviewers can trace them.</li>
   </ul>
 </Section>
 
 <Section
-  eyebrow="Work"
-  title="Backend work I've done"
+  eyebrow="Work samples"
+  title="What I can show today"
 >
   <div className="grid-two">
     <Card>
-      <h3 className="feature-card__title">CIRISNode Backend</h3>
+      <h3 className="feature-card__title">Car-Match API</h3>
       <ul className="feature-list">
-        <li>Designed 50+ endpoints with OpenAPI + Pact contract tests.</li>
-        <li>Integrated decentralized identity (DID) and Matrix messaging with audit logs.</li>
-        <li>51 Jest + Supertest suites catch regressions before deploys.</li>
+        <li>Express + MongoDB CRUD routes with mocked JWT guards.</li>
+        <li>API docs live in Postman + README tables; no OpenAPI generator yet.</li>
+        <li>Repository issues list missing features (rate limiting, proper logging).</li>
       </ul>
     </Card>
     <Card>
-      <h3 className="feature-card__title">Car-Match Backend</h3>
+      <h3 className="feature-card__title">Secrets Management tutorial</h3>
       <ul className="feature-list">
-        <li>Express API with socket-powered messaging and JWT auth.</li>
-        <li>MongoDB models tuned with compound indexes for search latency.</li>
-        <li>CI workflow seeds test data and runs smoke suites automatically.</li>
+        <li>Side-by-side “good vs. bad” Express code for handling secrets.</li>
+        <li>Used for personal learning and blog content, not deployed anywhere.</li>
+        <li>Disclosure: large portions scaffolded with ChatGPT + Copilot before I annotated them.</li>
       </ul>
     </Card>
   </div>
 </Section>
 
 <Section
-  eyebrow="Tools"
-  title="Tools I use"
+  eyebrow="Toolbox (with confidence labels)"
+  title="Stacks I reach for"
 >
   <div className="project-card__stack">
-    <span>Node.js</span>
-    <span>Express</span>
-    <span>Fastify</span>
-    <span>MongoDB</span>
-    <span>PostgreSQL</span>
-    <span>Prisma</span>
-    <span>JWT</span>
-    <span>Cognito</span>
-    <span>OpenAPI</span>
-    <span>Postman</span>
-    <span>k6</span>
+    <span>Node.js + Express (comfortable for prototypes)</span>
+    <span>TypeScript (learning)</span>
+    <span>MongoDB / Mongoose (learning)</span>
+    <span>PostgreSQL basics (exploring)</span>
+    <span>FastAPI (exploring)</span>
+    <span>Jest + Supertest (learning)</span>
+    <span>Postman collections (comfortable)</span>
   </div>
+  <p>Each repo calls out where I’m strong vs. where I lean heavily on AI or tutorials.</p>
 </Section>
 
 <Section
-  eyebrow="Job titles"
-  title="Terms for recruiters"
->
-  <div>Backend Engineer, Software Engineer (Backend), API Engineer, Platform Engineer, Node.js Engineer, Server-side Engineer</div>
-</Section>
-
-<Section
-  eyebrow="Partnering"
-  title="How I work with teams"
+  eyebrow="Help wanted"
+  title="Gaps I’m working through"
 >
   <ul className="feature-list">
-    <li>Start with sequence diagrams and acceptance tests so product, UX, and API docs align.</li>
-    <li>Ship behind feature flags, backed by observability dashboards and clear rollback plans.</li>
-    <li>Pair with SRE/SecOps to threat-model new endpoints before launch.</li>
+    <li>Designing auth flows that include refresh tokens, device trust, and auditing.</li>
+    <li>Schema design + migrations for relational databases (beyond toy schemas).</li>
+    <li>Observability + tracing for Express/FastAPI services.</li>
+    <li>Performance profiling, caching strategies, and async job processing.</li>
   </ul>
+  <p>If you can mentor a junior backend engineer through these topics, I’d love to hear from you.</p>
 </Section>

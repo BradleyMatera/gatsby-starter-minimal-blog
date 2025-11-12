@@ -6,6 +6,10 @@ description: "A hands-on guide to parsing Wavefront OBJ files in Zig, focusing o
 theme: "Low-Level Experiments"
 ---
 
+> **Context:** Same Zig OBJ parser I use for learning—no production games rely on it.  
+> **AI assist:** ChatGPT/Copilot drafted portions of the code; I rewrote, documented, and tested them before publishing.  
+> **Status:** Benchmarks + coverage numbers come from my laptop and Valgrind runs; they’re directional, not enterprise SLAs.
+
 ## TL;DR
 
 - **Zig handles OBJ parsing with precision and speed.** Explicit memory control kept leaks at zero while processing 10k-vertex models in about 10ms [^zig-docs][^obj-spec].
@@ -148,9 +152,9 @@ loadAndRender();
 - Straightforward orthographic projection confirms geometry without a full 3D stack.
 
 ## Results
-- Parsed 10,000-vertex OBJ models in under 10ms—roughly five times faster than a JavaScript parser.
-- No leaks detected via Valgrind because every allocation routes through explicit `deinit` paths.
-- Unit tests cover ~85% of the codebase, including malformed vertex and face inputs.
+- Parsed 10,000-vertex OBJ models in under 10ms on my M2 Max—roughly five times faster than my JavaScript parser.  
+- No leaks detected via Valgrind because every allocation routes through explicit `deinit` paths.  
+- Unit tests cover ~85% of the codebase (per `zig test --test-cmd` output), including malformed vertex and face inputs.
 
 ## Lessons Learned
 - **Manual memory is a deliberate trade-off.** Forgetting `errdefer` in early builds leaked allocations; Zig surfaced the issue quickly [^zig-memory].

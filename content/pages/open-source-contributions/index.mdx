@@ -11,66 +11,54 @@ import Link from "../../../src/components/ui/Link";
   title="Where I build in public"
 >
   <p>
-    <strong>TL;DR:</strong> I contribute production-ready features, documentation, and tooling to projects that help teams make ethical, reliable software decisions.
+    <strong>Reality:</strong> I’m a student contributor making small documentation fixes, onboarding notes, and experimental branches. Everything here is unpaid, evidence-linked, and built with heavy AI/tutor support.
   </p>
 </Section>
 
 <Section
-  eyebrow="Flagship work"
-  title="Highlighted contributions"
+  eyebrow="Current contributions"
+  title="Proof-backed updates"
 >
   <div className="grid-two">
     <Card>
       <div className="project-card__stack">
-        <span>Contributor</span>
-        <span>Backend</span>
+        <span>Volunteer contributor</span>
+        <span>Node.js</span>
       </div>
       <h3 className="feature-card__title">
         <Link to="https://github.com/CIRISAI/CIRISNode" external>
-          CIRIS AI Ethics Engine · Node.js backend
+          CIRIS AI Ethics Engine
         </Link>
       </h3>
       <ul className="feature-list">
-        <li>
-          <strong>Situation:</strong> Distributed AI governance tool needed secure routing, DID integrations, and observability before wider contributor onboarding.
-        </li>
-        <li>
-          <strong>Action:</strong> Delivered eight PRs that hardened authentication, added Matrix + DID support, and shipped Docker dev environments with 51 automated tests.
-        </li>
-        <li>
-          <strong>Result:</strong> Teams demo the Ethics Engine with traceable decision logs and recover gracefully from downstream failures.
-        </li>
+        <li>Followed the setup docs, filed bugs I hit, and opened lightweight PRs (typo fixes, README clarifications).</li>
+        <li>Documented every AI-assisted change in the pull request descriptions so maintainers understood the workflow.</li>
+        <li>Outcome: two small PRs merged; larger refactors still live in forks/practice branches.</li>
       </ul>
       <div className="card-actions">
         <Link to="https://github.com/CIRISAI/CIRISNode/pulls?q=is%3Apr+author%3ABradleyMatera" external>
-          Review merged pull requests
+          See my merged PRs
         </Link>
       </div>
     </Card>
     <Card>
       <div className="project-card__stack">
-        <span>Maintainer</span>
+        <span>Frontend helper</span>
         <span>Documentation</span>
       </div>
       <h3 className="feature-card__title">
         <Link to="https://github.com/CIRISAI/CIRIS-Covenant.github.io" external>
-          CIRIS Covenant · Contributor application flow
+          CIRIS Covenant site
         </Link>
       </h3>
       <ul className="feature-list">
-        <li>
-          <strong>Situation:</strong> Community website lacked a trustworthy onboarding path for new contributors.
-        </li>
-        <li>
-          <strong>Action:</strong> Built the Next.js App Router form, validated submissions, and documented deployment requirements for project leads.
-        </li>
-        <li>
-          <strong>Result:</strong> Volunteer sign-ups increased with a fully automated intake process and clear follow-up steps.
-        </li>
+        <li>Paired with a maintainer on the contributor application form; my code followed their guidance + AI prompts.</li>
+        <li>Added environment notes (Netlify variables, preview steps) after running through the deployment myself.</li>
+        <li>Outcome: documentation PR merged; any future automation ideas are tracked as TODO notes.</li>
       </ul>
       <div className="card-actions">
         <Link to="https://github.com/CIRISAI/CIRIS-Covenant.github.io/pull/3" external>
-          View implementation PR
+          Read the PR
         </Link>
       </div>
     </Card>
@@ -79,43 +67,31 @@ import Link from "../../../src/components/ui/Link";
 
 <Section
   eyebrow="In progress"
-  title="Where I'm contributing next"
+  title="Where I'm learning next"
 >
   <div className="grid-two">
     <Card>
       <div className="project-card__stack">
-        <span>Reviewer</span>
-        <span>Developer tooling</span>
+        <span>Docs-first approach</span>
+        <span>Accessibility</span>
       </div>
-      <h3 className="feature-card__title">Open-source accessibility tooling</h3>
+      <h3 className="feature-card__title">Accessibility CI templates</h3>
       <ul className="feature-list">
-        <li>
-          <strong>Situation:</strong> Smaller teams often skip automated accessibility checks due to complicated setup.
-        </li>
-        <li>
-          <strong>Action:</strong> Pairing with maintainers to add Axe and Lighthouse CI recipes that run inside GitHub Actions.
-        </li>
-        <li>
-          <strong>Result:</strong> Targeting a reusable template that catches regressions before deploy approvals.
-        </li>
+        <li>Goal: package the Axe/Lighthouse CI recipes I use on my portfolio into a reusable workflow.</li>
+        <li>Status: prototyping inside a personal repo with AI-generated scaffolding; no upstream PR yet.</li>
+        <li>Next step: share a branch with interested maintainers for review before claiming adoption.</li>
       </ul>
     </Card>
     <Card>
       <div className="project-card__stack">
-        <span>Contributor</span>
-        <span>Community</span>
+        <span>Community notes</span>
+        <span>Ethical AI</span>
       </div>
       <h3 className="feature-card__title">Ethical AI working group</h3>
       <ul className="feature-list">
-        <li>
-          <strong>Situation:</strong> Stakeholders need transparent documentation to understand guardrails applied to AI systems.
-        </li>
-        <li>
-          <strong>Action:</strong> Drafting open-source playbooks that map ethics decisions to concrete observability metrics.
-        </li>
-        <li>
-          <strong>Result:</strong> Establishing a repeatable review workflow for new AI deployments.
-        </li>
+        <li>Goal: help document governance checklists inside CIRIS working sessions.</li>
+        <li>Status: attending calls + keeping shared notes; haven’t merged any code yet.</li>
+        <li>Next step: convert those notes into public blog posts so others can follow along.</li>
       </ul>
     </Card>
   </div>
@@ -126,7 +102,7 @@ import Link from "../../../src/components/ui/Link";
   title="Update cadence"
 >
   <p>
-    I audit this page quarterly and log major changes in the design doc. Pull requests are tracked through GitHub notifications, and significant milestones feed back into the <Link to="/contributions">Contributions hub</Link> for broader context.
+    I audit this page quarterly. When something lands (or stalls), I log it inside the <Link to="/contributions">Contributions hub</Link> and in <code>honesty.md</code> so there’s a paper trail.
   </p>
 </Section>
 
@@ -136,10 +112,10 @@ import Link from "../../../src/components/ui/Link";
 >
   <div className="card-actions">
     <Link data-variant="primary" to="/contact">
-      Start a collaboration
+      Share your contributor guide
     </Link>
     <Link to="https://github.com/BradleyMatera" external>
-      Explore more open-source work
+      Browse my forks
     </Link>
   </div>
 </Section>

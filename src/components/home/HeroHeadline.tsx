@@ -14,12 +14,12 @@ const HeroHeadline = () => {
       }}
     >
       <span className="hero-highlight">Bradley Matera</span>
-      <h1 className="hero-headline">Full Stack Engineer specializing in cloud-native applications</h1>
+      <h1 className="hero-headline">Systems-focused web developer who builds with AI support</h1>
       <p className="hero-description">
-        <strong>B.S. Web Development (GPA 3.8, Full Sail University)</strong> | <strong>AWS Cloud Support Intern (Amazon, Summer 2025)</strong> | Full Stack Software Engineer building production-ready systems with scalable backends and cloud architecture.
+        U.S. Army combat medic → <strong>B.S. Web Development, Full Sail 2025</strong>. I treat software like the field work I came from: stay calm, study the system in front of me, and get it working.
       </p>
       <p className="hero-description">
-        Hands-on experience troubleshooting live AWS environments and optimizing customer workloads. Explore the case studies, sprint retros, and tooling guides I use to deliver secure, accessible applications from discovery to deployment.
+        Recent AWS Cloud Support internship work was all about labs, monitoring dashboards, and automating repetitive support workflows. I pair with tools like ChatGPT and Copilot in nearly every session to scaffold code, then I debug, adapt, and ship the result.
       </p>
     </div>
   );

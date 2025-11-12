@@ -8,90 +8,69 @@ import { Section, Card } from "../../../src/components/ui";
 
 <Section
   eyebrow="Cloud Engineer"
-  title="Design cost-aware AWS environments with guardrails"
-  description="Plan, provision, and maintain cloud infrastructure that stays secure, observable, and affordable."
->
-  <ul className="list-disc space-y-2 pl-5">
-    <li><strong>Secure defaults:</strong> IAM least-privilege, VPC segmentation, and automated compliance checks.</li>
-    <li><strong>Operational excellence:</strong> Blue/green deploys, runbooks, and on-call ready dashboards.</li>
-    <li><strong>Cost control:</strong> Usage monitoring, rightsizing, and lifecycle policies that keep bills predictable.</li>
-  </ul>
-</Section>
+  title="Learning to think like a cloud engineer"
+  description="I haven’t been paid as a cloud engineer yet. This page explains how I practice the discipline today, what I’ve actually done, and where I still need mentorship."
+/>
 
 <Section
-  eyebrow="What I do"
-  title="Day to day work"
+  eyebrow="Current practice"
+  title="What my 'cloud' reps actually look like"
 >
   <ul className="feature-list">
-    <li><strong>Provisioning:</strong> Terraform/CDK stacks for multi-account AWS environments with CI validation.</li>
-    <li><strong>Deployment automation:</strong> GitHub Actions + CodeDeploy pipelines with canary/blue-green strategies.</li>
-    <li><strong>Environment management:</strong> Staging/production parity, secrets rotation, and drift detection.</li>
-    <li><strong>Observability:</strong> CloudWatch, OpenTelemetry, and incident dashboards wired to PagerDuty/Slack.</li>
-    <li><strong>Cost optimisation:</strong> Budgets, anomaly detection, and lifecycle policies for storage and compute.</li>
+    <li>AWS Cloud Support internship (Summer 2025): lab exercises, CloudWatch dashboards, IAM investigations, runbook writing.</li>
+    <li>Personal prototypes (Car-Match, ProjectHub proxy) deployed to Netlify/Render with simple CI—no multi-account infrastructure yet.</li>
+    <li>Blog posts documenting how I configure budgets, monitor bills, and keep honesty logs of what’s broken.</li>
+    <li>AI pair-programming in almost every session; prompts + reviews live in the repos.</li>
   </ul>
 </Section>
 
 <Section
-  eyebrow="Work"
-  title="Cloud work I've done"
+  eyebrow="Work samples"
+  title="Proof (student-level, transparent)"
 >
   <div className="grid-two">
     <Card>
-      <h3 className="feature-card__title">Amazon Cloud Support</h3>
+      <h3 className="feature-card__title">AWS internship labs</h3>
       <ul className="feature-list">
-        <li>Troubleshot EC2, S3, and DynamoDB production incidents under SLA.</li>
-        <li>Authored IAM remediation guides adopted by 20+ customers.</li>
-        <li>Captured runbooks that reduced escalations across the pod.</li>
+        <li>Built CloudWatch dashboards + SNS alerts for sample environments (documented in internship recap post).</li>
+        <li>Automated repetitive support workflows via shell scripts and AWS CLI.</li>
+        <li>Logged every limitation (no customer-facing tickets alone) so expectations stay realistic.</li>
       </ul>
     </Card>
     <Card>
-      <h3 className="feature-card__title">CIRIS AI Infrastructure</h3>
+      <h3 className="feature-card__title">Portfolio prototypes</h3>
       <ul className="feature-list">
-        <li>ECS + Fargate containers with private networking and WAF protection.</li>
-        <li>GitHub Actions pipeline builds images, scans for CVEs, and deploys automatically.</li>
-        <li>Centralised logging/metrics with CloudWatch and structured alerts.</li>
+        <li>Car-Match + Docker Multilang repos show how I structure env vars, README runbooks, and TODOs.</li>
+        <li>Netlify/GitHub Pages deployments include manual smoke test checklists instead of automated suites (noted in docs).</li>
       </ul>
     </Card>
   </div>
 </Section>
 
 <Section
-  eyebrow="Tools"
-  title="Stuff I use"
+  eyebrow="Tools I'm exploring"
+  title="Stack in rotation (with AI help)"
 >
   <div className="project-card__stack">
-    <span>AWS</span>
-    <span>Organizations</span>
-    <span>EC2</span>
-    <span>ECS / Fargate</span>
-    <span>Lambda</span>
-    <span>S3</span>
-    <span>DynamoDB</span>
-    <span>RDS</span>
-    <span>CloudFront</span>
-    <span>Bedrock</span>
-    <span>Terraform</span>
-    <span>AWS CDK</span>
-    <span>Docker</span>
-    <span>GitHub Actions</span>
-    <span>CodeDeploy</span>
+    <span>CloudWatch dashboards</span>
+    <span>IAM basics + Access Analyzer</span>
+    <span>S3 / Lambda labs</span>
+    <span>GitHub Actions for small deployments</span>
+    <span>Docker Compose dev setups</span>
+    <span>Terraform tutorials (not production-ready)</span>
   </div>
+  <p>I call out each tool’s maturity in the relevant repo. If something is purely experimental, the docs say so.</p>
 </Section>
 
 <Section
-  eyebrow="Job titles"
-  title="Terms for recruiters"
->
-  <div>Cloud Engineer, Cloud Support Engineer, Platform Engineer, Infrastructure Engineer, AWS Engineer, Site Reliability Engineer (cloud focus)</div>
-</Section>
-
-<Section
-  eyebrow="Partnering"
-  title="How I engage"
+  eyebrow="Where I need help"
+  title="Mentorship wishlist"
 >
   <ul className="feature-list">
-    <li>Kick off with threat models and cost forecasts so stakeholders know trade-offs.</li>
-    <li>Document architecture runbooks and onboarding checklists for new engineers.</li>
-    <li>Review observability dashboards weekly to keep MTTR low and budgets on track.</li>
+    <li>Designing real multi-account AWS environments (beyond labs).</li>
+    <li>Deep dive into IAM policy design and security reviews.</li>
+    <li>Automated testing/validation for Terraform + deployment pipelines.</li>
+    <li>Incident response in real production settings.</li>
   </ul>
+  <p>If you’re hiring for junior cloud roles and can provide coaching in these areas, I’d love to talk.</p>
 </Section>

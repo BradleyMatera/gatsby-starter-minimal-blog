@@ -5,13 +5,17 @@ description: "How I decrypted, explored, and used JSON Web Tokens (JWTs) to solv
 tags: ["JWT", "CTF", "Web Tokens", "gRPC", "JSON", "Encryption"]
 ---
 
+> **Context:** Student-run winter CTF exercise I tackled to learn JWT chains and gRPC tooling—no customers or production stakes.  
+> **AI assist:** ChatGPT explained Libsodium + JWT quirks and helped me review the scripts; I saved those prompts in my notebook.  
+> **Status:** Personal case study so collaborators see how I practice backend problems even though I haven’t been paid as an engineer yet.
+
 ## TL;DR
 
 <div className="tldr-card">
 	<ul>
-		<li><strong>Outcome:</strong> Solved a winter CTF by decoding a chained ladder of **JWT access tokens** guarding layered gRPC endpoints.</li>
-		<li><strong>Proof:</strong> Used Libsodium, `grpcurl`, and custom Python scripts to verify signatures, rotate credentials, and capture proxy responses.</li>
-		<li><strong>Action:</strong> Flagged AWS load balancer 464 errors caused by **metadata casing** and `application/grpc` mismatches, guiding next retries.</li>
+		<li><strong>Outcome:</strong> Completed the Discord/Full Sail CTF puzzle by decoding a chained ladder of <strong>JWT access tokens</strong> in a mock gRPC stack.</li>
+		<li><strong>Proof:</strong> Libsodium, `grpcurl`, and AI-assisted Python scripts verified signatures, rotated credentials, and captured proxy responses on my laptop.</li>
+		<li><strong>Reality:</strong> This was a learning scenario—every insight here comes from personal practice, not a production outage.</li>
 	</ul>
 </div>
 

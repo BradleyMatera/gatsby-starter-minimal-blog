@@ -7,18 +7,22 @@ description: "Embark on my journey from simple container experiments to orchestr
 theme: "Cloud & DevOps"
 ---
 
+> **Context:** Personal journal of how I moved from “docker run hello-world” to multi-service Compose stacks and beginner-friendly Amazon EKS labs. I haven’t owned production containers yet.  
+> **AI assist:** ChatGPT helped organise my notes; I edited on 2025-10-15 to match my actual repos (Docker Multilang, ProjectHub proxy).  
+> **Status:** Student-level experience—treat any “production-ready” phrasing as goals, not resume claims.
+
 ## TL;DR
 
-- **Compose first, Kubernetes next.** Local fleets start with Docker Compose, then graduate to EKS when workloads need autoscaling muscle [^compose][^kubernetes].  
-- **Observability is cargo.** Structured logs, health probes, and chaos drills uncover weak links before production does.  
-- **Infrastructure as code keeps crews synced.** Terraform, CI pipelines, and GitOps guarantee clusters match source control.  
-- **Lean images and automation cut cost.** Multi-stage builds, security scans, and spot instances reduce waste without sacrificing reliability.
+- **Compose first, Kubernetes later (in labs).** I keep daily work in Docker Compose and spin up EKS only when I want to learn how autoscaling works [^compose][^kubernetes].  
+- **Observability = logs + basic probes.** Structured logging, `/healthz` endpoints, and deliberate “kill the container” drills catch most mistakes before anyone else sees them.  
+- **Infrastructure as code (for me) = Compose files + Terraform playgrounds.** Everything is versioned so I can reproduce the environment quickly.  
+- **Lean images matter.** Multi-stage builds, security scans, and automation keep local dev snappy and hosting costs low when I deploy to Render/Netlify.
 
 ## From Hello World to Fleet Operations
 
 - Began with single-container Python and Node demos, then expanded into a three-service stack (`frontend`, `api`, `db`).  
 - Optimised each image with multi-stage builds, health checks, and persistent volumes to keep local resilience high.  
-- Sharing the environment became trivial—every teammate could run `docker compose up` to match production assumptions [^compose].
+- Sharing the environment became trivial—classmates (or future-me) can run `docker compose up` to match the exact same setup [^compose].
 
 ## Compose Foundations
 
@@ -58,16 +62,16 @@ volumes:
 
 ## Observability & Resilience
 
-- **Structured logging:** JSON logs with correlation IDs feed Logstash/CloudWatch to trace entire requests.  
-- **Health probes:** Separate readiness and liveness endpoints tell orchestrators when to route traffic.  
-- **Chaos drills:** Kill containers with `docker compose kill api` to validate graceful degradation paths.
+- **Structured logging:** JSON logs with trace IDs stream to stdout so `docker compose logs` (or CloudWatch in labs) can stitch requests together.  
+- **Health probes:** Separate readiness/liveness endpoints tell Compose, k6 scripts, or EKS when to route traffic.  
+- **Chaos drills:** Kill containers with `docker compose kill api` or `kubectl delete pod` to validate graceful degradation paths.
 
-## Kubernetes on Amazon EKS
+## Kubernetes on Amazon EKS (Lab work)
 
-- **Provision with Terraform:** Define clusters, node groups, VPCs, and IAM roles as code for reviewable changes.  
-- **Deploy with manifests:** Each service owns a Deployment, Service, HPA, ConfigMap, and Secret boundary.  
-- **Ingress & security:** AWS Load Balancer Controller provisions TLS-enabled ALBs; secrets stay in AWS Secrets Manager.  
-- **Observability stack:** Prometheus + Grafana watch latency/resources while Fluent Bit ships logs to CloudWatch.
+- **Provision with Terraform:** AWS Workshops + Skill Builder labs walk through defining clusters, node groups, VPCs, and IAM roles as code so I can rehearse the motions.  
+- **Deploy with manifests:** I templated Deployments/Services/ConfigMaps for my three-service demo, but these only saw synthetic traffic.  
+- **Ingress & security:** Used AWS Load Balancer Controller in the lab to set up TLS; secrets still lived in AWS Secrets Manager with sample data.  
+- **Observability stack:** Followed workshop steps to install Prometheus + Grafana; no real customers, just metrics from test pods.
 
 **Deployment snippet:**
 
@@ -102,7 +106,7 @@ spec:
             periodSeconds: 10
 ```
 
-- Autoscaling and rolling upgrades kept throughput stable while reducing manual intervention.
+- Autoscaling and rolling upgrades behaved well in the sandbox; I still need mentorship before promising the same in production.
 
 ## Lessons from the Voyage
 

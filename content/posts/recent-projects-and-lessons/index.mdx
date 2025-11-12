@@ -7,6 +7,10 @@ banner: ./background.jpg
 description: "How I built a time-tracking app with Node.js and Express, the API endpoints it exposes, and what I learned about separation of concerns and early testing."
 ---
 
+> **Context:** BasicServerSetup is a solo practice project (in-memory store, Heroku hobby dyno) I use to learn REST patterns—no paying customers rely on it.  
+> **AI assist:** ChatGPT + Copilot drafted some controller/README text; I edited it before publishing this case study.  
+> **Status:** Honest overview of what works today and what’s still TODO (JWT auth, persistent DB, automated tests).
+
 ## TL;DR
 
 - **Lightweight time-tracking API with real separation.** Node.js + Express handles auth, clock events, and timesheet retrieval while a static Tailwind UI consumes the endpoints.

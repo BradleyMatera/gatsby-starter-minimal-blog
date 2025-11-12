@@ -7,6 +7,10 @@ description: "Explore WebGPU as a modern successor to WebGL, with step-by-step s
 theme: "Low-Level Experiments"
 ---
 
+> **Context:** Notes from my Triangle Shader Lab / WebGPU experiments—self-study work, not a production graphics engine.  
+> **AI assist:** ChatGPT + Copilot helped scaffold the initial WGSL + TypeScript snippets; I iterated and documented them here.  
+> **Status:** Performance numbers come from my laptop (Chrome Canary); treat them as anecdotal guidance.
+
 ## TL;DR
 
 - **WebGPU renders faster than WebGL when the pipeline is structured right.** Precompiled pipelines and command encoders delivered 2× speedups in my shapes renderer.[^mdn-webgpu]
@@ -122,8 +126,8 @@ function render(device: GPUDevice, context: GPUCanvasContext, pipeline: GPURende
 
 ## Results
 
-- **60 FPS with 10k+ vertices.** Reduced CPU–GPU sync overhead yielded roughly 2× the throughput of my prior WebGL demo.
-- **92% Lighthouse accessibility.** Keyboard shortcuts and ARIA status updates kept controls usable even during intensive rendering.
+- **60 FPS with 10k+ vertices (on my MacBook).** Reduced CPU–GPU sync overhead yielded roughly 2× the throughput of my prior WebGL demo.  
+- **92% Lighthouse accessibility.** Keyboard shortcuts and ARIA status updates kept controls usable even during intensive rendering.  
 - **20% broader support via fallback.** WebGL gracefully handles unsupported browsers while notifying users how to enable WebGPU.[^caniuse]
 
 ## Lessons Learned
