@@ -17,7 +17,8 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix"
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "postinstall": "if [ \"$NETLIFY\" = \"true\" ]; then npm rebuild sharp --platform=linux --arch=x64; fi"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.1.0",
