@@ -265,7 +265,7 @@ const HeroSystemScene: React.FC = () => {
           letterSpacing: "-0.02em",
           textShadow: "0 2px 12px #fff"
         }}>
-Web Development (B.S.) | Cloud Computing | AWS | Full-Stack | JavaScript | Python | AI Workflows        </div>
+Early-career Web Dev (B.S. Oct 2025) · React/Express demos · Learning AWS + AI-assisted workflows        </div>
       </div>
     </div>
   );
