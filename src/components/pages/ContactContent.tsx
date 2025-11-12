@@ -38,7 +38,7 @@ const ContactContent = () => (
           </p>
         </div>
         <div className="contact-form">
-          <h3 className="contact-info__headline">What you'll receive</h3>
+          <h3 className="contact-info__headline">What you&rsquo;ll receive</h3>
           <ul className="contact-info__list">
             <li>A quick confirmation so you know the message landed</li>
             <li>Any clarifying questions to keep scope precise</li>
@@ -60,7 +60,7 @@ const ContactContent = () => (
       }
       description={
         <p>
-          I regularly share progress on the channels below so you can monitor delivery even when we're not on a call.
+          I regularly share progress on the channels below so you can monitor delivery even when we&rsquo;re not on a call.
         </p>
       }
     >
