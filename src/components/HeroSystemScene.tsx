@@ -26,6 +26,7 @@ type OrbitParams = {
 
 const HeroSystemScene: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasWrapperRef = useRef<HTMLDivElement>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
 
   useEffect(() => {
@@ -39,9 +40,13 @@ const HeroSystemScene: React.FC = () => {
       let handlePointerMove: (e: MouseEvent | TouchEvent) => void;
       let handleResize: () => void;
 
+      let resizeObserver: ResizeObserver | null = null;
+
       try {
-        const isMobile = window.innerWidth < 700;
-        const orbitCount = isMobile ? MOBILE_ORBIT_COUNT : DESKTOP_ORBIT_COUNT;
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const allowAnimation = !prefersReducedMotion;
+        const isTouchViewport = window.innerWidth < 700;
+        const orbitCount = isTouchViewport ? MOBILE_ORBIT_COUNT : DESKTOP_ORBIT_COUNT;
 
         const width = canvas.clientWidth;
         const height = canvas.clientHeight;
@@ -55,13 +60,18 @@ const HeroSystemScene: React.FC = () => {
       scene.background = new THREE.Color(BG_COLOR);
 
       const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 100);
-      camera.position.set(isMobile ? 0 : 1.1, 0, 7);
+      camera.position.set(isTouchViewport ? 0 : 1.1, 0, 7);
 
       if (!rendererRef.current) {
-        rendererRef.current = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: "high-performance" });
-        rendererRef.current.setSize(width, height);
-        rendererRef.current.setPixelRatio(window.devicePixelRatio);
+        rendererRef.current = new THREE.WebGLRenderer({
+          canvas,
+          antialias: true,
+          alpha: true,
+          powerPreference: "high-performance",
+        });
       }
+      rendererRef.current.setSize(width, height, false);
+      rendererRef.current.setPixelRatio(Math.min(window.devicePixelRatio ?? 1, 2));
       const renderer = rendererRef.current;
 
       const keyLight = new THREE.DirectionalLight(0xffffff, 0.85);
@@ -167,7 +177,7 @@ const HeroSystemScene: React.FC = () => {
 
         targetX = lerp(targetX, mouseX, 0.08);
         targetY = lerp(targetY, mouseY, 0.08);
-        camera.position.x = (isMobile ? 0 : 1.1) + targetX * 1.1;
+        camera.position.x = (isTouchViewport ? 0 : 1.1) + targetX * 1.1;
         camera.position.y = targetY * 0.7;
         camera.lookAt(0, 0, 0);
 
@@ -176,7 +186,11 @@ const HeroSystemScene: React.FC = () => {
         }
         frameId = requestAnimationFrame(animate);
       };
-      animate();
+      if (allowAnimation) {
+        animate();
+      } else if (renderer) {
+        renderer.render(scene, camera);
+      }
 
       handlePointerMove = (e: MouseEvent | TouchEvent) => {
         let x = 0, y = 0;
@@ -192,8 +206,8 @@ const HeroSystemScene: React.FC = () => {
         }
       };
       if (renderer) {
-        renderer.domElement.addEventListener("mousemove", handlePointerMove);
-        renderer.domElement.addEventListener("touchmove", handlePointerMove);
+        renderer.domElement.addEventListener("mousemove", handlePointerMove, { passive: true });
+        renderer.domElement.addEventListener("touchmove", handlePointerMove, { passive: true });
       }
 
       handleResize = () => {
@@ -202,11 +216,16 @@ const HeroSystemScene: React.FC = () => {
         if (w > 0 && h > 0 && renderer) {
           camera.aspect = w / h;
           camera.updateProjectionMatrix();
-          renderer.setSize(w, h);
-          renderer.setPixelRatio(window.devicePixelRatio);
+          renderer.setSize(w, h, false);
+          renderer.setPixelRatio(Math.min(window.devicePixelRatio ?? 1, 2));
         }
       };
-        window.addEventListener("resize", handleResize);
+      window.addEventListener("resize", handleResize, { passive: true });
+      if (typeof ResizeObserver !== "undefined" && canvasWrapperRef.current) {
+        resizeObserver = new ResizeObserver(() => handleResize());
+        resizeObserver.observe(canvasWrapperRef.current);
+      }
+      handleResize();
 
       } catch (error) {
         console.error("Error initializing Three.js scene:", error);
@@ -217,6 +236,7 @@ const HeroSystemScene: React.FC = () => {
           cancelAnimationFrame(frameId);
         }
         window.removeEventListener("resize", handleResize);
+        resizeObserver?.disconnect();
         if (rendererRef.current) {
           rendererRef.current.domElement.removeEventListener("mousemove", handlePointerMove);
           rendererRef.current.domElement.removeEventListener("touchmove", handlePointerMove);
@@ -227,47 +247,18 @@ const HeroSystemScene: React.FC = () => {
     }
   }, []);
 
-  // Bar hero height
-  const height = 96;
-
   return (
-    <div style={{
-      position: "relative",
-      overflow: "hidden",
-      width: "100%",
-      height: `${height}px`,
-      marginTop: "8px",
-      marginBottom: "16px"
-    }}>
-      <div style={{
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        width: "100%",
-        height: `${height}px`,
-        maxWidth: "100vw",
-        margin: "0 auto",
-        background: BG_COLOR,
-        borderRadius: "12px",
-        overflow: "hidden",
-        boxShadow: "0 4px 16px rgba(0,0,0,0.06)",
-        gap: "2rem"
-      }}>
-        <div style={{ width: "96px", height: "96px", flexShrink: 0, position: "relative", overflow: "hidden" }}>
-          <canvas ref={canvasRef} style={{ width: "100%", height: "100%" }} />
+    <section className="hero-system" aria-label="Current focus banner">
+      <div className="hero-system__card">
+        <div className="hero-system__canvas-wrapper" ref={canvasWrapperRef}>
+          <canvas ref={canvasRef} className="hero-system__canvas" />
         </div>
-        <div style={{
-          textAlign: "left",
-          color: "#000",
-          fontFamily: "'Space Grotesk Variable', 'Montserrat', sans-serif",
-          fontWeight: 700,
-          fontSize: "1.6rem",
-          letterSpacing: "-0.02em",
-          textShadow: "0 2px 12px #fff"
-        }}>
-Early-career Web Dev (B.S. Oct 2025) · React/Express demos · Learning AWS + AI-assisted workflows        </div>
+        <div className="hero-system__copy">
+          <span className="hero-system__eyebrow">Currently practicing</span>
+          Early-career Web Dev (B.S. Oct 2025) · React/Express demos · Learning AWS + AI-assisted workflows
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
