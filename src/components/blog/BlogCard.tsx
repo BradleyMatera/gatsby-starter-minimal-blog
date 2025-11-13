@@ -31,7 +31,7 @@ const formatExcerpt = (excerpt: string, maxLength = 180) => {
 
 const BlogCard = ({ post, showTags = true }: BlogCardProps) => {
   const { tagsPath, basePath } = useMinimalBlogConfig();
-  const { ref, revealed } = useScrollReveal(0);
+  const { ref, revealed } = useScrollReveal(0, { initiallyVisible: true });
 
   return (
     <article

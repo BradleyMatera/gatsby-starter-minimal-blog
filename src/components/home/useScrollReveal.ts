@@ -7,6 +7,14 @@ type ScrollRevealOptions = {
   initiallyVisible?: boolean;
 };
 
+const isElementInViewport = (el: HTMLElement) => {
+  if (typeof window === "undefined") {
+    return false;
+  }
+  const rect = el.getBoundingClientRect();
+  return rect.top <= window.innerHeight && rect.bottom >= 0;
+};
+
 export function useScrollReveal(delay = 0, options?: ScrollRevealOptions) {
   const ref = useRef<HTMLElement | null>(null);
   const isServer = typeof window === "undefined";
@@ -25,6 +33,16 @@ export function useScrollReveal(delay = 0, options?: ScrollRevealOptions) {
     }
 
     const revealNow = () => setRevealed(true);
+
+    const elementCurrentlyVisible = isElementInViewport(element);
+    if (elementCurrentlyVisible) {
+      if (delay > 0) {
+        const immediateTimeout = window.setTimeout(revealNow, delay);
+        return () => window.clearTimeout(immediateTimeout);
+      }
+      revealNow();
+      return undefined;
+    }
 
     if (!("IntersectionObserver" in window)) {
       const fallback = window.setTimeout(revealNow, delay);

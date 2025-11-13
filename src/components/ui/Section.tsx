@@ -27,7 +27,7 @@ const Section = ({
   revealDelay = 0,
   children,
 }: SectionProps) => {
-  const { ref, revealed } = useScrollReveal(revealDelay);
+  const { ref, revealed } = useScrollReveal(revealDelay, { initiallyVisible: true });
   const isVisible = disableReveal || revealed;
   const sectionClassName = cx(
     "section-shell",

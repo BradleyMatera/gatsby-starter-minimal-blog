@@ -22,7 +22,7 @@ type ProjectCardProps = {
 };
 
 const ProjectCard = ({ title, meta, summary, impact, impactPrefix = "Impact", stack, links, className }: ProjectCardProps) => {
-  const { ref, revealed } = useScrollReveal(0);
+  const { ref, revealed } = useScrollReveal(0, { initiallyVisible: true });
   const articleClassName = cx(
     "project-card",
     "reveal-card",
