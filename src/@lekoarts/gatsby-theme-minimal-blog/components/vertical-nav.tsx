@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Link } from "gatsby";
+import ThemeToggle from "../../../components/ThemeToggle";
 import "../../../styles/vertical-nav.css";
 
 type NavItem = {
@@ -102,16 +103,19 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
                       <span className="vertical-nav__label">{label}</span>
                     </Link>
                   </li>
-            );
-          })}
-        </ul>
-        <a href="/contact" className="vertical-nav__cta vertical-nav__cta--inline">
-          <span className="vertical-nav__cta-icon" aria-hidden="true">✉</span>
-          <span>Email me!</span>
-        </a>
-      </div>
-    </nav>
-  )}
+                );
+              })}
+            </ul>
+            <div className="vertical-nav__actions">
+              <ThemeToggle />
+              <a href="/contact" className="vertical-nav__cta vertical-nav__cta--inline">
+                <span className="vertical-nav__cta-icon" aria-hidden="true">✉</span>
+                <span>Email me!</span>
+              </a>
+            </div>
+          </div>
+        </nav>
+      )}
 
       {/* Mobile Drawer Nav */}
       {isMobile && mobileDrawerOpen && (
@@ -143,6 +147,7 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
             >
               Close Menu
             </button>
+            <ThemeToggle />
             <ul className="vertical-nav__list">
               {coreLinks.map((item) => {
                 const label = item.slug === "/" ? "Home" : item.title;
@@ -165,13 +170,15 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
           );
         })}
       </ul>
-        <a href="/contact" className="vertical-nav__cta">
-          <span className="vertical-nav__cta-icon" aria-hidden="true">✉</span>
-          <span>Email me!</span>
-        </a>
-    </div>
-  </nav>
-)}
+            <div className="vertical-nav__actions vertical-nav__actions--stacked">
+              <a href="/contact" className="vertical-nav__cta">
+                <span className="vertical-nav__cta-icon" aria-hidden="true">✉</span>
+                <span>Email me!</span>
+              </a>
+            </div>
+          </div>
+        </nav>
+      )}
     </>
   );
 };

@@ -29,8 +29,8 @@ const StatusRow = ({ icon, label, text }: StatusRowProps) => {
         alignItems: "center",
         gap: "0.5rem",
         transition: "box-shadow 0.3s, background 0.3s",
-        boxShadow: active ? "0 2px 12px rgba(0,32,64,0.08)" : "none",
-        background: active ? "var(--color-bg-soft, #f7f8fa)" : "none",
+        boxShadow: active ? "0 2px 12px rgba(0,0,0,0.15)" : "none",
+        background: active ? "var(--color-surface-alt, #f7f8fa)" : "none",
         borderRadius: "1rem",
       }}
       onMouseEnter={() => setActive(true)}
@@ -40,21 +40,21 @@ const StatusRow = ({ icon, label, text }: StatusRowProps) => {
         style={{
           display: "inline-flex",
           alignItems: "center",
-          position: "relative",
-        }}
-      >
-        {icon}
-        <span
-          style={{
-            width: 8,
-            height: 8,
-            borderRadius: "50%",
-            background: active ? "var(--color-accent, #e05a5a)" : "#dbe2ea",
-            marginLeft: 4,
-            boxShadow: active ? "0 0 8px 2px rgba(224,90,90,0.15)" : "none",
-            opacity: active ? 1 : 0.5,
-            animation: active
-              ? "statusPulse 1.2s infinite cubic-bezier(.22,.9,.2,1)"
+            position: "relative",
+          }}
+        >
+          {icon}
+          <span
+            style={{
+              width: 8,
+              height: 8,
+              borderRadius: "50%",
+              background: active ? "var(--color-accent, #e05a5a)" : "var(--color-border, #dbe2ea)",
+              marginLeft: 4,
+              boxShadow: active ? "0 0 8px 2px rgba(224,90,90,0.15)" : "none",
+              opacity: active ? 1 : 0.5,
+              animation: active
+                ? "statusPulse 1.2s infinite cubic-bezier(.22,.9,.2,1)"
               : "none",
           }}
         />
@@ -62,7 +62,7 @@ const StatusRow = ({ icon, label, text }: StatusRowProps) => {
       <span
         style={{
           fontWeight: 600,
-          color: active ? "var(--color-accent, #1a3a6c)" : "#444",
+          color: active ? "var(--color-accent, #1a3a6c)" : "var(--color-text-subtle, #444)",
           transition: "color 0.3s",
         }}
       >
@@ -71,9 +71,10 @@ const StatusRow = ({ icon, label, text }: StatusRowProps) => {
       <span
         style={{
           marginLeft: 8,
-          opacity: active ? 1 : 0,
+          opacity: active ? 1 : 0.8,
           transform: active ? "translateY(0)" : "translateY(8px)",
           transition: "opacity 0.4s, transform 0.4s",
+          color: "var(--color-text, #000)",
         }}
       >
         {text}
