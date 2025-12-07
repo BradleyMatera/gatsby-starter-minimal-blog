@@ -2182,6 +2182,30 @@ img {
   box-shadow: 0 6px 15px rgba(226, 59, 45, 0.18);
 }
 
+.gif-frame {
+  margin: 1.5rem 0;
+  max-width: 760px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.gif-frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.gif-frame figcaption {
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  color: var(--color-text-subtle);
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+}
+
 .tiny-dot-cluster span {
   position: absolute;
   width: 6px;
