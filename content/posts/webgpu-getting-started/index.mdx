@@ -63,6 +63,40 @@ triangle-shader-lab/
 - Annotated copy helps more than fancy effects. Recruiters appreciated that I call it a study site, not a framework.  
 - Sharing prompt logs builds trust. I include links to AI conversations so engineers know where I got help.
 
+## Setup checklist (what actually worked)
+
+- Chrome Canary or Edge with `--enable-unsafe-webgpu` flags; macOS needs Metal support.  
+- Bun `1.x`, Node `20.x`, Next.js 14 with the `experimental.webgpu` flag enabled.  
+- Install GPU debuggers (Chrome DevTools WebGPU tab) and use render doc captures sparingly to avoid huge files.  
+- Keep shaders small and readable; every line gets a comment tied to the tutorial step.
+
+## Debugging patterns that saved me
+
+- **Blank canvas:** Verify `navigator.gpu` first, then check adapter requests. If adapter is null, bail with a user-facing message.  
+- **Nothing renders after resize:** Ensure `device.queue.submit` still runs and swap chain is reconfigured; resizing resets context state.  
+- **Weird colors/vertices:** Inspect buffer layouts and alignments; a single stride mistake ruined the cube until I logged offsets.  
+- **Performance dips:** Use small frame counters; disable fancy overlays unless debugging. WebGPU is fast, but the page still needs to be honest on low-power laptops.
+
+## Mistakes and corrections
+
+- **Copying samples without understanding:** Early on I pasted code and hoped. Now every demo has a “Why this line exists” note.  
+- **Ignoring accessibility:** Added captions, transcripts for Looms, and clear “WebGPU required” copy.  
+- **No fallback demos:** Added a “read-only” mode with screenshots and code snippets so readers without WebGPU can still learn.  
+- **Too few tests:** I now snapshot the rendered canvas dimensions and check for thrown errors during adapter/device negotiation.
+
+## How this project shows up in interviews
+
+- I treat it as a learning case study, not production. I walk interviewers through the “Reality snapshot” and the bug logs.  
+- I use it to answer “How do you learn new low-level tech?” → start small, annotate heavily, build honesty logs, and keep proof links.  
+- I call out that AI drafted early WGSL snippets, but I rewrote them after validating against the WebGPU spec.
+
+## Reading and reference list
+
+- WebGPU spec + MDN docs (annotated in `notes/webgpu.md`).  
+- Chrome WebGPU samples and Mozilla’s demos.  
+- “WebGPU Fundamentals” blog series for mental models of pipelines and bind groups.  
+- RenderDoc + Chrome DevTools docs for capture/inspection tips.
+
 ## TODOs
 
 - Add WebGPU flag instructions for each browser.  

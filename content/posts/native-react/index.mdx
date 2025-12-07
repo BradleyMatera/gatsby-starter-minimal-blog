@@ -121,6 +121,34 @@ const filteredCharacters = useMemo(() => {
 - Write Playwright tests covering the top flows.  
 - Sanitize the repo so I can make it public without leaking secrets.
 
+## How to replay the stack
+
+- Frontend: `npm install && npm run dev` (Vite). Point `VITE_API_BASE_URL` at the deployed gateway.  
+- Backend: `sam build && sam deploy --guided` with your own stage name. Seeds DynamoDB with sample data from `seed.json`.  
+- Smoke test: `npm run test:smoke` to create/read/update/delete a character and assert the UI rolls back on failure.  
+- Logs: CloudWatch for Lambda; Vercel for frontend 500s; both include request IDs to correlate.
+
+## Failure cases I’ve already hit
+
+- **401/403 from API Gateway:** Missing or expired API key; fixed by rotating the key and keeping it server-side only.  
+- **Schema drift:** Frontend added a new field; backend rejected it. Added JSON schema validation + contract tests.  
+- **Cold-start UX:** Added skeletons and optimistic updates so users aren’t staring at blank pages.  
+- **Caching gone wrong:** Stale Jikan responses showed outdated data. Added a “Last refreshed” badge and manual refresh button.
+
+## Interview angles
+
+- **Trade-offs:** Chose serverless to keep costs low and avoid managing servers; acknowledge cold starts and regional latency.  
+- **Security:** API key injected at the edge, input validation everywhere, and rate limiting on the public API.  
+- **Honesty:** Repo is private until secrets are scrubbed; I’m transparent about what’s missing (auth, uploads, full IaC).  
+- **Testing:** Unit + contract tests for the Lambda handlers, planned Playwright for top user journeys.
+
+## Stretch goals and open questions
+
+- Should I add offline-first with IndexedDB, or is that overkill for this use case?  
+- Would AppSync simplify auth + caching compared to raw API Gateway?  
+- How to balance DX (Vite) with production parity (SAM) without duplicating configs.  
+- Whether to move to a monorepo (Nx/Turborepo) for shared types between frontend and Lambdas.
+
 ## Links
 
 - Live demo: [https://cruddemo-one.vercel.app/](https://cruddemo-one.vercel.app/) (backend sleeps when unused; expect a short delay).  

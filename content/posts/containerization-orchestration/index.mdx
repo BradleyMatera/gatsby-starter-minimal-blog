@@ -121,6 +121,33 @@ spec:
 - Explore App Mesh or Linkerd to understand service meshes before I make claims about them.  
 - Figure out how to shrink cold-start time on the Render backend (Car-Match) without leaving the free tier.
 
+## Failure stories and fixes
+
+- **Images ballooned past 1 GB:** I forgot multi-stage builds. Switched to `node:20-alpine` builder + slim runtime; image dropped to ~150 MB.  
+- **Crash-looping pods on EKS:** Liveness probes hit `/healthz` before the app bound the port. Added `initialDelaySeconds` and a lightweight `/ready` endpoint.  
+- **Mystery 502s through ALB:** Uppercase headers + missing `te: trailers` on gRPC paths. Normalized headers and documented it in the runbook.  
+- **Compose env drift:** Teammates kept stale `.env` files. Added `.env.example` + `scripts/verify-env.sh` to diff and fail fast.
+
+## Guardrails I follow
+
+- Keep `docker-compose.yml` as the source of truth; avoid “just run docker run” instructions.  
+- Health checks everywhere (Compose, K8s, and app-level) so failures surface quickly.  
+- Tear down labs immediately (`terraform destroy`, `kubectl delete ns demo`) to avoid surprise bills.  
+- Document every drill in `docs/runbook.md` with a date, command, and lesson learned.
+
+## Interview-ready narratives
+
+- **Why Compose first:** It’s the quickest way for me to prove a multi-service app works end-to-end. Once stable, I port the same health checks and env patterns to K8s.  
+- **How I debug crashes:** Start with container logs, then health checks, then dependencies. If it’s K8s, I add `kubectl describe pod` to see events before blaming app code.  
+- **What I know vs. don’t know:** Comfortable with Compose + basic K8s deployments; not experienced with service meshes, multi-tenant clusters, or production on-call. I say that upfront.
+
+## Labs I plan to add
+
+- Blue/green + canary rollouts via Argo or plain `kubectl rollout` patterns.  
+- Pod disruption budgets and eviction drills to see how apps behave during node maintenance.  
+- Centralized logging stack (Fluent Bit + Loki) with correlation IDs wired through HTTP headers.  
+- Cost tracking on EKS using AWS Cost Explorer tags, just to see how quickly experiments add up.
+
 ## References
 
 [^compose]: Docker Documentation, “Overview of Docker Compose,” accessed May 2025, https://docs.docker.com/compose/  

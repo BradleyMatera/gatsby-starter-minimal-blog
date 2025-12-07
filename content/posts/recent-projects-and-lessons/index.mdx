@@ -69,3 +69,31 @@ BasicServerSetup/
 ## Repo
 
 - [https://github.com/BradleyMatera/BasicServerSetup](https://github.com/BradleyMatera/BasicServerSetup)
+
+## Repro + smoke checklist
+
+- `npm install && npm run dev` for local API; set `PORT` and mock secret in `.env`.  
+- `npm run start:frontend` to serve the static dashboard; point `API_BASE_URL` at local or Heroku.  
+- Run `scripts/smoke.sh` to hit `/healthz`, `/clockin`, `/clockout`, `/timesheet`.  
+- Manual Postman collection covers happy paths; failures logged in `docs/runbook.md`.
+
+## Incidents and fixes
+
+- **Clock drift bug:** Client and server timezones mismatched; normalized to UTC and added unit tests for duration math.  
+- **CORS misconfig:** Frontend broke on Pages; enabled CORS for the Pages origin only and documented it.  
+- **Silent 500s:** Missing error handler returned HTML errors. Added JSON error middleware + request IDs.  
+- **Config drift:** Frontend pointed at the wrong API after a deploy. Added a config banner showing current API base and environment.
+
+## Interview angles
+
+- **Separation of deploys:** Shows I can manage independent front/back pipelines and keep configs aligned.  
+- **Honesty about gaps:** It’s a lab; auth and persistence are mocked until I wire Atlas/Postgres.  
+- **Operational habits:** Runbook, smoke script, and Postman collection prove I think about operability, not just code.  
+- **Next steps:** Database + JWT work is scoped; I can describe exactly how I’ll roll it out and test it.
+
+## Stretch goals
+
+- Add structured logging + a minimal dashboard (Grafana or even a CSV dump) for time entries.  
+- Introduce role-based access (admin vs employee) once auth is real.  
+- Automate seed data and teardown for repeatable demos.  
+- Move to Fly.io to practice global deploys and see how latency affects the UI.

@@ -94,6 +94,35 @@ export const handler = async (event) => {
 - Mobile viewport testing for the hosted UI + React app.  
 - IaC cleanup: migrate from SAM CLI commands to CDK or Terraform with clearer state management.
 
+## Repro steps (lab only)
+
+- Set `USER_POOL_ID`, `CLIENT_ID`, and callback URLs in `.env` + Cognito console.  
+- Run `npm install && npm run dev` for the SPA; expect redirect to hosted UI for login.  
+- Deploy backend with `sam build && sam deploy --guided`; seed a test user.  
+- Use Playwright script (`tests/auth.spec.ts`) to verify login → API call → refresh flow.  
+- Check CloudWatch logs for verification errors after each run.
+
+## Incidents and fixes
+
+- **Stale JWKS keys:** Cached keys caused 401s after a pool rotation. Added JWKS cache invalidation + error logging.  
+- **Token in localStorage (early build):** Moved to memory + HttpOnly cookie to prevent XSS exposure. Logged the change in the honesty file.  
+- **CSRF on refresh endpoint:** Added CSRF token + double-submit cookie pattern; Playwright tests assert headers are present.  
+- **MFA edge cases:** Hosted UI MFA step broke the redirect. Added clear copy on the login button and documented MFA expectations.
+
+## Interview talking points
+
+- **Threat model:** Why access tokens live in memory, refresh in HttpOnly, and why I avoid localStorage.  
+- **Defense in depth:** Authorizer checks scopes; Lambda re-verifies claims; API Gateway throttles to limit brute force.  
+- **Honesty:** Lab account only, no custom domain/WAF yet. I describe exactly what’s missing before someone assumes production readiness.  
+- **Testing:** Playwright covers the full loop; SAM/unit tests cover token parsing and verifier edge cases.
+
+## Stretch goals and open questions
+
+- Add device tracking + sign-out everywhere flows.  
+- Evaluate Cognito triggers (pre-token, post-confirmation) for audit logging.  
+- Decide between CDK vs Terraform for long-term IaC; SAM is fine for now but drifts.  
+- Explore passkeys/WebAuthn for a future version once basics are rock solid.
+
 ## Links
 
 - Repo (request access): [https://github.com/BradleyMatera/cognito-react-auth-lab](https://github.com/BradleyMatera/cognito-react-auth-lab)  

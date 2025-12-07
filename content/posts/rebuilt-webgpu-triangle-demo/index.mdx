@@ -1,0 +1,78 @@
+---
+title: "Why I Rebuilt My WebGPU Triangle Demo From Scratch"
+date: "2025-11-14"
+slug: "/rebuilt-webgpu-triangle-demo"
+tags: ["webgpu", "webdev", "learning", "webgl"]
+description: "I rebuilt my triangle demo to create a clean WebGPU lab focused on the basics—adapter, device, buffers, and a simple UI shell."
+theme: "Low-Level Experiments"
+---
+
+I built my Triangle Demo because I wanted a clean WebGPU study lab that made sense for how I learn. I originally forked a public WebGPU project that showed what was possible, and it gave me the push to start exploring how triangle rendering works. The original project was great, but it had a completely different purpose and long-term direction. What I wanted was something smaller, simpler, and focused only on the “hello triangle” and “textured cube” fundamentals.
+
+So instead of trying to bend something bigger into a study tool, I decided to rebuild my own version from the ground up.
+
+## Why I needed my own structure
+
+Once I started exploring WebGPU, I realized I learn best when everything in a project is built by me, for me, and matches what I’m trying to study. I needed:
+
+- a minimal layout  
+- no extra abstraction layers  
+- short TypeScript files I could read in one sitting  
+- a UI shell I understood  
+- a direct mapping from code to canvas
+
+Not because anything else was wrong, but because I wanted a space where every file existed for one reason — to help me understand the pipeline.
+
+## Building it clean
+
+I rebuilt the entire demo using tools I already use daily:
+
+- **Next.js 16** for the UI  
+- **NextUI** for the layout  
+- **Bun** for scripts and static exports  
+- a single `/lib/webgpu` folder that holds the render loop logic  
+- compact TypeScript files for the triangle and cube demos  
+- simple WGSL shaders with no extra complexity
+
+I wrote my own initialization steps:
+
+1. request the adapter  
+2. request the device  
+3. configure the canvas  
+4. create buffers  
+5. load WGSL  
+6. submit draws
+
+With everything written by me from scratch, I could finally see exactly how each piece of the pipeline fits together.
+
+## What the rebuild gave me
+
+This rebuild wasn’t about fixing anything. It was about **clarity**.
+
+The new setup gives me:
+
+- a WebGPU project I fully understand  
+- a clean space to tweak shaders  
+- a simple path to experiment with buffers, attributes, and color outputs  
+- direct connection between the code and what I see on the canvas  
+- a predictable structure I can keep expanding as I learn
+
+Instead of navigating around a larger ecosystem with its own goals, I now have a focused lab designed specifically for learning WebGPU fundamentals. That alone made the rebuild worth it.
+
+## What I learned
+
+Rebuilding this demo taught me more than I expected:
+
+- how the adapter/device negotiation really works  
+- how pipelines, buffers, and shaders interact  
+- how the render loop lives and breathes  
+- how small changes in WGSL show up instantly on the canvas  
+- how much easier learning is when the project matches your learning style
+
+This project is not an engine. Not a framework. Not a competitor to anything. It is just a compact, personal study lab that helps me understand the basics without distractions.
+
+## Final thoughts
+
+The new Triangle Demo is clean, simple, and built entirely around learning. It keeps the triangle and the textured cube close at hand so I can focus on the actual WebGPU pipeline instead of navigating around unrelated features.
+
+It is the version that finally made WebGPU click for me, and it gives me a foundation to keep experimenting as the API evolves.

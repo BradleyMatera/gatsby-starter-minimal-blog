@@ -1,0 +1,104 @@
+---
+title: "The Day My Gatsby Nav Bar Made Me Question Reality"
+date: "2025-10-20"
+slug: "/gatsby-nav-bar-haunted"
+tags: ["Gatsby", "CSS", "Debugging", "Frontend"]
+description: "How a haunted nav bar forced me to rebuild the structure, not just the styles."
+theme: "Front-End & Full-Stack"
+---
+
+When I rebuilt my portfolio with Gatsby, I expected normal front end issues like spacing or a missing import. What I did not expect was the nav bar fighting me like it had a mind of its own. On desktop it looked fine at first glance. On mobile and certain screen sizes it turned into something between a glitch and a crime scene. The spacing was wrong, the padding drifted depending on the browser, and random items would shift like they were trying to escape the layout.
+
+At first I thought it was just sloppy CSS on my part, but the deeper I went the stranger it got. I fixed a margin on one breakpoint and it broke the layout on another. I aligned the logo and it pushed the entire menu off screen. It felt like fighting a ghost that would fix itself when I looked away and then break again when I touched literally anything.
+
+## The first sign something was off
+
+I started noticing weird inconsistencies:
+
+- on desktop the nav looked clean  
+- on iPhone it stacked wrong  
+- on an Android tablet one of the links slipped down a few pixels  
+- in Chrome responsive mode the entire thing bounced when resizing
+
+It made zero sense. The code was simple. Normal React components. Normal Gatsby layout. Normal styled components. But the nav acted like it was built out of jello.
+
+The worst part was that every person who looked at it gave different feedback. One guy said the spacing looked fine. Another sent me screenshots where the text looked like it was orbiting the logo. I had no idea which version was real.
+
+## The first round of fixes that went nowhere
+
+I tried everything that made sense:
+
+- tightened padding  
+- deleted margin rules  
+- replaced flexbox with grid  
+- replaced grid with flexbox again  
+- normalized line height  
+- used gap utilities  
+- tried a CSS reset  
+- rebuilt the component from scratch
+
+Nothing solved it across every viewport. Every fix created a new problem. At one point the mobile menu icon drifted so far off the screen it looked like it was trying to run away from my codebase. I knew I was missing something.
+
+## Finding the root cause
+
+When I finally slowed down and treated the nav like an actual debugging problem instead of a quick CSS annoyance, I noticed the real issue: the structure of the component itself was messy. Not broken, just built in a way that made every style rule interfere with something else.
+
+Here were the real issues hiding underneath:
+
+- nested containers fighting for space  
+- padding declared on both parent and child elements  
+- flexbox alignment rules that canceled each other out  
+- inconsistent font sizes causing invisible height changes  
+- Gatsby theme defaults adding margins I never set  
+- no global spacing system
+
+Individually these things seemed small but together they created a death spiral. There was no single source of truth. The nav bar was balancing itself on invisible calculations.
+
+## The move that finally fixed everything
+
+Instead of duct taping the layout, I tore the whole thing down and rebuilt it with actual intent. Clean, simple, and predictable. I created a real spacing system. I gave the nav its own dedicated wrapper. I made sure no child element used padding unless it had a reason. And I kept the font sizes consistent so they did not secretly affect vertical alignment.
+
+The final structure looked like this:
+
+```html
+<header class="site-header">
+  <nav class="nav-container">
+    <div class="nav-left">
+      <a class="logo" href="/">Bradley Matera</a>
+    </div>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/blogs">Blog</a></li>
+        <li><a href="/about">About</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+```
+
+Clean. Predictable. No unnecessary wrappers. No random spacing rules.
+
+## Why it worked
+
+Once the structure was clean, fixing the padding and alignment became normal work again. Responsive breakpoints were actually responsive. The mobile menu icon stayed where it was supposed to. The logo stopped drifting like it was floating in space.
+
+The layout finally behaved because nothing was fighting behind the scenes. No inherited margins. No double padding. No default Gatsby theme styles sneaking in. Everything had one clear job.
+
+## What I learned
+
+If the layout keeps breaking in random ways, the structure is probably wrong.
+
+Bad structure means every style rule becomes a gamble. You can fix a small thing and accidentally break something two components down because everything is chained together in ways you cannot see.
+
+Rebuilding the nav from scratch took less time than all the hours I spent firefighting random alignment bugs.
+
+## Final thoughts
+
+Front end bugs are loud when the problem is small and quiet when the problem is structural. The loud stuff distracts you, but the quiet stuff hurts you.
+
+Once I cleaned up the skeleton of the component, the nav bar stopped acting haunted and started acting like a normal layout again.
+
+Sometimes the fix is not more CSS. Sometimes the fix is admitting the component needs to be rebuilt instead of patched.
+
+The new nav bar works everywhere and finally matches what I had in my head from the start.

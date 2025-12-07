@@ -91,6 +91,35 @@ volumes:
 - Automated cleanup for volumes/networks so teammates don’t end up with stale resources.  
 - Better story around secrets (maybe doppler/.env vault). For now I rely on `.env.example` files.
 
+## Repro steps (for future me or teammates)
+
+1. Copy `.env.example` to `.env.api` and `.env.db`; fill in passwords.  
+2. Run `docker compose up --build`. Wait for health checks to go green.  
+3. Execute `scripts/smoke.sh` to hit Node, Python, and Postgres.  
+4. Tail logs with `docker compose logs -f api python` and confirm `traceId` flows across services.  
+5. Kill one service (`docker compose kill python`) and verify API degrades gracefully.
+
+## Failure drills and lessons
+
+- **Breaking Postgres:** Stopped the DB to see error handling. API returned 503 with a user-friendly message—logged the stack trace server-side only.  
+- **Timeouts between services:** Added a 2s timeout to the API→Python call; the frontend shows a banner when dependencies are slow.  
+- **Log file bloat:** Mounted a host directory and hit 1GB fast. Added log rotation config + a cleanup script.  
+- **Dependency sprawl:** npm/pip upgrades broke builds; pinned versions and added `npm ci`/`pip install -r` in the Dockerfiles.
+
+## How I use this in interviews
+
+- Talk through why I separated responsibilities (Node for routing/auth, Python for CPU tasks).  
+- Show the `scripts/` folder as proof I operationalize even small labs.  
+- Admit gaps: no real tracing stack, no secrets manager, and only local/VM deployments so far.  
+- Offer to screen share the runbook so interviewers see the habit of documenting drills.
+
+## Next iterations
+
+- Add k6 tests to simulate basic load across both services.  
+- Replace raw curl health checks with a tiny status page showing dependency health.  
+- Publish a short Loom walkthrough of the repo structure and the smoke test output.  
+- Try the same pattern with a queue (e.g., RabbitMQ) to decouple CPU-heavy tasks.
+
 ## Links
 
 - Repo: [https://github.com/BradleyMatera/docker_multilang_project](https://github.com/BradleyMatera/docker_multilang_project)  

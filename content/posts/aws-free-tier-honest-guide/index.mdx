@@ -1,0 +1,199 @@
+---
+title: "How to Launch AWS Stacks for Free — And What Happens When the Free Tier Ends"
+date: "2025-10-20"
+slug: "/aws-free-tier-honest-guide"
+tags: ["AWS", "Cloud", "Cost Management"]
+description: "An honest guide to running cloud infrastructure without surprise bills—how I stay within free tiers and what changes when they expire."
+theme: "Cloud & DevOps"
+---
+
+## An honest guide to running cloud infrastructure without surprise bills
+
+When I started building projects that hit the cloud, one of the biggest doubts was: “Can I really launch this stuff for free?” The short answer: yes, you can launch on AWS for free — or at least extremely low cost — but the longer and more honest answer is that you need to understand exactly how the free tier works, what the limits are, and when you’ll cross into paying territory. This post walks through how I spin up full stacks on AWS, what free means in practice, where the hidden traps are, and how much things cost when the free buffer disappears.
+
+---
+
+## Understanding the AWS Free Tier
+
+When you sign up for AWS as a new account, you get access to a Free Tier. According to AWS:  
+“Gain free, hands-on experience … with select services” as part of the Free Tier.
+
+The Free Tier breaks down into three categories:
+
+### 1. 12-Month Free Tier
+
+Many core services (like EC2 micro instances, RDS micro DBs, S3 storage) are free for up to **12 months** from account creation, within certain usage limits.
+
+### 2. Always Free
+
+Some services or usage levels remain free even after the 12 months, but with limited quotas (Lambda requests, DynamoDB storage, etc).
+
+### 3. Short-Term Trials
+
+Occasionally specific services get temporary trials.
+
+One of the biggest parts of the Free Tier: 750 hours/month of a **t2.micro or t3.micro EC2 instance** (enough to run 1 instance 24/7) during the first 12 months.
+
+---
+
+## How I Use It To Launch a Stack
+
+Here’s how I actually spin up a full AWS stack for free or very close to free.
+
+I start by defining what I actually need:
+
+- a micro EC2 instance (or Lambda + API Gateway)  
+- an S3 bucket for static assets  
+- maybe a small RDS micro DB  
+- IAM roles  
+- CloudWatch logs  
+- security groups and basic networking
+
+Then I check whether each part is Free Tier eligible, and whether I’m still within the 12-month window.
+
+I deploy the smallest possible instance sizes, choose the cheapest region, and I aggressively clean up anything I’m not using:
+
+- terminate EC2 instances  
+- delete EBS volumes  
+- empty and delete buckets  
+- remove unused IPs  
+- remove snapshots
+
+Free is not automatic. If you forget resources, they run up costs.
+
+---
+
+## Hidden Traps: How “Free” Becomes “I Just Got Billed”
+
+I’ve been hit by random charges for dumb reasons. These are the traps most people fall into:
+
+### Idle EC2 instances / leftover volumes
+
+Free Tier covers *compute hours*, but **EBS storage still costs money** if you leave volumes behind.
+
+### Data transfer, snapshots, cross-region mistakes
+
+Free Tier doesn’t usually cover:
+
+- inter-region traffic  
+- snapshot storage  
+- elastic IPs not attached to running instances
+
+### Multi-region deployments
+
+Free Tier quotas apply per account, *not* per region. If you deploy in two regions, you burn double the hours.
+
+### CloudWatch logs piling up
+
+Logs accumulate endlessly unless you set retention rules.
+
+### Free doesn’t mean forever
+
+Once your 12 months run out, you pay normal pricing across the board.
+
+If you don’t monitor, “free” can turn into a surprise $50–200 bill very quickly.
+
+---
+
+## Actual Cost Breakdown (Hourly, Daily, Weekly, Monthly, Yearly)
+
+Below are realistic numbers based on common AWS services.
+
+### EC2 t2.micro or t3.micro (after free tier ends)
+
+On-demand cost in us-east-1 is around **$0.0116/hr**.
+
+- Hourly: ~$0.0116  
+- Daily: ~$0.28  
+- Weekly: ~$1.96  
+- Monthly: ~$8.40  
+- Year: ~$102
+
+Two forgotten micro instances? Double it: ~$200/year.
+
+### S3 Standard Storage (after free tier 5GB)
+
+S3 Standard costs about **$0.023/GB/mo**.
+
+Example: 50GB stored:
+
+- 50 × $0.023 = **$1.15/month**  
+- Yearly: $13.80
+
+But PUT/GET requests and transfer can add to that.
+
+### CloudWatch Logs
+
+CloudWatch has free ingestion + free Live Tail minutes, but if you exceed:
+
+Example: 18,200 billable minutes  
+→ 18,200 × $0.01 = **$182/month**  
+just for log viewing.
+
+This happens fast if you don’t set retention.
+
+---
+
+## Putting It All Together
+
+If you’re disciplined:
+
+- **$0/month** is totally realistic.
+
+If you exceed limits a little:
+
+- **$10–$20/month**.
+
+If you forget resources:
+
+- **$50–$200/month**.
+
+If you forget *everything* for a year:
+
+- **$600–$2,400** depending on what’s running.
+
+---
+
+## My Workflow for Keeping AWS Actually Free
+
+This is how I avoid bills:
+
+- Launch the minimum necessary resources  
+- Use micro instances only  
+- Prefer S3 + CloudFront static hosting  
+- Turn off or delete unused resources immediately  
+- Add deletion-lifecycle policies for logs  
+- Add AWS Budgets alerts (I set $5/month alarms)  
+- Use tools like Lambda and DynamoDB which have Always Free quotas  
+- Tag resources so I know what everything is for
+
+The best rule I use is simple:  
+**If I’m not actively using it, I delete it.**
+
+---
+
+## What Changes After the Free Tier Ends
+
+After the 12-month period:
+
+- EC2 charges fully  
+- RDS charges fully  
+- S3 beyond Always Free charges fully  
+- CloudWatch logs charge based on storage and ingestion  
+- AWS will not shut down anything automatically
+
+You graduate from the sandbox into pay-as-you-go. It’s still powerful. It’s just not free anymore.
+
+---
+
+## Final Thoughts
+
+Launching on AWS for free is absolutely possible — I’ve done it countless times. But you need to treat “free” as a strategic window, not a permanent state. The moment you stop watching usage, you can rack up very real bills.
+
+For prototypes, portfolios, student work, and small tools: AWS Free Tier is perfect.  
+For production without cost controls: it becomes expensive fast.
+
+Stay curious. Watch your resources. And always check your bill before AWS checks it for you.
+
+— **Bradley Matera**  
+(bradleysgatsbyblog.netlify.app)

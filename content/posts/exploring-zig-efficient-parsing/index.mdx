@@ -99,6 +99,35 @@ const vertices = new Float32Array(buffer, 4, count * 3);
 - Better logging and benchmark automation (currently rely on scripts + manual recording).  
 - Document a step-by-step tutorial so other Zig learners can follow along.
 
+## Repro checklist
+
+- Install Zig 0.12.x.  
+- Run `zig test src/parser.zig` to confirm the parsing core is green.  
+- Execute `zig build run -- model=obj/teapot.obj --out=web/public/model.bin` to produce the binary.  
+- Open `web/preview.html` and watch PixiJS render the model. If it fails, check endianness and buffer lengths first.  
+- Flip allocators in `main.zig` (Arena vs GPA) and rerun the benchmarks to see the trade-offs.
+
+## Bugs I hit (and fixed)
+
+- **Leaking on parse failure:** Missing `errdefer` led to leftover allocations when a face line was malformed. Fixed by scoping temporary buffers and using GPA leak detection.  
+- **Silent data corruption:** Misaligned struct packing between Zig and JS caused skewed meshes. Added explicit byte sizes and tests that diff exported binaries.  
+- **Line length overflows:** Extremely long OBJ lines crashed the parser. I now clamp lines, surface a clear error, and suggest splitting assets.  
+- **PixiJS mismatch:** I once flipped winding order; the model rendered inside-out. Added a small visual check to the preview and a note in the README.
+
+## How I’d explain this in interviews
+
+- **Why Zig:** Needed explicit memory control and fast feedback to learn low-level parsing; JS hid too much.  
+- **Safety nets:** Tests + fuzz cases + allocator guards are my “seatbelts” while experimenting.  
+- **Interop clarity:** Typed arrays + explicit endianness beats JSON for large meshes; it’s leaner and easier to reason about.  
+- **Scope honesty:** This is a learning tool—no production promises. I’m transparent about missing MTL/normal support.
+
+## Stretch goals and open questions
+
+- Evaluate a streaming WebAssembly build so parsing happens client-side for big models.  
+- Try a rayon-style parallel parse (once Zig’s async story stabilizes) to see if multi-core helps.  
+- Add a metrics hook to log peak allocations per file size.  
+- Write a mini guide: “From JS parser to Zig” for others making the same jump.
+
 ## Links
 
 - Repo: [https://github.com/BradleyMatera/obj-parser](https://github.com/BradleyMatera/obj-parser)  

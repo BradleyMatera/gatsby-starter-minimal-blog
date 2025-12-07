@@ -60,6 +60,27 @@ theme: "Front-End & Full-Stack"
 - Mobile end-to-end tests are limited—need to add Playwright mobile viewports.  
 - Observability for Playwright runs is basic (GitHub logs). Would like better dashboards.
 
+## Failures that shaped this pyramid
+
+- **Mocked everything, missed reality:** Early tests mocked fetch/API too much; bugs slipped. Swapped to MSW and added integration tests with real DBs to catch schema issues.  
+- **Flaky E2E from shared data:** Tests raced on the same DB rows. Fixed by seeding per-test DBs and resetting between runs.  
+- **Silent contract breaks:** Frontend shipped a new field, backend choked. Added OpenAPI schema validation and manual Pact runs before merges.  
+- **Visual regressions:** CSS tweak broke dark mode. Percy (pilot) caught it; I now run targeted visual snapshots for header/nav.
+
+## How I explain this to interviewers
+
+- **Scope clarity:** I map each test type to risk it mitigates (unit = logic, integration = wiring, e2e = user trust).  
+- **Automation philosophy:** Start small (unit/comp), add integration where it hurts, reserve e2e for top flows.  
+- **Honesty:** No production on-call; my testing habits come from student projects and labs. I state the gaps and the roadmap.  
+- **Tool choices:** GitHub Actions + Playwright + MSW because they’re fast, cheap, and easy to share with classmates.
+
+## Next experiments
+
+- Add axe to CI for accessibility checks on key pages.  
+- Automate contract tests nightly with PactFlow or a lightweight schema diff step.  
+- Run Playwright in mobile viewports + low-bandwidth mode to simulate real users.  
+- Publish a “testing starter” template repo with MSW + Playwright + contract example.
+
 ## Links
 
 - Testing templates: [https://github.com/BradleyMatera/testing-templates](https://github.com/BradleyMatera/testing-templates)  

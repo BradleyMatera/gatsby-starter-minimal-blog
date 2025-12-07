@@ -93,6 +93,35 @@ jobs:
 - Write Jest tests for fetch logic and use Playwright for end-to-end flows.  
 - Document rate-limit handling clearly on the site (currently only in README).
 
+## Repro steps and smoke test
+
+- `npm install && npm run dev` to run locally.  
+- Hit search for “pikachu” and “charizard”; confirm stats + TCG art load and errors are absent.  
+- Toggle dark mode (prefers-color-scheme) to ensure contrast holds.  
+- Throttle network in DevTools to “Slow 3G” and verify skeletons + aria-live messages appear.  
+- Run `npm run lint && npm run build` before pushing; Pages deploys on main only.
+
+## Bugs I already hit
+
+- **Rate limits:** PokeAPI returned 429s; added backoff + user messaging instead of silent failures.  
+- **Layout shifts:** Missing width/height on sprites caused jank. Fixed with explicit dimensions and lazy loading.  
+- **Keyboard traps:** Early modal/search focus traps were missing; added focus management + escape handlers.  
+- **Caching lies:** sessionStorage served stale data after deploys. Added a `version` key to bust caches on build.
+
+## Interview angles
+
+- **Why plain JS:** Wanted to show fundamentals without a framework crutch; also keeps bundle tiny for Pages.  
+- **Accessibility discipline:** Lighthouse + manual keyboard checks every deploy; aria-live for status messages.  
+- **Honesty:** No auth, no monetization, no Gen 2+. I state that up front.  
+- **Testing plan:** Unit tests for fetch/caching; Playwright for search, detail, and error flows.
+
+## Stretch ideas
+
+- Add a “compare two Pokémon” view with charted stats.  
+- Ship an offline-first mode with a service worker + IndexedDB cache.  
+- Surface API status badges so users know if PokeAPI/TCG is throttling.  
+- Publish a short Loom walkthrough for non-technical viewers (kids, parents) to enjoy the site.
+
 ## Links
 
 - Live demo: [https://bradleymatera.github.io/Interactive-Pokedex/](https://bradleymatera.github.io/Interactive-Pokedex/)  

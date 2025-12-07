@@ -56,6 +56,34 @@ Every job application gets both: PDF in the ATS, SPA link in the cover letter or
 - **Share proof.** Every claim links to a repo, PR, or log. If the link breaks, the claim goes with it.  
 - **Listen to feedback.** When hiring managers say “I couldn’t find X,” I fix it and note the change in `honesty.md`.
 
+## Real recruiter feedback (and what I did)
+
+- “Couldn’t find your PDF.” → Added a red “Download PDF résumé” button in the hero and footer.  
+- “Too much JS; page felt heavy.” → Built the semantic HTML/CSS fallback and linked it in the nav.  
+- “Which projects are real vs. labs?” → Added “Reality snapshot” + AI disclosure atop every case study.  
+- “Links 404 on mobile VPN.” → Prefixed all internal links correctly and added status badges to demos (up/down/slow).
+
+## How I measure if the site is working
+
+- **Analytics:** Track scroll depth and exit rates. If a project card has high exits, I rewrite or move it lower.  
+- **Speed:** Lighthouse scores stay in the high 90s; bundle size monitored on each deploy.  
+- **Engagement:** Count clicks on “Contact” + PDF downloads after each update to see if changes help.  
+- **Honesty velocity:** `honesty.md` updates at least monthly; if it’s stale, I question whether the site is.
+
+## Playbook before a job application
+
+- Update résumé date, regenerate PDF, and verify the link.  
+- Ensure top 3 projects have working demos + screenshots + proof links.  
+- Add a short “Why I’m applying” blurb to the homepage (temporary, removed after the cycle).  
+- Check dark mode readability and mobile nav; recruiters often open on phones.
+
+## Open questions I’m still testing
+
+- Whether to add a 60-second Loom walkthrough or if that adds friction.  
+- How much animation is acceptable before it distracts from content.  
+- Best way to surface “what changed” without making the homepage feel like a changelog.  
+- Whether to auto-detect ATS bots and serve the semantic version first.
+
 ## References
 
 [^visualcv]: VisualCV, “Should You Make an Interactive Resume?,” accessed May 2025, https://www.visualcv.com/blog/interactive-resume/  

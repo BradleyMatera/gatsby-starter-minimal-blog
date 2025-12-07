@@ -15,6 +15,17 @@ theme: "Cloud & DevOps"
 - 12-week program split between **mornings** (Cloud Practitioner/SAA coursework, architecture reviews) and **afternoons** (ticket simulations, hands-on labs, runbook writing).  
 - I rotated through EC2, S3, IAM, networking, and observability labs; each lab ended with a quiz + short retro shared with a senior engineer.  
 - Capstone was a media metadata pipeline built entirely in AWS sandbox accounts: S3 → Lambda (FFmpeg) → DynamoDB → API Gateway + static dashboard. No external users relied on it.
+- Tracked lab completion, quiz scores, ticket MTTR in simulations, and budget alerts; shipped weekly retros (“what broke / what I fixed / what I still don’t know”) to mentors.
+
+## Table of contents
+
+- [Weekly structure](#weekly-structure)  
+- [Troubleshooting drills I ran](#troubleshooting-drills-i-ran)  
+- [Capstone: media metadata pipeline](#capstone-media-metadata-pipeline-lab-only)  
+- [Tooling & automations I leaned on](#tooling--automations-i-leaned-on)  
+- [Proof & artifacts](#proof--artifacts)  
+- [Gaps & next steps](#gaps--next-steps)  
+- [Interview stories I reuse](#interview-stories-i-reuse)
 
 ## Weekly structure
 
@@ -27,6 +38,15 @@ theme: "Cloud & DevOps"
 | 9–10 | Capstone build | S3→Lambda→DynamoDB metadata pipeline, runbook, health checks, IaC template. |
 | 11 | Support simulations | Pager-style ticket drills, on-call shadowing, Amazon Leadership Principles reviews. |
 | 12 | Presentations + retros | Capstone demo, personal growth plan, peer feedback write-up. |
+
+## Troubleshooting drills I ran
+
+- **EC2 boot loops:** Collected console output, diffed failed user-data scripts, rebuilt launch templates. Lesson: user-data must be idempotent, and CloudWatch agent config drifts silently.  
+- **VPC reachability:** Reachability Analyzer + traceroute inside bastions; caught mismatched CIDRs and missing return routes during peering labs.  
+- **S3 “Access Denied” mazes:** IAM Policy Simulator + CloudTrail to isolate missing `Principal`/`Condition` in cross-account bucket policies; wrote a step-by-step playbook.  
+- **Cost spikes:** “Rapid response” checklist: Budgets alert → Cost Explorer by service → orphaned EBS + idle NAT → snapshot/terminate → tag everything.  
+- **CloudWatch log flooding:** Temporary retention policy, metric filters for error bursts, and alarms to detect runaway debug logs.  
+- **Bedrock prompt logging:** Prototyped logging wrapper to capture prompts/outputs for audit; documented privacy/legal considerations before any production use.
 
 ## Capstone: media metadata pipeline (lab-only)
 
@@ -80,6 +100,9 @@ Resources:
 - Replace API key auth with Cognito + IAM authorizers (on the backlog).  
 - Integration tests exist locally but CI/CD only runs lint + unit tests. Need to script `sam validate`, deploy to a staging stack, and capture screenshots automatically.  
 - FFmpeg binary came from a public layer; I owe the team a security review and pinning strategy before recommending it anywhere else.
+- Add signed URLs and lifecycle rules on the ingest bucket so lab data ages out automatically.  
+- Improve cold-starts: explore container-based Lambda vs. slimmer FFmpeg layer; measure impact and document trade-offs.  
+- Load test with varied media types and longer runs; current numbers are from small samples.
 
 ## Tooling & automations I leaned on
 
@@ -87,6 +110,9 @@ Resources:
 - **Cost visibility:** Budgets (email + Slack) triggered at 10% and 25% of the sandbox allowance, mostly to prove I could wire alerts.  
 - **Security workflows:** npm audit CI (both frontend + backend), OWASP ZAP baseline workflow for the Render-deployed intern app, Bedrock prompt logging experiments with Amazon Q.  
 - **AI helpers:** Amazon Q Business answered “where does this service log?” while ChatGPT helped translate dense docs into playbooks. Every AI-assisted snippet is annotated in the repo so it’s obvious what I edited.
+- **Observability kits:** Reusable CloudWatch dashboards for EC2/Lambda/RDS; alarm templates for errors, latency p90/p99, throttles.  
+- **Runbook template:** Intro → Symptoms → Timeline → Logs/metrics links → Fix → Prevent → Open questions. Kept consistency across labs.  
+- **Retro cadence:** Weekly self-review to mentors: “what worked, what broke, what I still don’t understand,” with ticket IDs and lab links.
 
 ## Proof & artifacts
 
@@ -94,6 +120,8 @@ Resources:
 - **Dashboards:** `dashboards/cloudwatch-dashboard.json` plus PNG exports in the repo.  
 - **Runbooks:** See `notes/runbooks/*.md`—each links to the relevant log groups, budgets, or config files.  
 - **Capstone deck:** PDF stored under `presentations/capstone-media-pipeline.pdf` with the architecture diagram, metrics, and TODO table.
+- **Quizzes/assessments:** Scores + notes per module; gaps highlighted (SCPs, advanced VPC patterns).  
+- **Ticket drills:** Stored transcripts/timelines from mock pager escalations; anonymized for interview use.
 
 ## Gaps & next steps
 
@@ -101,6 +129,15 @@ Resources:
 - Pair with a real AWS Support engineer on a shadow shift to see how customer tickets differ from our simulations.  
 - Harden IAM knowledge (resource-level permissions, SCPs, org design) beyond what the internship covered.  
 - Turn the FFmpeg Lambda into a public tutorial once I replace the binary layer and add full test coverage.
+- Build a “cost kill switch” pattern (Budgets → SNS → Lambda to tag/stop idle resources) to prove automated cleanup.  
+- Add synthetics against the capstone API (API Gateway → Lambda → DynamoDB) and publish results with dashboards.
+
+## Interview stories I reuse
+
+- **EC2 boot-loop fix:** Found bad user-data and broken CloudWatch agent; rewrote idempotently, added alarms—shows calm debugging under pressure.  
+- **S3 Access Denied:** Used Policy Simulator + CloudTrail to prove missing `Principal` condition; fixed cross-account access—demonstrates systematic troubleshooting.  
+- **Cost spike response:** Identified idle NAT + orphaned EBS, tagged/terminated, set budgets/alerts—ownership + cost awareness.  
+- **Capstone cold-starts:** Measured FFmpeg cold-start impact, proposed container-based Lambda + signed URLs—trade-off thinking and next steps.
 
 ## References
 

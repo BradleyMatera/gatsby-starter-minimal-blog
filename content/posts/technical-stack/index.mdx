@@ -72,6 +72,34 @@ theme: "Front-End & Full-Stack"
 - Harden Car-Match backend (Mongo Atlas, Render, Ops docs) so it remains honest even when folks poke at it.  
 - Publish my GitHub Actions templates + Notion trackers so others can reuse them.
 
+## How I keep this stack honest
+
+- **Evidence per tool:** Each claim links to a repo or lab. If I say “EKS,” the README shows the Terraform and `kubectl` outputs.  
+- **Comfort tags:** “Comfortable,” “Learning,” or “Experimental” on each category. If I haven’t shipped code with it, I say so.  
+- **Changelog:** This page gets a date-stamped note in `honesty.md` when tools move between categories.  
+- **Drift checks:** Quarterly review: what did I actually use in the last 90 days? Anything unused gets demoted.
+
+## Gaps I’m not hiding
+
+- No production on-call, no multi-team coordination yet.  
+- Limited CS fundamentals (DS/algos) beyond interview prep.  
+- Observability is basic: `/healthz` + logs; no end-to-end tracing in my personal projects yet.  
+- Security reviews are self-driven; no formal pen-test experience.
+
+## Playbook for adopting a new tool
+
+- Start with a small lab + README.  
+- Add a “Reality snapshot” and “What’s missing” so I don’t oversell.  
+- Capture AI prompts + sources in `notes/` for transparency.  
+- Ship one example that proves value (e.g., policy-as-code gate in CI) before listing it here.
+
+## Interview narrative
+
+- **Breadth vs depth:** Broad exposure through labs and projects, deeper comfort in React/Node/AWS basics.  
+- **Approach:** Prototype quickly, document constraints, automate CI, add health checks, then iterate.  
+- **Honesty-first:** I explicitly label student-level work and free-tier limits.  
+- **Roadmap:** Actively studying AWS Developer Associate, adding tracing, and improving testing discipline.
+
 ## References
 
 [^typescript]: Microsoft, “TypeScript Handbook,” https://www.typescriptlang.org/docs/  

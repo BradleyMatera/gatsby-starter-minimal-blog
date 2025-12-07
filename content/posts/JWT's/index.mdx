@@ -66,6 +66,47 @@ theme: "Front-End & Full-Stack"
 - Explore gRPC-Web + Envoy because most browser clients I touch won’t support native gRPC.  
 - Build a tiny dashboard showing which token you’re currently holding; right now it’s just environment variables and terminal echoes.
 
+## How to replay this lab fast
+
+- Clone the repo, copy the starter artifacts into `ctf-tools/data/`, and run `python ctf_jwt_walkthrough.py --dump`.  
+- Run `scripts/set-token.sh data/bootstrap.jwt` to seed the first request, then use `grpc_client.py --route GetToken --out tokens/connect.jwt`.  
+- Keep `notes/terminal-log.md` open; it’s the source of truth for expected claims and headers at each hop.  
+- If anything fails, check the troubleshooting table above before touching code—the errors were 90% header formatting.
+
+## Ethics and safety
+
+- All secrets are lab-provided and scoped to the CTF. I don’t reuse them or share raw artifacts.  
+- Every AI-assisted suggestion that touched crypto or headers was cross-checked against docs; nothing ships on trust alone.  
+- This is not production auth. I disable `verify_aud` because the lab required it; I never do that on real systems.
+
+## What I would change next time
+
+- Build a CLI wrapper to avoid juggling Python + shell scripts.  
+- Add property-based tests for the decrypt/verify functions so malformed payloads are caught immediately.  
+- Record a Loom walkthrough to show the pace of requests; text alone hides the timing pressure.  
+- Swap grpcurl for a minimal Go client to compare error visibility and performance.
+
+## Interview angles
+
+- **Debugging under pressure:** Explain how I isolated each failure (headers, TLS, audience checks) with concrete evidence.  
+- **Security mindset:** Call out where I intentionally disabled validations for the lab and why that’s unacceptable elsewhere.  
+- **Automation:** Show how scripting the ladder reduced copy/paste errors—mirrors real-world “script the toil” thinking.  
+- **Communication:** Mention the `notes/terminal-log.md` as a stand-in for incident notes so others can replay the steps.
+
+## Checklists I keep close
+
+- Before decrypting: confirm key length, nonce length, and Base64 padding.  
+- Before sending tokens: lowercase headers, include `te: trailers`, and set `content-type: application/grpc`.  
+- Before trusting AI output: find the spec line; if missing, log it in `hallucinations.md`.  
+- After success: export artifacts, tag them by step, and write a retro while details are fresh.
+
+## Open questions
+
+- Best lightweight way to visualize token flow (sequence diagram vs live dashboard).  
+- Whether to refactor to Go/Rust for better perf and type safety without losing readability.  
+- How to share this as a workshop without leaking challenge details or encouraging bad security habits.  
+- If I should add JWT tampering scenarios (alg=none, key confusion) to make the lab more robust.
+
 ## References & further reading
 
 - RFC 7519, “JSON Web Token (JWT)” – [https://www.rfc-editor.org/rfc/rfc7519](https://www.rfc-editor.org/rfc/rfc7519)  

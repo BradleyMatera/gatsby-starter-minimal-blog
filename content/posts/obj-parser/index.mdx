@@ -90,6 +90,35 @@ const vertices = new Float32Array(buffer, 4, count * 3);
 - Interop requires discipline: typed arrays, struct alignment, and explicit endianness keep the web preview honest.  
 - Still missing: MTL parsing, WASM build for in-browser parsing, automated performance CI.
 
+## Repro steps (5-minute version)
+
+- Install Zig 0.12.x.  
+- Run `zig test src/parser.zig` to confirm parsing basics.  
+- Convert an OBJ: `zig build run -- model=examples/teapot.obj --out=web/public/model.bin`.  
+- Start the preview: `npm install && npm run preview` inside `web/` and load the page.  
+- Verify the render; if it looks inverted, check winding order and struct packing.
+
+## Things that broke and what fixed them
+
+- **Memory leaks on failure:** Missing `errdefer` in a couple of branches leaked allocations. Fixed and added a fuzz test that purposely feeds malformed OBJ lines.  
+- **Corrupted floats:** Misaligned struct packing between Zig and JS created NaN vertices. Added explicit size assertions and binary snapshot tests.  
+- **Buffer overflow risk:** Some OBJ files had extremely long lines. Added a 1024-byte clamp with a readable error telling users to split files.  
+- **Preview lies:** PixiJS silently ignored bad data. Added a small checksum + vertex count badge to the preview so I can detect mismatches.
+
+## How I frame this for interviews
+
+- It’s a learning lab: proves I can reason about memory, streaming, and browser interop.  
+- Safety nets: tests, fuzzing, and allocator diagnostics to catch mistakes early.  
+- Transparency: AI helped with scaffolding, but every line is annotated and cross-checked against the OBJ spec.  
+- Scope: Not production—no materials, no normals, no giant-scene guarantees.
+
+## Next experiments
+
+- WASM build to do parsing client-side and skip the binary download.  
+- Parallel parse attempt (once Zig’s async story stabilizes) to see if multi-core helps.  
+- Add metrics for peak memory and per-step timing in CI to catch regressions.  
+- Document a “Zig vs JS parser” case study with side-by-side code and perf charts.
+
 ## Links
 
 - Repo: [https://github.com/BradleyMatera/obj-parser](https://github.com/BradleyMatera/obj-parser)  

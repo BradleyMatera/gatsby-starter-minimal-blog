@@ -100,6 +100,40 @@ jobs:
 - Nightly `npm audit` + `pip-audit` workflows log findings; high severity issues block merging until resolved.  
 - Cost dashboards (Netlify, Render, Mongo Atlas, AWS Budgets) alert via email when spend crosses thresholds—even if it’s only a few dollars.
 
+## Real-world incidents and fixes
+
+- **Broken Netlify build (missing sharp deps):** Added `NETLIFY_USE_YARN` + `NODE_OPTIONS=--max_old_space_size=4096` and documented a manual retry script.  
+- **Render cold starts causing 500s:** Added a synthetic warm-up curl in the cron workflow and surfaced a “server is waking up” banner on the frontend to stay honest.  
+- **Stale cache on GitHub Pages:** A rogue service worker served old assets. I added a “clear SW” checklist to deploy notes and a `version.txt` endpoint to verify freshness.  
+- **ECR permission error:** OIDC role was missing `ecr:GetAuthorizationToken`; fixed the policy and wrote a README section on least privilege.
+
+## Security checks baked into CI
+
+- Dependency scanning with `npm audit`/`pip-audit`; Trivy for images.  
+- Secrets scanning via `gitleaks` on PRs.  
+- OIDC everywhere possible—no long-lived AWS keys.  
+- Deployment steps bail on unsigned commits or dirty trees in release branches.
+
+## Release cadence and communication
+
+- **PR stage:** Build + lint + unit tests. PR comment shows artifact size and lighthouse summary when applicable.  
+- **Main merges:** Auto-deploy to preview/stage. Slack gets the URL plus `/healthz` result.  
+- **Production:** Manual approval with a short checklist: migration status, smoke tests passed, roll-forward plan in place.  
+- **Post-release:** If metrics degrade or smoke fails, run rollback script and post a short retro in the repo.
+
+## Playbooks I keep on hand
+
+- **“Deploy is broken” flow:** Check runner logs → rerun with debug → verify secrets/env → isolate failing step.  
+- **“AWS creds failing” flow:** Confirm OIDC role trust policy, session duration, and GitHub environment.  
+- **“Static assets stale” flow:** Purge CDN, unregister service worker, check `version.txt`, then redeploy if needed.
+
+## How I’d scale this for a team
+
+- Split workflows by concern (lint/test/build vs deploy) with required approvals.  
+- Add ephemeral preview environments per PR (Netlify deploy previews + seeded test data).  
+- Introduce policy-as-code (Checkov or OPA) for Terraform/CloudFormation before apply.  
+- Rotate secrets automatically and surface drift via nightly checks.
+
 ## To-do list
 
 - Add Playwright-based synthetic tests that run automatically after deploys.  
