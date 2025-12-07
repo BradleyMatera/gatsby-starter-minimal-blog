@@ -10,8 +10,17 @@ type LinkProps = {
 
 const Link = ({ href, to, children, target, rel, className, ...rest }: LinkProps) => {
   const finalHref = href ?? to ?? "#";
-  const isInternal = /^\/(?!\/)/.test(finalHref);
+  const isHash = finalHref.startsWith("#");
+  const isInternal = isHash || /^\/(?!\/)/.test(finalHref);
+
   if (isInternal) {
+    if (isHash) {
+      return (
+        <a href={finalHref} className={className} {...rest}>
+          {children}
+        </a>
+      );
+    }
     return (
       <GatsbyLink to={finalHref} className={className} {...rest}>
         {children}

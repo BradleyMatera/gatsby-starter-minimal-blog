@@ -38,7 +38,26 @@ type TocItem = {
   level: number;
 };
 
-const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({ data: { post }, children }) => {
+const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({ data, children }) => {
+  const post = data?.post;
+  if (!post) {
+    return (
+      <Layout>
+        <Section className="post-entry" disableReveal>
+          <article className="surface-card">
+            <header sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+              <span className="eyebrow">Blog post</span>
+              <Heading as="h1" className="section-title" sx={{ mb: 0 }}>
+                Post not found
+              </Heading>
+            </header>
+            <p>Sorry, this post could not be loaded. Please check the URL.</p>
+          </article>
+        </Section>
+      </Layout>
+    );
+  }
+
   const [tocItems, setTocItems] = React.useState<TocItem[]>([]);
 
   React.useEffect(() => {
@@ -106,12 +125,18 @@ const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({ data:
 
 export default Post;
 
-export const Head: HeadFC<MBPostProps> = ({ data: { post } }) => (
-  <Seo
-    title={post.title}
-    description={post.description ? post.description : post.excerpt}
-    image={post.banner ? post.banner?.childImageSharp?.resize?.src : undefined}
-    pathname={post.slug}
-    canonicalUrl={post.canonicalUrl}
-  />
-);
+export const Head: HeadFC<MBPostProps> = ({ data }) => {
+  const post = data?.post;
+  if (!post) {
+    return <Seo title="Post not found" description="This post could not be loaded." />;
+  }
+  return (
+    <Seo
+      title={post.title}
+      description={post.description ? post.description : post.excerpt}
+      image={post.banner ? post.banner?.childImageSharp?.resize?.src : undefined}
+      pathname={post.slug}
+      canonicalUrl={post.canonicalUrl}
+    />
+  );
+};
