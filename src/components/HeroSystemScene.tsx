@@ -16,7 +16,9 @@ const HeroSystemScene: React.FC = () => (
       </div>
       <div className="hero-system__copy">
         <span className="hero-system__eyebrow">Currently practicing</span>
-        Early-career Web Dev (B.S. Oct 2025) · React/Express demos · Learning AWS + AI-assisted workflows
+        <p className="hero-system__tagline">
+          Early-career Web Dev (B.S. Oct 2025) · React/Express demos · Learning AWS + AI-assisted workflows
+        </p>
       </div>
     </div>
   </section>

@@ -1529,8 +1529,8 @@ img {
 }
 
 .hero-system__photo {
-  width: clamp(220px, 24vw, 320px);
-  aspect-ratio: 4 / 5;
+  width: clamp(160px, 22vw, 240px);
+  aspect-ratio: 3 / 4;
   border-radius: 16px;
   overflow: hidden;
   border: 1px solid var(--color-border);
@@ -1548,9 +1548,14 @@ img {
 .hero-system__copy {
   font-family: "Space Grotesk Variable", "Montserrat", "Inter", sans-serif;
   font-weight: 600;
-  font-size: clamp(1rem, 2vw, 1.4rem);
-  line-height: 1.4;
+  font-size: clamp(0.95rem, 1.75vw, 1.2rem);
+  line-height: 1.35;
   color: var(--color-text);
+  max-width: 520px;
+}
+
+.hero-system__tagline {
+  margin: 0.25rem 0 0;
 }
 
 .hero-system__title {
