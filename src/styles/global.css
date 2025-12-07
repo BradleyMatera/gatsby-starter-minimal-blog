@@ -2251,29 +2251,32 @@ img {
 .theme-toggle {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.6rem 0.9rem;
-  border-radius: 999px;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 50%;
   border: 1px solid var(--color-border);
   background: var(--color-surface);
   color: var(--color-text);
   cursor: pointer;
-  font-weight: 700;
-  font-size: 0.9rem;
-  box-shadow: 0 4px 12px var(--color-shadow);
-  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  font-weight: 600;
+  font-size: 0.85rem;
+  box-shadow: none;
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
 }
 
 .theme-toggle:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 18px var(--color-shadow);
   border-color: var(--color-border-strong);
 }
 
 .theme-toggle__icon {
   display: inline-flex;
-  width: 1.1rem;
-  height: 1.1rem;
+  width: 1.05rem;
+  height: 1.05rem;
+  align-items: center;
+  justify-content: center;
 }
 
 .tiny-dot-cluster span {

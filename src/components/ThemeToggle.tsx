@@ -35,7 +35,6 @@ const ThemeToggle: React.FC = () => {
       <span className="theme-toggle__icon" aria-hidden="true">
         {theme === "light" ? "🌞" : "🌜"}
       </span>
-      <span>{theme === "light" ? "Light" : "Dark"} mode</span>
     </button>
   );
 };
