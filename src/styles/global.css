@@ -1529,8 +1529,10 @@ img {
 }
 
 .hero-system__photo {
-  width: clamp(160px, 22vw, 240px);
+  width: clamp(150px, 20vw, 220px);
   aspect-ratio: 3 / 4;
+  min-height: 180px;
+  max-height: 260px;
   border-radius: 16px;
   overflow: hidden;
   border: 1px solid var(--color-border);
