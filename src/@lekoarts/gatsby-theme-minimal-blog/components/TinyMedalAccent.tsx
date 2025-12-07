@@ -1,102 +1,22 @@
 // src/@lekoarts/gatsby-theme-minimal-blog/components/TinyMedalAccent.tsx
-// Minimal three.js accent: animated medal for background item.
+// Static medal accent to reduce runtime GPU work.
 
-import React, { useRef, useEffect } from "react";
-import * as THREE from "three";
+import React from "react";
 
-const ACCENT_GOLD = "#ffd700";
-const BG_COLOR = "#fff";
-
-const TinyMedalAccent: React.FC = () => {
-  const mountRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!mountRef.current) {
-      return;
-    }
-
-    const mountNode = mountRef.current;
-    let frameId: number;
-    let renderer: THREE.WebGLRenderer;
-
-    try {
-      const width = 32;
-      const height = 32;
-
-      if (mountNode.clientWidth === 0 || mountNode.clientHeight === 0) {
-        console.warn("TinyMedalAccent: mount node has zero dimensions.");
-        return;
-      }
-
-      const scene = new THREE.Scene();
-      scene.background = new THREE.Color(BG_COLOR);
-
-      const camera = new THREE.OrthographicCamera(0, width, height, 0, -10, 10);
-
-      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: "high-performance" });
-      renderer.setSize(width, height);
-      renderer.setPixelRatio(window.devicePixelRatio);
-      mountNode.appendChild(renderer.domElement);
-
-      const medalGeo = new THREE.CircleGeometry(10, 24);
-      const medalMat = new THREE.MeshBasicMaterial({ color: ACCENT_GOLD });
-      const medal = new THREE.Mesh(medalGeo, medalMat);
-      medal.position.set(16, 16, 0);
-      scene.add(medal);
-
-      const ribbonGeo = new THREE.BoxGeometry(4, 10, 1);
-      const ribbonMat = new THREE.MeshBasicMaterial({ color: "#e23b2d" });
-      const ribbon = new THREE.Mesh(ribbonGeo, ribbonMat);
-      ribbon.position.set(16, 26, 0);
-      scene.add(ribbon);
-
-      let time = 0;
-      const animate = () => {
-        time += 0.016;
-        medal.position.y = 16 + Math.sin(time * 1.2) * 1.2;
-        ribbon.position.y = 26 + Math.cos(time * 1.4) * 1.1;
-        renderer.render(scene, camera);
-        frameId = requestAnimationFrame(animate);
-      };
-      animate();
-
-    } catch (error) {
-      console.error("Error initializing TinyMedalAccent scene:", error);
-    }
-
-    return () => {
-      if (frameId) {
-        cancelAnimationFrame(frameId);
-      }
-      if (renderer) {
-        if (renderer.domElement.parentNode === mountNode) {
-          mountNode.removeChild(renderer.domElement);
-        }
-        renderer.dispose();
-      }
-    };
-  }, []);
-
-  return (
-    <div
-      style={{
-        width: "32px",
-        height: "32px",
-        display: "inline-flex",
-        alignItems: "center",
-        justifyContent: "center",
-        verticalAlign: "middle",
-        background: "#f7f7f7",
-        borderRadius: "6px",
-        boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
-        border: "1px solid #ececec",
-        overflow: "hidden",
-        marginRight: "0.5rem"
-      }}
-    >
-      <div ref={mountRef} style={{ width: "100%", height: "100%" }} />
-    </div>
-  );
-};
+const TinyMedalAccent: React.FC = () => (
+  <span className="accent-tile accent-tile--gold" aria-hidden="true">
+    <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+      <circle cx="12" cy="12" r="6.5" fill="currentColor" opacity="0.9" />
+      <path
+        d="m9 3.5 3 3 3-3M9 9l3 3 3-3"
+        fill="none"
+        stroke="#e23b2d"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  </span>
+);
 
 export default TinyMedalAccent;
