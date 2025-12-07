@@ -3,115 +3,145 @@ title: "Full Sail University: How Formal Training Shaped My Approach"
 date: "2025-05-26"
 slug: "/full-sail-university-web-development"
 tags: ["Education", "Career", "Process"]
-description: "What the Web Development B.S. program actually looked like for me—cadence, projects, and the habits I carried forward."
+description: "What the Web Development B.S. program actually looked like for me—habits, chaos, structure, real gaps, and how I turned all of it into my workflow today."
 theme: "Career"
 ---
 
 > **Context:** Finished Full Sail’s Web Development B.S. in October 2025 (GPA ~3.8). Still looking for my first paid SWE role.  
-> **AI assist:** ChatGPT reorganized my course notes/interview stories; I cross-checked everything with syllabi and transcripts.  
+> **AI assist:** ChatGPT helped reorganize my notes; I cross-checked with syllabi/transcripts.  
 > **Status:** Honest recap, not an attempt to inflate coursework into production experience.
+
+![Fast-paced sprints](https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXZkbzQ0NzVtc2hlMjFxeHppb2ZiNDlicmtpYW5tcTY0azFhbmUxayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohs7LtH9LX6YlWx68/giphy.gif)
 
 ## Program snapshot
 
-- **Format:** 4-week sprints (one course at a time). Each sprint = lectures, labs, critiques, and a final defence.  
-- **Schedule:** ~25 hrs/week between live sessions, labs, and group projects.  
-- **Deliverables:** Every course demanded a functioning project, code review, and reflection. Documentation usually counted for 20–30% of the grade.  
-- **Tracking:** I kept a Notion database of courses, instructors, rubrics, and final artifacts (links included below).
+Full Sail’s Web Development program moves fast. Everything is built around four-week sprints—controlled chaos with a deadline. You focus on **one course at a time**, but each month hits like its own bootcamp.
 
-## Courses that mattered most (to me)
+- **Format:** 4-week sprints with rotating instructors and rubrics.  
+- **Schedule:** Workload shifted constantly—some weeks light, others unexpectedly heavy.  
+- **Deliverables:** Working build, documentation, rubric checklist, and a retro or reflection.  
+- **Grading weight:** Docs/presentation quality mattered almost as much as code.  
 
-| Course | Key deliverable | Skills reinforced |
+## Course areas that shaped me the most
+
+Full Sail’s titles shifted over time and instructors ran things differently, so grouping by area is more honest than listing exact course names.
+
+| Course area | Key deliverable | Skills reinforced |
 | --- | --- | --- |
-| Project & Portfolio I–IV | Progressive full-stack app (React + Node + Mongo/Postgres) | Iterative design reviews, roadmap planning, demoing in front of “clients.” |
-| Server-Side Languages | Node/PHP REST APIs with templating + session management | Routing, auth basics, error handling, code reviews. |
-| Cloud Application Development | Deploy microservices to AWS (Elastic Beanstalk, RDS, CloudWatch) | Cost modelling, IaC, logging, runbook writing. |
-| Server Management & Configuration | Linux hardening lab (bash scripts, Nginx, CIS benchmarks) | Ops hygiene, automation, and documentation. |
-| Human-Computer Interaction | Accessibility audits, usability testing, persona-driven design | UX empathy, WCAG basics, communication with non-dev stakeholders. |
+| Full-stack project cycles (Project & Portfolio) | Building and iterating on a React + Node app each month | Iteration, planning, accepting critique, demoing unfinished work with confidence |
+| Server-side development | REST APIs, templating, session-based auth in Node/PHP | Routing, state handling, error patterns, readable backend structure |
+| Cloud and application deployment | AWS Academy labs with services like Elastic Beanstalk, RDS, CloudWatch (sandbox depth) | Basic cloud mental models, logging, monitoring, cost awareness, rollback habits |
+| Systems and configuration basics | Linux permissions, basic Nginx concepts, small automation scripts | Ops hygiene, troubleshooting steps, repeatable checklists, scripting discipline |
+| Human-Computer Interaction & UX | Usability testing, accessibility checks, persona-driven design exercises | UX empathy, accessibility awareness, clearer communication with non-technical people |
 
 ## Signature projects & evidence
 
-### Capstone: Event Ops Platform
-- **Stack:** React, Node.js/Express, PostgreSQL, AWS Elastic Beanstalk.  
-- **My role:** Backend lead (JWT auth, analytics dashboards, deployment scripts), plus documentation + presentation.  
-- **Reality:** Class-level MVP. CI/CD pipelines and IaC templates exist, but it’s not production. Repo + deck live in `projects/event-ops`.
+### Capstone: Car-Match (personal learning project)
+- **Stack:** React, Node.js/Express, MongoDB Atlas, Render (backend), GitHub Pages (frontend)  
+- **Reality:** End-to-end matching prototype I built myself. Handles auth, profiles, uploads, scoring, and real-time updates once the backend wakes up. Runs on free-tier infra, so I classify it as a learning project—not production.  
+- Repo + demo: https://github.com/BradleyMatera/car-match
 
-### Server Management lab
-- Automated EC2 provisioning via CloudFormation, configured blue/green deployments, and wrote a CIS benchmark checklist.  
-- Labs ran in AWS Academy accounts; every instruction had to be codified in a runbook. I reused that format for my personal projects.
+![Debugging late nights](https://media.giphy.com/media/3oEduSbSGpGaRX2Vri/giphy.gif)
 
-### Communication drills
-- Weekly stand-ups, peer reviews, and “client” presentations (professors role-play stake-holders). That cadence is why my portfolio updates read like status reports.
+### Other projects that shaped my learning
+- **Interactive Pokédex:** API-driven search, cards, error states, responsive layout. Demo: https://bradleymatera.github.io/Interactive-Pokedex/  
+- **AnimalSounds:** Small UI/UX experiment for sound triggers and mobile-first interaction. Demo: https://bradleymatera.github.io/AnimalSounds/  
+- **Professional Portfolio Website:** Hand-built portfolio (no template). Demo: https://bradleymatera.github.io/Professional-Portfolio-Website/  
+- **CheeseMath (Jest Tests):** Tiny math utility to learn unit testing/mocking/CI. Demo: https://bradleymatera.github.io/CheeseMath-Jest-Tests/  
+- **Triangle WebGPU Demo:** First graphics experiment; learned the pipeline and debugging GPU errors. Demo: https://bradleymatera.github.io/TriangleDemo/  
+- **Ethics Engine Frontend Demo:** Rule-based decision UI prototype. Demo: https://bradleymatera.github.io/EthicsFrontEndDemo/
+
+### Server Management Lab
+Covered Linux hardening, Nginx basics, and bash automation. I didn’t build full AWS pipelines there; most of my ops habits came later from personal projects and the AWS internship.
+
+### Communication touchpoints
+This was a remote program. I didn’t do weekly stand-ups with classmates. Most “comms practice” came from Tech Talk (an after-class group) and occasional Q&A with instructors. The status-report style in my repos is a personal habit, not from formal stand-ups.
 
 ## Habits I carried forward
 
-- **Sprint rhythm:** Intake → prototype → critique → iterate → deliver. Matches how I manage personal projects now.  
-- **Docs before code:** Diagrams, test evidence, and deployment notes were graded artifacts. I still require them before calling a project “done.”  
-- **Feedback resilience:** Professors often pivoted requirements mid-sprint. Learning to absorb that calmly helps when recruiters or mentors redirect my work.  
-- **Honesty logs:** My “honesty.md” idea started as a course reflection requirement.
+- **Sprint rhythm:** Intake → prototype → critique → iterate → deliver.  
+- **Docs before code:** Clarity, diagrams, tests, deploy notes, retro—no “done” without docs.  
+- **Feedback resilience:** Frequent scope pivots desensitized me to change.  
+- **Honesty logs:** Every project tracks what’s done, broken, and next.
+
+![Cloud labs](https://media.giphy.com/media/l46Cy1rHbQ92uuLXa/giphy.gif)
 
 ## Beyond coursework
 
-- **AWS Cloud Support internship:** The school projects gave me enough foundation to survive AWS labs, but the internship taught me real troubleshooting cadence.  
-- **Community involvement:** Tech Talk Club, CIRIS documentation contributions, and open-source PRs kept me collaborating outside the classroom.  
-- **Personal experiments:** Triangle Shader Lab (WebGPU) and OBJ Parser (Zig) filled the gaps that the curriculum couldn’t cover.
+- **AWS Cloud Support Internship:** Concepts at school; reality at AWS—log hunting, broken infra diagnosis under time pressure.  
+- **Community involvement:** CIRIS docs, Tech Talk Club, alumni Q&A, small OSS fixes.  
+- **Personal experiments:** WebGPU shaders and Zig parsers filled curriculum gaps and showed where academics stop and the real world begins.
 
 ## What the program didn’t cover (well)
 
-- Deep CS topics (algorithms, data structures beyond the basics). I supplement with LeetCode + freeCodeCamp.  
-- Production-scale DevOps (multi-account AWS, Terraform at scale). I learn those through personal labs and the internship.  
-- Real on-call or stakeholder pressure. School simulated it, but the stakes were low. I’m transparent about that with recruiters.
+- Deep CS theory (algorithms, data structures beyond basics).  
+- Production-scale DevOps (multi-account AWS, Terraform modules, blast radius).  
+- Real on-call culture—no paging, SLAs, or incident triage.  
+- System design beyond small apps.  
+- I compensate with LeetCode, cloud labs, ACloudGuru, personal projects, and the internship.
 
 ## A week-in-the-life during a sprint
 
-- **Monday:** Intake lecture, skim the rubric, set a small proof of concept.  
-- **Tuesday:** Build the skeleton, push a WIP branch, record a Loom explainer to myself.  
-- **Wednesday:** Peer review and critique. Patch feedback the same night while notes are fresh.  
-- **Thursday:** Add tests, write the README/change log, rehearse the demo script.  
-- **Friday:** Submit and defend. Capture Q&A in a retro doc.  
-- **Weekend:** Light cleanup only—no last-minute cramming. Sleep beats sloppy commits.
+There was no single “normal week.” Each course had its own rhythm. The consistent anchors:
 
-## Mistakes I made (and fixed)
+- **Weekly project due Sunday**  
+- **If discussions existed:** initial post Thursday, two replies Sunday
 
-- **Overbuilding early:** I tried to gold-plate UI instead of nailing requirements. Fix: ship the rubric items first, then iterate.  
-- **Ignoring accessibility until the end:** Lost points on contrast and semantics. Fix: ran axe checks as part of the Thursday checklist.  
-- **Treating group work like solo projects:** I carried too much. Fix: delegated tasks by rubric section and enforced daily updates.  
-- **Skipping tests:** Early projects broke during demos. Fix: add minimal happy-path tests and screenshot evidence to every submission.
+Everything else moved. Some weeks felt like lightweight labs; others like a four-week hackathon squeezed into six days. Rubrics sometimes contradicted themselves. The real skill was adjusting, interpreting, and self-organizing.
+
+- **Early-week orientation:** Rubric drops, announcements, decoding expectations (every instructor interpreted rubrics differently).  
+- **Mid-week chaos (or silence):** Could be UI flows, backend logic, DB schema, AWS lab, accessibility review, or waiting for clarifications.  
+- **Late-week push (Thu–Sun):** Partners available, critiques posted, requirements clarified—prototypes became real builds.  
+- **Sunday crunch:** Final packaging, retros, last-second fixes, demos, screenshots, README tweaks. Most submissions landed in a 6–10 hour window before 11:59 PM ET.
+
+![Sunday crunch energy](https://media.giphy.com/media/3ohhwF34cGDoFFhRfy/giphy.gif)
+
+Bottom line: no ritual Monday–Friday—only adaptation, deadlines, and evidence. That forced me to build my own systems for consistency and delivery.
+
+## Mistakes I made (and fixed) — the real list
+
+- **Building the whole idea instead of the assignment:** I’d architect like it was a startup app and chase features no one graded. Fix: work backward from the rubric and ship faster.  
+- **Over-researching instead of starting:** I’d read docs, overthink tooling, and delay writing code. Fix: prototype early, even if rough—speed doubled once something existed.  
+- **Light Git/GitHub use early on:** Forgot to commit/branch and lost work. Fix: proper commits/branches became natural once projects grew (Car-Match).  
+- **Letting vague rubrics stall me:** I’d wait for clarification and lose days. Fix: make assumptions, document them, and move.  
+- **Underestimating “simple” tasks:** UI, APIs, deploys, and auth always took longer. Fix: pad time and treat “simple” as “unknown.”  
+- **Not testing on real devices:** Early projects broke on phones/tablets. Fix: test on mobile and use dev tools for responsiveness.  
+- **Deploying last-minute:** Sunday-night deploys failed (cold starts, cache, env vars). Fix: deploy early/often—never first deploy on Sunday.  
+- **Working solo by default:** In groups I’d carry too much. Fix: delegate by rubric items, set boundaries.  
+- **Not documenting decisions:** Forgetting my own reasoning led to rework. Fix: write decisions while coding.  
+- **Perfection before done:** Polished UI and rewrote working code needlessly. Fix: Done → Working → Better.  
+- **Avoiding “boring” topics:** Accessibility, testing, comments, error messages, validation. Fix: school and Car-Match forced me to care.  
+- **Trying to learn everything at once:** Spread too thin across front/back/cloud/devops/design. Fix: narrow focus to 1–2 skills per month and rotate.
+
+![Checklists and retros](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbzMxZXY1eG5oajBxNXJjcDVveXVuOXQ1MjhtYXA4Ym5ncGx1enFhZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QWkuGmMgphvmE/giphy.gif)
 
 ## How I present this to employers
 
-- I call the degree what it is: structured reps, not production.  
-- I pair each course with an artifact link (repo, rubric, or demo) and one sentence on what it proves.  
-- I’m explicit about gaps (no on-call, limited scale) and show the labs and projects I’m using to close them.
+- This degree gave me **reps**, not production.  
+- I pair each course with a link + one-sentence takeaway.  
+- I’m explicit about gaps and how I’m closing them.  
+- I show projects, runbooks, evidence, retros—not hype.
 
-## Advice to future Full Sail students (or anyone in an accelerated program)
+## Advice to future Full Sail students
 
-- Treat every rubric line as a user story; mark them done with evidence.  
-- Keep a living “parking lot” of stretch ideas so scope stays realistic.  
-- Record short Looms of your progress; they become instant presentation notes.  
-- Build one “anchor” project outside class to tie everything together—it keeps you from feeling like you’re starting over each month.
-
-## Interview stories pulled from school
-
-- **Handling shifting requirements:** In Project & Portfolio II, requirements changed mid-sprint. I re-scoped, documented the trade-offs, and delivered a smaller but stable feature. I retell that when asked about ambiguity.  
-- **Recovering from failure:** I once broke a deploy the night before a defence; spent an hour debugging, wrote a retro, and presented both the fix and the failure. It shows resilience and honesty.  
-- **Communicating with non-technical stakeholders:** HCI presentations forced me to explain decisions to “clients.” I use that muscle in internships and mentor calls.
+- Treat rubrics like user stories—finish with evidence.  
+- Keep a parking-lot list so you don’t chase stretch ideas mid-sprint.  
+- Record Looms weekly; they save presentations.  
+- Build one anchor project outside class to unify skills.
 
 ## Metrics and receipts
 
-- ~20 projects delivered across the program.  
-- Average turnaround per sprint: 4 weeks with at least two critique loops.  
-- GPA ~3.8, with highest marks on docs/presentations—evidence that communication is a strength.  
-- Post-grad: still doing weekly code reviews with peers to keep that cadence alive.
+- ~20 projects shipped.  
+- Every sprint: at least two critique loops.  
+- GPA ~3.8; strongest in docs/presentations.  
+- Post-grad: weekly code reviews with peers to keep cadence alive.
 
 ## Artifacts & links
 
-- Course archive (syllabi, rubrics, artifacts): [https://github.com/BradleyMatera/full-sail-archive](https://github.com/BradleyMatera/full-sail-archive)  
-- Capstone repo/deck: [https://github.com/BradleyMatera/event-ops-capstone](https://github.com/BradleyMatera/event-ops-capstone)  
-- Server management runbook: [https://github.com/BradleyMatera/server-management-labs](https://github.com/BradleyMatera/server-management-labs)  
-- Notes/retros: `notes/full-sail/*.md` (includes honest pros/cons for each course)
+Most portfolio/GitHub repos come from Full Sail work, but syllabi, rubrics, and runbooks are private or lost. If you want specific artifacts, I can share what I have privately.
 
 ## Key takeaways
 
-- Formal education gave me structure, accountability, and plenty of reps presenting/defending work.  
-- Side projects + internships are still required to stress-test those skills.  
-- I keep iterating on the honesty mindset Full Sail drilled into us: document what’s done, what’s broken, and what’s next—no fluff.
+- Formal education gave me structure, accountability, and reps presenting/defending work.  
+- Side projects and internships are essential to stress-test those skills.  
+- Full Sail drilled an honesty mindset: document what’s done, what’s broken, and what’s next—no fluff.
