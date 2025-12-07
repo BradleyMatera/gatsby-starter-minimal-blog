@@ -1485,7 +1485,7 @@ img {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   align-items: start;
-  min-height: auto;
+  min-height: clamp(440px, 75vh, 560px);
   gap: clamp(1.5rem, 3vw, 2.5rem);
   padding: clamp(1.25rem, 2vw, 2rem) clamp(1.5rem, 3vw, 2.2rem);
 }
@@ -1521,6 +1521,7 @@ img {
   padding: clamp(1rem, 2vw, 1.5rem) clamp(1.25rem, 3vw, 2.25rem);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
   overflow: hidden;
+  min-height: 260px;
 }
 
 .hero-system__card--compact {
@@ -1544,10 +1545,8 @@ img {
 }
 
 .hero-system__photo {
-  width: clamp(150px, 20vw, 220px);
-  aspect-ratio: 3 / 4;
-  min-height: 180px;
-  max-height: 260px;
+  width: 200px;
+  height: 240px;
   border-radius: 16px;
   overflow: hidden;
   border: 1px solid var(--color-border);
