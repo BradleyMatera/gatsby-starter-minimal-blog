@@ -112,17 +112,6 @@ const config: GatsbyConfig = {
       },
     },
     {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        trackingId: `G-V5RJ4522VW`, // Your Google Analytics Measurement ID
-        head: true, // Ensures the script is loaded in the <head> section
-        respectDNT: true,
-        pageTransitionDelay: 0,
-        enableWebVitalsTracking: true,
-        cookieFlags: `SameSite=None;Secure`,
-      },
-    },
-    {
       resolve: `gatsby-plugin-sharp`,
     },
     {
@@ -131,7 +120,6 @@ const config: GatsbyConfig = {
     {
       resolve: `gatsby-plugin-image`,
     },
-    `gatsby-plugin-offline`,
     shouldAnalyseBundle && {
       resolve: `gatsby-plugin-webpack-statoscope`,
       options: {

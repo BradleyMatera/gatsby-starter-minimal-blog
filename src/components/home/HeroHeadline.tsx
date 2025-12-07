@@ -1,18 +1,7 @@
 import * as React from "react";
-import { useScrollReveal } from "./useScrollReveal";
-
 const HeroHeadline = () => {
-  const { ref, revealed } = useScrollReveal(0, { initiallyVisible: true });
-
   return (
-    <div
-      ref={ref as React.RefObject<HTMLDivElement>}
-      style={{
-        opacity: revealed ? 1 : 0,
-        transform: revealed ? "translateY(0)" : "translateY(32px)",
-        transition: "opacity 0.7s cubic-bezier(.22,.9,.2,1), transform 0.7s cubic-bezier(.22,.9,.2,1)",
-      }}
-    >
+    <div>
       <span className="hero-highlight">Hi, my name is Bradley Matera.</span>
       <h1 className="hero-headline">Technologist building real experience in cloud, automation, and software development</h1>
       <p className="hero-description">

@@ -1528,6 +1528,21 @@ img {
   margin: 0 auto;
 }
 
+@media (max-width: 720px) {
+  .hero-system__card {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .hero-system__photo {
+    margin: 0 auto;
+  }
+
+  .hero-system__copy {
+    text-align: center;
+  }
+}
+
 .hero-system__photo {
   width: clamp(150px, 20vw, 220px);
   aspect-ratio: 3 / 4;
