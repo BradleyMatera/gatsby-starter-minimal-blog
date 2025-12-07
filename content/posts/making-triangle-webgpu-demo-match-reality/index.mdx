@@ -1,29 +1,23 @@
 ---
-title: "Making My Triangle WebGPU Demo Match What It Actually Is"
+title: "Setting Honest Expectations for My Triangle WebGPU Demo"
 date: "2025-11-14"
 slug: "/making-triangle-webgpu-demo-match-reality"
 tags: ["learning", "webdev", "nextjs", "webgpu"]
-description: "Cleaning up the copy so my WebGPU study lab reads like what it is—a simple triangle and cube playground, not a graphics engine."
+description: "Resetting the copy so the demo reads like what it is: an AI-assisted, small WebGPU triangle/cube playground—not a graphics engine or expert flex."
 theme: "Low-Level Experiments"
 ---
 
 # Making My Triangle WebGPU Demo Match What It Actually Is
 
-When I built my Triangle WebGPU Demo, I originally focused on getting the code working: the adapter, the device, the buffers, the shaders, the render loop. The technical side came together fast because I kept the code small and readable. But the site text did not really match the project. The UI looked polished enough that it made the whole thing seem like it was some kind of real graphics tool or early engine, and that was never the intention.
+When I built my Triangle WebGPU Demo, I mostly leaned on AI to scaffold the adapter/device/buffer/shader plumbing and I glued it together to learn. The UI ended up looking polished enough that it made the whole thing seem like a serious graphics tool or engine, which is not true. It’s just a tiny, AI-assisted study sandbox.
 
-This blog is just me correcting that. I updated the wording on the site so it reflects the actual purpose of the project and does not give off the wrong idea.
+This post is me correcting that. I’m updating the wording so it reflects the actual purpose: learn the basics, not showcase low-level skills I don’t have.
 
 ## Why the site needed clearer wording
 
-The code itself is extremely simple. It is a small setup built around two WebGPU samples that people use to learn the basics. But the layout, the clean UI components, and the animated demo switching made it look more complex than it really was.
+The code is extremely simple and AI-assisted. It’s a small setup built around two WebGPU samples (triangle + textured cube) to learn the basics. The clean UI and demo switching made it look more complex than it is.
 
-Someone landing on the site with no context might assume:
-
-- it is a lightweight rendering library  
-- it is an early GPU tool  
-- it is part of a larger graphics project
-
-None of that is true. It is just a study lab I built for myself so I could learn the fundamentals of WebGPU in a clean environment. The problem was not the code. It was the **presentation**.
+Someone landing with no context might assume it’s a lightweight rendering library or early GPU tool. None of that is true. It’s a study lab I tweaked with AI’s help so I could learn WebGPU fundamentals in a clean environment. The problem was the **presentation**, not hidden depth.
 
 ## What the project really is
 
@@ -34,28 +28,26 @@ Triangle Shader Lab is just a place where I can see the WebGPU pipeline without 
 
 That is the entire scope.
 
-The value of the project is not in features. It is in clarity. I kept the main logic in one file, kept the WGSL small, and let the UI show the output right next to the code it comes from. I wanted something where I could tweak a buffer or a shader and instantly see what changed.
+The value is clarity, not features. AI helped scaffold it; I kept the WGSL tiny and the UI shows output next to code so I can tweak and see changes immediately.
 
 ## What I changed
 
-I rewrote the site’s text so it explains what the project is and nothing more. The new wording stays factual and avoids implying anything bigger. It focuses on:
+I rewrote the site’s text so it explains what the project is and nothing more. It focuses on:
 
-- how the demo works  
-- how the render loop is structured  
-- what the code is for  
-- what the project helps you practice  
-- where the actual WebGPU learning happens
+- how the demo works (triangle + cube, AI-assisted scaffolding)  
+- how the render loop is structured at a high level  
+- what the code is for (learning, not production)  
+- what the project helps you practice (basic pipeline awareness)  
+- where the actual WebGPU learning happens (small, readable files)
 
 The UI still looks nice, but now the description matches the reality. If someone opens the site, they will know exactly what they are looking at.
 
 ## Why clarity matters
 
-I am still early in learning WebGPU, and having a simple, honest description of the project actually helps me learn better. When the wording is clean, it forces you to think about what you are actually building instead of what the UI accidentally makes it look like. It keeps you grounded and focused on the fundamentals.
+I’m still early in WebGPU, and having a simple, honest description helps me learn. Clear wording forces me to think about what I’m actually building instead of letting a polished UI imply skills I don’t have.
 
 This edit also made me appreciate how much wording affects perception. Even when the code is tiny, a polished layout can make people expect a whole framework behind it. I want the site to be approachable, not misleading.
 
 ## Final thoughts
 
-This project is not a graphics engine. It is not a beginner-friendly version of something bigger. It is a small WebGPU learning space that keeps the triangle and the cube right in front of you while you study the pipeline.
-
-Now the site’s text finally says that. Nothing inflated, nothing implied, and nothing outside the actual scope. Just a clean place to learn WebGPU the way I need to learn it.
+This project is not a graphics engine. It’s not proof of low-level expertise. It’s a small, AI-assisted WebGPU learning space that keeps the triangle and cube in front of you while you study the pipeline. Nothing inflated, nothing implied—just a clean place to learn the way I need to.
