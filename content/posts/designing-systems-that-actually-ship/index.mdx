@@ -1,0 +1,254 @@
+---
+title: Designing Systems That Actually Ship
+slug: "/designing-systems-that-actually-ship"
+date: 2025-11-06
+description: How I approach design-system thinking as an engineer, why I like structure, and what I’ve learned building reusable UI patterns across my portfolio, school projects, and small apps.
+tags:
+  - design-systems
+  - frontend
+  - ui-engineering
+  - accessibility
+  - css-architecture
+  - documentation
+theme: "Design Systems & UI Engineering"
+---
+
+> **Context:** This is how I approach reusable UI as an engineer who cares about consistency, accessibility, and developer experience, even on small teams and solo builds.  
+> **AI assist:** ChatGPT helps me outline docs and tighten wording. The code choices, constraints, and results come from my own builds, audits, and reviews.  
+> **Status:** 2025 playbook based on how I’ve been structuring my Gatsby portfolio and other React projects while I finish my degree and keep shipping.
+
+## TL;DR
+
+I try to build UI systems the same way I build production software: translate intent into predictable patterns, document decisions clearly, and keep accessibility and maintainability in mind. My stuff leans opinionated and a little over-structured because I want it to survive edits, handoffs, and future me forgetting why I did something.
+
+In practice, I lean on:
+- Tokens and primitives (mostly CSS custom properties + reusable components) to encode intent.
+- Documentation patterns (recipes, reality blocks, checklists) to prevent drift.
+- Accessibility defaults and lightweight audits so the system stays usable, not just good looking.
+
+---
+
+<a id="reality-snapshot"></a>
+## Reality snapshot
+
+- **Where this is applied:** My Gatsby portfolio/blog, school projects, and small React apps where I want consistent UI without rewriting styling rules on every page.
+- **Tooling I actually use:** Gatsby + React, MDX, TypeScript (when the project calls for it), ESLint/Prettier, Lighthouse, basic accessibility checks (keyboard navigation, headings/labels, contrast), and Playwright smoke tests on deploy previews for flow-heavy projects. Axe automation is still being rolled in.
+- **What I’m not claiming:** I’m not running a full enterprise design-system pipeline. I’m not consistently shipping versioned npm packages for a design system, and I’m not running visual regression testing as a hard gate on every project.
+- **What I do have:** A repeatable way of building components, keeping styles consistent, and documenting decisions so the site stays maintainable.
+
+## Table of contents
+
+- [Reality snapshot](#reality-snapshot)  
+- [Why I take design systems seriously](#why-i-take-design-systems-seriously)  
+- [Over-structuring is a feature](#over-structuring-is-a-feature-not-a-flaw)  
+- [How I translate design into code](#how-i-translate-design-into-code)  
+- [CSS architecture and constraints](#css-architecture-and-constraints)  
+- [Accessibility is part of the API](#accessibility-is-part-of-the-api)  
+- [Documentation as a first-class deliverable](#documentation-as-a-first-class-deliverable)  
+- [Design system starter kit (my 2025 version)](#design-system-starter-kit-my-2025-version)  
+- [Collaboration habits that keep changes shippable](#collaboration-habits-that-keep-changes-shippable)  
+- [Receipts from my own builds](#receipts-from-my-own-builds)  
+- [Working across design and engineering](#working-across-design-and-engineering)  
+- [What I care about building next](#what-i-care-about-building-next)  
+- [Closing thoughts](#closing-thoughts)
+
+---
+
+<a id="why-i-take-design-systems-seriously"></a>
+## Why I Take Design Systems Seriously
+
+Design systems are not just styling. They are a contract.
+
+Even on a small project, UI breaks down when the rules live in someone’s head. That’s when you get drift: spacing starts to vary, buttons feel different across pages, and you end up with random one-off styling fixes that are hard to unwind later.
+
+I learned that a lot of UI issues aren’t “design problems.” They’re consistency problems caused by unclear patterns and missing documentation.
+
+When I build a reusable component, I’m not only thinking about how it looks on one page. I’m thinking about how it behaves when:
+
+- It gets reused across multiple pages
+- It needs responsive layout behavior
+- Someone updates it later without context
+- Accessibility needs tighten up
+- The site grows and “quick fixes” start stacking up
+
+That’s why I push structure early. It saves time later.
+
+---
+
+<a id="over-structuring-is-a-feature-not-a-flaw"></a>
+## Over-Structuring Is a Feature, Not a Flaw
+
+I used to worry that I was adding too much ceremony. Then I ran into the same class of problems repeatedly: unclear props, inconsistent spacing, and components that slowly turned into “do anything” blobs.
+
+So now I try to separate three things as I build:
+
+- **Intent:** what the component is for
+- **Implementation detail:** what can change without breaking consumers
+- **Consumer API:** what other code should touch (props, variants, and documented usage)
+
+This shows up in how I organize components, tokens, and docs.
+
+I prefer systems where spacing, color, and typography decisions don’t get scattered across random files or inline overrides. Instead, I centralize them behind a small set of variables and patterns.
+
+Sometimes I still use UI libraries depending on the project. When I do, I try to rely on theme-level configuration and composition more than ad-hoc overrides. I want the system to feel predictable to the next developer.
+
+---
+
+<a id="how-i-translate-design-into-code"></a>
+## How I Translate Design Into Code
+
+I treat UI decisions like data, even when I’m working without a formal design handoff.
+
+My first step is usually “pattern spotting”:
+
+- What repeats?
+- What should scale across breakpoints?
+- What’s a real variant vs. a one-off?
+- What can be standardized into a token?
+
+From there I map it into abstractions developers expect:
+
+- Tokens via CSS custom properties for things like spacing, radii, and colors
+- Constrained variants for components instead of “pass any class”
+- Reusable layout wrappers instead of rewriting layout rules every time
+
+I’m not chasing perfect parity on the first pass. I’m chasing **predictable evolution**. I want it to be obvious where changes should live when the site grows.
+
+---
+
+<a id="css-architecture-and-constraints"></a>
+## CSS Architecture and Constraints
+
+CSS is powerful, but it gets messy fast without boundaries.
+
+In my projects, I try to keep CSS:
+
+- Predictable (low specificity, few surprises)
+- Consistent (shared variables and repeated patterns)
+- Responsive (layouts that don’t collapse weird on mobile)
+- Debuggable (simple selectors, clear ownership)
+
+Even when using modern tooling, the fundamentals still matter: flow, containment, inheritance, layout, and the cascade.
+
+CSS custom properties do a lot of work for me because they’re transparent and flexible. If something feels off, I can inspect it quickly and trace where it came from.
+
+Animations exist, but I keep them restrained. If motion doesn’t improve clarity or hierarchy, it’s probably noise.
+
+---
+
+<a id="accessibility-is-part-of-the-api"></a>
+## Accessibility Is Part of the API
+
+Accessibility is not something I want to “add later.” It shapes how components should be built.
+
+In practice, that means I aim for:
+
+- Semantic HTML first
+- Keyboard navigation that makes sense
+- Clear labels, headings, and focus states
+- Contrast that isn’t fragile
+
+My approach is not perfect, but it is consistent. I do a lot of basic checks that catch the majority of issues early, especially on content-heavy pages like my blog.
+
+I also don’t pretend that a visually correct UI is automatically usable. I try to validate behavior, not just appearance.
+
+---
+
+<a id="documentation-as-a-first-class-deliverable"></a>
+## Documentation as a First-Class Deliverable
+
+Documentation is part of shipping, especially when UI patterns are reused.
+
+Good docs answer:
+
+- What this is for
+- When to use it
+- When not to use it
+- What assumptions it makes
+- What is intentionally out of scope
+
+I write documentation mostly to reduce future confusion. If a system requires tribal knowledge to use, it will fragment.
+
+This is also why I care about contribution habits like code reviews and clear PR descriptions. Even on solo projects, I treat my repo like someone else will inherit it later.
+
+---
+
+<a id="design-system-starter-kit-my-2025-version"></a>
+## Design System Starter Kit (My 2025 Version)
+
+This is what I actually use or aim for in my projects, without pretending it’s an enterprise pipeline.
+
+- **Tokens as the baseline:** CSS custom properties for spacing, typography scale, radii, and colors. When I add a new value, I try to do it as a token first instead of a one-off.
+- **Layout patterns:** A small set of reusable layout components or classes (sections, cards, grids, stacks) so pages don’t become unique snowflakes.
+- **Constrained variants:** Buttons, badges, and cards usually expose a few variants and sizes. I avoid “pass any className and hope” unless it’s a deliberate escape hatch.
+- **State handling:** Disabled and loading states are treated as real states, not afterthoughts. If the UI can be in that state, it should be styled and understandable.
+- **Lightweight validation:** Lighthouse runs, keyboard walkthrough, basic contrast checks, and quick manual spot checks across breakpoints. Axe automation is still on deck.
+- **Docs scaffolding:** For the parts I reuse the most, I keep short docs that include intent, usage examples, and “don’t do this” notes.
+
+---
+
+<a id="collaboration-habits-that-keep-changes-shippable"></a>
+## Collaboration Habits That Keep Changes Shippable
+
+A lot of my work is solo, but I still try to build habits that translate to team environments:
+
+- I write PR descriptions as if someone else will review them later.
+- I keep notes about what a change impacts (layout, typography, components, content).
+- If a change risks breaking UI, I test it across desktop and mobile widths before calling it done.
+- I try to leave “why” breadcrumbs in commit messages, not just “what.”
+
+On teams, I think most UI chaos comes from missing intent and unclear ownership. My default move is to make the decision explicit, then make it repeatable.
+
+---
+
+<a id="receipts-from-my-own-builds"></a>
+## Receipts From My Own Builds
+
+These are examples of how I’ve been applying this on my own site and projects, without overselling it.
+
+| Area | What I shipped | Practices applied |
+| --- | --- | --- |
+| Gatsby portfolio/blog | CSS variable tokens in `src/styles/global.css`, MDX shortcodes (Callout/Aside/Tip) to keep posts consistent, and built-in skip link/back-to-top controls. | Documented content patterns in `docs/content-authoring.md`, predictable section/card layouts, Lighthouse + keyboard spot checks. |
+| Interactive Pokédex (GitHub Pages) | Vanilla JS + Tailwind build with labeled search, accessible sprites, caching, and clear rate-limit messaging. | Lighthouse scores logged in the repo, keyboard walkthroughs per README, planned Jest + Playwright tests noted in the post. |
+| CheeseMath (Card Obscurer) | Luhn validation, inline errors, ARIA labels; CodePen prototype graduated to a GitHub Pages demo. | Reality block lists mobile Safari quirks; next steps are axe/Lighthouse audits and unit tests before calling it portfolio-ready. |
+
+---
+
+<a id="working-across-design-and-engineering"></a>
+## Working Across Design and Engineering
+
+I’m comfortable sitting between design and engineering because I’m used to translating intent into constraints.
+
+I don’t try to redesign someone’s work. I try to clarify it, and then encode it into predictable patterns.
+
+When there’s tension between design fidelity and engineering constraints, my preference is to surface it early and make the tradeoff explicit rather than silently compromising.
+
+Most friction comes from ambiguity. Clarity solves more than arguing about implementation details.
+
+---
+
+<a id="what-i-care-about-building-next"></a>
+## What I Care About Building Next
+
+I want to work on UI systems that feel like infrastructure.
+
+That means systems that:
+
+- Are used by multiple developers or teams
+- Need stability over time
+- Balance flexibility with consistency
+- Treat accessibility and predictability as core requirements
+
+I’m not chasing novelty. I care about systems that quietly work, scale, and reduce cognitive load for people building product UI.
+
+---
+
+<a id="closing-thoughts"></a>
+## Closing Thoughts
+
+I’m not a visual designer. I’m an engineer who cares about UI being consistent, accessible, and maintainable.
+
+I default to structure because ambiguity doesn’t scale. I write docs because people deserve clarity. And I try to build systems that make the correct thing easy and the wrong thing harder to do by accident.
+
+If there’s one theme across my projects, it’s this:  
+**good systems keep shipping because they stay understandable.**
