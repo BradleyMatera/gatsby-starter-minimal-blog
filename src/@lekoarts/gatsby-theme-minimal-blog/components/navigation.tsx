@@ -2,7 +2,7 @@ import * as React from "react";
 import { Link, useStaticQuery, graphql } from "gatsby";
 import useMinimalBlogConfig from "../hooks/use-minimal-blog-config";
 import replaceSlashes from "../utils/replaceSlashes";
-import cx from "../../../utils/cx";
+import joinClasses from "../../../utils/joinClasses";
 
 type NavigationItem = {
   title: string;
@@ -178,7 +178,7 @@ const Navigation = ({
             return (
               <li
                 key={item.slug}
-                className={cx("nav-dropdown", dropdownOpen && "nav-dropdown--open")}
+                className={joinClasses("nav-dropdown", dropdownOpen && "nav-dropdown--open")}
                 ref={dropdownRef}
               >
                 <button
@@ -214,7 +214,7 @@ const Navigation = ({
             return (
               <li
                 key={item.slug}
-                className={cx("nav-dropdown", themeDropdownOpen && "nav-dropdown--open")}
+                className={joinClasses("nav-dropdown", themeDropdownOpen && "nav-dropdown--open")}
                 ref={themeDropdownRef}
               >
                 <button

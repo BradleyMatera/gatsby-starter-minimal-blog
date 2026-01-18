@@ -8,9 +8,9 @@
   "starter-name": "gatsby-starter-minimal-blog",
   "packageManager": "bun@1.1.15",
   "scripts": {
-  "build": "gatsby build",
-  "develop": "gatsby develop",
-  "dev": "gatsby develop",
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "dev": "gatsby develop",
     "develop:cypress": "cross-env CYPRESS_SUPPORT=y yarn develop",
     "build:cypress": "cross-env CYPRESS_SUPPORT=y yarn build",
     "start": "gatsby develop",
@@ -18,6 +18,8 @@
     "clean": "gatsby clean",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "test": "node scripts/verify-main-route.js",
+    "check": "npm run lint && npm run test",
     "postinstall": "if [ \"$NETLIFY\" = \"true\" ]; then npm rebuild sharp --platform=linux --arch=x64; fi"
   },
   "dependencies": {

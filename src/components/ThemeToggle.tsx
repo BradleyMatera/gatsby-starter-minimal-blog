@@ -7,6 +7,14 @@ const STORAGE_KEY = "bm-theme";
 const ThemeToggle: React.FC = () => {
   const [theme, setTheme] = React.useState<Theme>("light");
 
+  const applyTheme = (next: Theme) => {
+    if (typeof document === "undefined") return;
+    const root = document.documentElement;
+    root.setAttribute("data-theme", next);
+    root.style.colorScheme = next;
+    window.localStorage.setItem(STORAGE_KEY, next);
+  };
+
   React.useEffect(() => {
     if (typeof window === "undefined") return;
     const stored = window.localStorage.getItem(STORAGE_KEY) as Theme | null;
@@ -15,14 +23,6 @@ const ThemeToggle: React.FC = () => {
     applyTheme(initial);
     setTheme(initial);
   }, []);
-
-  const applyTheme = (next: Theme) => {
-    if (typeof document === "undefined") return;
-    const root = document.documentElement;
-    root.setAttribute("data-theme", next);
-    root.style.colorScheme = next;
-    window.localStorage.setItem(STORAGE_KEY, next);
-  };
 
   const toggle = () => {
     const next: Theme = theme === "light" ? "dark" : "light";

@@ -1,5 +1,5 @@
 import * as React from "react";
-import cx from "../../utils/cx";
+import joinClasses from "../../utils/joinClasses";
 
 type CardVariant = "default" | "muted" | "outline";
 
@@ -21,7 +21,7 @@ import TinyDotClusterAccent from "../TinyDotClusterAccent";
 const Card = ({ as: Tag = "div", variant = "default", className, children }: CardProps) => {
   const variantClass = variantClassMap[variant] ?? variantClassMap.default;
   return (
-    <Tag className={cx(variantClass, className)} style={{ position: "relative" }}>
+    <Tag className={joinClasses(variantClass, className)} style={{ position: "relative" }}>
       <TinyDotClusterAccent />
       {children}
     </Tag>

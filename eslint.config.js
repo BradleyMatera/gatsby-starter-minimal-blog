@@ -19,6 +19,7 @@ export default tseslint.config(
       ".cache/**",
       "static/**",
       "src/@lekoarts/gatsby-theme-minimal-blog/components/**",
+      "scripts/**",
     ],
   },
   js.configs.recommended,

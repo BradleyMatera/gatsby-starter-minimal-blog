@@ -1,5 +1,5 @@
 import * as React from "react";
-import cx from "../../../utils/cx";
+import joinClasses from "../../../utils/joinClasses";
 
 type TitleProps = {
   text: string;
@@ -10,7 +10,7 @@ type TitleProps = {
 };
 
 const Title = ({ text, as: HeadingTag = "h2", className, kicker, children }: TitleProps) => (
-  <div className={cx("section-header-inline", className)}>
+  <div className={joinClasses("section-header-inline", className)}>
     <div>
       {kicker ? <span className="eyebrow">{kicker}</span> : null}
       <HeadingTag className="section-title" style={{ marginBottom: 0 }}>

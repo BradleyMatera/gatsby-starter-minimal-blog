@@ -2,14 +2,14 @@
 // Lightweight SVG accent for list bullets and hero highlights.
 
 import React from "react";
-import cx from "../utils/cx";
+import joinClasses from "../utils/joinClasses";
 
 type TinyTriangleAccentProps = {
   className?: string;
 };
 
 const TinyTriangleAccent: React.FC<TinyTriangleAccentProps> = ({ className }) => (
-  <span className={cx("tiny-triangle-accent accent-tile accent-tile--warm", className)} aria-hidden="true">
+  <span className={joinClasses("tiny-triangle-accent accent-tile accent-tile--warm", className)} aria-hidden="true">
     <svg viewBox="0 0 24 24" role="presentation" focusable="false">
       <path
         d="M12 4.5 4.5 18h15z"

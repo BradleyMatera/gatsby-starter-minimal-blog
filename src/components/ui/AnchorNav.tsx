@@ -1,5 +1,5 @@
 import * as React from "react";
-import cx from "../../utils/cx";
+import joinClasses from "../../utils/joinClasses";
 
 type AnchorNavItem = {
   id: string;
@@ -17,7 +17,7 @@ const AnchorNav = ({ items, className }: AnchorNavProps) => {
   }
 
   return (
-    <nav className={cx("surface-card inpage-nav", className)} aria-label="On this page">
+    <nav className={joinClasses("surface-card inpage-nav", className)} aria-label="On this page">
       <span className="eyebrow">On this page</span>
       <div className="inpage-nav__links">
         {items.map((item) => (

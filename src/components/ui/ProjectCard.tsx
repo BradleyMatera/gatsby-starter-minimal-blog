@@ -1,5 +1,5 @@
 import * as React from "react";
-import cx from "../../utils/cx";
+import joinClasses from "../../utils/joinClasses";
 import Link from "./Link";
 import { useScrollReveal } from "../home/useScrollReveal";
 
@@ -23,7 +23,7 @@ type ProjectCardProps = {
 
 const ProjectCard = ({ title, meta, summary, impact, impactPrefix = "Impact", stack, links, className }: ProjectCardProps) => {
   const { ref, revealed } = useScrollReveal(0, { initiallyVisible: true });
-  const articleClassName = cx(
+  const articleClassName = joinClasses(
     "project-card",
     "reveal-card",
     className,

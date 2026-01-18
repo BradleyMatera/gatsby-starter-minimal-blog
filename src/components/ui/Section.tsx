@@ -1,5 +1,5 @@
 import * as React from "react";
-import cx from "../../utils/cx";
+import joinClasses from "../../utils/joinClasses";
 import { useScrollReveal } from "../home/useScrollReveal";
 
 type SectionProps = {
@@ -29,7 +29,7 @@ const Section = ({
 }: SectionProps) => {
   const { ref, revealed } = useScrollReveal(revealDelay, { initiallyVisible: true });
   const isVisible = disableReveal || revealed;
-  const sectionClassName = cx(
+  const sectionClassName = joinClasses(
     "section-shell",
     disableReveal ? undefined : "reveal-card",
     className,
