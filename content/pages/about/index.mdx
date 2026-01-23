@@ -3,196 +3,299 @@ title: "About"
 slug: "/about"
 ---
 
-import { Section, AnchorNav, Card } from "../../../src/components/ui";
+import { Section, AnchorNav } from "../../../src/components/ui";
+import HeroBanner from "../../../src/components/visuals/HeroBanner";
+import SkillCategory from "../../../src/components/visuals/SkillCategory";
+import MonitorIcon from "../../../src/components/visuals/icons/MonitorIcon";
+import ServerIcon from "../../../src/components/visuals/icons/ServerIcon";
+import CloudIcon from "../../../src/components/visuals/icons/CloudIcon";
+import BrainIcon from "../../../src/components/visuals/icons/BrainIcon";
+import ExperienceTimeline from "../../../src/components/visuals/ExperienceTimeline";
+
+<div className="about-hero">
+  <HeroBanner
+    title="Systems-minded web developer"
+    subtitle="Building reliable software with thoughtful interfaces, dependable backends, and clear documentation."
+    ctaText="Let’s talk"
+    ctaLink="/contact/"
+  />
+</div>
+
+
+<div className="about-layout">
+  <main className="about-layout__main">
+
+<section className="about-section about-section--profile" id="profile">
+  <div className="about-section__inner">
+    <div className="about-profile__grid">
+      <div className="about-profile__hero">
+        <div className="about-profile__hero-content">
+          <div className="about-profile__text">
+            <p className="about-profile__intro">
+              Hi, I'm <strong>Bradley Matera</strong>.
+            </p>
+            <p className="about-profile__credentials">
+              <strong>Full Stack Software Engineer</strong> | <strong>B.S. Web Development (Full Sail University)</strong> | <strong>AWS Cloud Support Intern (Amazon, Summer 2025)</strong>
+            </p>
+            <p className="about-profile__tagline">Army Combat Medic → Software Engineer.</p>
+            <div className="about-profile__bio">
+              <p>
+                I build production-ready systems with scalable backend services, automation, and cloud infrastructure that keep teams confident in what they ship.
+              </p>
+              <p>
+                Military training taught me calm, precise decision-making, while roles in operations and rescue sharpened my problem-solving under pressure across DevOps, observability, and documentation.
+              </p>
+              <ul className="about-profile__list">
+                <li><strong>Process-driven:</strong> Translate incidents into automation and runbooks that prevent the same issue twice.</li>
+                <li><strong>Communicative:</strong> Keep teams aligned with annotated deployments and shared playbooks.</li>
+                <li><strong>Documentation-first:</strong> Write notes that let the next engineer pick up a project without guesswork.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section className="about-section about-section--build" id="what-i-build">
+  <div className="about-section__inner">
+    <h2 className="section-title"><strong>What I build</strong> — Production-ready systems across the stack</h2>
+    <div className="what-i-build-grid">
+      <div className="build-card">
+        <SkillCategory icon={<MonitorIcon />} title="Frontend">
+          <ul>
+            <li><strong>Responsive, accessible React interfaces</strong></li>
+            <li><strong>Design systems tied</strong> to real product behavior</li>
+            <li><strong>State management</strong> and custom hooks</li>
+            <li><strong>Keyboard-friendly interactions</strong> with clear focus states</li>
+          </ul>
+        </SkillCategory>
+      </div>
+      <div className="build-card">
+        <SkillCategory icon={<ServerIcon />} title="Backend">
+          <ul>
+            <li><strong>Node and API services</strong> with observability</li>
+            <li><strong>Authentication & real-time</strong> capabilities</li>
+            <li><strong>Logging, error handling</strong>, and clear data contracts</li>
+            <li><strong>Robust testing</strong> for feature flows</li>
+          </ul>
+        </SkillCategory>
+      </div>
+      <div className="build-card">
+        <SkillCategory icon={<CloudIcon />} title="Cloud & Systems">
+          <ul>
+            <li><strong>AWS services</strong> and monitoring</li>
+            <li><strong>CI/CD pipelines</strong> plus observability</li>
+            <li><strong>Deployment automation</strong> and runbooks</li>
+            <li><strong>Infrastructure resiliency</strong> with cost awareness</li>
+          </ul>
+        </SkillCategory>
+      </div>
+      <div className="build-card">
+        <SkillCategory icon={<BrainIcon />} title="Applied AI">
+          <ul>
+            <li><strong>Local LLM integrations</strong> for tooling experiences</li>
+            <li><strong>Model hosting</strong> and inference tooling</li>
+            <li><strong>AI experiences</strong> wired into real products</li>
+            <li><strong>Prompt + guardrail</strong> systems for reliability</li>
+          </ul>
+        </SkillCategory>
+      </div>
+    </div>
+    <figure className="section-graphic section-graphic--skills" aria-hidden="true">
+      <img src="/skills-icons.png" alt="" />
+    </figure>
+  </div>
+</section>
 
 <Section
-  eyebrow="Profile"
-  title={
-    <>
-      Hi, I'm Bradley Matera.
-      <br />
-    </>
-  }
-  description={
-    <p>
-      <strong>Systems-focused web developer</strong> | <strong>B.S. Web Development, Full Sail University (Oct 2025)</strong>
-    </p>
-  }
+  className="section-surface about-section about-section--work"
+  id="how-i-work"
+  title="How I work"
 >
-  <p>
-    I came into tech after serving as a U.S. Army combat medic with the 82nd Airborne. That background makes me a calm debugger: I study the system in front of me, find the pressure point, and keep moving.
-  </p>
-  <p>
-    I’m not a “blank-page” coder. I use AI tools like ChatGPT and Copilot in almost every coding session to scaffold ideas, surface explanations, and spot bugs. Then I adapt, document, and ship the work. This site is my running log of the demos, prototypes, and notes that process produces.
-  </p>
-</Section>
-
-<AnchorNav
-  items={[
-    { id: "skills", label: "Technical Skills" },
-    { id: "how-i-build", label: "How I Build" },
-    { id: "certifications", label: "Licenses & Certifications" },
-    { id: "education", label: "Education" },
-    { id: "differentiators", label: "What Sets Me Apart" },
-  ]}
-/>
-
-<Section
-  eyebrow="My Story"
-  title="From Front Lines to Code Lines"
->
-  <p>Before diving into tech, I served as a medic in the U.S. Army, managing high-stakes situations that demanded quick thinking and precision. My time in security, case management, construction, and animal rescue honed my ability to adapt and solve problems under pressure. These experiences shape my engineering approach: identify the core issue, implement reliable fixes, and ensure systems stay resilient.</p>
-  <p>In 2025 I completed an AWS Cloud Support internship. It wasn’t glamorous—I spent my days working through labs, documenting troubleshooting steps, building CloudWatch dashboards, and automating repetitive support workflows. But it taught me how AWS services fit together and reminded me that even internal tools deserve clear runbooks.</p>
-</Section>
-
-<Section
-  id="skills"
-  eyebrow="Technical Skills"
-  title="Where I'm confident vs. where I'm still learning"
->
-  <div className="grid-two">
-    <Card>
-      <h3 className="feature-card__title">Comfortable today</h3>
-      <div className="project-card__stack">
-        <span>HTML & CSS layouts</span>
-        <span>JavaScript fundamentals + React basics</span>
-        <span>Git / GitHub</span>
-        <span>Deploying demos to Netlify / GitHub Pages</span>
-        <span>Express + simple Node APIs</span>
-        <span>Writing docs / changelogs</span>
+  <div className="about-section__inner">
+    <div className="about-work__grid">
+      <div className="how-i-work-grid">
+        <article className="about-panel about-panel--work feature-card how-i-work__focus">
+          <div className="about-work__panel">
+            <h3 className="feature-card__title"><strong>Focus areas</strong> — What drives my work</h3>
+            <ul className="feature-list">
+              <li><strong>Clear documentation</strong> — Every project includes runbooks and annotated deployments.</li>
+              <li><strong>Predictable deployments</strong> — CI/CD pipelines that reduce manual steps.</li>
+              <li><strong>Calm problem-solving</strong> — Army medic training applied to production incidents.</li>
+              <li><strong>Next-developer ready</strong> — Code that tells a story and keeps knowledge transfer simple.</li>
+            </ul>
+          </div>
+        </article>
+        <article className="about-panel about-panel--work feature-card how-i-work__collaboration">
+          <div className="about-work__panel">
+            <h3 className="feature-card__title"><strong>Collaboration style</strong> — Team-first development</h3>
+            <p>I develop with the next engineer in mind: <strong>shared runbooks</strong>, <strong>annotated deployments</strong>, and <strong>communicative updates</strong> keep the whole team aligned.</p>
+            <ul className="feature-list about-work__collab-list">
+              <li><strong>Pairing-ready:</strong> I bring structure to sprint planning, pair programming, or accessibility reviews.</li>
+              <li><strong>Metrics-focused:</strong> Documentation, observability, and automation tie back to measurable outcomes.</li>
+              <li><strong>Calm under pressure:</strong> I stay level-headed through incidents and keep stakeholders informed.</li>
+            </ul>
+          </div>
+        </article>
       </div>
-      <p>I can navigate these on my own (with AI pair-programming for momentum) and point to shipped demos that prove it.</p>
-    </Card>
-    <Card>
-      <h3 className="feature-card__title">Actively learning</h3>
-      <div className="project-card__stack">
-        <span>React hooks & state modeling</span>
-        <span>Next.js routing / data fetching</span>
-        <span>GitHub Actions & basic CI</span>
-        <span>Docker dev containers</span>
-        <span>AWS CloudWatch, IAM, and automation labs</span>
-        <span>WebGPU + graphics foundations</span>
-      </div>
-      <p>These are in-progress reps—you’ll see them referenced in blog posts and TODOs. I still lean heavily on tutorials and AI explanations.</p>
-    </Card>
-    <Card variant="muted">
-      <h3 className="feature-card__title">Exploring / curious</h3>
-      <div className="project-card__stack">
-        <span>Vue / Angular experiments</span>
-        <span>FastAPI + Python tooling</span>
-        <span>Server-side auth patterns</span>
-        <span>Zig + lower-level parsing</span>
-        <span>Advanced AWS services (beyond labs)</span>
-        <span>Accessibility audits at scale</span>
-      </div>
-      <p>These show up in prototypes, not production work. Expect notes about what was AI-generated and what I still need help with.</p>
-    </Card>
+    </div>
   </div>
 </Section>
 
+<div className="timeline-banner" aria-hidden="true">
+  <img className="timeline-banner__img" src="/career-timeline.png" alt="" />
+</div>
+
 <Section
-  id="how-i-build"
-  eyebrow="Workflow"
-  title="How I build (and what I still need help with)"
+  className="section-surface section-surface--alt about-section about-section--experience"
+  id="experience"
+  title="Experience"
 >
-  <div className="grid-two">
-    <Card>
-      <h3 className="feature-card__title">AI-assisted, builder mindset</h3>
-      <p>I prompt ChatGPT and Copilot to scaffold components, write tests, or explain APIs. Then I read every line, adapt it to my project, and document what changed. I keep prompt logs so the collaboration is transparent.</p>
-      <p>Most projects on this site were assembled this way. If something was heavily AI-generated, the project page states it outright.</p>
-    </Card>
-    <Card variant="muted">
-      <h3 className="feature-card__title">Limits I'm working through</h3>
-      <ul className="feature-list">
-        <li>Algorithms / data structures (I’m still at the basics).</li>
-        <li>Low-level languages and systems design.</li>
-        <li>Whiteboard-style problem solving without references.</li>
-        <li>Large production deployments (my experience is in demos and labs).</li>
-      </ul>
-      <p>I’m looking for teams that value honest status updates and mentorship so I can keep closing these gaps.</p>
-    </Card>
+  <div className="about-section__inner">
+    <div className="about-experience__grid">
+      <div className="about-experience__list">
+        <ExperienceTimeline />
+      </div>
+    </div>
   </div>
 </Section>
 
+
 <Section
+  className="section-surface about-section about-section--certifications"
   id="certifications"
-  eyebrow="Licenses & Certifications"
-  title="Certifications I've earned"
+  title="Licenses & Certifications"
 >
-  <div className="grid-three">
-    <Card>
-      <h3>AWS Certified AI Practitioner</h3>
-      <p><strong>Amazon Web Services (AWS)</strong></p>
-      <p>Issued Aug 2025, Expires Aug 2028</p>
-    </Card>
-    <Card>
-      <h3>AWS Certified Solutions Architect – Associate</h3>
-      <p><strong>Amazon Web Services (AWS)</strong></p>
-      <p>Issued Jul 2025, Expires Jul 2028</p>
-    </Card>
-    <Card>
-      <h3>Foundational C# with Microsoft</h3>
-      <p>freeCodeCamp</p>
-      <p>Issued Jan 2025</p>
-      <p>Credential ID bradleymatera-fcswm</p>
-    </Card>
-    <Card>
-      <h3>JavaScript Algorithms and Data Structures</h3>
-      <p>freeCodeCamp</p>
-      <p>Issued Dec 2024</p>
-      <p>Credential ID bradleymatera-jaads</p>
-    </Card>
-    <Card>
-      <h3>Responsive Web Design</h3>
-      <p>freeCodeCamp</p>
-      <p>Issued Dec 2024</p>
-      <p>Credential ID bradleymatera-rwd</p>
-    </Card>
-    <Card>
-      <h3>Creating Your Personal Brand</h3>
-      <p>LinkedIn</p>
-      <p>Issued Sep 2024</p>
-    </Card>
-    <Card>
-      <h3>Getting Things Done</h3>
-      <p>LinkedIn</p>
-      <p>Issued Sep 2024</p>
-    </Card>
-    <Card>
-      <h3>Interpersonal Communication (2020)</h3>
-      <p>LinkedIn</p>
-      <p>Issued Sep 2024</p>
-    </Card>
-    <Card>
-      <h3>Professional Networking</h3>
-      <p>LinkedIn</p>
-      <p>Issued Sep 2024</p>
-    </Card>
+  <div className="about-section__inner">
+    <p className="section-subtitle">Certifications I’ve earned</p>
+    <div className="certification-cards">
+      <article className="certification-card">
+        <div className="certification-card__title">
+          <a href="https://www.credly.com/badges/fcbb3120-f086-4784-9cb5-80daca9fb61a/linked_in_profile" target="_blank" rel="noopener noreferrer">
+            AWS Certified AI Practitioner
+          </a>
+        </div>
+        <div className="certification-card__issuer">Amazon Web Services (AWS)</div>
+        <div className="certification-card__dates">Issued Aug 2025 · Expires Aug 2028</div>
+      </article>
+      <article className="certification-card">
+        <div className="certification-card__title">
+          <a href="https://www.credly.com/badges/fe12a8a4-dacf-43cb-bfe1-c8c75e20585f/linked_in_profile" target="_blank" rel="noopener noreferrer">
+            AWS Certified Solutions Architect – Associate
+          </a>
+        </div>
+        <div className="certification-card__issuer">Amazon Web Services (AWS)</div>
+        <div className="certification-card__dates">Issued Jul 2025 · Expires Jul 2028</div>
+      </article>
+      <article className="certification-card">
+        <div className="certification-card__title">
+          <a href="https://www.freecodecamp.org/certification/bradleymatera/foundational-c-sharp-with-microsoft" target="_blank" rel="noopener noreferrer">
+            Foundational C# with Microsoft
+          </a>
+        </div>
+        <div className="certification-card__issuer">freeCodeCamp</div>
+        <div className="certification-card__dates">Issued Jan 2025</div>
+        <div className="certification-card__id">Credential ID: bradleymatera-fcswm</div>
+      </article>
+      <article className="certification-card">
+        <div className="certification-card__title">
+          <a href="https://www.freecodecamp.org/certification/bradleymatera/javascript-algorithms-and-data-structures-v8" target="_blank" rel="noopener noreferrer">
+            JavaScript Algorithms and Data Structures
+          </a>
+        </div>
+        <div className="certification-card__issuer">freeCodeCamp</div>
+        <div className="certification-card__dates">Issued Dec 2024</div>
+        <div className="certification-card__id">Credential ID: bradleymatera-jaads</div>
+      </article>
+      <article className="certification-card">
+        <div className="certification-card__title">
+          <a href="https://www.freecodecamp.org/certification/bradleymatera/responsive-web-design" target="_blank" rel="noopener noreferrer">
+            Responsive Web Design
+          </a>
+        </div>
+        <div className="certification-card__issuer">freeCodeCamp</div>
+        <div className="certification-card__dates">Issued Dec 2024</div>
+        <div className="certification-card__id">Credential ID: bradleymatera-rwd</div>
+      </article>
+      <article className="certification-card">
+        <div className="certification-card__title">Creating Your Personal Brand</div>
+        <div className="certification-card__issuer">LinkedIn</div>
+        <div className="certification-card__dates">Issued Sep 2024</div>
+      </article>
+      <article className="certification-card">
+        <div className="certification-card__title">Getting Things Done</div>
+        <div className="certification-card__issuer">LinkedIn</div>
+        <div className="certification-card__dates">Issued Sep 2024</div>
+      </article>
+      <article className="certification-card">
+        <div className="certification-card__title">Interpersonal Communication (2020)</div>
+        <div className="certification-card__issuer">LinkedIn</div>
+        <div className="certification-card__dates">Issued Sep 2024</div>
+      </article>
+      <article className="certification-card">
+        <div className="certification-card__title">Professional Networking</div>
+        <div className="certification-card__issuer">LinkedIn</div>
+        <div className="certification-card__dates">Issued Sep 2024</div>
+      </article>
+    </div>
+  </div>
+</Section>
+
+
+<Section
+  className="section-surface about-section"
+  id="outside"
+  title="Outside of work"
+>
+  <div className="about-section__inner">
+    <div className="about-outside__content">
+      <p>
+        I'm a father, a builder, and someone who enjoys learning new systems just to understand how they work. When something breaks, I want to know why — and how to make sure it doesn't break again.
+      </p>
+      <ul className="about-outside__list">
+        <li><strong>Curiosity:</strong> I dig into systems just to understand how they tick.</li>
+        <li><strong>Persistence:</strong> I stay with problems until they behave.</li>
+      </ul>
+    </div>
   </div>
 </Section>
 
 <Section
-  id="education"
-  eyebrow="Education"
-  title="Formal training"
-  description="B.S. in Web Development — Full Sail University"
+  className="section-surface section-surface--alt about-section about-section--cta"
+  title="Let's talk"
 >
-  <div>Graduated October 2025 — GPA 3.8</div>
+  <div className="about-section__inner">
+    <div className="about-panel">
+      <div className="about-cta__grid">
+      <div className="about-cta__left">
+        <h3 className="feature-card__title"><strong>Ready when you are</strong> — Let's connect</h3>
+        <p>
+          If you're looking for someone who can <strong>ship</strong>, <strong>debug</strong>, <strong>document</strong>, and keep systems steady under pressure — let's talk.
+        </p>
+        <ul className="feature-list about-cta__list">
+          <li><strong>Email:</strong> bradmatera@gmail.com</li>
+          <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/bradmatera" target="_blank" rel="noopener noreferrer">/in/bradmatera</a></li>
+          <li><strong>GitHub:</strong> <a href="https://github.com/BradleyMatera" target="_blank" rel="noopener noreferrer">@BradleyMatera</a></li>
+        </ul>
+      </div>
+      <div className="about-cta__right">
+        <h3 className="feature-card__title"><strong>What to expect</strong> — Quick response, clear next steps</h3>
+        <p>I respond within <strong>24 hours</strong> with availability, relevant case studies, and a short plan for how we can collaborate. Need a résumé PDF? Just ask.</p>
+      </div>
+    </div>
+  </div>
+  </div>
 </Section>
-
-<Section
-  id="differentiators"
-  eyebrow="What sets me apart"
-  title={
-    <>
-      <strong>What Sets Me Apart</strong> — Medic discipline meets engineering rigor
-    </>
-  }
->
-  <ul className="feature-list">
-    <li><strong>Calm under pressure</strong> — Army medic training -> steady nerves when prototypes break.</li>
-    <li><strong>Transparent process</strong> — Every project page calls out what AI/tuts helped and what’s still unfinished.</li>
-    <li><strong>Systems thinking</strong> — I map flows, write runbooks, and treat even small demos like they deserve documentation.</li>
-    <li><strong>Growth mindset</strong> — I’m upfront about gaps (algorithms, low-level work) and look for mentors who can help me close them.</li>
-  </ul>
-</Section>
+  </main>
+  <aside className="about-layout__aside">
+    <AnchorNav
+      items={[
+        { id: "what-i-build", label: "What I build" },
+        { id: "how-i-work", label: "How I work" },
+        { id: "experience", label: "Experience" },
+        { id: "outside", label: "Outside of work" },
+      ]}
+    />
+  </aside>
+</div>

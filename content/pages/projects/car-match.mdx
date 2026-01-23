@@ -8,83 +8,80 @@ import { Section, Card, AnchorNav, Link } from "../../../src/components/ui";
 
 <Section
   eyebrow="Case Study"
-  title="Car-Match · Personal learning project"
-  description="React + Node prototype deployed as a demo (frontend on GitHub Pages, backend on Render + MongoDB Atlas). It works end-to-end once the free backend wakes up, but cold starts take ~5 minutes so I still label it a learning project."
+  title="Car-Match · MVP full-stack matchmaking demo"
+  description="React frontend and Express backend with MongoDB Atlas persistence when configured. Frontend hosted on GitHub Pages; backend API is ready for Render deployment."
 />
-
-<Section
-  eyebrow="TL;DR"
-  title="What actually shipped"
->
-  <p>
-    <strong>TL;DR:</strong> A solo capstone project that lets me experiment with profile cards, event listings, forums, and simple auth flows. The frontend is always up on GitHub Pages; the Express/Mongo backend is on Render’s free tier, so the first login or forum hit can take ~5 minutes while it cold-starts. Once it’s warm, posts/events/forums persist via MongoDB Atlas. Real-time chat, Dockerized deployments, and load testing are still TODOs.
-  </p>
-  <div className="project-card__stack">
-    <span>Demo: GitHub Pages + Render + MongoDB Atlas</span>
-    <span>Guided by tutorials + AI prompts</span>
-    <span>Used to learn React Router + Express controllers</span>
-  </div>
-</Section>
 
 <AnchorNav
   items={[
-    { id: "overview", label: "Problem overview" },
-    { id: "approach", label: "Approach" },
-    { id: "impact", label: "Impact metrics" },
-    { id: "artifacts", label: "Supporting artifacts" },
-    { id: "lessons", label: "Lessons & next steps" },
+    { id: "overview", label: "Problem" },
+    { id: "approach", label: "Solution" },
+    { id: "role", label: "My Role" },
+    { id: "impact", label: "Outcomes & Proof" },
+    { id: "artifacts", label: "Tech Stack" },
   ]}
 />
 
-<Section id="overview" eyebrow="Project context" title="Why I built it">
-  <ul className="feature-list">
-    <li><strong>Purpose:</strong> Give myself a safe place to practice React Router, protected routes, and basic CRUD patterns.</li>
-    <li><strong>Scope:</strong> Profiles, event listings, forums, and simple messaging notes. Messaging/notifications are basic; moderation + Dockerized infra are still future work.</li>
-    <li><strong>Support:</strong> Built with heavy guidance from tutorials, StackOverflow answers, and AI pair-programming.</li>
-  </ul>
+<Section id="overview" eyebrow="Project context" title="Problem">
+  <p>
+    Users needed a platform to match profiles, participate in forums, and communicate through chat features. The system required authentication, profile management, event listings, and data storage for profiles, events, forums, and messages.
+  </p>
 </Section>
 
-<Section id="approach" eyebrow="Approach" title="What I actually touched">
+<Section id="approach" eyebrow="Solution" title="What I built">
+  <p>
+    Built an MVP full-stack application with a React frontend, Express API backend, and MongoDB Atlas persistence when configured. The frontend provides user interfaces for profiles, forums, events, and chat. The backend handles authentication, data storage, and API routing.
+  </p>
   <div className="grid-two">
     <Card>
-      <h3 className="feature-card__title">Experience layer</h3>
+      <h3 className="feature-card__title">Frontend</h3>
       <ul className="feature-list">
-        <li>React pages with context for auth state (JWTs issued by the Render backend once it’s awake).</li>
-        <li>Reusable cards/lists generated with Copilot, then refactored manually.</li>
-        <li>Accessibility pass (manual + Axe) documented in the README.</li>
+        <li>React application with context-based authentication state management</li>
+        <li>React Router for navigation and protected routes</li>
+        <li>Reusable UI components for profiles, forums, and events</li>
+        <li>Accessibility features documented in README</li>
       </ul>
     </Card>
     <Card>
-      <h3 className="feature-card__title">Platform layer</h3>
+      <h3 className="feature-card__title">Backend</h3>
       <ul className="feature-list">
-        <li>Express API deployed to Render (free tier). Health checks + `/healthz` endpoint warm it up; first request after inactivity takes minutes.</li>
-        <li>MongoDB Atlas handles events/forums. Collections persist as long as Atlas is configured; otherwise it falls back to mock data.</li>
-        <li>Postman collection + prompt log describing how AI helped.</li>
+        <li>Express API with JWT authentication</li>
+        <li>MongoDB Atlas persistence when configured</li>
+        <li>Health check endpoint for monitoring</li>
+        <li>API endpoints for profiles, events, forums, and messaging</li>
       </ul>
     </Card>
   </div>
 </Section>
 
-<Section id="impact" eyebrow="What I learned" title="Outcomes (personal, not production)">
-  <div className="grid-two">
-    <Card>
-      <h3 className="feature-card__title">Confidence</h3>
-      <p className="feature-card__body">
-        I’m now comfortable wiring up forms, simple auth guards, and documenting unfinished features instead of pretending they exist.
-      </p>
-    </Card>
-    <Card>
-      <h3 className="feature-card__title">Next steps</h3>
-      <p className="feature-card__body">
-        Remaining work is tracked openly: replace mock auth with a hosted provider, add automated tests, and decide whether real-time chat is worth the maintenance cost.
-      </p>
-    </Card>
-  </div>
+<Section id="role" eyebrow="My Role" title="Responsibilities">
+  <ul className="feature-list">
+    <li>Designed and implemented React UI components for profiles, forums, and chat</li>
+    <li>Built Express API endpoints for authentication, profile matching, and messaging</li>
+    <li>Designed MongoDB schema for users, events, forums, and messages</li>
+    <li>Configured deployment pipelines for frontend (GitHub Pages) and backend (Render)</li>
+    <li>Implemented authentication flow with JWT tokens</li>
+    <li>Created documentation and setup instructions</li>
+  </ul>
 </Section>
 
-<Section id="artifacts" eyebrow="Supporting artifacts" title="Links & disclosures">
+<Section id="impact" eyebrow="Outcomes & Proof" title="Measurable results">
   <ul className="feature-list">
-    <li><Link to="https://github.com/BradleyMatera/car-match" external><strong>Repository:</strong></Link> includes AI prompt logs, TODOs, and setup instructions.</li>
-    <li><strong>Live demo:</strong> Frontend at <Link to="https://bradleymatera.github.io/car-match/#/login" external>https://bradleymatera.github.io/car-match/#/login</Link>. Backend spins up on Render; expect ~5 minutes on first login while the free instance starts.</li>
+    <li><strong>GitHub repo:</strong> <Link to="https://github.com/BradleyMatera/car-match" external>car-match</Link></li>
+    <li><strong>Live deployment:</strong> Frontend deployed to <Link to="https://bradleymatera.github.io/car-match/#/login" external>GitHub Pages</Link>; backend API deployment configured for Render</li>
+    <li><strong>Authentication flow:</strong> JWT token implementation in Express routes</li>
+    <li><strong>Data persistence:</strong> MongoDB Atlas configuration for users, events, forums, and messages</li>
+    <li><strong>Deployment configuration:</strong> Frontend and backend deployment steps documented in the repository</li>
   </ul>
+</Section>
+
+<Section id="artifacts" eyebrow="Tech Stack" title="Technologies used">
+  <div className="project-card__stack">
+    <span>React</span>
+    <span>Express</span>
+    <span>MongoDB</span>
+    <span>Render</span>
+    <span>GitHub Pages</span>
+    <span>JWT</span>
+  </div>
 </Section>

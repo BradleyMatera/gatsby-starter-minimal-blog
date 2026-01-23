@@ -8,6 +8,7 @@ import Header from "./header";
 import Footer from "./footer";
 import SkipNavLink from "./skip-nav";
 import CodeStyles from "../styles/code";
+import GlobalScrollEffects from "../../../components/visuals/GlobalScrollEffects";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -41,6 +42,24 @@ const Layout = ({ children, className = `` }: LayoutProps) => {
         }}
       />
       <div className="layout-shell">
+        <div className="scroll-color-layer" aria-hidden="true" />
+        <svg
+          className="global-curves"
+          viewBox="0 0 1440 900"
+          preserveAspectRatio="xMidYMid slice"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            className="global-curves__path"
+            d="M-50,180 C220,80 420,260 690,180 C980,90 1170,260 1490,150"
+          />
+          <path
+            className="global-curves__path global-curves__path--alt"
+            d="M-80,520 C180,420 460,600 740,520 C980,450 1180,620 1500,520"
+          />
+        </svg>
+        <GlobalScrollEffects />
         <SkipNavLink>Skip to content</SkipNavLink>
         <Header />
         <main id="site-main" className={`site-main ${className}`}>

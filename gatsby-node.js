@@ -20,3 +20,23 @@ exports.onCreateWebpackConfig = ({ actions, getConfig, stage }) => {
 
   actions.replaceWebpackConfig(config);
 };
+
+// Define GraphQL schema for custom siteMetadata fields
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions;
+
+  const typeDefs = `
+    type SiteSiteMetadata {
+      siteTitle: String
+      siteTitleAlt: String
+      siteHeadline: String
+      siteUrl: String
+      siteDescription: String
+      siteImage: String
+      siteLanguage: String
+      author: String
+    }
+  `;
+
+  createTypes(typeDefs);
+};

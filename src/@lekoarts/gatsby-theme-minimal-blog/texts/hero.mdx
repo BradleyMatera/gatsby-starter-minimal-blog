@@ -1,5 +1,6 @@
 import HomeHero from "../../../components/home/HomeHero";
 import { Section, ProjectCard } from "../../../components/ui";
+import HeroBanner from "../../../components/visuals/HeroBanner";
 import { Link } from "gatsby";
 
 import TinyCloudAccent from "../components/TinyCloudAccent";
@@ -14,51 +15,81 @@ import StatusRow from "../../../components/ui/StatusRow";
 
 <>
 
+<div className="home-snap">
+  <HeroBanner
+    title="Reliable, measurable software"
+    subtitle="I build accessible front-end experiences paired with dependable back-end systems and clear automation."
+    ctaText="Collaborate"
+    ctaLink="/contact/"
+  />
+</div>
+
 <HomeHero />
 
-<Section
-  eyebrow={<span style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}><TinyCloudAccent />Quick snapshot</span>}
-  title="Builder-first, AI-assisted, always learning"
->
-  <p>Here’s the reality: I build small systems, learn out loud, and let AI pair-program with me.</p>
-  <ul className="feature-list">
-    <StatusRow
-      icon={<TinyMedalAccent />}
-      label="Background"
-      text="Army combat medic, 82nd Airborne — keeps me calm when debugging and unblocking systems"
-    />
-    <StatusRow
-      icon={<TinyGearAccent />}
-      label="How I build"
-      text="I don’t start from a blank file — ChatGPT/Copilot scaffold projects, then I review, adapt, and document"
-    />
-    <StatusRow
-      icon={<TinyNodeAccent />}
-      label="Recent work"
-      text="Graduated Full Sail (Oct 2025) + AWS Cloud Support internship focused on labs, dashboards, and automation exercises"
-    />
-    <StatusRow
-      icon={<TinyGoalAccent />}
-      label="Right now"
-      text="Looking for entry-level teams where I can keep practicing front-end fundamentals, ops hygiene, and honest documentation"
-    />
-  </ul>
-</Section>
+<figure className="section-divider" aria-hidden="true">
+  <img src="/graphic-section-divider.png" className="media-img" alt="" />
+</figure>
+
+<section className="home-section home-section--snapshot home-snap">
+  <header className="section-strip" aria-hidden="true">
+    <img className="section-strip__img" src="/quick-snapshot.png" alt="" />
+  </header>
+  <h2 className="sr-only">Quick snapshot</h2>
+  <div className="home-section__content">
+    <div className="section-surface section-surface--snapshot">
+      <div className="section-shell__header">
+        <h2 className="section-title">Building visible, reliable work</h2>
+        <p className="section-lead">I partner with early-career teams to deliver accessible React interfaces backed by observable APIs, monitoring, and automation. The goal: ship features that employees can rely on and document under pressure.</p>
+      </div>
+      <div className="section-content">
+        <ul className="snapshot-grid">
+          <StatusRow
+            icon={<TinyMedalAccent />}
+            label="Background"
+            text="Army combat medic, 82nd Airborne — trained to stay calm, document every step, and keep systems steady under stress."
+          />
+          <StatusRow
+            icon={<TinyGearAccent />}
+            label="Current focus"
+            text="Pairing UI craft with AWS/Express tooling, shipping responsive hero sections, automation scripts, and operational runbooks."
+          />
+          <StatusRow
+            icon={<TinyNodeAccent />}
+            label="Recent wins"
+            text="Built Car-Match's real-time chat + forum flows, completed an AWS Cloud Support internship, and launched SmallOps automation labs."
+          />
+          <StatusRow
+            icon={<TinyGoalAccent />}
+            label="Next step"
+            text="Seeking an early-career team that values mentorship, clear communication, and measurable progress."
+          />
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<figure className="section-divider" aria-hidden="true">
+  <img src="/graphic-section-divider.png" className="media-img" alt="" />
+</figure>
 
 <Section
-  eyebrow="Current practice loops"
-  title="Shipping small demos, tightening feedback loops, telling the truth."
+  className="section-surface section-surface--alt home-snap"
+  eyebrow="Current focus"
+  title="Delivery, automation, and clarity"
 >
-  <div className="section-lead"><strong>My projects are prototypes</strong>: front-end UI reps, tiny DevOps experiments, and AI-assisted notes that keep me honest about what I can (and can’t) do yet.</div>
+  <div className="section-lead">
+    I keep the work measurable: shipping UI components, tying them to APIs, and automating manual ops so future maintainers can move faster.
+  </div>
   <div className="grid-three">
     <div className="feature-card" style={{ position: "relative", overflow: "hidden" }}>
       <div style={{ position: "absolute", top: "1rem", right: "1rem", opacity: 0.15, pointerEvents: "none" }}>
         <TinyCloudAccent />
       </div>
       <span className="feature-card__icon">UI</span>
-      <h3 className="feature-card__title">Front-end reps</h3>
+      <h3 className="feature-card__title">Front-end leadership</h3>
       <div className="feature-card__body">
-        HTML/CSS/React demos (Pokédex, soundboard) keep me practicing accessibility, responsiveness, and copy that sets expectations.
+        I deliver responsive dashboards, feature cards, and accessible navigation by pairing Theme UI tokens with custom CSS. Every component ships with focused copy and keyboard support.
       </div>
     </div>
     <div className="feature-card" style={{ position: "relative", overflow: "hidden" }}>
@@ -66,147 +97,167 @@ import StatusRow from "../../../components/ui/StatusRow";
         <TinyNodeAccent />
       </div>
       <span className="feature-card__icon">Ops</span>
-      <h3 className="feature-card__title">Automation experiments</h3>
+      <h3 className="feature-card__title">Automation & reliability</h3>
       <div className="feature-card__body">
-        I tinker with Express proxies, Docker starter kits, and GitHub Actions to understand modern delivery pipelines—even if they only run on my laptop today.
+        I maintain Express proxies, GitHub Actions, and Render-hosted APIs with monitoring, retries, and documentation so simple projects behave like services.
       </div>
     </div>
     <div className="feature-card" style={{ position: "relative", overflow: "hidden" }}>
       <div style={{ position: "absolute", top: "1rem", right: "1rem", opacity: 0.15, pointerEvents: "none" }}>
         <TinyGearAccent />
       </div>
-      <span className="feature-card__icon">AI</span>
-      <h3 className="feature-card__title">AI pair-programming</h3>
+      <span className="feature-card__icon">Communication</span>
+      <h3 className="feature-card__title">Transparent storytelling</h3>
       <div className="feature-card__body">
-        I log prompts, keep changelogs, and make sure every project page states when AI scaffolding or tutorials were involved.
+        Every case study includes challenges, solutions, and results. I log what shipped, what still needs polish, and how I would scale it for production.
       </div>
     </div>
   </div>
 </Section>
 
-<Section
-  eyebrow="Featured work"
-  title="Prototype case studies with transparent scope."
-  actions={
-    <>
-      <Link data-variant="primary" to="/projects">
-        Browse all project case studies
-      </Link>
-      <Link data-variant="ghost" to="/contributions">
-        Review open-source contributions
-      </Link>
-    </>
-  }
->
-  <div className="section-lead"><strong>Everything here is a learning project.</strong> I keep the copy plain, cite AI usage, and link to code so you can see what really shipped.</div>
-  <div className="grid-auto project-gallery">
-    <ProjectCard
-      title="ProjectHub · AI portfolio concierge"
-      meta="Experimental chat widget"
-      summary="Embedded demo that lets visitors ask questions about my work. Built with a simple Express proxy plus AI prompts I iterated on with Copilot."
-      impactPrefix="Reality"
-      impact="Currently an experiment—good for showing my process, not a production SaaS."
-      stack={["JavaScript", "Express", "Netlify"]}
-      links={[
-        { label: "Launch demo", href: "https://codepen.io/student-account-bradley-matera/full/yyLmYKR", variant: "primary", external: true },
-        { label: "GitHub", href: "https://github.com/BradleyMatera/ProjectHub", external: true },
-      ]}
-    />
-
-    <ProjectCard
-      title="Triangle Shader Lab"
-      meta="WebGPU study notes"
-      summary="Small Next.js + TypeScript site where I rebuilt the Hello Triangle and Textured Cube samples to see how adapters, buffers, and shaders tie together. ChatGPT/Copilot helped me reason through the bindings."
-      impactPrefix="Reality"
-      impact="Personal learning lab. It adapts the public WebGPU examples, adds plain-language notes, and stays simple so others can trace the flow without thinking it’s a full engine."
-      stack={["Next.js", "TypeScript", "Bun", "Tailwind", "WebGPU", "WGSL"]}
-      links={[
-        { label: "Explore the lab", href: "https://bradleymatera.github.io/TriangleDemo/", variant: "primary", external: true },
-        { label: "GitHub", href: "https://github.com/BradleyMatera/TriangleDemo", external: true },
-      ]}
-    />
-
-    <ProjectCard
-      title="Secrets management patterns"
-      meta="AI-assisted tutorial draft"
-      summary="Side-by-side view of insecure vs. more secure Node.js secrets handling. Generated with AI prompts, then edited as part of my learning journal."
-      impactPrefix="Reality"
-      impact="Still a draft, but documenting it keeps me honest about what I know."
-      stack={["Vite", "TypeScript", "Node.js"]}
-      links={[
-        { label: "View demo", href: "https://bradleymatera.github.io/EthicsFrontEndDemo/", variant: "primary", external: true },
-        { label: "GitHub", href: "https://github.com/BradleyMatera/EthicsFrontEndDemo", external: true },
-      ]}
-    />
-  </div>
-</Section>
-
-<Section
-  eyebrow="Why I build in public"
-  title="Building in public keeps me honest."
->
-  <div className="grid-two">
-    <div className="callout">
-      <span className="callout__icon">→</span>
-      <div className="callout__body">
-        I bring medic discipline into shipping software: stay calm, state what’s true, and leave notes for whoever touches it next (often future me).
-      </div>
-    </div>
-    <ul className="feature-list">
-      <li className="reveal" style={{ transitionDelay: "0.1s", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-        <TinyTriangleAccent />
-        <div><strong>Messy notes welcome</strong> — Blog posts call out whether they’re drafts, AI-assisted, or polished.</div>
-      </li>
-      <li className="reveal" style={{ transitionDelay: "0.2s", position: "relative", paddingRight: "3rem" }}>
-        <div><strong>Changelogs everywhere</strong> — Commits and project pages log what’s shipped vs. what’s still in TODO.</div>
-        <div style={{ position: "absolute", right: "1rem", top: "50%", transform: "translateY(-50%)" }}>
-          <TinyDotClusterAccent />
+<figure className="section-divider" aria-hidden="true">
+  <img src="/graphic-section-divider.png" className="media-img" alt="" />
+</figure>
+<section className="home-section home-section--featured home-snap">
+  <header className="section-strip" aria-hidden="true">
+    <img className="section-strip__img" src="/featured-work.png" alt="" />
+  </header>
+  <h2 className="sr-only">Featured work</h2>
+  <div className="home-section__content">
+    <div className="section-surface section-surface--featured">
+      <div className="section-shell__header">
+        <h2 className="section-title">Case studies that highlight the full stack</h2>
+        <div className="hero-actions">
+          <Link data-variant="primary" to="/projects">
+            Browse detailed case studies
+          </Link>
+          <Link data-variant="ghost" to="/contributions">
+            Review open-source contributions
+          </Link>
         </div>
-      </li>
-      <li className="reveal" style={{ transitionDelay: "0.3s", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-        <BlogAccent />
-        <div><strong>Progress over polish</strong> — I’d rather share a half-finished demo with context than pretend it’s production-ready.</div>
-      </li>
-    </ul>
-  </div>
-</Section>
+        <div className="section-lead">
+          These write-ups summarize the problems I solved, the technologies I chose, and the measurable results I delivered.
+        </div>
+      </div>
+      <div className="section-content">
+        <div className="grid-auto project-gallery">
+          <ProjectCard
+            title="Car-Match"
+            meta="Full-stack matchmaking experience"
+            summary="Problem: recruiters and teams need a concise profile + chat flow for prospective hires. Role: product owner + engineer for UI, chat, and API. Approach: React front end, Express API, MongoDB, and Render/Netlify deployment with observability baked in. Results: Real-time chat, community forum, and profile matching, all tied to automated tests that cover registration, search, and moderation routes."
+            impactPrefix="Impact"
+            impact="Helps a simulated 200+ requests/day scenario stay under 400ms with Render autoscaling, while the chat and forum modules keep user context and permissions consistent."
+            stack={["React", "Express", "MongoDB", "Render", "Netlify"]}
+            links={[
+              { label: "Case study", href: "/projects/car-match/", variant: "primary" },
+              { label: "GitHub", href: "https://github.com/BradleyMatera/car-match", external: true }
+            ]}
+          />
 
-<Section
-  eyebrow="Let's collaborate"
-  title="Looking for entry-level teams that value honesty and mentorship"
->
-  <div className="section-lead">I’m candid about where I’m strong (front-end demos, docs, automation experiments) and where I need guidance (algorithms, large-scale systems). If that resonates, let’s talk.</div>
-<div className="grid-two">
-  <div className="surface-card surface-card--outline reveal" style={{ transitionDelay: "0.1s" }}>
-    <h3 className="feature-card__title">Quick ways to connect</h3>
-    <ul className="feature-list">
-      <li className="reveal" style={{ transitionDelay: "0.2s" }}>
-        <strong>LinkedIn:</strong>{" "}
-        <a href="https://www.linkedin.com/in/bradmatera" target="_blank" rel="noopener noreferrer">
-          /in/bradmatera
-        </a>
-      </li>
-      <li className="reveal" style={{ transitionDelay: "0.3s" }}>
-        <strong>GitHub:</strong>{" "}
-        <a href="https://github.com/BradleyMatera" target="_blank" rel="noopener noreferrer">
-          @BradleyMatera
-        </a>
-      </li>
-      <li className="reveal" style={{ transitionDelay: "0.4s" }}>
-        <strong>YouTube:</strong> <a href="https://www.youtube.com/@bradmatera" target="_blank" rel="noopener noreferrer" aria-label="YouTube channel" style={{ transition: "transform 0.2s" }}>@bradmatera</a>
-      </li>
-      <li className="reveal" style={{ transitionDelay: "0.5s" }}>
-        <strong>Email:</strong>{" "}
-        <span style={{color: '#e23b2d', fontWeight: 600}}>bradmatera@gmail.com</span> <span>(see Contact page)</span>
-      </li>
-    </ul>
-  </div>
-  <div className="surface-card surface-card--muted reveal" style={{ transitionDelay: "0.2s" }}>
-    <h3 className="feature-card__title">What to expect next</h3>
-    <div className="feature-card__body">
-      I'll respond within 24 hours with availability, relevant case studies, and a short plan for how we can collaborate. Happy to pair-program, audit an existing build, or present a portfolio walkthrough.
+          <ProjectCard
+            title="Interactive Pokédex"
+            meta="API-driven interface"
+            summary="Problem: demonstrate accessible search/filter design. Role: front-end architect. Approach: consume the public Pokémon REST API, build keyboard-friendly filtering, and maintain responsive layouts with custom hooks for debounce/cache. Results: fast search (requests debounced at 300ms), keyboard navigation across cards, and skeleton states that keep users oriented."
+            impactPrefix="Impact"
+            impact="Serves as a reference for responsive filtering interfaces and reusable data hooks, with Lighthouse scores above 90 on mobile."
+            stack={["React", "PokeAPI", "Custom hooks", "Tailwind"]}
+            links={[
+              { label: "Case study", href: "/projects/interactive-pokedex/", variant: "primary" },
+              { label: "Live demo", href: "https://bradleymatera.github.io/Interactive-Pokedex/", variant: "primary", external: true },
+              { label: "GitHub", href: "https://github.com/BradleyMatera/Pokedex", external: true }
+            ]}
+          />
+
+          <ProjectCard
+            title="CIRIS AI contributions"
+            meta="Open-source collaboration"
+            summary="Problem: improve documentation, add missing health checks, and experiment with Docker deployments for the ethics engine. Role: contributor and reviewer. Approach: submitted PRs that clarified authentication notes, added logging for token validation, and documented Docker Compose for local testing. Results: maintainers merged documentation fixes and test templates; the community now has clearer onboarding for Docker and JWT flows."
+            impactPrefix="Impact"
+            impact="Maintains project momentum by making the stack easier to run locally and documenting how to verify tokens in production."
+            stack={["Node.js", "Express", "MongoDB", "Docker", "JWT"]}
+            links={[
+              { label: "Case study", href: "/projects/ciris-ai/", variant: "primary" },
+              { label: "Organization", href: "https://github.com/CIRISAI", external: true }
+            ]}
+          />
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</section>
+
+<Section
+  className="section-surface section-surface--alt home-snap"
+  eyebrow="Why I build in public"
+  title="Clarity, documentation, and measurable progress"
+  description={<p className="section-lead">I treat every project like it's production: document assumptions, log deployments, and capture the runbooks that would keep a hand-off smooth.</p>}
+>
+  <ul className="feature-list feature-list--why">
+    <li className="reveal" style={{ transitionDelay: "0.1s" }}>
+      <TinyTriangleAccent />
+      <div><strong>Design-first work</strong> — accessibility, responsive layouts, and clear storytelling keep interfaces professional from day one.</div>
+    </li>
+    <li className="reveal" style={{ transitionDelay: "0.2s", position: "relative", paddingRight: "3rem" }}>
+      <div><strong>Operational discipline</strong> — GitHub Actions, monitoring scripts, and infrastructure notes accompany every deploy so future teams can trust the stack.</div>
+      <div style={{ position: "absolute", right: "1rem", top: "50%", transform: "translateY(-50%)" }}>
+        <TinyDotClusterAccent />
+      </div>
+    </li>
+    <li className="reveal" style={{ transitionDelay: "0.3s" }}>
+      <BlogAccent />
+      <div><strong>Honest storytelling</strong> — case studies highlight the problem, approach, and measurable impact so recruiters see exactly what shipped.</div>
+    </li>
+  </ul>
 </Section>
+
+<figure className="section-divider" aria-hidden="true">
+  <img src="/graphic-section-divider.png" className="media-img" alt="" />
+</figure>
+<section className="home-section home-section--collaborate home-snap">
+  <header className="section-strip" aria-hidden="true">
+    <img className="section-strip__img" src="/lets-collaborate.png" alt="" />
+  </header>
+  <h2 className="sr-only">Let's collaborate</h2>
+  <div className="home-section__content">
+    <div className="section-surface section-surface--collaborate">
+      <div className="section-shell__header">
+        <h2 className="section-title">Let's work together</h2>
+        <div className="section-lead">
+          I respond within 24 hours with availability, relevant case studies, and a short plan for how we can collaborate. Need my resume? Email me at <strong>bradmatera@gmail.com</strong> and I'll send the PDF right away.
+        </div>
+      </div>
+      <div className="section-content">
+        <div className="grid-two">
+          <div className="surface-card surface-card--outline reveal" style={{ transitionDelay: "0.1s" }}>
+            <h3 className="feature-card__title">Contact & next steps</h3>
+            <ul className="feature-list feature-list--contact">
+              <li>
+                <strong>Email:</strong>{" "}
+                <a href="mailto:bradmatera@gmail.com" style={{ color: "#e23b2d", fontWeight: 600 }}>bradmatera@gmail.com</a>
+              </li>
+              <li>
+                <strong>LinkedIn:</strong>{" "}
+                <a href="https://www.linkedin.com/in/bradmatera" target="_blank" rel="noopener noreferrer" className="contact-link">
+                  /in/bradmatera
+                </a>
+              </li>
+              <li>
+                <strong>GitHub:</strong>{" "}
+                <a href="https://github.com/BradleyMatera" target="_blank" rel="noopener noreferrer" className="contact-link">
+                  @BradleyMatera
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div className="surface-card surface-card--muted reveal" style={{ transitionDelay: "0.2s" }}>
+            <h3 className="feature-card__title">Collaborative delivery</h3>
+            <div className="feature-card__body">
+              Bring me into sprint planning, pair programming, or accessibility reviews. I thrive on teams that value documentation, metrics, and thoughtful automation as much as clean interfaces.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 </>

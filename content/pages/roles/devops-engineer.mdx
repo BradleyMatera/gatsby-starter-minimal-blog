@@ -9,19 +9,62 @@ import { Section, Card } from "../../../src/components/ui";
 <Section
   eyebrow="DevOps Engineer"
   title="Learning DevOps by automating my own projects"
-  description="I haven't held a DevOps title yet. This page documents the guardrails I've actually built, what still breaks, and where mentorship would help."
+  description="I have not held a DevOps Engineer title yet. This page documents the automation and deployment practices I have implemented, current limitations, and areas where mentorship would be valuable."
 />
+
+<Section
+  eyebrow="Honesty upgrade"
+  title="Clear scope, upfront"
+>
+  <div className="grid-three">
+    <Card>
+      <h3 className="feature-card__title">What I have</h3>
+      <ul className="feature-list">
+        <li>Personal CI scripts and deployment checklists for personal projects.</li>
+        <li>Local Docker Compose labs to practice repeatable environments.</li>
+        <li>Documentation practices that record failures and remediation steps.</li>
+      </ul>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">What I don’t have yet</h3>
+      <ul className="feature-list">
+        <li>Ownership of production CI/CD workflows or multi-team delivery pipelines.</li>
+        <li>On-call rotations or enterprise incident response.</li>
+        <li>Deep observability stacks beyond basic logs and alerts.</li>
+      </ul>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">What I’m doing next</h3>
+      <ul className="feature-list">
+        <li>Stronger rollback patterns and approval steps in CI/CD.</li>
+        <li>Monitoring practice beyond Lighthouse and console logs.</li>
+        <li>Policy-as-code exercises for secrets and access control.</li>
+      </ul>
+    </Card>
+  </div>
+</Section>
 
 <Section
   eyebrow="Reality snapshot"
   title="What 'DevOps' means in my world today"
 >
-  <ul className="feature-list">
-    <li>GitHub Actions pipelines for this Gatsby site + side projects (lint, type-check, deploy to Netlify/GitHub Pages).</li>
-    <li>Docker Compose labs (Docker Multilang) to keep Node, Python, and Zig tooling aligned on my laptop.</li>
-    <li>AWS internship exposure to ticket triage + CloudWatch dashboards—not production change ownership.</li>
-    <li>Every script was scaffolded with AI prompts; I keep those logs in the repos so reviewers know the origin.</li>
-  </ul>
+  <div className="grid-two">
+    <Card>
+      <h3 className="feature-card__title">Personal automation (public)</h3>
+      <ul className="feature-list">
+        <li>GitHub Actions pipelines for personal sites and demos, including linting, type-checking, and deployment to Netlify and GitHub Pages.</li>
+        <li>Docker Compose labs to standardize Node, Python, and Zig tooling in local development environments.</li>
+        <li>Scripts and deployment notes documented in repository READMEs.</li>
+      </ul>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">Guided exposure (lab-style)</h3>
+      <ul className="feature-list">
+        <li>AWS internship exposure to ticket triage and CloudWatch dashboards in lab-style environments.</li>
+        <li>Guided rotations only; no ownership of production changes or independent resolution of live customer tickets.</li>
+      </ul>
+    </Card>
+  </div>
 </Section>
 
 <Section
@@ -33,17 +76,25 @@ import { Section, Card } from "../../../src/components/ui";
       <h3 className="feature-card__title">Docker Multilang</h3>
       <ul className="feature-list">
         <li>Compose file standardizes Node, Python, and Zig tooling for onboarding.</li>
-        <li>Manual smoke tests replace automated suites; README lists missing health checks.</li>
-        <li>Pipeline: GitHub Actions builds images + runs linting; still figuring out caching best practices.</li>
+        <li>Manual smoke tests are used in place of automated test suites; README documentation lists missing health checks.</li>
+        <li>Pipeline uses GitHub Actions to build images and run linting; caching best practices are still being evaluated.</li>
       </ul>
+      <p className="feature-card__meta">
+        <strong>Proof links:</strong>{" "}
+        <a href="/containerization-and-orchestration/">Containerization notes</a>
+      </p>
     </Card>
     <Card>
       <h3 className="feature-card__title">Portfolio deploys</h3>
       <ul className="feature-list">
-        <li>Netlify + GitHub Pages workflows validate builds before publishing this honesty site and the static template.</li>
-        <li>Release notes + honesty logs replace formal change-management because there’s no team yet.</li>
-        <li>Accessibility + Lighthouse checks run via CLI scripts; failures block deploys until fixed.</li>
+        <li>Netlify and GitHub Pages workflows validate builds before publishing personal portfolio sites and static templates.</li>
+        <li>Release notes and documentation logs are used in place of formal change-management processes due to the absence of a team environment.</li>
+        <li>Accessibility and Lighthouse checks run via CLI scripts; build failures block deployments until issues are resolved.</li>
       </ul>
+      <p className="feature-card__meta">
+        <strong>Proof links:</strong>{" "}
+        <a href="/github-actions-aws-automation/">CI/CD workflow notes</a>
+      </p>
     </Card>
   </div>
 </Section>
@@ -53,15 +104,15 @@ import { Section, Card } from "../../../src/components/ui";
   title="What I'm practicing (always with AI pair-programming)"
 >
   <div className="project-card__stack">
-    <span>GitHub Actions</span>
-    <span>Netlify CLI</span>
-    <span>Docker / Docker Compose</span>
-    <span>AWS CLI labs</span>
-    <span>Bash scripting</span>
-    <span>Terraform tutorials</span>
-    <span>k6 smoke tests (local only)</span>
+    <span>GitHub Actions — personal CI basics</span>
+    <span>Netlify CLI — personal deploys</span>
+    <span>Docker / Docker Compose — local dev labs</span>
+    <span>AWS CLI labs — lab only</span>
+    <span>Bash scripting — local automation</span>
+    <span>Terraform — tutorial stage</span>
+    <span>k6 smoke tests — local only</span>
   </div>
-  <p>Each repo documents which of these tools is “working,” “rough draft,” or “on deck” so readers know what to trust.</p>
+  <p>Each repository documents which tools are operational, experimental, or planned to indicate maturity and reliability.</p>
 </Section>
 
 <Section
@@ -74,5 +125,5 @@ import { Section, Card } from "../../../src/components/ui";
     <li>Hardening secrets management and policy-as-code beyond `.env` files.</li>
     <li>Incident response drills in real production environments.</li>
   </ul>
-  <p>If you’re hiring for junior DevOps/platform roles and can coach through these gaps, I’d love to connect.</p>
+  <p>If you are hiring for junior DevOps or platform roles and provide coaching in these areas, I am open to discussing opportunities.</p>
 </Section>

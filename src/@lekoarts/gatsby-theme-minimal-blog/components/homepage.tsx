@@ -11,7 +11,6 @@ import { visuallyHidden } from "../styles/utils";
 import Seo from "./seo";
 import Hero from "../texts/hero.mdx";
 import Bottom from "../texts/bottom.mdx";
-import HeroSystemScene from "../../../components/HeroSystemScene";
 import TinyTriangleAccent from "../../../components/TinyTriangleAccent";
 
 export type MBHomepageProps = {
@@ -35,7 +34,6 @@ const Homepage = ({ posts }: MBHomepageProps) => {
 
   return (
     <Layout>
-      <HeroSystemScene />
       <h1 sx={visuallyHidden}>{siteTitle}</h1>
       <section sx={{ mb: [3, 4, 5] }}>
         <Hero />

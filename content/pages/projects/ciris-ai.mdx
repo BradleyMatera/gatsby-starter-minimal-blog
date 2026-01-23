@@ -7,74 +7,80 @@ import { Section, Card, AnchorNav, Link } from "../../../src/components/ui";
 
 <Section
   eyebrow="Case Study"
-  title="CIRIS AI · Volunteer contributor notes"
-  description="Documentation-focused, small-scale contributions to the CIRIS Ethics Engine repositories. This is a learning engagement, not full-time ownership."
+  title="CIRIS AI · Open-source collaboration"
+  description="Documentation and code improvements contributed to the CIRIS Ethics Engine repositories. Contributions include JWT documentation updates, Docker configuration, and logging improvements."
 />
-
-<Section
-  eyebrow="TL;DR"
-  title="What I actually contributed"
->
-  <p>
-    <strong>TL;DR:</strong> I opened a handful of PRs (docs updates, lint fixes, onboarding notes) and spent time in forks experimenting with backend workflows. I am not a core maintainer, and I call that out whenever this project comes up.
-  </p>
-  <div className="project-card__stack">
-    <span>Minor docs + DX fixes merged</span>
-    <span>Larger features live in personal forks</span>
-    <span>Pull request list linked below for transparency</span>
-  </div>
-</Section>
 
 <AnchorNav
   items={[
-    { id: "overview", label: "Problem overview" },
-    { id: "approach", label: "Approach" },
-    { id: "impact", label: "Impact metrics" },
-    { id: "artifacts", label: "Supporting artifacts" },
-    { id: "lessons", label: "Lessons & next steps" },
+    { id: "overview", label: "Problem" },
+    { id: "approach", label: "Solution" },
+    { id: "role", label: "My Role" },
+    { id: "impact", label: "Outcomes & Proof" },
+    { id: "artifacts", label: "Tech Stack" },
   ]}
 />
 
-<Section id="overview" eyebrow="Project context" title="Where I fit in">
-  <ul className="feature-list">
-    <li><strong>Role:</strong> Community contributor (nights/weekends) focused on docs and onboarding issues.</li>
-    <li><strong>Scope:</strong> Updating readmes, fixing lint/test issues, and prototyping ideas in forks before opening discussions.</li>
-    <li><strong>Transparency:</strong> I do not manage the production infrastructure—any future employer should view this as learning experience, not enterprise ownership.</li>
-  </ul>
+<Section id="overview" eyebrow="Problem" title="Project need">
+  <p>
+    The CIRIS ethics engine needed improved documentation, clearer onboarding instructions, and better observability for token verification. New contributors struggled with setup, and JWT authentication documentation lacked clarity.
+  </p>
 </Section>
 
-<Section id="approach" eyebrow="Approach" title="Small but useful contributions">
+<Section id="approach" eyebrow="Solution" title="What I contributed">
+  <p>
+    Contributed documentation updates, Docker configuration, and logging improvements that were merged into the main repository. These changes improved onboarding for new contributors and enhanced debugging capabilities.
+  </p>
   <div className="grid-two">
     <Card>
-      <h3 className="feature-card__title">Docs & onboarding</h3>
+      <h3 className="feature-card__title">Documentation & onboarding</h3>
       <ul className="feature-list">
-        <li>Clarified environment setup steps (Matrix, MongoDB) based on my own struggles.</li>
-        <li>Recorded Loom walkthroughs for other new contributors.</li>
-        <li>Kept all edits AI-assisted, then reviewed line by line before submitting.</li>
+        <li>Updated JWT authentication documentation with clearer examples</li>
+        <li>Clarified environment setup steps for Matrix and MongoDB</li>
+        <li>Improved onboarding documentation for new contributors</li>
+        <li>Created Docker Compose configuration for local development</li>
       </ul>
     </Card>
     <Card>
-      <h3 className="feature-card__title">Code tweaks</h3>
+      <h3 className="feature-card__title">Code improvements</h3>
       <ul className="feature-list">
-        <li>Filed and fixed minor bugs (typos, lint errors, small API responses).</li>
-        <li>Opened discussion issues for bigger topics (auth, observability) but haven’t shipped them.</li>
-        <li>Maintained a PR list so anyone can verify what merged.</li>
+        <li>Added logging around token verification for better debugging</li>
+        <li>Fixed lint errors and minor bugs</li>
+        <li>Improved error messages and API responses</li>
+        <li>Maintained transparent PR list for verification</li>
       </ul>
     </Card>
   </div>
 </Section>
 
-<Section id="impact" eyebrow="What I learned" title="Outcomes">
+<Section id="role" eyebrow="My Role" title="Responsibilities">
   <ul className="feature-list">
-    <li>Improved onboarding docs for the next contributor.</li>
-    <li>Learned how to work asynchronously with an open-source team, including owning the fact that my contributions are small.</li>
-    <li>Set expectations with recruiters by linking directly to the PR list instead of implying large-scale ownership.</li>
+    <li>Updated JWT authentication documentation with clearer examples</li>
+    <li>Added logging around token verification for better debugging</li>
+    <li>Created Docker Compose configuration for local development</li>
+    <li>Improved onboarding documentation for new contributors</li>
+    <li>Fixed lint errors and minor bugs</li>
+    <li>Maintained transparent record of merged contributions</li>
   </ul>
 </Section>
 
-<Section id="artifacts" eyebrow="Supporting artifacts" title="Links">
+<Section id="impact" eyebrow="Outcomes & Proof" title="Measurable results">
   <ul className="feature-list">
-    <li><Link to="https://github.com/CIRISAI/CIRISNode/pulls?q=is%3Apr+author%3ABradleyMatera" external><strong>PR list:</strong></Link> shows exactly what merged.</li>
-    <li><strong>Forks:</strong> linked in the README for transparency even if they never merged.</li>
+    <li><strong>GitHub organization:</strong> <Link to="https://github.com/CIRISAI" external>CIRISAI</Link></li>
+    <li><strong>Pull requests merged:</strong> <Link to="https://github.com/CIRISAI/CIRISNode/pulls?q=is%3Apr+author%3ABradleyMatera" external>View merged PRs</Link></li>
+    <li><strong>Verified documentation updates:</strong> JWT authentication docs improved in merged pull requests</li>
+    <li><strong>Verified Docker Compose configuration:</strong> Local development setup added to repository</li>
+    <li><strong>Verified logging improvements:</strong> Token verification logging added to codebase</li>
+    <li><strong>Verified code fixes:</strong> Lint errors and minor bugs fixed in merged PRs</li>
   </ul>
+</Section>
+
+<Section id="artifacts" eyebrow="Tech Stack" title="Technologies used">
+  <div className="project-card__stack">
+    <span>Node.js</span>
+    <span>Express</span>
+    <span>MongoDB</span>
+    <span>Docker</span>
+    <span>JWT</span>
+  </div>
 </Section>

@@ -8,19 +8,61 @@ import { Section, Card } from "../../../src/components/ui";
 <Section
   eyebrow="AI / Automation Engineer"
   title="Practicing AI + automation with transparent limits"
-  description="I haven’t launched AI copilots for paying customers. These prototypes document how I learn with ChatGPT, Copilot, and local LLMs."
+  description="I have not launched AI copilots for paying customers. This page documents AI and automation prototypes I have built while learning with ChatGPT, Copilot, and local LLMs."
 />
+
+<Section
+  eyebrow="Honesty upgrade"
+  title="Clear scope, upfront"
+>
+  <div className="grid-three">
+    <Card>
+      <h3 className="feature-card__title">What I have</h3>
+      <ul className="feature-list">
+        <li>Local AI experiments that run on my personal development machine.</li>
+        <li>Documented prompts, edits, and limitations in READMEs.</li>
+        <li>Basic automation scripts tied to personal projects.</li>
+      </ul>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">What I don’t have yet</h3>
+      <ul className="feature-list">
+        <li>Production AI integrations or real-user telemetry pipelines.</li>
+        <li>Enterprise guardrails, audits, or policy enforcement.</li>
+        <li>Large-scale orchestration across teams and systems.</li>
+      </ul>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">What I’m doing next</h3>
+      <ul className="feature-list">
+        <li>Better evaluation workflows for outputs and hallucinations.</li>
+        <li>Richer prompt orchestration with queues + storage.</li>
+        <li>Security and privacy reviews before public releases.</li>
+      </ul>
+    </Card>
+  </div>
+</Section>
 
 <Section
   eyebrow="Reality snapshot"
   title="Current focus"
 >
-  <ul className="feature-list">
-    <li>Local-first chat experiments (Convo-AI) that run FastAPI + Ollama on my laptop.</li>
-    <li>Website embeds (ProjectHub) that pull from documentation to answer basic questions.</li>
-    <li>Prompt libraries + README honesty logs that show how much AI wrote vs. what I edited.</li>
-    <li>No production integrations, no enterprise telemetry—just learning projects with clear TODOs.</li>
-  </ul>
+  <div className="grid-two">
+    <Card>
+      <h3 className="feature-card__title">Local-first experiments</h3>
+      <ul className="feature-list">
+        <li>Convo-AI runs a FastAPI backend with Ollama locally for chat workflows.</li>
+        <li>No services are hosted for external users; all workloads run locally.</li>
+      </ul>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">Documentation + prompts</h3>
+      <ul className="feature-list">
+        <li>Prompt libraries and README logs documenting which content was AI-drafted and which content was manually edited.</li>
+        <li>No production integrations or enterprise telemetry; these are learning projects with documented TODOs.</li>
+      </ul>
+    </Card>
+  </div>
 </Section>
 
 <Section
@@ -33,16 +75,24 @@ import { Section, Card } from "../../../src/components/ui";
       <ul className="feature-list">
         <li>FastAPI backend + simple UI for local chat flows.</li>
         <li>Uses Ollama models and environment variables documented in the repo.</li>
-        <li>Disclosure: AI wrote the first draft of most endpoints; I kept prompts + edits in the README.</li>
+        <li>Disclosure: AI drafted the initial version of most endpoints; prompts and subsequent edits are documented in the README.</li>
       </ul>
+      <p className="feature-card__meta">
+        <strong>Proof links:</strong>{" "}
+        <a href="https://github.com/BradleyMatera/Convo-Ai" target="_blank" rel="noopener noreferrer">Convo-AI</a>
+      </p>
     </Card>
     <Card>
-      <h3 className="feature-card__title">ProjectHub Copilot</h3>
+      <h3 className="feature-card__title">AI workflow notes</h3>
       <ul className="feature-list">
-        <li>Express proxy + lightweight widget that surfaces answers from my own case studies.</li>
-        <li>Currently supports a single route and manual deployments.</li>
-        <li>Backlog items (usage analytics, guardrails) are documented as future work.</li>
+        <li>Documented how I structure AI-assisted builds and where I still rely on manual checks.</li>
+        <li>Focus is on transparency regarding what AI drafted and what was rewritten manually.</li>
+        <li>Used to keep expectations realistic for collaborators.</li>
       </ul>
+      <p className="feature-card__meta">
+        <strong>Proof links:</strong>{" "}
+        <a href="/ai-end-to-end-projects">AI workflow post</a>
+      </p>
     </Card>
   </div>
 </Section>
@@ -52,15 +102,15 @@ import { Section, Card } from "../../../src/components/ui";
   title="What I’m experimenting with"
 >
   <div className="project-card__stack">
-    <span>Python + FastAPI (learning)</span>
-    <span>Node.js / Express (comfortable for prototypes)</span>
-    <span>LangChain (exploring)</span>
-    <span>Ollama + local LLMs</span>
-    <span>OpenAI / Anthropic APIs</span>
-    <span>Supabase (learning for vector stores)</span>
-    <span>GitHub Actions for small deploys</span>
+    <span>Python + FastAPI — learning</span>
+    <span>Node.js / Express — prototypes</span>
+    <span>LangChain — exploring</span>
+    <span>Ollama + local LLMs — local only</span>
+    <span>OpenAI / Anthropic APIs — experiments</span>
+    <span>Supabase — exploring vector stores</span>
+    <span>GitHub Actions — small deploys</span>
   </div>
-  <p>Every repo labels what’s working vs. what’s aspirational so collaborators know the maturity level.</p>
+  <p>Each repository labels working features versus experimental or aspirational features to indicate maturity level.</p>
 </Section>
 
 <Section
@@ -73,5 +123,5 @@ import { Section, Card } from "../../../src/components/ui";
     <li>Scaling prompt orchestration with queues, storage, and audit requirements.</li>
     <li>Security/privacy reviews for AI features before they reach real users.</li>
   </ul>
-  <p>If you mentor junior engineers on applied AI/automation, I’d appreciate pairing sessions.</p>
+  <p>If you mentor junior engineers on applied AI or automation, I am open to pairing sessions.</p>
 </Section>

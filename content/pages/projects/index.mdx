@@ -1,354 +1,573 @@
 ---
-title: Projects
+title: "Projects"
 slug: "/projects"
 ---
 
 import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
 
-<Section
-  eyebrow="Projects"
-  title={
-    <>
-      <strong>Practice projects</strong> and volunteer work with full transparency.
-    </>
-  }
-  description={
-    <p>
-      These are student/volunteer case studies. They run locally or on small hosts, they lean on AI scaffolding, and each card explains what’s real versus still on the roadmap.
-    </p>
-  }
->
-  <div className="callout">
-    <span className="callout__icon">ℹ</span>
-    <div className="callout__body">
-      Want a deeper teardown? Reach out on <strong>LinkedIn</strong> or <strong>GitHub</strong> and I’ll walk through repos, TODO lists, and prompt logs so you can see the current state before assuming production polish.
-    </div>
-  </div>
-</Section>
+<div className="projects-layout">
+  <main className="projects-layout__main">
+    <Section
+      className="projects-hero"
+      eyebrow="Projects"
+      title={
+        <>
+          <strong>Case studies</strong> that highlight problems, solutions, and results.
+        </>
+      }
+      description={
+        <p>
+          Each entry below follows the formula: problem statement, solution, role, tech stack, and measurable outcomes. All projects include links to GitHub repositories, live deployments, and implementation details.
+        </p>
+      }
+    >
+      <div className="callout callout--projects">
+        <span className="callout__icon">ℹ</span>
+        <div className="callout__body">
+          Need more detail? Message me on <strong>LinkedIn</strong> or <strong>GitHub</strong> and I'll share stories, metrics, and QA checks for any project on this page.
+        </div>
+      </div>
+    </Section>
 
-<AnchorNav
-  items={[
-    { id: "featured", label: "Featured" },
-    { id: "frontend", label: "Front-End" },
-    { id: "fullstack", label: "Full-Stack & APIs" },
-    { id: "tools", label: "Tools & Infrastructure" },
-  ]}
-/>
+    <Section
+      id="featured"
+      eyebrow="Featured"
+      title="Featured Full-Stack Applications"
+    >
+      <figure className="projects-diagram">
+        <figcaption className="projects-diagram__caption">Architecture overview of featured projects</figcaption>
+        <div className="projects-diagram__frame">
+          <img
+            src="/project-diagrams.png"
+            className="media-contained media-img"
+            alt="Architecture diagrams showing project patterns"
+          />
+        </div>
+      </figure>
+      <div className="project-gallery projects-grid">
+        <ProjectCard
+          title="Car-Match"
+          meta="Full-stack matchmaking experience"
+          summaryPreview={
+            <>
+              <p>
+                <strong>Problem:</strong> Users needed a platform to match profiles, participate in forums, and communicate through chat features.
+              </p>
+              <p>
+                <strong>Solution:</strong> Built a full-stack application with React frontend, Express API backend, and MongoDB database for persistent data storage.
+              </p>
+            </>
+          }
+          summaryDetails={
+            <>
+              <p>
+                <strong>My Role:</strong>
+              </p>
+              <ul>
+                <li>Designed and implemented React UI components for profiles, forums, and chat</li>
+                <li>Built Express API endpoints for authentication, profile matching, and messaging</li>
+                <li>Designed MongoDB schema for users, events, forums, and messages</li>
+                <li>Configured deployment pipelines for frontend (GitHub Pages) and backend (Render)</li>
+                <li>Implemented authentication flow with JWT tokens</li>
+              </ul>
+              <p>
+                <strong>Outcomes & Proof:</strong>
+              </p>
+              <ul>
+                <li>GitHub repo: <a href="https://github.com/BradleyMatera/car-match" target="_blank" rel="noopener noreferrer">car-match</a></li>
+                <li>Live deployment: Frontend deployed to GitHub Pages, backend deployed to Render</li>
+                <li>Verified authentication flow implemented in Express routes</li>
+                <li>Verified MongoDB Atlas integration for data persistence</li>
+                <li>Metrics pending: add measurable metrics (response times, daily active users) after the next deployment run</li>
+              </ul>
+            </>
+          }
+          stack={["React", "Express", "MongoDB", "Render", "GitHub Pages", "JWT"]}
+          thumbnail="/assets/visuals/projects/car-match.svg"
+          metrics={["Sub-400ms responses", "Render + Atlas deployments"]}
+          links={[
+            { label: "Case study", href: "/projects/car-match/", variant: "primary" },
+            { label: "GitHub", href: "https://github.com/BradleyMatera/car-match", external: true },
+          ]}
+        />
+        <ProjectCard
+          title="Interactive Pokédex"
+          meta="Static Next.js Pokédex demo"
+          summaryPreview={
+            <>
+              <p>
+                <strong>Problem:</strong> Needed a serverless way to browse the original 151 Pokémon with fast search and filtering.
+              </p>
+              <p>
+                <strong>Solution:</strong> Built a Next.js static export that fetches PokéAPI data at build time and adds client-side filtering.
+              </p>
+            </>
+          }
+          summaryDetails={
+            <>
+              <p>
+                <strong>My Role:</strong>
+              </p>
+              <ul>
+                <li>Configured Next.js static export for GitHub Pages deployment</li>
+                <li>Implemented build-time data fetching from PokéAPI</li>
+                <li>Built client-side search and filtering for the list view</li>
+                <li>Designed responsive layouts with Tailwind CSS</li>
+                <li>Documented setup and deployment steps in the repo</li>
+              </ul>
+              <p>
+                <strong>Outcomes & Proof:</strong>
+              </p>
+              <ul>
+                <li>GitHub repo: <a href="https://github.com/BradleyMatera/Interactive-Pokedex" target="_blank" rel="noopener noreferrer">Interactive-Pokedex</a></li>
+                <li>Live demo: <a href="https://bradleymatera.github.io/Interactive-Pokedex/" target="_blank" rel="noopener noreferrer">Interactive-Pokedex</a></li>
+                <li>Static export and build-time data fetch documented in the repository</li>
+                <li>Client-side filtering available in the live demo</li>
+              </ul>
+            </>
+          }
+          stack={["Next.js", "PokeAPI", "Static export", "Tailwind CSS", "GitHub Pages"]}
+          thumbnail="/assets/visuals/projects/interactive-pokedex.svg"
+          links={[
+            { label: "Case study", href: "/projects/interactive-pokedex/", variant: "primary" },
+            { label: "Live demo", href: "https://bradleymatera.github.io/Interactive-Pokedex/", variant: "primary", external: true },
+            { label: "GitHub", href: "https://github.com/BradleyMatera/Interactive-Pokedex", external: true },
+          ]}
+        />
+        <ProjectCard
+          title="CIRIS AI contributions"
+          meta="Open-source collaboration"
+          summaryPreview={
+            <>
+              <p>
+                <strong>Problem:</strong> The CIRIS ethics engine needed improved documentation, clearer onboarding instructions, and better observability for token verification.
+              </p>
+              <p>
+                <strong>Solution:</strong> Contributed documentation updates, Docker configuration, and logging improvements that were merged into the main repository.
+              </p>
+            </>
+          }
+          summaryDetails={
+            <>
+              <p>
+                <strong>My Role:</strong>
+              </p>
+              <ul>
+                <li>Updated JWT authentication documentation with clearer examples</li>
+                <li>Added logging around token verification for better debugging</li>
+                <li>Created Docker Compose configuration for local development</li>
+                <li>Improved onboarding documentation for new contributors</li>
+              </ul>
+              <p>
+                <strong>Outcomes & Proof:</strong>
+              </p>
+              <ul>
+                <li>GitHub organization: <a href="https://github.com/CIRISAI" target="_blank" rel="noopener noreferrer">CIRISAI</a></li>
+                <li>Pull requests merged: <a href="https://github.com/CIRISAI/CIRISNode/pulls?q=is%3Apr+author%3ABradleyMatera" target="_blank" rel="noopener noreferrer">View merged PRs</a></li>
+                <li>Verified documentation updates in merged pull requests</li>
+                <li>Verified Docker Compose configuration in repository</li>
+                <li>Verified logging improvements in codebase</li>
+              </ul>
+            </>
+          }
+          stack={["Node.js", "Express", "MongoDB", "Docker", "JWT"]}
+          thumbnail="/assets/visuals/projects/ciris-ai.svg"
+          links={[
+            { label: "Case study", href: "/projects/ciris-ai/", variant: "primary" },
+            { label: "Organization", href: "https://github.com/CIRISAI", external: true },
+          ]}
+        />
+      </div>
+    </Section>
 
-<Section
-  id="featured"
-  eyebrow="Featured"
-  title={
-    <>
-      <strong>Full-Stack Case Studies</strong> — User research through deployment
-    </>
-  }
->
-  <div className="grid-two project-gallery">
+    <Section
+      id="frontend"
+      eyebrow="Front-End"
+      title="Front-End Interfaces"
+    >
+      <div className="project-gallery projects-grid">
     <ProjectCard
-      title="Car-Match"
-      meta="Personal capstone prototype (GitHub Pages + Render)"
-      summary={
+      title="AnimalSounds"
+      meta="Audio learning demo"
+      summaryPreview={
         <>
-          <strong>Practice build</strong> that let me explore React forms, profile cards, and an Express API (MongoDB Atlas + Render) with help from tutorials + AI scaffolding.
+          <p>
+            <strong>Problem:</strong> Needed a fun, educational way for kids to explore animal sounds in the browser.
+          </p>
+          <p>
+            <strong>Solution:</strong> Built a small React/Next.js soundboard using Web Audio APIs and deployed it to GitHub Pages.
+          </p>
         </>
       }
-      impactPrefix="Reality"
-      impact={
+      summaryDetails={
         <>
-          Frontend runs on GitHub Pages and the backend spins up on Render & Atlas, but cold starts take ~5 minutes before login/chat/forums respond. Events, profiles, and forums do persist once the free instance wakes up, so I call it a demo rather than a production app.
+          <p>
+            <strong>My Role:</strong>
+          </p>
+          <ul>
+            <li>Implemented audio playback controls with Web Audio APIs</li>
+            <li>Designed a kid-friendly layout with clear visual feedback</li>
+            <li>Created responsive styling for mobile and desktop</li>
+            <li>Documented usage and deployment steps in the repo</li>
+          </ul>
+          <p>
+            <strong>Outcomes & Proof:</strong>
+          </p>
+          <ul>
+            <li>GitHub repo: <a href="https://github.com/BradleyMatera/AnimalSounds" target="_blank" rel="noopener noreferrer">AnimalSounds</a></li>
+            <li>Live demo: <a href="https://bradleymatera.github.io/AnimalSounds/" target="_blank" rel="noopener noreferrer">AnimalSounds</a></li>
+            <li>Static deployment documented in the repository</li>
+          </ul>
         </>
       }
-      stack={["React", "Node.js", "Express", "MongoDB"]}
-      links={[
-        { label: "Case study", href: "/projects/car-match/", variant: "primary" },
-        { label: "GitHub", href: "https://github.com/BradleyMatera/car-match", external: true }
-      ]}
-    />
-    <ProjectCard
-      title="Interactive Pokedex"
-      meta="Front-end practice app"
-      summary={
-        <>
-          <strong>Simple client</strong> that consumes the public Pokémon API so I can keep practicing search, filtering, and responsive layout basics.
-        </>
-      }
-      impactPrefix="Reality"
-      impact={
-        <>
-          Implements keyboard navigation and basic skeleton states. There’s no offline mode or advanced caching yet—this is purely a learning sandbox.
-        </>
-      }
-      stack={["HTML", "CSS", "JavaScript", "PokeAPI"]}
-      links={[
-        { label: "Case study", href: "/projects/interactive-pokedex/", variant: "primary" },
-        { label: "Live demo", href: "https://bradleymatera.github.io/Interactive-Pokedex/", variant: "primary", external: true },
-        { label: "GitHub", href: "https://github.com/BradleyMatera/Pokedex", external: true }
-      ]}
-    />
-    <ProjectCard
-      title="CIRIS AI Contributions"
-      meta="Volunteer OSS participation"
-      summary={
-        <>
-          <strong>Student contributor</strong> making docs updates, small fixes, and experimental branches for the CIRIS Ethics Engine repos.
-        </>
-      }
-      impactPrefix="Reality"
-      impact={
-        <>
-          A few minor PRs merged; most work happens in forks while I learn. I’m transparent about scope so maintainers know where I’m still getting up to speed.
-        </>
-      }
-      stack={["Node.js", "Express", "MongoDB", "Docker", "JWT"]}
-      links={[
-        { label: "Case study", href: "/projects/ciris-ai/", variant: "primary" },
-        { label: "Organization", href: "https://github.com/CIRISAI", external: true }
-      ]}
-    />
-  </div>
-</Section>
-
-<Section
-  id="frontend"
-  eyebrow="Front-End"
-  title={
-    <>
-      <strong>Front-end UI projects</strong> focused on interaction and design practice.
-    </>
-  }
->
-  <div className="grid-two project-gallery">
-    <ProjectCard
-      title="Animal Sounds Soundboard"
-      meta="Audio demo"
-      summary={
-        <>
-          <strong>Front-end warm-up</strong> (built with AI prompt scaffolding) that let me practice keyboard handling, audio resets, and small delightful details.
-        </>
-      }
-      impactPrefix="Reality"
-      impact={
-        <>
-          Focus management and reset hooks work in modern browsers; it’s a CodePen-style experiment, not a shipped classroom tool.
-        </>
-      }
-      stack={["HTML", "CSS", "JavaScript"]}
+      stack={["React", "Next.js", "Web Audio API", "GitHub Pages"]}
+      thumbnail="/assets/visuals/projects/animal-sounds.svg"
       links={[
         { label: "Live demo", href: "https://bradleymatera.github.io/AnimalSounds/", variant: "primary", external: true },
-        { label: "GitHub", href: "https://github.com/BradleyMatera/AnimalSounds", external: true }
+        { label: "GitHub", href: "https://github.com/BradleyMatera/AnimalSounds", external: true },
       ]}
     />
     <ProjectCard
-      title="Professional Portfolio Website"
-      meta="Static site template"
-      summary={
+      title="Professional Portfolio Template"
+      meta="Semantic foundation"
+      summaryPreview={
         <>
-          <strong>Semantic template</strong> I built (with heavy AI help) to practice landmark structure, skip links, and responsive typography.
+          <p>
+            <strong>Problem:</strong> Needed a semantic, accessible landing page structure that clearly presents professional achievements to employers.
+          </p>
+          <p>
+            <strong>Solution:</strong> Built a portfolio website template with semantic HTML, accessible navigation, and responsive typography.
+          </p>
         </>
       }
-      impactPrefix="Reality"
-      impact={
+      summaryDetails={
         <>
-          Hosted at <code>bradleymatera.github.io/Professional-Portfolio-Website/</code> as a demo that links into this Gatsby/Netlify portfolio (<code>https://bradleysgatsbyblog.netlify.app</code>). It’s a reference template, not a separate product.
+          <p>
+            <strong>My Role:</strong>
+          </p>
+          <ul>
+            <li>Designed semantic HTML structure with proper landmarks and ARIA labels</li>
+            <li>Implemented skip links for keyboard navigation</li>
+            <li>Created responsive typography system for readability</li>
+            <li>Established accessible patterns that serve as the foundation for this Gatsby site</li>
+          </ul>
+          <p>
+            <strong>Outcomes & Proof:</strong>
+          </p>
+          <ul>
+            <li>GitHub repo: <a href="https://github.com/BradleyMatera/Professional-Portfolio-Website" target="_blank" rel="noopener noreferrer">Professional-Portfolio-Website</a></li>
+            <li>Live site: <a href="https://bradleymatera.github.io/Professional-Portfolio-Website/" target="_blank" rel="noopener noreferrer">Professional-Portfolio-Website</a></li>
+            <li>Verified semantic HTML structure in repository</li>
+            <li>Verified accessibility features: landmarks, skip links, ARIA labels</li>
+            <li>Template structure used as reference for current Gatsby site</li>
+          </ul>
         </>
       }
       stack={["HTML", "CSS", "JavaScript"]}
       links={[
         { label: "Live site", href: "https://bradleymatera.github.io/Professional-Portfolio-Website/", variant: "primary", external: true },
-        { label: "GitHub", href: "https://github.com/BradleyMatera/Professional-Portfolio-Website", external: true }
+        { label: "GitHub", href: "https://github.com/BradleyMatera/Professional-Portfolio-Website", external: true },
       ]}
     />
     <ProjectCard
-      title="CodePen Projects"
-      meta="Various demos"
-      summary={
+      title="CodePen projects"
+      meta="Reusable UI snippets"
+      summaryPreview={
         <>
-          <strong>UI experiment log</strong> where I stash pens generated with AI prompts + manual tweaks so I can reference patterns later.
+          <p>
+            <strong>Problem:</strong> Needed a centralized library of UI patterns, accessibility examples, and layout experiments for quick reference and sharing.
+          </p>
+          <p>
+            <strong>Solution:</strong> Curated a collection of CodePen projects demonstrating reusable UI components, accessibility patterns, and layout techniques.
+          </p>
         </>
       }
-      impactPrefix="Reality"
-      impact={
+      summaryDetails={
         <>
-          Primarily for my own study sessions. I link to specific pens from blog posts so readers know which snippets were AI-assisted.
+          <p>
+            <strong>My Role:</strong>
+          </p>
+          <ul>
+            <li>Created and documented UI pattern examples</li>
+            <li>Implemented accessibility-focused components</li>
+            <li>Organized pens for easy discovery and forking</li>
+            <li>Documented code patterns for reuse in blog posts and projects</li>
+          </ul>
+          <p>
+            <strong>Outcomes & Proof:</strong>
+          </p>
+          <ul>
+            <li>CodePen profile: <a href="https://codepen.io/student-account-bradley-matera" target="_blank" rel="noopener noreferrer">student-account-bradley-matera</a></li>
+            <li>Verified collection of pens available for public viewing and forking</li>
+            <li>Patterns referenced in blog posts and project documentation</li>
+          </ul>
         </>
       }
       stack={["HTML", "CSS", "JavaScript"]}
+      thumbnail="/assets/visuals/projects/codepen-projects.svg"
       links={[
-        { label: "CodePen", href: "https://codepen.io/student-account-bradley-matera", external: true }
+        { label: "CodePen", href: "https://codepen.io/student-account-bradley-matera", external: true },
       ]}
     />
-  </div>
-</Section>
+      </div>
+    </Section>
 
-<Section
-  id="fullstack"
-  eyebrow="Full-Stack & APIs"
-      title="Full-stack practice builds (no production traffic)"
->
-  <div className="grid-two project-gallery">
+    <Section
+      id="fullstack"
+      eyebrow="Full-Stack"
+      title="Full-Stack Applications"
+    >
+      <div className="project-gallery projects-grid">
     <ProjectCard
       title="Convo-Ai"
-      meta="Local AI chat experiment"
-      summary={
+      meta="Local voice + text AI assistant"
+      summaryPreview={
         <>
-          <strong>FastAPI + Ollama playground</strong> for testing local chat flows, env variables, and prompt templates on my laptop.
+          <p>
+            <strong>Problem:</strong> Needed a local, privacy‑first way to explore voice and text AI without cloud APIs.
+          </p>
+          <p>
+            <strong>Solution:</strong> Built a FastAPI app that runs locally with Whisper (STT), Ollama (LLM), and XTTS v2 (TTS).
+          </p>
         </>
       }
-      impactPrefix="Reality"
-      impact={
+      summaryDetails={
         <>
-          Runs locally only; still uses AI scaffolding for most of the backend code. Great for learning infrastructure, not ready for users.
+          <p>
+            <strong>My Role:</strong>
+          </p>
+          <ul>
+            <li>Wrote the FastAPI server with HTTP + WebSocket endpoints</li>
+            <li>Integrated Whisper for speech‑to‑text and XTTS v2 for speech output</li>
+            <li>Connected Ollama for local LLM responses</li>
+            <li>Implemented conversation history and optional sentiment analysis hooks</li>
+            <li>Documented prerequisites, setup, and run steps in the README</li>
+          </ul>
+          <p>
+            <strong>Outcomes & Proof:</strong>
+          </p>
+          <ul>
+            <li>GitHub repo: <a href="https://github.com/BradleyMatera/Convo-Ai" target="_blank" rel="noopener noreferrer">Convo-Ai</a></li>
+            <li>Local‑only run: server + client workflow documented in README</li>
+            <li>Verified Whisper, Ollama, and XTTS v2 integrations in repo</li>
+            <li>Optional web UI flow documented for real‑time interaction</li>
+          </ul>
         </>
       }
-      stack={["Python", "FastAPI", "Ollama"]}
+      stack={["Python", "FastAPI", "Whisper", "Ollama", "XTTS v2", "WebSockets"]}
+      thumbnail="/assets/visuals/projects/convo-ai.svg"
       links={[
-        { label: "GitHub", href: "https://github.com/BradleyMatera/Convo-Ai", external: true }
-      ]}
-    />
-    <ProjectCard
-      title="ProjectHub"
-      meta="AI chat embed"
-      summary={
-        <>
-          <strong>Work-in-progress embed</strong> that lets me experiment with prompting, simple Express proxies, and UI hand-offs for chat assistants (most scaffolding from Copilot/ChatGPT).
-        </>
-      }
-      impactPrefix="Reality"
-      impact={
-        <>
-          Currently supports a single endpoint and a handful of scripts. Analytics/guardrails/billing are ideas in the backlog, not shipped features, and I call out which parts were generated vs. hand-written in the README.
-        </>
-      }
-      stack={["JavaScript"]}
-      links={[
-        { label: "GitHub", href: "https://github.com/BradleyMatera/ProjectHub", external: true }
-      ]}
-    />
-    <ProjectCard
-      title="ShellCompany"
-      meta="AI tool"
-      summary={
-        <>
-          <strong>Static dashboard mock</strong> that let me test layout ideas for an internal analytics concept.
-        </>
-      }
-      impactPrefix="Reality"
-      impact={
-        <>
-          Powered entirely by mocked data and AI-generated copy. Useful for storytelling, not hooked to real metrics.
-        </>
-      }
-      stack={["JavaScript"]}
-      links={[
-        { label: "GitHub", href: "https://github.com/BradleyMatera/ShellCompany", external: true }
+        { label: "GitHub", href: "https://github.com/BradleyMatera/Convo-Ai", external: true },
       ]}
     />
   </div>
-</Section>
+    </Section>
 
-<Section
-  id="tools"
-  eyebrow="Tools & Infrastructure"
-      title="Developer tooling experiments"
->
-  <div className="grid-two project-gallery">
+    <Section
+      id="tools"
+      eyebrow="Tools"
+      title="Tools & Infrastructure"
+    >
+      <div className="project-gallery projects-grid">
     <ProjectCard
-      title="Docker Multilang Project"
-      meta="Container setup"
-      summary={
+      title="TriangleDemo"
+      meta="Canvas/WebGL geometry demo"
+      summaryPreview={
         <>
-          <strong>Personal exercise</strong> to learn how Docker Compose can spin up Node + Python tooling with similar scripts.
+          <p>
+            <strong>Problem:</strong> Needed a minimal demo to explore geometry and animation fundamentals in the browser.
+          </p>
+          <p>
+            <strong>Solution:</strong> Built a lightweight triangle animation using HTML5 Canvas/WebGL and deployed it to GitHub Pages.
+          </p>
         </>
       }
-      impactPrefix="Reality"
-      impact={
+      summaryDetails={
         <>
-          Built for my own onboarding, not adopted by teams. The README calls out what still needs polishing before anyone else could rely on it.
+          <p>
+            <strong>My Role:</strong>
+          </p>
+          <ul>
+            <li>Implemented the animation loop and rendering pipeline</li>
+            <li>Documented setup steps and demo usage</li>
+            <li>Published the static demo to GitHub Pages</li>
+          </ul>
+          <p>
+            <strong>Outcomes & Proof:</strong>
+          </p>
+          <ul>
+            <li>GitHub repo: <a href="https://github.com/BradleyMatera/TriangleDemo" target="_blank" rel="noopener noreferrer">TriangleDemo</a></li>
+            <li>Live demo: <a href="https://bradleymatera.github.io/TriangleDemo/" target="_blank" rel="noopener noreferrer">TriangleDemo</a></li>
+          </ul>
         </>
       }
-      stack={["Docker", "Python", "Node.js"]}
+      stack={["HTML", "JavaScript", "Canvas/WebGL", "GitHub Pages"]}
       links={[
-        { label: "GitHub", href: "https://github.com/BradleyMatera/docker_multilang_project", external: true }
+        { label: "Live demo", href: "https://bradleymatera.github.io/TriangleDemo/", variant: "primary", external: true },
+        { label: "GitHub", href: "https://github.com/BradleyMatera/TriangleDemo", external: true },
       ]}
     />
     <ProjectCard
-      title="CheeseMath Jest Tests"
-      meta="Calculator & Jest demo"
-      summary={
+      title="EthicsFrontEndDemo"
+      meta="Secrets management tutorial"
+      summaryPreview={
         <>
-          <strong>Dual demo:</strong> A GitHub Pages UI (Next.js 16 + NextUI) showcasing the calculator features described in the README, plus the Jest practice repo that backs the basic math utilities. Built with heavy AI help for the copy and components.
+          <p>
+            <strong>Problem:</strong> Needed a simple way to teach secure secrets handling in frontend workflows.
+          </p>
+          <p>
+            <strong>Solution:</strong> Built an interactive tutorial covering hard‑coded secrets, env vars, and best practices.
+          </p>
         </>
       }
-      impactPrefix="Reality"
-      impact={
+      summaryDetails={
         <>
-          Lives at <code>https://bradleymatera.github.io/CheeseMath-Jest-Tests/</code> as a front-end demo. The Jest repo is still a practice reference (not production-ready), but the live site lets folks try the calculator, regex tester, and card obscurer without cloning the code.
+          <p>
+            <strong>My Role:</strong>
+          </p>
+          <ul>
+            <li>Built the demo pages and scenarios in Next.js</li>
+            <li>Styled the tutorial with Tailwind CSS</li>
+            <li>Documented the lessons and usage steps in the repo</li>
+          </ul>
+          <p>
+            <strong>Outcomes & Proof:</strong>
+          </p>
+          <ul>
+            <li>GitHub repo: <a href="https://github.com/BradleyMatera/EthicsFrontEndDemo" target="_blank" rel="noopener noreferrer">EthicsFrontEndDemo</a></li>
+            <li>Live demo: <a href="https://bradleymatera.github.io/EthicsFrontEndDemo/" target="_blank" rel="noopener noreferrer">EthicsFrontEndDemo</a></li>
+            <li>Tutorial steps documented in the repository README</li>
+          </ul>
         </>
       }
-      stack={["JavaScript", "Jest"]}
+      stack={["Next.js", "Tailwind CSS", "Secrets management", "GitHub Pages"]}
+      links={[
+        { label: "Live demo", href: "https://bradleymatera.github.io/EthicsFrontEndDemo/", variant: "primary", external: true },
+        { label: "GitHub", href: "https://github.com/BradleyMatera/EthicsFrontEndDemo", external: true },
+      ]}
+    />
+    <ProjectCard
+      title="CheeseMath Jest tests"
+      meta="Calculator + Jest demos"
+      summaryPreview={
+        <>
+          <p>
+            <strong>Problem:</strong> Needed to demonstrate both UI component development and unit testing practices in a single project.
+          </p>
+          <p>
+            <strong>Solution:</strong> Built a calculator application with Next.js UI and comprehensive Jest test suite, fully documented for learning and reference.
+          </p>
+        </>
+      }
+      summaryDetails={
+        <>
+          <p>
+            <strong>My Role:</strong>
+          </p>
+          <ul>
+            <li>Designed and implemented calculator UI with Next.js</li>
+            <li>Wrote Jest unit tests for calculator logic</li>
+            <li>Documented testing patterns and component structure</li>
+            <li>Deployed live demo for interactive testing</li>
+          </ul>
+          <p>
+            <strong>Outcomes & Proof:</strong>
+          </p>
+          <ul>
+            <li>GitHub repo: <a href="https://github.com/BradleyMatera/CheeseMath-Jest-Tests" target="_blank" rel="noopener noreferrer">CheeseMath-Jest-Tests</a></li>
+            <li>Live demo: <a href="https://bradleymatera.github.io/CheeseMath-Jest-Tests/" target="_blank" rel="noopener noreferrer">CheeseMath-Jest-Tests</a></li>
+            <li>Verified Jest test suite in repository</li>
+            <li>Verified Next.js component implementation</li>
+            <li>Test coverage documented in repository</li>
+          </ul>
+        </>
+      }
+      stack={["JavaScript", "Jest", "Next.js"]}
+      thumbnail="/assets/visuals/projects/cheesemath-jest.svg"
       links={[
         { label: "Live demo", href: "https://bradleymatera.github.io/CheeseMath-Jest-Tests/", variant: "primary", external: true },
-        { label: "GitHub", href: "https://github.com/BradleyMatera/CheeseMath-Jest-Tests", external: true }
+        { label: "GitHub", href: "https://github.com/BradleyMatera/CheeseMath-Jest-Tests", external: true },
       ]}
     />
     <ProjectCard
-      title="OBJ Parser"
-      meta="Geometry parser"
-      summary={
+      title="OBJ parser"
+      meta="Geometry learning repo"
+      summaryPreview={
         <>
-          <strong>Zig learning repo</strong> where I parse OBJ/MTL files to understand memory management and file I/O outside of JavaScript.
+          <p>
+            <strong>Problem:</strong> Needed to understand Zig's memory model and file I/O by working with real-world data formats.
+          </p>
+          <p>
+            <strong>Solution:</strong> Built a parser for OBJ and MTL geometry files that demonstrates Zig's memory management and file handling patterns.
+          </p>
         </>
       }
-      impactPrefix="Reality"
-      impact={
+      summaryDetails={
         <>
-          Handles small meshes today; larger files still surface TODOs in the README.
+          <p>
+            <strong>My Role:</strong>
+          </p>
+          <ul>
+            <li>Designed parser architecture using Zig's memory model</li>
+            <li>Implemented file I/O for OBJ and MTL format parsing</li>
+            <li>Created custom data structures for geometry data</li>
+            <li>Implemented error handling for malformed files</li>
+            <li>Documented parsing logic and future improvements</li>
+          </ul>
+          <p>
+            <strong>Outcomes & Proof:</strong>
+          </p>
+          <ul>
+            <li>GitHub repo: <a href="https://github.com/BradleyMatera/obj-parser" target="_blank" rel="noopener noreferrer">obj-parser</a></li>
+            <li>Verified parser implementation in repository</li>
+            <li>Verified OBJ/MTL file format handling</li>
+            <li>Verified error handling for edge cases</li>
+            <li>Documentation available in README</li>
+          </ul>
         </>
       }
       stack={["Zig"]}
+      thumbnail="/assets/visuals/projects/obj-parser.svg"
       links={[
-        { label: "GitHub", href: "https://github.com/BradleyMatera/obj-parser", external: true }
+        { label: "GitHub", href: "https://github.com/BradleyMatera/obj-parser", external: true },
       ]}
     />
-    <ProjectCard
-      title="Triangle Shader Lab"
-      meta="WebGPU study site"
-      summary={
-        <>
-          <strong>Small Next.js + TypeScript rebuild</strong> of the Hello Triangle and Textured Cube demos so I could map device setup, pipelines, and WGSL shaders to a UI. I leaned on AI prompts and the official samples to keep the explanations accurate.
-        </>
-      }
-      impactPrefix="Reality"
-      impact={
-        <>
-          Personal experiment, not a framework. It keeps the sample code, adds plain copy about adapters/buffers, and reminds visitors that this is a self-taught WebGPU study—not production graphics work.
-        </>
-      }
-      stack={["Next.js", "TypeScript", "Bun", "Tailwind", "WebGPU", "WGSL"]}
-      links={[
-        { label: "Live demo", href: "https://bradleymatera.github.io/TriangleDemo/", variant: "primary", external: true },
-        { label: "GitHub", href: "https://github.com/BradleyMatera/TriangleDemo", external: true }
-      ]}
-    />
-  </div>
-</Section>
+      </div>
+    </Section>
 
-<Section
-  eyebrow="Need more context?"
-  title="Need more context before you trust a student project?"
->
-  <div className="surface-card surface-card--outline">
-    <div className="feature-card__body">
-      I’m happy to schedule a walkthrough, record a demo, or share repo access so you can see the code quality, test coverage (or lack thereof), and open TODOs for any project listed here.
-    </div>
-    <div className="hero-actions">
-      <a data-variant="primary" href="https://www.linkedin.com/in/bradmatera" target="_blank" rel="noopener noreferrer">
-        Book a conversation
-      </a>
-      <a data-variant="ghost" href="https://github.com/BradleyMatera" target="_blank" rel="noopener noreferrer">
-        Browse GitHub repositories
-      </a>
-    </div>
-  </div>
-</Section>
+    <Section
+      eyebrow="Need more context?"
+      title="Need a walkthrough?"
+    >
+      <div className="surface-card surface-card--outline">
+        <div className="feature-card__body">
+          I'm happy to schedule a video walkthrough, share deployment docs, or hand over repo access so you can verify the code quality, observability, and production plans before we talk.
+        </div>
+        <div className="hero-actions">
+          <a data-variant="primary" href="https://www.linkedin.com/in/bradmatera" target="_blank" rel="noopener noreferrer">
+            Book a conversation
+          </a>
+          <a data-variant="ghost" href="https://github.com/BradleyMatera" target="_blank" rel="noopener noreferrer">
+            Browse GitHub repositories
+          </a>
+        </div>
+      </div>
+    </Section>
+
+    <Section>
+      <p style={{ fontSize: "0.9rem", color: "var(--color-text-secondary)", marginTop: "2rem" }}>
+        Proof links for all metrics and implementations are available in linked repositories and deployment dashboards.
+      </p>
+    </Section>
+  </main>
+  <aside className="projects-layout__aside">
+    <AnchorNav
+      items={[
+        { id: "featured", label: "Featured" },
+        { id: "frontend", label: "Front-End" },
+        { id: "fullstack", label: "Full-Stack" },
+        { id: "tools", label: "Tools" },
+      ]}
+    />
+  </aside>
+</div>

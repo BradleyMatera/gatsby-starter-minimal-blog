@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" role="img" aria-label="Portfolio Template thumbnail">
+  <defs>
+    <linearGradient id="bgportfolio-template" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="180" rx="20" fill="url(#bgportfolio-template)"/>
+  <text x="50%" y="70" text-anchor="middle" fill="#f8fafc" font-size="22" font-family="Inter, system-ui, sans-serif" font-weight="700">Portfolio Template</text>
+  <text x="50%" y="105" text-anchor="middle" fill="rgba(248, 250, 252, 0.8)" font-size="14" font-family="Inter, system-ui, sans-serif">Case study thumbnail</text>
+</svg>

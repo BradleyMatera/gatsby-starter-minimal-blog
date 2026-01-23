@@ -9,19 +9,63 @@ import { Section, Card } from "../../../src/components/ui";
 <Section
   eyebrow="Cloud Engineer"
   title="Learning to think like a cloud engineer"
-  description="I haven’t been paid as a cloud engineer yet. This page explains how I practice the discipline today, what I’ve actually done, and where I still need mentorship."
+  description="I have not held a paid Cloud Engineer title yet. This page documents the cloud-related work I have completed, the environments I have practiced in, and the areas where I still need mentorship."
 />
+
+<Section
+  eyebrow="Honesty upgrade"
+  title="Clear scope, upfront"
+>
+  <div className="grid-three">
+    <Card>
+      <h3 className="feature-card__title">What I have</h3>
+      <ul className="feature-list">
+        <li>Completed guided AWS internship lab exercises with documented runbooks.</li>
+        <li>Personal deployments on GitHub Pages and Render.</li>
+        <li>Documentation habits that track failures and fixes.</li>
+      </ul>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">What I don’t have yet</h3>
+      <ul className="feature-list">
+        <li>Ownership of production AWS environments or multi-account architecture design.</li>
+        <li>On-call rotations or customer ticket ownership.</li>
+        <li>Enterprise-scale incident response experience.</li>
+      </ul>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">What I’m doing next</h3>
+      <ul className="feature-list">
+        <li>IAM policy drills and security review practice.</li>
+        <li>Terraform plan/apply reps in a sandbox account.</li>
+        <li>Small monitoring project with alerts + cost guardrails.</li>
+      </ul>
+    </Card>
+  </div>
+</Section>
 
 <Section
   eyebrow="Current practice"
   title="What my 'cloud' reps actually look like"
 >
-  <ul className="feature-list">
-    <li>AWS Cloud Support internship (Summer 2025): lab exercises, CloudWatch dashboards, IAM investigations, runbook writing.</li>
-    <li>Personal prototypes (Car-Match, ProjectHub proxy) deployed to Netlify/Render with simple CI—Car-Match’s backend cold-starts for ~5 minutes on free Render.</li>
-    <li>Blog posts documenting how I configure budgets, monitor bills, and keep honesty logs of what’s broken.</li>
-    <li>AI pair-programming in almost every session; prompts + reviews live in the repos.</li>
-  </ul>
+  <div className="grid-two">
+    <Card>
+      <h3 className="feature-card__title">Internship practice (internal + lab-style)</h3>
+      <ul className="feature-list">
+        <li>AWS Cloud Support Engineer internship (Summer 2025): completed lab exercises, built CloudWatch dashboards, performed IAM investigations, and wrote runbooks in training environments.</li>
+        <li>Worked in guided rotations and lab-style environments; did not own production AWS accounts or independently resolve live customer tickets.</li>
+      </ul>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">Personal deployments (public, small-scale)</h3>
+      <ul className="feature-list">
+        <li>Car-Match backend deployed to Render with README runbooks.</li>
+        <li>Interactive Pokédex and AnimalSounds deployed to GitHub Pages.</li>
+        <li>Free-tier cold starts can take several minutes; this limitation is documented in project READMEs.</li>
+        <li>Blog posts documenting how I configure budgets, monitor bills, and keep honesty logs of what’s broken.</li>
+      </ul>
+    </Card>
+  </div>
 </Section>
 
 <Section
@@ -33,16 +77,28 @@ import { Section, Card } from "../../../src/components/ui";
       <h3 className="feature-card__title">AWS internship labs</h3>
       <ul className="feature-list">
         <li>Built CloudWatch dashboards + SNS alerts for sample environments (documented in internship recap post).</li>
-        <li>Automated repetitive support workflows via shell scripts and AWS CLI.</li>
+        <li>Automated repetitive lab support workflows using shell scripts and AWS CLI.</li>
         <li>Logged every limitation (no customer-facing tickets alone) so expectations stay realistic.</li>
       </ul>
+      <p className="feature-card__meta">
+        <strong>Proof links:</strong>{" "}
+        <a href="/aws-cloud-support-internship-mastering-troubleshooting-and-architecture/">Internship recap post</a>
+      </p>
     </Card>
     <Card>
       <h3 className="feature-card__title">Portfolio prototypes</h3>
       <ul className="feature-list">
-        <li>Car-Match + Docker Multilang repos show how I structure env vars, README runbooks, and TODOs (including Render cold-start expectations).</li>
-        <li>Netlify/GitHub Pages deployments include manual smoke test checklists instead of automated suites (noted in docs).</li>
+        <li>Car-Match repo shows env vars, README runbooks, and Render deployment notes.</li>
+        <li>Interactive Pokédex and AnimalSounds document GitHub Pages deployment steps.</li>
       </ul>
+      <p className="feature-card__meta">
+        <strong>Proof links:</strong>{" "}
+        <a href="https://github.com/BradleyMatera/car-match" target="_blank" rel="noopener noreferrer">Car-Match repo</a>,{" "}
+        <a href="https://github.com/BradleyMatera/Interactive-Pokedex" target="_blank" rel="noopener noreferrer">Interactive Pokédex repo</a>,{" "}
+        <a href="https://bradleymatera.github.io/Interactive-Pokedex/" target="_blank" reo="noopener noreferrer">Interactive Pokédex live</a>,{" "}
+        <a href="https://github.com/BradleyMatera/AnimalSounds" target="_blank" rel="noopener noreferrer">AnimalSounds repo</a>
+        <a href="https://bradleymatera.github.io/AnimalSounds/" target="_blank" rel="noopener noreferrer">AnimalSounds live</a>
+      </p>
     </Card>
   </div>
 </Section>
@@ -52,14 +108,14 @@ import { Section, Card } from "../../../src/components/ui";
   title="Stack in rotation (with AI help)"
 >
   <div className="project-card__stack">
-    <span>CloudWatch dashboards</span>
-    <span>IAM basics + Access Analyzer</span>
-    <span>S3 / Lambda labs</span>
-    <span>GitHub Actions for small deployments</span>
-    <span>Docker Compose dev setups</span>
-    <span>Terraform tutorials (not production-ready)</span>
+    <span>CloudWatch dashboards — lab + personal</span>
+    <span>IAM basics + Access Analyzer — lab only</span>
+    <span>S3 / Lambda labs — lab only</span>
+    <span>GitHub Actions — personal CI basics</span>
+    <span>Docker Compose — local dev only</span>
+    <span>Terraform — tutorial stage</span>
   </div>
-  <p>I call out each tool’s maturity in the relevant repo. If something is purely experimental, the docs say so.</p>
+  <p>Each repository documents the maturity of the tools used. Experimental work is explicitly labeled in the project documentation.</p>
 </Section>
 
 <Section
@@ -72,5 +128,5 @@ import { Section, Card } from "../../../src/components/ui";
     <li>Automated testing/validation for Terraform + deployment pipelines.</li>
     <li>Incident response in real production settings.</li>
   </ul>
-  <p>If you’re hiring for junior cloud roles and can provide coaching in these areas, I’d love to talk.</p>
+  <p>If you are hiring for junior cloud roles and provide coaching in these areas, I am open to discussing opportunities.</p>
 </Section>

@@ -993,7 +993,7 @@
             "entity": "127.0.0.1"
           },
           {
-            "url": "http://127.0.0.1:9000/favicon-32x32.png",
+            "url": "http://127.0.0.1:9000/favicon-32x32-32x32.png",
             "sessionTargetType": "page",
             "protocol": "http/1.1",
             "rendererStartTime": 306.6430000066757,
@@ -1010,7 +1010,7 @@
             "entity": "127.0.0.1"
           },
           {
-            "url": "http://127.0.0.1:9000/android-chrome-192x192.png",
+            "url": "http://127.0.0.1:9000/android-chrome-192x192-192x192.png",
             "sessionTargetType": "page",
             "protocol": "http/1.1",
             "rendererStartTime": 309.6190000027418,
@@ -4627,7 +4627,7 @@
             "totalBytes": 48557
           },
           {
-            "url": "http://127.0.0.1:9000/android-chrome-192x192.png",
+            "url": "http://127.0.0.1:9000/android-chrome-192x192-192x192.png",
             "totalBytes": 37513
           },
           {

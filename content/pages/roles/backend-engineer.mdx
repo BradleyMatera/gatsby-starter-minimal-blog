@@ -9,19 +9,62 @@ import { Section, Card } from "../../../src/components/ui";
 <Section
   eyebrow="Backend Engineer"
   title="How I currently practice backend engineering"
-  description="I haven’t been paid as a backend engineer yet; these are student projects and volunteer experiments with clear limits."
+  description="I have not held a paid Backend Engineer title yet. This page documents student and volunteer backend projects with clearly defined scope and limitations."
 />
+
+<Section
+  eyebrow="Honesty upgrade"
+  title="Clear scope, upfront"
+>
+  <div className="grid-three">
+    <Card>
+      <h3 className="feature-card__title">What I have</h3>
+      <ul className="feature-list">
+        <li>Personal APIs deployed on small hosting providers for demonstration purposes.</li>
+        <li>Local FastAPI experiments to learn backend service patterns.</li>
+        <li>Documentation that lists missing features and risks.</li>
+      </ul>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">What I don’t have yet</h3>
+      <ul className="feature-list">
+        <li>Ownership of production backend systems or high-traffic services.</li>
+        <li>Deep observability with tracing and alerting.</li>
+        <li>Large-scale data modeling and migrations.</li>
+      </ul>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">What I’m doing next</h3>
+      <ul className="feature-list">
+        <li>Auth hardening (refresh tokens, auditing, device trust).</li>
+        <li>Schema migration practice for relational databases.</li>
+        <li>Async job queues and caching experiments.</li>
+      </ul>
+    </Card>
+  </div>
+</Section>
 
 <Section
   eyebrow="Reality snapshot"
   title="Where I actually spend time"
 >
-  <ul className="feature-list">
-    <li>Node/Express APIs powering Car-Match, ProjectHub, and tutorial repos (Car-Match runs on Render/Atlas but still feels like a demo because of cold starts).</li>
-    <li>FastAPI experiments for Convo-AI to understand Python services.</li>
-    <li>README honesty logs that spell out missing pieces: auth hardening, load tests, observability.</li>
-    <li>AI pair-programming in every session; prompts + edits included in the repo so reviewers can trace them.</li>
-  </ul>
+  <div className="grid-two">
+    <Card>
+      <h3 className="feature-card__title">Personal deployments (public, small-scale)</h3>
+      <ul className="feature-list">
+        <li>Node and Express APIs for Car-Match, deployed on Render with MongoDB Atlas.</li>
+        <li>Free-tier cold starts can take several minutes; this limitation is documented in the README.</li>
+        <li>README documentation lists missing features such as authentication hardening, load testing, and observability.</li>
+      </ul>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">Local experiments (learning)</h3>
+      <ul className="feature-list">
+        <li>FastAPI experiments for Convo-AI to understand Python-based backend services.</li>
+        <li>AI-assisted pair programming in development sessions; prompts and edits are included in the repository for traceability.</li>
+      </ul>
+    </Card>
+  </div>
 </Section>
 
 <Section
@@ -32,18 +75,28 @@ import { Section, Card } from "../../../src/components/ui";
     <Card>
       <h3 className="feature-card__title">Car-Match API</h3>
       <ul className="feature-list">
-        <li>Express + MongoDB CRUD routes deployed to Render; JWT auth works once the free instance wakes up (expect ~5 minute cold starts).</li>
-        <li>API docs live in Postman + README tables; no OpenAPI generator yet.</li>
-        <li>Repository issues list missing pieces (rate limiting, structured logging, faster startup paths).</li>
+        <li>Express and MongoDB CRUD routes deployed on Render; JWT authentication functions once the free instance is active.</li>
+        <li>API documentation is maintained in Postman collections and README tables; no OpenAPI generation is implemented.</li>
+        <li>Repository issues track missing features including rate limiting, structured logging, and startup performance improvements.</li>
       </ul>
+      <p className="feature-card__meta">
+        <strong>Proof links:</strong>{" "}
+        <a href="/projects/car-match/">Case study</a>,{" "}
+        <a href="https://github.com/BradleyMatera/car-match" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </p>
     </Card>
     <Card>
       <h3 className="feature-card__title">Secrets Management tutorial</h3>
       <ul className="feature-list">
-        <li>Side-by-side “good vs. bad” Express code for handling secrets.</li>
-        <li>Used for personal learning and blog content, not deployed anywhere.</li>
-        <li>Disclosure: large portions scaffolded with ChatGPT + Copilot before I annotated them.</li>
+        <li>Side-by-side examples of secure and insecure patterns for handling secrets in demo workflows.</li>
+        <li>Used for personal learning and blog content; not deployed to production environments.</li>
+        <li>Disclosure: large portions were scaffolded with ChatGPT and Copilot before manual annotation.</li>
       </ul>
+      <p className="feature-card__meta">
+        <strong>Proof links:</strong>{" "}
+        <a href="https://github.com/BradleyMatera/EthicsFrontEndDemo" target="_blank" rel="noopener noreferrer">EthicsFrontEndDemo repo</a>,{" "}
+        <a href="https://bradleymatera.github.io/EthicsFrontEndDemo" target="_blank" rel="noopener noreferrer">EthicsFrontEndDemo Live demo</a>
+      </p>
     </Card>
   </div>
 </Section>
@@ -61,7 +114,7 @@ import { Section, Card } from "../../../src/components/ui";
     <span>Jest + Supertest (learning)</span>
     <span>Postman collections (comfortable)</span>
   </div>
-  <p>Each repo calls out where I’m strong vs. where I lean heavily on AI or tutorials.</p>
+  <p>Each repository documents areas of strength and areas where AI tools or tutorials were heavily used.</p>
 </Section>
 
 <Section
@@ -74,5 +127,5 @@ import { Section, Card } from "../../../src/components/ui";
     <li>Observability + tracing for Express/FastAPI services.</li>
     <li>Performance profiling, caching strategies, and async job processing.</li>
   </ul>
-  <p>If you can mentor a junior backend engineer through these topics, I’d love to hear from you.</p>
+  <p>If you mentor junior backend engineers in these topics, I am open to discussing opportunities.</p>
 </Section>

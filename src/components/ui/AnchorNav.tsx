@@ -17,11 +17,11 @@ const AnchorNav = ({ items, className }: AnchorNavProps) => {
   }
 
   return (
-    <nav className={joinClasses("surface-card inpage-nav", className)} aria-label="On this page">
-      <span className="eyebrow">On this page</span>
+    <nav className={joinClasses("inpage-nav", className)} aria-label="On this page">
+      <span className="inpage-nav__label">On this page</span>
       <div className="inpage-nav__links">
         {items.map((item) => (
-          <a key={item.id} className="filter-pill" href={`#${item.id}`}>
+          <a key={item.id} className="inpage-nav__link" href={`#${item.id}`}>
             {item.label}
           </a>
         ))}

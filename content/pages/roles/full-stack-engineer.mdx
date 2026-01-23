@@ -9,19 +9,63 @@ import { Section, Card } from "../../../src/components/ui";
 <Section
   eyebrow="Full-Stack Engineer"
   title="Full-stack practice (student level)"
-  description="I pair React front ends with small Node/FastAPI backends to learn the workflow. No paid work yet—just honest reps documented in public."
+  description="I pair React front ends with small Node and FastAPI backends to practice full-stack workflows. I have not completed paid full-stack engineering work; projects are documented publicly for transparency."
 />
+
+<Section
+  eyebrow="Honesty upgrade"
+  title="Clear scope, upfront"
+>
+  <div className="grid-three">
+    <Card>
+      <h3 className="feature-card__title">What I have</h3>
+      <ul className="feature-list">
+        <li>Public front-end deployments accessible via live URLs.</li>
+        <li>Small backend services paired with these demos.</li>
+        <li>Documentation that identifies missing features and known risks.</li>
+      </ul>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">What I don’t have yet</h3>
+      <ul className="feature-list">
+        <li>Ownership of production full-stack systems or large-scale traffic environments.</li>
+        <li>Cross-team delivery and real stakeholder timelines.</li>
+        <li>Deep testing discipline across the stack.</li>
+      </ul>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">What I’m doing next</h3>
+      <ul className="feature-list">
+        <li>Strengthen authentication and session management workflows.</li>
+        <li>Improve test coverage and CI reliability.</li>
+        <li>Practice accessibility reviews with peers.</li>
+      </ul>
+    </Card>
+  </div>
+</Section>
 
 <Section
   eyebrow="Reality snapshot"
   title="What I actually ship"
 >
-  <ul className="feature-list">
-    <li>React + Gatsby UI work (this site, Interactive Pokédex, Car-Match dashboard running on GitHub Pages).</li>
-    <li>Express/FastAPI services that back those UIs locally or on small hosts like Render/Netlify Functions (Car-Match’s backend cold-starts on the free Render tier).</li>
-    <li>CI/CD scripts that lint, run basic tests, and deploy to GitHub Pages or Netlify.</li>
-    <li>AI companionship throughout—Copilot/ChatGPT help scaffold components and routes before I review them.</li>
-  </ul>
+  <div className="grid-two">
+    <Card>
+      <h3 className="feature-card__title">Front-end demos (public)</h3>
+      <ul className="feature-list">
+        <li>React and Gatsby UI development for this site and the Interactive Pokédex.</li>
+        <li>GitHub Pages deployments for AnimalSounds and other demonstration projects.</li>
+        <li>CI scripts perform linting and build validation before deployment.</li>
+      </ul>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">Back-end pairings (small-scale)</h3>
+      <ul className="feature-list">
+        <li>Car-Match backend is deployed on Render with MongoDB Atlas.</li>
+        <li>Free-tier cold starts can take several minutes; this limitation is documented in the README.</li>
+        <li>Copilot and ChatGPT are used to scaffold routes before manual review.</li>
+      </ul>
+    </Card>
+  </div>
 </Section>
 
 <Section
@@ -32,18 +76,28 @@ import { Section, Card } from "../../../src/components/ui";
     <Card>
       <h3 className="feature-card__title">Interactive Pokédex</h3>
       <ul className="feature-list">
-        <li>Front-end React-lite build (vanilla JS + components) with accessibility checks.</li>
-        <li>Focuses on client-side filtering + fetch flows rather than complex backend logic.</li>
-        <li>Repo shows prompt logs + TODOs for pagination, offline mode, and testing.</li>
+        <li>Next.js static export with client-side filtering for the original 151 Pokémon.</li>
+        <li>Focuses on front-end data fetching and search UX rather than backend services.</li>
+        <li>Repository includes prompt logs and TODOs for pagination, offline mode, and testing.</li>
       </ul>
+      <p className="feature-card__meta">
+        <strong>Proof links:</strong>{" "}
+        <a href="/projects/interactive-pokedex/">Case study</a>,{" "}
+        <a href="https://github.com/BradleyMatera/Interactive-Pokedex" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </p>
     </Card>
     <Card>
-      <h3 className="feature-card__title">ProjectHub proxy</h3>
+      <h3 className="feature-card__title">Car-Match</h3>
       <ul className="feature-list">
-        <li>Express proxy that fronts AI endpoints for my own experiments.</li>
-        <li>Includes minimal frontend embed + instructions for running locally.</li>
-        <li>Callouts everywhere that this is a learning sandbox, not a SaaS tool.</li>
+        <li>React frontend + Express backend with MongoDB persistence.</li>
+        <li>Focuses on auth, matching, forums, and messaging flows.</li>
+        <li>Deployments and known limitations are documented in the README.</li>
       </ul>
+      <p className="feature-card__meta">
+        <strong>Proof links:</strong>{" "}
+        <a href="/projects/car-match/">Case study</a>,{" "}
+        <a href="https://github.com/BradleyMatera/car-match" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </p>
     </Card>
   </div>
 </Section>
@@ -62,7 +116,7 @@ import { Section, Card } from "../../../src/components/ui";
     <span>Docker Compose for dev parity (learning)</span>
     <span>Playwright / Vitest (exploring)</span>
   </div>
-  <p>Each repo annotates which pieces are stable vs. experimental so there are no surprises.</p>
+  <p>Each repository documents which components are stable and which are experimental to indicate maturity.</p>
 </Section>
 
 <Section
@@ -75,5 +129,5 @@ import { Section, Card } from "../../../src/components/ui";
     <li>Deeper testing discipline (unit, integration, and visual regression).</li>
     <li>Mentorship on prioritizing work across the stack with real stakeholders.</li>
   </ul>
-  <p>If your team can pair-program and coach through these gaps, I’m ready to learn.</p>
+  <p>If your team provides mentorship and pair-programming support in these areas, I am open to discussing opportunities.</p>
 </Section>

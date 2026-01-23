@@ -5,6 +5,26 @@ import Code from "./code";
 import { Section, Card, Link, Badge } from "../../../components/ui";
 import joinClasses from "../../../utils/joinClasses";
 
+// Map MDX headings to Theme UI Heading component
+const H1 = (props: React.HTMLAttributes<HTMLHeadingElement>) => (
+  <Heading as="h1" {...props} />
+);
+const H2 = (props: React.HTMLAttributes<HTMLHeadingElement>) => (
+  <Heading as="h2" {...props} />
+);
+const H3 = (props: React.HTMLAttributes<HTMLHeadingElement>) => (
+  <Heading as="h3" {...props} />
+);
+const H4 = (props: React.HTMLAttributes<HTMLHeadingElement>) => (
+  <Heading as="h4" {...props} />
+);
+const H5 = (props: React.HTMLAttributes<HTMLHeadingElement>) => (
+  <Heading as="h5" {...props} />
+);
+const H6 = (props: React.HTMLAttributes<HTMLHeadingElement>) => (
+  <Heading as="h6" {...props} />
+);
+
 interface CalloutProps {
   children: React.ReactNode;
   type?: string;
@@ -48,6 +68,12 @@ const components = {
   pre: (props: { children?: React.ReactNode; className?: string }) => <Code {...props} />,
   Text,
   Title: Heading,
+  h1: H1,
+  h2: H2,
+  h3: H3,
+  h4: H4,
+  h5: H5,
+  h6: H6,
   a: Link,
   p: Paragraph,
   Callout,

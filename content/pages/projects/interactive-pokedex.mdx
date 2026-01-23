@@ -8,74 +8,78 @@ import { Section, Card, AnchorNav, Link } from "../../../src/components/ui";
 
 <Section
   eyebrow="Case Study"
-  title="Interactive Pokédex · Front-end practice app"
-  description="A lightweight PokéAPI client I use to practice forms, filtering, and basic accessibility. Built with AI assistance."
+  title="Interactive Pokédex · Static Next.js demo"
+  description="Next.js static export that builds a Pokédex for the first 151 Pokémon with client-side search and filtering. Hosted on GitHub Pages with build-time data from PokéAPI."
 />
-
-<Section
-  eyebrow="TL;DR"
-  title="What it is (and what it isn't)"
->
-  <p>
-    <strong>TL;DR:</strong> This is a responsive front-end demo with search and filter UI. It does not have offline caching, complex performance tuning, or analytics—just honest code and notes about what I’m learning.
-  </p>
-  <div className="project-card__stack">
-    <span>Runs on GitHub Pages</span>
-    <span>Accessibility checks documented in README</span>
-    <span>AI-generated scaffolding noted in repo</span>
-  </div>
-</Section>
 
 <AnchorNav
   items={[
-    { id: "overview", label: "Problem overview" },
-    { id: "approach", label: "Approach" },
-    { id: "impact", label: "Impact metrics" },
-    { id: "artifacts", label: "Supporting artifacts" },
-    { id: "lessons", label: "Lessons & next steps" },
+    { id: "overview", label: "Problem" },
+    { id: "approach", label: "Solution" },
+    { id: "role", label: "My Role" },
+    { id: "impact", label: "Outcomes & Proof" },
+    { id: "artifacts", label: "Tech Stack" },
   ]}
 />
 
-<Section id="overview" eyebrow="Project context" title="Why I built it">
-  <ul className="feature-list">
-    <li><strong>Audience:</strong> Me! It’s a personal playground to keep my React/vanilla JS muscle memory fresh.</li>
-    <li><strong>Assistance:</strong> Layouts and some utility helpers were generated with Copilot; README notes the prompts I used.</li>
-    <li><strong>Scope:</strong> Search + filter UI, basic skeleton loaders, manual accessibility passes.</li>
-  </ul>
+<Section id="overview" eyebrow="Problem" title="User need">
+  <p>
+    I wanted a static, serverless way to browse the original 151 Pokémon with fast search and filtering. The experience needed to be responsive, easy to scan, and fully usable without a backend.
+  </p>
 </Section>
 
-<Section id="approach" eyebrow="Approach" title="Implementation notes">
+<Section id="approach" eyebrow="Solution" title="What I built">
+  <p>
+    Built a Next.js app that fetches PokéAPI data at build time and exports a static site to GitHub Pages. The list view uses client-side search and filtering, and each Pokémon has a pre-rendered detail page.
+  </p>
   <div className="grid-two">
     <Card>
-      <h3 className="feature-card__title">Experience design</h3>
+      <h3 className="feature-card__title">User interface</h3>
       <ul className="feature-list">
-        <li>Sticky search input + CSS Grid cards.</li>
-        <li>Keyboard navigation and focus outlines verified manually.</li>
-        <li>Sprites fetched directly from the PokéAPI (no image optimization yet).</li>
+        <li>Search and filtering UI for the 151‑Pokémon list</li>
+        <li>Responsive grid layout for cards and detail pages</li>
+        <li>Clear card hierarchy with stats and type badges</li>
+        <li>Consistent navigation between list and detail views</li>
       </ul>
     </Card>
     <Card>
-      <h3 className="feature-card__title">Engineering decisions</h3>
+      <h3 className="feature-card__title">Technical implementation</h3>
       <ul className="feature-list">
-        <li>Simple fetch + debounce helper (documented in repo).</li>
-        <li>Graceful error messaging when the API rate limits me.</li>
-        <li>No offline mode or aggressive caching—documented as future work.</li>
+        <li>Next.js static export with build-time data fetch</li>
+        <li>Pre-rendered detail pages for each Pokémon</li>
+        <li>Client-side search and filtering state management</li>
+        <li>Tailwind CSS for responsive styling</li>
       </ul>
     </Card>
   </div>
 </Section>
 
-<Section id="impact" eyebrow="What I gained" title="Outcomes">
+<Section id="role" eyebrow="My Role" title="Responsibilities">
   <ul className="feature-list">
-    <li><strong>Practice hours:</strong> Reinforced responsive design + accessibility basics.</li>
-    <li><strong>Transparency:</strong> Learned to call out AI contributions in the README so visitors know what to expect.</li>
-    <li><strong>Next:</strong> Explore service workers + sprite caching once I’m ready to tackle offline UX.</li>
+    <li>Configured Next.js static export for GitHub Pages deployment</li>
+    <li>Implemented build-time data fetching from PokéAPI</li>
+    <li>Built client-side search and filtering for the list view</li>
+    <li>Designed responsive layouts with Tailwind CSS</li>
+    <li>Documented setup and deployment steps in the repo</li>
   </ul>
 </Section>
 
-<Section id="artifacts" eyebrow="Supporting artifacts" title="Links & notes">
+<Section id="impact" eyebrow="Outcomes & Proof" title="Measurable results">
   <ul className="feature-list">
-    <li><Link to="https://bradleymatera.github.io/Interactive-Pokedex/" external><strong>Live demo:</strong></Link> Front-end only, no auth or offline mode.</li>
-    <li><Link to="https://github.com/BradleyMatera/Pokedex" external><strong>Repository:</strong></Link> Includes AI prompt log + manual accessibility checklist.</li>
+    <li><strong>GitHub repo:</strong> <Link to="https://github.com/BradleyMatera/Interactive-Pokedex" external>Interactive-Pokedex</Link></li>
+    <li><strong>Live demo:</strong> <Link to="https://bradleymatera.github.io/Interactive-Pokedex/" external>Interactive-Pokedex</Link></li>
+    <li><strong>Static export:</strong> Build-time data fetch and export documented in the repository</li>
+    <li><strong>Search and filtering:</strong> Client-side list filtering available in the live demo</li>
+    <li><strong>Responsive UI:</strong> Grid and detail views adapt across screen sizes</li>
   </ul>
+</Section>
+
+<Section id="artifacts" eyebrow="Tech Stack" title="Technologies used">
+  <div className="project-card__stack">
+    <span>Next.js</span>
+    <span>PokeAPI</span>
+    <span>Static export</span>
+    <span>Tailwind CSS</span>
+    <span>GitHub Pages</span>
+  </div>
 </Section>
