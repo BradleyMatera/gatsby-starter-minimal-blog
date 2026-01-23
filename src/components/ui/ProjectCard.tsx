@@ -55,12 +55,44 @@ const ProjectCard = ({
   const previewContent = summaryPreview ?? summary;
   const previewClassName = hasDetails ? "project-card__summary" : "project-card__description";
 
+  const handleMouseMove = (event: React.MouseEvent<HTMLElement>) => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+    const target = event.currentTarget;
+    const rect = target.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
+    const rotateX = `${Math.max(-8, Math.min(8, -y * 10))}deg`;
+    const rotateY = `${Math.max(-8, Math.min(8, x * 10))}deg`;
+    target.style.setProperty("--tilt-x", rotateX);
+    target.style.setProperty("--tilt-y", rotateY);
+  };
+
+  const handleMouseLeave = (event: React.MouseEvent<HTMLElement>) => {
+    const target = event.currentTarget;
+    target.style.setProperty("--tilt-x", "0deg");
+    target.style.setProperty("--tilt-y", "0deg");
+  };
+
   return (
-    <article ref={ref as React.RefObject<HTMLElement>} className={articleClassName}>
+    <article
+      ref={ref as React.RefObject<HTMLElement>}
+      className={articleClassName}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
       <div className="project-card__frame">
         {thumbnail ? (
           <div className="project-card__thumbnail">
-            <img src={thumbnail} alt={thumbnailAlt ?? `${title} project thumbnail`} loading="lazy" />
+            <img
+              src={thumbnail}
+              alt={thumbnailAlt ?? `${title} project thumbnail`}
+              loading="lazy"
+              decoding="async"
+              width="120"
+              height="120"
+            />
           </div>
         ) : null}
         <div className="project-card__content">

@@ -19,7 +19,20 @@ const HeroBanner = ({ title, subtitle, ctaText, ctaLink }: HeroBannerProps) => (
       </Link>
     </div>
     <div className="hero-banner__visual" role="presentation">
-      <img src="/hero-amazon-4032x3024.jpg" alt="Bradley Matera working with AWS systems" className="media-img" />
+      <picture>
+        <source type="image/avif" srcSet="/hero-amazon-2000.avif" />
+        <source type="image/webp" srcSet="/hero-amazon-2000.webp" />
+        <img
+          src="/hero-amazon-2000.jpg"
+          alt="Bradley Matera working with AWS systems"
+          className="media-img"
+          width="2000"
+          height="1500"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+        />
+      </picture>
     </div>
   </section>
 );

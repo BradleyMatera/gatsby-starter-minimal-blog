@@ -52,6 +52,18 @@ import { Section, Card, AnchorNav, Link } from "../../../src/components/ui";
       </ul>
     </Card>
   </div>
+  <div className="image-tug" aria-label="Interactive Pokédex visuals">
+    <div className="image-tug__layer image-tug__layer--back">
+      <picture>
+        <source type="image/avif" srcSet="/project-diagrams.avif" />
+        <source type="image/webp" srcSet="/project-diagrams.webp" />
+        <img src="/project-diagrams.png" alt="" width="1536" height="1024" loading="lazy" decoding="async" />
+      </picture>
+    </div>
+    <div className="image-tug__layer image-tug__layer--front">
+      <img src="/assets/visuals/projects/interactive-pokedex.svg" alt="Interactive Pokédex project visual" width="1536" height="1024" loading="lazy" decoding="async" />
+    </div>
+  </div>
 </Section>
 
 <Section id="role" eyebrow="My Role" title="Responsibilities">

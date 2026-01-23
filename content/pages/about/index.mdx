@@ -103,7 +103,11 @@ import ExperienceTimeline from "../../../src/components/visuals/ExperienceTimeli
       </div>
     </div>
     <figure className="section-graphic section-graphic--skills" aria-hidden="true">
-      <img src="/skills-icons.png" alt="" />
+      <picture>
+        <source type="image/avif" srcSet="/skills-icons.avif" />
+        <source type="image/webp" srcSet="/skills-icons.webp" />
+        <img src="/skills-icons.png" alt="" width="1536" height="1024" loading="lazy" decoding="async" />
+      </picture>
     </figure>
   </div>
 </section>
@@ -144,7 +148,11 @@ import ExperienceTimeline from "../../../src/components/visuals/ExperienceTimeli
 </Section>
 
 <div className="timeline-banner" aria-hidden="true">
-  <img className="timeline-banner__img" src="/career-timeline.png" alt="" />
+  <picture>
+    <source type="image/avif" srcSet="/career-timeline.avif" />
+    <source type="image/webp" srcSet="/career-timeline.webp" />
+    <img className="timeline-banner__img" src="/career-timeline.png" alt="" width="1536" height="1024" loading="lazy" decoding="async" />
+  </picture>
 </div>
 
 <Section

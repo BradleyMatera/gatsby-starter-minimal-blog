@@ -10,6 +10,14 @@ const GlobalScrollEffects = () => {
         return;
       }
 
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        return;
+      }
+
+      if ("paintWorklet" in CSS) {
+        CSS.paintWorklet.addModule("/worklets/hero-spotlight.js").catch(() => {});
+      }
+
       const gsapModule = await import("gsap");
       const scrollTriggerModule = await import("gsap/ScrollTrigger");
 

@@ -5,9 +5,9 @@ const HeroHeadline = () => {
       <span className="hero-highlight">
         Full Sail University Web Development ’25 · AWS Cloud Support Intern
       </span>
-      <h1 className="hero-headline">
+      <h2 className="hero-headline">
         Bradley Matera — Accessible web developer
-      </h1>
+      </h2>
       <p className="hero-description">
         Systems-minded web developer building reliable cloud, automation, and software experiences.
       </p>
