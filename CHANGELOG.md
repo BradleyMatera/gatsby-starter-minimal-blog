@@ -4,7 +4,8 @@
 
 ### Patch Changes
 
-- Ignore local-only tooling and scratch docs (Claude settings, ProjectHub proxy, and local audit/notes files).
+- Remove local-only scratch docs and unused tooling from the repo and keep them ignored.
+- Refresh favicon assets and social preview metadata for updated branding.
 
 ## 1.3.16
 

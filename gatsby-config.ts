@@ -5,11 +5,11 @@ const shouldAnalyseBundle = process.env.ANALYSE_BUNDLE;
 
 const config: GatsbyConfig = {
   siteMetadata: {
-    siteTitle: `Bradley Matera · Portfolio & Blog`,
-    siteTitleAlt: `Bradley Matera — Accessible web developer & AWS intern`,
-    siteHeadline: `Bradley Matera · Building accessible, cloud-ready web experiences`,
-    siteUrl: `https://bradleysgatsbyblog.netlify.app`,
-    siteDescription: `Insights, projects, and field notes from Bradley Matera — blending design systems, full-stack engineering, and AWS operations to ship inclusive products.`,
+    siteTitle: `Bradley Matera — Portfolio`,
+    siteTitleAlt: `Bradley Matera — Systems-minded web developer`,
+    siteHeadline: `Bradley Matera — Full-stack and cloud systems`,
+    siteUrl: `https://bradleymatera.dev`,
+    siteDescription: `Portfolio and case studies from Bradley Matera. Full-stack web development, AWS cloud systems, and applied AI projects.`,
     siteImage: `/banner-1200x630.jpg`,
     siteLanguage: `en`,
     author: `@bradleymatera`,
@@ -44,12 +44,12 @@ const config: GatsbyConfig = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Bradley Matera - Portfolio & Blog`,
-        short_name: `Bradley's Blog`,
-        description: `An online hub for Bradley Matera's web development journey, featuring portfolio projects, blogs, and educational resources.`,
+        name: `Bradley Matera — Portfolio`,
+        short_name: `Bradley Matera`,
+        description: `Portfolio and case studies from Bradley Matera.`,
         start_url: `/`,
         background_color: `#ffffff`,
-        theme_color: `#007acc`,
+        theme_color: `#160632`,
         display: `standalone`,
         icons: [
           {
