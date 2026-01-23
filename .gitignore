@@ -68,3 +68,18 @@ public
 .vscode
 .DS_Store
 .localdev
+
+# Local notes and scratch docs
+ACCEPTANCE-CHECKLIST.md
+IMPLEMENTATION-PLAN.md
+STYLE-REGRESSION.md
+devtoblogs.md
+honestplan.md
+honesty.md
+update.md
+content/pages/about/index.mdx.bak
+docs/audits/*.json
+
+# Local tools and unused services
+.claude/
+projecthub-proxy/

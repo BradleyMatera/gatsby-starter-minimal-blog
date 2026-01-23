@@ -1,5 +1,11 @@
 # Change Log
 
+## Unreleased
+
+### Patch Changes
+
+- Ignore local-only tooling and scratch docs (Claude settings, ProjectHub proxy, and local audit/notes files).
+
 ## 1.3.16
 
 ### Patch Changes
