@@ -1,379 +1,77 @@
 ---
-title: "How I Learn by Doing: My CodePen Journey"
-date: "2025-03-22"
-tags: ["Projects", "JavaScript", "React", "CSS", "Learning", "CodePen"]
-description: "A field report on how I use CodePen to build muscle memory, where AI fits, what’s real, and what still breaks—GIFs included."
-theme: "Front-End & Full-Stack"
-slug: "/how-i-learn-by-doing-my-code-pen-journey/"
+title: "How I Learn by Building Small Demos"
+date: "2025-03-18"
+slug: "/how-i-learn-by-doing"
+tags: ["learning", "projects", "web-development"]
+description: "A simple method I use to learn tools without getting stuck in tutorials."
+theme: "Process"
 ---
 
-> **Context:** CodePen is the sandbox where I learn in public while juggling school, family, and internship work. None of these pens are “products”—they’re reps.  
-> **AI assist:** Copilot/ChatGPT help with scaffolds, regex, and wording. I note AI involvement on every pen.  
-> **Status:** Learning log first, portfolio second. Expect rough edges and TODOs.
-
-### TL;DR
-
-- I start in CodePen because it is fast, safe to break, and easy to share.  
-- AI gives me scaffolds; I supply constraints, debugging, and deploys.  
-- Pens only graduate to repos when they are stable, accessible, and tested.  
-- Every pen gets a “Reality” block, GIF, and backlog note to keep me honest.
-
-## Reality snapshot
-
-- Current loop: CodePen for fast prototypes → debug/annotate → graduate to repos once stable.  
-- Guardrails: reality blocks, backlog notes, and “graduate or archive” choices logged per pen.  
-- Tooling: AI for scaffolds; I constrain prompts, rewrite risky bits, and own deploys.  
-- Gaps: deeper CS/algorithms, full test coverage, and some mobile/audio edge cases.
-
-### Table of contents
-
-- [Where my skills actually sit](#where-my-skills-actually-sit)  
-- [Why CodePen is my gym](#why-codepen-is-my-gym)  
-- [How I start a pen](#how-i-start-a-pen-even-when-i-dont-know-enough)  
-- [Anchor pens & lessons](#anchor-pens--what-they-taught-me)  
-- [Learning pattern](#learning-pattern-that-keeps-me-honest)  
-- [Case studies](#case-study-card-obscurer-cheesemath)  
-- [AI: helpful vs harmful](#where-ai-helps-and-where-it-breaks-things)  
-- [Retro + graduation rules](#my-monthly-retro-loop)  
-- [Failure modes + checklists](#common-failure-modes-and-how-i-respond)  
-- [Prompt recipes](#prompt-recipes-i-actually-use)  
-- [Next steps](#next-steps)
-
-<figure className="gif-frame">
-  <img
-    src="https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif"
-    alt="Hands-on coding loop."
-    loading="lazy"
-    decoding="async"
-  />
-  <figcaption>
-    Hands-on loop: type, run, break, fix. Source: <a href="https://giphy.com/gifs/cat-typing-13HgwGsXF0aiGY">Giphy</a>.
-  </figcaption>
-</figure>
-
----
-
-<a id="where-my-skills-actually-sit"></a>
-## Where My Skills Actually Sit
-
-- B.S. Web Development (Full Sail 2025) gave me HTML/CSS/JS fundamentals, starter React, a dash of Python/SQL, and UX basics.  
-- Comfort zone: reading JS/React, tracing requests, wiring small APIs, and deploying to GitHub Pages/Netlify without fear.  
-- Gaps: classic data structures/algorithms depth, writing everything from a blank file without references, and formal CS math.  
-- AI’s role: accelerant, not autopilot. I still debug, decide scope, and wire deploys.
-- Constraints: balancing family, internship work, and school means I need feedback loops that are short, cheap, and honest—hence CodePen.
-- Taste: prioritize honest copy, realistic scopes, and receipts that survive interviews over “perfect” patterns.
-
----
-
-<a id="why-codepen-is-my-gym"></a>
-## Why CodePen Is My Gym
-
-- **Instant feedback:** No local setup; I can prototype an idea in minutes.  
-- **Safe failure:** Breaking a pen doesn’t take down Netlify or a Render backend.  
-- **Documentation:** Every pen description now includes a “Reality” block (what works, what doesn’t, what AI wrote).
-- **Shareable receipts:** I can drop a single URL into DMs or interviews to show behavior without asking anyone to clone a repo.  
-- **Scope guardrails:** Pens force me to keep things small; if the surface area blows up, that is a signal to graduate to a repo.
-- **Visual proof:** GIFs and screenshots live beside the code so reviewers see behavior before clicking anything.
-
-<figure className="gif-frame">
-  <img
-    src="https://media.giphy.com/media/3o7btPCcdNniyf0ArS/giphy.gif"
-    alt="Quick prototyping."
-    loading="lazy"
-    decoding="async"
-  />
-  <figcaption>
-    Prototyping fast: sketch, test, ship. Source: <a href="https://giphy.com/gifs/coding-programmer-3o7btPCcdNniyf0ArS">Giphy</a>.
-  </figcaption>
-</figure>
-
----
-
-<a id="what-i-carry-into-every-pen"></a>
-## What I Carry Into Every Pen
-
-- Small CSS token set (spacing, typography, brand colors) so pens look related.  
-- Console helpers (`console.table`, inline debug overlays) for fast inspection.  
-- A “Reality” badge that states AI involvement, known bugs, and TODOs.  
-- Copy blocks that admit what is missing (“Mobile audio limited,” “Keyboard nav WIP”).  
-- A cleanup checklist: keyboard, focus ring, reduced motion, and loading states before I publish.
-
----
-
-<a id="how-i-start-a-pen-even-when-i-dont-know-enough"></a>
-## How I Start a Pen (Even When I Don’t Know Enough)
-
-1. **Talk like a human:** “I want a calculator that won’t crash on divide by zero,” not “build me a perfect architecture.”  
-1. **Let AI propose a first file:** Folder structure + a single entry point. Nothing more.  
-1. **Ship a broken version fast:** Paste, run, screenshot the error. That’s my real syllabus.  
-1. **Iterate with receipts:** I send errors back to AI, adjust, and log “Reality” notes in the pen description.  
-1. **Graduate or archive:** Stable pens move to GitHub repos with tests; noisy ones stay on CodePen as cautionary tales.
-1. **Add observability:** Even in tiny pens I include console tables, inline status text, and sometimes a debug overlay that renders current state—cheap observability muscles.
-
----
-
-<a id="anchor-pens--what-they-taught-me"></a>
-## Anchor Pens & What They Taught Me
-
-| Pen | Link | Focus | Reality snapshot |
-| --- | --- | --- | --- |
-| Garbage Collection Visualizer | [Pen](https://codepen.io/student-account-bradley-matera/pen/ZYzoWpL) | Mark-and-sweep animation via vanilla JS/CSS | Good for interviews. Numbers are illustrative, not engine-accurate. AI helped outline the visuals. |
-| React Calculator | [Pen](https://codepen.io/student-account-bradley-matera/pen/ogvGZjJ) | Controlled inputs + `useState` patterns | Handles multiple decimals + divide-by-zero messaging. Keyboard support still TODO. |
-| Sound Machine | [Pen](https://codepen.io/student-account-bradley-matera/details/dPbVvoa) | Keyboard accessibility + audio APIs | Resetting `audio.currentTime` prevents overlaps; mobile audio quirks remain. |
-| Markdown Previewer | [Pen](https://codepen.io/student-account-bradley-matera/pen/ZYzXeEJ) | `marked` + sanitization | Gracefully handles malformed input. Needs tests before repo promotion. |
-| Regex Analyzer | [Pen](https://codepen.io/student-account-bradley-matera/details/dyEYbPO) | Regex visualization + copy-to-clipboard | Explains capture groups; AI wrote starter text, I rewrote logic. |
-| Random Quote Generator v1/v2 | [Pen](https://codepen.io/student-account-bradley-matera/pen/azoLpeG) / [Pen](https://codepen.io/student-account-bradley-matera/pen/PwYJWMY) | Async fetches + design iteration | Shows my jump from “works” to “pleasant.” Debounce and loading states are in. |
-
-<figure className="gif-frame">
-  <img
-    src="https://media.giphy.com/media/l0ExncehJzexFpRHq/giphy.gif"
-    alt="Cataloging projects."
-    loading="lazy"
-    decoding="async"
-  />
-  <figcaption>
-    Cataloging pens and lessons. Source: <a href="https://giphy.com/gifs/season-9-the-office-tv-land-l0ExncehJzexFpRHq">Giphy</a>.
-  </figcaption>
-</figure>
-
----
-
-<a id="learning-pattern-that-keeps-me-honest"></a>
-## Learning Pattern That Keeps Me Honest
-
-1. **Set a hypothesis:** “Can I explain garbage collection visually?” “Can I mask card numbers accessibly?”  
-1. **Instrument immediately:** `console.table`, live regions, overlays—debug without leaving the pen.  
-1. **Break it on purpose:** Invalid inputs, rapid keypresses, offline mode. Note what fails and why.  
-1. **Document the truth:** Each pen gets a “Reality” block with scope, AI involvement, and TODOs.  
-1. **Promote selectively:** Stable pens graduate to GitHub + tests + CI (CheeseMath is the pattern).  
-1. **Archive without guilt:** If it stays noisy, I leave it as a lesson, not a product.
-1. **Track drift:** When a pen diverges from its original intent, I either rename it or split it. This prevents “mystery blobs” that do too much.
-
-<figure className="gif-frame">
-  <img
-    src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif"
-    alt="Iteration loop."
-    loading="lazy"
-    decoding="async"
-  />
-  <figcaption>
-    Iteration loop: build, test, adjust, repeat. Source: <a href="https://giphy.com/gifs/loop-code-l0MYt5jPR6QX5pnqM">Giphy</a>.
-  </figcaption>
-</figure>
-
----
-
-<a id="case-study-card-obscurer-cheesemath"></a>
-## Case Study: Card Obscurer (CheeseMath)
-
-- Goal: practice credit card masking/validation with clear UX.  
-- Live demo: [https://bradleymatera.github.io/CheeseMath-Jest-Tests/](https://bradleymatera.github.io/CheeseMath-Jest-Tests/).  
-- Reality: regex alone was brittle; added Luhn checks, inline errors, and ARIA labels.  
-- Next: axe/Lighthouse audits + unit tests before calling it “portfolio-ready.”
-
-<figure className="gif-frame">
-  <img
-    src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExY3lqZ3FoeDQ2Z2FraG84ajllOGVjdWJybjVhcTFxc2F0MjRxc2NjbCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/baZrRkhJ2SOvSBwLHj/giphy.gif"
-    alt="Credit card swipe animation."
-    loading="lazy"
-    decoding="async"
-  />
-  <figcaption>
-    Testing validation flows. Source: <a href="https://giphy.com/gifs/expressonehungary-exo-card-expressone-baZrRkhJ2SOvSBwLHj">Giphy</a>.
-  </figcaption>
-</figure>
-
----
-
-## Case Study: Garbage Collection Visualizer
-
-- Goal: teach myself GC phases (mark, sweep) without hand-waving.  
-- Build notes: started with AI-generated SVG circles; rewrote to a simple canvas grid to control performance. Added a “slow-mo” toggle to see the sweep phase.  
-- Reality: numbers are illustrative, not tied to real engine telemetry. Memory fragmentation visuals are crude but good enough to talk through in interviews.  
-- Next: log simulated heap snapshots to show fragmentation over time and link out to real engine docs for honesty.
-
-<figure className="gif-frame">
-  <img
-    src="https://media.giphy.com/media/3oEduSbSGpGaRX2Vri/giphy.gif"
-    alt="Garbage collection sweep."
-    loading="lazy"
-    decoding="async"
-  />
-  <figcaption>
-    Visualizing a simple mark-and-sweep pass. Source: <a href="https://giphy.com/gifs/mentalfloss-mind-blown-monty-python-3oEduSbSGpGaRX2Vri">Giphy</a>.
-  </figcaption>
-</figure>
-
----
-
-## Case Study: Sound Machine
-
-- Goal: practice keyboard accessibility and audio APIs together.  
-- Build notes: AI scaffolded the key map; I rewrote focus management and added ARIA live regions for “playing” announcements.  
-- Reality: desktop is solid; mobile Safari throttles audio without user gestures. I document that right in the pen.  
-- Next: lightweight visualizer bars (no canvas) and a latency note comparing browsers.
-
-<figure className="gif-frame">
-  <img
-    src="https://media.giphy.com/media/l3q2K5jinAlChoCLS/giphy.gif"
-    alt="Headphones and music focus."
-    loading="lazy"
-    decoding="async"
-  />
-  <figcaption>
-    Keeping keyboard focus in sync with audio. Source: <a href="https://giphy.com/gifs/music-headphones-l3q2K5jinAlChoCLS">Giphy</a>.
-  </figcaption>
-</figure>
-
----
-
-## Case Study: Regex Analyzer
-
-- Goal: turn abstract regex into readable feedback.  
-- Build notes: AI drafted the table; I added copy-to-clipboard with fallback, highlighted capture groups, and error handling for malformed patterns.  
-- Reality: complex lookbehinds still trip it up; I flag that in the “Reality” section.  
-- Next: mini “regex cookbook” with preset patterns and pitfalls, plus a toggle to show the raw JavaScript errors.
-
----
-
-<a id="where-ai-helps-and-where-it-breaks-things"></a>
-## Where AI Helps and Where It Breaks Things
-
-- **Helps:** bootstrap layouts, remind me of API signatures, draft copy, generate starter tests, propose folder trees.  
-- **Hurts:** invents config options, forgets previous decisions, mixes CSS methodologies, and overfits to frameworks I am not using.  
-- **Mitigation:** I pin patterns (e.g., “stick to CSS modules,” “use fetch not axios”), paste real errors, and keep scope narrow (one file at a time).
-
-<figure className="gif-frame">
-  <img
-    src="https://media.giphy.com/media/26tn33aiTi1jkl6H6/giphy.gif"
-    alt="AI assist"
-    loading="lazy"
-    decoding="async"
-  />
-  <figcaption>
-    AI as the fast typer; I’m the driver. Source: <a href="https://giphy.com/gifs/cbc-schitts-creek-episode-4-l3vR1t9Qf3vcQ62qk">Giphy</a>.
-  </figcaption>
-</figure>
-
----
-
-<a id="my-monthly-retro-loop"></a>
-## My Monthly Retro Loop
-
-- **AI disclosure:** If Copilot/ChatGPT wrote most of it, I label it “Needs manual review.”  
-- **Backlog maintenance:** `codepen-ideas.md` tracks upcoming pens + references (MDN, WCAG).  
-- **Graduation list:** Pens that earn repos, tests, and CI.  
-- **Stalled list:** Pens that stay messy—kept as learning artifacts, not hidden.  
-- **Metric:** Did I learn something I can reuse? If yes, I document and keep it. If no, I archive ruthlessly.
-
----
-
-## How I Decide to Graduate a Pen to a Repo
-
-- **Stability:** fewer than 2 open “Reality” bugs.  
-- **Accessibility:** basic keyboard + screen reader checks pass.  
-- **Testing:** at least one smoke test or story that guards core behavior.  
-- **Deployment plan:** static export works on GitHub Pages/Netlify without hacks.  
-- **Honesty note:** README includes AI usage and remaining gaps.
-
----
-
-<a id="common-failure-modes-and-how-i-respond"></a>
-## Common Failure Modes (and How I Respond)
-
-- **Performance dips:** If FPS drops in a canvas pen, I cap draw calls or switch to CSS animations.  
-- **State bugs:** I log state transitions in a sidebar so I can see bad flows instantly.  
-- **API shifts:** If a library updates, I lock versions in the pen description and plan a follow-up.  
-- **Scope creep:** If features pile up, I fork the pen and freeze the original as “v1.”  
-- **Caching ghosts:** If assets or service workers stick around, I version URLs and add a “hard refresh” note.  
-- **CSS thrash:** When class names balloon, I reset to a minimal spacing/typography palette, then reapply components.
-
-<figure className="gif-frame">
-  <img
-    src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif"
-    alt="Debugging at a desk."
-    loading="lazy"
-    decoding="async"
-  />
-  <figcaption>
-    When bugs appear: slow down, isolate, fix. Source: <a href="https://giphy.com/gifs/computador-26xBukh0D9Qm4HAyU">Giphy</a>.
-  </figcaption>
-</figure>
-
----
-
-## Debugging & Observability Checklist
-
-- [ ] Reproduce on a clean load (disable cache).  
-- [ ] Capture the exact error stack and paste it into the pen description.  
-- [ ] Log network requests + payloads; note CORS/caching layers.  
-- [ ] Add inline status text (loading/error/success) that is visible without DevTools.  
-- [ ] Verify keyboard-only flows and focus order.  
-- [ ] Validate on Chrome + mobile Safari for audio/input pens.  
-- [ ] Record a quick GIF of the failure for future-me.
-
----
-
-## Tactics for Staying Honest
-
-- Include a “Reality” badge in the pen header.  
-- Write the failure case first (“Does not support mobile Safari yet”).  
-- Link to the GitHub issue or TODO that tracks the gap.  
-- Capture a GIF of the broken behavior so future me remembers why it mattered.
-
----
-
-## What AI Does for Me (and What It Breaks)
-
-- **Useful:** starter components, regex helpers, CRUD stubs, copy tweaks, quick diagrams.  
-- **Risky:** inventing APIs that don’t exist, mixing patterns mid-pen, forgetting my file paths, and hallucinating service worker settings.  
-- **Guardrails:** I paste real errors back, constrain scope, and rewrite any security-sensitive code by hand.
-
-<figure className="gif-frame">
-  <img
-    src="https://media.giphy.com/media/5kq0GCjHA8Rwc/giphy.gif"
-    alt="AI robot chatting."
-    loading="lazy"
-    decoding="async"
-  />
-  <figcaption>
-    AI as pair: fast, but needs direction. Source: <a href="https://giphy.com/gifs/ai-robot-chatgpt-2wW2HY3rrfZ4k">Giphy</a>.
-  </figcaption>
-</figure>
-
----
-
-<a id="prompt-recipes-i-actually-use"></a>
-## Prompt Recipes I Actually Use
-
-- “Give me a minimal folder structure for React in a single CodePen. Keep styles in one CSS file. No TypeScript.”  
-- “Write one React component that renders X behavior. Do not include build config.”  
-- “Here is the error log. Fix only what the error mentions. Do not refactor the rest.”  
-- “Rewrite this copy to be honest about what is broken and what is stable.”  
-- “Generate Jest tests for this function; prefer `vitest` style but avoid external mocks.”  
-- “Summarize what this pen currently does in 3 bullets for a README.”
-
----
-
-## Takeaways
-
-- CodePen is my controlled gym: fast feedback, scoped experiments, and honest “Reality” notes.  
-- AI accelerates scaffolds, but I constrain prompts, rewrite sensitive code, and rely on real debugging.  
-- Pens graduate only when stable, accessible, and tested; noisy pens stay as lessons with documented gaps.
-
----
-
-<a id="next-steps"></a>
-## Next Steps
-
-- Convert Garbage Collection, Sound Machine, and Regex Analyzer into repos with Jest + axe checks.  
-- Add a “skills index” page mapping pens to concepts (interview prep).  
-- Record short GIFs (Giphy) per pen to show behavior before someone clicks.
-
----
-
-## References
-
-- MDN Web Docs, “Memory Management,” https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Memory_management  
-- React Docs, “State and Lifecycle,” https://react.dev/learn/state-a-components-memory  
-- MDN Web Docs, “HTMLMediaElement,” https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement
+I learn faster by building than by watching.
+
+This post explains the small demo method I use. It keeps scope tight and progress visible.
+
+You will get the steps, the checklist, and the common traps.
+
+## The promise
+
+You will learn:
+
+- how to pick a demo
+- how to keep scope small
+- how to document what you learned
+
+> "If the demo is tiny, the lesson is clear."
+
+## The method
+
+1. Pick a single goal.
+2. Build the smallest version.
+3. Write a short note.
+
+### Example note template
+
+```text
+Goal:
+What worked:
+What failed:
+What I learned:
+```
+
+## CTA: Open the notes
+
+- https://github.com/BradleyMatera/learning-journal
+
+## Now do it your way
+
+### Steps
+
+1. Choose a tool you want to learn.
+2. Build a tiny demo in one day.
+3. Write a one page note.
+
+### Common mistakes
+
+- Picking a big project.
+- Skipping the notes.
+- Waiting for perfect understanding.
+
+## Quick checklist
+
+- [ ] One goal
+- [ ] One demo
+- [ ] One note
+
+## Next steps
+
+- Build one demo this week.
+- Share the note with a peer.
+- Repeat next month with a new tool.
+
+## Related links
+
+- https://bradleymatera.dev/
+
+## Final CTA
+
+If you want my demo template, ask and I will share it.

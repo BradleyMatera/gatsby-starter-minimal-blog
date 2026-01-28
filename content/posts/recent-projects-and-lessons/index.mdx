@@ -1,99 +1,69 @@
 ---
-title: "Exploring My Recent Project: BasicServerSetup"
-date: "2024-12-04"
-slug: "/recent-project-basicserversetup"
-tags: ["Projects", "APIs", "Backend"]
-banner: ./background.jpg
-description: "Breaking down BasicServerSetup—a time-tracking API + static dashboard I use to practice separation of concerns, docs, and deploy hygiene."
-theme: "Front-End & Full-Stack"
+title: "Recent Projects and Lessons: A Short Reality Log"
+date: "2025-08-28"
+slug: "/recent-projects-and-lessons"
+tags: ["projects", "learning", "web-development"]
+description: "A short log of what I shipped and what it taught me."
+theme: "Process"
 ---
 
-> **Context:** BasicServerSetup is my sandbox for REST patterns. Backend (Node/Express) runs on a Heroku hobby dyno; frontend (Tailwind/Vanilla JS) lives on GitHub Pages. No customers rely on it.  
-> **AI assist:** ChatGPT/Copilot drafted some controller and README boilerplate; I annotated everything and logged prompts in `docs/ai-prompts.md`.  
-> **Status:** Demo works, but auth is mocked, data lives in memory, and automated tests are still on the backlog.
+I keep a short log for each project. It keeps me honest.
 
-## Reality snapshot
+This post lists recent demos and the lessons that actually stuck.
 
-- API handles `/register`, `/login`, `/clockin`, `/clockout`, `/timesheet`. Data is in-memory today, but controllers are ready for Mongo/Postgres once I wire them up.  
-- Frontend displays current status, basic charts, and toast notifications. Built as a static bundle so I can host it anywhere.  
-- Deployment split (Heroku + GitHub Pages) forces me to treat front/back deploys separately, like a mini production flow.
+You will get the lesson format, a checklist, and a next step.
 
-## Architecture
+## The promise
 
+You will learn:
+
+- how I log lessons
+- how I keep scope small
+- how I decide what to build next
+
+> "If I cannot name the lesson, the project is not done."
+
+## The lesson format
+
+```text
+Project:
+What shipped:
+What I learned:
 ```
-BasicServerSetup/
-├── app/
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   └── utils/
-├── tests/
-│   └── postman-collection.json
-└── frontend/
-    └── index.html
-```
 
-- `authMiddleware.js` injects a lightweight token check (mocked JWT).  
-- `timeController.js` coordinates clock-ins/outs and calculates durations.  
-- `frontend/` uses Fetch to call the API, shows skeletons, and displays errors via toasts.
+## CTA: Open the project list
 
-## Deployment flow
+- https://bradleymatera.dev/projects/
 
-| Layer | Platform | Notes |
-| --- | --- | --- |
-| API | Heroku hobby dyno | GitHub integration auto-deploys `main`. ENV vars stored in Config Vars. `/healthz` used for smoke tests. |
-| Frontend | GitHub Pages | Actions workflow builds + deploys on merge. `config.js` stores API base URL. |
-| CI | GitHub Actions | Runs `npm run lint` + `npm run test` (placeholder until I add Jest). |
+## Now do it your way
 
-## Docs & testing
+### Steps
 
-- README + `docs/runbook.md` explain start/stop steps, env vars, and TODOs.  
-- Postman collection covers CRUD flows; I run it manually after deploys until automated tests exist.  
-- Smoke script (`scripts/smoke.sh`) pings `/healthz`, `/timesheet`, and verifies response codes.
+1. Pick your last project.
+2. Write three lines.
+3. Share the lesson.
 
-## Lessons so far
+### Common mistakes
 
-- **Separation of concerns:** Controllers stay thin; models handle business logic. Swapping data stores later will be straightforward.  
-- **Docs first:** Writing the runbook forced me to think about failure modes before they happened.  
-- **Independent deploys:** Shipping UI tweaks without touching the API (and vice versa) keeps iteration fast.  
-- **TODOs remain:** JWT auth, persistent DB, integration tests, and structured logging are still in progress. READMEs list each gap so nobody assumes it’s production-ready.
+- Listing features instead of lessons.
+- Skipping notes when busy.
+- Starting a new project too fast.
+
+## Quick checklist
+
+- [ ] Three line lesson
+- [ ] Proof link added
+- [ ] Next step written
 
 ## Next steps
 
-- Wire up MongoDB Atlas (or Postgres) + Mongoose.  
-- Replace mock auth with real JWTs.  
-- Add Jest + Supertest coverage, then automate the Postman collection in CI.  
-- Move deployment from Heroku to Render or Fly.io for more control (and to align with other projects).  
-- Publish the repo once secrets + docs are cleaned up.
+- Add a lesson log to your README.
+- Update it after each ship.
 
-## Repo
+## Related links
 
-- [https://github.com/BradleyMatera/BasicServerSetup](https://github.com/BradleyMatera/BasicServerSetup)
+- https://bradleymatera.dev/projects/
 
-## Repro + smoke checklist
+## Final CTA
 
-- `npm install && npm run dev` for local API; set `PORT` and mock secret in `.env`.  
-- `npm run start:frontend` to serve the static dashboard; point `API_BASE_URL` at local or Heroku.  
-- Run `scripts/smoke.sh` to hit `/healthz`, `/clockin`, `/clockout`, `/timesheet`.  
-- Manual Postman collection covers happy paths; failures logged in `docs/runbook.md`.
-
-## Incidents and fixes
-
-- **Clock drift bug:** Client and server timezones mismatched; normalized to UTC and added unit tests for duration math.  
-- **CORS misconfig:** Frontend broke on Pages; enabled CORS for the Pages origin only and documented it.  
-- **Silent 500s:** Missing error handler returned HTML errors. Added JSON error middleware + request IDs.  
-- **Config drift:** Frontend pointed at the wrong API after a deploy. Added a config banner showing current API base and environment.
-
-## Interview angles
-
-- **Separation of deploys:** Shows I can manage independent front/back pipelines and keep configs aligned.  
-- **Honesty about gaps:** It’s a lab; auth and persistence are mocked until I wire Atlas/Postgres.  
-- **Operational habits:** Runbook, smoke script, and Postman collection prove I think about operability, not just code.  
-- **Next steps:** Database + JWT work is scoped; I can describe exactly how I’ll roll it out and test it.
-
-## Stretch goals
-
-- Add structured logging + a minimal dashboard (Grafana or even a CSV dump) for time entries.  
-- Introduce role-based access (admin vs employee) once auth is real.  
-- Automate seed data and teardown for repeatable demos.  
-- Move to Fly.io to practice global deploys and see how latency affects the UI.
+If you want my lesson template, ask and I will share it.

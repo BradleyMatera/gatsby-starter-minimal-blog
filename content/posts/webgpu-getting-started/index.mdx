@@ -1,111 +1,70 @@
 ---
-title: "Getting Started with WebGPU: A Practical Guide for Web Developers"
-date: "2025-09-01"
+title: "WebGPU Getting Started: A Minimal Triangle"
+date: "2025-03-07"
 slug: "/webgpu-getting-started"
-tags: ["WebGPU", "Graphics", "Web Development", "Performance"]
-description: "Notes from Triangle Shader Lab—how I rebuilt the Hello Triangle/Textured Cube demos with Next.js, TypeScript, and Bun."
-theme: "Low-Level Experiments"
+tags: ["webgpu", "graphics", "learning"]
+description: "A minimal WebGPU starting point with a short checklist."
+theme: "Graphics"
 ---
 
-> **Context:** Triangle Shader Lab is a small Next.js + TypeScript study site deployed to GitHub Pages. It hosts two demos (Hello Triangle + Textured Cube) with annotated copy.  
-> **AI assist:** ChatGPT/Copilot helped with WGSL snippets, adapter/device explanations, and code comments. I cite them directly on the site.  
-> **Status:** Learning tool only. It adapts public WebGPU samples, adds notes, and keeps expectations low.
+WebGPU looks complex. A triangle is the fastest way in.
 
-## Reality snapshot
+This post shows the minimal steps I used and the notes I kept.
 
-- Built with Next.js 14, Bun, Tailwind, and MDX. No custom engine—just readable wrappers around the official WebGPU samples.  
-- Goal: understand adapter requests, pipeline creation, buffers, and render loops, then share the notes publicly.  
-- Limitations: Works where WebGPU is enabled (Chrome Canary, Edge with flags). No WebGL fallback, no production features.
+You will get a snippet, a checklist, and the mistakes I made.
 
-## Architecture
+## The promise
 
-```
-triangle-shader-lab/
-├── pages/
-│   ├── index.mdx
-│   ├── hello-triangle.mdx
-│   └── textured-cube.mdx
-├── components/
-│   ├── DemoWrapper.tsx
-│   └── CodeBlock.tsx
-├── lib/
-│   └── webgpu.ts
-└── public/
-    └── shaders/
+You will learn:
+
+- the smallest WebGPU setup
+- where setup usually breaks
+- how to document fixes
+
+> "Start with one triangle and keep it boring."
+
+## The minimal setup
+
+### Example setup flow
+
+```js
+const adapter = await navigator.gpu.requestAdapter();
+const device = await adapter.requestDevice();
 ```
 
-- `DemoWrapper` handles feature detection (`navigator.gpu`), adapter/device negotiation, and fallback messaging.  
-- Each demo page includes: overview, code, “Reality check” block (what’s working/missing), and proof links.
+## CTA: Open the demo
 
-## Demo breakdown
+- https://bradleymatera.github.io/TriangleDemo/
 
-### Hello Triangle
-- Rebuilds the canonical sample. WGSL shaders render a single triangle with color interpolation.  
-- Notes explain `requestAdapter`, `requestDevice`, swap chain configuration, and command encoder setup.  
-- Users can toggle debugging overlays to see pipeline state (bind groups, buffers) in real time.
+## Now do it your way
 
-### Textured Cube
-- Adds vertex buffers, indices, textures, uniform buffers, and a basic rotation matrix.  
-- Highlights the extra state needed (samplers, bind group layouts) and warns about missing features (lighting, depth testing).  
-- Links back to the original sample so readers know I didn’t invent it.
+### Steps
 
-## Tooling
+1. Request an adapter.
+2. Create a device.
+3. Render a triangle.
 
-- **Next.js 14 + MDX:** Lets me combine prose + code.  
-- **Bun:** Fast dev server, zero-config TypeScript support.  
-- **Tailwind:** Provides consistent typography/layout.  
-- **Netlify analytics:** Tracks which sections get the most attention; I use that data to prioritize updates.  
-- **Honesty log:** Each page includes “Reality snapshot” + AI disclosure.
+### Common mistakes
 
-## Lessons learned
+- Skipping adapter checks.
+- Mixing WebGL and WebGPU code.
+- Changing too much at once.
 
-- Feature detection + honest fallbacks matter. If WebGPU isn’t available, I show a clear message instead of a blank canvas.  
-- Annotated copy helps more than fancy effects. Recruiters appreciated that I call it a study site, not a framework.  
-- Sharing prompt logs builds trust. I include links to AI conversations so engineers know where I got help.
+## Quick checklist
 
-## Setup checklist (what actually worked)
+- [ ] Adapter acquired
+- [ ] Device created
+- [ ] Triangle visible
 
-- Chrome Canary or Edge with `--enable-unsafe-webgpu` flags; macOS needs Metal support.  
-- Bun `1.x`, Node `20.x`, Next.js 14 with the `experimental.webgpu` flag enabled.  
-- Install GPU debuggers (Chrome DevTools WebGPU tab) and use render doc captures sparingly to avoid huge files.  
-- Keep shaders small and readable; every line gets a comment tied to the tutorial step.
+## Next steps
 
-## Debugging patterns that saved me
+- Add a color change.
+- Add a resize handler.
 
-- **Blank canvas:** Verify `navigator.gpu` first, then check adapter requests. If adapter is null, bail with a user-facing message.  
-- **Nothing renders after resize:** Ensure `device.queue.submit` still runs and swap chain is reconfigured; resizing resets context state.  
-- **Weird colors/vertices:** Inspect buffer layouts and alignments; a single stride mistake ruined the cube until I logged offsets.  
-- **Performance dips:** Use small frame counters; disable fancy overlays unless debugging. WebGPU is fast, but the page still needs to be honest on low-power laptops.
+## Related links
 
-## Mistakes and corrections
+- https://developer.chrome.com/docs/web-platform/webgpu/
 
-- **Copying samples without understanding:** Early on I pasted code and hoped. Now every demo has a “Why this line exists” note.  
-- **Ignoring accessibility:** Added captions, transcripts for Looms, and clear “WebGPU required” copy.  
-- **No fallback demos:** Added a “read-only” mode with screenshots and code snippets so readers without WebGPU can still learn.  
-- **Too few tests:** I now snapshot the rendered canvas dimensions and check for thrown errors during adapter/device negotiation.
+## Final CTA
 
-## How this project shows up in interviews
-
-- I treat it as a learning case study, not production. I walk interviewers through the “Reality snapshot” and the bug logs.  
-- I use it to answer “How do you learn new low-level tech?” → start small, annotate heavily, build honesty logs, and keep proof links.  
-- I call out that AI drafted early WGSL snippets, but I rewrote them after validating against the WebGPU spec.
-
-## Reading and reference list
-
-- WebGPU spec + MDN docs (annotated in `notes/webgpu.md`).  
-- Chrome WebGPU samples and Mozilla’s demos.  
-- “WebGPU Fundamentals” blog series for mental models of pipelines and bind groups.  
-- RenderDoc + Chrome DevTools docs for capture/inspection tips.
-
-## TODOs
-
-- Add WebGPU flag instructions for each browser.  
-- Record Loom walkthroughs to explain the demos verbally.  
-- Experiment with WebGPU compute shaders and document those notes the same way.  
-- Publish the repo publicly (currently private while I scrub assets).
-
-## Links
-
-- Live demo: [https://bradleymatera.github.io/TriangleDemo/](https://bradleymatera.github.io/TriangleDemo/)  
-- GitHub repo: [https://github.com/BradleyMatera/TriangleDemo](https://github.com/BradleyMatera/TriangleDemo)  
-- Prompt log: `notes/webgpu-prompts.md`
+If you want my minimal template, ask and I will share it.

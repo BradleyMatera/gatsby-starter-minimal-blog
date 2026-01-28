@@ -1,141 +1,78 @@
 ---
-title: "Scaling OBJ Parsing in Zig: Streaming, Allocators, and Web Integration"
-date: "2025-08-18"
-tags: ["Zig", "Performance", "3D Parsing", "PixiJS", "Optimization"]
-description: "Notes from my Zig OBJ parser experiment—how I stream large files, juggle allocators, and hand results to a PixiJS viewer."
-theme: "Low-Level Experiments"
+title: "Zig OBJ Parsing: What I Learned From a Small Parser"
+date: "2025-03-10"
+slug: "/exploring-zig-efficient-parsing"
+tags: ["zig", "parsing", "performance"]
+description: "A small Zig parsing lab and the notes I kept while building it."
+theme: "Systems"
 ---
 
-> **Context:** Personal Zig study (`obj-parser` repo). Built to understand memory management outside JavaScript; not shipped in any production renderer.  
-> **AI assist:** ChatGPT/Copilot provided starter snippets (allocators, WGSL integration). I audited every line before committing.  
-> **Status:** Benchmarks come from my M2 laptop and sample OBJ files. Treat them as directional, not formal performance claims.
+This is a small parsing lab in Zig. No production use.
 
-## Reality snapshot
+I wrote it to learn parsing, memory, and error handling in a low-level language.
 
-- Goal: parse multi-megabyte OBJ files without loading them entirely into memory, then stream the vertices directly into a browser renderer.  
-- Approach: streaming I/O + allocator mix (Arena, GeneralPurposeAllocator, FixedBufferAllocator) + binary export for PixiJS.  
-- Limitations: Handles ~50 MB files comfortably. Anything bigger exposes TODOs (MTL parsing, normals, materials).
+You will get the core steps, a code snippet, and my checklist.
 
-## Architecture
+## The promise
 
-```
-obj-parser/
-├── src/
-│   ├── main.zig
-│   ├── parser.zig
-│   └── exporter.zig
-├── tests/
-│   └── parser_test.zig
-├── examples/
-│   ├── cube.obj
-│   └── teapot.obj
-└── web/
-    └── preview.js
-```
+You will learn:
 
-- `parser.zig` – streaming reader + line processor.  
-- `exporter.zig` – writes a compact binary format (vertex count + raw floats) so the web client can map it into typed arrays.  
-- `web/preview.js` – PixiJS viewer to prove the data actually renders.
+- how I structured the parser
+- how I logged errors
+- what I would do next
 
-## Streaming & allocators
+> "Parsing is simple until you log every edge case."
+
+## The core idea
+
+I kept the parser small and strict. That made bugs obvious.
+
+### Example Zig parsing pattern
 
 ```zig
-pub fn parse(allocator: std.mem.Allocator, reader: anytype) !Model {
-    var buffered = std.io.bufferedReader(reader);
-    var stream = buffered.reader();
-    var model = Model.init(allocator);
-
-    var line: [1024]u8 = undefined;
-    while (try stream.readUntilDelimiterOrEof(&line, '\n')) |slice| {
-        try model.processLine(slice);
-    }
-
-    return model;
-}
-```
-
-- Reads one line at a time, reducing peak memory ~90% versus slurping the whole file.  
-- `errdefer` ensures partially built models release memory when parsing fails.  
-- Arena allocator handles temporary buffers; GPA stores final vertex/face arrays; FixedBufferAllocator tokenizes hot loops.
-
-## Binary hand-off to the browser
-
-```zig
-pub fn exportBinary(model: Model, writer: anytype) !void {
-    try writer.writeInt(u32, model.vertices.len, .Little);
-    for (model.vertices) |v| {
-        try writer.writeAll(std.mem.asBytes(&v));
+const line = try reader.readUntilDelimiterOrEofAlloc(allocator, '\n', 1024);
+if (line) |l| {
+    if (std.mem.startsWith(u8, l, "v ")) {
+        // parse vertex
     }
 }
 ```
 
-```js
-const response = await fetch("model.bin");
-const buffer = await response.arrayBuffer();
-const count = new DataView(buffer).getUint32(0, true);
-const vertices = new Float32Array(buffer, 4, count * 3);
-```
+## CTA: Open the repo
 
-- Zero-copy: the browser maps the ArrayBuffer directly. No JSON, no duplicate arrays.  
-- Endianness is explicit (`Little`), so the JS side knows what to expect.
+- https://github.com/BradleyMatera/zig-obj-parser
 
-## Benchmarks (anecdotal)
+## Now do it your way
 
-- **50 MB OBJ** → ~150 ms parse on an M2 Max, ~5 MB peak memory.  
-- **JavaScript baseline** (old parser) → ~800 ms + 90 MB peak memory.  
-- `zig test` + fuzz cases cover malformed vertices/faces; coverage reports hover around 90%. Failures trigger bug tickets before I merge.
+### Steps
 
-## Lessons learned
+1. Pick one file format.
+2. Parse one line type.
+3. Add strict error messages.
+4. Log what breaks.
 
-- Allocator choice is architecture. Arenas speed up temp allocations; GPA’s leak detection saved me countless times.  
-- Streaming keeps memory predictable but forces careful buffer sizing. I clamp line length and surface useful errors when models exceed limits.  
-- Interop demands rigor: typed arrays, endianness, and struct packing must line up or PixiJS draws garbage.  
-- Zig isn’t “faster Rust”; it just gives me explicit control, which fit this problem well.
+### Common mistakes
 
-## TODOs
+- Allowing silent failures.
+- Ignoring memory limits.
+- Skipping small test files.
 
-- Parse MTL files + textures. Right now it’s vertices/faces only.  
-- Compile to WebAssembly so the parsing can happen in-browser (bye-bye network trip).  
-- Better logging and benchmark automation (currently rely on scripts + manual recording).  
-- Document a step-by-step tutorial so other Zig learners can follow along.
+## Quick checklist
 
-## Repro checklist
+- [ ] One line type parsed
+- [ ] Errors logged
+- [ ] Test file included
 
-- Install Zig 0.12.x.  
-- Run `zig test src/parser.zig` to confirm the parsing core is green.  
-- Execute `zig build run -- model=obj/teapot.obj --out=web/public/model.bin` to produce the binary.  
-- Open `web/preview.html` and watch PixiJS render the model. If it fails, check endianness and buffer lengths first.  
-- Flip allocators in `main.zig` (Arena vs GPA) and rerun the benchmarks to see the trade-offs.
+## Next steps
 
-## Bugs I hit (and fixed)
+- Add benchmarks for big files.
+- Add unit tests for each token.
+- Document the error format.
 
-- **Leaking on parse failure:** Missing `errdefer` led to leftover allocations when a face line was malformed. Fixed by scoping temporary buffers and using GPA leak detection.  
-- **Silent data corruption:** Misaligned struct packing between Zig and JS caused skewed meshes. Added explicit byte sizes and tests that diff exported binaries.  
-- **Line length overflows:** Extremely long OBJ lines crashed the parser. I now clamp lines, surface a clear error, and suggest splitting assets.  
-- **PixiJS mismatch:** I once flipped winding order; the model rendered inside-out. Added a small visual check to the preview and a note in the README.
+## Related links
 
-## How I’d explain this in interviews
+- https://ziglang.org/documentation/0.13.0/
 
-- **Why Zig:** Needed explicit memory control and fast feedback to learn low-level parsing; JS hid too much.  
-- **Safety nets:** Tests + fuzz cases + allocator guards are my “seatbelts” while experimenting.  
-- **Interop clarity:** Typed arrays + explicit endianness beats JSON for large meshes; it’s leaner and easier to reason about.  
-- **Scope honesty:** This is a learning tool—no production promises. I’m transparent about missing MTL/normal support.
+## Final CTA
 
-## Stretch goals and open questions
-
-- Evaluate a streaming WebAssembly build so parsing happens client-side for big models.  
-- Try a rayon-style parallel parse (once Zig’s async story stabilizes) to see if multi-core helps.  
-- Add a metrics hook to log peak allocations per file size.  
-- Write a mini guide: “From JS parser to Zig” for others making the same jump.
-
-## Links
-
-- Repo: [https://github.com/BradleyMatera/obj-parser](https://github.com/BradleyMatera/obj-parser)  
-- Prompt log: `notes/ai-prompts.md`  
-- PixiJS demo: `web/preview.js` (GitHub Pages build coming soon)
-
-## References
-
-[^zig-docs]: Zig Language Reference, https://ziglang.org/documentation/master/  
-[^obj-spec]: OBJ File Format, http://paulbourke.net/dataformats/obj/  
-[^zig-alloc-guide]: “Choosing an Allocator,” Zig Learn, https://ziglearn.org/chapter-2/
+If you want my test files, ask and I will share them.

@@ -1,127 +1,80 @@
 ---
-title: "Containerizing Multi-Language Projects with Docker: A Practical Guide"
-date: "2024-07-15"
-tags: ["Docker", "Node.js", "Python", "DevOps", "Containerization"]
-description: "How I built a two-service Docker Compose lab (Node + Python), what I learned from breaking it, and why it still counts as practice—not production."
+title: "Docker for Multi-Language Projects: A Practical Lab Guide"
+date: "2025-06-10"
+slug: "/containerizing-multi-language-projects-with-docker-a-practical-guide"
+tags: ["docker", "containerization", "web-development"]
+description: "A short lab guide for running two languages in one Docker setup."
 theme: "Cloud & DevOps"
 ---
 
-> **Context:** Personal repo (`docker_multilang_project`) where I containerized a Node API and a Python utility. No clients, no prod traffic—just me trying to stop “works on my machine” excuses.  
-> **AI assist:** ChatGPT summarized Docker docs and suggested health-check patterns; I kept all final code/tests/manual notes in the repo.  
-> **Status:** Student exercise. Useful for onboarding and demos, but not hardened for production.
+This is a lab guide for small projects, not production.
 
-## Reality snapshot
+I wrote it to keep my own steps clear when a repo has more than one language.
 
-- Stack: Node 20 + Express (`/api`), Python 3.11 helper service, Postgres 15. Managed via Docker Compose v3.9.  
-- Use cases: practice dependency isolation, log correlation, and failure drills.  
-- Observability: JSON logs, `/healthz` endpoints, and `docker compose logs`. No ELK/Splunk stack yet.  
-- Hosting: Runs locally or on a single VM. Not deployed for real users.
+You will get the simplest setup, a checklist, and the mistakes I hit.
 
-## Architecture overview
+## The promise
 
-```
-docker_multilang_project/
-├── docker-compose.yml
-├── node-service/
-│   ├── Dockerfile
-│   ├── package.json
-│   └── server.js
-├── python-service/
-│   ├── Dockerfile
-│   └── app.py
-└── scripts/
-    └── smoke.sh
-```
+You will learn how to:
 
-- `node-service`: REST API that exposes math endpoints and proxies to the Python service when needed.  
-- `python-service`: Handles CPU-heavy calculations/string parsing. Communicates via HTTP on the internal network.  
-- `scripts/smoke.sh`: Quick smoke test hitting both services + Postgres after `docker compose up`.
+- keep each service isolated
+- run both with one command
+- document the steps
 
-## Compose highlights
+> "Two languages are fine. Two unclear setups are not."
+
+## Minimal setup
+
+### Example compose file
 
 ```yaml
 services:
   api:
-    build: ./node-service
-    env_file: .env.api
-    depends_on: [db]
-    ports: ["4000:4000"]
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:4000/healthz"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-
-  python:
-    build: ./python-service
-
-  db:
-    image: postgres:15
-    environment:
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-volumes:
-  pgdata:
+    build: ./api
+    ports:
+      - "4000:4000"
+  web:
+    build: ./web
+    ports:
+      - "3000:3000"
 ```
 
-- **Why:** Health checks keep Compose from routing traffic to sick containers. Named volumes preserve data. `.env` keeps secrets out of Git.  
-- **Observability:** Logs include `traceId` so I can follow a request from Node → Python. When I tail logs, it’s clear which container said what.
+## CTA: Open the repo
 
-## Experiments & results
+- https://github.com/BradleyMatera/docker_multilang_project
 
-| Experiment | Observation | Outcome |
-| --- | --- | --- |
-| Remove Express dependency mid-run | Only the Node build failed; Python kept serving other requests | Proof that isolation works. |
-| Force Python infinite loop | Node flagged the dependency timeout but stayed healthy | Need better circuit breakers, but UI didn’t crash. |
-| Mount log volume (`./logs:/app/logs`) | Restarting containers kept historical logs | Good for debugging; README now reminds me to clean the directory. |
-| Scale Node tier (`docker compose up --scale api=3`) | Load balanced across three containers (still localhost traffic) | Helps me explain horizontal scaling during interviews. |
+## Now do it your way
 
-## Tooling & docs
+### Steps
 
-- **Scripts:** `scripts/new-cert.sh`, `scripts/smoke.sh`, and `scripts/cleanup.sh` keep routines consistent.  
-- **Documentation:** `README.md` covers setup, health checks, and TODOs; `docs/runbook.md` logs drills (failures, fixes, lessons).  
-- **Security:** Multi-stage builds, `npm audit`, and `pip-audit` run before merges. Findings get tracked in repo issues.  
-- **CI/CD:** GitHub Actions builds the images, runs lint/tests, and publishes artifacts so I can pull them on another machine.
+1. Split services into folders.
+2. Add a Dockerfile per service.
+3. Write a simple compose file.
+4. Add a notes file with start and stop steps.
 
-## What still needs work
+### Common mistakes
 
-- CI smoke tests that spin up the stack in GitHub Actions and run `scripts/smoke.sh`. Currently manual.  
-- More realistic observability stack (Prometheus + Grafana or at least Loki) instead of plain logs.  
-- Automated cleanup for volumes/networks so teammates don’t end up with stale resources.  
-- Better story around secrets (maybe doppler/.env vault). For now I rely on `.env.example` files.
+- Sharing env files between services.
+- Forgetting port mappings.
+- Hiding setup steps inside shell scripts only.
 
-## Repro steps (for future me or teammates)
+## Quick checklist
 
-1. Copy `.env.example` to `.env.api` and `.env.db`; fill in passwords.  
-2. Run `docker compose up --build`. Wait for health checks to go green.  
-3. Execute `scripts/smoke.sh` to hit Node, Python, and Postgres.  
-4. Tail logs with `docker compose logs -f api python` and confirm `traceId` flows across services.  
-5. Kill one service (`docker compose kill python`) and verify API degrades gracefully.
+- [ ] Dockerfiles build
+- [ ] Compose runs both services
+- [ ] Notes include start and stop steps
 
-## Failure drills and lessons
+## Next steps
 
-- **Breaking Postgres:** Stopped the DB to see error handling. API returned 503 with a user-friendly message—logged the stack trace server-side only.  
-- **Timeouts between services:** Added a 2s timeout to the API→Python call; the frontend shows a banner when dependencies are slow.  
-- **Log file bloat:** Mounted a host directory and hit 1GB fast. Added log rotation config + a cleanup script.  
-- **Dependency sprawl:** npm/pip upgrades broke builds; pinned versions and added `npm ci`/`pip install -r` in the Dockerfiles.
+- Add a health check route.
+- Add a small seed script.
+- Keep the notes updated.
 
-## How I use this in interviews
+## Related links
 
-- Talk through why I separated responsibilities (Node for routing/auth, Python for CPU tasks).  
-- Show the `scripts/` folder as proof I operationalize even small labs.  
-- Admit gaps: no real tracing stack, no secrets manager, and only local/VM deployments so far.  
-- Offer to screen share the runbook so interviewers see the habit of documenting drills.
+- https://docs.docker.com/compose/
+- https://docs.docker.com/build/
 
-## Next iterations
+## Final CTA
 
-- Add k6 tests to simulate basic load across both services.  
-- Replace raw curl health checks with a tiny status page showing dependency health.  
-- Publish a short Loom walkthrough of the repo structure and the smoke test output.  
-- Try the same pattern with a queue (e.g., RabbitMQ) to decouple CPU-heavy tasks.
-
-## Links
-
-- Repo: [https://github.com/BradleyMatera/docker_multilang_project](https://github.com/BradleyMatera/docker_multilang_project)  
-- Smoke test script example: [https://gist.github.com/BradleyMatera/docker-multilang-smoke](https://gist.github.com/BradleyMatera/docker-multilang-smoke)  
-- Trivy scan notes: `docs/security.md`
+If you want my notes template, ask and I will share it.

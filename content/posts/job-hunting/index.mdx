@@ -1,146 +1,74 @@
 ---
-title: "Targeted Job Applications in 2025: SPA Résumés + CodePens"
-date: "2025-03-24"
-slug: "/blog/spa-resume-websites-2025"
-tags: ["Job Search", "Web Development", "SPA", "Resumes", "Cover Letters", "CodePen"]
-description: "How I built role-specific SPA résumés for Anduril + Johnson Health Tech, the evidence I paired with each, and what recruiters said."
+title: "Job Hunting Notes: What I Track and What I Drop"
+date: "2025-09-01"
+slug: "/job-hunting"
+tags: ["career", "job-search"]
+description: "A blunt list of what I track during a job search and what I stop doing."
 theme: "Career"
 ---
 
-> **Context:** Early-career dev (no paid SWE role yet) documenting my job search. Two target roles: Anduril (Web Infrastructure) and Johnson Health Tech (Software Tester I).  
-> **AI assist:** ChatGPT helped organize research notes and recruiter feedback; the PDFs/SPAs themselves are hand-built (with AI-disclosure sections).  
-> **Status:** Applications submitted, interviews held, no offers yet. Sharing the process keeps me accountable.
+Job hunting is noisy. I track the parts I can control.
 
-## Reality snapshot
+This post is a short system that keeps me honest and focused.
 
-- Every application still starts with a PDF résumé uploaded to the ATS.  
-- SPA résumés live on CodePen (exported to static builds when needed). They contain honesty blocks, GitHub links, and the same PDF download.  
-- Recruiters care most about clarity + proof, not animations. The SPAs help when I’m in conversations, not before.
-- Versioning: I bump copy versions weekly during active hunts and log changes in a Notion page (what changed, why, recruiter reaction).  
-- Metrics tracked: time-on-page, which sections get mentioned in calls, click-through on PDF/download/LinkedIn. Most traction still comes from PDF → LinkedIn → GitHub, but SPAs improve depth when the recruiter actually looks.
+You will get a checklist, a template, and the mistakes I avoid.
 
-## Why I bothered with SPA résumés
+## The promise
 
-- **Control the story:** ATS strips formatting; the SPA lets me foreground “proof-first” links and honesty blocks.  
-- **Speed of iteration:** CodePen + Tailwind means I can ship a role-specific version in under a day without breaking the main portfolio.  
-- **Honesty front and center:** Each SPA has a “Reality” card (what’s real, what’s not, AI disclosure). It disarms skepticism when I’m early-career.  
-- **Live demos embedded:** Recruiters who do click can see GIFs/screenshots/code links without digging.
+You will learn:
 
-## Constraints and rules I follow
+- what I track each week
+- how I reduce wasted effort
+- how I keep proof links ready
 
-- PDF first, always. SPA is additive, never a replacement.  
-- One SPA per role; once the role closes, I archive the pen and keep the PDF + lessons.  
-- Copy must include AI disclosure and “not a product” for study demos.  
-- Accessibility parity: skip links, keyboard traps avoided, alt text on every image, prefers-reduced-motion respected.  
-- No autoplay media; performance budget under 90kb CSS/JS where possible.
+> "If I cannot prove it in one click, I do not list it."
 
-## Target roles & requirement mapping
+## What I track
 
-| Company / Role | Key requirements | My evidence |
-| --- | --- | --- |
-| Anduril – Software Engineer, Web Infrastructure | JS/TS depth, WebGPU familiarity, DevOps toolchain (CircleCI/Bazel), Linux comfort, clear communication | Triangle Shader Lab (WebGPU study), Docker Multilang project, GitHub Actions write-ups, AWS internship runbooks, Army medic story for calm communication |
-| Johnson Health Tech – Software Tester I | QA mindset, OOP fundamentals, Android/Unix fluency, documentation | CheeseMath Jest suite, Anime CRUD bug diary, manual test checklists, shell scripts from AWS labs |
+- roles applied
+- follow-ups sent
+- one proof link per skill
 
-Listings: [Anduril](https://job-boards.greenhouse.io/andurilindustries/jobs/4663439007?gh_jid=4663439007) • [Johnson Health Tech](https://www.indeed.com/viewjob?jk=cada0de72ec519fb)
+### Example tracking line
 
-### Requirement-to-proof detail (Anduril)
+```text
+Company | Role | Date | Follow-up | Proof link
+```
 
-- **WebGPU familiarity:** Triangle Shader Lab write-up, code links, and honesty note (“study site, not production”).  
-- **DevOps/tooling:** Docker Multilang project README (health checks, logs, failure drills), GitHub Actions pipelines on multiple repos, notes on OIDC runners.  
-- **Linux comfort:** AWS internship runbooks + shell scripts for log inspection; link to service-restart drills.  
-- **Communication under pressure:** 82nd Airborne medic → calm debugging story; links to incident-style blog notes.
+## CTA: Copy the tracker
 
-### Requirement-to-proof detail (Johnson Health Tech)
+- https://www.notion.so/bradleymatera/cert-tracker
 
-- **QA mindset:** Anime CRUD bug diary (defect, repro, fix); Jest coverage on CheeseMath; manual test checklists.  
-- **OOP fundamentals:** Small class-based utilities in Anime CRUD; notes on refactoring for testability.  
-- **Android/Unix fluency:** Bash scripts for log tailing and cleanup; adb basics noted in cover letter.  
-- **Documentation:** README sections with “Reality” + TODO; short runbooks included in the SPA.
+## Now do it your way
 
-## SPA résumé structure
+### Steps
 
-- **Hero:** Name, role target, PDF download, “Reality” note (“Early-career developer; demos listed below are personal projects”).  
-- **Sections:** Skills, project highlights, proof links (GitHub PRs, Render demos), honesty log snapshot.  
-- **Analytics:** Console logs + manual tracking (time on page, which sections recruiters mention). If multiple recruiters miss a section, I move it.  
-- **Accessibility:** Same rules as my main portfolio—skip links, keyboard nav, alt text.
-- **Performance:** Inline critical CSS; defer any non-critical JS; images compressed; no third-party trackers.  
-- **AI disclosure:** A dedicated paragraph stating where AI assisted (copy scaffolding, regex snippets) and what I rewrote by hand.
+1. Pick a simple tracker.
+2. Add one proof link per skill.
+3. Review once a week.
 
-### Example – Anduril SPA résumé
+### Common mistakes
 
-- Built with vanilla JS + Tailwind + PixiJS accents referencing the Triangle Shader Lab study.  
-- Links to: Triangle Shader Lab (WebGPU study notes), Docker Multilang repo, AWS internship runbooks, medic-to-engineer blog post.  
-- Includes a “Reality snapshot” card: “Render backend cold-starts ~5 minutes, AWS experience is lab-only, Bazel knowledge TBD.”  
-- CodePen link: [https://codepen.io/student-account-bradley-matera/pen/vEYrOGB](https://codepen.io/student-account-bradley-matera/pen/vEYrOGB)
+- Tracking everything except proof.
+- Applying without a clear target.
+- Letting the list grow without review.
 
-### Example – Johnson Health Tech SPA résumé
+## Quick checklist
 
-- Focus on test plans, Jest coverage, defect narratives.  
-- Screenshots from CheeseMath (live demo) and Anime CRUD bug logs.  
-- CTA buttons for PDF download + GitHub issues showing actual QA work.  
-- CodePen link: [https://codepen.io/student-account-bradley-matera/pen/RNwJPaw](https://codepen.io/student-account-bradley-matera/pen/RNwJPaw)
-
-### Cover letter pattern I’m using
-
-- **Opening:** Cite the role and 1–2 requirements verbatim from the listing.  
-- **Evidence block:** Bullet each requirement with a matching artifact (repo, bug diary, runbook).  
-- **Reality note:** “Early-career; experience is project/internship-level; seeking mentorship.”  
-- **CTA:** Link to PDF + SPA; offer a 15-minute walkthrough.  
-- **Sanitization:** Redact company specifics before publishing templates.
-
-## Traditional materials still lead
-
-- **PDF résumé:** 1 page, metric-driven, ATS-friendly. Updated monthly; stored in `/static/BradleyMatera-Resume.pdf`.  
-- **Cover letters:** Tailored to each company. I cite specific requirements + evidence, then link to the SPA for the curious.  
-- **Evidence bundle:** When possible I include a GitHub issue, PR, or demo link that matches each requirement. Recruiters responded positively to “here’s the proof” sections.
-
-## Recruiter feedback & adjustments
-
-- “Love the honesty blocks, but send the PDF first.” → PDF now highlighted at the top of every page.  
-- “Triangle Shader Lab sounds like a product.” → Updated copy everywhere to call it a WebGPU study site.  
-- “Hard to find your contact info.” → Added header/footer CTAs + `/contact` link in every hero.  
-- “Can you share cover letter templates?” → I now keep redacted versions and plan to publish snippets once sensitive data is removed.
-- “Where is your test evidence?” → Added direct links to test reports (Jest output) and bug diaries instead of burying them in copy.  
-- “Loading feels slow.” → Reduced JS/CSS bundle, lazy-loaded screenshots, and added a fallback static export for slow networks.  
-- “What’s real vs aspirational?” → Expanded honesty blocks with dates, scope, and TODOs per project.
-
-## Results (so far)
-
-- SPA résumés sparked deeper conversations (“Walk me through your Docker project” instead of “Where’s your GitHub?”).  
-- Requirement-to-evidence mapping made interviews smoother; I always had a repo or log to show.  
-- Maintenance cost is real: I audit each SPA quarterly for accessibility + copy accuracy. When life gets busy, I freeze them and stick to the PDF.
-
-## Build pipeline for the SPAs
-
-- **Authoring:** CodePen for rapid edits; Tailwind for consistent tokens; inline honesty blocks.  
-- **Testing:** Manual keyboard walk-through, Axe browser extension, lighthouse checks targeting 90+ for accessibility/perf.  
-- **Export:** CodePen export → static build; optional Netlify deploy for private preview links.  
-- **Analytics:** Simple console logs + verbal feedback tracking; no external trackers to avoid privacy/legal friction with recruiters.  
-- **Version control:** Changelogs in Notion with date, change, and recruiter feedback for that change.
-
-## Risks and mitigations
-
-- **Recruiters skipping the SPA:** Mitigation—PDF-first workflow and inline PDF download CTA on the SPA.  
-- **Content drift:** Mitigation—quarterly audits; archive old role-specific claims; date-stamp honesty blocks.  
-- **Accessibility regressions:** Mitigation—Axe checks, manual keyboard tab pass, prefers-reduced-motion toggle.  
-- **Perception risk (“too flashy”):** Mitigation—minimal animation, focus on proof links, plain copy.
-
-## Lessons learned
-
-- Proof beats polish: links to real repos/bug diaries open doors faster than fancy visuals.  
-- Specificity wins: mirroring exact requirements and pairing them with artifacts reduces back-and-forth.  
-- Honesty upfront disarms skepticism: “lab-only AWS” or “study site” language earns trust.  
-- Maintenance is a tax: SPAs require grooming; freezing them when busy prevents stale claims.
+- [ ] One tracker
+- [ ] Weekly review
+- [ ] Proof link per skill
 
 ## Next steps
 
-1. Publish sanitized cover letter templates.  
-2. Automate accessibility audits for the SPAs (axe via GitHub Actions).  
-3. Package each SPA as a static download for companies that block CodePen.  
-4. Keep pairing every new artifact (blog post, project) with a requirement so I’m ready for the next role.
+- Tighten your proof links today.
+- Remove one role that does not fit.
+- Keep the tracker short.
 
-## References
+## Related links
 
-- “Interactive Résumés: Opportunities and Trade-offs,” *Journal of Career Development*, 2023.  
-- Lever, “Applicant Tracking Systems: A Recruiter’s Guide,” 2024.  
-- Anduril Industries + Johnson Health Tech job listings (linked above).
+- https://bradleymatera.dev/
+
+## Final CTA
+
+If you want my tracker template, ask and I will share it.

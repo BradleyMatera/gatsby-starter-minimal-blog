@@ -1,103 +1,91 @@
 ---
-title: "Balancing School, Work, and Side Projects: Strategies for Sustainable Productivity"
-date: "2025-10-13"
-tags: ["Productivity", "Time Management", "Career Development", "Wellness"]
-description: "How I kept a Full Sail course load, an AWS internship, and portfolio builds moving without burning out—and where the system still cracks."
-theme: "Career"
+title: "Balancing School, Work, and Projects: A Practical Weekly System"
+date: "2025-09-20"
+slug: "/balancing-school-work-projects"
+tags: ["time-management", "learning", "career"]
+description: "The simple weekly system I use to keep projects moving without burning out."
+theme: "Productivity"
 ---
 
-> **Context:** Final year of my Web Development B.S. (Oct 2025 grad), AWS Cloud Support internship, and a rotating set of portfolio projects (Car-Match, Triangle Shader Lab, CheeseMath). No paid SWE role yet—this is a student playbook.  
-> **AI assist:** ChatGPT helped outline the sections and reword calendar notes into readable prose. I fed it real data from Google Calendar, Notion, Apple Health, and Obsidian before editing everything on 2025-10-12.  
-> **Status:** Honest retrospective, not a productivity gospel. The numbers below are personal logs, not company KPIs.
+This is not a hustle post. It is a simple schedule that kept me sane.
 
-## Reality snapshot
+I used it during a heavy school term and a rotating project load. It worked because it was small and repeatable.
 
-- Weekly time budget averaged **55–60 hrs** (25 hrs school, 20–25 hrs internship, 10–12 hrs portfolio). Beyond that, sleep or weekends took the hit.  
-- Tracked everything in Google Calendar (blocks), Notion (tasks/Eisenhower), Obsidian (journal/energy audits). If it wasn’t in all three, it usually didn’t happen.  
-- Automation/templates saved **8–10 hrs/week** (GitHub Actions deploys, README templates, VS Code snippets). When I skipped rest, quality dipped immediately.  
-- Metrics I watched: sleep (Apple Health/Whoop), missed blocks vs planned, and “stress red flags” (back-to-back late nights, >20% blocks missed).
+You will get the schedule, a checklist, and the mistakes that made me adjust it.
 
-## Table of contents
+## The promise
 
-- [Weekly operating system](#weekly-operating-system)  
-- [Tooling + automation stack](#tooling--automation-stack)  
-- [Burnout prevention habits](#burnout-prevention-habits)  
-- [Cross-discipline lessons](#cross-discipline-lessons)  
-- [Outcomes (with honest caveats)](#outcomes-with-honest-caveats)  
-- [Gaps & next steps](#gaps--next-steps)  
-- [Interview-ready stories](#interview-ready-stories)
+You will walk away with:
 
-## Weekly operating system
+- a weekly template you can copy
+- a short list of rules that reduce stress
+- a clear way to track progress
 
-### Sunday reset (60–90 min)
-1. **Review commitments:** peek at Canvas deadlines, internship sprint board, Netlify deploy queue.  
-2. **Three priorities rule:** pick one academic deliverable, one internship milestone, one portfolio goal. Everything else is optional.  
-3. **Time block:** drop those priorities (and recovery time) onto Google Calendar. Use distinct colors per area.  
-4. **Buffer:** leave 20–30 minute gaps between focus blocks. If something overruns, I flex there instead of cannibalizing sleep.  
-5. **Reality check:** compare plan vs last week’s execution in Obsidian. If I missed >20% of blocks, shrink this week’s commitments before Monday.
+> "A small plan you follow beats a big plan you ignore."
 
-### Daily cadence
-- **06:30–08:00** – Deep work (course labs, internship prep, or tricky code). Phone stays in “Focus” mode.  
-- **09:00–17:00** – Internship hours. Notes live in `notes/aws-internship/daily.md`. When the shift ends I close Slack, update the Kanban, and log a one-line retro.  
-- **18:00–20:00** – Portfolio or class group projects. I stop when the block ends—even if TODOs remain—so I can journal, stretch, and eat something that isn’t instant ramen.  
-- **21:00** – Shutdown ritual (James Clear-style): review tomorrow’s blocks, jot lessons in Obsidian, queue GitHub drafts if needed, then read fiction until lights out.
+## My weekly structure
 
-## Tooling + automation stack
+### Monday to Thursday
 
-| Tool | Purpose | Notes |
-| --- | --- | --- |
-| **Google Calendar** | Time blocking | Color-coded (blue = school, green = internship, yellow = portfolio, purple = recovery). Shared with accountability partner weekly. |
-| **Notion** | Task + Eisenhower board | Filters by course/internship/project. “Delegated” means “park until we talk about it.” |
-| **Obsidian** | Journal + energy audits | Template logs sleep, mood (1–5), highlights, friction. Charts in Dataview let me spot burnout before it hits. |
-| **GitHub Actions** | Automated deploys/tests | Keeps Netlify/GitHub Pages builds off my plate; logs errors to Slack if something breaks. |
-| **CLI scripts** | Repo scaffolding | `scripts/new-post.sh`, `scripts/branch.sh`, etc., prevent rabbit holes when I create new work. |
-| **Apple Health + Whoop** | Sleep/stress signals | I export weekly CSVs to Obsidian. If sleep dips below 7 hrs for three nights, I trim tasks immediately. |
+- One small task per day
+- One note per day
+- No big rewrites
 
-## Burnout prevention habits
+### Friday
 
-1. **Energy audit Fridays:** Rate mental/physical energy (1–5). Anything ≤2 triggers a lighter weekend schedule and “no new projects” rule.  
-2. **Accountability partner:** Another Full Sail student reviews my Sunday plan. If it looks unrealistic, they call it out. I do the same for them.  
-3. **Device-free nights:** Minimum one per week (usually Wednesday). No code, no socials, just a walk or analog hobby. Apple Health screenshots keep me honest.  
-4. **Quarterly PTO days (even as a student):** Once a quarter I mark a weekday as “admin day”—handle doctors, errands, or nothing. If internships can plan maint windows, so can I.
-5. **Sleep guards:** If sleep &lt;7 hours for three nights, I cancel/trim tasks; if heart rate variability tanks (Whoop), I skip intense work blocks.
+- Review what shipped
+- Pick the next small win
 
-## Cross-discipline lessons
+### Weekend
 
-- **Army medic triage → task triage:** Stabilize critical items first (due this week, or block others). “Nice to haves” move to the backlog until capacity returns.  
-- **Logistics mindset:** Always prep “Plan B” and “Plan C” for labs, devices, or teammates flaking. Spare laptop charger and offline docs saved me multiple times.  
-- **Empathetic communication:** Weekly update email (professors/intership mentors) + Loom walkthroughs for group projects avoided last-minute panic.
+- One longer build block
+- One cleanup block
 
-## Outcomes (with honest caveats)
+### Example weekly note
 
-- **Academics:** Stayed on track for Oct 2025 graduation (current GPA ~3.8). Two assignments slipped, but I owned it early and negotiated new dates.  
-- **Internship:** Met every lab requirement, presented capstone on time, and captured a handbook-worth of runbooks. Still no production pager duty experience.  
-- **Portfolio:** Shipped major honesty updates (Car-Match, Triangle Shader Lab, CheeseMath). Skipped two earlier goals (public CI template, bigger Zig post) to keep sleep intact.  
-- **Wellness:** Average sleep 7h05m (Apple Health). Stress flagged red twice; both times correlated with ignoring device-free nights. Lesson learned.
-- **Compromises:** “No weekend work” is still aspirational; I broke it 2/4 weekends when deadlines collided. Calling that out helps me plan better buffers.
+```text
+Goal:
+What shipped:
+What broke:
+Next small step:
+```
 
-## Gaps & next steps
+## CTA: Copy the template
 
-- Add habit tracking + rolling averages to Notion so I don’t rely on manual CSV imports.  
-- Experiment with Pomodoro for late-night study blocks (current approach drifts after 30 minutes).  
-- Share this template with younger cohorts; maybe turn it into a Notion kit so others don’t start from scratch.  
-- Build a “no weekend work” rule at least once per month. Still a work in progress.
-- Publish a downloadable Sunday reset checklist + daily shutdown ritual so others can reuse it.  
-- Add a small “red flag” widget (sleep &lt;7h, stress marker, >20% blocks missed) that tells me to cut scope automatically.
+- https://github.com/BradleyMatera/learning-journal
 
-## Interview-ready stories
+## Now do it your way
 
-- **Time triage under load:** Balanced Canvas deadlines, internship labs, and portfolio by cutting scope and communicating early—shows prioritization and honesty.  
-- **Energy audit and recovery:** Noticed burnout signals, enforced device-free night, sleep recovered, and quality improved—demonstrates self-management.  
-- **Automation saves:** Set up GitHub Actions deploys/tests to reclaim 8–10 hours weekly—proof of making tools work for me, not the other way around.  
-- **Communication loops:** Weekly updates to professors/mentors prevented surprises; mirrors real-world stakeholder updates.
+### Steps
 
-## References & influences
+1. Pick one project.
+2. Write one task per day.
+3. Ship one small thing by Friday.
+4. Do a short retro.
 
-[^newport-deepwork]: Cal Newport, “Deep Work,” 2016.  
-[^timeblocking-technique]: Todoist, “Time Blocking 101,” Accessed Oct 2025.  
-[^eisenhower-matrix]: MindTools, “Eisenhower Matrix,” Accessed Oct 2025.  
-[^shutdown-ritual]: James Clear, “Atomic Habits,” 2018.  
-[^energy-audit]: Harvard Business Review, “Energy Management,” 2023.  
-[^recovery-science]: Sabine Sonnentag, “Psychological Detachment from Work,” Journal of Organizational Behavior, 2006.  
-[^rest-productivity]: Stanford Medicine, “The Power of Rest,” 2024.  
-[^pomodoro]: Francesco Cirillo, “The Pomodoro Technique,” 2006.
+### Common mistakes
+
+- Planning too much.
+- Skipping the weekly retro.
+- Starting new projects before finishing one.
+
+## Quick checklist
+
+- [ ] One task per day
+- [ ] One shipping block per week
+- [ ] One retro note
+
+## Next steps
+
+- Try this system for two weeks.
+- Remove one task if you miss the plan twice.
+- Keep the notes short and honest.
+
+## Related links
+
+- https://bradleymatera.dev/
+- https://github.com/BradleyMatera/learning-journal
+
+## Final CTA
+
+If you try this schedule, send me what worked and what did not.

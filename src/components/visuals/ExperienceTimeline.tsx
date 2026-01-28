@@ -37,11 +37,11 @@ const entries: TimelineEntry[] = [
     company: "Amazon Web Services (AWS)",
     location: "Seattle, WA (On-site internship)",
     summary:
-      "Completed guided AWS support rotations in training environments and delivered internal-style troubleshooting notes.",
+      "Completed guided support rotations in training environments and produced internal-style documentation and repeatable troubleshooting notes.",
     responsibilities: [
-      { label: "Capstone", detail: "Built a serverless metadata extraction workflow using Lambda, DynamoDB, and S3 with an accessible frontend deployed on AWS Amplify." },
-      { label: "Cost model", detail: "Estimated storage and data transfer using measurable inputs to calculate cost per upload and retrieval." },
-      { label: "Documentation", detail: "Documented assumptions and calculation logic for reproducible review." },
+      { label: "Capstone", detail: "Built a serverless metadata extraction workflow using AWS Lambda, DynamoDB, and S3 with an accessible front end deployed on AWS Amplify." },
+      { label: "Cost model", detail: "Implemented a transparent cost model using measurable inputs to estimate cost per upload and retrieval." },
+      { label: "Documentation", detail: "Documented assumptions and calculation logic so results are reproducible and explainable during review." },
     ],
     skills: [
       "Amazon S3, EC2, RDS, DynamoDB",

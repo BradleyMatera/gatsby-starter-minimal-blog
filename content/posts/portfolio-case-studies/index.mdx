@@ -1,116 +1,81 @@
 ---
-title: "Merging CodePens and GitHub Projects into a Cohesive Portfolio"
-date: "2025-06-09"
+title: "Portfolio Case Studies: How I Keep Them Honest"
+date: "2025-05-30"
 slug: "/portfolio-case-studies"
-tags: ["Portfolio", "Storytelling", "Career"]
-description: "How I turned scattered demos into honest case studies—and the system I use to keep them updated."
-theme: "Front-End & Full-Stack"
+tags: ["portfolio", "projects", "process"]
+description: "A short guide to writing case studies that match the code."
+theme: "Process"
 ---
 
-> **Context:** My portfolio used to be a pile of CodePen links and GitHub repos. Recruiters were confused, so I rebuilt everything around case studies and honesty logs.  
-> **AI assist:** ChatGPT helped brainstorm section names/checklists; the content comes from actual analytics + recruiter feedback dated 2025-10-15.  
-> **Status:** Still job-hunting. This is the system I actively maintain, not a retrospective on a finished product.
+A case study is only as good as its proof links.
 
-## Reality snapshot
+This post shows the small structure I use and the checks that keep it honest.
 
-- Portfolio surface = Gatsby/Netlify site + GitHub Pages template + PDF résumé.  
-- Content lives in MDX case studies (`content/pages/projects/*.mdx`) so I can diff claims.  
-- Analytics + recruiter feedback drive updates. If a case study stops performing, it gets rewritten or archived.  
-- Honesty docs (`honesty.md`, `honestplan.md`) log every change with dates + rationale.
+You will get the template, a checklist, and common mistakes.
 
-## Inventory first
+## The promise
 
-```
-| Project               | Asset Type                 | Primary Skill             | Outcome                                               |
-|-----------------------|----------------------------|---------------------------|-------------------------------------------------------|
-| Car-Match             | GitHub repo + live demo    | React + Express practice  | Documented GitHub Pages + Render backend demo         |
-| Triangle Shader Lab   | Static site + repo         | WebGPU study              | Adapted Hello Triangle/Textured Cube with explanations|
-| CheeseMath            | GitHub repo + Pages demo   | Testing + Next.js         | Calculator UI + Jest practice                         |
-| CodePen experiments   | CodePen embeds             | UI/UX + JS fundamentals   | Recreated in blog posts + templates                   |
-```
+You will learn:
 
-- This spreadsheet (Notion) highlights overlap and gaps. Everything I want to highlight must have context, constraints, and proof.
+- a simple case study format
+- how I link proof
+- how I keep claims accurate
 
-## Narrative buckets I use
+> "If the repo cannot prove it, the post should not claim it."
 
-1. **Learning by Experimentation:** CodePens + smaller demos (Garbage Collection, Sound Machine).  
-2. **Front-End/Product Work:** Interactive Pokédex, CheeseMath, SPA résumés.  
-3. **Full-Stack/API:** Car-Match, React + AWS CRUD, ProjectHub.  
-4. **Infrastructure/Automation:** Docker Multilang, GitHub Actions, AWS internship capstone.
+## The template
 
-Each bucket links to detailed case studies and blog posts so recruiters can scan or deep-dive.
+### Sections I keep
 
-## Case study template
+- Problem
+- Solution
+- Proof links
+- Limits
 
-```markdown
-## Reality snapshot
-- Sentence about scope, hosting, limitations.
+### Example block
 
-## Context & constraints
-- Problem, users, deadlines, tooling.
-
-## What I built
-- Architecture diagram or bullet list.
-- Screenshots / gifs / proof links.
-
-## Observability & honesty
-- Health checks, analytics, TODOs, known gaps.
-
-## Evidence
-- Repo link, live demo, prompt log, runbooks.
+```md
+Problem: one sentence
+Solution: one sentence
+Proof: repo or demo link
+Limits: one sentence
 ```
 
-- Every case study also starts with a callout: “Demo runs on free Render; expect 5-minute cold starts.” No surprises.
+## CTA: Open the portfolio
 
-## Maintenance loop
+- https://bradleymatera.dev/projects/
 
-1. **Measure:** Netlify analytics (time on page, exits), recruiter feedback, personal retros.  
-2. **Decide:** If a case study underperforms or becomes misleading, demote it, rewrite it, or archive it.  
-3. **Update:** Edit MDX + honesty docs. Note the date + reason.  
-4. **Verify:** Run `bun run lint`, `npm run build`, and manual smoke tests.  
-5. **Communicate:** Post the update on LinkedIn + in the honesty changelog so hiring teams see transparency.
+## Now do it your way
 
-## Results (qualitative but real)
+### Steps
 
-- Recruiters now comment on specific projects (“Saw your Car-Match honesty block…”) instead of saying “nice site.”  
-- I spend less time explaining what’s real because the case studies already do it.  
-- I can onboard mentors quickly: “Read `/projects/ciris-ai/`, then we’ll pair.”
+1. Pick one project.
+2. Write the four lines.
+3. Add proof links.
+4. Add limits.
+
+### Common mistakes
+
+- Long paragraphs with no proof.
+- Listing tools not in the repo.
+- Hiding limitations.
+
+## Quick checklist
+
+- [ ] Proof links added
+- [ ] Limits stated
+- [ ] Tools match repo
 
 ## Next steps
 
-- Automate analytics exports (Netlify → Google Sheets) so I can spot stale content faster.  
-- Produce short Loom walkthroughs for each case study to help visual learners.  
-- Ship a template repo others can fork (MDX + honesty log scaffold).
+- Update one case study today.
+- Remove one unverified claim.
+- Add one proof link.
 
-## How I turn a repo into a case study
+## Related links
 
-- **Reality snapshot first:** One paragraph on scope, hosting, and limits.  
-- **Proof links:** Repo, demo, PRs, prompt logs, runbooks. If a link is dead, I either fix it or remove the claim.  
-- **Constraints:** Call out free-tier limits, cold starts, and missing features so expectations are set.  
-- **Results:** Even if it’s a lab, I add numbers (uptime of the demo, Lighthouse scores, test counts).  
-- **Retros:** One “what worked” and one “what hurt” so the story isn’t all hype.
+- https://bradleymatera.dev/projects/
 
-## Common mistakes I made (and fixed)
+## Final CTA
 
-- **Wall of links:** Dumped GitHub/CodePen links without context. Fixed by grouping into narrative buckets and adding summaries.  
-- **Stale claims:** Old demos broke but copy stayed rosy. Added the honesty log and a “last updated” line on each page.  
-- **Too much fluff:** Removed “mission statements” that analytics showed nobody read. Replaced with quick proof bullets.  
-- **No accessibility proof:** Now I log Lighthouse/axe results per case study so I can speak to a11y work concretely.
-
-## Interview angles
-
-- Show the Notion inventory to prove I track overlap and gaps like a mini product manager.  
-- Walk through one case study using the template above; highlight the honesty block and proof links.  
-- Admit that these are student-level projects with free-tier constraints, then explain how I’d harden them for production.  
-- Offer to open the honesty log so interviewers see the change history, not just the final polish.
-
-## Open questions
-
-- How often to rotate case studies without looking chaotic.  
-- Whether to add a “demo uptime” badge per project or if that’s distracting.  
-- Best way to keep Loom walkthroughs short but useful.  
-- Whether to merge CodePen experiments into fewer, richer posts or keep them standalone.
-
-## References
-
-[^nng-portfolios]: Nielsen Norman Group, “UX Portfolios: Managers Want Communicated Value,” https://www.nngroup.com/articles/ux-portfolios/
+If you want my template file, ask and I will share it.

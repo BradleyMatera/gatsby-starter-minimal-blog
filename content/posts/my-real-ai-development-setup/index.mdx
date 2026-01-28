@@ -1,68 +1,76 @@
 ---
-title: "My Real AI Development Setup"
-date: "2025-11-14"
+title: "My Real AI Development Setup: Tools and Limits"
+date: "2025-09-05"
 slug: "/my-real-ai-development-setup"
-tags: ["webdev", "javascript", "ai", "productivity"]
-description: "How I actually pair AI tools with VS Code, Cline, local models, and AWS-focused helpers to keep projects moving."
+tags: ["ai", "tools", "productivity"]
+description: "A plain list of the AI tools I use and how I keep them honest."
 theme: "Process"
 ---
 
-# My Actual AI Development Setup
+Here is my real setup. It is not magical.
 
-Using AI tools has become part of my normal workflow because they help me stay productive when I get stuck. None of the tools I use solve everything on their own, and each one fills a different gap. VS Code is the main place where most hands-on editing happens, but only one of the agent tools actually runs inside it. Everything else is opened separately depending on what the project needs. This setup works because the tools support the work rather than replace it, and it allows progress even when the project moves into areas that are unfamiliar.
+I use AI for drafting, refactors, and summarizing. I still verify everything.
 
----
+You will get the tool list, the guardrails, and a checklist.
 
-## How VS Code Fits Into the Setup
+## The promise
 
-VS Code is the editor where almost all file editing takes place. Cline is the extension that actually interacts with the environment. It can read the project tree, open files, modify them, run commands, react to errors, and propose patches that fit the structure of the repo. Having an agent inside the editor turns small tasks into manageable steps instead of long guesswork loops. It does not handle everything, but it reduces friction when a project involves a lot of moving parts.
+You will learn:
 
----
+- which tools I use
+- how I verify outputs
+- what I avoid
 
-## How Ollama and Qwen Help With Daily Coding
+> "If I cannot verify it, I do not ship it."
 
-Ollama runs locally and hosts the models that handle most of the routine reasoning. Qwen models run quickly, do not require tokens, and work without an internet connection, which makes them useful for day-to-day coding. Local models like Qwen help clean up components, fix TypeScript or JavaScript issues, reorganize files, adjust imports, and write small helpers. Since they run inside Cline, they can read the actual project structure and respond based on the files instead of guessing. This makes local models useful for steady incremental progress.
+## My tool list
 
----
+- ChatGPT for outlining and refactors
+- GitHub Copilot for small code suggestions
+- Local notes to track changes
 
-## When the Workflow Switches to Claude Models
+### Example verification step
 
-Sometimes local models run into problems that require better reasoning or a clearer explanation. In those cases, the model used by Cline gets switched to a Claude model. Claude is useful for situations when logic spans multiple files, when a messy section needs to be rewritten, when build problems become confusing, or when WebGPU code needs a deeper breakdown. Claude handles larger context better, and Cline carries out the edits. This combination works well when the project moves beyond small isolated fixes.
+```text
+Ask AI for a plan.
+Read the docs yourself.
+Apply only what you can explain.
+```
 
----
+## CTA: Open the notes
 
-## Where Cursor Fits In
+- https://github.com/BradleyMatera/learning-journal
 
-Cursor is a separate AI IDE and it is not part of the VS Code setup. It gets opened when the project needs larger structural adjustments. Cursor helps when a React codebase becomes disorganized, when a feature touches too many files to fix in small patches, or when a Webflow-related feature needs cleaner output. It is not used constantly. It is used when the shape of the project needs to be fixed rather than the individual lines of code.
+## Now do it your way
 
----
+### Steps
 
-## How Kiro Fits Into AWS Work
+1. Pick one AI task you will allow.
+2. Define one task you will not allow.
+3. Keep a short change log.
 
-Kiro is another standalone AI IDE and only becomes relevant when a project involves AWS. It handles tasks like diagnosing IAM issues, adjusting S3 bucket policies, checking CloudWatch logs, fixing AWS CLI errors, or reviewing configuration problems. Kiro reacts to real AWS output instead of generating architecture from scratch, which makes it helpful when deployments hit AWS-specific problems. It stays closed unless the work involves infrastructure tasks.
+### Common mistakes
 
----
+- Copying code you do not understand.
+- Letting AI define the scope.
+- Skipping the docs.
 
-## Copilot’s Small Role in the Workflow
+## Quick checklist
 
-GitHub Copilot runs quietly in the background. It handles small things like JSX completion, basic patterns, tiny helper functions, or quick loops. It does not make architectural decisions and it does not interact with the larger structure of the project. It operates like autocomplete. It saves time on typing but does not influence bigger parts of the workflow.
+- [ ] Plan is clear
+- [ ] Docs checked
+- [ ] Changes logged
 
----
+## Next steps
 
-## Why Markdown Files Matter
+- Write one AI usage rule.
+- Add it to your README.
+- Follow it for one week.
 
-Markdown files act as the stable memory that all tools rely on. They hold the architecture notes, naming conventions, TODO lists, route summaries, design notes, and deployment instructions. These files get opened before making changes so agents understand the direction of the project, and they get updated when large edits are made. This helps avoid drift, keeps everything aligned, and makes sure the project maintains a clear structure even when multiple tools are involved.
+## Related links
 
----
+- https://github.com/features/copilot
 
-## What a Real Session Feels Like
+## Final CTA
 
-A normal session begins by opening VS Code with Cline running and a local model active through Ollama. A small task gets described, Cline inspects the relevant files, and it proposes changes. Those changes get reviewed and either accepted or rejected. The app is run to see what happens. Errors show up, the error output gets pasted into the tool, and Cline attempts to fix the issue. If the reasoning needs to be stronger, Claude is switched in. Once everything works locally, the work is committed and pushed. When deployment breaks, debugging happens with logs, browser tools, or AWS dashboards. If AWS becomes the blocker, Kiro is opened to diagnose the issue.
-
-This loop repeats until the feature is complete. The setup does not automate the process, but it reduces the amount of time spent hunting for solutions in the dark. It keeps the project moving forward even when knowledge gaps show up.
-
----
-
-## Closing Notes
-
-The mix of tools in this setup is not about trying to appear advanced or creating an automated pipeline. It is simply a practical way to keep working through projects, especially during parts that would normally slow everything down. Each tool handles a specific type of problem, and switching between them depending on the situation makes it easier to finish features and learn at the same time. The tools do not replace development. They support it so progress continues even when the work gets complicated.
+If you want my AI guardrails list, ask me.

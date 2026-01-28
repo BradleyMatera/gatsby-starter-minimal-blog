@@ -1,124 +1,93 @@
 ---
-title: "Crafting Cloud-Ready Web Adventures: Resilient and Accessible for All"
-date: "2025-06-23"
+title: "Cloud-Ready Web Demos: A Practical Pre-Launch Checklist"
+date: "2025-06-22"
 slug: "/cloud-ready-web-experiences"
-tags: ["Architecture", "Accessibility", "DevOps", "Cloud"]
-description: "The real checklist I use before shipping a demo to GitHub Pages, Netlify, or Render—accessibility, deploys, and honesty included."
-theme: "Cloud & DevOps"
+tags: ["web-development", "accessibility", "process"]
+description: "A simple checklist I run before I ship a public demo."
+theme: "Front-End & Full-Stack"
 ---
 
-> **Context:** These practices apply to my small projects (Car-Match, Interactive Pokédex, Triangle Shader Lab, CheeseMath). They run on GitHub Pages, Netlify, or Render—not on enterprise infra.  
-> **AI assist:** ChatGPT helped reorganize my scattered checklists into readable sections; every item maps to real repos and docs.  
-> **Status:** Student perspective. Think “personal SRE playbook” more than “platform engineering manifesto.”
+I ship small public demos. I treat them like products.
 
+This post is the short checklist I use before I publish. It is not enterprise. It is just honest.
+
+You will get the steps, the mistakes, and a template you can reuse.
+
+## The promise
+
+By the end, you will have:
+
+- a pre-launch checklist
+- a list of common mistakes
+- a simple way to document limits
+
+> "A demo is fine. A demo without notes is a trap."
+
+## The checklist I run
+
+### Accessibility
+
+- Keyboard focus visible
+- Color contrast checked
+- Headings in order
+
+### Reliability
+
+- One basic smoke check
+- Clear error states
+- Links verified
+
+### Honesty
+
+- Limitations written down
+- Missing features listed
+- Tech stack is accurate
+
+### Example note section
+
+```md
 ## Reality snapshot
+- What works
+- What is missing
+- What is planned
+```
 
-- **Front ends:** GitHub Pages (PWA/React/Vite builds) or Netlify (Gatsby). Build logs live in Actions + Netlify dashboards.  
-- **Back ends / APIs:** Render free tier (Express + Mongo Atlas) or small serverless functions. Cold starts are real, so every README states the wake-up delay.  
-- **Observability:** DevTools, Netlify analytics, basic CloudWatch dashboards, and manual smoke tests. No PagerDuty, no multi-region failover.  
-- **Goal:** Publish demos that anyone can run, show how I think about resilience, and be transparent about what’s missing.
-- **Metrics tracked:** Lighthouse (accessibility/perf), axe scans, cold-start timing on Render, uptime via simple curl smoke tests, and budget tables in Notion.
+## CTA: Copy the checklist
 
-## Table of contents
+- https://github.com/BradleyMatera/learning-journal
 
-- [My five-part pre-launch checklist](#my-five-part-pre-launch-checklist)  
-- [Case study: Interactive Pokédex](#case-study-interactive-pokedex-github-pages)  
-- [Other examples](#other-examples)  
-- [Deployment patterns I use](#deployment-patterns-i-use)  
-- [Risks and mitigations](#risks-and-mitigations)  
-- [Takeaways](#takeaways)  
-- [What still needs work](#what-still-needs-work)
+## Now do it your way
 
-<a id="my-five-part-pre-launch-checklist"></a>
-## My five-part pre-launch checklist
+### Steps
 
-### 1. Accessibility
-- Semantic HTML (`main`, `nav`, `button`) before considering ARIA; headings are nested correctly.  
-- Keyboard walkthrough recorded before each deploy (tab through, ensure focus outlines, confirm skip links).  
-- Automated scans: axe CLI + Lighthouse (desktop + mobile). Failures block the release.  
-- Manual screen reader pass (VoiceOver on Mac). Rough edges get logged in the README “Reality” block if I can’t fix them immediately.  
-- Prefers-reduced-motion respected; animations gated behind that check.
+1. Pick one demo.
+2. Run the checklist.
+3. Write the reality snapshot.
+4. Ship the update.
 
-### 2. Performance
-- Bundle budgets in Vite/Gatsby (`performanceBudget` file). If LCP > 2.5 s locally, I trim images/fonts before publishing.  
-- Lazy-load heavy sections (Three.js demos, code examples); heavy shaders get screenshots + “open demo” links instead of auto-loading.  
-- Use Netlify deploy previews to test throttled 3G speeds. I log actual numbers in the PR description.  
-- Cache strategy noted: IndexedDB/localStorage for recent results; explicit statement of what is cached and for how long.
+### Common mistakes
 
-### 3. Reliability
-- GitHub Actions handles lint/tests/builds. Netlify + Render webhooks notify Slack so I see failures quickly.  
-- Each repo has a `/healthz` endpoint (backend) or `/status.json` file (frontend) describing what “healthy” means.  
-- Feature flags live in JSON or env vars to hide in-progress sections while still deploying often.
-- Manual smoke script (`scripts/smoke.sh`) for each project; I run it after deploys and log pass/fail in PRs.  
-- Cold-start notes: README and UI call out Render wake-up times; front ends show a “waking API” banner instead of failing silently.
+- Saying a demo is production-ready.
+- Leaving broken links on the page.
+- Hiding limits in the README only.
 
-### 4. Security
-- Secrets live in GitHub Actions secrets or Render dashboard. READMEs show exactly what to set (`REACT_APP_API_BASE_URL`, `MONGODB_URI`, etc.).  
-- npm audit + OWASP ZAP baseline workflows run at least weekly. Issues get logged, even if the fix is “upgrade when maintainer releases patch.”  
-- If a project uses third-party scripts, I document why and add subresource integrity hashes when possible.
-- No PII; if a demo touches user data, it’s clearly fake data.  
-- CORS rules documented per environment; default is least privilege (same-origin where possible).
+## Quick checklist
 
-### 5. Cost & honesty
-- Keep a tiny Notion table of monthly spend (Render free tier, Atlas, Netlify). Anything that risks a charge gets an alert.  
-- README “Reality Check” section spells out cold starts, missing features, and TODOs so nobody mistakes a demo for production.  
-- When something’s down (e.g., Render sleeping), the site tells you up front. No silent failures.
-- “Not production” banner on study sites (Triangle Shader Lab, CheeseMath) plus AI disclosure where relevant.
+- [ ] Focus and contrast checked
+- [ ] Errors tested
+- [ ] Limits written down
 
-<a id="case-study-interactive-pokedex-github-pages"></a>
-## Case study: Interactive Pokédex (GitHub Pages)
+## Next steps
 
-| Area | What I did | Where it lives |
-| --- | --- | --- |
-| Accessibility | axe + manual screen reader pass; swap out decorative sprites for `role="img"` w/ descriptive labels | `content/posts/pokedex/index.mdx` + repo README |
-| Performance | IndexedDB cache for most recent results, `localStorage` for user preferences, throttled tests recorded in PR | `pokedex/README.md` |
-| Reliability | Netlify analytics for referring traffic + error rates; manual smoke test script in `scripts/smoke.sh` | repo `scripts/` |
-| Security | No secrets (public PokeAPI). README includes rate-limit handling tips. | README |
-| Honesty | “Reality” block on the project page outlines missing offline mode and limited dataset. | `/projects/interactive-pokedex/` |
+- Add a short reality snapshot to each demo.
+- Create one smoke check script.
+- Re-check links before sharing.
 
-<a id="other-examples"></a>
-## Other examples
+## Related links
 
-- **Car-Match:** Frontend on Pages, backend on Render/Atlas. README and `/projects/car-match/` warn about 5-minute cold starts. Health checks + logs in Render dashboard show when the API is up.  
-- **Triangle Shader Lab:** Static Next.js site on GitHub Pages. Observability is a simple log overlay + Netlify analytics—enough for a study project.  
-- **CheeseMath:** Next.js demo + Jest practice repo. Accessibility checklist stored in `docs/a11y.md`, deploys automated via GitHub Actions → Pages.
-- **Targeted SPA résumés:** CodePen → static export; honesty blocks + accessibility checklist; PDF-first so recruiters aren’t forced through the SPA.
+- https://www.w3.org/WAI/standards-guidelines/wcag/
+- https://developer.mozilla.org/docs/Web/Accessibility
 
-<a id="deployment-patterns-i-use"></a>
-## Deployment patterns I use
+## Final CTA
 
-- **Static (GitHub Pages/Netlify):** Vite/Gatsby/Next static exports; GitHub Actions builds with axe + Lighthouse.  
-- **Render + Atlas (APIs):** Express + Mongo free tiers; health checks wired; cold-start warnings in UI.  
-- **Serverless bits:** Small functions for email/contact forms; logged to CloudWatch or a simple log endpoint; env vars managed per provider.  
-- **Infra as docs:** No heavy IaC here; I keep diagrams + runbooks per project so anyone can recreate the setup manually.
-
-<a id="risks-and-mitigations"></a>
-## Risks and mitigations
-
-- **Cold starts:** Mitigation—UI banner for “waking API,” keep endpoints lean, document expected delay.  
-- **Rate limits / outages:** Mitigation—catch errors client-side, show friendly fallback, log the event in browser console for repro.  
-- **Accessibility drift:** Mitigation—block merges on axe/Lighthouse failures; manual keyboard pass before release.  
-- **Cost creep:** Mitigation—Notion budget table + provider alerts; kill switches are “delete Render service” since these are demos.  
-- **Security gaps:** Mitigation—no PII, secrets in env, ZAP baseline weekly, note known vulns in README if upstream unpatched.
-
-<a id="takeaways"></a>
-## Takeaways
-
-- “Reality” blocks earn trust: calling out cold starts and missing features upfront prevents surprises.  
-- Accessibility + perf as gates: axe/Lighthouse as blockers force me to ship leaner, more usable demos.  
-- Proof over polish: health checks, smoke scripts, and error banners matter more than animations for these demos.  
-- Write it down: runbooks and README honesty notes are the difference between a cute demo and something someone else can reason about.
-
-<a id="what-still-needs-work"></a>
-## What still needs work
-
-- End-to-end synthetic tests that run after each deployment (Playwright/Checkly). Right now smoke tests are manual.  
-- Better logging for front-end demos (would love to send errors to Sentry or a lightweight endpoint).  
-- Document cost impacts when I experiment with larger datasets or GPU workloads.  
-- Expand the checklist into a real template repo so I stop copy/pasting between projects.
-
-## References
-
-[^aria]: W3C, “Using WAI-ARIA,” accessed May 2025, https://www.w3.org/WAI/ARIA/apg/practices/using-aria/  
-[^wcag]: W3C, “Web Content Accessibility Guidelines (WCAG) 2.1,” accessed May 2025, https://www.w3.org/TR/WCAG21/  
-[^well-architected]: AWS, “AWS Well-Architected Framework,” accessed May 2025, https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html
+If you want my checklist template, ask and I will share it.

@@ -1,99 +1,77 @@
 ---
-title: "The Day I Learned How Confusing GitHub Pages Deployments Can Get"
-date: "2025-11-14"
+title: "GitHub Pages Deployments: The One Setting That Broke My Site"
+date: "2025-05-05"
 slug: "/github-pages-deployments-confusing"
-tags: ["webdev", "devops", "github", "githubactions"]
-description: "How serving the wrong folder kept my Pages site stuck on old builds, and the checklist that fixed it."
+tags: ["github", "deployment", "web-development"]
+description: "A short fix for the most common GitHub Pages deploy mistake I made."
 theme: "Front-End & Full-Stack"
 ---
 
-I always thought GitHub Pages was simple. You build your project, push the static export, and the site updates. That is what the docs say and that is how everyone on Reddit and StackOverflow talks about it. So when my site refused to update and kept serving old HTML from some random folder I forgot existed, I figured I just messed up a command.
+My GitHub Pages demo broke after deploy. The code was fine.
 
-Turns out this was one of those problems that teaches you way more about the platform than you ever wanted to know.
+The problem was one setting. This post shows the fix and the checklist I now follow.
 
-This whole thing started because my repo had multiple deployments in it over time. I had old folders, old builds, old static exports, and GitHub Pages settings that I never checked after the very first time I set the repo up. It was the perfect storm of confusion.
+You will get the exact steps and a short list of mistakes to avoid.
 
-## Where things started breaking
+## The promise
 
-My project had gone through a few iterations. I had:
+You will learn:
 
-- an older site that used a `/docs` folder  
-- a later version that output to `/dist`  
-- some leftover static files inside the root  
-- GitHub Actions workflows I copied from older repos  
-- Pages pointed at a folder I forgot even existed
+- which Pages setting matters most
+- how to verify the deploy
+- how to avoid stale assets
 
-At first none of this mattered because I was not rebuilding the repo often. But when I pushed a brand new version of the site, the Pages server kept pulling from that ancient `/docs` folder instead of the new static export.
+> "If the URL is wrong, the deploy is wrong."
 
-I did not even remember creating `/docs`. It was from a build system I used months before.
+## The fix
 
-## The symptoms
+I had the wrong base path for a project site.
 
-I would deploy and the site would show:
+### Example base path setup
 
-- old CSS  
-- old JavaScript  
-- old HTML  
-- broken layout  
-- missing assets
+```js
+// next.config.js example
+const isProd = process.env.NODE_ENV === "production";
 
-I checked the code and everything in my repo was up to date. The build artifact looked correct. The static export was correct. The workflow logs were clean.
+module.exports = {
+  basePath: isProd ? "/MyRepoName" : "",
+};
+```
 
-Meanwhile the live site looked like it was living three timelines behind my repo.
+## CTA: Open the demo
 
-## The moment I realized the issue
+- https://bradleymatera.github.io/AnimalSounds/
 
-At one point I opened GitHub Pages settings and it hit me immediately.
+## Now do it your way
 
-The Pages source was set to:
+### Steps
 
-`/docs`
+1. Confirm the repo name.
+2. Set the base path if needed.
+3. Rebuild and redeploy.
+4. Test the site in a private window.
 
-Not `/dist`.  
-Not `/build`.  
-Not anything modern.  
-Just the old folder I did not delete because I assumed it did not matter.
+### Common mistakes
 
-That small detail caused the entire deployment to serve stale content. Pages was not reading my new build at all. It was faithfully serving whatever was in `/docs` because I had told it to do that a long time ago and then forgot.
+- Leaving the base path blank.
+- Pushing without rebuilding.
+- Forgetting to clear stale service workers.
 
-## Cleaning it up
+## Quick checklist
 
-Once I figured that out, the fix was straightforward:
+- [ ] Base path matches repo name
+- [ ] New build published
+- [ ] Live site tested
 
-1. Delete the old `/docs` folder completely.  
-2. Update the Pages deployment settings to point to the correct build output.  
-3. Clean the repo of leftover static files.  
-4. Commit a fresh static export from Bun or Next.js.  
-5. Trigger a clean GitHub Pages build.
+## Next steps
 
-The second I deleted `/docs` and pointed GitHub Pages to the actual build directory, everything snapped back to normal. The new layout loaded. The CSS updated. The site finally reflected the code I was actually writing.
+- Add a deploy note to your README.
+- Keep a small checklist in the repo.
 
-## What the problem really taught me
+## Related links
 
-This was not a bug. It was user error plus how GitHub Pages is designed.
+- https://docs.github.com/pages
 
-Pages keeps serving whatever folder you told it to serve until you explicitly change it. It does not auto detect changes. It does not switch to a new build folder because it looks “more correct.” It sticks to the literal path you set.
+## Final CTA
 
-If you point Pages at `/docs`, it will die on that hill until you fix it.
-
-That is both a feature and a trap.
-
-## How to avoid this mess
-
-If your GitHub Pages site serves old content even though your build is correct, check this list:
-
-- Look at the Pages source folder.  
-- Make sure your static export path matches that folder exactly.  
-- Delete any old build folders you are not using.  
-- Clean out orphaned HTML files in the root.  
-- Make sure your workflow artifacts match your Pages directory.
-
-It takes five minutes to check, but if you forget how the repo was originally configured, you can lose hours trying to debug something that is not actually broken.
-
-## Final thoughts
-
-This taught me to treat deployment folders like infrastructure. They matter. They carry history. And if you do not clean them up, they can bite you months later when you least expect it.
-
-Now I check my Pages settings before every new repo upgrade. Not because I am paranoid, but because I now understand exactly how easy it is to break a Pages deployment by accident.
-
-And how annoying it is when GitHub is faithfully serving the wrong folder while you blame everything else.
+If you want my GitHub Pages notes, ask and I will share them.

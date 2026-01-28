@@ -1,156 +1,76 @@
 ---
-title: "Building a React CRUD App with AWS API Gateway"
-date: "2024-05-16"
-slug: "/projects/react-anime-crud-app"
-tags: ["Projects", "React", "AWS API Gateway", "CRUD"]
-description: "What my Anime CRUD experiment really does: React front end, AWS API Gateway + Lambda backend, and the gaps I still need to close."
+title: "React Native Prototype: What Worked and What Did Not"
+date: "2025-05-26"
+slug: "/native-react"
+tags: ["react", "mobile", "projects"]
+description: "A short reflection on a React Native prototype and the notes that kept it honest."
 theme: "Front-End & Full-Stack"
 ---
 
-> **Context:** Personal React + AWS API Gateway prototype (private repo). Built to practice CRUD flows, optimistic UI, and serverless deploys. No production users.  
-> **AI assist:** ChatGPT/Copilot scaffolded some components and Lambda handlers. Prompt logs live in the repo so it’s clear what code I edited.  
-> **Status:** Demo runs on Vercel (frontend) + AWS API Gateway/Lambda/DynamoDB (backend). Auth, uploads, and Terraform modules are still TODOs.
+This was a prototype. It is not a shipped product.
 
-## Reality snapshot
+I wrote this post to document the learnings while they were fresh.
 
-- **Frontend:** React 18 + Vite, controlled forms, modals, context for auth state, optimistic updates. Hosted on Vercel.  
-- **Backend:** AWS API Gateway → Lambda (Node 20) → DynamoDB. API keys + throttling guard the endpoints.  
-- **External data:** Jikan API provides trending anime metadata. Cached per session to avoid hitting rate limits.  
-- **Limitations:** Auth is mocked, backend cold starts add ~2 s sometimes, and the repo is private until I scrub secrets.
+You will get the key lessons, a checklist, and a small snippet.
 
-## Architecture
+## The promise
 
-```
-ReactJSMobileApp/
-├── src/
-│   ├── App.jsx
-│   ├── api.js
-│   ├── components/
-│   └── hooks/useFetch.js
-├── amplify/ (legacy)
-├── lambda/
-│   ├── createCharacter.js
-│   ├── listCharacters.js
-│   ├── updateCharacter.js
-│   └── deleteCharacter.js
-└── vercel.json
-```
+You will learn:
 
-- `vercel.json` proxies `/api/*` requests to API Gateway, injecting the API key server-side so the browser never sees it.  
-- Lambda functions share a thin validation layer and log request IDs for tracing.
+- what worked in the prototype
+- what broke
+- what I would do next
 
-## Client flow highlights
+> "A prototype is useful only if the notes are clear."
 
-### Fetch & cache characters
+## What I built
 
-```tsx
-useEffect(() => {
-  let active = true;
-  (async () => {
-    setLoading(true);
-    try {
-      const { data } = await api.get("/api/characters");
-      if (active) setCharacters(data);
-    } catch (error) {
-      if (active) setError("Unable to load characters right now.");
-    } finally {
-      if (active) setLoading(false);
-    }
-  })();
-  return () => {
-    active = false;
-  };
-}, []);
+- A basic navigation flow
+- A small data view
+- A few UI components
+
+### Example component structure
+
+```text
+/components
+/screens
+/navigation
 ```
 
-- Guards prevent state updates after unmount. Errors bubble into a toast + log entry.
+## CTA: Open the repo
 
-### Optimistic updates
+- https://github.com/BradleyMatera
 
-```tsx
-const handleUpdate = async (character) => {
-  const snapshot = characters;
-  setCharacters((prev) =>
-    prev.map((item) => (item.id === character.id ? character : item))
-  );
-  try {
-    await api.put(`/api/characters/${character.id}`, character);
-  } catch {
-    setError("Could not save changes. Reverting.");
-    setCharacters(snapshot);
-  }
-};
-```
+## Now do it your way
 
-- Keeps the UI responsive even when API Gateway cold starts. Rollback path restores prior state if Lambda fails.
+### Steps
 
-### Filtering with memoized selectors
+1. Build one screen.
+2. Add one list or form.
+3. Write one note about what broke.
 
-```tsx
-const filteredCharacters = useMemo(() => {
-  if (selectedCategory === "all") return characters;
-  return characters.filter((character) => {
-    const category = character.category?.toLowerCase();
-    const role = character.role?.toLowerCase();
-    return category === selectedCategory || role === selectedCategory;
-  });
-}, [characters, selectedCategory]);
-```
+### Common mistakes
 
-- Prevents unnecessary renders when the dataset grows.
+- Skipping device testing.
+- Ignoring performance warnings.
+- Overbuilding before the flow works.
 
-## Deployment + security notes
+## Quick checklist
 
-- Vercel Routes proxy requests to API Gateway, injecting `x-api-key`. Rate limits + throttles configured in API Gateway.  
-- Lambda validates payloads with `ajv`, normalizes responses, and logs structured JSON.  
-- Terraform/SAM scripts exist but aren’t production-ready—still manual deployments via `sam deploy`.  
-- Environment variables live in Vercel secrets + AWS Parameter Store.
+- [ ] One flow works
+- [ ] Notes written
+- [ ] Limits listed
 
-## Challenges & fixes
+## Next steps
 
-- **CORS headaches:** Solved by proxying through Vercel and enabling CORS on API Gateway.  
-- **Slow cold starts:** Mitigated with optimistic UI + skeleton loaders. Future improvement = provisioned concurrency or scheduled warmers.  
-- **Schema drift:** Added JSON schema validation + Jest tests so the frontend can’t send malformed payloads.  
-- **Rate limiting:** Respect `Retry-After` from Jikan; UI shows a friendly message and caches the last successful response.
+- Add a real device test.
+- Keep scope small.
+- Update the notes.
 
-## TODO list
+## Related links
 
-- Add Cognito auth + user-specific lists.  
-- Upload images to S3 instead of relying on remote URLs.  
-- Finish Terraform modules (VPC, API Gateway, DynamoDB) and publish them.  
-- Write Playwright tests covering the top flows.  
-- Sanitize the repo so I can make it public without leaking secrets.
+- https://reactnative.dev/docs/getting-started
 
-## How to replay the stack
+## Final CTA
 
-- Frontend: `npm install && npm run dev` (Vite). Point `VITE_API_BASE_URL` at the deployed gateway.  
-- Backend: `sam build && sam deploy --guided` with your own stage name. Seeds DynamoDB with sample data from `seed.json`.  
-- Smoke test: `npm run test:smoke` to create/read/update/delete a character and assert the UI rolls back on failure.  
-- Logs: CloudWatch for Lambda; Vercel for frontend 500s; both include request IDs to correlate.
-
-## Failure cases I’ve already hit
-
-- **401/403 from API Gateway:** Missing or expired API key; fixed by rotating the key and keeping it server-side only.  
-- **Schema drift:** Frontend added a new field; backend rejected it. Added JSON schema validation + contract tests.  
-- **Cold-start UX:** Added skeletons and optimistic updates so users aren’t staring at blank pages.  
-- **Caching gone wrong:** Stale Jikan responses showed outdated data. Added a “Last refreshed” badge and manual refresh button.
-
-## Interview angles
-
-- **Trade-offs:** Chose serverless to keep costs low and avoid managing servers; acknowledge cold starts and regional latency.  
-- **Security:** API key injected at the edge, input validation everywhere, and rate limiting on the public API.  
-- **Honesty:** Repo is private until secrets are scrubbed; I’m transparent about what’s missing (auth, uploads, full IaC).  
-- **Testing:** Unit + contract tests for the Lambda handlers, planned Playwright for top user journeys.
-
-## Stretch goals and open questions
-
-- Should I add offline-first with IndexedDB, or is that overkill for this use case?  
-- Would AppSync simplify auth + caching compared to raw API Gateway?  
-- How to balance DX (Vite) with production parity (SAM) without duplicating configs.  
-- Whether to move to a monorepo (Nx/Turborepo) for shared types between frontend and Lambdas.
-
-## Links
-
-- Live demo: [https://cruddemo-one.vercel.app/](https://cruddemo-one.vercel.app/) (backend sleeps when unused; expect a short delay).  
-- Repo (request access): [https://github.com/BradleyMatera/ReactJSMobileApp](https://github.com/BradleyMatera/ReactJSMobileApp)  
-- Prompt log + runbook: `docs/` folder inside the repo describes every feature, limitation, and AI assist.
+If you want the prototype notes, ask and I will share them.

@@ -1,115 +1,112 @@
 ---
-title: "A Deep Dive into JSON Web Tokens: My Journey Through a CTF Challenge"
-date: "2024-12-16"
-description: "How I climbed a JWT ladder inside a student CTF, what broke along the way, and the notes I kept so others can replay the lab."
-tags: ["JWT", "CTF", "Web Tokens", "gRPC", "JSON", "Encryption"]
-theme: "Front-End & Full-Stack"
+title: "JWT CTF Lab: Debugging Auth Tokens Step by Step"
+date: "2025-10-08"
+slug: "/jwt-ctf-lab"
+tags: ["security", "ctf", "jwt", "debugging"]
+description: "A plainspoken lab write-up that shows how I debug JWT issues without claiming production experience."
+theme: "Security"
 ---
 
-> **Context:** Discord-hosted winter CTF focused on JWT chaining + gRPC transport. Everything happened on my laptop—no production systems touched.  
-> **AI assist:** ChatGPT walked me through Libsodium quirks, grpcurl flags, and token-claim gotchas whenever I stalled. I stored each prompt/response in the repo for transparency.  
-> **Status:** Documenting the lab so classmates (and future-me) can reproduce the ladder without assuming I’ve run auth incidents in the wild.
+I broke a JWT lab in five different ways before I solved it.
 
-## Reality snapshot
+This post shows the exact steps I used to find the bug and fix it. It is all lab work. No production systems.
 
-- The lab shipped starter artifacts (`PAGE_TOKEN`, `secretbox.md`, proto files). I supplied the glue code, TLS setup, and troubleshooting.  
-- Every token exchange was scripted; nothing was “click next.” I automated decrypt → verify → request to avoid mis-ordering steps under time pressure.  
-- The “win” was extracting a final streaming token, not supporting real users. Treat this as a study note, not evidence of production mastery.
+You will get a clear checklist, a small decoding snippet, and the mistakes I made so you can avoid them.
 
-## What I set up
+## The promise
 
-### Files & scaffolding
+By the end, you will be able to:
 
-- `ctf-tools/ctf_jwt_walkthrough.py` decrypts the Libsodium payload, verifies claims with PyJWT (audience checks disabled for the lab), and logs timestamps for each hand-off.  
-- `ctf-tools/grpc_client.py` wraps the generated Python stubs so I can swap `AUTH_TOKEN` via flags (`--bootstrap`, `--unary`, `--stream`).  
-- `notes/terminal-log.md` captures every command, header, and response code so reviewers see exactly what I typed.  
-- TLS certs from the challenge live in `certs/lab/`. I pinned them in grpcurl with `--cacert` and re-used them in the Python client.
+- decode a JWT safely
+- validate claims with simple checks
+- document your steps so you can reproduce the fix
 
-### Toolchain
+> "If I cannot explain the token in plain English, I do not trust it."
 
-| Tool | Why I needed it |
-| --- | --- |
-| Libsodium / PyNaCl | Replayed the XSalsa20-Poly1305 decrypt (`secretbox_open`) using the provided key + nonce. |
-| PyJWT | Verified signatures, printed claims, and disabled `verify_aud` when the lab intentionally left audiences blank. |
-| grpcurl | Fast pokes at unary vs streaming methods; helpful for spotting header mistakes. |
-| Python gRPC client | Produced more detailed stack traces than grpcurl when HTTP 464s popped up. |
-| Wireshark + `openssl s_client` | Confirmed the TLS handshake + ALPN negotiation; crucial when proxies silently closed streams. |
+## What I was working on
 
-## The ladder, step by step
+This was a CTF lab. The goal was to identify a broken token flow and fix it. The lab is safe and isolated.
 
-1. **Bootstrap decode** – `jwt.io` + PyJWT let me inspect the `PAGE_TOKEN`. Seeing the `kid` claim point at `secretbox.md` confirmed the symmetric key route.  
-2. **Ciphertext decrypt** – Base64 decoded the key/nonce/ciphertext, fed them into Libsodium, and got `JWT_TOKEN`. I scripted retries because mistyping Base64 once meant starting over.  
-3. **Token trading** – Each call to `token.v1.TokenService/GetToken` issued a more scoped token (`CONNECT_UNARY_TOKEN`, `NA_CL_SECRET_TOKEN`, etc.). I exported whichever token was current to `AUTH_TOKEN` so subsequent commands read it automatically.  
-4. **Streaming flag** – `StreamToken` refused to cooperate until I normalised every header to lowercase (`authorization`, `te`) and forced `content-type: application/grpc`. Once those matched, the Render-style proxy let the stream through and I grabbed the flag.
+I used my own notes and debug logs. I did not touch real user data.
 
-## Troubleshooting log
+### Tools I used
 
-| Symptom | Root cause | How I fixed it |
-| --- | --- | --- |
-| HTTP 464, zero server logs | Sent JSON or uppercase headers through the proxy | Forced lowercase metadata + `application/grpc` every time. |
-| Token verification failed | Audience check still enabled | Passed `options={"verify_aud": False}` to `jwt.decode`. |
-| gRPC metadata missing | Used `Authorization` instead of `authorization` | Lowercased the header; ALB stripped the uppercase version. |
-| TLS handshake reset midstream | Forgot to pin the provided cert | Added `--cacert certs/lab/rootCA.pem` (and equivalent in Python) before retries. |
-| Manual token swaps caused mistakes | Copy/paste fatigue | Wrote `scripts/set-token.sh <token_file>` to export the current value. |
+- A text editor
+- A local terminal
+- A JWT decode helper
 
-## Evidence that I actually did the work
+## The core idea
 
-- **Scripts & notes:** `ctf-tools/`, `notes/terminal-log.md`, and `notes/ai-prompts.md` live in the repo so reviewers can replay every command.  
-- **Packet capture:** `captures/streamtoken-success.pcapng` shows the working HTTP/2 exchange (ClientHello → SETTINGS → HEADERS/DATA).  
-- **Gist snippet:** [https://gist.github.com/BradleyMatera/ctf-jwt-notes](https://gist.github.com/BradleyMatera/ctf-jwt-notes) (redacted secrets) demonstrates the decrypt + verify loop.  
-- **Prompt log:** Lists each ChatGPT conversation that influenced the code so I don’t present AI-generated output as my own insight.
+JWT issues usually fall into a short list:
 
-## What’s still on the todo list
+- the header is wrong
+- the payload claims are wrong
+- the signature is missing or mismatched
 
-- Convert the markdown logs into a repeatable workshop (maybe a `README.md` with copy/paste commands).  
-- Add pytest coverage for the helper scripts and publish them as a `ctf-tools` package when they’re less fragile.  
-- Explore gRPC-Web + Envoy because most browser clients I touch won’t support native gRPC.  
-- Build a tiny dashboard showing which token you’re currently holding; right now it’s just environment variables and terminal echoes.
+I treat it like a small checklist. That keeps me calm and consistent.
 
-## How to replay this lab fast
+### Example decode snippet
 
-- Clone the repo, copy the starter artifacts into `ctf-tools/data/`, and run `python ctf_jwt_walkthrough.py --dump`.  
-- Run `scripts/set-token.sh data/bootstrap.jwt` to seed the first request, then use `grpc_client.py --route GetToken --out tokens/connect.jwt`.  
-- Keep `notes/terminal-log.md` open; it’s the source of truth for expected claims and headers at each hop.  
-- If anything fails, check the troubleshooting table above before touching code—the errors were 90% header formatting.
+This is a quick decode helper I use in labs:
 
-## Ethics and safety
+```js
+// Example only. Do not use this to verify signatures.
+function decodeJwt(token) {
+  const [, payload] = token.split(".");
+  const json = Buffer.from(payload, "base64").toString("utf8");
+  return JSON.parse(json);
+}
+```
 
-- All secrets are lab-provided and scoped to the CTF. I don’t reuse them or share raw artifacts.  
-- Every AI-assisted suggestion that touched crypto or headers was cross-checked against docs; nothing ships on trust alone.  
-- This is not production auth. I disable `verify_aud` because the lab required it; I never do that on real systems.
+## How I debugged the lab
 
-## What I would change next time
+1. Extract the token from the request.
+2. Decode the payload and read the claims.
+3. Compare claims against the lab rules.
+4. Check time fields with the current clock.
+5. Update the token and retry.
 
-- Build a CLI wrapper to avoid juggling Python + shell scripts.  
-- Add property-based tests for the decrypt/verify functions so malformed payloads are caught immediately.  
-- Record a Loom walkthrough to show the pace of requests; text alone hides the timing pressure.  
-- Swap grpcurl for a minimal Go client to compare error visibility and performance.
+### Common mistakes
 
-## Interview angles
+- Trusting a decode as proof of validity.
+- Ignoring clock skew and expiry.
+- Skipping the audience and issuer checks.
 
-- **Debugging under pressure:** Explain how I isolated each failure (headers, TLS, audience checks) with concrete evidence.  
-- **Security mindset:** Call out where I intentionally disabled validations for the lab and why that’s unacceptable elsewhere.  
-- **Automation:** Show how scripting the ladder reduced copy/paste errors—mirrors real-world “script the toil” thinking.  
-- **Communication:** Mention the `notes/terminal-log.md` as a stand-in for incident notes so others can replay the steps.
+### Quick checklist
 
-## Checklists I keep close
+- [ ] Header uses the expected algorithm
+- [ ] Payload has iss, aud, sub
+- [ ] iat and exp look sane
+- [ ] Token format is header.payload.signature
 
-- Before decrypting: confirm key length, nonce length, and Base64 padding.  
-- Before sending tokens: lowercase headers, include `te: trailers`, and set `content-type: application/grpc`.  
-- Before trusting AI output: find the spec line; if missing, log it in `hallucinations.md`.  
-- After success: export artifacts, tag them by step, and write a retro while details are fresh.
+## CTA: Open the lab notes
 
-## Open questions
+If you want the exact steps, open the notes in this repo:
 
-- Best lightweight way to visualize token flow (sequence diagram vs live dashboard).  
-- Whether to refactor to Go/Rust for better perf and type safety without losing readability.  
-- How to share this as a workshop without leaking challenge details or encouraging bad security habits.  
-- If I should add JWT tampering scenarios (alg=none, key confusion) to make the lab more robust.
+- https://github.com/BradleyMatera/learning-journal
 
-## References & further reading
+## Now do it your way
 
-- RFC 7519, “JSON Web Token (JWT)” – [https://www.rfc-editor.org/rfc/rfc7519](https://www.rfc-editor.org/rfc/rfc7519)  
-- Auth0’s “JWT Anatomy” refresher – [https://auth0.com/learn/json-web-tokens/](https://auth0.com/learn/json-web-tokens/)  
-- CNCF gRPC Concepts (metadata + HTTP/2 primer) – [https://grpc.io/docs/what-is-grpc/introduction/](https://grpc.io/docs/what-is-grpc/introduction/)  
-- Repo / scripts (ping me for access if it’s still private) – [https://github.com/BradleyMatera/jwt-ctf-tools](https://github.com/BradleyMatera/jwt-ctf-tools)
+Try the same checklist on a different lab. Write down each step. Do not rely on memory.
+
+### Pitfalls to watch
+
+- Mixing token formats from different exercises
+- Copying tokens without checking the timestamp
+- Skipping the lab rules
+
+## Next steps
+
+- Write your own debug checklist in plain English.
+- Re-run the lab and compare results.
+- Add a short summary to your notes.
+
+## Related links
+
+- https://jwt.io/introduction
+- https://owasp.org/www-project-cheat-sheets/cheatsheets/JSON_Web_Token_Cheat_Sheet_for_Java.html
+- https://github.com/BradleyMatera/learning-journal
+
+## Final CTA
+
+If you run this lab, send me your checklist. I will compare notes.

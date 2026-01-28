@@ -1,90 +1,76 @@
 ---
-title: "Interactive Portfolios: Balancing Fun with Recruiter Expectations"
-date: "2025-07-21"
+title: "Interactive Portfolios: How I Balance Fun and Clarity"
+date: "2025-03-30"
 slug: "/interactive-portfolios-recruiter-expectations"
-tags: ["Portfolio", "Career", "UX"]
-description: "How I keep an interactive portfolio honest—PDF résumé, SPA experience, analytics, and the guardrails that keep recruiters happy."
+tags: ["portfolio", "ux", "web-development"]
+description: "A direct guide to making interactive portfolios readable and honest."
 theme: "Front-End & Full-Stack"
 ---
 
-> **Context:** I run two public portfolios: this Gatsby/Netlify site (case studies, honesty logs) and a lighter semantic template on GitHub Pages. Every application still includes a PDF résumé.  
-> **AI assist:** ChatGPT summarized recruiter conversations and analytics excerpts; I edited the tone and numbers to match my actual dashboards.  
-> **Status:** Advice from someone still job hunting. Use it as peer notes, not a definitive playbook.
+Interactive portfolios are fun. They can also confuse people.
 
-## Reality snapshot
+This post shows how I keep mine readable for recruiters and still fun to browse.
 
-- Recruiters and hiring managers consistently ask for a PDF first. Interactive sites are “nice to have” once they’ve skimmed the basics.  
-- My Netlify analytics show average session length ~2m15s. Most visitors read the hero + first project, maybe one blog post, then bounce.  
-- Accessibility is non-negotiable: skip links, focus outlines, alt text, and a big “Download PDF résumé” button near the top.
+You will get the rules I follow, a checklist, and the mistakes to avoid.
 
-## Dual-track setup
+## The promise
 
-| Asset | Purpose | Notes |
-| --- | --- | --- |
-| **PDF résumé** | ATS-friendly, 1 page (bullets, measurable outcomes). | Updated monthly. Stored in `/static/BradleyMatera-Resume.pdf` with a visible timestamp. |
-| **Interactive SPA** | Deep dive with honesty logs, case studies, live demos. | Gatsby on Netlify, content stored in MDX so I can diff claims. |
-| **Semantic template** | Lightweight version (HTML/CSS/JS) on GitHub Pages. | Useful for recruiters who block heavy JS. Links straight back here. |
+You will learn:
 
-Every job application gets both: PDF in the ATS, SPA link in the cover letter or “Additional Materials” field.
+- when to use motion
+- how to keep the content scannable
+- how to avoid misleading claims
 
-## Design + honesty principles
+> "Fun is fine. Clarity is required."
 
-1. **Navigation clarity:** Sticky nav, skip links, and CTA buttons (“Contact”, “Download PDF”) at the top.  
-2. **Accessibility:** axe + Lighthouse scans on each deploy, manual keyboard + screen reader pass.  
-3. **Reality blocks:** Every project/blog post starts with context + AI disclosure so visitors know what’s real.  
-4. **Analytics + feedback:** Netlify analytics + LinkedIn DMs from recruiters drive my backlog (e.g., one DM prompted a bigger “Download PDF” button).  
-5. **Changelog:** `honesty.md` logs every copy update with dates + rationale. The homepage shows “Last honesty update” so readers know the site isn’t stale.
+## The rules I follow
 
-## When I iterate or retire content
+- Start with a clear headline.
+- Keep navigation obvious.
+- Write short summaries with proof links.
 
-- If analytics show high exit rates on a section (>60% drop), I rewrite or remove it. Example: I trimmed the old “Mission” fluff because nobody scrolled past it.  
-- If a project becomes misleading (Car-Match before it had a live backend), I add disclaimers or demote it until the copy matches reality.  
-- When recruiters ask for clarity (“Is Triangle Shader Lab your framework?”), I update the site immediately so the next visitor isn’t confused.
+### Example content block
 
-## Checklists I run before sharing the SPA
+```md
+Problem: short and direct
+Solution: short and direct
+Proof: link to repo or demo
+```
 
-- [ ] PDF résumé link visible in hero + footer.  
-- [ ] All outbound proof links (GitHub PRs, Render demos, CodePens) open in new tabs and include context.  
-- [ ] Accessibility audit: axe zero critical issues, manual keyboard walkthrough recorded.  
-- [ ] Netlify deploy log clean (no warnings about sharp, images, etc.).  
-- [ ] Honesty log updated with what changed (date, summary).
+## CTA: Open the site
 
-## Lessons so far
+- https://bradleymatera.dev/
 
-- **Interactive ≠ replacement.** Recruiters still skim the PDF first. The SPA is a guided tour for those who want more context.  
-- **Maintenance beats novelty.** A static, honest site beats a flashy but broken experience.  
-- **Share proof.** Every claim links to a repo, PR, or log. If the link breaks, the claim goes with it.  
-- **Listen to feedback.** When hiring managers say “I couldn’t find X,” I fix it and note the change in `honesty.md`.
+## Now do it your way
 
-## Real recruiter feedback (and what I did)
+### Steps
 
-- “Couldn’t find your PDF.” → Added a red “Download PDF résumé” button in the hero and footer.  
-- “Too much JS; page felt heavy.” → Built the semantic HTML/CSS fallback and linked it in the nav.  
-- “Which projects are real vs. labs?” → Added “Reality snapshot” + AI disclosure atop every case study.  
-- “Links 404 on mobile VPN.” → Prefixed all internal links correctly and added status badges to demos (up/down/slow).
+1. Write a one sentence summary for each project.
+2. Add one proof link.
+3. Limit motion to one or two sections.
 
-## How I measure if the site is working
+### Common mistakes
 
-- **Analytics:** Track scroll depth and exit rates. If a project card has high exits, I rewrite or move it lower.  
-- **Speed:** Lighthouse scores stay in the high 90s; bundle size monitored on each deploy.  
-- **Engagement:** Count clicks on “Contact” + PDF downloads after each update to see if changes help.  
-- **Honesty velocity:** `honesty.md` updates at least monthly; if it’s stale, I question whether the site is.
+- Hiding the main content behind animations.
+- Using vague claims with no links.
+- Overloading the hero with text.
 
-## Playbook before a job application
+## Quick checklist
 
-- Update résumé date, regenerate PDF, and verify the link.  
-- Ensure top 3 projects have working demos + screenshots + proof links.  
-- Add a short “Why I’m applying” blurb to the homepage (temporary, removed after the cycle).  
-- Check dark mode readability and mobile nav; recruiters often open on phones.
+- [ ] Clear nav
+- [ ] Proof links
+- [ ] Simple summaries
 
-## Open questions I’m still testing
+## Next steps
 
-- Whether to add a 60-second Loom walkthrough or if that adds friction.  
-- How much animation is acceptable before it distracts from content.  
-- Best way to surface “what changed” without making the homepage feel like a changelog.  
-- Whether to auto-detect ATS bots and serve the semantic version first.
+- Audit your homepage in 10 seconds.
+- Remove one distracting element.
+- Add one proof link.
 
-## References
+## Related links
 
-[^visualcv]: VisualCV, “Should You Make an Interactive Resume?,” accessed May 2025, https://www.visualcv.com/blog/interactive-resume/  
-[^the-muse]: The Muse, “When (and When Not) to Use an Interactive Resume,” accessed May 2025, https://www.themuse.com/advice/when-and-when-not-to-use-an-interactive-resume
+- https://developer.mozilla.org/docs/Web/Accessibility
+
+## Final CTA
+
+If you want a quick review of your portfolio, ask and I will give you notes.

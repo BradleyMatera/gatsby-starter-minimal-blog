@@ -79,7 +79,7 @@ const ContactContent = () => (
         <Card variant="outline">
           <h3 className="project-card__title">GitHub Activity</h3>
           <p className="project-card__description">
-            <strong>Daily commits</strong> and documentation updates so you can review code paths or reference playbooks anytime.
+            <strong>Daily commits</strong> and documentation updates so you can review code paths or reference notes anytime.
           </p>
           <div className="card-actions">
             <Link href="https://github.com/BradleyMatera" data-variant="primary">

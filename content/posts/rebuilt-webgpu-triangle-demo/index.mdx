@@ -1,80 +1,78 @@
 ---
-title: "Why I Rebuilt My WebGPU Triangle Demo (With AI Holding My Hand)"
-date: "2025-11-14"
+title: "Rebuilding a WebGPU Triangle Demo: Notes and Fixes"
+date: "2025-05-02"
 slug: "/rebuilt-webgpu-triangle-demo"
-tags: ["webgpu", "webdev", "learning", "webgl"]
-description: "An honest rebuild of a tiny WebGPU triangle lab: mostly AI scaffolding, me wiring the pieces, all in the name of learning—not low-level wizardry."
-theme: "Low-Level Experiments"
+tags: ["webgpu", "graphics", "learning"]
+description: "A short record of what broke, what I fixed, and what I learned."
+theme: "Graphics"
 ---
 
-> **Honesty:** I’m not a low-level graphics engineer. I leaned on AI for most of the scaffolding and wiring, then I glued the pieces together to understand what was happening. This rebuild is about learning, not mastery.
+This is a learning demo. It broke a lot before it worked.
 
-I built (really, rebuilt) my Triangle Demo because I wanted a clean WebGPU study lab that matched how I learn. I was poking around Three.js first, realized I didn’t grasp the pipeline, and asked AI to scaffold a WebGPU triangle/cube example. The original sample I forked was solid, but I wanted something even smaller and focused on “hello triangle” and “textured cube” fundamentals.
+I wrote this post to capture the fixes and the exact steps.
 
-So instead of trying to bend something bigger into a study tool, I pared it down with AI’s help and kept only the parts I could mentally follow.
+You will get the core steps and a checklist you can reuse.
 
-## Why I needed my own structure
+## The promise
 
-Once I started exploring WebGPU, I realized I learn best when everything in a project is understandable by me (even if AI drafted it) and matches what I’m trying to study. I needed:
+You will learn:
 
-- a minimal layout  
-- no extra abstraction layers  
-- short TypeScript files I could read in one sitting  
-- a UI shell I understood  
-- a direct mapping from code to canvas
+- what broke and why
+- how I fixed it
+- how I documented it
 
-Not because anything else was wrong, but because I wanted a space where every file existed for one reason — to help me understand the pipeline. AI provided the starter, I pruned and annotated until it clicked.
+> "If the demo is small, the fix is clear."
 
-## Building it clean
+## What changed
 
-I rebuilt the demo using tools I already use daily, plus AI to fill gaps:
+- Cleaned up shader inputs
+- Fixed the render loop
+- Wrote a short note
 
-- **Next.js 16** for the UI  
-- **NextUI** for the layout  
-- **Bun** for scripts and static exports  
-- a single `/lib/webgpu` folder that holds the render loop logic  
-- compact TypeScript files for the triangle and cube demos  
-- simple WGSL shaders with no extra complexity
+### Example render loop
 
-AI drafted the initialization steps; I rewrote/annotated them so I could follow along:
+```js
+function frame() {
+  // update
+  // draw
+  requestAnimationFrame(frame);
+}
+```
 
-1. request the adapter  
-2. request the device  
-3. configure the canvas  
-4. create buffers  
-5. load WGSL  
-6. submit draws
+## CTA: Open the demo
 
-With everything written by me from scratch, I could finally see exactly how each piece of the pipeline fits together.
+- https://bradleymatera.github.io/TriangleDemo/
 
-## What the rebuild gave me
+## Now do it your way
 
-This rebuild wasn’t about flexing low-level skills. It was about **clarity**.
+### Steps
 
-The new setup gives me:
+1. Start with a minimal triangle.
+2. Add one change at a time.
+3. Log each fix.
 
-- a WebGPU project I fully understand  
-- a clean space to tweak shaders  
-- a simple path to experiment with buffers, attributes, and color outputs  
-- direct connection between the code and what I see on the canvas  
-- a predictable structure I can keep expanding as I learn
+### Common mistakes
 
-Instead of navigating around a larger ecosystem with its own goals, I now have a focused lab designed specifically for learning WebGPU fundamentals. That alone made the rebuild worth it, even if AI supplied half the code.
+- Changing too much at once.
+- Skipping error logs.
+- Not saving the working version.
 
-## What I learned
+## Quick checklist
 
-Rebuilding (and annotating AI output) taught me more than I expected:
+- [ ] Minimal triangle works
+- [ ] One fix per change
+- [ ] Notes updated
 
-- how the adapter/device negotiation really works  
-- how pipelines, buffers, and shaders interact  
-- how the render loop lives and breathes  
-- how small changes in WGSL show up instantly on the canvas  
-- how much easier learning is when the project matches your learning style
+## Next steps
 
-This project is not an engine. Not a framework. Not a competitor to anything. It is just a compact, AI-assisted study lab that helps me understand the basics without distractions.
+- Add a small performance note.
+- Add a simple controls panel.
+- Keep the demo small.
 
-## Final thoughts
+## Related links
 
-The new Triangle Demo is clean, simple, and built around learning—not expertise. It keeps the triangle and the textured cube close at hand so I can focus on the WebGPU pipeline instead of pretending to be a graphics wizard.
+- https://developer.chrome.com/docs/web-platform/webgpu/
 
-It’s the version that finally made WebGPU feel less mysterious, and it gives me a foundation to keep experimenting (with AI guardrails) as the API evolves.
+## Final CTA
+
+If you want my debug notes, ask and I will share them.

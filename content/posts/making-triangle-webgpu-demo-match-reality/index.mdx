@@ -1,53 +1,76 @@
 ---
-title: "Setting Honest Expectations for My Triangle WebGPU Demo"
-date: "2025-11-14"
+title: "Triangle WebGPU Demo: Making the Write-Up Match Reality"
+date: "2025-07-22"
 slug: "/making-triangle-webgpu-demo-match-reality"
-tags: ["learning", "webdev", "nextjs", "webgpu"]
-description: "Resetting the copy so the demo reads like what it is: an AI-assisted, small WebGPU triangle/cube playground—not a graphics engine or expert flex."
-theme: "Low-Level Experiments"
+tags: ["webgpu", "graphics", "debugging"]
+description: "A short audit of a WebGPU demo and the notes that made it honest."
+theme: "Graphics"
 ---
 
-# Making My Triangle WebGPU Demo Match What It Actually Is
+I built a small WebGPU demo and the write-up got ahead of the code.
 
-When I built my Triangle WebGPU Demo, I mostly leaned on AI to scaffold the adapter/device/buffer/shader plumbing and I glued it together to learn. The UI ended up looking polished enough that it made the whole thing seem like a serious graphics tool or engine, which is not true. It’s just a tiny, AI-assisted study sandbox.
+This post shows how I trimmed the claims to match the repo.
 
-This post is me correcting that. I’m updating the wording so it reflects the actual purpose: learn the basics, not showcase low-level skills I don’t have.
+You will get the checklist I used and the mistakes I avoid now.
 
-## Why the site needed clearer wording
+## The promise
 
-The code is extremely simple and AI-assisted. It’s a small setup built around two WebGPU samples (triangle + textured cube) to learn the basics. The clean UI and demo switching made it look more complex than it is.
+You will learn:
 
-Someone landing with no context might assume it’s a lightweight rendering library or early GPU tool. None of that is true. It’s a study lab I tweaked with AI’s help so I could learn WebGPU fundamentals in a clean environment. The problem was the **presentation**, not hidden depth.
+- how to audit a demo
+- how to rewrite claims
+- how to keep proof links tight
 
-## What the project really is
-
-Triangle Shader Lab is just a place where I can see the WebGPU pipeline without noise. It focuses on two demos:
-
-1. a triangle  
-2. a textured cube
-
-That is the entire scope.
-
-The value is clarity, not features. AI helped scaffold it; I kept the WGSL tiny and the UI shows output next to code so I can tweak and see changes immediately.
+> "If the repo cannot prove it, the post should not claim it."
 
 ## What I changed
 
-I rewrote the site’s text so it explains what the project is and nothing more. It focuses on:
+- Removed claims that were not in the code.
+- Added a short limitations section.
+- Linked directly to the demo.
 
-- how the demo works (triangle + cube, AI-assisted scaffolding)  
-- how the render loop is structured at a high level  
-- what the code is for (learning, not production)  
-- what the project helps you practice (basic pipeline awareness)  
-- where the actual WebGPU learning happens (small, readable files)
+### Example honesty note
 
-The UI still looks nice, but now the description matches the reality. If someone opens the site, they will know exactly what they are looking at.
+```text
+What works:
+What is missing:
+What is planned:
+```
 
-## Why clarity matters
+## CTA: Open the demo
 
-I’m still early in WebGPU, and having a simple, honest description helps me learn. Clear wording forces me to think about what I’m actually building instead of letting a polished UI imply skills I don’t have.
+- https://bradleymatera.github.io/TriangleDemo/
 
-This edit also made me appreciate how much wording affects perception. Even when the code is tiny, a polished layout can make people expect a whole framework behind it. I want the site to be approachable, not misleading.
+## Now do it your way
 
-## Final thoughts
+### Steps
 
-This project is not a graphics engine. It’s not proof of low-level expertise. It’s a small, AI-assisted WebGPU learning space that keeps the triangle and cube in front of you while you study the pipeline. Nothing inflated, nothing implied—just a clean place to learn the way I need to.
+1. Open the repo.
+2. List every claim in the post.
+3. Remove anything you cannot prove.
+
+### Common mistakes
+
+- Keeping old claims after refactors.
+- Listing performance numbers without data.
+- Hiding missing features.
+
+## Quick checklist
+
+- [ ] Claims match code
+- [ ] Limitations are visible
+- [ ] Proof links work
+
+## Next steps
+
+- Re-audit one project page.
+- Add a limitations section.
+- Share the updated link.
+
+## Related links
+
+- https://github.com/BradleyMatera/TriangleDemo
+
+## Final CTA
+
+If you want a second set of eyes on a demo post, ask me.

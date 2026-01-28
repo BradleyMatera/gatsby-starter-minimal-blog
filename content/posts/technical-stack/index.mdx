@@ -1,106 +1,72 @@
 ---
-title: "My Technical Stack: Languages, Frameworks, Tools, and Specialties"
+title: "My Technical Stack: What I Use and What I Am Still Learning"
 date: "2025-04-28"
 slug: "/technical-stack-2025"
-tags: ["Technical Stack", "Tools", "Process"]
-description: "A candid inventory of the tools I use—what I’m comfortable with, what I’m learning, and what’s purely experimental."
+tags: ["tools", "process", "web-development"]
+description: "A direct inventory of the tools I use and the gaps I still have."
 theme: "Front-End & Full-Stack"
 ---
 
-> **Context:** Full Sail grad + AWS intern, still pre-first SWE job. This stack reflects the tech I touch in portfolio projects (Car-Match, Triangle Shader Lab, CheeseMath, AWS labs).  
-> **AI assist:** ChatGPT helped group the tools and reminded me to tag comfort levels.  
-> **Status:** Living document. I update it whenever my habits change.
+This is a living list. It changes as my projects change.
 
-## Languages & comfort levels
+I only list tools I have used in a demo or lab. Anything else is marked as planned.
 
-| Language | Primary use | Status |
-| --- | --- | --- |
-| **TypeScript** | React SPAs, Node APIs | Comfortable for prototypes. Generics/utility types still require docs. |
-| **JavaScript (ES2023)** | CodePens, Gatsby/Vite builds | Daily driver. Async patterns + DOM APIs feel natural. |
-| **Python** | AWS labs, automation scripts, FastAPI demos | Learning. Comfortable with scripting; still new to larger apps. |
-| **HTML/CSS** | Semantic layouts, Tailwind tokens | Comfortable. Accessibility/language semantics baked into every project. |
-| **C#/Java** | Coursework + interview prep | Exploring. No production experience. |
-| **PHP** | Legacy coursework | Rarely used now. |
+You will get the structure I use and a checklist for keeping it honest.
 
-## Frameworks & libraries
+## The promise
 
-- **React / Next.js / Gatsby:** Main UI stack (this site, SPA résumés, CheeseMath). Hooks + context + Suspense for state management.  
-- **Node.js + Express:** Lightweight REST APIs (BasicServerSetup, Car-Match backend).  
-- **FastAPI:** Local experiments for Convo-AI. Still prototyping.  
-- **Tailwind CSS:** Default styling approach (consistent tokens, responsive utilities).  
-- **PixiJS / Three.js:** Used in Triangle Shader Lab + other visual experiments. AI helps me reason through graphics math.  
-- **Testing:** Jest/Supertest (backend), Testing Library (frontend), Playwright (auth labs).
+You will learn:
 
-## Cloud/DevOps toolkit
+- how I track comfort levels
+- how I tie tools to demos
+- how I avoid over-claims
 
-| Area | Tools | Notes |
-| --- | --- | --- |
-| Hosting & deploys | Netlify, GitHub Pages, Render, AWS (Lambda, API Gateway, EKS labs) | Netlify/Pages host most sites. Render handles Car-Match backend (free tier). AWS used for labs + serverless experiments. |
-| Data | DynamoDB, MongoDB Atlas, PostgreSQL | DynamoDB for serverless labs, Mongo for Car-Match, Postgres for BasicServerSetup prototypes. |
-| Containers | Docker Compose, ECR, EKS labs | Compose for daily usage, EKS for workshops. No production clusters yet. |
-| IaC | Terraform, SAM/Serverless Framework | Terraform for EKS labs, SAM for serverless APIs. CDK still experimental. |
-| Observability | CloudWatch, Netlify analytics, simple `/healthz` endpoints | Need to add Sentry/OTel eventually. |
+> "If I cannot point to a demo, I do not list the tool."
 
-## Productivity stack
+## The structure
 
-- **GitHub Actions:** CI/CD for all repos (lint, test, build, deploy).  
-- **Notion + Obsidian:** Project tracking, honesty logs, study notes.  
-- **VS Code + Copilot Chat:** Editor + AI pair programming.  
-- **Postman/Bruno:** API testing collections.  
-- **Slack + Loom:** Async updates to mentors/recruiters.  
-- **Apple Health/Whoop:** Sleep/stress data that feeds planning decisions.
+### Example format
 
-## Focus areas
+```text
+Tool: where I used it
+Status: comfortable, learning, planned
+Proof: repo or demo link
+```
 
-1. **Accessibility-first UI:** Semantic HTML, skip links, screen reader testing, color contrast.  
-2. **API design + auth:** Building JWT/Cognito flows, documenting endpoints, writing runbooks.  
-3. **CI/CD automation:** GitHub Actions templates for Netlify/Render/AWS deploys.  
-4. **Cost-aware architectures:** Serverless + free-tier hosting keep demos affordable.  
-5. **Honesty + documentation:** `honesty.md`, README “Reality” sections, and runbooks for every project.
+## CTA: Open the demos
 
-## Currently exploring
+- https://bradleymatera.dev/projects/
 
-- **AWS Bedrock / Q Business:** Responsible AI workflows, prompt logging, access controls.  
-- **Policy-as-code:** OPA + AWS Config for guardrails (still lab-only).  
-- **Edge rendering:** Next.js + Cloudflare Workers experiments for faster global delivery.  
-- **Zig + WebGPU:** Low-level performance practice (Triangle Shader Lab, OBJ Parser).
+## Now do it your way
+
+### Steps
+
+1. List your tools.
+2. Mark comfort level.
+3. Add one proof link per tool.
+
+### Common mistakes
+
+- Listing tools you touched once.
+- Hiding gaps.
+- Mixing planned with real.
+
+## Quick checklist
+
+- [ ] Comfort level set
+- [ ] Proof link added
+- [ ] Planned items labeled
 
 ## Next steps
 
-- Deepen AWS Developer Associate prep (tie it to CheeseMath backend).  
-- Add tracing/log aggregation to personal projects (maybe OpenTelemetry + Grafana Cloud).  
-- Harden Car-Match backend (Mongo Atlas, Render, Ops docs) so it remains honest even when folks poke at it.  
-- Publish my GitHub Actions templates + Notion trackers so others can reuse them.
+- Update your list this month.
+- Remove one tool you did not use.
+- Add one demo link.
 
-## How I keep this stack honest
+## Related links
 
-- **Evidence per tool:** Each claim links to a repo or lab. If I say “EKS,” the README shows the Terraform and `kubectl` outputs.  
-- **Comfort tags:** “Comfortable,” “Learning,” or “Experimental” on each category. If I haven’t shipped code with it, I say so.  
-- **Changelog:** This page gets a date-stamped note in `honesty.md` when tools move between categories.  
-- **Drift checks:** Quarterly review: what did I actually use in the last 90 days? Anything unused gets demoted.
+- https://bradleymatera.dev/projects/
 
-## Gaps I’m not hiding
+## Final CTA
 
-- No production on-call, no multi-team coordination yet.  
-- Limited CS fundamentals (DS/algos) beyond interview prep.  
-- Observability is basic: `/healthz` + logs; no end-to-end tracing in my personal projects yet.  
-- Security reviews are self-driven; no formal pen-test experience.
-
-## Playbook for adopting a new tool
-
-- Start with a small lab + README.  
-- Add a “Reality snapshot” and “What’s missing” so I don’t oversell.  
-- Capture AI prompts + sources in `notes/` for transparency.  
-- Ship one example that proves value (e.g., policy-as-code gate in CI) before listing it here.
-
-## Interview narrative
-
-- **Breadth vs depth:** Broad exposure through labs and projects, deeper comfort in React/Node/AWS basics.  
-- **Approach:** Prototype quickly, document constraints, automate CI, add health checks, then iterate.  
-- **Honesty-first:** I explicitly label student-level work and free-tier limits.  
-- **Roadmap:** Actively studying AWS Developer Associate, adding tracing, and improving testing discipline.
-
-## References
-
-[^typescript]: Microsoft, “TypeScript Handbook,” https://www.typescriptlang.org/docs/  
-[^bedrock]: AWS, “What Is Amazon Bedrock?,” https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html
+If you want my stack template, ask and I will share it.

@@ -1,148 +1,112 @@
 ---
-title: "AWS Cloud Support Internship: Mastering Troubleshooting and Architecture"
+title: "AWS Cloud Support Internship Notes: What I Practiced and What I Did Not"
 date: "2025-08-01"
-tags: ["AWS", "Internship", "Cloud Support", "DevOps", "AI", "Bedrock", "Career Development"]
-description: "Week-by-week notes from my AWS Cloud Support Associate internship—what I practiced, how I documented it, and where the gaps still are."
+slug: "/aws-cloud-support-internship-mastering-troubleshooting-and-architecture"
+tags: ["aws", "internship", "cloud-support", "devops"]
+description: "A lab-only summary of what I practiced during my AWS support internship and what remains out of scope."
 theme: "Cloud & DevOps"
 ---
 
-> **Context:** Summer 2025 AWS Cloud Support Associate internship in Seattle (Oscar building). My cohort lived inside labs, mock tickets, and certification prep—no direct customer production support.  
-> **AI assist:** ChatGPT + Amazon Q Business helped summarize service docs and draft troubleshooting checklists; I edited everything before submitting to mentors.  
-> **Status:** Honest reflection so recruiters see exactly what I touched (and what remains on the “practice only” list).
+This was a lab-heavy internship. No production ownership. No customer data.
 
-## Reality snapshot
+I kept notes and checklists for each lab. This post is the clean summary of what I actually touched.
 
-- 12-week program split between **mornings** (Cloud Practitioner/SAA coursework, architecture reviews) and **afternoons** (ticket simulations, hands-on labs, runbook writing).  
-- I rotated through EC2, S3, IAM, networking, and observability labs; each lab ended with a quiz + short retro shared with a senior engineer.  
-- Capstone was a media metadata pipeline built entirely in AWS sandbox accounts: S3 → Lambda (FFmpeg) → DynamoDB → API Gateway + static dashboard. No external users relied on it.
-- Tracked lab completion, quiz scores, ticket MTTR in simulations, and budget alerts; shipped weekly retros (“what broke / what I fixed / what I still don’t know”) to mentors.
+You will get the weekly structure, the capstone outline, and the exact gaps I still have.
 
 ## Table of contents
 
-- [Weekly structure](#weekly-structure)  
-- [Troubleshooting drills I ran](#troubleshooting-drills-i-ran)  
-- [Capstone: media metadata pipeline](#capstone-media-metadata-pipeline-lab-only)  
-- [Tooling & automations I leaned on](#tooling--automations-i-leaned-on)  
-- [Proof & artifacts](#proof--artifacts)  
-- [Gaps & next steps](#gaps--next-steps)  
-- [Interview stories I reuse](#interview-stories-i-reuse)
+- [The promise](#the-promise)
+- [What the program looked like](#what-the-program-looked-like)
+- [Troubleshooting drills](#troubleshooting-drills)
+- [Capstone overview](#capstone-overview)
+- [How to apply this](#how-to-apply-this)
+- [Common mistakes](#common-mistakes)
+- [Next steps](#next-steps)
 
-## Weekly structure
+## The promise
 
-| Week(s) | Focus | Deliverables |
-| --- | --- | --- |
-| 1–2 | Orientation, Cloud Practitioner refresh | Daily lab reports, IAM policy walk-through, “how to escalate” checklist. |
-| 3–4 | Linux + networking deep dive | Troubleshoot EC2 boot loops, build VPC peering diagrams, script CloudWatch log exports. |
-| 5–6 | Storage & security | S3 bucket policy labs, KMS envelope encryption exercises, Bedrock prompt-logging prototype. |
-| 7–8 | Observability + automation | CloudWatch dashboard for mock SaaS, Cost Explorer alarms, npm audit playbooks. |
-| 9–10 | Capstone build | S3→Lambda→DynamoDB metadata pipeline, runbook, health checks, IaC template. |
-| 11 | Support simulations | Pager-style ticket drills, on-call shadowing, Amazon Leadership Principles reviews. |
-| 12 | Presentations + retros | Capstone demo, personal growth plan, peer feedback write-up. |
+This post gives you:
 
-## Troubleshooting drills I ran
+- a realistic picture of lab work
+- a clear capstone summary
+- a short checklist you can reuse
 
-- **EC2 boot loops:** Collected console output, diffed failed user-data scripts, rebuilt launch templates. Lesson: user-data must be idempotent, and CloudWatch agent config drifts silently.  
-- **VPC reachability:** Reachability Analyzer + traceroute inside bastions; caught mismatched CIDRs and missing return routes during peering labs.  
-- **S3 “Access Denied” mazes:** IAM Policy Simulator + CloudTrail to isolate missing `Principal`/`Condition` in cross-account bucket policies; wrote a step-by-step playbook.  
-- **Cost spikes:** “Rapid response” checklist: Budgets alert → Cost Explorer by service → orphaned EBS + idle NAT → snapshot/terminate → tag everything.  
-- **CloudWatch log flooding:** Temporary retention policy, metric filters for error bursts, and alarms to detect runaway debug logs.  
-- **Bedrock prompt logging:** Prototyped logging wrapper to capture prompts/outputs for audit; documented privacy/legal considerations before any production use.
+> "I document the lab, not a fantasy."
 
-## Capstone: media metadata pipeline (lab-only)
+## What the program looked like
 
-### Architecture
-- **Input:** Files land in `media-ingest-bucket`.  
-- **Processing:** Node.js 20 Lambda pulls the object, shells out to FFmpeg to extract metadata, pushes a compact JSON doc to DynamoDB.  
-- **API:** API Gateway exposes read-only endpoints so a static dashboard (S3 + CloudFront) can query the table.  
-- **Observability:** CloudWatch logs, metrics, and alarms track Lambda duration, DynamoDB throttle counts, and FFmpeg exits. Budgets/Cost Explorer alerts guard the lab account.
+- 12 weeks of labs and mock tickets
+- certification prep and architecture reviews
+- weekly retros with mentors
 
-```yaml
-Resources:
-  MediaBucket:
-    Type: AWS::S3::Bucket
-    Properties:
-      NotificationConfiguration:
-        LambdaConfigurations:
-          - Event: s3:ObjectCreated:*
-            Function: !GetAtt MetadataLambda.Arn
+I did not own production accounts. I did not handle live customer tickets.
 
-  MetadataLambda:
-    Type: AWS::Lambda::Function
-    Properties:
-      Runtime: nodejs20.x
-      Handler: index.handler
-      Code:
-        S3Bucket: !Ref ArtifactBucket
-        S3Key: lambda.zip
-      Environment:
-        Variables:
-          TABLE_NAME: !Ref MetadataTable
+## Troubleshooting drills
 
-  MetadataTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      BillingMode: PAY_PER_REQUEST
-      AttributeDefinitions:
-        - AttributeName: FileKey
-          AttributeType: S
-      KeySchema:
-        - AttributeName: FileKey
-          KeyType: HASH
+I ran lab exercises for:
+
+- EC2 boot issues
+- VPC reachability
+- S3 access errors
+- CloudWatch log floods
+
+### Example note format
+
+```text
+Symptom:
+Impact:
+Signals checked:
+Fix applied:
+What I will change next time:
 ```
 
-### What worked
-- Lambda stayed under 2 GB memory/30 s duration even when FFmpeg processed 250 MB sample files.  
-- DynamoDB recorded ~300 sample rows with zero throttling thanks to on-demand mode.  
-- CloudWatch dashboard (latency, invocations, FFmpeg exit codes, DynamoDB consumed RCUs) made it easy to talk through the design review.  
-- Step Functions “stretch goal” doc lists how I’d fan-out enrichment jobs if this ever handled more than demo traffic.
+## Capstone overview
 
-### What still needs work
-- Replace API key auth with Cognito + IAM authorizers (on the backlog).  
-- Integration tests exist locally but CI/CD only runs lint + unit tests. Need to script `sam validate`, deploy to a staging stack, and capture screenshots automatically.  
-- FFmpeg binary came from a public layer; I owe the team a security review and pinning strategy before recommending it anywhere else.
-- Add signed URLs and lifecycle rules on the ingest bucket so lab data ages out automatically.  
-- Improve cold-starts: explore container-based Lambda vs. slimmer FFmpeg layer; measure impact and document trade-offs.  
-- Load test with varied media types and longer runs; current numbers are from small samples.
+Capstone scope was a metadata extraction workflow in AWS sandbox accounts.
 
-## Tooling & automations I leaned on
+- S3 uploads trigger Lambda
+- Lambda writes metadata to DynamoDB
+- Amplify hosts a simple review UI
+- Cost model estimates storage and transfer
 
-- **Docs-as-code:** Every lab ended with a markdown runbook + diagram (Mermaid + Excalidraw). These live in `notes/aws-internship/` and were reviewed by mentors weekly.  
-- **Cost visibility:** Budgets (email + Slack) triggered at 10% and 25% of the sandbox allowance, mostly to prove I could wire alerts.  
-- **Security workflows:** npm audit CI (both frontend + backend), OWASP ZAP baseline workflow for the Render-deployed intern app, Bedrock prompt logging experiments with Amazon Q.  
-- **AI helpers:** Amazon Q Business answered “where does this service log?” while ChatGPT helped translate dense docs into playbooks. Every AI-assisted snippet is annotated in the repo so it’s obvious what I edited.
-- **Observability kits:** Reusable CloudWatch dashboards for EC2/Lambda/RDS; alarm templates for errors, latency p90/p99, throttles.  
-- **Runbook template:** Intro → Symptoms → Timeline → Logs/metrics links → Fix → Prevent → Open questions. Kept consistency across labs.  
-- **Retro cadence:** Weekly self-review to mentors: “what worked, what broke, what I still don’t understand,” with ticket IDs and lab links.
+No external users depended on it.
 
-## Proof & artifacts
+## CTA: Open the lab notes
 
-- **Lab tracker:** [https://github.com/BradleyMatera/aws-internship-journal](https://github.com/BradleyMatera/aws-internship-journal) (private; screenshots/redacted excerpts available).  
-- **Dashboards:** `dashboards/cloudwatch-dashboard.json` plus PNG exports in the repo.  
-- **Runbooks:** See `notes/runbooks/*.md`—each links to the relevant log groups, budgets, or config files.  
-- **Capstone deck:** PDF stored under `presentations/capstone-media-pipeline.pdf` with the architecture diagram, metrics, and TODO table.
-- **Quizzes/assessments:** Scores + notes per module; gaps highlighted (SCPs, advanced VPC patterns).  
-- **Ticket drills:** Stored transcripts/timelines from mock pager escalations; anonymized for interview use.
+- https://github.com/BradleyMatera/learning-journal
 
-## Gaps & next steps
+## Now do it your way
 
-- Earn Developer Associate and re-run the labs with IaC-first deployments.  
-- Pair with a real AWS Support engineer on a shadow shift to see how customer tickets differ from our simulations.  
-- Harden IAM knowledge (resource-level permissions, SCPs, org design) beyond what the internship covered.  
-- Turn the FFmpeg Lambda into a public tutorial once I replace the binary layer and add full test coverage.
-- Build a “cost kill switch” pattern (Budgets → SNS → Lambda to tag/stop idle resources) to prove automated cleanup.  
-- Add synthetics against the capstone API (API Gateway → Lambda → DynamoDB) and publish results with dashboards.
+### Steps
 
-## Interview stories I reuse
+1. Pick one AWS lab and run it end to end.
+2. Write a short checklist.
+3. Build a tiny capstone that uses two services.
 
-- **EC2 boot-loop fix:** Found bad user-data and broken CloudWatch agent; rewrote idempotently, added alarms—shows calm debugging under pressure.  
-- **S3 Access Denied:** Used Policy Simulator + CloudTrail to prove missing `Principal` condition; fixed cross-account access—demonstrates systematic troubleshooting.  
-- **Cost spike response:** Identified idle NAT + orphaned EBS, tagged/terminated, set budgets/alerts—ownership + cost awareness.  
-- **Capstone cold-starts:** Measured FFmpeg cold-start impact, proposed container-based Lambda + signed URLs—trade-off thinking and next steps.
+### Common mistakes
 
-## References
+- Saying you own production when you do not.
+- Skipping cost notes in labs.
+- Writing vague notes that you cannot repeat.
 
-[^aws-careers]: AWS. "Careers at AWS." Accessed October 2025. https://aws.amazon.com/careers/  
-[^aws-training]: AWS Training. "Cloud Practitioner Essentials." Accessed October 2025. https://aws.amazon.com/training/  
-[^bedrock-docs]: AWS. "Amazon Bedrock Documentation." Accessed October 2025. https://docs.aws.amazon.com/bedrock/  
-[^aws-cost]: AWS. "Cost Management Best Practices." Accessed October 2025. https://aws.amazon.com/architecture/cost-management/  
-[^aws-intern]: AWS Blogs. "Inside AWS Internships." 2024 – outlines the same bootcamp cadence our cohort followed.
+## Quick checklist
+
+- [ ] Lab scope is clear
+- [ ] Notes include steps and outcomes
+- [ ] Capstone is safe and small
+
+## Next steps
+
+- Expand the cost model with real unit inputs.
+- Add a second lab that uses IAM policies.
+- Write a one page capstone summary.
+
+## Related links
+
+- https://aws.amazon.com/training/
+- https://docs.aws.amazon.com/lambda/
+- https://docs.aws.amazon.com/dynamodb/
+
+## Final CTA
+
+If you want the capstone outline I used, ask and I will share it.

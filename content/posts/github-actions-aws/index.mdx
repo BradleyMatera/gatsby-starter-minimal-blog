@@ -1,28 +1,34 @@
 ---
-title: "Automating Deployment with GitHub Actions and AWS"
+title: "GitHub Actions for Demos: A Small CI Setup That Stays Honest"
 date: "2025-07-07"
 slug: "/github-actions-aws-automation"
-tags: ["CI/CD", "GitHub Actions", "AWS", "Automation"]
-description: "My current CI/CD stack for portfolio projects—what runs, where it deploys, and how I keep it honest."
+tags: ["ci-cd", "github-actions", "aws", "automation"]
+description: "A small CI pattern I use for demos and labs, plus what is still planned."
 theme: "Cloud & DevOps"
 ---
 
-> **Context:** These workflows power this Gatsby site (Netlify), Car-Match (GitHub Pages frontend + Render backend), CheeseMath (GitHub Pages), and AWS labs. No enterprise-scale systems—just my projects.  
-> **AI assist:** ChatGPT helped me structure the write-up; the YAML snippets come straight from the repos.  
-> **Status:** Everything described here runs today. Some AWS deploys still live in lab accounts, and I call that out below.
+I use GitHub Actions for demos and labs, not enterprise systems.
 
-## Reality snapshot
+This post shows a small, honest CI setup and how I document what is planned.
 
-- **Static apps:** Gatsby/React/Vite sites build via Yarn/Bun, lint/test, then deploy to Netlify or GitHub Pages.  
-- **APIs:** Express apps build Docker images, push to GHCR/ECR, and deploy to Render or EKS labs.  
-- **Serverless:** SAM/Serverless Framework packages functions, assumes AWS roles via OIDC, and deploys to sandbox accounts.  
-- **Observability:** Slack webhooks for success/failure, `/healthz` smoke tests, version tags (`vYYYY.MM.DD.N`). No on-call, but I check logs daily.
+You will get a working baseline, a checklist, and common mistakes.
 
-## Baseline workflow (static site example)
+## The promise
+
+You will learn:
+
+- a simple CI workflow
+- how to keep claims accurate
+- what to label as planned
+
+> "If the workflow is not in the repo, it is not a claim."
+
+## Baseline workflow
+
+This is the minimal pattern I aim for in demo repos.
 
 ```yaml
-name: ci-static
-
+name: ci
 on:
   push:
     branches: [main]
@@ -30,117 +36,66 @@ on:
     branches: [main]
 
 jobs:
-  build-test-deploy:
+  build:
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write   # for OIDC when targeting AWS
-      contents: read
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
       - run: npm ci
       - run: npm run lint
       - run: npm run test --if-present
       - run: npm run build
-      - name: Deploy to Netlify
-        if: github.ref == 'refs/heads/main'
-        uses: netlify/actions/cli@v4
-        with:
-          args: deploy --dir=public --prod
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
 ```
 
-- **Why it works:** Immutable installs (`npm ci`), lint/tests enforced before builds, and deployments happen only on main. Pull requests stop after the build so reviewers see artifacts fast.
+## What is real vs planned
 
-## AWS deployments (labs + future hosting)
+### Real today
 
-```yaml
-  deploy-aws:
-    needs: build-test-deploy
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      contents: read
-    steps:
-      - uses: actions/checkout@v4
-      - uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: arn:aws:iam::123456789012:role/github-actions
-          role-session-name: github-actions
-          aws-region: us-east-1
-      - run: sam build
-      - run: sam deploy --no-confirm-changeset --stack-name media-pipeline --region us-east-1
-```
+- Lint and build in repos that include scripts.
+- Manual deploys or simple deploy scripts.
 
-- OIDC means I don’t store long-lived AWS keys in GitHub.  
-- Stacks deploy to AWS Academy / sandbox accounts; README files state that clearly so nobody assumes it’s production.
+### Planned
 
-## Containers & Render deploys
+- Slack alerts
+- Nightly audits
+- Automated smoke checks
 
-- Build + scan images (`docker build`, `docker scan`, Trivy).  
-- Push to GitHub Container Registry.  
-- Trigger Render via webhook (free tier for Car-Match backend). README warns about 5-minute cold starts.
+## CTA: Open the repo
 
-## Observability & rollback habits
+- https://github.com/BradleyMatera/bradleymatera.dev
 
-- Smoke tests (`scripts/smoke.sh`) hit `/healthz` + a basic user flow post-deploy. Failures run `scripts/rollback.sh` to redeploy the previous artifact.  
-- Slack notifications (success/failure) include commit SHA, author, and deploy URL.  
-- Tags like `v2025.10.15.1` map to Netlify deploy IDs and Render releases, making it easy to diff.
+## Now do it your way
 
-## Governance & cost guardrails
+### Steps
 
-- Branch protections: lint/test/build must pass before merging.  
-- Secrets live in GitHub environments (dev/stage/prod) with required reviewers.  
-- Nightly `npm audit` + `pip-audit` workflows log findings; high severity issues block merging until resolved.  
-- Cost dashboards (Netlify, Render, Mongo Atlas, AWS Budgets) alert via email when spend crosses thresholds—even if it’s only a few dollars.
+1. Add the baseline workflow.
+2. Keep scripts simple.
+3. Document any missing steps as planned.
 
-## Real-world incidents and fixes
+### Common mistakes
 
-- **Broken Netlify build (missing sharp deps):** Added `NETLIFY_USE_YARN` + `NODE_OPTIONS=--max_old_space_size=4096` and documented a manual retry script.  
-- **Render cold starts causing 500s:** Added a synthetic warm-up curl in the cron workflow and surfaced a “server is waking up” banner on the frontend to stay honest.  
-- **Stale cache on GitHub Pages:** A rogue service worker served old assets. I added a “clear SW” checklist to deploy notes and a `version.txt` endpoint to verify freshness.  
-- **ECR permission error:** OIDC role was missing `ecr:GetAuthorizationToken`; fixed the policy and wrote a README section on least privilege.
+- Claiming alerts you do not have.
+- Listing checks that are not in CI.
+- Copying YAML without testing it.
 
-## Security checks baked into CI
+## Quick checklist
 
-- Dependency scanning with `npm audit`/`pip-audit`; Trivy for images.  
-- Secrets scanning via `gitleaks` on PRs.  
-- OIDC everywhere possible—no long-lived AWS keys.  
-- Deployment steps bail on unsigned commits or dirty trees in release branches.
+- [ ] Workflow runs on push
+- [ ] Lint and build pass
+- [ ] Planned items listed clearly
 
-## Release cadence and communication
+## Next steps
 
-- **PR stage:** Build + lint + unit tests. PR comment shows artifact size and lighthouse summary when applicable.  
-- **Main merges:** Auto-deploy to preview/stage. Slack gets the URL plus `/healthz` result.  
-- **Production:** Manual approval with a short checklist: migration status, smoke tests passed, roll-forward plan in place.  
-- **Post-release:** If metrics degrade or smoke fails, run rollback script and post a short retro in the repo.
+- Add one smoke check.
+- Add a small deploy step.
+- Keep notes in the README.
 
-## Playbooks I keep on hand
+## Related links
 
-- **“Deploy is broken” flow:** Check runner logs → rerun with debug → verify secrets/env → isolate failing step.  
-- **“AWS creds failing” flow:** Confirm OIDC role trust policy, session duration, and GitHub environment.  
-- **“Static assets stale” flow:** Purge CDN, unregister service worker, check `version.txt`, then redeploy if needed.
+- https://docs.github.com/actions
 
-## How I’d scale this for a team
+## Final CTA
 
-- Split workflows by concern (lint/test/build vs deploy) with required approvals.  
-- Add ephemeral preview environments per PR (Netlify deploy previews + seeded test data).  
-- Introduce policy-as-code (Checkov or OPA) for Terraform/CloudFormation before apply.  
-- Rotate secrets automatically and surface drift via nightly checks.
-
-## To-do list
-
-- Add Playwright-based synthetic tests that run automatically after deploys.  
-- Publish my workflow templates so classmates can fork them instead of copying snippets.  
-- Experiment with Checkly/Upptime for external monitoring.  
-- Migrate more workloads to the AWS adapter (S3/CloudFront) once I clean up the sharp install process.
-
-## References
-
-[^oidc]: GitHub Docs, “Configuring OpenID Connect in GitHub Actions,” https://docs.github.com/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-github-actions
+If you want my baseline workflow file, ask and I will share it.

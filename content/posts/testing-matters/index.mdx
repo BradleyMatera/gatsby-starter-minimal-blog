@@ -1,93 +1,78 @@
 ---
-title: "Why Testing Matters: From Jest to Integration Tests"
+title: "Testing That I Actually Run: A Small Pyramid"
 date: "2025-09-29"
 slug: "/why-testing-matters"
-tags: ["Testing", "Quality", "DevOps"]
-description: "The test pyramid I use across my projects—tools, cadence, and the honest gaps."
+tags: ["testing", "quality", "devops"]
+description: "A short, honest testing stack used in demos and labs."
 theme: "Front-End & Full-Stack"
 ---
 
-> **Context:** Early-career developer documenting the test strategy I actually run on my repos (Car-Match, CheeseMath, BasicServerSetup, AWS labs). No production on-call experience yet.  
-> **AI assist:** ChatGPT helped me reorder notes; every tool listed below is in use today (or clearly labeled “pilot”).  
-> **Status:** Snapshot, not perfection. Contract testing + accessibility automation still need work.
+I test to catch real bugs, not to impress anyone.
 
-## Reality snapshot
+This post shows the test levels I actually run and what is still planned.
 
-- **Unit/component tests:** Jest/Vitest + Testing Library. Run locally (watch mode) and in CI on every PR.  
-- **Integration tests:** Supertest + Dockerized Postgres/Mongo + LocalStack for AWS services. Run on PRs touching backend code.  
-- **End-to-end:** Playwright smoke tests on Netlify deploy previews, Percy (pilot) for Gatsby visual diffs.  
-- **Contract tests:** Pact/OpenAPI schema checks run manually before major refactors—automation coming soon.  
-- **Observability:** Test runs push results to GitHub Checks + Slack notifications. Failures block merges.
+You will get the pyramid, a checklist, and the common mistakes.
 
-## Pyramid breakdown
+## The promise
 
-| Layer | Scope | Tools | Cadence | Status |
-| --- | --- | --- | --- | --- |
-| Unit | Pure functions, hooks | Jest, Vitest | Watch + PR | ✅ |
-| Component | React UI, accessibility | Testing Library, Storybook test runner | PR + nightly | ✅ |
-| Integration | API + DB, AWS mocks | Supertest, LocalStack, Docker Compose | PRs touching backend | ✅ |
-| Contract | API request/response contracts | Pact, OpenAPI validators | Manual before breaking changes | 🧪 Pilot |
-| End-to-end | User flows | Playwright, Cypress (legacy), Percy (visual) | Main merges + scheduled | ✅ / 🧪 |
+You will learn:
 
-## Tooling details
+- what I test today
+- what I do manually
+- what is planned
 
-- **Jest/Vitest:** Cover utility modules (date math, data transforms), React hooks, and components. Mocks replaced with MSW where possible.  
-- **Testing Library:** Queries by role/label to ensure accessibility. If a component is hard to test, it’s usually poorly structured.  
-- **Supertest + Docker Compose:** Spins up Express + Postgres containers, seeds data, runs API tests, tears everything down.  
-- **LocalStack:** Emulates S3/DynamoDB/SNS for AWS labs. Lets me test IaC templates without hitting real AWS (saves $$).  
-- **Playwright:** Automates login → CRUD → logout. Runs on Netlify deploy previews so I can review failures before shipping.  
-- **Percy (pilot):** Visual snapshots for this Gatsby site. Still deciding if the cost is worth it.
+> "A small test suite that runs beats a big suite that does not."
 
-## Reliability practices
+## What I do today
 
-- Each test suite uses isolated data (per-worker DB, temporary DynamoDB tables).  
-- Factories generate deterministic fixtures to avoid flaky assertions.  
-- Only end-to-end tests have retries (max 2) to handle occasional network hiccups.  
-- Monthly “test hygiene” session: delete redundant tests, update snapshots, document new commands.
+- Unit and component tests in repos that include them
+- Manual smoke checks on key flows
+- Short notes on test gaps
 
-## Workflow
+### Example test script
 
-1. **Pre-commit:** Lint + unit tests via Husky.  
-2. **Pull request:** Unit, component, integration suites run in GitHub Actions.  
-3. **Deploy preview (Netlify/Render):** Playwright smoke suite + optional Percy run.  
-4. **Main merge:** Deploy + regressions checks, nightly contract suite.  
-5. **Weekly:** Manual contract tests (until automated) + accessibility spot checks.
+```json
+{
+  "scripts": {
+    "test": "vitest run"
+  }
+}
+```
 
-## Known gaps
+## CTA: Open the test demos
 
-- Contract tests aren’t automated yet. I run them before schema changes, but a nightly job is on the roadmap.  
-- Accessibility checks only run manually; I want axe in CI for components/pages.  
-- Mobile end-to-end tests are limited—need to add Playwright mobile viewports.  
-- Observability for Playwright runs is basic (GitHub logs). Would like better dashboards.
+- https://github.com/BradleyMatera/CheeseMath-Jest-Tests
 
-## Failures that shaped this pyramid
+## Now do it your way
 
-- **Mocked everything, missed reality:** Early tests mocked fetch/API too much; bugs slipped. Swapped to MSW and added integration tests with real DBs to catch schema issues.  
-- **Flaky E2E from shared data:** Tests raced on the same DB rows. Fixed by seeding per-test DBs and resetting between runs.  
-- **Silent contract breaks:** Frontend shipped a new field, backend choked. Added OpenAPI schema validation and manual Pact runs before merges.  
-- **Visual regressions:** CSS tweak broke dark mode. Percy (pilot) caught it; I now run targeted visual snapshots for header/nav.
+### Steps
 
-## How I explain this to interviewers
+1. Add one unit test.
+2. Add one smoke check.
+3. Write one gap note.
 
-- **Scope clarity:** I map each test type to risk it mitigates (unit = logic, integration = wiring, e2e = user trust).  
-- **Automation philosophy:** Start small (unit/comp), add integration where it hurts, reserve e2e for top flows.  
-- **Honesty:** No production on-call; my testing habits come from student projects and labs. I state the gaps and the roadmap.  
-- **Tool choices:** GitHub Actions + Playwright + MSW because they’re fast, cheap, and easy to share with classmates.
+### Common mistakes
 
-## Next experiments
+- Writing tests that never run.
+- Claiming CI gates without workflows.
+- Skipping the README notes.
 
-- Add axe to CI for accessibility checks on key pages.  
-- Automate contract tests nightly with PactFlow or a lightweight schema diff step.  
-- Run Playwright in mobile viewports + low-bandwidth mode to simulate real users.  
-- Publish a “testing starter” template repo with MSW + Playwright + contract example.
+## Quick checklist
 
-## Links
+- [ ] One test runs
+- [ ] One smoke check done
+- [ ] Gaps listed
 
-- Testing templates: [https://github.com/BradleyMatera/testing-templates](https://github.com/BradleyMatera/testing-templates)  
-- Example suites: Car-Match (`tests/`), BasicServerSetup (`postman/`), CheeseMath (`__tests__/`).  
-- Prompt logs + retros: `notes/testing-journal.md`
+## Next steps
 
-## References
+- Add one integration test.
+- Add a small CI workflow if you have not.
 
-[^jest]: Jest Documentation, “Getting Started,” https://jestjs.io/docs/getting-started  
-[^rtl]: Testing Library, “Guiding Principles,” https://testing-library.com/docs/guiding-principles
+## Related links
+
+- https://vitest.dev/
+- https://testing-library.com/docs/
+
+## Final CTA
+
+If you want my small test template, ask and I will share it.

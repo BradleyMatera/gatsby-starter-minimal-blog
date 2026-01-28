@@ -1,100 +1,82 @@
 ---
-title: "Combat Medic → Software Engineer — An unconventional path"
-date: "2025-04-01"
+title: "Combat Medic to Software Engineer: What Actually Transfers"
+date: "2025-04-20"
 slug: "/from-medic-to-engineer"
-tags: ["Career", "Soft Skills", "Leadership"]
-description: "How my Army medic background, service roles, and student projects intersect—and where I still need help."
+tags: ["career", "storytelling", "learning"]
+description: "A blunt look at what transfers from medicine to software, and what does not."
 theme: "Career"
 ---
 
-> **Context:** Former U.S. Army combat medic (82nd Airborne) now studying web development (Full Sail B.S., graduation Oct 2025) and interning in AWS Cloud Support. No paid SWE role yet.  
-> **AI assist:** ChatGPT helped me organise interview stories into this outline; every anecdote comes from my journals and mentor feedback.  
-> **Status:** Reflection, not a victory lap. I’m documenting the throughline so hiring managers know what’s real.
+The job change is real. The skills transfer is uneven.
 
-## Reality snapshot
+This post covers the specific habits that carried over and the parts that did not.
 
-- Military experience = 3.5 years triaging casualties, coordinating medevacs, and running aid stations.  
-- Civilian roles (case management, security, construction, animal rescue) reinforced empathy, logistics, and practical problem solving.  
-- Today’s work = student projects (Car-Match, Triangle Shader Lab, CheeseMath), AWS internship labs, and an honesty-first portfolio.
+You will get concrete examples and a simple checklist you can apply.
 
-## Transferable muscles
+## The promise
 
-| Past role | What I actually did | How it shows up now |
-| --- | --- | --- |
-| Combat medic | Stabilized multiple patients, prioritized severity, called in specialists, documented everything | Incident triage mindset: reproduce bugs fast, label severity, route owners, capture postmortem notes (Car-Match runbooks, AWS lab retros) |
-| Case manager | Tracked complex cases, aligned families/providers, maintained daily status reports | Stakeholder comms: weekly updates to professors, internship mentors, and project collaborators |
-| Construction | Worked from blueprints, adapted when materials/weather shifted, led small crews | Product agility: roadmap Car-Match features, adjust scope when Render cold starts or Atlas limits pop up |
-| Animal rescue | Stayed calm with limited gear, made humane but tough calls, logged each event | Pragmatic delivery: cut scope when exhaustion rises, focus on user impact (accessibility, reliability) over “shiny” features |
+You will learn:
 
-## How it translates to engineering work
+- which habits transfer cleanly
+- which ones need retraining
+- how I document the gap
 
-### Triage before heroics
-When Car-Match’s backend sleeps on Render, I stabilize first (wake instance, log downtime on the site) before exploring cron jobs or paid tiers. Same with AWS labs: collect signals → narrow blast radius → document the fix.
+> "Calm is useful. Clarity is better."
 
-### Story-first communication
-Patient charts demanded “Situation → Background → Assessment → Recommendation.” I use the same format in pull requests, runbooks, and status updates so teammates can act quickly.
+## What transferred
 
-### Planning with contingencies
-Military logistics = backups for everything. In software that means fallback content, cached API responses, or documented manual overrides. My READMEs call out cold starts, feature flags, and “if this breaks, do that” steps.
+- Triage mindset for debugging.
+- Clear notes under stress.
+- Communication that stays short and direct.
 
-### Empathy under pressure
-Calm tone during outages, demos, or tough feedback sessions matters. I learned that rescuing animals and sustaining morale on long missions. Now I use it to facilitate study groups, run peer reviews, and keep honesty logs even when the results aren’t flattering.
+### Example note format
 
-## Proof points
+```text
+Problem:
+What I saw:
+What I tried:
+What fixed it:
+```
 
-- **Runbooks & retros:** `/docs/runbooks` in most repos + AWS internship notes show the triage/comms habit in action.  
-- **Honesty updates:** `honesty.md` + `honestplan.md` document every copy change and limitation on my portfolio—transparency born from medic-level accountability.  
-- **Community work:** Tech Talk Club coordination + CIRIS documentation contributions rely on the same skills as managing aid-station crews.
+## CTA: Read the notes format
 
-## Case studies that show the translation
+- https://github.com/BradleyMatera/learning-journal
 
-- **Gatsby nav bar meltdown:** Treated it like a mass-casualty event—identify symptoms, sort by severity (layout first, then interactions), isolate root cause (bad DOM structure), rebuild, write a retro. Result: stable nav and a blog post that doubles as evidence.  
-- **Service worker hostage situation:** Cached site wouldn’t update. I gathered signals (curl, incognito, DevTools), unregistered the rogue worker, wrote a step-by-step guide so others could avoid it. Same playbook as clearing a blocked airway: assess, clear, re-verify.  
-- **AWS internship lab drills:** Built dashboards and alarm playbooks. The habit of rehearsing medevac steps translated into runbook dry-runs—walkthroughs before the real alarm hits.
+## What did not transfer
 
-## Interview stories (STAR-ready)
+- Production ownership. I do not claim that.
+- Team-scale processes. I am still learning them.
 
-- **When time and resources were limited:** On a field exercise with scarce supplies, I prioritized patients and communicated trade-offs. In tech, I mirrored this when Render cold starts hit Car-Match: woke the instance, posted downtime notes, deferred non-critical features, and documented a fallback plan.  
-- **When a tool failed mid-mission:** During an animal rescue, our radio died; we pivoted to hand signals and written notes. Recently, when GitHub Actions secrets broke, I switched to manual deploys, updated the README with steps, and opened an issue with repro details instead of panicking.  
-- **When I had to say “I don’t know” fast:** In the Army, guessing could cost lives. Now, in study groups or project reviews, I flag uncertainty immediately and propose next steps (trace logs, add tests, pull in a mentor). It builds trust and keeps momentum.
+## Now do it your way
 
-## Gaps, missteps, and how I’m fixing them
+### Steps
 
-- **Over-indexing on hustle:** Early on, I tried to outwork gaps instead of narrowing scope. Now I cap weekly hours and define a “minimal viable proof” for every goal.  
-- **Too many tools, not enough depth:** I bounced between stacks. The fix: pick a focused tech trio per quarter (e.g., React + AWS basics + testing) and log every deviation.  
-- **Underestimating math/CS weight:** I skipped fundamentals until interviews exposed it. I’m adding weekly data-structure reps and pairing them with small feature rewrites to reinforce muscle memory.  
-- **Letting AI over-speak:** Copilot sometimes invents patterns. I started keeping a “hallucination log” and require source links before merging AI-suggested changes.
+1. Write one short note after each bug.
+2. Keep the language plain.
+3. Share the note with a peer.
 
-## How I present this on a resume or portfolio
+### Common mistakes
 
-- Lead with the throughline: triage → comms → delivery under constraints.  
-- Pair every bullet with proof: link to runbooks, postmortems, or commit diffs.  
-- Keep titles honest: “Student developer” and “Intern” instead of inflating.  
-- Add a “service mindset” section with concrete behaviors (status updates, checklists, fallback plans).
+- Writing long notes no one reads.
+- Hiding uncertainty.
+- Claiming experience you do not have.
 
-## Playbook for other veterans switching to tech
+## Quick checklist
 
-- Translate missions to incidents: symptoms, severity, owners, timelines.  
-- Practice calm communication: Situation → Background → Assessment → Recommendation works as well in Slack as it did in a field report.  
-- Rehearse under load: runbook dry-runs, chaos drills on side projects, and mock interviews.  
-- Guard your energy: apply the same discipline to rest and recovery as you did to PT.
+- [ ] Note is one screen long
+- [ ] Fix is clear
+- [ ] Gaps are written down
 
-## Open questions I’m still working through
+## Next steps
 
-- How to get real on-call experience without over-selling myself.  
-- Best path to earn trust on a team quickly while being transparent about student-level gaps.  
-- Which senior mentors to shadow for “calm under pressure” in production environments.  
-- How to measure whether my “service mindset” actually reduces incident friction on a team.
+- Keep a weekly debug log.
+- Pick one habit to improve each month.
+- Ask for feedback on your notes.
 
-## Where I still need mentorship
+## Related links
 
-- Deep CS topics (algorithms, distributed systems).  
-- Running real on-call rotations with customers on the line.  
-- Leading cross-functional engineering projects (beyond student teams).  
-- Translating empathy into scalable processes (incident response, accessibility reviews, documentation ops).
+- https://bradleymatera.dev/
 
-## Takeaways for other career-changers
+## Final CTA
 
-- Catalog your previous playbooks. You probably already know how to triage, document, and communicate—just reframe it.  
-- Stay honest about gaps. I say “student-level” every chance I get so expectations match reality.  
-- Keep serving. Whether it’s open-source docs, study groups, or honest portfolios, the service mindset still applies.
+If you want my note template, ask and I will share it.
