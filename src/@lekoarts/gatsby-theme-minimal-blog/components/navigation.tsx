@@ -124,7 +124,9 @@ const Navigation = ({
 
     const hiddenPostSlugs = new Set([
       "/making-triangle-webgpu-demo-match-reality",
+      "/making-triangle-webgpu-demo-match-reality/",
       "/rebuilt-webgpu-triangle-demo",
+      "/rebuilt-webgpu-triangle-demo/",
     ]);
     const posts = (data.allPost.nodes as PostNode[]).filter((post) =>
       !hiddenPostSlugs.has(post.slug) &&

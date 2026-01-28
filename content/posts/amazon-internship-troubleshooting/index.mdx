@@ -1,112 +1,117 @@
 ---
-title: "AWS Cloud Support Internship Notes: What I Practiced and What I Did Not"
+title: "AWS Cloud Support Internship: Lab Notes and Capstone Walkthrough"
 date: "2025-08-01"
 slug: "/aws-cloud-support-internship-mastering-troubleshooting-and-architecture"
-tags: ["aws", "internship", "cloud-support", "devops"]
-description: "A lab-only summary of what I practiced during my AWS support internship and what remains out of scope."
+tags: ["aws", "cloud-support", "internship", "devops"]
+description: "A lab only walkthrough of the AWS support internship work, including the capstone outline."
 theme: "Cloud & DevOps"
 ---
 
-This was a lab-heavy internship. No production ownership. No customer data.
+This post covers lab work, not production support.
 
-I kept notes and checklists for each lab. This post is the clean summary of what I actually touched.
+I worked in training environments with mock tickets and labs.
 
-You will get the weekly structure, the capstone outline, and the exact gaps I still have.
+You will learn the structure, the capstone flow, and how I documented it.
 
-## Table of contents
+If you want a realistic view of what the internship covered, this is it.
 
-- [The promise](#the-promise)
-- [What the program looked like](#what-the-program-looked-like)
-- [Troubleshooting drills](#troubleshooting-drills)
-- [Capstone overview](#capstone-overview)
-- [How to apply this](#how-to-apply-this)
-- [Common mistakes](#common-mistakes)
-- [Next steps](#next-steps)
+## What this is
 
-## The promise
+High level, this is a summary of lab exercises and a capstone build.
 
-This post gives you:
+Low level, it is a set of steps and checks that match what I practiced.
 
-- a realistic picture of lab work
-- a clear capstone summary
-- a short checklist you can reuse
+Key terms:
 
-> "I document the lab, not a fantasy."
+- **Lab**: a safe environment with guided tasks and no customer data.
+- **Capstone**: a small project that ties together multiple services.
+- **Mock ticket**: a simulated issue used to practice troubleshooting.
 
-## What the program looked like
+## What you need
 
-- 12 weeks of labs and mock tickets
-- certification prep and architecture reviews
-- weekly retros with mentors
+- An AWS account in a sandbox or lab.
+- AWS CLI and basic IAM access.
+- A text editor for notes.
 
-I did not own production accounts. I did not handle live customer tickets.
+Docs used:
 
-## Troubleshooting drills
+- https://docs.aws.amazon.com/lambda/
+- https://docs.aws.amazon.com/dynamodb/
+- https://docs.aws.amazon.com/s3/
 
-I ran lab exercises for:
+## Start to finish
 
-- EC2 boot issues
-- VPC reachability
-- S3 access errors
-- CloudWatch log floods
+1) Set up the lab account.
 
-### Example note format
+Why: You need a safe space to practice without real data.
+
+2) Create an S3 bucket for uploads.
+
+Why: The capstone ingests files from S3.
+
+3) Create a Lambda function that reads metadata.
+
+Why: Lambda does the extraction work.
+
+4) Store results in DynamoDB.
+
+Why: The metadata needs a simple queryable store.
+
+5) Build a basic Amplify UI.
+
+Why: The UI is for internal review, not a public app.
+
+6) Document costs.
+
+Why: The capstone includes a basic cost model.
+
+### Example resource sketch
 
 ```text
-Symptom:
-Impact:
-Signals checked:
-Fix applied:
-What I will change next time:
+S3 upload -> Lambda -> DynamoDB -> Amplify UI
 ```
 
-## Capstone overview
+## Verify it worked
 
-Capstone scope was a metadata extraction workflow in AWS sandbox accounts.
+- Upload a test file to S3.
+- Confirm a DynamoDB item is created.
+- Load the Amplify UI and read the metadata.
 
-- S3 uploads trigger Lambda
-- Lambda writes metadata to DynamoDB
-- Amplify hosts a simple review UI
-- Cost model estimates storage and transfer
+If you see no DynamoDB items, check the Lambda logs in CloudWatch.
 
-No external users depended on it.
+## Common mistakes
 
-## CTA: Open the lab notes
+- **Symptom**: Lambda runs but writes nothing.
+  **Cause**: Missing DynamoDB permissions.
+  **Fix**: Add an IAM policy that allows PutItem.
 
-- https://github.com/BradleyMatera/learning-journal
+- **Symptom**: UI shows empty data.
+  **Cause**: Wrong table name or region.
+  **Fix**: Check environment variables in the UI config.
 
-## Now do it your way
+- **Symptom**: Costs are unclear.
+  **Cause**: No inputs recorded.
+  **Fix**: Log request counts and storage size before estimating.
 
-### Steps
+## Cheat sheet
 
-1. Pick one AWS lab and run it end to end.
-2. Write a short checklist.
-3. Build a tiny capstone that uses two services.
-
-### Common mistakes
-
-- Saying you own production when you do not.
-- Skipping cost notes in labs.
-- Writing vague notes that you cannot repeat.
-
-## Quick checklist
-
-- [ ] Lab scope is clear
-- [ ] Notes include steps and outcomes
-- [ ] Capstone is safe and small
+- Use a sandbox account.
+- Keep the capstone small.
+- Write a short note for each lab.
+- Verify each service step.
 
 ## Next steps
 
-- Expand the cost model with real unit inputs.
-- Add a second lab that uses IAM policies.
-- Write a one page capstone summary.
+- Add a second test file type.
+- Add simple error handling.
+- Expand the cost model inputs.
 
-## Related links
+Related links:
 
-- https://aws.amazon.com/training/
-- https://docs.aws.amazon.com/lambda/
-- https://docs.aws.amazon.com/dynamodb/
+- https://docs.aws.amazon.com/lambda/latest/dg/welcome.html
+- https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html
+- https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html
 
-## Final CTA
+Final CTA:
 
-If you want the capstone outline I used, ask and I will share it.
+If you want the capstone outline in plain text, ask and I will share it.

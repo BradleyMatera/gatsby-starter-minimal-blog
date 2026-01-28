@@ -1,49 +1,61 @@
 ---
-title: "Cloud-Ready Web Demos: A Practical Pre-Launch Checklist"
+title: "Cloud Ready Demos: A Full Pre-Launch Guide"
 date: "2025-06-22"
 slug: "/cloud-ready-web-experiences"
 tags: ["web-development", "accessibility", "process"]
-description: "A simple checklist I run before I ship a public demo."
+description: "A full pre-launch guide for small public demos."
 theme: "Front-End & Full-Stack"
 ---
 
-I ship small public demos. I treat them like products.
+Public demos can look polished and still be honest.
 
-This post is the short checklist I use before I publish. It is not enterprise. It is just honest.
+This post shows a full pre-launch workflow with setup, checks, and clean notes.
 
-You will get the steps, the mistakes, and a template you can reuse.
+You will get the full sequence from setup to verification.
 
-## The promise
+If you ship demos, this is for you.
 
-By the end, you will have:
+## What this is
 
-- a pre-launch checklist
-- a list of common mistakes
-- a simple way to document limits
+High level, this is a pre-launch checklist for small demo sites.
 
-> "A demo is fine. A demo without notes is a trap."
+Low level, it is a set of steps with verification and cleanup.
 
-## The checklist I run
+Key terms:
 
-### Accessibility
+- **Demo**: a public project that proves a feature without full production scope.
+- **Checklist**: a short list of checks you run before publishing.
+- **Reality snapshot**: a short section that lists limits and gaps.
 
-- Keyboard focus visible
-- Color contrast checked
-- Headings in order
+## What you need
 
-### Reliability
+- A deployed demo link.
+- A README you can edit.
+- A browser for checks.
 
-- One basic smoke check
-- Clear error states
-- Links verified
+## Start to finish
 
-### Honesty
+1) Review the main flow.
 
-- Limitations written down
-- Missing features listed
-- Tech stack is accurate
+Why: You need the core experience to work before polish.
 
-### Example note section
+2) Check accessibility.
+
+Why: A demo should still be usable.
+
+3) Check links and errors.
+
+Why: Broken links kill trust fast.
+
+4) Add a reality snapshot.
+
+Why: You must list limits clearly.
+
+5) Re-test after edits.
+
+Why: Changes can break working flows.
+
+### Example reality snapshot
 
 ```md
 ## Reality snapshot
@@ -52,42 +64,45 @@ By the end, you will have:
 - What is planned
 ```
 
-## CTA: Copy the checklist
+## Verify it worked
 
-- https://github.com/BradleyMatera/learning-journal
+- The demo loads in a private window.
+- Keyboard navigation works on key buttons.
+- The reality snapshot matches the demo.
 
-## Now do it your way
+If a link fails, fix it before sharing.
 
-### Steps
+## Common mistakes
 
-1. Pick one demo.
-2. Run the checklist.
-3. Write the reality snapshot.
-4. Ship the update.
+- **Symptom**: Users report broken links.
+  **Cause**: Links not checked after deploy.
+  **Fix**: Click every link before publishing.
 
-### Common mistakes
+- **Symptom**: Accessibility regressions.
+  **Cause**: New styles without contrast checks.
+  **Fix**: Run a quick contrast review.
 
-- Saying a demo is production-ready.
-- Leaving broken links on the page.
-- Hiding limits in the README only.
+- **Symptom**: Confusing scope.
+  **Cause**: No limits listed.
+  **Fix**: Add a reality snapshot.
 
-## Quick checklist
+## Cheat sheet
 
-- [ ] Focus and contrast checked
-- [ ] Errors tested
-- [ ] Limits written down
+- Test the main flow.
+- Check accessibility.
+- Fix links and errors.
+- Write a reality snapshot.
 
 ## Next steps
 
-- Add a short reality snapshot to each demo.
-- Create one smoke check script.
-- Re-check links before sharing.
+- Add a small checklist to each demo README.
+- Re-run the checklist before every share.
 
-## Related links
+Related links:
 
-- https://www.w3.org/WAI/standards-guidelines/wcag/
 - https://developer.mozilla.org/docs/Web/Accessibility
+- https://www.w3.org/WAI/standards-guidelines/wcag/
 
-## Final CTA
+Final CTA:
 
-If you want my checklist template, ask and I will share it.
+If you want my checklist, ask and I will share it.

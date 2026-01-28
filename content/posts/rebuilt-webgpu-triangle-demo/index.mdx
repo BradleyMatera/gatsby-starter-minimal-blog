@@ -1,14 +1,104 @@
 ---
-title: "WebGPU Triangle Demo: The Combined Guide"
-date: "2025-07-22"
+title: "Rebuilding a WebGPU Triangle Demo: Full Debug Guide"
+date: "2025-05-02"
 slug: "/rebuilt-webgpu-triangle-demo"
 tags: ["webgpu", "graphics", "learning"]
-description: "This post has been merged into the main WebGPU triangle guide."
+description: "A full debug walkthrough for rebuilding a WebGPU triangle demo."
 theme: "Graphics"
 ---
 
-This post has been merged into the main guide to avoid repetition.
+This post is a full rebuild guide for a small WebGPU demo.
 
-Read the combined version here:
+It focuses on the fixes that made the demo stable.
 
-- /webgpu-getting-started
+You will get the steps, verification, and common mistakes.
+
+If you are debugging a WebGPU demo, this is for you.
+
+## What this is
+
+High level, this is a rebuild process for a small GPU demo.
+
+Low level, it is a set of fixes with verification checks.
+
+Key terms:
+
+- **Render loop**: the function that redraws each frame.
+- **Pipeline**: the GPU setup for a draw call.
+- **Shader**: the GPU program that controls drawing.
+
+## What you need
+
+- A working WebGPU setup.
+- A simple triangle demo.
+- A browser with WebGPU support.
+
+Docs used:
+
+- https://developer.chrome.com/docs/web-platform/webgpu/
+
+## Start to finish
+
+1) Start from the smallest triangle.
+
+Why: You need a baseline.
+
+2) Replace one part at a time.
+
+Why: You need to isolate changes.
+
+3) Log errors after each change.
+
+Why: WebGPU errors are easy to miss.
+
+### Example render loop
+
+```js
+function frame() {
+  // update
+  // draw
+  requestAnimationFrame(frame);
+}
+```
+
+## Verify it worked
+
+- The triangle renders.
+- No WebGPU errors in the console.
+- The demo stays stable for 30 seconds.
+
+If it fails, revert one change at a time.
+
+## Common mistakes
+
+- **Symptom**: Nothing renders.
+  **Cause**: Pipeline or shader mismatch.
+  **Fix**: Check shader inputs and pipeline layout.
+
+- **Symptom**: Flicker or crash.
+  **Cause**: Render loop errors.
+  **Fix**: Simplify the loop.
+
+- **Symptom**: Random errors.
+  **Cause**: Changes in too many files.
+  **Fix**: Change one file at a time.
+
+## Cheat sheet
+
+- Start with a minimal triangle.
+- Change one piece at a time.
+- Verify after each change.
+
+## Next steps
+
+- Add a color toggle.
+- Add a resize handler.
+
+Related links:
+
+- https://bradleymatera.github.io/TriangleDemo/
+- https://github.com/BradleyMatera/TriangleDemo
+
+Final CTA:
+
+If you want my debug notes, ask and I will share them.

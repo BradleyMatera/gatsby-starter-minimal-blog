@@ -1,33 +1,68 @@
 ---
-title: "AWS Free Tier Guide: A Honest Lab Budget Plan"
+title: "AWS Free Tier: A Step by Step Lab Budget Guide"
 date: "2025-09-12"
 slug: "/aws-free-tier-honest-guide"
 tags: ["aws", "cost-management", "learning"]
-description: "A simple, lab-first plan to avoid surprise AWS costs."
+description: "A full lab budget workflow that keeps AWS costs visible and small."
 theme: "Cloud & DevOps"
 ---
 
-AWS free tier is useful, but it is not magic.
+AWS free tier is useful, but it is not a shield.
 
-This post shows a simple budget plan I use for labs. It keeps costs visible and small.
+This post shows the exact steps I use to keep lab costs under control.
 
-You will get a checklist, a cost math example, and the common mistakes I made.
+You will set alerts, track usage, and clean up safely.
 
-## The promise
+If you run labs, this is for you.
 
-By the end, you will:
+## What this is
 
-- know what to watch
-- log costs in a simple way
-- avoid common free-tier traps
+High level, this is a cost control workflow for labs.
 
-> "If the cost is unclear, the lab is not done."
+Low level, it is a checklist with alerts, usage notes, and cleanup steps.
 
-## Start with a tiny budget
+Key terms:
 
-Set a small limit for your lab month. I use a small number and treat it as a hard cap.
+- **Free tier**: limited AWS usage that does not cost money within specific limits.
+- **Budget alert**: a notification when spend crosses a set amount.
+- **Cleanup**: deleting resources so they do not keep billing.
 
-If you are not sure, set it lower. You can always raise it later.
+## What you need
+
+- An AWS account.
+- Access to Billing and Cost Management.
+- A small monthly lab budget.
+
+Docs used:
+
+- https://aws.amazon.com/free/
+- https://docs.aws.amazon.com/cost-management/
+
+## Start to finish
+
+1) Set a budget alert.
+
+Why: You need an early warning before spend grows.
+
+2) Pick one service for your lab.
+
+Why: Fewer services means easier tracking.
+
+3) Log your expected usage.
+
+Why: You need a baseline for cost math.
+
+4) Run the lab.
+
+Why: You need real usage data.
+
+5) Record actual usage.
+
+Why: You need to compare expected vs actual.
+
+6) Clean up the resources.
+
+Why: Idle resources keep billing.
 
 ### Example cost math
 
@@ -37,48 +72,46 @@ Request cost = requests * price_per_request
 Total = storage + request cost
 ```
 
-## How I track it
+## Verify it worked
 
-- A simple note with service, usage, and price.
-- A weekly check of the billing page.
-- A short summary in my lab notes.
+- The budget alert exists.
+- Usage numbers are in your notes.
+- The resources are deleted.
 
-### Quick checklist
+If you still see charges, check for hidden resources like snapshots.
 
-- [ ] Budget alert set
-- [ ] Usage note updated weekly
-- [ ] Delete unused resources
+## Common mistakes
 
-## CTA: Open the notes template
+- **Symptom**: Unexpected charges.
+  **Cause**: Resources left running.
+  **Fix**: Delete and confirm in the console.
 
-- https://github.com/BradleyMatera/learning-journal
+- **Symptom**: No alert emails.
+  **Cause**: Budget alert not configured.
+  **Fix**: Create the alert and test it.
 
-## Now do it your way
+- **Symptom**: Costs are unclear.
+  **Cause**: No usage notes.
+  **Fix**: Log usage right after the lab.
 
-### Steps
+## Cheat sheet
 
-1. Pick one service for a lab.
-2. Write the usage you expect.
-3. Set an alert below your cap.
-4. Clean up on the same day.
-
-### Common mistakes
-
-- Leaving resources running.
-- Forgetting data transfer costs.
-- Relying on free tier without checking the clock.
+- Set a budget alert first.
+- Keep labs small.
+- Record usage and costs.
+- Clean up the same day.
 
 ## Next steps
 
-- Add a cleanup checklist to your lab notes.
-- Review costs at the end of the week.
-- Repeat with a second service.
+- Add a short cleanup checklist to your notes.
+- Try a second lab with a new service.
+- Keep the budget number visible.
 
-## Related links
+Related links:
 
 - https://aws.amazon.com/free/
 - https://docs.aws.amazon.com/cost-management/
 
-## Final CTA
+Final CTA:
 
-If you want my lab budget template, ask me and I will share it.
+If you want my budget note template, ask and I will share it.

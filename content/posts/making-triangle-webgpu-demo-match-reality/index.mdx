@@ -1,14 +1,103 @@
 ---
-title: "WebGPU Triangle Demo: The Combined Guide"
+title: "WebGPU Demo Honesty Audit: Full Step by Step"
 date: "2025-07-22"
 slug: "/making-triangle-webgpu-demo-match-reality"
 tags: ["webgpu", "graphics", "debugging"]
-description: "This post has been merged into the main WebGPU triangle guide."
+description: "A complete audit process for making a WebGPU write-up match the repo."
 theme: "Graphics"
 ---
 
-This post has been merged into the main guide to avoid repetition.
+This post is about honesty, not extra features.
 
-Read the combined version here:
+I use this process to make sure a WebGPU write-up matches the repo.
 
-- /webgpu-getting-started
+You will get the audit steps, checks, and common mistakes.
+
+If you publish demos, this is for you.
+
+## What this is
+
+High level, this is a documentation audit.
+
+Low level, it is a line-by-line check of claims versus code.
+
+Key terms:
+
+- **Claim**: a statement about a feature or result.
+- **Proof link**: a repo file or demo URL.
+- **Audit**: verifying every claim against evidence.
+
+## What you need
+
+- The demo repo.
+- The demo link.
+- The post draft.
+
+## Start to finish
+
+1) List every claim in the post.
+
+Why: You need a clear inventory.
+
+2) Match each claim to a file.
+
+Why: Every claim should have evidence.
+
+3) Remove anything you cannot prove.
+
+Why: Unverified claims damage trust.
+
+4) Add a limits section.
+
+Why: Limits make the scope clear.
+
+### Example limits block
+
+```md
+## Limits
+- No performance benchmarks
+- No advanced shading
+```
+
+## Verify it worked
+
+- Every claim maps to a file or demo.
+- The limits are clear and visible.
+- The post matches the code.
+
+If a claim has no proof, remove it.
+
+## Common mistakes
+
+- **Symptom**: Post feels inflated.
+  **Cause**: Old claims left in.
+  **Fix**: Re-audit after each refactor.
+
+- **Symptom**: Demo lacks proof links.
+  **Cause**: Links not added.
+  **Fix**: Add direct repo paths.
+
+- **Symptom**: Limits missing.
+  **Cause**: Skipping scope notes.
+  **Fix**: Add a limits section.
+
+## Cheat sheet
+
+- List claims.
+- Match to code.
+- Remove unproven lines.
+- Add limits.
+
+## Next steps
+
+- Audit one demo post today.
+- Add proof links where missing.
+
+Related links:
+
+- https://github.com/BradleyMatera/TriangleDemo
+- https://bradleymatera.github.io/TriangleDemo/
+
+Final CTA:
+
+If you want a second set of eyes on a post, ask me.

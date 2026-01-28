@@ -1,35 +1,79 @@
 ---
-title: "Containerization and Orchestration: What I Practiced in Labs"
+title: "Containerization and Orchestration Labs: Full Walkthrough"
 date: "2025-07-15"
 slug: "/containerization-and-orchestration"
 tags: ["docker", "containerization", "devops"]
-description: "A lab-only summary of how I practice containers without claiming production ownership."
+description: "A full lab guide for container basics with clear steps and verification."
 theme: "Cloud & DevOps"
 ---
 
-This is lab work and personal experiments. No production containers.
+This is a lab guide, not a production guide.
 
-I use containers to learn reproducible builds and basic orchestration ideas. That is the scope.
+I use containers to learn reproducible builds and small service wiring.
 
-You will get the exact steps I use and the mistakes I watch for.
+You will build, run, verify, and clean up a tiny stack.
 
-## The promise
+If you are new to Docker, this is for you.
 
-You will learn:
+## What this is
 
-- a simple container workflow
-- how I document each lab
-- what I am still not doing
+High level, containers package an app with its dependencies.
 
-> "If it does not run on my machine twice, it is not documented."
+Low level, a Dockerfile builds an image and Docker Compose runs services together.
 
-## What I actually do
+Key terms:
 
-- Build small images
-- Run a local compose stack
-- Write short notes
+- **Image**: a snapshot of an app and its dependencies.
+- **Container**: a running instance of an image.
+- **Compose**: a YAML file that runs multiple containers.
 
-### Example docker-compose snippet
+## What you need
+
+- Docker Desktop installed.
+- A simple app folder.
+- A terminal.
+
+Docs used:
+
+- https://docs.docker.com/get-started/
+- https://docs.docker.com/compose/
+
+## Start to finish
+
+1) Create a Dockerfile.
+
+Why: The Dockerfile tells Docker how to build your image.
+
+Example:
+
+```Dockerfile
+FROM node:20-alpine
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci
+COPY . .
+CMD ["npm", "run", "start"]
+```
+
+2) Build the image.
+
+Why: You need a built image before you can run it.
+
+```bash
+docker build -t demo-app .
+```
+
+3) Run the container.
+
+Why: This proves the image works.
+
+```bash
+docker run -p 3000:3000 demo-app
+```
+
+4) Add Compose if you need a database.
+
+Why: Compose makes multi-service setups simple.
 
 ```yaml
 services:
@@ -43,42 +87,65 @@ services:
       POSTGRES_PASSWORD: example
 ```
 
-## CTA: Open the lab notes
+5) Run Compose.
 
-- https://github.com/BradleyMatera/learning-journal
+```bash
+docker compose up
+```
 
-## Now do it your way
+6) Clean up.
 
-### Steps
+Why: Stopping containers avoids accidental costs and clutter.
 
-1. Pick one small app.
-2. Write a Dockerfile.
-3. Add a compose file if you need a DB.
-4. Write a short note about what broke.
+```bash
+docker compose down
+```
 
-### Common mistakes
+## Verify it worked
 
-- Forgetting to document env vars.
-- Mixing dev and prod ports.
-- Leaving containers running.
+- You can reach the app at http://localhost:3000
+- Containers show as running in Docker Desktop
+- Logs show the app started without errors
 
-## Quick checklist
+If the container exits, check the logs:
 
-- [ ] Dockerfile builds
-- [ ] Compose runs
-- [ ] Notes written
+```bash
+docker logs <container-id>
+```
+
+## Common mistakes
+
+- **Symptom**: Build fails on npm install.
+  **Cause**: Missing package-lock.json.
+  **Fix**: Copy it into the image or use npm install.
+
+- **Symptom**: Port not reachable.
+  **Cause**: Port mapping missing.
+  **Fix**: Use -p 3000:3000 in docker run.
+
+- **Symptom**: Compose fails.
+  **Cause**: YAML indentation errors.
+  **Fix**: Re-check spaces and alignment.
+
+## Cheat sheet
+
+- Dockerfile builds the image.
+- docker build creates the image.
+- docker run starts one container.
+- docker compose runs multiple services.
+- docker compose down stops them.
 
 ## Next steps
 
 - Add a health check route.
-- Log one failure and the fix.
-- Keep the stack small.
+- Add a small .env file and load it.
+- Write short notes for the lab.
 
-## Related links
+Related links:
 
+- https://docs.docker.com/get-started/
 - https://docs.docker.com/compose/
-- https://docs.docker.com/build/
 
-## Final CTA
+Final CTA:
 
-If you want my compose template, ask and I will share it.
+If you want a starter Dockerfile, ask and I will share it.

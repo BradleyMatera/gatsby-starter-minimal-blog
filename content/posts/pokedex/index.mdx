@@ -1,77 +1,114 @@
 ---
-title: "Interactive Pokédex: Static Data, Real UX"
+title: "Interactive Pokedex Demo: Full Build Walkthrough"
 date: "2025-06-18"
 slug: "/interactive-pokedex"
 tags: ["next-js", "react", "web-development"]
-description: "A concise case study for a static Pokédex demo with client-side search."
+description: "A complete tutorial for a static Pokedex demo with search and detail pages."
 theme: "Front-End & Full-Stack"
 ---
 
-This is a static demo built to practice search and data loading.
+This is a static demo built to practice data loading and search.
 
-There is no backend. It ships as a static site.
+There is no backend. The data is loaded at build time.
 
-You will get the structure, a small snippet, and the checklist I follow.
+You will build the list, add search, and verify the result.
 
-## The promise
+If you want a full static demo guide, this is for you.
 
-You will learn:
+## What this is
 
-- how the data loads
-- how search is handled
-- how I document limits
+High level, this is a static site that lists Pokemon and supports search.
 
-> "If the data is static, say it."
+Low level, it uses a build-time fetch and client-side filtering.
 
-## What I built
+Key terms:
 
-- Static list of the first 151 Pokemon
-- Client-side search and filters
-- Detail pages
+- **Static site**: pages built ahead of time.
+- **Build-time fetch**: data loaded when you build, not at runtime.
+- **Client-side filter**: filtering in the browser.
 
-### Example data load pattern
+## What you need
+
+- Node.js 18 or later.
+- A Next.js project.
+- Access to the PokeAPI.
+
+Docs used:
+
+- https://nextjs.org/docs
+- https://pokeapi.co/
+
+## Start to finish
+
+1) Create a Next.js app.
+
+Why: You need a clean app skeleton.
+
+```bash
+npx create-next-app@latest pokedex
+cd pokedex
+```
+
+2) Fetch data at build time.
+
+Why: The list is static.
 
 ```js
-// example only
 const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151");
 const data = await res.json();
 ```
 
-## CTA: Open the demo
+3) Render the list.
 
-- https://bradleymatera.github.io/Interactive-Pokedex/
+Why: You need a visible grid of items.
 
-## Now do it your way
+4) Add client-side search.
 
-### Steps
+Why: Search happens in the browser.
 
-1. Fetch a small dataset.
-2. Build a search input.
-3. Add a detail view.
+5) Add a detail page.
 
-### Common mistakes
+Why: Users need a single item view.
 
-- Claiming a backend that does not exist.
-- Ignoring loading states.
-- Forgetting empty search results.
+## Verify it worked
 
-## Quick checklist
+- The list shows 151 items.
+- Search filters results.
+- A detail page renders.
 
-- [ ] Data load works
-- [ ] Search handles empty state
-- [ ] Limits are written down
+If the list is empty, check the fetch call and build logs.
+
+## Common mistakes
+
+- **Symptom**: API fetch fails.
+  **Cause**: Network errors or rate limits.
+  **Fix**: Retry or cache data.
+
+- **Symptom**: Search is slow.
+  **Cause**: Filtering on every keystroke without debounce.
+  **Fix**: Add a small debounce.
+
+- **Symptom**: Detail page 404.
+  **Cause**: Missing dynamic route.
+  **Fix**: Create the correct route file.
+
+## Cheat sheet
+
+- Build-time fetch for the list.
+- Client-side filter for search.
+- Detail page for one item.
 
 ## Next steps
 
 - Add type filters.
-- Add a small loading skeleton.
-- Document data source.
+- Add loading skeletons.
+- Document the data source in README.
 
-## Related links
+Related links:
 
 - https://pokeapi.co/
-- https://github.com/BradleyMatera/Interactive-Pokedex
+- https://nextjs.org/docs
 
-## Final CTA
+Final CTA:
 
-If you want the notes for this demo, ask and I will share them.
+If you want a quick code review of your Pokedex demo, ask and I will help.

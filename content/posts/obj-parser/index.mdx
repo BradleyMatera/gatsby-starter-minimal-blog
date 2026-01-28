@@ -1,75 +1,115 @@
 ---
-title: "OBJ Parser Notes: A Small Systems Exercise"
+title: "OBJ Parser Lab: Full Walkthrough"
 date: "2025-02-22"
 slug: "/obj-parser"
 tags: ["zig", "parsing", "systems"]
-description: "A short write-up on a small OBJ parser and the lessons it taught me."
+description: "A complete lab guide for parsing OBJ files with clear steps and verification."
 theme: "Systems"
 ---
 
-This is a small parser exercise. It is not production code.
+This is a small parsing lab. It is not production code.
 
-I wrote this post to capture the logic and the mistakes while I built it.
+I built it to learn parsing, errors, and data validation.
 
-You will get a short summary, a snippet, and a checklist.
+You will get the full steps and checks.
 
-## The promise
+If you want a simple systems exercise, this is for you.
 
-You will learn:
+## What this is
 
-- the parsing approach I used
-- how I logged errors
-- what I would change next
+High level, this is a parser that turns text lines into data structures.
 
-> "Small parsers teach big lessons."
+Low level, it is a line reader plus token parsing and validation.
 
-## The approach
+Key terms:
 
-I kept parsing strict and logging simple. That made bugs obvious.
+- **OBJ**: a text format for 3D geometry.
+- **Token**: a value parsed from a line.
+- **Validation**: checks that the parsed data is correct.
 
-### Example parse loop
+## What you need
 
-```zig
-while (try reader.readUntilDelimiterOrEofAlloc(allocator, '\n', 2048)) |line| {
-    if (line.len == 0) continue;
-    // parse by prefix
-}
+- Zig 0.13.x installed.
+- A small OBJ file.
+- A terminal.
+
+Docs used:
+
+- https://ziglang.org/documentation/0.13.0/
+- https://en.wikipedia.org/wiki/Wavefront_.obj_file
+
+## Start to finish
+
+1) Create a Zig project.
+
+Why: You need a clean place to test parsing.
+
+```bash
+mkdir obj-parser && cd obj-parser
+zig init
 ```
 
-## CTA: Open the repo
+2) Read the file line by line.
 
-- https://github.com/BradleyMatera/OBJ-Parser
+Why: OBJ is line-based.
 
-## Now do it your way
+```zig
+const line = try reader.readUntilDelimiterOrEofAlloc(allocator, '\n', 2048);
+```
 
-### Steps
+3) Parse vertex lines.
 
-1. Pick one format.
-2. Parse one line type.
-3. Write one error test.
+Why: Vertices are the core data.
 
-### Common mistakes
+4) Count faces.
 
-- Allowing silent failures.
-- Ignoring memory usage.
-- Skipping tiny test files.
+Why: Face counts verify the file.
 
-## Quick checklist
+## Verify it worked
 
-- [ ] One token parsed
-- [ ] One error case tested
-- [ ] Notes written
+- Print vertex and face counts.
+- Compare against the file.
+
+Example output:
+
+```text
+vertices: 8
+faces: 12
+```
+
+If counts are off, log the first failing line.
+
+## Common mistakes
+
+- **Symptom**: Crash on large files.
+  **Cause**: Buffer too small.
+  **Fix**: Increase the read buffer.
+
+- **Symptom**: Wrong counts.
+  **Cause**: Blank lines not skipped.
+  **Fix**: Skip empty lines.
+
+- **Symptom**: Float parse errors.
+  **Cause**: Extra spaces.
+  **Fix**: Trim and split on whitespace.
+
+## Cheat sheet
+
+- Read line by line.
+- Parse tokens carefully.
+- Log errors early.
+- Verify counts.
 
 ## Next steps
 
-- Add benchmarks.
-- Add a file size guard.
-- Document edge cases.
+- Add unit tests for bad lines.
+- Add benchmarks for big files.
 
-## Related links
+Related links:
 
+- https://ziglang.org/documentation/0.13.0/
 - https://en.wikipedia.org/wiki/Wavefront_.obj_file
 
-## Final CTA
+Final CTA:
 
-If you want the test files, ask and I will share them.
+If you want my test files, ask and I will share them.

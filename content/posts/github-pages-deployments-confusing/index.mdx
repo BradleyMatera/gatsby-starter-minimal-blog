@@ -1,36 +1,55 @@
 ---
-title: "GitHub Pages Deployments: The One Setting That Broke My Site"
+title: "GitHub Pages Deployments: Full Fix for Base Path Bugs"
 date: "2025-05-05"
 slug: "/github-pages-deployments-confusing"
 tags: ["github", "deployment", "web-development"]
-description: "A short fix for the most common GitHub Pages deploy mistake I made."
+description: "A complete fix guide for the most common GitHub Pages base path mistake."
 theme: "Front-End & Full-Stack"
 ---
 
-My GitHub Pages demo broke after deploy. The code was fine.
+GitHub Pages fails fast when the base path is wrong.
 
-The problem was one setting. This post shows the fix and the checklist I now follow.
+This post shows a full fix with setup, verification, and cleanup.
 
-You will get the exact steps and a short list of mistakes to avoid.
+You will get the exact steps and a checklist you can reuse.
 
-## The promise
+If your Pages site breaks after deploy, this is for you.
 
-You will learn:
+## What this is
 
-- which Pages setting matters most
-- how to verify the deploy
-- how to avoid stale assets
+High level, Pages hosts static files under a repo path.
 
-> "If the URL is wrong, the deploy is wrong."
+Low level, your app needs a base path that matches the repo name.
 
-## The fix
+Key terms:
 
-I had the wrong base path for a project site.
+- **Base path**: the URL prefix for a repo site.
+- **Project site**: a Pages site served from a repo, not a custom domain.
+- **Deploy**: pushing a build output to Pages.
 
-### Example base path setup
+## What you need
+
+- A GitHub repo.
+- A built static site.
+- GitHub Pages enabled.
+
+Docs used:
+
+- https://docs.github.com/pages
+
+## Start to finish
+
+1) Confirm the repo name.
+
+Why: The base path must match it.
+
+2) Set the base path in your config.
+
+Why: Static assets must resolve to the repo path.
+
+Example `next.config.js`:
 
 ```js
-// next.config.js example
 const isProd = process.env.NODE_ENV === "production";
 
 module.exports = {
@@ -38,40 +57,55 @@ module.exports = {
 };
 ```
 
-## CTA: Open the demo
+3) Build the site.
 
-- https://bradleymatera.github.io/AnimalSounds/
+Why: You need the correct output for Pages.
 
-## Now do it your way
+```bash
+npm run build
+```
 
-### Steps
+4) Deploy to Pages.
 
-1. Confirm the repo name.
-2. Set the base path if needed.
-3. Rebuild and redeploy.
-4. Test the site in a private window.
+Why: The build output must be published.
 
-### Common mistakes
+## Verify it worked
 
-- Leaving the base path blank.
-- Pushing without rebuilding.
-- Forgetting to clear stale service workers.
+- The home page loads.
+- Assets load without 404s.
+- Links work in a private window.
 
-## Quick checklist
+If assets 404, the base path is still wrong.
 
-- [ ] Base path matches repo name
-- [ ] New build published
-- [ ] Live site tested
+## Common mistakes
+
+- **Symptom**: CSS and JS 404.
+  **Cause**: Missing base path.
+  **Fix**: Set base path and rebuild.
+
+- **Symptom**: Works locally, fails on Pages.
+  **Cause**: Using local root paths.
+  **Fix**: Use the repo path in config.
+
+- **Symptom**: Stale assets.
+  **Cause**: Cached service worker.
+  **Fix**: Unregister the service worker.
+
+## Cheat sheet
+
+- Base path must equal repo name.
+- Build before deploy.
+- Test in a private window.
 
 ## Next steps
 
-- Add a deploy note to your README.
+- Add a short deploy note to README.
 - Keep a small checklist in the repo.
 
-## Related links
+Related links:
 
 - https://docs.github.com/pages
 
-## Final CTA
+Final CTA:
 
-If you want my GitHub Pages notes, ask and I will share them.
+If you want a Pages checklist, ask and I will share it.

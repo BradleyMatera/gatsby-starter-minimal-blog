@@ -1,37 +1,47 @@
 ---
-title: "Designing Systems That Ship: A Simple Project Checklist"
+title: "Designing Systems That Ship: A Full Start to Finish Checklist"
 date: "2025-06-01"
 slug: "/designing-systems-that-actually-ship"
 tags: ["process", "projects", "web-development"]
-description: "A short checklist I use to move demos from idea to shipped code."
+description: "A complete project shipping workflow with setup, steps, and verification."
 theme: "Process"
 ---
 
-Shipping beats perfect.
+Shipping is a system, not a mood.
 
-This post is the simple checklist I use to move a demo from idea to live link. It is not fancy. It works.
+This post is a full workflow I use to move a demo from idea to link.
 
-You will get my structure, a code snippet, and the pitfalls I avoid.
+You will get the setup, the steps, and the checks.
 
-## The promise
+If you want a clear process, this is for you.
 
-You will leave with:
+## What this is
 
-- a clear shipping checklist
-- a way to document limits
-- a small template you can copy
+High level, this is a repeatable way to ship small software projects.
 
-> "I do not call it done until the notes are clear."
+Low level, it is a set of steps, files, and verification checks.
 
-## The checklist
+Key terms:
 
-1. Define the smallest demo.
-2. Write the folder map.
-3. Build the first working path.
-4. Add notes and links.
-5. Ship.
+- **Scope**: the smallest feature set you will ship.
+- **Proof link**: a repo or demo URL that shows the work.
+- **Reality snapshot**: a short list of limits and gaps.
 
-### Example folder map
+## What you need
+
+- A project idea.
+- A repo you can push to.
+- A place to host a demo.
+
+## Start to finish
+
+1) Write a one sentence scope.
+
+Why: Scope controls time and quality.
+
+2) Create the repo and file map.
+
+Why: You need a clean structure before you build.
 
 ```text
 /README.md
@@ -41,42 +51,64 @@ You will leave with:
 /notes
 ```
 
-## CTA: Copy the checklist
+3) Build the main flow.
 
-- https://github.com/BradleyMatera/learning-journal
+Why: A working flow proves the idea.
 
-## Now do it your way
+4) Add a README with limits.
 
-### Steps
+Why: You must write what is missing.
 
-1. Pick a single user flow.
-2. Build it end to end.
-3. Write a one page note.
-4. Publish the link.
+```md
+## Reality snapshot
+- What works
+- What is missing
+- What is planned
+```
 
-### Common mistakes
+5) Deploy and verify.
 
-- Starting with polish instead of function.
-- Writing long docs before code exists.
-- Hiding limits in your head.
+Why: A demo without a working link is not done.
 
-## Quick checklist
+## Verify it worked
 
-- [ ] One working flow
-- [ ] README updated
-- [ ] Notes include limits
+- The demo loads in a private window.
+- The main flow works end to end.
+- The README matches the code.
+
+If you cannot verify it, you cannot claim it.
+
+## Common mistakes
+
+- **Symptom**: The demo is live but broken.
+  **Cause**: No verification step.
+  **Fix**: Add a short verification checklist.
+
+- **Symptom**: Claims do not match code.
+  **Cause**: Notes are stale.
+  **Fix**: Update notes after each change.
+
+- **Symptom**: Scope explodes.
+  **Cause**: No one sentence goal.
+  **Fix**: Rewrite the scope and cut features.
+
+## Cheat sheet
+
+- Write the one sentence scope.
+- Build the main flow first.
+- Add a reality snapshot.
+- Verify the demo link.
 
 ## Next steps
 
-- Apply this to one current project.
-- Ship a small update by Friday.
-- Keep the checklist short.
+- Apply this to one demo this week.
+- Remove one unverified claim.
+- Add one proof link.
 
-## Related links
+Related links:
 
-- https://bradleymatera.dev/
-- https://github.com/BradleyMatera/learning-journal
+- https://bradleymatera.dev/projects/
 
-## Final CTA
+Final CTA:
 
-If you want my checklist template, ask and I will share it.
+If you want my project template, ask and I will share it.

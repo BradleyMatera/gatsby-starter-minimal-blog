@@ -1,35 +1,57 @@
 ---
-title: "Cognito + React Auth: A Lab Guide With Clear Limits"
+title: "Cognito + React Auth Lab: Full Setup and Verification"
 date: "2025-08-16"
 slug: "/secure-authentication-cognito-react"
 tags: ["aws", "authentication", "react", "security"]
-description: "A lab-first guide for wiring Cognito into a React demo without over-claiming."
+description: "A complete lab guide for wiring Cognito into a React demo with clear checks."
 theme: "Security"
 ---
 
-This is lab work, not a production system.
+This is a lab guide for a small React auth demo.
 
-I used Cognito to learn the auth flow and document the steps. That is the scope.
+It does not claim production ownership or enterprise setup.
 
-You will get a short setup, a checklist, and common mistakes.
+You will set up a user pool, wire it to React, and verify the flow.
 
-## The promise
+If you are new to Cognito, this is for you.
 
-You will learn:
+## What this is
 
-- the basic Cognito flow
-- how I document each step
-- where I stopped
+High level, Cognito manages user sign up and sign in.
 
-> "Auth is only real when the steps are repeatable."
+Low level, you create a user pool and connect it in your app config.
 
-## The basic flow
+Key terms:
 
-1. Create a user pool.
-2. Configure an app client.
-3. Wire it into the React UI.
+- **User pool**: Cognito’s user directory.
+- **App client**: a client id that your app uses to connect.
+- **Hosted UI**: Cognito’s optional login UI.
 
-### Example config shape
+## What you need
+
+- An AWS account.
+- A React app.
+- Basic AWS console access.
+
+Docs used:
+
+- https://docs.aws.amazon.com/cognito/
+
+## Start to finish
+
+1) Create a user pool.
+
+Why: The user pool is the core auth store.
+
+2) Create an app client.
+
+Why: Your app needs a client id to connect.
+
+3) Copy the pool and client IDs into your app config.
+
+Why: Your app needs to know where to authenticate.
+
+Example config:
 
 ```js
 export const authConfig = {
@@ -39,39 +61,52 @@ export const authConfig = {
 };
 ```
 
-## CTA: Open the notes
+4) Add a basic sign in screen.
 
-- https://github.com/BradleyMatera/learning-journal
+Why: You need a UI to test the flow.
 
-## Now do it your way
+5) Test sign up and sign in.
 
-### Steps
+Why: This verifies the pool works.
 
-1. Set up a user pool.
-2. Test sign up and sign in.
-3. Write a short notes file.
+## Verify it worked
 
-### Common mistakes
+- You can create a user.
+- You can sign in.
+- Tokens appear in your app logs.
 
-- Mixing region and pool ID.
-- Forgetting callback URLs.
-- Skipping logout testing.
+If sign in fails, check the app client and region.
 
-## Quick checklist
+## Common mistakes
 
-- [ ] Sign up works
-- [ ] Sign in works
-- [ ] Notes written
+- **Symptom**: Invalid client error.
+  **Cause**: Wrong client id.
+  **Fix**: Copy the correct id from AWS.
+
+- **Symptom**: Region mismatch.
+  **Cause**: Using the wrong region.
+  **Fix**: Set the correct region in config.
+
+- **Symptom**: Callback errors.
+  **Cause**: Missing callback URL.
+  **Fix**: Add the correct URL in Cognito.
+
+## Cheat sheet
+
+- Create user pool.
+- Create app client.
+- Configure app.
+- Test sign up and sign in.
 
 ## Next steps
 
 - Add MFA in a lab.
-- Add a small error state.
+- Add error states in UI.
 
-## Related links
+Related links:
 
 - https://docs.aws.amazon.com/cognito/
 
-## Final CTA
+Final CTA:
 
-If you want my setup notes, ask and I will share them.
+If you want my config checklist, ask and I will share it.

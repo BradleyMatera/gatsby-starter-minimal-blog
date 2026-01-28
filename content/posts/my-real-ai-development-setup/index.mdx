@@ -1,76 +1,104 @@
 ---
-title: "My Real AI Development Setup: Tools and Limits"
+title: "My Real AI Development Setup: Complete Workflow"
 date: "2025-09-05"
 slug: "/my-real-ai-development-setup"
 tags: ["ai", "tools", "productivity"]
-description: "A plain list of the AI tools I use and how I keep them honest."
+description: "A full workflow for using AI tools with clear verification steps."
 theme: "Process"
 ---
 
-Here is my real setup. It is not magical.
+This is my actual setup. It is simple and verifiable.
 
-I use AI for drafting, refactors, and summarizing. I still verify everything.
+I use AI for drafts and refactors, then verify everything.
 
-You will get the tool list, the guardrails, and a checklist.
+You will get the tool list, the steps, and the checks.
 
-## The promise
+If you use AI in your work, this is for you.
 
-You will learn:
+## What this is
 
-- which tools I use
-- how I verify outputs
-- what I avoid
+High level, this is a workflow for using AI as a helper.
 
-> "If I cannot verify it, I do not ship it."
+Low level, it is a set of prompts, checks, and edits.
 
-## My tool list
+Key terms:
 
-- ChatGPT for outlining and refactors
-- GitHub Copilot for small code suggestions
-- Local notes to track changes
+- **Prompt**: the input you give an AI tool.
+- **Verification**: checking output against docs and code.
+- **Change log**: a short record of what changed.
 
-### Example verification step
+## What you need
+
+- A text editor.
+- An AI tool like ChatGPT or Copilot.
+- The official docs for your stack.
+
+## Start to finish
+
+1) Define the task in one sentence.
+
+Why: Clear prompts reduce garbage output.
+
+2) Ask for a short plan, not full code.
+
+Why: Plans are easier to verify.
+
+3) Write the first version yourself.
+
+Why: You need to understand the code.
+
+4) Ask AI to refactor or clean up.
+
+Why: Refactors are safer than full rewrites.
+
+5) Verify against docs.
+
+Why: AI can be wrong.
+
+### Example prompt
 
 ```text
-Ask AI for a plan.
-Read the docs yourself.
-Apply only what you can explain.
+Give me a 5 step plan for this task. Keep it short and direct.
 ```
 
-## CTA: Open the notes
+## Verify it worked
 
-- https://github.com/BradleyMatera/learning-journal
+- The code runs locally.
+- The changes match the plan.
+- The docs support the approach.
 
-## Now do it your way
+If you cannot explain a line, remove it.
 
-### Steps
+## Common mistakes
 
-1. Pick one AI task you will allow.
-2. Define one task you will not allow.
-3. Keep a short change log.
+- **Symptom**: Code compiles but fails at runtime.
+  **Cause**: Skipped verification.
+  **Fix**: Test each change locally.
 
-### Common mistakes
+- **Symptom**: Overly complex output.
+  **Cause**: Prompt too broad.
+  **Fix**: Ask for a smaller plan.
 
-- Copying code you do not understand.
-- Letting AI define the scope.
-- Skipping the docs.
+- **Symptom**: Claims that are not true.
+  **Cause**: Copying AI text into docs.
+  **Fix**: Rewrite in your own words.
 
-## Quick checklist
+## Cheat sheet
 
-- [ ] Plan is clear
-- [ ] Docs checked
-- [ ] Changes logged
+- One sentence task.
+- Ask for a plan.
+- Write first version.
+- Verify with docs.
 
 ## Next steps
 
-- Write one AI usage rule.
-- Add it to your README.
-- Follow it for one week.
+- Add a short change log to your README.
+- Keep prompts short.
 
-## Related links
+Related links:
 
 - https://github.com/features/copilot
 
-## Final CTA
+Final CTA:
 
-If you want my AI guardrails list, ask me.
+If you want my prompt list, ask and I will share it.

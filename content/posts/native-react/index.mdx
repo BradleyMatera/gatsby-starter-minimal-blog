@@ -1,76 +1,106 @@
 ---
-title: "React Native Prototype: What Worked and What Did Not"
+title: "React Native Prototype: Full Start to Finish Lab"
 date: "2025-05-26"
 slug: "/native-react"
 tags: ["react", "mobile", "projects"]
-description: "A short reflection on a React Native prototype and the notes that kept it honest."
+description: "A complete lab guide for a small React Native prototype with clear checks."
 theme: "Front-End & Full-Stack"
 ---
 
-This was a prototype. It is not a shipped product.
+This is a prototype lab, not a shipped app.
 
-I wrote this post to document the learnings while they were fresh.
+I built it to learn the core flow and document the steps.
 
-You will get the key lessons, a checklist, and a small snippet.
+You will get setup, build, verify, and cleanup.
 
-## The promise
+If you are new to React Native, this is for you.
 
-You will learn:
+## What this is
 
-- what worked in the prototype
-- what broke
-- what I would do next
+High level, this is a mobile UI prototype using React Native.
 
-> "A prototype is useful only if the notes are clear."
+Low level, it is a project setup, one screen, and a basic navigation flow.
 
-## What I built
+Key terms:
 
-- A basic navigation flow
-- A small data view
-- A few UI components
+- **Metro**: the dev server for React Native.
+- **Expo**: a toolchain that simplifies React Native dev.
+- **Prototype**: a small build to test one idea.
 
-### Example component structure
+## What you need
 
-```text
-/components
-/screens
-/navigation
+- Node.js 18 or later.
+- Expo CLI installed.
+- A phone or emulator.
+
+Docs used:
+
+- https://docs.expo.dev/
+- https://reactnative.dev/docs/getting-started
+
+## Start to finish
+
+1) Create a new Expo app.
+
+Why: Expo handles setup fast.
+
+```bash
+npx create-expo-app my-prototype
+cd my-prototype
+npm start
 ```
 
-## CTA: Open the repo
+2) Build one screen.
 
-- https://github.com/BradleyMatera
+Why: You need a working UI to test.
 
-## Now do it your way
+3) Add one navigation route.
 
-### Steps
+Why: Navigation is the first real test.
 
-1. Build one screen.
-2. Add one list or form.
-3. Write one note about what broke.
+4) Run on a device.
 
-### Common mistakes
+Why: Mobile behavior is different from web.
 
-- Skipping device testing.
-- Ignoring performance warnings.
-- Overbuilding before the flow works.
+## Verify it worked
 
-## Quick checklist
+- The app runs on the device.
+- The screen renders without errors.
+- Navigation works in both directions.
 
-- [ ] One flow works
-- [ ] Notes written
-- [ ] Limits listed
+If it does not run, restart Metro and clear cache.
+
+## Common mistakes
+
+- **Symptom**: App fails to load.
+  **Cause**: Metro cache issues.
+  **Fix**: Restart with `expo start -c`.
+
+- **Symptom**: Navigation errors.
+  **Cause**: Missing navigation setup.
+  **Fix**: Follow the React Navigation docs.
+
+- **Symptom**: UI looks wrong on device.
+  **Cause**: Using web-only styles.
+  **Fix**: Use React Native style rules.
+
+## Cheat sheet
+
+- Use Expo for setup.
+- Build one screen first.
+- Test on a real device.
 
 ## Next steps
 
-- Add a real device test.
-- Keep scope small.
-- Update the notes.
+- Add a second screen.
+- Add a simple form.
+- Keep the prototype small.
 
-## Related links
+Related links:
 
+- https://docs.expo.dev/
 - https://reactnative.dev/docs/getting-started
 
-## Final CTA
+Final CTA:
 
-If you want the prototype notes, ask and I will share them.
+If you want a small React Native checklist, ask and I will share it.

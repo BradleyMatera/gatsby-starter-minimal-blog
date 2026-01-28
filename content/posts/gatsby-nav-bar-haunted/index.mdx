@@ -1,78 +1,116 @@
 ---
-title: "Gatsby Navbar Bug: How I Found the Real Cause"
+title: "Gatsby Navbar Bug: Full Debug Walkthrough"
 date: "2025-04-04"
 slug: "/gatsby-nav-bar-haunted"
 tags: ["gatsby", "debugging", "web-development"]
-description: "A short bug hunt that turned into a repeatable checklist."
+description: "A complete walkthrough of a Gatsby nav bug with steps, verification, and fixes."
 theme: "Front-End & Full-Stack"
 ---
 
-My navbar kept breaking after deploy. Locally it looked fine.
+My navbar broke after deploy even though it worked locally.
 
-This post shows how I found the real cause and fixed it.
+This post shows the full debug path and the fix.
 
-You will get a simple checklist and a small code snippet.
+You will learn how to reproduce, verify, and prevent it.
 
-## The promise
+If your Gatsby nav breaks only in production, this is for you.
 
-You will learn:
+## What this is
 
-- how I isolated the issue
-- how I verified the fix
-- how to avoid the same trap
+High level, this is a routing mismatch caused by build output and path config.
 
-> "If it only breaks in deploy, your build is part of the bug."
+Low level, it is a check of link paths, build output, and trailing slash settings.
 
-## What broke
+Key terms:
 
-- Links worked locally.
-- Links failed on the deployed site.
+- **Base path**: the prefix your site uses when hosted in a subfolder.
+- **Trailing slash**: whether URLs end in `/` or not.
+- **Build output**: the HTML files Gatsby generates.
 
-## The fix
+## What you need
 
-It was a routing mismatch. I had to align the path and the build output.
+- A Gatsby site.
+- Access to the build output folder.
+- A deploy where the bug happens.
 
-### Example snippet
-
-```jsx
-import { Link } from "gatsby";
-
-<Link to="/about/">About</Link>
-```
-
-## CTA: Open the repo
-
-- https://github.com/BradleyMatera/bradleymatera.dev
-
-## Now do it your way
-
-### Steps
-
-1. Reproduce the bug in a clean build.
-2. Check output paths in the build folder.
-3. Compare local paths to deployed paths.
-
-### Common mistakes
-
-- Assuming dev server paths match deploy paths.
-- Forgetting a trailing slash setting.
-- Fixing symptoms instead of the build config.
-
-## Quick checklist
-
-- [ ] Build output verified
-- [ ] Link paths match output
-- [ ] Deploy tested
-
-## Next steps
-
-- Add a small routing note to your README.
-- Run a build before every share.
-
-## Related links
+Docs used:
 
 - https://www.gatsbyjs.com/docs/reference/routing/
 
-## Final CTA
+## Start to finish
 
-If you hit a similar bug, send me your repro steps.
+1) Rebuild the site locally.
+
+Why: You need the output that matches the deploy.
+
+```bash
+gatsby build
+```
+
+2) Inspect the `public` folder.
+
+Why: You need to know the real paths.
+
+```bash
+ls public
+```
+
+3) Compare link paths with output paths.
+
+Why: If they do not match, nav fails.
+
+Example:
+
+```jsx
+<Link to="/about/">About</Link>
+```
+
+4) Check trailing slash settings.
+
+Why: Gatsby can generate different paths based on this.
+
+5) Deploy and test in a private window.
+
+Why: It removes cache effects.
+
+## Verify it worked
+
+- Nav links load the correct pages.
+- No 404s after deploy.
+- The same links work in a private window.
+
+If it still fails, check the deploy base path.
+
+## Common mistakes
+
+- **Symptom**: Works locally, fails in deploy.
+  **Cause**: Base path mismatch.
+  **Fix**: Align base path and links.
+
+- **Symptom**: Random 404s.
+  **Cause**: Trailing slash mismatch.
+  **Fix**: Set trailingSlash and update links.
+
+- **Symptom**: Old links still load.
+  **Cause**: Cache.
+  **Fix**: Use a private window and clear cache.
+
+## Cheat sheet
+
+- Build locally.
+- Inspect `public` paths.
+- Match links to output.
+- Test in a private window.
+
+## Next steps
+
+- Add a short routing note in your README.
+- Run a build before sharing links.
+
+Related links:
+
+- https://www.gatsbyjs.com/docs/reference/routing/
+
+Final CTA:
+
+If you hit the same bug, send me your steps and I will compare notes.

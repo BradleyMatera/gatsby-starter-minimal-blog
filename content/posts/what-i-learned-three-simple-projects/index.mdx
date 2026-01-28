@@ -2,94 +2,122 @@
 title: "What I Learned From Three Small Projects"
 date: "2025-10-04"
 slug: "/what-i-learned-three-simple-projects"
-tags: ["projects", "learning", "web-development"]
-description: "Three small demos and the exact lessons they taught me."
+tags: ["projects", "process", "web-development"]
+description: "Three small demos, the real lessons, and a repeatable way to document them."
 theme: "Process"
 ---
 
 Small projects teach faster than big plans.
 
-This post covers three demos and the concrete lessons they gave me.
+This post shows three demos and the exact lessons they gave me.
 
-You will get the lesson format, a checklist, and links to each demo.
+You will get the format I use, the steps I repeat, and links to each demo.
+
+If you want a clean way to learn without fluff, this is it.
 
 ## The promise
 
-You will learn:
+By the end, you will:
 
-- how I choose tiny projects
-- what each one taught me
-- how I document the lessons
+- pick three small project ideas that finish fast
+- build and ship each demo
+- write short lessons that are easy to verify
 
-> "A small demo with clear notes beats a big demo with no proof."
+> "A small demo with proof beats a big demo with vague claims."
 
-## The three projects
+## What this is
 
-### 1) AnimalSounds
+**High level:** A small project is a focused demo with a single goal, a short build time, and a public link.
 
-- Next.js App Router + NextUI + Tailwind
-- Offline-ready public/audio assets
-- localStorage favorites and listening stats
+**Low level:** You ship a feature, verify it in the browser, and write a short lesson with proof links.
 
-Demo: https://bradleymatera.github.io/AnimalSounds/
+**Key terms:**
 
-### 2) CheeseMath
+- **Demo:** A small public project with one clear capability.
+- **Proof link:** A link to a repo or live page that shows the claim is real.
+- **Lesson:** A short statement that says what worked and what to fix next.
 
-- Small test-focused math demo
-- Simple unit tests
+## What you need
 
-Demo: https://bradleymatera.github.io/CheeseMath-Jest-Tests/
+- A public GitHub repo for each demo
+- A live URL for each demo
+- A note template with three lines
 
-### 3) EthicsFrontEndDemo
+Here are the three demos I use as examples:
 
-- Front-end demo for security education
-- Simple interactive examples
+- AnimalSounds: https://bradleymatera.github.io/AnimalSounds/
+- CheeseMath: https://bradleymatera.github.io/CheeseMath-Jest-Tests/
+- EthicsFrontEndDemo: https://bradleymatera.github.io/EthicsFrontEndDemo/
 
-Demo: https://bradleymatera.github.io/EthicsFrontEndDemo/
+## Start to finish
 
-### Example lesson format
+1. **Pick the smallest possible goal.**
+   Examples: play a sound, render a triangle, show a secure pattern.
 
-```text
-Project:
-One thing I learned:
-One thing I would change:
-```
+2. **Define the one success check.**
+   If it does not pass that check, it is not done.
 
-## CTA: Open the repos
+3. **Build the demo.**
+   Keep the scope tight. No extra features.
+
+4. **Publish a live link.**
+   The demo is not real until it is accessible.
+
+5. **Write the lesson.**
+   Use the three line template below.
+
+   ```text
+   Project:
+   One thing I learned:
+   One thing I would change next:
+   ```
+
+6. **Add proof links.**
+   Put the repo and live URL in the post.
+
+## Verify it worked
+
+- The live demo loads without errors.
+- The repo README explains how to run it locally.
+- The lesson matches what the demo actually does.
+
+If any of those fail, fix the demo or delete the claim.
+
+## Common mistakes
+
+- **Symptom:** Projects never finish.  
+  **Cause:** The goal was too big.  
+  **Fix:** Cut the goal until it can ship in one weekend.
+
+- **Symptom:** The demo is live but the README is empty.  
+  **Cause:** You skipped documentation.  
+  **Fix:** Add a short setup section and a proof link.
+
+- **Symptom:** The lesson sounds like marketing.  
+  **Cause:** The lesson is not tied to a real check.  
+  **Fix:** Use the template and keep it factual.
+
+## Cheat sheet
+
+- One goal per demo.
+- One success check.
+- One live link.
+- One lesson template.
+- Proof links everywhere.
+
+## Next steps
+
+- Add a small "Lessons" section to each repo README.
+- Share one lesson with a peer and ask for feedback.
+- Build one more demo with a different tool.
+
+## Related links
 
 - https://github.com/BradleyMatera/AnimalSounds
 - https://github.com/BradleyMatera/CheeseMath-Jest-Tests
 - https://github.com/BradleyMatera/EthicsFrontEndDemo
-
-## Now do it your way
-
-### Steps
-
-1. Pick three small ideas.
-2. Build each in one weekend.
-3. Write one lesson per project.
-
-### Common mistakes
-
-- Picking projects that are too big.
-- Skipping the notes.
-- Forgetting the proof links.
-
-## Quick checklist
-
-- [ ] Three small demos
-- [ ] One lesson each
-- [ ] Proof links added
-
-## Next steps
-
-- Add a lesson section to your README.
-- Share one lesson with a peer.
-
-## Related links
-
 - https://bradleymatera.dev/projects/
 
 ## Final CTA
 
-If you want my lesson template, ask and I will share it.
+Pick one small idea and ship it in two days. Then write the lesson while it is fresh.

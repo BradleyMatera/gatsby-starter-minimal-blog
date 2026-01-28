@@ -3,76 +3,128 @@ title: "Testing That I Actually Run: A Small Pyramid"
 date: "2025-09-29"
 slug: "/why-testing-matters"
 tags: ["testing", "quality", "devops"]
-description: "A short, honest testing stack used in demos and labs."
+description: "A small, honest testing stack for demos with clear checks and proof links."
 theme: "Front-End & Full-Stack"
 ---
 
 I test to catch real bugs, not to impress anyone.
 
-This post shows the test levels I actually run and what is still planned.
+This post shows a small testing pyramid I actually run on my demos.
 
-You will get the pyramid, a checklist, and the common mistakes.
+You will get a clean definition of each layer, the exact commands, and how I verify results.
+
+If you only want one takeaway, it is this: a tiny suite that runs is better than a big suite that does not.
 
 ## The promise
 
-You will learn:
+By the end, you will be able to:
 
-- what I test today
-- what I do manually
-- what is planned
+- choose a test scope that matches a small project
+- run unit and component tests without extra setup
+- document what is not tested yet
 
 > "A small test suite that runs beats a big suite that does not."
 
-## What I do today
+## What this is
 
-- Unit and component tests in repos that include them
-- Manual smoke checks on key flows
-- Short notes on test gaps
+**High level:** A testing pyramid is a simple way to balance test types. You run lots of fast unit tests, a few component tests, and a handful of manual checks.
 
-### Example test script
+**Low level:** You wire a single test command, run it locally, and record gaps in a short checklist.
 
-```json
-{
-  "scripts": {
-    "test": "vitest run"
-  }
-}
-```
+**Key terms:**
 
-## CTA: Open the test demos
+- **Unit test:** A test that checks one function in isolation.
+- **Component test:** A test that renders a UI component and checks behavior.
+- **Smoke check:** A short manual pass that verifies key flows still work.
 
-- https://github.com/BradleyMatera/CheeseMath-Jest-Tests
+## What you need
 
-## Now do it your way
+- A repo with a `test` script in `package.json`
+- A local Node runtime that matches the repo
+- One test runner already in the project (Vitest or Jest)
 
-### Steps
+If your repo has no tests at all, start with a single unit test and a single smoke check.
 
-1. Add one unit test.
-2. Add one smoke check.
-3. Write one gap note.
+## Start to finish
 
-### Common mistakes
+1. **Find the test command.**
+   Open `package.json` and look for the `test` script. This is the only command you need.
 
-- Writing tests that never run.
-- Claiming CI gates without workflows.
-- Skipping the README notes.
+   ```json
+   {
+     "scripts": {
+       "test": "vitest run"
+     }
+   }
+   ```
 
-## Quick checklist
+2. **Run tests once.**
+   This confirms the test runner works and gives you a baseline.
 
-- [ ] One test runs
-- [ ] One smoke check done
-- [ ] Gaps listed
+   ```bash
+   npm test
+   ```
+
+3. **Add one unit test if none exist.**
+   Pick a small pure function and assert one input and one output.
+
+4. **Add one component test if the repo includes React.**
+   Render a component, then assert a visible label or button.
+
+5. **Do one smoke check.**
+   Load the demo, click through one core flow, and write down what you touched.
+
+6. **Write a gap note.**
+   Keep this honest. One or two bullets is enough.
+
+   ```text
+   Gaps: No integration tests. No API error state checks.
+   ```
+
+## Verify it worked
+
+Use these checks:
+
+- The test command exits with code 0.
+- The output lists at least one passing test.
+- The smoke check matches what you claimed.
+
+If you see a failing test, fix it or delete it. Do not leave broken tests around and call it done.
+
+## Common mistakes
+
+- **Symptom:** Tests never run on your machine.  
+  **Cause:** The `test` script is missing or wrong.  
+  **Fix:** Add a test script and rerun locally.
+
+- **Symptom:** You claim CI gates but there is no workflow.  
+  **Cause:** The workflow file does not exist.  
+  **Fix:** Remove the claim or add the workflow later as a planned step.
+
+- **Symptom:** Smoke checks are vague.  
+  **Cause:** You did not record what you clicked.  
+  **Fix:** Write a two line note so you can repeat it next time.
+
+## Cheat sheet
+
+- Keep unit tests small and fast.
+- Keep component tests to a few critical UI bits.
+- Run one smoke check per release.
+- Document gaps honestly.
+- Do not claim automation you cannot point to.
 
 ## Next steps
 
-- Add one integration test.
-- Add a small CI workflow if you have not.
+- Add one more test for the most fragile function.
+- Add a simple README section called "Testing" with the command and gaps.
+- If you want CI, add it later and link the workflow file.
 
 ## Related links
 
 - https://vitest.dev/
 - https://testing-library.com/docs/
+- https://github.com/BradleyMatera/CheeseMath-Jest-Tests
 
 ## Final CTA
 
-If you want my small test template, ask and I will share it.
+Run your test command today and write one honest gap note. That is enough to level up.

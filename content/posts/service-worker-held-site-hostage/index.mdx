@@ -1,35 +1,55 @@
 ---
-title: "Service Worker Bug: How I Cleared a Stale Site"
+title: "Service Worker Bug: Full Fix From Cache to Clean"
 date: "2025-04-12"
 slug: "/service-worker-held-site-hostage"
 tags: ["debugging", "web-development", "caching"]
-description: "A short fix for a stale service worker that kept serving old assets."
+description: "A full guide to finding and clearing a stale service worker."
 theme: "Front-End & Full-Stack"
 ---
 
-A service worker cached my site and ignored my new deploys.
+A stale service worker can make a correct deploy look broken.
 
-This post shows the exact steps I used to find it and clear it.
+This post shows the full fix from detection to cleanup.
 
-You will get a checklist and a small code snippet.
+You will get steps, verification, and common mistakes.
 
-## The promise
+If your site shows old assets, this is for you.
 
-You will learn:
+## What this is
 
-- how to detect a stale service worker
-- how to unregister it
-- how to prevent it next time
+High level, a service worker can cache files to speed up repeat visits.
 
-> "If the deploy is right but the browser is wrong, check the service worker."
+Low level, it is a script that runs in the background and can override new assets.
 
-## What happened
+Key terms:
 
-This was a static site export. The service worker came from a template I had used.
+- **Service worker**: a background script that can cache responses.
+- **Cache**: stored files the browser reuses.
+- **Unregister**: removing the service worker from the browser.
 
-It kept serving old assets even after a new deploy.
+## What you need
 
-### Example unregister snippet
+- The deployed site.
+- Browser DevTools.
+- Access to the repo or build.
+
+Docs used:
+
+- https://developer.mozilla.org/docs/Web/API/Service_Worker_API
+
+## Start to finish
+
+1) Open DevTools and go to Application.
+
+Why: Service worker controls are there.
+
+2) Check for an active service worker.
+
+Why: You need to confirm it exists.
+
+3) Unregister the worker.
+
+Why: It stops the stale cache.
 
 ```js
 if ("serviceWorker" in navigator) {
@@ -39,39 +59,52 @@ if ("serviceWorker" in navigator) {
 }
 ```
 
-## CTA: Open the repo
+4) Clear storage.
 
-- https://github.com/BradleyMatera/bradleymatera.dev
+Why: Old caches can still linger.
 
-## Now do it your way
+5) Reload the site in a private window.
 
-### Steps
+Why: It avoids cached state.
 
-1. Open DevTools Application tab.
-2. Check for active service workers.
-3. Unregister and reload.
+## Verify it worked
 
-### Common mistakes
+- The new assets load.
+- The site reflects the latest deploy.
+- The service worker list is empty.
 
-- Forgetting to clear caches.
-- Assuming the build is broken.
-- Leaving offline plugins enabled.
+If it still shows old assets, you have another cache layer.
 
-## Quick checklist
+## Common mistakes
 
-- [ ] Service worker checked
-- [ ] Cache cleared
-- [ ] Site reloads with new assets
+- **Symptom**: Assets still old.
+  **Cause**: Cache not cleared.
+  **Fix**: Clear storage and reload.
+
+- **Symptom**: Worker comes back.
+  **Cause**: Offline plugin still enabled.
+  **Fix**: Remove the plugin and rebuild.
+
+- **Symptom**: Site breaks after unregister.
+  **Cause**: App depends on cached data.
+  **Fix**: Remove that dependency.
+
+## Cheat sheet
+
+- Check Application tab.
+- Unregister worker.
+- Clear storage.
+- Reload in private window.
 
 ## Next steps
 
 - Remove unused offline plugins.
-- Add a small deploy note.
+- Add a deploy note about cache.
 
-## Related links
+Related links:
 
 - https://developer.mozilla.org/docs/Web/API/Service_Worker_API
 
-## Final CTA
+Final CTA:
 
-If you hit a similar issue, send me your repro steps.
+If you hit this bug, send me the steps you used and I will compare notes.

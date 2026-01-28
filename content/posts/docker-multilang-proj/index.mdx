@@ -1,31 +1,74 @@
 ---
-title: "Docker for Multi-Language Projects: A Practical Lab Guide"
+title: "Docker for Multi-Language Projects: Full Setup From Zero"
 date: "2025-06-10"
+description: "A complete lab guide for running two languages in one Docker setup with clear steps and verification."
 slug: "/containerizing-multi-language-projects-with-docker-a-practical-guide"
 tags: ["docker", "containerization", "web-development"]
-description: "A short lab guide for running two languages in one Docker setup."
 theme: "Cloud & DevOps"
 ---
 
-This is a lab guide for small projects, not production.
+Running two languages in one repo can get messy fast.
 
-I wrote it to keep my own steps clear when a repo has more than one language.
+This post is a full lab guide to keep the setup simple and repeatable.
 
-You will get the simplest setup, a checklist, and the mistakes I hit.
+You will build a two service setup with Docker and Compose.
 
-## The promise
+If you are new to multi-service repos, this is for you.
 
-You will learn how to:
+## What this is
 
-- keep each service isolated
-- run both with one command
-- document the steps
+High level, Docker lets each service run in its own container.
 
-> "Two languages are fine. Two unclear setups are not."
+Low level, you write a Dockerfile per service and a Compose file to run them together.
 
-## Minimal setup
+Key terms:
 
-### Example compose file
+- **Dockerfile**: the build recipe for an image.
+- **Image**: the built artifact that includes your app and dependencies.
+- **Compose**: a YAML file that defines how services run together.
+
+## What you need
+
+- Docker Desktop installed.
+- A repo with two folders, such as `api` and `web`.
+- A terminal.
+
+Docs used:
+
+- https://docs.docker.com/build/
+- https://docs.docker.com/compose/
+
+## Start to finish
+
+1) Create a Dockerfile for each service.
+
+Why: Each service should build in isolation.
+
+`api/Dockerfile` example:
+
+```Dockerfile
+FROM node:20-alpine
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci
+COPY . .
+CMD ["npm", "run", "start"]
+```
+
+`web/Dockerfile` example:
+
+```Dockerfile
+FROM node:20-alpine
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci
+COPY . .
+CMD ["npm", "run", "dev"]
+```
+
+2) Create `docker-compose.yml` at the repo root.
+
+Why: Compose starts both services together.
 
 ```yaml
 services:
@@ -37,44 +80,74 @@ services:
     build: ./web
     ports:
       - "3000:3000"
+    depends_on:
+      - api
 ```
 
-## CTA: Open the repo
+3) Build and run the stack.
 
-- https://github.com/BradleyMatera/docker_multilang_project
+Why: This confirms both services start.
 
-## Now do it your way
+```bash
+docker compose up --build
+```
 
-### Steps
+4) Add a small note in README.
 
-1. Split services into folders.
-2. Add a Dockerfile per service.
-3. Write a simple compose file.
-4. Add a notes file with start and stop steps.
+Why: You need steps anyone can repeat.
 
-### Common mistakes
+Example:
 
-- Sharing env files between services.
-- Forgetting port mappings.
-- Hiding setup steps inside shell scripts only.
+```md
+## Run locally
+- docker compose up --build
+- open http://localhost:3000
+```
 
-## Quick checklist
+## Verify it worked
 
-- [ ] Dockerfiles build
-- [ ] Compose runs both services
-- [ ] Notes include start and stop steps
+- The web app opens at http://localhost:3000
+- The API responds at http://localhost:4000
+- `docker compose ps` shows both services running
+
+If the API does not respond, check the container logs:
+
+```bash
+docker logs <container-id>
+```
+
+## Common mistakes
+
+- **Symptom**: Build fails on npm install.
+  **Cause**: Missing lockfile in the image.
+  **Fix**: Copy `package-lock.json` before running `npm ci`.
+
+- **Symptom**: Web app cannot reach API.
+  **Cause**: Wrong host or port.
+  **Fix**: Use the API service name from Compose.
+
+- **Symptom**: Compose fails to start.
+  **Cause**: YAML indentation errors.
+  **Fix**: Re-check spaces and alignment.
+
+## Cheat sheet
+
+- One Dockerfile per service.
+- One Compose file at the root.
+- Build and run with `docker compose up --build`.
+- Verify both ports respond.
 
 ## Next steps
 
 - Add a health check route.
-- Add a small seed script.
-- Keep the notes updated.
+- Add a `.env` example file.
+- Add a short troubleshooting section.
 
-## Related links
+Related links:
 
 - https://docs.docker.com/compose/
 - https://docs.docker.com/build/
 
-## Final CTA
+Final CTA:
 
-If you want my notes template, ask and I will share it.
+If you want my example repo structure, ask and I will share it.

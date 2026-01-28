@@ -1,105 +1,138 @@
 ---
-title: "How I Build End to End Projects With AI, Without Hiding the Work"
+title: "End to End Projects With AI: A Complete, Honest Workflow"
 date: "2025-10-01"
 slug: "/ai-end-to-end-projects"
 tags: ["ai", "process", "projects", "web-development"]
-description: "My honest workflow for using AI as a helper while keeping the work verifiable."
+description: "A full start to finish workflow for using AI as a helper without overstating results."
 theme: "Process"
 ---
 
-AI helps me move faster. It does not do the work for me.
+AI can speed up the boring parts, not replace the work.
 
-This post shows the exact workflow I use to build a project from idea to demo. It is plain, repeatable, and honest.
+This post is a full workflow from idea to demo with guardrails.
 
-You will get my steps, my checks, and a checklist you can copy.
+You will learn how I scope, build, verify, and document projects.
 
-## Table of contents
+If you want a clean process without fluff, this is for you.
 
-- [The promise](#the-promise)
-- [My workflow in one page](#my-workflow-in-one-page)
-- [How I keep it honest](#how-i-keep-it-honest)
-- [How to do it yourself](#how-to-do-it-yourself)
-- [Common mistakes](#common-mistakes)
-- [Next steps](#next-steps)
+## What this is
 
-## The promise
+High level, this is a project workflow that uses AI for drafts and refactors.
 
-You will leave with a workflow that:
+Low level, it is a checklist with prompts, code steps, and verification checks.
 
-- uses AI for speed
-- keeps the code verifiable
-- produces demos you can show
+Key terms:
 
-> "AI is a tool, not a substitute for proof."
+- **Scope**: the smallest version of the idea you can ship.
+- **Verification**: proof that the demo works and matches the claims.
+- **Notes**: short documentation that explains what is missing.
 
-## My workflow in one page
+## What you need
 
-1. Define the smallest demo I can ship.
-2. Ask AI for a rough plan and file map.
-3. Write the first version myself.
-4. Use AI to refactor, not to invent.
-5. Add notes and proof links.
+- A simple project idea.
+- A local dev setup for the stack you plan to use.
+- A text editor and terminal.
 
-### Example prompt I use
+Optional tools:
+
+- ChatGPT or Copilot for drafting.
+- A README template.
+
+## Start to finish
+
+1) Write a one sentence scope.
+
+Why: This prevents the project from bloating.
+
+Example:
 
 ```text
-Build a minimal plan for a small web demo.
-List pages, core components, and risks.
-Keep it under 8 steps.
+Build a static demo that lists 151 Pokemon with search and details.
 ```
 
-## How I keep it honest
+2) Ask AI for a rough plan.
 
-- I label AI help in notes.
-- I keep a small debug log.
-- I only claim what is visible in the repo or demo.
+Why: You want an outline, not a full solution.
 
-### Checklist I use every time
+Prompt:
 
-- [ ] Does the demo run locally?
-- [ ] Are links real and working?
-- [ ] Are limitations written down?
-- [ ] Is the tech stack accurate?
+```text
+Give me a 6 step plan for this demo. Keep it small and direct.
+```
 
-## CTA: Open a repo and verify
+3) Build the first working path.
 
-Pick one demo and check the README first:
+Why: The first working path proves the idea.
 
-- https://github.com/BradleyMatera/AnimalSounds
+Example steps:
 
-## Now do it your way
+- Create the project folder.
+- Build one screen.
+- Show one data item.
 
-### Steps
+4) Add a README with limits.
 
-1. Pick a tiny goal that fits in a weekend.
-2. Write a three sentence spec.
-3. Use AI for a draft plan.
-4. Build the demo.
-5. Write the notes and publish the link.
+Why: You need to document gaps honestly.
 
-### Common mistakes
+Example section:
 
-- Asking AI to design everything.
-- Skipping the README.
-- Listing tools you did not use.
+```md
+## Reality snapshot
+- What works
+- What is missing
+- What is planned
+```
 
-## Quick checklist
+5) Verify and publish.
 
-- [ ] Scope is small and clear
-- [ ] Demo runs without hidden setup
-- [ ] Notes explain what is missing
+Why: A demo without a working link is not useful.
+
+Verify:
+
+- The demo runs locally.
+- The live link works.
+- The README matches the code.
+
+## Verify it worked
+
+- You can load the demo without errors.
+- The main flow works in a private browser window.
+- The README does not claim features you do not have.
+
+If you see build errors, fix them before publishing.
+
+## Common mistakes
+
+- **Symptom**: The demo works locally but not online.
+  **Cause**: Missing base path or missing assets.
+  **Fix**: Update config and rebuild.
+
+- **Symptom**: README claims features not in code.
+  **Cause**: Copying an outline without edits.
+  **Fix**: Rewrite the README after the demo works.
+
+- **Symptom**: AI output is wrong.
+  **Cause**: You accepted it without verification.
+  **Fix**: Check docs and test the code.
+
+## Cheat sheet
+
+- Write a one sentence scope.
+- Build the smallest working path.
+- Add a reality snapshot.
+- Verify the live link.
 
 ## Next steps
 
-- Publish one small demo this week.
-- Add a notes section to the README.
-- Share the demo link with one person.
+- Ship one small demo this week.
+- Remove one claim you cannot prove.
+- Add one proof link.
 
-## Related links
+Related links:
 
+- https://bradleymatera.dev/projects/
 - https://github.com/BradleyMatera/AnimalSounds
-- https://github.com/BradleyMatera/Interactive-Pokedex
 
-## Final CTA
+Final CTA:
 
-If you want my template for project notes, ask me. I will share it.
+If you want my README template, ask and I will share it.

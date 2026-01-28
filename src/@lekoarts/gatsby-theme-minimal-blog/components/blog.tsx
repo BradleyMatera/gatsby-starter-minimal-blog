@@ -32,7 +32,9 @@ export type MBBlogProps = {
 
 const hiddenPostSlugs = new Set([
   "/making-triangle-webgpu-demo-match-reality",
+  "/making-triangle-webgpu-demo-match-reality/",
   "/rebuilt-webgpu-triangle-demo",
+  "/rebuilt-webgpu-triangle-demo/",
 ]);
 
 const Blog = ({ posts }: MBBlogProps) => {

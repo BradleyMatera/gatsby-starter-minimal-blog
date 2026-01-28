@@ -1,31 +1,49 @@
 ---
-title: "GitHub Actions for Demos: A Small CI Setup That Stays Honest"
+title: "GitHub Actions for Demos: Full Setup and Verification"
 date: "2025-07-07"
 slug: "/github-actions-aws-automation"
 tags: ["ci-cd", "github-actions", "aws", "automation"]
-description: "A small CI pattern I use for demos and labs, plus what is still planned."
+description: "A full start to finish CI setup for demos, with clear notes on what is planned."
 theme: "Cloud & DevOps"
 ---
 
-I use GitHub Actions for demos and labs, not enterprise systems.
+This is a demo-scale CI setup, not enterprise automation.
 
-This post shows a small, honest CI setup and how I document what is planned.
+I use a small workflow to lint, test, and build demos. Anything beyond that is labeled as planned.
 
-You will get a working baseline, a checklist, and common mistakes.
+You will get the workflow, the checks, and the mistakes I avoid.
 
-## The promise
+If you are setting up CI for a small project, this is for you.
 
-You will learn:
+## What this is
 
-- a simple CI workflow
-- how to keep claims accurate
-- what to label as planned
+High level, CI runs checks on every push and pull request.
 
-> "If the workflow is not in the repo, it is not a claim."
+Low level, it is a YAML workflow in `.github/workflows/`.
 
-## Baseline workflow
+Key terms:
 
-This is the minimal pattern I aim for in demo repos.
+- **Workflow**: the YAML file GitHub Actions runs.
+- **Job**: a set of steps in a workflow.
+- **Runner**: the machine that executes the steps.
+
+## What you need
+
+- A GitHub repo.
+- A `package.json` with scripts.
+- GitHub Actions enabled.
+
+Docs used:
+
+- https://docs.github.com/actions
+
+## Start to finish
+
+1) Create a workflow file.
+
+Why: GitHub Actions only runs files in `.github/workflows/`.
+
+Create `.github/workflows/ci.yml`:
 
 ```yaml
 name: ci
@@ -49,53 +67,52 @@ jobs:
       - run: npm run build
 ```
 
-## What is real vs planned
+2) Commit and push.
 
-### Real today
+Why: The workflow will not run until it is in the repo.
 
-- Lint and build in repos that include scripts.
-- Manual deploys or simple deploy scripts.
+3) Check the Actions tab.
 
-### Planned
+Why: You need to confirm the workflow runs.
 
-- Slack alerts
-- Nightly audits
-- Automated smoke checks
+## Verify it worked
 
-## CTA: Open the repo
+- The workflow shows as green in Actions.
+- Lint, test, and build steps complete.
+- Failed steps show a readable error log.
 
-- https://github.com/BradleyMatera/bradleymatera.dev
+If it fails, fix the script locally and re-run.
 
-## Now do it your way
+## Common mistakes
 
-### Steps
+- **Symptom**: Workflow does not run.
+  **Cause**: File not in `.github/workflows/`.
+  **Fix**: Move it and push.
 
-1. Add the baseline workflow.
-2. Keep scripts simple.
-3. Document any missing steps as planned.
+- **Symptom**: npm ci fails.
+  **Cause**: Missing lockfile.
+  **Fix**: Commit `package-lock.json` or use `npm install`.
 
-### Common mistakes
+- **Symptom**: Tests not found.
+  **Cause**: No test script.
+  **Fix**: Use `--if-present` or add a script.
 
-- Claiming alerts you do not have.
-- Listing checks that are not in CI.
-- Copying YAML without testing it.
+## Cheat sheet
 
-## Quick checklist
-
-- [ ] Workflow runs on push
-- [ ] Lint and build pass
-- [ ] Planned items listed clearly
+- Put workflows in `.github/workflows/`.
+- Use `npm ci` for clean installs.
+- Check Actions after every push.
 
 ## Next steps
 
-- Add one smoke check.
-- Add a small deploy step.
-- Keep notes in the README.
+- Add a deploy step if you need it.
+- Add a smoke check script.
+- Keep planned items listed in README.
 
-## Related links
+Related links:
 
 - https://docs.github.com/actions
 
-## Final CTA
+Final CTA:
 
-If you want my baseline workflow file, ask and I will share it.
+If you want my baseline workflow, ask and I will share it.
