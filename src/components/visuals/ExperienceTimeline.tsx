@@ -33,15 +33,15 @@ const entries: TimelineEntry[] = [
   {
     id: "aws-internship-2025",
     dates: "May 2025 – Aug 2025",
-    title: "Cloud Support Engineer Intern",
+    title: "Cloud Support Engineer Intern (Capstone Project)",
     company: "Amazon Web Services (AWS)",
     location: "Seattle, WA (On-site internship)",
     summary:
-      "Completed hands-on AWS support rotations, triaging incidents, automating dashboards, and delivering runbooks for internal usage.",
+      "Completed guided AWS support rotations in training environments and delivered internal-style runbooks and troubleshooting notes.",
     responsibilities: [
-      { label: "Automation", detail: "Automated incident response checks using CloudWatch and Lambda workflows." },
-      { label: "Observability", detail: "Built dashboards that surfaced S3/EC2 health for on-call engineers." },
-      { label: "Runbooks", detail: "Authored documentation covering networking and AI support workflows." },
+      { label: "Capstone", detail: "Built a serverless metadata extraction workflow using Lambda, DynamoDB, and S3 with an accessible frontend deployed on AWS Amplify." },
+      { label: "Cost model", detail: "Estimated storage and data transfer using measurable inputs to calculate cost per upload and retrieval." },
+      { label: "Documentation", detail: "Documented assumptions and calculation logic for reproducible review." },
     ],
     skills: [
       "Amazon S3, EC2, RDS, DynamoDB",
