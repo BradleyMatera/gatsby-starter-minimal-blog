@@ -9,18 +9,18 @@ type Feature = {
 const features: Feature[] = [
   {
     icon: "01",
-    title: "Production cloud systems",
-    body: "Harden AWS workloads with IAM, logging, staged environments, and cost-aware design that keeps services stable and affordable.",
+    title: "Cloud reps (labs + public demos)",
+    body: "Practice IAM, logging, staged environments, and cost-aware design in labs and public deployments that stay stable and affordable.",
   },
   {
     icon: "02",
     title: "Secure backend services",
-    body: "Ship Node.js APIs with real authentication, instrumentation, and documentation so teammates can build on top without surprises.",
+    body: "Build Node.js APIs with authentication, instrumentation, and documentation so the next developer can extend them without surprises.",
   },
   {
     icon: "03",
     title: "Automation-first workflows",
-    body: "Wire CI/CD, branch protections, and AI helpers into delivery pipelines so the right code reaches production every time.",
+    body: "Wire CI/CD, branch protections, and AI helpers into delivery pipelines so the right code reaches a repeatable deploy every time.",
   },
 ];
 
