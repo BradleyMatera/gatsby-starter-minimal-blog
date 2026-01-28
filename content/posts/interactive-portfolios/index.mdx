@@ -1,105 +1,206 @@
 ---
-title: "Interactive Portfolios: A Full Guide to Clarity and Proof"
-date: "2025-03-30"
+title: "Interactive Portfolio Basics: Keep It Fun and Still Clear"
+date: "2025-03-29"
 slug: "/interactive-portfolios-recruiter-expectations"
-tags: ["portfolio", "ux", "web-development"]
-description: "A complete guide to building an interactive portfolio that stays clear and honest."
-theme: "Front-End & Full-Stack"
+tags: ["portfolio", "ux", "web"]
+description: "A practical guide to building an interactive portfolio that still scans fast."
+theme: "Portfolio"
 ---
 
-Interactive portfolios can help, but only if they stay readable.
+Portfolios should be readable first, flashy second.
 
-This post is a full guide to balancing motion with clarity and proof.
+This post shows how to build a small interactive portfolio without breaking clarity.
 
-You will get the structure, the steps, and the mistakes to avoid.
+You will set up a basic structure, add one interactive section, and verify accessibility.
 
-If you are building a portfolio site, this is for you.
+I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+
+## The promise
+
+By the end, you will:
+
+- build a simple portfolio structure
+- add one interactive section without hiding content
+- verify that a recruiter can scan it fast
+
+> "If the content is not readable without motion, it is not ready."
 
 ## What this is
 
-High level, this is a content and UX guide for portfolio sites.
+**High level:** An interactive portfolio is a normal portfolio with small enhancements like animation or toggles.
 
-Low level, it is a layout checklist and proof link process.
+**Low level:** You keep the core HTML readable, then add a small JavaScript layer that does not hide content.
 
-Key terms:
+**Key terms:**
 
-- **Proof link**: a repo or demo URL that backs a claim.
-- **CTA**: a clear action like “View demo” or “Read case study.”
-- **Reality snapshot**: a short list of limits and gaps.
+- **Skip link:** A link that jumps to the main content for keyboard users.
+- **CTA:** The main action you want a reader to take.
+- **Progressive enhancement:** Adding JS only after the core page works.
 
 ## What you need
 
-- A list of projects.
-- A demo link for each project.
-- A short summary for each project.
+- A folder for your site
+- A simple web server (optional)
+- A text editor
 
-## Start to finish
+## Start to Finish
 
-1) Write a one sentence summary for each project.
+### Step 1: Create the base HTML
+Goal:
+Create a clean, readable structure with headings and sections.
 
-Why: Readers scan fast.
+Actions:
+- File path: `index.html`
+- Add:
+  ```html
+  <!doctype html>
+  <html lang="en">
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>Bradley Matera - Portfolio</title>
+    </head>
+    <body>
+      <a class="skip-link" href="#main">Skip to content</a>
+      <header>
+        <h1>Bradley Matera</h1>
+        <p>Systems minded software engineer.</p>
+      </header>
+      <main id="main">
+        <section>
+          <h2>Projects</h2>
+          <ul>
+            <li>AnimalSounds</li>
+            <li>WebGPU Triangle Demo</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Contact</h2>
+          <p>Email: bradmatera@gmail.com</p>
+        </section>
+      </main>
+    </body>
+  </html>
+  ```
 
-2) Add proof links.
+Why:
+This is the readable core. Headings give structure for scanning. A skip link is a basic accessibility requirement. The portfolio should be usable even with no CSS. This also makes the interactive layer optional.
 
-Why: Claims need evidence.
+Verify:
+- Open `index.html` in a browser.
+- Expected: readable text with a working skip link.
+- This confirms the base page works.
 
-3) Keep motion limited.
+If it fails:
+- Symptom: skip link does nothing.
+- Fix: ensure the `main` element has `id="main"`.
 
-Why: Motion should support, not block.
+### Step 2: Add a small interactive section
+Goal:
+Add one interactive panel without hiding essential content.
 
-4) Add a reality snapshot where needed.
+Actions:
+- File path: `index.html`
+- Add after Projects:
+  ```html
+  <section>
+    <h2>Focus</h2>
+    <button id="toggle">Show focus areas</button>
+    <ul id="focus" hidden>
+      <li>Clear documentation</li>
+      <li>Repeatable deploys</li>
+      <li>Honest demos</li>
+    </ul>
+  </section>
+  <script>
+    const button = document.getElementById("toggle");
+    const list = document.getElementById("focus");
+    button.addEventListener("click", () => {
+      list.hidden = !list.hidden;
+      button.textContent = list.hidden ? "Show focus areas" : "Hide focus areas";
+    });
+  </script>
+  ```
 
-Why: Honest limits build trust.
+Why:
+A small toggle is enough to make the page feel interactive. Keeping the content in the DOM means it can still be read. This avoids hiding critical information from search and screen readers. The toggle is a safe, low risk interaction.
 
-### Example project block
+Verify:
+- Click the button.
+- Expected: the list shows and hides.
+- This confirms the interaction works.
 
-```md
-Problem: one sentence
-Solution: one sentence
-Proof: repo and demo
-Limits: one sentence
-```
+If it fails:
+- Symptom: button does nothing.
+- Fix: ensure the element IDs match the script.
+
+### Step 3: Add basic styling
+Goal:
+Make the layout readable without overpowering the content.
+
+Actions:
+- File path: `styles.css`
+- Add:
+  ```css
+  body { font-family: system-ui, sans-serif; max-width: 60ch; margin: 2rem auto; line-height: 1.6; }
+  .skip-link { position: absolute; left: -999px; }
+  .skip-link:focus { left: 1rem; background: #000; color: #fff; padding: 0.5rem; }
+  ```
+- Link it in `index.html`:
+  ```html
+  <link rel="stylesheet" href="styles.css" />
+  ```
+
+Why:
+Readable line length matters more than effects. The skip link styles make keyboard navigation visible. This keeps the page accessible while still being clean. The styles stay minimal.
+
+Verify:
+- Reload the page.
+- Expected: text is centered and readable.
+- This confirms CSS is applied.
+
+If it fails:
+- Symptom: no styling applied.
+- Fix: ensure the CSS file name matches the link.
 
 ## Verify it worked
 
-- The homepage explains what you do in one sentence.
-- Each project has a repo or demo link.
-- No section hides the main content.
-
-If a project has no proof link, remove it.
+- The page reads fine without JavaScript.
+- The toggle works when JavaScript is enabled.
+- The skip link is visible on focus.
 
 ## Common mistakes
 
-- **Symptom**: Visitors get lost.
-  **Cause**: Over-designed nav.
-  **Fix**: Keep the nav simple and visible.
+- **Symptom:** Interactive section hides important info.  
+  **Cause:** You moved core content into a toggle.  
+  **Fix:** Keep core content visible and use toggles for extras.
 
-- **Symptom**: Claims feel inflated.
-  **Cause**: No proof links.
-  **Fix**: Add the repo or demo.
+- **Symptom:** Page feels cluttered.  
+  **Cause:** Too many animations.  
+  **Fix:** Keep one or two small interactions.
 
-- **Symptom**: Too much motion.
-  **Cause**: Multiple animated sections.
-  **Fix**: Keep motion to one or two areas.
+- **Symptom:** Skip link does not work.  
+  **Cause:** Missing target ID.  
+  **Fix:** Add `id="main"` to the main element.
 
 ## Cheat sheet
 
-- Clear summary first.
-- Proof link for every claim.
-- Motion stays minimal.
-- Limits are visible.
+- Build a readable HTML base first.
+- Add one small interaction.
+- Keep core content visible.
+- Verify keyboard navigation.
 
 ## Next steps
 
-- Audit your site in 10 minutes.
-- Remove one unverified claim.
-- Add one missing proof link.
+- Add a projects page with case studies.
+- Add a single featured project section.
+- Add a contact form if needed.
 
-Related links:
+## Related links
 
-- https://developer.mozilla.org/docs/Web/Accessibility
-- https://bradleymatera.dev/
+- https://webaim.org/techniques/keyboard/
+- https://web.dev/learn/accessibility/
 
-Final CTA:
+## Final CTA
 
-If you want a fast portfolio review, ask and I will give you notes.
+Ship the simple version first, then add motion only if the content still scans fast.

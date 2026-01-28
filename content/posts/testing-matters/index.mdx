@@ -3,128 +3,186 @@ title: "Testing That I Actually Run: A Small Pyramid"
 date: "2025-09-29"
 slug: "/why-testing-matters"
 tags: ["testing", "quality", "devops"]
-description: "A small, honest testing stack for demos with clear checks and proof links."
+description: "A small, honest testing stack with exact commands, checks, and gaps."
 theme: "Front-End & Full-Stack"
 ---
 
 I test to catch real bugs, not to impress anyone.
 
-This post shows a small testing pyramid I actually run on my demos.
+This post shows a tiny testing pyramid that I actually run on demos.
 
-You will get a clean definition of each layer, the exact commands, and how I verify results.
+You will set up a single test command, run it, and document the gaps.
 
-If you only want one takeaway, it is this: a tiny suite that runs is better than a big suite that does not.
+I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
 
 ## The promise
 
-By the end, you will be able to:
+By the end, you will:
 
-- choose a test scope that matches a small project
-- run unit and component tests without extra setup
-- document what is not tested yet
+- run a single test command
+- add one focused unit test
+- document one testing gap you will fix later
 
 > "A small test suite that runs beats a big suite that does not."
 
 ## What this is
 
-**High level:** A testing pyramid is a simple way to balance test types. You run lots of fast unit tests, a few component tests, and a handful of manual checks.
+**High level:** A testing pyramid keeps most tests small and fast, then adds fewer higher-level checks.
 
-**Low level:** You wire a single test command, run it locally, and record gaps in a short checklist.
+**Low level:** You wire one test runner, add one unit test, then perform one manual smoke check.
 
 **Key terms:**
 
-- **Unit test:** A test that checks one function in isolation.
-- **Component test:** A test that renders a UI component and checks behavior.
-- **Smoke check:** A short manual pass that verifies key flows still work.
+- **Unit test:** A test for a single function.
+- **Component test:** A test for a UI component.
+- **Smoke check:** A quick manual run of core flows.
 
 ## What you need
 
-- A repo with a `test` script in `package.json`
-- A local Node runtime that matches the repo
-- One test runner already in the project (Vitest or Jest)
+- Node 18+
+- A repo with a `package.json`
+- A test runner like Vitest or Jest
 
-If your repo has no tests at all, start with a single unit test and a single smoke check.
+## Start to Finish
 
-## Start to finish
+### Step 1: Add a test script
+Goal:
+Ensure the repo has a single command for tests.
 
-1. **Find the test command.**
-   Open `package.json` and look for the `test` script. This is the only command you need.
+Actions:
+- File path: `package.json`
+- Add or confirm:
+  ```json
+  {
+    "scripts": {
+      "test": "vitest run"
+    }
+  }
+  ```
+- Command:
+  ```bash
+  npm install -D vitest
+  ```
 
-   ```json
-   {
-     "scripts": {
-       "test": "vitest run"
-     }
-   }
-   ```
+Why:
+A single command is how you avoid broken test instructions. It also makes CI possible later. Without a consistent script, tests become tribal knowledge. This step makes your test entry point explicit.
 
-2. **Run tests once.**
-   This confirms the test runner works and gives you a baseline.
+Verify:
+- Run:
+  ```bash
+  npm test
+  ```
+- Expected: Vitest runs and exits without crashing.
+- This confirms the test runner works.
 
-   ```bash
-   npm test
-   ```
+If it fails:
+- Symptom: `vitest: command not found`.
+- Fix: install Vitest and re-run `npm test`.
 
-3. **Add one unit test if none exist.**
-   Pick a small pure function and assert one input and one output.
+### Step 2: Add one unit test
+Goal:
+Add a small unit test that proves the runner works.
 
-4. **Add one component test if the repo includes React.**
-   Render a component, then assert a visible label or button.
+Actions:
+- File path: `src/sum.ts`
+- Add:
+  ```ts
+  export function sum(a: number, b: number) {
+    return a + b;
+  }
+  ```
+- File path: `src/sum.test.ts`
+- Add:
+  ```ts
+  import { sum } from "./sum";
+  import { describe, it, expect } from "vitest";
 
-5. **Do one smoke check.**
-   Load the demo, click through one core flow, and write down what you touched.
+  describe("sum", () => {
+    it("adds two numbers", () => {
+      expect(sum(2, 3)).toBe(5);
+    });
+  });
+  ```
 
-6. **Write a gap note.**
-   Keep this honest. One or two bullets is enough.
+Why:
+A tiny test proves the entire testing loop. It also shows the exact pattern you can repeat later. This avoids complex setup and keeps the first pass fast. One passing test is more valuable than ten unrun tests.
 
-   ```text
-   Gaps: No integration tests. No API error state checks.
-   ```
+Verify:
+- Run:
+  ```bash
+  npm test
+  ```
+- Expected: one passing test called "adds two numbers".
+- This confirms the test file is detected and executed.
+
+If it fails:
+- Symptom: test file not found.
+- Fix: ensure the file name ends with `.test.ts`.
+
+### Step 3: Record one smoke check
+Goal:
+Document the one manual flow you check every time.
+
+Actions:
+- File path: `docs/testing-notes.md`
+- Add:
+  ```text
+  Smoke check:
+  - Load the home page
+  - Click the primary CTA
+  - Confirm the page navigates
+  ```
+
+Why:
+Manual checks are still valid, but they need to be written down. This keeps the check repeatable. It also tells future you what was actually verified. A simple file is enough.
+
+Verify:
+- Open the app locally and follow the bullets.
+- Expected: each step works without errors.
+- This confirms your smoke check is real.
+
+If it fails:
+- Symptom: you forgot the steps.
+- Fix: update the list to reflect what you actually tested.
 
 ## Verify it worked
 
-Use these checks:
-
-- The test command exits with code 0.
-- The output lists at least one passing test.
-- The smoke check matches what you claimed.
-
-If you see a failing test, fix it or delete it. Do not leave broken tests around and call it done.
+- `npm test` runs without crashing.
+- At least one test passes.
+- The smoke check steps are documented.
 
 ## Common mistakes
 
-- **Symptom:** Tests never run on your machine.  
-  **Cause:** The `test` script is missing or wrong.  
-  **Fix:** Add a test script and rerun locally.
+- **Symptom:** Tests never run.  
+  **Cause:** No test script defined.  
+  **Fix:** Add the `test` script and run it once.
 
-- **Symptom:** You claim CI gates but there is no workflow.  
-  **Cause:** The workflow file does not exist.  
-  **Fix:** Remove the claim or add the workflow later as a planned step.
+- **Symptom:** Tests pass locally but fail for others.  
+  **Cause:** Missing dev dependency.  
+  **Fix:** Add the test runner to `devDependencies`.
 
 - **Symptom:** Smoke checks are vague.  
-  **Cause:** You did not record what you clicked.  
-  **Fix:** Write a two line note so you can repeat it next time.
+  **Cause:** No written steps.  
+  **Fix:** Write down exact clicks and expected outcomes.
 
 ## Cheat sheet
 
-- Keep unit tests small and fast.
-- Keep component tests to a few critical UI bits.
-- Run one smoke check per release.
+- One `npm test` command.
+- One unit test.
+- One smoke check note.
 - Document gaps honestly.
-- Do not claim automation you cannot point to.
 
 ## Next steps
 
-- Add one more test for the most fragile function.
-- Add a simple README section called "Testing" with the command and gaps.
+- Add a second unit test for the most fragile function.
+- Add a basic component test if you use React.
 - If you want CI, add it later and link the workflow file.
 
 ## Related links
 
 - https://vitest.dev/
 - https://testing-library.com/docs/
-- https://github.com/BradleyMatera/CheeseMath-Jest-Tests
 
 ## Final CTA
 
-Run your test command today and write one honest gap note. That is enough to level up.
+Run your tests once today and document one gap. That is enough to move forward.

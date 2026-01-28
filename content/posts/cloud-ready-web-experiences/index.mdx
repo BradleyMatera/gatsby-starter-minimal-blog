@@ -1,108 +1,178 @@
 ---
-title: "Cloud Ready Demos: A Full Pre-Launch Guide"
-date: "2025-06-22"
+title: "Cloud Ready Web Checks: A Small, Honest Prelaunch Checklist"
+date: "2025-06-05"
 slug: "/cloud-ready-web-experiences"
-tags: ["web-development", "accessibility", "process"]
-description: "A full pre-launch guide for small public demos."
-theme: "Front-End & Full-Stack"
+tags: ["web", "reliability", "checklist"]
+description: "A concrete prelaunch checklist with exact files, commands, and verification steps."
+theme: "Process"
 ---
 
-Public demos can look polished and still be honest.
+A launch checklist is only useful if you can run every line.
 
-This post shows a full pre-launch workflow with setup, checks, and clean notes.
+This post shows a small prelaunch checklist you can wire into any web project.
 
-You will get the full sequence from setup to verification.
+You will add scripts, a checklist file, and a few clear checks you can verify.
 
-If you ship demos, this is for you.
+I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+
+## The promise
+
+By the end, you will:
+
+- add a real checklist file to your repo
+- run three concrete checks before deploy
+- document what you did and what you skipped
+
+> "A short checklist you actually run beats a perfect checklist you ignore."
 
 ## What this is
 
-High level, this is a pre-launch checklist for small demo sites.
+**High level:** A prelaunch checklist is a short list of checks you run before publishing.
 
-Low level, it is a set of steps with verification and cleanup.
+**Low level:** You add scripts, run commands, capture the output, and record any gaps.
 
-Key terms:
+**Key terms:**
 
-- **Demo**: a public project that proves a feature without full production scope.
-- **Checklist**: a short list of checks you run before publishing.
-- **Reality snapshot**: a short section that lists limits and gaps.
+- **Checklist:** A written list of checks you can repeat.
+- **Build:** The process that turns source code into deployable output.
+- **Smoke check:** A short manual pass of core flows.
 
 ## What you need
 
-- A deployed demo link.
-- A README you can edit.
-- A browser for checks.
+- A web repo with `package.json`
+- A build command that works locally
+- A place to store notes, like `docs/`
 
-## Start to finish
+## Start to Finish
 
-1) Review the main flow.
+### Step 1: Create a checklist file
+Goal:
+Create a single source of truth for prelaunch checks.
 
-Why: You need the core experience to work before polish.
+Actions:
+- File path: `docs/prelaunch-checklist.md`
+- Add:
+  ```text
+  Prelaunch checklist
+  - Build passes locally
+  - Lint passes locally
+  - Core user flow smoke check
+  - 404 page loads
+  - Contact link works
+  ```
 
-2) Check accessibility.
+Why:
+A checklist is only real if it is written down. Keeping it in `docs/` makes it part of the repo. A short list is easier to keep up to date. This also gives you a place to track gaps later.
 
-Why: A demo should still be usable.
+Verify:
+- Run:
+  ```bash
+  cat docs/prelaunch-checklist.md
+  ```
+- Expected: the five lines above.
+- This confirms the checklist exists.
 
-3) Check links and errors.
+If it fails:
+- Symptom: file not found.
+- Fix: create the `docs/` folder and add the file again.
 
-Why: Broken links kill trust fast.
+### Step 2: Add scripts for build and lint
+Goal:
+Ensure build and lint commands exist and are consistent.
 
-4) Add a reality snapshot.
+Actions:
+- File path: `package.json`
+- Add or confirm:
+  ```json
+  {
+    "scripts": {
+      "build": "your-build-command",
+      "lint": "your-lint-command"
+    }
+  }
+  ```
+- Replace the placeholders with your real commands.
 
-Why: You must list limits clearly.
+Why:
+Scripts standardize how you run checks. This avoids “works on my machine” issues. It also keeps the checklist repeatable. A single entry point is the cleanest path to verification.
 
-5) Re-test after edits.
+Verify:
+- Run:
+  ```bash
+  npm run build
+  npm run lint
+  ```
+- Expected: both commands exit with code 0.
+- This confirms the scripts are real.
 
-Why: Changes can break working flows.
+If it fails:
+- Symptom: script not found.
+- Fix: update `package.json` with the correct command.
 
-### Example reality snapshot
+### Step 3: Add a smoke check note
+Goal:
+Document what you manually verify before publish.
 
-```md
-## Reality snapshot
-- What works
-- What is missing
-- What is planned
-```
+Actions:
+- File path: `docs/smoke-check.md`
+- Add:
+  ```text
+  Smoke check
+  - Home page loads
+  - Primary CTA works
+  - One form submits
+  ```
+
+Why:
+Manual checks are valid when written down. They help you catch UI regressions that automation does not cover. This also keeps your claims honest. If you did not check it, do not claim it.
+
+Verify:
+- Run the app and follow the list.
+- Expected: each step works once.
+- This confirms the smoke check is real.
+
+If it fails:
+- Symptom: you cannot reproduce the check.
+- Fix: update the list to match what you actually tested.
 
 ## Verify it worked
 
-- The demo loads in a private window.
-- Keyboard navigation works on key buttons.
-- The reality snapshot matches the demo.
-
-If a link fails, fix it before sharing.
+- `docs/prelaunch-checklist.md` exists and is readable.
+- `npm run build` and `npm run lint` complete without errors.
+- Smoke check steps are listed and verified manually.
 
 ## Common mistakes
 
-- **Symptom**: Users report broken links.
-  **Cause**: Links not checked after deploy.
-  **Fix**: Click every link before publishing.
+- **Symptom:** Lint is skipped before deploy.  
+  **Cause:** No lint script exists.  
+  **Fix:** Add the script and run it once.
 
-- **Symptom**: Accessibility regressions.
-  **Cause**: New styles without contrast checks.
-  **Fix**: Run a quick contrast review.
+- **Symptom:** Checklist grows and stops being used.  
+  **Cause:** Too many items.  
+  **Fix:** Keep it under 10 items and cut anything not run.
 
-- **Symptom**: Confusing scope.
-  **Cause**: No limits listed.
-  **Fix**: Add a reality snapshot.
+- **Symptom:** Smoke checks are vague.  
+  **Cause:** No specific steps.  
+  **Fix:** Write three exact actions and confirm them.
 
 ## Cheat sheet
 
-- Test the main flow.
-- Check accessibility.
-- Fix links and errors.
-- Write a reality snapshot.
+- Write the checklist.
+- Add build and lint scripts.
+- Run both commands.
+- Do one smoke check and note it.
 
 ## Next steps
 
-- Add a small checklist to each demo README.
-- Re-run the checklist before every share.
+- Add a small release note file per deploy.
+- Add a simple 404 test page check.
+- Add one accessibility scan if your tools support it.
 
-Related links:
+## Related links
 
-- https://developer.mozilla.org/docs/Web/Accessibility
-- https://www.w3.org/WAI/standards-guidelines/wcag/
+- https://web.dev/reliable/
+- https://web.dev/learn/console/
 
-Final CTA:
+## Final CTA
 
-If you want my checklist, ask and I will share it.
+Make the checklist short enough that you can finish it before every deploy.

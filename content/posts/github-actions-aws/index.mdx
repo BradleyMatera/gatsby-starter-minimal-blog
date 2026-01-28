@@ -1,118 +1,146 @@
 ---
-title: "GitHub Actions for Demos: Full Setup and Verification"
-date: "2025-07-07"
-slug: "/github-actions-aws-automation"
-tags: ["ci-cd", "github-actions", "aws", "automation"]
-description: "A full start to finish CI setup for demos, with clear notes on what is planned."
-theme: "Cloud & DevOps"
+title: "GitHub Actions Basics: One CI Check You Can Trust"
+date: "2025-02-25"
+slug: "/github-actions-aws"
+tags: ["github", "ci", "devops"]
+description: "A minimal GitHub Actions workflow with exact file paths and checks."
+theme: "DevOps"
 ---
 
-This is a demo-scale CI setup, not enterprise automation.
+CI does not need to be complicated to be useful.
 
-I use a small workflow to lint, test, and build demos. Anything beyond that is labeled as planned.
+This post shows a single workflow that runs build and lint.
 
-You will get the workflow, the checks, and the mistakes I avoid.
+You will add one workflow file and verify it in GitHub.
 
-If you are setting up CI for a small project, this is for you.
+I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+
+## The promise
+
+By the end, you will:
+
+- add a workflow file to your repo
+- run build and lint on every push
+- verify the check appears in GitHub
+
+> "If CI runs one real check, it is already worth it."
 
 ## What this is
 
-High level, CI runs checks on every push and pull request.
+**High level:** GitHub Actions runs scripts for you in the cloud when you push code.
 
-Low level, it is a YAML workflow in `.github/workflows/`.
+**Low level:** You add a YAML file under `.github/workflows` and list the commands to run.
 
-Key terms:
+**Key terms:**
 
-- **Workflow**: the YAML file GitHub Actions runs.
-- **Job**: a set of steps in a workflow.
-- **Runner**: the machine that executes the steps.
+- **Workflow:** A YAML file that defines CI tasks.
+- **Job:** A set of steps that run on a GitHub runner.
+- **Step:** A command or action inside a job.
 
 ## What you need
 
-- A GitHub repo.
-- A `package.json` with scripts.
-- GitHub Actions enabled.
+- A GitHub repo
+- A build and lint command in `package.json`
 
-Docs used:
+## Start to Finish
 
-- https://docs.github.com/actions
+### Step 1: Add a workflow file
+Goal:
+Create a CI workflow that runs build and lint.
 
-## Start to finish
+Actions:
+- File path: `.github/workflows/ci.yml`
+- Add:
+  ```yaml
+  name: CI
+  on:
+    push:
+      branches: ["main"]
+    pull_request:
+      branches: ["main"]
 
-1) Create a workflow file.
+  jobs:
+    build:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+        - uses: actions/setup-node@v4
+          with:
+            node-version: 18
+        - run: npm install
+        - run: npm run lint
+        - run: npm run build
+  ```
 
-Why: GitHub Actions only runs files in `.github/workflows/`.
+Why:
+This workflow is the smallest useful CI setup. It installs dependencies and runs your real checks. It does not claim to do anything else. This keeps it honest and easy to maintain. You can expand later once this is stable.
 
-Create `.github/workflows/ci.yml`:
+Verify:
+- Commit and push the file.
+- In GitHub, open the Actions tab.
+- Expected: a CI run appears and completes.
+- This confirms the workflow is active.
 
-```yaml
-name: ci
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+If it fails:
+- Symptom: workflow does not trigger.
+- Fix: check the branch name and YAML indentation.
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run test --if-present
-      - run: npm run build
-```
+### Step 2: Verify build output locally
+Goal:
+Ensure the workflow commands pass on your machine.
 
-2) Commit and push.
+Actions:
+- Commands:
+  ```bash
+  npm run lint
+  npm run build
+  ```
 
-Why: The workflow will not run until it is in the repo.
+Why:
+CI should match local behavior. If you cannot run it locally, CI will fail. This step saves time by catching issues before push. It also confirms the scripts are correct.
 
-3) Check the Actions tab.
+Verify:
+- Expected: both commands exit with code 0.
+- This confirms CI should pass.
 
-Why: You need to confirm the workflow runs.
+If it fails:
+- Symptom: command not found.
+- Fix: update the script names in the workflow.
 
 ## Verify it worked
 
-- The workflow shows as green in Actions.
-- Lint, test, and build steps complete.
-- Failed steps show a readable error log.
-
-If it fails, fix the script locally and re-run.
+- The Actions tab shows a green check.
+- The workflow logs show both commands ran.
 
 ## Common mistakes
 
-- **Symptom**: Workflow does not run.
-  **Cause**: File not in `.github/workflows/`.
-  **Fix**: Move it and push.
+- **Symptom:** CI fails on install.  
+  **Cause:** Missing lockfile or incompatible Node version.  
+  **Fix:** commit `package-lock.json` and match Node version.
 
-- **Symptom**: npm ci fails.
-  **Cause**: Missing lockfile.
-  **Fix**: Commit `package-lock.json` or use `npm install`.
+- **Symptom:** CI passes but build is wrong.  
+  **Cause:** You are not running the same build locally.  
+  **Fix:** run the exact commands before push.
 
-- **Symptom**: Tests not found.
-  **Cause**: No test script.
-  **Fix**: Use `--if-present` or add a script.
+- **Symptom:** Workflow never triggers.  
+  **Cause:** wrong branch name.  
+  **Fix:** change `main` to your real default branch.
 
 ## Cheat sheet
 
-- Put workflows in `.github/workflows/`.
-- Use `npm ci` for clean installs.
-- Check Actions after every push.
+- Put workflows in `.github/workflows`.
+- Run `lint` and `build` only.
+- Verify in the Actions tab.
 
 ## Next steps
 
-- Add a deploy step if you need it.
-- Add a smoke check script.
-- Keep planned items listed in README.
+- Add tests if you have them.
+- Add a build artifact upload if needed.
 
-Related links:
+## Related links
 
-- https://docs.github.com/actions
+- https://docs.github.com/en/actions
 
-Final CTA:
+## Final CTA
 
-If you want my baseline workflow, ask and I will share it.
+One clean workflow is enough to start. Make it real, then expand it later.

@@ -3,121 +3,150 @@ title: "What I Learned From Three Small Projects"
 date: "2025-10-04"
 slug: "/what-i-learned-three-simple-projects"
 tags: ["projects", "process", "web-development"]
-description: "Three small demos, the real lessons, and a repeatable way to document them."
+description: "Three small demos, the real lessons, and a repeatable format with proof."
 theme: "Process"
 ---
 
-Small projects teach faster than big plans.
+Small projects teach faster than long plans.
 
-This post shows three demos and the exact lessons they gave me.
+This post shows three demos and the exact lesson format I use.
 
-You will get the format I use, the steps I repeat, and links to each demo.
+You will build a short project list, add proof links, and write one lesson each.
 
-If you want a clean way to learn without fluff, this is it.
+I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
 
 ## The promise
 
 By the end, you will:
 
-- pick three small project ideas that finish fast
-- build and ship each demo
-- write short lessons that are easy to verify
+- list three small demos with proof links
+- write one lesson per demo
+- keep the list current with an update date
 
-> "A small demo with proof beats a big demo with vague claims."
+> "One lesson with proof beats a page of claims."
 
 ## What this is
 
-**High level:** A small project is a focused demo with a single goal, a short build time, and a public link.
+**High level:** This is a small project review format that keeps learning visible.
 
-**Low level:** You ship a feature, verify it in the browser, and write a short lesson with proof links.
+**Low level:** You write a list of demos and add a one line lesson under each.
 
 **Key terms:**
 
-- **Demo:** A small public project with one clear capability.
-- **Proof link:** A link to a repo or live page that shows the claim is real.
-- **Lesson:** A short statement that says what worked and what to fix next.
+- **Proof link:** A URL that shows the demo works.
+- **Lesson:** A short statement of what you learned.
 
 ## What you need
 
-- A public GitHub repo for each demo
-- A live URL for each demo
-- A note template with three lines
+- Three demos
+- A notes file
+- Working URLs
 
-Here are the three demos I use as examples:
+## Start to Finish
 
-- AnimalSounds: https://bradleymatera.github.io/AnimalSounds/
-- CheeseMath: https://bradleymatera.github.io/CheeseMath-Jest-Tests/
-- EthicsFrontEndDemo: https://bradleymatera.github.io/EthicsFrontEndDemo/
+### Step 1: Create the list file
+Goal:
+Create a single file that lists the three projects.
 
-## Start to finish
+Actions:
+- File path: `docs/three-projects.md`
+- Add:
+  ```text
+  Three projects
+  - AnimalSounds: https://bradleymatera.github.io/AnimalSounds/
+  - CheeseMath: https://bradleymatera.github.io/CheeseMath-Jest-Tests/
+  - EthicsFrontEndDemo: https://bradleymatera.github.io/EthicsFrontEndDemo/
+  ```
 
-1. **Pick the smallest possible goal.**
-   Examples: play a sound, render a triangle, show a secure pattern.
+Why:
+A list keeps the content scannable. It also ensures the proof links are visible. This prevents vague summaries. It makes updates quick.
 
-2. **Define the one success check.**
-   If it does not pass that check, it is not done.
+Verify:
+- Click each link.
+- Expected: each demo loads.
+- This confirms the proof works.
 
-3. **Build the demo.**
-   Keep the scope tight. No extra features.
+If it fails:
+- Symptom: 404.  
+  **Fix:** update the link or remove the project.
 
-4. **Publish a live link.**
-   The demo is not real until it is accessible.
+### Step 2: Add one lesson per project
+Goal:
+Write one short lesson tied to each demo.
 
-5. **Write the lesson.**
-   Use the three line template below.
+Actions:
+- Under each project line, add:
+  ```text
+  Lesson: Base paths matter for GitHub Pages.
+  ```
 
-   ```text
-   Project:
-   One thing I learned:
-   One thing I would change next:
-   ```
+Why:
+A single lesson keeps the post short and honest. It also makes the demo more useful. One line is easier to verify than a paragraph. It keeps the format consistent.
 
-6. **Add proof links.**
-   Put the repo and live URL in the post.
+Verify:
+- Each project has exactly one lesson line.
+- This confirms consistency.
+
+If it fails:
+- Symptom: lessons are long and vague.  
+  **Fix:** cut to one sentence with a concrete fix.
+
+### Step 3: Add an update date
+Goal:
+Show when the list was last refreshed.
+
+Actions:
+- Add to the top of the file:
+  ```text
+  Updated: 2025-10-04
+  ```
+
+Why:
+An update date signals recency. It keeps the list honest. It also makes it easy to see when the list is stale. One line is enough.
+
+Verify:
+- The date appears at the top.
+- This confirms the update is visible.
+
+If it fails:
+- Symptom: date missing.  
+  **Fix:** add it and move on.
 
 ## Verify it worked
 
-- The live demo loads without errors.
-- The repo README explains how to run it locally.
-- The lesson matches what the demo actually does.
-
-If any of those fail, fix the demo or delete the claim.
+- Proof links load.
+- Each project has one lesson.
+- Update date is present.
 
 ## Common mistakes
 
-- **Symptom:** Projects never finish.  
-  **Cause:** The goal was too big.  
-  **Fix:** Cut the goal until it can ship in one weekend.
+- **Symptom:** Project list gets bloated.  
+  **Cause:** no limit.  
+  **Fix:** keep it to three projects.
 
-- **Symptom:** The demo is live but the README is empty.  
-  **Cause:** You skipped documentation.  
-  **Fix:** Add a short setup section and a proof link.
+- **Symptom:** Lessons are generic.  
+  **Cause:** no specific outcome.  
+  **Fix:** tie the lesson to a visible behavior.
 
-- **Symptom:** The lesson sounds like marketing.  
-  **Cause:** The lesson is not tied to a real check.  
-  **Fix:** Use the template and keep it factual.
+- **Symptom:** Links break.  
+  **Cause:** demos removed.  
+  **Fix:** update or remove the link.
 
 ## Cheat sheet
 
-- One goal per demo.
-- One success check.
-- One live link.
-- One lesson template.
-- Proof links everywhere.
+- Three projects.
+- Three proof links.
+- Three lessons.
 
 ## Next steps
 
-- Add a small "Lessons" section to each repo README.
-- Share one lesson with a peer and ask for feedback.
-- Build one more demo with a different tool.
+- Rotate older projects out every quarter.
+- Add a screenshot per demo.
 
 ## Related links
 
-- https://github.com/BradleyMatera/AnimalSounds
-- https://github.com/BradleyMatera/CheeseMath-Jest-Tests
-- https://github.com/BradleyMatera/EthicsFrontEndDemo
 - https://bradleymatera.dev/projects/
 
 ## Final CTA
 
-Pick one small idea and ship it in two days. Then write the lesson while it is fresh.
+Keep the list small, current, and verifiable.

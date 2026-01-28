@@ -1,127 +1,199 @@
 ---
-title: "JWT CTF Lab: A Full Debug Walkthrough"
-date: "2025-10-08"
+title: "JWT CTF Lab: Build, Decode, and Verify Tokens"
+date: "2025-08-10"
 slug: "/jwt-ctf-lab"
-tags: ["security", "ctf", "jwt", "debugging"]
-description: "A complete lab tutorial for decoding, checking, and fixing JWTs without claiming production experience."
+tags: ["security", "jwt", "ctf"]
+description: "A full JWT lab guide with exact steps, commands, and verification checks."
 theme: "Security"
 ---
 
-JWT bugs are common because people skip basic checks.
+JWTs are simple until you trust them without verifying.
 
-This post is a full lab walkthrough, not a production story.
+This lab walks through creating, decoding, and validating a JWT.
 
-You will decode a token, validate claims, and fix a broken flow.
+You will build a tiny token workflow and verify each step.
 
-If you are new to JWTs, this is for you.
+I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+
+## The promise
+
+By the end, you will:
+
+- generate a JWT
+- decode it safely
+- verify its signature
+
+> "If you do not verify the signature, the token is just a string."
 
 ## What this is
 
-High level, a JWT is a signed string used to pass claims between a client and server.
+**High level:** JWT is a signed token format used for auth and claims.
 
-Low level, it is three base64url parts: header, payload, signature.
+**Low level:** You sign a JSON payload with a secret, then verify that signature on decode.
 
-Key terms:
+**Key terms:**
 
-- **Header**: metadata like the algorithm used to sign the token.
-- **Payload**: the claims, such as subject, issuer, and expiry.
-- **Signature**: the cryptographic proof the token was not tampered with.
+- **JWT:** JSON Web Token.
+- **Header:** The token metadata.
+- **Payload:** The claims inside the token.
+- **Signature:** The cryptographic proof the token was not modified.
 
 ## What you need
 
-- A JWT string from your lab.
-- Node.js 18 or later.
-- A text editor and a terminal.
+- Node 18+
+- A terminal
+- A new folder for the lab
 
-Optional but helpful:
+## Start to Finish
 
-- A JWT debugger like https://jwt.io
+### Step 1: Create the lab project
+Goal:
+Set up a minimal Node project for the JWT lab.
 
-## Start to finish
+Actions:
+- Commands:
+  ```bash
+  mkdir jwt-lab && cd jwt-lab
+  npm init -y
+  npm install jsonwebtoken
+  ```
+- File path: `index.js`
 
-1) Copy the token from the lab.
+Why:
+A clean folder keeps the lab isolated. `jsonwebtoken` gives you signing and verification in a few lines. This keeps the example focused. It also makes it easy to delete later.
 
-Why: You need the raw string for every check.
+Verify:
+- Run:
+  ```bash
+  npm list jsonwebtoken
+  ```
+- Expected: `jsonwebtoken` appears.
+- This confirms the dependency is installed.
 
-2) Split the token into its three parts.
+If it fails:
+- Symptom: `jsonwebtoken` missing.
+- Fix: run `npm install jsonwebtoken` again.
 
-Why: You need to inspect header and payload separately.
+### Step 2: Sign a token
+Goal:
+Generate a JWT with a known payload.
 
-```bash
-node -e "const t=process.argv[1]; console.log(t.split('.'))" "YOUR.JWT.HERE"
-```
+Actions:
+- File path: `index.js`
+- Add:
+  ```js
+  const jwt = require("jsonwebtoken");
 
-3) Decode the payload.
+  const secret = "demo-secret";
+  const payload = { userId: "123", role: "user" };
 
-Why: You need to read claims like exp and aud.
+  const token = jwt.sign(payload, secret, { expiresIn: "1h" });
+  console.log("token:", token);
+  ```
 
-```bash
-node -e "const p=process.argv[1].split('.')[1]; console.log(Buffer.from(p,'base64url').toString('utf8'))" "YOUR.JWT.HERE"
-```
+Why:
+You need a real token to test. A short payload is easy to inspect. A fixed secret keeps the lab deterministic. Expiration helps demonstrate validation later.
 
-4) Check core claims.
+Verify:
+- Run:
+  ```bash
+  node index.js
+  ```
+- Expected: a long token string printed to the console.
+- This confirms the token is generated.
 
-Why: Most lab failures are missing or wrong claims.
+If it fails:
+- Symptom: `jwt.sign is not a function`.
+- Fix: check the import and package install.
 
-Check at least:
+### Step 3: Decode the token
+Goal:
+Inspect the token without verifying it yet.
 
-- iss (issuer)
-- aud (audience)
-- sub (subject)
-- exp (expiry)
+Actions:
+- File path: `index.js`
+- Add after signing:
+  ```js
+  const decoded = jwt.decode(token, { complete: true });
+  console.log("decoded:", decoded);
+  ```
 
-5) Fix the claim or regenerate the token.
+Why:
+Decoding shows the header and payload. This proves what is inside the token. It also shows why decoding alone is not enough for trust. This step is the baseline for the next verification step.
 
-Why: A corrected claim is only valid if it matches the lab rules.
+Verify:
+- Run `node index.js`.
+- Expected: `header` and `payload` printed.
+- This confirms the decode works.
 
-If you are using a lab tool, follow its exact signing steps.
+If it fails:
+- Symptom: `decoded` is null.
+- Fix: ensure the token string is passed correctly.
 
-6) Retry the lab request.
+### Step 4: Verify the signature
+Goal:
+Verify the token with the correct secret.
 
-Why: You need to confirm the fix, not just the theory.
+Actions:
+- File path: `index.js`
+- Add:
+  ```js
+  try {
+    const verified = jwt.verify(token, secret);
+    console.log("verified:", verified);
+  } catch (err) {
+    console.error("verify failed:", err.message);
+  }
+  ```
+
+Why:
+Verification is the security step. It proves the token was signed with the secret. Without this, any attacker can forge a token. This is the part that turns the JWT into a trustworthy claim.
+
+Verify:
+- Run `node index.js`.
+- Expected: `verified` object printed with `userId` and `role`.
+- This confirms the signature is valid.
+
+If it fails:
+- Symptom: `invalid signature`.
+- Fix: ensure the secret used to verify matches the secret used to sign.
 
 ## Verify it worked
 
-- The lab should accept the token.
-- The server should stop returning auth errors.
-
-If you see **401 Unauthorized**, it usually means a missing or invalid claim.
-
-If you see **403 Forbidden**, it often means the claim is valid but not allowed.
+- A token prints.
+- The token decodes into header and payload.
+- Verification returns the payload without errors.
 
 ## Common mistakes
 
-- **Symptom**: Token decodes but still fails.
-  **Cause**: You only decoded, you did not verify claims.
-  **Fix**: Check iss, aud, sub, exp one by one.
+- **Symptom:** Verification fails with `invalid signature`.  
+  **Cause:** Secret mismatch.  
+  **Fix:** use the same secret for signing and verifying.
 
-- **Symptom**: Expired token.
-  **Cause**: Wrong system time or wrong exp value.
-  **Fix**: Regenerate with a fresh exp.
+- **Symptom:** Token expires immediately.  
+  **Cause:** Bad `expiresIn` value.  
+  **Fix:** use `1h` or a numeric value in seconds.
 
-- **Symptom**: Algorithm mismatch.
-  **Cause**: Header alg does not match the lab rules.
-  **Fix**: Use the correct signing algorithm.
+- **Symptom:** You trust decoded tokens without verifying.  
+  **Cause:** Misunderstanding of JWT.  
+  **Fix:** always call `verify`.
 
 ## Cheat sheet
 
-- JWT is header.payload.signature.
-- Decode does not equal verify.
-- Check iss, aud, sub, exp every time.
-- Fix one claim at a time.
-- Re-run the lab after each change.
+- Sign with a secret.
+- Decode for visibility.
+- Verify for trust.
 
 ## Next steps
 
-- Try the same checklist on a new lab token.
-- Write a short debug note after each fix.
-- Read the OWASP JWT cheat sheet.
+- Add a refresh token flow.
+- Store the token securely in memory only for demos.
 
-Related links:
+## Related links
 
-- https://jwt.io/introduction
-- https://owasp.org/www-project-cheat-sheets/cheatsheets/JSON_Web_Token_Cheat_Sheet_for_Java.html
+- https://jwt.io/
+- https://github.com/auth0/node-jsonwebtoken
 
-Final CTA:
+## Final CTA
 
-If you want a short JWT checklist you can print, ask and I will share it.
+If you do not verify the token, you do not have security.

@@ -1,108 +1,163 @@
 ---
-title: "Balancing School, Work, and Projects: A Complete Weekly System"
-date: "2025-09-20"
+title: "Balancing Work, School, and Projects: A Simple Schedule"
+date: "2025-04-12"
 slug: "/balancing-school-work-projects"
-tags: ["time-management", "learning", "career"]
-description: "A complete weekly system with steps, checks, and common mistakes."
-theme: "Productivity"
+tags: ["process", "time-management", "career"]
+description: "A concrete weekly plan that balances classes, work, and projects."
+theme: "Process"
 ---
 
-This is a simple weekly system that kept me shipping.
+Balance is not a vibe. It is a schedule you can repeat.
 
-It is not a hustle routine. It is a checklist you can follow.
+This post shows a simple weekly plan and how to track it.
 
-You will learn the schedule, the rules, and the debug steps when it fails.
+You will create a schedule file, time box tasks, and review what worked.
 
-If you are juggling multiple priorities, this is for you.
+I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+
+## The promise
+
+By the end, you will:
+
+- set weekly time blocks
+- keep one project moving without burnout
+- measure what actually got done
+
+> "If it is not on the schedule, it will not happen."
 
 ## What this is
 
-High level, this is a weekly planning system for small projects.
+**High level:** This is a weekly planning loop that protects focus time.
 
-Low level, it is a set of daily tasks, a weekly review, and a cleanup routine.
+**Low level:** You write a schedule file, use time blocks, and update one review note each week.
 
-Key terms:
+**Key terms:**
 
-- **Weekly review**: a short check to decide what stays and what drops.
-- **Shipping block**: a focused session to push one feature or fix.
-- **Retro note**: a short note about what worked and what did not.
+- **Time block:** A fixed block of time for one type of work.
+- **Review note:** A short weekly reflection on what worked.
 
 ## What you need
 
-- A calendar.
-- A single project you care about.
-- A place to store short notes.
+- A calendar
+- A notes file
+- One weekly review slot
 
-## Start to finish
+## Start to Finish
 
-1) Pick one project for the week.
-
-Why: One focus avoids split attention.
-
-2) Write one task per day.
-
-Why: Small tasks keep momentum.
-
-3) Schedule one shipping block.
-
-Why: You need uninterrupted time to finish.
-
-4) Do a weekly review.
-
-Why: You need to drop tasks that are not moving the project.
-
-5) Write a retro note.
-
-Why: You need to learn from the week.
-
-### Example weekly note
-
-```text
+### Step 1: Create a weekly schedule file
 Goal:
-What shipped:
-What broke:
-Next small step:
-```
+Write a schedule you can repeat every week.
+
+Actions:
+- File path: `planning/weekly-schedule.md`
+- Add:
+  ```text
+  Weekly schedule
+  - Mon: class + 60 min project
+  - Tue: work + 60 min project
+  - Wed: class + review
+  - Thu: work + 60 min project
+  - Fri: project block
+  ```
+- Command:
+  ```bash
+  mkdir -p planning
+  $EDITOR planning/weekly-schedule.md
+  ```
+
+Why:
+A written schedule is harder to ignore. It gives you a baseline you can adjust. It also makes time limits visible. This keeps you from overcommitting.
+
+Verify:
+- Open the file and confirm each day has a block.
+- This confirms the schedule exists.
+
+If it fails:
+- Symptom: the file is empty.
+- Fix: add just one line per day and refine later.
+
+### Step 2: Add a project time box
+Goal:
+Protect one focused project block each week.
+
+Actions:
+- Add to `planning/weekly-schedule.md`:
+  ```text
+  - Fri: 2 hour project block
+  ```
+- Add a calendar event for that block.
+
+Why:
+One larger block is where deep work happens. Short daily blocks are good, but a bigger block helps you finish features. This keeps the project moving. The calendar event makes it real.
+
+Verify:
+- Expected: a calendar event exists.
+- This confirms the block is scheduled.
+
+If it fails:
+- Symptom: no event.
+- Fix: add it now and set a reminder.
+
+### Step 3: Add a weekly review note
+Goal:
+Record what worked and what did not.
+
+Actions:
+- File path: `planning/weekly-review.md`
+- Add:
+  ```text
+  Week of:
+  - What shipped:
+  - What slipped:
+  - One change next week:
+  ```
+
+Why:
+The review keeps the schedule honest. It shows what actually happened. It also helps you adjust the next week. One short note is enough.
+
+Verify:
+- Fill it in once.
+- This confirms the review loop is active.
+
+If it fails:
+- Symptom: notes stay blank.
+- Fix: write one line per section and move on.
 
 ## Verify it worked
 
-- You shipped at least one small change.
-- You have a written retro note.
-- The next task is clear.
-
-If you did not ship, reduce scope next week.
+- A weekly schedule file exists.
+- One project block is on your calendar.
+- A review note is filled out.
 
 ## Common mistakes
 
-- **Symptom**: Tasks keep rolling over.
-  **Cause**: Tasks are too big.
-  **Fix**: Split into smaller pieces.
+- **Symptom:** Project time disappears.  
+  **Cause:** No calendar event.  
+  **Fix:** schedule it like a meeting.
 
-- **Symptom**: No shipping block.
-  **Cause**: No calendar hold.
-  **Fix**: Put it on the calendar first.
+- **Symptom:** You keep overbooking.  
+  **Cause:** No review loop.  
+  **Fix:** adjust the schedule weekly.
 
-- **Symptom**: No retro notes.
-  **Cause**: Skipping reflection.
-  **Fix**: Write three lines only.
+- **Symptom:** Schedule feels unrealistic.  
+  **Cause:** Too many blocks.  
+  **Fix:** cut one block and reassess.
 
 ## Cheat sheet
 
-- One project per week.
-- One task per day.
-- One shipping block.
-- One retro note.
+- Write the schedule.
+- Time box one project block.
+- Review weekly.
 
 ## Next steps
 
-- Try this for two weeks.
-- Drop one task if you miss twice.
-- Keep the notes short.
+- Add a short "done" list for each week.
+- Track time spent once per week.
 
-Related links:
+## Related links
 
-- https://bradleymatera.dev/
+- https://www.calnewport.com/blog/2009/01/12/time-blocking/
 
-Final CTA:
+## Final CTA
 
-If you want my weekly template, ask and I will share it.
+Keep the schedule small enough to follow. That is the only version that works.

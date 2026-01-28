@@ -1,115 +1,208 @@
 ---
-title: "OBJ Parser Lab: Full Walkthrough"
+title: "OBJ Parser Lab: Count Vertices and Faces in Zig"
 date: "2025-02-22"
 slug: "/obj-parser"
 tags: ["zig", "parsing", "systems"]
-description: "A complete lab guide for parsing OBJ files with clear steps and verification."
+description: "A complete Zig OBJ parsing lab with exact steps, checks, and fixes."
 theme: "Systems"
 ---
 
-This is a small parsing lab. It is not production code.
+This is a small parsing lab, not production code.
 
-I built it to learn parsing, errors, and data validation.
+You will build a minimal OBJ parser that counts vertices and faces.
 
-You will get the full steps and checks.
+It is small enough to reason about and strict enough to verify.
 
-If you want a simple systems exercise, this is for you.
+I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+
+## The promise
+
+By the end, you will:
+
+- parse `v` and `f` lines from an OBJ file
+- print counts with a predictable output
+- debug the most common parse errors
+
+> "If the counts match the file, the parser is doing its job."
 
 ## What this is
 
-High level, this is a parser that turns text lines into data structures.
+**High level:** An OBJ parser reads a text file and extracts geometry data.
 
-Low level, it is a line reader plus token parsing and validation.
+**Low level:** You read each line, split tokens, and increment counters for `v` and `f` lines.
 
-Key terms:
+**Key terms:**
 
-- **OBJ**: a text format for 3D geometry.
-- **Token**: a value parsed from a line.
-- **Validation**: checks that the parsed data is correct.
+- **OBJ:** Plain text file format for 3D geometry.
+- **Vertex line:** A line starting with `v`.
+- **Face line:** A line starting with `f`.
+- **Token:** A split part of a line.
 
 ## What you need
 
-- Zig 0.13.x installed.
-- A small OBJ file.
-- A terminal.
+- Zig installed
+- A terminal
+- A test OBJ file
 
-Docs used:
+## Start to Finish
 
-- https://ziglang.org/documentation/0.13.0/
-- https://en.wikipedia.org/wiki/Wavefront_.obj_file
+### Step 1: Create the project
+Goal:
+Scaffold a Zig project and add a test OBJ file.
 
-## Start to finish
+Actions:
+- Commands:
+  ```bash
+  mkdir obj-parser && cd obj-parser
+  zig init-exe
+  mkdir data
+  ```
+- File path: `data/sample.obj`
+- Add:
+  ```text
+  v 0 0 0
+  v 1 0 0
+  v 1 1 0
+  v 0 1 0
+  f 1 2 3
+  f 1 3 4
+  ```
 
-1) Create a Zig project.
+Why:
+You need a tiny, known file to verify counts. Four vertices and two faces keep the output simple. Using `zig init-exe` ensures the build system is ready. This keeps the lab deterministic.
 
-Why: You need a clean place to test parsing.
+Verify:
+- Run:
+  ```bash
+  cat data/sample.obj
+  ```
+- Expected: the exact lines above.
+- This confirms the input is correct.
 
-```bash
-mkdir obj-parser && cd obj-parser
-zig init
-```
+If it fails:
+- Symptom: missing file.
+- Fix: ensure `data/` exists and save the file again.
 
-2) Read the file line by line.
+### Step 2: Implement the parser
+Goal:
+Count vertices and faces by reading the file line by line.
 
-Why: OBJ is line-based.
+Actions:
+- File path: `src/main.zig`
+- Replace contents with:
+  ```zig
+  const std = @import("std");
 
-```zig
-const line = try reader.readUntilDelimiterOrEofAlloc(allocator, '\n', 2048);
-```
+  pub fn main() !void {
+      var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+      defer _ = gpa.deinit();
+      const allocator = gpa.allocator();
 
-3) Parse vertex lines.
+      var file = try std.fs.cwd().openFile("data/sample.obj", .{});
+      defer file.close();
 
-Why: Vertices are the core data.
+      var buf_reader = std.io.bufferedReader(file.reader());
+      var in_stream = buf_reader.reader();
 
-4) Count faces.
+      var vertex_count: usize = 0;
+      var face_count: usize = 0;
 
-Why: Face counts verify the file.
+      var line_buf: [256]u8 = undefined;
+      while (try in_stream.readUntilDelimiterOrEof(&line_buf, '\n')) |line| {
+          if (line.len == 0) continue;
+          if (line[0] == 'v') vertex_count += 1;
+          if (line[0] == 'f') face_count += 1;
+      }
+
+      const out = std.io.getStdOut().writer();
+      try out.print("vertices: {d}\nfaces: {d}\n", .{ vertex_count, face_count });
+  }
+  ```
+
+Why:
+Counting lines is the simplest parser that still proves the flow works. It forces you to handle file IO and line splitting. It also gives a clear verification output. This is a safe first step before parsing full geometry.
+
+Verify:
+- Run:
+  ```bash
+  zig build run
+  ```
+- Expected output:
+  ```text
+  vertices: 4
+  faces: 2
+  ```
+- This confirms the parser counts lines correctly.
+
+If it fails:
+- Symptom: counts are wrong.
+- Fix: ensure your sample file matches the lines above.
+
+### Step 3: Add a basic validation check
+Goal:
+Detect invalid lines early and print a warning.
+
+Actions:
+- File path: `src/main.zig`
+- Add inside the loop:
+  ```zig
+  if (line[0] != 'v' and line[0] != 'f') {
+      const out = std.io.getStdOut().writer();
+      try out.print("skipped line: {s}\n", .{line});
+  }
+  ```
+
+Why:
+OBJ files can include comments and other line types. Printing skipped lines helps you see what you are ignoring. This makes debugging faster. It also keeps the parser honest about what it does and does not handle.
+
+Verify:
+- Add a comment line to the file: `# comment`
+- Run `zig build run`.
+- Expected: a `skipped line` message.
+- This confirms the validation path works.
+
+If it fails:
+- Symptom: no skipped line prints.
+- Fix: ensure the line starts with `#` and is not blank.
 
 ## Verify it worked
 
-- Print vertex and face counts.
-- Compare against the file.
-
-Example output:
-
-```text
-vertices: 8
-faces: 12
-```
-
-If counts are off, log the first failing line.
+- Counts match the file.
+- Skipped lines log correctly.
+- The program exits without errors.
 
 ## Common mistakes
 
-- **Symptom**: Crash on large files.
-  **Cause**: Buffer too small.
-  **Fix**: Increase the read buffer.
+- **Symptom:** Buffer overflow error.  
+  **Cause:** Line buffer too small.  
+  **Fix:** Increase `line_buf` size.
 
-- **Symptom**: Wrong counts.
-  **Cause**: Blank lines not skipped.
-  **Fix**: Skip empty lines.
+- **Symptom:** Counts are off by one.  
+  **Cause:** Blank line at end of file.  
+  **Fix:** Keep the `line.len == 0` guard.
 
-- **Symptom**: Float parse errors.
-  **Cause**: Extra spaces.
-  **Fix**: Trim and split on whitespace.
+- **Symptom:** Parser crashes on large files.  
+  **Cause:** The line buffer is too small.  
+  **Fix:** Increase the buffer or use `readUntilDelimiterOrEofAlloc`.
 
 ## Cheat sheet
 
-- Read line by line.
-- Parse tokens carefully.
-- Log errors early.
-- Verify counts.
+- Use a tiny file with known counts.
+- Count `v` and `f` lines first.
+- Print output as proof.
+- Add skipped line logs for validation.
 
 ## Next steps
 
-- Add unit tests for bad lines.
-- Add benchmarks for big files.
+- Parse vertex floats and face indices.
+- Add unit tests with malformed files.
+- Track line numbers for better errors.
 
-Related links:
+## Related links
 
-- https://ziglang.org/documentation/0.13.0/
+- https://ziglang.org/learn/
 - https://en.wikipedia.org/wiki/Wavefront_.obj_file
 
-Final CTA:
+## Final CTA
 
-If you want my test files, ask and I will share them.
+Make the counts match the file before you add more features.

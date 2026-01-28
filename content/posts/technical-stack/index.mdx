@@ -1,97 +1,159 @@
 ---
-title: "My Technical Stack: Complete Inventory With Proof"
-date: "2025-04-28"
+title: "Technical Stack 2025: A Verifiable Inventory"
+date: "2025-10-12"
 slug: "/technical-stack-2025"
-tags: ["tools", "process", "web-development"]
-description: "A full inventory of tools, comfort levels, and proof links."
-theme: "Front-End & Full-Stack"
+tags: ["stack", "process", "documentation"]
+description: "A simple way to document what you actually use and what you are still learning."
+theme: "Process"
 ---
 
-This is a strict inventory, not a wishlist.
+Your stack should be a list you can prove, not a wish list.
 
-I only list tools I have used in a demo or lab.
+This post shows how I document what I use, what I am learning, and what is next.
 
-You will get the structure, the checks, and a template to keep it honest.
+You will create a stack file and verify each item with a repo or demo.
 
-If you want to publish your stack, this is for you.
+I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+
+## The promise
+
+By the end, you will:
+
+- write a stack inventory you can defend
+- link each tool to proof
+- separate comfort from learning
+
+> "If there is no proof link, it is not on the stack list."
 
 ## What this is
 
-High level, this is a list of tools tied to evidence.
+**High level:** A stack inventory is a short list of tools you actually use.
 
-Low level, it is a format that links each tool to a repo or demo.
+**Low level:** You list tools and link to a repo or demo that proves usage.
 
-Key terms:
+**Key terms:**
 
-- **Comfort level**: how confident you are using a tool.
-- **Proof link**: a repo or demo URL that backs the tool.
-- **Planned**: a tool you plan to try, not one you already used.
+- **Comfort:** Tools you can ship with today.
+- **Learning:** Tools you are still practicing.
+- **Proof link:** A repo or demo that shows you used the tool.
 
 ## What you need
 
-- A list of tools you actually used.
-- One proof link per tool.
-- A short note for planned tools.
+- A notes file
+- Links to your repos and demos
 
-## Start to finish
+## Start to Finish
 
-1) List each tool you used.
+### Step 1: Create a stack file
+Goal:
+Write down your current stack categories.
 
-Why: This is the base inventory.
+Actions:
+- File path: `docs/stack.md`
+- Add:
+  ```text
+  Stack
+  Comfort:
+  - React
+  - TypeScript
+  Learning:
+  - WebGPU
+  - AWS
+  ```
 
-2) Add a comfort level.
+Why:
+A clear list prevents overclaiming. It also makes updates easy. Splitting comfort and learning keeps your story honest. This format scales as your skills change.
 
-Why: It shows honesty and gaps.
+Verify:
+- Open the file and confirm the categories exist.
+- This confirms the structure is ready.
 
-3) Attach a proof link.
+If it fails:
+- Symptom: list is vague.  
+  **Fix:** use specific tool names.
 
-Why: The proof link prevents over-claiming.
+### Step 2: Add proof links
+Goal:
+Link each tool to a real example.
 
-### Example format
+Actions:
+- File path: `docs/stack.md`
+- Add:
+  ```text
+  Proof:
+  - React: https://github.com/BradleyMatera/AnimalSounds
+  - WebGPU: https://github.com/BradleyMatera/TriangleDemo
+  ```
 
-```text
-Tool: React
-Status: comfortable
-Proof: https://bradleymatera.dev
-```
+Why:
+Proof links turn claims into facts. They also help readers verify quickly. This keeps the stack list grounded in work you can show. It is the simplest honesty check.
+
+Verify:
+- Click each link.
+- Expected: repo or demo opens.
+- This confirms the proof is real.
+
+If it fails:
+- Symptom: link 404.  
+  **Fix:** update the URL or remove the tool.
+
+### Step 3: Add a short update note
+Goal:
+Record one change to the stack.
+
+Actions:
+- File path: `docs/stack.md`
+- Add:
+  ```text
+  Update: Added WebGPU after shipping TriangleDemo.
+  ```
+
+Why:
+A short update note shows progression. It also prevents the list from becoming stale. This makes your stack more believable. One line is enough.
+
+Verify:
+- Confirm the update is a single sentence.
+- This confirms the note is concise.
+
+If it fails:
+- Symptom: the note reads like a blog post.  
+  **Fix:** cut it to one sentence.
 
 ## Verify it worked
 
-- Each tool has one proof link.
-- Planned tools are labeled clearly.
-- There are no vague claims.
-
-If you cannot prove a tool, remove it.
+- Stack list is split into comfort and learning.
+- Every tool has a proof link.
+- Update note exists.
 
 ## Common mistakes
 
-- **Symptom**: Stack looks impressive but vague.
-  **Cause**: No proof links.
-  **Fix**: Add the link or remove the tool.
+- **Symptom:** Stack reads like a buzzword list.  
+  **Cause:** No proof.  
+  **Fix:** add links or remove items.
 
-- **Symptom**: Claims feel inflated.
-  **Cause**: Mixing planned and real tools.
-  **Fix**: Separate planned items.
+- **Symptom:** No difference between comfort and learning.  
+  **Cause:** Everything is listed as equal.  
+  **Fix:** split into two lists.
 
-- **Symptom**: List grows too large.
-  **Cause**: No pruning.
-  **Fix**: Remove unused tools monthly.
+- **Symptom:** Stack never updates.  
+  **Cause:** No update note.  
+  **Fix:** add one update line per quarter.
 
 ## Cheat sheet
 
-- One tool, one proof link.
-- Comfort level for each tool.
-- Planned tools labeled.
+- Split comfort and learning.
+- Add proof links.
+- Add one update note.
 
 ## Next steps
 
-- Add proof links to your stack today.
-- Remove one tool you cannot prove.
+- Replace one learning item with comfort once you ship a demo.
+- Add a link to your stack file from your README.
 
-Related links:
+## Related links
 
 - https://bradleymatera.dev/projects/
 
-Final CTA:
+## Final CTA
 
-If you want my stack template, ask and I will share it.
+If you cannot prove a tool, leave it off the list.

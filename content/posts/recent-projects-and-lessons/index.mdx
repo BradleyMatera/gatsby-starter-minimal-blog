@@ -1,110 +1,150 @@
 ---
-title: "Recent Projects and Lessons: A Full Reality Log"
-date: "2025-08-28"
+title: "Recent Projects and Lessons: A Short, Verifiable Format"
+date: "2025-06-01"
 slug: "/recent-projects-and-lessons"
-tags: ["projects", "learning", "web-development"]
-description: "A complete log format for projects, lessons, and proof links."
+tags: ["projects", "learning", "process"]
+description: "A compact format for sharing recent demos with proof links."
 theme: "Process"
 ---
 
-Shipping without a lesson log makes you repeat mistakes.
+Recent projects only matter if the proof links work.
 
-This post shows the full format I use to capture lessons from demos.
+This post shows a short format for listing demos and lessons.
 
-You will get a template, steps, and verification checks.
+You will add a project list, proof links, and one lesson per demo.
 
-If you ship small projects, this is for you.
+I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+
+## The promise
+
+By the end, you will:
+
+- list projects with working links
+- write one lesson per project
+- keep the format consistent
+
+> "One proof link beats a page of claims."
 
 ## What this is
 
-High level, this is a project log with lessons and proof.
+**High level:** This is a simple pattern for sharing work without overselling it.
 
-Low level, it is a short template and a weekly routine.
+**Low level:** You write a list of projects and add a one line lesson for each.
 
-Key terms:
+**Key terms:**
 
-- **Lesson log**: a short record of what changed and what you learned.
-- **Proof link**: a repo or demo URL that backs the project.
-- **Reality snapshot**: a short list of limits and gaps.
+- **Proof link:** A repo or demo URL.
+- **Lesson:** One specific takeaway.
 
 ## What you need
 
-- A list of your demos.
-- One proof link per demo.
-- A place to store short notes.
+- A list of projects
+- Working repo and demo links
 
-## Start to finish
+## Start to Finish
 
-1) Pick the last demo you shipped.
+### Step 1: Create the list file
+Goal:
+Write a consistent list of recent projects.
 
-Why: Start with the freshest memory.
+Actions:
+- File path: `docs/recent-projects.md`
+- Add:
+  ```text
+  Recent projects
+  - AnimalSounds: https://bradleymatera.github.io/AnimalSounds/
+  - WebGPU Triangle Demo: https://bradleymatera.github.io/TriangleDemo/
+  ```
 
-2) Write a three line lesson.
+Why:
+A short list makes the projects easy to scan. It keeps the post honest. It also makes updates fast. Proof links are required for trust.
 
-Why: Short notes are easier to maintain.
+Verify:
+- Click each link.
+- Expected: each demo loads.
+- This confirms the list is valid.
 
-3) Add a reality snapshot.
+If it fails:
+- Symptom: 404.  
+  **Fix:** update the link or remove the project.
 
-Why: Limits must be visible.
+### Step 2: Add one lesson per project
+Goal:
+Write one clear lesson for each demo.
 
-4) Add proof links.
+Actions:
+- Add under each project:
+  ```text
+  Lesson: Base path matters for GitHub Pages.
+  ```
 
-Why: A lesson log without links is weak.
+Why:
+A lesson turns the list into useful content. It also keeps the post from being just a link dump. One sentence is enough. It is easier to keep honest and updated.
 
-### Example lesson format
+Verify:
+- Each project has exactly one lesson.
+- This confirms consistency.
 
-```text
-Project:
-What shipped:
-What I learned:
-```
+If it fails:
+- Symptom: lessons are vague.  
+  **Fix:** tie them to a specific fix or check.
 
-### Example reality snapshot
+### Step 3: Add an update date
+Goal:
+Show when the list was last refreshed.
 
-```text
-What works:
-What is missing:
-What is planned:
-```
+Actions:
+- Add to the top of the file:
+  ```text
+  Updated: 2025-06-01
+  ```
+
+Why:
+Dates show recency. It prevents stale lists from looking current. This keeps the page honest. It also helps you remember to update it.
+
+Verify:
+- The date appears at the top.
+- This confirms the update time is visible.
+
+If it fails:
+- Symptom: no date.  
+  **Fix:** add one line and move on.
 
 ## Verify it worked
 
-- The lesson log is one screen long.
-- Every project has a working link.
-- Limits are listed.
-
-If a link is broken, fix it before sharing.
+- The list has proof links.
+- Each project has one lesson.
+- The update date is present.
 
 ## Common mistakes
 
-- **Symptom**: Notes get long.
-  **Cause**: Writing essays.
-  **Fix**: Keep to three lines.
+- **Symptom:** Projects listed without proof.  
+  **Cause:** missing links.  
+  **Fix:** add links or remove the item.
 
-- **Symptom**: No proof links.
-  **Cause**: Skipping link checks.
-  **Fix**: Add the link as part of the log.
+- **Symptom:** Lessons are too long.  
+  **Cause:** trying to explain the whole project.  
+  **Fix:** keep it to one sentence.
 
-- **Symptom**: Limits missing.
-  **Cause**: Avoiding the hard parts.
-  **Fix**: Write the limits first.
+- **Symptom:** List goes stale.  
+  **Cause:** no update date.  
+  **Fix:** add one and refresh monthly.
 
 ## Cheat sheet
 
-- Three line lesson.
-- Reality snapshot.
-- Proof links.
-- Weekly review.
+- List the project.
+- Link the proof.
+- Add one lesson.
 
 ## Next steps
 
-- Add a lesson log to one README.
-- Update it after your next demo.
+- Add screenshots for the top two projects.
+- Move older projects to an archive section.
 
-Related links:
+## Related links
 
 - https://bradleymatera.dev/projects/
 
-Final CTA:
+## Final CTA
 
-If you want my lesson template, ask and I will share it.
+Keep the list short, current, and verifiable.

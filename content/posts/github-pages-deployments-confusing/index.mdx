@@ -1,111 +1,172 @@
 ---
-title: "GitHub Pages Deployments: Full Fix for Base Path Bugs"
-date: "2025-05-05"
+title: "GitHub Pages Deployments That Stop Being Confusing"
+date: "2025-03-01"
 slug: "/github-pages-deployments-confusing"
-tags: ["github", "deployment", "web-development"]
-description: "A complete fix guide for the most common GitHub Pages base path mistake."
-theme: "Front-End & Full-Stack"
+tags: ["github", "deployment", "web"]
+description: "Exact steps to deploy a static site to GitHub Pages and verify it works."
+theme: "Deployment"
 ---
 
-GitHub Pages fails fast when the base path is wrong.
+GitHub Pages is simple once you wire the base path correctly.
 
-This post shows a full fix with setup, verification, and cleanup.
+This post shows a minimal deployment flow with exact files and checks.
 
-You will get the exact steps and a checklist you can reuse.
+You will publish a static build and verify the live URL.
 
-If your Pages site breaks after deploy, this is for you.
+I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+
+## The promise
+
+By the end, you will:
+
+- set the correct base path
+- publish to GitHub Pages
+- verify the live URL works
+
+> "If the base path is wrong, every asset breaks."
 
 ## What this is
 
-High level, Pages hosts static files under a repo path.
+**High level:** GitHub Pages hosts static files from a branch or a folder.
 
-Low level, your app needs a base path that matches the repo name.
+**Low level:** You build the site into a folder and push that folder to `gh-pages`.
 
-Key terms:
+**Key terms:**
 
-- **Base path**: the URL prefix for a repo site.
-- **Project site**: a Pages site served from a repo, not a custom domain.
-- **Deploy**: pushing a build output to Pages.
+- **Base path:** The URL prefix where your site lives.
+- **Static build:** The output folder with HTML, CSS, and JS files.
+- **Pages branch:** The branch GitHub Pages serves from.
 
 ## What you need
 
-- A GitHub repo.
-- A built static site.
-- GitHub Pages enabled.
+- A GitHub repo
+- A build command that outputs static files
+- A `gh-pages` deploy script or manual branch push
 
-Docs used:
+## Start to Finish
 
-- https://docs.github.com/pages
+### Step 1: Set the base path
+Goal:
+Make sure the app uses the repo name as the base path.
 
-## Start to finish
+Actions:
+- File path: `package.json`
+- Add or confirm:
+  ```json
+  {
+    "homepage": "https://yourname.github.io/your-repo"
+  }
+  ```
 
-1) Confirm the repo name.
+Why:
+GitHub Pages hosts your site under a repo path. Without the base path, your assets point to `/` and break. This one line fixes 90 percent of broken deployments. It also makes local and production builds consistent.
 
-Why: The base path must match it.
+Verify:
+- Run:
+  ```bash
+  npm run build
+  ```
+- Open the generated `index.html` and confirm asset URLs include `/your-repo/`.
+- This confirms the base path is applied.
 
-2) Set the base path in your config.
+If it fails:
+- Symptom: assets still point to `/`.
+- Fix: ensure the `homepage` value is exact and rebuild.
 
-Why: Static assets must resolve to the repo path.
+### Step 2: Add a deploy script
+Goal:
+Publish the build folder to GitHub Pages.
 
-Example `next.config.js`:
+Actions:
+- Install the deploy tool:
+  ```bash
+  npm install -D gh-pages
+  ```
+- File path: `package.json`
+- Add:
+  ```json
+  {
+    "scripts": {
+      "deploy": "gh-pages -d dist"
+    }
+  }
+  ```
+- Replace `dist` with your build output folder.
 
-```js
-const isProd = process.env.NODE_ENV === "production";
+Why:
+`gh-pages` pushes your build output to the Pages branch. The script keeps the command consistent. This makes your deploy repeatable. It also reduces mistakes when you publish updates.
 
-module.exports = {
-  basePath: isProd ? "/MyRepoName" : "",
-};
-```
+Verify:
+- Run:
+  ```bash
+  npm run deploy
+  ```
+- Expected: a new `gh-pages` branch is created.
+- This confirms the deploy script worked.
 
-3) Build the site.
+If it fails:
+- Symptom: `ENOENT` for the build folder.
+- Fix: check your build output folder name.
 
-Why: You need the correct output for Pages.
+### Step 3: Turn on GitHub Pages
+Goal:
+Enable GitHub Pages for the repo.
 
-```bash
-npm run build
-```
+Actions:
+- GitHub repo settings → Pages
+- Source: Deploy from branch
+- Branch: `gh-pages`
+- Folder: `/`
 
-4) Deploy to Pages.
+Why:
+GitHub Pages does not serve anything until it is configured. Picking the correct branch is the most common mistake. This step makes the site live. It is a one time setup.
 
-Why: The build output must be published.
+Verify:
+- Open the Pages URL provided by GitHub.
+- Expected: your site loads with CSS and JS.
+- This confirms the site is live.
+
+If it fails:
+- Symptom: 404 or blank page.
+- Fix: wait for the build to finish, then hard reload.
 
 ## Verify it worked
 
-- The home page loads.
-- Assets load without 404s.
-- Links work in a private window.
-
-If assets 404, the base path is still wrong.
+- The live URL loads.
+- CSS and JS assets load without 404s.
+- Refreshing does not break routes.
 
 ## Common mistakes
 
-- **Symptom**: CSS and JS 404.
-  **Cause**: Missing base path.
-  **Fix**: Set base path and rebuild.
+- **Symptom:** Blank page with console errors.  
+  **Cause:** Wrong base path.  
+  **Fix:** set `homepage` and rebuild.
 
-- **Symptom**: Works locally, fails on Pages.
-  **Cause**: Using local root paths.
-  **Fix**: Use the repo path in config.
+- **Symptom:** 404 on the root URL.  
+  **Cause:** Pages not enabled or wrong branch.  
+  **Fix:** enable Pages on the `gh-pages` branch.
 
-- **Symptom**: Stale assets.
-  **Cause**: Cached service worker.
-  **Fix**: Unregister the service worker.
+- **Symptom:** Old version keeps showing.  
+  **Cause:** Browser cache.  
+  **Fix:** hard reload and clear cache.
 
 ## Cheat sheet
 
-- Base path must equal repo name.
-- Build before deploy.
-- Test in a private window.
+- Set `homepage` to the repo URL.
+- Build the site.
+- Deploy to `gh-pages`.
+- Enable Pages in settings.
 
 ## Next steps
 
-- Add a short deploy note to README.
-- Keep a small checklist in the repo.
+- Add a custom domain if you have one.
+- Add a README section with deploy steps.
 
-Related links:
+## Related links
 
-- https://docs.github.com/pages
+- https://pages.github.com/
+- https://www.npmjs.com/package/gh-pages
 
-Final CTA:
+## Final CTA
 
-If you want a Pages checklist, ask and I will share it.
+Make the base path correct first. Everything else is secondary.

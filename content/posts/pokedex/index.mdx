@@ -1,114 +1,162 @@
 ---
-title: "Interactive Pokedex Demo: Full Build Walkthrough"
-date: "2025-06-18"
+title: "Interactive Pokedex: Static Build With Search"
+date: "2025-05-01"
 slug: "/interactive-pokedex"
-tags: ["next-js", "react", "web-development"]
-description: "A complete tutorial for a static Pokedex demo with search and detail pages."
-theme: "Front-End & Full-Stack"
+tags: ["nextjs", "api", "frontend"]
+description: "A minimal static Pokedex build with search and clear verification steps."
+theme: "Front-End"
 ---
 
-This is a static demo built to practice data loading and search.
+This is a static Pokedex demo with client side search.
 
-There is no backend. The data is loaded at build time.
+It uses build time data and a simple search filter.
 
-You will build the list, add search, and verify the result.
+You will fetch data, render cards, and verify search works.
 
-If you want a full static demo guide, this is for you.
+I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+
+## The promise
+
+By the end, you will:
+
+- build a static list from a public API
+- add a simple search filter
+- verify the output with clear checks
+
+> "If the list renders and search filters, the demo works."
 
 ## What this is
 
-High level, this is a static site that lists Pokemon and supports search.
+**High level:** A static Pokedex is a list of Pokemon that is built ahead of time.
 
-Low level, it uses a build-time fetch and client-side filtering.
+**Low level:** You fetch data during build, render a list, and filter it in the browser.
 
-Key terms:
+**Key terms:**
 
-- **Static site**: pages built ahead of time.
-- **Build-time fetch**: data loaded when you build, not at runtime.
-- **Client-side filter**: filtering in the browser.
+- **Static build:** HTML generated at build time.
+- **Client side search:** Filtering done in the browser after load.
 
 ## What you need
 
-- Node.js 18 or later.
-- A Next.js project.
-- Access to the PokeAPI.
+- Node 18+
+- Next.js
+- PokéAPI
 
-Docs used:
+## Start to Finish
 
-- https://nextjs.org/docs
-- https://pokeapi.co/
+### Step 1: Create the Next.js app
+Goal:
+Scaffold a new Next.js project.
 
-## Start to finish
+Actions:
+- Command:
+  ```bash
+  npx create-next-app@latest pokedex-demo
+  cd pokedex-demo
+  ```
 
-1) Create a Next.js app.
+Why:
+Next.js gives you a static build option. It also includes routing by default. This keeps the demo simple. You can deploy the static output to GitHub Pages later.
 
-Why: You need a clean app skeleton.
+Verify:
+- Run:
+  ```bash
+  npm run dev
+  ```
+- Expected: the starter page loads.
+- This confirms the project runs.
 
-```bash
-npx create-next-app@latest pokedex
-cd pokedex
-```
+If it fails:
+- Symptom: dev server fails to start.  
+  **Fix:** reinstall dependencies and retry.
 
-2) Fetch data at build time.
+### Step 2: Fetch Pokemon at build time
+Goal:
+Load a list of Pokemon for static rendering.
 
-Why: The list is static.
+Actions:
+- File path: `app/page.tsx` or `pages/index.tsx`
+- Add a fetch call:
+  ```ts
+  const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151");
+  const data = await res.json();
+  ```
+- Render the list of names.
 
-```js
-const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151");
-const data = await res.json();
-```
+Why:
+Build time fetch makes the page static. It also avoids a server at runtime. This keeps the demo fast and simple. You can verify the list output easily.
 
-3) Render the list.
+Verify:
+- Run:
+  ```bash
+  npm run dev
+  ```
+- Expected: a list of names appears.
+- This confirms the fetch and render work.
 
-Why: You need a visible grid of items.
+If it fails:
+- Symptom: fetch error.  
+  **Fix:** check the API URL and network.
 
-4) Add client-side search.
+### Step 3: Add search filtering
+Goal:
+Filter the list by input.
 
-Why: Search happens in the browser.
+Actions:
+- Add a state value for the query.
+- Filter the list before rendering:
+  ```ts
+  const filtered = items.filter((p) => p.name.includes(query.toLowerCase()));
+  ```
 
-5) Add a detail page.
+Why:
+Search is the main interactive feature. Filtering in the browser is fast for small lists. This keeps the demo offline friendly. It also makes the UI more useful.
 
-Why: Users need a single item view.
+Verify:
+- Type a name into the search input.
+- Expected: the list filters immediately.
+- This confirms search works.
+
+If it fails:
+- Symptom: no filtering.  
+  **Fix:** ensure the query value updates on input.
 
 ## Verify it worked
 
-- The list shows 151 items.
+- The list renders.
 - Search filters results.
-- A detail page renders.
-
-If the list is empty, check the fetch call and build logs.
+- The page loads without errors.
 
 ## Common mistakes
 
-- **Symptom**: API fetch fails.
-  **Cause**: Network errors or rate limits.
-  **Fix**: Retry or cache data.
+- **Symptom:** API fetch fails at build time.  
+  **Cause:** missing network access.  
+  **Fix:** run the build with internet access or cache results.
 
-- **Symptom**: Search is slow.
-  **Cause**: Filtering on every keystroke without debounce.
-  **Fix**: Add a small debounce.
+- **Symptom:** Search is case sensitive.  
+  **Cause:** no normalization.  
+  **Fix:** use `toLowerCase()` on both sides.
 
-- **Symptom**: Detail page 404.
-  **Cause**: Missing dynamic route.
-  **Fix**: Create the correct route file.
+- **Symptom:** Build fails on fetch.  
+  **Cause:** incorrect fetch usage in the app router.  
+  **Fix:** move fetch to a server component.
 
 ## Cheat sheet
 
-- Build-time fetch for the list.
-- Client-side filter for search.
-- Detail page for one item.
+- Fetch 151 Pokemon.
+- Render the list.
+- Filter by query.
 
 ## Next steps
 
+- Add detail pages.
 - Add type filters.
-- Add loading skeletons.
-- Document the data source in README.
 
-Related links:
+## Related links
 
 - https://pokeapi.co/
 - https://nextjs.org/docs
 
-Final CTA:
+## Final CTA
 
-If you want a quick code review of your Pokedex demo, ask and I will help.
+Keep the demo small and verify the core behavior first.

@@ -1,138 +1,200 @@
 ---
-title: "End to End Projects With AI: A Complete, Honest Workflow"
-date: "2025-10-01"
+title: "End to End Projects With AI: A Strict, Verifiable Workflow"
+date: "2025-05-03"
 slug: "/ai-end-to-end-projects"
-tags: ["ai", "process", "projects", "web-development"]
-description: "A full start to finish workflow for using AI as a helper without overstating results."
+tags: ["ai", "workflow", "productivity"]
+description: "A practical AI assisted build workflow with exact steps, files, and checks."
 theme: "Process"
 ---
 
-AI can speed up the boring parts, not replace the work.
+AI can speed you up, but it can also lie.
 
-This post is a full workflow from idea to demo with guardrails.
+This post shows the exact workflow I use to keep AI output honest.
 
-You will learn how I scope, build, verify, and document projects.
+You will set up a prompt log, verify code, and document gaps.
 
-If you want a clean process without fluff, this is for you.
+I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+
+## The promise
+
+By the end, you will:
+
+- structure an AI assisted build workflow
+- keep a proof trail in your repo
+- avoid claims your code cannot back up
+
+> "AI helps me draft. I still verify everything."
 
 ## What this is
 
-High level, this is a project workflow that uses AI for drafts and refactors.
+**High level:** This is a project workflow that uses AI for drafts and refactors, then verifies every output by running code.
 
-Low level, it is a checklist with prompts, code steps, and verification checks.
+**Low level:** You keep a prompt log, implement changes in files, run tests, and write a gap note.
 
-Key terms:
+**Key terms:**
 
-- **Scope**: the smallest version of the idea you can ship.
-- **Verification**: proof that the demo works and matches the claims.
-- **Notes**: short documentation that explains what is missing.
+- **Prompt log:** A file where you track AI requests and edits.
+- **Verification:** Running code or checks to confirm output.
+- **Gap note:** A short list of what is not done yet.
 
 ## What you need
 
-- A simple project idea.
-- A local dev setup for the stack you plan to use.
-- A text editor and terminal.
+- A repo with a working build command
+- A text editor
+- A place to store notes in the repo
 
-Optional tools:
+## Start to Finish
 
-- ChatGPT or Copilot for drafting.
-- A README template.
+### Step 1: Add a prompt log
+Goal:
+Create a file to record AI inputs and outputs.
 
-## Start to finish
+Actions:
+- File path: `docs/prompt-log.md`
+- Add:
+  ```text
+  Prompt log
+  Date:
+  Prompt:
+  Output summary:
+  Verified by:
+  ```
 
-1) Write a one sentence scope.
-
-Why: This prevents the project from bloating.
-
-Example:
-
-```text
-Build a static demo that lists 151 Pokemon with search and details.
-```
-
-2) Ask AI for a rough plan.
-
-Why: You want an outline, not a full solution.
-
-Prompt:
-
-```text
-Give me a 6 step plan for this demo. Keep it small and direct.
-```
-
-3) Build the first working path.
-
-Why: The first working path proves the idea.
-
-Example steps:
-
-- Create the project folder.
-- Build one screen.
-- Show one data item.
-
-4) Add a README with limits.
-
-Why: You need to document gaps honestly.
-
-Example section:
-
-```md
-## Reality snapshot
-- What works
-- What is missing
-- What is planned
-```
-
-5) Verify and publish.
-
-Why: A demo without a working link is not useful.
+Why:
+A prompt log makes the work traceable. It shows what came from the model and what you changed. This keeps your repo honest. It also helps you debug when something breaks later.
 
 Verify:
+- Run:
+  ```bash
+  cat docs/prompt-log.md
+  ```
+- Expected: the template appears.
+- This confirms the file exists.
 
-- The demo runs locally.
-- The live link works.
-- The README matches the code.
+If it fails:
+- Symptom: file not found.
+- Fix: create the `docs/` folder and add the file again.
+
+### Step 2: Draft a change with AI
+Goal:
+Use AI to draft a change you can verify.
+
+Actions:
+- Example prompt in your log:
+  ```text
+  Prompt: Add a button component with props for label and onClick.
+  Output summary: Drafted Button.tsx and usage example.
+  ```
+- File path: `src/components/Button.tsx`
+- Add:
+  ```tsx
+  type ButtonProps = { label: string; onClick?: () => void };
+
+  export function Button({ label, onClick }: ButtonProps) {
+    return <button onClick={onClick}>{label}</button>;
+  }
+  ```
+
+Why:
+A small component is easy to verify. It keeps the AI output scoped. This step also forces you to review the code before you ship it. A tiny change is easier to debug than a big refactor.
+
+Verify:
+- Import and render the button in a page.
+- Run your dev server.
+- Expected: a button appears and clicks.
+- This confirms the code runs.
+
+If it fails:
+- Symptom: build error in TypeScript.
+- Fix: add the correct props type or adjust the import.
+
+### Step 3: Run verification checks
+Goal:
+Confirm the change does not break the project.
+
+Actions:
+- Commands:
+  ```bash
+  npm run build
+  npm run lint
+  ```
+- Add a line to the prompt log:
+  ```text
+  Verified by: build + lint
+  ```
+
+Why:
+AI output can be wrong. Running your build and lint is the fastest proof you have. Logging the checks keeps you honest. This step is what turns a draft into a real change.
+
+Verify:
+- Expected: both commands exit with code 0.
+- This proves the change is safe to keep.
+
+If it fails:
+- Symptom: build error.
+- Fix: revert the change or correct the failing file.
+
+### Step 4: Write a gap note
+Goal:
+Record what is still missing.
+
+Actions:
+- File path: `docs/gaps.md`
+- Add:
+  ```text
+  Gaps
+  - Button has no hover styles
+  - Button has no disabled state
+  ```
+
+Why:
+Gap notes stop you from overstating progress. They also make future work clear. This is the most honest part of the workflow. It prevents fake polish.
+
+Verify:
+- Open `docs/gaps.md` and confirm the list is there.
+- This confirms the gap note exists.
+
+If it fails:
+- Symptom: the list is empty.
+- Fix: add at least one real gap.
 
 ## Verify it worked
 
-- You can load the demo without errors.
-- The main flow works in a private browser window.
-- The README does not claim features you do not have.
-
-If you see build errors, fix them before publishing.
+- The prompt log exists and has entries.
+- The change runs locally.
+- Build and lint pass.
+- A gap note exists.
 
 ## Common mistakes
 
-- **Symptom**: The demo works locally but not online.
-  **Cause**: Missing base path or missing assets.
-  **Fix**: Update config and rebuild.
+- **Symptom:** AI output is merged without review.  
+  **Cause:** No verification step.  
+  **Fix:** Run build and lint before merge.
 
-- **Symptom**: README claims features not in code.
-  **Cause**: Copying an outline without edits.
-  **Fix**: Rewrite the README after the demo works.
+- **Symptom:** Claims do not match code.  
+  **Cause:** No prompt log or gap note.  
+  **Fix:** add both files and keep them updated.
 
-- **Symptom**: AI output is wrong.
-  **Cause**: You accepted it without verification.
-  **Fix**: Check docs and test the code.
+- **Symptom:** Changes are too big.  
+  **Cause:** One giant prompt.  
+  **Fix:** split the work into small tasks.
 
 ## Cheat sheet
 
-- Write a one sentence scope.
-- Build the smallest working path.
-- Add a reality snapshot.
-- Verify the live link.
+- Write the prompt log.
+- Keep AI changes small.
+- Verify with build and lint.
+- Write a gap note.
 
 ## Next steps
 
-- Ship one small demo this week.
-- Remove one claim you cannot prove.
-- Add one proof link.
+- Add a short CHANGELOG entry per AI assisted change.
+- Add tests for the new component.
 
-Related links:
+## Related links
 
-- https://bradleymatera.dev/projects/
-- https://github.com/BradleyMatera/AnimalSounds
+- https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-and-highlighting-code-blocks
 
-Final CTA:
+## Final CTA
 
-If you want my README template, ask and I will share it.
+Use AI for drafts, then prove every change with a real check.

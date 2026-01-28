@@ -1,104 +1,174 @@
 ---
-title: "Rebuilding a WebGPU Triangle Demo: Full Debug Guide"
+title: "Rebuilding a WebGPU Triangle Demo: A Clean Fix Pass"
 date: "2025-05-02"
 slug: "/rebuilt-webgpu-triangle-demo"
 tags: ["webgpu", "graphics", "learning"]
-description: "A full debug walkthrough for rebuilding a WebGPU triangle demo."
+description: "A focused WebGPU rebuild with exact changes and verification steps."
 theme: "Graphics"
 ---
 
-This post is a full rebuild guide for a small WebGPU demo.
+Small WebGPU demos break for boring reasons.
 
-It focuses on the fixes that made the demo stable.
+This post shows a clean fix pass and how to verify the rebuild.
 
-You will get the steps, verification, and common mistakes.
+You will isolate one issue at a time and prove the fix works.
 
-If you are debugging a WebGPU demo, this is for you.
+I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+
+## The promise
+
+By the end, you will:
+
+- fix a broken triangle render
+- clean up the render loop
+- verify the output is stable
+
+> "Fix one thing, then verify it, then move on."
 
 ## What this is
 
-High level, this is a rebuild process for a small GPU demo.
+**High level:** This is a minimal rebuild pass for a broken WebGPU demo.
 
-Low level, it is a set of fixes with verification checks.
+**Low level:** You verify the adapter, fix the pipeline, and confirm the draw call runs.
 
-Key terms:
+**Key terms:**
 
-- **Render loop**: the function that redraws each frame.
-- **Pipeline**: the GPU setup for a draw call.
-- **Shader**: the GPU program that controls drawing.
+- **Render loop:** A function that draws each frame.
+- **Pipeline:** The config for shaders and output.
 
 ## What you need
 
-- A working WebGPU setup.
-- A simple triangle demo.
-- A browser with WebGPU support.
+- A WebGPU capable browser
+- A minimal WebGPU demo project
 
-Docs used:
+## Start to Finish
 
-- https://developer.chrome.com/docs/web-platform/webgpu/
+### Step 1: Confirm the adapter and device
+Goal:
+Ensure WebGPU is available before debugging anything else.
 
-## Start to finish
+Actions:
+- File path: `main.js`
+- Add:
+  ```js
+  const adapter = await navigator.gpu.requestAdapter();
+  if (!adapter) throw new Error("No GPU adapter");
+  const device = await adapter.requestDevice();
+  ```
 
-1) Start from the smallest triangle.
+Why:
+If the adapter is missing, nothing else matters. This is the first hard check. It reduces false debugging. It also tells you whether the browser supports WebGPU.
 
-Why: You need a baseline.
+Verify:
+- Run the demo and check the console.
+- Expected: no "No GPU adapter" error.
+- This confirms WebGPU is available.
 
-2) Replace one part at a time.
+If it fails:
+- Symptom: adapter is null.  
+  **Fix:** enable WebGPU in the browser flags.
 
-Why: You need to isolate changes.
+### Step 2: Rebuild the pipeline
+Goal:
+Create a minimal pipeline that can draw a triangle.
 
-3) Log errors after each change.
+Actions:
+- File path: `main.js`
+- Add:
+  ```js
+  const pipeline = device.createRenderPipeline({
+    layout: "auto",
+    vertex: { module, entryPoint: "vs_main" },
+    fragment: { module, entryPoint: "fs_main", targets: [{ format }] },
+    primitive: { topology: "triangle-list" }
+  });
+  ```
 
-Why: WebGPU errors are easy to miss.
+Why:
+If the pipeline is wrong, nothing draws. A minimal pipeline reduces the number of moving parts. This also makes shader issues easier to spot. It is the fastest route back to a working demo.
 
-### Example render loop
+Verify:
+- Run the demo and look for a triangle.
+- Expected: a triangle appears.
+- This confirms the pipeline works.
 
-```js
-function frame() {
-  // update
-  // draw
-  requestAnimationFrame(frame);
-}
-```
+If it fails:
+- Symptom: blank canvas.  
+  **Fix:** verify shader entry point names.
+
+### Step 3: Clean the render loop
+Goal:
+Ensure each frame clears and draws correctly.
+
+Actions:
+- File path: `main.js`
+- Use this loop:
+  ```js
+  function frame() {
+    const encoder = device.createCommandEncoder();
+    const pass = encoder.beginRenderPass({
+      colorAttachments: [{
+        view: context.getCurrentTexture().createView(),
+        clearValue: { r: 0.05, g: 0.05, b: 0.08, a: 1 },
+        loadOp: "clear",
+        storeOp: "store"
+      }]
+    });
+    pass.setPipeline(pipeline);
+    pass.draw(3);
+    pass.end();
+    device.queue.submit([encoder.finish()]);
+    requestAnimationFrame(frame);
+  }
+  frame();
+  ```
+
+Why:
+A clean render loop removes flicker and blank frames. It also makes the draw call obvious. This is the simplest loop that still updates every frame. It is the most reliable baseline.
+
+Verify:
+- Expected: the triangle stays visible without flicker.
+- This confirms the loop works.
+
+If it fails:
+- Symptom: triangle flickers.  
+  **Fix:** ensure you use `loadOp: "clear"` and submit the command buffer.
 
 ## Verify it worked
 
-- The triangle renders.
-- No WebGPU errors in the console.
-- The demo stays stable for 30 seconds.
-
-If it fails, revert one change at a time.
+- A triangle appears.
+- The render loop runs without errors.
+- The output is stable.
 
 ## Common mistakes
 
-- **Symptom**: Nothing renders.
-  **Cause**: Pipeline or shader mismatch.
-  **Fix**: Check shader inputs and pipeline layout.
+- **Symptom:** Nothing renders.  
+  **Cause:** Shader entry points mismatch.  
+  **Fix:** align entry point names in code and shader.
 
-- **Symptom**: Flicker or crash.
-  **Cause**: Render loop errors.
-  **Fix**: Simplify the loop.
+- **Symptom:** Canvas is black.  
+  **Cause:** No clear color or draw call.  
+  **Fix:** add `clearValue` and `draw(3)`.
 
-- **Symptom**: Random errors.
-  **Cause**: Changes in too many files.
-  **Fix**: Change one file at a time.
+- **Symptom:** Device lost errors.  
+  **Cause:** driver issues.  
+  **Fix:** reload and try again.
 
 ## Cheat sheet
 
-- Start with a minimal triangle.
-- Change one piece at a time.
-- Verify after each change.
+- Check adapter and device.
+- Use a minimal pipeline.
+- Use a clean render loop.
 
 ## Next steps
 
-- Add a color toggle.
-- Add a resize handler.
+- Add resize handling.
+- Add a uniform for color.
 
-Related links:
+## Related links
 
-- https://bradleymatera.github.io/TriangleDemo/
-- https://github.com/BradleyMatera/TriangleDemo
+- https://developer.chrome.com/docs/web-platform/webgpu/
 
-Final CTA:
+## Final CTA
 
-If you want my debug notes, ask and I will share them.
+Fix one issue at a time and verify after every change.

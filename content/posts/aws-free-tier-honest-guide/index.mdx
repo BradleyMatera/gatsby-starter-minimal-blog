@@ -1,117 +1,146 @@
 ---
-title: "AWS Free Tier: A Step by Step Lab Budget Guide"
-date: "2025-09-12"
+title: "AWS Free Tier: What Actually Costs Money"
+date: "2025-07-05"
 slug: "/aws-free-tier-honest-guide"
-tags: ["aws", "cost-management", "learning"]
-description: "A full lab budget workflow that keeps AWS costs visible and small."
-theme: "Cloud & DevOps"
+tags: ["aws", "cloud", "costs"]
+description: "A clear free tier checklist with exact console steps and verification checks."
+theme: "Cloud"
 ---
 
-AWS free tier is useful, but it is not a shield.
+The free tier is only free if you keep tracking it.
 
-This post shows the exact steps I use to keep lab costs under control.
+This post shows a short list of checks that prevent surprise bills.
 
-You will set alerts, track usage, and clean up safely.
+You will set up a budget alert and audit active resources.
 
-If you run labs, this is for you.
+I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+
+## The promise
+
+By the end, you will:
+
+- check what is running in your account
+- set a cost alert
+- verify the alert works
+
+> "If you cannot see the cost, it will surprise you."
 
 ## What this is
 
-High level, this is a cost control workflow for labs.
+**High level:** The free tier is a set of limited monthly allowances.
 
-Low level, it is a checklist with alerts, usage notes, and cleanup steps.
+**Low level:** You track running resources and set a budget alert in AWS Billing.
 
-Key terms:
+**Key terms:**
 
-- **Free tier**: limited AWS usage that does not cost money within specific limits.
-- **Budget alert**: a notification when spend crosses a set amount.
-- **Cleanup**: deleting resources so they do not keep billing.
+- **Free tier:** AWS usage limits that are free for a period.
+- **Budget alert:** A notification triggered by cost thresholds.
 
 ## What you need
 
-- An AWS account.
-- Access to Billing and Cost Management.
-- A small monthly lab budget.
+- AWS account
+- Access to Billing
+- Email address for alerts
 
-Docs used:
+## Start to Finish
 
-- https://aws.amazon.com/free/
-- https://docs.aws.amazon.com/cost-management/
+### Step 1: Audit active resources
+Goal:
+Find what is currently running.
 
-## Start to finish
+Actions:
+- AWS Console → EC2 → Instances
+- Stop anything you do not need.
+- AWS Console → RDS → Databases
+- Delete unused databases.
 
-1) Set a budget alert.
+Why:
+Most surprise bills come from resources left running. EC2 and RDS are the usual suspects. This step reduces risk quickly. It also tells you what you are paying for.
 
-Why: You need an early warning before spend grows.
+Verify:
+- Expected: only the resources you intend to keep are running.
+- This confirms your account is clean.
 
-2) Pick one service for your lab.
+If it fails:
+- Symptom: resources reappear.
+- Fix: check for auto scaling or scheduled instances.
 
-Why: Fewer services means easier tracking.
+### Step 2: Create a budget alert
+Goal:
+Get notified before costs spike.
 
-3) Log your expected usage.
+Actions:
+- AWS Console → Billing → Budgets → Create budget
+- Budget type: Cost
+- Amount: `$5`
+- Alerts: Email
 
-Why: You need a baseline for cost math.
+Why:
+A small budget alert is cheap insurance. It tells you early when something is wrong. It also makes the free tier safer. This is the easiest guardrail you can add.
 
-4) Run the lab.
+Verify:
+- Expected: the budget appears in the list.
+- This confirms the alert is set.
 
-Why: You need real usage data.
+If it fails:
+- Symptom: Budgets unavailable.  
+  **Fix:** ensure Billing access is enabled in your account.
 
-5) Record actual usage.
+### Step 3: Check the cost explorer
+Goal:
+See where costs are coming from.
 
-Why: You need to compare expected vs actual.
+Actions:
+- AWS Console → Cost Explorer
+- Time range: last 7 days
+- Group by: Service
 
-6) Clean up the resources.
+Why:
+Cost Explorer is the fastest way to see cost sources. Grouping by service tells you what to shut down first. This keeps your account honest. It also confirms the alert is not your only signal.
 
-Why: Idle resources keep billing.
+Verify:
+- Expected: a chart listing services and costs.
+- This confirms you have visibility.
 
-### Example cost math
-
-```text
-Monthly storage cost = GB-month * price_per_gb
-Request cost = requests * price_per_request
-Total = storage + request cost
-```
+If it fails:
+- Symptom: Cost Explorer not enabled.
+- Fix: enable it in Billing settings.
 
 ## Verify it worked
 
-- The budget alert exists.
-- Usage numbers are in your notes.
-- The resources are deleted.
-
-If you still see charges, check for hidden resources like snapshots.
+- Only intended resources are running.
+- Budget alert exists.
+- Cost Explorer shows data.
 
 ## Common mistakes
 
-- **Symptom**: Unexpected charges.
-  **Cause**: Resources left running.
-  **Fix**: Delete and confirm in the console.
+- **Symptom:** Costs appear without warning.  
+  **Cause:** No budget alert.  
+  **Fix:** create a small budget now.
 
-- **Symptom**: No alert emails.
-  **Cause**: Budget alert not configured.
-  **Fix**: Create the alert and test it.
+- **Symptom:** Costs keep growing.  
+  **Cause:** A resource is still running.  
+  **Fix:** stop or delete unused resources.
 
-- **Symptom**: Costs are unclear.
-  **Cause**: No usage notes.
-  **Fix**: Log usage right after the lab.
+- **Symptom:** You cannot access Billing.  
+  **Cause:** Insufficient permissions.  
+  **Fix:** enable billing access for your user.
 
 ## Cheat sheet
 
-- Set a budget alert first.
-- Keep labs small.
-- Record usage and costs.
-- Clean up the same day.
+- Stop unused resources.
+- Add a small budget alert.
+- Check Cost Explorer weekly.
 
 ## Next steps
 
-- Add a short cleanup checklist to your notes.
-- Try a second lab with a new service.
-- Keep the budget number visible.
+- Add a second alert at a higher threshold.
+- Tag resources so you can group costs by project.
 
-Related links:
+## Related links
 
-- https://aws.amazon.com/free/
-- https://docs.aws.amazon.com/cost-management/
+- https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/monitoring-costs.html
 
-Final CTA:
+## Final CTA
 
-If you want my budget note template, ask and I will share it.
+If you use the free tier, set a budget alert today.

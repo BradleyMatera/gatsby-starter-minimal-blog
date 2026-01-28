@@ -1,116 +1,153 @@
 ---
-title: "Gatsby Navbar Bug: Full Debug Walkthrough"
-date: "2025-04-04"
+title: "Gatsby Nav Bar Haunted: Fixing a Stuck Dropdown"
+date: "2025-02-02"
 slug: "/gatsby-nav-bar-haunted"
-tags: ["gatsby", "debugging", "web-development"]
-description: "A complete walkthrough of a Gatsby nav bug with steps, verification, and fixes."
-theme: "Front-End & Full-Stack"
+tags: ["gatsby", "react", "debugging"]
+description: "A precise fix for a dropdown that stays open in a Gatsby navigation menu."
+theme: "Debugging"
 ---
 
-My navbar broke after deploy even though it worked locally.
+My nav dropdown stayed open even when it should have closed.
 
-This post shows the full debug path and the fix.
+This post shows the exact fix: a click outside handler and a visibility reset.
 
-You will learn how to reproduce, verify, and prevent it.
+You will add two small effects and verify the menu closes correctly.
 
-If your Gatsby nav breaks only in production, this is for you.
+These steps are verifiable in this repo.
+
+## The promise
+
+By the end, you will:
+
+- add a click outside handler for the menu
+- close the dropdown when the nav hides
+- verify the fix in the browser
+
+> "If the menu stays open after you click outside, it is your state logic."
 
 ## What this is
 
-High level, this is a routing mismatch caused by build output and path config.
+**High level:** A dropdown should close when the user clicks elsewhere or when the nav hides.
 
-Low level, it is a check of link paths, build output, and trailing slash settings.
+**Low level:** You track open state in React and reset it in event handlers.
 
-Key terms:
+**Key terms:**
 
-- **Base path**: the prefix your site uses when hosted in a subfolder.
-- **Trailing slash**: whether URLs end in `/` or not.
-- **Build output**: the HTML files Gatsby generates.
+- **Dropdown state:** A boolean that says the menu is open or closed.
+- **Click outside handler:** A document listener that closes the menu when you click away.
 
 ## What you need
 
-- A Gatsby site.
-- Access to the build output folder.
-- A deploy where the bug happens.
+- This repo
+- A running dev server
+- The navigation component open in your editor
 
-Docs used:
+## Start to Finish
 
-- https://www.gatsbyjs.com/docs/reference/routing/
+### Step 1: Add a click outside handler
+Goal:
+Close the dropdown when a user clicks outside of it.
 
-## Start to finish
+Actions:
+- File path: `src/@lekoarts/gatsby-theme-minimal-blog/components/navigation.tsx`
+- Add or confirm this effect exists:
+  ```tsx
+  const dropdownRef = React.useRef<HTMLLIElement>(null);
 
-1) Rebuild the site locally.
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+  ```
+- Make sure the dropdown container uses the ref:
+  ```tsx
+  <li ref={dropdownRef}>
+  ```
 
-Why: You need the output that matches the deploy.
+Why:
+React state does not update itself when users click away. A document listener lets you detect clicks outside the dropdown. This is the standard fix for stuck menus. Without it, the open state stays true and the menu never closes.
 
-```bash
-gatsby build
-```
+Verify:
+- Run:
+  ```bash
+  bun run dev
+  ```
+- Open the dropdown and click anywhere else.
+- Expected: the dropdown closes.
+- This confirms the click outside handler works.
 
-2) Inspect the `public` folder.
+If it fails:
+- Symptom: dropdown never closes.
+- Fix: ensure the ref is attached to the correct element.
 
-Why: You need to know the real paths.
+### Step 2: Reset when the nav hides
+Goal:
+Close the dropdown if the nav is hidden or collapsed.
 
-```bash
-ls public
-```
+Actions:
+- File path: `src/@lekoarts/gatsby-theme-minimal-blog/components/navigation.tsx`
+- Add or confirm this effect exists:
+  ```tsx
+  React.useEffect(() => {
+    if (!isVisible) {
+      setDropdownOpen(false);
+    }
+  }, [isVisible]);
+  ```
 
-3) Compare link paths with output paths.
+Why:
+A hidden nav should not keep its dropdown state. If the nav is collapsed, the dropdown should be closed. Resetting state when visibility changes prevents ghost menus. This also prevents focus traps in hidden menus.
 
-Why: If they do not match, nav fails.
+Verify:
+- Hide the nav (for example, collapse the menu on mobile).
+- Expected: dropdown state resets and stays closed.
+- This confirms the visibility reset works.
 
-Example:
-
-```jsx
-<Link to="/about/">About</Link>
-```
-
-4) Check trailing slash settings.
-
-Why: Gatsby can generate different paths based on this.
-
-5) Deploy and test in a private window.
-
-Why: It removes cache effects.
+If it fails:
+- Symptom: menu stays open when collapsed.
+- Fix: ensure `isVisible` changes are passed correctly to the component.
 
 ## Verify it worked
 
-- Nav links load the correct pages.
-- No 404s after deploy.
-- The same links work in a private window.
-
-If it still fails, check the deploy base path.
+- Dropdown closes on outside click.
+- Dropdown closes when nav is hidden.
+- No console errors appear.
 
 ## Common mistakes
 
-- **Symptom**: Works locally, fails in deploy.
-  **Cause**: Base path mismatch.
-  **Fix**: Align base path and links.
+- **Symptom:** Outside click does nothing.  
+  **Cause:** The ref is attached to the wrong element.  
+  **Fix:** Attach the ref to the dropdown container element.
 
-- **Symptom**: Random 404s.
-  **Cause**: Trailing slash mismatch.
-  **Fix**: Set trailingSlash and update links.
+- **Symptom:** Dropdown closes immediately after opening.  
+  **Cause:** The click handler captures the opening click.  
+  **Fix:** Use `mousedown` and ensure the button is inside the ref container.
 
-- **Symptom**: Old links still load.
-  **Cause**: Cache.
-  **Fix**: Use a private window and clear cache.
+- **Symptom:** Dropdown state gets out of sync.  
+  **Cause:** Multiple state sources.  
+  **Fix:** Keep one boolean state for open and close.
 
 ## Cheat sheet
 
-- Build locally.
-- Inspect `public` paths.
-- Match links to output.
-- Test in a private window.
+- Track dropdown state in React.
+- Close it on outside click.
+- Reset state when nav hides.
+- Verify in the browser.
 
 ## Next steps
 
-- Add a short routing note in your README.
-- Run a build before sharing links.
+- Add keyboard support for Escape to close.
+- Add focus management for accessibility.
 
-Related links:
+## Related links
 
-- https://www.gatsbyjs.com/docs/reference/routing/
+- https://react.dev/reference/react/useEffect
 
-Final CTA:
+## Final CTA
 
-If you hit the same bug, send me your steps and I will compare notes.
+Fix the close behavior first. Fancy styling can wait.

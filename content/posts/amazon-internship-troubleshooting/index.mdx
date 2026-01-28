@@ -1,117 +1,211 @@
 ---
-title: "AWS Cloud Support Internship: Lab Notes and Capstone Walkthrough"
-date: "2025-08-01"
+title: "AWS Cloud Support Internship: What I Actually Practiced"
+date: "2025-08-18"
 slug: "/aws-cloud-support-internship-mastering-troubleshooting-and-architecture"
-tags: ["aws", "cloud-support", "internship", "devops"]
-description: "A lab only walkthrough of the AWS support internship work, including the capstone outline."
-theme: "Cloud & DevOps"
+tags: ["aws", "troubleshooting", "cloud"]
+description: "A clear, bounded summary of training labs and a capstone build."
+theme: "Cloud"
 ---
 
-This post covers lab work, not production support.
+This is an internship post about guided training and a capstone.
 
-I worked in training environments with mock tickets and labs.
+It does not describe production ownership or customer tickets.
 
-You will learn the structure, the capstone flow, and how I documented it.
+You will see the exact lab style steps I practiced and how I verified them.
 
-If you want a realistic view of what the internship covered, this is it.
+I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+
+## The promise
+
+By the end, you will:
+
+- understand the scope of the training work
+- see a concrete capstone outline
+- know what I did and did not do
+
+> "Guided labs build skill, but they are not production ownership."
 
 ## What this is
 
-High level, this is a summary of lab exercises and a capstone build.
+**High level:** This is a summary of guided lab rotations and a capstone build.
 
-Low level, it is a set of steps and checks that match what I practiced.
+**Low level:** The capstone used S3, Lambda, DynamoDB, and an Amplify frontend plus a cost model.
 
-Key terms:
+**Key terms:**
 
-- **Lab**: a safe environment with guided tasks and no customer data.
-- **Capstone**: a small project that ties together multiple services.
-- **Mock ticket**: a simulated issue used to practice troubleshooting.
+- **Guided lab:** A training environment with sample data and instructions.
+- **Capstone:** A final project that demonstrates skills in a controlled setting.
 
 ## What you need
 
-- An AWS account in a sandbox or lab.
-- AWS CLI and basic IAM access.
-- A text editor for notes.
+- AWS account
+- Access to S3, Lambda, DynamoDB, and Amplify
+- A small test dataset
 
-Docs used:
+## Start to Finish
 
-- https://docs.aws.amazon.com/lambda/
-- https://docs.aws.amazon.com/dynamodb/
-- https://docs.aws.amazon.com/s3/
+### Step 1: Create the S3 input bucket
+Goal:
+Create a bucket for uploads that Lambda can read.
 
-## Start to finish
+Actions:
+- AWS Console → S3 → Create bucket
+- Name: `metadata-input-demo`
+- Region: your default region
 
-1) Set up the lab account.
+Why:
+The bucket is the entry point for uploads. It provides a stable source for the workflow. This keeps the capstone simple. You can restrict permissions later if needed.
 
-Why: You need a safe space to practice without real data.
+Verify:
+- Expected: bucket appears in the S3 list.
+- This confirms the input bucket exists.
 
-2) Create an S3 bucket for uploads.
+If it fails:
+- Symptom: bucket name already taken.  
+  **Fix:** choose a unique name.
 
-Why: The capstone ingests files from S3.
+### Step 2: Add a Lambda function
+Goal:
+Parse object metadata when a file is uploaded.
 
-3) Create a Lambda function that reads metadata.
+Actions:
+- AWS Console → Lambda → Create function
+- Runtime: Node.js 18
+- Trigger: S3 upload from `metadata-input-demo`
+- Code snippet:
+  ```js
+  exports.handler = async (event) => {
+    const record = event.Records[0];
+    const key = record.s3.object.key;
+    console.log("uploaded:", key);
+    return { ok: true, key };
+  };
+  ```
 
-Why: Lambda does the extraction work.
+Why:
+A simple Lambda function proves the event flow. You can extend it later to extract metadata. This keeps the capstone easy to verify. The console log is the first proof step.
 
-4) Store results in DynamoDB.
+Verify:
+- Upload a file to the bucket.
+- Check CloudWatch logs for the key.
+- This confirms the trigger works.
 
-Why: The metadata needs a simple queryable store.
+If it fails:
+- Symptom: no logs.  
+  **Fix:** check the S3 trigger permissions.
 
-5) Build a basic Amplify UI.
+### Step 3: Store records in DynamoDB
+Goal:
+Persist extracted metadata.
 
-Why: The UI is for internal review, not a public app.
+Actions:
+- AWS Console → DynamoDB → Create table
+- Table name: `metadata-items`
+- Partition key: `id` (string)
+- Update Lambda code to write:
+  ```js
+  // pseudocode
+  // put item with id and metadata
+  ```
 
-6) Document costs.
+Why:
+A database makes the result queryable. DynamoDB keeps it simple with no servers. This step turns logs into data. It also lets the UI fetch real records.
 
-Why: The capstone includes a basic cost model.
+Verify:
+- After uploading, check the DynamoDB table.
+- Expected: a new item appears.
+- This confirms persistence works.
 
-### Example resource sketch
+If it fails:
+- Symptom: no new items.  
+  **Fix:** confirm the Lambda IAM role allows DynamoDB writes.
 
-```text
-S3 upload -> Lambda -> DynamoDB -> Amplify UI
-```
+### Step 4: Add a simple frontend in Amplify
+Goal:
+Display the stored metadata in a web UI.
+
+Actions:
+- Create a small frontend that calls an API.
+- Deploy via AWS Amplify.
+- Set the API URL in environment variables.
+
+Why:
+A UI makes the capstone visible. Amplify provides a fast deploy path. Environment variables keep the API configurable. This is enough for a demo view.
+
+Verify:
+- Open the Amplify URL.
+- Expected: a page loads and shows data.
+- This confirms the end to end flow works.
+
+If it fails:
+- Symptom: API errors.  
+  **Fix:** check the API URL and CORS settings.
+
+### Step 5: Add a cost model note
+Goal:
+Document a basic cost estimate.
+
+Actions:
+- File path: `docs/cost-model.md`
+- Add inputs:
+  ```text
+  Inputs:
+  - Requests per month
+  - GB stored
+  - Lambda GB seconds
+  - DynamoDB read and write units
+  ```
+
+Why:
+A cost model shows you thought about pricing. It keeps assumptions visible. It also makes the capstone reproducible. A small note is enough.
+
+Verify:
+- Open the file and confirm all inputs are listed.
+- This confirms the model is documented.
+
+If it fails:
+- Symptom: assumptions missing.  
+  **Fix:** add the missing inputs.
 
 ## Verify it worked
 
-- Upload a test file to S3.
-- Confirm a DynamoDB item is created.
-- Load the Amplify UI and read the metadata.
-
-If you see no DynamoDB items, check the Lambda logs in CloudWatch.
+- Upload triggers Lambda logs.
+- DynamoDB contains metadata records.
+- UI loads and shows data.
+- Cost model inputs are documented.
 
 ## Common mistakes
 
-- **Symptom**: Lambda runs but writes nothing.
-  **Cause**: Missing DynamoDB permissions.
-  **Fix**: Add an IAM policy that allows PutItem.
+- **Symptom:** Lambda never triggers.  
+  **Cause:** Missing S3 trigger.  
+  **Fix:** add the trigger and permissions.
 
-- **Symptom**: UI shows empty data.
-  **Cause**: Wrong table name or region.
-  **Fix**: Check environment variables in the UI config.
+- **Symptom:** DynamoDB writes fail.  
+  **Cause:** IAM role missing permission.  
+  **Fix:** attach the DynamoDB write policy.
 
-- **Symptom**: Costs are unclear.
-  **Cause**: No inputs recorded.
-  **Fix**: Log request counts and storage size before estimating.
+- **Symptom:** UI shows no data.  
+  **Cause:** API URL or CORS mismatch.  
+  **Fix:** update the URL and CORS config.
 
 ## Cheat sheet
 
-- Use a sandbox account.
-- Keep the capstone small.
-- Write a short note for each lab.
-- Verify each service step.
+- S3 upload triggers Lambda.
+- Lambda writes to DynamoDB.
+- UI reads from API.
+- Cost model is a simple note.
 
 ## Next steps
 
-- Add a second test file type.
-- Add simple error handling.
-- Expand the cost model inputs.
+- Add retries and error logs.
+- Add a small test script for the API.
 
-Related links:
+## Related links
 
-- https://docs.aws.amazon.com/lambda/latest/dg/welcome.html
-- https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html
-- https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html
+- https://docs.aws.amazon.com/lambda/
+- https://docs.aws.amazon.com/s3/
+- https://docs.aws.amazon.com/amazondynamodb/
 
-Final CTA:
+## Final CTA
 
-If you want the capstone outline in plain text, ask and I will share it.
+Keep the capstone small and prove each step. That is the honest path.

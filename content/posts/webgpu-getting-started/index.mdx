@@ -3,184 +3,242 @@ title: "WebGPU Triangle Demo: Start, Fix, and Keep It Honest"
 date: "2025-07-22"
 slug: "/webgpu-getting-started"
 tags: ["webgpu", "graphics", "learning"]
-description: "A complete, minimal WebGPU triangle guide with setup, fixes, and verification."
+description: "A complete WebGPU triangle guide with exact steps and verification."
 theme: "Graphics"
 ---
 
-WebGPU looks scary until you ship one triangle.
+WebGPU gets easier after the first triangle.
 
-This is a combined guide that covers the minimal start, the rebuild fixes, and the honesty audit.
+This is the combined guide for the minimal setup, rebuild fixes, and honesty checks.
 
-You will get a working setup, the exact steps, and a clear checklist to keep the write up honest.
+You will render a triangle, verify the output, and keep the write up strict.
 
-If you only build one WebGPU thing, build this.
+I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
 
 ## The promise
 
 By the end, you will:
 
-- understand what WebGPU actually is
-- render a triangle with a minimal pipeline
-- debug common setup failures without guessing
+- render a WebGPU triangle
+- verify the render loop
+- keep the write up aligned with the code
 
 > "One triangle is enough to learn the pipeline."
 
 ## What this is
 
-**High level:** WebGPU is the browser API for modern GPU access. It lets you submit commands to the GPU for fast graphics work.
+**High level:** WebGPU is a browser API for GPU rendering.
 
-**Low level:** You request a GPU adapter, create a device, define a render pipeline, and issue a draw call into a canvas context.
+**Low level:** You request a device, configure a canvas, build a pipeline, and draw.
 
 **Key terms:**
 
-- **Adapter:** The GPU driver entry point that tells you what the system supports.
-- **Device:** The object you use to create buffers, shaders, and pipelines.
-- **Pipeline:** The configuration that connects your shaders to the GPU render stages.
+- **Adapter:** GPU capability entry point.
+- **Device:** The object that creates GPU resources.
+- **Pipeline:** The configuration that ties shaders to output.
 
 ## What you need
 
-- A browser that supports WebGPU (Chrome or Edge stable)
-- A simple static site or local dev server
-- A single HTML file and one JS file
+- Chrome or Edge with WebGPU enabled
+- A local static server
 
-If WebGPU is disabled, you will need to turn it on in `chrome://flags`.
+## Start to Finish
 
-## Start to finish
+### Step 1: Create the HTML shell
+Goal:
+Set up a canvas and script entry point.
 
-1. **Create the HTML shell.**
-   The canvas is the only required element.
+Actions:
+- File path: `index.html`
+- Add:
+  ```html
+  <canvas id="gfx" width="640" height="360"></canvas>
+  <script type="module" src="main.js"></script>
+  ```
 
-   ```html
-   <canvas id="gfx" width="640" height="360"></canvas>
-   <script type="module" src="main.js"></script>
-   ```
+Why:
+The canvas is the render target. The module script lets you use top level await. This keeps the demo minimal and modern. Without the canvas, nothing will render.
 
-2. **Request the adapter and device.**
-   This is the minimum handshake.
+Verify:
+- Open the HTML file in a browser.
+- Expected: a blank page with no errors.
+- This confirms the shell loads.
 
-   ```js
-   const adapter = await navigator.gpu.requestAdapter();
-   if (!adapter) throw new Error("No GPU adapter");
-   const device = await adapter.requestDevice();
-   ```
+If it fails:
+- Symptom: script not found.  
+  **Fix:** ensure `main.js` exists in the same folder.
 
-3. **Create the canvas context.**
-   You must configure it with the preferred format.
+### Step 2: Request the adapter and device
+Goal:
+Confirm WebGPU is available and create a device.
 
-   ```js
-   const canvas = document.getElementById("gfx");
-   const context = canvas.getContext("webgpu");
-   const format = navigator.gpu.getPreferredCanvasFormat();
-   context.configure({ device, format, alphaMode: "opaque" });
-   ```
+Actions:
+- File path: `main.js`
+- Add:
+  ```js
+  const adapter = await navigator.gpu.requestAdapter();
+  if (!adapter) throw new Error("No GPU adapter");
+  const device = await adapter.requestDevice();
+  ```
 
-4. **Define a minimal shader.**
-   Use WGSL with a hard coded triangle.
+Why:
+The adapter check is the first gate. The device is required to create pipelines and buffers. This step prevents silent failures. It also tells you whether the browser supports WebGPU.
 
-   ```wgsl
-   @vertex
-   fn vs_main(@builtin(vertex_index) vi: u32) -> @builtin(position) vec4f {
-     var positions = array<vec2f, 3>(
-       vec2f(0.0, 0.6),
-       vec2f(-0.6, -0.6),
-       vec2f(0.6, -0.6)
-     );
-     return vec4f(positions[vi], 0.0, 1.0);
-   }
+Verify:
+- Open DevTools Console.
+- Expected: no error thrown.
+- This confirms WebGPU is available.
 
-   @fragment
-   fn fs_main() -> @location(0) vec4f {
-     return vec4f(0.2, 0.6, 1.0, 1.0);
-   }
-   ```
+If it fails:
+- Symptom: `No GPU adapter`.  
+  **Fix:** enable WebGPU in browser flags.
 
-5. **Create the pipeline.**
-   This binds the shader to the render pass.
+### Step 3: Configure the canvas context
+Goal:
+Bind the canvas to WebGPU and set the format.
 
-   ```js
-   const module = device.createShaderModule({ code: shaderCode });
-   const pipeline = device.createRenderPipeline({
-     layout: "auto",
-     vertex: { module, entryPoint: "vs_main" },
-     fragment: { module, entryPoint: "fs_main", targets: [{ format }] },
-     primitive: { topology: "triangle-list" }
-   });
-   ```
+Actions:
+- File path: `main.js`
+- Add:
+  ```js
+  const canvas = document.getElementById("gfx");
+  const context = canvas.getContext("webgpu");
+  const format = navigator.gpu.getPreferredCanvasFormat();
+  context.configure({ device, format, alphaMode: "opaque" });
+  ```
 
-6. **Draw the frame.**
-   This is the minimal render loop.
+Why:
+The context is how WebGPU draws to the canvas. The format must match the pipeline output. This is the most common source of blank screens. Setting `opaque` avoids transparency bugs.
 
-   ```js
-   function frame() {
-     const encoder = device.createCommandEncoder();
-     const pass = encoder.beginRenderPass({
-       colorAttachments: [{
-         view: context.getCurrentTexture().createView(),
-         clearValue: { r: 0.05, g: 0.05, b: 0.08, a: 1 },
-         loadOp: "clear",
-         storeOp: "store"
-       }]
-     });
-     pass.setPipeline(pipeline);
-     pass.draw(3);
-     pass.end();
-     device.queue.submit([encoder.finish()]);
-     requestAnimationFrame(frame);
-   }
-   frame();
-   ```
+Verify:
+- Expected: no errors in console.
+- This confirms the context is configured.
 
-7. **Write the honesty note.**
-   If you share this, say exactly what it does and what it does not.
+If it fails:
+- Symptom: `context` is null.  
+  **Fix:** confirm the canvas ID and WebGPU support.
 
-   ```text
-   What works: One triangle, one pipeline, one draw call.
-   What is next: Resize handling and input controls.
-   ```
+### Step 4: Build a minimal pipeline
+Goal:
+Create a pipeline that draws one triangle.
+
+Actions:
+- File path: `main.js`
+- Add a shader string:
+  ```js
+  const shaderCode = `
+  @vertex
+  fn vs_main(@builtin(vertex_index) vi: u32) -> @builtin(position) vec4f {
+    var positions = array<vec2f, 3>(
+      vec2f(0.0, 0.6),
+      vec2f(-0.6, -0.6),
+      vec2f(0.6, -0.6)
+    );
+    return vec4f(positions[vi], 0.0, 1.0);
+  }
+  @fragment
+  fn fs_main() -> @location(0) vec4f {
+    return vec4f(0.2, 0.6, 1.0, 1.0);
+  }`;
+  ```
+- Create the pipeline:
+  ```js
+  const module = device.createShaderModule({ code: shaderCode });
+  const pipeline = device.createRenderPipeline({
+    layout: "auto",
+    vertex: { module, entryPoint: "vs_main" },
+    fragment: { module, entryPoint: "fs_main", targets: [{ format }] },
+    primitive: { topology: "triangle-list" }
+  });
+  ```
+
+Why:
+A minimal shader removes variables. The pipeline ties the shader to the render pass. This is the core of the demo. Without a valid pipeline, nothing will render.
+
+Verify:
+- Expected: no shader compile errors in console.
+- This confirms the pipeline is valid.
+
+If it fails:
+- Symptom: shader compile error.  
+  **Fix:** check entry point names and WGSL syntax.
+
+### Step 5: Draw the frame
+Goal:
+Issue one draw call and render the triangle.
+
+Actions:
+- File path: `main.js`
+- Add:
+  ```js
+  function frame() {
+    const encoder = device.createCommandEncoder();
+    const pass = encoder.beginRenderPass({
+      colorAttachments: [{
+        view: context.getCurrentTexture().createView(),
+        clearValue: { r: 0.05, g: 0.05, b: 0.08, a: 1 },
+        loadOp: "clear",
+        storeOp: "store"
+      }]
+    });
+    pass.setPipeline(pipeline);
+    pass.draw(3);
+    pass.end();
+    device.queue.submit([encoder.finish()]);
+    requestAnimationFrame(frame);
+  }
+  frame();
+  ```
+
+Why:
+This is the full draw loop. It clears the screen and draws three vertices. `requestAnimationFrame` keeps it running. This is the most reliable baseline for WebGPU demos.
+
+Verify:
+- Expected: a blue triangle appears on a dark background.
+- This confirms the render loop works.
+
+If it fails:
+- Symptom: blank canvas.  
+  **Fix:** ensure the pipeline and context use the same format.
 
 ## Verify it worked
 
-- The canvas shows a triangle on a dark background.
-- The browser console has no WebGPU errors.
-- The frame loop runs without throwing.
-
-If you do not see a triangle, check the console first. Most failures are misconfigured context or shader errors.
+- The triangle is visible.
+- No console errors appear.
+- The output is stable.
 
 ## Common mistakes
 
 - **Symptom:** `navigator.gpu` is undefined.  
-  **Cause:** WebGPU is not enabled or the browser is too old.  
-  **Fix:** Update the browser and enable WebGPU in flags.
+  **Cause:** WebGPU disabled.  
+  **Fix:** enable WebGPU in browser flags.
 
-- **Symptom:** Clear color shows but no triangle.  
-  **Cause:** Shader compile error or wrong entry point names.  
-  **Fix:** Ensure `vs_main` and `fs_main` match your pipeline config.
+- **Symptom:** Triangle flickers.  
+  **Cause:** missing `loadOp: "clear"`.  
+  **Fix:** add the clear operation.
 
-- **Symptom:** Canvas is blank and console shows device lost.  
-  **Cause:** GPU reset or driver issue.  
-  **Fix:** Reload the page or try a different GPU.
+- **Symptom:** Shader compile errors.  
+  **Cause:** WGSL syntax issues.  
+  **Fix:** check the shader code carefully.
 
 ## Cheat sheet
 
 - Request adapter and device.
-- Configure the canvas with the preferred format.
-- Build a pipeline with WGSL.
-- Draw 3 vertices.
-- Keep your write up strict and honest.
+- Configure the canvas context.
+- Build a minimal pipeline.
+- Draw three vertices.
 
 ## Next steps
 
-- Add a resize handler.
-- Add a uniform buffer for color.
-- Export this demo as a static page.
+- Add resize handling.
+- Add a uniform for color.
+- Keep the write up aligned with the code.
 
 ## Related links
 
 - https://developer.chrome.com/docs/web-platform/webgpu/
 - https://www.w3.org/TR/webgpu/
-- https://github.com/BradleyMatera/TriangleDemo
-- https://bradleymatera.github.io/TriangleDemo/
 
 ## Final CTA
 
-Ship one triangle, then build one small improvement. Do not skip the verify step.
+Get one triangle working, then build one small improvement at a time.

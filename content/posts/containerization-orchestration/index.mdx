@@ -1,151 +1,195 @@
 ---
-title: "Containerization and Orchestration Labs: Full Walkthrough"
-date: "2025-07-15"
+title: "Containerization and Orchestration: A Small Lab You Can Run"
+date: "2025-06-22"
 slug: "/containerization-and-orchestration"
-tags: ["docker", "containerization", "devops"]
-description: "A full lab guide for container basics with clear steps and verification."
-theme: "Cloud & DevOps"
+tags: ["docker", "kubernetes", "devops"]
+description: "A minimal container lab plus a small orchestration step with exact commands."
+theme: "DevOps"
 ---
 
-This is a lab guide, not a production guide.
+Containerization is easier when you keep the stack small.
 
-I use containers to learn reproducible builds and small service wiring.
+This post shows one container and one orchestration step you can verify.
 
-You will build, run, verify, and clean up a tiny stack.
+You will build a container and run it under Compose.
 
-If you are new to Docker, this is for you.
+I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+
+## The promise
+
+By the end, you will:
+
+- build one container image
+- run it with Compose
+- verify the service is healthy
+
+> "Orchestration is just a repeatable run command."
 
 ## What this is
 
-High level, containers package an app with its dependencies.
+**High level:** Containerization packages your app, orchestration runs it consistently.
 
-Low level, a Dockerfile builds an image and Docker Compose runs services together.
+**Low level:** You write a Dockerfile, then use Compose to run it with ports.
 
-Key terms:
+**Key terms:**
 
-- **Image**: a snapshot of an app and its dependencies.
-- **Container**: a running instance of an image.
-- **Compose**: a YAML file that runs multiple containers.
+- **Dockerfile:** Build instructions for an image.
+- **Compose:** A YAML file that runs containers together.
+- **Port mapping:** The link between host and container ports.
 
 ## What you need
 
-- Docker Desktop installed.
-- A simple app folder.
-- A terminal.
+- Docker Desktop
+- A small web server app
 
-Docs used:
+## Start to Finish
 
-- https://docs.docker.com/get-started/
-- https://docs.docker.com/compose/
+### Step 1: Create the app
+Goal:
+Create a tiny web server that returns a health response.
 
-## Start to finish
+Actions:
+- File path: `app/index.js`
+- Add:
+  ```js
+  const express = require("express");
+  const app = express();
+  app.get("/health", (_req, res) => res.json({ ok: true }));
+  app.listen(3000, () => console.log("server on 3000"));
+  ```
+- File path: `app/package.json`
+- Add:
+  ```json
+  {
+    "name": "app",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": { "start": "node index.js" },
+    "dependencies": { "express": "^4.19.2" }
+  }
+  ```
+- Command:
+  ```bash
+  cd app && npm install
+  ```
 
-1) Create a Dockerfile.
+Why:
+A health route is a clean verification step. Express makes the app tiny. This keeps the lab focused on containers, not frameworks. A small app is easier to debug.
 
-Why: The Dockerfile tells Docker how to build your image.
+Verify:
+- Run:
+  ```bash
+  npm start
+  ```
+- Expected: `server on 3000`.
+- This confirms the app works.
 
-Example:
+If it fails:
+- Symptom: module not found.
+- Fix: run `npm install`.
 
-```Dockerfile
-FROM node:20-alpine
-WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm ci
-COPY . .
-CMD ["npm", "run", "start"]
-```
+### Step 2: Add a Dockerfile
+Goal:
+Package the app into a container image.
 
-2) Build the image.
+Actions:
+- File path: `app/Dockerfile`
+- Add:
+  ```dockerfile
+  FROM node:18-alpine
+  WORKDIR /app
+  COPY package.json package-lock.json ./
+  RUN npm install --production
+  COPY . .
+  EXPOSE 3000
+  CMD ["npm", "start"]
+  ```
 
-Why: You need a built image before you can run it.
+Why:
+The Dockerfile defines how the image is built. Using a small base image keeps builds fast. Exposing the port documents the service. This is the minimum to containerize a Node app.
 
-```bash
-docker build -t demo-app .
-```
+Verify:
+- Run:
+  ```bash
+  docker build -t lab-app app
+  ```
+- Expected: build completes without errors.
+- This confirms the Dockerfile works.
 
-3) Run the container.
+If it fails:
+- Symptom: missing `package-lock.json`.
+- Fix: run `npm install` to generate it.
 
-Why: This proves the image works.
+### Step 3: Orchestrate with Compose
+Goal:
+Run the container with a repeatable command.
 
-```bash
-docker run -p 3000:3000 demo-app
-```
+Actions:
+- File path: `docker-compose.yml`
+- Add:
+  ```yaml
+  services:
+    app:
+      build: ./app
+      ports:
+        - "3000:3000"
+  ```
+- Command:
+  ```bash
+  docker compose up --build
+  ```
 
-4) Add Compose if you need a database.
+Why:
+Compose turns the run command into config. This makes it repeatable. It also makes it easy to add more services later. For a small lab, this is enough orchestration.
 
-Why: Compose makes multi-service setups simple.
+Verify:
+- Run:
+  ```bash
+  curl http://localhost:3000/health
+  ```
+- Expected: `{ "ok": true }`.
+- This confirms the container is running.
 
-```yaml
-services:
-  app:
-    build: .
-    ports:
-      - "3000:3000"
-  db:
-    image: postgres:15
-    environment:
-      POSTGRES_PASSWORD: example
-```
-
-5) Run Compose.
-
-```bash
-docker compose up
-```
-
-6) Clean up.
-
-Why: Stopping containers avoids accidental costs and clutter.
-
-```bash
-docker compose down
-```
+If it fails:
+- Symptom: connection refused.  
+  **Fix:** check port mapping and ensure the container is running.
 
 ## Verify it worked
 
-- You can reach the app at http://localhost:3000
-- Containers show as running in Docker Desktop
-- Logs show the app started without errors
-
-If the container exits, check the logs:
-
-```bash
-docker logs <container-id>
-```
+- `docker compose up` runs.
+- `/health` returns JSON.
+- Logs show the server started.
 
 ## Common mistakes
 
-- **Symptom**: Build fails on npm install.
-  **Cause**: Missing package-lock.json.
-  **Fix**: Copy it into the image or use npm install.
+- **Symptom:** Container exits immediately.  
+  **Cause:** The command is wrong.  
+  **Fix:** use `npm start` and ensure it exists.
 
-- **Symptom**: Port not reachable.
-  **Cause**: Port mapping missing.
-  **Fix**: Use -p 3000:3000 in docker run.
+- **Symptom:** Port not reachable.  
+  **Cause:** No port mapping.  
+  **Fix:** add `3000:3000` in Compose.
 
-- **Symptom**: Compose fails.
-  **Cause**: YAML indentation errors.
-  **Fix**: Re-check spaces and alignment.
+- **Symptom:** Build fails.  
+  **Cause:** Missing lockfile.  
+  **Fix:** run `npm install` and rebuild.
 
 ## Cheat sheet
 
-- Dockerfile builds the image.
-- docker build creates the image.
-- docker run starts one container.
-- docker compose runs multiple services.
-- docker compose down stops them.
+- Build a tiny app.
+- Write a Dockerfile.
+- Run with Compose.
+- Verify with curl.
 
 ## Next steps
 
-- Add a health check route.
-- Add a small .env file and load it.
-- Write short notes for the lab.
+- Add a second service.
+- Add a health check in Compose.
 
-Related links:
+## Related links
 
-- https://docs.docker.com/get-started/
 - https://docs.docker.com/compose/
 
-Final CTA:
+## Final CTA
 
-If you want a starter Dockerfile, ask and I will share it.
+Keep the lab small and verify every step.

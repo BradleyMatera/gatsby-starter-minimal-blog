@@ -1,106 +1,162 @@
 ---
-title: "React Native Prototype: Full Start to Finish Lab"
-date: "2025-05-26"
+title: "React Native Prototype: A Small, Verifiable Start"
+date: "2025-04-28"
 slug: "/native-react"
-tags: ["react", "mobile", "projects"]
-description: "A complete lab guide for a small React Native prototype with clear checks."
-theme: "Front-End & Full-Stack"
+tags: ["react-native", "mobile", "prototype"]
+description: "A minimal React Native prototype with exact steps, checks, and fixes."
+theme: "Mobile"
 ---
 
-This is a prototype lab, not a shipped app.
+Mobile prototypes only matter if they run on a device.
 
-I built it to learn the core flow and document the steps.
+This post shows a small React Native setup you can verify.
 
-You will get setup, build, verify, and cleanup.
+You will create a new app, render one screen, and confirm it runs.
 
-If you are new to React Native, this is for you.
+I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+
+## The promise
+
+By the end, you will:
+
+- create a React Native project
+- render a simple screen
+- verify it runs on a simulator
+
+> "If it does not run on a device, it is not done."
 
 ## What this is
 
-High level, this is a mobile UI prototype using React Native.
+**High level:** React Native lets you build mobile apps with React.
 
-Low level, it is a project setup, one screen, and a basic navigation flow.
+**Low level:** You use the CLI to scaffold a project and edit `App.tsx`.
 
-Key terms:
+**Key terms:**
 
-- **Metro**: the dev server for React Native.
-- **Expo**: a toolchain that simplifies React Native dev.
-- **Prototype**: a small build to test one idea.
+- **Simulator:** A local device emulator.
+- **Bundle:** The JavaScript code packaged for the app.
 
 ## What you need
 
-- Node.js 18 or later.
-- Expo CLI installed.
-- A phone or emulator.
+- Node 18+
+- React Native CLI
+- iOS Simulator or Android Emulator
 
-Docs used:
+## Start to Finish
 
-- https://docs.expo.dev/
-- https://reactnative.dev/docs/getting-started
+### Step 1: Create the project
+Goal:
+Scaffold a new React Native app.
 
-## Start to finish
+Actions:
+- Command:
+  ```bash
+  npx react-native@latest init NativeLab
+  cd NativeLab
+  ```
 
-1) Create a new Expo app.
+Why:
+The CLI sets up the native project structure. It also creates iOS and Android folders for you. This is the fastest way to get a runnable app. It avoids manual config mistakes.
 
-Why: Expo handles setup fast.
+Verify:
+- Expected: `ios/` and `android/` folders exist.
+- This confirms the scaffold worked.
 
-```bash
-npx create-expo-app my-prototype
-cd my-prototype
-npm start
-```
+If it fails:
+- Symptom: CLI error about dependencies.  
+  **Fix:** follow the CLI output and install required tools.
 
-2) Build one screen.
+### Step 2: Edit the main screen
+Goal:
+Render one clear view so you can verify changes.
 
-Why: You need a working UI to test.
+Actions:
+- File path: `App.tsx`
+- Replace the body with:
+  ```tsx
+  import React from "react";
+  import { SafeAreaView, Text } from "react-native";
 
-3) Add one navigation route.
+  export default function App() {
+    return (
+      <SafeAreaView style={{ padding: 24 }}>
+        <Text>NativeLab is running.</Text>
+      </SafeAreaView>
+    );
+  }
+  ```
 
-Why: Navigation is the first real test.
+Why:
+A simple screen is enough to verify the app runs. It avoids extra components. It also makes hot reload obvious. This is your baseline for future changes.
 
-4) Run on a device.
+Verify:
+- Run the app and confirm the text appears.
+- This confirms the edit is live.
 
-Why: Mobile behavior is different from web.
+If it fails:
+- Symptom: red screen error.  
+  **Fix:** check imports and file name.
+
+### Step 3: Run the app
+Goal:
+Launch the app in a simulator.
+
+Actions:
+- Command for iOS:
+  ```bash
+  npx react-native run-ios
+  ```
+- Command for Android:
+  ```bash
+  npx react-native run-android
+  ```
+
+Why:
+Running the app is the proof. It confirms your environment is correct. It also confirms your code compiles. Without this, the project is not real.
+
+Verify:
+- Expected: app opens and shows "NativeLab is running."
+- This confirms the build and run steps work.
+
+If it fails:
+- Symptom: emulator not found.  
+  **Fix:** start the simulator first.
 
 ## Verify it worked
 
-- The app runs on the device.
-- The screen renders without errors.
-- Navigation works in both directions.
-
-If it does not run, restart Metro and clear cache.
+- The app launches.
+- The text appears.
+- No red screen errors show.
 
 ## Common mistakes
 
-- **Symptom**: App fails to load.
-  **Cause**: Metro cache issues.
-  **Fix**: Restart with `expo start -c`.
+- **Symptom:** Metro server not running.  
+  **Cause:** no bundler process.  
+  **Fix:** run `npx react-native start`.
 
-- **Symptom**: Navigation errors.
-  **Cause**: Missing navigation setup.
-  **Fix**: Follow the React Navigation docs.
+- **Symptom:** iOS build fails.  
+  **Cause:** missing Xcode tools.  
+  **Fix:** install Xcode and accept the license.
 
-- **Symptom**: UI looks wrong on device.
-  **Cause**: Using web-only styles.
-  **Fix**: Use React Native style rules.
+- **Symptom:** Android build fails.  
+  **Cause:** emulator not running.  
+  **Fix:** start Android Studio emulator.
 
 ## Cheat sheet
 
-- Use Expo for setup.
-- Build one screen first.
-- Test on a real device.
+- Scaffold with `react-native init`.
+- Edit `App.tsx`.
+- Run on a simulator.
 
 ## Next steps
 
-- Add a second screen.
-- Add a simple form.
-- Keep the prototype small.
+- Add one button.
+- Add a second screen with navigation.
 
-Related links:
+## Related links
 
-- https://docs.expo.dev/
-- https://reactnative.dev/docs/getting-started
+- https://reactnative.dev/docs/environment-setup
 
-Final CTA:
+## Final CTA
 
-If you want a small React Native checklist, ask and I will share it.
+Get one screen running before you build anything bigger.

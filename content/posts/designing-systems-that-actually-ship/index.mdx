@@ -1,114 +1,161 @@
 ---
-title: "Designing Systems That Ship: A Full Start to Finish Checklist"
-date: "2025-06-01"
+title: "Designing Systems That Actually Ship: A Small Template"
+date: "2025-05-19"
 slug: "/designing-systems-that-actually-ship"
-tags: ["process", "projects", "web-development"]
-description: "A complete project shipping workflow with setup, steps, and verification."
-theme: "Process"
+tags: ["systems", "documentation", "process"]
+description: "A simple system design template with exact files and checks."
+theme: "Systems"
 ---
 
-Shipping is a system, not a mood.
+Systems only ship when the design is short and testable.
 
-This post is a full workflow I use to move a demo from idea to link.
+This post shows a lightweight design template you can finish in one sitting.
 
-You will get the setup, the steps, and the checks.
+You will write a one page design, then verify it against code.
 
-If you want a clear process, this is for you.
+I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+
+## The promise
+
+By the end, you will:
+
+- write a one page system design
+- define scope and boundaries
+- verify the design against a small repo
+
+> "If the design cannot fit on one page, it probably will not ship."
 
 ## What this is
 
-High level, this is a repeatable way to ship small software projects.
+**High level:** A system design is a short plan for how parts connect.
 
-Low level, it is a set of steps, files, and verification checks.
+**Low level:** You document inputs, outputs, and the minimal data flow.
 
-Key terms:
+**Key terms:**
 
-- **Scope**: the smallest feature set you will ship.
-- **Proof link**: a repo or demo URL that shows the work.
-- **Reality snapshot**: a short list of limits and gaps.
+- **Boundary:** The edge between two parts of the system.
+- **Data flow:** How data moves between parts.
+- **Scope:** What the system does and does not do.
 
 ## What you need
 
-- A project idea.
-- A repo you can push to.
-- A place to host a demo.
+- A repo for the system
+- A place to store docs
 
-## Start to finish
+## Start to Finish
 
-1) Write a one sentence scope.
+### Step 1: Create a one page design file
+Goal:
+Write a short system design you can actually use.
 
-Why: Scope controls time and quality.
+Actions:
+- File path: `docs/system-design.md`
+- Add:
+  ```text
+  System design
+  Goal:
+  Inputs:
+  Outputs:
+  Boundaries:
+  Data flow:
+  ```
 
-2) Create the repo and file map.
+Why:
+A one page template keeps the design tight. It forces you to define scope. It also makes review easier. This prevents vague architecture that never ships.
 
-Why: You need a clean structure before you build.
+Verify:
+- Open the file and fill one line per section.
+- This confirms the design is not empty.
 
-```text
-/README.md
-/src
-  /components
-  /pages
-/notes
-```
+If it fails:
+- Symptom: the file grows beyond one page.
+- Fix: cut features or move them to a "next" section.
 
-3) Build the main flow.
+### Step 2: Map the design to files
+Goal:
+Connect the design to real code locations.
 
-Why: A working flow proves the idea.
+Actions:
+- File path: `docs/system-design.md`
+- Add a mapping section:
+  ```text
+  File map:
+  - API routes: src/api/
+  - UI: src/components/
+  - Data: src/data/
+  ```
 
-4) Add a README with limits.
+Why:
+If the design cannot map to files, it is not real. This step keeps the doc tied to code. It also makes reviews faster. You can confirm the system is implemented where you expect.
 
-Why: You must write what is missing.
+Verify:
+- Check that each path exists in the repo.
+- This confirms the mapping is valid.
 
-```md
-## Reality snapshot
-- What works
-- What is missing
-- What is planned
-```
+If it fails:
+- Symptom: paths do not exist.
+- Fix: update the map to match real folders.
 
-5) Deploy and verify.
+### Step 3: Add a "done" definition
+Goal:
+Define the minimum ship criteria.
 
-Why: A demo without a working link is not done.
+Actions:
+- File path: `docs/system-design.md`
+- Add:
+  ```text
+  Done when:
+  - API returns 200 on /health
+  - UI renders the core screen
+  - One demo flow is verified
+  ```
+
+Why:
+A clear "done" prevents scope creep. It also gives you a verification target. This makes shipping possible. Without a done definition, work drifts.
+
+Verify:
+- Confirm each bullet can be tested.
+- This proves the criteria are measurable.
+
+If it fails:
+- Symptom: "done" is vague.  
+  **Fix:** rewrite bullets as concrete checks.
 
 ## Verify it worked
 
-- The demo loads in a private window.
-- The main flow works end to end.
-- The README matches the code.
-
-If you cannot verify it, you cannot claim it.
+- The design file is one page.
+- The file map matches the repo.
+- The done criteria are testable.
 
 ## Common mistakes
 
-- **Symptom**: The demo is live but broken.
-  **Cause**: No verification step.
-  **Fix**: Add a short verification checklist.
+- **Symptom:** The design is longer than the code.  
+  **Cause:** Too much scope.  
+  **Fix:** cut features until it fits one page.
 
-- **Symptom**: Claims do not match code.
-  **Cause**: Notes are stale.
-  **Fix**: Update notes after each change.
+- **Symptom:** Design does not match files.  
+  **Cause:** No file map.  
+  **Fix:** add a file map section.
 
-- **Symptom**: Scope explodes.
-  **Cause**: No one sentence goal.
-  **Fix**: Rewrite the scope and cut features.
+- **Symptom:** "Done" is not testable.  
+  **Cause:** Vague wording.  
+  **Fix:** write checks you can run.
 
 ## Cheat sheet
 
-- Write the one sentence scope.
-- Build the main flow first.
-- Add a reality snapshot.
-- Verify the demo link.
+- One page design.
+- File map.
+- Done criteria.
 
 ## Next steps
 
-- Apply this to one demo this week.
-- Remove one unverified claim.
-- Add one proof link.
+- Add one diagram if the system grows.
+- Link the design from the README.
 
-Related links:
+## Related links
 
-- https://bradleymatera.dev/projects/
+- https://12factor.net/
 
-Final CTA:
+## Final CTA
 
-If you want my project template, ask and I will share it.
+Keep the design small enough to ship this week.

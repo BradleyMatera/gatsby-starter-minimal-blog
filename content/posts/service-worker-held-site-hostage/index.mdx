@@ -1,110 +1,188 @@
 ---
-title: "Service Worker Bug: Full Fix From Cache to Clean"
-date: "2025-04-12"
+title: "Service Worker Held My Site Hostage: How I Removed It"
+date: "2025-03-11"
 slug: "/service-worker-held-site-hostage"
-tags: ["debugging", "web-development", "caching"]
-description: "A full guide to finding and clearing a stale service worker."
-theme: "Front-End & Full-Stack"
+tags: ["debugging", "gatsby", "web"]
+description: "Exact steps to find a stuck service worker, remove it, and verify the site updates."
+theme: "Debugging"
 ---
 
-A stale service worker can make a correct deploy look broken.
+A stale service worker can make your site lie to you.
 
-This post shows the full fix from detection to cleanup.
+This post shows the exact steps I used to remove a stuck service worker and confirm updates shipped.
 
-You will get steps, verification, and common mistakes.
+Everything here is verifiable in a browser and in this repo.
 
-If your site shows old assets, this is for you.
+## The promise
+
+By the end, you will:
+
+- find a service worker that is caching old content
+- remove it cleanly
+- verify the site updates without stale files
+
+> "If your browser still serves yesterday’s build, the fix is in the Application tab."
 
 ## What this is
 
-High level, a service worker can cache files to speed up repeat visits.
+**High level:** A service worker is a background script that can cache files and serve them even after deploys.
 
-Low level, it is a script that runs in the background and can override new assets.
+**Low level:** The browser registers a worker, stores cached assets, and serves those cached assets until you unregister it.
 
-Key terms:
+**Key terms:**
 
-- **Service worker**: a background script that can cache responses.
-- **Cache**: stored files the browser reuses.
-- **Unregister**: removing the service worker from the browser.
+- **Service worker:** A browser script that can intercept network requests.
+- **Cache storage:** The browser’s saved asset store used by the worker.
+- **Unregister:** The action that removes the worker.
 
 ## What you need
 
-- The deployed site.
-- Browser DevTools.
-- Access to the repo or build.
+- Chrome or Edge
+- Access to DevTools
+- This repo checked out
 
-Docs used:
+## Start to Finish
 
-- https://developer.mozilla.org/docs/Web/API/Service_Worker_API
+### Step 1: Confirm the service worker is active
+Goal:
+Verify that a service worker is controlling the page.
 
-## Start to finish
+Actions:
+- Open the site in Chrome.
+- Open DevTools → Application → Service Workers.
+- Look for an active registration.
 
-1) Open DevTools and go to Application.
+Why:
+You need to prove a worker exists before changing anything. The Application tab shows exactly which worker is controlling the page. This avoids guessing. If no worker is active, your issue is not a worker cache.
 
-Why: Service worker controls are there.
+Verify:
+- Expected: a service worker entry with "activated" or "running".
+- This confirms the worker is active.
 
-2) Check for an active service worker.
+If it fails:
+- Symptom: no worker listed.
+- Fix: skip to other cache issues like hard reload or CDN cache.
 
-Why: You need to confirm it exists.
+### Step 2: Unregister the worker
+Goal:
+Remove the worker so it can no longer intercept requests.
 
-3) Unregister the worker.
+Actions:
+- In DevTools → Application → Service Workers, click "Unregister".
+- Check "Update on reload".
+- Hard reload the page.
 
-Why: It stops the stale cache.
+Why:
+Unregistering removes the worker script. The hard reload forces the browser to fetch live assets. "Update on reload" ensures you are not seeing cached files. This isolates the problem to the worker.
 
-```js
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.getRegistrations().then((regs) => {
-    regs.forEach((reg) => reg.unregister());
-  });
-}
-```
+Verify:
+- Expected: no active worker listed after reload.
+- This confirms the worker is gone.
 
-4) Clear storage.
+If it fails:
+- Symptom: worker reappears after reload.
+- Fix: clear site data in Application → Storage and reload again.
 
-Why: Old caches can still linger.
+### Step 3: Clear cached data
+Goal:
+Remove any cached files the worker left behind.
 
-5) Reload the site in a private window.
+Actions:
+- DevTools → Application → Storage
+- Click "Clear site data"
+- Reload the page
 
-Why: It avoids cached state.
+Why:
+Even after unregistering, caches can stick around. Clearing site data removes cached files and storage keys. This guarantees the next load is from the network. It also removes old app state that could be misleading.
+
+Verify:
+- Expected: the cache storage list is empty.
+- This confirms no stale assets remain.
+
+If it fails:
+- Symptom: cache entries remain.
+- Fix: close the tab, reopen, and clear again.
+
+### Step 4: Ensure the repo does not re-register a worker
+Goal:
+Confirm the project does not re-add a service worker on build.
+
+Actions:
+- File path: `gatsby-config.ts`
+- Check the plugins list.
+- Ensure `gatsby-plugin-offline` is not present.
+
+Why:
+`gatsby-plugin-offline` installs a service worker. If it is in the plugin list, the worker will come back. Removing the plugin prevents future re-registration. This is the root fix in a Gatsby site.
+
+Verify:
+- Expected: no `gatsby-plugin-offline` entry in `gatsby-config.ts`.
+- This confirms the worker will not be re-added.
+
+If it fails:
+- Symptom: plugin exists.
+- Fix: remove it and restart the dev server.
+
+### Step 5: Verify the live content updates
+Goal:
+Confirm that updates appear without stale content.
+
+Actions:
+- Edit a visible line in the page content.
+- Run:
+  ```bash
+  bun run dev
+  ```
+- Reload the page in the browser.
+
+Why:
+A visible change is the easiest check. The dev server rebuilds on save. If the new text appears, the cache is no longer hiding changes. This confirms the issue is resolved.
+
+Verify:
+- Expected: the edited text appears immediately after reload.
+- This confirms the worker is not blocking updates.
+
+If it fails:
+- Symptom: old text still shows.
+- Fix: hard reload and clear site data again.
 
 ## Verify it worked
 
-- The new assets load.
-- The site reflects the latest deploy.
-- The service worker list is empty.
-
-If it still shows old assets, you have another cache layer.
+- No active service worker in Application tab.
+- Cache storage is empty.
+- Content updates show immediately.
 
 ## Common mistakes
 
-- **Symptom**: Assets still old.
-  **Cause**: Cache not cleared.
-  **Fix**: Clear storage and reload.
+- **Symptom:** Changes show in dev server but not in browser.  
+  **Cause:** Worker cache still active.  
+  **Fix:** Unregister and clear site data.
 
-- **Symptom**: Worker comes back.
-  **Cause**: Offline plugin still enabled.
-  **Fix**: Remove the plugin and rebuild.
+- **Symptom:** Worker keeps returning.  
+  **Cause:** Offline plugin still enabled.  
+  **Fix:** Remove the plugin and rebuild.
 
-- **Symptom**: Site breaks after unregister.
-  **Cause**: App depends on cached data.
-  **Fix**: Remove that dependency.
+- **Symptom:** Cached assets appear after deploy.  
+  **Cause:** The browser did not update.  
+  **Fix:** Hard reload with cache disabled in DevTools.
 
 ## Cheat sheet
 
-- Check Application tab.
-- Unregister worker.
-- Clear storage.
-- Reload in private window.
+- Application tab tells the truth.
+- Unregister, then clear site data.
+- Remove offline plugin if present.
+- Verify with a visible content change.
 
 ## Next steps
 
-- Remove unused offline plugins.
-- Add a deploy note about cache.
+- Add a short "cache" note to your README.
+- Avoid service workers unless you need offline support.
 
-Related links:
+## Related links
 
-- https://developer.mozilla.org/docs/Web/API/Service_Worker_API
+- https://developer.chrome.com/docs/devtools/application/service-workers/
+- https://www.gatsbyjs.com/docs/how-to/progressive-web-apps/offline/
 
-Final CTA:
+## Final CTA
 
-If you hit this bug, send me the steps you used and I will compare notes.
+When the page lies to you, check the worker first.

@@ -1,104 +1,158 @@
 ---
-title: "My Real AI Development Setup: Complete Workflow"
-date: "2025-09-05"
+title: "My Real AI Development Setup: Tools and Checks"
+date: "2025-04-20"
 slug: "/my-real-ai-development-setup"
-tags: ["ai", "tools", "productivity"]
-description: "A full workflow for using AI tools with clear verification steps."
+tags: ["ai", "tools", "workflow"]
+description: "A concrete AI dev setup with exact files, commands, and checks."
 theme: "Process"
 ---
 
-This is my actual setup. It is simple and verifiable.
+This is the setup I actually use to work with AI tools.
 
-I use AI for drafts and refactors, then verify everything.
+It is practical, small, and focused on verification.
 
-You will get the tool list, the steps, and the checks.
+You will document your setup and add proof of what you run.
 
-If you use AI in your work, this is for you.
+I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+
+## The promise
+
+By the end, you will:
+
+- document your AI tooling in one file
+- add a reproducible install list
+- define a verification step for each tool
+
+> "If the tool is not installed and used, it does not belong on the list."
 
 ## What this is
 
-High level, this is a workflow for using AI as a helper.
+**High level:** A dev setup is a list of tools and the checks you run.
 
-Low level, it is a set of prompts, checks, and edits.
+**Low level:** You write a setup file with commands and verify each tool runs.
 
-Key terms:
+**Key terms:**
 
-- **Prompt**: the input you give an AI tool.
-- **Verification**: checking output against docs and code.
-- **Change log**: a short record of what changed.
+- **CLI tool:** A command you run from the terminal.
+- **Verification:** A quick check that a tool works.
 
 ## What you need
 
-- A text editor.
-- An AI tool like ChatGPT or Copilot.
-- The official docs for your stack.
+- A notes folder
+- The tools you actually use
 
-## Start to finish
+## Start to Finish
 
-1) Define the task in one sentence.
+### Step 1: Create a setup file
+Goal:
+Document your tools in one place.
 
-Why: Clear prompts reduce garbage output.
+Actions:
+- File path: `docs/dev-setup.md`
+- Add:
+  ```text
+  AI dev setup
+  - Node 18
+  - Python 3.11
+  - VS Code
+  ```
 
-2) Ask for a short plan, not full code.
+Why:
+A single file keeps the setup clear. It avoids scattered notes. This also lets others reproduce your environment. It is the baseline for honest tooling claims.
 
-Why: Plans are easier to verify.
+Verify:
+- Open the file and confirm the list exists.
+- This confirms the setup file is created.
 
-3) Write the first version yourself.
+If it fails:
+- Symptom: no file.  
+  **Fix:** create the file and add the list.
 
-Why: You need to understand the code.
+### Step 2: Add install commands
+Goal:
+List the exact commands that install the tools.
 
-4) Ask AI to refactor or clean up.
+Actions:
+- File path: `docs/dev-setup.md`
+- Add:
+  ```text
+  Install
+  - Node: https://nodejs.org/
+  - Python: https://www.python.org/downloads/
+  ```
 
-Why: Refactors are safer than full rewrites.
+Why:
+A setup is only useful if it is repeatable. Links to official installers are the safest option. This keeps the setup honest. It also avoids vague instructions.
 
-5) Verify against docs.
+Verify:
+- Click each link.
+- Expected: official download pages open.
+- This confirms the install sources are valid.
 
-Why: AI can be wrong.
+If it fails:
+- Symptom: broken link.  
+  **Fix:** update the URL.
 
-### Example prompt
+### Step 3: Add a verification command
+Goal:
+Prove each tool works on your machine.
 
-```text
-Give me a 5 step plan for this task. Keep it short and direct.
-```
+Actions:
+- File path: `docs/dev-setup.md`
+- Add:
+  ```text
+  Verify
+  - node -v
+  - python3 --version
+  ```
+
+Why:
+A version command is the simplest proof. It confirms the tool is installed and on PATH. This makes the setup reproducible. It also prevents phantom tools in your list.
+
+Verify:
+- Run the commands and confirm they print a version.
+- This confirms the tools are active.
+
+If it fails:
+- Symptom: command not found.  
+  **Fix:** reinstall the tool or update PATH.
 
 ## Verify it worked
 
-- The code runs locally.
-- The changes match the plan.
-- The docs support the approach.
-
-If you cannot explain a line, remove it.
+- The setup file exists.
+- Install sources are listed.
+- Version commands return output.
 
 ## Common mistakes
 
-- **Symptom**: Code compiles but fails at runtime.
-  **Cause**: Skipped verification.
-  **Fix**: Test each change locally.
+- **Symptom:** Tools listed but not installed.  
+  **Cause:** No verify step.  
+  **Fix:** add version checks.
 
-- **Symptom**: Overly complex output.
-  **Cause**: Prompt too broad.
-  **Fix**: Ask for a smaller plan.
+- **Symptom:** Links point to random guides.  
+  **Cause:** No official source.  
+  **Fix:** link to official downloads.
 
-- **Symptom**: Claims that are not true.
-  **Cause**: Copying AI text into docs.
-  **Fix**: Rewrite in your own words.
+- **Symptom:** The setup grows too large.  
+  **Cause:** Listing tools you do not use.  
+  **Fix:** remove anything you did not use this month.
 
 ## Cheat sheet
 
-- One sentence task.
-- Ask for a plan.
-- Write first version.
-- Verify with docs.
+- One setup file.
+- One install list.
+- One verification per tool.
 
 ## Next steps
 
-- Add a short change log to your README.
-- Keep prompts short.
+- Add your editor extensions list.
+- Add one sample project that proves the setup works.
 
-Related links:
+## Related links
 
-- https://github.com/features/copilot
+- https://nodejs.org/
+- https://www.python.org/downloads/
 
-Final CTA:
+## Final CTA
 
-If you want my prompt list, ask and I will share it.
+Keep the setup short, verified, and honest.

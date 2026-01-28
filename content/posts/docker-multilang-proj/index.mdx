@@ -1,153 +1,314 @@
 ---
-title: "Docker for Multi-Language Projects: Full Setup From Zero"
-date: "2025-06-10"
-description: "A complete lab guide for running two languages in one Docker setup with clear steps and verification."
+title: "Docker Multilang: One Compose File, Three Runtimes"
+date: "2025-02-10"
 slug: "/containerizing-multi-language-projects-with-docker-a-practical-guide"
-tags: ["docker", "containerization", "web-development"]
-theme: "Cloud & DevOps"
+tags: ["docker", "containers", "devops"]
+description: "A concrete guide to containerizing a small multi-language project with exact files and commands."
+theme: "DevOps"
 ---
 
-Running two languages in one repo can get messy fast.
+Containers are simple when you keep the surface area small.
 
-This post is a full lab guide to keep the setup simple and repeatable.
+This post shows a minimal multi-language setup using Docker and Compose.
 
-You will build a two service setup with Docker and Compose.
+You will build a Node API, a Python worker, and a static frontend in one stack.
 
-If you are new to multi-service repos, this is for you.
+I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+
+## The promise
+
+By the end, you will:
+
+- run three services with one `docker compose up`
+- understand how ports and networks line up
+- verify each service with a concrete check
+
+> "If each container has one job, Compose becomes easy to reason about."
 
 ## What this is
 
-High level, Docker lets each service run in its own container.
+**High level:** Docker packages each service with its runtime so they run consistently.
 
-Low level, you write a Dockerfile per service and a Compose file to run them together.
+**Low level:** You write a Dockerfile per service and a `docker-compose.yml` that wires ports and dependencies.
 
-Key terms:
+**Key terms:**
 
-- **Dockerfile**: the build recipe for an image.
-- **Image**: the built artifact that includes your app and dependencies.
-- **Compose**: a YAML file that defines how services run together.
+- **Image:** A packaged filesystem and runtime.
+- **Container:** A running instance of an image.
+- **Compose:** A config file that runs multiple containers together.
 
 ## What you need
 
-- Docker Desktop installed.
-- A repo with two folders, such as `api` and `web`.
-- A terminal.
+- Docker Desktop installed
+- Node 18
+- Python 3.11
 
-Docs used:
+## Start to Finish
 
-- https://docs.docker.com/build/
-- https://docs.docker.com/compose/
+### Step 1: Create the project layout
+Goal:
+Create a folder structure that separates services.
 
-## Start to finish
+Actions:
+- Commands:
+  ```bash
+  mkdir multilang && cd multilang
+  mkdir api worker web
+  ```
+- File tree:
+  ```text
+  multilang/
+    api/
+    worker/
+    web/
+  ```
 
-1) Create a Dockerfile for each service.
+Why:
+Clear folders keep Dockerfiles simple and predictable. Each folder becomes a build context. This avoids accidental file leaks into images. It also makes it easy to reason about which service owns which code.
 
-Why: Each service should build in isolation.
+Verify:
+- Run:
+  ```bash
+  ls
+  ```
+- Expected: `api`, `worker`, and `web` directories.
+- This confirms the structure is in place.
 
-`api/Dockerfile` example:
+If it fails:
+- Symptom: missing folder.
+- Fix: re run the `mkdir` commands.
 
-```Dockerfile
-FROM node:20-alpine
-WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm ci
-COPY . .
-CMD ["npm", "run", "start"]
-```
+### Step 2: Add the Node API
+Goal:
+Create a minimal Node API that responds on `/health`.
 
-`web/Dockerfile` example:
+Actions:
+- File path: `api/index.js`
+- Add:
+  ```js
+  const express = require("express");
+  const app = express();
+  app.get("/health", (_req, res) => res.json({ ok: true }));
+  app.listen(3001, () => console.log("api on 3001"));
+  ```
+- File path: `api/package.json`
+- Add:
+  ```json
+  {
+    "name": "api",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+      "start": "node index.js"
+    },
+    "dependencies": {
+      "express": "^4.19.2"
+    }
+  }
+  ```
+- Command:
+  ```bash
+  cd api && npm install
+  ```
 
-```Dockerfile
-FROM node:20-alpine
-WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm ci
-COPY . .
-CMD ["npm", "run", "dev"]
-```
+Why:
+A health route is the simplest verification check. Express keeps the example short. Having a fixed port is important for Compose mapping. This step establishes one running service in the stack.
 
-2) Create `docker-compose.yml` at the repo root.
+Verify:
+- Run locally:
+  ```bash
+  npm start
+  ```
+- Expected output: `api on 3001`.
+- This confirms the API starts.
 
-Why: Compose starts both services together.
+If it fails:
+- Symptom: `Cannot find module 'express'`.
+- Fix: run `npm install` in `api/`.
 
-```yaml
-services:
-  api:
-    build: ./api
-    ports:
-      - "4000:4000"
-  web:
-    build: ./web
-    ports:
-      - "3000:3000"
-    depends_on:
-      - api
-```
+### Step 3: Add the Python worker
+Goal:
+Create a Python script that prints a heartbeat.
 
-3) Build and run the stack.
+Actions:
+- File path: `worker/main.py`
+- Add:
+  ```py
+  import time
 
-Why: This confirms both services start.
+  while True:
+      print("worker alive")
+      time.sleep(5)
+  ```
+- File path: `worker/requirements.txt`
+- Add:
+  ```text
+  ```
 
-```bash
-docker compose up --build
-```
+Why:
+The worker does not need a server. A loop proves it is running. This keeps the example focused on multi runtime containers. You can replace the worker with real jobs later.
 
-4) Add a small note in README.
+Verify:
+- Run:
+  ```bash
+  python3 worker/main.py
+  ```
+- Expected output: `worker alive` every 5 seconds.
+- This confirms the worker runs.
 
-Why: You need steps anyone can repeat.
+If it fails:
+- Symptom: `python3: command not found`.
+- Fix: install Python 3.11.
 
-Example:
+### Step 4: Add a static web page
+Goal:
+Create a tiny static site to serve.
 
-```md
-## Run locally
-- docker compose up --build
-- open http://localhost:3000
-```
+Actions:
+- File path: `web/index.html`
+- Add:
+  ```html
+  <h1>Multilang Demo</h1>
+  <p>If you see this, the web container works.</p>
+  ```
+
+Why:
+A static page verifies your web container without extra tooling. It keeps the stack small. You can replace it with a real frontend later. This makes the web service easy to test.
+
+Verify:
+- Open the file in a browser.
+- Expected: the heading and paragraph show.
+- This confirms the file renders.
+
+If it fails:
+- Symptom: blank page.
+- Fix: check the file path and content.
+
+### Step 5: Add Dockerfiles
+Goal:
+Create one Dockerfile per service.
+
+Actions:
+- File path: `api/Dockerfile`
+  ```dockerfile
+  FROM node:18-alpine
+  WORKDIR /app
+  COPY package.json package-lock.json ./
+  RUN npm install --production
+  COPY . .
+  EXPOSE 3001
+  CMD ["npm", "start"]
+  ```
+- File path: `worker/Dockerfile`
+  ```dockerfile
+  FROM python:3.11-slim
+  WORKDIR /app
+  COPY requirements.txt ./
+  RUN pip install -r requirements.txt
+  COPY . .
+  CMD ["python", "main.py"]
+  ```
+- File path: `web/Dockerfile`
+  ```dockerfile
+  FROM nginx:alpine
+  COPY index.html /usr/share/nginx/html/index.html
+  ```
+
+Why:
+Each Dockerfile describes one runtime. Small base images keep builds fast. Copying only required files reduces noise. Exposing the API port makes the mapping explicit.
+
+Verify:
+- Build one image:
+  ```bash
+  docker build -t multilang-api api
+  ```
+- Expected: build completes without errors.
+- This confirms the Dockerfile is valid.
+
+If it fails:
+- Symptom: missing `package-lock.json`.
+- Fix: run `npm install` in `api/` or update the COPY line.
+
+### Step 6: Add Compose
+Goal:
+Run all services with one command.
+
+Actions:
+- File path: `docker-compose.yml`
+- Add:
+  ```yaml
+  services:
+    api:
+      build: ./api
+      ports:
+        - "3001:3001"
+    worker:
+      build: ./worker
+    web:
+      build: ./web
+      ports:
+        - "8080:80"
+  ```
+- Command:
+  ```bash
+  docker compose up --build
+  ```
+
+Why:
+Compose maps your services to ports and builds them together. This is the simplest way to run three containers in one stack. Keeping the file short avoids hidden behavior. You can add networks and env later.
+
+Verify:
+- Open http://localhost:8080
+- Expected: "Multilang Demo" page.
+- Run:
+  ```bash
+  curl http://localhost:3001/health
+  ```
+- Expected: `{ "ok": true }`
+- This confirms the web and API containers run.
+
+If it fails:
+- Symptom: port already in use.
+- Fix: change the host ports in `docker-compose.yml`.
 
 ## Verify it worked
 
-- The web app opens at http://localhost:3000
-- The API responds at http://localhost:4000
-- `docker compose ps` shows both services running
-
-If the API does not respond, check the container logs:
-
-```bash
-docker logs <container-id>
-```
+- Web page loads on port 8080.
+- API health returns JSON on port 3001.
+- Worker logs show "worker alive" every 5 seconds.
 
 ## Common mistakes
 
-- **Symptom**: Build fails on npm install.
-  **Cause**: Missing lockfile in the image.
-  **Fix**: Copy `package-lock.json` before running `npm ci`.
+- **Symptom:** API container exits instantly.  
+  **Cause:** `npm install` did not run.  
+  **Fix:** rebuild with `docker compose up --build`.
 
-- **Symptom**: Web app cannot reach API.
-  **Cause**: Wrong host or port.
-  **Fix**: Use the API service name from Compose.
+- **Symptom:** Web page 404.  
+  **Cause:** Nginx did not receive the `index.html`.  
+  **Fix:** confirm the COPY path in the web Dockerfile.
 
-- **Symptom**: Compose fails to start.
-  **Cause**: YAML indentation errors.
-  **Fix**: Re-check spaces and alignment.
+- **Symptom:** Worker spams errors.  
+  **Cause:** Python file name mismatch.  
+  **Fix:** ensure `main.py` exists in `worker/`.
 
 ## Cheat sheet
 
 - One Dockerfile per service.
-- One Compose file at the root.
-- Build and run with `docker compose up --build`.
-- Verify both ports respond.
+- One port per public service.
+- Compose runs everything.
+- Verify with curl and a browser.
 
 ## Next steps
 
-- Add a health check route.
-- Add a `.env` example file.
-- Add a short troubleshooting section.
+- Add environment variables for config.
+- Add a shared network and service names.
+- Add health checks in Compose.
 
-Related links:
+## Related links
 
 - https://docs.docker.com/compose/
 - https://docs.docker.com/build/
 
-Final CTA:
+## Final CTA
 
-If you want my example repo structure, ask and I will share it.
+Build one service at a time, then compose them together.

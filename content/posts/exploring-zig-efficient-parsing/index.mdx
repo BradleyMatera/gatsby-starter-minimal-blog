@@ -1,128 +1,235 @@
 ---
-title: "Zig Parsing Lab: Build a Small OBJ Parser"
-date: "2025-03-10"
+title: "Zig OBJ Parsing: A Small, Fast Parser You Can Verify"
+date: "2025-06-18"
 slug: "/exploring-zig-efficient-parsing"
 tags: ["zig", "parsing", "performance"]
-description: "A complete lab tutorial for parsing OBJ files in Zig with clear steps and checks."
+description: "A complete, minimal OBJ parser in Zig with exact steps, checks, and debug tips."
 theme: "Systems"
 ---
 
-Parsing gets clearer when you build something tiny.
+Parsing is not magic. It is careful input handling and boring loops.
 
-This post is a full lab tutorial for a small OBJ parser in Zig.
+This post shows a minimal OBJ parser in Zig and how to verify it works.
 
-You will parse one file type, log errors, and verify the output.
+You will build one file parser, run it, and confirm the output.
 
-If you are new to Zig, this is a good start.
+I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+
+## The promise
+
+By the end, you will:
+
+- understand what an OBJ parser does
+- build a tiny Zig parser that reads vertices
+- verify output with exact expected lines
+
+> "If the output is predictable, the parser is correct."
 
 ## What this is
 
-High level, you read a text file and translate lines into structured data.
+**High level:** An OBJ parser reads a text file and turns lines like `v 0.0 1.0 0.0` into numbers you can use.
 
-Low level, you parse line prefixes like `v` and store numbers in arrays.
+**Low level:** You open a file, read it line by line, split on spaces, and store floats in a list.
 
-Key terms:
+**Key terms:**
 
-- **OBJ**: a simple 3D model file format.
-- **Token**: a piece of a line, such as a float or an index.
-- **Parser**: code that turns text into data.
+- **OBJ:** A plain text 3D file format with lines like `v`, `vn`, and `f`.
+- **Parser:** Code that reads text and converts it into structured data.
+- **Allocator:** Zig’s memory manager for dynamic arrays.
+- **Slice:** A view into a contiguous block of memory.
+- **Token:** A split piece of a string, usually from a delimiter.
+- **Struct:** A Zig type that groups fields together.
 
 ## What you need
 
-- Zig 0.13.x installed.
-- A small OBJ file.
-- A terminal.
+- Zig installed (0.12.x or later)
+- A terminal
+- A text editor
 
-Docs used:
+Optional test file:
 
-- https://ziglang.org/documentation/0.13.0/
-- https://en.wikipedia.org/wiki/Wavefront_.obj_file
-
-## Start to finish
-
-1) Create a Zig project.
-
-Why: You need a clean place to test parsing.
-
-```bash
-mkdir zig-obj && cd zig-obj
-zig init
+```text
+v 0.0 1.0 0.0
+v -1.0 0.0 0.0
+v 1.0 0.0 0.0
 ```
 
-2) Load the file line by line.
+## Start to Finish
 
-Why: OBJ is line-based.
+### Step 1: Create the project
+Goal:
+Create a clean Zig project with one executable.
+
+Actions:
+- Command:
+  ```bash
+  mkdir zig-obj && cd zig-obj
+  zig init-exe
+  ```
+- File path: `src/main.zig`
+- Keep the generated `main.zig` for now.
+
+Why:
+This gives you a minimal build target and a predictable folder layout. You need `src/main.zig` so Zig knows where to start. Using `zig init-exe` avoids missing build files. It also makes it easy to run `zig build run` later. This keeps the setup aligned with Zig defaults.
+
+Verify:
+- Run:
+  ```bash
+  zig build
+  ```
+- Expected output: no errors.
+- This confirms the project compiles before you add code.
+
+If it fails:
+- Symptom: `zig: command not found`
+- Fix: install Zig and ensure it is on your PATH.
+
+### Step 2: Add a small OBJ file
+Goal:
+Create a known input file with three vertices.
+
+Actions:
+- File path: `data/sample.obj`
+- Create the file with:
+  ```text
+  v 0.0 1.0 0.0
+  v -1.0 0.0 0.0
+  v 1.0 0.0 0.0
+  ```
+- Command:
+  ```bash
+  mkdir -p data
+  $EDITOR data/sample.obj
+  ```
+
+Why:
+A parser is only as testable as its input. Using three fixed vertices gives you known output. This also avoids huge files while you are still debugging. Keeping the file under `data/` makes it easy to reference and share. You will use this file for verification.
+
+Verify:
+- Run:
+  ```bash
+  cat data/sample.obj
+  ```
+- Expected output: the three lines shown above.
+- This confirms the input is correct.
+
+If it fails:
+- Symptom: `No such file or directory`
+- Fix: re run `mkdir -p data` and create the file again.
+
+### Step 3: Implement the parser
+Goal:
+Read the OBJ file and collect vertices into a list.
+
+Actions:
+- File path: `src/main.zig`
+- Replace the file contents with:
 
 ```zig
-const line = try reader.readUntilDelimiterOrEofAlloc(allocator, '\n', 2048);
-```
+const std = @import("std");
 
-3) Match line prefixes.
+const Vertex = struct {
+    x: f32,
+    y: f32,
+    z: f32,
+};
 
-Why: `v` lines are vertices, `f` lines are faces.
+pub fn main() !void {
+    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    defer _ = gpa.deinit();
+    const allocator = gpa.allocator();
 
-```zig
-if (std.mem.startsWith(u8, line, "v ")) {
-    // parse vertex
+    var file = try std.fs.cwd().openFile("data/sample.obj", .{});
+    defer file.close();
+
+    const reader = file.reader();
+    var buf_reader = std.io.bufferedReader(reader);
+    var in_stream = buf_reader.reader();
+
+    var vertices = std.ArrayList(Vertex).init(allocator);
+    defer vertices.deinit();
+
+    var line_buf: [256]u8 = undefined;
+    while (try in_stream.readUntilDelimiterOrEof(&line_buf, '\n')) |line| {
+        if (line.len == 0) continue;
+        if (line[0] != 'v') continue;
+
+        var it = std.mem.tokenize(u8, line, " ");
+        _ = it.next(); // skip "v"
+        const x = try std.fmt.parseFloat(f32, it.next().?);
+        const y = try std.fmt.parseFloat(f32, it.next().?);
+        const z = try std.fmt.parseFloat(f32, it.next().?);
+        try vertices.append(.{ .x = x, .y = y, .z = z });
+    }
+
+    const out = std.io.getStdOut().writer();
+    for (vertices.items) |v| {
+        try out.print("v {d:.1} {d:.1} {d:.1}\n", .{ v.x, v.y, v.z });
+    }
 }
 ```
 
-4) Parse numbers.
+Why:
+This parser is minimal and predictable. It only reads lines that start with `v`, so it avoids faces and normals for now. Tokenizing by space keeps the logic straightforward. `ArrayList` gives you a dynamic list without guessing the vertex count. Printing the parsed vertices gives you a direct verification target.
 
-Why: You need floats and indices in numeric form.
+Verify:
+- Run:
+  ```bash
+  zig build run
+  ```
+- Expected output:
+  ```text
+  v 0.0 1.0 0.0
+  v -1.0 0.0 0.0
+  v 1.0 0.0 0.0
+  ```
+- This confirms the parser reads the file and extracts floats correctly.
 
-Use `std.fmt.parseFloat` for floats.
-
-5) Store parsed values.
-
-Why: You need a data structure to verify later.
+If it fails:
+- Symptom: `parseFloat` error or null token
+- Fix: ensure each `v` line has three numeric values and no extra spaces.
 
 ## Verify it worked
 
-- Print the number of vertices and faces.
-- Compare with the input file.
+- You see three vertices printed exactly as the input.
+- There are no panics or parse errors.
+- Running twice gives the same output.
 
-Example output:
-
-```text
-vertices: 8
-faces: 12
-```
-
-If the numbers are wrong, log the line that failed.
+This proves the parser is deterministic for simple inputs.
 
 ## Common mistakes
 
-- **Symptom**: Parser crashes on a line.
-  **Cause**: Line length too small.
-  **Fix**: Increase the buffer size.
+- **Symptom:** Only one vertex prints.  
+  **Cause:** The line buffer is too small.  
+  **Fix:** Increase `line_buf` size to 512.
 
-- **Symptom**: Wrong counts.
-  **Cause**: Ignoring blank or comment lines.
-  **Fix**: Skip lines that start with `#`.
+- **Symptom:** No output at all.  
+  **Cause:** The file path is wrong.  
+  **Fix:** Check that `data/sample.obj` exists and matches the path in code.
 
-- **Symptom**: Float parse errors.
-  **Cause**: Extra spaces.
-  **Fix**: Split by whitespace and trim.
+- **Symptom:** Crashes on lines with tabs.  
+  **Cause:** The tokenizer only splits on spaces.  
+  **Fix:** Replace tabs with spaces or add a tab check.
 
 ## Cheat sheet
 
-- Read line by line.
-- Check line prefixes.
-- Parse tokens into numbers.
-- Log failures.
+- Use `zig init-exe` to scaffold.
+- Put test inputs in `data/`.
+- Read with `readUntilDelimiterOrEof`.
+- Split with `tokenize` and parse floats.
+- Print what you parsed to verify.
 
 ## Next steps
 
-- Add face parsing.
-- Add a simple benchmark.
-- Add unit tests for bad input.
+- Add support for `vn` and `f` lines.
+- Support comments and blank lines.
+- Store vertices in a file format your renderer consumes.
 
-Related links:
+## Related links
 
-- https://ziglang.org/documentation/0.13.0/
+- https://ziglang.org/learn/
 - https://en.wikipedia.org/wiki/Wavefront_.obj_file
 
-Final CTA:
+## Final CTA
 
-If you want the sample OBJ files I used, ask and I will share them.
+Build the parser, run it, and keep the output small enough to reason about.

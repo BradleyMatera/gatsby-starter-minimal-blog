@@ -1,102 +1,158 @@
 ---
-title: "Full Sail Web Development: A Complete, Honest Breakdown"
-date: "2025-09-18"
+title: "What Formal Training Actually Gave Me"
+date: "2025-01-15"
 slug: "/full-sail-university-web-development"
-tags: ["education", "learning", "career"]
-description: "A full breakdown of what the program covered, what it did not, and how I filled the gaps."
+tags: ["education", "process", "career"]
+description: "A clear breakdown of what I kept from formal training and how I use it now."
 theme: "Career"
 ---
 
-This is a straight breakdown of what the program did and did not teach.
+Formal training only matters if you can reuse it in real projects.
 
-It is not a promo post. It is a clear list of reps and gaps.
+This post shows what I kept from school, how I organize it, and how I verify it.
 
-You will get the structure, the gaps, and the practical steps I used to close them.
+You will build a small structure to preserve course work and keep it honest.
 
-If you are choosing a program, this is for you.
+I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+
+## The promise
+
+By the end, you will:
+
+- organize course projects with proof links
+- capture one repeatable process you can use now
+- avoid overstating what school covered
+
+> "Keep the parts that still run and delete the rest."
 
 ## What this is
 
-High level, this is a summary of training plus a gap plan.
+**High level:** This is a method for extracting useful habits from formal training.
 
-Low level, it is a list of skills, missing areas, and the steps I used to practice them.
+**Low level:** You archive projects, add proof links, and write short notes about what the project does today.
 
-Key terms:
+**Key terms:**
 
-- **Reps**: repeated practice that builds skill.
-- **Gap**: a topic the program did not cover deeply.
-- **Retro note**: a short summary of what worked and what did not.
+- **Proof link:** A repo or live URL that shows the project works.
+- **Archive:** A folder for old projects you no longer update.
 
 ## What you need
 
-- A way to track notes.
-- One small project outside class.
-- A weekly review habit.
+- A folder for archived projects
+- A short README template
+- One example project you can still run
 
-## Start to finish
+## Start to Finish
 
-1) Track weekly reps.
+### Step 1: Create an archive folder
+Goal:
+Store school projects in one place.
 
-Why: You need a record of what you actually practiced.
+Actions:
+- Command:
+  ```bash
+  mkdir -p school-projects/archive
+  ```
 
-2) List gaps every month.
+Why:
+A clean archive stops old projects from polluting your current work. It also makes the story clear. This is the first step to honest documentation. You can always delete what no longer works.
 
-Why: The gaps pile up fast if you do not name them.
+Verify:
+- Run:
+  ```bash
+  ls school-projects
+  ```
+- Expected: `archive` folder.
+- This confirms the structure is ready.
 
-3) Build one demo to close one gap.
+If it fails:
+- Symptom: folder not found.
+- Fix: re-run the `mkdir` command.
 
-Why: The demo is the proof that you learned it.
+### Step 2: Add a short project README
+Goal:
+Document one project with a clear proof link.
 
-4) Write a short retro note.
+Actions:
+- File path: `school-projects/archive/project-name/README.md`
+- Add:
+  ```text
+  Project: Example Project
+  Status: archived
+  Proof link: https://github.com/yourname/project
+  What still works: builds locally
+  What does not: no live demo
+  ```
 
-Why: It helps you retain the lesson.
+Why:
+This keeps the project honest. It shows what still runs and what does not. It also prevents vague claims. A short README is enough to be clear.
 
-### Example retro note
+Verify:
+- Open the README and confirm the proof link works.
+- This confirms the project is documented.
 
-```text
-What I learned:
-What I missed:
-What I will practice next:
-```
+If it fails:
+- Symptom: no proof link.
+- Fix: add the repo URL or remove the project.
+
+### Step 3: Capture the reusable habit
+Goal:
+Write one habit you still use from training.
+
+Actions:
+- File path: `school-projects/habits.md`
+- Add:
+  ```text
+  Habit: small weekly deliverables
+  How I use it now: weekly demo goals
+  ```
+
+Why:
+The habit is the long term value. This turns education into a repeatable process. It also keeps the post grounded in what you actually do now. The habit should be specific and testable.
+
+Verify:
+- Open the file and confirm the habit is stated in one sentence.
+- This confirms it is usable.
+
+If it fails:
+- Symptom: the habit is vague.
+- Fix: rewrite it with a concrete example.
 
 ## Verify it worked
 
-- You can explain the concept without notes.
-- The demo runs without hidden setup.
-- The retro note is short and clear.
-
-If the demo does not run, the gap is still open.
+- Archive folder exists.
+- One project has a README and proof link.
+- One habit is documented.
 
 ## Common mistakes
 
-- **Symptom**: Too many gaps at once.
-  **Cause**: Trying to cover everything.
-  **Fix**: Pick one gap per month.
+- **Symptom:** Old projects are listed as current.  
+  **Cause:** No archive or status note.  
+  **Fix:** add a status line in README.
 
-- **Symptom**: Demos never ship.
-  **Cause**: No weekly review.
-  **Fix**: Add a short review block.
+- **Symptom:** Claims do not match reality.  
+  **Cause:** No proof link.  
+  **Fix:** add a link or remove the claim.
 
-- **Symptom**: Notes disappear.
-  **Cause**: No consistent storage.
-  **Fix**: Keep notes in one place.
+- **Symptom:** The habit is abstract.  
+  **Cause:** No concrete example.  
+  **Fix:** add one real example.
 
 ## Cheat sheet
 
-- Track weekly reps.
-- List gaps monthly.
-- Ship one demo per gap.
-- Write a short retro note.
+- Archive old projects.
+- Add proof links.
+- Keep one real habit.
 
 ## Next steps
 
-- Choose one gap and build a demo this month.
-- Add a short retro note to the demo README.
+- Move broken projects to archive.
+- Keep only the ones you can still run.
 
-Related links:
+## Related links
 
-- https://bradleymatera.dev/
+- https://guides.github.com/features/wikis/
 
-Final CTA:
+## Final CTA
 
-If you want my gap tracking template, ask and I will share it.
+Keep the useful parts and cut the rest. That is the honest way to do this.

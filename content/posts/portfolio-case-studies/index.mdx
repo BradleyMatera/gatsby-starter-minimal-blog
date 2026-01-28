@@ -1,104 +1,155 @@
 ---
-title: "Portfolio Case Studies: Full Template and Process"
-date: "2025-05-30"
+title: "Portfolio Case Studies: A Simple, Verifiable Template"
+date: "2025-03-22"
 slug: "/portfolio-case-studies"
-tags: ["portfolio", "projects", "process"]
-description: "A complete case study template with steps, checks, and proof links."
-theme: "Process"
+tags: ["portfolio", "writing", "process"]
+description: "A short case study template you can verify with proof links."
+theme: "Portfolio"
 ---
 
-Case studies only work when they match the code.
+A case study is a proof document, not a sales page.
 
-This post is a full template and process for writing honest case studies.
+This post gives you a short template that stays honest and scannable.
 
-You will get the exact sections, checks, and mistakes to avoid.
+You will write one case study that links to real proof.
 
-If you write portfolio case studies, this is for you.
+I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+
+## The promise
+
+By the end, you will:
+
+- write a short case study with proof links
+- avoid inflated claims
+- keep it readable for recruiters
+
+> "If the proof link is missing, the claim goes away."
 
 ## What this is
 
-High level, this is a structure for explaining a project clearly.
+**High level:** A case study explains the problem, solution, and result with proof.
 
-Low level, it is a set of sections and proof links tied to the repo.
+**Low level:** You write a short MDX file with fixed sections and links.
 
-Key terms:
+**Key terms:**
 
-- **Case study**: a short report of a project and its results.
-- **Proof link**: a repo or demo URL that backs a claim.
-- **Limitations**: a list of what the project does not do.
+- **Proof link:** A repo or demo URL.
+- **Outcome:** What the project achieved, stated plainly.
 
 ## What you need
 
-- A repo and demo.
-- A short project summary.
-- A list of limits.
+- A project repo
+- A live demo URL
+- A place to write the case study
 
-## Start to finish
+## Start to Finish
 
-1) Write the one sentence problem.
+### Step 1: Create the case study file
+Goal:
+Create a single file with fixed sections.
 
-Why: It frames the project fast.
+Actions:
+- File path: `content/case-studies/project-name.mdx`
+- Add:
+  ```text
+  # Project name
 
-2) Write the one sentence solution.
+  ## Problem
+  ## Solution
+  ## What I built
+  ## Outcomes and proof
+  ```
 
-Why: It explains what you built.
+Why:
+Fixed sections keep the structure clear. It makes the writing faster. It also makes scanning easier. This prevents the case study from drifting into vague storytelling.
 
-3) Add proof links.
+Verify:
+- Open the file and confirm the headings exist.
+- This confirms the structure is set.
 
-Why: You need evidence.
+If it fails:
+- Symptom: file missing.  
+  **Fix:** create the folder and file.
 
-4) Add limits.
+### Step 2: Add proof links
+Goal:
+Attach real proof to outcomes.
 
-Why: Limits prevent over-claiming.
+Actions:
+- Under "Outcomes and proof" add:
+  ```text
+  - Repo: https://github.com/yourname/project
+  - Demo: https://yourname.github.io/project
+  ```
 
-### Example case study block
+Why:
+Proof links are the heart of the case study. They make the claims verifiable. This avoids inflated statements. It also saves reviewers time.
 
-```md
-Problem: one sentence
-Solution: one sentence
-Proof: repo and demo
-Limits: one sentence
-```
+Verify:
+- Click each link.
+- Expected: the repo and demo load.
+- This confirms the proof is real.
+
+If it fails:
+- Symptom: 404.  
+  **Fix:** update the URL or remove the link.
+
+### Step 3: Add one concrete outcome
+Goal:
+State one result that is visible in the demo or repo.
+
+Actions:
+- Example outcome:
+  ```text
+  - Search filters the list in real time.
+  ```
+
+Why:
+Outcomes should be observable, not vague. One concrete outcome is enough. This keeps the case study honest. It also makes it easier to verify.
+
+Verify:
+- Open the demo and check the outcome.
+- This confirms the statement is true.
+
+If it fails:
+- Symptom: the outcome is not visible.  
+  **Fix:** remove the outcome or update the demo.
 
 ## Verify it worked
 
-- Claims match the repo.
+- The case study has all four sections.
 - Proof links work.
-- Limits are visible.
-
-If a claim is not in the code, remove it.
+- Outcomes are visible in the demo.
 
 ## Common mistakes
 
-- **Symptom**: Long paragraphs with no proof.
-  **Cause**: No structure.
-  **Fix**: Use the template.
+- **Symptom:** Case study reads like a resume bullet.  
+  **Cause:** No problem or solution section.  
+  **Fix:** use the template headings.
 
-- **Symptom**: Tech stack mismatch.
-  **Cause**: Copying old text.
-  **Fix**: Update from the repo.
+- **Symptom:** Outcomes are vague.  
+  **Cause:** No proof links.  
+  **Fix:** add a demo link and describe what you can see.
 
-- **Symptom**: Missing limits.
-  **Cause**: Skipping the hard parts.
-  **Fix**: Add a limits section.
+- **Symptom:** Claims do not match the repo.  
+  **Cause:** outdated writing.  
+  **Fix:** update the case study after each change.
 
 ## Cheat sheet
 
-- One sentence problem.
-- One sentence solution.
-- Proof links.
-- Limits listed.
+- Use fixed sections.
+- Add proof links.
+- Keep outcomes visible.
 
 ## Next steps
 
-- Update one case study today.
-- Remove one unverified claim.
-- Add one proof link.
+- Add one screenshot per case study.
+- Keep a changelog for updates.
 
-Related links:
+## Related links
 
 - https://bradleymatera.dev/projects/
 
-Final CTA:
+## Final CTA
 
-If you want my case study template file, ask and I will share it.
+Write the shortest case study that still has proof. That is the goal.

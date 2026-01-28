@@ -1,102 +1,150 @@
 ---
-title: "Sell Your Skills With a Small Project: Full Guide"
-date: "2025-08-03"
-slug: "/sell-your-skills-small-project"
+title: "Sell Your Skills With One Small Project"
+date: "2025-05-25"
+slug: "/sell-your-skills-with-a-small-project"
 tags: ["portfolio", "career", "projects"]
-description: "A complete guide for building a small demo that proves one skill."
-theme: "Career"
+description: "A concrete way to prove a skill with one small demo and proof links."
+theme: "Portfolio"
 ---
 
-Small projects are easier to finish and easier to verify.
+Small projects are the fastest way to show a skill.
 
-This post shows a full process for shipping a tiny demo that proves one skill.
+This post shows how to build one demo and document it clearly.
 
-You will get steps, checks, and common mistakes.
+You will ship one feature, add proof links, and write a short case note.
 
-If you need portfolio proof fast, this is for you.
+I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+
+## The promise
+
+By the end, you will:
+
+- pick one skill to prove
+- build one small demo
+- add proof links and a short explanation
+
+> "One clear demo beats a vague resume line."
 
 ## What this is
 
-High level, this is a method to prove a single skill with a small demo.
+**High level:** A skill proof is a small project that shows one capability.
 
-Low level, it is a scope checklist, a build plan, and proof links.
+**Low level:** You build one feature, deploy it, and link the repo.
 
-Key terms:
+**Key terms:**
 
-- **Proof demo**: a small project that shows one skill.
-- **Scope**: the smallest version of the idea.
-- **CTA**: a clear action such as “View demo.”
+- **Skill proof:** A demo that shows one skill.
+- **Proof link:** A repo or live URL.
 
 ## What you need
 
-- One skill to prove.
-- A small project idea.
-- A repo and demo host.
+- A repo
+- A deploy target
+- A short README
 
-## Start to finish
+## Start to Finish
 
-1) Write the skill at the top of the README.
+### Step 1: Choose the skill
+Goal:
+Pick a single skill you can demonstrate quickly.
 
-Why: It keeps the demo focused.
+Actions:
+- Write the skill in `README.md`:
+  ```text
+  Skill to prove: client side search
+  ```
 
-2) Define the smallest demo.
+Why:
+One skill keeps the project focused. It also makes the output easy to judge. This prevents scope creep. You can do another skill later.
 
-Why: Small scope ships faster.
+Verify:
+- The skill is one sentence.
+- This confirms the scope is small.
 
-3) Build one working flow.
+If it fails:
+- Symptom: you list five skills.  
+  **Fix:** keep only one.
 
-Why: A flow is stronger than a list of features.
+### Step 2: Build the smallest demo
+Goal:
+Implement the feature in the simplest way.
 
-4) Add proof links.
+Actions:
+- Build a list and filter it by input.
+- Example code:
+  ```js
+  const filtered = items.filter((i) => i.name.includes(query));
+  ```
 
-Why: You need evidence for claims.
+Why:
+The demo should be easy to review. A small example makes the skill obvious. It also reduces bugs. This keeps the project finishable.
 
-### Example summary block
+Verify:
+- Search input filters the list.
+- This confirms the feature works.
 
-```md
-Skill: API fetch
-Demo: one page list
-Proof: repo + live link
-```
+If it fails:
+- Symptom: list does not update.  
+  **Fix:** ensure the query state updates on input.
+
+### Step 3: Add proof links
+Goal:
+Make the demo verifiable.
+
+Actions:
+- Add to README:
+  ```text
+  Repo: https://github.com/yourname/project
+  Demo: https://yourname.github.io/project
+  ```
+
+Why:
+Proof links make the skill real. They also save time for reviewers. This is the most important part of the project. Without proof links, the skill is just a claim.
+
+Verify:
+- Click each link.
+- Expected: repo and demo load.
+- This confirms the proof works.
+
+If it fails:
+- Symptom: 404.  
+  **Fix:** update the URLs.
 
 ## Verify it worked
 
-- The demo runs locally.
-- The live link loads.
-- The README matches the code.
-
-If you cannot verify it, cut the claim.
+- The demo shows the skill.
+- The proof links open.
+- The README states the goal clearly.
 
 ## Common mistakes
 
-- **Symptom**: Demo never ships.
-  **Cause**: Scope too large.
-  **Fix**: Cut the feature list in half.
+- **Symptom:** The project proves too many things.  
+  **Cause:** scope creep.  
+  **Fix:** cut it down to one feature.
 
-- **Symptom**: Proof link missing.
-  **Cause**: Skipping the publish step.
-  **Fix**: Add the live link before sharing.
+- **Symptom:** Proof links are missing.  
+  **Cause:** no deploy step.  
+  **Fix:** deploy and add links.
 
-- **Symptom**: Claims feel vague.
-  **Cause**: No concrete output.
-  **Fix**: Describe the exact flow.
+- **Symptom:** The skill is unclear.  
+  **Cause:** no goal statement.  
+  **Fix:** add one sentence to README.
 
 ## Cheat sheet
 
 - One skill.
-- One flow.
-- One proof link.
-- One short README.
+- One demo.
+- Two proof links.
 
 ## Next steps
 
-- Pick one skill and build this week.
-- Add proof links after publishing.
+- Add a short case study paragraph.
+- Add one screenshot of the demo.
 
-Related links:
+## Related links
 
 - https://bradleymatera.dev/projects/
 
-Final CTA:
+## Final CTA
 
-If you want feedback on a small demo, ask and I will help.
+Prove one skill clearly, then move to the next.

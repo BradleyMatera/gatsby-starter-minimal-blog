@@ -1,108 +1,181 @@
 ---
-title: "How I Learn by Building: A Full Start to Finish Method"
-date: "2025-03-18"
+title: "How I Learn by Doing: A Repeatable Mini Project Loop"
+date: "2025-03-14"
 slug: "/how-i-learn-by-doing"
-tags: ["learning", "projects", "web-development"]
-description: "A complete method for learning by shipping small demos."
+tags: ["learning", "process", "projects"]
+description: "A concrete loop for building small demos with proof and short lessons."
 theme: "Process"
 ---
 
-Tutorials are fine. Building is faster.
+I learn faster when I build something small and ship it.
 
-This post is a full method for learning by shipping small demos.
+This post shows the loop I use: pick a goal, build, verify, and document the lesson.
 
-You will get the steps, the checks, and the mistakes to avoid.
+You will get exact steps and a simple template you can reuse.
 
-If you learn best by doing, this is for you.
+I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+
+## The promise
+
+By the end, you will:
+
+- plan a tiny project you can finish
+- ship it with a live link
+- document what you learned in a repeatable format
+
+> "Small demos with proof teach faster than big plans."
 
 ## What this is
 
-High level, this is a learning loop built around small projects.
+**High level:** A learning loop is a short cycle of build, verify, and document.
 
-Low level, it is a set of steps, a note template, and a verification checklist.
+**Low level:** You write a README, add a live link, and capture one lesson in a notes file.
 
-Key terms:
+**Key terms:**
 
-- **Demo**: a tiny project that proves one concept.
-- **Learning loop**: repeatable steps that turn effort into skill.
-- **Proof link**: a repo or demo URL that shows the work.
+- **Demo:** A small project with one clear feature.
+- **Proof link:** A URL that shows the demo works.
+- **Lesson:** A short note about what you learned and what to change next.
 
 ## What you need
 
-- One small idea.
-- A repo to publish.
-- A short note template.
+- A GitHub repo
+- A live deploy target (GitHub Pages is enough)
+- A notes file in the repo
 
-## Start to finish
+## Start to Finish
 
-1) Pick one concept.
-
-Why: A single focus is easier to complete.
-
-2) Write a one sentence goal.
-
-Why: It keeps the demo small.
-
-3) Build the smallest version.
-
-Why: You need a working result fast.
-
-4) Write a short note.
-
-Why: The note is the real learning artifact.
-
-5) Publish the link.
-
-Why: A demo without a link is not verifiable.
-
-### Example note template
-
-```text
+### Step 1: Define the smallest goal
 Goal:
-What worked:
-What failed:
-What I learned:
-```
+Pick a single feature that you can finish in a weekend.
+
+Actions:
+- File path: `README.md`
+- Add a goal line:
+  ```text
+  Goal: Play one sound when a user clicks a card.
+  ```
+
+Why:
+A single goal keeps the scope small. It reduces unfinished work. It also makes verification simple. You cannot learn from a demo that never ships.
+
+Verify:
+- Expected: the goal is one sentence and measurable.
+- This confirms the scope is small.
+
+If it fails:
+- Symptom: the goal reads like a full product.
+- Fix: cut features until it fits in one sentence.
+
+### Step 2: Build the smallest feature
+Goal:
+Implement the core feature only.
+
+Actions:
+- File path: `src/index.js` (or your entry file)
+- Add a button or handler for the one feature.
+- Example:
+  ```js
+  button.addEventListener("click", () => audio.play());
+  ```
+
+Why:
+The smallest feature proves the idea. This keeps the demo real and testable. It also avoids spending time on polish before the feature works. You can add polish later if the core works.
+
+Verify:
+- Run the app locally.
+- Click the button.
+- Expected: the audio plays.
+- This confirms the core feature works.
+
+If it fails:
+- Symptom: nothing happens on click.
+- Fix: check the element ID and the event listener binding.
+
+### Step 3: Add a proof link
+Goal:
+Make the demo public so others can verify it.
+
+Actions:
+- Deploy to GitHub Pages or another static host.
+- Add the URL to `README.md`:
+  ```text
+  Live demo: https://yourname.github.io/your-repo/
+  ```
+
+Why:
+A public link is the proof. It also forces you to finish the build step. Without a live link, the demo is just a claim. This is how you build trust.
+
+Verify:
+- Open the URL in a browser.
+- Expected: the demo loads and works.
+- This confirms the demo is real.
+
+If it fails:
+- Symptom: 404 or blank page.
+- Fix: check the base path and rebuild.
+
+### Step 4: Write the lesson
+Goal:
+Record what you learned in a short, repeatable format.
+
+Actions:
+- File path: `docs/lessons.md`
+- Add:
+  ```text
+  Lesson
+  - What worked:
+  - What broke:
+  - What I would change next:
+  ```
+
+Why:
+The lesson is the real output of the project. It keeps your learning visible. It also makes it easier to explain the project later. A short template keeps it from turning into a novel.
+
+Verify:
+- Open `docs/lessons.md` and fill the three lines.
+- This confirms the learning is captured.
+
+If it fails:
+- Symptom: the file stays empty.
+- Fix: write one sentence per line and move on.
 
 ## Verify it worked
 
 - The demo runs locally.
-- The demo runs from the live link.
-- The note explains what is missing.
-
-If you cannot reproduce it, rewrite the note.
+- The demo is live.
+- The lesson template is filled out.
 
 ## Common mistakes
 
-- **Symptom**: Demo never ships.
-  **Cause**: Scope too large.
-  **Fix**: Cut it in half.
+- **Symptom:** The demo never ships.  
+  **Cause:** The goal was too big.  
+  **Fix:** cut it down to one feature.
 
-- **Symptom**: Notes are empty.
-  **Cause**: Skipped reflection.
-  **Fix**: Write three lines only.
+- **Symptom:** The demo works but has no proof link.  
+  **Cause:** You skipped deploy.  
+  **Fix:** deploy before you call it done.
 
-- **Symptom**: Claims are vague.
-  **Cause**: No proof link.
-  **Fix**: Add the repo or demo link.
+- **Symptom:** The lesson is vague.  
+  **Cause:** No template.  
+  **Fix:** use the three line format.
 
 ## Cheat sheet
 
-- One concept.
-- One sentence goal.
-- One small demo.
-- One short note.
+- One feature.
+- One proof link.
+- One lesson template.
+- Repeat.
 
 ## Next steps
 
-- Ship one demo this week.
-- Add a reality snapshot to the README.
-- Share the link with one person.
+- Build a second demo in a different tool.
+- Share one lesson with a peer.
 
-Related links:
+## Related links
 
-- https://bradleymatera.dev/projects/
+- https://pages.github.com/
 
-Final CTA:
+## Final CTA
 
-If you want my note template, ask and I will share it.
+Ship the small demo. Then write the lesson while it is fresh.
