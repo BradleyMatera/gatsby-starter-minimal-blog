@@ -201,10 +201,10 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
       summaryPreview={
         <>
           <p>
-            <strong>Problem:</strong> Needed a fun, educational way for kids to explore animal sounds in the browser.
+            <strong>Problem:</strong> Needed an interactive way to explore animal sounds with fast, offline-ready playback.
           </p>
           <p>
-            <strong>Solution:</strong> Built a small React/Next.js soundboard using Web Audio APIs and deployed it to GitHub Pages.
+            <strong>Solution:</strong> Built a Next.js App Router soundboard with bundled audio assets and base-path-aware deployment on GitHub Pages.
           </p>
         </>
       }
@@ -214,10 +214,10 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
             <strong>My Role:</strong>
           </p>
           <ul>
-            <li>Implemented audio playback controls with Web Audio APIs</li>
-            <li>Designed a kid-friendly layout with clear visual feedback</li>
-            <li>Created responsive styling for mobile and desktop</li>
-            <li>Documented usage and deployment steps in the repo</li>
+            <li>Built the soundboard UI with Next.js App Router, NextUI, and Tailwind</li>
+            <li>Shipped offline-ready audio from bundled public assets with SVG illustrations</li>
+            <li>Added keyboard-friendly interactions plus local favorites and listening stats via localStorage</li>
+            <li>Gated optional Pexels enrichment behind environment flags to keep the default build private</li>
           </ul>
           <p>
             <strong>Outcomes & Proof:</strong>
@@ -225,11 +225,11 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
           <ul>
             <li>GitHub repo: <a href="https://github.com/BradleyMatera/AnimalSounds" target="_blank" rel="noopener noreferrer">AnimalSounds</a></li>
             <li>Live demo: <a href="https://bradleymatera.github.io/AnimalSounds/" target="_blank" rel="noopener noreferrer">AnimalSounds</a></li>
-            <li>Static deployment documented in the repository</li>
+            <li>Base-path-aware asset loading documented for GitHub Pages deployment</li>
           </ul>
         </>
       }
-      stack={["React", "Next.js", "Web Audio API", "GitHub Pages"]}
+      stack={["Next.js App Router", "NextUI", "Tailwind", "Web Audio API", "GitHub Pages"]}
       thumbnail="/assets/visuals/projects/animal-sounds.svg"
       links={[
         { label: "Live demo", href: "https://bradleymatera.github.io/AnimalSounds/", variant: "primary", external: true },
