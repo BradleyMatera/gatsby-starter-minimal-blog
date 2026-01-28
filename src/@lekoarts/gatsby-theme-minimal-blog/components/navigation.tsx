@@ -122,10 +122,15 @@ const Navigation = ({
       tags?: Array<{ name: string }> | null;
     };
 
+    const hiddenPostSlugs = new Set([
+      "/making-triangle-webgpu-demo-match-reality",
+      "/rebuilt-webgpu-triangle-demo",
+    ]);
     const posts = (data.allPost.nodes as PostNode[]).filter((post) =>
-      post.title.toLowerCase().includes(searchLower) ||
-      post.excerpt?.toLowerCase().includes(searchLower) ||
-      post.tags?.some((tag) => tag.name.toLowerCase().includes(searchLower))
+      !hiddenPostSlugs.has(post.slug) &&
+      (post.title.toLowerCase().includes(searchLower) ||
+        post.excerpt?.toLowerCase().includes(searchLower) ||
+        post.tags?.some((tag) => tag.name.toLowerCase().includes(searchLower)))
     );
 
     type PageNode = {

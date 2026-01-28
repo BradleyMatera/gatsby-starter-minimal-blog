@@ -1,112 +1,127 @@
 ---
-title: "JWT CTF Lab: Debugging Auth Tokens Step by Step"
+title: "JWT CTF Lab: A Full Debug Walkthrough"
 date: "2025-10-08"
 slug: "/jwt-ctf-lab"
 tags: ["security", "ctf", "jwt", "debugging"]
-description: "A plainspoken lab write-up that shows how I debug JWT issues without claiming production experience."
+description: "A complete lab tutorial for decoding, checking, and fixing JWTs without claiming production experience."
 theme: "Security"
 ---
 
-I broke a JWT lab in five different ways before I solved it.
+JWT bugs are common because people skip basic checks.
 
-This post shows the exact steps I used to find the bug and fix it. It is all lab work. No production systems.
+This post is a full lab walkthrough, not a production story.
 
-You will get a clear checklist, a small decoding snippet, and the mistakes I made so you can avoid them.
+You will decode a token, validate claims, and fix a broken flow.
 
-## The promise
+If you are new to JWTs, this is for you.
 
-By the end, you will be able to:
+## What this is
 
-- decode a JWT safely
-- validate claims with simple checks
-- document your steps so you can reproduce the fix
+High level, a JWT is a signed string used to pass claims between a client and server.
 
-> "If I cannot explain the token in plain English, I do not trust it."
+Low level, it is three base64url parts: header, payload, signature.
 
-## What I was working on
+Key terms:
 
-This was a CTF lab. The goal was to identify a broken token flow and fix it. The lab is safe and isolated.
+- **Header**: metadata like the algorithm used to sign the token.
+- **Payload**: the claims, such as subject, issuer, and expiry.
+- **Signature**: the cryptographic proof the token was not tampered with.
 
-I used my own notes and debug logs. I did not touch real user data.
+## What you need
 
-### Tools I used
+- A JWT string from your lab.
+- Node.js 18 or later.
+- A text editor and a terminal.
 
-- A text editor
-- A local terminal
-- A JWT decode helper
+Optional but helpful:
 
-## The core idea
+- A JWT debugger like https://jwt.io
 
-JWT issues usually fall into a short list:
+## Start to finish
 
-- the header is wrong
-- the payload claims are wrong
-- the signature is missing or mismatched
+1) Copy the token from the lab.
 
-I treat it like a small checklist. That keeps me calm and consistent.
+Why: You need the raw string for every check.
 
-### Example decode snippet
+2) Split the token into its three parts.
 
-This is a quick decode helper I use in labs:
+Why: You need to inspect header and payload separately.
 
-```js
-// Example only. Do not use this to verify signatures.
-function decodeJwt(token) {
-  const [, payload] = token.split(".");
-  const json = Buffer.from(payload, "base64").toString("utf8");
-  return JSON.parse(json);
-}
+```bash
+node -e "const t=process.argv[1]; console.log(t.split('.'))" "YOUR.JWT.HERE"
 ```
 
-## How I debugged the lab
+3) Decode the payload.
 
-1. Extract the token from the request.
-2. Decode the payload and read the claims.
-3. Compare claims against the lab rules.
-4. Check time fields with the current clock.
-5. Update the token and retry.
+Why: You need to read claims like exp and aud.
 
-### Common mistakes
+```bash
+node -e "const p=process.argv[1].split('.')[1]; console.log(Buffer.from(p,'base64url').toString('utf8'))" "YOUR.JWT.HERE"
+```
 
-- Trusting a decode as proof of validity.
-- Ignoring clock skew and expiry.
-- Skipping the audience and issuer checks.
+4) Check core claims.
 
-### Quick checklist
+Why: Most lab failures are missing or wrong claims.
 
-- [ ] Header uses the expected algorithm
-- [ ] Payload has iss, aud, sub
-- [ ] iat and exp look sane
-- [ ] Token format is header.payload.signature
+Check at least:
 
-## CTA: Open the lab notes
+- iss (issuer)
+- aud (audience)
+- sub (subject)
+- exp (expiry)
 
-If you want the exact steps, open the notes in this repo:
+5) Fix the claim or regenerate the token.
 
-- https://github.com/BradleyMatera/learning-journal
+Why: A corrected claim is only valid if it matches the lab rules.
 
-## Now do it your way
+If you are using a lab tool, follow its exact signing steps.
 
-Try the same checklist on a different lab. Write down each step. Do not rely on memory.
+6) Retry the lab request.
 
-### Pitfalls to watch
+Why: You need to confirm the fix, not just the theory.
 
-- Mixing token formats from different exercises
-- Copying tokens without checking the timestamp
-- Skipping the lab rules
+## Verify it worked
+
+- The lab should accept the token.
+- The server should stop returning auth errors.
+
+If you see **401 Unauthorized**, it usually means a missing or invalid claim.
+
+If you see **403 Forbidden**, it often means the claim is valid but not allowed.
+
+## Common mistakes
+
+- **Symptom**: Token decodes but still fails.
+  **Cause**: You only decoded, you did not verify claims.
+  **Fix**: Check iss, aud, sub, exp one by one.
+
+- **Symptom**: Expired token.
+  **Cause**: Wrong system time or wrong exp value.
+  **Fix**: Regenerate with a fresh exp.
+
+- **Symptom**: Algorithm mismatch.
+  **Cause**: Header alg does not match the lab rules.
+  **Fix**: Use the correct signing algorithm.
+
+## Cheat sheet
+
+- JWT is header.payload.signature.
+- Decode does not equal verify.
+- Check iss, aud, sub, exp every time.
+- Fix one claim at a time.
+- Re-run the lab after each change.
 
 ## Next steps
 
-- Write your own debug checklist in plain English.
-- Re-run the lab and compare results.
-- Add a short summary to your notes.
+- Try the same checklist on a new lab token.
+- Write a short debug note after each fix.
+- Read the OWASP JWT cheat sheet.
 
-## Related links
+Related links:
 
 - https://jwt.io/introduction
 - https://owasp.org/www-project-cheat-sheets/cheatsheets/JSON_Web_Token_Cheat_Sheet_for_Java.html
-- https://github.com/BradleyMatera/learning-journal
 
-## Final CTA
+Final CTA:
 
-If you run this lab, send me your checklist. I will compare notes.
+If you want a short JWT checklist you can print, ask and I will share it.

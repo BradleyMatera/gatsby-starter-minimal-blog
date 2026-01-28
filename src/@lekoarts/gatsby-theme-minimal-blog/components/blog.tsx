@@ -30,6 +30,11 @@ export type MBBlogProps = {
   }[];
 };
 
+const hiddenPostSlugs = new Set([
+  "/making-triangle-webgpu-demo-match-reality",
+  "/rebuilt-webgpu-triangle-demo",
+]);
+
 const Blog = ({ posts }: MBBlogProps) => {
   const PAGE_SIZE = 5;
   const { tagsPath, basePath } = useMinimalBlogConfig();
@@ -37,6 +42,10 @@ const Blog = ({ posts }: MBBlogProps) => {
   const [query, setQuery] = React.useState("");
   const [activeTag, setActiveTag] = React.useState<string | null>(null);
   const [page, setPage] = React.useState(1);
+  const visiblePosts = React.useMemo(
+    () => posts.filter((post) => !hiddenPostSlugs.has(post.slug)),
+    [posts]
+  );
 
   const tags = React.useMemo(() => {
     const all = new Map<
@@ -47,7 +56,7 @@ const Blog = ({ posts }: MBBlogProps) => {
         count: number;
       }
     >();
-    posts.forEach((post) => {
+    visiblePosts.forEach((post) => {
       post.tags?.forEach((tag) => {
         const existing = all.get(tag.slug);
         if (existing) {
@@ -58,7 +67,7 @@ const Blog = ({ posts }: MBBlogProps) => {
       });
     });
     return Array.from(all.values()).sort((a, b) => b.count - a.count);
-  }, [posts]);
+  }, [visiblePosts]);
 
   const activeTagMeta = React.useMemo(() => {
     if (!activeTag) return null;
@@ -122,7 +131,7 @@ const Blog = ({ posts }: MBBlogProps) => {
 
   const filtered = React.useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
-    return posts.filter((post) => {
+    return visiblePosts.filter((post) => {
       const matchesTag = activeTag ? post.tags?.some((tag) => tag.slug === activeTag) : true;
       if (!matchesTag) return false;
       if (!normalizedQuery) return true;
@@ -132,7 +141,7 @@ const Blog = ({ posts }: MBBlogProps) => {
         .toLowerCase();
       return haystack.includes(normalizedQuery);
     });
-  }, [posts, query, activeTag]);
+  }, [visiblePosts, query, activeTag]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
 
