@@ -1,70 +1,128 @@
 ---
-title: "WebGPU Getting Started: A Minimal Triangle"
-date: "2025-03-07"
+title: "WebGPU Triangle Demo: Start, Fix, and Keep It Honest"
+date: "2025-07-22"
 slug: "/webgpu-getting-started"
 tags: ["webgpu", "graphics", "learning"]
-description: "A minimal WebGPU starting point with a short checklist."
+description: "One post that covers the minimal WebGPU start, the rebuild fixes, and the honesty audit."
 theme: "Graphics"
 ---
 
-WebGPU looks complex. A triangle is the fastest way in.
+WebGPU is easier if you start small and write clear notes.
 
-This post shows the minimal steps I used and the notes I kept.
+This post combines three short updates into one clean guide: the first triangle, the rebuild fixes, and the honesty audit.
 
-You will get a snippet, a checklist, and the mistakes I made.
+You will get a minimal setup, a fix list, and a checklist you can reuse.
+
+## Table of contents
+
+- [The promise](#the-promise)
+- [Start with a minimal triangle](#start-with-a-minimal-triangle)
+- [Fixes from the rebuild](#fixes-from-the-rebuild)
+- [Honesty audit](#honesty-audit)
+- [How to do it yourself](#how-to-do-it-yourself)
+- [Common mistakes](#common-mistakes)
+- [Next steps](#next-steps)
 
 ## The promise
 
 You will learn:
 
 - the smallest WebGPU setup
-- where setup usually breaks
-- how to document fixes
+- the fixes that made the demo stable
+- how to keep the write-up honest
 
-> "Start with one triangle and keep it boring."
+> "One triangle is enough to learn the pipeline."
 
-## The minimal setup
+## Start with a minimal triangle
 
-### Example setup flow
+Keep the first version boring. That is the point.
+
+### Minimal setup snippet
 
 ```js
 const adapter = await navigator.gpu.requestAdapter();
 const device = await adapter.requestDevice();
 ```
 
+### What I keep minimal
+
+- One pipeline
+- One buffer
+- One draw call
+
 ## CTA: Open the demo
 
 - https://bradleymatera.github.io/TriangleDemo/
+
+## Fixes from the rebuild
+
+These fixes made the demo stable:
+
+- Cleaned up shader inputs
+- Simplified the render loop
+- Added a short debug note
+
+### Example render loop
+
+```js
+function frame() {
+  // update
+  // draw
+  requestAnimationFrame(frame);
+}
+```
+
+## Honesty audit
+
+I rewrote the write-up so it matched the repo.
+
+What I kept:
+
+- What runs now
+- What is missing
+- What is planned
+
+### Example honesty note
+
+```text
+What works:
+What is missing:
+What is planned:
+```
 
 ## Now do it your way
 
 ### Steps
 
-1. Request an adapter.
-2. Create a device.
-3. Render a triangle.
+1. Start with the minimal triangle.
+2. Fix one issue at a time.
+3. Write a short note for each fix.
+4. Audit your write-up against the repo.
 
 ### Common mistakes
 
-- Skipping adapter checks.
-- Mixing WebGL and WebGPU code.
 - Changing too much at once.
+- Claiming features that are not in the repo.
+- Skipping notes because the demo is small.
 
 ## Quick checklist
 
 - [ ] Adapter acquired
-- [ ] Device created
 - [ ] Triangle visible
+- [ ] Fixes logged
+- [ ] Write-up matches repo
 
 ## Next steps
 
-- Add a color change.
+- Add one color change.
 - Add a resize handler.
+- Keep the honesty note updated.
 
 ## Related links
 
 - https://developer.chrome.com/docs/web-platform/webgpu/
+- https://github.com/BradleyMatera/TriangleDemo
 
 ## Final CTA
 
-If you want my minimal template, ask and I will share it.
+If you want my debug notes, ask and I will share them.
