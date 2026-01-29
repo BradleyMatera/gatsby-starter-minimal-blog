@@ -7,145 +7,63 @@ description: "A practical method to translate real experience into engineering p
 theme: "Career"
 ---
 
-Transferable skills only matter if you can show them.
+Career transitions into tech are often written as stories about potential. That approach usually falls apart in interviews, because potential is hard to verify. What hiring managers actually respond to is concrete work: labs completed, systems built, documentation written, problems debugged, environments deployed. This post is not a motivational transition story. It is a grounded explanation of how a non‑traditional background can connect to real engineering behaviors that are already visible in projects and work history.
 
-This post shows how I map real experience to concrete engineering behavior.
+Nothing in this post is hypothetical. Every example maps to something that exists: a lab, a deployment, a repository, or a documented process. The goal is not to convince anyone with adjectives. The goal is to make the path traceable.
 
-You will build a simple mapping doc and link it to real work.
+## Starting point
 
-I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+Before tech, my work was operational and field‑based. Army healthcare, case management in court systems, construction, logistics, animal care, and facility maintenance. Those roles were not software jobs. They did, however, involve repeatable processes, documentation, coordination, troubleshooting under pressure, and responsibility for outcomes. That matters only if it shows up later in observable engineering behavior, so the focus here is on where that actually happened.
 
-## The promise
+## AWS support internship: applied cloud work
 
-By the end, you will:
+The first direct bridge into engineering work came through an AWS Cloud Support Engineering internship. This was not a research or theory role. It was guided, lab‑driven work inside AWS environments.
 
-- map past experience to specific engineering actions
-- avoid vague claims and keep it provable
-- build a short proof list you can show
+Concrete activities during that internship included:
 
-> "If it cannot be shown, it should not be claimed."
+• Guided support rotations in training environments
+• Juniper/Junos troubleshooting labs delivered through Jupyter notebooks
+• Building a serverless metadata extraction workflow using Lambda, DynamoDB, and S3
+• Deploying an accessible frontend for that workflow on AWS Amplify
+• Implementing a transparent cost model to estimate storage, transfer, and compute usage
 
-## What this is
+These were not abstract exercises. They required reading logs, interpreting failure modes, configuring IAM, wiring services together, validating data flow, and producing working outputs. The capstone project produced a deployed workflow and a documented cost breakdown. That is the point where cloud services stopped being conceptual and became operational.
 
-**High level:** This is a method to translate past roles into engineering behaviors without exaggeration.
+## Open‑source frontend work: operating inside existing codebases
 
-**Low level:** You write a table that links a real behavior to a real artifact like a repo or note.
+Alongside formal internship work, I contributed to CIRIS Ethical AI as a junior frontend developer. The scope was intentionally small: onboarding documentation, environment setup notes, JWT guidance, logging around token verification, lint fixes, and clearer error messages.
 
-**Key terms:**
+The engineering behavior here was not inventing new systems. It was reading an existing codebase, running it locally, identifying friction points, improving documentation, submitting pull requests, and tracking larger changes as GitHub issues. That is the same behavior expected in real teams: understand the current system first, improve it incrementally, leave a transparent record of changes.
 
-- **Behavior:** A concrete action you performed.
-- **Artifact:** A file or link that proves the behavior.
+## Building and deploying personal projects
 
-## What you need
+Parallel to work roles, I built and deployed web projects, demos, and infrastructure experiments. These include full‑stack applications, static sites, containerized services, and AWS‑hosted workflows. The consistent pattern has been:
 
-- A notes file
-- A list of projects or posts you can link to
+• Assemble a working stack
+• Deploy it to a real environment
+• Debug real runtime and configuration issues
+• Document what broke and how it was fixed
 
-## Start to Finish
+This matters more than the specific tech choices. Shipping a deployed system forces interaction with DNS, build pipelines, environment variables, caching, IAM, and service configuration. Those are operational engineering tasks, not tutorial exercises.
 
-### Step 1: Create a skills map file
-Goal:
-Make a table that links experience to proof.
+## Current work: facilities and operations
 
-Actions:
-- File path: `docs/skills-map.md`
-- Add:
-  ```text
-  Experience | Behavior | Proof
-  Medic | Calm triage under pressure | Link to a debug post
-  Operations | Process cleanup | Link to a checklist
-  ```
+My current role is a maintenance technician. It is not a software role, but it is still operations work: handling requests, diagnosing issues, coordinating fixes, documenting work completed, and managing competing priorities. That operational mindset carries directly into support engineering, site reliability, and infrastructure roles where the core task is keeping systems functional and responding to incidents.
 
-Why:
-A table forces clarity. It avoids vague phrases like "leadership" without proof. It also makes it easy to review and edit. This is the backbone of honest storytelling.
+## What this adds up to
 
-Verify:
-- Open the file and confirm each row has a link you can click.
-- This confirms the proof exists.
+The outcome of this path is not a claim to be a senior engineer. The outcome is a body of verifiable work:
 
-If it fails:
-- Symptom: you cannot find proof.
-- Fix: remove the row or replace it with a real artifact.
+• Completed AWS labs and guided troubleshooting environments
+• A deployed serverless workflow with documented cost modeling
+• Open‑source contributions merged into an existing codebase
+• Multiple self‑hosted and cloud‑hosted projects deployed and debugged
+• Documented fixes and write‑ups tied to real issues
 
-### Step 2: Add one real example
-Goal:
-Link one skill to a real engineering artifact.
+That is what interviewers and hiring managers can inspect. The transition is not described as identity change. It is described as accumulated engineering activity.
 
-Actions:
-- Example row:
-  ```text
-  Medic | Structured communication | https://bradleymatera.dev/service-worker-held-site-hostage/
-  ```
+## Closing
 
-Why:
-One real example is better than a list of vague traits. It shows you can connect experience to output. This keeps your story grounded. It also gives readers a place to verify.
+Non‑traditional backgrounds only matter to the extent they produce real, inspectable work in the present. Labs completed, systems built, environments deployed, problems debugged, documentation written. That is what connects past experience to engineering roles.
 
-Verify:
-- Click the link.
-- Expected: the post loads.
-- This confirms the proof is accessible.
-
-If it fails:
-- Symptom: 404.
-- Fix: update the URL or remove the row.
-
-### Step 3: Add a short summary block
-Goal:
-Explain the mapping in one paragraph.
-
-Actions:
-- File path: `docs/skills-map.md`
-- Add:
-  ```text
-  Summary: I map past experience to specific, verifiable behaviors. If I cannot link it, I do not claim it.
-  ```
-
-Why:
-The summary makes the intent explicit. It prevents overreach. It also helps readers understand the method quickly. This keeps the story consistent across pages.
-
-Verify:
-- The summary is one or two sentences.
-- This confirms it is concise.
-
-If it fails:
-- Symptom: summary is long and vague.
-- Fix: cut it to one sentence.
-
-## Verify it worked
-
-- The table exists.
-- Each row has a working link.
-- The summary is concise.
-
-## Common mistakes
-
-- **Symptom:** Skills sound like buzzwords.  
-  **Cause:** No proof link.  
-  **Fix:** add proof or delete the line.
-
-- **Symptom:** Claims imply production ownership.  
-  **Cause:** Overreach in wording.  
-  **Fix:** use neutral, verifiable wording.
-
-- **Symptom:** Too many rows.  
-  **Cause:** Trying to list everything.  
-  **Fix:** keep only what you can prove.
-
-## Cheat sheet
-
-- Map experience to behavior.
-- Link behavior to proof.
-- Cut anything unverified.
-
-## Next steps
-
-- Add two more proof links.
-- Use the same table for your resume bullets.
-
-## Related links
-
-- https://bradleymatera.dev/blog/
-
-## Final CTA
-
-If you cannot prove it, do not claim it. That rule keeps the story strong.
+This is not a story about potential. It is a record of work already done.

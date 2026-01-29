@@ -7,308 +7,344 @@ description: "A concrete guide to containerizing a small multi-language project 
 theme: "DevOps"
 ---
 
-Containers are simple when you keep the surface area small.
+Most Docker tutorials either feel like abstract theory or giant production stacks you’ll never build just to learn the basics. This guide does neither. It builds a small system that actually feels like a real application: an API, a background worker, and a web front end all running together.
 
-This post shows a minimal multi-language setup using Docker and Compose.
+The point is not the code itself. The point is seeing three different runtimes packaged, wired, and launched as one system with a single command. Once you’ve done that once, containerization stops feeling mysterious and starts feeling mechanical.
 
-You will build a Node API, a Python worker, and a static frontend in one stack.
+By the end, you will not just have read about containers. You will have a running multi‑service stack on your machine that you can break, modify, and extend.
 
-I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+## What you are building
 
-## The promise
+This lab creates a minimal multi-language stack. Each service has one responsibility so the container boundaries are obvious.
 
-By the end, you will:
+| Service | Runtime | Purpose | Port |
+|----------|----------|----------|------|
+| API | Node + Express | Exposes `/numbers` and `/sorted` endpoints returning random and sorted values | 3001 |
+| Worker | Python | Background loop fetching and logging sorted numbers from API | none |
+| Web | Nginx | Serves a static page that fetches and displays sorted data | 8080 → 80 |
 
-- run three services with one `docker compose up`
-- understand how ports and networks line up
-- verify each service with a concrete check
+At the end of the guide, all three will run with a single command.
 
-> "If each container has one job, Compose becomes easy to reason about."
+## Prerequisites
 
-## What this is
+Install Docker Desktop and verify it runs before continuing.
 
-**High level:** Docker packages each service with its runtime so they run consistently.
+```bash
+docker version
+```
 
-**Low level:** You write a Dockerfile per service and a `docker-compose.yml` that wires ports and dependencies.
+If this prints a version, Docker is ready. Node and Python will be installed inside containers, so you do not need them locally.
 
-**Key terms:**
+## Step 1: Create the project structure
 
-- **Image:** A packaged filesystem and runtime.
-- **Container:** A running instance of an image.
-- **Compose:** A config file that runs multiple containers together.
+Start by creating a clean workspace. Each folder will become a Docker build context.
 
-## What you need
+```bash
+mkdir multilang
+cd multilang
+mkdir api worker web
+```
 
-- Docker Desktop installed
-- Node 18
-- Python 3.11
+Confirm the structure exists.
 
-## Start to Finish
+```bash
+ls
+```
 
-### Step 1: Create the project layout
-Goal:
-Create a folder structure that separates services.
+Expected output:
 
-Actions:
-- Commands:
-  ```bash
-  mkdir multilang && cd multilang
-  mkdir api worker web
-  ```
-- File tree:
-  ```text
-  multilang/
-    api/
-    worker/
-    web/
-  ```
+```
+api  worker  web
+```
 
-Why:
-Clear folders keep Dockerfiles simple and predictable. Each folder becomes a build context. This avoids accidental file leaks into images. It also makes it easy to reason about which service owns which code.
+This separation prevents accidental file leakage between containers and keeps each runtime isolated.
 
-Verify:
-- Run:
-  ```bash
-  ls
-  ```
-- Expected: `api`, `worker`, and `web` directories.
-- This confirms the structure is in place.
+## Step 2: Create the Node API service
 
-If it fails:
-- Symptom: missing folder.
-- Fix: re run the `mkdir` commands.
+The API exposes `/numbers` and `/sorted` endpoints returning random and sorted values.
 
-### Step 2: Add the Node API
-Goal:
-Create a minimal Node API that responds on `/health`.
+Create the API source file.
 
-Actions:
-- File path: `api/index.js`
-- Add:
-  ```js
-  const express = require("express");
-  const app = express();
-  app.get("/health", (_req, res) => res.json({ ok: true }));
-  app.listen(3001, () => console.log("api on 3001"));
-  ```
-- File path: `api/package.json`
-- Add:
-  ```json
-  {
-    "name": "api",
-    "version": "1.0.0",
-    "main": "index.js",
-    "scripts": {
-      "start": "node index.js"
-    },
-    "dependencies": {
-      "express": "^4.19.2"
-    }
+```bash
+cat > api/index.js <<'EOF'
+const express = require("express");
+const app = express();
+
+function generateNumbers() {
+  return Array.from({ length: 15 }, () => Math.floor(Math.random() * 100));
+}
+
+app.get("/numbers", (_req, res) => {
+  const nums = generateNumbers();
+  res.json({ numbers: nums });
+});
+
+app.get("/sorted", (_req, res) => {
+  const nums = generateNumbers();
+  const sorted = [...nums].sort((a, b) => a - b);
+  res.json({ original: nums, sorted });
+});
+
+app.listen(3001, () => {
+  console.log("api running on 3001");
+});
+EOF
+```
+
+Create the package manifest.
+
+```bash
+cat > api/package.json <<'EOF'
+{
+  "name": "api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
   }
-  ```
-- Command:
-  ```bash
-  cd api && npm install
-  ```
+}
+EOF
+```
 
-Why:
-A health route is the simplest verification check. Express keeps the example short. Having a fixed port is important for Compose mapping. This step establishes one running service in the stack.
+Install dependencies to generate the lockfile.
 
-Verify:
-- Run locally:
-  ```bash
-  npm start
-  ```
-- Expected output: `api on 3001`.
-- This confirms the API starts.
+```bash
+cd api
+npm install
+cd ..
+```
 
-If it fails:
-- Symptom: `Cannot find module 'express'`.
-- Fix: run `npm install` in `api/`.
+The API code is now complete and ready for containerization.
 
-### Step 3: Add the Python worker
-Goal:
-Create a Python script that prints a heartbeat.
+## Step 3: Create the Python worker service
 
-Actions:
-- File path: `worker/main.py`
-- Add:
-  ```py
-  import time
+The worker periodically fetches from the API and logs sorted results.
 
-  while True:
-      print("worker alive")
-      time.sleep(5)
-  ```
-- File path: `worker/requirements.txt`
-- Add:
-  ```text
-  ```
+Create the worker script.
 
-Why:
-The worker does not need a server. A loop proves it is running. This keeps the example focused on multi runtime containers. You can replace the worker with real jobs later.
+```bash
+cat > worker/main.py <<'EOF'
+import time
+import requests
 
-Verify:
-- Run:
-  ```bash
-  python3 worker/main.py
-  ```
-- Expected output: `worker alive` every 5 seconds.
-- This confirms the worker runs.
+API_URL = "http://api:3001/sorted"
 
-If it fails:
-- Symptom: `python3: command not found`.
-- Fix: install Python 3.11.
+while True:
+    try:
+        r = requests.get(API_URL, timeout=5)
+        data = r.json()
+        print("original:", data["original"])
+        print("sorted:  ", data["sorted"])
+        print("---")
+    except Exception as e:
+        print("worker error:", e)
 
-### Step 4: Add a static web page
-Goal:
-Create a tiny static site to serve.
+    time.sleep(5)
+EOF
+```
 
-Actions:
-- File path: `web/index.html`
-- Add:
-  ```html
-  <h1>Multilang Demo</h1>
-  <p>If you see this, the web container works.</p>
-  ```
+Create the requirements file with `requests`.
 
-Why:
-A static page verifies your web container without extra tooling. It keeps the stack small. You can replace it with a real frontend later. This makes the web service easy to test.
+```bash
+cat > worker/requirements.txt <<'EOF'
+requests
+EOF
+```
 
-Verify:
-- Open the file in a browser.
-- Expected: the heading and paragraph show.
-- This confirms the file renders.
+No local install is required. Dependencies will be installed inside the container.
 
-If it fails:
-- Symptom: blank page.
-- Fix: check the file path and content.
+## Step 4: Create the static web service
 
-### Step 5: Add Dockerfiles
-Goal:
-Create one Dockerfile per service.
+The web page fetches sorted data from the API and displays it.
 
-Actions:
-- File path: `api/Dockerfile`
-  ```dockerfile
-  FROM node:18-alpine
-  WORKDIR /app
-  COPY package.json package-lock.json ./
-  RUN npm install --production
-  COPY . .
-  EXPOSE 3001
-  CMD ["npm", "start"]
-  ```
-- File path: `worker/Dockerfile`
-  ```dockerfile
-  FROM python:3.11-slim
-  WORKDIR /app
-  COPY requirements.txt ./
-  RUN pip install -r requirements.txt
-  COPY . .
-  CMD ["python", "main.py"]
-  ```
-- File path: `web/Dockerfile`
-  ```dockerfile
-  FROM nginx:alpine
-  COPY index.html /usr/share/nginx/html/index.html
-  ```
+```bash
+cat > web/index.html <<'EOF'
+<!doctype html>
+<html>
+  <head>
+    <title>Docker Multilang Sorting Demo</title>
+  </head>
+  <body>
+    <h1>Sorting Demo</h1>
+    <button onclick="loadData()">Generate & Sort</button>
+    <pre id="output"></pre>
 
-Why:
-Each Dockerfile describes one runtime. Small base images keep builds fast. Copying only required files reduces noise. Exposing the API port makes the mapping explicit.
+    <script>
+      async function loadData() {
+        const res = await fetch('http://localhost:3001/sorted');
+        const data = await res.json();
+        document.getElementById('output').textContent =
+          'Original: ' + JSON.stringify(data.original) + '\n' +
+          'Sorted:  ' + JSON.stringify(data.sorted);
+      }
+    </script>
+  </body>
+</html>
+EOF
+```
 
-Verify:
-- Build one image:
-  ```bash
-  docker build -t multilang-api api
-  ```
-- Expected: build completes without errors.
-- This confirms the Dockerfile is valid.
+This file is enough to verify Nginx container behavior.
 
-If it fails:
-- Symptom: missing `package-lock.json`.
-- Fix: run `npm install` in `api/` or update the COPY line.
+## Step 5: Create Dockerfiles for each service
 
-### Step 6: Add Compose
-Goal:
-Run all services with one command.
+Each service now needs a container build definition.
 
-Actions:
-- File path: `docker-compose.yml`
-- Add:
-  ```yaml
-  services:
-    api:
-      build: ./api
-      ports:
-        - "3001:3001"
-    worker:
-      build: ./worker
-    web:
-      build: ./web
-      ports:
-        - "8080:80"
-  ```
-- Command:
-  ```bash
-  docker compose up --build
-  ```
+Node API Dockerfile:
 
-Why:
-Compose maps your services to ports and builds them together. This is the simplest way to run three containers in one stack. Keeping the file short avoids hidden behavior. You can add networks and env later.
+```bash
+cat > api/Dockerfile <<'EOF'
+FROM node:18-alpine
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm install --production
+COPY . .
+EXPOSE 3001
+CMD ["npm", "start"]
+EOF
+```
 
-Verify:
-- Open http://localhost:8080
-- Expected: "Multilang Demo" page.
-- Run:
-  ```bash
-  curl http://localhost:3001/health
-  ```
-- Expected: `{ "ok": true }`
-- This confirms the web and API containers run.
+Python worker Dockerfile:
 
-If it fails:
-- Symptom: port already in use.
-- Fix: change the host ports in `docker-compose.yml`.
+```bash
+cat > worker/Dockerfile <<'EOF'
+FROM python:3.11-slim
+WORKDIR /app
+COPY requirements.txt ./
+RUN pip install -r requirements.txt
+COPY . .
+CMD ["python", "main.py"]
+EOF
+```
 
-## Verify it worked
+Web Dockerfile:
 
-- Web page loads on port 8080.
-- API health returns JSON on port 3001.
-- Worker logs show "worker alive" every 5 seconds.
+```bash
+cat > web/Dockerfile <<'EOF'
+FROM nginx:alpine
+COPY index.html /usr/share/nginx/html/index.html
+EOF
+```
 
-## Common mistakes
+At this point, each folder contains runnable source code and a Dockerfile that defines how to package it.
 
-- **Symptom:** API container exits instantly.  
-  **Cause:** `npm install` did not run.  
-  **Fix:** rebuild with `docker compose up --build`.
+## Step 6: Create the Compose file
 
-- **Symptom:** Web page 404.  
-  **Cause:** Nginx did not receive the `index.html`.  
-  **Fix:** confirm the COPY path in the web Dockerfile.
+Docker Compose will build and run all services together.
 
-- **Symptom:** Worker spams errors.  
-  **Cause:** Python file name mismatch.  
-  **Fix:** ensure `main.py` exists in `worker/`.
+```bash
+cat > docker-compose.yml <<'EOF'
+services:
+  api:
+    build: ./api
+    ports:
+      - "3001:3001"
 
-## Cheat sheet
+  worker:
+    build: ./worker
 
-- One Dockerfile per service.
-- One port per public service.
-- Compose runs everything.
-- Verify with curl and a browser.
+  web:
+    build: ./web
+    ports:
+      - "8080:80"
+EOF
+```
 
-## Next steps
+This file declares three services, two exposed ports, and local build contexts.
 
-- Add environment variables for config.
-- Add a shared network and service names.
-- Add health checks in Compose.
+## Step 7: Build and run the stack
 
-## Related links
+Run the full stack with one command.
 
-- https://docs.docker.com/compose/
-- https://docs.docker.com/build/
+```bash
+docker compose up --build
+```
 
-## Final CTA
+You should see logs showing:
 
-Build one service at a time, then compose them together.
+- API container printing `api running on 3001`
+- Worker container printing original and sorted arrays fetched from the API
+- Web container starting Nginx
+
+Leave this running and open a second terminal for verification.
+
+## Step 8: Verify each service
+
+Verify the web service in a browser.
+
+Open:
+
+```
+http://localhost:8080
+```
+
+Expected result: the page displays a button. Clicking it fetches and shows original and sorted arrays from the API.
+
+Verify the API service.
+
+```bash
+curl http://localhost:3001/sorted
+```
+
+Expected response:
+
+```
+{"original":[34,7,88,...],"sorted":[7,34,88,...]}
+```
+
+Verify the worker service.
+
+Look at the Compose logs and confirm repeated output:
+
+```
+original: [34, 7, 88, ...]
+sorted:   [7, 34, 88, ...]
+---
+```
+
+If all three checks succeed, the multi-runtime container stack is functioning correctly.
+
+## Common failure points
+
+| Symptom | Cause | Fix |
+|----------|--------|-----|
+| API container exits immediately | `package-lock.json` missing | Run `npm install` in `api/` and rebuild |
+| Web page returns 404 | Incorrect COPY path in web Dockerfile | Confirm `index.html` exists in `web/` |
+| Ports unavailable | Port already in use | Change host ports in compose file |
+| Worker prints errors | File name mismatch | Ensure `worker/main.py` exists |
+| Web page shows CORS error | Browser blocks API call | Run browser with disabled CORS for demo or proxy API through web container |
+
+These issues account for most failures when assembling small multi-container stacks.
+
+## What you now have
+
+At this point, your project directory contains:
+
+```text
+multilang/
+  api/
+    index.js
+    package.json
+    package-lock.json
+    Dockerfile
+  worker/
+    main.py
+    requirements.txt
+    Dockerfile
+  web/
+    index.html
+    Dockerfile
+  docker-compose.yml
+```
+
+You can stop the stack with `Ctrl+C` and restart it any time with `docker compose up`.
+
+## Closing
+
+At this point you have something most Docker introductions never give you: a working multi‑runtime system you can actually play with.
+
+You can change the API response and watch the container rebuild. You can slow the worker loop and see log behavior. You can replace the static page with a real frontend. None of that requires guessing how the pieces connect anymore — you already wired them once.
+
+That is the real value of this lab. Not memorizing commands. Not reading diagrams. Actually building a small system that behaves like a real one.

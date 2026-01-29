@@ -7,147 +7,139 @@ description: "A precise fix for a dropdown that stays open in a Gatsby navigatio
 theme: "Debugging"
 ---
 
-My nav dropdown stayed open even when it should have closed.
+My nav dropdown stayed open when it should have closed. It felt haunted because the UI kept acting like it was still open even after I clicked somewhere else. The bug wasn’t styling. It wasn’t Gatsby. It was state that never got reset.
 
-This post shows the exact fix: a click outside handler and a visibility reset.
+This post is a start-to-finish fix you can actually verify inside this repo. The goal is simple: when a dropdown is open, it must close when you click outside of it, and it must also close if the nav itself becomes hidden or collapsed. If either of those are missing, you get the classic “ghost menu” where state says open even though the user is done with it.
 
-You will add two small effects and verify the menu closes correctly.
+## What’s really happening
 
-These steps are verifiable in this repo.
+A dropdown is not a DOM thing. In React it is almost always a boolean. If that boolean stays `true`, the dropdown stays “open” forever unless you explicitly change it back. Clicking outside does not magically update your state. React has no idea you want the menu closed unless you wire up an event that tells it.
 
-## The promise
+The second half of the problem is visibility changes. If your nav collapses on mobile, or hides on scroll, or mounts and unmounts during route transitions, your dropdown state can survive in the wrong moment. That’s where it starts looking haunted. The UI is doing exactly what you told it to do, you just forgot to tell it when to stop.
 
-By the end, you will:
+## The fix in one sentence
 
-- add a click outside handler for the menu
-- close the dropdown when the nav hides
-- verify the fix in the browser
+You add a document-level click listener that closes the dropdown when the click happens outside the dropdown, and you add a second effect that forces the dropdown closed whenever the nav visibility state goes false.
 
-> "If the menu stays open after you click outside, it is your state logic."
+## What you need before you touch anything
 
-## What this is
+You need this repo running locally and you need the navigation component open in your editor. Nothing else. This is not a redesign and it is not a refactor. You are adding two small effects and attaching a ref to the correct element.
 
-**High level:** A dropdown should close when the user clicks elsewhere or when the nav hides.
+Start the dev server so you can verify every change as you make it.
 
-**Low level:** You track open state in React and reset it in event handlers.
+```bash
+bun run dev
+```
 
-**Key terms:**
+If you’re using npm/yarn/pnpm, use whatever starts your Gatsby dev server. The important part is that you can reproduce the bug on demand.
 
-- **Dropdown state:** A boolean that says the menu is open or closed.
-- **Click outside handler:** A document listener that closes the menu when you click away.
+## Reproduce the bug first
 
-## What you need
+Before fixing anything, reproduce it in the browser so you know exactly what “broken” looks like.
 
-- This repo
-- A running dev server
-- The navigation component open in your editor
+Open the site, open the dropdown, and then click somewhere else on the page. If the dropdown stays open, or if it closes visually but the state is still stuck (you can usually tell because it reopens weirdly or won’t toggle correctly), you’re looking at the same class of bug.
 
-## Start to Finish
+Now collapse or hide the nav (mobile menu, scroll-hide behavior, whatever your setup is). If the dropdown state survives into the hidden nav state, you’ll see the menu behave out of sync when the nav returns.
 
-### Step 1: Add a click outside handler
-Goal:
-Close the dropdown when a user clicks outside of it.
+That’s the baseline.
 
-Actions:
-- File path: `src/@lekoarts/gatsby-theme-minimal-blog/components/navigation.tsx`
-- Add or confirm this effect exists:
-  ```tsx
-  const dropdownRef = React.useRef<HTMLLIElement>(null);
+## Start to finish
 
-  React.useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setDropdownOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-  ```
-- Make sure the dropdown container uses the ref:
-  ```tsx
-  <li ref={dropdownRef}>
-  ```
+### Step 1: Close on outside click
 
-Why:
-React state does not update itself when users click away. A document listener lets you detect clicks outside the dropdown. This is the standard fix for stuck menus. Without it, the open state stays true and the menu never closes.
+This step fixes the most common reason dropdowns get stuck: nothing is watching for clicks that happen outside the menu.
 
-Verify:
-- Run:
-  ```bash
-  bun run dev
-  ```
-- Open the dropdown and click anywhere else.
-- Expected: the dropdown closes.
-- This confirms the click outside handler works.
+File:
+`src/@lekoarts/gatsby-theme-minimal-blog/components/navigation.tsx`
 
-If it fails:
-- Symptom: dropdown never closes.
-- Fix: ensure the ref is attached to the correct element.
+Add a ref that points at the dropdown container element, then register a `mousedown` listener on `document`. We use `mousedown` instead of `click` because it avoids a common edge case where the opening click and closing click fight each other. The listener checks whether the click happened inside the dropdown container. If it did not, it closes the dropdown.
 
-### Step 2: Reset when the nav hides
-Goal:
-Close the dropdown if the nav is hidden or collapsed.
+Add or confirm this effect exists:
 
-Actions:
-- File path: `src/@lekoarts/gatsby-theme-minimal-blog/components/navigation.tsx`
-- Add or confirm this effect exists:
-  ```tsx
-  React.useEffect(() => {
-    if (!isVisible) {
+```tsx
+const dropdownRef = React.useRef<HTMLLIElement>(null);
+
+React.useEffect(() => {
+  const handleClickOutside = (event: MouseEvent) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
       setDropdownOpen(false);
     }
-  }, [isVisible]);
-  ```
+  };
 
-Why:
-A hidden nav should not keep its dropdown state. If the nav is collapsed, the dropdown should be closed. Resetting state when visibility changes prevents ghost menus. This also prevents focus traps in hidden menus.
+  document.addEventListener("mousedown", handleClickOutside);
+  return () => document.removeEventListener("mousedown", handleClickOutside);
+}, []);
+```
 
-Verify:
-- Hide the nav (for example, collapse the menu on mobile).
-- Expected: dropdown state resets and stays closed.
-- This confirms the visibility reset works.
+Now the critical part: the ref must be attached to the right DOM element. If you attach it to the wrong node, every click looks “outside” and the dropdown becomes unusable, or the outside click never registers and the dropdown never closes.
 
-If it fails:
-- Symptom: menu stays open when collapsed.
-- Fix: ensure `isVisible` changes are passed correctly to the component.
+Make sure the dropdown container uses the ref:
+
+```tsx
+<li ref={dropdownRef}>
+```
+
+Verification:
+
+Open the dropdown and click anywhere else on the page.
+
+Expected result: the dropdown closes immediately and reliably.
+
+If it fails, don’t guess. It is almost always one of these two issues: the `ref` is attached to the wrong element, or the dropdown content is rendered outside of that element (portals, absolute-positioned nodes rendered elsewhere, etc.). In this theme setup it is typically just the wrong element.
+
+### Step 2: Reset when the nav hides
+
+Outside click fixes the “I’m done with the dropdown” moment, but it doesn’t fix the “nav changed state” moment. If your nav hides or collapses, keeping dropdown open state around is a mistake. The dropdown should not exist as open when the nav is not visible.
+
+File:
+`src/@lekoarts/gatsby-theme-minimal-blog/components/navigation.tsx`
+
+Add or confirm this effect exists:
+
+```tsx
+React.useEffect(() => {
+  if (!isVisible) {
+    setDropdownOpen(false);
+  }
+}, [isVisible]);
+```
+
+This is intentionally blunt. If visibility goes false, you force the dropdown closed. That prevents ghost UI states and focus traps, and it keeps the toggle logic sane when the nav comes back.
+
+Verification:
+
+Trigger whatever behavior makes your nav not visible. If that is a mobile collapse, do that. If it hides on scroll, scroll until it hides.
+
+Expected result: the dropdown is closed and stays closed when the nav returns.
+
+If it fails, the fix is not to tweak this effect. The fix is to confirm that `isVisible` is actually the visibility signal you think it is and that it updates when the nav hides.
 
 ## Verify it worked
 
-- Dropdown closes on outside click.
-- Dropdown closes when nav is hidden.
-- No console errors appear.
+You’re done when all three of these feel boring:
 
-## Common mistakes
+The dropdown closes when you click outside. The dropdown closes when the nav hides. The dropdown toggles normally without getting into a stuck half-state.
 
-- **Symptom:** Outside click does nothing.  
-  **Cause:** The ref is attached to the wrong element.  
-  **Fix:** Attach the ref to the dropdown container element.
+If you want to be extra strict, do a full pass of “open dropdown → click outside → open dropdown again → collapse nav → expand nav → open dropdown again.” If that loop stays consistent, the bug is gone.
 
-- **Symptom:** Dropdown closes immediately after opening.  
-  **Cause:** The click handler captures the opening click.  
-  **Fix:** Use `mousedown` and ensure the button is inside the ref container.
+## Why this bug keeps showing up
 
-- **Symptom:** Dropdown state gets out of sync.  
-  **Cause:** Multiple state sources.  
-  **Fix:** Keep one boolean state for open and close.
+This bug shows up because dropdowns are state machines pretending to be UI. A dropdown is either open or closed. If you do not define the transitions that lead back to closed, state will sit open forever. Outside click and visibility reset are just two transitions people forget to define.
 
-## Cheat sheet
+In Gatsby specifically, nav components often live across route transitions and layout changes. That means state can outlive the visual moment that created it. The fix is not Gatsby-specific. It is the same fix you’d ship in any React app.
 
-- Track dropdown state in React.
-- Close it on outside click.
-- Reset state when nav hides.
-- Verify in the browser.
+## Optional upgrades that are worth doing
 
-## Next steps
+If you want to finish the job, there are two small upgrades that are actually useful.
 
-- Add keyboard support for Escape to close.
-- Add focus management for accessibility.
+First, add Escape-to-close. This is a real usability win and it takes a few lines. Second, confirm focus behavior so keyboard users don’t get trapped in a hidden menu.
 
-## Related links
+I’m not including those changes here because the post is about the stuck dropdown bug, but if you’re already in this component, they’re worth the extra minute.
+
+## Related reference
 
 - https://react.dev/reference/react/useEffect
 
-## Final CTA
+## Closing
 
-Fix the close behavior first. Fancy styling can wait.
+Fix the close behavior first. Fancy styling can wait. A dropdown that can’t close is not a visual issue, it’s a state issue, and this is the smallest reliable set of transitions that keeps it sane.

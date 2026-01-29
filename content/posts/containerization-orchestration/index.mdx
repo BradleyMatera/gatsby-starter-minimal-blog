@@ -7,189 +7,190 @@ description: "A minimal container lab plus a small orchestration step with exact
 theme: "DevOps"
 ---
 
-Containerization is easier when you keep the stack small.
+Containerization is only confusing when the example is too big. If you keep the stack small, the ideas become obvious: build an image, run it, confirm it responds. Orchestration at this scale is just a repeatable run command written down so you don’t have to remember it.
 
-This post shows one container and one orchestration step you can verify.
+This post is a start‑to‑finish lab. Every file and command is real and copy‑paste ready. If you follow it exactly, you will end with a running container, started through Compose, responding to a health check. No placeholders. No skipped steps. No abstract explanation without a working result.
 
-You will build a container and run it under Compose.
+## What you are building
 
-I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+You will create a tiny Node web service with one health endpoint, package it into a Docker image, and run it using Docker Compose. The goal is not to build an app. The goal is to understand the minimum moving parts of containerization and a simple orchestration layer.
 
-## The promise
+Before touching anything, here is the end state so the steps make sense.
 
-By the end, you will:
+| Item | Path | Purpose |
+|------|------|---------|
+| Web service | `app/index.js` | Simple HTTP server with `/health` endpoint |
+| App manifest | `app/package.json` | Declares dependencies and start command |
+| Container build file | `app/Dockerfile` | Defines how the image is built |
+| Orchestration file | `docker-compose.yml` | Runs the container with a mapped port |
 
-- build one container image
-- run it with Compose
-- verify the service is healthy
+Once these exist, you will be able to build the image, run the container, and confirm it responds.
 
-> "Orchestration is just a repeatable run command."
+## Prerequisites
 
-## What this is
+You need Docker Desktop installed and Node.js available on your machine. No other tooling is required. If Docker is not installed, install Docker Desktop first and confirm this works before continuing:
 
-**High level:** Containerization packages your app, orchestration runs it consistently.
+```bash
+docker version
+```
 
-**Low level:** You write a Dockerfile, then use Compose to run it with ports.
+If that command returns a version, Docker is ready.
 
-**Key terms:**
+## Step 1: Create the web service
 
-- **Dockerfile:** Build instructions for an image.
-- **Compose:** A YAML file that runs containers together.
-- **Port mapping:** The link between host and container ports.
+The service will expose one route: `/health`. This keeps verification simple. If `/health` returns JSON, the container is working.
 
-## What you need
+Run the following commands to create the app folder and files.
 
-- Docker Desktop
-- A small web server app
+```bash
+mkdir -p app
+cat > app/index.js <<'EOF'
+const express = require("express");
+const app = express();
 
-## Start to Finish
+app.get("/health", (_req, res) => {
+  res.json({ ok: true });
+});
 
-### Step 1: Create the app
-Goal:
-Create a tiny web server that returns a health response.
+app.listen(3000, () => {
+  console.log("server on 3000");
+});
+EOF
+```
 
-Actions:
-- File path: `app/index.js`
-- Add:
-  ```js
-  const express = require("express");
-  const app = express();
-  app.get("/health", (_req, res) => res.json({ ok: true }));
-  app.listen(3000, () => console.log("server on 3000"));
-  ```
-- File path: `app/package.json`
-- Add:
-  ```json
-  {
-    "name": "app",
-    "version": "1.0.0",
-    "main": "index.js",
-    "scripts": { "start": "node index.js" },
-    "dependencies": { "express": "^4.19.2" }
+Now create the package manifest.
+
+```bash
+cat > app/package.json <<'EOF'
+{
+  "name": "lab-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
   }
-  ```
-- Command:
-  ```bash
-  cd app && npm install
-  ```
+}
+EOF
+```
 
-Why:
-A health route is a clean verification step. Express makes the app tiny. This keeps the lab focused on containers, not frameworks. A small app is easier to debug.
+Install dependencies and verify the service runs locally.
 
-Verify:
-- Run:
-  ```bash
-  npm start
-  ```
-- Expected: `server on 3000`.
-- This confirms the app works.
+```bash
+cd app
+npm install
+npm start
+```
 
-If it fails:
-- Symptom: module not found.
-- Fix: run `npm install`.
+Expected output:
 
-### Step 2: Add a Dockerfile
-Goal:
-Package the app into a container image.
+```
+server on 3000
+```
 
-Actions:
-- File path: `app/Dockerfile`
-- Add:
-  ```dockerfile
-  FROM node:18-alpine
-  WORKDIR /app
-  COPY package.json package-lock.json ./
-  RUN npm install --production
-  COPY . .
-  EXPOSE 3000
-  CMD ["npm", "start"]
-  ```
+In another terminal, verify the health endpoint.
 
-Why:
-The Dockerfile defines how the image is built. Using a small base image keeps builds fast. Exposing the port documents the service. This is the minimum to containerize a Node app.
+```bash
+curl http://localhost:3000/health
+```
 
-Verify:
-- Run:
-  ```bash
-  docker build -t lab-app app
-  ```
-- Expected: build completes without errors.
-- This confirms the Dockerfile works.
+Expected response:
 
-If it fails:
-- Symptom: missing `package-lock.json`.
-- Fix: run `npm install` to generate it.
+```
+{"ok":true}
+```
 
-### Step 3: Orchestrate with Compose
-Goal:
-Run the container with a repeatable command.
+Stop the local server with `Ctrl+C`. At this point the service works outside a container.
 
-Actions:
-- File path: `docker-compose.yml`
-- Add:
-  ```yaml
-  services:
-    app:
-      build: ./app
-      ports:
-        - "3000:3000"
-  ```
-- Command:
-  ```bash
-  docker compose up --build
-  ```
+## Step 2: Build a container image
 
-Why:
-Compose turns the run command into config. This makes it repeatable. It also makes it easy to add more services later. For a small lab, this is enough orchestration.
+Now you will package the service into a container image using a Dockerfile.
 
-Verify:
-- Run:
-  ```bash
-  curl http://localhost:3000/health
-  ```
-- Expected: `{ "ok": true }`.
-- This confirms the container is running.
+Create the Dockerfile.
 
-If it fails:
-- Symptom: connection refused.  
-  **Fix:** check port mapping and ensure the container is running.
+```bash
+cat > app/Dockerfile <<'EOF'
+FROM node:18-alpine
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm install --production
+COPY . .
+EXPOSE 3000
+CMD ["npm", "start"]
+EOF
+```
 
-## Verify it worked
+Build the image.
 
-- `docker compose up` runs.
-- `/health` returns JSON.
-- Logs show the server started.
+```bash
+docker build -t lab-app ./app
+```
 
-## Common mistakes
+If the build completes without errors, the image is ready. You can verify it exists with:
 
-- **Symptom:** Container exits immediately.  
-  **Cause:** The command is wrong.  
-  **Fix:** use `npm start` and ensure it exists.
+```bash
+docker images | grep lab-app
+```
 
-- **Symptom:** Port not reachable.  
-  **Cause:** No port mapping.  
-  **Fix:** add `3000:3000` in Compose.
+## Step 3: Run the image with Compose
 
-- **Symptom:** Build fails.  
-  **Cause:** Missing lockfile.  
-  **Fix:** run `npm install` and rebuild.
+Running containers manually is fine once. Orchestration starts when the run command becomes a file you can repeat. Docker Compose provides that layer.
 
-## Cheat sheet
+Create the Compose file in the project root.
 
-- Build a tiny app.
-- Write a Dockerfile.
-- Run with Compose.
-- Verify with curl.
+```bash
+cat > docker-compose.yml <<'EOF'
+services:
+  app:
+    build: ./app
+    ports:
+      - "3000:3000"
+EOF
+```
 
-## Next steps
+Start the service through Compose.
 
-- Add a second service.
-- Add a health check in Compose.
+```bash
+docker compose up --build
+```
 
-## Related links
+You should see output showing the image building and the server starting.
 
-- https://docs.docker.com/compose/
+```
+server on 3000
+```
 
-## Final CTA
+In another terminal, verify the running container.
 
-Keep the lab small and verify every step.
+```bash
+curl http://localhost:3000/health
+```
+
+Expected response:
+
+```
+{"ok":true}
+```
+
+Stop Compose with `Ctrl+C` when finished.
+
+## What just happened
+
+A Node service was created. A Docker image packaged it. Compose ran the image with a mapped port. The `/health` endpoint confirmed the container responded correctly. That is the complete containerization and basic orchestration loop in its smallest useful form.
+
+## Common failure points
+
+| Symptom | Likely cause | Fix |
+|----------|--------------|-----|
+| `Cannot find module express` | Dependencies not installed | Run `npm install` in `app` and rebuild image |
+| Container exits immediately | Start command missing | Ensure `scripts.start` exists in package.json |
+| `curl` connection refused | Port mapping missing or container not running | Confirm `3000:3000` in compose and container logs |
+| Docker build fails on lockfile | `package-lock.json` missing | Run `npm install` before building image |
+
+## Closing
+
+Containerization is just packaging a working service into an image. Orchestration is just running that image through a repeatable configuration. Keeping the example small removes the noise and makes the mechanics clear.
+
+Once this lab runs on your machine, you have a real baseline. From here you can add databases, reverse proxies, or multiple services, but the core loop remains the same.

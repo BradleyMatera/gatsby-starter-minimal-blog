@@ -7,157 +7,64 @@ description: "A concrete weekly plan that balances classes, work, and projects."
 theme: "Process"
 ---
 
-Balance is not a vibe. It is a schedule you can repeat.
+Balancing work, school, and projects is often presented as a scheduling problem. For me, it has never worked that way. I do not follow written schedules, fixed study plans, or rigid weekly routines. Projects are a hobby first. I work on them when I feel like working on them. That has been the most accurate description of how I’ve actually built things over the past few years.
 
-This post shows a simple weekly plan and how to track it.
+Because of that, this is not a guide about calendars or time blocking. It is a description of a different pattern: working in sprints instead of steady daily routines, and using interest as the primary driver instead of strict structure.
 
-You will create a schedule file, time box tasks, and review what worked.
 
-I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+## The sprint pattern
 
-## The promise
+![Burst of coding sprint](https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif)
 
-By the end, you will:
+My project work has almost always happened in bursts. I’ll code every day for a week. Then I might not touch a project for another week or two. Sometimes it’s three days of heavy work, then nothing for several days. The length of these bursts is not consistent. It usually falls somewhere between a couple of days and two weeks.
 
-- set weekly time blocks
-- keep one project moving without burnout
-- measure what actually got done
+There is no written plan behind this. When an idea is interesting, I work on it. When it stops being interesting for a moment, I step away. When I come back, I either continue or start something new. Over time, this has still resulted in finished projects, deployed sites, and working systems. The rhythm is irregular, but the output still accumulates.
 
-> "If it is not on the schedule, it will not happen."
+This is important because it removes the assumption that progress must happen in equal daily slices. For some people, that works. For me, momentum comes in waves, not in evenly spaced hours.
 
-## What this is
 
-**High level:** This is a weekly planning loop that protects focus time.
+## How free time is actually split
 
-**Low level:** You write a schedule file, use time blocks, and update one review note each week.
+![Switching between gaming and coding](https://media.giphy.com/media/oe33xf3B50fsc/giphy.gif)
 
-**Key terms:**
+Outside of work and obligations, my free time usually lands in one of two places: gaming or coding. If I feel like gaming, I game. If I feel like building something, I open a project instead. I haven’t noticed a meaningful difference in how much I code overall. The activity just shifts based on interest at the moment.
 
-- **Time block:** A fixed block of time for one type of work.
-- **Review note:** A short weekly reflection on what worked.
+When I do want to ship something, I’ve consistently been able to commit weekends, nights, or both until the feature or project is finished. That has been true for portfolio sites, demos, and full-stack projects. There is no hidden system behind it. Just making time when a project matters enough to push it across the finish line.
 
-## What you need
 
-- A calendar
-- A notes file
-- One weekly review slot
+## How school and work fit into this
 
-## Start to Finish
+![Balancing tasks](https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif)
 
-### Step 1: Create a weekly schedule file
-Goal:
-Write a schedule you can repeat every week.
+While I was in school, project work usually happened in the gaps between assignments. Since graduating and starting full-time work, the pattern has stayed mostly the same. Projects still happen when interest is high and time opens up. The difference now is simply being more aware that work takes a fixed portion of the week.
 
-Actions:
-- File path: `planning/weekly-schedule.md`
-- Add:
-  ```text
-  Weekly schedule
-  - Mon: class + 60 min project
-  - Tue: work + 60 min project
-  - Wed: class + review
-  - Thu: work + 60 min project
-  - Fri: project block
-  ```
-- Command:
-  ```bash
-  mkdir -p planning
-  $EDITOR planning/weekly-schedule.md
-  ```
+There was no moment where I switched to a strict balancing system. The same sprint-based pattern continues. The only adjustment has been recognizing that some weeks are heavier on work and some weeks have more room for projects.
 
-Why:
-A written schedule is harder to ignore. It gives you a baseline you can adjust. It also makes time limits visible. This keeps you from overcommitting.
+## What this means in practice
 
-Verify:
-- Open the file and confirm each day has a block.
-- This confirms the schedule exists.
+This approach has a few practical characteristics.
 
-If it fails:
-- Symptom: the file is empty.
-- Fix: add just one line per day and refine later.
+| Aspect | How it actually works |
+|--------|-----------------------|
+| Scheduling | No written schedules or fixed time blocks |
+| Work pattern | Bursts of daily coding followed by gaps |
+| Motivation | Driven by interest, not routine |
+| Project completion | Weekends and nights used when finishing is needed |
+| Consistency | Irregular rhythm, but steady long-term output |
 
-### Step 2: Add a project time box
-Goal:
-Protect one focused project block each week.
+This is not a recommendation. It is simply the pattern that has produced real finished work for me.
 
-Actions:
-- Add to `planning/weekly-schedule.md`:
-  ```text
-  - Fri: 2 hour project block
-  ```
-- Add a calendar event for that block.
 
-Why:
-One larger block is where deep work happens. Short daily blocks are good, but a bigger block helps you finish features. This keeps the project moving. The calendar event makes it real.
+## Why this works for some people
 
-Verify:
-- Expected: a calendar event exists.
-- This confirms the block is scheduled.
+![Momentum building](https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif)
 
-If it fails:
-- Symptom: no event.
-- Fix: add it now and set a reminder.
+Sprint-based work can be effective when projects are driven by curiosity and personal interest. Instead of forcing daily progress, it allows momentum to build naturally. When interest is high, output is high. When interest is low, stepping away prevents burnout.
 
-### Step 3: Add a weekly review note
-Goal:
-Record what worked and what did not.
+The tradeoff is that progress does not look uniform week to week. But over months, projects still move from idea to completion.
 
-Actions:
-- File path: `planning/weekly-review.md`
-- Add:
-  ```text
-  Week of:
-  - What shipped:
-  - What slipped:
-  - One change next week:
-  ```
+## Closing
 
-Why:
-The review keeps the schedule honest. It shows what actually happened. It also helps you adjust the next week. One short note is enough.
+Not everyone needs a written schedule to balance work, school, and projects. Some people operate better in steady routines. Others operate in bursts.
 
-Verify:
-- Fill it in once.
-- This confirms the review loop is active.
-
-If it fails:
-- Symptom: notes stay blank.
-- Fix: write one line per section and move on.
-
-## Verify it worked
-
-- A weekly schedule file exists.
-- One project block is on your calendar.
-- A review note is filled out.
-
-## Common mistakes
-
-- **Symptom:** Project time disappears.  
-  **Cause:** No calendar event.  
-  **Fix:** schedule it like a meeting.
-
-- **Symptom:** You keep overbooking.  
-  **Cause:** No review loop.  
-  **Fix:** adjust the schedule weekly.
-
-- **Symptom:** Schedule feels unrealistic.  
-  **Cause:** Too many blocks.  
-  **Fix:** cut one block and reassess.
-
-## Cheat sheet
-
-- Write the schedule.
-- Time box one project block.
-- Review weekly.
-
-## Next steps
-
-- Add a short "done" list for each week.
-- Track time spent once per week.
-
-## Related links
-
-- https://www.calnewport.com/blog/2009/01/12/time-blocking/
-
-## Final CTA
-
-Keep the schedule small enough to follow. That is the only version that works.
+This post describes the second pattern. No rigid planning. No calendar systems. Just building when interest is present, committing extra time when something needs to be finished, and letting progress accumulate over time.

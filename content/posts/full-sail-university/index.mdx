@@ -7,152 +7,48 @@ description: "A clear breakdown of what I kept from formal training and how I us
 theme: "Career"
 ---
 
-Formal training only matters if you can reuse it in real projects.
+Formal training did not turn me into an engineer by itself. What it did give me was repeated exposure to building, breaking, fixing, and presenting software projects under time constraints. That only matters if those behaviors still show up in how I work today. This post is a straight explanation of what actually came out of my Web Development degree and how it connects to the work I do now.
 
-This post shows what I kept from school, how I organize it, and how I verify it.
+There is no system to install here and no artificial workflow. This is simply a record of what was real in that program and what carried forward.
 
-You will build a small structure to preserve course work and keep it honest.
+## What the program actually looked like
 
-I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+![Developer writing code](https://media.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif)
 
-## The promise
+The Web Development program at Full Sail runs on short monthly courses. Each month you switch topics, deliver a project, present it, then move on. That pace forces you to ship something even when you do not feel ready. You do not sit in theory for long. You build, submit, and iterate.
 
-By the end, you will:
+The curriculum covered HTML, CSS, JavaScript, React, basic backend concepts, databases, UX, project planning, and cloud fundamentals. None of these were mastered in isolation. The value came from repeatedly being dropped into unfamiliar stacks and being required to produce a working deliverable anyway.
 
-- organize course projects with proof links
-- capture one repeatable process you can use now
-- avoid overstating what school covered
+## The behavior it produced
 
-> "Keep the parts that still run and delete the rest."
+![Debugging in action](https://media.giphy.com/media/3og0IPxMM0erATueVW/giphy.gif)
 
-## What this is
+The useful outcome of that environment was not memorizing syntax. It was learning how to:
 
-**High level:** This is a method for extracting useful habits from formal training.
+• Start from a blank folder and get something running
+• Read documentation fast enough to unblock yourself
+• Debug when instructions are incomplete or wrong
+• Present work that is not perfect but functional
+• Take feedback and apply it to the next build
 
-**Low level:** You archive projects, add proof links, and write short notes about what the project does today.
+Those behaviors are the same ones I use now when building personal projects, working inside existing codebases, or learning new cloud services. That is the real connection.
 
-**Key terms:**
+## Where it shows up today
 
-- **Proof link:** A repo or live URL that shows the project works.
-- **Archive:** A folder for old projects you no longer update.
+![Deploying to cloud](https://media.giphy.com/media/5xaOcLGvzHxDKjufnLW/giphy.gif)
 
-## What you need
+After graduation, those same behaviors show up in three places:
 
-- A folder for archived projects
-- A short README template
-- One example project you can still run
+First, in personal projects. I routinely spin up new repos, assemble stacks, deploy them, break them, and fix them. That loop came directly from being forced to deliver monthly projects on deadlines.
 
-## Start to Finish
+Second, in my AWS internship. The guided labs and capstone work required jumping into unfamiliar services, reading service docs, wiring components together, debugging failures, and producing working deployments. That felt like an accelerated version of school projects, just inside real AWS environments instead of classroom ones.
 
-### Step 1: Create an archive folder
-Goal:
-Store school projects in one place.
+Third, in open source contributions. Running an unfamiliar project locally, fixing onboarding friction, improving documentation, submitting PRs, and tracking issues is the same pattern: enter a codebase, understand it, make a small improvement, leave a record.
 
-Actions:
-- Command:
-  ```bash
-  mkdir -p school-projects/archive
-  ```
+## What did not carry forward
 
-Why:
-A clean archive stops old projects from polluting your current work. It also makes the story clear. This is the first step to honest documentation. You can always delete what no longer works.
+Not everything from school remained useful. Some class projects no longer run. Some frameworks taught are outdated. Some assignments were done only to meet grading criteria. That is normal. The output that matters is what still builds, deploys, or taught a repeatable behavior. Everything else is just history.
 
-Verify:
-- Run:
-  ```bash
-  ls school-projects
-  ```
-- Expected: `archive` folder.
-- This confirms the structure is ready.
+## Closing
 
-If it fails:
-- Symptom: folder not found.
-- Fix: re-run the `mkdir` command.
-
-### Step 2: Add a short project README
-Goal:
-Document one project with a clear proof link.
-
-Actions:
-- File path: `school-projects/archive/project-name/README.md`
-- Add:
-  ```text
-  Project: Example Project
-  Status: archived
-  Proof link: https://github.com/yourname/project
-  What still works: builds locally
-  What does not: no live demo
-  ```
-
-Why:
-This keeps the project honest. It shows what still runs and what does not. It also prevents vague claims. A short README is enough to be clear.
-
-Verify:
-- Open the README and confirm the proof link works.
-- This confirms the project is documented.
-
-If it fails:
-- Symptom: no proof link.
-- Fix: add the repo URL or remove the project.
-
-### Step 3: Capture the reusable habit
-Goal:
-Write one habit you still use from training.
-
-Actions:
-- File path: `school-projects/habits.md`
-- Add:
-  ```text
-  Habit: small weekly deliverables
-  How I use it now: weekly demo goals
-  ```
-
-Why:
-The habit is the long term value. This turns education into a repeatable process. It also keeps the post grounded in what you actually do now. The habit should be specific and testable.
-
-Verify:
-- Open the file and confirm the habit is stated in one sentence.
-- This confirms it is usable.
-
-If it fails:
-- Symptom: the habit is vague.
-- Fix: rewrite it with a concrete example.
-
-## Verify it worked
-
-- Archive folder exists.
-- One project has a README and proof link.
-- One habit is documented.
-
-## Common mistakes
-
-- **Symptom:** Old projects are listed as current.  
-  **Cause:** No archive or status note.  
-  **Fix:** add a status line in README.
-
-- **Symptom:** Claims do not match reality.  
-  **Cause:** No proof link.  
-  **Fix:** add a link or remove the claim.
-
-- **Symptom:** The habit is abstract.  
-  **Cause:** No concrete example.  
-  **Fix:** add one real example.
-
-## Cheat sheet
-
-- Archive old projects.
-- Add proof links.
-- Keep one real habit.
-
-## Next steps
-
-- Move broken projects to archive.
-- Keep only the ones you can still run.
-
-## Related links
-
-- https://guides.github.com/features/wikis/
-
-## Final CTA
-
-Keep the useful parts and cut the rest. That is the honest way to do this.
+The degree did not magically create engineering skill. It created a high-frequency environment for shipping imperfect software, learning under pressure, and adapting quickly. Those behaviors are still present in how I work now. That is the only part of formal training that matters in practice.

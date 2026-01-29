@@ -7,150 +7,60 @@ description: "A concrete way to track cert prep without pretending it is product
 theme: "Career"
 ---
 
-Certs matter only if you can show what you learned.
+Certifications mattered to me for a simple reason: they got me out of theory and into the tools.
 
-This post shows a simple way to track certification study and proof links.
+Before I had any AWS certifications, cloud felt abstract. I could read articles and watch videos, but I didn’t yet have instinct for where things lived in the console, how permissions failed, or what logs looked like when something broke. Studying for certifications gave me a reason to sit down and work through that gap instead of staying in the shallow end.
 
-You will build a study plan file and a proof list you can update.
+I didn’t grow up doing computer science problems for fun. I learn by interacting with real systems. The certifications only mattered because they pushed me into that pattern earlier than I would have gotten there on my own.
 
-I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
 
-## The promise
+## What certifications actually did for me
 
-By the end, you will:
+![Studying hard](https://media.giphy.com/media/IPbS5R4fSUl5S/giphy.gif)
 
-- track certification study in one file
-- link each cert to proof
-- keep the claims honest
+During my AWS Cloud Support internship, I completed two certifications in a 12‑week window: AWS Certified AI Practitioner and AWS Certified Solutions Architect Associate. Both were finished by week seven of the internship. That didn’t make me an expert, but it did mean I was spending every day inside AWS.
 
-> "If a cert is listed, the proof link should be one click away."
+At Amazon, I was an intern across cloud support, not tied to a single narrow product. I was constantly exposed to major AWS services: EC2, S3, RDS, IAM, Lambda, DynamoDB, CloudWatch, networking basics, permissions, logs, and runbooks. That daily exposure is what made the certifications realistic to pursue. The exams weren’t separate from the internship — they were layered on top of the work I was already doing.
 
-## What this is
+Outside of work hours, I used Udemy courses to structure exam prep, mainly Stephen Maarek’s courses. I ran the practice exams, looked up explanations for the questions I missed, and found YouTube breakdowns when I needed a different explanation. The question pools change over time, so I made sure I was looking at updated material instead of relying on older walkthroughs. The loop was simple: test, find gaps, review, test again.
 
-**High level:** This is a documentation method for certification progress and proof.
+I also kept physical notebooks. Anytime I hit a concept that didn’t stick, I wrote it down by hand and reread it later. Over time, those notebooks turned into a record of what I had to reinforce.
 
-**Low level:** You keep a study plan, log the exam date, and link to the public badge.
+I’ll be direct about the part people don’t usually say out loud: I memorized the practice exams. I ran Stephen Maarek’s test banks until I knew them well and was consistently scoring in the 90–100% range. I did the same with a few other test sets. By the time I sat the real exams, the format and style of questioning felt familiar.
 
-**Key terms:**
+So the certifications weren’t about “natural talent” or secret tricks. They came from daily AWS exposure during the internship, structured prep at night, repetition, and filling in gaps as I found them. That’s it.
 
-- **Badge:** A public URL that verifies the certification.
-- **Study plan:** A list of topics with dates and notes.
 
-## What you need
+## What the process actually gave me
 
-- A notes folder
-- Your badge URLs
+![Writing notes](https://media.giphy.com/media/YS8c0Z7in21AM4A2AR/giphy.gif)
 
-## Start to Finish
+The exam itself was just the checkpoint. The real value was spending weeks moving between AWS consoles, documentation, guided labs, Udemy quizzes, YouTube explanations, and my own notes.
 
-### Step 1: Create a certification tracker
-Goal:
-List your certs and public proof.
+I wasn’t just looking at architecture diagrams. I was wiring services together in lab environments, watching things fail, fixing them, and then reinforcing the same concepts through practice questions. That cycle built familiarity and confidence inside AWS environments.
 
-Actions:
-- File path: `docs/certifications.md`
-- Add:
-  ```text
-  Certifications
-  - AWS Certified AI Practitioner: https://www.credly.com/your-badge
-  - AWS SAA: https://www.credly.com/your-badge
-  ```
+It also changed how I approach technical problems in general. When something doesn’t work, I go to logs, permissions, configurations, and data flow instead of guessing. That habit came from living inside AWS daily as an intern and reinforcing it through exam prep.
 
-Why:
-This keeps the proof close to the claim. It also makes audits easy. If you do not have a badge URL, you should not list the cert. This is the easiest way to stay honest.
 
-Verify:
-- Open each link and confirm the badge loads.
-- This confirms the proof is real.
+## What certifications did not do
 
-If it fails:
-- Symptom: badge link is private.
-- Fix: make it public or remove it.
+![Exam stress](https://media.giphy.com/media/BmmfETghGOPrW/giphy.gif)
 
-### Step 2: Add a study plan
-Goal:
-Write a short plan that you can actually follow.
+They didn’t make me a senior engineer. They didn’t give me production ownership experience. They didn’t replace real project work. They didn’t teach deep algorithms or low‑level systems design.
 
-Actions:
-- File path: `docs/cert-study-plan.md`
-- Add:
-  ```text
-  Study plan
-  - Week 1: core services summary
-  - Week 2: practice questions
-  - Week 3: review gaps
-  ```
+What they did give me was comfort navigating AWS. I can open a new AWS account, find services without hunting through menus, understand where permissions live, and trace basic failures. That’s the real outcome I walked away with.
 
-Why:
-A short plan keeps you moving. It prevents endless study with no test date. It also shows what you did, not just the result. That makes the learning visible.
+## How this connects to how I learn now
 
-Verify:
-- Confirm each week has one clear focus.
-- This confirms the plan is usable.
+The reason certifications worked for me is the same reason my personal projects work for me. I learn best by touching systems, seeing what breaks, and fixing it.
 
-If it fails:
-- Symptom: plan is too big.  
-  Fix: cut it down to three or four weeks.
+Certifications gave me a structured reason to do that early on, before I had large personal or production projects. Now the same learning loop is driven by the projects I build and deploy on my own.
 
-### Step 3: Add a proof section to your resume
-Goal:
-Link certs in one place so they can be verified.
 
-Actions:
-- File path: `resume.md`
-- Add a section:
-  ```text
-  Certifications
-  - AWS Certified AI Practitioner (badge link)
-  - AWS Certified Solutions Architect Associate (badge link)
-  ```
+## Closing
 
-Why:
-If you list certs, you should link them. This prevents confusion and removes doubts. It also saves recruiters time. This keeps your story consistent across the site and resume.
+![AWS cloud](https://media.giphy.com/media/xKDt6YcZy3qWfhwMdT/giphy.gif)
 
-Verify:
-- Open the resume file and click the links.
-- This confirms the proof is visible.
+I don’t treat certifications as status symbols. For me, they were a structured way to get comfortable inside real cloud systems.
 
-If it fails:
-- Symptom: links are missing.  
-  Fix: add the URLs or remove the line.
-
-## Verify it worked
-
-- Badge links exist and are public.
-- The study plan is short and dated.
-- The resume matches the tracker.
-
-## Common mistakes
-
-- **Symptom:** Certs listed with no proof.  
-  **Cause:** Badge links missing.  
-  **Fix:** add the badge URL or remove the cert.
-
-- **Symptom:** Study plan keeps growing.  
-  **Cause:** No deadline.  
-  **Fix:** set a date and keep it short.
-
-- **Symptom:** Resume and site disagree.  
-  **Cause:** Two sources of truth.  
-  **Fix:** update them together.
-
-## Cheat sheet
-
-- Keep a badge link per cert.
-- Keep a short study plan.
-- Keep resume and site aligned.
-
-## Next steps
-
-- Add one study note per week.
-- Add one small project that uses a service from the cert.
-
-## Related links
-
-- https://www.credly.com/
-
-## Final CTA
-
-List only the certs you can prove in one click.
+The badges are simply proof I went through that process. The real value was the experience I gained along the way.

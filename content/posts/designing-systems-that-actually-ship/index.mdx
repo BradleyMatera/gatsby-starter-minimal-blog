@@ -7,155 +7,203 @@ description: "A simple system design template with exact files and checks."
 theme: "Systems"
 ---
 
-Systems only ship when the design is short and testable.
+Most systems that fail to ship do not fail because of technical difficulty. They fail because the design never becomes actionable. It lives as loose ideas, scattered notes, or long documents that do not point to real files or testable outcomes. This guide fixes that by turning system design into a concrete artifact that lives inside the repo and directly drives implementation.
 
-This post shows a lightweight design template you can finish in one sitting.
+This is not architecture theory. This is a practical design workflow that results in a real design document, a real file map tied to your codebase, and a real definition of what “done” means. Every step creates a file or a verification step. Nothing here is abstract or hypothetical.
 
-You will write a one page design, then verify it against code.
+## What you are building
 
-I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+You will create a system design document that answers four questions in a way that is directly usable during development.
 
-## The promise
+What problem does the system solve.
+What inputs enter the system.
+What outputs leave the system.
+Where each piece lives in the codebase.
 
-By the end, you will:
+When finished, your repo will contain a single source of truth that connects intent to implementation.
 
-- write a one page system design
-- define scope and boundaries
-- verify the design against a small repo
+Here is the final state before starting.
 
-> "If the design cannot fit on one page, it probably will not ship."
+| Item | Path | Purpose |
+|------|------|---------|
+| System design document | `docs/system-design.md` | Defines system behavior, code locations, and ship conditions |
 
-## What this is
+Once this file exists and is filled in, design stops being an idea and becomes an executable plan.
 
-**High level:** A system design is a short plan for how parts connect.
+## Why this matters
 
-**Low level:** You document inputs, outputs, and the minimal data flow.
+Without a concrete design artifact, projects drift. Features get added without boundaries. Files grow without ownership. Testing becomes unclear. Deployment becomes risky. The system becomes difficult to reason about because no single place explains what the system is supposed to do.
 
-**Key terms:**
+A short, explicit design document prevents this. It does not replace code. It guides code. It is small enough to maintain and strong enough to stop uncontrolled growth.
 
-- **Boundary:** The edge between two parts of the system.
-- **Data flow:** How data moves between parts.
-- **Scope:** What the system does and does not do.
+## Prerequisites
 
-## What you need
+You need a repository where the system will live. It can be empty or partially built. If the repo does not have a `docs` directory, this guide will create it.
 
-- A repo for the system
-- A place to store docs
+No frameworks or tooling assumptions are required. This works for frontend projects, backend services, or full stack applications.
 
-## Start to Finish
+## Step 1: Create the design document
 
-### Step 1: Create a one page design file
-Goal:
-Write a short system design you can actually use.
+The design file starts with structured headings. This prevents vague writing and forces direct answers.
 
-Actions:
-- File path: `docs/system-design.md`
-- Add:
-  ```text
-  System design
-  Goal:
-  Inputs:
-  Outputs:
-  Boundaries:
-  Data flow:
-  ```
+Create the design file with this command:
 
-Why:
-A one page template keeps the design tight. It forces you to define scope. It also makes review easier. This prevents vague architecture that never ships.
+```bash
+mkdir -p docs
+cat > docs/system-design.md <<'EOF'
+# System design
 
-Verify:
-- Open the file and fill one line per section.
-- This confirms the design is not empty.
+## Goal
 
-If it fails:
-- Symptom: the file grows beyond one page.
-- Fix: cut features or move them to a "next" section.
+## Problem statement
 
-### Step 2: Map the design to files
-Goal:
-Connect the design to real code locations.
+## Inputs
 
-Actions:
-- File path: `docs/system-design.md`
-- Add a mapping section:
-  ```text
-  File map:
-  - API routes: src/api/
-  - UI: src/components/
-  - Data: src/data/
-  ```
+## Outputs
 
-Why:
-If the design cannot map to files, it is not real. This step keeps the doc tied to code. It also makes reviews faster. You can confirm the system is implemented where you expect.
+## Constraints
 
-Verify:
-- Check that each path exists in the repo.
-- This confirms the mapping is valid.
+## High-level flow
+EOF
+```
 
-If it fails:
-- Symptom: paths do not exist.
-- Fix: update the map to match real folders.
+Open the file and fill each section with one or two sentences. Keep it brief. If you need long paragraphs, the system scope is too large for a single design document and should be split into phases.
 
-### Step 3: Add a "done" definition
-Goal:
-Define the minimum ship criteria.
+Verify the file exists:
 
-Actions:
-- File path: `docs/system-design.md`
-- Add:
-  ```text
-  Done when:
-  - API returns 200 on /health
-  - UI renders the core screen
-  - One demo flow is verified
-  ```
+```bash
+cat docs/system-design.md
+```
 
-Why:
-A clear "done" prevents scope creep. It also gives you a verification target. This makes shipping possible. Without a done definition, work drifts.
+If the template prints, the design skeleton is complete.
 
-Verify:
-- Confirm each bullet can be tested.
-- This proves the criteria are measurable.
+## Step 2: Define system boundaries
 
-If it fails:
-- Symptom: "done" is vague.  
-  **Fix:** rewrite bullets as concrete checks.
+Systems fail when boundaries are unclear. This step makes it explicit what is inside the system and what is outside it.
 
-## Verify it worked
+Append a boundary definition section.
 
-- The design file is one page.
-- The file map matches the repo.
-- The done criteria are testable.
+```bash
+cat >> docs/system-design.md <<'EOF'
 
-## Common mistakes
+## System boundaries
 
-- **Symptom:** The design is longer than the code.  
-  **Cause:** Too much scope.  
-  **Fix:** cut features until it fits one page.
+Inside the system:
 
-- **Symptom:** Design does not match files.  
-  **Cause:** No file map.  
-  **Fix:** add a file map section.
+Outside the system:
+EOF
+```
 
-- **Symptom:** "Done" is not testable.  
-  **Cause:** Vague wording.  
-  **Fix:** write checks you can run.
+Fill these lines. If something belongs in both lists, the boundary is unclear and must be resolved before writing code.
 
-## Cheat sheet
+## Step 3: Map design to real code paths
 
-- One page design.
-- File map.
-- Done criteria.
+A design that does not map to real file paths is not implementable. This step ties abstract behavior to physical code locations.
 
-## Next steps
+Append the file map section.
 
-- Add one diagram if the system grows.
-- Link the design from the README.
+```bash
+cat >> docs/system-design.md <<'EOF'
 
-## Related links
+## File map
 
-- https://12factor.net/
+- API layer: src/api/
+- UI layer: src/ui/
+- Data access: src/data/
+- Shared utilities: src/lib/
+- Configuration: src/config/
+EOF
+```
 
-## Final CTA
+Now compare these paths with your repo. If your project uses different folder names, update the mapping so each listed path actually exists. Do not move forward until every path listed is real.
 
-Keep the design small enough to ship this week.
+## Step 4: Define data flow
+
+Data flow explains how information moves through the system. This prevents guesswork during implementation.
+
+Append the data flow section.
+
+```bash
+cat >> docs/system-design.md <<'EOF'
+
+## Data flow
+
+1. Input enters through API or UI
+2. Validation occurs
+3. Data is processed or stored
+4. Output is returned to the requester
+EOF
+```
+
+Replace these steps with your real system flow. Keep it short and numbered. Each step should correspond to code that will exist in one of the mapped folders.
+
+## Step 5: Define external dependencies
+
+Systems interact with outside services. This must be declared early to avoid surprises.
+
+Append the dependency section.
+
+```bash
+cat >> docs/system-design.md <<'EOF'
+
+## External dependencies
+
+- Database
+- Authentication provider
+- File storage
+- Third-party APIs
+EOF
+```
+
+Remove any lines that do not apply. Add specific services where known.
+
+## Step 6: Define what "done" means
+
+Without a concrete definition of done, systems expand indefinitely. This step defines the smallest shippable unit.
+
+Append the done section.
+
+```bash
+cat >> docs/system-design.md <<'EOF'
+
+## Done when
+
+- API returns expected responses
+- UI renders core user flow
+- Data persists correctly
+- One end-to-end flow is verified
+EOF
+```
+
+Rewrite these bullets so each condition can be verified through a command, browser check, or test. If a condition cannot be tested, it is not a valid done condition.
+
+## Step 7: Verify the design is implementable
+
+At this stage, answer these questions.
+
+| Question | Verification |
+|----------|--------------|
+| Does the design exist as a file? | `docs/system-design.md` prints successfully |
+| Do all mapped paths exist? | Each listed folder exists in the repo |
+| Are boundaries defined? | Inside/Outside lists are filled |
+| Is data flow clear? | Steps map to code locations |
+| Are done conditions testable? | Each has a verification method |
+
+If any answer is no, update the design before writing code.
+
+## Common failure patterns
+
+| Failure | Cause | Correction |
+|---------|-------|------------|
+| Design too large | Too many responsibilities in one doc | Split into multiple design files |
+| Unclear ownership | File map missing or inaccurate | Fix mapping before coding |
+| Endless scope creep | No done definition | Rewrite done conditions |
+| Confusing behavior | No data flow defined | Add data flow steps |
+
+These are the most common reasons systems stall before shipping.
+
+## Closing
+
+A system design that ships has three properties. It is short. It maps directly to real code. It defines a testable end state.
+
+If your design document meets those conditions, implementation becomes straightforward. If it does not, fix the design before writing code.

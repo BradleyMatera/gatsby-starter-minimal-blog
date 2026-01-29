@@ -7,140 +7,115 @@ description: "A minimal GitHub Actions workflow with exact file paths and checks
 theme: "DevOps"
 ---
 
-CI does not need to be complicated to be useful.
+Continuous Integration only matters if it runs something real. Most CI tutorials either show massive pipelines that do too much, or toy examples that do nothing useful. The goal here is smaller and stricter: one workflow, one runner, two real commands, and a visible green check in GitHub. If those three things exist, you have working CI. Everything else is optional.
 
-This post shows a single workflow that runs build and lint.
+This post walks through adding a single GitHub Actions workflow to a JavaScript project. The workflow installs dependencies, runs lint, and runs build. No test scaffolding. No deployment. No claims beyond what actually happens. At the end, you will see the workflow run in GitHub and you will know exactly why it passed or failed.
 
-You will add one workflow file and verify it in GitHub.
+## Why CI is worth setting up
 
-I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+Without CI, the only person verifying builds is you, on your machine, in your environment. The moment another contributor, another OS, or another Node version enters the picture, assumptions start breaking. CI solves exactly one problem: it runs your project in a clean environment every time you push, using declared versions and declared commands. If the commands fail there, they will fail for someone else too. That feedback loop is the entire value.
 
-## The promise
+GitHub Actions is simply the execution platform. It spins up a temporary machine, checks out your code, runs the commands you specify, and reports success or failure. Nothing more mysterious than that is happening.
 
-By the end, you will:
+## What you will add
 
-- add a workflow file to your repo
-- run build and lint on every push
-- verify the check appears in GitHub
+You will add a single YAML file under `.github/workflows`. That file describes when the workflow runs, what environment it uses, and which commands to execute. Once committed, GitHub reads it automatically and starts running it on every push to your main branch and every pull request targeting that branch.
 
-> "If CI runs one real check, it is already worth it."
+By the end, three things will exist:
 
-## What this is
+• A workflow file in your repo
+• A visible Actions run in GitHub
+• A green checkmark on successful pushes
 
-**High level:** GitHub Actions runs scripts for you in the cloud when you push code.
+If those exist, CI is working.
 
-**Low level:** You add a YAML file under `.github/workflows` and list the commands to run.
+## What you need before starting
 
-**Key terms:**
+You need a GitHub repository and a project that already defines `lint` and `build` scripts in `package.json`. If those scripts do not exist, this workflow has nothing real to run, and the setup is meaningless. The workflow will not guess commands for you.
 
-- **Workflow:** A YAML file that defines CI tasks.
-- **Job:** A set of steps that run on a GitHub runner.
-- **Step:** A command or action inside a job.
+You should also be able to run these commands locally. CI should never be the first place you discover that your own build is broken.
 
-## What you need
+## Start to finish
 
-- A GitHub repo
-- A build and lint command in `package.json`
+### Step 1: Create the workflow file
 
-## Start to Finish
+GitHub Actions looks for workflow definitions inside `.github/workflows`. You will create a single file named `ci.yml` in that directory. The content below declares one job that runs on Ubuntu, installs Node, installs dependencies, then runs lint and build.
 
-### Step 1: Add a workflow file
-Goal:
-Create a CI workflow that runs build and lint.
+Create the file:
 
-Actions:
-- File path: `.github/workflows/ci.yml`
-- Add:
-  ```yaml
-  name: CI
-  on:
-    push:
-      branches: ["main"]
-    pull_request:
-      branches: ["main"]
+```yaml
+name: CI
 
-  jobs:
-    build:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v4
-        - uses: actions/setup-node@v4
-          with:
-            node-version: 18
-        - run: npm install
-        - run: npm run lint
-        - run: npm run build
-  ```
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
 
-Why:
-This workflow is the smallest useful CI setup. It installs dependencies and runs your real checks. It does not claim to do anything else. This keeps it honest and easy to maintain. You can expand later once this is stable.
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-Verify:
-- Commit and push the file.
-- In GitHub, open the Actions tab.
-- Expected: a CI run appears and completes.
-- This confirms the workflow is active.
+    steps:
+      - uses: actions/checkout@v4
 
-If it fails:
-- Symptom: workflow does not trigger.
-- Fix: check the branch name and YAML indentation.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
 
-### Step 2: Verify build output locally
-Goal:
-Ensure the workflow commands pass on your machine.
+      - run: npm install
+      - run: npm run lint
+      - run: npm run build
+```
 
-Actions:
-- Commands:
-  ```bash
-  npm run lint
-  npm run build
-  ```
+Nothing in this file is decorative. Each step corresponds to a real action.
 
-Why:
-CI should match local behavior. If you cannot run it locally, CI will fail. This step saves time by catching issues before push. It also confirms the scripts are correct.
+`actions/checkout` pulls your repository onto the runner. `actions/setup-node` installs the Node version you specify. The three `run` lines execute exactly the same commands you run locally. If any of them exit with a non‑zero code, the workflow fails. That is the whole contract.
 
-Verify:
-- Expected: both commands exit with code 0.
-- This confirms CI should pass.
+### Step 2: Commit and push
 
-If it fails:
-- Symptom: command not found.
-- Fix: update the script names in the workflow.
+Once the file exists in your repo, commit it and push to GitHub. There is no extra configuration step. GitHub scans the `.github/workflows` directory automatically.
 
-## Verify it worked
+As soon as the push completes, GitHub queues a workflow run. You can watch it in real time under the Actions tab in your repository. Each step logs its output, just like a terminal session.
 
-- The Actions tab shows a green check.
-- The workflow logs show both commands ran.
+### Step 3: Verify the run
 
-## Common mistakes
+Open your repository in GitHub and click the Actions tab. You should see a workflow named "CI". Click into the latest run.
 
-- **Symptom:** CI fails on install.  
-  **Cause:** Missing lockfile or incompatible Node version.  
-  **Fix:** commit `package-lock.json` and match Node version.
+If everything passes, you will see each step marked as successful and the overall workflow marked with a green check. That green check is the only thing CI owes you: proof that a clean machine could install, lint, and build your project without manual intervention.
 
-- **Symptom:** CI passes but build is wrong.  
-  **Cause:** You are not running the same build locally.  
-  **Fix:** run the exact commands before push.
+If the workflow fails, the log will show exactly which command failed. There is no guessing. You fix the failure locally, commit again, and CI re‑runs automatically.
 
-- **Symptom:** Workflow never triggers.  
-  **Cause:** wrong branch name.  
-  **Fix:** change `main` to your real default branch.
+## Why each part exists
 
-## Cheat sheet
+The `on` block defines when the workflow triggers. Running on pushes ensures your main branch is always verified. Running on pull requests ensures changes are checked before merging.
 
-- Put workflows in `.github/workflows`.
-- Run `lint` and `build` only.
-- Verify in the Actions tab.
+The runner environment (`ubuntu-latest`) gives you a consistent, clean OS every time. If your project only works on your laptop, CI will expose that quickly.
 
-## Next steps
+Pinning a Node version prevents surprises when GitHub updates default environments. You are declaring which runtime your project expects.
 
-- Add tests if you have them.
-- Add a build artifact upload if needed.
+Running `npm install` inside CI ensures dependency resolution works from scratch. Running `lint` ensures code style or static checks remain enforced. Running `build` ensures the project can actually compile or bundle. Those three together represent the minimum viable health check for most JavaScript projects.
 
-## Related links
+## Common failure modes
 
-- https://docs.github.com/en/actions
+CI failures are usually simple and mechanical.
 
-## Final CTA
+A workflow that never runs is almost always a branch mismatch. If your default branch is not named `main`, the trigger will never fire.
 
-One clean workflow is enough to start. Make it real, then expand it later.
+A workflow that fails during install usually means a missing or outdated lockfile. Committing `package-lock.json` or equivalent makes installs deterministic.
+
+A workflow that passes locally but fails in CI usually means your local environment hides an assumption. Different Node versions, missing environment variables, or OS‑specific paths are common causes.
+
+In every case, the fix is to make the local and CI environments match more closely, not to weaken the CI checks.
+
+## Extending later
+
+Once this baseline works, you can add tests, caching, artifact uploads, or deployments. Those are all additive. None of them are worth doing until this core loop is stable.
+
+A workflow that runs real commands and gives reliable feedback is already useful. Fancy pipelines that do not run real checks are not.
+
+## Closing
+
+A working CI setup is not measured by how complex it is. It is measured by whether it runs your real build in a clean environment and tells you when something breaks.
+
+If you have a workflow file, a visible Actions run, and a green checkmark on successful pushes, CI is doing its job.

@@ -7,172 +7,209 @@ description: "A concrete prelaunch checklist with exact files, commands, and ver
 theme: "Process"
 ---
 
-A launch checklist is only useful if you can run every line.
+A “cloud ready” web launch is not a special certification. It just means you can build the site, deploy it, and verify the basics without guessing. Most problems at launch are boring problems: the build fails in CI, lint was never run, environment variables are missing, a page 404s, a form does nothing, or the deployed site is serving old assets.
 
-This post shows a small prelaunch checklist you can wire into any web project.
+This post is a small prelaunch checklist you can add to any web repo. The goal is not perfection. The goal is repeatability. You should be able to run the same commands before every deploy and know what “good” looks like.
 
-You will add scripts, a checklist file, and a few clear checks you can verify.
+This is still a guide. It is start to finish. But first, here is what you are actually building.
 
-I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+## What this checklist is
 
-## The promise
+You are adding two docs files and a few scripts so your repo has one place that says what you check before deploying. The checklist is not a blog post idea or a concept. It is a file in your repo that you can open and follow.
 
-By the end, you will:
+This setup gives you three outcomes.
 
-- add a real checklist file to your repo
-- run three concrete checks before deploy
-- document what you did and what you skipped
+First, you have a written checklist that stays with the project.
 
-> "A short checklist you actually run beats a perfect checklist you ignore."
+Second, you have consistent commands to run for build and lint.
 
-## What this is
+Third, you have a tiny manual “smoke check” list that forces you to click the most important user flow once before you publish.
 
-**High level:** A prelaunch checklist is a short list of checks you run before publishing.
+I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally in your own project.
 
-**Low level:** You add scripts, run commands, capture the output, and record any gaps.
+## What you need before you start
 
-**Key terms:**
+You need a web repo that uses Node tooling and has a `package.json`. You also need a build command that works locally, or at least a way to create one. If you are using Gatsby, Next.js, Vite, or plain React, you already have the pieces.
 
-- **Checklist:** A written list of checks you can repeat.
-- **Build:** The process that turns source code into deployable output.
-- **Smoke check:** A short manual pass of core flows.
+If you do not know your build command yet, that is fine. You will identify it in Step 2.
 
-## What you need
+## The final structure you will end up with
 
-- A web repo with `package.json`
-- A build command that works locally
-- A place to store notes, like `docs/`
+Before we do steps, this is the target. It is small on purpose.
 
-## Start to Finish
+| Item | Path | Purpose |
+|------|------|---------|
+| Prelaunch checklist | `docs/prelaunch-checklist.md` | The written list you run before deploy |
+| Smoke check list | `docs/smoke-check.md` | The few manual clicks you confirm before deploy |
+| Scripts | `package.json` | One consistent place to run build and lint |
 
-### Step 1: Create a checklist file
-Goal:
-Create a single source of truth for prelaunch checks.
+Once these exist, you can run the checks in a couple minutes and keep shipping without guessing.
 
-Actions:
-- File path: `docs/prelaunch-checklist.md`
-- Add:
-  ```text
-  Prelaunch checklist
-  - Build passes locally
-  - Lint passes locally
-  - Core user flow smoke check
-  - 404 page loads
-  - Contact link works
-  ```
+## Start to finish
 
-Why:
-A checklist is only real if it is written down. Keeping it in `docs/` makes it part of the repo. A short list is easier to keep up to date. This also gives you a place to track gaps later.
+### Step 1: Add a real checklist file
 
-Verify:
-- Run:
-  ```bash
-  cat docs/prelaunch-checklist.md
-  ```
-- Expected: the five lines above.
-- This confirms the checklist exists.
+Create a file at `docs/prelaunch-checklist.md`. This is your single source of truth. Keep it short enough that you will actually run it.
 
-If it fails:
-- Symptom: file not found.
-- Fix: create the `docs/` folder and add the file again.
+Create the folder and file:
 
-### Step 2: Add scripts for build and lint
-Goal:
-Ensure build and lint commands exist and are consistent.
+```bash
+mkdir -p docs
+cat > docs/prelaunch-checklist.md <<'EOF'
+Prelaunch checklist
+- Build passes locally
+- Lint passes locally
+- Home page loads on the deployed URL
+- One primary user flow works end to end
+- 404 page loads (or at least a non-broken fallback)
+EOF
+```
 
-Actions:
-- File path: `package.json`
-- Add or confirm:
-  ```json
-  {
-    "scripts": {
-      "build": "your-build-command",
-      "lint": "your-lint-command"
-    }
-  }
-  ```
-- Replace the placeholders with your real commands.
+This list is intentionally boring. It covers the checks that break most often on small web deploys.
 
-Why:
-Scripts standardize how you run checks. This avoids “works on my machine” issues. It also keeps the checklist repeatable. A single entry point is the cleanest path to verification.
+Verify the file exists and is readable:
 
-Verify:
-- Run:
-  ```bash
-  npm run build
-  npm run lint
-  ```
-- Expected: both commands exit with code 0.
-- This confirms the scripts are real.
+```bash
+cat docs/prelaunch-checklist.md
+```
 
-If it fails:
-- Symptom: script not found.
-- Fix: update `package.json` with the correct command.
+If this fails with “file not found,” you either did not create the folder, or you created the file somewhere else. Fix that before moving on.
 
-### Step 3: Add a smoke check note
-Goal:
-Document what you manually verify before publish.
+### Step 2: Make build and lint repeatable through scripts
 
-Actions:
-- File path: `docs/smoke-check.md`
-- Add:
-  ```text
-  Smoke check
-  - Home page loads
-  - Primary CTA works
-  - One form submits
-  ```
+The checklist is only useful if the checks are easy to run. That is why scripts matter. Scripts also prevent the “I ran a different command last time” problem.
 
-Why:
-Manual checks are valid when written down. They help you catch UI regressions that automation does not cover. This also keeps your claims honest. If you did not check it, do not claim it.
 
-Verify:
-- Run the app and follow the list.
-- Expected: each step works once.
-- This confirms the smoke check is real.
+Open `package.json` and make sure you have `build` and `lint` scripts.
 
-If it fails:
-- Symptom: you cannot reproduce the check.
-- Fix: update the list to match what you actually tested.
+Here are examples for common stacks. Use the one that matches your project.
 
-## Verify it worked
+| Stack | Build | Lint |
+|------|-------|------|
+| Next.js | `next build` | `next lint` |
+| Gatsby | `gatsby build` | `eslint .` |
+| Vite | `vite build` | `eslint .` |
+| Create React App | `react-scripts build` | `eslint .` or `react-scripts test` (if that is what you use) |
 
-- `docs/prelaunch-checklist.md` exists and is readable.
-- `npm run build` and `npm run lint` complete without errors.
-- Smoke check steps are listed and verified manually.
+Instead of typing JSON by hand, set scripts with `npm pkg set` so the command is repeatable. Pick the block that matches your stack and copy/paste it.
 
-## Common mistakes
+For Next.js:
+```bash
+npm pkg set scripts.build="next build"
+npm pkg set scripts.lint="next lint"
+```
 
-- **Symptom:** Lint is skipped before deploy.  
-  **Cause:** No lint script exists.  
-  **Fix:** Add the script and run it once.
+For Gatsby:
+```bash
+npm pkg set scripts.build="gatsby build"
+npm pkg set scripts.lint="eslint ."
+```
 
-- **Symptom:** Checklist grows and stops being used.  
-  **Cause:** Too many items.  
-  **Fix:** Keep it under 10 items and cut anything not run.
+For Vite:
+```bash
+npm pkg set scripts.build="vite build"
+npm pkg set scripts.lint="eslint ."
+```
 
-- **Symptom:** Smoke checks are vague.  
-  **Cause:** No specific steps.  
-  **Fix:** Write three exact actions and confirm them.
+For Create React App:
+```bash
+npm pkg set scripts.build="react-scripts build"
+npm pkg set scripts.lint="eslint ."
+```
 
-## Cheat sheet
+If `npm run lint` fails because ESLint isn’t installed yet, set up a minimal lint config first. If your repo already has ESLint, skip this section.
 
-- Write the checklist.
-- Add build and lint scripts.
-- Run both commands.
-- Do one smoke check and note it.
+```bash
+npm i -D eslint
+npx eslint --init
+```
 
-## Next steps
+If you don’t want the interactive init, this is a minimal config that works for plain JavaScript projects. Create it and run lint again.
 
-- Add a small release note file per deploy.
-- Add a simple 404 test page check.
-- Add one accessibility scan if your tools support it.
+```bash
+cat > .eslintrc.cjs <<'EOF'
+module.exports = {
+  env: { browser: true, node: true, es2021: true },
+  extends: ["eslint:recommended"],
+  parserOptions: { ecmaVersion: "latest", sourceType: "module" },
+  rules: {}
+};
+EOF
+```
 
-## Related links
+Once scripts are set, run them.
 
-- https://web.dev/reliable/
-- https://web.dev/learn/console/
+```bash
+npm run build
+npm run lint
+```
 
-## Final CTA
+Both commands should exit successfully. If one fails, do not ignore it. Fix it until it passes, or update the checklist to match reality. The point is to stop lying to yourself about what you checked.
 
-Make the checklist short enough that you can finish it before every deploy.
+### Step 3: Write a small smoke check you can actually perform
+
+Automation will not catch everything. You still need one quick manual pass. Keep this list short. Three items is enough.
+
+Create `docs/smoke-check.md`:
+
+```bash
+cat > docs/smoke-check.md <<'EOF'
+Smoke check
+- Home page loads
+- Primary CTA works (button or link)
+- One form or important interaction works once
+EOF
+```
+
+Now actually run the app locally and do those three things once. If your app has no form, replace it with something real, like “one login works,” or “one project card opens,” or “search returns results.”
+
+After you deploy, repeat the same three clicks on the deployed URL. Local success does not always match production.
+
+### Step 4: Add a quick deploy note when you ship
+
+This step is optional, but it stops the “I think this used to work” problem. Write one small release note per deploy.
+
+```bash
+DATE="2025-06-05"
+mkdir -p docs/releases
+cat > "docs/releases/${DATE}.md" <<'EOF'
+Release 2025-06-05
+- Changed: updated hero layout and image sizing
+- Verified: build, lint, smoke check
+- Skipped: nothing
+EOF
+```
+
+Change the `DATE` value and the bullet lines to match what you actually shipped.
+
+## How you know the setup is done
+
+At this point, you should be able to answer three questions with files and commands, not memory.
+
+| Question | Proof |
+|----------|------|
+| Do you have a checklist? | `docs/prelaunch-checklist.md` exists |
+| Can you run build and lint the same way every time? | `npm run build` and `npm run lint` work |
+| Do you do a manual pass before deploy? | `docs/smoke-check.md` exists and you actually follow it |
+
+If those are true, you now have a prelaunch checklist that is real.
+
+## Common problems and what to check first
+
+When something goes wrong, it usually points back to one of these.
+
+| Symptom | Likely cause | First check |
+|---------|--------------|------------|
+| Build passes locally but fails in CI | Node version mismatch or missing env vars | CI logs and Node version |
+| Lint is never run | No lint script or it is slow and ignored | `package.json` scripts |
+| Deployed site shows old assets | Caching or service worker | Hard refresh and service worker settings |
+| A page 404s in production only | Routing or base path differences | Deployed URL paths |
+| A form does nothing | Missing API endpoint or blocked request | DevTools Network tab |
+
+This table is not exhaustive. It is just the common boring stuff that breaks launches.
+
+## Closing
+
+This checklist is not about being perfect. It is about being able to deploy without guessing. Keep the list short enough that you run it every time, and keep the scripts consistent so checks are repeatable.
+
+If you want to expand later, add one accessibility scan and one simple end to end test. But do not add more checks until you are running the basic ones every deploy.

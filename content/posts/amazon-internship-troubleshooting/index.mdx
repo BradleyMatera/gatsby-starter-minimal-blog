@@ -7,205 +7,83 @@ description: "A clear, bounded summary of training labs and a capstone build."
 theme: "Cloud"
 ---
 
-This is an internship post about guided training and a capstone.
+This post is about what I actually did during my AWS Cloud Support internship. Not what people imagine when they hear the words “cloud engineer,” and not a made-up story about owning production systems. Just the real work I was exposed to, the training I completed, and the kind of troubleshooting muscle it built.
 
-It does not describe production ownership or customer tickets.
+I want to be very clear up front. I did not own production customer environments. I did not run on-call rotations. I did not make high-risk changes to live enterprise systems. This was a guided internship with structured labs, internal tooling, and a capstone project designed to prove understanding in a controlled setting. That distinction matters, because pretending lab work is the same as production ownership helps nobody.
 
-You will see the exact lab style steps I practiced and how I verified them.
 
-I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+![Jeff Bezos laugh](https://media.giphy.com/media/l0HlRnAWXxn0MhKLK/giphy.gif)
 
-## The promise
 
-By the end, you will:
+## What the training environment looked like
 
-- understand the scope of the training work
-- see a concrete capstone outline
-- know what I did and did not do
+![Working in cloud consoles](https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif)
 
-> "Guided labs build skill, but they are not production ownership."
 
-## What this is
+Most of the work I did lived inside guided lab environments. These were pre-scoped exercises with sample data, instructions, and a target outcome. The point was not to memorize button clicks. The point was to understand how services interact, how permissions fail, how logs surface errors, and how to confirm that a system is doing what you think it is doing.
 
-**High level:** This is a summary of guided lab rotations and a capstone build.
+A typical lab would start with a problem statement. Something like “files uploaded to an S3 bucket should trigger a Lambda function which stores metadata in DynamoDB and exposes results to a frontend.” From there, I would build the pieces one at a time, verify each connection, intentionally break things to see failure modes, and then fix them using logs and documentation. That rhythm repeated across many exercises, and by the end, opening CloudWatch logs or IAM policy pages stopped feeling foreign and started feeling normal.
 
-**Low level:** The capstone used S3, Lambda, DynamoDB, and an Amplify frontend plus a cost model.
+The value in those labs was not the final diagram. The value was learning how to approach unknown cloud behavior without freezing. When a Lambda did not trigger, I learned to check S3 event configuration and permissions. When DynamoDB writes failed, I learned to inspect the Lambda execution role. When a frontend could not reach an API, I learned to look at CORS and environment variables. These are small problems individually, but stacked together they build real troubleshooting instinct.
 
-**Key terms:**
 
-- **Guided lab:** A training environment with sample data and instructions.
-- **Capstone:** A final project that demonstrates skills in a controlled setting.
+## The capstone project
 
-## What you need
+![Connecting services](https://media.giphy.com/media/l0HlNQ03J5JxX6lva/giphy.gif)
 
-- AWS account
-- Access to S3, Lambda, DynamoDB, and Amplify
-- A small test dataset
+![Connecting all the things meme](https://media.giphy.com/media/3o7qE1YN7aBOFPRw8E/giphy.gif)
 
-## Start to Finish
+Toward the end of the internship, I completed a capstone build that pulled together several services into one end to end workflow. The goal was simple: simulate a small cloud system that ingests uploaded files, processes metadata, stores results, and displays them in a web interface. Nothing exotic. Just enough moving parts to prove I could connect services, understand data flow, and verify behavior.
 
-### Step 1: Create the S3 input bucket
-Goal:
-Create a bucket for uploads that Lambda can read.
+The workflow started with an S3 bucket that accepted file uploads. Each upload generated an event that triggered a Lambda function. That Lambda extracted basic metadata from the uploaded object and wrote a record into a DynamoDB table. From there, a small frontend deployed with Amplify queried the data and displayed it in a browser. Alongside the build, I documented a basic cost model to show I understood how pricing factors into even simple architectures.
 
-Actions:
-- AWS Console → S3 → Create bucket
-- Name: `metadata-input-demo`
-- Region: your default region
+What mattered was not that the system was complex. What mattered was that every step forced me to confirm assumptions. Did the S3 event actually fire. Did the Lambda receive the event structure I expected. Did the IAM role allow the DynamoDB write. Did the frontend actually point at the right API endpoint. Did the deployed build behave the same way as the local one. Those questions are the heart of cloud troubleshooting, and that is what I practiced.
 
-Why:
-The bucket is the entry point for uploads. It provides a stable source for the workflow. This keeps the capstone simple. You can restrict permissions later if needed.
 
-Verify:
-- Expected: bucket appears in the S3 list.
-- This confirms the input bucket exists.
+## What I actually learned
 
-If it fails:
-- Symptom: bucket name already taken.  
-  **Fix:** choose a unique name.
+![Debugging and logs](https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif)
 
-### Step 2: Add a Lambda function
-Goal:
-Parse object metadata when a file is uploaded.
+![AWS learning curve meme](https://media.giphy.com/media/3oEduQAsYcJKQH2XsI/giphy.gif)
 
-Actions:
-- AWS Console → Lambda → Create function
-- Runtime: Node.js 18
-- Trigger: S3 upload from `metadata-input-demo`
-- Code snippet:
-  ```js
-  exports.handler = async (event) => {
-    const record = event.Records[0];
-    const key = record.s3.object.key;
-    console.log("uploaded:", key);
-    return { ok: true, key };
-  };
-  ```
+By the end of the internship, AWS stopped feeling like a collection of mysterious services and started feeling like a toolbox I could open with confidence. I became comfortable navigating the console, reading service documentation, interpreting CloudWatch logs, and following structured troubleshooting paths instead of guessing blindly. I learned how small misconfigurations in permissions, triggers, or environment variables can silently break a system, and how to methodically find where the chain failed.
 
-Why:
-A simple Lambda function proves the event flow. You can extend it later to extract metadata. This keeps the capstone easy to verify. The console log is the first proof step.
 
-Verify:
-- Upload a file to the bucket.
-- Check CloudWatch logs for the key.
-- This confirms the trigger works.
+I also learned the difference between theory and reality. On paper, connecting S3 to Lambda to DynamoDB to a frontend is a clean four-box diagram. In reality, there are region settings, permission policies, event structures, SDK versions, deployment quirks, and caching behavior that make or break the build. Working through that gap is where the real growth happened.
 
-If it fails:
-- Symptom: no logs.  
-  **Fix:** check the S3 trigger permissions.
+## Quick skill reality table
 
-### Step 3: Store records in DynamoDB
-Goal:
-Persist extracted metadata.
+![AWS console chaos meme](https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif)
 
-Actions:
-- AWS Console → DynamoDB → Create table
-- Table name: `metadata-items`
-- Partition key: `id` (string)
-- Update Lambda code to write:
-  ```js
-  // pseudocode
-  // put item with id and metadata
-  ```
+Sometimes it helps to see this laid out side by side instead of only in paragraphs. This table is the honest snapshot of what I actually practiced during the internship versus what I did not touch.
 
-Why:
-A database makes the result queryable. DynamoDB keeps it simple with no servers. This step turns logs into data. It also lets the UI fetch real records.
+| Area | What I actually practiced | What I did not do |
+|------|---------------------------|------------------|
+| AWS Console navigation | Daily use of EC2, S3, RDS, IAM, Lambda, CloudWatch consoles | Managing large multi-account enterprise setups |
+| Troubleshooting | Reading logs, following runbooks, tracing broken service connections | Handling live customer production incidents |
+| IAM and permissions | Debugging missing permissions in lab environments | Designing complex enterprise IAM architectures |
+| Event-driven flows | Wiring S3 triggers to Lambda and downstream services | Operating high-scale event pipelines in production |
+| Datastores | Writing and reading from DynamoDB in controlled builds | Running or tuning production databases |
+| Frontend deployment | Deploying simple frontends with Amplify | Owning long-lived production web platforms |
+| Cost awareness | Building basic cost models and understanding pricing | Managing real organizational cloud budgets |
+| On-call experience | None | Pager duty or outage response |
 
-Verify:
-- After uploading, check the DynamoDB table.
-- Expected: a new item appears.
-- This confirms persistence works.
+This is not meant to downplay the work. It is simply the honest boundary of what the internship covered and what it did not. That clarity is more useful than pretending everything was production-level experience.
 
-If it fails:
-- Symptom: no new items.  
-  **Fix:** confirm the Lambda IAM role allows DynamoDB writes.
+## What I did not do
 
-### Step 4: Add a simple frontend in Amplify
-Goal:
-Display the stored metadata in a web UI.
+I did not manage real customer incidents. I did not handle production outages. I did not carry a pager. I did not make direct changes to critical customer infrastructure. This internship was not about throwing interns into live systems. It was about building foundational skill safely, inside controlled environments, with guided feedback.
 
-Actions:
-- Create a small frontend that calls an API.
-- Deploy via AWS Amplify.
-- Set the API URL in environment variables.
+That matters because I want my experience represented honestly. The labs were real. The troubleshooting was real. The AWS services were real. But the risk level and ownership level were intentionally bounded. That is how training should work.
 
-Why:
-A UI makes the capstone visible. Amplify provides a fast deploy path. Environment variables keep the API configurable. This is enough for a demo view.
+## How this connects to how I build today
 
-Verify:
-- Open the Amplify URL.
-- Expected: a page loads and shows data.
-- This confirms the end to end flow works.
+The biggest takeaway from the internship is that it reinforced how I already learn. I build something, it breaks, I inspect logs and system behavior, I form a hypothesis, I test it, and I repeat until the system behaves. That same loop shows up in my personal projects, my AI-assisted builds, and any system I touch now. The internship just gave me a larger playground and better tools to practice it.
 
-If it fails:
-- Symptom: API errors.  
-  **Fix:** check the API URL and CORS settings.
+I walked out of that experience not claiming to be a senior cloud architect, but confident that if you put me in front of an unfamiliar AWS setup, I can read what exists, understand how the pieces connect, find where something is failing, and move the system toward working again. That is the real skill I gained.
 
-### Step 5: Add a cost model note
-Goal:
-Document a basic cost estimate.
+## Closing
 
-Actions:
-- File path: `docs/cost-model.md`
-- Add inputs:
-  ```text
-  Inputs:
-  - Requests per month
-  - GB stored
-  - Lambda GB seconds
-  - DynamoDB read and write units
-  ```
+This internship was not about collecting buzzwords. It was about learning how to stay calm inside unfamiliar technical systems, how to verify behavior instead of trusting assumptions, and how to use logs, documentation, and structured thinking to solve problems.
 
-Why:
-A cost model shows you thought about pricing. It keeps assumptions visible. It also makes the capstone reproducible. A small note is enough.
-
-Verify:
-- Open the file and confirm all inputs are listed.
-- This confirms the model is documented.
-
-If it fails:
-- Symptom: assumptions missing.  
-  **Fix:** add the missing inputs.
-
-## Verify it worked
-
-- Upload triggers Lambda logs.
-- DynamoDB contains metadata records.
-- UI loads and shows data.
-- Cost model inputs are documented.
-
-## Common mistakes
-
-- **Symptom:** Lambda never triggers.  
-  **Cause:** Missing S3 trigger.  
-  **Fix:** add the trigger and permissions.
-
-- **Symptom:** DynamoDB writes fail.  
-  **Cause:** IAM role missing permission.  
-  **Fix:** attach the DynamoDB write policy.
-
-- **Symptom:** UI shows no data.  
-  **Cause:** API URL or CORS mismatch.  
-  **Fix:** update the URL and CORS config.
-
-## Cheat sheet
-
-- S3 upload triggers Lambda.
-- Lambda writes to DynamoDB.
-- UI reads from API.
-- Cost model is a simple note.
-
-## Next steps
-
-- Add retries and error logs.
-- Add a small test script for the API.
-
-## Related links
-
-- https://docs.aws.amazon.com/lambda/
-- https://docs.aws.amazon.com/s3/
-- https://docs.aws.amazon.com/amazondynamodb/
-
-## Final CTA
-
-Keep the capstone small and prove each step. That is the honest path.
+That foundation is what I carry forward into every project I build now. Not pretending lab work is production. Not pretending I know everything. Just a real base of cloud troubleshooting experience that I continue to grow from.

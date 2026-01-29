@@ -7,140 +7,116 @@ description: "A clear free tier checklist with exact console steps and verificat
 theme: "Cloud"
 ---
 
-The free tier is only free if you keep tracking it.
+The AWS free tier is only free if you keep an eye on it. There is no drama here. No horror story. Just a simple reality: AWS will happily keep charging you if you leave things running, and the console will not stop you. The free tier gives you room to learn, experiment, and build, but it does not replace paying attention.
 
-This post shows a short list of checks that prevent surprise bills.
+This post is not a lecture and it is not a warning label. It is simply the way I check a new AWS account when I want to stay inside the free tier. The steps are basic, but they work because they force you to look at what is actually running instead of assuming nothing is happening.
 
-You will set up a budget alert and audit active resources.
+I cannot verify these steps from this blog repo. Treat this as a walkthrough you can run in your own AWS account.
 
-I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+## What this post is actually about
 
-## The promise
+On paper, the AWS free tier is a list of monthly allowances. In practice, it is a system that only stays free if you regularly confirm what is active. Most surprise bills come from one of two things: resources left running, or no cost alerts. This guide focuses on fixing both of those.
 
-By the end, you will:
 
-- check what is running in your account
-- set a cost alert
-- verify the alert works
 
-> "If you cannot see the cost, it will surprise you."
+## What actually costs money in the free tier
 
-## What this is
+![Watching AWS costs](https://media.giphy.com/media/3o7btPCcdNniyf0ArS/giphy.gif)
 
-**High level:** The free tier is a set of limited monthly allowances.
+On paper, the AWS free tier sounds generous. In practice, a few specific services are responsible for almost every surprise bill. I like to keep a simple mental model of what is truly "dangerous" if left running, what is usually safe, and what only costs money when you move data around. A table makes this clearer than a long explanation.
 
-**Low level:** You track running resources and set a budget alert in AWS Billing.
+| Service | Free tier allowance | What actually causes charges | Why people get surprised |
+|--------|---------------------|------------------------------|--------------------------|
+| EC2 | 750 hours per month of t2.micro or t3.micro (first 12 months) | Running an instance outside free tier size, or running 24/7 for months | People forget instances are still running after testing |
+| RDS | 750 hours per month of db.t2.micro or db.t3.micro (first 12 months) | Leaving a database running continuously | Databases feel "small" but charge every hour |
+| S3 | 5 GB standard storage | Storing large files or keeping old test data | Storage accumulates quietly over time |
+| Lambda | 1 million requests per month | High request volume or long execution time | Rare for beginners, but possible in loops |
+| Data Transfer | Limited free outbound data | Downloading large files or heavy frontend traffic | Bandwidth is easy to forget to measure |
 
-**Key terms:**
+This table is not meant to be perfect or exhaustive. It is just the handful of services that matter most when you are learning. If you watch EC2, RDS, and S3, you already avoid most free tier mistakes.
 
-- **Free tier:** AWS usage limits that are free for a period.
-- **Budget alert:** A notification triggered by cost thresholds.
+---
 
-## What you need
+## Before you start
 
-- AWS account
-- Access to Billing
-- Email address for alerts
+All you need is an AWS account with access to the Billing console and an email address that can receive alerts. That is it. No CLI, no automation, no infrastructure-as-code. Just the console.
 
-## Start to Finish
+Once you have that, the workflow is always the same. First, you look at what is running. Then you add a small cost alarm so you are never surprised. Finally, you glance at the cost explorer so you know where money is actually going.
 
-### Step 1: Audit active resources
-Goal:
-Find what is currently running.
 
-Actions:
-- AWS Console → EC2 → Instances
-- Stop anything you do not need.
-- AWS Console → RDS → Databases
-- Delete unused databases.
+## Step 1: Audit what is currently running
 
-Why:
-Most surprise bills come from resources left running. EC2 and RDS are the usual suspects. This step reduces risk quickly. It also tells you what you are paying for.
+![Checking running services](https://media.giphy.com/media/xT9IgG50Fb7Mi0prBC/giphy.gif)
 
-Verify:
-- Expected: only the resources you intend to keep are running.
-- This confirms your account is clean.
+The first thing I do in any AWS account is look for resources that can quietly cost money if left on. EC2 and RDS are the most common culprits, so I start there.
 
-If it fails:
-- Symptom: resources reappear.
-- Fix: check for auto scaling or scheduled instances.
+Open the AWS Console and go to EC2. Click Instances. If anything is running and you do not actively need it, stop it. Do not overthink it. If you are not using it right now, it does not need to be running.
 
-### Step 2: Create a budget alert
-Goal:
-Get notified before costs spike.
+Then go to RDS. Click Databases. If you have a database sitting there from a test project you forgot about, delete it. RDS charges hourly, and free tier allowances are easy to burn through if you leave a database alive for weeks.
 
-Actions:
-- AWS Console → Billing → Budgets → Create budget
-- Budget type: Cost
-- Amount: `$5`
-- Alerts: Email
+This step sounds simple, but it matters because most free tier surprises come from forgetting that something is still alive in the background. When you finish this step, you should be able to say, with confidence, “I know exactly what is currently running in this account.”
 
-Why:
-A small budget alert is cheap insurance. It tells you early when something is wrong. It also makes the free tier safer. This is the easiest guardrail you can add.
+If you notice resources that keep reappearing after you stop them, check whether you created an auto scaling group or scheduled start/stop rule. Those will bring instances back even when you think you shut them down.
 
-Verify:
-- Expected: the budget appears in the list.
-- This confirms the alert is set.
 
-If it fails:
-- Symptom: Budgets unavailable.  
-  **Fix:** ensure Billing access is enabled in your account.
+## Step 2: Create a small budget alert
 
-### Step 3: Check the cost explorer
-Goal:
-See where costs are coming from.
+![Setting an alert](https://media.giphy.com/media/l0HlvtIPzPdt2usKs/giphy.gif)
 
-Actions:
-- AWS Console → Cost Explorer
-- Time range: last 7 days
-- Group by: Service
+Once I know what is running, the next thing I do is add a tiny cost alarm. This is the safety net that catches mistakes.
 
-Why:
-Cost Explorer is the fastest way to see cost sources. Grouping by service tells you what to shut down first. This keeps your account honest. It also confirms the alert is not your only signal.
+Go to the AWS Console, open Billing, then Budgets, and create a new budget. Choose a cost budget, set the amount to something small like $5, and attach an email alert. This does not stop charges. It simply tells you early that something is happening.
 
-Verify:
-- Expected: a chart listing services and costs.
-- This confirms you have visibility.
+The reason I like a very small budget is that it gives you time to react. If a resource starts charging unexpectedly, you get a warning before it turns into a real bill. It is cheap insurance, and it takes less than a minute to set up.
 
-If it fails:
-- Symptom: Cost Explorer not enabled.
-- Fix: enable it in Billing settings.
+After creating the budget, check that it appears in the Budgets list. That confirmation matters, because without an alert you are relying entirely on memory to notice costs.
 
-## Verify it worked
+If the Budgets page is unavailable, you may need to enable Billing access for your IAM user in the account settings. That is a one-time account setup step.
 
-- Only intended resources are running.
-- Budget alert exists.
-- Cost Explorer shows data.
 
-## Common mistakes
+## Step 3: Look at Cost Explorer
 
-- **Symptom:** Costs appear without warning.  
-  **Cause:** No budget alert.  
-  **Fix:** create a small budget now.
+![Exploring cloud dashboards](https://media.giphy.com/media/26tPplGWjN0xLybiU/giphy.gif)
 
-- **Symptom:** Costs keep growing.  
-  **Cause:** A resource is still running.  
-  **Fix:** stop or delete unused resources.
+Even with alerts in place, I still like to glance at Cost Explorer. This is where you see which services are actually generating charges.
 
-- **Symptom:** You cannot access Billing.  
-  **Cause:** Insufficient permissions.  
-  **Fix:** enable billing access for your user.
+Open the AWS Console, go to Cost Explorer, set the time range to the last seven days, and group the view by Service. You will get a simple chart showing where money is going.
 
-## Cheat sheet
+Most of the time in a fresh free tier account, this chart will be almost empty. That is good. If something shows up that you do not recognize, that is your signal to go back and find what is running.
 
-- Stop unused resources.
-- Add a small budget alert.
-- Check Cost Explorer weekly.
+If Cost Explorer is not enabled, the console will ask you to enable it. Do that once, and it will start collecting data going forward.
 
-## Next steps
+## How I verify that everything is safe
 
-- Add a second alert at a higher threshold.
-- Tag resources so you can group costs by project.
+When I finish these three steps, I want to be able to answer three questions without guessing. Do I know what resources are currently running. Do I have a cost alert that will email me if something starts charging. And can I see which services are generating costs.
 
-## Related links
+If the answer to all three is yes, then I know I am operating inside the free tier with guardrails in place. Nothing fancy. Just visibility and early warning.
 
-- https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/monitoring-costs.html
+## Common ways people get surprised
 
-## Final CTA
+Most surprise bills come from the same patterns. Leaving an EC2 instance running for days after testing. Forgetting an RDS database exists. Spinning up a resource in a different region and never looking at it again. Or never creating a budget alert and assuming the free tier will “just work.”
 
-If you use the free tier, set a budget alert today.
+
+None of these are advanced mistakes. They are simple oversights. This checklist exists to prevent exactly that.
+
+## Quick symptom-to-cause reference
+
+When something does go wrong, it usually follows very predictable patterns. Instead of guessing, I like to keep a simple reference in my head for what to check first.
+
+| Symptom | Likely cause | First thing to check |
+|---------|--------------|----------------------|
+| Monthly cost suddenly appears | EC2 instance still running | EC2 → Instances page |
+| Bill keeps growing slowly | RDS database left alive | RDS → Databases page |
+| Small but steady charges | Old files in S3 | S3 bucket storage size |
+| Unexpected regional charges | Resource created in another region | Region selector in console |
+| No alerts before a bill | No budget alert configured | Billing → Budgets |
+
+This keeps troubleshooting simple. Look at the symptom, check the first obvious place, and you usually find the answer in minutes, not hours.
+
+## Closing
+
+The AWS free tier is useful, but it is not magic. It rewards people who look at their account and punishes people who assume nothing is happening.
+
+If you take five minutes to audit running resources, add a small budget alert, and glance at Cost Explorer, you remove almost all of the risk. That is the entire point of this guide.
+
+No hype. No fear. Just staying aware of what is actually running in your account.

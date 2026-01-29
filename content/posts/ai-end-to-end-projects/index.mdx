@@ -9,192 +9,95 @@ theme: "Process"
 
 AI can speed you up, but it can also lie.
 
-This post shows the exact workflow I use to keep AI output honest.
+This post is not a tutorial and it is not a flex. It is just me explaining how I actually build end to end projects with AI, based on what I’ve really done, what I’ve actually struggled with, and how I’ve learned to make systems work instead of just talking about them.
 
-You will set up a prompt log, verify code, and document gaps.
+If you only look at my repos, it can look like I’m cranking out full stack apps, dashboards, WebGPU demos, AWS deployments, Docker setups, CI pipelines, auth flows, and UI systems nonstop. That part is real. The part that isn’t real is the idea that I sit down and type perfect solutions from memory like a textbook engineer. That has never been me.
 
-I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+What I am good at is steering a build. I can describe behavior clearly. I can read code once it exists. I can trace a system end to end. I can debug when something breaks. I can deploy and keep poking until the live system behaves. AI just accelerates the front half of that loop. I still own whether the thing actually works.
 
-## The promise
+There is one rule I follow across all of this: I do not claim something is built unless I can run it, build it, or point to the exact change that made it work. If I can’t prove it in a repo or a live deploy, I don’t talk like it’s done.
 
-By the end, you will:
+## Where my baseline actually is
 
-- structure an AI assisted build workflow
-- keep a proof trail in your repo
-- avoid claims your code cannot back up
+I have a B.S. in Web Development. I’ve worked in real codebases. I’ve shipped real projects. I’ve done an AWS Cloud Support internship where I lived inside AWS consoles, labs, logs, runbooks, and troubleshooting workflows. I’ve built a Gatsby portfolio, React apps, Node backends, WebGPU demos, and deployed systems to GitHub Pages and AWS.
 
-> "AI helps me draft. I still verify everything."
+I do not have a computer science background. I do not write algorithms from memory. I do not sit at a whiteboard and derive solutions from scratch. I learn by touching systems, breaking them, and fixing them. That is consistent across my projects and across my internship.
 
-## What this is
+Once a system exists, I am comfortable inside it. I can follow requests, state, data flow, permissions, logs, and deployment pipelines. That is the foundation I build on.
 
-**High level:** This is a project workflow that uses AI for drafts and refactors, then verifies every output by running code.
 
-**Low level:** You keep a prompt log, implement changes in files, run tests, and write a gap note.
+## How I actually start projects
 
-**Key terms:**
+![Building and coding](https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif)
 
-- **Prompt log:** A file where you track AI requests and edits.
-- **Verification:** Running code or checks to confirm output.
-- **Gap note:** A short list of what is not done yet.
+I do not start with architecture diagrams. I start with behavior.
 
-## What you need
+My first prompt to AI is always plain language. “I want a full stack app where users can sign up, log in, and post to a feed.” “I want a clean WebGPU page that renders a triangle and then a cube I can flip between.” “I want a Node backend with auth and a React front end that consumes it.”
 
-- A repo with a working build command
-- A text editor
-- A place to store notes in the repo
+I talk like a normal person because that is how I think about systems at the beginning. AI fills in the technical scaffolding. My job is to stop it from wandering into overbuilt nonsense.
 
-## Start to Finish
+Once the idea is clear, I let AI propose an initial folder structure. I do not accept it blindly. I look at it and ask a simple question: if I come back to this in three days, will I understand where things live. If the answer is no, I change it.
 
-### Step 1: Add a prompt log
-Goal:
-Create a file to record AI inputs and outputs.
+Then I ask for a single runnable slice. One entry file. One route. One page. One WebGPU init. Something I can paste in and run. It almost never works on the first try. That is expected.
 
-Actions:
-- File path: `docs/prompt-log.md`
-- Add:
-  ```text
-  Prompt log
-  Date:
-  Prompt:
-  Output summary:
-  Verified by:
-  ```
+From there, the real work begins. I run it. It breaks. I read the error. I check logs. I inspect DevTools. I paste context back to AI. I make one small change at a time. I keep going until the local system behaves. Then I move to deployment and repeat the same process in a live environment.
 
-Why:
-A prompt log makes the work traceable. It shows what came from the model and what you changed. This keeps your repo honest. It also helps you debug when something breaks later.
+I do not architect everything up front. I build until friction appears, then I solve that friction. Over time, structure emerges. That is how every real project I’ve shipped has grown.
 
-Verify:
-- Run:
-  ```bash
-  cat docs/prompt-log.md
-  ```
-- Expected: the template appears.
-- This confirms the file exists.
 
-If it fails:
-- Symptom: file not found.
-- Fix: create the `docs/` folder and add the file again.
+## Where AI helps and where I take over
 
-### Step 2: Draft a change with AI
-Goal:
-Use AI to draft a change you can verify.
+![Debugging and problem solving](https://media.giphy.com/media/ZVik7pBtu9dNS/giphy.gif)
 
-Actions:
-- Example prompt in your log:
-  ```text
-  Prompt: Add a button component with props for label and onClick.
-  Output summary: Drafted Button.tsx and usage example.
-  ```
-- File path: `src/components/Button.tsx`
-- Add:
-  ```tsx
-  type ButtonProps = { label: string; onClick?: () => void };
+AI is good at giving me a fast first draft. Boilerplate. Syntax I don’t memorize. Scaffolding. Quick translations from plain language to code. That is useful because it gets me to something I can run instead of staring at an empty folder.
 
-  export function Button({ label, onClick }: ButtonProps) {
-    return <button onClick={onClick}>{label}</button>;
-  }
-  ```
+AI is also unreliable. It invents file paths. It switches patterns mid-build. It hallucinates APIs. It misses security concerns. It cannot see my actual environment. It cannot see my logs. It cannot see my deployment dashboards.
 
-Why:
-A small component is easy to verify. It keeps the AI output scoped. This step also forces you to review the code before you ship it. A tiny change is easier to debug than a big refactor.
+So the split in practice looks like this.
 
-Verify:
-- Import and render the button in a page.
-- Run your dev server.
-- Expected: a button appears and clicks.
-- This confirms the code runs.
+| Area | Where AI helps | Where I step in |
+|------|----------------|----------------|
+| Scaffolding | Drafts structures and starter code quickly | Deciding if the structure actually fits how I work |
+| Syntax | Fills in language details | Verifying it matches real versions in my repo |
+| First pass logic | Translates behavior into a starting implementation | Testing edge cases and real runtime behavior |
+| Debugging | Suggests fixes when I paste errors | Reading actual logs, DevTools, and system output |
+| Security | Suggests patterns if prompted | Making sure keys, roles, and flows are safe |
+| Deployment | Writes Dockerfiles or configs | Running builds, fixing IAM, DNS, SSL, and environment issues |
+| Direction | Generates options fast | Choosing what keeps the system understandable and maintainable |
 
-If it fails:
-- Symptom: build error in TypeScript.
-- Fix: add the correct props type or adjust the import.
+This is not theory. This is how every project I’ve built with AI has actually gone. AI accelerates the start. I own correctness, deployment, and final shape.
 
-### Step 3: Run verification checks
-Goal:
-Confirm the change does not break the project.
+## What makes this real instead of performative
 
-Actions:
-- Commands:
-  ```bash
-  npm run build
-  npm run lint
-  ```
-- Add a line to the prompt log:
-  ```text
-  Verified by: build + lint
-  ```
+I do not measure progress by how much code AI wrote. I measure progress by whether the system runs and behaves in a real environment.
 
-Why:
-AI output can be wrong. Running your build and lint is the fastest proof you have. Logging the checks keeps you honest. This step is what turns a draft into a real change.
+When something fails, I do not guess. I open logs. I open DevTools. I inspect network requests. I tail Docker output. I read CI logs. I look at AWS dashboards when I’m deploying cloud resources. That is where real answers live.
 
-Verify:
-- Expected: both commands exit with code 0.
-- This proves the change is safe to keep.
+AI only sees the text I paste into chat. I see the entire system. That is why I can tell when AI is confidently wrong.
 
-If it fails:
-- Symptom: build error.
-- Fix: revert the change or correct the failing file.
+Deployment is the final reality check. AI cannot log into AWS. It cannot wire IAM roles correctly in my account. It cannot fix DNS. It cannot debug SSL. It cannot clear a bad service worker cache. When the live site is broken, it is me in a terminal and a console making it behave.
 
-### Step 4: Write a gap note
-Goal:
-Record what is still missing.
 
-Actions:
-- File path: `docs/gaps.md`
-- Add:
-  ```text
-  Gaps
-  - Button has no hover styles
-  - Button has no disabled state
-  ```
+## The cycle behind every project I ship
 
-Why:
-Gap notes stop you from overstating progress. They also make future work clear. This is the most honest part of the workflow. It prevents fake polish.
+![Deploying and shipping](https://media.giphy.com/media/oe33xf3B50fsc/giphy.gif)
 
-Verify:
-- Open `docs/gaps.md` and confirm the list is there.
-- This confirms the gap note exists.
+Every project I’ve completed follows the same loop.
 
-If it fails:
-- Symptom: the list is empty.
-- Fix: add at least one real gap.
+I describe behavior. AI drafts a starting point. I run it. It breaks. I debug. It works locally. I deploy. It breaks again. I debug in the live environment. It works in production. I clean up the UI and wording. I document enough that someone else can understand it. Then I move on.
 
-## Verify it worked
+There is no magic. Just repetition, logs, friction, and stubbornness.
 
-- The prompt log exists and has entries.
-- The change runs locally.
-- Build and lint pass.
-- A gap note exists.
+## Why this approach fits me
 
-## Common mistakes
+I learn by doing. I learned AWS by living in consoles, labs, logs, and runbooks during my internship. I learned web development by shipping projects that broke in new ways every week. I learned AI-assisted building by being burned by hallucinated code enough times to stop trusting it blindly.
 
-- **Symptom:** AI output is merged without review.  
-  **Cause:** No verification step.  
-  **Fix:** Run build and lint before merge.
+This loop fits how my brain works. Touch the system. Break the system. Fix the system. Repeat.
 
-- **Symptom:** Claims do not match code.  
-  **Cause:** No prompt log or gap note.  
-  **Fix:** add both files and keep them updated.
+## Closing
 
-- **Symptom:** Changes are too big.  
-  **Cause:** One giant prompt.  
-  **Fix:** split the work into small tasks.
+I am not a textbook engineer. I am a builder who uses AI as a tool, not as a replacement for thinking. I ship real systems, debug real failures, and deploy real projects.
 
-## Cheat sheet
+If you want someone who can memorize algorithms and write solutions from scratch at a whiteboard, that is not me.
 
-- Write the prompt log.
-- Keep AI changes small.
-- Verify with build and lint.
-- Write a gap note.
-
-## Next steps
-
-- Add a short CHANGELOG entry per AI assisted change.
-- Add tests for the new component.
-
-## Related links
-
-- https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-and-highlighting-code-blocks
-
-## Final CTA
-
-Use AI for drafts, then prove every change with a real check.
+If you want someone who can enter an existing system, understand how it works, use AI to move faster, debug what breaks, and deliver working features end to end, that is exactly what I do.
