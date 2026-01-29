@@ -7,202 +7,387 @@ description: "A complete Zig OBJ parsing lab with exact steps, checks, and fixes
 theme: "Systems"
 ---
 
-This is a small parsing lab, not production code.
+This is a lab you can run locally. It is not a full OBJ loader. It is not a renderer. It is a deliberately small parser that forces you to touch the parts that matter in systems work: file IO, tokenizing text safely, handling weird input, and proving your result with checks you can repeat.
 
-You will build a minimal OBJ parser that counts vertices and faces.
+The end goal is simple: read an `.obj` file and produce a count of **position vertices** (`v`) and **faces** (`f`). But we are not going to do it with a “count the first letter of each line” trick. That approach is too fragile for OBJ because `v` is a family of line types (`v`, `vn`, `vt`), and face lines can come in multiple formats. This lab keeps the surface area small, but it stays honest about those details.
 
-It is small enough to reason about and strict enough to verify.
+If you only take one thing from this post, take this: parsing is not about writing code that works on one file. Parsing is about writing code that fails in predictable ways, tells you why, and makes it hard for you to lie to yourself.
 
-I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+![Terminal reality check](https://media.giphy.com/media/bWM2eWYfN3r20/giphy.gif)
 
-## The promise
+## What you are building
 
-By the end, you will:
+You are building a tiny command line tool that:
 
-- parse `v` and `f` lines from an OBJ file
-- print counts with a predictable output
-- debug the most common parse errors
+1) Opens an OBJ file from `data/sample.obj`.
 
-> "If the counts match the file, the parser is doing its job."
+2) Reads the file line by line.
 
-## What this is
+3) Classifies each line into one of the OBJ record types you care about.
 
-**High level:** An OBJ parser reads a text file and extracts geometry data.
+4) Increments counters for `v` (position vertices) and `f` (faces).
 
-**Low level:** You read each line, split tokens, and increment counters for `v` and `f` lines.
+5) Prints counts in a stable format.
 
-**Key terms:**
+Then you progressively harden it so it behaves like a real parser: it trims whitespace, ignores comments, doesn’t confuse `vn` with `v`, validates face tokens, tracks line numbers, and reports what it skipped.
 
-- **OBJ:** Plain text file format for 3D geometry.
-- **Vertex line:** A line starting with `v`.
-- **Face line:** A line starting with `f`.
-- **Token:** A split part of a line.
+## What an OBJ file really looks like
+
+OBJ is plain text. That is both the reason it is popular and the reason parsers get messy. Lines are records. Records are identified by a keyword at the front of the line. The simplest mental model is “first token is the record type, the rest are fields.”
+
+The catch is that the record type is not always one character. The `v` family is the classic trap. A file can contain:
+
+- `v x y z` for position vertices
+- `vt u v` (or `vt u v w`) for texture coordinates
+- `vn x y z` for vertex normals
+
+If you only check `line[0] == 'v'`, you will incorrectly count `vt` and `vn` as vertices. That is why we tokenize first and match the first token.
+
+![Tokenizing the line instead of guessing](https://media.giphy.com/media/65n8RPEa3r65q/giphy.gif)
+
+### OBJ line types you will see a lot
+
+Before the table, the point is not to memorize OBJ. The point is to know which lines to ignore without breaking.
+
+| Prefix token | Meaning | What we do in this lab |
+|---|---|---|
+| `v` | position vertex | count it |
+| `vt` | texture coordinate | ignore it (but do not miscount it) |
+| `vn` | normal vector | ignore it (but do not miscount it) |
+| `f` | face | count it and validate its tokens |
+| `#` | comment | ignore |
+| `o` / `g` | object / group | ignore |
+| `usemtl` / `mtllib` | materials | ignore |
+| anything else | other record types | log as skipped |
+
+After the table: we only count `v` and `f`, but the parser will recognize the other common prefixes so you can see what you are skipping.
 
 ## What you need
 
-- Zig installed
-- A terminal
-- A test OBJ file
+You need Zig installed, a terminal, and a tiny OBJ file you can reason about. If Zig is not installed, install it from the official site and confirm it runs:
 
-## Start to Finish
+```bash
+zig version
+```
 
-### Step 1: Create the project
-Goal:
-Scaffold a Zig project and add a test OBJ file.
+If that prints a version, you are good.
 
-Actions:
-- Commands:
-  ```bash
-  mkdir obj-parser && cd obj-parser
-  zig init-exe
-  mkdir data
-  ```
-- File path: `data/sample.obj`
-- Add:
-  ```text
-  v 0 0 0
-  v 1 0 0
-  v 1 1 0
-  v 0 1 0
-  f 1 2 3
-  f 1 3 4
-  ```
+## Start to finish
 
-Why:
-You need a tiny, known file to verify counts. Four vertices and two faces keep the output simple. Using `zig init-exe` ensures the build system is ready. This keeps the lab deterministic.
+### Step 1: Scaffold the project and create the test file
 
-Verify:
-- Run:
-  ```bash
-  cat data/sample.obj
-  ```
-- Expected: the exact lines above.
-- This confirms the input is correct.
+Create a clean folder and initialize an executable project:
 
-If it fails:
-- Symptom: missing file.
-- Fix: ensure `data/` exists and save the file again.
+```bash
+mkdir obj-parser && cd obj-parser
+zig init-exe
+mkdir -p data
+```
 
-### Step 2: Implement the parser
-Goal:
-Count vertices and faces by reading the file line by line.
+Now create `data/sample.obj` with known counts. This file includes `v`, `vt`, and `vn` on purpose so your parser has to be correct.
 
-Actions:
-- File path: `src/main.zig`
-- Replace contents with:
-  ```zig
-  const std = @import("std");
+Create the file:
 
-  pub fn main() !void {
-      var gpa = std.heap.GeneralPurposeAllocator(.{}){};
-      defer _ = gpa.deinit();
-      const allocator = gpa.allocator();
+```text
+# sample.obj - tiny verification file
+v 0 0 0
+v 1 0 0
+v 1 1 0
+v 0 1 0
 
-      var file = try std.fs.cwd().openFile("data/sample.obj", .{});
-      defer file.close();
+vt 0 0
+vt 1 0
+vt 1 1
+vt 0 1
 
-      var buf_reader = std.io.bufferedReader(file.reader());
-      var in_stream = buf_reader.reader();
+vn 0 0 1
 
-      var vertex_count: usize = 0;
-      var face_count: usize = 0;
+f 1/1/1 2/2/1 3/3/1
+f 1/1/1 3/3/1 4/4/1
+```
 
-      var line_buf: [256]u8 = undefined;
-      while (try in_stream.readUntilDelimiterOrEof(&line_buf, '\n')) |line| {
-          if (line.len == 0) continue;
-          if (line[0] == 'v') vertex_count += 1;
-          if (line[0] == 'f') face_count += 1;
-      }
+Why this exact file: it gives you four position vertices and two faces, but it also includes texture coordinates and a normal so you can prove you are not accidentally counting those.
 
-      const out = std.io.getStdOut().writer();
-      try out.print("vertices: {d}\nfaces: {d}\n", .{ vertex_count, face_count });
-  }
-  ```
+Verify the input before writing any code:
 
-Why:
-Counting lines is the simplest parser that still proves the flow works. It forces you to handle file IO and line splitting. It also gives a clear verification output. This is a safe first step before parsing full geometry.
+```bash
+cat data/sample.obj
+```
 
-Verify:
-- Run:
-  ```bash
-  zig build run
-  ```
-- Expected output:
-  ```text
-  vertices: 4
-  faces: 2
-  ```
-- This confirms the parser counts lines correctly.
+You should see the same lines. If your counts are wrong later, this is the first thing you re-check.
 
-If it fails:
-- Symptom: counts are wrong.
-- Fix: ensure your sample file matches the lines above.
+### Step 2: Write the smallest honest parser
 
-### Step 3: Add a basic validation check
-Goal:
-Detect invalid lines early and print a warning.
+We are going to build the code in pieces, but it will still be copy/paste ready at each step.
 
-Actions:
-- File path: `src/main.zig`
-- Add inside the loop:
-  ```zig
-  if (line[0] != 'v' and line[0] != 'f') {
-      const out = std.io.getStdOut().writer();
-      try out.print("skipped line: {s}\n", .{line});
-  }
-  ```
+Open `src/main.zig` and replace it with this:
 
-Why:
-OBJ files can include comments and other line types. Printing skipped lines helps you see what you are ignoring. This makes debugging faster. It also keeps the parser honest about what it does and does not handle.
+```zig
+const std = @import("std");
 
-Verify:
-- Add a comment line to the file: `# comment`
-- Run `zig build run`.
-- Expected: a `skipped line` message.
-- This confirms the validation path works.
+pub fn main() !void {
+    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    defer _ = gpa.deinit();
+    const allocator = gpa.allocator();
 
-If it fails:
-- Symptom: no skipped line prints.
-- Fix: ensure the line starts with `#` and is not blank.
+    const path = "data/sample.obj";
+    var file = try std.fs.cwd().openFile(path, .{});
+    defer file.close();
 
-## Verify it worked
+    var reader = std.io.bufferedReader(file.reader());
+    var in_stream = reader.reader();
 
-- Counts match the file.
-- Skipped lines log correctly.
-- The program exits without errors.
+    var vertex_count: usize = 0;
+    var face_count: usize = 0;
+    var skipped_count: usize = 0;
 
-## Common mistakes
+    var line_no: usize = 0;
+    var line_buf: [1024]u8 = undefined;
 
-- **Symptom:** Buffer overflow error.  
-  **Cause:** Line buffer too small.  
-  **Fix:** Increase `line_buf` size.
+    while (try in_stream.readUntilDelimiterOrEof(&line_buf, '\n')) |raw_line| {
+        line_no += 1;
 
-- **Symptom:** Counts are off by one.  
-  **Cause:** Blank line at end of file.  
-  **Fix:** Keep the `line.len == 0` guard.
+        // Remove trailing carriage return for Windows-formatted files.
+        const line = std.mem.trimRight(u8, raw_line, "\r");
 
-- **Symptom:** Parser crashes on large files.  
-  **Cause:** The line buffer is too small.  
-  **Fix:** Increase the buffer or use `readUntilDelimiterOrEofAlloc`.
+        // Trim leading/trailing whitespace so indented files still work.
+        const trimmed = std.mem.trim(u8, line, " \t");
+        if (trimmed.len == 0) continue;
 
-## Cheat sheet
+        // Comment lines can begin with '#', sometimes after whitespace.
+        if (trimmed[0] == '#') continue;
 
-- Use a tiny file with known counts.
-- Count `v` and `f` lines first.
-- Print output as proof.
-- Add skipped line logs for validation.
+        var it = std.mem.tokenizeAny(u8, trimmed, " \t");
+        const head_opt = it.next();
+        if (head_opt == null) continue;
+        const head = head_opt.?;
 
-## Next steps
+        if (std.mem.eql(u8, head, "v")) {
+            vertex_count += 1;
+            continue;
+        }
 
-- Parse vertex floats and face indices.
-- Add unit tests with malformed files.
-- Track line numbers for better errors.
+        if (std.mem.eql(u8, head, "f")) {
+            face_count += 1;
+            continue;
+        }
+
+        // Recognize common OBJ types so we don't miscount them.
+        if (std.mem.eql(u8, head, "vt") or std.mem.eql(u8, head, "vn") or std.mem.eql(u8, head, "o") or std.mem.eql(u8, head, "g") or std.mem.eql(u8, head, "usemtl") or std.mem.eql(u8, head, "mtllib")) {
+            skipped_count += 1;
+            continue;
+        }
+
+        // Anything else: log once per line so you can see what's being ignored.
+        skipped_count += 1;
+        const out = std.io.getStdOut().writer();
+        try out.print("skipped line {d}: {s}\n", .{ line_no, trimmed });
+
+        _ = allocator; // allocator becomes useful in the hardened steps
+    }
+
+    const out = std.io.getStdOut().writer();
+    try out.print("vertices: {d}\nfaces: {d}\nskipped: {d}\n", .{ vertex_count, face_count, skipped_count });
+}
+```
+
+What this is doing, line by line, in plain terms.
+
+It opens `data/sample.obj`, wraps the file reader in a buffered reader so reads are efficient, and then loops line by line. Each line is cleaned up in a way that matches real files. We trim a Windows `\r` if it exists, we trim whitespace so indentation doesn’t break parsing, and we ignore blank lines and comments.
+
+Then we tokenize the line by whitespace. The first token is the record type. That is what we match on. This is the difference between an honest parser and a fragile “first character” trick.
+
+Finally, we count `v` and `f`, and we treat several other common prefixes as “known but ignored.” Everything else prints as a skipped line with a line number so you can see what the file contains.
+
+Run it:
+
+```bash
+zig build run
+```
+
+Expected output (exact numbers):
+
+```text
+vertices: 4
+faces: 2
+skipped: 6
+```
+
+That skipped count is correct for this sample file: 4 `vt` lines + 1 `vn` line + 1 `mtllib/usemtl` is not in the sample, so in this file it is `vt` + `vn` only plus any other non-counted type you add. If your skipped number differs, don’t guess. Re-open `data/sample.obj` and count the lines you expect to be skipped.
+
+### Step 3: Stop counting garbage as faces by validating face tokens
+
+Counting `f` lines is not enough if you want the parser to be trustworthy. You need to prove the face line is shaped like a face line.
+
+OBJ faces can be written a few ways. You will see at least these forms:
+
+| Face token form | Meaning |
+|---|---|
+| `f 1 2 3` | positions only |
+| `f 1/1 2/2 3/3` | position/texcoord |
+| `f 1//1 2//1 3//1` | position//normal |
+| `f 1/1/1 2/2/1 3/3/1` | position/texcoord/normal |
+
+If you are coming from web dev, treat this like API input variations. Same endpoint, different payload shapes. Your parser has to normalize the shapes before you can do anything useful with them.
+
+![Different input shapes](https://media.giphy.com/media/S9RnJWRWoiRZlHgaHa/giphy.gif)
+
+The important part for this lab is that each face token must start with a valid position index. That is what we will validate.
+
+Replace only the `if (std.mem.eql(u8, head, "f")) { ... }` block with this version:
+
+```zig
+if (std.mem.eql(u8, head, "f")) {
+    var verts_on_face: usize = 0;
+
+    while (it.next()) |face_tok| {
+        // Each token looks like "v", "v/vt", "v//vn", or "v/vt/vn".
+        // We only care that the first part is a valid integer.
+        var slash_it = std.mem.splitScalar(u8, face_tok, '/');
+        const v_idx_str_opt = slash_it.next();
+        if (v_idx_str_opt == null or v_idx_str_opt.?.len == 0) {
+            return error.InvalidFaceToken;
+        }
+
+        // OBJ indices are 1-based and can be negative (relative indexing).
+        // We accept any non-zero integer here and validate range later.
+        const v_idx = try std.fmt.parseInt(i64, v_idx_str_opt.?, 10);
+        if (v_idx == 0) return error.InvalidFaceIndex;
+
+        verts_on_face += 1;
+    }
+
+    // A face must have at least 3 vertices.
+    if (verts_on_face < 3) return error.FaceTooSmall;
+
+    face_count += 1;
+    continue;
+}
+```
+
+Now the parser is doing something important: it refuses to count a face that doesn’t look like a face. That is what makes your counts meaningful.
+
+Run again:
+
+```bash
+zig build run
+```
+
+You should still see `faces: 2`. If you do, your validation is not breaking correct input.
+
+Now test that the validation actually triggers. Edit `data/sample.obj` and intentionally add a bad face line at the bottom:
+
+```text
+f a b c
+```
+
+Run again. You should get a Zig error. That is good. A parser that never errors is usually ignoring the problem.
+
+### Step 4: Validate vertex lines too (and avoid the `vn` trap)
+
+We already match `head == "v"` so we are not counting `vn` or `vt` as vertices, but we are still counting any `v` line even if it has the wrong number of fields.
+
+OBJ `v` lines are usually `v x y z` and optionally `v x y z w`. For this lab, require at least 3 coordinates.
+
+Replace only the `if (std.mem.eql(u8, head, "v")) { ... }` block with this version:
+
+```zig
+if (std.mem.eql(u8, head, "v")) {
+    // Require at least x y z.
+    const x_opt = it.next();
+    const y_opt = it.next();
+    const z_opt = it.next();
+    if (x_opt == null or y_opt == null or z_opt == null) {
+        return error.InvalidVertexLine;
+    }
+
+    // Parse as float to ensure it's not junk.
+    _ = try std.fmt.parseFloat(f64, x_opt.?);
+    _ = try std.fmt.parseFloat(f64, y_opt.?);
+    _ = try std.fmt.parseFloat(f64, z_opt.?);
+
+    vertex_count += 1;
+    continue;
+}
+```
+
+This step makes vertex counting honest in the same way face validation made face counting honest. You are no longer counting malformed data.
+
+### Step 5: Track line numbers and show a helpful error message
+
+Right now if an error happens, Zig will return it, but you won’t know which line caused it unless you guess. A parser should tell you.
+
+The simplest approach is to replace `return error...` with printing a message that includes the line number and content, then returning an error.
+
+Find each `return error.` in the face and vertex validation blocks and replace it with this pattern:
+
+```zig
+const out = std.io.getStdOut().writer();
+try out.print("parse error on line {d}: {s}\n", .{ line_no, trimmed });
+return error.ParseFailed;
+```
+
+Do that for each validation failure branch. The exact error type is less important than the habit: always attach a line number and the line content.
+
+Now when you intentionally break the file, you should see which line broke.
+
+![Baseline established](https://media.giphy.com/media/R5dspTNJBVL51hiSN7/giphy.gif)
+
+## A stronger “verify” section
+
+At this point you have a lab that can fail loudly, not quietly. So verification becomes more than “it printed numbers.” It becomes: you can predict what will happen when the input changes.
+
+Here are three tests you should run, on purpose.
+
+First, add a `vn` line and confirm vertex count does not change. It should not, because `vn` is not `v`.
+
+Second, add a comment line with leading spaces, like:
+
+```text
+   # indented comment
+```
+
+Confirm it does not produce skipped output and does not affect counts. It should not, because we trim whitespace before checking `#`.
+
+Third, add a broken `v` line:
+
+```text
+v 1 2
+```
+
+Confirm the parser prints a line-numbered error and fails. That is what “honest parsing” looks like.
+
+## Common mistakes and what they look like
+
+Parsing mistakes usually show up as “it kind of works” until you change the input slightly.
+
+If you see your vertex count jump when you add `vt` or `vn` lines, you are not matching on the first token correctly.
+
+If you see face counts increase even when face lines are malformed, you are counting without validating tokens.
+
+If you see failures only on Windows-formatted OBJ files, you forgot to trim `\r`.
+
+If you see weird behavior on lines with indentation, you are not trimming whitespace before tokenizing.
+
+## Next steps that are actually worth doing
+
+If you want to keep going, the next real upgrades are still small, but they teach you more.
+
+The first upgrade is range validation. Once you have counted vertices, you can validate that face indices reference valid vertices. That means keeping a list or at least knowing `vertex_count` and rejecting indices that are outside `1..vertex_count` (and handling negative indices relative to the end).
+
+The second upgrade is triangulation. OBJ faces can have more than three vertices. If you ever want to render, you need to triangulate polygons (fan triangulation is fine for a lab).
+
+The third upgrade is memory strategy. Right now we validate floats but we don’t store them. If you decide to store geometry, you need a plan for allocations and growth, and Zig forces you to be explicit about that. That’s a good thing.
+
+This is the part that makes it “more than a guide.” The code is not trying to accept everything. It is trying to reject broken input quickly and with context.
+
+![Debugging moment](https://media.giphy.com/media/3ohzdYt5HYinIx13ji/giphy.gif)
+
+## Final reminder
+
+This lab is not impressive by itself. That is the point. It is small enough that you can understand every line, but strict enough that it does not let you fake correctness. Make the counts match the file, then make the failures predictable, then scale up.
 
 ## Related links
 
 - https://ziglang.org/learn/
 - https://en.wikipedia.org/wiki/Wavefront_.obj_file
-
-## Final CTA
-
-Make the counts match the file before you add more features.

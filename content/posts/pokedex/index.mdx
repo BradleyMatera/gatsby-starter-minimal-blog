@@ -7,156 +7,532 @@ description: "A minimal static Pokedex build with search and clear verification 
 theme: "Front-End"
 ---
 
-This is a static Pokedex demo with client side search.
+This is a static Pokedex demo you can host anywhere because it is just HTML, CSS, and JavaScript. There is no server code in this repo. The “data” comes from the free PokéAPI at runtime, which means the site itself is static, but the page still does real network work in the browser. That difference matters, because it changes what can break and how you verify things.
 
-It uses build time data and a simple search filter.
+![Searching for Pokemon](https://media.giphy.com/media/WTTyM6pD9rl4VjG1R1/giphy.gif)
 
-You will fetch data, render cards, and verify search works.
+When people say “static,” a lot of them mean “no backend.” That is what we are doing here. You will build a small front end that fetches a list of Pokémon, renders cards, and filters those cards with a search input. You will also add the boring but necessary parts that make it feel real: loading states, error states, and a few basic guardrails so your app does not explode the second the API has a hiccup.
 
-I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+## What you are building
 
-## The promise
+You are building one page that does four things in a clean loop. It loads a list of Pokémon names from PokéAPI, it optionally fetches extra details for each Pokémon (sprite + types), it renders a grid of cards, and it filters that grid based on what the user types. That is the whole product. The point is not the features. The point is learning what “real” client side apps do every day: fetch, transform, render, and re-render when state changes.
 
-By the end, you will:
+If you are coming from web dev basics, think of this as the smallest possible version of an e-commerce grid. The API is your database. The cards are your product tiles. The search input is your filter UI.
 
-- build a static list from a public API
-- add a simple search filter
-- verify the output with clear checks
+## The one API you need
 
-> "If the list renders and search filters, the demo works."
+PokéAPI is public and free. The endpoint we use first is the list endpoint:
 
-## What this is
+- `https://pokeapi.co/api/v2/pokemon?limit=151`
 
-**High level:** A static Pokedex is a list of Pokemon that is built ahead of time.
+That returns a JSON object with a `results` array. Each entry has a `name` and a `url` that points to the detail resource for that Pokémon. If you want sprites and types, you do a second fetch per Pokémon using that `url`.
 
-**Low level:** You fetch data during build, render a list, and filter it in the browser.
+Here is the shape, simplified:
 
-**Key terms:**
+| Request | What it returns | Why you care |
+| --- | --- | --- |
+| `GET /pokemon?limit=151` | `{ results: [{ name, url }, ...] }` | Fast list for initial render |
+| `GET /pokemon/{id or name}` (the `url`) | sprite URLs, types, stats, moves | Use sprite + types for nicer cards |
 
-- **Static build:** HTML generated at build time.
-- **Client side search:** Filtering done in the browser after load.
+If you only render names, you can stop at the first endpoint. If you want the cards to look like a Pokedex and not a plain list, you do the detail fetch.
 
-## What you need
+## What “static” actually means here
 
-- Node 18+
-- Next.js
-- PokéAPI
+A static site means your host is serving files, not generating HTML on the fly. GitHub Pages, Netlify, and S3 static hosting all fit. But your browser is still doing work. The browser will request `index.html`, then it will request `styles.css` and `app.js`, and then `app.js` will request the API. If the API is down, the page still loads, but your grid will not. That is the exact kind of “real” failure mode you need to design for.
 
-## Start to Finish
+That is why this post is heavy on verification. You cannot trust “it worked once.” You want checks you can repeat.
 
-### Step 1: Create the Next.js app
-Goal:
-Scaffold a new Next.js project.
+![Loading… but make it obvious](https://media.giphy.com/media/FaAxdPWZ7HKGmlnku7/giphy.gif)
 
-Actions:
-- Command:
-  ```bash
-  npx create-next-app@latest pokedex-demo
-  cd pokedex-demo
-  ```
+## Folder layout
 
-Why:
-Next.js gives you a static build option. It also includes routing by default. This keeps the demo simple. You can deploy the static output to GitHub Pages later.
+You do not need build tools for this. Create a folder and put three files in it. That is the entire project.
 
-Verify:
-- Run:
-  ```bash
-  npm run dev
-  ```
-- Expected: the starter page loads.
-- This confirms the project runs.
+```
+interactive-pokedex/
+  index.html
+  styles.css
+  app.js
+```
 
-If it fails:
-- Symptom: dev server fails to start.  
-  **Fix:** reinstall dependencies and retry.
+If you are already inside a bigger repo, this can live anywhere, but keep the files together while you are learning so you are not hunting paths.
 
-### Step 2: Fetch Pokemon at build time
-Goal:
-Load a list of Pokemon for static rendering.
+## Step 1: Build the HTML skeleton
 
-Actions:
-- File path: `app/page.tsx` or `pages/index.tsx`
-- Add a fetch call:
-  ```ts
-  const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151");
-  const data = await res.json();
-  ```
-- Render the list of names.
+This HTML is not fancy. It is a header, a search input, a status line, and a grid container. The important part is that we give ourselves stable IDs so the JavaScript can grab elements without guessing.
 
-Why:
-Build time fetch makes the page static. It also avoids a server at runtime. This keeps the demo fast and simple. You can verify the list output easily.
+Create `index.html`:
 
-Verify:
-- Run:
-  ```bash
-  npm run dev
-  ```
-- Expected: a list of names appears.
-- This confirms the fetch and render work.
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Pokedex</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="top">
+      <h1>Interactive Pokedex</h1>
+      <p class="sub">
+        Static site, live data. Search is client-side.
+      </p>
 
-If it fails:
-- Symptom: fetch error.  
-  **Fix:** check the API URL and network.
+      <div class="controls">
+        <label class="search">
+          <span class="label">Search</span>
+          <input
+            id="search"
+            type="search"
+            placeholder="Try: pika, char, mew…"
+            autocomplete="off"
+          />
+        </label>
 
-### Step 3: Add search filtering
-Goal:
-Filter the list by input.
+        <button id="reload" type="button">Reload</button>
+      </div>
 
-Actions:
-- Add a state value for the query.
-- Filter the list before rendering:
-  ```ts
-  const filtered = items.filter((p) => p.name.includes(query.toLowerCase()));
-  ```
+      <p id="status" class="status" aria-live="polite"></p>
+    </header>
 
-Why:
-Search is the main interactive feature. Filtering in the browser is fast for small lists. This keeps the demo offline friendly. It also makes the UI more useful.
+    <main class="main">
+      <section id="grid" class="grid" aria-label="Pokemon results"></section>
+    </main>
 
-Verify:
-- Type a name into the search input.
-- Expected: the list filters immediately.
-- This confirms search works.
+    <script src="./app.js" type="module"></script>
+  </body>
+</html>
+```
 
-If it fails:
-- Symptom: no filtering.  
-  **Fix:** ensure the query value updates on input.
+What each piece is doing, in plain terms: the `#search` input is the only user input, the `#reload` button is a manual reset for testing, the `#status` line is where you tell the user what is happening, and the `#grid` section is where the cards go.
 
-## Verify it worked
+## Step 2: Add CSS that makes cards readable
 
-- The list renders.
-- Search filters results.
-- The page loads without errors.
+The CSS is not about looking pretty. It is about making it obvious what you rendered and when you re-rendered. When you are debugging, clarity is more useful than style.
 
-## Common mistakes
+Create `styles.css`:
 
-- **Symptom:** API fetch fails at build time.  
-  **Cause:** missing network access.  
-  **Fix:** run the build with internet access or cache results.
+```css
+:root {
+  --bg: #0b0f17;
+  --panel: #121a29;
+  --text: #e7eefc;
+  --muted: #a9b7d0;
+  --border: rgba(255, 255, 255, 0.08);
+  --chip: rgba(255, 255, 255, 0.08);
+  --focus: rgba(126, 165, 255, 0.45);
+}
 
-- **Symptom:** Search is case sensitive.  
-  **Cause:** no normalization.  
-  **Fix:** use `toLowerCase()` on both sides.
+* { box-sizing: border-box; }
 
-- **Symptom:** Build fails on fetch.  
-  **Cause:** incorrect fetch usage in the app router.  
-  **Fix:** move fetch to a server component.
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  background: var(--bg);
+  color: var(--text);
+}
 
-## Cheat sheet
+.top {
+  padding: 2rem 1rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
 
-- Fetch 151 Pokemon.
-- Render the list.
-- Filter by query.
+.top h1 {
+  margin: 0 0 0.25rem;
+  font-size: 1.6rem;
+}
 
-## Next steps
+.sub {
+  margin: 0 0 1rem;
+  color: var(--muted);
+}
 
-- Add detail pages.
-- Add type filters.
+.controls {
+  display: flex;
+  gap: 0.75rem;
+  align-items: end;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+.search {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.label {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+input[type="search"] {
+  width: min(520px, 92vw);
+  padding: 0.7rem 0.8rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  outline: none;
+}
+
+input[type="search"]:focus {
+  box-shadow: 0 0 0 4px var(--focus);
+}
+
+button {
+  padding: 0.7rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(1.08);
+}
+
+.status {
+  margin: 0.25rem 0 0;
+  min-height: 1.25rem;
+  color: var(--muted);
+}
+
+.main {
+  padding: 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 0.9rem;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 0.9rem;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.card .row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.name {
+  text-transform: capitalize;
+  font-weight: 700;
+}
+
+.id {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.sprite {
+  width: 96px;
+  height: 96px;
+  image-rendering: pixelated;
+  margin-inline: auto;
+}
+
+.types {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.chip {
+  font-size: 0.8rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  background: var(--chip);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.empty {
+  padding: 2rem 1rem;
+  border: 1px dashed var(--border);
+  border-radius: 14px;
+  color: var(--muted);
+}
+```
+
+That is a lot of CSS for a “simple” demo, but it is all there to keep your UI readable while you iterate. If you do not control spacing and contrast, debugging turns into guessing.
+
+## Step 3: Write the JavaScript like a real app
+
+This is where most “toy” demos fall apart. The toy version fetches once, renders once, and never handles errors. The real version keeps state, shows status, and lets you retry without refreshing the whole browser tab.
+
+Create `app.js`:
+
+```js
+const API_LIST = "https://pokeapi.co/api/v2/pokemon?limit=151";
+
+const el = {
+  search: document.getElementById("search"),
+  reload: document.getElementById("reload"),
+  status: document.getElementById("status"),
+  grid: document.getElementById("grid"),
+};
+
+const state = {
+  all: [],
+  filtered: [],
+  query: "",
+  loading: false,
+};
+
+function setStatus(msg) {
+  el.status.textContent = msg;
+}
+
+function escapeHtml(str) {
+  return str
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function debounce(fn, ms = 150) {
+  let t;
+  return (...args) => {
+    clearTimeout(t);
+    t = setTimeout(() => fn(...args), ms);
+  };
+}
+
+function normalizeQuery(q) {
+  return q.trim().toLowerCase();
+}
+
+function toIdFromUrl(url) {
+  // Example: https://pokeapi.co/api/v2/pokemon/25/
+  // We want "25".
+  const parts = url.split("/").filter(Boolean);
+  return parts[parts.length - 1];
+}
+
+function renderEmpty(message) {
+  el.grid.innerHTML = `<div class="empty">${escapeHtml(message)}</div>`;
+}
+
+function renderCards(items) {
+  if (!items.length) {
+    renderEmpty("No results. Try a different search.");
+    return;
+  }
+
+  const html = items
+    .map((p) => {
+      const types = p.types?.length
+        ? p.types.map((t) => `<span class="chip">${escapeHtml(t)}</span>`).join("")
+        : "";
+
+      const sprite = p.sprite
+        ? `<img class="sprite" src="${p.sprite}" alt="${escapeHtml(p.name)} sprite" loading="lazy" />`
+        : `<div class="sprite" aria-hidden="true"></div>`;
+
+      return `
+        <article class="card">
+          <div class="row">
+            <div class="name">${escapeHtml(p.name)}</div>
+            <div class="id">#${escapeHtml(String(p.id))}</div>
+          </div>
+          ${sprite}
+          <div class="types">${types}</div>
+        </article>
+      `;
+    })
+    .join("");
+
+  el.grid.innerHTML = html;
+}
+
+function applyFilter() {
+  const q = normalizeQuery(state.query);
+  if (!q) {
+    state.filtered = state.all;
+  } else {
+    state.filtered = state.all.filter((p) => p.name.includes(q));
+  }
+
+  renderCards(state.filtered);
+  setStatus(`${state.filtered.length} shown${q ? ` (filtered by "${q}")` : ""}.`);
+}
+
+async function fetchJson(url, { timeoutMs = 12000 } = {}) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    const res = await fetch(url, { signal: controller.signal });
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status} for ${url}`);
+    }
+    return await res.json();
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function fetchPokemonDetails(list) {
+  // This is intentionally sequential-ish with a small concurrency limit.
+  // If you blast 151 requests at once, you will learn the wrong lesson.
+  const concurrency = 8;
+  const out = [];
+  let i = 0;
+
+  async function worker() {
+    while (i < list.length) {
+      const idx = i++;
+      const item = list[idx];
+      try {
+        const detail = await fetchJson(item.url);
+        out[idx] = {
+          name: item.name,
+          id: Number(toIdFromUrl(item.url)),
+          sprite: detail.sprites?.front_default ?? "",
+          types: (detail.types ?? []).map((t) => t.type?.name).filter(Boolean),
+        };
+      } catch {
+        // If one detail fetch fails, keep going.
+        out[idx] = {
+          name: item.name,
+          id: Number(toIdFromUrl(item.url)),
+          sprite: "",
+          types: [],
+        };
+      }
+
+      // Tiny status heartbeat so you can see progress.
+      if (idx % 15 === 0) {
+        setStatus(`Loading details… ${idx}/${list.length}`);
+      }
+    }
+  }
+
+  await Promise.all(Array.from({ length: concurrency }, () => worker()));
+  return out.filter(Boolean);
+}
+
+async function load() {
+  state.loading = true;
+  setStatus("Loading list…");
+  renderEmpty("Loading…");
+
+  try {
+    const listData = await fetchJson(API_LIST);
+    const list = (listData.results ?? []).map((x) => ({
+      name: x.name,
+      url: x.url,
+    }));
+
+    setStatus("Loading details…");
+    const detailed = await fetchPokemonDetails(list);
+
+    // Keep stable ordering by id.
+    detailed.sort((a, b) => a.id - b.id);
+
+    state.all = detailed;
+    state.query = "";
+    el.search.value = "";
+    applyFilter();
+
+    setStatus(`Loaded ${state.all.length} Pokémon.`);
+  } catch (err) {
+    console.error(err);
+    state.all = [];
+    renderEmpty("Failed to load PokéAPI data. Check your connection and try Reload.");
+    setStatus("Load failed. Open DevTools Console for the error.");
+  } finally {
+    state.loading = false;
+  }
+}
+
+el.search.addEventListener(
+  "input",
+  debounce((e) => {
+    state.query = e.target.value;
+    applyFilter();
+  }, 120)
+);
+
+el.reload.addEventListener("click", () => {
+  if (!state.loading) load();
+});
+
+load();
+```
+
+If you have never written JavaScript “with state,” this file is the mental model. You have a `state` object (data + current query + loading flag), a `render` function (takes state and produces DOM), and a `load` function (the async part that pulls data in). You are not doing anything fancy. You are just being explicit about what changes and what depends on what.
+
+![Keyboard mashing while it finally works](https://media.giphy.com/media/mcsPU3SkKrYDdW3aAU/giphy.gif)
+
+### Why the code is written this way
+
+There are a few choices here that make the demo feel real instead of “one happy path.” The `fetchJson` helper uses an AbortController timeout so a dead request does not hang forever. The detail fetch uses limited concurrency so you do not blast the API and then wonder why your browser or the endpoint starts acting weird. The rendering escapes HTML so you do not accidentally train yourself into unsafe string interpolation habits.
+
+Also, notice what we did not do. We did not use a framework. We did not add bundlers. We did not add TypeScript. The point is to understand what the browser is doing first.
+
+## Step 4: Run it locally (the right way)
+
+If you double click `index.html` and it works, cool, but do not rely on that. In real hosting, files are served over HTTP. Some browser behaviors are different between `file://` and `http://`, and you want your dev loop to match reality.
+
+Use one of these local servers:
+
+| Tool | Command | Notes |
+| --- | --- | --- |
+| Node (npx) | `npx serve .` | Quick, no setup |
+| Python | `python3 -m http.server 8000` | Works on most systems |
+
+Then open the URL it prints, usually `http://localhost:8000`.
+
+## Verification checks that actually mean something
+
+This section is the difference between “it loaded once” and “I understand what is happening.” Do these checks in order.
+
+First, open DevTools and go to the Network tab. Reload the page. You should see `index.html`, `styles.css`, and `app.js` load from your server. Then you should see a request to `pokeapi.co`. If you do not see that request, your JavaScript is not running or your file path is wrong.
+
+Second, confirm the list load. The status line should go from “Loading list…” to “Loading details…” to “Loaded 151 Pokémon.” If it gets stuck on loading, you likely hit a request issue.
+
+Third, type `pika` in the search box. The status line should update with the number shown and the grid should shrink. Clear the input and confirm it returns to the full list.
+
+Fourth, break it on purpose. Turn off your network (or block the request in DevTools) and hit Reload. You should see the empty state message and the status telling you to check the console. That is what “real” looks like: the page does not crash, it tells you what happened.
+
+![Searching again… because it always breaks once](https://media.giphy.com/media/6bIFzrUUhr9A7o4wWy/giphy.gif)
+
+## Common problems and what they usually mean
+
+If the grid is empty but there is no error, you probably rendered an empty array. That can happen if `results` is not there because the list request failed or returned a different shape. Log the list response once: `console.log(listData)`.
+
+If you see `TypeError: Failed to fetch`, that is usually network or a blocked request. Check you are online and that nothing is blocking `pokeapi.co`.
+
+If it loads sometimes and fails sometimes, that is usually you spamming reload and hitting rate limits or transient network issues. That is why the detail fetch is concurrency-limited.
+
+If sprites are missing, that can be normal. Some entries can have a null sprite depending on the resource. The code handles that by showing an empty sprite box instead of breaking.
+
+## Small upgrades that keep it simple
+
+If you want one “real” improvement without turning this into a framework project, add caching. You can store `state.all` in `localStorage` with a timestamp and only re-fetch if the cache is older than a day. That makes the demo faster and it teaches a real pattern: cache data that is expensive to fetch.
+
+If you want another improvement that stays honest, add a type filter. You already have types on each Pokémon. Add a dropdown with a few type names and filter the list by `types.includes(selectedType)`.
 
 ## Related links
 
 - https://pokeapi.co/
-- https://nextjs.org/docs
 
-## Final CTA
+## Final note
 
-Keep the demo small and verify the core behavior first.
+This is a static site that does real work. Your “backend” is a public API, your “database” is JSON over HTTP, and your “app logic” is a small loop of state → render → user input → filter → render. If you can build this cleanly with vanilla code, frameworks become less magical, because you understand what they are abstracting.
+
+---

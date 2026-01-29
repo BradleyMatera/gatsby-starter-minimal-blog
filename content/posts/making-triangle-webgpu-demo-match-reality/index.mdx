@@ -7,167 +7,151 @@ description: "A concrete audit checklist to align a WebGPU write up with actual 
 theme: "Graphics"
 ---
 
-A demo is only as honest as its write up.
 
-This post shows how I audit a WebGPU demo post against the repo.
+A demo is only as honest as its write up. WebGPU is especially easy to oversell because most people reading a post cannot tell what is “one triangle” versus “real engine-ish work” unless you show them exactly where it lives in code. If you want the post to be credible, every claim needs a file path you can point at and a proof link that still works when someone clicks it six months later.
 
-You will compare claims to code, fix mismatches, and verify links.
+This post is the audit process I use to make the write up match the repo. It is not about polishing the prose. It is about deleting anything that is not visible in code, labeling future work like future work, and fixing links so a reader can verify everything without guessing.
 
-These steps are verifiable in this blog repo.
+![Reality check](https://media.giphy.com/media/gZfHAM1ucPQ2c/giphy.gif)
 
 ## The promise
 
-By the end, you will:
+When you finish this audit, your WebGPU demo post will only say what the repo actually does. Not what you planned, not what you think it does, not what you remember it doing on your machine three weeks ago. The end state is boring in the best way. A reader can open the repo, find the exact lines that back up each statement, and run the demo without stepping on a broken link.
 
-- find mismatched claims in a post
-- replace them with verifiable statements
-- confirm every link works
-
-> "If a claim is not visible in the repo, I cut it."
+That is the whole rule: if a claim is not visible in the repo, it gets cut or it gets moved into a clearly labeled “Next experiments” section.
 
 ## What this is
 
-**High level:** An honesty audit compares what you wrote to what the code actually does.
+An honesty audit is just a comparison: what the blog claims versus what the repository proves. High level, you treat the blog like marketing copy that needs receipts. Low level, you open the repo, identify the real behavior, and then rewrite the blog so every sentence can be backed up by a concrete reference.
 
-**Low level:** You open the repo, list the real features, and edit the post to match.
+The audit has only three objects:
 
-**Key terms:**
-
-- **Claim:** A statement about what the project does.
-- **Proof link:** A link to code or a demo that confirms the claim.
-- **Mismatch:** A claim that is not present in the code.
+A claim is a statement like “this demo renders a triangle with a render loop,” or “this uses one shader module,” or “this supports resizing.” Proof is whatever lets a stranger confirm the claim without trusting you, usually a link to a specific file, a function, or a demo URL that actually loads. A mismatch is any sentence you cannot prove in under one minute with the repo open.
 
 ## What you need
 
-- The demo repo open in a browser
-- The blog post file open in your editor
-- A list of real features from the repo
+You need the demo repo open somewhere you can search it, and you need this blog file open in your editor. If you can, open the demo running locally too, because “it compiles” and “it renders” are not the same thing in WebGPU.
 
-## Start to Finish
+If you are auditing a repo on GitHub, the fastest proof links are deep links to a file and (when possible) a specific line range. If you are auditing locally, the fastest proof is a search command that lands you on the exact implementation.
 
-### Step 1: List the real features from the repo
-Goal:
-Write down only what the repo actually contains.
+![Digging through code](https://media.giphy.com/media/3o7aD9hC6GgT3KfX2k/giphy.gif)
 
-Actions:
-- Open the repo in your browser.
-- Read the README and the main entry file.
-- Create a list in a scratch file:
-  ```text
-  Real features:
-  - Renders a triangle
-  - One shader
-  - One render loop
-  ```
+## Start to finish
 
-Why:
-You cannot audit without a source of truth. The README and main entry file are the safest sources. A short list keeps you focused. This avoids inflating the write up.
+### Step 1: Create a source-of-truth feature list from the repo
 
-Verify:
-- You can point to the exact file that implements each feature.
-- This confirms your list is grounded in code.
+Do not start by reading the blog post. Start by grounding yourself in the actual code. If you start from the blog, you will subconsciously try to justify it. If you start from the repo, you will naturally write smaller, more accurate claims.
 
-If it fails:
-- Symptom: You cannot find a feature in the repo.
-- Fix: remove it from the list.
+Open the README and the actual entry file that boots WebGPU. For a tiny demo, that is usually `index.html` and one JavaScript/TypeScript file, or a `main.ts` that sets up the device, pipeline, and render loop. Your goal is not to describe how WebGPU works. Your goal is to list what exists in this repo right now.
 
-### Step 2: Open the blog post file
-Goal:
-Edit the post where the claims live.
+Create a scratch list in plain text. Keep it short. Each item must correspond to something you can point at.
 
-Actions:
-- File path: `content/posts/making-triangle-webgpu-demo-match-reality/index.mdx`
-- Open the file in your editor.
+```text
+Real features (as of this commit):
+- Initializes WebGPU (requests adapter + device)
+- Creates one pipeline (vertex + fragment)
+- Renders one triangle in a loop
+- Uses one shader module
+- Clears the canvas each frame
+```
 
-Why:
-This is the source of the claims you need to fix. Editing the post directly keeps the change visible in git. You can review the diff before publishing. This is the only place the public copy lives.
+If you are not sure about an item, do not include it. “Not sure” is already a mismatch.
 
-Verify:
-- You can see the frontmatter and the body text.
-- This confirms you opened the correct file.
+Local way to confirm (examples):
 
-If it fails:
-- Symptom: file not found.
-- Fix: check the `content/posts` folder for the slug name.
+```bash
+# find the adapter/device request
+rg "requestAdapter|requestDevice" -n .
 
-### Step 3: Replace mismatched claims
-Goal:
-Remove or rewrite any claim that is not backed by the repo.
+# find pipeline creation
+rg "createRenderPipeline" -n .
 
-Actions:
-- Find each claim in the post body.
-- Replace it with a verifiable line, for example:
-  ```text
-  The demo renders one triangle with a single shader and a single draw call.
-  ```
-- Remove any metric or automation claims you cannot point to in code.
+# find render loop
+rg "requestAnimationFrame|setInterval" -n .
 
-Why:
-Honesty is the product here. If the repo does not show it, the post should not say it. This keeps the blog credible. It also helps you avoid accidental oversell in interviews.
+# find shader code locations
+rg "shader" -n .
+```
 
-Verify:
-- Every line in the post maps to something you can see in the repo.
-- This confirms the write up matches reality.
+The verification for this step is simple. For every bullet in your scratch list, you can open the file and show the line that implements it.
 
-If it fails:
-- Symptom: You are unsure about a claim.
-- Fix: delete it or move it to a "Next experiments" section.
+### Step 2: Extract the claims from the blog post
 
-### Step 4: Verify links
-Goal:
-Ensure every repo and demo link works.
+Now switch to the blog post and treat it like a checklist of statements that need receipts. Every sentence that implies behavior is a claim, even if it is phrased casually. “This demo supports…” is a claim. “This project includes…” is a claim. “I wired up…” is a claim.
 
-Actions:
-- Copy each link from the post and open it.
-- If a link 404s, fix it in the post.
+Instead of rewriting immediately, copy the claims into a separate scratch section so you can compare them cleanly. If you want to do this fast, search your post for verbs like “renders,” “supports,” “handles,” “implements,” “adds,” and “includes.” Those words are almost always where mismatches hide.
 
-Why:
-Broken links make honest claims look fake. Link checks are a fast credibility win. They also prevent wasted time for readers. This step is easy and worth it.
+### Step 3: Map each claim to a proof link, or kill it
 
-Verify:
-- Each link opens the correct repo or live demo.
-- This confirms your proof links are valid.
+This is the only part that matters. For each claim from the post, you either attach proof or you remove the claim.
 
-If it fails:
-- Symptom: 404 or redirected link.
-- Fix: update the URL or remove the link.
+If you want a simple structure that stays readable, use a table during the audit. This table is not for the final reader, it is for you while you edit.
 
-## Verify it worked
+| Blog claim | Proof you can link to | Keep, rewrite, or cut |
+|---|---|---|
+| “Renders a triangle” | `src/main.ts` render pass + draw call | Keep |
+| “Supports resizing” | resize handler + canvas reconfigure | Keep if present, cut if missing |
+| “Multiple shaders” | multiple shader modules/files | Cut if only one exists |
+| “Performance metrics” | benchmark script, log output, or report | Cut unless you have proof |
 
-- The post contains only claims you can point to in code.
-- All repo and demo links open.
-- No unverified metrics remain.
+If you are using GitHub, your proof should ideally be a file link that lands right on the relevant code. If you are local, your proof can be a search command and a file path you include in the post so a reader can reproduce it.
 
-## Common mistakes
+Here is the rewrite pattern that keeps you honest:
 
-- **Symptom:** "Planned" features read like they are done.  
-  **Cause:** The post does not label future work.  
-  **Fix:** Add a "Next experiments" section.
+When the repo clearly proves the claim, say the smallest true version. If the repo partially proves it, rewrite it to match what exists. If the repo does not prove it, delete it or move it into “Next experiments.”
 
-- **Symptom:** Metrics have no proof.  
-  **Cause:** No report or log exists.  
-  **Fix:** remove the metric or add a link to the report.
+Example of a verifiable sentence:
 
-- **Symptom:** Post says WebGPU when repo uses Canvas.  
-  **Cause:** Naming drift over time.  
-  **Fix:** update the title and tags to match the repo.
+“The demo renders one triangle using a single pipeline and a single shader module.”
 
-## Cheat sheet
+That sentence is tight, testable, and doesn’t imply features you do not have.
 
-- List real features first.
-- Replace every claim that lacks proof.
-- Fix every broken link.
-- Use a "Next experiments" section for plans.
+### Step 4: Label future work like future work
 
-## Next steps
+A lot of write ups rot because “plans” are written like “features.” If you want to talk about where the demo is going, do it, but isolate it. One section, clearly labeled, no ambiguity.
 
-- Run the demo again and capture a short GIF.
-- Add a short "What changed" note in the repo README.
+A good “Next experiments” section reads like: “I want to try X next” and then points to where that would live. It does not read like “X exists today.”
 
-## Related links
+This sounds picky, but it is the difference between a post that reads like a real project log and a post that reads like a sales pitch.
 
-- https://developer.chrome.com/docs/web-platform/webgpu/
+![Future work](https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif)
 
-## Final CTA
+### Step 5: Verify every link, every time
+
+Broken links destroy credibility faster than a weak demo. If your post has proof links, they need to open correctly.
+
+Open each link in the post. If you have a lot of them, use a quick command-driven check. This is not perfect, but it catches the obvious problems.
+
+```bash
+# list all URLs in the post
+rg "https?://" content/posts/making-triangle-webgpu-demo-match-reality/index.mdx
+
+# quick check a single URL
+curl -I https://developer.chrome.com/docs/web-platform/webgpu/
+```
+
+If a link 404s or redirects somewhere weird, fix it or remove it. If the demo link is supposed to load a page, open it in a private window too, because caches lie and so do service workers.
+
+### Step 6: Final verification, like a stranger
+
+Do one last pass pretending you are not you. Open the repo fresh, open the post fresh, and attempt to verify each claim with one click or one search. If you cannot verify a claim quickly, it is still too large or too vague.
+
+The verification checklist is not long. It is just strict.
+
+First, every feature sentence in the post can be mapped to a file you can point at. Second, every URL in the post opens. Third, there are no metrics that do not have a report, log, or code artifact backing them up.
+
+![Ship it](https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif)
+
+## Common mistakes that make WebGPU posts look fake
+
+The most common mistake is writing about a thing you did once on your machine and forgetting it never got committed. WebGPU demos are especially susceptible to this because you can hack locally for hours, and then later the write up implies those hacks are part of the repo.
+
+The second most common mistake is mixing future work into present tense. If you want to talk about what you plan to build, do it, but quarantine it. The reader should never have to guess what exists.
+
+The third mistake is claiming performance wins without proof. If you want to talk performance, you need a repeatable measurement, even if it is rough. Without that, it is just vibes and nobody should trust it.
+
+## Final rule
 
 If a claim is not visible in the repo, remove it. That is the whole rule.
+
+If you follow that rule, your WebGPU post becomes something you can stand behind in an interview without sweating the details, because the details are literally in the links.

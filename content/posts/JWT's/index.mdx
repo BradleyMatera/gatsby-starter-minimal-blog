@@ -7,193 +7,313 @@ description: "A full JWT lab guide with exact steps, commands, and verification 
 theme: "Security"
 ---
 
-JWTs are simple until you trust them without verifying.
 
-This lab walks through creating, decoding, and validating a JWT.
+JWTs are not “magic auth.” A JWT is just a string. The only time it becomes useful is when you verify it correctly and treat its claims like untrusted input until that verification succeeds. Most JWT confusion comes from mixing up three different actions that sound similar but are not the same thing: creating a token, decoding a token, and verifying a token.
 
-You will build a tiny token workflow and verify each step.
+This post is a lab. You will generate real tokens, inspect them in multiple ways, verify them, and then deliberately break them so you can see exactly what failure looks like. The goal is not to memorize vocabulary. The goal is to understand where trust is created, where it is not, and what lines of code actually matter.
 
-I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+![Terminal + security](https://media.giphy.com/media/l0HlNaQ6gWfllcjDO/giphy.gif)
+
+## The mental model
+
+A JWT has three parts separated by dots:
+
+`header.payload.signature`
+
+Each part is base64url-encoded. That encoding is not encryption. It’s just a compact way to transport bytes as text.
+
+The header usually says what algorithm was used to sign (example: HS256) and the token type (JWT). The payload is a JSON object (claims). The signature is the proof that the header and payload were not modified after the token was signed.
+
+If you only decode a token, you can see the header and payload. That is useful for debugging. It is not security.
+
+If you verify a token, the library recomputes the signature using the secret/key you provide and checks that it matches the signature in the token. That is the moment the token becomes trustworthy.
 
 ## The promise
 
-By the end, you will:
+By the end of this lab, you will have done all of these things on purpose and seen the output in your terminal:
 
-- generate a JWT
-- decode it safely
-- verify its signature
+1) Generate a JWT
+2) Split it into its 3 dot-separated segments
+3) Manually base64url-decode the header and payload without using any library
+4) Decode using a library to prove it matches your manual decode
+5) Verify a correct token
+6) See verification fail when you change a single character in the payload
+7) See verification fail when you use the wrong secret
+8) See verification fail when the token is expired
 
-> "If you do not verify the signature, the token is just a string."
+If you don’t see those states happen, you didn’t actually learn JWT behavior yet. You only read about it.
 
-## What this is
+## What you need before starting
 
-**High level:** JWT is a signed token format used for auth and claims.
+You need Node 18+ and a terminal. No frameworks. No web server. No database. This is intentionally small so you can see what is happening.
 
-**Low level:** You sign a JSON payload with a secret, then verify that signature on decode.
+## Start to finish
 
-**Key terms:**
+### Step 1: Create a clean lab project
 
-- **JWT:** JSON Web Token.
-- **Header:** The token metadata.
-- **Payload:** The claims inside the token.
-- **Signature:** The cryptographic proof the token was not modified.
+Create a folder, initialize Node, and install one dependency.
 
-## What you need
+```bash
+mkdir jwt-lab
+cd jwt-lab
+npm init -y
+npm install jsonwebtoken
+```
 
-- Node 18+
-- A terminal
-- A new folder for the lab
+Create a file:
 
-## Start to Finish
+```bash
+touch index.js
+```
 
-### Step 1: Create the lab project
-Goal:
-Set up a minimal Node project for the JWT lab.
+### Step 2: Add only the signer first
 
-Actions:
-- Commands:
-  ```bash
-  mkdir jwt-lab && cd jwt-lab
-  npm init -y
-  npm install jsonwebtoken
-  ```
-- File path: `index.js`
+Instead of pasting a giant file all at once, we’ll build this lab in layers so every moving part is visible.
 
-Why:
-A clean folder keeps the lab isolated. `jsonwebtoken` gives you signing and verification in a few lines. This keeps the example focused. It also makes it easy to delete later.
+Open `index.js` and start with only this:
 
-Verify:
-- Run:
-  ```bash
-  npm list jsonwebtoken
-  ```
-- Expected: `jsonwebtoken` appears.
-- This confirms the dependency is installed.
+```js
+const jwt = require("jsonwebtoken");
 
-If it fails:
-- Symptom: `jsonwebtoken` missing.
-- Fix: run `npm install jsonwebtoken` again.
+const SECRET = "demo-secret";
 
-### Step 2: Sign a token
-Goal:
-Generate a JWT with a known payload.
+const payload = {
+  userId: "123",
+  role: "user"
+};
 
-Actions:
-- File path: `index.js`
-- Add:
-  ```js
-  const jwt = require("jsonwebtoken");
+const token = jwt.sign(payload, SECRET, {
+  algorithm: "HS256",
+  expiresIn: "15s"
+});
 
-  const secret = "demo-secret";
-  const payload = { userId: "123", role: "user" };
+console.log("token:\n", token);
+```
 
-  const token = jwt.sign(payload, secret, { expiresIn: "1h" });
-  console.log("token:", token);
-  ```
+**What each line does:**
 
-Why:
-You need a real token to test. A short payload is easy to inspect. A fixed secret keeps the lab deterministic. Expiration helps demonstrate validation later.
+`require("jsonwebtoken")` loads the library that knows how to sign and verify tokens. Nothing here is JWT-specific yet. It’s just a Node module import.
 
-Verify:
-- Run:
-  ```bash
-  node index.js
-  ```
-- Expected: a long token string printed to the console.
-- This confirms the token is generated.
+`SECRET` is the shared key. With HS256, the same secret signs and verifies. Anyone with this value can mint valid tokens. That’s why real projects never hardcode it.
 
-If it fails:
-- Symptom: `jwt.sign is not a function`.
-- Fix: check the import and package install.
+`payload` is just a plain JavaScript object. These fields are not trusted yet. They are just data you intend to sign.
 
-### Step 3: Decode the token
-Goal:
-Inspect the token without verifying it yet.
+`jwt.sign(...)` does three things internally: it builds a header, serializes the payload, and creates a signature using HMAC SHA-256 over both. The output is the compact dot-separated string.
 
-Actions:
-- File path: `index.js`
-- Add after signing:
-  ```js
-  const decoded = jwt.decode(token, { complete: true });
-  console.log("decoded:", decoded);
-  ```
+Run it now:
 
-Why:
-Decoding shows the header and payload. This proves what is inside the token. It also shows why decoding alone is not enough for trust. This step is the baseline for the next verification step.
+```bash
+node index.js
+```
 
-Verify:
-- Run `node index.js`.
-- Expected: `header` and `payload` printed.
-- This confirms the decode works.
+If you see a long string with two dots in it, signing worked. Nothing else in this lab matters until this step prints a token.
 
-If it fails:
-- Symptom: `decoded` is null.
-- Fix: ensure the token string is passed correctly.
+---
 
-### Step 4: Verify the signature
-Goal:
-Verify the token with the correct secret.
+### Step 3: Split the token into its three parts
 
-Actions:
-- File path: `index.js`
-- Add:
-  ```js
-  try {
-    const verified = jwt.verify(token, secret);
-    console.log("verified:", verified);
-  } catch (err) {
-    console.error("verify failed:", err.message);
-  }
-  ```
+Right now the token is just one long string. JWTs are easier to understand when you physically separate them.
 
-Why:
-Verification is the security step. It proves the token was signed with the secret. Without this, any attacker can forge a token. This is the part that turns the JWT into a trustworthy claim.
+Append this under your existing code:
 
-Verify:
-- Run `node index.js`.
-- Expected: `verified` object printed with `userId` and `role`.
-- This confirms the signature is valid.
+```js
+const parts = token.split(".");
 
-If it fails:
-- Symptom: `invalid signature`.
-- Fix: ensure the secret used to verify matches the secret used to sign.
+console.log("\nheaderB64 :", parts[0]);
+console.log("payloadB64:", parts[1]);
+console.log("signatureB64:", parts[2]);
+```
 
-## Verify it worked
+**Explanation:**
 
-- A token prints.
-- The token decodes into header and payload.
-- Verification returns the payload without errors.
+`token.split(".")` turns `header.payload.signature` into an array of three strings. Each string is base64url text. No encryption. No secrecy. Just encoding.
 
-## Common mistakes
+If `parts.length` is not 3, the token is malformed. A valid JWT always has exactly three segments.
 
-- **Symptom:** Verification fails with `invalid signature`.  
-  **Cause:** Secret mismatch.  
-  **Fix:** use the same secret for signing and verifying.
+Run again:
 
-- **Symptom:** Token expires immediately.  
-  **Cause:** Bad `expiresIn` value.  
-  **Fix:** use `1h` or a numeric value in seconds.
+```bash
+node index.js
+```
 
-- **Symptom:** You trust decoded tokens without verifying.  
-  **Cause:** Misunderstanding of JWT.  
-  **Fix:** always call `verify`.
+You should now see three separate base64url segments printed. This is the raw shape of a JWT.
 
-## Cheat sheet
+---
 
-- Sign with a secret.
-- Decode for visibility.
-- Verify for trust.
+### Step 4: Manually decode header and payload
 
-## Next steps
+Libraries make things feel magical. We’re going to remove the magic and decode by hand so you see exactly what’s inside.
 
-- Add a refresh token flow.
-- Store the token securely in memory only for demos.
+Append this next:
 
-## Related links
+```js
+function base64UrlToString(input) {
+  const base64 = input.replace(/-/g, "+").replace(/_/g, "/");
+  const padded = base64.padEnd(Math.ceil(base64.length / 4) * 4, "=");
+  return Buffer.from(padded, "base64").toString("utf8");
+}
 
-- https://jwt.io/
-- https://github.com/auth0/node-jsonwebtoken
+const headerText = base64UrlToString(parts[0]);
+const payloadText = base64UrlToString(parts[1]);
 
-## Final CTA
+console.log("\nheader (decoded text):\n", headerText);
+console.log("payload (decoded text):\n", payloadText);
+```
 
-If you do not verify the token, you do not have security.
+**Explanation:**
+
+JWT uses **base64url**, which is slightly different from normal base64. This helper function converts base64url into normal base64 and then into readable text.
+
+After decoding:
+
+- The **header** becomes a JSON string describing algorithm and type.
+- The **payload** becomes your original object plus timestamps the library added.
+
+Run again:
+
+```bash
+node index.js
+```
+
+You should literally see JSON printed in your terminal. This proves two things:
+
+1) Anyone who has a JWT can read its payload.
+2) JWT payloads are not secrets.
+
+---
+
+### Step 5: Decode using the library
+
+Now that you’ve decoded manually, let’s prove the library does the same thing.
+
+Append:
+
+```js
+const decoded = jwt.decode(token, { complete: true });
+console.log("\nlibrary decoded:", decoded);
+```
+
+**Explanation:**
+
+`jwt.decode()` does **no verification**. It just reads base64url and parses JSON. If an attacker edits the payload, decode will happily show the attacker’s data. This is why decode is not security.
+
+Run again and confirm your manual decode and library decode match.
+
+---
+
+### Step 6: Verify the token (this is where trust begins)
+
+Append:
+
+```js
+try {
+  const verified = jwt.verify(token, SECRET, { algorithms: ["HS256"] });
+  console.log("\nverified payload:", verified);
+} catch (err) {
+  console.error("verification failed:", err.message);
+}
+```
+
+**Explanation:**
+
+`jwt.verify()` recomputes the signature using the secret. If the signature matches, it returns the payload. If not, it throws an error. This single function call is the difference between *reading data* and *trusting data*.
+
+If this prints your payload, the signature is valid. This is the exact moment authentication systems decide whether a request is legitimate.
+
+---
+
+### Step 7: Tamper with the payload and watch verification fail
+
+Now we will change the payload but keep the old signature. This simulates an attacker editing claims.
+
+Append:
+
+```js
+function tamperPayload(token) {
+  const [h, p, s] = token.split(".");
+  const payloadText = base64UrlToString(p);
+  const payloadObj = JSON.parse(payloadText);
+
+  payloadObj.role = "admin"; // attacker change
+
+  const nextPayload = Buffer.from(JSON.stringify(payloadObj))
+    .toString("base64")
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/g, "");
+
+  return `${h}.${nextPayload}.${s}`; // old signature kept
+}
+
+const tampered = tamperPayload(token);
+console.log("\ntampered decoded:", jwt.decode(tampered));
+
+try {
+  jwt.verify(tampered, SECRET, { algorithms: ["HS256"] });
+  console.log("this should not print");
+} catch (err) {
+  console.error("expected failure:", err.message);
+}
+```
+
+**Explanation:**
+
+The decoded tampered token will show `role: admin`. That proves decode is not protection. But verification will fail because the signature no longer matches. This is the security property JWTs provide.
+
+---
+
+### Step 8: Verify with the wrong secret
+
+Append:
+
+```js
+try {
+  jwt.verify(token, "wrong-secret", { algorithms: ["HS256"] });
+} catch (err) {
+  console.error("wrong secret failure:", err.message);
+}
+```
+
+**Explanation:**
+
+Even though the token is perfectly formed, using the wrong secret fails verification. This proves only the server that owns the secret can validate tokens.
+
+---
+
+### Step 9: Watch expiration fail
+
+Your token was created with `expiresIn: "15s"`. Wait 20 seconds and run the file again. You will now see verification fail with `jwt expired`.
+
+**Explanation:**
+
+Expiration is enforced during verification, not during decode. An expired token can still be decoded, but it cannot be trusted.
+
+---
+
+## What each part actually means
+
+### Header
+
+The header tells the verifier which algorithm to expect. Example:
+
+```json
+{"alg":"HS256","typ":"JWT"}
+```
+
+If your server expects HS256 but receives a token claiming a different algorithm, verification should reject it. That’s why we pass `algorithms: ["HS256"]` to verify.
+
+### Payload
+
+The payload is your claim set. It is visible data. It is not encrypted. Never store passwords, secrets, or private data in a JWT payload. Only store identifiers and roles you are comfortable being readable by clients.
+
+### Signature
+
+The signature is the cryptographic seal. Any change to header or payload breaks it. This is the only reason JWTs are safe for authentication.
+
+### Decode vs Verify
+
+Decode answers: “What does this token claim?”
+
+Verify answers: “Was this claim set issued by a trusted signer and still valid?”
+
+Auth systems must always call verify before trusting anything from a token.

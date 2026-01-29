@@ -7,175 +7,161 @@ description: "A concrete loop for building small demos with proof and short less
 theme: "Process"
 ---
 
-I learn faster when I build something small and ship it.
 
-This post shows the loop I use: pick a goal, build, verify, and document the lesson.
+I learn faster by shipping small, real things than by planning large, imaginary ones. This post describes the actual loop I use when I want to understand a tool or idea: I build a tiny working demo, put it somewhere public, then write down exactly what broke and what I changed. Nothing here is aspirational. Every step ends in a file, a command, or a URL you can verify.
 
-You will get exact steps and a simple template you can reuse.
+The point of this loop is not productivity theater. The point is to force contact with real environments: the browser, the build output, the deployment host, and the mistakes that only appear once something is live.
 
-I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+## The shape of the loop
 
-## The promise
+A usable learning loop has three visible artifacts. There is a local project that runs. There is a public link that proves it runs outside your machine. There is a short written note that captures what actually went wrong and what you fixed. If any of those are missing, the loop is not complete and the learning stays fuzzy.
 
-By the end, you will:
+![Building a small demo](https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif)
 
-- plan a tiny project you can finish
-- ship it with a live link
-- document what you learned in a repeatable format
+This post walks through a concrete example using a single static HTML page. The example is intentionally simple because the mechanics of building, verifying, and deploying are the part that matters. The same loop applies to larger stacks later.
 
-> "Small demos with proof teach faster than big plans."
+## A real starting point: one tiny demo
 
-## What this is
+Start with an empty folder and create the smallest possible project. No frameworks, no scaffolding tools, no generators. Just a file that does one thing and can be opened in a browser.
 
-**High level:** A learning loop is a short cycle of build, verify, and document.
+```bash
+mkdir mini-demo
+cd mini-demo
 
-**Low level:** You write a README, add a live link, and capture one lesson in a notes file.
+cat > index.html <<'EOF'
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mini Demo</title>
+  </head>
+  <body>
+    <h1>Click the box</h1>
+    <div id="box" style="width:100px;height:100px;background:#4f46e5;cursor:pointer"></div>
+    <p id="status"></p>
 
-**Key terms:**
+    <script>
+      const box = document.getElementById("box");
+      const status = document.getElementById("status");
 
-- **Demo:** A small project with one clear feature.
-- **Proof link:** A URL that shows the demo works.
-- **Lesson:** A short note about what you learned and what to change next.
+      box.addEventListener("click", () => {
+        status.textContent = "Box clicked at " + new Date().toLocaleTimeString();
+      });
+    </script>
+  </body>
+</html>
+EOF
+```
 
-## What you need
+Open `index.html` in a browser and click the square. If the timestamp appears, the demo is real. This is the first important point: the project exists outside your head and outside a tutorial. It runs.
 
-- A GitHub repo
-- A live deploy target (GitHub Pages is enough)
-- A notes file in the repo
+## Local verification before anything else
 
-## Start to Finish
+Before thinking about deployment, confirm the demo behaves correctly in a clean browser session. Reload the page. Click again. Confirm the timestamp updates every time. If this fails locally, deploying it only publishes a broken artifact. Fix local behavior first, always.
 
-### Step 1: Define the smallest goal
-Goal:
-Pick a single feature that you can finish in a weekend.
+This step sounds obvious, but it is where most abandoned projects die. Local verification is the first filter that separates "I thought about building" from "I built something that executes."
 
-Actions:
-- File path: `README.md`
-- Add a goal line:
-  ```text
-  Goal: Play one sound when a user clicks a card.
-  ```
+![Testing in the browser](https://media.giphy.com/media/ZVik7pBtu9dNS/giphy.gif)
 
-Why:
-A single goal keeps the scope small. It reduces unfinished work. It also makes verification simple. You cannot learn from a demo that never ships.
+## Putting the demo under version control
 
-Verify:
-- Expected: the goal is one sentence and measurable.
-- This confirms the scope is small.
+Now make the demo something you can actually share. Initialize a git repository and commit the file.
 
-If it fails:
-- Symptom: the goal reads like a full product.
-- Fix: cut features until it fits in one sentence.
+```bash
+git init
+git branch -M main
+git add index.html
+git commit -m "Add mini demo"
+```
 
-### Step 2: Build the smallest feature
-Goal:
-Implement the core feature only.
+At this point you have a reproducible artifact. Anyone can clone the repo and open the same file. That reproducibility is part of the learning process. If you cannot reproduce your own demo later, the learning is lost.
 
-Actions:
-- File path: `src/index.js` (or your entry file)
-- Add a button or handler for the one feature.
-- Example:
-  ```js
-  button.addEventListener("click", () => audio.play());
-  ```
+## Deploying the demo to a real URL
 
-Why:
-The smallest feature proves the idea. This keeps the demo real and testable. It also avoids spending time on polish before the feature works. You can add polish later if the core works.
+A demo that only runs on your machine is still half-finished. The moment you put it on a public URL, you force yourself to confront file paths, hosting behavior, and browser caching. This example uses GitHub Pages through GitHub Actions because it removes manual steps and produces a visible deployment log.
 
-Verify:
-- Run the app locally.
-- Click the button.
-- Expected: the audio plays.
-- This confirms the core feature works.
+Create the workflow file:
 
-If it fails:
-- Symptom: nothing happens on click.
-- Fix: check the element ID and the event listener binding.
+`.github/workflows/pages.yml`
 
-### Step 3: Add a proof link
-Goal:
-Make the demo public so others can verify it.
+```yaml
+name: Deploy Pages
 
-Actions:
-- Deploy to GitHub Pages or another static host.
-- Add the URL to `README.md`:
-  ```text
-  Live demo: https://yourname.github.io/your-repo/
-  ```
+on:
+  push:
+    branches: ["main"]
 
-Why:
-A public link is the proof. It also forces you to finish the build step. Without a live link, the demo is just a claim. This is how you build trust.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
-Verify:
-- Open the URL in a browser.
-- Expected: the demo loads and works.
-- This confirms the demo is real.
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
-If it fails:
-- Symptom: 404 or blank page.
-- Fix: check the base path and rebuild.
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
-### Step 4: Write the lesson
-Goal:
-Record what you learned in a short, repeatable format.
+    runs-on: ubuntu-latest
 
-Actions:
-- File path: `docs/lessons.md`
-- Add:
-  ```text
-  Lesson
-  - What worked:
-  - What broke:
-  - What I would change next:
-  ```
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-Why:
-The lesson is the real output of the project. It keeps your learning visible. It also makes it easier to explain the project later. A short template keeps it from turning into a novel.
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
 
-Verify:
-- Open `docs/lessons.md` and fill the three lines.
-- This confirms the learning is captured.
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
 
-If it fails:
-- Symptom: the file stays empty.
-- Fix: write one sentence per line and move on.
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
+```
 
-## Verify it worked
+This workflow is mechanical. It checks out your repository, tells GitHub this job is a Pages deployment, uploads the current folder as the site artifact, and publishes it. There is no build step because this demo is plain HTML. For larger projects, the only change is adding a build command before the upload.
 
-- The demo runs locally.
-- The demo is live.
-- The lesson template is filled out.
+Push the repository to GitHub:
 
-## Common mistakes
+```bash
+git remote add origin https://github.com/<yourname>/mini-demo.git
+git push -u origin main
+```
 
-- **Symptom:** The demo never ships.  
-  **Cause:** The goal was too big.  
-  **Fix:** cut it down to one feature.
+When the push completes, open the Actions tab in your repo. You will see the workflow run. When it finishes, GitHub shows the live Pages URL. Open that URL and click the square. If the timestamp updates, your demo is now running on infrastructure you do not control. That is the second important point: your code survived a clean environment and a real host.
 
-- **Symptom:** The demo works but has no proof link.  
-  **Cause:** You skipped deploy.  
-  **Fix:** deploy before you call it done.
+![Deploying through GitHub Actions](https://media.giphy.com/media/3o7aCTfyhYawdOXcFW/giphy.gif)
 
-- **Symptom:** The lesson is vague.  
-  **Cause:** No template.  
-  **Fix:** use the three line format.
+## Proving the deploy actually updated
 
-## Cheat sheet
+To avoid fooling yourself with cached pages, reload the URL with a hard refresh. Click the square again. The time should change. If the page does not update, check the Actions run logs. They will show whether a new deployment actually happened. This is where you learn to trust logs over assumptions.
 
-- One feature.
-- One proof link.
-- One lesson template.
-- Repeat.
+## Writing down the lesson
 
-## Next steps
+After the demo is live, write one short note about what actually happened. Create a file named `lesson.md` and write three sentences.
 
-- Build a second demo in a different tool.
-- Share one lesson with a peer.
+```bash
+cat > lesson.md <<'EOF'
+The demo broke the first time because I forgot to enable Pages → Source → GitHub Actions.
+After fixing that, the workflow deployed correctly and returned a live URL.
+Next time I will always check Pages settings before debugging YAML.
+EOF
+```
 
-## Related links
+This is not documentation for others. This is a memory aid for you. When you repeat this loop with a different tool later, these small notes prevent you from relearning the same mistakes from scratch.
 
-- https://pages.github.com/
+## Why this loop works
 
-## Final CTA
+This process forces three real interactions: writing code that runs, deploying to a host you do not control, and reading logs when something fails. Those interactions are where understanding forms. Reading articles or watching videos can introduce concepts, but shipping even a tiny demo is what makes them stick.
 
-Ship the small demo. Then write the lesson while it is fresh.
+Over time the demos get larger, the stacks change, and the deployment targets evolve. The loop stays the same: build something small, verify locally, deploy publicly, record what actually broke. That repetition is the real curriculum.
+
+## Closing
+
+If you have a local demo that runs, a public URL that proves it, and a short note that captures what went wrong, you have learned something concrete. Everything else is just preparation for that moment.

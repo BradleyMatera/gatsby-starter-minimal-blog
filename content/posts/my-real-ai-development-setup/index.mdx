@@ -7,152 +7,125 @@ description: "A concrete AI dev setup with exact files, commands, and checks."
 theme: "Process"
 ---
 
-This is the setup I actually use to work with AI tools.
+Most posts about AI tooling either sound like marketing or sound like someone trying to show off a stack. This is neither. This post is simply a description of the tools I have actually used, what each one is, what it is good at, what it is bad at, and why I choose one over another depending on the situation.
 
-It is practical, small, and focused on verification.
+There is no “workflow philosophy” here. No productivity system. No grand claims. Just a straightforward breakdown of editors, AI agents, local models, hosted models, and autocomplete tools, and what each of them is useful for in practice.
 
-You will document your setup and add proof of what you run.
+![Tool sprawl](https://media.giphy.com/media/26ufnwz3wDUli7GU0/giphy.gif)
 
-I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+## Three buckets: editors, terminals, and models
 
-## The promise
+If you blend these together, everything sounds like marketing. Separating them makes it understandable.
 
-By the end, you will:
+Editors are where you navigate a repo, search, make changes, review diffs, and keep context. VS Code is the editor I use the most. Cursor and Kiro are also editors, but they are AI-first editors. Cline is not really an editor by itself. It is an agent that lives inside VS Code and can operate on the repo.
 
-- document your AI tooling in one file
-- add a reproducible install list
-- define a verification step for each tool
+Terminal tools are the stuff that proves whether anything is real. Running builds, running tests, running scripts, looking at logs, and reading errors. AI can help interpret output, but the terminal is still the source of truth because it is the thing that can tell you “this compiles” or “this fails” without opinion.
 
-> "If the tool is not installed and used, it does not belong on the list."
+Models are the brains. Local models (like Qwen through Ollama) are fast and cheap, and they are good for constant small tasks. Bigger hosted models (like Claude) are slower and cost more, but they handle wider context and messier reasoning better. Model choice matters because the same tool behaves differently depending on what brain you attach to it.
 
-## What this is
+## VS Code
 
-**High level:** A dev setup is a list of tools and the checks you run.
+VS Code is just the editor. It is not an AI product. The reason it stays central for me is boring but real. It is where I can search across a repo, jump between definitions and references, compare diffs, keep multiple terminals open, and not lose my place. If you have ever tried to refactor a project without solid search and navigation, you know why that matters.
 
-**Low level:** You write a setup file with commands and verify each tool runs.
+When AI is involved, VS Code matters even more because it is the place where I can review what the AI changed. Most AI mistakes are not obvious until you look at the diff and notice it changed a pattern, renamed something inconsistently, or introduced a new style in a file that already had a standard. So VS Code is not “the AI tool.” It is the control room.
 
-**Key terms:**
+![Reading diffs](https://media.giphy.com/media/3o6Zt8MgUuvSbkZYWc/giphy.gif)
 
-- **CLI tool:** A command you run from the terminal.
-- **Verification:** A quick check that a tool works.
+## Cline
 
-## What you need
+Cline is a VS Code extension that acts like an agent. The important detail is not that it can chat. The important detail is that it can see the repo and operate on it. It can browse the file tree, open files, propose patches in the right places, run commands, then react to the output that comes back.
 
-- A notes folder
-- The tools you actually use
+That repo awareness is the whole reason it is useful. A normal chat model will happily give you a snippet that does not match your project. Cline can look at your actual project structure and aim the changes at real files.
 
-## Start to Finish
+Where Cline shines is scoped work that still needs real repo context. Fix a broken import chain. Trace where a route is defined. Update a component but keep the existing patterns. Find why the build fails and propose a patch. It is basically good at “help me move in the repo” tasks.
 
-### Step 1: Create a setup file
-Goal:
-Document your tools in one place.
+Where Cline gets dangerous is when you let it do large refactors without tight boundaries. Agents can churn code. They can change styles mid stream. They can move files to places that feel neat to them but not to you. The way I keep it safe is treating it like a patch assistant. Small tasks, review diffs, run the app, repeat.
 
-Actions:
-- File path: `docs/dev-setup.md`
-- Add:
-  ```text
-  AI dev setup
-  - Node 18
-  - Python 3.11
-  - VS Code
-  ```
+## Ollama
 
-Why:
-A single file keeps the setup clear. It avoids scattered notes. This also lets others reproduce your environment. It is the baseline for honest tooling claims.
+Ollama is a local model runner. That means it is not the model itself, it is the thing that hosts models on your machine. The reason I use it is because it makes AI help feel like a normal tool instead of a separate activity. No tabs, no waiting on a website, no thinking about tokens every time I ask for help.
 
-Verify:
-- Open the file and confirm the list exists.
-- This confirms the setup file is created.
+Local running also changes the vibe in a practical way. You ask more questions because the cost is basically your hardware, not a meter. That matters when you are doing day to day cleanup work and you just want quick answers without turning it into a production.
 
-If it fails:
-- Symptom: no file.  
-  **Fix:** create the file and add the list.
+The tradeoff is obvious too. Local models have a ceiling. They can be great for constant small work, but they are not always great when the bug is conceptual or the fix depends on understanding a wide slice of the app.
 
-### Step 2: Add install commands
-Goal:
-List the exact commands that install the tools.
+## Qwen models
 
-Actions:
-- File path: `docs/dev-setup.md`
-- Add:
-  ```text
-  Install
-  - Node: https://nodejs.org/
-  - Python: https://www.python.org/downloads/
-  ```
+When I say Qwen here, I mean the Qwen models I have run locally through Ollama. I like them for the boring, constant, real tasks that every repo has. They are fast enough that you can keep them “on” mentally and just use them like a helper while you work.
 
-Why:
-A setup is only useful if it is repeatable. Links to official installers are the safest option. This keeps the setup honest. It also avoids vague instructions.
+The kinds of tasks that fit Qwen well are things like cleaning up a component so it reads like a human wrote it, extracting repeated logic into a helper, fixing TypeScript errors where the intent is obvious, reorganizing imports, writing small utilities, or giving you a first pass implementation that you are going to review and adjust anyway.
 
-Verify:
-- Click each link.
-- Expected: official download pages open.
-- This confirms the install sources are valid.
+The kinds of tasks that fit Qwen poorly are the ones where the model needs to hold a wide context, like multi-file data flow, tricky auth behavior, subtle WebGPU pipeline issues, or deployment failures where the fix depends on understanding the environment and not just the code. When a local model starts guessing confidently, that is when it becomes slower than just switching to a stronger brain.
 
-If it fails:
-- Symptom: broken link.  
-  **Fix:** update the URL.
+![Local model loop](https://media.giphy.com/media/l0HlNaQ6gWfllcjDO/giphy.gif)
 
-### Step 3: Add a verification command
-Goal:
-Prove each tool works on your machine.
+## Claude models
 
-Actions:
-- File path: `docs/dev-setup.md`
-- Add:
-  ```text
-  Verify
-  - node -v
-  - python3 --version
-  ```
+Claude is the model I switch to when the problem stops being “small code work” and becomes “reasoning work.” Multi-file bugs. Messy code that needs a rewrite without changing behavior. Build errors that have more than one root cause. Situations where you need an explanation that maps back to your files and not just a generic answer.
 
-Why:
-A version command is the simplest proof. It confirms the tool is installed and on PATH. This makes the setup reproducible. It also prevents phantom tools in your list.
+The difference is not magic. The difference is that it tends to keep a larger mental model at once, and it is better at explaining why a fix is the fix. That matters because patching the symptom is easy, but patching the cause is what keeps the repo from turning into a haunted house.
 
-Verify:
-- Run the commands and confirm they print a version.
-- This confirms the tools are active.
+The downside is cost and overkill. If you use a stronger model for every tiny change, you waste time. You also start accepting changes you did not fully understand because the output looks confident. So for me Claude is a switch, not a default. I use it when the problem deserves it.
 
-If it fails:
-- Symptom: command not found.  
-  **Fix:** reinstall the tool or update PATH.
+## Cursor
 
-## Verify it worked
+Cursor is an AI-first editor. The way I think about it is that VS Code is my stable home, and Cursor is the tool I open when the codebase shape is the problem. That does not mean “I need help writing code.” It means the repo is messy enough that doing changes one file at a time is painful, and you need a broader restructuring pass.
 
-- The setup file exists.
-- Install sources are listed.
-- Version commands return output.
+Cursor is useful when you want consistent changes across many files. Renaming patterns. Reorganizing folders. Pulling a feature into a cleaner structure. Refactoring repeated patterns in a React codebase. Stuff that would be annoying and error-prone if you tried to do it manually across a lot of files.
 
-## Common mistakes
+The risk is the same as any wide tool. It can produce a huge diff that is hard to review. If you cannot review it, you cannot trust it. So I only use Cursor when I am willing to do the review work and I have a clear goal for the refactor.
 
-- **Symptom:** Tools listed but not installed.  
-  **Cause:** No verify step.  
-  **Fix:** add version checks.
+## Kiro
 
-- **Symptom:** Links point to random guides.  
-  **Cause:** No official source.  
-  **Fix:** link to official downloads.
+Kiro is another AI-first IDE, and for me it only matters when the blocker is AWS output and configuration. IAM failures. S3 policy behavior. CloudWatch logs. CLI errors. Deployments that technically finished but the app does not behave.
 
-- **Symptom:** The setup grows too large.  
-  **Cause:** Listing tools you do not use.  
-  **Fix:** remove anything you did not use this month.
+The reason an AI IDE can help in this category is not that it invents architecture. It is that it can help you interpret error messages, map them to configuration, and propose small changes you can test. AWS debugging is mostly reading and iterating. A tool that can keep track of the context of an error and help you form the next test can save time.
 
-## Cheat sheet
+The risk is when it starts hallucinating solutions that do not match what AWS is actually returning. If it is not grounded in the exact output you are seeing, it becomes noise. So Kiro is not always open. It is a tool I open when the problem is clearly in AWS land.
 
-- One setup file.
-- One install list.
-- One verification per tool.
+## GitHub Copilot
 
-## Next steps
+Copilot is autocomplete. That is the honest description. It is good at finishing JSX lines, filling in small helper functions, and saving you from typing boilerplate. It is not good at owning architecture decisions or understanding your whole repo.
 
-- Add your editor extensions list.
-- Add one sample project that proves the setup works.
+If you treat Copilot like a small typing tool, it is helpful. If you treat it like a decision maker, it will push patterns that do not match your codebase and you will spend time cleaning up drift.
 
-## Related links
+![Autocomplete energy](https://media.giphy.com/media/26ufnwz3wDUli7GU0/giphy.gif)
 
-- https://nodejs.org/
-- https://www.python.org/downloads/
+## Why model choice matters depending on the tool
 
-## Final CTA
+This is the part that usually gets skipped. People talk about tools like the tool is the brain. It is not. The model is the brain.
 
-Keep the setup short, verified, and honest.
+Cline is an agent layer. It can talk to a local model through Ollama or it can talk to a hosted model. That choice changes how it behaves. If you attach a local model, you get fast, cheap iteration for small fixes, and you accept that it will hit a ceiling. If you attach a stronger hosted model, you get deeper reasoning, but you also need to keep scope tighter because big brains produce big edits.
+
+Cursor and Kiro are similar. They are editors with AI capability, but the model quality and context handling changes what they are good at. The more the task looks like “understand this whole system,” the more model quality matters. The more the task looks like “help me write this small piece cleanly,” the more speed matters.
+
+## A breakdown that actually separates tools from models
+
+Before the table, this is the clearest way I know how to say it. Tools are the interface. Models are the reasoning engine. Terminals are the truth.
+
+| Category | Examples | What it is | What it is best at | What it is risky at |
+|---|---|---|---|---|
+| Code editor | VS Code | Where you navigate and edit | Search, refactor, diff review, control | None, unless you skip review |
+| Agent in editor | Cline | Repo-aware patch assistant | Scoped changes with real file context | Large uncontrolled refactors |
+| Local model runner | Ollama | Hosts models on your machine | Fast, cheap iteration | Reasoning ceiling |
+| Local models | Qwen | The brains you run locally | Daily cleanup and small fixes | Confident guessing on complex issues |
+| Hosted models | Claude | Stronger external brains | Multi-file reasoning, clear explanations | Overkill, cost, big diffs |
+| AI-first editor | Cursor | Editor designed around AI | Repo-wide restructuring | Huge diffs that are hard to review |
+| AI-first editor for AWS work | Kiro | AI IDE for infra debugging | Interpreting real AWS output and config | Hallucinating if not grounded |
+| Autocomplete | Copilot | Inline suggestions | Small typing acceleration | Drift if you let it steer |
+
+After the table, the most important detail is that you still do the verification step the same way every time. Run the app. Run the build. Read the logs. Check the browser. The model can help you interpret output, but it cannot replace output.
+
+## What I actually want people to take from this
+
+These tools are useful when they reduce friction and stay grounded in the repo. They are annoying when they add noise, invent patterns, or make changes you cannot review.
+
+If you are trying to decide what to use, the best starting point is not buying an AI IDE. The best starting point is deciding whether you need repo-aware edits, fast local help, or deeper reasoning. Once you know which kind of problem you are solving, the tool choice becomes obvious.
+
+![Reality wins](https://media.giphy.com/media/3o7TKtnuHOHHUjR38Y/giphy.gif)
+
+## Closing
+
+This is not a stack to copy. It is just the set of tools I have actually used and the reasons they ended up in the rotation.
+
+If you want one rule that keeps you honest, it is this. The tool is never the proof. The proof is the repo building and behaving, and the model you picked helping you get there without making a mess.

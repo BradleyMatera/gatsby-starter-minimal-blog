@@ -131,6 +131,181 @@ Open the URL GitHub provides. The page should load with styling and JavaScript w
 
 If you see a blank page or console errors, go back to Step 1. It is almost always the base path.
 
+
+## Deploying a plain HTML page with GitHub Actions (no gh-pages branch)
+
+The `gh-pages` branch approach works, but it is not the only way, and it is not the cleanest way anymore. GitHub Pages can also be deployed directly from GitHub Actions. The mental model is different.
+
+With Actions-based Pages deployments, you do not push files to a `gh-pages` branch. Instead, your workflow builds (or just gathers) a folder of static files, uploads it as a Pages artifact, and GitHub publishes that artifact to your Pages URL. Your repository stays cleaner because your generated site output does not live in your git history.
+
+This section is a complete lab for a dead simple static site. It uses a single `index.html`, an optional `styles.css`, and a GitHub Actions workflow that deploys on every push to `main`.
+
+![GitHub Actions running](https://media.giphy.com/media/3o7aCTfyhYawdOXcFW/giphy.gif)
+
+### Step 0: Make sure Pages is set to “GitHub Actions”
+
+Open your repository on GitHub. Go to Settings → Pages. Under “Build and deployment,” set the Source to GitHub Actions. If you leave it on “Deploy from a branch,” the workflow can run perfectly and you will still sit there wondering why nothing updates.
+
+### Step 1: Create the simplest possible site
+
+In a new repo, create a folder and add `index.html`. This example is intentionally boring because the point is deployment mechanics, not design.
+
+```bash
+mkdir gh-pages-html-demo
+cd gh-pages-html-demo
+
+git init
+
+git branch -M main
+
+git config user.name "Your Name"
+
+git config user.email "you@example.com"
+
+cat > index.html <<'EOF'
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GitHub Pages HTML Demo</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="wrap">
+      <h1>GitHub Pages via GitHub Actions</h1>
+      <p>This page is deployed from a workflow, not a gh-pages branch.</p>
+      <p id="stamp"></p>
+    </main>
+
+    <script>
+      document.getElementById("stamp").textContent = "Deployed at: " + new Date().toISOString();
+    </script>
+  </body>
+</html>
+EOF
+
+cat > styles.css <<'EOF'
+:root { color-scheme: light dark; }
+body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+.wrap { max-width: 72ch; margin: 0 auto; padding: 3rem 1.25rem; }
+h1 { line-height: 1.1; margin: 0 0 1rem; }
+p { line-height: 1.6; margin: 0 0 0.9rem; }
+EOF
+
+git add .
+git commit -m "Add simple static page"
+```
+
+At this point you have a real static site. There is no build step. The folder itself is the deployable artifact.
+
+### Step 2: Add the GitHub Actions workflow
+
+Create this file:
+
+`.github/workflows/pages.yml`
+
+```yaml
+name: Deploy Pages
+
+on:
+  push:
+    branches: ["main"]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
+```
+
+This workflow is doing four real things.
+
+Checkout pulls your repo onto the runner. Configure Pages sets up the Pages deployment context. Upload Pages Artifact packages a folder into the special artifact GitHub Pages expects. Deploy Pages publishes that artifact and returns the live URL as an output.
+
+The `permissions` block matters. Pages deployments require `pages: write` and `id-token: write`. If you omit them, the workflow can fail with confusing authorization errors even though the YAML “looks right.”
+
+The `path: .` line is intentionally blunt for this demo. It uploads the repository root, which contains `index.html` and `styles.css`. In a real app, you would upload the build output directory, like `dist` or `build`.
+
+![Deploy Success](https://media.giphy.com/media/5xaOcLGvzHxDKjufnLW/giphy.gif)
+### Step 3: Push the repo to GitHub
+
+Create the repo on GitHub, add the remote, then push.
+
+```bash
+git remote add origin https://github.com/<yourname>/gh-pages-html-demo.git
+git push -u origin main
+```
+
+As soon as the push finishes, the workflow will run. Go to the Actions tab and click the latest run. When it finishes, it will show the deployed Pages URL.
+
+### Verification: prove it updated
+
+Open the deployed URL and refresh twice. You should see the timestamp change. That is your proof that you are not looking at an old cached build and that the workflow is really deploying the current repo contents.
+
+If the page loads but CSS is missing, open DevTools → Network and look for a 404 on `styles.css`. In this plain HTML demo, that almost always means you uploaded the wrong folder, not that Pages is broken.
+
+## Deploying a built site with Actions (dist/build/public)
+
+Most real projects produce a build folder. The only change you make is what you upload.
+
+Instead of uploading `path: .`, you run your build and upload the build output directory.
+
+Example shape:
+
+```yaml
+      - name: Install
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+```
+
+The rest of the workflow stays the same. The only strict rule is that the uploaded folder must contain an `index.html` at its root.
+
+## Common Actions-based Pages failures
+
+| Symptom | What it usually means | Fix |
+|--------|------------------------|-----|
+| Workflow succeeds but Pages URL never changes | Pages Source is still set to branch deploy | Settings → Pages → Source → GitHub Actions |
+| Deploy step fails with permission/authorization errors | Missing Pages permissions | Add `pages: write` and `id-token: write` |
+| Page loads but assets 404 | Wrong upload folder or wrong base path | Upload the correct build folder and re-check base paths |
+| Build works locally but fails in Actions | Your local environment is hiding an assumption | Pin Node version and make build deterministic |
+
+This is still the same story as the branch method. Pages is simple. Your paths and your build output are what make it feel complex.
+
 ## Verify it worked
 
 A correct deployment has three properties. The root URL loads. Refreshing the page does not break routing. Assets load without 404 errors. If those are true, your GitHub Pages deployment is complete.

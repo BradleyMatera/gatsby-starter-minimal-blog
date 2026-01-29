@@ -7,156 +7,162 @@ description: "A practical job search workflow with exact files, steps, and check
 theme: "Career"
 ---
 
-Job hunting is chaotic unless you make it a repeatable process.
 
-This post shows the exact workflow I use to track applications and improve the resume.
+Job hunting is a pipeline, and pipelines get messy when you try to hold them in your head. The only way I’ve ever seen it become less chaotic is when you turn it into something you can point at: a tracker you actually update, a place where each resume version lives, and a weekly check that forces you to react to reality instead of vibes.
 
-You will create a tracker, a resume folder, and a short feedback loop.
+This is a practical workflow you can run locally. It is not a productivity system and it is not a “brand building” post. It’s the minimum set of files and habits that make a search measurable. If you do not want structure, stop here. If you do, this is start-to-finish.
 
-I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+![Job search chaos](https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif)
 
 ## The promise
 
-By the end, you will:
+By the end, you’ll have one tracker file that can’t get lost, one folder that keeps resume versions tied to the roles you applied to, and one weekly review note that prevents you from repeating the same week forever. You will also have a simple rule for follow-ups so your pipeline doesn’t silently stall.
 
-- create a simple application tracker
-- organize resume versions in a clear folder
-- run a weekly feedback review
-
-> "If you cannot see your pipeline, you cannot fix it."
+The only standard I care about is this: if someone asked you right now “how many roles have you applied to in the last 30 days and what happened,” you could answer in under a minute by opening a file.
 
 ## What this is
 
-**High level:** A job search is a pipeline of applications, follow ups, and improvements.
+High level, the job search is a pipeline: you apply, you wait, you follow up, you either move forward or you don’t, and you adjust. Low level, it’s just data. Company, role, date applied, status, link, and notes. When you keep that data in a tracker, you start seeing patterns. When you don’t, every rejection feels random and every follow-up becomes a guess.
 
-**Low level:** You track each application, store each resume version, and review results weekly.
-
-**Key terms:**
-
-- **Tracker:** A file that records applications and outcomes.
-- **Resume version:** A tailored copy of your resume for one role.
-- **Feedback loop:** A short review to change what is not working.
+This workflow is intentionally small. It assumes you are doing the hard parts already: finding roles, tailoring your resume, and applying. The workflow doesn’t replace that work. It makes it visible.
 
 ## What you need
 
-- A folder for job search files
-- A spreadsheet or CSV file
-- A calendar reminder
+You need a folder on your machine for job search artifacts and you need one tracker format. I use CSV because it works everywhere: spreadsheets can open it, scripts can read it, and git can diff it. If you prefer a Google Sheet, you can mirror the same columns there. The key is choosing one place that is “truth.”
 
-## Start to Finish
+![Spreadsheet energy](https://media.giphy.com/media/26tPplGWjN0xLybiU/giphy.gif)
 
-### Step 1: Create a tracker
-Goal:
-Build a single file that tracks every application.
+## Start to finish
 
-Actions:
-- File path: `job-search/tracker.csv`
-- Add headers:
-  ```text
-  company,role,date_applied,status,link,notes
-  ```
-- Command:
-  ```bash
-  mkdir -p job-search
-  $EDITOR job-search/tracker.csv
-  ```
+### Step 1: Create a tracker that you will actually update
 
-Why:
-A tracker makes your search visible. It stops you from forgetting who you applied to. It also shows patterns in rejections and responses. Without a tracker, you repeat mistakes.
+Make a folder dedicated to the search and create one CSV file inside it. I’m using `job-search/` because it is boring and obvious. If you already have a home for personal admin work, put it there instead, but keep it in one place.
 
-Verify:
-- Open the file and add one real application row.
-- Expected: one line with real data.
-- This confirms the tracker is live.
+```bash
+mkdir -p job-search
+cat > job-search/tracker.csv <<'EOF'
+company,role,location,date_applied,status,source,posting_link,follow_up_date,last_touch,notes
+EOF
+```
 
-If it fails:
-- Symptom: you never update the file.
-- Fix: set a weekly reminder and add one row at a time.
+Those headers are not “nice to have.” They prevent the most common problem: writing notes that cannot be compared later. “Source” is where you found it (LinkedIn, Indeed, company site, referral). “Follow_up_date” is the date you intend to follow up. “Last_touch” is the last time you did anything related to that application. That single field stops you from wondering whether you already sent a message.
 
-### Step 2: Store resume versions
-Goal:
-Keep each resume version tied to a role.
+Now add one real row immediately. If you don’t do this right now, the tracker becomes a dead file and the whole idea collapses.
 
-Actions:
-- File path: `job-search/resumes/`
-- Create one file per role:
-  ```text
-  job-search/resumes/2025-02-20_company_role.pdf
-  ```
+```bash
+echo "Amazon,Cloud Support Engineer Intern,Seattle WA,2025-05-01,Completed,Amazon jobs,https://example.com,2025-05-08,2025-05-08,Internship pipeline" >> job-search/tracker.csv
+```
 
-Why:
-Tailored resumes are easier to manage when stored with a naming pattern. It also lets you review what you sent later. This prevents conflicting versions. You can compare outcomes against each version.
+Replace the values with a real entry from your own search. The point is not the example. The point is that your tracker has at least one real row today.
 
-Verify:
-- Ensure at least one PDF exists in the folder.
-- Expected: file names include date and company.
-- This confirms the structure is consistent.
+Verification that this step worked is simple. Open the file. If it has headers and at least one real entry, it is alive.
 
-If it fails:
-- Symptom: files are scattered.
-- Fix: move them into the folder and rename them once.
+### Step 2: Make resume versions a file system problem
 
-### Step 3: Add a weekly review note
-Goal:
-Record what is working and what is not.
+Resumes get messy because you reuse “the one resume” for jobs that aren’t the same, then you can’t remember what you sent or what changed. The fix is not a new resume. The fix is saving versions that are tied to roles.
 
-Actions:
-- File path: `job-search/weekly-notes.md`
-- Add a template:
-  ```text
-  Week of:
-  - Applied:
-  - Interviews:
-  - Rejections:
-  - Change next week:
-  ```
+Create a folder for resume outputs and a folder for the job descriptions you applied to. Saving the job description is not optional if you want to learn. A posting can disappear or change. If you don’t keep it, you lose the ability to review what you actually applied to.
 
-Why:
-A weekly note creates a feedback loop. It forces you to adjust your approach. It also keeps you from repeating the same week. One note per week is enough.
+```bash
+mkdir -p job-search/resumes
+mkdir -p job-search/postings
+```
 
-Verify:
-- Fill in the template for the current week.
-- This confirms the loop is active.
+Use a naming convention that bakes in date, company, and role. Keep it boring. Boring scales.
 
-If it fails:
-- Symptom: the note stays empty.
-- Fix: add just one line and keep going.
+Example:
 
-## Verify it worked
+- `job-search/resumes/2026-01-29_amazon_cloud-support.pdf`
+- `job-search/postings/2026-01-29_amazon_cloud-support.txt`
 
-- The tracker has real entries.
-- Resume versions are stored and named.
-- Weekly notes are filled in.
+If you want a simple command to capture a posting quickly, paste the job description into a text file.
 
-## Common mistakes
+```bash
+cat > job-search/postings/2026-01-29_company_role.txt <<'EOF'
+PASTE THE JOB DESCRIPTION HERE
+EOF
+```
 
-- **Symptom:** You forget where you applied.  
-  **Cause:** No tracker.  
-  **Fix:** add every application on the same day.
+Now connect those files back to your tracker by adding a note in the row like “resume: 2026-01-29_company_role.pdf” and “posting saved.” It sounds tedious until you realize it makes reviewing outcomes possible.
 
-- **Symptom:** Resume versions get mixed.  
-  **Cause:** No naming pattern.  
-  **Fix:** add date and company to the file name.
+![Organizing files](https://media.giphy.com/media/3o6ZtpxSZbQRRnwCKQ/giphy.gif)
 
-- **Symptom:** You keep applying without feedback.  
-  **Cause:** No weekly review.  
-  **Fix:** write one change per week.
+### Step 3: Add a weekly review note that forces a change
 
-## Cheat sheet
+A tracker by itself can still become a graveyard. The weekly review is where it becomes a feedback loop. You’re not writing a diary. You’re doing a quick operational check: what moved, what stalled, what you will change.
 
-- One tracker file.
-- One resume folder.
-- One weekly note.
+Create the weekly notes file.
 
-## Next steps
+```bash
+cat > job-search/weekly-notes.md <<'EOF'
+# Weekly Job Search Review
 
-- Add a short list of target companies.
-- Add a follow up reminder in your calendar.
+Week of:
 
-## Related links
+What I shipped:
 
-- https://www.indeed.com/career-advice/resumes-cover-letters/how-to-write-a-resume
+What moved forward:
 
-## Final CTA
+What stalled:
 
-Track the work and change one thing each week. That is how this gets better.
+One change for next week:
+
+EOF
+```
+
+Now actually fill it in once per week. It can be three lines. The only required field is “One change for next week.” If you cannot name one change, you will repeat the same week.
+
+![Thinking hard](https://media.giphy.com/media/3o7aCTfyhYawdOXcFW/giphy.gif)
+
+### Step 4: Follow-ups that don’t feel weird
+
+Most searches die because follow-ups never happen, not because the resume is bad. The trick is to make follow-up dates part of the tracker, not something you “remember.”
+
+This is the rule I use because it’s predictable and doesn’t turn into spam:
+
+If you applied and heard nothing, follow up 5–7 business days later. If you had an interview, follow up within 24 hours with a thank-you and then again after the timeframe they gave you passes.
+
+That’s it. You’re not chasing people every two days. You’re just keeping your pipeline from freezing.
+
+When you add a row to the tracker, set `follow_up_date` immediately. That is the whole move.
+
+## A tracker table that stays readable
+
+If you prefer spreadsheets over CSV editing, keep the CSV as the “source of truth” and open it in a spreadsheet app. The format is the same either way. What matters is consistency.
+
+Here is the meaning of each column in plain language.
+
+| Column | What it is | Why it exists |
+|---|---|---|
+| company | The company name | Lets you group outcomes by employer |
+| role | The role title | Lets you compare role families |
+| location | City/remote/hybrid | Prevents confusion later |
+| date_applied | When you applied | Enables 30/60/90 day review |
+| status | Applied, Phone Screen, Interview, Rejected, Offer, etc | Turns feelings into states |
+| source | Where you found it | Shows which sources convert |
+| posting_link | The URL | Gives you a quick jump target |
+| follow_up_date | When you will follow up | Prevents silent stalls |
+| last_touch | Last action you took | Prevents duplicate follow-ups |
+| notes | Anything that matters | Captures context without bloating the row |
+
+## How you know this workflow is working
+
+You’ll feel it working when you stop wondering what happened and start seeing what happened. You will have a count of active applications. You will have follow-ups scheduled. You will be able to look back and see whether a certain resume version or source actually led to interviews.
+
+The weird part is that this doesn’t make job hunting easier emotionally. It just makes it less foggy. You can still get rejected. You can still get ignored. The difference is you can now respond with a real change instead of random flailing.
+
+## Common failure modes
+
+If this falls apart, it is almost always one of three things.
+
+The tracker exists but never gets updated. That is solved by making “add row to tracker” part of the application process itself. Apply, then log. Same session.
+
+Resume versions exist but are scattered. That is solved once: move them into the folder and rename them. You only have to clean the mess once.
+
+The weekly note stays empty. That is solved by making the weekly note stupidly small. If you cannot write the full template, write one line: “One change next week: ____.” Keeping the loop alive matters more than writing a nice note.
+
+## Closing
+
+This is not a motivational system. It’s a small set of files that turns a job search into a pipeline you can inspect. If you can see the pipeline, you can change it. If you can’t see it, you will keep guessing.
+
+If you implement only one part, implement the tracker. A single CSV that stays current beats any complicated setup that never gets touched.

@@ -7,182 +7,107 @@ description: "Exact steps to find a stuck service worker, remove it, and verify 
 theme: "Debugging"
 ---
 
-A stale service worker can make your site lie to you.
+How a single cached file made my entire GitHub Pages site refuse to update, why it happened, and exactly how to fix it if it ever happens to you.
 
-This post shows the exact steps I used to remove a stuck service worker and confirm updates shipped.
+## What actually happened
 
-Everything here is verifiable in a browser and in this repo.
+My GitHub Pages frontend absolutely refused to update after a full rebuild. I deleted the old code, pushed a new Next.js build, cleaned every folder, checked the deploy logs, and refreshed the live site a hundred times. The same old UI kept loading. Same filters button. Same old DOM. It looked like my deploy did not even run.
 
-## The promise
+GitHub Actions passed every time. The artifact had the correct static export. My repo was clean. My build folder was clean. I even ran `grep` across the entire project looking for any leftover UI code and found nothing.
 
-By the end, you will:
+Then I hit the live URL with `curl` and it returned the correct new markup. But the browser still showed the old one. So at that point the server and the browser disagreed. When that happens, something in the middle is lying to you.
 
-- find a service worker that is caching old content
-- remove it cleanly
-- verify the site updates without stale files
+And that something was a service worker I did not even know existed.
 
-> "If your browser still serves yesterday’s build, the fix is in the Application tab."
+## What the actual root problem was
 
-## What this is
+A stale service worker was still registered in the browser from an earlier version of the site. I did not write the service worker myself. AI generated it once, and I never questioned it. I did not know what “sw.js” even meant at the time.
 
-**High level:** A service worker is a background script that can cache files and serve them even after deploys.
+A service worker sits between the browser and the network. It can intercept requests and decide what to return. My service worker had cached the old version of the site and never let go of it. So even though the server was sending the new version, the browser ignored it.
 
-**Low level:** The browser registers a worker, stores cached assets, and serves those cached assets until you unregister it.
+The browser trusted the service worker more than the server.
 
-**Key terms:**
+This is the exact kind of bug that does not feel logical until you understand how aggressive service worker caching is.
 
-- **Service worker:** A browser script that can intercept network requests.
-- **Cache storage:** The browser’s saved asset store used by the worker.
-- **Unregister:** The action that removes the worker.
+## The fix that finally worked
 
-## What you need
+Here is the fix that instantly solved it:
 
-- Chrome or Edge
-- Access to DevTools
-- This repo checked out
+### Step 1  
+Open your site in Chrome.
 
-## Start to Finish
+### Step 2  
+Open DevTools with:  
+`Ctrl + Shift + I` or `Cmd + Option + I`
 
-### Step 1: Confirm the service worker is active
-Goal:
-Verify that a service worker is controlling the page.
+### Step 3  
+Go to the **Application** tab.
 
-Actions:
-- Open the site in Chrome.
-- Open DevTools → Application → Service Workers.
-- Look for an active registration.
+### Step 4  
+Click **Service Workers** on the left.
 
-Why:
-You need to prove a worker exists before changing anything. The Application tab shows exactly which worker is controlling the page. This avoids guessing. If no worker is active, your issue is not a worker cache.
+### Step 5  
+You will see one or more registered service workers.  
+Look for anything like:  
+`sw.js`  
+`service-worker.js`  
+or anything showing “activated”.
 
-Verify:
-- Expected: a service worker entry with "activated" or "running".
-- This confirms the worker is active.
+### Step 6  
+Click **Unregister**.
 
-If it fails:
-- Symptom: no worker listed.
-- Fix: skip to other cache issues like hard reload or CDN cache.
+### Step 7  
+Refresh the page.
 
-### Step 2: Unregister the worker
-Goal:
-Remove the worker so it can no longer intercept requests.
+If the service worker was the problem, the new version of the site will load instantly. No delay. No waiting. It is one of the most dramatic "instant fix" moments you can have in web development.
 
-Actions:
-- In DevTools → Application → Service Workers, click "Unregister".
-- Check "Update on reload".
-- Hard reload the page.
+This is the exact moment it hit me that the entire issue was not my code or GitHub Pages. It was a cached worker from a build that did not exist anymore.
 
-Why:
-Unregistering removes the worker script. The hard reload forces the browser to fetch live assets. "Update on reload" ensures you are not seeing cached files. This isolates the problem to the worker.
+## How to confirm this is your issue too
 
-Verify:
-- Expected: no active worker listed after reload.
-- This confirms the worker is gone.
+Here are the fastest ways to check if you have the same problem.
 
-If it fails:
-- Symptom: worker reappears after reload.
-- Fix: clear site data in Application → Storage and reload again.
+### 1. Hit your site with curl  
+Run this in your terminal:
 
-### Step 3: Clear cached data
-Goal:
-Remove any cached files the worker left behind.
+curl -sL https://your-site.github.io | head
 
-Actions:
-- DevTools → Application → Storage
-- Click "Clear site data"
-- Reload the page
+If the HTML here is newer than what your browser is showing, your browser is being lied to.
 
-Why:
-Even after unregistering, caches can stick around. Clearing site data removes cached files and storage keys. This guarantees the next load is from the network. It also removes old app state that could be misleading.
+### 2. Open your site in Incognito  
+If Incognito shows the new version but your normal browser does not, that is almost always a service worker or cache problem.
 
-Verify:
-- Expected: the cache storage list is empty.
-- This confirms no stale assets remain.
+### 3. Check DevTools  
+Look for an active service worker. If you see one and you did not explicitly write it, that is probably the issue.
 
-If it fails:
-- Symptom: cache entries remain.
-- Fix: close the tab, reopen, and clear again.
+## Why this problem happens to many developers
 
-### Step 4: Ensure the repo does not re-register a worker
-Goal:
-Confirm the project does not re-add a service worker on build.
+Service workers are extremely powerful. They allow offline support, caching, background syncing, and more. But the downside is that they aggressively hold onto cached files. This is on purpose. They are designed to keep apps working even if the network dies.
 
-Actions:
-- File path: `gatsby-config.ts`
-- Check the plugins list.
-- Ensure `gatsby-plugin-offline` is not present.
+The problem is that GitHub Pages does not know anything about your service worker. So even after a fresh deploy, the browser can still keep serving old files because the worker is literally intercepting every request.
 
-Why:
-`gatsby-plugin-offline` installs a service worker. If it is in the plugin list, the worker will come back. Removing the plugin prevents future re-registration. This is the root fix in a Gatsby site.
+This is why so many people complain that their GitHub Pages site does not update after a deploy. The deploy is fine. The browser is not.
 
-Verify:
-- Expected: no `gatsby-plugin-offline` entry in `gatsby-config.ts`.
-- This confirms the worker will not be re-added.
+## Why this deserves a blog post
 
-If it fails:
-- Symptom: plugin exists.
-- Fix: remove it and restart the dev server.
+Because it is one of the most confusing and frustrating bugs you can hit as a newer developer. You can spend hours thinking your deploy is wrong, your build is wrong, your repo is wrong, or GitHub Pages is broken. But the truth is that your browser is simply loading an old cached version from a script you forgot about, or did not know existed.
 
-### Step 5: Verify the live content updates
-Goal:
-Confirm that updates appear without stale content.
+Service workers can hold a website hostage if you are not careful.
 
-Actions:
-- Edit a visible line in the page content.
-- Run:
-  ```bash
-  bun run dev
-  ```
-- Reload the page in the browser.
+## What I would do differently now
 
-Why:
-A visible change is the easiest check. The dev server rebuilds on save. If the new text appears, the cache is no longer hiding changes. This confirms the issue is resolved.
+Since hitting this issue, here is what I changed in my workflow:
 
-Verify:
-- Expected: the edited text appears immediately after reload.
-- This confirms the worker is not blocking updates.
+- I never generate a service worker unless I know why I need it  
+- I always check DevTools when a deploy looks stuck  
+- I test live sites in Incognito to avoid cache issues  
+- I keep build processes simple until I fully understand what is happening  
+- I clean out all AI generated files before deploying anything  
 
-If it fails:
-- Symptom: old text still shows.
-- Fix: hard reload and clear site data again.
+Caching bugs like this are sneaky and they waste time, but once you see how they work, they are easy to avoid.
 
-## Verify it worked
+## Final takeaway
 
-- No active service worker in Application tab.
-- Cache storage is empty.
-- Content updates show immediately.
+If your website refuses to update even though your deploy is clean, it might be a stale service worker. You can confirm this by comparing the server output with curl and checking the Application tab in DevTools. Unregistering the worker fixes the issue instantly.
 
-## Common mistakes
-
-- **Symptom:** Changes show in dev server but not in browser.  
-  **Cause:** Worker cache still active.  
-  **Fix:** Unregister and clear site data.
-
-- **Symptom:** Worker keeps returning.  
-  **Cause:** Offline plugin still enabled.  
-  **Fix:** Remove the plugin and rebuild.
-
-- **Symptom:** Cached assets appear after deploy.  
-  **Cause:** The browser did not update.  
-  **Fix:** Hard reload with cache disabled in DevTools.
-
-## Cheat sheet
-
-- Application tab tells the truth.
-- Unregister, then clear site data.
-- Remove offline plugin if present.
-- Verify with a visible content change.
-
-## Next steps
-
-- Add a short "cache" note to your README.
-- Avoid service workers unless you need offline support.
-
-## Related links
-
-- https://developer.chrome.com/docs/devtools/application/service-workers/
-- https://www.gatsbyjs.com/docs/how-to/progressive-web-apps/offline/
-
-## Final CTA
-
-When the page lies to you, check the worker first.
+This bug taught me more about how the browser actually works than almost anything else I have built so far.

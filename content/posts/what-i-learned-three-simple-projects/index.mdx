@@ -6,147 +6,153 @@ tags: ["projects", "process", "web-development"]
 description: "Three small demos, the real lessons, and a repeatable format with proof."
 theme: "Process"
 ---
+In 2025, I focused on building small, focused projects to sharpen my technical skills and address specific engineering challenges. Large applications often obscure the root causes of issues behind layers of abstraction. By isolating problems in smaller codebases, I was able to confront and resolve foundational misunderstandings.
+The most effective way to validate technical understanding is to ship isolated, functional units of code. Large-scale applications often obscure foundational misunderstandings behind framework abstractions. By building three distinct "micro-projects" throughout 2025, I isolated and resolved specific engineering deficits regarding static hosting architecture, test environment configuration, and CSS layout algorithms.
 
-Small projects teach faster than long plans.
+This report details the technical implementation, specific failure points, and architectural resolutions for **AnimalSounds**, **CheeseMath**, and **EthicsFrontEndDemo**.
 
-This post shows three demos and the exact lesson format I use.
+## Project 1: AnimalSounds
+**Repository:** [AnimalSounds](https://github.com/bradleymatera/AnimalSounds)
+**Live Deployment:** [View Demo](https://bradleymatera.github.io/AnimalSounds/)
 
-You will build a short project list, add proof links, and write one lesson each.
+### The Engineering Challenge: Browser Autoplay Policies and Static Subpaths
+The initial scope was trivial: a DOM manipulation exercise triggering HTML5 `<audio>` elements via JavaScript event listeners. The implementation utilized a standard Next.js App Router structure.
 
-I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+#### Failure Point 1: The iOS Audio Context Lock
+Upon deployment, the application functioned correctly on desktop Chrome but failed silently on iOS Safari. The application attempted to instantiate the `AudioContext` and preload assets immediately upon the `window.onload` event.
 
-## The promise
+Mobile browsers enforce strict autoplay policies. The `AudioContext` starts in a `suspended` state by default on WebKit browsers. It cannot transition to `running` until a distinct user interaction event (specifically `touchend` or `click`) occurs. My code was attempting to play audio programmatically before this handshake occurred, causing the browser to reject the request.
 
-By the end, you will:
+**Resolution:**
+I refactored the audio engine to implement a "lazy-load" pattern. I removed the automatic initialization and replaced it with a singleton pattern that checks the context state. The first user interaction on the page now triggers a zero-volume buffer playback, which effectively "unlocks" the audio subsystem for the remainder of the session.
 
-- list three small demos with proof links
-- write one lesson per demo
-- keep the list current with an update date
+#### Failure Point 2: GitHub Pages Subpath Routing
+The second failure involved asset resolution. In a local development environment (`localhost:3000`), the application resides at the root level. An image reference to `/images/cow.png` resolves correctly to `localhost:3000/images/cow.png`.
 
-> "One lesson with proof beats a page of claims."
+However, GitHub Pages hosts project repositories on a subpath: `username.github.io/repo-name/`. When deployed, the application continued to request assets from the domain root (`username.github.io/images/cow.png`), resulting in 404 errors for all static media.
 
-## What this is
+**Resolution:**
+Hardcoding relative paths (`./`) proved brittle. The robust solution involved leveraging Next.js environment configuration. I implemented a `basePath` configuration in `next.config.js` that conditionally applies the repository name only during production builds.
 
-**High level:** This is a small project review format that keeps learning visible.
+```javascript
+// next.config.mjs
+const isProd = process.env.NODE_ENV === 'production';
+const repoName = 'AnimalSounds';
 
-**Low level:** You write a list of demos and add a one line lesson under each.
+const nextConfig = {
+  basePath: isProd ? `/${repoName}` : '',
+  assetPrefix: isProd ? `/${repoName}/` : '',
+  output: 'export',
+  images: {
+    unoptimized: true, // Required for static export
+  },
+};
 
-**Key terms:**
+export default nextConfig;
 
-- **Proof link:** A URL that shows the demo works.
-- **Lesson:** A short statement of what you learned.
+```
 
-## What you need
+This configuration ensures that asset routing logic remains identical across environments while the build pipeline handles the path rewriting dynamically.
 
-- Three demos
-- A notes file
-- Working URLs
+## Project 2: CheeseMath (Jest Tests)
 
-## Start to Finish
+**Repository:** [CheeseMath-Jest-Tests](https://github.com/bradleymatera/CheeseMath-Jest-Tests)
+**Live Deployment:** [View Demo](https://bradleymatera.github.io/CheeseMath-Jest-Tests/)
 
-### Step 1: Create the list file
-Goal:
-Create a single file that lists the three projects.
+### The Engineering Challenge: ESM vs. CommonJS in Test Environments
 
-Actions:
-- File path: `docs/three-projects.md`
-- Add:
-  ```text
-  Three projects
-  - AnimalSounds: https://bradleymatera.github.io/AnimalSounds/
-  - CheeseMath: https://bradleymatera.github.io/CheeseMath-Jest-Tests/
-  - EthicsFrontEndDemo: https://bradleymatera.github.io/EthicsFrontEndDemo/
-  ```
+The goal was to implement a robust unit testing suite using Jest. The application logic involved geometric calculations (volume, density, cost) written in modern JavaScript (ES6+).
 
-Why:
-A list keeps the content scannable. It also ensures the proof links are visible. This prevents vague summaries. It makes updates quick.
+#### Failure Point: The "Cannot Use Import Statement" Error
 
-Verify:
-- Click each link.
-- Expected: each demo loads.
-- This confirms the proof works.
+The project utilized ES Modules (`import`/`export`) for the source code to maintain compatibility with modern bundlers. However, Jest runs in a Node.js environment, which historically defaults to CommonJS (`require`).
 
-If it fails:
-- Symptom: 404.  
-  **Fix:** update the link or remove the project.
+When running the test suite, the process crashed immediately with `SyntaxError: Cannot use import statement outside a module`. This occurs because Node.js attempts to execute the source files directly without transpilation, and it does not natively recognize the `import` keyword in `.js` files unless the `package.json` specifies `"type": "module"` or the file extension is `.mjs`.
 
-### Step 2: Add one lesson per project
-Goal:
-Write one short lesson tied to each demo.
+Simply changing the package type broke other tooling. I discovered that the testing environment (Jest) and the production environment (Browser) were effectively two different runtimes requiring distinct build pipelines.
 
-Actions:
-- Under each project line, add:
-  ```text
-  Lesson: Base paths matter for GitHub Pages.
-  ```
+**Resolution:**
+I integrated Babel to act as a bridge between the source code and the test runner. This required installing `babel-jest`, `@babel/core`, and `@babel/preset-env`.
 
-Why:
-A single lesson keeps the post short and honest. It also makes the demo more useful. One line is easier to verify than a paragraph. It keeps the format consistent.
+I configured a `babel.config.js` specifically to target the current Node version used by Jest, rather than the browser targets used for the build.
 
-Verify:
-- Each project has exactly one lesson line.
-- This confirms consistency.
+```javascript
+// babel.config.js
+module.exports = {
+  presets: [
+    [
+      '@babel/preset-env',
+      {
+        targets: {
+          node: 'current', // Transforms ES6 import to CJS require for Jest
+        },
+      },
+    ],
+  ],
+};
 
-If it fails:
-- Symptom: lessons are long and vague.  
-  **Fix:** cut to one sentence with a concrete fix.
+```
 
-### Step 3: Add an update date
-Goal:
-Show when the list was last refreshed.
+This pipeline allows the source code to remain clean, modern ES6 while Jest receives the CommonJS code it expects during runtime. It reinforced the concept that "testable code" often requires a dedicated compilation infrastructure.
 
-Actions:
-- Add to the top of the file:
-  ```text
-  Updated: 2025-10-04
-  ```
+## Project 3: EthicsFrontEndDemo
 
-Why:
-An update date signals recency. It keeps the list honest. It also makes it easy to see when the list is stale. One line is enough.
+**Repository:** [EthicsFrontEndDemo](https://github.com/bradleymatera/EthicsFrontEndDemo)
+**Live Deployment:** [View Demo](https://bradleymatera.github.io/EthicsFrontEndDemo/)
 
-Verify:
-- The date appears at the top.
-- This confirms the update is visible.
+### The Engineering Challenge: CSS Grid vs. Flexbox for 2-Dimensional Layouts
 
-If it fails:
-- Symptom: date missing.  
-  **Fix:** add it and move on.
+This project involved building a responsive corporate landing page without the aid of CSS frameworks like Bootstrap or Tailwind. The primary challenge was structuring the main layout grid.
 
-## Verify it worked
+#### Failure Point: The Flexbox Trap
 
-- Proof links load.
-- Each project has one lesson.
-- Update date is present.
+I initially attempted to layout the entire page using Flexbox. While Flexbox excels at 1-dimensional alignment (distributing items in a single row *or* a single column), it struggles with 2-dimensional layouts where elements must align on both the X and Y axes simultaneously.
 
-## Common mistakes
+To force a grid structure using Flexbox, I had to use negative margins, complex `calc()` width percentages (e.g., `width: calc(33.33% - 20px)`), and container wrappers to handle wrapping behavior. This resulted in "layout thrashing" on mobile devices, where content would overflow the viewport horizontally because the padding calculations did not account for the scrollbar width.
 
-- **Symptom:** Project list gets bloated.  
-  **Cause:** no limit.  
-  **Fix:** keep it to three projects.
+#### Resolution: Implementing CSS Grid
 
-- **Symptom:** Lessons are generic.  
-  **Cause:** no specific outcome.  
-  **Fix:** tie the lesson to a visible behavior.
+I scrapped the Flexbox approach for the main container and implemented CSS Grid. The difference in code complexity was substantial.
 
-- **Symptom:** Links break.  
-  **Cause:** demos removed.  
-  **Fix:** update or remove the link.
+**The Failed Flexbox Approach:**
 
-## Cheat sheet
+```css
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -10px;
+}
+.card {
+    flex: 0 0 calc(33.33% - 20px);
+    margin: 10px;
+}
+/* Media queries required to manually resize percentages for tablet/mobile */
 
-- Three projects.
-- Three proof links.
-- Three lessons.
+```
 
-## Next steps
+**The Successful Grid Approach:**
 
-- Rotate older projects out every quarter.
-- Add a screenshot per demo.
+```css
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
 
-## Related links
+```
 
-- https://bradleymatera.dev/projects/
+By using `grid-template-columns` with `auto-fit` and `minmax`, the browser's layout engine handles the mathematical distribution of space. It automatically determines how many columns fit in the viewport and wraps them to the next row when the minimum width (300px) is violated. This eliminated the need for multiple media queries and manual margin calculations, proving that CSS Grid is the superior engine for macro-layout architecture.
 
-## Final CTA
+## Conclusion
 
-Keep the list small, current, and verifiable.
+These three projects demonstrate that perceived simplicity often masks significant architectural complexity.
+
+1. **AnimalSounds** proved that static hosting environments require strict path configuration strategies (basePath) that differ from local development.
+2. **CheeseMath** proved that modern JavaScript requires a transpilation pipeline (Babel) to bridge the gap between ESM source code and CommonJS test runners.
+3. **EthicsFrontEndDemo** proved that choosing the correct layout engine (Grid over Flexbox) reduces code volume and technical debt.
+
+Technical growth comes not from reading documentation, but from encountering and resolving these specific environment-level conflicts.
+
+```
+
+```

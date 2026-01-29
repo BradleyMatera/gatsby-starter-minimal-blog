@@ -7,200 +7,237 @@ description: "A practical guide to building an interactive portfolio that still 
 theme: "Portfolio"
 ---
 
-Portfolios should be readable first, flashy second.
 
-This post shows how to build a small interactive portfolio without breaking clarity.
+Portfolios should be readable first and interactive second. Not because interaction is bad, but because the person viewing your site is usually scanning, not exploring. If the first ten seconds is motion, hidden panels, and clever transitions, you are making your best content harder to access.
 
-You will set up a basic structure, add one interactive section, and verify accessibility.
+What I actually mean by “interactive portfolio” is simple. It is a normal portfolio that still works as plain HTML, and then you add one or two small interactions that make it feel alive without hiding the important parts. If you can turn off JavaScript and still understand who you are, what you built, and how to contact you, you are in a good spot.
 
-I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+![Recruiter scanning fast](https://media.giphy.com/media/CLvo7qdosBBHG/giphy.gif)
 
 ## The promise
 
-By the end, you will:
+This guide builds one small interactive section the safe way. You will end with a page that scans quickly, still has personality, and has an interaction that does not break accessibility or bury your content.
 
-- build a simple portfolio structure
-- add one interactive section without hiding content
-- verify that a recruiter can scan it fast
+Here’s the standard I use: a recruiter should be able to answer three questions without clicking anything. Who is this person. What have they built. How do I contact them. If those answers require a toggle, a tab, or a hover effect, the structure is wrong.
 
-> "If the content is not readable without motion, it is not ready."
+## What counts as “safe” interaction
 
-## What this is
+Safe interaction is interaction that adds convenience or flavor, not interaction that gates information. A theme toggle is safe because it does not hide your projects. A “show more details” panel is usually safe if the summary is still visible. A filter for projects can be safe if the full list is still reachable and nothing becomes impossible to find.
 
-**High level:** An interactive portfolio is a normal portfolio with small enhancements like animation or toggles.
+Unsafe interaction is anything that replaces the readable base. If your Projects section is only visible after a tab click, or your contact info is inside an accordion, you are betting your entire portfolio on someone choosing to interact. Most people won’t.
 
-**Low level:** You keep the core HTML readable, then add a small JavaScript layer that does not hide content.
+## Start to finish
 
-**Key terms:**
+### Step 1: Build the readable base first
 
-- **Skip link:** A link that jumps to the main content for keyboard users.
-- **CTA:** The main action you want a reader to take.
-- **Progressive enhancement:** Adding JS only after the core page works.
+Create a folder and make a single HTML file. This is intentionally plain because the whole point is making sure the content is readable without styling or scripts.
 
-## What you need
+File: `index.html`
 
-- A folder for your site
-- A simple web server (optional)
-- A text editor
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bradley Matera - Portfolio</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-## Start to Finish
+    <header class="site-header">
+      <h1>Bradley Matera</h1>
+      <p>Systems minded builder. I ship small demos and keep them readable.</p>
 
-### Step 1: Create the base HTML
-Goal:
-Create a clean, readable structure with headings and sections.
+      <nav aria-label="Primary">
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
 
-Actions:
-- File path: `index.html`
-- Add:
-  ```html
-  <!doctype html>
-  <html lang="en">
-    <head>
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title>Bradley Matera - Portfolio</title>
-    </head>
-    <body>
-      <a class="skip-link" href="#main">Skip to content</a>
-      <header>
-        <h1>Bradley Matera</h1>
-        <p>Systems minded software engineer.</p>
-      </header>
-      <main id="main">
-        <section>
-          <h2>Projects</h2>
-          <ul>
-            <li>AnimalSounds</li>
-            <li>WebGPU Triangle Demo</li>
-          </ul>
-        </section>
-        <section>
-          <h2>Contact</h2>
-          <p>Email: bradmatera@gmail.com</p>
-        </section>
-      </main>
-    </body>
-  </html>
-  ```
+    <main id="main">
+      <section id="projects" aria-labelledby="projects-title">
+        <h2 id="projects-title">Projects</h2>
+        <p class="lede">These are fast links to real work. Details can come later, but the list has to scan fast.</p>
 
-Why:
-This is the readable core. Headings give structure for scanning. A skip link is a basic accessibility requirement. The portfolio should be usable even with no CSS. This also makes the interactive layer optional.
+        <ul class="projects">
+          <li>
+            <strong>AnimalSounds</strong>
+            <span class="muted">Small interactive demo focused on clean UI and quick scanning.</span>
+          </li>
+          <li>
+            <strong>WebGPU Triangle Demo</strong>
+            <span class="muted">A minimal graphics demo that proves the project runs and renders.</span>
+          </li>
+        </ul>
+      </section>
 
-Verify:
-- Open `index.html` in a browser.
-- Expected: readable text with a working skip link.
-- This confirms the base page works.
+      <section id="about" aria-labelledby="about-title">
+        <h2 id="about-title">About</h2>
+        <p>I care about repeatable builds, clear structure, and projects that don’t fall apart once they are deployed. I would rather have one clean interaction that works everywhere than five effects that look good only on my machine.</p>
+      </section>
 
-If it fails:
-- Symptom: skip link does nothing.
-- Fix: ensure the `main` element has `id="main"`.
+      <section id="contact" aria-labelledby="contact-title">
+        <h2 id="contact-title">Contact</h2>
+        <p>Email: <a href="mailto:bradmatera@gmail.com">bradmatera@gmail.com</a></p>
+      </section>
+    </main>
+  </body>
+</html>
+```
 
-### Step 2: Add a small interactive section
-Goal:
-Add one interactive panel without hiding essential content.
+At this point, open the file in a browser and do one boring check that matters. Hit Tab until the skip link appears, press Enter, and confirm focus jumps into the main content. If the page is readable and the skip link works, the foundation is solid.
 
-Actions:
-- File path: `index.html`
-- Add after Projects:
-  ```html
-  <section>
-    <h2>Focus</h2>
-    <button id="toggle">Show focus areas</button>
-    <ul id="focus" hidden>
-      <li>Clear documentation</li>
-      <li>Repeatable deploys</li>
-      <li>Honest demos</li>
-    </ul>
-  </section>
-  <script>
-    const button = document.getElementById("toggle");
-    const list = document.getElementById("focus");
-    button.addEventListener("click", () => {
-      list.hidden = !list.hidden;
-      button.textContent = list.hidden ? "Show focus areas" : "Hide focus areas";
-    });
-  </script>
-  ```
+### Step 2: Add one interaction without hiding core content
 
-Why:
-A small toggle is enough to make the page feel interactive. Keeping the content in the DOM means it can still be read. This avoids hiding critical information from search and screen readers. The toggle is a safe, low risk interaction.
+The safest first interaction is a detail panel that is clearly “extra” and does not contain anything essential. The Projects list stays visible. The interaction simply gives a way to expand optional context.
 
-Verify:
-- Click the button.
-- Expected: the list shows and hides.
-- This confirms the interaction works.
+Add this section right after the Projects list.
 
-If it fails:
-- Symptom: button does nothing.
-- Fix: ensure the element IDs match the script.
+```html
+<section aria-labelledby="focus-title" class="focus">
+  <h2 id="focus-title">Focus</h2>
+  <p class="lede">This is optional detail. It should never be required to understand the page.</p>
 
-### Step 3: Add basic styling
-Goal:
-Make the layout readable without overpowering the content.
+  <button id="focusToggle" aria-expanded="false" aria-controls="focusList">
+    Show focus areas
+  </button>
 
-Actions:
-- File path: `styles.css`
-- Add:
-  ```css
-  body { font-family: system-ui, sans-serif; max-width: 60ch; margin: 2rem auto; line-height: 1.6; }
-  .skip-link { position: absolute; left: -999px; }
-  .skip-link:focus { left: 1rem; background: #000; color: #fff; padding: 0.5rem; }
-  ```
-- Link it in `index.html`:
-  ```html
-  <link rel="stylesheet" href="styles.css" />
-  ```
+  <ul id="focusList" hidden>
+    <li>Clear documentation and predictable structure</li>
+    <li>Repeatable deploys and clean build output</li>
+    <li>Accessible UI that still looks intentional</li>
+  </ul>
+</section>
 
-Why:
-Readable line length matters more than effects. The skip link styles make keyboard navigation visible. This keeps the page accessible while still being clean. The styles stay minimal.
+<script>
+  const button = document.getElementById("focusToggle");
+  const list = document.getElementById("focusList");
 
-Verify:
-- Reload the page.
-- Expected: text is centered and readable.
-- This confirms CSS is applied.
+  button.addEventListener("click", () => {
+    const nextHidden = !list.hidden;
+    list.hidden = nextHidden;
 
-If it fails:
-- Symptom: no styling applied.
-- Fix: ensure the CSS file name matches the link.
+    const expanded = String(!nextHidden);
+    button.setAttribute("aria-expanded", expanded);
+    button.textContent = nextHidden ? "Show focus areas" : "Hide focus areas";
+  });
+</script>
+```
 
-## Verify it worked
+This is the difference between “interaction” and “UI trick.” The content exists in the DOM. The button toggles visibility, and the ARIA attributes stay honest so assistive tech understands the state change.
 
-- The page reads fine without JavaScript.
-- The toggle works when JavaScript is enabled.
-- The skip link is visible on focus.
+![Toggling UI](https://media.giphy.com/media/Ws6T5PN7wHv3cY8xy8/giphy.gif)
 
-## Common mistakes
+Now verify it like a normal person. Click the button. Confirm the list appears. Click again. Confirm it hides. Then hit Tab and confirm the button is reachable by keyboard and still works when you activate it.
 
-- **Symptom:** Interactive section hides important info.  
-  **Cause:** You moved core content into a toggle.  
-  **Fix:** Keep core content visible and use toggles for extras.
+### Step 3: Add minimal styling that improves scanning
 
-- **Symptom:** Page feels cluttered.  
-  **Cause:** Too many animations.  
-  **Fix:** Keep one or two small interactions.
+Most portfolios get worse when styling becomes the main event. Keep the typography and spacing clean first. Effects can wait.
 
-- **Symptom:** Skip link does not work.  
-  **Cause:** Missing target ID.  
-  **Fix:** Add `id="main"` to the main element.
+File: `styles.css`
 
-## Cheat sheet
+```css
+:root { color-scheme: light dark; }
 
-- Build a readable HTML base first.
-- Add one small interaction.
-- Keep core content visible.
-- Verify keyboard navigation.
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  line-height: 1.6;
+}
 
-## Next steps
+.site-header {
+  max-width: 70ch;
+  margin: 0 auto;
+  padding: 2.25rem 1.25rem 1.5rem;
+}
 
-- Add a projects page with case studies.
-- Add a single featured project section.
-- Add a contact form if needed.
+main {
+  max-width: 70ch;
+  margin: 0 auto;
+  padding: 0 1.25rem 3rem;
+}
 
-## Related links
+nav a {
+  margin-right: 1rem;
+}
 
-- https://webaim.org/techniques/keyboard/
-- https://web.dev/learn/accessibility/
+.lede {
+  margin: 0.5rem 0 1rem;
+}
 
-## Final CTA
+.projects {
+  padding-left: 1.1rem;
+}
 
-Ship the simple version first, then add motion only if the content still scans fast.
+.projects li {
+  margin: 0 0 0.75rem;
+}
+
+.muted {
+  display: block;
+  opacity: 0.75;
+}
+
+.focus button {
+  padding: 0.6rem 0.9rem;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+}
+
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  padding: 0.5rem 0.75rem;
+  background: #000;
+  color: #fff;
+  z-index: 10;
+}
+```
+
+Reload the page and do the same scan test again. Can you read the header, see Projects, and see Contact without hunting. That is the actual goal. If it scans clean now, you have permission to add small personality later.
+
+## The interaction rules I follow
+
+When people say “make it interactive,” they usually mean “make it feel alive.” That is fair. The problem is that most interactive ideas also hide content. The easiest way to avoid that trap is to keep a clear boundary between what must be visible and what can be optional.
+
+Below is a simple reference table. It is not theory. It is just a way to decide whether an idea is helping or harming the scan experience.
+
+| Interaction | Usually safe | Usually risky | Why it matters |
+|---|---|---|---|
+| Theme toggle | ✅ | ❌ | Doesn’t hide content, just changes presentation |
+| “Show more details” below a summary | ✅ | ❌ | Keeps the scan path intact |
+| Project filtering | ✅ | ⚠️ | Safe if an “All” view exists and nothing disappears permanently |
+| Hover-only reveals | ❌ | ✅ | Hover does not exist on touch devices and often hides important info |
+| Tabs for core sections | ❌ | ✅ | Forces clicks to discover basic content |
+| Auto-animations on load | ⚠️ | ⚠️ | Can be fine, but it can also distract from scanning |
+
+## Accessibility checks that are actually worth doing
+
+You do not need a full audit to avoid the most common problems. You need a small handful of checks that catch the things people break with interaction.
+
+First, keyboard only. Reload the page, do not touch the mouse, and hit Tab through the header links and the toggle button. If the page becomes annoying to use, it will be annoying for more people than you think.
+
+Second, reduced motion. If you later add animation, respect `prefers-reduced-motion`. If your portfolio depends on motion to communicate structure, you are building a demo of animation, not a portfolio.
+
+Third, readability without JavaScript. Turn off scripts or use a browser extension to block them. The Projects list and Contact section must still exist and make sense.
+
+![Keyboard navigation](https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif)
+
+## The part recruiters actually care about
+
+Most reviewers are not judging your animation skills. They are judging whether you can communicate clearly, structure information, and ship something that doesn’t break. If your portfolio makes them work to find basic facts, you are losing points for the wrong reason.
+
+The fastest win is always the same: make the first screen boring in the best way. Name, role, one sentence, projects, contact. Then add the small interaction after the essentials are already visible.
+
+![Fixing bugs](https://media.giphy.com/media/oaDcc0LTCuIAiGYrzn/giphy.gif)
+
+## Closing
+
+A good interactive portfolio is not a playground. It is a readable page with one or two deliberate interactions that do not hide the important content. Build the readable base first, add one safe interaction, and verify it works with keyboard navigation. If you do that, the portfolio stays fun without becoming a puzzle.

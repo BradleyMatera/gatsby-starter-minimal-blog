@@ -7,144 +7,255 @@ description: "A concrete way to prove a skill with one small demo and proof link
 theme: "Portfolio"
 ---
 
-Small projects are the fastest way to show a skill.
+Small projects are the fastest mechanism to demonstrate technical competence. A resume lists claims; a repository provides evidence.
 
-This post shows how to build one demo and document it clearly.
+This post documents how to scope, build, and document a "Skill Proof"—a micro-project designed to verify a single capability.
 
-You will ship one feature, add proof links, and write a short case note.
+You will implement a specific feature, deploy it to a public URL, and write documentation that explains the technical decision-making process.
 
-I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+This is a lab guide. You should execute these steps locally to produce a portfolio asset.
 
 ## The promise
 
-By the end, you will:
+By the end of this guide, you will:
 
-- pick one skill to prove
-- build one small demo
-- add proof links and a short explanation
-
-> "One clear demo beats a vague resume line."
+- Scoping a project to a single, verifiable technical skill.
+- Implement a functional "Client-Side Search" demo using vanilla JavaScript.
+- Deploy the project to a public URL.
+- Structure a README that functions as technical documentation.
 
 ## What this is
 
-**High level:** A skill proof is a small project that shows one capability.
+**High level:** A Skill Proof is a contained project that demonstrates proficiency in one specific area (e.g., API integration, state management, or performance optimization) without the overhead of a full application.
 
-**Low level:** You build one feature, deploy it, and link the repo.
+**Low level:** You will create a single HTML file that fetches data and filters it, push it to GitHub, and deploy it via a static host.
 
 **Key terms:**
 
-- **Skill proof:** A demo that shows one skill.
-- **Proof link:** A repo or live URL.
+- **Scope Creep:** The tendency to add unnecessary features (like authentication or complex styling) that distract from the core skill being demonstrated.
+- **Proof Link:** A direct URL to a running instance of the code. Code that does not run is difficult to verify.
+- **Context Statement:** A specific section in documentation explaining *why* the solution was built this way.
 
 ## What you need
 
-- A repo
-- A deploy target
-- A short README
+- A GitHub account.
+- A code editor (VS Code).
+- A terminal.
+- A free Vercel or Netlify account (or GitHub Pages).
 
 ## Start to Finish
 
-### Step 1: Choose the skill
-Goal:
-Pick a single skill you can demonstrate quickly.
+### Step 1: Define the scope
+**Goal:**
+Select a single technical problem to solve. For this lab, the skill is **"Efficient Client-Side Filtering."**
 
-Actions:
-- Write the skill in `README.md`:
-  ```text
-  Skill to prove: client side search
-  ```
+**Actions:**
 
-Why:
-One skill keeps the project focused. It also makes the output easy to judge. This prevents scope creep. You can do another skill later.
+1.  Create a local folder named `skill-demo-search`.
+2.  Create a `README.md` file immediately.
+3.  Add the following "Goal Statement" to the top:
+    ```markdown
+    # Client-Side Search Demo
+    **Goal:** Demonstrate performant array filtering on a dataset of 500 records using vanilla JavaScript.
+    **Constraint:** No external libraries (no React, no Lodash).
+    ```
 
-Verify:
-- The skill is one sentence.
-- This confirms the scope is small.
+**Why:**
+Defining the constraint upfront prevents over-engineering. Employers want to see that you can solve problems with native tools before reaching for heavy frameworks. Writing the goal first keeps the development focused.
 
-If it fails:
-- Symptom: you list five skills.  
-  **Fix:** keep only one.
+**Verify:**
+- Read the README.
+- Confirm it lists exactly one goal.
+- Confirm it lists exactly one constraint.
 
-### Step 2: Build the smallest demo
-Goal:
-Implement the feature in the simplest way.
+**If it fails:**
+- **Symptom:** You feel the urge to add a "Login" page.
+- **Fix:** Delete the idea. Authentication is a separate skill. Do not mix them.
 
-Actions:
-- Build a list and filter it by input.
-- Example code:
-  ```js
-  const filtered = items.filter((i) => i.name.includes(query));
-  ```
+### Step 2: Build the demo
+**Goal:**
+Implement the filtering logic in the simplest possible way.
 
-Why:
-The demo should be easy to review. A small example makes the skill obvious. It also reduces bugs. This keeps the project finishable.
+**Actions:**
 
-Verify:
-- Search input filters the list.
-- This confirms the feature works.
+1.  Create an `index.html` file in your folder.
+2.  Paste the following code. This sets up a mock dataset and a search input.
+    ```html
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Skill Proof: Search</title>
+        <style>
+            body { font-family: system-ui, sans-serif; padding: 20px; max-width: 600px; margin: 0 auto; }
+            input { padding: 10px; width: 100%; box-sizing: border-box; margin-bottom: 20px; font-size: 16px; }
+            .item { padding: 10px; border-bottom: 1px solid #eee; }
+            .hidden { display: none; }
+        </style>
+    </head>
+    <body>
+        <h1>Employee Directory</h1>
+        <input type="text" id="search" placeholder="Type to filter names...">
+        <div id="results"></div>
 
-If it fails:
-- Symptom: list does not update.  
-  **Fix:** ensure the query state updates on input.
+        <script>
+            // 1. Generate Mock Data
+            const data = Array.from({ length: 500 }, (_, i) => ({
+                id: i,
+                name: `Employee ${i + 1}`,
+                role: i % 3 === 0 ? 'Engineer' : 'Designer'
+            }));
 
-### Step 3: Add proof links
-Goal:
-Make the demo verifiable.
+            const list = document.getElementById('results');
+            const input = document.getElementById('search');
 
-Actions:
-- Add to README:
-  ```text
-  Repo: https://github.com/yourname/project
-  Demo: https://yourname.github.io/project
-  ```
+            // 2. Initial Render
+            function render(items) {
+                list.innerHTML = items.map(i => 
+                    `<div class="item"><strong>${i.name}</strong> - ${i.role}</div>`
+                ).join('');
+            }
+            render(data);
 
-Why:
-Proof links make the skill real. They also save time for reviewers. This is the most important part of the project. Without proof links, the skill is just a claim.
+            // 3. Filter Logic
+            input.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase();
+                const filtered = data.filter(item => 
+                    item.name.toLowerCase().includes(term)
+                );
+                render(filtered);
+            });
+        </script>
+    </body>
+    </html>
+    ```
+3.  Open `index.html` in your browser.
 
-Verify:
-- Click each link.
-- Expected: repo and demo load.
-- This confirms the proof works.
+**Why:**
+This code demonstrates three distinct competencies:
+1.  **Data generation:** Creating mock data for testing.
+2.  **DOM manipulation:** Updating the UI based on state.
+3.  **Event handling:** Reacting to user input in real-time.
 
-If it fails:
-- Symptom: 404.  
-  **Fix:** update the URLs.
+**Verify:**
+1.  Type "50" into the box.
+2.  **Expected:** The list updates to show only employees with "50" in their name (e.g., "Employee 50", "Employee 150").
+3.  Delete the text.
+4.  **Expected:** The full list returns.
+
+**If it fails:**
+- **Symptom:** List vanishes.
+- **Fix:** Check the console for syntax errors. Ensure `render` is called inside the event listener.
+
+### Step 3: Deploy the project
+**Goal:**
+Make the code accessible to anyone with a web browser.
+
+**Actions:**
+
+1.  **Push to GitHub:**
+    ```bash
+    git init
+    git add .
+    git commit -m "feat: implement search logic"
+    git branch -M main
+    # Create a new repo on GitHub and follow the "push an existing repository" instructions
+    ```
+2.  **Deploy (Vercel Example):**
+    - Go to Vercel.com.
+    - Click "Add New" > "Project".
+    - Import your new GitHub repository.
+    - Click "Deploy".
+    - Wait for the "Production Deployment" URL.
+
+**Why:**
+Code that sits on your hard drive is invisible to recruiters. A live URL proves the code works in a production environment and shows you understand the deployment lifecycle.
+
+**Verify:**
+1.  Open the Vercel/Netlify URL on your phone (a different device).
+2.  **Expected:** The site loads and the search functions correctly.
+
+**If it fails:**
+- **Symptom:** 404 Error.
+- **Fix:** Ensure your file is named `index.html`. Most static hosts look for this specific filename by default.
+
+### Step 4: Document the proof
+**Goal:**
+Explain your work so a recruiter understands the value without reading the code.
+
+**Actions:**
+
+1.  Open `README.md`.
+2.  Replace the contents with this structure:
+    ```markdown
+    # Skill Proof: Client-Side Search
+
+    **Live Demo:** [Insert Vercel URL Here]
+    **Source Code:** [Insert GitHub Repo URL Here]
+
+    ## The Goal
+    To demonstrate efficient array filtering and DOM updates using vanilla JavaScript, ensuring high performance with a dataset of 500 items.
+
+    ## Technical Choices
+    - **Vanilla JS:** Used to avoid the bundle size overhead of React/Vue for a simple list interaction.
+    - **Array.filter():** Selected for readability and native browser optimization.
+    - **Template Literals:** Used for clean HTML generation within the render function.
+
+    ## How to Run Locally
+    1. Clone the repo.
+    2. Open `index.html` in any browser.
+    ```
+3.  Push the changes to GitHub.
+
+**Why:**
+The README is the interface between your code and the human hiring manager. It provides context. Explicitly stating *why* you chose Vanilla JS over React shows engineering maturity.
+
+**Verify:**
+1.  Go to your GitHub repository page.
+2.  Click the "Live Demo" link in your README.
+3.  Confirm it opens the deployed site.
+
+**If it fails:**
+- **Symptom:** Links are unclickable.
+- **Fix:** Ensure you use standard Markdown syntax `[Link Text](URL)`.
 
 ## Verify it worked
 
-- The demo shows the skill.
-- The proof links open.
-- The README states the goal clearly.
+Perform this final audit before sharing the project:
+
+1.  **Scope Check:** Does the project do exactly one thing (Search)? Yes.
+2.  **Functionality Check:** Does the live link work on a mobile device? Yes.
+3.  **Documentation Check:** Does the README explain the "Why" and not just the "How"? Yes.
 
 ## Common mistakes
 
-- **Symptom:** The project proves too many things.  
-  **Cause:** scope creep.  
-  **Fix:** cut it down to one feature.
+- **Symptom:** The project has no README or a default "Create React App" README.
+  **Cause:** Neglecting documentation.
+  **Fix:** Always replace default READMEs. A generic README suggests a lack of attention to detail.
 
-- **Symptom:** Proof links are missing.  
-  **Cause:** no deploy step.  
-  **Fix:** deploy and add links.
+- **Symptom:** The code works locally but shows a blank page online.
+  **Cause:** Case sensitivity issues or incorrect file paths.
+  **Fix:** Ensure files are lowercase (e.g., `index.html`, not `Index.html`). Linux servers (used by Vercel/Netlify) are case-sensitive.
 
-- **Symptom:** The skill is unclear.  
-  **Cause:** no goal statement.  
-  **Fix:** add one sentence to README.
+- **Symptom:** You spent 4 hours styling the page with CSS.
+  **Cause:** Scope creep.
+  **Fix:** Use standard browser styles or a classless CSS framework (like Water.css) if you must style it. The goal is to prove the logic, not your design skills.
 
 ## Cheat sheet
 
-- One skill.
-- One demo.
-- Two proof links.
+1.  **Pick:** One specific interaction (Search, Sort, Fetch, Form Validation).
+2.  **Build:** Use the simplest tool for the job (often vanilla JS).
+3.  **Deploy:** Get a public URL immediately.
+4.  **Link:** Put the URL at the very top of the README.
 
 ## Next steps
 
-- Add a short case study paragraph.
-- Add one screenshot of the demo.
+- **Refactor:** Create a version 2 branch that adds a "Debounce" function to the search input to prove performance optimization skills.
+- **Test:** Add a simple unit test file to verify the filtering logic.
+- **Expand:** Do this again for a different skill, like "API Data Fetching" or "Form State Management."
 
 ## Related links
 
-- https://bradleymatera.dev/projects/
-
-## Final CTA
-
-Prove one skill clearly, then move to the next.
+- [GitHub Guides: Documenting your projects](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes)
+- [Vercel Deployment Documentation](https://vercel.com/docs/deployments/overview)

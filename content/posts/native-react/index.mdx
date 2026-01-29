@@ -7,156 +7,224 @@ description: "A minimal React Native prototype with exact steps, checks, and fix
 theme: "Mobile"
 ---
 
-Mobile prototypes only matter if they run on a device.
+Mobile prototypes only matter if they run on an actual simulator or device. A repo that “looks right” but won’t boot is just text.
 
-This post shows a small React Native setup you can verify.
+This post is a small React Native prototype you can verify. The goal is not to build an app. The goal is to create a fresh project, change one file, and prove you can see your change on screen. Once you can do that, everything else becomes normal incremental work instead of guesswork.
 
-You will create a new app, render one screen, and confirm it runs.
+![Booting something real](https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif)
 
-I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+## What you are building
 
-## The promise
+You are building the smallest possible React Native app that prints a single line of text in a safe area. That sounds boring, but it is the right baseline because it proves the entire chain works: Node can run the CLI, the native project exists, the bundler can serve JavaScript, the native shell can load it, and the screen can render.
 
-By the end, you will:
+React Native is just React code running inside a native shell. The “native” part is real. iOS builds use Xcode. Android builds use Gradle and the Android toolchain. The JavaScript is still yours, but the last mile is a real native app.
 
-- create a React Native project
-- render a simple screen
-- verify it runs on a simulator
+## What you need and why you need it
 
-> "If it does not run on a device, it is not done."
+React Native is one of those setups where missing one piece can waste a whole night. So here is what matters and why.
 
-## What this is
+You need Node because the React Native CLI is a Node tool. You need Xcode if you plan to run iOS because iOS builds are Xcode projects under the hood. You need Android Studio if you plan to run Android because it provides the SDK, emulator, and build tools that Gradle expects.
 
-**High level:** React Native lets you build mobile apps with React.
+If you only want one platform right now, pick one. iOS on macOS is usually the smoother path because Xcode + Simulator are tightly integrated. Android is totally fine too, but your setup surface area is bigger because the SDK, emulator image, and Java requirements have more moving parts.
 
-**Low level:** You use the CLI to scaffold a project and edit `App.tsx`.
+## Quick environment sanity checks
 
-**Key terms:**
+Before you scaffold anything, do these checks. They are not “optional best practices.” They are just the fastest way to confirm you are not walking into a setup trap.
 
-- **Simulator:** A local device emulator.
-- **Bundle:** The JavaScript code packaged for the app.
+First, confirm Node exists and is not ancient.
 
-## What you need
+```bash
+node -v
+npm -v
+```
 
-- Node 18+
-- React Native CLI
-- iOS Simulator or Android Emulator
+If you do not see versions printed, stop and fix Node first. A lot of React Native errors are just “you are missing Node” wearing a mask.
 
-## Start to Finish
+Second, if you are doing iOS, confirm Xcode command line tools are installed and the license is accepted. This is one of the most common iOS failure modes.
+
+```bash
+xcode-select -p
+sudo xcodebuild -license accept
+```
+
+Third, if you are doing Android, confirm you have Android Studio installed and that you can open the SDK Manager and install at least one emulator image. If you do not have an emulator that can boot, `run-android` has nothing to target.
+
+![Checking your setup](https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif)
+
+## Start to finish
 
 ### Step 1: Create the project
-Goal:
-Scaffold a new React Native app.
 
-Actions:
-- Command:
-  ```bash
-  npx react-native@latest init NativeLab
-  cd NativeLab
-  ```
+This is the scaffold step. It creates the repo, the native shells, and the default starter app.
 
-Why:
-The CLI sets up the native project structure. It also creates iOS and Android folders for you. This is the fastest way to get a runnable app. It avoids manual config mistakes.
+```bash
+npx react-native@latest init NativeLab
+cd NativeLab
+```
 
-Verify:
-- Expected: `ios/` and `android/` folders exist.
-- This confirms the scaffold worked.
+What that command actually does matters. It generates a project folder, installs the JavaScript dependencies, and creates the native folders (`ios/` and `android/`) that Xcode and Gradle will build. If those folders do not exist, you do not have a real React Native project.
 
-If it fails:
-- Symptom: CLI error about dependencies.  
-  **Fix:** follow the CLI output and install required tools.
+**Verify it worked:**
 
-### Step 2: Edit the main screen
-Goal:
-Render one clear view so you can verify changes.
+Open the folder and confirm you see `ios/` and `android/`.
 
-Actions:
-- File path: `App.tsx`
-- Replace the body with:
-  ```tsx
-  import React from "react";
-  import { SafeAreaView, Text } from "react-native";
+If it fails, do not try to “fix it by guessing.” Read the exact CLI output. Most failures are missing prerequisites or permissions.
 
-  export default function App() {
-    return (
-      <SafeAreaView style={{ padding: 24 }}>
-        <Text>NativeLab is running.</Text>
-      </SafeAreaView>
-    );
-  }
-  ```
+### Step 2: Edit the one file that proves everything
 
-Why:
-A simple screen is enough to verify the app runs. It avoids extra components. It also makes hot reload obvious. This is your baseline for future changes.
+React Native projects can get noisy fast. The point here is to keep the first change dead simple so you can see the feedback loop.
 
-Verify:
-- Run the app and confirm the text appears.
-- This confirms the edit is live.
+Open `App.tsx` and replace it with this:
 
-If it fails:
-- Symptom: red screen error.  
-  **Fix:** check imports and file name.
+```tsx
+import React from "react";
+import { SafeAreaView, Text } from "react-native";
 
-### Step 3: Run the app
-Goal:
-Launch the app in a simulator.
+export default function App() {
+  return (
+    <SafeAreaView style={{ padding: 24 }}>
+      <Text>NativeLab is running.</Text>
+    </SafeAreaView>
+  );
+}
+```
 
-Actions:
-- Command for iOS:
-  ```bash
-  npx react-native run-ios
-  ```
-- Command for Android:
-  ```bash
-  npx react-native run-android
-  ```
+Here is what that code is doing in plain terms. `SafeAreaView` prevents your content from sitting under the notch or the status bar on iOS. The inline `padding: 24` makes it obvious the layout is yours, not the default template. The `Text` component is the simplest visible output you can render on every platform.
 
-Why:
-Running the app is the proof. It confirms your environment is correct. It also confirms your code compiles. Without this, the project is not real.
+**Verify it worked:**
 
-Verify:
-- Expected: app opens and shows "NativeLab is running."
-- This confirms the build and run steps work.
+The file should save cleanly with no TypeScript errors. If your editor highlights the imports as missing, it usually means your dependency install did not complete.
 
-If it fails:
-- Symptom: emulator not found.  
-  **Fix:** start the simulator first.
+### Step 3: Run it on iOS
 
-## Verify it worked
+If you are on macOS and you installed Xcode, this is the most direct proof.
 
-- The app launches.
-- The text appears.
-- No red screen errors show.
+```bash
+npx react-native run-ios
+```
 
-## Common mistakes
+What is happening during this step is important. The CLI kicks off a native build in the background, launches Simulator, starts Metro (the JavaScript bundler), then the app connects to Metro to load your JavaScript bundle.
 
-- **Symptom:** Metro server not running.  
-  **Cause:** no bundler process.  
-  **Fix:** run `npx react-native start`.
+**Verify it worked:**
 
-- **Symptom:** iOS build fails.  
-  **Cause:** missing Xcode tools.  
-  **Fix:** install Xcode and accept the license.
+You should see the Simulator open and the text `NativeLab is running.` on screen.
 
-- **Symptom:** Android build fails.  
-  **Cause:** emulator not running.  
-  **Fix:** start Android Studio emulator.
+If it fails, the most common causes are: Xcode not installed, Xcode license not accepted, or missing command line tools.
 
-## Cheat sheet
+### Step 4: Run it on Android
 
-- Scaffold with `react-native init`.
-- Edit `App.tsx`.
-- Run on a simulator.
+Android requires an emulator or device connected through ADB. Start the emulator first, then run:
 
-## Next steps
+```bash
+npx react-native run-android
+```
 
-- Add one button.
-- Add a second screen with navigation.
+Android failures are often not “React Native problems.” They are toolchain problems. Wrong SDK path, no emulator running, Gradle failing, Java version mismatch. The good news is that once you get one project to run, the next ones are much easier because the machine is configured.
+
+**Verify it worked:**
+
+The emulator should open the app and show the same text.
+
+![When it finally boots](https://media.giphy.com/media/l0HlNaQ6gWfllcjDO/giphy.gif)
+
+## What “running” actually means
+
+A lot of beginners think “it ran” means “the command finished.” In React Native, “it ran” means you can change JavaScript and reliably see the change on screen. That is the real prototype loop.
+
+So after you see the screen once, change the text to something else, save, and confirm the app updates. That is your proof that Metro is serving your bundle correctly and the app is connected.
+
+## Common failures that look like React Native but are not
+
+React Native errors are usually symptoms, not causes. Here are the ones that show up the most.
+
+### Metro is not running
+
+If the app launches but you see a blank screen or bundle loading issues, Metro might not be running.
+
+Run:
+
+```bash
+npx react-native start
+```
+
+Keep that terminal open, then in a second terminal run `run-ios` or `run-android` again.
+
+### iOS build fails immediately
+
+If you see build failures that look like Xcode toolchain errors, it usually means Xcode is missing or not configured.
+
+The two fastest checks:
+
+```bash
+xcode-select -p
+sudo xcodebuild -license accept
+```
+
+Then retry the run command.
+
+### Android says it cannot find a device
+
+That is almost always “your emulator is not running” or “ADB cannot see it.” Start an emulator from Android Studio Device Manager, then run:
+
+```bash
+adb devices
+```
+
+If nothing shows up, the React Native CLI cannot target anything.
+
+### Gradle errors that feel random
+
+Gradle errors are loud and annoying, but the fix usually lives in the first real error line, not the bottom. Scroll up until you find the first failure that mentions a missing SDK, missing Java, or an incompatible version.
+
+## What you should do next (still small)
+
+Once your baseline runs, keep the next move small. Add one button. Add one press handler. Change the layout slightly. The point is to keep the feedback loop alive while you learn the shape of React Native.
+
+If you want a clean next step that still stays verifiable, add a button that toggles text so you confirm state updates in the app.
+
+Replace `App.tsx` with this:
+
+```tsx
+import React from "react";
+import { SafeAreaView, Text, Pressable, View } from "react-native";
+
+export default function App() {
+  const [on, setOn] = React.useState(false);
+
+  return (
+    <SafeAreaView style={{ padding: 24 }}>
+      <View style={{ gap: 12 }}>
+        <Text style={{ fontSize: 18 }}>
+          {on ? "State is ON" : "State is OFF"}
+        </Text>
+
+        <Pressable
+          onPress={() => setOn((v) => !v)}
+          style={{
+            paddingVertical: 12,
+            paddingHorizontal: 16,
+            borderRadius: 10,
+            borderWidth: 1,
+          }}
+        >
+          <Text>Toggle</Text>
+        </Pressable>
+      </View>
+    </SafeAreaView>
+  );
+}
+```
+
+This is still minimal, but it proves something more than static rendering. It proves state changes render correctly, touch input works, and your development loop is stable.
+
+![Small wins](https://media.giphy.com/media/26ufnwz3wDUli7GU0/giphy.gif)
 
 ## Related links
 
-- https://reactnative.dev/docs/environment-setup
+The React Native docs have two different setup paths (Expo and React Native CLI). This post is the React Native CLI path because it forces you to prove the native toolchain works.
 
-## Final CTA
+https://reactnative.dev/docs/environment-setup
 
-Get one screen running before you build anything bigger.
+## Final check
+
+If you can do these three things, you have a real starting point: create the project, run it, and change JavaScript and see the update on screen. Everything else builds on top of that.

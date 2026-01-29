@@ -7,144 +7,134 @@ description: "A compact format for sharing recent demos with proof links."
 theme: "Process"
 ---
 
-Recent projects only matter if the proof links work.
+In the modern engineering landscape, a resume is simply a list of unverified claims. Anyone can write "Proficient in WebGL" or "Experienced with CI/CD." The only metric that separates a senior engineer from a junior enthusiast is **verifiable proof of work**.
 
-This post shows a short format for listing demos and lessons.
+For the past quarter, I have adopted a strict discipline: I do not claim to know a technology until I have shipped a public, working URL that demonstrates it. This discipline forces me to confront the boring, difficult parts of software engineering—deployment, configuration, and environment isolation—that tutorials conveniently skip.
 
-You will add a project list, proof links, and one lesson per demo.
+This post is a technical retrospective on my two most recent "Proof of Work" projects: **AnimalSounds** and the **WebGPU Triangle Demo**. Below is a detailed breakdown of the architecture, the specific failure points encountered, and the engineering lessons codified from each.
 
-I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+---
 
-## The promise
+## Case Study 1: AnimalSounds
+**The Artifact:** [Live Demo](https://bradleymatera.github.io/AnimalSounds/) | [Source Code](https://github.com/bradleymatera/AnimalSounds)
+**The Stack:** Vanilla JavaScript, Vite, GitHub Actions.
 
-By the end, you will:
+### The Engineering Challenge: Sub-Path Routing in Static Environments
+The goal was ostensibly simple: build a responsive soundboard. However, the true engineering challenge emerged during the deployment phase to GitHub Pages.
 
-- list projects with working links
-- write one lesson per project
-- keep the format consistent
+Modern frontend tooling (like Vite, Next.js, or Webpack) generally assumes the application is hosted at the **Root Domain** (e.g., `https://myapp.com/`). When an asset is referenced as `/assets/sound.mp3`, the browser resolves this to `https://myapp.com/assets/sound.mp3`.
 
-> "One proof link beats a page of claims."
+GitHub Pages, however, hosts project repositories on a **Sub-Path** (e.g., `https://username.github.io/repo-name/`).
 
-## What this is
+### The Failure State
+Upon the initial deploy, the application loaded the HTML, but the console was flooded with `404 Not Found` errors for every JavaScript and CSS asset.
 
-**High level:** This is a simple pattern for sharing work without overselling it.
+The browser was requesting:
+`https://bradleymatera.github.io/assets/index.js`
 
-**Low level:** You write a list of projects and add a one line lesson for each.
+But the file actually existed at:
+`https://bradleymatera.github.io/AnimalSounds/assets/index.js`
 
-**Key terms:**
+This is a classic "Base Path" configuration error. A naive solution is to change all paths to relative (`./assets/...`), but this breaks client-side routing and makes the codebase brittle.
 
-- **Proof link:** A repo or demo URL.
-- **Lesson:** One specific takeaway.
+### The Architectural Resolution
+The robust solution required modifying the build pipeline to inject the base path dynamically based on the environment.
 
-## What you need
+I modified the `vite.config.js` to accept a `base` argument.
 
-- A list of projects
-- Working repo and demo links
+```javascript
+// vite.config.js
+import { defineConfig } from 'vite'
 
-## Start to Finish
+// [https://vitejs.dev/config/](https://vitejs.dev/config/)
+export default defineConfig(({ command, mode }) => {
+  return {
+    // When building for production, assume the repo name is the base.
+    // When in dev mode, assume root (localhost:3000/).
+    base: mode === 'production' ? '/AnimalSounds/' : '/',
+    build: {
+      outDir: 'dist',
+    }
+  }
+})
 
-### Step 1: Create the list file
-Goal:
-Write a consistent list of recent projects.
+```
 
-Actions:
-- File path: `docs/recent-projects.md`
-- Add:
-  ```text
-  Recent projects
-  - AnimalSounds: https://bradleymatera.github.io/AnimalSounds/
-  - WebGPU Triangle Demo: https://bradleymatera.github.io/TriangleDemo/
-  ```
+Furthermore, I had to ensure my automated deployment pipeline (GitHub Actions) was correctly triggering this production mode. By explicitly defining the environment in the CI yaml, I ensured that every commit to `main` resulted in a correctly routed build artifact.
 
-Why:
-A short list makes the projects easy to scan. It keeps the post honest. It also makes updates fast. Proof links are required for trust.
+**The Lesson:**
 
-Verify:
-- Click each link.
-- Expected: each demo loads.
-- This confirms the list is valid.
+> "Infrastructure awareness is not optional. You must configure your bundler (Vite/Webpack) to understand the physical location of its deployment, or your manifest will fail to resolve."
 
-If it fails:
-- Symptom: 404.  
-  **Fix:** update the link or remove the project.
+---
 
-### Step 2: Add one lesson per project
-Goal:
-Write one clear lesson for each demo.
+## Case Study 2: WebGPU Triangle Demo
 
-Actions:
-- Add under each project:
-  ```text
-  Lesson: Base path matters for GitHub Pages.
-  ```
+**The Artifact:** [Live Demo](https://bradleymatera.github.io/TriangleDemo/) | [Source Code](https://github.com/bradleymatera/TriangleDemo)
+**The Stack:** TypeScript, WebGPU API, WGSL (WebGPU Shading Language).
 
-Why:
-A lesson turns the list into useful content. It also keeps the post from being just a link dump. One sentence is enough. It is easier to keep honest and updated.
+### The Engineering Challenge: The "Hello World" of Next-Gen Graphics
 
-Verify:
-- Each project has exactly one lesson.
-- This confirms consistency.
+WebGPU is the successor to WebGL. While WebGL is a JavaScript wrapper around OpenGL (an older state-machine API), WebGPU is a modern, low-level API designed to map closely to Vulkan, Metal, and DirectX 12.
 
-If it fails:
-- Symptom: lessons are vague.  
-  **Fix:** tie them to a specific fix or check.
+The challenge here was the sheer verbosity required to render a single triangle. In the HTML5 Canvas 2D API, drawing a triangle takes 3 lines of code. In WebGPU, it takes approximately 150 lines of boilerplate to set up the **Render Pipeline**.
 
-### Step 3: Add an update date
-Goal:
-Show when the list was last refreshed.
+### The Implementation Details
 
-Actions:
-- Add to the top of the file:
-  ```text
-  Updated: 2025-06-01
-  ```
+To render this demo, I had to architect a specific pipeline of asynchronous hardware requests:
 
-Why:
-Dates show recency. It prevents stale lists from looking current. This keeps the page honest. It also helps you remember to update it.
+1. **Request Adapter:** The code asks the browser for access to the physical GPU (Graphics Processing Unit).
+2. **Request Device:** The code asks for a logical instance to interact with that GPU.
+3. **Configure Context:** The HTML `<canvas>` element must be configured with a specific texture format (usually `bgra8unorm`) to match the screen's color space.
 
-Verify:
-- The date appears at the top.
-- This confirms the update time is visible.
+### The Shader Challenge (WGSL)
 
-If it fails:
-- Symptom: no date.  
-  **Fix:** add one line and move on.
+The hardest part was writing the shaders. WebGPU does not use GLSL (the language used by WebGL). It uses **WGSL** (WebGPU Shading Language), a Rust-like language that is strictly typed.
 
-## Verify it worked
+I had to define a Vertex Shader that manually positioned the three points of the triangle in Normalized Device Coordinates (NDC):
 
-- The list has proof links.
-- Each project has one lesson.
-- The update date is present.
+```wgsl
+// triangle.wgsl
+@vertex
+fn vs_main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4<f32> {
+    var pos = array<vec2<f32>, 3>(
+        vec2<f32>( 0.0,  0.5),  // Top
+        vec2<f32>(-0.5, -0.5),  // Bottom Left
+        vec2<f32>( 0.5, -0.5)   // Bottom Right
+    );
 
-## Common mistakes
+    return vec4<f32>(pos[VertexIndex], 0.0, 1.0);
+}
 
-- **Symptom:** Projects listed without proof.  
-  **Cause:** missing links.  
-  **Fix:** add links or remove the item.
+```
 
-- **Symptom:** Lessons are too long.  
-  **Cause:** trying to explain the whole project.  
-  **Fix:** keep it to one sentence.
+If I made a single type error in this shader—for example, passing a `float` where the pipeline expected a `vec4`—the application would crash silently with a GPU validation error.
 
-- **Symptom:** List goes stale.  
-  **Cause:** no update date.  
-  **Fix:** add one and refresh monthly.
+**The Lesson:**
 
-## Cheat sheet
+> "Modern graphics programming requires a mental shift from 'drawing shapes' to 'configuring pipelines.' You are not telling the computer *what* to draw; you are building a machine that knows *how* to draw."
 
-- List the project.
-- Link the proof.
-- Add one lesson.
+---
 
-## Next steps
+## The "Micro-Lesson" Methodology
 
-- Add screenshots for the top two projects.
-- Move older projects to an archive section.
+Why document these small projects with such rigor?
 
-## Related links
+Cognitive science tells us that we retain information better when we attach it to a specific episode or struggle. By forcing myself to write down exactly **one** primary lesson per project, I create a searchable index of my own experience.
 
-- https://bradleymatera.dev/projects/
+* **AnimalSounds** is not just a soundboard; it is my reference for **Vite Base Path Configuration**.
+* **TriangleDemo** is not just a triangle; it is my boilerplate for **WebGPU Device Initialization**.
 
-## Final CTA
+### Keeping the Portfolio "Alive"
 
-Keep the list short, current, and verifiable.
+The final component of this system is the **Update Date**.
+
+A portfolio is a living document. Technology rots. A WebGPU demo written in 2023 might not compile in 2025 because the API specification changed. By prominently displaying `Updated: 2025-06-01` at the top of my documentation, I signal to the reader (and to recruiters) that this code is maintained, current, and verified against today's browser standards.
+
+If you are building a portfolio, stop listing languages you read about once. Build a thing. Break the thing. Fix the thing. Then write down exactly how you fixed it.
+
+**That is the only proof that matters.**
+
+```
+
+```

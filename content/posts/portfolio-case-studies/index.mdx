@@ -7,149 +7,128 @@ description: "A short case study template you can verify with proof links."
 theme: "Portfolio"
 ---
 
-A case study is a proof document, not a sales page.
+Most developer portfolios are fundamentally broken. They function as "Galleries"—grids of pretty screenshots that tell me absolutely nothing about the candidate's ability to solve complex problems.
 
-This post gives you a short template that stays honest and scannable.
+As a hiring manager or senior engineer reviewing a portfolio, I do not care what the UI looks like (unless you are a designer). I care about the **decisions** you made.
 
-You will write one case study that links to real proof.
+* Why did you choose Postgres over MongoDB?
+* How did you handle invalidation when you implemented that cache?
+* What happened when the API latency spiked?
 
-I cannot verify these steps from this blog repo. Treat this as a lab guide you can run locally.
+A "Gallery" hides these answers. A "Case Study" reveals them.
 
-## The promise
+This post is a deep dive into the **Verifiable Case Study Architecture**. It is the standard I use to document my own work, designed specifically to pass the scrutiny of a technical audit.
 
-By the end, you will:
+---
 
-- write a short case study with proof links
-- avoid inflated claims
-- keep it readable for recruiters
+## The Philosophy: Evidence Over Claims
 
-> "If the proof link is missing, the claim goes away."
+The core principle of this format is simple: **"If you cannot link to the code that proves it, do not write it."**
 
-## What this is
+A resume bullet point says: *"Optimized database queries."*
+A Case Study says: *"Reduced query time from 500ms to 20ms by adding a composite index on `(user_id, status)`, verified in commit `8a4f2b`."*
 
-**High level:** A case study explains the problem, solution, and result with proof.
+The difference is credibility. The former is a marketing claim; the latter is an engineering fact.
 
-**Low level:** You write a short MDX file with fixed sections and links.
+---
 
-**Key terms:**
+## The Architecture of a Technical Case Study
 
-- **Proof link:** A repo or demo URL.
-- **Outcome:** What the project achieved, stated plainly.
+Do not write a "story." Write a report. Structure every project page on your portfolio with these four rigid sections.
 
-## What you need
+### Section 1: The Context & Constraints
+Stop telling me "I built a To-Do App." Tell me **why** the existing solutions failed or what specific constraint you were trying to satisfy.
 
-- A project repo
-- A live demo URL
-- A place to write the case study
+**Bad Context:**
+"I wanted to learn React, so I built a dashboard."
 
-## Start to Finish
+**Good Context:**
+"I needed to visualize 10,000 data points in real-time without blocking the main thread. Existing libraries caused UI jank on low-end devices. The constraint was to achieve 60fps rendering on a Moto G4."
 
-### Step 1: Create the case study file
-Goal:
-Create a single file with fixed sections.
+### Section 2: The "Stack Decision" Matrix
+Junior developers list tools. Senior developers justify tools. For every major technology in your stack, write one sentence explaining the *trade-off* that led to its selection.
 
-Actions:
-- File path: `content/case-studies/project-name.mdx`
-- Add:
-  ```text
-  # Project name
+| Technology | The Alternative | Why I Chose It |
+| :--- | :--- | :--- |
+| **Next.js** | Create React App | Needed Server-Side Rendering (SSR) for SEO and initial load performance. |
+| **Supabase** | Firebase | Needed a relational schema (SQL) for complex join queries that NoSQL couldn't handle efficiently. |
+| **Tailwind** | Styled Components | Prioritized build-time CSS extraction over runtime interpolation for performance. |
 
-  ## Problem
-  ## Solution
-  ## What I built
-  ## Outcomes and proof
-  ```
+This table alone proves you understand the ecosystem, not just the syntax.
 
-Why:
-Fixed sections keep the structure clear. It makes the writing faster. It also makes scanning easier. This prevents the case study from drifting into vague storytelling.
+### Section 3: The "Oh No" Moment (The Technical Hurdle)
+This is the most critical section. A project that went perfectly teaches you nothing. I want to read about the moment everything broke.
 
-Verify:
-- Open the file and confirm the headings exist.
-- This confirms the structure is set.
+Identify the single hardest technical challenge you faced.
+* Was it a CORS error that wouldn't die?
+* Was it a race condition in your state management?
+* Was it a memory leak in your WebSocket connection?
 
-If it fails:
-- Symptom: file missing.  
-  **Fix:** create the folder and file.
+**Example from a recent project:**
+> "While building the real-time chat, I encountered a 'Prop Drilling' issue where updating a single message caused the entire chat window to re-render. This caused input lag.
+>
+> **The Fix:** I refactored the state management to use **React Context** with a split provider pattern, separating the 'Message List' state from the 'Input' state. This reduced render cycles by 90%."
 
-### Step 2: Add proof links
-Goal:
-Attach real proof to outcomes.
+### Section 4: The Outcomes & Permalinks
+Finally, verify your claims. Do not just link to the repo root. Link to the **specific file and line number** where the magic happens.
 
-Actions:
-- Under "Outcomes and proof" add:
-  ```text
-  - Repo: https://github.com/yourname/project
-  - Demo: https://yourname.github.io/project
-  ```
+GitHub allows you to press `y` on any file view to get a "Permalink" to that specific commit hash. Use this.
 
-Why:
-Proof links are the heart of the case study. They make the claims verifiable. This avoids inflated statements. It also saves reviewers time.
+**The Verification List:**
+* **The Claim:** "Implemented optimistic UI updates."
+* **The Proof:** [Link to `ChatProvider.tsx` Line 45](https://github.com/bradleymatera/project/blob/main/src/context/ChatProvider.tsx#L45)
+* **The Claim:** "Secured API endpoints with middleware."
+* **The Proof:** [Link to `middleware.ts` Line 12](https://github.com/bradleymatera/project/blob/main/src/middleware.ts#L12)
 
-Verify:
-- Click each link.
-- Expected: the repo and demo load.
-- This confirms the proof is real.
+---
 
-If it fails:
-- Symptom: 404.  
-  **Fix:** update the URL or remove the link.
+## A Concrete Template
 
-### Step 3: Add one concrete outcome
-Goal:
-State one result that is visible in the demo or repo.
+If you are rewriting your portfolio today, copy this markdown structure. It forces you to be honest.
 
-Actions:
-- Example outcome:
-  ```text
-  - Search filters the list in real time.
-  ```
+```markdown
+# [Project Name]
+**Live Demo:** [URL]
+**Source Code:** [URL]
 
-Why:
-Outcomes should be observable, not vague. One concrete outcome is enough. This keeps the case study honest. It also makes it easier to verify.
+## 1. The Goal
+One sentence describing the business value or user problem.
+*Constraint:* What was the limiting factor? (Time, Performance, Cost?)
 
-Verify:
-- Open the demo and check the outcome.
-- This confirms the statement is true.
+## 2. Technical Decisions
+- **Database:** Postgres. *Why?* Strict schema validation required for financial data.
+- **Hosting:** Vercel. *Why?* Zero-config Edge Functions were cheaper than AWS Lambda for this scale.
 
-If it fails:
-- Symptom: the outcome is not visible.  
-  **Fix:** remove the outcome or update the demo.
+## 3. The Hardest Challenge: [Name of Problem]
+Describe the bug or architectural bottleneck.
+**The Solution:** Describe how you fixed it.
+**Code Reference:** [Link to the specific commit or function]
 
-## Verify it worked
+## 4. Retrospective
+What would you do differently if you built it again today?
+(e.g., "I would swap Redux for TanStack Query to handle caching better.")
 
-- The case study has all four sections.
-- Proof links work.
-- Outcomes are visible in the demo.
+```
 
-## Common mistakes
+---
 
-- **Symptom:** Case study reads like a resume bullet.  
-  **Cause:** No problem or solution section.  
-  **Fix:** use the template headings.
+## Why "Retrospectives" Get You Hired
 
-- **Symptom:** Outcomes are vague.  
-  **Cause:** No proof links.  
-  **Fix:** add a demo link and describe what you can see.
+The final section of the template—the **Retrospective**—is a secret weapon.
 
-- **Symptom:** Claims do not match the repo.  
-  **Cause:** outdated writing.  
-  **Fix:** update the case study after each change.
+Junior engineers try to hide their mistakes. They want the project to look perfect.
+Senior engineers **advertise** their mistakes. They say, *"I shouldn't have used MongoDB here. The data was too relational. Next time I'd use SQL."*
 
-## Cheat sheet
+This shows self-awareness. It shows growth. It proves that you are a better engineer *today* than you were when you wrote the code.
 
-- Use fixed sections.
-- Add proof links.
-- Keep outcomes visible.
+## Final Thoughts
 
-## Next steps
+Stop building "Portfolios." Start building "Engineering Logs."
 
-- Add one screenshot per case study.
-- Keep a changelog for updates.
+A portfolio is a display case; it implies you are finished learning. An Engineering Log is a laboratory notebook; it proves you are constantly running experiments, analyzing data, and improving your methods.
 
-## Related links
+Write for the Engineer who will read your code, not the Recruiter who will scan your keywords. The Recruiter gets you the phone screen. The Case Study gets you the job.
 
-- https://bradleymatera.dev/projects/
+```
 
-## Final CTA
-
-Write the shortest case study that still has proof. That is the goal.
+```
