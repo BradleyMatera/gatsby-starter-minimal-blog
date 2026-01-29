@@ -1,0 +1,124 @@
+---
+title: "AWS vs. Azure vs. Google Cloud: The Ultimate Free Tier Battle & Survival Guide"
+date: "2026-01-24"
+slug: "/aws-vs-azure-vs-google-cloud"
+tags: ["cloud", "free-tier", "comparison"]
+description: "A side-by-side breakdown of AWS, Azure, and GCP's free tier offerings."
+theme: "Cloud"
+---
+
+**Which cloud provider actually supports a developer’s growth for free, and which one is designing a billing trap?**
+
+In my previous post, I broke down the mechanics of the AWS Free Tier—specifically how to survive the first 12 months without incurring surprise debt. Since then, the conversation has shifted toward a broader comparison. It is not enough to just know how AWS works; as developers, we need to know if we are even betting on the right horse.
+
+If you are building a portfolio, launching a startup prototype, or just trying to learn `cloud` without melting your credit card, you need a side-by-side technical and financial breakdown.
+
+This is that breakdown.
+
+We are going to pit **AWS**, **Microsoft Azure**, and **Google Cloud Platform (GCP)** against each other. We will analyze their compute limits, database constraints, hidden network costs, and the specific "gotchas" that each provider uses to monetize their free users.
+
+---
+
+## The Philosophy of "Free"
+
+Before looking at the numbers, you have to understand the business model, because it dictates the limitations you will face.
+
+> "The cloud is not a charity. The Free Tier is a customer acquisition funnel designed to integrate you into an ecosystem."
+
+* **AWS** wants you to build habits. Their 12-month model is designed to get you addicted to their specific proprietary tools (RDS, S3, IAM) so that when the year ends, the switching cost is too high to leave.
+* **Azure** wants enterprise adoption. They front-load credits ($200) to let you taste the "premium" power, hoping you'll convince your boss to migrate the company infrastructure later.
+* **GCP** plays the long game. They are the distant third in market share, so they offer the most generous "Always Free" tier to attract hobbyists and students, hoping that grassroots loyalty will grow their market share.
+
+---
+
+## 1. Compute: The Engine Room
+
+The biggest cost for any project is the Virtual Machine (VM). Here is how they compare when you strip away the marketing fluff.
+
+### AWS: The Standard (EC2)
+* **The Offer:** 750 Hours/month of `t2.micro` or `t3.micro`.
+* **The Specs:** 2 vCPUs (burstable), 1 GiB Memory.
+* **The Reality:** This is enough to run one instance continuously (24/7) for a month. However, AWS uses a "CPU Credit" system. If your website gets a sudden spike in traffic, you burn credits. If you run out of credits, your CPU is throttled to baseline performance, making your site crawl.
+* **The Trap:** It is strictly **12 months**. On day 366, you are billed standard on-demand rates.
+
+### Azure: The Burstable (B-Series)
+* **The Offer:** 750 Hours/month of `B1s` instances.
+* **The Specs:** 1 vCPU, 1 GiB Memory.
+* **The Reality:** Similar to AWS, this uses a credit banking system. The `B1s` is noticeably weaker than the AWS `t3.micro` for multi-threaded tasks because it only offers 1 vCPU compared to AWS's 2.
+* **The Trap:** The interface. Azure’s portal is complex. It is very easy to accidentally select a "Standard SSD" (paid) instead of a "Standard HDD" (free) during setup.
+
+### GCP: The Forever Server (Compute Engine)
+* **The Offer:** `e2-micro` instance.
+* **The Specs:** 2 vCPUs, 1 GiB Memory (0.25 vCPU sustained).
+* **The Reality:** **This is the winner for longevity.** As of this writing, this offer is part of the "Always Free" program, meaning it does not expire after 12 months.
+* **The Trap:** Location. This is only free in specific regions (usually `us-west1`, `us-central1`, `us-east1`). If you deploy in `us-east4` by mistake, you pay full price immediately.
+
+---
+
+## 2. Databases: The Expensive Part
+
+Stateless servers are cheap; stateful data is expensive. This is where the cloud providers try to squeeze you.
+
+### AWS (RDS)
+AWS offers 750 hours of `db.t2.micro` or `db.t3.micro` (Single-AZ).
+* **Pros:** You get a real, managed relational database (MySQL, PostgreSQL, MariaDB).
+* **Cons:** It stops being free after 12 months. Migrating data *out* of AWS later can be tricky due to egress fees.
+
+### Azure (SQL Database)
+Azure offers 250 GB of Azure SQL Database.
+* **Pros:** 250 GB is massive compared to the 20GB limit often seen elsewhere.
+* **Cons:** This is specifically "Azure SQL," which is Microsoft SQL Server. If your project is built on Postgres or MySQL, this free tier doesn't help you much. You have to adapt your stack to their technology.
+
+### GCP (Firestore)
+GCP does **not** offer a generous free tier for Cloud SQL (their managed relational service). Instead, they push you toward Firestore (NoSQL).
+* **Pros:** Firestore is incredibly fast and easy for mobile apps.
+* **Cons:** It is NoSQL. If you are trying to learn traditional SQL table relationships, GCP forces you to pay roughly $10-$15/month for the smallest SQL instance.
+
+---
+
+## 3. The "Silent Killers" of Cloud Billing
+
+Regardless of which provider you choose, the billing algorithms share the same ruthless logic regarding "optional" resources. These are the line items that do not appear on the main pricing page but appear on your invoice.
+
+### The Orphaned Volume
+When you terminate a server, the cloud provider assumes you want to keep the data. They delete the compute resource but leave the hard drive (EBS/Disk) active.
+* **The Cost:** Roughly $0.10 per GB per month.
+* **The Fix:** You must manually locate the "Storage" or "Volumes" dashboard and delete these unattached disks. There is no auto-delete for these.
+
+### The Static IP Tax
+A static IP (Elastic IP) is free *only while it is being used*.
+* **The Logic:** IPv4 addresses are a scarce global resource. The providers punish you for hoarding them.
+* **The Cost:** If you stop your server but keep the IP reserved, you are charged ~$0.005/hour. That is roughly $3.60/month for doing absolutely nothing.
+
+### Data Egress (The "Hotel California" Fee)
+You can check out any time you like, but you can never leave—without paying.
+* **Ingress (Data In):** Always Free.
+* **Egress (Data Out):** Charged per GB after a small threshold.
+* **The Risk:** If you host a large media file and it gets hotlinked on a popular site, your egress fees will skyrocket instantly.
+
+---
+
+## Final Verdict: Which One Should You Choose?
+
+After deploying stacks on all three, here is my decision matrix for new projects:
+
+### Choose AWS If:
+1.  **You are job hunting.** AWS holds the largest market share. Having "Deployed MERN stack on EC2" on your resume is statistically more valuable than the others.
+2.  **You need a standard SQL database.** The RDS free tier is the most straightforward way to run MySQL/Postgres for a year.
+
+### Choose GCP If:
+1.  **You are building a permanent personal tool.** If you want a Discord bot or a script runner that stays online for 5 years for $0, the `e2-micro` is unmatched.
+2.  **You are comfortable with Linux/Command Line.** GCP’s interface is developer-focused but less "hand-holding" than Azure.
+
+### Choose Azure If:
+1.  **You work in the .NET ecosystem.** Visual Studio integration with Azure is seamless.
+2.  **You need massive database storage.** The 250GB SQL limit is generous if you are willing to use Microsoft SQL Server.
+
+### The Golden Rule
+The only true way to stay free is **vigilance**. Set up "Billing Alerts" the moment you create your account. Set an alert for $0.01. The moment you get that email, you know you have crossed a line, and you can fix it before it becomes a $500 problem.
+
+Stay curious, keep building, and check your billing dashboard every single morning.
+
+— **Bradley Matera**
+
+*(bradleymatera.dev)*
