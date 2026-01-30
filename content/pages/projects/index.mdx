@@ -4,6 +4,7 @@ slug: "/projects"
 ---
 
 import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
+import InfoIcon from "../../../src/components/visuals/icons/InfoIcon";
 
 <div className="projects-layout">
   <main className="projects-layout__main">
@@ -22,7 +23,9 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
       }
     >
       <div className="callout callout--projects">
-        <span className="callout__icon">ℹ</span>
+        <span className="callout__icon">
+          <InfoIcon size={20} />
+        </span>
         <div className="callout__body">
           Need more detail? Message me on <strong>LinkedIn</strong> or <strong>GitHub</strong> and I'll share stories, metrics, and QA checks for any project on this page.
         </div>

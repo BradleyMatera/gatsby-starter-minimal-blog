@@ -4532,3 +4532,20 @@ body {
   color: var(--color-text-subtle);
   margin-top: 2rem;
 }
+
+/* External link indicator */
+.link-external {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.link-external__icon {
+  flex-shrink: 0;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.link-external:hover .link-external__icon {
+  opacity: 1;
+}

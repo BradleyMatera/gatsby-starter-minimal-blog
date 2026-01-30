@@ -3,6 +3,7 @@ import joinClasses from "../../utils/joinClasses";
 import Link from "./Link";
 import { useScrollReveal } from "../home/useScrollReveal";
 import MetricBadge from "../visuals/MetricBadge";
+import ExternalLinkIcon from "../visuals/icons/ExternalLinkIcon";
 
 type ProjectLink = {
   label: string;
@@ -155,8 +156,12 @@ const ProjectCard = ({
                   data-variant={link.variant ?? "ghost"}
                   target={link.external ? "_blank" : undefined}
                   rel={link.external ? "noopener noreferrer" : undefined}
+                  className={link.external ? "link-external" : undefined}
                 >
                   {link.label}
+                  {link.external && (
+                    <ExternalLinkIcon size={14} className="link-external__icon" />
+                  )}
                 </Link>
               ))}
             </div>
