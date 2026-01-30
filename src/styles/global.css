@@ -4525,3 +4525,10 @@ body {
     grid-template-columns: minmax(0, 1fr) minmax(0, 170px);
   }
 }
+
+/* Projects page footer note - replaces inline styles */
+.projects-footer-note {
+  font-size: var(--text-sm);
+  color: var(--color-text-subtle);
+  margin-top: 2rem;
+}

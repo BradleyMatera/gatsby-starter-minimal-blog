@@ -35,24 +35,6 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
   title="Featured Full-Stack Applications"
   className="projects-section snap-panel"
 >
-      <figure className="projects-diagram">
-        <figcaption className="projects-diagram__caption">Architecture overview of featured projects</figcaption>
-        <div className="projects-diagram__frame">
-          <picture>
-            <source type="image/avif" srcSet="/project-diagrams.avif" />
-            <source type="image/webp" srcSet="/project-diagrams.webp" />
-            <img
-              src="/project-diagrams.png"
-              className="media-contained media-img"
-              alt="Architecture diagrams showing project patterns"
-              width="1536"
-              height="1024"
-              loading="lazy"
-              decoding="async"
-            />
-          </picture>
-        </div>
-      </figure>
       <div className="project-gallery projects-grid">
         <ProjectCard
           title="Car-Match"
@@ -543,7 +525,6 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
     </Section>
 
     <Section
-      eyebrow="Need more context?"
       title="Need a walkthrough?"
     >
       <div className="surface-card surface-card--outline">
@@ -562,7 +543,7 @@ import { Section, AnchorNav, ProjectCard } from "../../../src/components/ui";
     </Section>
 
     <Section>
-      <p style={{ fontSize: "0.9rem", color: "var(--color-text-secondary)", marginTop: "2rem" }}>
+      <p className="projects-footer-note">
         Proof links for all metrics and implementations are available in linked repositories and deployment dashboards.
       </p>
     </Section>
