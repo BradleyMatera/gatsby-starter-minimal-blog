@@ -2,6 +2,17 @@ import * as React from "react";
 import { Link } from "gatsby";
 import ThemeToggle from "../../../components/ThemeToggle";
 import "../../../styles/vertical-nav.css";
+import {
+  HomeIcon,
+  ProjectsIcon,
+  AboutIcon,
+  RolesIcon,
+  ContributionsIcon,
+  BlogIcon,
+  EmailIcon,
+  MenuIcon,
+  CloseIcon,
+} from "../../../components/visuals/icons";
 
 type NavItem = {
   title: string;
@@ -59,17 +70,9 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
           }}
         >
           {mobileDrawerOpen ? (
-            // Close icon
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M6 6l12 12M6 18L18 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
+            <CloseIcon size={24} />
           ) : (
-            // Hamburger icon
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <rect x="4" y="7" width="16" height="2" rx="1" fill="currentColor"/>
-              <rect x="4" y="11" width="16" height="2" rx="1" fill="currentColor"/>
-              <rect x="4" y="15" width="16" height="2" rx="1" fill="currentColor"/>
-            </svg>
+            <MenuIcon size={24} />
           )}
         </button>
       )}
@@ -109,7 +112,9 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
             <div className="vertical-nav__actions">
               <ThemeToggle />
               <a href="/contact" className="vertical-nav__cta vertical-nav__cta--inline">
-                <span className="vertical-nav__cta-icon" aria-hidden="true">✉</span>
+                <span className="vertical-nav__cta-icon" aria-hidden="true">
+                  <EmailIcon size={18} />
+                </span>
                 <span>Email me!</span>
               </a>
             </div>
@@ -172,7 +177,9 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
       </ul>
             <div className="vertical-nav__actions vertical-nav__actions--stacked">
               <a href="/contact" className="vertical-nav__cta">
-                <span className="vertical-nav__cta-icon" aria-hidden="true">✉</span>
+                <span className="vertical-nav__cta-icon" aria-hidden="true">
+                  <EmailIcon size={18} />
+                </span>
                 <span>Email me!</span>
               </a>
             </div>
@@ -187,38 +194,19 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
 function getNavIcon(slug: string): React.ReactNode {
   switch (slug) {
     case "/":
-      return <span title="Home">⌂</span>;
+      return <HomeIcon size={18} />;
     case "/projects":
-      return <span title="Projects">◈</span>;
+      return <ProjectsIcon size={18} />;
     case "/about":
-      return <span title="About">☉</span>;
+      return <AboutIcon size={18} />;
     case "/contact":
-      return <span title="Contact">✉</span>;
+      return <EmailIcon size={18} />;
     case "/roles":
-      // Custom SVG icon for Roles
-      return (
-        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
-          <circle cx="10" cy="7" r="3.5" stroke="#e05a5a" strokeWidth="2"/>
-          <rect x="4" y="13" width="12" height="5" rx="2.5" stroke="#e05a5a" strokeWidth="2"/>
-        </svg>
-      );
+      return <RolesIcon size={18} />;
     case "/contributions":
-      // Custom SVG icon for Contributions
-      return (
-        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
-          <path d="M4 10h12M10 4v12" stroke="#e05a5a" strokeWidth="2" strokeLinecap="round"/>
-          <circle cx="10" cy="10" r="9" stroke="#e05a5a" strokeWidth="2"/>
-        </svg>
-      );
+      return <ContributionsIcon size={18} />;
     case "/posts":
-      // Custom SVG icon for Blog
-      return (
-        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
-          <rect x="3" y="5" width="14" height="10" rx="2" stroke="#e05a5a" strokeWidth="2"/>
-          <line x1="6" y1="8" x2="14" y2="8" stroke="#e05a5a" strokeWidth="2"/>
-          <line x1="6" y1="12" x2="12" y2="12" stroke="#e05a5a" strokeWidth="2"/>
-        </svg>
-      );
+      return <BlogIcon size={18} />;
     default:
       return <span>•</span>;
   }

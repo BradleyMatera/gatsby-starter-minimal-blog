@@ -1,4 +1,5 @@
 import React from "react";
+import { SunIcon, MoonIcon } from "../components/visuals/icons";
 
 type Theme = "light" | "dark";
 
@@ -33,7 +34,7 @@ const ThemeToggle: React.FC = () => {
   return (
     <button type="button" className="theme-toggle" onClick={toggle} aria-label="Toggle light and dark mode">
       <span className="theme-toggle__icon" aria-hidden="true">
-        {theme === "light" ? "🌞" : "🌜"}
+        {theme === "light" ? <SunIcon size={20} /> : <MoonIcon size={20} />}
       </span>
     </button>
   );

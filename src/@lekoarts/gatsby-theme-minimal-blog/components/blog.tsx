@@ -8,6 +8,7 @@ import replaceSlashes from "../utils/replaceSlashes";
 import Seo from "./seo";
 import BlogAccent from "../../../components/BlogAccent";
 import { Section } from "../../../components/ui";
+import { SearchIcon, TagIcon, ChevronLeftIcon, ChevronRightIcon } from "../../../components/visuals/icons";
 
 declare global {
   interface Window {
@@ -214,12 +215,7 @@ const Blog = ({ posts }: MBBlogProps) => {
               }
             }}
           >
-            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24">
-              <path
-                fill="currentColor"
-                d="M15.5 14h-.79l-.28-.27a6 6 0 10-.71.71l.27.28v.79l5 5a1 1 0 001.41-1.41zm-5.5 0a4 4 0 114-4 4 4 0 01-4 4z"
-              />
-            </svg>
+            <SearchIcon size={20} />
             <label htmlFor="blog-search" className="sr-only">
               Search blog posts
             </label>
@@ -262,7 +258,9 @@ const Blog = ({ posts }: MBBlogProps) => {
               className="card-link blog-filter-more"
               to={replaceSlashes(`/${basePath}/${tagsPath}`)}
             >
-              Browse all blog tags →
+              <TagIcon size={16} />
+              <span>Browse all blog tags</span>
+              <span aria-hidden="true">→</span>
             </Link>
           </div>
         </div>
@@ -288,18 +286,22 @@ const Blog = ({ posts }: MBBlogProps) => {
               type="button"
               onClick={() => setPage((prev) => Math.max(1, prev - 1))}
               disabled={page === 1}
+              className="pagination-btn"
             >
-              Previous
+              <ChevronLeftIcon size={16} />
+              <span>Previous</span>
             </button>
-            <span>
+            <span className="pagination-info">
               Page {page} of {totalPages}
             </span>
             <button
               type="button"
               onClick={() => setPage((prev) => Math.min(totalPages, prev + 1))}
               disabled={page === totalPages}
+              className="pagination-btn"
             >
-              Next
+              <span>Next</span>
+              <ChevronRightIcon size={16} />
             </button>
           </nav>
         ) : null}
