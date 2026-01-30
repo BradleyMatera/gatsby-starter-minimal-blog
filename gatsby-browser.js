@@ -1,6 +1,7 @@
 
 // Cyberpunk Theme - Load in order of specificity
 import "./src/styles/cyberpunk-theme.css";
+import "./src/styles/cyberpunk-nav.css";
 import "./src/styles/global.css";
 import "./src/styles/vertical-nav.css";
 import "./src/styles/media.css";
