@@ -124,7 +124,7 @@
 
 .cyber-nav__link:hover {
   color: var(--color-accent);
-  background: var(--color-accent-soft);
+  background: transparent;
 }
 
 .cyber-nav__link:hover::before {
@@ -134,7 +134,7 @@
 .cyber-nav__link--active,
 .cyber-nav__link[aria-current="page"] {
   color: var(--color-accent);
-  background: var(--color-accent-soft);
+  background: transparent;
 }
 
 .cyber-nav__link--active::before,
