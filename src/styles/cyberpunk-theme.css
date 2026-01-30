@@ -54,38 +54,38 @@
    ============================================ */
 
 :root {
-  /* Light mode - minimal, mostly dark theme */
-  --color-page-bg: var(--dark-900);
-  --color-surface: var(--dark-800);
-  --color-surface-alt: var(--dark-700);
-  --color-surface-muted: var(--dark-600);
-  --color-text: var(--text-primary);
-  --color-text-subtle: var(--text-secondary);
-  --color-text-inverse: var(--text-inverse);
-  --color-border: var(--dark-500);
-  --color-border-strong: var(--dark-600);
+  /* Light mode - bright, readable theme */
+  --color-page-bg: #f8f9fc;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f0f2f8;
+  --color-surface-muted: #e8ebf3;
+  --color-text: #1a1a2e;
+  --color-text-subtle: #4a4a6a;
+  --color-text-inverse: #ffffff;
+  --color-border: #d0d4e0;
+  --color-border-strong: #b8bcd0;
   
-  /* Accent Colors - Cyberpunk Neon */
-  --color-accent: var(--neon-cyan);
-  --color-accent-secondary: var(--neon-magenta);
-  --color-accent-hover: var(--neon-blue);
-  --color-accent-soft: rgba(0, 255, 255, 0.15);
+  /* Accent Colors - Cyberpunk Neon (visible on light) */
+  --color-accent: #0088cc;
+  --color-accent-secondary: #cc00cc;
+  --color-accent-hover: #006699;
+  --color-accent-soft: rgba(0, 136, 204, 0.12);
   
   /* Links */
-  --color-link: var(--neon-cyan);
-  --color-focus: var(--neon-magenta);
-  --color-muted: var(--dark-600);
+  --color-link: #0066cc;
+  --color-focus: #cc00cc;
+  --color-muted: #8a8aaa;
   
   /* UI Elements */
-  --color-highlight-line-bg: rgba(0, 255, 255, 0.12);
-  --color-badge-bg: rgba(0, 255, 255, 0.15);
-  --color-badge-text: var(--text-primary);
-  --color-card-shadow: rgba(0, 0, 0, 0.5);
-  --color-toc-bg: var(--dark-800);
-  --color-code-bg: var(--dark-700);
-  --color-code-text: var(--neon-green);
-  --color-nav-bg: rgba(10, 10, 15, 0.95);
-  --color-shadow: rgba(0, 0, 0, 0.5);
+  --color-highlight-line-bg: rgba(0, 136, 204, 0.1);
+  --color-badge-bg: rgba(0, 136, 204, 0.12);
+  --color-badge-text: #1a1a2e;
+  --color-card-shadow: rgba(0, 0, 0, 0.08);
+  --color-toc-bg: #f0f2f8;
+  --color-code-bg: #f4f6fa;
+  --color-code-text: #2d2d4a;
+  --color-nav-bg: rgba(255, 255, 255, 0.95);
+  --color-shadow: rgba(0, 0, 0, 0.1);
   
   /* Aliases */
   --color-primary: var(--color-accent);
