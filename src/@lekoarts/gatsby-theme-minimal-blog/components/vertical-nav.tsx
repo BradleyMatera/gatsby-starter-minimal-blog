@@ -26,6 +26,7 @@ type VerticalNavProps = {
 const VerticalNav = ({ nav }: VerticalNavProps) => {
   const [mobileDrawerOpen, setMobileDrawerOpen] = React.useState(false);
   const [isMobile, setIsMobile] = React.useState(false);
+  const [activeLink, setActiveLink] = React.useState("");
 
   React.useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 1024);
@@ -38,6 +39,13 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
     if (!isMobile) setMobileDrawerOpen(false);
   }, [isMobile]);
 
+  // Set active link based on current path
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      setActiveLink(window.location.pathname);
+    }
+  }, []);
+
   // Filter to core links only: Home, Projects, About, Contact, Roles, Contributions, Blog
   const coreLinks = nav.filter(item =>
     ["/", "/projects", "/about", "/roles", "/contributions", "/posts"].includes(item.slug)
@@ -47,27 +55,9 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
     <>
       {isMobile && (
         <button
-          className="vertical-nav__toggle-icon"
+          className="vertical-nav__toggle-icon cyber-toggle"
           aria-label={mobileDrawerOpen ? "Close menu" : "Open menu"}
           onClick={() => setMobileDrawerOpen(!mobileDrawerOpen)}
-          style={{
-            position: "fixed",
-            top: "1rem",
-            left: "1rem",
-            zIndex: 200,
-            background: "var(--color-accent, #e05a5a)",
-            color: "var(--color-text-inverse, #fff)",
-            border: "none",
-            borderRadius: "50%",
-            width: "40px",
-            height: "40px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            boxShadow: "0 2px 8px rgba(224,90,90,0.10)",
-            cursor: "pointer",
-            transition: "left 0.3s"
-          }}
         >
           {mobileDrawerOpen ? (
             <CloseIcon size={24} />
@@ -79,43 +69,45 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
       {/* Desktop Nav */}
       {!isMobile && (
         <nav
-          className="vertical-nav vertical-nav--top"
+          className="vertical-nav vertical-nav--top cyber-nav"
           role="navigation"
           aria-label="Main Navigation"
         >
-          <div className="vertical-nav__inner">
-            <Link to="/" className="vertical-nav__brand" aria-label="Home">
-              <span className="vertical-nav__brand-text">BM</span>
+          <div className="vertical-nav__inner cyber-nav__inner">
+            <Link to="/" className="vertical-nav__brand cyber-brand" aria-label="Home">
+              <span className="vertical-nav__brand-text cyber-brand__text">BM</span>
             </Link>
-            <ul className="vertical-nav__list">
+            <ul className="vertical-nav__list cyber-nav__list">
               {coreLinks.map((item) => {
                 const label = item.slug === "/" ? "Home" : item.title;
                 const icon = getNavIcon(item.slug);
+                const isActive = activeLink === item.slug || activeLink.startsWith(item.slug + '/');
 
                 return (
                   <li key={item.slug}>
                     <Link
                       to={item.slug}
-                      className="vertical-nav__link"
-                      activeClassName="vertical-nav__link--active"
+                      className={`vertical-nav__link cyber-nav__link ${isActive ? 'cyber-nav__link--active' : ''}`}
+                      activeClassName="vertical-nav__link--active cyber-nav__link--active"
                       title={label}
                     >
-                      <span className="vertical-nav__icon" aria-hidden="true">
+                      <span className="vertical-nav__icon cyber-nav__icon" aria-hidden="true">
                         {icon}
                       </span>
-                      <span className="vertical-nav__label">{label}</span>
+                      <span className="vertical-nav__label cyber-nav__label">{label}</span>
+                      {isActive && <span className="cyber-nav__glow" aria-hidden="true" />}
                     </Link>
                   </li>
                 );
               })}
             </ul>
-            <div className="vertical-nav__actions">
+            <div className="vertical-nav__actions cyber-nav__actions">
               <ThemeToggle />
-              <a href="/contact" className="vertical-nav__cta vertical-nav__cta--inline">
+              <a href="/contact" className="vertical-nav__cta vertical-nav__cta--inline cyber-cta">
                 <span className="vertical-nav__cta-icon" aria-hidden="true">
                   <EmailIcon size={18} />
                 </span>
-                <span>Email me!</span>
+                <span>Contact</span>
               </a>
             </div>
           </div>
@@ -125,62 +117,52 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
       {/* Mobile Drawer Nav */}
       {isMobile && mobileDrawerOpen && (
         <nav
-          className="vertical-nav vertical-nav--drawer"
+          className="vertical-nav vertical-nav--drawer cyber-drawer"
           role="navigation"
           aria-label="Main Navigation"
         >
-          <div className="vertical-nav__inner">
-            <Link to="/" className="vertical-nav__brand" aria-label="Home">
-              <span className="vertical-nav__brand-text">BM</span>
+          <div className="vertical-nav__inner cyber-drawer__inner">
+            <Link to="/" className="vertical-nav__brand cyber-brand" aria-label="Home">
+              <span className="vertical-nav__brand-text cyber-brand__text">BM</span>
             </Link>
             <button
-              className="vertical-nav__close-btn"
-              style={{
-                marginBottom: "1.5rem",
-                background: "var(--color-accent, #e05a5a)",
-                color: "var(--color-text-inverse, #fff)",
-                border: "none",
-                borderRadius: "8px",
-                padding: "0.75rem 1.5rem",
-                fontSize: "1rem",
-                fontWeight: 700,
-                cursor: "pointer",
-                alignSelf: "flex-end"
-              }}
+              className="vertical-nav__close-btn cyber-close-btn"
               onClick={() => setMobileDrawerOpen(false)}
               aria-label="Close Menu"
             >
-              Close Menu
+              Close
             </button>
             <ThemeToggle />
-            <ul className="vertical-nav__list">
+            <ul className="vertical-nav__list cyber-drawer__list">
               {coreLinks.map((item) => {
                 const label = item.slug === "/" ? "Home" : item.title;
                 const icon = getNavIcon(item.slug);
+                const isActive = activeLink === item.slug || activeLink.startsWith(item.slug + '/');
 
                 return (
                   <li key={item.slug}>
                     <Link
                       to={item.slug}
-                      className="vertical-nav__link"
-                      activeClassName="vertical-nav__link--active"
+                      className={`vertical-nav__link cyber-drawer__link ${isActive ? 'cyber-drawer__link--active' : ''}`}
+                      activeClassName="vertical-nav__link--active cyber-drawer__link--active"
                       title={label}
+                      onClick={() => setMobileDrawerOpen(false)}
                     >
-                      <span className="vertical-nav__icon" aria-hidden="true">
+                      <span className="vertical-nav__icon cyber-drawer__icon" aria-hidden="true">
                         {icon}
                       </span>
-                      <span className="vertical-nav__label">{label}</span>
+                      <span className="vertical-nav__label cyber-drawer__label">{label}</span>
                     </Link>
                   </li>
-          );
-        })}
-      </ul>
-            <div className="vertical-nav__actions vertical-nav__actions--stacked">
-              <a href="/contact" className="vertical-nav__cta">
+                );
+              })}
+            </ul>
+            <div className="vertical-nav__actions vertical-nav__actions--stacked cyber-drawer__actions">
+              <a href="/contact" className="vertical-nav__cta cyber-cta cyber-cta--drawer">
                 <span className="vertical-nav__cta-icon" aria-hidden="true">
                   <EmailIcon size={18} />
                 </span>
-                <span>Email me!</span>
+                <span>Contact</span>
               </a>
             </div>
           </div>
