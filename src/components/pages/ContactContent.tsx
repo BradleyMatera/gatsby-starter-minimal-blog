@@ -30,7 +30,7 @@ const ContactContent = () => (
             <li>Constraints to respect - tech stack, compliance, stakeholders</li>
           </ul>
           <a className="contact-info__cta" href="mailto:bradmatera@gmail.com">
-            <span>Email Bradley</span>
+            <span>Email Bradley@:</span>
             <span>bradmatera@gmail.com</span>
           </a>
           <p className="contact-info__note">
