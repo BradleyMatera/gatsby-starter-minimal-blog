@@ -189,6 +189,25 @@ const PurchasesPage = () => {
     }
   };
 
+  const handleLogin = () => {
+    if (typeof window !== "undefined") {
+      window.sessionStorage.setItem("identity_redirect", "/purchases");
+    }
+    if (identity) {
+      identity.close();
+      identity.open("login");
+    }
+  };
+
+  const handleLogout = () => {
+    identity?.logout();
+    identity?.close();
+    setUser(null);
+    setOrders([]);
+    setStatus("idle");
+    setMessage(null);
+  };
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     await loadOrders({ email, lookupToken });
@@ -220,7 +239,7 @@ const PurchasesPage = () => {
                 <button
                   className="store-button store-button--ghost"
                   type="button"
-                  onClick={() => identity?.logout()}
+                  onClick={handleLogout}
                   style={{ marginTop: "0.5rem" }}
                 >
                   Sign out
@@ -230,12 +249,7 @@ const PurchasesPage = () => {
               <button
                 className="store-button"
                 type="button"
-                onClick={() => {
-                  if (typeof window !== "undefined") {
-                    window.sessionStorage.setItem("identity_redirect", "/purchases");
-                  }
-                  identity?.open("login");
-                }}
+                onClick={handleLogin}
                 disabled={!identity}
               >
                 {identity ? "Sign in" : "Loading sign-in…"}
