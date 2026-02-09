@@ -1,5 +1,6 @@
 const { json } = require("./_response");
 const { query } = require("./_db");
+const { getAuthedEmail } = require("./_identity");
 
 const isValidEmail = (value) => {
   if (typeof value !== "string") return false;
@@ -15,20 +16,6 @@ const isValidToken = (value) => {
   return /^[a-f0-9]+$/i.test(trimmed);
 };
 
-const decodeJwtEmail = (authHeader) => {
-  if (!authHeader) return null;
-  const token = authHeader.replace(/^Bearer\s+/i, "").trim();
-  if (!token) return null;
-  const parts = token.split(".");
-  if (parts.length < 2) return null;
-  try {
-    const payload = JSON.parse(Buffer.from(parts[1], "base64url").toString("utf8"));
-    return payload?.email || payload?.user_metadata?.email || null;
-  } catch (error) {
-    return null;
-  }
-};
-
 exports.handler = async (event) => {
   if (event.httpMethod === "OPTIONS") {
     return json(200, { ok: true });
@@ -38,14 +25,10 @@ exports.handler = async (event) => {
     return json(405, { error: "method_not_allowed", message: "Use POST." });
   }
 
-  let authedEmail = event.clientContext?.user?.email || null;
+  let authedEmail = await getAuthedEmail(event);
   let email = authedEmail;
   let lookupToken = null;
-
-  if (!authedEmail && process.env.NETLIFY_DEV === "true") {
-    authedEmail = decodeJwtEmail(event.headers?.authorization || event.headers?.Authorization || "");
-    email = authedEmail;
-  }
+  email = authedEmail || null;
 
   if (!authedEmail) {
     let payload;

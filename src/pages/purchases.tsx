@@ -217,6 +217,14 @@ const PurchasesPage = () => {
                 >
                   Send test receipt
                 </button>
+                <button
+                  className="store-button store-button--ghost"
+                  type="button"
+                  onClick={() => identity?.logout()}
+                  style={{ marginTop: "0.5rem" }}
+                >
+                  Sign out
+                </button>
               </div>
             ) : (
               <button

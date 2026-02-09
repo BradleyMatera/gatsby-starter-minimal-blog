@@ -2,8 +2,7 @@ const crypto = require("crypto");
 const { json } = require("./_response");
 const { query } = require("./_db");
 const { sendReceiptEmail } = require("./_email");
-
-const getAuthedEmail = (event) => event.clientContext?.user?.email || null;
+const { getAuthedEmail } = require("./_identity");
 
 exports.handler = async (event) => {
   if (event.httpMethod === "OPTIONS") {
@@ -14,7 +13,7 @@ exports.handler = async (event) => {
     return json(405, { error: "method_not_allowed", message: "Use POST." });
   }
 
-  const email = getAuthedEmail(event);
+  const email = await getAuthedEmail(event);
   if (!email) {
     return json(401, { error: "unauthorized", message: "Sign in required." });
   }
