@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Link } from "gatsby";
 import ThemeToggle from "../../../components/ThemeToggle";
-import "../../../styles/vertical-nav.css";
 import {
   HomeIcon,
   ProjectsIcon,
