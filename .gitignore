@@ -84,3 +84,6 @@ docs/audits/*.json
 # Local tools and unused services
 .claude/
 projecthub-proxy/
+
+# Local Netlify folder
+.netlify

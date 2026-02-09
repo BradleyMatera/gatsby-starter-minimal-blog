@@ -28,6 +28,52 @@ const Layout = ({ children, className = `` }: LayoutProps) => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+    const redirect = window.sessionStorage.getItem("identity_redirect");
+    const hash = window.location.hash || "";
+    const hasIdentityToken =
+      hash.includes("recovery_token") ||
+      hash.includes("confirmation_token") ||
+      hash.includes("invite_token") ||
+      hash.includes("email_change_token");
+
+    if (!redirect && !hasIdentityToken) return;
+
+    let cancelled = false;
+
+    const initIdentity = async () => {
+      const module = await import("netlify-identity-widget");
+      const widget = module.default;
+
+      const hostname = window.location.hostname;
+      const isLocal =
+        hostname === "localhost" || hostname === "127.0.0.1" || hostname === "0.0.0.0";
+      const identityBase =
+        (process.env.GATSBY_IDENTITY_URL || "").trim() || "https://bradleymatera.dev";
+
+      if (isLocal) {
+        widget.init({ APIUrl: `${identityBase}/.netlify/identity` });
+      } else {
+        widget.init();
+      }
+
+      const user = widget.currentUser();
+      if (!cancelled && user && redirect) {
+        window.sessionStorage.removeItem("identity_redirect");
+        if (window.location.pathname !== redirect) {
+          window.location.assign(redirect);
+        }
+      }
+    };
+
+    initIdentity();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const handleBackToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };

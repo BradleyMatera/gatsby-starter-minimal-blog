@@ -41,6 +41,12 @@ const Footer = () => {
                   <Link to={replaceSlashes(`/${basePath}/${item.slug}`)}>{item.title}</Link>
                 </li>
               ))}
+              <li>
+                <Link to="/store/">Store</Link>
+              </li>
+              <li>
+                <Link to="/purchases/">Purchases</Link>
+              </li>
             </ul>
           </div>
           {externalLinks && externalLinks.length > 0 ? (
@@ -72,6 +78,7 @@ const Footer = () => {
       <div className="footer-bottom">
         <span>&copy; {currentYear} {siteTitle}. All rights reserved.</span>
         <span>Designing and delivering resilient cloud-backed products.</span>
+        <span>As an Amazon Associate I earn from qualifying purchases.</span>
       </div>
     </footer>
   );

@@ -1,0 +1,4 @@
+Example download placeholder.
+
+Replace this file with your real digital product and update the file_key mapping
+in netlify/functions/_downloads.js and the products table.

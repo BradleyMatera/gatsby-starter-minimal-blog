@@ -1,0 +1,2 @@
+ALTER TABLE orders
+  ADD COLUMN IF NOT EXISTS receipt_email_sent_at TIMESTAMPTZ;

@@ -40,3 +40,12 @@ exports.createSchemaCustomization = ({ actions }) => {
 
   createTypes(typeDefs);
 };
+
+exports.onCreatePage = ({ page, actions }) => {
+  const { createPage } = actions;
+
+  if (page.path === "/store/") {
+    page.matchPath = "/store/*";
+    createPage(page);
+  }
+};
