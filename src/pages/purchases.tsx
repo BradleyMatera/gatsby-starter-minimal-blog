@@ -313,6 +313,10 @@ const PurchasesPage = () => {
         <header className="store-header">
           <h1 className="store-title">Customer Portal</h1>
           <p className="store-subtitle">Sign in or use your access code to manage purchases.</p>
+          <p className="store-legal">
+            Affiliate products are sold by third-party merchants. Bradley Matera is not the seller or creator of affiliate products.
+            Direct digital downloads are sold by Bradley Matera.
+          </p>
         </header>
 
         <div className="store-access">

@@ -93,6 +93,9 @@ const SuccessPage = () => {
         <header className="store-header">
           <h1 className="store-title">Payment confirmed</h1>
           <p className="store-subtitle">Your download links are below.</p>
+          <p className="store-legal">
+            Direct digital downloads are sold by Bradley Matera. Affiliate products are sold by third-party merchants.
+          </p>
         </header>
 
         {status === "loading" && <div className="store-status">Verifying payment…</div>}

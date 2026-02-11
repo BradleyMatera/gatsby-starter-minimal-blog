@@ -33,8 +33,10 @@ const buildReceiptEmail = ({
   const downloadsText = successUrl
     ? `Access your downloads: ${successUrl}`
     : `Access your downloads in the customer portal: ${purchasesUrl}`;
+  const sellerDisclosure =
+    "Affiliate products are sold by third-party merchants. Bradley Matera is not the seller or creator of affiliate products. Direct digital downloads are sold by Bradley Matera.";
 
-  const text = `Thanks for your purchase!\n\nOrder ID: ${orderId}\nDate: ${purchaseDate}\nLookup code: ${lookupToken}\n\nItems:\n${lines}\n\nTotal: ${formatMoney(totalCents, currency)}\n\n${downloadsText}\nView purchases: ${purchasesUrl}\n\nSupport: ${supportEmail}\n`;
+  const text = `Thanks for your purchase!\n\nOrder ID: ${orderId}\nDate: ${purchaseDate}\nLookup code: ${lookupToken}\n\nItems:\n${lines}\n\nTotal: ${formatMoney(totalCents, currency)}\n\n${downloadsText}\nView purchases: ${purchasesUrl}\n\nSupport: ${supportEmail}\n\n${sellerDisclosure}\n`;
 
   const htmlItems = items
     .map(
@@ -82,6 +84,10 @@ const buildReceiptEmail = ({
         <a href="${purchasesUrl}" target="_blank" rel="noopener noreferrer">View your purchases</a>
       </p>
       <p style="margin: 0;">Support: <a href="mailto:${supportEmail}">${supportEmail}</a></p>
+      <p style="margin: 16px 0 0; font-size: 12px; color: #666;">
+        Affiliate products are sold by third-party merchants. Bradley Matera is not the seller or creator of affiliate products.
+        Direct digital downloads are sold by Bradley Matera.
+      </p>
     </div>
   `;
 
@@ -100,7 +106,7 @@ const sendReceiptEmail = async ({
 }) => {
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.ORDER_EMAIL_FROM;
-  const supportEmail = process.env.ORDER_SUPPORT_EMAIL || "support@bradleymatera.dev";
+  const supportEmail = process.env.ORDER_SUPPORT_EMAIL || "bradmatera@gmail.com";
 
   if (!apiKey || !from) {
     console.warn("Email sending skipped: RESEND_API_KEY or ORDER_EMAIL_FROM not set.");

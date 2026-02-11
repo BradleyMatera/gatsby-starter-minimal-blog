@@ -11,8 +11,6 @@ const Footer = () => {
   const description = siteHeadline || siteDescription;
   const quickStats = [
     "AWS Cloud Support Engineer Intern — Amazon",
-    "Core Skills: Full-Stack JavaScript, AWS, CI/CD, API security",
-    "Certifications: AWS Solutions Architect – Associate, AWS AI Practitioner",
     "Based in the Midwest — open to Seattle on-site or remote",
   ];
 
@@ -22,13 +20,9 @@ const Footer = () => {
         <div className="footer__brand">
           <p className="footer__title">{siteTitle}</p>
           {description ? <p className="footer__description">{description}</p> : null}
-          <div className="hero-actions">
-            <Link data-variant="primary" to={replaceSlashes(`/${basePath}/projects`)}>
-              View project portfolio
-            </Link>
-            <Link data-variant="ghost" to={replaceSlashes(`/${basePath}/blog`)}>
-              Read latest blog posts
-            </Link>
+          <div className="footer-cta">
+            <Link to={replaceSlashes(`/${basePath}/projects`)}>View project portfolio</Link>
+            <Link to={replaceSlashes(`/${basePath}/blog`)}>Read latest blog posts</Link>
           </div>
         </div>
 
@@ -79,6 +73,7 @@ const Footer = () => {
         <span>&copy; {currentYear} {siteTitle}. All rights reserved.</span>
         <span>Designing and delivering resilient cloud-backed products.</span>
         <span>As an Amazon Associate I earn from qualifying purchases.</span>
+        <span>Affiliate products are sold by third-party merchants; direct downloads are sold by Bradley Matera.</span>
       </div>
     </footer>
   );

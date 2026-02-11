@@ -1,12 +1,14 @@
 const { json } = require("./_response");
-const { query } = require("./_db");
+const { query, ensureProductsSchema } = require("./_db");
 
 exports.handler = async () => {
   try {
+    await ensureProductsSchema();
     const result = await query(
       `SELECT id, slug, name, description, price_cents, currency,
               COALESCE(product_type, 'direct') AS product_type,
-              affiliate_url, affiliate_source, display_price
+              affiliate_url, affiliate_source, display_price,
+              image_url, image_alt, badge, featured_rank, category, collection
        FROM products
        WHERE active = true
        ORDER BY created_at DESC`

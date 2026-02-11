@@ -45,7 +45,7 @@ Required Netlify environment variables (Functions only):
 - `DOWNLOAD_TOKEN_SECRET` (random 32+ chars)
 - `RESEND_API_KEY` (for purchase emails)
 - `ORDER_EMAIL_FROM` (verified sender, e.g. `Bradley Matera <receipts@bradleymatera.dev>`)
-- `ORDER_SUPPORT_EMAIL` (optional, defaults to support@bradleymatera.dev)
+- `ORDER_SUPPORT_EMAIL` (optional, defaults to bradmatera@gmail.com)
 
 Optional (overrides Netlify’s `URL`):
 - `SITE_URL` (set to `https://bradleymatera.dev` in production)
