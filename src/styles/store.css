@@ -385,6 +385,21 @@
   gap: 0.5rem;
 }
 
+.store-asin-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  color: var(--color-text-subtle);
+}
+
+.store-asin-code {
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
 .store-pill--warn {
   background: rgba(244, 63, 94, 0.2);
   color: var(--color-text);

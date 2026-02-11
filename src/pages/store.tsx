@@ -98,6 +98,27 @@ const getProductImage = (product: Product) => {
 
 const getProductAlt = (product: Product) => product.image_alt || product.name;
 
+const getAmazonAsin = (product: Product) => {
+  if (!product.affiliate_url) return null;
+  const match =
+    product.affiliate_url.match(/\/dp\/([A-Z0-9]{10})/i) ||
+    product.affiliate_url.match(/\/gp\/product\/([A-Z0-9]{10})/i);
+  return match ? match[1].toUpperCase() : null;
+};
+
+const renderAmazonMeta = (product: Product) => {
+  if (!(product.product_type === "affiliate" && product.affiliate_source === "amazon")) {
+    return null;
+  }
+  const asin = getAmazonAsin(product);
+  return (
+    <div className="store-asin-row">
+      <span className="store-pill store-pill--accent">Ships from Amazon</span>
+      {asin && <span className="store-asin-code">ASIN {asin}</span>}
+    </div>
+  );
+};
+
 const useProducts = () => {
   const [products, setProducts] = React.useState<Product[]>([]);
   const [loading, setLoading] = React.useState(true);
@@ -189,6 +210,7 @@ const StoreIndex: React.FC<RouteComponentProps> = () => {
                 {product.badge && <span className="store-pill store-pill--accent">{product.badge}</span>}
               </div>
               <p className="store-meta">{product.description}</p>
+              {renderAmazonMeta(product)}
             </div>
             <div className="store-price">{formatPrice(product)}</div>
             <div className="store-actions">
@@ -254,6 +276,7 @@ const StoreIndex: React.FC<RouteComponentProps> = () => {
                       </div>
                       <h3>{product.name}</h3>
                       <p className="store-meta">{product.description}</p>
+                      {renderAmazonMeta(product)}
                       <div className="store-featured-card__footer">
                         <span className="store-price">{formatPrice(product)}</span>
                         <a className="store-button" href={getGoUrl(product.slug)}>
@@ -418,6 +441,7 @@ const StoreProduct: React.FC<StoreProductProps> = ({ slug }) => {
           Part of Brad&apos;s Amazon Picks.
         </p>
       )}
+      {renderAmazonMeta(product)}
       <div className="store-price" style={{ marginBottom: "1rem" }}>
         {formatPrice(product)}
       </div>
