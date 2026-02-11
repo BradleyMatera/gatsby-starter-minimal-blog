@@ -6,7 +6,7 @@
   "author": "LekoArts",
   "license": "0BSD",
   "starter-name": "gatsby-starter-minimal-blog",
-  "packageManager": "bun@1.1.15",
+  "packageManager": "npm@10.8.2",
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
