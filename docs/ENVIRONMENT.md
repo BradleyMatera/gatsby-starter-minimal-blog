@@ -1,10 +1,40 @@
-# Environment
 
-| Variable | Purpose | Example | Notes |
-| --- | --- | --- | --- |
-| `ANALYSE_BUNDLE` | Toggles `gatsby-plugin-webpack-statoscope` in `gatsby-config.ts`. When truthy (`1`, `true`), the build writes reports to `public/.statoscope/`. | `ANALYSE_BUNDLE=1 npm run build` | Only useful for bundle analysis. No value = plugin is omitted. |
-| `NETLIFY` | Read in `package.json`’s `postinstall` hook to rebuild `sharp` for Netlify’s Linux x64 environment. | `NETLIFY=true npm install` | Set automatically by Netlify; locally set when debugging the sharp rebuild warning. |
-| `XAI_API_KEY` | Required by `projecthub-proxy/server.js` to authenticate with `https://api.x.ai/v1/chat/completions`. | `XAI_API_KEY=sk-...` | Keep this secret. Without it, `/api/chat` returns `400` because the proxy cannot forward requests. |
-| `PORT` | Defines the listening port for `projecthub-proxy/server.js`, defaulting to `3000` if absent. | `PORT=4000 node projecthub-proxy/server.js` | Changing the port means updating the front-end URL that hits the proxy. |
-| `USER_POOL_ID` | Referenced in the Cognito-Lambda example inside `content/posts/secure-authentication-cognito-react/index.mdx`. | `USER_POOL_ID=us-east-1_abcd1234` | **Assumption:** This blog post snippet expects Cognito values; the Gatsby site itself does not read them. *How to verify:* run `rg "USER_POOL_ID" -n content/posts/secure-authentication-cognito-react/index.mdx` and note the snippet only documents the flow. |
-| `CLIENT_ID` | Same Cognito sample, used by `aws-jwt-verify` in the same MDX snippet. | `CLIENT_ID=1h2jk3l4m5n6op7q8r9s0t` | **Assumption:** Only the illustrated Lambda needs it; Gatsby builds succeed without defining it. *How to verify:* comment out the snippet and rebuild; Gatsby still compiles. |
+# Environment variables
+
+## Required
+| Variable | Used by | Purpose |
+| --- | --- | --- |
+| `NETLIFY_DATABASE_URL` | Functions | Pooled DB connection for runtime queries. |
+| `NETLIFY_DATABASE_URL_UNPOOLED` | CLI | Migrations and seed scripts. |
+| `SITE_URL` | Functions | Canonical URL for redirects and emails. |
+| `STRIPE_SECRET_KEY` | Functions | Stripe API for Checkout + verification. |
+| `STRIPE_WEBHOOK_SECRET` | Functions | Webhook signature verification. |
+| `DOWNLOAD_TOKEN_SECRET` | Functions | HMAC secret for download tokens. |
+| `RESEND_API_KEY` | Functions | Receipt emails. |
+| `ORDER_EMAIL_FROM` | Functions | Receipt sender address. |
+
+## Optional
+| Variable | Used by | Purpose |
+| --- | --- | --- |
+| `ORDER_SUPPORT_EMAIL` | Functions | Reply-to for receipts (defaults in code). |
+| `GATSBY_IDENTITY_URL` | Frontend | Identity base URL override. |
+
+## Example .env (no secrets)
+```
+NETLIFY_DATABASE_URL=postgresql://.../neondb
+NETLIFY_DATABASE_URL_UNPOOLED=postgresql://.../neondb
+SITE_URL=http://localhost:8888
+STRIPE_SECRET_KEY=sk_live_...
+STRIPE_WEBHOOK_SECRET=whsec_...
+DOWNLOAD_TOKEN_SECRET=...
+RESEND_API_KEY=re_...
+ORDER_EMAIL_FROM=Bradley Matera <receipts@bradleymatera.dev>
+ORDER_SUPPORT_EMAIL=bradmatera@gmail.com
+```
+
+## Notes
+- Do not expose secrets client-side.
+- For local dev, use `.env` with the same variables.
+
+## Read next
+- `development.md`

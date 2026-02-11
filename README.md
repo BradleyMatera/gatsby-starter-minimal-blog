@@ -1,146 +1,32 @@
-# Bradley Matera · Portfolio & Blog
 
-Custom Gatsby site that powers Bradley Matera’s public portfolio, career pages, and MDX blog. The starter from LekoArts has been heavily shadowed to add bespoke layout blocks, richer navigation, and a tailored dark/light design system.
+# bradleymatera.dev
 
----
+Production Gatsby site with a real store and customer portal.
 
-- **Live site:** https://bradleysgatsbyblog.netlify.app
-- **Tech focus:** Gatsby 5 · React 18 · TypeScript · Theme UI · Tailwind/PostCSS · MDX
+## Documentation
+Start at `docs/README.md` for the full documentation flow.
 
----
-
-## Highlights
-
-- Opinionated homepage composed from reusable React sections (`HomeHero`, `Section`, `Card`, `ProjectCard`).
-- Role-specific landing pages (`/roles/...`) and project/contribution indexes driven by MDX.
-- Blog listing with URL-aware search/tag filters that degrade gracefully without JavaScript.
-- Dedicated project case studies (`/projects/car-match`, `/projects/interactive-pokedex`, `/projects/ciris-ai`) and a Netlify-backed contact form.
-- Dark/light color modes powered by Theme UI and global CSS custom properties.
-- Express proxy (`projecthub-proxy`) that forwards ProjectHub chat requests to the xAI Grok API without exposing credentials.
-
-## Project Structure
-
-```
-├── content/                   # MDX sources (pages, roles, posts, assets)
-├── src/
-│   ├── components/            # Custom React components used across MDX
-│   │   ├── home/HomeHero.tsx
-│   │   └── ui/                # Sections, cards, links, etc.
-│   ├── @lekoarts/gatsby-theme-minimal-blog/
-│   │   ├── components/        # Shadowed theme components (layout, blog, post)
-│   │   └── texts/             # Homepage sections authored in MDX
-│   ├── styles/global.css      # Main design language applied site-wide
-│   └── utils/                 # Small helpers (e.g., `cx`)
-├── projecthub-proxy/          # Optional Node server for ProjectHub chat
-├── gatsby-config.ts           # Site metadata + plugin configuration
-├── tailwind.config.js         # Tailwind tokens used inside custom CSS
-└── docs/                      # Supplemental documentation for this repo
-```
-
-## Getting Started
-
-Prerequisites: Node 18+ (Gatsby 5). You can work with Bun 1.1+ (preferred) or stick with npm/yarn if you already have them configured.
-
+## Quick start
 ```bash
-# Bun workflow (recommended)
-bun install          # install dependencies via Bun
-bun dev              # start Gatsby dev server at http://localhost:8000
-bun run build        # create production bundle in ./public
-bun run serve        # preview the production build locally
-bun run clean        # clear Gatsby caches
-bun lint             # run ESLint across JS/TS sources
-
-# npm fallback
 npm install
-npm run develop
+npm run develop        # Gatsby at http://localhost:8000
+netlify dev --no-open  # Site + functions at http://localhost:8888
 ```
 
-When running locally you can toggle between light and dark themes with the header control. Gatsby stores the chosen palette in `localStorage`.
+## What this repo includes
+- Portfolio + blog (Gatsby).
+- Store with two product types:
+  - Direct digital downloads (Stripe Checkout).
+  - Affiliate picks (Amazon links).
+- Customer portal for purchases (Netlify Identity + order lookup code).
 
-## Authoring Content
+## Key routes
+- `/store` (listing)
+- `/store/:slug` (detail)
+- `/go/:slug` (affiliate redirect or direct checkout)
+- `/purchases` (customer portal)
+- `/success` and `/cancel`
+- `/support`
 
-- Pages live in `content/pages/**/index.mdx`. They can import React components from `src/components/ui`.
-- Blog posts live in `content/posts/<slug>/index.mdx`. Each folder may include local assets (images, etc).
-- Frontmatter fields (`title`, `slug`, `date`, `tags`, `banner`, etc.) are consumed by the theme’s GraphQL queries.
-- The homepage pulls most copy from `src/@lekoarts/gatsby-theme-minimal-blog/texts/hero.mdx` and `texts/bottom.mdx`, with the main hero unit defined in `src/components/home/HomeHero.tsx`.
-- Case studies live alongside the project index (e.g., `content/pages/projects/car-match.mdx`) and the contact form is at `content/pages/contact/index.mdx`.
-
-See `docs/content-authoring.md` for detailed guidance on MDX structure, shortcodes, and imports.
-
-## Styling System
-
-There are three complementary layers:
-
-1. **Theme UI theme overrides** (`src/@lekoarts/.../gatsby-plugin-theme-ui/index.ts`) redefine tokens, shadows, and component presets for the shadowed theme components.
-2. **Global CSS** (`src/styles/global.css`) establishes the visual system for navigation, cards, layouts, and typography—including the custom dark/light palettes.
-3. **Tailwind tokens** (`tailwind.config.js` + `src/components/style.css`) supply utility classes inside legacy components. Tailwind is processed through PostCSS using `@tailwindcss/postcss`.
-
-Refer to `docs/styling.md` for examples of where each layer applies and how to extend them safely.
-
-## Development Notes
-
-- **TypeScript:** `tsconfig.json` enables `strict` mode. Shadowed files from the theme remain `.tsx`; older helper components under `src/components` are still JavaScript.
-- **Analytics:** Google Analytics v4 is configured via `gatsby-plugin-google-analytics` with Measurement ID `G-V5RJ4522VW`.
-- **RSS + SEO:** The feed, sitemap, and manifest plugins reuse the metadata in `gatsby-config.ts`.
-- **Bundle inspection:** Set `ANALYSE_BUNDLE=1` before running `npm run build` to emit Statoscope reports under `public/.statoscope/`.
-
-Development workflow, testing, and deployment guidance lives in `docs/development.md`.
-
-## ProjectHub Proxy (Optional)
-
-`projecthub-proxy/server.js` exposes `POST /api/chat` and relays requests to the xAI Grok API:
-
-```bash
-XAI_API_KEY=<token> PORT=3000 node projecthub-proxy/server.js
-```
-
-Deploy it separately (e.g., Render, Fly, or a small EC2 instance) and point the ProjectHub front-end at the hosted endpoint. Rate limiting is set to 100 requests / 15 minutes; adjust as needed.
-
-## Additional Documentation
-
-Further detail is available under `docs/`:
-
-- `docs/development.md` – local tooling, scripts, environment variables, and deployment recommendations.
-- `docs/content-authoring.md` – how to write MDX pages/posts, embed components, and manage assets.
-- `docs/styling.md` – explanation of Theme UI overrides, CSS architecture, and Tailwind usage.
-- `docs/architecture.md` – component map and data flow between the theme, custom UI, and content layers.
-- `docs/site-review.md` – living review of UX, performance, and outstanding opportunities.
-
-Keep these files current when you change workflows or add new features so future contributors can ramp up quickly.
-
----
-
-## Noteworthy/Unusual Aspects
-
-- **Theme shadowing:** Extensive use of Gatsby theme shadowing for custom layout, navigation, and blog features.
-- **MDX everywhere:** All content (pages, posts, roles, projects) authored in MDX, with React components imported for rich layouts.
-- **Express proxy:** Optional Node.js proxy for xAI Grok API, not part of Gatsby build.
-- **Design system:** Three-layer styling (Theme UI, global CSS, Tailwind utilities) for maximum flexibility and consistency.
-- **Accessibility:** Semantic headings, skip nav, focus-visible outlines, aria labels, and dark-mode infrastructure (toggle currently disabled).
-- **Performance:** Static HTML/JS output, CDN hosting, bundle analysis via Statoscope.
-- **Security:** All external links use `rel="noopener noreferrer"`, Netlify forms use honeypot, proxy is rate-limited.
-- **Docs-first:** Every major feature, workflow, and design decision is documented in detail.
-
-## Recommendations for Lean Efficiency
-
-- **Keep docs current:** Update documentation with every workflow, content, or design change.
-- **Group content:** Use tags/themes in MDX frontmatter for filtering and series.
-- **Audit assets:** Ensure all images have descriptive alt text and responsive formats.
-- **Expand case studies:** Add deep-dive pages for all major projects.
-- **Structured data:** Add JSON-LD for articles and case studies for SEO (see `docs/structured-data.md`).
-- **Breadcrumbs:** Consider for long-form content and role pages (see `docs/breadcrumbs.md`).
-
-## Documentation Map & Cross-links
-
-- [Architecture](docs/architecture.md): Technical structure, Gatsby layers, component map.
-- [Development](docs/development.md): Workflow, scripts, troubleshooting, deployment.
-- [Content Authoring](docs/content-authoring.md): MDX structure, frontmatter, imports.
-- [Styling](docs/styling.md): Theme UI, global CSS, Tailwind, design system.
-- [Site Review](docs/site-review.md): UX, accessibility, performance, opportunities.
-- [Overview Section](docs/overview-section.md): Homepage interactive section.
-- [Redesign Concept](docs/redesign-concept.md): Visual/UX philosophy, wireframes.
-- [Audit Inventory](docs/audit-inventory.md): Content themes, gaps, recommendations.
-- [Breadcrumbs](docs/breadcrumbs.md): Navigation strategy (new).
-- [Structured Data](docs/structured-data.md): SEO and rich snippets (new).
-
-See each doc for further cross-links and details. Keep this README as the entry point for all documentation.
+## Source of truth
+Code is the source of truth. Docs are aligned to the current codebase.
