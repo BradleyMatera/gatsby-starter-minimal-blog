@@ -68,6 +68,54 @@
   color: var(--color-text-subtle);
 }
 
+.store-tabs {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.store-tab {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text-subtle);
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.store-tab--active {
+  background: var(--store-accent);
+  border-color: var(--store-accent);
+  color: var(--color-text-inverse);
+  box-shadow: 0 10px 20px rgba(29, 78, 216, 0.25);
+}
+
+.store-tab--active .store-tab-count {
+  background: rgba(255, 255, 255, 0.25);
+  color: var(--color-text-inverse);
+}
+
+.store-tab-count {
+  min-width: 24px;
+  text-align: center;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.2);
+  font-size: 0.75rem;
+}
+
+.store-tab:focus-visible {
+  outline: 3px solid rgba(29, 78, 216, 0.3);
+  outline-offset: 2px;
+}
+
 .store-card {
   background: var(--color-surface);
   border: 1px solid var(--color-border);

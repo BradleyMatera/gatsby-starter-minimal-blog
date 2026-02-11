@@ -221,6 +221,8 @@
   word-break: break-word;
   overflow-wrap: anywhere;
   white-space: nowrap;
+  max-width: none;
+  overflow: visible;
 }
 .vertical-nav--top .vertical-nav__cta {
   display: inline-flex;

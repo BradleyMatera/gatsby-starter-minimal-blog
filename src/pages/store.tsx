@@ -177,6 +177,47 @@ const StoreIndex: React.FC<RouteComponentProps> = () => {
     (product) => product.product_type === "affiliate" && product.affiliate_source !== "amazon",
   );
 
+  const collectionOrder = ["Core Desk & Streaming", "Home Lab & Maker Gear", "Learning & Hobby"];
+  const slugify = (value: string) =>
+    value
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "");
+
+  const amazonCollections = Array.from(
+    new Set(amazonProducts.map((product) => product.collection).filter(Boolean)),
+  ) as string[];
+  const orderedCollections = [
+    ...collectionOrder.filter((name) => amazonCollections.includes(name)),
+    ...amazonCollections.filter((name) => !collectionOrder.includes(name)),
+  ];
+  const amazonTabs = [
+    { key: "all", label: "All picks" },
+    ...orderedCollections.map((label) => ({ key: slugify(label), label })),
+  ];
+
+  const [activeAmazonTab, setActiveAmazonTab] = React.useState(amazonTabs[0]?.key ?? "all");
+
+  React.useEffect(() => {
+    if (!amazonTabs.find((tab) => tab.key === activeAmazonTab)) {
+      setActiveAmazonTab(amazonTabs[0]?.key ?? "all");
+    }
+  }, [amazonTabs, activeAmazonTab]);
+
+  const amazonCounts = amazonProducts.reduce<Record<string, number>>((acc, product) => {
+    if (product.collection) {
+      const key = slugify(product.collection);
+      acc[key] = (acc[key] || 0) + 1;
+    }
+    return acc;
+  }, {});
+
+  const activeCollectionLabel = amazonTabs.find((tab) => tab.key === activeAmazonTab)?.label;
+  const filteredAmazonProducts =
+    activeAmazonTab === "all" || !activeCollectionLabel
+      ? amazonProducts
+      : amazonProducts.filter((product) => product.collection === activeCollectionLabel);
+
   const productMap = new Map(products.map((product) => [product.slug, product]));
 
   const comparisonCards = [
@@ -312,7 +353,27 @@ const StoreIndex: React.FC<RouteComponentProps> = () => {
               <p className="store-section-description">
                 Hand-picked Amazon gear I actually recommend. Checkout happens on Amazon, and using these links supports my work at no extra cost.
               </p>
-              {renderProducts(amazonProducts)}
+              {amazonTabs.length > 1 && (
+                <div className="store-tabs" role="tablist" aria-label="Amazon picks categories">
+                  {amazonTabs.map((tab) => {
+                    const count = tab.key === "all" ? amazonProducts.length : amazonCounts[tab.key] || 0;
+                    return (
+                      <button
+                        key={tab.key}
+                        type="button"
+                        role="tab"
+                        aria-selected={activeAmazonTab === tab.key}
+                        className={`store-tab ${activeAmazonTab === tab.key ? "store-tab--active" : ""}`}
+                        onClick={() => setActiveAmazonTab(tab.key)}
+                      >
+                        <span>{tab.label}</span>
+                        <span className="store-tab-count">{count}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+              {renderProducts(filteredAmazonProducts)}
             </section>
           )}
 
