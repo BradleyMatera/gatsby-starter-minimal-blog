@@ -86,6 +86,7 @@ const fallbackImages: Record<string, string> = {
   network: "/store/router.svg",
   camera: "/store/camera.svg",
   robot: "/store/robot.svg",
+  light: "/store/light.svg",
   art: "/store/art.svg",
   apparel: "/store/shirt.svg",
   book: "/store/book.svg",
