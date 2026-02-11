@@ -2405,14 +2405,14 @@ img {
 
 html,
 body {
-  scroll-snap-type: y proximity;
+  scroll-snap-type: none;
   scroll-padding-top: 6rem;
   scroll-behavior: smooth;
 }
 
 .site-content > * {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+  scroll-snap-align: none;
+  scroll-snap-stop: normal;
   scroll-margin-top: 6rem;
 }
 
@@ -2421,7 +2421,7 @@ body {
 }
 
 .snap-panel {
-  scroll-snap-align: start;
+  scroll-snap-align: none;
   scroll-margin-top: 6rem;
 }
 
