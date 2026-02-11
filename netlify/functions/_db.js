@@ -13,8 +13,25 @@ const pool = global.__netlifyDbPool ||
   });
 
 global.__netlifyDbPool = pool;
+let ordersSchemaReady = false;
 
 const query = (text, params) => pool.query(text, params);
 const getClient = () => pool.connect();
 
-module.exports = { query, getClient };
+const ensureOrdersSchema = async () => {
+  if (ordersSchemaReady) return;
+
+  await pool.query(
+    "ALTER TABLE orders ADD COLUMN IF NOT EXISTS lookup_token text"
+  );
+  await pool.query(
+    "CREATE UNIQUE INDEX IF NOT EXISTS orders_lookup_token_unique ON orders (lookup_token) WHERE lookup_token IS NOT NULL"
+  );
+  await pool.query(
+    "ALTER TABLE orders ADD COLUMN IF NOT EXISTS receipt_email_sent_at timestamptz"
+  );
+
+  ordersSchemaReady = true;
+};
+
+module.exports = { query, getClient, ensureOrdersSchema };

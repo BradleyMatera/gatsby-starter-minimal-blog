@@ -98,7 +98,6 @@ Step 8: Verify live basics
 - /success shows downloads
 - /purchases can find the order by sign-in or email + lookup code
 - Purchase email sends full receipt (items, total, lookup code, downloads link)
-- /purchases "Send test receipt" works (signed-in only)
 
 Quick checklist
 
@@ -127,6 +126,8 @@ Purchases access checks
 - Netlify Identity login works
 - Logged-in users see only their orders
 - Email + lookup code path works
+- Portal can fetch download links for paid orders
+- Portal can resend receipts
 
 If something fails, reply with one line:
 - "list_products 500 locally"

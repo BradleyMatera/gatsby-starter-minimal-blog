@@ -1,6 +1,6 @@
 const crypto = require("crypto");
 const { json } = require("./_response");
-const { query } = require("./_db");
+const { query, ensureOrdersSchema } = require("./_db");
 const { stripe } = require("./_stripe");
 const { signToken } = require("./_downloadTokens");
 
@@ -28,6 +28,7 @@ exports.handler = async (event) => {
   }
 
   try {
+    await ensureOrdersSchema();
     let session;
     try {
       session = await stripe.checkout.sessions.retrieve(sessionId);

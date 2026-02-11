@@ -1,5 +1,5 @@
 const crypto = require("crypto");
-const { query, getClient } = require("./_db");
+const { query, getClient, ensureOrdersSchema } = require("./_db");
 const { stripe } = require("./_stripe");
 const { sendReceiptEmail } = require("./_email");
 
@@ -51,6 +51,7 @@ exports.handler = async (event) => {
     }
 
     try {
+      await ensureOrdersSchema();
       const lineItems = await stripe.checkout.sessions.listLineItems(session.id, { limit: 1 });
       const lineItem = lineItems.data[0];
       const unitAmount = lineItem?.price?.unit_amount;

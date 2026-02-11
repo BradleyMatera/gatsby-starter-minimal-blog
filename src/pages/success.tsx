@@ -131,7 +131,7 @@ const SuccessPage = () => {
                   </div>
                 )}
                 <div className="store-meta">
-                  Save this code to view purchases later at <Link className="store-link" to="/purchases/">/purchases</Link>.
+                  Save this code to view purchases later in the <Link className="store-link" to="/purchases/">customer portal</Link>.
                 </div>
               </div>
             )}
@@ -150,7 +150,7 @@ const SuccessPage = () => {
             <div style={{ marginTop: "1.5rem" }}>
               <Link className="store-link" to="/store/">Back to store</Link>
               <span style={{ marginLeft: "1rem" }}>
-                <Link className="store-link" to="/purchases/">View purchases</Link>
+                <Link className="store-link" to="/purchases/">Customer portal</Link>
               </span>
             </div>
           </div>

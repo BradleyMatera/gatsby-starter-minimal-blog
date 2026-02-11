@@ -113,7 +113,7 @@ const StoreIndex: React.FC<RouteComponentProps> = () => {
           <p className="store-disclosure">{disclosureText}</p>
           <div className="store-cta">
             <a className="store-button" href="#products">Browse products</a>
-            <Link className="store-link" to="/purchases/">View purchases</Link>
+            <Link className="store-link" to="/purchases/">Customer portal</Link>
             <Link className="store-link" to="/support/">Support</Link>
           </div>
         </div>
@@ -232,7 +232,7 @@ const StoreProduct: React.FC<StoreProductProps> = ({ slug }) => {
           {getBuyLabel(product)}
         </a>
         <Link className="store-link" to="/store/">Back to store</Link>
-        <Link className="store-link" to="/purchases/">View purchases</Link>
+        <Link className="store-link" to="/purchases/">Customer portal</Link>
       </div>
       {error && <div className="store-status store-error" style={{ marginTop: "1.5rem" }}>{error}</div>}
     </div>

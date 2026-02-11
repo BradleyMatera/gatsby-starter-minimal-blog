@@ -1,5 +1,5 @@
 const { json } = require("./_response");
-const { query } = require("./_db");
+const { query, ensureOrdersSchema } = require("./_db");
 const { getAuthedEmail } = require("./_identity");
 
 const isValidEmail = (value) => {
@@ -51,6 +51,7 @@ exports.handler = async (event) => {
   }
 
   try {
+    await ensureOrdersSchema();
     const queryParams = [email.trim()];
     let tokenClause = "";
 

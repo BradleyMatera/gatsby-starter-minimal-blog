@@ -1,6 +1,6 @@
 const crypto = require("crypto");
 const { json } = require("./_response");
-const { query } = require("./_db");
+const { query, ensureOrdersSchema } = require("./_db");
 const { sendReceiptEmail } = require("./_email");
 const { getAuthedEmail } = require("./_identity");
 
@@ -19,6 +19,7 @@ exports.handler = async (event) => {
   }
 
   try {
+    await ensureOrdersSchema();
     const orderResult = await query(
       `SELECT id, stripe_session_id, lookup_token, created_at
        FROM orders
@@ -69,7 +70,7 @@ exports.handler = async (event) => {
       }
     }
 
-    await sendReceiptEmail({
+    const sent = await sendReceiptEmail({
       to: email,
       orderId,
       lookupToken,
@@ -80,9 +81,20 @@ exports.handler = async (event) => {
       currency,
     });
 
+    if (!sent) {
+      return json(500, {
+        error: "email_not_configured",
+        message: "Email service not configured. Check RESEND_API_KEY and ORDER_EMAIL_FROM.",
+      });
+    }
+
     return json(200, { ok: true, message: "Test receipt sent." });
   } catch (error) {
     console.error("send_test_receipt error", error);
-    return json(500, { error: "server_error", message: "Unable to send test receipt." });
+    const isDev = process.env.NETLIFY_DEV === "true";
+    return json(500, {
+      error: "server_error",
+      message: isDev && error instanceof Error ? error.message : "Unable to send test receipt.",
+    });
   }
 };

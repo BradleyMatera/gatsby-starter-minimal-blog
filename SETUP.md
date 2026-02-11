@@ -136,6 +136,7 @@ Amazon links are created manually and must already include your tag parameter:
   - **Email + lookup code** from the purchase email or success page.
 - The email must match `orders.customer_email` (captured from Stripe Checkout).
 - If Stripe Checkout doesn’t provide an email, the order won’t be discoverable on this page.
+- Customers can request download links and resend receipts from the portal.
 
 ## Purchase email delivery
 

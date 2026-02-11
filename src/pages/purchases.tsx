@@ -20,6 +20,14 @@ type Order = {
   items: OrderItem[];
 };
 
+type DownloadItem = {
+  product_id: string;
+  name: string;
+  quantity: number;
+  download_url: string;
+  expires_at: number;
+};
+
 type IdentityUser = {
   email?: string;
   jwt: () => Promise<string>;
@@ -46,6 +54,16 @@ const getFunctionsUrl = (path: string) => {
   return base ? `${base}/.netlify/functions/${path}` : `/.netlify/functions/${path}`;
 };
 
+const normalizeDownloadUrl = (url: string) => {
+  const base = getFunctionsBase();
+  if (!base) return url;
+  try {
+    return new URL(url, base).toString();
+  } catch (error) {
+    return url;
+  }
+};
+
 const formatMoney = (amountCents: number, currency = "USD") => {
   const amount = amountCents / 100;
   try {
@@ -66,6 +84,11 @@ const PurchasesPage = () => {
   const [status, setStatus] = React.useState<"idle" | "loading" | "error" | "success">("idle");
   const [message, setMessage] = React.useState<string | null>(null);
   const [orders, setOrders] = React.useState<Order[]>([]);
+  const [downloadsByOrder, setDownloadsByOrder] = React.useState<Record<string, DownloadItem[]>>({});
+  const [accessMode, setAccessMode] = React.useState<"auth" | "code" | null>(null);
+  const [accessPayload, setAccessPayload] = React.useState<{ email: string; lookupToken: string } | null>(null);
+  const [actionMessage, setActionMessage] = React.useState<string | null>(null);
+  const [busyOrderId, setBusyOrderId] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     if (typeof window === "undefined") return;
@@ -125,7 +148,7 @@ const PurchasesPage = () => {
   const loadOrders = async (options: { token?: string; email?: string; lookupToken?: string }) => {
     setStatus("loading");
     setMessage(null);
-    setOrders([]);
+    setActionMessage(null);
 
     try {
       const headers: Record<string, string> = { "Content-Type": "application/json" };
@@ -147,8 +170,16 @@ const PurchasesPage = () => {
       }
       setOrders(data.orders || []);
       setStatus("success");
+      setDownloadsByOrder({});
       if (!data.orders || data.orders.length === 0) {
         setMessage("No orders found yet.");
+      }
+      if (options.token) {
+        setAccessMode("auth");
+        setAccessPayload(null);
+      } else if (options.email && options.lookupToken) {
+        setAccessMode("code");
+        setAccessPayload({ email: options.email, lookupToken: options.lookupToken });
       }
     } catch (error) {
       setStatus("error");
@@ -158,36 +189,13 @@ const PurchasesPage = () => {
 
   React.useEffect(() => {
     if (!user) return;
+    if (user.email) {
+      setEmail(user.email);
+    }
     user.jwt().then((token) => {
       loadOrders({ token });
     });
   }, [user]);
-
-  const handleSendTestReceipt = async () => {
-    if (!user) return;
-    setStatus("loading");
-    setMessage(null);
-    try {
-      const token = await user.jwt();
-      const res = await fetch(getFunctionsUrl("send_test_receipt"), {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({}),
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data?.message || "Unable to send test receipt.");
-      }
-      setStatus("success");
-      setMessage("Test receipt sent to your email.");
-    } catch (error) {
-      setStatus("error");
-      setMessage(error instanceof Error ? error.message : "Unable to send test receipt.");
-    }
-  };
 
   const handleLogin = () => {
     if (typeof window !== "undefined") {
@@ -199,13 +207,27 @@ const PurchasesPage = () => {
     }
   };
 
+  const handleSignup = () => {
+    if (typeof window !== "undefined") {
+      window.sessionStorage.setItem("identity_redirect", "/purchases");
+    }
+    if (identity) {
+      identity.close();
+      identity.open("signup");
+    }
+  };
+
   const handleLogout = () => {
     identity?.logout();
     identity?.close();
     setUser(null);
     setOrders([]);
+    setDownloadsByOrder({});
     setStatus("idle");
     setMessage(null);
+    setActionMessage(null);
+    setAccessMode(null);
+    setAccessPayload(null);
   };
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -213,12 +235,84 @@ const PurchasesPage = () => {
     await loadOrders({ email, lookupToken });
   };
 
+  const getAuthHeaders = async () => {
+    if (accessMode === "auth" && user) {
+      const token = await user.jwt();
+      return { Authorization: `Bearer ${token}` };
+    }
+    return {};
+  };
+
+  const getActionPayload = async (orderId: string) => {
+    const headers: Record<string, string> = { "Content-Type": "application/json" };
+    const body: Record<string, string> = { order_id: orderId };
+
+    if (accessMode === "auth" && user) {
+      const authHeaders = await getAuthHeaders();
+      Object.assign(headers, authHeaders);
+      return { headers, body };
+    }
+
+    if (accessMode === "code" && accessPayload) {
+      body.email = accessPayload.email;
+      body.lookup_token = accessPayload.lookupToken;
+      return { headers, body };
+    }
+
+    throw new Error("Sign in or use your access code to continue.");
+  };
+
+  const handleGetDownloads = async (orderId: string) => {
+    try {
+      setBusyOrderId(orderId);
+      setActionMessage(null);
+      const { headers, body } = await getActionPayload(orderId);
+      const res = await fetch(getFunctionsUrl("get_order_downloads"), {
+        method: "POST",
+        headers,
+        body: JSON.stringify(body),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data?.message || "Unable to fetch downloads.");
+      }
+      setDownloadsByOrder((prev) => ({ ...prev, [orderId]: data.downloads || [] }));
+      setActionMessage("Download links are ready.");
+    } catch (error) {
+      setActionMessage(error instanceof Error ? error.message : "Unable to fetch downloads.");
+    } finally {
+      setBusyOrderId(null);
+    }
+  };
+
+  const handleSendReceipt = async (orderId: string) => {
+    try {
+      setBusyOrderId(orderId);
+      setActionMessage(null);
+      const { headers, body } = await getActionPayload(orderId);
+      const res = await fetch(getFunctionsUrl("send_receipt_email"), {
+        method: "POST",
+        headers,
+        body: JSON.stringify(body),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data?.message || "Unable to send receipt.");
+      }
+      setActionMessage("Receipt email sent.");
+    } catch (error) {
+      setActionMessage(error instanceof Error ? error.message : "Unable to send receipt.");
+    } finally {
+      setBusyOrderId(null);
+    }
+  };
+
   return (
     <Layout>
       <div className="store-shell">
         <header className="store-header">
-          <h1 className="store-title">Purchases</h1>
-          <p className="store-subtitle">Access your orders securely.</p>
+          <h1 className="store-title">Customer Portal</h1>
+          <p className="store-subtitle">Sign in or use your access code to manage purchases.</p>
         </header>
 
         <div className="store-access">
@@ -231,14 +325,6 @@ const PurchasesPage = () => {
                 <button
                   className="store-button store-button--ghost"
                   type="button"
-                  onClick={handleSendTestReceipt}
-                  style={{ marginTop: "0.75rem" }}
-                >
-                  Send test receipt
-                </button>
-                <button
-                  className="store-button store-button--ghost"
-                  type="button"
                   onClick={handleLogout}
                   style={{ marginTop: "0.5rem" }}
                 >
@@ -246,14 +332,24 @@ const PurchasesPage = () => {
                 </button>
               </div>
             ) : (
-              <button
-                className="store-button"
-                type="button"
-                onClick={handleLogin}
-                disabled={!identity}
-              >
-                {identity ? "Sign in" : "Loading sign-in…"}
-              </button>
+              <div className="store-auth-actions">
+                <button
+                  className="store-button"
+                  type="button"
+                  onClick={handleLogin}
+                  disabled={!identity}
+                >
+                  {identity ? "Sign in" : "Loading sign-in…"}
+                </button>
+                <button
+                  className="store-button store-button--ghost"
+                  type="button"
+                  onClick={handleSignup}
+                  disabled={!identity}
+                >
+                  Create account
+                </button>
+              </div>
             )}
           </div>
 
@@ -303,6 +399,12 @@ const PurchasesPage = () => {
           </div>
         )}
 
+        {actionMessage && (
+          <div className="store-status" style={{ marginTop: "1rem" }}>
+            {actionMessage}
+          </div>
+        )}
+
         {orders.length > 0 && (
           <div className="store-orders">
             {orders.map((order) => {
@@ -310,6 +412,8 @@ const PurchasesPage = () => {
                 (sum, item) => sum + item.unit_price_cents * item.quantity,
                 0
               );
+              const downloads = downloadsByOrder[order.id] || [];
+              const isBusy = busyOrderId === order.id;
               return (
                 <div key={order.id} className="store-order">
                   <div className="store-order-header">
@@ -338,6 +442,38 @@ const PurchasesPage = () => {
                     <span>Total</span>
                     <span>{formatMoney(totalCents)}</span>
                   </div>
+                  <div className="store-order-actions">
+                    <button
+                      className="store-button store-button--ghost"
+                      type="button"
+                      disabled={isBusy || order.status !== "paid"}
+                      onClick={() => handleGetDownloads(order.id)}
+                    >
+                      {order.status !== "paid" ? "Downloads unavailable" : "Get downloads"}
+                    </button>
+                    <button
+                      className="store-button store-button--ghost"
+                      type="button"
+                      disabled={isBusy}
+                      onClick={() => handleSendReceipt(order.id)}
+                    >
+                      Email receipt
+                    </button>
+                  </div>
+                  {downloads.length > 0 && (
+                    <div className="store-downloads">
+                      {downloads.map((download) => (
+                        <div key={`${order.id}-${download.product_id}`} className="store-download-item">
+                          <div><strong>{download.name}</strong></div>
+                          <div className="store-meta">Quantity: {download.quantity}</div>
+                          <a href={normalizeDownloadUrl(download.download_url)}>Download</a>
+                          <div className="store-meta">
+                            Link expires at {new Date(download.expires_at * 1000).toLocaleTimeString()}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               );
             })}

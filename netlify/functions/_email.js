@@ -30,7 +30,11 @@ const buildReceiptEmail = ({
     )
     .join("\n");
 
-  const text = `Thanks for your purchase!\n\nOrder ID: ${orderId}\nDate: ${purchaseDate}\nLookup code: ${lookupToken}\n\nItems:\n${lines}\n\nTotal: ${formatMoney(totalCents, currency)}\n\nAccess your downloads: ${successUrl}\nView purchases: ${purchasesUrl}\n\nSupport: ${supportEmail}\n`;
+  const downloadsText = successUrl
+    ? `Access your downloads: ${successUrl}`
+    : `Access your downloads in the customer portal: ${purchasesUrl}`;
+
+  const text = `Thanks for your purchase!\n\nOrder ID: ${orderId}\nDate: ${purchaseDate}\nLookup code: ${lookupToken}\n\nItems:\n${lines}\n\nTotal: ${formatMoney(totalCents, currency)}\n\n${downloadsText}\nView purchases: ${purchasesUrl}\n\nSupport: ${supportEmail}\n`;
 
   const htmlItems = items
     .map(
@@ -67,9 +71,13 @@ const buildReceiptEmail = ({
         </tbody>
       </table>
       <p style="margin: 0 0 12px; font-weight: bold;">Total: ${formatMoney(totalCents, currency)}</p>
-      <p style="margin: 0 0 8px;">
+      ${
+        successUrl
+          ? `<p style="margin: 0 0 8px;">
         <a href="${successUrl}" target="_blank" rel="noopener noreferrer">Access your downloads</a>
-      </p>
+      </p>`
+          : ""
+      }
       <p style="margin: 0 0 16px;">
         <a href="${purchasesUrl}" target="_blank" rel="noopener noreferrer">View your purchases</a>
       </p>
@@ -124,6 +132,7 @@ const sendReceiptEmail = async ({
     body: JSON.stringify({
       from,
       to,
+      reply_to: supportEmail,
       subject: receipt.subject,
       text: receipt.text,
       html: receipt.html,
