@@ -19,6 +19,7 @@ This documentation is organized to match the current codebase. If something disa
 ## System map
 - `./architecture.md`
 - `./store-and-portal.md`
+- `./payments-and-fulfillment.md`
 - `./database.md`
 - `./functions.md`
 

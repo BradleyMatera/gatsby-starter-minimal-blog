@@ -1,7 +1,6 @@
-const crypto = require("crypto");
 const { query, getClient, ensureOrdersSchema } = require("./_db");
 const { stripe } = require("./_stripe");
-const { sendReceiptEmail } = require("./_email");
+const { sendReceiptEmail, sendRefundEmail } = require("./_email");
 
 const getHeader = (headers, name) => {
   const target = Object.keys(headers || {}).find(
@@ -74,45 +73,32 @@ exports.handler = async (event) => {
 
       const client = await getClient();
       let orderId;
-      let lookupToken;
       try {
         await client.query("BEGIN");
 
-        lookupToken = crypto.randomBytes(24).toString("hex");
-
         const orderResult = await client.query(
-          `INSERT INTO orders (stripe_session_id, stripe_payment_intent_id, customer_email, status, lookup_token)
-           VALUES ($1, $2, $3, 'paid', $4)
+          `INSERT INTO orders (stripe_session_id, stripe_payment_intent_id, customer_email, status)
+           VALUES ($1, $2, $3, 'paid')
            ON CONFLICT (stripe_session_id) DO NOTHING
            RETURNING id`,
-          [session.id, session.payment_intent || null, session.customer_details?.email || null, lookupToken]
+          [session.id, session.payment_intent || null, session.customer_details?.email || null]
         );
 
         if (orderResult.rowCount === 0) {
           const existing = await client.query(
-            "SELECT id, lookup_token, customer_email, receipt_email_sent_at FROM orders WHERE stripe_session_id = $1",
+            "SELECT id, customer_email, receipt_email_sent_at FROM orders WHERE stripe_session_id = $1",
             [session.id]
           );
           const existingOrder = existing.rows[0];
-          let existingToken = existingOrder?.lookup_token || null;
-
-          if (existingOrder && !existingToken) {
-            existingToken = crypto.randomBytes(24).toString("hex");
-            await client.query(
-              "UPDATE orders SET lookup_token = $1 WHERE id = $2 AND lookup_token IS NULL",
-              [existingToken, existingOrder.id]
-            );
-          }
 
           await client.query("COMMIT");
 
           const fallbackEmail = session.customer_details?.email;
           const email = existingOrder?.customer_email || fallbackEmail;
-          if (email && existingToken && !existingOrder?.receipt_email_sent_at) {
+          if (email && !existingOrder?.receipt_email_sent_at) {
             sendReceiptEmail({
               to: email,
               orderId: existingOrder.id,
-              lookupToken: existingToken,
               sessionId: session.id,
               purchaseDate,
               items: [
@@ -161,7 +147,6 @@ exports.handler = async (event) => {
         sendReceiptEmail({
           to: email,
           orderId,
-          lookupToken,
           sessionId: session.id,
           purchaseDate,
           items: [
@@ -215,6 +200,33 @@ exports.handler = async (event) => {
 
       if (result.rowCount === 0) {
         return { statusCode: 200, body: "No matching order to refund" };
+      }
+
+      const orderResult = await query(
+        "SELECT id, customer_email, refund_email_sent_at FROM orders WHERE stripe_payment_intent_id = $1",
+        [paymentIntentId]
+      );
+      const order = orderResult.rows?.[0];
+
+      if (order?.customer_email && !order?.refund_email_sent_at) {
+        const refundDate = new Date().toISOString();
+        sendRefundEmail({
+          to: order.customer_email,
+          orderId: order.id,
+          refundDate,
+        })
+          .then((sent) => {
+            if (sent) {
+              return query(
+                "UPDATE orders SET refund_email_sent_at = NOW() WHERE id = $1 AND refund_email_sent_at IS NULL",
+                [order.id]
+              );
+            }
+            return null;
+          })
+          .catch((error) => {
+            console.error("Failed to send refund email", error);
+          });
       }
 
       return { statusCode: 200, body: "Order refunded" };

@@ -18,7 +18,7 @@ netlify dev --no-open  # Site + functions at http://localhost:8888
 - Store with two product types:
   - Direct digital downloads (Stripe Checkout).
   - Affiliate picks (Amazon links).
-- Customer portal for purchases (Netlify Identity + order lookup code).
+- Customer portal for purchases (Netlify Identity).
 
 ## Key routes
 - `/store` (listing)

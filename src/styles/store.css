@@ -75,6 +75,19 @@
   gap: 0.75rem;
 }
 
+.store-tabs--primary {
+  margin-bottom: 1rem;
+}
+
+.store-tabs--primary .store-tab {
+  font-size: 0.95rem;
+  padding: 0.55rem 1.1rem;
+}
+
+.store-tabs--primary .store-tab-count {
+  min-width: 28px;
+}
+
 .store-tab {
   border: 1px solid var(--color-border);
   background: var(--color-surface);
@@ -279,26 +292,14 @@
   font-size: 0.9rem;
 }
 
-.store-lookup {
-  margin: 1rem 0 1.5rem;
-  padding: 1rem 1.25rem;
-  border-radius: 14px;
+.store-empty {
   border: 1px dashed var(--color-border);
-  display: grid;
-  gap: 0.5rem;
+  border-radius: 14px;
+  padding: 1rem 1.25rem;
+  color: var(--color-text-subtle);
+  background: var(--color-surface-alt);
 }
 
-.store-lookup-row {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-}
-
-.store-lookup-code {
-  font-size: 1.05rem;
-  letter-spacing: 1px;
-}
 
 .store-disclosure {
   margin: 0.5rem 0 0;

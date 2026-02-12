@@ -59,6 +59,26 @@ const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({ data,
   }
 
   const [tocItems, setTocItems] = React.useState<TocItem[]>([]);
+  const houseAds = [
+    {
+      title: "Brad's Amazon Picks",
+      body: "Curated tech gear I actually use. Support the site at no extra cost.",
+      cta: "Shop the picks",
+      href: "/store/#brads-amazon-picks",
+    },
+    {
+      title: "Direct Downloads",
+      body: "Grab the templates, checklists, and playbooks I sell directly.",
+      cta: "View downloads",
+      href: "/store/",
+    },
+    {
+      title: "Customer Portal",
+      body: "Already purchased? Access your downloads and receipts here.",
+      cta: "Open portal",
+      href: "/purchases/",
+    },
+  ];
 
   React.useEffect(() => {
     if (typeof window === "undefined") return;
@@ -97,23 +117,45 @@ const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({ data,
           </header>
 
           <div className="post-layout">
+            <aside className="house-ads house-ads--left" aria-label="Promoted links">
+              {houseAds.map((ad) => (
+                <a key={ad.title} className="house-ad" href={ad.href}>
+                  <span className="house-ad__eyebrow">House ad</span>
+                  <span className="house-ad__title">{ad.title}</span>
+                  <span className="house-ad__body">{ad.body}</span>
+                  <span className="house-ad__cta">{ad.cta}</span>
+                </a>
+              ))}
+            </aside>
             <section className="post-content" itemProp="articleBody">
               {children}
             </section>
-            {tocItems.length > 1 ? (
-              <aside className="toc" aria-label="Table of contents">
-                <p className="toc__title">On this page</p>
-                <nav>
-                  <ul className="toc__list">
-                    {tocItems.map((item) => (
-                      <li key={item.id} style={{ paddingLeft: item.level === 3 ? "0.75rem" : 0 }}>
-                        <a href={`#${item.id}`}>{item.text}</a>
-                      </li>
-                    ))}
-                  </ul>
-                </nav>
-              </aside>
-            ) : null}
+            <aside className="post-rail">
+              {tocItems.length > 1 ? (
+                <div className="toc" aria-label="Table of contents">
+                  <p className="toc__title">On this page</p>
+                  <nav>
+                    <ul className="toc__list">
+                      {tocItems.map((item) => (
+                        <li key={item.id} style={{ paddingLeft: item.level === 3 ? "0.75rem" : 0 }}>
+                          <a href={`#${item.id}`}>{item.text}</a>
+                        </li>
+                      ))}
+                    </ul>
+                  </nav>
+                </div>
+              ) : null}
+              <div className="house-ads house-ads--right" aria-label="Promoted links">
+                {houseAds.map((ad) => (
+                  <a key={ad.title} className="house-ad" href={ad.href}>
+                    <span className="house-ad__eyebrow">House ad</span>
+                    <span className="house-ad__title">{ad.title}</span>
+                    <span className="house-ad__body">{ad.body}</span>
+                    <span className="house-ad__cta">{ad.cta}</span>
+                  </a>
+                ))}
+              </div>
+            </aside>
           </div>
 
           <PostFooter post={post} />

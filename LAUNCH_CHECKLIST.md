@@ -25,7 +25,6 @@
 
 ## Customer portal
 - [ ] `/purchases` sign-in works (Netlify Identity).
-- [ ] Order lookup code works.
 - [ ] Orders and downloads render after purchase.
 
 ## Refund handling

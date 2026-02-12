@@ -23,13 +23,13 @@ const ensureOrdersSchema = async () => {
   if (ordersSchemaReady) return;
 
   await pool.query(
-    "ALTER TABLE orders ADD COLUMN IF NOT EXISTS lookup_token text"
-  );
-  await pool.query(
-    "CREATE UNIQUE INDEX IF NOT EXISTS orders_lookup_token_unique ON orders (lookup_token) WHERE lookup_token IS NOT NULL"
-  );
-  await pool.query(
     "ALTER TABLE orders ADD COLUMN IF NOT EXISTS receipt_email_sent_at timestamptz"
+  );
+  await pool.query(
+    "ALTER TABLE orders ADD COLUMN IF NOT EXISTS download_links_last_sent_at timestamptz"
+  );
+  await pool.query(
+    "ALTER TABLE orders ADD COLUMN IF NOT EXISTS refund_email_sent_at timestamptz"
   );
 
   ordersSchemaReady = true;

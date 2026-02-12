@@ -27,8 +27,7 @@ Amazon clicks   -> affiliate_clicks
 3. Customer is redirected to Amazon with your tag.
 
 ## Portal flow
-- Authenticated users: Netlify Identity.
-- Unauthenticated users: email + lookup code.
+- Authenticated users only (Netlify Identity).
 
 ## Read next
 - `store-and-portal.md`

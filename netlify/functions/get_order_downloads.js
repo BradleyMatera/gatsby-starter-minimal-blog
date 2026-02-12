@@ -2,22 +2,9 @@ const { json } = require("./_response");
 const { query, ensureOrdersSchema } = require("./_db");
 const { getAuthedEmail } = require("./_identity");
 const { signToken } = require("./_downloadTokens");
+const { sendDownloadReadyEmail } = require("./_email");
 
 const TOKEN_TTL_SECONDS = 60 * 15;
-
-const isValidEmail = (value) => {
-  if (typeof value !== "string") return false;
-  const trimmed = value.trim();
-  if (!trimmed || trimmed.length > 254) return false;
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed);
-};
-
-const isValidToken = (value) => {
-  if (typeof value !== "string") return false;
-  const trimmed = value.trim();
-  if (!trimmed || trimmed.length < 32 || trimmed.length > 128) return false;
-  return /^[a-f0-9]+$/i.test(trimmed);
-};
 
 exports.handler = async (event) => {
   if (event.httpMethod === "OPTIONS") {
@@ -46,35 +33,21 @@ exports.handler = async (event) => {
   }
 
   const authedEmail = await getAuthedEmail(event);
-  let email = authedEmail;
-  let lookupToken = null;
-
   if (!authedEmail) {
-    email = payload.email;
-    lookupToken = payload.lookup_token;
-
-    if (!isValidEmail(email)) {
-      return json(400, { error: "invalid_email", message: "Enter a valid email address." });
-    }
-
-    if (!isValidToken(lookupToken)) {
-      return json(400, { error: "invalid_token", message: "Enter a valid order lookup code." });
-    }
+    return json(401, { error: "unauthorized", message: "Sign in required." });
   }
 
   try {
     await ensureOrdersSchema();
 
-    const params = [orderId, email.trim()];
-    const tokenClause = authedEmail ? "" : "AND lookup_token = $3";
-    if (!authedEmail) params.push(lookupToken.trim());
+    const params = [orderId, authedEmail.trim()];
 
     const orderResult = await query(
-      `SELECT id, status
+      `SELECT id, status, customer_email, download_links_last_sent_at
        FROM orders
        WHERE id = $1
          AND lower(customer_email) = lower($2)
-         ${tokenClause}`,
+        `,
       params
     );
 
@@ -98,6 +71,11 @@ exports.handler = async (event) => {
     const now = Math.floor(Date.now() / 1000);
     const expiresAt = now + TOKEN_TTL_SECONDS;
 
+    const proto = event.headers?.["x-forwarded-proto"] || "http";
+    const host = event.headers?.host || "";
+    const origin = host ? `${proto}://${host}` : (process.env.SITE_URL || "").replace(/\/$/, "");
+    const downloadBase = origin ? `${origin}/.netlify/functions/download` : "/.netlify/functions/download";
+
     const downloads = itemsResult.rows.map((item) => {
       const token = signToken(
         {
@@ -113,10 +91,39 @@ exports.handler = async (event) => {
         product_id: item.id,
         name: item.name,
         quantity: item.quantity,
-        download_url: `/.netlify/functions/download?token=${token}`,
+        download_url: `${downloadBase}?token=${token}`,
         expires_at: expiresAt,
       };
     });
+
+    if (order.customer_email) {
+      const lastSent = order.download_links_last_sent_at
+        ? new Date(order.download_links_last_sent_at).getTime()
+        : 0;
+      const now = Date.now();
+      const sixHours = 6 * 60 * 60 * 1000;
+
+      if (!lastSent || now - lastSent > sixHours) {
+        sendDownloadReadyEmail({
+          to: order.customer_email,
+          orderId: order.id,
+          sessionId: null,
+          purchaseDate: new Date().toISOString(),
+        })
+          .then((sent) => {
+            if (sent) {
+              return query(
+                "UPDATE orders SET download_links_last_sent_at = NOW() WHERE id = $1",
+                [order.id]
+              );
+            }
+            return null;
+          })
+          .catch((error) => {
+            console.error("Failed to send download-ready email", error);
+          });
+      }
+    }
 
     return json(200, { order_id: order.id, downloads });
   } catch (error) {

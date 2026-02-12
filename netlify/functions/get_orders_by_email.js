@@ -2,20 +2,6 @@ const { json } = require("./_response");
 const { query, ensureOrdersSchema } = require("./_db");
 const { getAuthedEmail } = require("./_identity");
 
-const isValidEmail = (value) => {
-  if (typeof value !== "string") return false;
-  const trimmed = value.trim();
-  if (!trimmed || trimmed.length > 254) return false;
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed);
-};
-
-const isValidToken = (value) => {
-  if (typeof value !== "string") return false;
-  const trimmed = value.trim();
-  if (!trimmed || trimmed.length < 32 || trimmed.length > 128) return false;
-  return /^[a-f0-9]+$/i.test(trimmed);
-};
-
 exports.handler = async (event) => {
   if (event.httpMethod === "OPTIONS") {
     return json(200, { ok: true });
@@ -25,41 +11,14 @@ exports.handler = async (event) => {
     return json(405, { error: "method_not_allowed", message: "Use POST." });
   }
 
-  let authedEmail = await getAuthedEmail(event);
-  let email = authedEmail;
-  let lookupToken = null;
-  email = authedEmail || null;
-
+  const authedEmail = await getAuthedEmail(event);
   if (!authedEmail) {
-    let payload;
-    try {
-      payload = JSON.parse(event.body || "{}");
-    } catch (error) {
-      return json(400, { error: "invalid_json", message: "Invalid JSON body." });
-    }
-
-    email = payload.email;
-    lookupToken = payload.lookup_token;
-
-    if (!isValidEmail(email)) {
-      return json(400, { error: "invalid_email", message: "Enter a valid email address." });
-    }
-
-    if (!isValidToken(lookupToken)) {
-      return json(400, { error: "invalid_token", message: "Enter a valid order lookup code." });
-    }
+    return json(401, { error: "unauthorized", message: "Sign in required." });
   }
 
   try {
     await ensureOrdersSchema();
-    const queryParams = [email.trim()];
-    let tokenClause = "";
-
-    if (!authedEmail) {
-      tokenClause = "AND o.lookup_token = $2";
-      queryParams.push(lookupToken.trim());
-    }
-
+    const queryParams = [authedEmail.trim()];
     const result = await query(
       `SELECT
          o.id,
@@ -83,7 +42,6 @@ exports.handler = async (event) => {
        LEFT JOIN order_items oi ON oi.order_id = o.id
        LEFT JOIN products p ON p.id = oi.product_id
        WHERE lower(o.customer_email) = lower($1)
-       ${tokenClause}
        GROUP BY o.id
        ORDER BY o.created_at DESC`,
       queryParams

@@ -32,16 +32,12 @@ ASINs are derived from the Amazon `affiliate_url` format:
 - `/dp/ASIN` or `/gp/product/ASIN`.
 
 ## Customer portal
-Two access paths:
-1. Netlify Identity (sign-in).
-2. Lookup code generated at purchase.
+Access is via Netlify Identity (sign-in) only.
 
 Portal features:
 - View orders and line items.
 - Get download links.
 - Email receipts.
 
-## Read next
-- `functions.md`
 ## Read next
 - `functions.md`

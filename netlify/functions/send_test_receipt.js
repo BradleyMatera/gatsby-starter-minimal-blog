@@ -21,7 +21,7 @@ exports.handler = async (event) => {
   try {
     await ensureOrdersSchema();
     const orderResult = await query(
-      `SELECT id, stripe_session_id, lookup_token, created_at
+      `SELECT id, stripe_session_id, created_at
        FROM orders
        WHERE lower(customer_email) = lower($1)
        ORDER BY created_at DESC
@@ -31,7 +31,6 @@ exports.handler = async (event) => {
 
     let orderId = `TEST-${crypto.randomBytes(6).toString("hex")}`;
     let sessionId = `test_${crypto.randomBytes(8).toString("hex")}`;
-    let lookupToken = crypto.randomBytes(24).toString("hex");
     let purchaseDate = new Date().toISOString();
     let items = [
       { name: "Test receipt item", quantity: 1, unit_price_cents: 1200 },
@@ -43,7 +42,6 @@ exports.handler = async (event) => {
       const order = orderResult.rows[0];
       orderId = order.id;
       sessionId = order.stripe_session_id || sessionId;
-      lookupToken = order.lookup_token || lookupToken;
       purchaseDate = order.created_at
         ? new Date(order.created_at).toISOString()
         : purchaseDate;
@@ -73,7 +71,6 @@ exports.handler = async (event) => {
     const sent = await sendReceiptEmail({
       to: email,
       orderId,
-      lookupToken,
       sessionId,
       purchaseDate,
       items,

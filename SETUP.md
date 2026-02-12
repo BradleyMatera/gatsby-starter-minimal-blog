@@ -22,9 +22,10 @@ This project relies on Netlify DB, Stripe Checkout, Netlify Identity, and Resend
 ```bash
 psql "$NETLIFY_DATABASE_URL_UNPOOLED" -f netlify/db/migrations/001_init.sql
 psql "$NETLIFY_DATABASE_URL_UNPOOLED" -f netlify/db/migrations/002_affiliate_marketplace.sql
-psql "$NETLIFY_DATABASE_URL_UNPOOLED" -f netlify/db/migrations/003_order_lookup_token.sql
 psql "$NETLIFY_DATABASE_URL_UNPOOLED" -f netlify/db/migrations/004_receipt_email_sent.sql
 psql "$NETLIFY_DATABASE_URL_UNPOOLED" -f netlify/db/migrations/005_product_presentation.sql
+psql "$NETLIFY_DATABASE_URL_UNPOOLED" -f netlify/db/migrations/006_download_links_sent.sql
+psql "$NETLIFY_DATABASE_URL_UNPOOLED" -f netlify/db/migrations/007_refund_email_sent.sql
 ```
 
 ## Step 3: Seed products

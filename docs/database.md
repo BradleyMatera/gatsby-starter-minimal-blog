@@ -11,7 +11,8 @@
 ### orders
 - `id`, `stripe_session_id`, `stripe_payment_intent_id`
 - `customer_email`, `status`, `created_at`
-- `lookup_token`, `receipt_email_sent_at`
+- `receipt_email_sent_at`
+- `download_links_last_sent_at`, `refund_email_sent_at`
 
 ### order_items
 - `order_id`, `product_id`, `quantity`, `unit_price_cents`
@@ -22,9 +23,10 @@
 ## Migrations
 - `001_init.sql`
 - `002_affiliate_marketplace.sql`
-- `003_order_lookup_token.sql`
 - `004_receipt_email_sent.sql`
 - `005_product_presentation.sql`
+- `006_download_links_sent.sql`
+- `007_refund_email_sent.sql`
 
 ## Seeds
 - `003_nerdy_affiliates.sql` (Brad's Amazon Picks)

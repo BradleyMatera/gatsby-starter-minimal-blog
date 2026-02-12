@@ -14,9 +14,6 @@
 ### Resend 403 domain not verified
 - Verify the domain in Resend and re-test.
 
-### "lookup_token does not exist"
-- Migrations not applied or DB schema is behind. Run migrations.
-
 ### Failed to fetch on store page
 - Functions not running (use `netlify dev`).
 

@@ -166,10 +166,6 @@ const useProducts = () => {
 const StoreIndex: React.FC<RouteComponentProps> = () => {
   const { products, loading, error } = useProducts();
 
-  const featuredProducts = [...products]
-    .filter((product) => product.featured_rank !== null && product.featured_rank !== undefined)
-    .sort((a, b) => (a.featured_rank ?? 999) - (b.featured_rank ?? 999));
-
   const directProducts = products.filter((product) => product.product_type !== "affiliate");
   const amazonProducts = products.filter(
     (product) => product.product_type === "affiliate" && product.affiliate_source === "amazon",
@@ -177,6 +173,40 @@ const StoreIndex: React.FC<RouteComponentProps> = () => {
   const partnerProducts = products.filter(
     (product) => product.product_type === "affiliate" && product.affiliate_source !== "amazon",
   );
+
+  const storeTabs = [
+    amazonProducts.length > 0
+      ? { key: "amazon", label: "Brad's Amazon Picks", count: amazonProducts.length }
+      : null,
+    { key: "direct", label: "Digital downloads", count: directProducts.length },
+    partnerProducts.length > 0
+      ? { key: "partner", label: "Partner picks", count: partnerProducts.length }
+      : null,
+  ].filter(Boolean) as { key: string; label: string; count: number }[];
+
+  const defaultStoreTab =
+    storeTabs.find((tab) => tab.key === "amazon")?.key ||
+    storeTabs[0]?.key ||
+    "direct";
+
+  const [activeStoreTab, setActiveStoreTab] = React.useState(defaultStoreTab);
+
+  React.useEffect(() => {
+    if (!storeTabs.find((tab) => tab.key === activeStoreTab)) {
+      setActiveStoreTab(defaultStoreTab);
+    }
+  }, [storeTabs, activeStoreTab, defaultStoreTab]);
+
+  const featuredProducts = [...products]
+    .filter((product) => product.featured_rank !== null && product.featured_rank !== undefined)
+    .filter((product) => {
+      if (activeStoreTab === "direct") return product.product_type !== "affiliate";
+      if (activeStoreTab === "partner") {
+        return product.product_type === "affiliate" && product.affiliate_source !== "amazon";
+      }
+      return product.product_type === "affiliate" && product.affiliate_source === "amazon";
+    })
+    .sort((a, b) => (a.featured_rank ?? 999) - (b.featured_rank ?? 999));
 
   const collectionOrder = ["Core Desk & Streaming", "Home Lab & Maker Gear", "Learning & Hobby"];
   const slugify = (value: string) =>
@@ -303,6 +333,24 @@ const StoreIndex: React.FC<RouteComponentProps> = () => {
 
       {!loading && !error && products.length > 0 && (
         <div id="products" className="store-sections">
+          {storeTabs.length > 1 && (
+            <div className="store-tabs store-tabs--primary" role="tablist" aria-label="Store sections">
+              {storeTabs.map((tab) => (
+                <button
+                  key={tab.key}
+                  type="button"
+                  role="tab"
+                  aria-selected={activeStoreTab === tab.key}
+                  className={`store-tab ${activeStoreTab === tab.key ? "store-tab--active" : ""}`}
+                  onClick={() => setActiveStoreTab(tab.key)}
+                >
+                  <span>{tab.label}</span>
+                  <span className="store-tab-count">{tab.count}</span>
+                </button>
+              ))}
+            </div>
+          )}
+
           {featuredProducts.length > 0 && (
             <section className="store-section store-section--featured">
               <h2 className="store-section-title">Featured picks</h2>
@@ -338,17 +386,23 @@ const StoreIndex: React.FC<RouteComponentProps> = () => {
             </section>
           )}
 
-          {directProducts.length > 0 && (
+          {activeStoreTab === "direct" && (
             <section className="store-section">
-              <h2 className="store-section-title">Direct downloads</h2>
+              <h2 className="store-section-title">Digital downloads</h2>
               <p className="store-section-description">
                 Instant digital downloads sold directly by Bradley Matera.
               </p>
-              {renderProducts(directProducts)}
+              {directProducts.length > 0 ? (
+                renderProducts(directProducts)
+              ) : (
+                <div className="store-empty">
+                  No direct downloads yet. New digital releases are coming soon.
+                </div>
+              )}
             </section>
           )}
 
-          {amazonProducts.length > 0 && (
+          {activeStoreTab === "amazon" && amazonProducts.length > 0 && (
             <section id="brads-amazon-picks" className="store-section">
               <h2 className="store-section-title">Brad&apos;s Amazon Picks</h2>
               <p className="store-section-description">
@@ -378,7 +432,7 @@ const StoreIndex: React.FC<RouteComponentProps> = () => {
             </section>
           )}
 
-          {comparisonItems.length > 0 && (
+          {activeStoreTab === "amazon" && comparisonItems.length > 0 && (
             <section className="store-section store-section--compare">
               <h2 className="store-section-title">Quick comparison</h2>
               <p className="store-section-description">
@@ -411,7 +465,7 @@ const StoreIndex: React.FC<RouteComponentProps> = () => {
             </section>
           )}
 
-          {partnerProducts.length > 0 && (
+          {activeStoreTab === "partner" && partnerProducts.length > 0 && (
             <section className="store-section">
               <h2 className="store-section-title">Partner picks</h2>
               <p className="store-section-description">

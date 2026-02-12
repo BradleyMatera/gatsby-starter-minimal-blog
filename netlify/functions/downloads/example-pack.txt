@@ -1,4 +1,31 @@
-Example download placeholder.
+This is test, you should not have payed 12 dollers, but here is a Monkeys
 
-Replace this file with your real digital product and update the file_key mapping
-in netlify/functions/_downloads.js and the products table.
+
+
+    || __   ||
+    ||=\_`\=||
+    || (__/ ||
+    ||  | | :-"""-.
+    ||==| \/-=-.   \
+    ||  |(_|o o/   |_
+    ||   \/ "  \   ,_)
+    ||====\ ^  /__/
+    ||     ;--'  `-.
+    ||    /      .  \
+    ||===;        \  \
+    ||   |         | |
+    || .-\ '     _/_/
+    |:'  _;.    (_  \
+    /  .'  `;\   \\_/
+   |_ /     |||  |\\
+  /  _)=====|||  | ||
+ /  /|      ||/  / //
+ \_/||      ( `-/ ||
+    ||======/  /  \\ .-.
+jgs ||      \_/    \'-'/
+    ||      ||      `"`
+    ||======||
+    ||      ||
+Artist
+Joan G. Stark (Spunk)
+https://www.asciiart.eu/art/ba2a7cabd3b15c50

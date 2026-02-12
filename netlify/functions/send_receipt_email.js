@@ -1,22 +1,7 @@
-const crypto = require("crypto");
 const { json } = require("./_response");
 const { query, ensureOrdersSchema } = require("./_db");
 const { getAuthedEmail } = require("./_identity");
 const { sendReceiptEmail } = require("./_email");
-
-const isValidEmail = (value) => {
-  if (typeof value !== "string") return false;
-  const trimmed = value.trim();
-  if (!trimmed || trimmed.length > 254) return false;
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed);
-};
-
-const isValidToken = (value) => {
-  if (typeof value !== "string") return false;
-  const trimmed = value.trim();
-  if (!trimmed || trimmed.length < 32 || trimmed.length > 128) return false;
-  return /^[a-f0-9]+$/i.test(trimmed);
-};
 
 exports.handler = async (event) => {
   if (event.httpMethod === "OPTIONS") {
@@ -40,35 +25,20 @@ exports.handler = async (event) => {
   }
 
   const authedEmail = await getAuthedEmail(event);
-  let email = authedEmail;
-  let lookupToken = null;
-
   if (!authedEmail) {
-    email = payload.email;
-    lookupToken = payload.lookup_token;
-
-    if (!isValidEmail(email)) {
-      return json(400, { error: "invalid_email", message: "Enter a valid email address." });
-    }
-
-    if (!isValidToken(lookupToken)) {
-      return json(400, { error: "invalid_token", message: "Enter a valid order lookup code." });
-    }
+    return json(401, { error: "unauthorized", message: "Sign in required." });
   }
 
   try {
     await ensureOrdersSchema();
 
-    const params = [orderId, email.trim()];
-    const tokenClause = authedEmail ? "" : "AND lookup_token = $3";
-    if (!authedEmail) params.push(lookupToken.trim());
+    const params = [orderId, authedEmail.trim()];
 
     const orderResult = await query(
-      `SELECT id, customer_email, lookup_token, created_at, stripe_session_id
+      `SELECT id, customer_email, created_at, stripe_session_id
        FROM orders
        WHERE id = $1
-         AND lower(customer_email) = lower($2)
-         ${tokenClause}`,
+         AND lower(customer_email) = lower($2)`,
       params
     );
 
@@ -77,14 +47,6 @@ exports.handler = async (event) => {
     }
 
     const order = orderResult.rows[0];
-    let orderLookupToken = order.lookup_token;
-    if (!orderLookupToken) {
-      orderLookupToken = crypto.randomBytes(24).toString("hex");
-      await query(
-        "UPDATE orders SET lookup_token = $1 WHERE id = $2 AND lookup_token IS NULL",
-        [orderLookupToken, order.id]
-      );
-    }
 
     const itemsResult = await query(
       `SELECT p.name, p.currency, oi.quantity, oi.unit_price_cents
@@ -109,9 +71,8 @@ exports.handler = async (event) => {
       : new Date().toISOString();
 
     const sent = await sendReceiptEmail({
-      to: order.customer_email || email,
+      to: order.customer_email || authedEmail,
       orderId: order.id,
-      lookupToken: orderLookupToken,
       sessionId: order.stripe_session_id || null,
       purchaseDate,
       items,

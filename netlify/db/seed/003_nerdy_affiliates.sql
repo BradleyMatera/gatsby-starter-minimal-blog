@@ -577,6 +577,26 @@ INSERT INTO products (
     null,
     'collectible',
     'Learning & Hobby'
+  ),
+  (
+    gen_random_uuid(),
+    'example-download-pack',
+    'Example Download Pack',
+    'A starter digital asset bundle to prove the direct-download flow end to end.',
+    1200,
+    'USD',
+    true,
+    'example-pack',
+    'direct',
+    null,
+    null,
+    '$12.00 download',
+    '/store/gear.svg',
+    'Example digital download pack',
+    'Digital pack',
+    null,
+    'digital',
+    null
   )
 ON CONFLICT (slug) DO UPDATE SET
   name = EXCLUDED.name,

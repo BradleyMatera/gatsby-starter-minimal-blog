@@ -58,9 +58,13 @@ const normalizeDownloadUrl = (url: string) => {
   const base = getFunctionsBase();
   if (!base) return url;
   try {
-    return new URL(url, base).toString();
+    const normalized = new URL(url, base);
+    if (normalized.pathname.endsWith("/.netlify/functions/download/")) {
+      normalized.pathname = normalized.pathname.replace(/\/$/, "");
+    }
+    return normalized.toString();
   } catch (error) {
-    return url;
+    return url.replace("/.netlify/functions/download/?", "/.netlify/functions/download?");
   }
 };
 
@@ -77,16 +81,13 @@ const formatMoney = (amountCents: number, currency = "USD") => {
 };
 
 const PurchasesPage = () => {
-  const [email, setEmail] = React.useState("");
-  const [lookupToken, setLookupToken] = React.useState("");
   const [identity, setIdentity] = React.useState<IdentityWidget | null>(null);
   const [user, setUser] = React.useState<IdentityUser | null>(null);
   const [status, setStatus] = React.useState<"idle" | "loading" | "error" | "success">("idle");
   const [message, setMessage] = React.useState<string | null>(null);
   const [orders, setOrders] = React.useState<Order[]>([]);
   const [downloadsByOrder, setDownloadsByOrder] = React.useState<Record<string, DownloadItem[]>>({});
-  const [accessMode, setAccessMode] = React.useState<"auth" | "code" | null>(null);
-  const [accessPayload, setAccessPayload] = React.useState<{ email: string; lookupToken: string } | null>(null);
+  const [accessMode, setAccessMode] = React.useState<"auth" | null>(null);
   const [actionMessage, setActionMessage] = React.useState<string | null>(null);
   const [busyOrderId, setBusyOrderId] = React.useState<string | null>(null);
 
@@ -145,7 +146,7 @@ const PurchasesPage = () => {
     };
   }, []);
 
-  const loadOrders = async (options: { token?: string; email?: string; lookupToken?: string }) => {
+  const loadOrders = async (options: { token?: string }) => {
     setStatus("loading");
     setMessage(null);
     setActionMessage(null);
@@ -159,10 +160,7 @@ const PurchasesPage = () => {
       const res = await fetch(getFunctionsUrl("get_orders_by_email"), {
         method: "POST",
         headers,
-        body: JSON.stringify({
-          email: options.email,
-          lookup_token: options.lookupToken,
-        }),
+        body: JSON.stringify({}),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -176,10 +174,6 @@ const PurchasesPage = () => {
       }
       if (options.token) {
         setAccessMode("auth");
-        setAccessPayload(null);
-      } else if (options.email && options.lookupToken) {
-        setAccessMode("code");
-        setAccessPayload({ email: options.email, lookupToken: options.lookupToken });
       }
     } catch (error) {
       setStatus("error");
@@ -189,9 +183,6 @@ const PurchasesPage = () => {
 
   React.useEffect(() => {
     if (!user) return;
-    if (user.email) {
-      setEmail(user.email);
-    }
     user.jwt().then((token) => {
       loadOrders({ token });
     });
@@ -227,12 +218,6 @@ const PurchasesPage = () => {
     setMessage(null);
     setActionMessage(null);
     setAccessMode(null);
-    setAccessPayload(null);
-  };
-
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    await loadOrders({ email, lookupToken });
   };
 
   const getAuthHeaders = async () => {
@@ -253,13 +238,7 @@ const PurchasesPage = () => {
       return { headers, body };
     }
 
-    if (accessMode === "code" && accessPayload) {
-      body.email = accessPayload.email;
-      body.lookup_token = accessPayload.lookupToken;
-      return { headers, body };
-    }
-
-    throw new Error("Sign in or use your access code to continue.");
+    throw new Error("Sign in to continue.");
   };
 
   const handleGetDownloads = async (orderId: string) => {
@@ -312,7 +291,7 @@ const PurchasesPage = () => {
       <div className="store-shell">
         <header className="store-header">
           <h1 className="store-title">Customer Portal</h1>
-          <p className="store-subtitle">Sign in or use your access code to manage purchases.</p>
+          <p className="store-subtitle">Sign in to manage your purchases.</p>
           <p className="store-legal">
             Affiliate products are sold by third-party merchants. Bradley Matera is not the seller or creator of affiliate products.
             Direct digital downloads are sold by Bradley Matera.
@@ -355,40 +334,6 @@ const PurchasesPage = () => {
                 </button>
               </div>
             )}
-          </div>
-
-          <div className="store-access-card">
-            <h3>Use your access code</h3>
-            <p className="store-meta">Paste the code from your purchase email.</p>
-            <form className="store-form" onSubmit={handleSubmit}>
-              <label className="store-label" htmlFor="purchase-email">
-                Email
-              </label>
-              <input
-                id="purchase-email"
-                type="email"
-                required
-                className="store-input"
-                placeholder="you@example.com"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-              />
-              <label className="store-label" htmlFor="purchase-token">
-                Order lookup code
-              </label>
-              <input
-                id="purchase-token"
-                type="text"
-                required
-                className="store-input"
-                placeholder="Paste the code from your purchase email"
-                value={lookupToken}
-                onChange={(event) => setLookupToken(event.target.value)}
-              />
-              <button className="store-button" type="submit" disabled={status === "loading"}>
-                {status === "loading" ? "Searching…" : "Find my orders"}
-              </button>
-            </form>
           </div>
         </div>
 
@@ -470,7 +415,14 @@ const PurchasesPage = () => {
                         <div key={`${order.id}-${download.product_id}`} className="store-download-item">
                           <div><strong>{download.name}</strong></div>
                           <div className="store-meta">Quantity: {download.quantity}</div>
-                          <a href={normalizeDownloadUrl(download.download_url)}>Download</a>
+                          <a
+                            href={normalizeDownloadUrl(download.download_url)}
+                            download
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            Download
+                          </a>
                           <div className="store-meta">
                             Link expires at {new Date(download.expires_at * 1000).toLocaleTimeString()}
                           </div>

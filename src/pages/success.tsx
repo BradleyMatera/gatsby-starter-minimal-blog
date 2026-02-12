@@ -14,7 +14,6 @@ type DownloadItem = {
 type EntitlementResponse = {
   order_id: string;
   customer_email?: string;
-  lookup_token?: string | null;
   downloads: DownloadItem[];
 };
 
@@ -34,9 +33,13 @@ const normalizeDownloadUrl = (url: string) => {
   const base = getFunctionsBase();
   if (!base) return url;
   try {
-    return new URL(url, base).toString();
+    const normalized = new URL(url, base);
+    if (normalized.pathname.endsWith("/.netlify/functions/download/")) {
+      normalized.pathname = normalized.pathname.replace(/\/$/, "");
+    }
+    return normalized.toString();
   } catch (error) {
-    return url;
+    return url.replace("/.netlify/functions/download/?", "/.netlify/functions/download?");
   }
 };
 
@@ -44,7 +47,6 @@ const SuccessPage = () => {
   const [status, setStatus] = React.useState<"idle" | "loading" | "error" | "success">("idle");
   const [message, setMessage] = React.useState<string | null>(null);
   const [entitlements, setEntitlements] = React.useState<EntitlementResponse | null>(null);
-  const [copied, setCopied] = React.useState(false);
 
   React.useEffect(() => {
     if (typeof window === "undefined") return;
@@ -77,16 +79,6 @@ const SuccessPage = () => {
     load();
   }, []);
 
-  const handleCopy = async (value: string) => {
-    try {
-      await navigator.clipboard.writeText(value);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (error) {
-      setCopied(false);
-    }
-  };
-
   return (
     <Layout>
       <div className="store-shell">
@@ -115,35 +107,19 @@ const SuccessPage = () => {
             {entitlements.customer_email && (
               <div className="store-meta">Receipt sent to: {entitlements.customer_email}</div>
             )}
-            {entitlements.lookup_token && (
-              <div className="store-lookup">
-                <div className="store-meta">Order lookup code</div>
-                <div className="store-lookup-row">
-                  <strong className="store-lookup-code">{entitlements.lookup_token}</strong>
-                  <button
-                    className="store-button store-button--ghost"
-                    type="button"
-                    onClick={() => handleCopy(entitlements.lookup_token || "")}
-                  >
-                    {copied ? "Copied" : "Copy"}
-                  </button>
-                </div>
-                {entitlements.customer_email && (
-                  <div className="store-meta">
-                    We emailed this code to {entitlements.customer_email}.
-                  </div>
-                )}
-                <div className="store-meta">
-                  Save this code to view purchases later in the <Link className="store-link" to="/purchases/">customer portal</Link>.
-                </div>
-              </div>
-            )}
             <div className="store-downloads">
               {entitlements.downloads.map((item) => (
                 <div key={item.product_id} className="store-download-item">
                   <div><strong>{item.name}</strong></div>
                   <div className="store-meta">Quantity: {item.quantity}</div>
-                  <a href={normalizeDownloadUrl(item.download_url)}>Download</a>
+                  <a
+                    href={normalizeDownloadUrl(item.download_url)}
+                    download
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Download
+                  </a>
                   <div className="store-meta">
                     Link expires at {new Date(item.expires_at * 1000).toLocaleTimeString()}
                   </div>

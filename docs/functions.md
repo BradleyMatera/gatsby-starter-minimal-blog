@@ -11,9 +11,9 @@
 | `stripe_webhook` | POST | Stripe | Source of truth for orders + refunds. |
 | `get_entitlements` | POST | Public | Validate session and return downloads. |
 | `download` | GET | Token | Serve gated download. |
-| `get_orders_by_email` | POST | Identity or lookup | Customer order history. |
-| `get_order_downloads` | POST | Identity or lookup | Downloads for a single order. |
-| `send_receipt_email` | POST | Identity or lookup | Send receipt to customer. |
+| `get_orders_by_email` | POST | Identity | Customer order history. |
+| `get_order_downloads` | POST | Identity | Downloads for a single order. |
+| `send_receipt_email` | POST | Identity | Send receipt to customer. |
 
 ## Request examples
 ### create_checkout_session
@@ -25,19 +25,19 @@ Response:
 { "url": "https://checkout.stripe.com/..." }
 ```
 
-### get_orders_by_email (unauthenticated)
-```json
-{ "email": "you@example.com", "lookup_token": "<code>" }
-```
+### get_orders_by_email
+Requires Netlify Identity JWT in `Authorization: Bearer <token>`.
 
-### get_order_downloads (unauthenticated)
-```json
-{ "order_id": "<uuid>", "email": "you@example.com", "lookup_token": "<code>" }
-```
+### get_order_downloads
+Requires Netlify Identity JWT in `Authorization: Bearer <token>`.
 
 ## Notes
 - `stripe_webhook` is the source of truth for payments.
 - Download links are time-limited tokens.
+- Email lifecycle:
+  - Receipt email on purchase.
+  - Download-ready email when downloads are generated (success page or portal).
+  - Refund email on charge refund.
 
 ## Read next
 - `development.md`
