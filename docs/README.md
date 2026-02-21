@@ -28,6 +28,7 @@ This documentation is organized to match the current codebase. If something disa
 - `./DEPLOYMENT.md`
 - `./DEBUGGING.md`
 - `./BUILD-STATUS.md`
+- `./quality-audit-2026-02.md`
 
 ## Content and styling
 - `./content-authoring.md`

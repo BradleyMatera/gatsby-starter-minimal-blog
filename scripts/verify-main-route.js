@@ -14,9 +14,15 @@ const build = () => {
 const verifyHome = () => {
   const indexPath = resolve(projectRoot, "public", "index.html");
   const html = readFileSync(indexPath, "utf8");
-  const titleMarker = "Bradley Matera — Accessible web developer";
-  if (!html.includes(titleMarker)) {
-    throw new Error(`Home page title marker not found. Expected snippet: ${titleMarker}`);
+  const acceptedMarkers = [
+    "Bradley Matera — Portfolio",
+    "Bradley Matera — Full-stack and cloud systems",
+  ];
+  const found = acceptedMarkers.some((marker) => html.includes(marker));
+  if (!found) {
+    throw new Error(
+      `Home page title marker not found. Expected one of: ${acceptedMarkers.join(" | ")}`
+    );
   }
 };
 

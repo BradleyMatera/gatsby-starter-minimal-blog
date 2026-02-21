@@ -2,26 +2,20 @@ import * as React from "react";
 import { Link } from "gatsby";
 import { Router, RouteComponentProps } from "@reach/router";
 import Layout from "../@lekoarts/gatsby-theme-minimal-blog/components/layout";
+import StoreProductRoute from "../components/store/store-detail-route";
+import {
+  AmazonCollectionTabs,
+  collectionOrder,
+  ComparisonSection,
+  FeaturedSection,
+  Product,
+  ProductGrid,
+  slugify,
+  StoreHero,
+  StorePrimaryTabs,
+  StoreTab,
+} from "../components/store/store-view";
 import "../styles/store.css";
-
-type Product = {
-  id: string;
-  slug: string;
-  name: string;
-  description: string;
-  price_cents: number;
-  currency: string;
-  product_type?: "affiliate" | "direct";
-  affiliate_source?: string | null;
-  affiliate_url?: string | null;
-  display_price?: string | null;
-  image_url?: string | null;
-  image_alt?: string | null;
-  badge?: string | null;
-  featured_rank?: number | null;
-  category?: string | null;
-  collection?: string | null;
-};
 
 const getFunctionsBase = () => {
   if (typeof window === "undefined") return "";
@@ -38,92 +32,6 @@ const getFunctionsUrl = (path: string) => {
 const getGoUrl = (slug: string) => {
   const base = getFunctionsBase();
   return base ? `${base}/go/${slug}` : `/go/${slug}`;
-};
-
-const formatPrice = (product: Product) => {
-  if (product.display_price) return product.display_price;
-  const amount = product.price_cents / 100;
-  try {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: product.currency.toUpperCase(),
-    }).format(amount);
-  } catch (error) {
-    return `${amount.toFixed(2)} ${product.currency.toUpperCase()}`;
-  }
-};
-
-const getBuyLabel = (product: Product, variant: "list" | "detail" = "list") => {
-  if (product.product_type === "affiliate") {
-    if (product.affiliate_source === "amazon") {
-      return variant === "detail" ? "View on Amazon" : "See on Amazon";
-    }
-    return "Buy now";
-  }
-  return "Buy";
-};
-
-const disclosureText = "As an Amazon Associate I earn from qualifying purchases.";
-const legalText =
-  "Affiliate products are sold by third-party merchants. Bradley Matera is not the seller or creator of affiliate products. Direct digital downloads are sold by Bradley Matera.";
-
-const getProductBadge = (product: Product) => {
-  if (product.product_type === "affiliate") {
-    if (product.affiliate_source === "amazon") return "Amazon pick";
-    return product.affiliate_source ? product.affiliate_source : "Affiliate";
-  }
-  return "Direct";
-};
-
-const fallbackImages: Record<string, string> = {
-  mouse: "/store/mouse.svg",
-  keyboard: "/store/keyboard.svg",
-  streamdeck: "/store/deck.svg",
-  maker: "/store/microcontroller.svg",
-  pi: "/store/pi.svg",
-  audio: "/store/mic.svg",
-  tabletop: "/store/book.svg",
-  network: "/store/router.svg",
-  camera: "/store/camera.svg",
-  robot: "/store/robot.svg",
-  light: "/store/light.svg",
-  art: "/store/art.svg",
-  apparel: "/store/shirt.svg",
-  book: "/store/book.svg",
-  lego: "/store/lego.svg",
-  collectible: "/store/funko.svg",
-  default: "/store/gear.svg",
-};
-
-const getProductImage = (product: Product) => {
-  if (product.image_url) return product.image_url;
-  if (product.category && fallbackImages[product.category]) {
-    return fallbackImages[product.category];
-  }
-  return fallbackImages.default;
-};
-
-const getProductAlt = (product: Product) => product.image_alt || product.name;
-
-const getAmazonAsin = (product: Product) => {
-  if (!product.affiliate_url) return null;
-  const match =
-    product.affiliate_url.match(/\/dp\/([A-Z0-9]{10})/i) ||
-    product.affiliate_url.match(/\/gp\/product\/([A-Z0-9]{10})/i);
-  return match ? match[1].toUpperCase() : null;
-};
-
-const renderAmazonMeta = (product: Product) => {
-  if (!(product.product_type === "affiliate" && product.affiliate_source === "amazon")) {
-    return null;
-  }
-  const asin = getAmazonAsin(product);
-  return (
-    <div className="store-asin-row">
-      <span className="store-pill store-pill--accent">Ships from Amazon</span>
-      {asin && <span className="store-asin-code">ASIN {asin}</span>}
-    </div>
-  );
 };
 
 const useProducts = () => {
@@ -174,23 +82,26 @@ const StoreIndex: React.FC<RouteComponentProps> = () => {
     (product) => product.product_type === "affiliate" && product.affiliate_source !== "amazon",
   );
 
-  const storeTabs = [
-    amazonProducts.length > 0
-      ? { key: "amazon", label: "Brad's Amazon Picks", count: amazonProducts.length }
-      : null,
-    { key: "direct", label: "Digital downloads", count: directProducts.length },
-    partnerProducts.length > 0
-      ? { key: "partner", label: "Partner picks", count: partnerProducts.length }
-      : null,
-  ].filter(Boolean) as { key: string; label: string; count: number }[];
+  const storeTabs = React.useMemo(
+    () =>
+      [
+        amazonProducts.length > 0
+          ? { key: "amazon", label: "Brad's Amazon Picks", count: amazonProducts.length }
+          : null,
+        { key: "direct", label: "Digital downloads", count: directProducts.length },
+        partnerProducts.length > 0
+          ? { key: "partner", label: "Partner picks", count: partnerProducts.length }
+          : null,
+      ].filter(Boolean) as StoreTab[],
+    [amazonProducts.length, directProducts.length, partnerProducts.length],
+  );
 
-  const defaultStoreTab =
-    storeTabs.find((tab) => tab.key === "amazon")?.key ||
-    storeTabs[0]?.key ||
-    "direct";
+  const defaultStoreTab = React.useMemo(
+    () => storeTabs.find((tab) => tab.key === "amazon")?.key || storeTabs[0]?.key || "direct",
+    [storeTabs],
+  );
 
   const [activeStoreTab, setActiveStoreTab] = React.useState(defaultStoreTab);
-
   React.useEffect(() => {
     if (!storeTabs.find((tab) => tab.key === activeStoreTab)) {
       setActiveStoreTab(defaultStoreTab);
@@ -208,24 +119,19 @@ const StoreIndex: React.FC<RouteComponentProps> = () => {
     })
     .sort((a, b) => (a.featured_rank ?? 999) - (b.featured_rank ?? 999));
 
-  const collectionOrder = ["Core Desk & Streaming", "Home Lab & Maker Gear", "Learning & Hobby"];
-  const slugify = (value: string) =>
-    value
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/(^-|-$)/g, "");
-
-  const amazonCollections = Array.from(
-    new Set(amazonProducts.map((product) => product.collection).filter(Boolean)),
-  ) as string[];
-  const orderedCollections = [
-    ...collectionOrder.filter((name) => amazonCollections.includes(name)),
-    ...amazonCollections.filter((name) => !collectionOrder.includes(name)),
-  ];
-  const amazonTabs = [
-    { key: "all", label: "All picks" },
-    ...orderedCollections.map((label) => ({ key: slugify(label), label })),
-  ];
+  const amazonTabs = React.useMemo(() => {
+    const amazonCollections = Array.from(
+      new Set(amazonProducts.map((product) => product.collection).filter(Boolean)),
+    ) as string[];
+    const orderedCollections = [
+      ...collectionOrder.filter((name) => amazonCollections.includes(name)),
+      ...amazonCollections.filter((name) => !collectionOrder.includes(name)),
+    ];
+    return [
+      { key: "all", label: "All picks" },
+      ...orderedCollections.map((label) => ({ key: slugify(label), label })),
+    ];
+  }, [amazonProducts]);
 
   const [activeAmazonTab, setActiveAmazonTab] = React.useState(amazonTabs[0]?.key ?? "all");
 
@@ -273,51 +179,38 @@ const StoreIndex: React.FC<RouteComponentProps> = () => {
     .map((card) => ({ ...card, product: productMap.get(card.slug) }))
     .filter((card): card is typeof card & { product: Product } => Boolean(card.product));
 
-  const renderProducts = (items: Product[]) => (
-    <div className="store-grid" style={{ marginTop: "1.5rem" }}>
-      {items.map((product) => (
-        <div key={product.id} className="store-card">
-          <div className="store-card__image">
-            <img src={getProductImage(product)} alt={getProductAlt(product)} loading="lazy" />
-          </div>
-          <div className="store-card__body">
-            <div>
-              <h3>{product.name}</h3>
-              <div className="store-pill-group" style={{ marginTop: "0.35rem" }}>
-                <span className="store-pill">{getProductBadge(product)}</span>
-                {product.badge && <span className="store-pill store-pill--accent">{product.badge}</span>}
-              </div>
-              <p className="store-meta">{product.description}</p>
-              {renderAmazonMeta(product)}
-            </div>
-            <div className="store-price">{formatPrice(product)}</div>
-            <div className="store-actions">
-              <a className="store-button" href={getGoUrl(product.slug)}>
-                {getBuyLabel(product, "list")}
-              </a>
-              <Link className="store-link" to={`/store/${product.slug}`}>Details</Link>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
+  const getStorePanelId = React.useCallback((tabKey: string) => {
+    if (tabKey === "amazon") return "brads-amazon-picks";
+    return `store-panel-${tabKey}`;
+  }, []);
+
+  const handlePrimaryTabsKeyDown = React.useCallback(
+    (event: React.KeyboardEvent<HTMLElement>) => {
+      if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+      event.preventDefault();
+
+      const currentIndex = storeTabs.findIndex((tab) => tab.key === activeStoreTab);
+      if (currentIndex === -1 || storeTabs.length === 0) return;
+
+      let nextIndex = currentIndex;
+      if (event.key === "ArrowRight") nextIndex = (currentIndex + 1) % storeTabs.length;
+      if (event.key === "ArrowLeft") nextIndex = (currentIndex - 1 + storeTabs.length) % storeTabs.length;
+      if (event.key === "Home") nextIndex = 0;
+      if (event.key === "End") nextIndex = storeTabs.length - 1;
+
+      const nextTabKey = storeTabs[nextIndex]?.key;
+      if (!nextTabKey) return;
+      setActiveStoreTab(nextTabKey);
+      requestAnimationFrame(() => {
+        document.getElementById(`store-tab-${nextTabKey}`)?.focus();
+      });
+    },
+    [storeTabs, activeStoreTab],
   );
 
   return (
     <div className="store-shell">
-      <header className="store-header store-hero">
-        <div>
-          <h1 className="store-title">Store</h1>
-          <p className="store-subtitle">Curated tech picks plus direct digital downloads.</p>
-          <p className="store-disclosure">{disclosureText}</p>
-          <p className="store-legal">{legalText}</p>
-          <div className="store-cta">
-            <a className="store-button" href="#brads-amazon-picks">Browse Brad&apos;s Amazon Picks</a>
-            <Link className="store-link" to="/purchases/">Customer portal</Link>
-            <Link className="store-link" to="/support/">Support</Link>
-          </div>
-        </div>
-      </header>
+      <StoreHero amazonAnchorId="brads-amazon-picks" />
 
       {loading && <div className="store-status">Loading products…</div>}
 
@@ -333,248 +226,87 @@ const StoreIndex: React.FC<RouteComponentProps> = () => {
 
       {!loading && !error && products.length > 0 && (
         <div id="products" className="store-sections">
-          {storeTabs.length > 1 && (
-            <div className="store-tabs store-tabs--primary" role="tablist" aria-label="Store sections">
-              {storeTabs.map((tab) => (
-                <button
-                  key={tab.key}
-                  type="button"
-                  role="tab"
-                  aria-selected={activeStoreTab === tab.key}
-                  className={`store-tab ${activeStoreTab === tab.key ? "store-tab--active" : ""}`}
-                  onClick={() => setActiveStoreTab(tab.key)}
-                >
-                  <span>{tab.label}</span>
-                  <span className="store-tab-count">{tab.count}</span>
-                </button>
-              ))}
-            </div>
-          )}
+          <StorePrimaryTabs
+            tabs={storeTabs}
+            activeTab={activeStoreTab}
+            getPanelId={getStorePanelId}
+            onTabChange={setActiveStoreTab}
+            onTabKeyDown={handlePrimaryTabsKeyDown}
+          />
 
-          {featuredProducts.length > 0 && (
-            <section className="store-section store-section--featured">
-              <h2 className="store-section-title">Featured picks</h2>
-              <p className="store-section-description">
-                The tightest stack of gear I keep recommending.
-              </p>
-              <div className="store-featured-grid">
-                {featuredProducts.map((product) => (
-                  <div key={product.id} className="store-featured-card">
-                    <div className="store-featured-card__image">
-                      <img src={getProductImage(product)} alt={getProductAlt(product)} loading="lazy" />
-                    </div>
-                    <div>
-                      <div className="store-pill-group">
-                        <span className="store-pill">{getProductBadge(product)}</span>
-                        {product.badge && (
-                          <span className="store-pill store-pill--accent">{product.badge}</span>
-                        )}
-                      </div>
-                      <h3>{product.name}</h3>
-                      <p className="store-meta">{product.description}</p>
-                      {renderAmazonMeta(product)}
-                      <div className="store-featured-card__footer">
-                        <span className="store-price">{formatPrice(product)}</span>
-                        <a className="store-button" href={getGoUrl(product.slug)}>
-                          {getBuyLabel(product, "list")}
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-          )}
+          <FeaturedSection products={featuredProducts} getGoUrl={getGoUrl} />
 
-          {activeStoreTab === "direct" && (
-            <section className="store-section">
+          <section
+            id="store-panel-direct"
+            role="tabpanel"
+            aria-labelledby="store-tab-direct"
+            aria-hidden={activeStoreTab !== "direct"}
+            hidden={activeStoreTab !== "direct"}
+            tabIndex={0}
+            className="store-section"
+          >
               <h2 className="store-section-title">Digital downloads</h2>
               <p className="store-section-description">
                 Instant digital downloads sold directly by Bradley Matera.
               </p>
               {directProducts.length > 0 ? (
-                renderProducts(directProducts)
+                <ProductGrid items={directProducts} getGoUrl={getGoUrl} />
               ) : (
                 <div className="store-empty">
                   No direct downloads yet. New digital releases are coming soon.
                 </div>
               )}
-            </section>
-          )}
+          </section>
 
-          {activeStoreTab === "amazon" && amazonProducts.length > 0 && (
-            <section id="brads-amazon-picks" className="store-section">
+          {amazonProducts.length > 0 && (
+            <section
+              id="brads-amazon-picks"
+              role="tabpanel"
+              aria-labelledby="store-tab-amazon"
+              aria-hidden={activeStoreTab !== "amazon"}
+              hidden={activeStoreTab !== "amazon"}
+              tabIndex={0}
+              className="store-section"
+            >
               <h2 className="store-section-title">Brad&apos;s Amazon Picks</h2>
               <p className="store-section-description">
                 Hand-picked Amazon gear I actually recommend. Checkout happens on Amazon, and using these links supports my work at no extra cost.
               </p>
-              {amazonTabs.length > 1 && (
-                <div className="store-tabs" role="tablist" aria-label="Amazon picks categories">
-                  {amazonTabs.map((tab) => {
-                    const count = tab.key === "all" ? amazonProducts.length : amazonCounts[tab.key] || 0;
-                    return (
-                      <button
-                        key={tab.key}
-                        type="button"
-                        role="tab"
-                        aria-selected={activeAmazonTab === tab.key}
-                        className={`store-tab ${activeAmazonTab === tab.key ? "store-tab--active" : ""}`}
-                        onClick={() => setActiveAmazonTab(tab.key)}
-                      >
-                        <span>{tab.label}</span>
-                        <span className="store-tab-count">{count}</span>
-                      </button>
-                    );
-                  })}
-                </div>
-              )}
-              {renderProducts(filteredAmazonProducts)}
+              <AmazonCollectionTabs
+                tabs={amazonTabs}
+                counts={amazonCounts}
+                totalCount={amazonProducts.length}
+                activeTab={activeAmazonTab}
+                onChange={setActiveAmazonTab}
+              />
+              <ProductGrid items={filteredAmazonProducts} getGoUrl={getGoUrl} />
             </section>
           )}
+          <ComparisonSection
+            visible={activeStoreTab === "amazon"}
+            items={comparisonItems}
+            getGoUrl={getGoUrl}
+          />
 
-          {activeStoreTab === "amazon" && comparisonItems.length > 0 && (
-            <section className="store-section store-section--compare">
-              <h2 className="store-section-title">Quick comparison</h2>
-              <p className="store-section-description">
-                Side-by-side highlights for the most popular picks.
-              </p>
-              <div className="store-compare-grid">
-                {comparisonItems.map((card) => (
-                  <div key={card.slug} className="store-compare-card">
-                    <div className="store-compare-card__header">
-                      <span className="store-pill store-pill--accent">{card.title}</span>
-                    </div>
-                    <div className="store-compare-card__body">
-                      <h3>{card.product.name}</h3>
-                      <p className="store-meta">{card.product.description}</p>
-                      <ul>
-                        {card.bullets.map((bullet) => (
-                          <li key={bullet}>{bullet}</li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div className="store-compare-card__footer">
-                      <span className="store-price">{formatPrice(card.product)}</span>
-                      <a className="store-button store-button--ghost" href={getGoUrl(card.product.slug)}>
-                        {getBuyLabel(card.product, "list")}
-                      </a>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-          )}
-
-          {activeStoreTab === "partner" && partnerProducts.length > 0 && (
-            <section className="store-section">
+          {partnerProducts.length > 0 && (
+            <section
+              id="store-panel-partner"
+              role="tabpanel"
+              aria-labelledby="store-tab-partner"
+              aria-hidden={activeStoreTab !== "partner"}
+              hidden={activeStoreTab !== "partner"}
+              tabIndex={0}
+              className="store-section"
+            >
               <h2 className="store-section-title">Partner picks</h2>
               <p className="store-section-description">
                 Affiliate products from trusted partner stores.
               </p>
-              {renderProducts(partnerProducts)}
+              <ProductGrid items={partnerProducts} getGoUrl={getGoUrl} />
             </section>
           )}
         </div>
       )}
-    </div>
-  );
-};
-
-interface StoreProductProps extends RouteComponentProps {
-  slug?: string;
-}
-
-const StoreProduct: React.FC<StoreProductProps> = ({ slug }) => {
-  const [product, setProduct] = React.useState<Product | null>(null);
-  const [loading, setLoading] = React.useState(true);
-  const [error, setError] = React.useState<string | null>(null);
-
-  React.useEffect(() => {
-    if (!slug) {
-      setLoading(false);
-      setError("Product not found.");
-      return;
-    }
-
-    let isMounted = true;
-    const load = async () => {
-      try {
-        const res = await fetch(getFunctionsUrl(`get_product?slug=${encodeURIComponent(slug)}`));
-        const data = await res.json();
-        if (!res.ok) {
-          throw new Error(data?.message || "Product not found.");
-        }
-        if (isMounted) {
-          setProduct(data.product);
-          setError(null);
-        }
-      } catch (err) {
-        if (isMounted) {
-          setError(err instanceof Error ? err.message : "Product not found.");
-        }
-      } finally {
-        if (isMounted) {
-          setLoading(false);
-        }
-      }
-    };
-    load();
-    return () => {
-      isMounted = false;
-    };
-  }, [slug]);
-
-  if (loading) {
-    return <div className="store-shell"><div className="store-status">Loading product…</div></div>;
-  }
-
-  if (!product || error) {
-    return (
-      <div className="store-shell">
-        <div className="store-status store-error">{error || "Product not found."}</div>
-        <div style={{ marginTop: "1.5rem" }}>
-          <Link className="store-link" to="/store/">Back to store</Link>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="store-shell store-detail">
-      <header className="store-header">
-        <h1 className="store-title">{product.name}</h1>
-        <p className="store-subtitle">{product.description}</p>
-        <p className="store-disclosure">{disclosureText}</p>
-        <p className="store-legal">{legalText}</p>
-      </header>
-      <div className="store-detail__media">
-        <img src={getProductImage(product)} alt={getProductAlt(product)} />
-      </div>
-      <div className="store-pill" style={{ marginBottom: "0.75rem" }}>
-        {getProductBadge(product)}
-      </div>
-      {product.badge && (
-        <div className="store-pill store-pill--accent" style={{ marginBottom: "0.75rem" }}>
-          {product.badge}
-        </div>
-      )}
-      {product.product_type === "affiliate" && product.affiliate_source === "amazon" && (
-        <p className="store-meta" style={{ marginBottom: "0.75rem" }}>
-          Part of Brad&apos;s Amazon Picks.
-        </p>
-      )}
-      {renderAmazonMeta(product)}
-      <div className="store-price" style={{ marginBottom: "1rem" }}>
-        {formatPrice(product)}
-      </div>
-      <div className="store-actions">
-        <a className="store-button" href={getGoUrl(product.slug)}>
-          {getBuyLabel(product, "detail")}
-        </a>
-        <Link className="store-link" to="/store/">Back to store</Link>
-        <Link className="store-link" to="/purchases/">Customer portal</Link>
-      </div>
-      {error && <div className="store-status store-error" style={{ marginTop: "1.5rem" }}>{error}</div>}
     </div>
   );
 };
@@ -584,7 +316,11 @@ const StorePage = () => {
     <Layout>
       <Router basepath="/store">
         <StoreIndex path="/" />
-        <StoreProduct path="/:slug" />
+        <StoreProductRoute
+          path="/:slug"
+          getFunctionsUrl={getFunctionsUrl}
+          getGoUrl={getGoUrl}
+        />
       </Router>
     </Layout>
   );
