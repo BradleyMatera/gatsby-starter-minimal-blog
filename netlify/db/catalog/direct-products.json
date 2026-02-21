@@ -1,0 +1,16 @@
+[
+  {
+    "slug": "example-download-pack",
+    "name": "Example Download Pack",
+    "description": "Starter proof-of-concept asset pack. Replace with your real product copy and files.",
+    "price_cents": 0,
+    "currency": "USD",
+    "file_key": "example-pack",
+    "active": true,
+    "display_price": "Free",
+    "badge": "Starter pack",
+    "featured_rank": 1,
+    "category": "book",
+    "collection": "Digital Downloads"
+  }
+]

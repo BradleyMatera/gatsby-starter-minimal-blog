@@ -31,6 +31,12 @@ const ensureOrdersSchema = async () => {
   await pool.query(
     "ALTER TABLE orders ADD COLUMN IF NOT EXISTS refund_email_sent_at timestamptz"
   );
+  await pool.query(
+    "ALTER TABLE order_items DROP CONSTRAINT IF EXISTS order_items_unit_price_cents_check"
+  );
+  await pool.query(
+    "ALTER TABLE order_items ADD CONSTRAINT order_items_unit_price_cents_check CHECK (unit_price_cents >= 0)"
+  );
 
   ordersSchemaReady = true;
 };
@@ -55,6 +61,12 @@ const ensureProductsSchema = async () => {
   );
   await pool.query(
     "ALTER TABLE products ADD COLUMN IF NOT EXISTS collection text"
+  );
+  await pool.query(
+    "ALTER TABLE products DROP CONSTRAINT IF EXISTS products_price_cents_check"
+  );
+  await pool.query(
+    "ALTER TABLE products ADD CONSTRAINT products_price_cents_check CHECK (price_cents >= 0)"
   );
 
   productsSchemaReady = true;

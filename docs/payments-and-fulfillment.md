@@ -45,7 +45,7 @@ This is the end-to-end flow for **direct digital downloads** (Stripe) and how th
 6. **Receipt email**  
    Webhook sends the receipt email via Resend.
 7. **Success page**  
-   `/success?session_id=...` calls `get_entitlements` which verifies the Stripe session is paid and returns **short-lived download URLs**.
+   `/success?session_id=...` calls `get_entitlements` which verifies the Stripe session (`paid` or `no_payment_required` for free products) and returns **short-lived download URLs**.
 8. **Download**  
    `/download?token=...` validates the signed token and serves the file.
 

@@ -3,7 +3,7 @@ VALUES (
   'example-product',
   'Example Download Pack',
   'Placeholder digital download. Replace this with your real product copy.',
-  1200,
+  0,
   'USD',
   true,
   'example-pack'

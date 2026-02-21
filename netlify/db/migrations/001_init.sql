@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS products (
   slug text UNIQUE NOT NULL,
   name text NOT NULL,
   description text NOT NULL,
-  price_cents integer NOT NULL CHECK (price_cents > 0),
+  price_cents integer NOT NULL CHECK (price_cents >= 0),
   currency text NOT NULL DEFAULT 'USD',
   active boolean NOT NULL DEFAULT true,
   file_key text NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS order_items (
   order_id uuid NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
   product_id uuid NOT NULL REFERENCES products(id),
   quantity integer NOT NULL CHECK (quantity > 0),
-  unit_price_cents integer NOT NULL CHECK (unit_price_cents > 0),
+  unit_price_cents integer NOT NULL CHECK (unit_price_cents >= 0),
   created_at timestamptz NOT NULL DEFAULT now(),
   UNIQUE (order_id, product_id)
 );

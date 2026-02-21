@@ -39,7 +39,7 @@ exports.handler = async (event) => {
       throw error;
     }
 
-    if (!session || session.payment_status !== "paid") {
+    if (!session || !["paid", "no_payment_required"].includes(session.payment_status)) {
       return json(402, { error: "not_paid", message: "Payment not verified." });
     }
 

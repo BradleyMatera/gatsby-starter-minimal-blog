@@ -56,7 +56,7 @@ exports.handler = async (event) => {
       const unitAmount = lineItem?.price?.unit_amount;
       const purchaseDate = new Date((session.created || Math.floor(Date.now() / 1000)) * 1000).toISOString();
 
-      if (!unitAmount) {
+      if (unitAmount === null || unitAmount === undefined) {
         console.error("Unable to read unit amount from Stripe line item.");
         return { statusCode: 500, body: "Missing line item data" };
       }

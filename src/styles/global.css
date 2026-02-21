@@ -2987,12 +2987,34 @@ body {
   text-decoration: none;
   color: var(--color-text);
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .house-ad:hover {
   transform: translateY(-2px);
   border-color: var(--color-accent);
   box-shadow: 0 16px 30px rgba(15, 23, 42, 0.18);
+}
+
+.house-ad::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  opacity: 0.85;
+}
+
+.house-ad--amazon::before {
+  background: linear-gradient(90deg, #f59e0b, #f97316);
+}
+
+.house-ad--direct::before {
+  background: linear-gradient(90deg, #22c55e, #06b6d4);
+}
+
+.house-ad--portal::before {
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
 }
 
 .house-ad__eyebrow {
