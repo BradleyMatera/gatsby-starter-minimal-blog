@@ -1,5 +1,5 @@
 const fs = require("fs");
-const { DOWNLOADS } = require("./_downloads");
+const { DOWNLOADS, DOWNLOADS_DIR } = require("./_downloads");
 const { verifyToken } = require("./_downloadTokens");
 
 exports.handler = async (event) => {
@@ -26,6 +26,11 @@ exports.handler = async (event) => {
 
   const download = DOWNLOADS[payload.file_key];
   if (!download) {
+    console.error("download missing file key", {
+      requested_file_key: payload.file_key,
+      available_file_keys: Object.keys(DOWNLOADS),
+      downloads_dir: DOWNLOADS_DIR,
+    });
     return { statusCode: 404, body: "Download not found." };
   }
 

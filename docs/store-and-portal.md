@@ -58,5 +58,25 @@ Notes:
 - Direct products must have `product_type = 'direct'` and `active = true` to appear in the Digital downloads section.
 - Direct products can use `price_cents = 0` for free checkout test flows.
 
+## Production deploy requirements for downloads
+To avoid "Download not found" in production:
+
+1. Keep digital files in `netlify/functions/downloads/`.
+2. Keep Netlify function includes configured:
+   - `netlify.toml`:
+     - `[functions]`
+     - `included_files = ["netlify/functions/downloads/**"]`
+3. Make sure DB `file_key` matches filename without extension exactly.
+   - `example-pack.txt` -> `file_key = example-pack`
+4. After deploy, run a live smoke test:
+   - complete checkout (or free checkout),
+   - open `/success?session_id=...`,
+   - click **Download** and confirm file is returned with HTTP 200.
+
+Security notes:
+- Downloads are never public file URLs; each link is signed and short-lived.
+- `get_entitlements` / `get_order_downloads` only issue signed links for paid/authorized orders.
+- Token verification happens in `netlify/functions/download.js` before any file read.
+
 ## Read next
 - `functions.md`
