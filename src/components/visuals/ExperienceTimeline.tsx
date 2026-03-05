@@ -85,7 +85,7 @@ const entries: TimelineEntry[] = [
     ],
     skills: ["Crisis intervention", "Project tracking", "Communication"],
     proof: [
-      { label: "Mason County services", href: "https://www.masoncountywa.gov/our-county/departments/community-services/" },
+      { label: "Mason County services", href: "https://www.sheltonwa.gov/government/municipal_court/therapeutic_court.php/" },
     ],
   },
   {
@@ -103,7 +103,7 @@ const entries: TimelineEntry[] = [
     ],
     skills: ["Compassion", "Volunteer leadership", "Problem-solving"],
     proof: [
-      { label: "Rescue page", href: "https://www.masoncountywa.gov" },
+      { label: "Rescue page", href: "https://www.kittenresq.net/" },
     ],
   },
   {
@@ -157,7 +157,7 @@ const entries: TimelineEntry[] = [
     ],
     skills: ["Crisis care", "Leadership", "Critical thinking"],
     proof: [
-      { label: "Army MOS 68W", href: "https://www.goarmy.com/careers-and-jobs/browse-career-fields/healthcare/health-care-specialist.html" },
+      { label: "Army MOS 68W", href: "https://www.goarmy.com/careers-and-jobs/specialty-careers/medical?iom=CUGA-26NMTF_N_PSEA_23377500180_2562092152_301694989599_190528454156_army+medic&goarmy-git-open=ebrc&&&&&gclsrc=aw.ds&gclid=Cj0KCQiA8KTNBhD_ARIsAOvp6DJ0v7CO0_t9cACELcSaJmBjeH4zSlDjqU8UR0hjkj3VwUcExBfDBmUaAnLjEALw_wcB" },
     ],
   },
 ];
