@@ -12,7 +12,7 @@ type TimelineEntry = {
 };
 
 const entries: TimelineEntry[] = [
-  {
+  /*{
     id: "maintenance-2025",
     dates: "Dec 2025 – Present",
     title: "Maintenance Technician",
@@ -29,7 +29,7 @@ const entries: TimelineEntry[] = [
     proof: [
       { label: "Facility info", href: "https://www.rockwalworthinc.com/" },
     ],
-  },
+  },*/
   {
     id: "aws-internship-2025",
     dates: "May 2025 – Aug 2025",
