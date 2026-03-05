@@ -34,23 +34,32 @@ export const slugify = (value: string) =>
     .replace(/(^-|-$)/g, "");
 
 const fallbackImages: Record<string, string> = {
-  mouse: "/store/mouse.svg",
-  keyboard: "/store/keyboard.svg",
-  streamdeck: "/store/deck.svg",
-  maker: "/store/microcontroller.svg",
-  pi: "/store/pi.svg",
-  audio: "/store/mic.svg",
-  tabletop: "/store/book.svg",
-  network: "/store/router.svg",
-  camera: "/store/camera.svg",
-  robot: "/store/robot.svg",
-  light: "/store/light.svg",
-  art: "/store/art.svg",
-  apparel: "/store/shirt.svg",
-  book: "/store/book.svg",
-  lego: "/store/lego.svg",
-  collectible: "/store/funko.svg",
-  default: "/store/gear.svg",
+  mouse: "/store/mouse.png",
+  keyboard: "/store/keyboard.png",
+  streamdeck: "/store/deck.png",
+  maker: "/store/microcontroller.png",
+  pi: "/store/pi.png",
+  audio: "/store/mic.png",
+  tabletop: "/store/book.png",
+  network: "/store/router.png",
+  camera: "/store/camera.png",
+  robot: "/store/robot.png",
+  light: "/store/light.png",
+  art: "/store/art.png",
+  apparel: "/store/shirt.png",
+  book: "/store/book.png",
+  lego: "/store/lego.png",
+  collectible: "/store/funko.png",
+  default: "/store/gear.png",
+};
+
+const normalizeProductImageUrl = (imageUrl: string) => {
+  const isLegacyLocalSvg =
+    (imageUrl.startsWith("/store/") || imageUrl.startsWith("/assets/visuals/projects/")) &&
+    /\.svg(?=$|\?)/i.test(imageUrl);
+
+  if (!isLegacyLocalSvg) return imageUrl;
+  return imageUrl.replace(/\.svg(?=$|\?)/i, ".png");
 };
 
 export const formatPrice = (product: Product) => {
@@ -85,7 +94,7 @@ export const getProductBadge = (product: Product) => {
 };
 
 export const getProductImage = (product: Product) => {
-  if (product.image_url) return product.image_url;
+  if (product.image_url) return normalizeProductImageUrl(product.image_url);
   if (product.category && fallbackImages[product.category]) {
     return fallbackImages[product.category];
   }

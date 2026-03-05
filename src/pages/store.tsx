@@ -20,7 +20,8 @@ import "../styles/store.css";
 const getFunctionsBase = () => {
   if (typeof window === "undefined") return "";
   const { hostname, port } = window.location;
-  if (hostname === "localhost" && port === "8000") return "http://localhost:8888";
+  const isLocalHost = hostname === "localhost" || hostname === "127.0.0.1" || hostname === "0.0.0.0";
+  if (isLocalHost && port === "8000") return "http://localhost:8888";
   return "";
 };
 
@@ -54,7 +55,15 @@ const useProducts = () => {
         }
       } catch (err) {
         if (isMounted) {
-          setError(err instanceof Error ? err.message : "Unable to load products.");
+          const message = err instanceof Error ? err.message : "Unable to load products.";
+          const localApiHint =
+            "Local API unavailable. Run `npm run dev` (Netlify dev) and open http://localhost:8888/store/.";
+          const lower = message.toLowerCase();
+          const isNetworkError =
+            lower.includes("failed to fetch") ||
+            lower.includes("networkerror") ||
+            lower.includes("load failed");
+          setError(isNetworkError ? localApiHint : message);
         }
       } finally {
         if (isMounted) {
@@ -118,6 +127,9 @@ const StoreIndex: React.FC<RouteComponentProps> = () => {
       return product.product_type === "affiliate" && product.affiliate_source === "amazon";
     })
     .sort((a, b) => (a.featured_rank ?? 999) - (b.featured_rank ?? 999));
+
+  // Avoid showing the same direct download twice when there are very few direct products.
+  const shouldShowFeatured = activeStoreTab !== "direct";
 
   const amazonTabs = React.useMemo(() => {
     const amazonCollections = Array.from(
@@ -234,7 +246,7 @@ const StoreIndex: React.FC<RouteComponentProps> = () => {
             onTabKeyDown={handlePrimaryTabsKeyDown}
           />
 
-          <FeaturedSection products={featuredProducts} getGoUrl={getGoUrl} />
+          {shouldShowFeatured && <FeaturedSection products={featuredProducts} getGoUrl={getGoUrl} />}
 
           <section
             id="store-panel-direct"
