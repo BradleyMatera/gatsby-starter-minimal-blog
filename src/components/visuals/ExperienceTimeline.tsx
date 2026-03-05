@@ -85,7 +85,7 @@ const entries: TimelineEntry[] = [
     ],
     skills: ["Crisis intervention", "Project tracking", "Communication"],
     proof: [
-      { label: "Mason County services", href: "https://www.sheltonwa.gov/government/municipal_court/therapeutic_court.php/" },
+      { label: "Mason County services", href: "https://www.sheltonwa.gov/government/municipal_court/therapeutic_court.php" },
     ],
   },
   {
