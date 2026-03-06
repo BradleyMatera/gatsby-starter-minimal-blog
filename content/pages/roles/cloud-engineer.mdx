@@ -8,9 +8,16 @@ import { Section, Card } from "../../../src/components/ui";
 
 <Section
   eyebrow="Cloud Engineer"
-  title="Learning to think like a cloud engineer"
-  description="I have not held a paid Cloud Engineer title yet. This page documents the cloud-related work I have completed, the environments I have practiced in, and the areas where I still need mentorship."
-/>
+  title="Cloud practice with proof up front"
+  description="I practiced cloud engineering through an AWS Cloud Support Engineer internship and small public deployments. The internship focused on guided rotations and troubleshooting labs rather than production customer work, and my personal projects focus on small deployments where limitations and cost tradeoffs are documented."
+>
+  <ul className="feature-list">
+    <li><strong>AWS internship:</strong> guided support rotations in training environments, not direct ownership of live customer tickets.</li>
+    <li><strong>Serverless capstone:</strong> Lambda, DynamoDB, S3, Amplify, and a metadata extraction workflow.</li>
+    <li><strong>Cost modeling:</strong> documented estimates for upload and retrieval costs using explicit assumptions.</li>
+    <li><strong>Public proof:</strong> Render and GitHub Pages deployments plus blog posts about AWS budgets and free-tier mistakes.</li>
+  </ul>
+</Section>
 
 <Section
   eyebrow="Honesty upgrade"
@@ -20,17 +27,17 @@ import { Section, Card } from "../../../src/components/ui";
     <Card>
       <h3 className="feature-card__title">What I have</h3>
       <ul className="feature-list">
-        <li>Completed guided AWS internship lab exercises with documented troubleshooting notes.</li>
-        <li>Personal deployments on GitHub Pages and Render.</li>
-        <li>Documentation habits that track failures and fixes.</li>
+        <li>Guided AWS internship reps with troubleshooting notes and written assumptions.</li>
+        <li>Small public deployments on GitHub Pages and Render.</li>
+        <li>Write-ups that document failures, costs, and limitations instead of hiding them.</li>
       </ul>
     </Card>
     <Card>
-      <h3 className="feature-card__title">What I don’t have yet</h3>
+      <h3 className="feature-card__title">What I am still working toward</h3>
       <ul className="feature-list">
         <li>Ownership of production AWS environments or multi-account architecture design.</li>
         <li>On-call rotations or customer ticket ownership.</li>
-        <li>Enterprise-scale response ownership.</li>
+        <li>Deeper IAM and security review experience outside labs.</li>
       </ul>
     </Card>
     <Card>
@@ -51,15 +58,17 @@ import { Section, Card } from "../../../src/components/ui";
   <div className="grid-two">
     <Card>
       <h3 className="feature-card__title">Internship practice (internal + lab-style)</h3>
+      <p>I did real cloud practice in the internship, but it happened in guided environments. That matters because the work was useful and technical, while still being different from owning live customer infrastructure.</p>
       <ul className="feature-list">
-        <li>Cloud Support Engineer Intern (Capstone Project) | Amazon Web Services | Seattle, WA | May 2025 - Aug 2025: completed guided support rotations in training environments with no customer data, producing internal-style documentation and repeatable troubleshooting notes.</li>
-        <li>Capstone: built a serverless metadata extraction workflow using AWS Lambda, DynamoDB, and S3, with an accessible front end deployed via AWS Amplify.</li>
-        <li>Implemented a transparent cost model using measurable inputs to estimate cost per upload and retrieval, with documented assumptions for reproducible review.</li>
-        <li>Worked in guided rotations and lab-style environments; did not own production AWS accounts or independently resolve live customer tickets.</li>
+        <li>Cloud Support Engineer Intern (Capstone Project), AWS, Seattle, WA, May 2025 - Aug 2025.</li>
+        <li>Built a serverless metadata extraction workflow using Lambda, DynamoDB, S3, and Amplify.</li>
+        <li>Implemented a documented cost model for upload and retrieval estimates.</li>
+        <li>Worked in guided rotations and lab-style environments rather than production customer accounts.</li>
       </ul>
     </Card>
     <Card>
       <h3 className="feature-card__title">Personal deployments (public, small-scale)</h3>
+      <p>Outside the internship, my cloud reps come from deploying and documenting smaller projects where the limitations are visible and easy to audit.</p>
       <ul className="feature-list">
         <li>Car-Match backend deployed to Render with README troubleshooting notes.</li>
         <li>Interactive Pokédex and AnimalSounds deployed to GitHub Pages.</li>
@@ -77,11 +86,12 @@ import { Section, Card } from "../../../src/components/ui";
   <div className="grid-two">
     <Card>
       <h3 className="feature-card__title">AWS internship labs</h3>
+      <p>The strongest cloud proof I have right now comes from the internship capstone and the documentation around it.</p>
       <ul className="feature-list">
         <li>Built CloudWatch dashboards + SNS alerts for sample environments (documented in internship recap post).</li>
         <li>Automated repetitive lab support workflows using shell scripts and AWS CLI.</li>
         <li>Capstone: metadata extraction workflow with a documented cost model for review.</li>
-        <li>Logged every limitation (no customer-facing tickets alone) so expectations stay realistic.</li>
+        <li>Logged every limitation so the page does not overstate the work.</li>
       </ul>
       <p className="feature-card__meta">
         <strong>Proof links:</strong>{" "}
@@ -129,7 +139,7 @@ import { Section, Card } from "../../../src/components/ui";
     <li>Designing real multi-account AWS environments (beyond labs).</li>
     <li>Deep dive into IAM policy design and security reviews.</li>
     <li>Automated testing/validation for Terraform + deployment pipelines.</li>
-    <li>Incident response in real production settings.</li>
+    <li>Incident response expectations in real production settings.</li>
   </ul>
   <p>If you are hiring for junior cloud roles and provide coaching in these areas, I am open to discussing opportunities.</p>
 </Section>

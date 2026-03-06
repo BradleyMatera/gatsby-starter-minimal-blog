@@ -8,9 +8,15 @@ import { Section, Card } from "../../../src/components/ui";
 
 <Section
   eyebrow="Backend Engineer"
-  title="How I currently practice backend engineering"
-  description="I have not held a paid Backend Engineer title yet. This page documents student and volunteer backend projects with clearly defined scope and limitations."
-/>
+  title="Backend practice with small deployed APIs and honest limitations"
+  description="I have not held a paid Backend Engineer title yet. What I can show is small-scale API work, local backend experiments, and documentation that clearly states what is missing."
+>
+  <ul className="feature-list">
+    <li><strong>Express API work:</strong> Car-Match deployed on Render with MongoDB Atlas and JWT auth.</li>
+    <li><strong>Backend experiments:</strong> FastAPI work for Convo-AI plus smaller schema and queue reps.</li>
+    <li><strong>Documentation:</strong> READMEs and issues list cold starts, missing features, and rough edges.</li>
+  </ul>
+</Section>
 
 <Section
   eyebrow="Honesty upgrade"
@@ -26,10 +32,10 @@ import { Section, Card } from "../../../src/components/ui";
       </ul>
     </Card>
     <Card>
-      <h3 className="feature-card__title">What I don’t have yet</h3>
+      <h3 className="feature-card__title">What I am still working toward</h3>
       <ul className="feature-list">
         <li>Ownership of production backend systems or high-traffic services.</li>
-        <li>Deep observability with tracing and alerting.</li>
+        <li>Tracing, alerting, and stronger observability beyond small-scale logs.</li>
         <li>Large-scale data modeling and migrations.</li>
       </ul>
     </Card>
@@ -51,6 +57,7 @@ import { Section, Card } from "../../../src/components/ui";
   <div className="grid-two">
     <Card>
       <h3 className="feature-card__title">Personal deployments (public, small-scale)</h3>
+      <p>This is the most concrete backend work I can point to right now: small public APIs with the tradeoffs clearly documented.</p>
       <ul className="feature-list">
         <li>Node and Express APIs for Car-Match, deployed on Render with MongoDB Atlas.</li>
         <li>Free-tier cold starts can take several minutes; this limitation is documented in the README.</li>
@@ -59,6 +66,7 @@ import { Section, Card } from "../../../src/components/ui";
     </Card>
     <Card>
       <h3 className="feature-card__title">Local experiments (learning)</h3>
+      <p>I also use smaller local experiments to learn backend patterns without pretending they are more mature than they are.</p>
       <ul className="feature-list">
         <li>FastAPI experiments for Convo-AI to understand Python-based backend services.</li>
         <li>AI-assisted pair programming in development sessions; prompts and edits are included in the repository for traceability.</li>
@@ -74,10 +82,11 @@ import { Section, Card } from "../../../src/components/ui";
   <div className="grid-two">
     <Card>
       <h3 className="feature-card__title">Car-Match API</h3>
+      <p><strong>Stack:</strong> Express, MongoDB Atlas, JWT, Render</p>
+      <p><strong>Purpose:</strong> CRUD routes for matching users, forums, messaging, and auth flows.</p>
       <ul className="feature-list">
-        <li>Express and MongoDB CRUD routes deployed on Render; JWT authentication functions once the free instance is active.</li>
-        <li>API documentation is maintained in Postman collections and README tables; no OpenAPI generation is implemented.</li>
-        <li>Repository issues track missing features including rate limiting, structured logging, and startup performance improvements.</li>
+        <li><strong>Limitations:</strong> free-tier cold starts, no rate limiting, limited structured logging, and no serious load testing yet.</li>
+        <li><strong>Docs:</strong> Postman collections and README tables instead of generated OpenAPI docs.</li>
       </ul>
       <p className="feature-card__meta">
         <strong>Proof links:</strong>{" "}
@@ -87,10 +96,11 @@ import { Section, Card } from "../../../src/components/ui";
     </Card>
     <Card>
       <h3 className="feature-card__title">Secrets Management tutorial</h3>
+      <p><strong>Stack:</strong> demo frontend + documented backend/security patterns</p>
+      <p><strong>Purpose:</strong> show secure versus insecure handling of secrets in a way beginners can inspect.</p>
       <ul className="feature-list">
-        <li>Side-by-side examples of secure and insecure patterns for handling secrets in demo workflows.</li>
-        <li>Used for personal learning and blog content; not deployed to production environments.</li>
-        <li>Disclosure: large portions were scaffolded with ChatGPT and Copilot before manual annotation.</li>
+        <li><strong>Limitations:</strong> educational demo only, not a production backend service.</li>
+        <li><strong>Disclosure:</strong> large portions were scaffolded with ChatGPT and Copilot before manual annotation.</li>
       </ul>
       <p className="feature-card__meta">
         <strong>Proof links:</strong>{" "}
@@ -124,7 +134,7 @@ import { Section, Card } from "../../../src/components/ui";
   <ul className="feature-list">
     <li>Designing auth flows that include refresh tokens, device trust, and auditing.</li>
     <li>Schema design + migrations for relational databases (beyond toy schemas).</li>
-    <li>Observability + tracing for Express/FastAPI services.</li>
+    <li>Observability and tracing for Express/FastAPI services.</li>
     <li>Performance profiling, caching strategies, and async job processing.</li>
   </ul>
   <p>If you mentor junior backend engineers in these topics, I am open to discussing opportunities.</p>

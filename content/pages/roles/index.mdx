@@ -8,13 +8,29 @@ import { Link } from "gatsby";
 
 <Section
   eyebrow="Roles"
-  title="Aspirational role guides (student case studies)"
-  description="These pages describe how I currently practice each discipline. I have not been paid in these roles yet—they’re learning roadmaps tied to the projects on this site."
+  title="How I currently practice these roles"
+  description="This section explains how I currently practice different engineering roles. I have not held most of these titles professionally. Each page shows the projects, experiments, and limitations of my current experience so expectations stay realistic."
 >
+  <p>
+    The goal here is transparency, not title collecting. These pages are meant to show what I actually practice, what I can point to, and where I still need mentorship.
+  </p>
   <ul className="list-disc space-y-2 pl-5">
     <li><strong>Proof-based:</strong> Every claim links to a real demo, repo, or blog post (even if it’s a rough draft).</li>
-    <li><strong>Transparency:</strong> Each role page opens with a reminder that these are practice reps with AI/tutor support.</li>
+    <li><strong>Transparency:</strong> Each role page opens with a reminder that these are practice reps, not claimed professional titles.</li>
     <li><strong>Guidance needed:</strong> I call out the gaps I still need mentorship on (algorithms, large-scale ops, etc.).</li>
+  </ul>
+</Section>
+
+<Section
+  eyebrow="Shared context"
+  title="Professional experience I am still working toward"
+  description="These gaps are shared across most of the role pages below, so I am stating them once here instead of repeating the same list five times."
+>
+  <ul className="feature-list">
+    <li>Owning production systems with real user traffic and business impact.</li>
+    <li>Working inside larger team environments with shared CI/CD, observability, and on-call expectations.</li>
+    <li>Handling incident response and troubleshooting in live production settings.</li>
+    <li>Designing enterprise-scale systems with long-lived operational ownership.</li>
   </ul>
 </Section>
 
@@ -22,35 +38,35 @@ import { Link } from "gatsby";
   <div className="grid-two">
     <Card>
       <h3 className="feature-card__title">Cloud Engineer</h3>
-      <div className="feature-card__body">AWS infrastructure, staging/production automation, logging, and cost-aware design.</div>
+      <div className="feature-card__body">AWS labs, small public deployments, cost-aware write-ups, and serverless practice with clear limits.</div>
       <div className="card-actions">
         <Link data-variant="primary" to="/roles/cloud-engineer">View role</Link>
       </div>
     </Card>
     <Card>
       <h3 className="feature-card__title">DevOps Engineer</h3>
-      <div className="feature-card__body">CI/CD pipelines, branch protections, and deployment guardrails that prevent mistakes.</div>
+      <div className="feature-card__body">GitHub Actions, Docker Compose, build checks, and deployment workflows that block obvious mistakes.</div>
       <div className="card-actions">
         <Link data-variant="primary" to="/roles/devops-engineer">View role</Link>
       </div>
     </Card>
     <Card>
       <h3 className="feature-card__title">Backend Engineer</h3>
-      <div className="feature-card__body">Node.js APIs, authentication, and data modeling supported by tests and instrumentation.</div>
+      <div className="feature-card__body">Node and FastAPI experiments focused on auth, APIs, persistence, and honest documentation of limits.</div>
       <div className="card-actions">
         <Link data-variant="primary" to="/roles/backend-engineer">View role</Link>
       </div>
     </Card>
     <Card>
       <h3 className="feature-card__title">Full-Stack Engineer</h3>
-      <div className="feature-card__body">React + Node experiences that stay stable from dev to production.</div>
+      <div className="feature-card__body">Frontend and backend projects where the main goal is getting the whole flow to work together.</div>
       <div className="card-actions">
         <Link data-variant="primary" to="/roles/full-stack-engineer">View role</Link>
       </div>
     </Card>
     <Card>
       <h3 className="feature-card__title">AI / Automation Engineer</h3>
-      <div className="feature-card__body">Automation workflows and AI-driven tooling that accelerate delivery.</div>
+      <div className="feature-card__body">Local model workflows, FastAPI experiments, prompt orchestration, and small automation tools.</div>
       <div className="card-actions">
         <Link data-variant="primary" to="/roles/ai-automation-engineer">View role</Link>
       </div>

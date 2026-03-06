@@ -7,9 +7,15 @@ import { Section, Card } from "../../../src/components/ui";
 
 <Section
   eyebrow="AI / Automation Engineer"
-  title="Practicing AI + automation with transparent limits"
-  description="I have not launched AI copilots for paying customers. This page documents AI and automation prototypes I have built while learning with ChatGPT, Copilot, and local LLMs."
-/>
+  title="AI and automation practice with the engineering work made explicit"
+  description="I have not launched AI products for paying customers. What I can show is local model work, FastAPI experiments, prompt documentation, and small automation workflows with clear limits."
+>
+  <ul className="feature-list">
+    <li><strong>Convo-AI:</strong> FastAPI backend, local model orchestration, and environment setup work.</li>
+    <li><strong>Automation:</strong> scripts and workflows that support personal projects and content pipelines.</li>
+    <li><strong>Documentation:</strong> prompt notes, disclosure of AI-assisted code, and manual review steps.</li>
+  </ul>
+</Section>
 
 <Section
   eyebrow="Honesty upgrade"
@@ -25,7 +31,7 @@ import { Section, Card } from "../../../src/components/ui";
       </ul>
     </Card>
     <Card>
-      <h3 className="feature-card__title">What I don’t have yet</h3>
+      <h3 className="feature-card__title">What I am still working toward</h3>
       <ul className="feature-list">
         <li>Production AI integrations or real-user telemetry pipelines.</li>
         <li>Enterprise guardrails, audits, or policy enforcement.</li>
@@ -50,6 +56,7 @@ import { Section, Card } from "../../../src/components/ui";
   <div className="grid-two">
     <Card>
       <h3 className="feature-card__title">Local-first experiments</h3>
+      <p>The engineering part of this work is in the backend setup, local model hosting, environment configuration, and getting the workflow to run reliably on one machine.</p>
       <ul className="feature-list">
         <li>Convo-AI runs a FastAPI backend with Ollama locally for chat workflows.</li>
         <li>No services are hosted for external users; all workloads run locally.</li>
@@ -57,9 +64,10 @@ import { Section, Card } from "../../../src/components/ui";
     </Card>
     <Card>
       <h3 className="feature-card__title">Documentation + prompts</h3>
+      <p>I treat prompt work like another engineering artifact: useful only if it is documented, reproducible, and paired with manual review.</p>
       <ul className="feature-list">
         <li>Prompt libraries and README logs documenting which content was AI-drafted and which content was manually edited.</li>
-        <li>No production integrations or enterprise telemetry; these are learning projects with documented TODOs.</li>
+        <li>Projects include TODOs for evaluation, safety, and more reliable workflow control.</li>
       </ul>
     </Card>
   </div>
@@ -72,6 +80,7 @@ import { Section, Card } from "../../../src/components/ui";
   <div className="grid-two">
     <Card>
       <h3 className="feature-card__title">Convo-AI</h3>
+      <p><strong>Engineering focus:</strong> FastAPI backend, local model workflow, environment variables, and end-to-end local setup.</p>
       <ul className="feature-list">
         <li>FastAPI backend + simple UI for local chat flows.</li>
         <li>Uses Ollama models and environment variables documented in the repo.</li>
@@ -84,10 +93,10 @@ import { Section, Card } from "../../../src/components/ui";
     </Card>
     <Card>
       <h3 className="feature-card__title">AI workflow notes</h3>
+      <p><strong>Engineering focus:</strong> how prompts, validation, disclosure, and manual review fit into the build process instead of replacing it.</p>
       <ul className="feature-list">
         <li>Documented how I structure AI-assisted builds and where I still rely on manual checks.</li>
         <li>Focus is on transparency regarding what AI drafted and what was rewritten manually.</li>
-        <li>Used to keep expectations realistic for collaborators.</li>
       </ul>
       <p className="feature-card__meta">
         <strong>Proof links:</strong>{" "}

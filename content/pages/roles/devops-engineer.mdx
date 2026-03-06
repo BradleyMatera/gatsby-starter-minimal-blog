@@ -8,9 +8,16 @@ import { Section, Card } from "../../../src/components/ui";
 
 <Section
   eyebrow="DevOps Engineer"
-  title="Learning DevOps by automating my own projects"
-  description="I have not held a DevOps Engineer title yet. This page documents the automation and deployment practices I have implemented, current limitations, and areas where mentorship would be valuable."
-/>
+  title="DevOps practice through my own build and deploy workflows"
+  description="I have not held a DevOps Engineer title yet. What I do have are repeated reps with GitHub Actions, Docker Compose, build validation, and deployment notes across my own projects."
+>
+  <ul className="feature-list">
+    <li><strong>GitHub Actions:</strong> linting, type-checking, and build validation before deploys.</li>
+    <li><strong>Docker Compose:</strong> repeatable local environments for Node, Python, and Zig experiments.</li>
+    <li><strong>Deployment checks:</strong> personal workflows that stop deploys when builds fail.</li>
+    <li><strong>Documentation:</strong> READMEs that spell out missing health checks, rollback gaps, and manual steps.</li>
+  </ul>
+</Section>
 
 <Section
   eyebrow="Honesty upgrade"
@@ -26,17 +33,17 @@ import { Section, Card } from "../../../src/components/ui";
       </ul>
     </Card>
     <Card>
-      <h3 className="feature-card__title">What I don’t have yet</h3>
+      <h3 className="feature-card__title">What I am still working toward</h3>
       <ul className="feature-list">
         <li>Ownership of production CI/CD workflows or multi-team delivery pipelines.</li>
-        <li>Support rotations or enterprise response ownership.</li>
-        <li>Deep observability stacks beyond basic logs and alerts.</li>
+        <li>Rollback drills and approvals in a real shared delivery environment.</li>
+        <li>Deeper observability stacks beyond basic logs and alerts.</li>
       </ul>
     </Card>
     <Card>
       <h3 className="feature-card__title">What I’m doing next</h3>
       <ul className="feature-list">
-        <li>Stronger rollback patterns and approval steps in CI/CD.</li>
+        <li>Required checks and manual approvals before deploy steps in sandbox workflows.</li>
         <li>Monitoring practice beyond Lighthouse and console logs.</li>
         <li>Policy-as-code exercises for secrets and access control.</li>
       </ul>
@@ -51,14 +58,16 @@ import { Section, Card } from "../../../src/components/ui";
   <div className="grid-two">
     <Card>
       <h3 className="feature-card__title">Personal automation (public)</h3>
+      <p>Most of my DevOps practice comes from automating my own releases and making small projects harder to break.</p>
       <ul className="feature-list">
-        <li>GitHub Actions pipelines for personal sites and demos, including linting, type-checking, and deployment to Netlify and GitHub Pages.</li>
+        <li>GitHub Actions pipelines run linting, type-checking, and build validation before publishing to Netlify or GitHub Pages.</li>
         <li>Docker Compose labs to standardize Node, Python, and Zig tooling in local development environments.</li>
         <li>Scripts and deployment notes documented in repository READMEs.</li>
       </ul>
     </Card>
     <Card>
       <h3 className="feature-card__title">Guided exposure (lab-style)</h3>
+      <p>The AWS internship added some operational context, but it was still guided exposure rather than owning shared pipelines for a team.</p>
       <ul className="feature-list">
         <li>AWS internship exposure to ticket triage and CloudWatch dashboards in lab-style environments.</li>
         <li>Guided rotations only; no ownership of production changes or independent resolution of live customer tickets.</li>
@@ -74,10 +83,11 @@ import { Section, Card } from "../../../src/components/ui";
   <div className="grid-two">
     <Card>
       <h3 className="feature-card__title">Docker Multilang</h3>
+      <p>This project is less about shipping an app and more about standardizing local environments so onboarding and repeatability are easier.</p>
       <ul className="feature-list">
         <li>Compose file standardizes Node, Python, and Zig tooling for onboarding.</li>
         <li>Manual smoke tests are used in place of automated test suites; README documentation lists missing health checks.</li>
-        <li>Pipeline uses GitHub Actions to build images and run linting; caching best practices are still being evaluated.</li>
+        <li>GitHub Actions builds images and runs linting before merge or deploy steps.</li>
       </ul>
       <p className="feature-card__meta">
         <strong>Proof links:</strong>{" "}
@@ -86,10 +96,11 @@ import { Section, Card } from "../../../src/components/ui";
     </Card>
     <Card>
       <h3 className="feature-card__title">Portfolio deploys</h3>
+      <p>This is where most of my practical CI/CD work shows up today: personal sites, demos, and deploy checks that block obvious mistakes.</p>
       <ul className="feature-list">
-        <li>Netlify and GitHub Pages workflows validate builds before publishing personal portfolio sites and static templates.</li>
-        <li>Release notes and documentation logs are used in place of formal change-management processes due to the absence of a team environment.</li>
-        <li>Accessibility and Lighthouse checks run via CLI scripts; build failures block deployments until issues are resolved.</li>
+        <li>Netlify and GitHub Pages workflows validate builds before publishing personal sites and templates.</li>
+        <li>Accessibility and Lighthouse checks run via CLI scripts.</li>
+        <li>Build failures block deployments until issues are resolved.</li>
       </ul>
       <p className="feature-card__meta">
         <strong>Proof links:</strong>{" "}
@@ -120,10 +131,10 @@ import { Section, Card } from "../../../src/components/ui";
   title="Where I still need guidance"
 >
   <ul className="feature-list">
-    <li>Designing CI/CD for teams bigger than me, including approvals and rollbacks.</li>
+    <li>Designing CI/CD for teams bigger than me, including approvals and rollback plans.</li>
     <li>Monitoring stacks beyond Lighthouse + console logs (e.g., Prometheus, Grafana).</li>
     <li>Hardening secrets management and policy-as-code beyond `.env` files.</li>
-    <li>Incident response drills in real production environments.</li>
+    <li>Incident response drills inside real production environments.</li>
   </ul>
   <p>If you are hiring for junior DevOps or platform roles and provide coaching in these areas, I am open to discussing opportunities.</p>
 </Section>

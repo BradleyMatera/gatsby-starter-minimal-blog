@@ -8,9 +8,15 @@ import { Section, Card } from "../../../src/components/ui";
 
 <Section
   eyebrow="Full-Stack Engineer"
-  title="Full-stack practice (student level)"
-  description="I pair React front ends with small Node and FastAPI backends to practice full-stack workflows. I have not completed paid full-stack engineering work; projects are documented publicly for transparency."
-/>
+  title="Full-stack practice focused on putting both sides together"
+  description="I pair React frontends with small backend services to practice full-stack workflows. The difference between this page and my backend page is scope: backend is about the API itself, while this page is about getting the frontend and backend working together as one experience."
+>
+  <ul className="feature-list">
+    <li><strong>Public UI work:</strong> this site, the Pokédex, and other live front-end projects.</li>
+    <li><strong>Integrated project:</strong> Car-Match combines frontend flows with a deployed Express backend.</li>
+    <li><strong>Shipping focus:</strong> deploys, CI checks, and documented limitations across the stack.</li>
+  </ul>
+</Section>
 
 <Section
   eyebrow="Honesty upgrade"
@@ -26,7 +32,7 @@ import { Section, Card } from "../../../src/components/ui";
       </ul>
     </Card>
     <Card>
-      <h3 className="feature-card__title">What I don’t have yet</h3>
+      <h3 className="feature-card__title">What I am still working toward</h3>
       <ul className="feature-list">
         <li>Ownership of production full-stack systems or large-scale traffic environments.</li>
         <li>Cross-team delivery and real stakeholder timelines.</li>
@@ -51,6 +57,7 @@ import { Section, Card } from "../../../src/components/ui";
   <div className="grid-two">
     <Card>
       <h3 className="feature-card__title">Front-end demos (public)</h3>
+      <p>The frontend side is where I ship the most often, but the full-stack part matters when the UI is tied to real data and backend behavior.</p>
       <ul className="feature-list">
         <li>React and Gatsby UI development for this site and the Interactive Pokédex.</li>
         <li>GitHub Pages deployments for AnimalSounds and other demonstration projects.</li>
@@ -59,6 +66,7 @@ import { Section, Card } from "../../../src/components/ui";
     </Card>
     <Card>
       <h3 className="feature-card__title">Back-end pairings (small-scale)</h3>
+      <p>This is what makes the page different from the frontend-only work: wiring the interface to auth, persistence, and backend flows.</p>
       <ul className="feature-list">
         <li>Car-Match backend is deployed on Render with MongoDB Atlas.</li>
         <li>Free-tier cold starts can take several minutes; this limitation is documented in the README.</li>
@@ -75,9 +83,9 @@ import { Section, Card } from "../../../src/components/ui";
   <div className="grid-two">
     <Card>
       <h3 className="feature-card__title">Interactive Pokédex</h3>
+      <p><strong>Focus:</strong> frontend-heavy project that demonstrates data fetching, search, and deployment, not a backend-heavy system.</p>
       <ul className="feature-list">
         <li>Next.js static export with client-side filtering for the original 151 Pokémon.</li>
-        <li>Focuses on front-end data fetching and search UX rather than backend services.</li>
         <li>Repository includes prompt logs and TODOs for pagination, offline mode, and testing.</li>
       </ul>
       <p className="feature-card__meta">
@@ -88,9 +96,9 @@ import { Section, Card } from "../../../src/components/ui";
     </Card>
     <Card>
       <h3 className="feature-card__title">Car-Match</h3>
+      <p><strong>Focus:</strong> the clearest full-stack example on this site because the frontend and backend have to work together for auth, matching, forums, and messaging.</p>
       <ul className="feature-list">
         <li>React frontend + Express backend with MongoDB persistence.</li>
-        <li>Focuses on auth, matching, forums, and messaging flows.</li>
         <li>Deployments and known limitations are documented in the README.</li>
       </ul>
       <p className="feature-card__meta">
