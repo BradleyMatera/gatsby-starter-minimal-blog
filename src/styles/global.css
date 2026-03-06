@@ -4759,7 +4759,7 @@ body {
   margin: 0;
   position: relative;
   box-sizing: border-box;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .projects-grid .project-card__frame {
@@ -4774,7 +4774,7 @@ body {
 
 .projects-layout .project-card {
   padding: clamp(0.9rem, 1.6vw, 1.15rem);
-  overflow: hidden !important;
+  overflow: visible !important;
 }
 
 .projects-layout .project-card__frame,
@@ -4807,10 +4807,7 @@ body {
 }
 
 .projects-layout .project-card__summary p {
-  display: grid;
-  grid-template-columns: max-content 1fr;
-  gap: 0.5rem;
-  align-items: start;
+  display: block;
   margin-bottom: 0.5rem;
 }
 
