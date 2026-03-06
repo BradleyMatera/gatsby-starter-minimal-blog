@@ -1,0 +1,146 @@
+---
+title: "How We Built This Coding Style With a GPT Agent and an External Reviewer"
+date: "2026-03-06"
+slug: "/coding-style-gpt-agent-external-reviewer"
+tags: ["process", "ai", "workflow", "quality"]
+description: "The exact loop: build with a GPT coding agent, validate through a local portal, and use outside feedback to harden quality."
+theme: "Process"
+---
+
+I did not land on this coding style by accident. It came from repeated failures: shipping too fast, missing layout bugs, trusting local assumptions, and getting vague feedback that did not map to exact fixes.
+
+The process only started working when I split responsibilities into two loops:
+
+1. **Build loop** with a GPT coding agent inside the repo.
+2. **Review loop** with an outside agent viewing the site through a local portal URL.
+
+That separation changed everything. The builder optimized for implementation speed. The outside reviewer optimized for user-facing quality and clarity. The result was less guesswork and fewer "looks fine on my machine" mistakes.
+
+## Why this style works
+
+Most solo development workflows collapse design, implementation, testing, and critique into one person and one perspective. That creates blind spots.
+
+I needed a workflow where:
+
+- code gets written fast,
+- changes are visible in a real browser environment,
+- feedback comes from a second viewpoint that is not anchored to my assumptions,
+- and each critique translates into concrete edits.
+
+That is why I use a two-agent loop instead of one long coding session.
+
+## The architecture of the workflow
+
+```text
+Local Repo (Gatsby)
+   |
+   | 1) GPT coding agent edits code, content, layout
+   v
+Local Dev Server (localhost:8000)
+   |
+   | 2) Share read-only tunnel URL (passwordless dev portal)
+   v
+Outside reviewer agent opens real pages
+   |
+   | 3) Reviewer reports UX/content issues with specific examples
+   v
+GPT coding agent applies fixes + verifies build
+```
+
+The key is that the reviewer is not reading source first. It reviews rendered output like a user would.
+
+## The build loop (inside the repo)
+
+The GPT coding agent handles implementation tasks end to end:
+
+- update MDX blog posts,
+- adjust CSS/layout,
+- normalize card structure,
+- standardize call-to-actions,
+- run build checks,
+- repeat until behavior is stable.
+
+This works best when requests are concrete. Instead of "improve the page," I use constraints like:
+
+- "do not remove words, only improve/add",
+- "make every project card include a clear problem statement",
+- "fix overlap in all breakpoints, not just desktop",
+- "keep dev tooling scripts out of git via `.gitignore`".
+
+Those constraints force deterministic edits and reduce drift.
+
+## The outside feedback loop (through the portal)
+
+The external reviewer agent accesses the local site through the shared dev portal URL and reports what is wrong in the rendered UI.
+
+That caught issues local implementation missed, including:
+
+- card overlaps caused by uneven heights,
+- inconsistent card action buttons,
+- impact statements that read like process notes instead of user outcomes,
+- sections that were technically correct but hard to scan.
+
+Because this feedback came from page-level observation, not source-level assumption, it was much more useful.
+
+## The review format that produced real fixes
+
+I stopped asking for generic "thoughts" and asked for structured findings:
+
+1. What is broken right now.
+2. Where it appears (page + section).
+3. Why it hurts readability or trust.
+4. What specific change would resolve it.
+
+This made the feedback directly actionable.
+
+A good example is layout overlap. "Cards feel messy" is not enough. "Card A spills over Card B when content expands and grid rows do not auto-size" is fixable.
+
+## Quality gates before calling a change done
+
+I now require these checks before closing a task:
+
+- local build passes,
+- key pages render without overlap or clipping,
+- links and buttons are consistent across cards,
+- content intros lead with user problem, not stack listing,
+- related-post and internal links are present where relevant,
+- dev-only agent tooling stays ignored in git.
+
+This is not enterprise bureaucracy. It is a lightweight release checklist that prevents repeat regressions.
+
+## What changed in my output quality
+
+This style improved three things immediately:
+
+1. **Speed with control**
+Implementation is still fast because the GPT agent handles execution, but quality is gated by external review.
+
+2. **Higher signal feedback**
+Outside review exposed issues that code-only review missed, especially layout and narrative clarity.
+
+3. **Better writing tone**
+Posts and project summaries shifted from generic AI phrasing to clearer first-person, outcome-driven language.
+
+## What to copy if you want the same workflow
+
+If you want this exact style, copy this minimal sequence:
+
+1. Build locally with a coding agent that can edit files and run checks.
+2. Expose the local page through a safe dev portal URL for outside review.
+3. Ask the reviewer for structured findings, not vague opinions.
+4. Convert each finding into one scoped code/content change.
+5. Re-run checks and repeat until no critical UX issues remain.
+
+The point is not "use more AI." The point is role separation: one agent builds, another audits from the outside.
+
+## Closing
+
+This process made my work more verifiable. It reduced hidden UI regressions, improved content readability, and produced cleaner delivery notes I can hand off without losing context.
+
+The workflow is simple: build, expose, review, fix, verify. Repeated enough times, that becomes a coding style instead of a one-off experiment.
+
+## Continue Reading in This Process Series
+
+- [How I Learn by Doing: A Repeatable Mini Project Loop](/how-i-learn-by-doing/)
+- [What I Learned From Three Small Projects](/what-i-learned-three-simple-projects/)
+- [Designing Systems That Actually Ship: A Small Template](/designing-systems-that-actually-ship/)

@@ -95,6 +95,14 @@ const getFunctionsUrl = (path: string) => {
 
 const isExternalHref = (href: string) => /^https?:\/\//i.test(href);
 
+const isAgentPreviewMode = () => {
+  if (typeof window !== "undefined") {
+    const host = window.location.hostname.toLowerCase();
+    if (host.endsWith(".loca.lt") || host.endsWith(".trycloudflare.com")) return true;
+  }
+  return process.env.GATSBY_AGENT_PREVIEW === "1";
+};
+
 const loadOneScriptPerSession = ({
   scriptSrc,
   sessionKey,
@@ -478,6 +486,7 @@ const buildHouseAds = (post: MBPostProps["post"]): HouseAd[] => {
 
 const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({ data, children }) => {
   const post = data?.post;
+  const agentPreviewMode = React.useMemo(() => isAgentPreviewMode(), []);
   const [tocItems, setTocItems] = React.useState<TocItem[]>([]);
   const [networkAds, setNetworkAds] = React.useState<HouseAd[] | null>(null);
   const [networkPlacements, setNetworkPlacements] = React.useState<NetworkPlacements | null>(null);
@@ -498,6 +507,11 @@ const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({ data,
 
   React.useEffect(() => {
     if (!post || typeof window === "undefined") return;
+    if (agentPreviewMode) {
+      setNetworkAds([]);
+      setNetworkPlacements(null);
+      return;
+    }
 
     let cancelled = false;
 
@@ -532,7 +546,7 @@ const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({ data,
     return () => {
       cancelled = true;
     };
-  }, [post, postTopic]);
+  }, [post, postTopic, agentPreviewMode]);
 
   React.useEffect(() => {
     setHideNativeBanner(false);
@@ -540,6 +554,7 @@ const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({ data,
 
   React.useEffect(() => {
     if (typeof window === "undefined") return;
+    if (agentPreviewMode) return;
     const popunderSrc = networkPlacements?.popunder?.enabled
       ? networkPlacements.popunder.script_src
       : null;
@@ -558,7 +573,7 @@ const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({ data,
       sessionKey: "adsterra_social_bar_loaded",
       dataAttr: "data-adsterra-social-bar",
     });
-  }, [networkPlacements]);
+  }, [networkPlacements, agentPreviewMode]);
 
   React.useEffect(() => {
     if (!post || typeof window === "undefined") return;
@@ -677,37 +692,39 @@ const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({ data,
                   </nav>
                 </div>
               ) : null}
-              <details className="sponsored-panel">
-                <summary>Sponsored tools and downloads</summary>
-                <div className="house-ads house-ads--right" aria-label="Promoted links">
-                  {networkPlacements?.banner_160x600?.enabled ? (
-                    <AdsterraIframeUnit placement={networkPlacements.banner_160x600} />
-                  ) : null}
-                  {networkPlacements?.banner_300x250?.enabled ? (
-                    <AdsterraIframeUnit placement={networkPlacements.banner_300x250} />
-                  ) : null}
-                  {networkPlacements?.native_banner?.enabled && !hideNativeBanner ? (
-                    <AdsterraNativeBannerUnit
-                      placement={networkPlacements.native_banner}
-                      onNoFill={() => setHideNativeBanner(true)}
-                    />
-                  ) : null}
-                  {rightAds.map((ad) => (
-                    <a
-                      key={ad.id}
-                      className={`house-ad house-ad--${ad.theme}`}
-                      href={ad.href}
-                      target={isExternalHref(ad.href) ? "_blank" : undefined}
-                      rel={isExternalHref(ad.href) ? "sponsored noopener noreferrer" : undefined}
-                    >
-                      <span className="house-ad__eyebrow">{ad.label}</span>
-                      <span className="house-ad__title">{ad.title}</span>
-                      <span className="house-ad__body">{ad.body}</span>
-                      <span className="house-ad__cta">{ad.cta}</span>
-                    </a>
-                  ))}
-                </div>
-              </details>
+              {!agentPreviewMode ? (
+                <details className="sponsored-panel">
+                  <summary>Sponsored tools and downloads</summary>
+                  <div className="house-ads house-ads--right" aria-label="Promoted links">
+                    {networkPlacements?.banner_160x600?.enabled ? (
+                      <AdsterraIframeUnit placement={networkPlacements.banner_160x600} />
+                    ) : null}
+                    {networkPlacements?.banner_300x250?.enabled ? (
+                      <AdsterraIframeUnit placement={networkPlacements.banner_300x250} />
+                    ) : null}
+                    {networkPlacements?.native_banner?.enabled && !hideNativeBanner ? (
+                      <AdsterraNativeBannerUnit
+                        placement={networkPlacements.native_banner}
+                        onNoFill={() => setHideNativeBanner(true)}
+                      />
+                    ) : null}
+                    {rightAds.map((ad) => (
+                      <a
+                        key={ad.id}
+                        className={`house-ad house-ad--${ad.theme}`}
+                        href={ad.href}
+                        target={isExternalHref(ad.href) ? "_blank" : undefined}
+                        rel={isExternalHref(ad.href) ? "sponsored noopener noreferrer" : undefined}
+                      >
+                        <span className="house-ad__eyebrow">{ad.label}</span>
+                        <span className="house-ad__title">{ad.title}</span>
+                        <span className="house-ad__body">{ad.body}</span>
+                        <span className="house-ad__cta">{ad.cta}</span>
+                      </a>
+                    ))}
+                  </div>
+                </details>
+              ) : null}
             </aside>
           </div>
 

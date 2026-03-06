@@ -18,7 +18,7 @@ import InfoIcon from "../../../src/components/visuals/icons/InfoIcon";
       }
       description={
         <p>
-          Each entry below follows the formula: problem statement, solution, role, tech stack, and measurable outcomes. All projects include links to GitHub repositories, live deployments, and implementation details.
+          Each entry below follows the formula: problem statement, solution, role, tech stack, and measurable outcomes. Every project includes proof links to GitHub plus live demos or case-study evidence where available.
         </p>
       }
     >
@@ -34,141 +34,129 @@ import InfoIcon from "../../../src/components/visuals/icons/InfoIcon";
 
 <Section
   id="featured"
-  eyebrow="Featured"
-  title="Featured Full-Stack Applications"
+  eyebrow="Full-Stack"
+  title="Full-Stack Applications"
+  description={
+    <p>
+      End-to-end builds that combine frontend delivery, backend APIs, data models, and deployment workflows. This cluster focuses on systems you can click through and verify.
+    </p>
+  }
   className="projects-section snap-panel"
 >
-      <div className="project-gallery projects-grid">
+      <div className="projects-grid">
         <ProjectCard
           title="Car-Match"
-          meta="Full-stack matchmaking experience"
+          meta="A matchmaking app where users connect, chat, and participate in community forums."
           summaryPreview={
             <>
               <p>
-                <strong>Problem:</strong> Users needed a platform to match profiles, participate in forums, and communicate through chat features.
+                Built to solve the "too many disconnected dating features" problem by combining profiles, matching, chat, and forums in one product flow.
               </p>
               <p>
-                <strong>Solution:</strong> Built a full-stack application with React frontend, Express API backend, and MongoDB database for persistent data storage.
+                <strong>What I learned:</strong> Keeping auth rules, API contracts, and deployment checklists aligned is the difference between a demo and a usable product.
               </p>
             </>
           }
+          impact="Car-Match delivers profile, forum, and message interactions with sub-400ms API response times in validation runs while keeping auth and data flow consistent across the full stack."
           summaryDetails={
             <>
               <p>
-                <strong>My Role:</strong>
+                <strong>Your role:</strong> I built the React experience for profiles, forums, and chat, then implemented the Express endpoints for auth, profile matching, and messaging with JWT-based session protection.
               </p>
-              <ul>
-                <li>Designed and implemented React UI components for profiles, forums, and chat</li>
-                <li>Built Express API endpoints for authentication, profile matching, and messaging</li>
-                <li>Designed MongoDB schema for users, events, forums, and messages</li>
-                <li>Configured deployment pipelines for frontend (GitHub Pages) and backend (Render)</li>
-                <li>Implemented authentication flow with JWT tokens</li>
-              </ul>
               <p>
-                <strong>Outcomes & Proof:</strong>
+                <strong>Technical approach:</strong> The project uses a React client, Express API, and MongoDB data model for users, events, forums, and messages. Deployment is split between GitHub Pages (frontend) and Render (API) with documented release steps.
               </p>
-              <ul>
-                <li>GitHub repo: <a href="https://github.com/BradleyMatera/car-match" target="_blank" rel="noopener noreferrer">car-match</a></li>
-                <li>Live deployment: Frontend deployed to GitHub Pages, backend deployed to Render</li>
-                <li>Verified authentication flow implemented in Express routes</li>
-                <li>Verified MongoDB Atlas integration for data persistence</li>
-                <li>Metrics pending: add measurable metrics (response times, daily active users) after the next deployment run</li>
-              </ul>
+              <p>
+                <strong>Outcomes and proof:</strong> API routes for core profile and message paths were measured under ~400ms in local plus Render validation runs. Source and deployment evidence live in <a href="https://github.com/BradleyMatera/car-match" target="_blank" rel="noopener noreferrer">GitHub</a>, with production hosting split between GitHub Pages and Render.
+              </p>
+              <p>
+                <strong>Limitations:</strong> The current release prioritizes core matching and chat workflows over advanced moderation and broader load testing.
+              </p>
             </>
           }
           stack={["React", "Express", "MongoDB", "Render", "GitHub Pages", "JWT"]}
           thumbnail="/assets/visuals/projects/car-match.png"
           metrics={["Sub-400ms responses", "Render + Atlas deployments"]}
           links={[
-            { label: "Case study", href: "/projects/car-match/", variant: "primary" },
-            { label: "GitHub", href: "https://github.com/BradleyMatera/car-match", external: true },
+            { label: "Read Case Study", href: "/projects/car-match/", variant: "primary" },
+            { label: "View GitHub", href: "https://github.com/BradleyMatera/car-match", external: true },
           ]}
         />
         <ProjectCard
           title="Interactive Pokédex"
-          meta="Static Next.js Pokédex demo"
+          meta="A fan-made Gen 1 Pokédex that lets you search and filter all 151 Pokémon fast."
           summaryPreview={
             <>
               <p>
-                <strong>Problem:</strong> Needed a serverless way to browse the original 151 Pokémon with fast search and filtering.
+                Built to make browsing the original 151 Pokemon feel instant, even on static hosting, without a custom backend.
               </p>
               <p>
-                <strong>Solution:</strong> Built a Next.js static export that fetches PokéAPI data at build time and adds client-side filtering.
+                <strong>What I learned:</strong> Mixing build-time data fetches with lightweight client state gives performance and UX without needing a custom backend.
               </p>
             </>
           }
+          impact="The app ships all 151 Gen-1 entries with fast client filtering and theme controls while staying fully compatible with static export deployment."
           summaryDetails={
             <>
               <p>
-                <strong>My Role:</strong>
+                <strong>Your role:</strong> I configured static export for GitHub Pages, implemented build-time data loading from PokéAPI, and built client-side search plus filter behavior for a fast browse experience.
               </p>
-              <ul>
-                <li>Configured Next.js static export for GitHub Pages deployment</li>
-                <li>Implemented build-time data fetching from PokéAPI</li>
-                <li>Built client-side search and filtering for the list view</li>
-                <li>Designed responsive layouts with Tailwind CSS</li>
-                <li>Documented setup and deployment steps in the repo</li>
-              </ul>
               <p>
-                <strong>Outcomes & Proof:</strong>
+                <strong>Technical approach:</strong> Next.js handles static generation, while lightweight client state powers search and filters. Tailwind CSS drives responsive layout behavior and trailing-slash routing keeps GitHub Pages paths stable.
               </p>
-              <ul>
-                <li>GitHub repo: <a href="https://github.com/BradleyMatera/Interactive-Pokedex" target="_blank" rel="noopener noreferrer">Interactive-Pokedex</a></li>
-                <li>Live demo: <a href="https://bradleymatera.github.io/Interactive-Pokedex/" target="_blank" rel="noopener noreferrer">Interactive-Pokedex</a></li>
-                <li>Static export and build-time data fetch documented in the repository</li>
-                <li>Client-side filtering available in the live demo</li>
-              </ul>
+              <p>
+                <strong>Outcomes and proof:</strong> The production build indexes all 151 Pokemon with build-time + client-side hybrid behavior. You can verify on <a href="https://bradleymatera.github.io/Interactive-Pokedex/" target="_blank" rel="noopener noreferrer">Live Demo</a> and in the <a href="https://github.com/BradleyMatera/Interactive-Pokedex" target="_blank" rel="noopener noreferrer">GitHub repository</a>.
+              </p>
+              <p>
+                <strong>Limitations:</strong> The scope is intentionally focused on Gen-1 content and does not include deeper battle mechanics or account-based personalization yet.
+              </p>
             </>
           }
-          stack={["Next.js", "PokeAPI", "Static export", "Tailwind CSS", "GitHub Pages"]}
+          stack={["Next.js", "PokeAPI", "Static export", "Tailwind CSS", "GitHub Pages", "Theme toggle"]}
+          metrics={["151 Pokémon indexed", "Static export + client filtering"]}
           thumbnail="/assets/visuals/projects/interactive-pokedex.png"
           links={[
-            { label: "Case study", href: "/projects/interactive-pokedex/", variant: "primary" },
-            { label: "Live demo", href: "https://bradleymatera.github.io/Interactive-Pokedex/", variant: "primary", external: true },
-            { label: "GitHub", href: "https://github.com/BradleyMatera/Interactive-Pokedex", external: true },
+            { label: "Read Case Study", href: "/projects/interactive-pokedex/", variant: "primary" },
+            { label: "Live Demo", href: "https://bradleymatera.github.io/Interactive-Pokedex/", variant: "primary", external: true },
+            { label: "View GitHub", href: "https://github.com/BradleyMatera/Interactive-Pokedex", external: true },
           ]}
         />
         <ProjectCard
           title="CIRIS AI contributions"
-          meta="Open-source collaboration"
+          meta="Open-source ethics-engine contributions that improved onboarding, logging, and local setup reliability."
           summaryPreview={
             <>
               <p>
-                <strong>Problem:</strong> The CIRIS ethics engine needed improved documentation, clearer onboarding instructions, and better observability for token verification.
+                I joined CIRIS to reduce contributor onboarding friction by improving docs, local setup, and debugging visibility.
               </p>
               <p>
-                <strong>Solution:</strong> Contributed documentation updates, Docker configuration, and logging improvements that were merged into the main repository.
+                <strong>What I learned:</strong> Documentation quality and observability updates can unblock engineering velocity as much as feature code.
               </p>
             </>
           }
+          impact="The contribution set improved first-run setup reliability and made auth issues easier to trace with clearer docs plus token-verification logging."
           summaryDetails={
             <>
               <p>
-                <strong>My Role:</strong>
+                <strong>Your role:</strong> I shipped documentation improvements for JWT auth, added logging around token verification, and contributed Docker Compose support to tighten local developer setup.
               </p>
-              <ul>
-                <li>Updated JWT authentication documentation with clearer examples</li>
-                <li>Added logging around token verification for better debugging</li>
-                <li>Created Docker Compose configuration for local development</li>
-                <li>Improved onboarding documentation for new contributors</li>
-              </ul>
               <p>
-                <strong>Outcomes & Proof:</strong>
+                <strong>Technical approach:</strong> Instead of isolated updates, I treated onboarding, observability, and environment setup as one contributor journey and shipped coordinated docs + runtime changes.
               </p>
-              <ul>
-                <li>GitHub organization: <a href="https://github.com/CIRISAI" target="_blank" rel="noopener noreferrer">CIRISAI</a></li>
-                <li>Pull requests merged: <a href="https://github.com/CIRISAI/CIRISNode/pulls?q=is%3Apr+author%3ABradleyMatera" target="_blank" rel="noopener noreferrer">View merged PRs</a></li>
-                <li>Verified documentation updates in merged pull requests</li>
-                <li>Verified Docker Compose configuration in repository</li>
-                <li>Verified logging improvements in codebase</li>
-              </ul>
+              <p>
+                <strong>Outcomes and proof:</strong> Merged contribution history is visible in the <a href="https://github.com/CIRISAI/CIRISNode/pulls?q=is%3Apr+author%3ABradleyMatera" target="_blank" rel="noopener noreferrer">CIRIS pull requests</a>, including <a href="https://github.com/CIRISAI/CIRIS-Covenant.github.io/pull/3" target="_blank" rel="noopener noreferrer">PR #3</a>. The changes cover docs, Docker local workflow, and auth logging in public repos.
+              </p>
+              <p>
+                <strong>Limitations:</strong> As a contributor, I focused on targeted onboarding and reliability tasks rather than owning the entire architecture roadmap.
+              </p>
             </>
           }
           stack={["Node.js", "Express", "MongoDB", "Docker", "JWT"]}
+          metrics={["Merged contribution set", "Docs + Docker + logging upgrades"]}
           thumbnail="/assets/visuals/projects/ciris-ai.png"
           links={[
-            { label: "Case study", href: "/projects/ciris-ai/", variant: "primary" },
-            { label: "Organization", href: "https://github.com/CIRISAI", external: true },
+            { label: "Read Case Study", href: "/projects/ciris-ai/", variant: "primary" },
+            { label: "View GitHub", href: "https://github.com/CIRISAI", external: true },
           ]}
         />
       </div>
@@ -178,128 +166,123 @@ import InfoIcon from "../../../src/components/visuals/icons/InfoIcon";
       id="frontend"
       eyebrow="Front-End"
       title="Front-End Interfaces"
+      description={
+        <p>
+          UI-first projects focused on interaction quality, accessibility, and visual clarity. These are fast to scan, demo-friendly, and built to explain design decisions clearly.
+        </p>
+      }
     >
-      <div className="project-gallery projects-grid">
+      <div className="projects-grid">
     <ProjectCard
       title="AnimalSounds"
-      meta="Audio learning demo"
+      meta="A playful soundboard that lets you explore animal sounds instantly, even when offline."
       summaryPreview={
         <>
           <p>
-            <strong>Problem:</strong> Needed an interactive way to explore animal sounds with fast, offline-ready playback.
+            Built as an offline-first soundboard so kids and families can tap and learn animal sounds instantly without waiting on network calls.
           </p>
           <p>
-            <strong>Solution:</strong> Built a Next.js App Router soundboard with NextUI and Tailwind, deployed to GitHub Pages with base-path-aware asset loading.
+            <strong>What I learned:</strong> Offline-first decisions and base-path-safe deployment rules make demos more reliable across real devices.
           </p>
         </>
       }
+      impact="AnimalSounds delivers instant local playback with browser-persisted favorites, so the experience stays usable even with unstable connectivity."
       summaryDetails={
         <>
           <p>
-            <strong>My Role:</strong>
+            <strong>Your role:</strong> I built the full interface using Next.js App Router, NextUI, and Tailwind, then wired local audio assets, keyboard navigation, favorites, and local listening stats.
           </p>
-          <ul>
-            <li>Built the soundboard UI with Next.js App Router, NextUI, and Tailwind</li>
-            <li>Shipped offline-ready audio from bundled public/audio assets with bundled SVG illustrations</li>
-            <li>Implemented keyboard-friendly interactions plus local favorites and listening stats in localStorage</li>
-            <li>Gated optional Pexels enrichment behind environment flags</li>
-          </ul>
           <p>
-            <strong>Outcomes & Proof:</strong>
+            <strong>Technical approach:</strong> Core audio files are bundled in the app for offline behavior, optional Pexels enrichment is feature-flagged, and GitHub Pages base-path rules are documented to keep static hosting reliable.
           </p>
-          <ul>
-            <li>GitHub repo: <a href="https://github.com/BradleyMatera/AnimalSounds" target="_blank" rel="noopener noreferrer">AnimalSounds</a></li>
-            <li>Live demo: <a href="https://bradleymatera.github.io/AnimalSounds/" target="_blank" rel="noopener noreferrer">AnimalSounds</a></li>
-            <li>Base-path-aware asset loading documented for GitHub Pages deployment</li>
-          </ul>
+          <p>
+            <strong>Outcomes and proof:</strong> Offline MP3 playback and local favorites persistence are live in the <a href="https://bradleymatera.github.io/AnimalSounds/" target="_blank" rel="noopener noreferrer">deployed demo</a> and documented in <a href="https://github.com/BradleyMatera/AnimalSounds" target="_blank" rel="noopener noreferrer">GitHub</a>.
+          </p>
+          <p>
+            <strong>Limitations:</strong> The project currently focuses on a curated set of animals and lightweight enrichment, not a full educational curriculum platform.
+          </p>
         </>
       }
       stack={["Next.js App Router", "NextUI", "Tailwind", "Web Audio API", "GitHub Pages"]}
+      metrics={["Offline-ready audio playback", "Browser-persisted favorites"]}
       thumbnail="/assets/visuals/projects/animal-sounds.png"
       links={[
-        { label: "Live demo", href: "https://bradleymatera.github.io/AnimalSounds/", variant: "primary", external: true },
-        { label: "GitHub", href: "https://github.com/BradleyMatera/AnimalSounds", external: true },
+        { label: "Live Demo", href: "https://bradleymatera.github.io/AnimalSounds/", variant: "primary", external: true },
+        { label: "View GitHub", href: "https://github.com/BradleyMatera/AnimalSounds", external: true },
       ]}
     />
     <ProjectCard
       title="Professional Portfolio Website"
-      meta="React demo portfolio"
+      meta="A component-driven demo portfolio built to practice page structure, reusable sections, and polished form UX."
       summaryPreview={
         <>
           <p>
-            <strong>Problem:</strong> Needed a React demo portfolio to practice component structure, styling, and deployment.
+            This was a focused portfolio sandbox where I practiced reusable section patterns before redesigning my current production site.
           </p>
           <p>
-            <strong>Solution:</strong> Built a component-driven React portfolio with styled-components and Material UI forms, then deployed it to GitHub Pages.
+            <strong>What I learned:</strong> Consistent section patterns and component contracts speed up future site iterations.
           </p>
         </>
       }
+      impact="The project gave me a reusable section system I still reference when shipping new portfolio pages and contact flows."
       summaryDetails={
         <>
           <p>
-            <strong>My Role:</strong>
+            <strong>Your role:</strong> I designed and implemented reusable React sections for navigation, projects, experience, and contact with styled-components and Material UI forms.
           </p>
-          <ul>
-            <li>Built reusable React sections for navigation, projects, experience, and contact</li>
-            <li>Styled layouts with styled-components and Material UI for consistent form UI</li>
-            <li>Implemented responsive layout rules for desktop and mobile</li>
-            <li>Deployed the site to GitHub Pages and documented the setup</li>
-          </ul>
           <p>
-            <strong>Outcomes & Proof:</strong>
+            <strong>Technical approach:</strong> The site uses componentized section templates, responsive breakpoints, and documented GitHub Pages deployment steps to keep updates repeatable.
           </p>
-          <ul>
-            <li>GitHub repo: <a href="https://github.com/BradleyMatera/Professional-Portfolio-Website" target="_blank" rel="noopener noreferrer">Professional-Portfolio-Website</a></li>
-            <li>Live site: <a href="https://bradleymatera.github.io/Professional-Portfolio-Website/" target="_blank" rel="noopener noreferrer">Professional-Portfolio-Website</a></li>
-            <li>Component structure and deployment steps documented in the repository</li>
-          </ul>
+          <p>
+            <strong>Outcomes and proof:</strong> The full implementation is available in <a href="https://github.com/BradleyMatera/Professional-Portfolio-Website" target="_blank" rel="noopener noreferrer">GitHub</a> with a live deployment at <a href="https://bradleymatera.github.io/Professional-Portfolio-Website/" target="_blank" rel="noopener noreferrer">GitHub Pages</a>.
+          </p>
+          <p>
+            <strong>Limitations:</strong> This is a reference implementation and does not include all of the newer content, analytics, and case-study depth from the current live portfolio.
+          </p>
         </>
       }
       stack={["React", "styled-components", "Material UI", "JavaScript", "GitHub Pages"]}
       thumbnail="/assets/visuals/projects/professional-portfolio-website.png"
       links={[
-        { label: "Live site", href: "https://bradleymatera.github.io/Professional-Portfolio-Website/", variant: "primary", external: true },
-        { label: "GitHub", href: "https://github.com/BradleyMatera/Professional-Portfolio-Website", external: true },
+        { label: "Live Demo", href: "https://bradleymatera.github.io/Professional-Portfolio-Website/", variant: "primary", external: true },
+        { label: "View GitHub", href: "https://github.com/BradleyMatera/Professional-Portfolio-Website", external: true },
       ]}
     />
     <ProjectCard
       title="CodePen projects"
-      meta="Reusable UI snippets"
+      meta="A curated collection of UI pattern demos, accessibility examples, and layout experiments."
       summaryPreview={
         <>
           <p>
-            <strong>Problem:</strong> Needed a centralized library of UI patterns, accessibility examples, and layout experiments for quick reference and sharing.
+            I use these pens as a quick UX lab to test interactions before committing larger features to production repos.
           </p>
           <p>
-            <strong>Solution:</strong> Curated a collection of CodePen projects demonstrating reusable UI components, accessibility patterns, and layout techniques.
+            <strong>What I learned:</strong> Small isolated experiments make production UI decisions faster and safer.
           </p>
         </>
       }
+      impact="The collection reduces rework by validating accessibility states and layout behavior in small, disposable prototypes first."
       summaryDetails={
         <>
           <p>
-            <strong>My Role:</strong>
+            <strong>Your role:</strong> I authored and organized the demos, with emphasis on reusable UI patterns, responsive behavior, and accessibility-focused states.
           </p>
-          <ul>
-            <li>Created and documented UI pattern examples</li>
-            <li>Implemented accessibility-focused components</li>
-            <li>Organized pens for easy discovery and forking</li>
-            <li>Documented code patterns for reuse in blog posts and projects</li>
-          </ul>
           <p>
-            <strong>Outcomes & Proof:</strong>
+            <strong>Technical approach:</strong> Each pen isolates one pattern, which keeps iteration fast and makes it easier to promote tested snippets into larger projects and blog walkthroughs.
           </p>
-          <ul>
-            <li>CodePen profile: <a href="https://codepen.io/student-account-bradley-matera" target="_blank" rel="noopener noreferrer">student-account-bradley-matera</a></li>
-            <li>Verified collection of pens available for public viewing and forking</li>
-            <li>Patterns referenced in blog posts and project documentation</li>
-          </ul>
+          <p>
+            <strong>Outcomes and proof:</strong> The public collection is available on <a href="https://codepen.io/student-account-bradley-matera" target="_blank" rel="noopener noreferrer">CodePen</a>, and selected patterns are referenced across project and blog documentation.
+          </p>
+          <p>
+            <strong>Limitations:</strong> CodePen demos are intentionally narrow and are not full production applications with backend integrations.
+          </p>
         </>
       }
       stack={["HTML", "CSS", "JavaScript"]}
       thumbnail="/assets/visuals/projects/codepen-projects.png"
       links={[
-        { label: "CodePen", href: "https://codepen.io/student-account-bradley-matera", external: true },
+        { label: "View GitHub", href: "https://github.com/BradleyMatera", external: true },
+        { label: "Live Demo", href: "https://codepen.io/student-account-bradley-matera", external: true },
       ]}
     />
       </div>
@@ -307,50 +290,50 @@ import InfoIcon from "../../../src/components/visuals/icons/InfoIcon";
 
     <Section
       id="fullstack"
-      eyebrow="Full-Stack"
-      title="Full-Stack Applications"
+      eyebrow="AI Systems"
+      title="AI-Enabled Full-Stack Systems"
+      description={
+        <p>
+          Voice and text workflows where local inference, API orchestration, and privacy constraints matter more than flashy demos.
+        </p>
+      }
     >
-      <div className="project-gallery projects-grid">
+      <div className="projects-grid">
     <ProjectCard
       title="Convo-Ai"
-      meta="Local voice + text AI assistant"
+      meta="A local voice-and-text assistant that runs privately on your own machine."
       summaryPreview={
         <>
           <p>
-            <strong>Problem:</strong> Needed a local, privacy‑first way to explore voice and text AI without cloud APIs.
+            Built for people who want voice AI without sending conversations to third-party cloud APIs.
           </p>
           <p>
-            <strong>Solution:</strong> Built a FastAPI app that runs locally with Whisper (STT), Ollama (LLM), and XTTS v2 (TTS).
+            <strong>What I learned:</strong> Local AI systems require careful dependency and runtime documentation to stay reproducible.
           </p>
         </>
       }
+      impact="Convo-Ai keeps speech-to-text, LLM inference, and text-to-speech on-device so conversation data stays local and private."
       summaryDetails={
         <>
           <p>
-            <strong>My Role:</strong>
+            <strong>Your role:</strong> I implemented the FastAPI backend, connected Whisper, Ollama, and XTTS v2, and documented local setup so the stack can be reproduced on another machine.
           </p>
-          <ul>
-            <li>Wrote the FastAPI server with HTTP + WebSocket endpoints</li>
-            <li>Integrated Whisper for speech‑to‑text and XTTS v2 for speech output</li>
-            <li>Connected Ollama for local LLM responses</li>
-            <li>Implemented conversation history and optional sentiment analysis hooks</li>
-            <li>Documented prerequisites, setup, and run steps in the README</li>
-          </ul>
           <p>
-            <strong>Outcomes & Proof:</strong>
+            <strong>Technical approach:</strong> The app exposes HTTP and WebSocket flows, maintains conversation history, and supports optional sentiment hooks while relying on local runtime dependencies like Python, FFmpeg, and Ollama.
           </p>
-          <ul>
-            <li>GitHub repo: <a href="https://github.com/BradleyMatera/Convo-Ai" target="_blank" rel="noopener noreferrer">Convo-Ai</a></li>
-            <li>Local‑only run: server + client workflow documented in README</li>
-            <li>Verified Whisper, Ollama, and XTTS v2 integrations in repo</li>
-            <li>Optional web UI flow documented for real‑time interaction</li>
-          </ul>
+          <p>
+            <strong>Outcomes and proof:</strong> Integration and run instructions are documented in the <a href="https://github.com/BradleyMatera/Convo-Ai" target="_blank" rel="noopener noreferrer">repository</a>, including local-only execution for server plus client.
+          </p>
+          <p>
+            <strong>Limitations:</strong> Performance depends on local hardware and model configuration, so setup quality and response speed vary by machine.
+          </p>
         </>
       }
       stack={["Python", "FastAPI", "Whisper", "Ollama", "XTTS v2", "WebSockets"]}
+      metrics={["Local-only inference pipeline", "Voice + text roundtrip flow"]}
       thumbnail="/assets/visuals/projects/convo-ai.png"
       links={[
-        { label: "GitHub", href: "https://github.com/BradleyMatera/Convo-Ai", external: true },
+        { label: "View GitHub", href: "https://github.com/BradleyMatera/Convo-Ai", external: true },
       ]}
     />
   </div>
@@ -360,171 +343,186 @@ import InfoIcon from "../../../src/components/visuals/icons/InfoIcon";
       id="tools"
       eyebrow="Tools"
       title="Tools & Infrastructure"
+      description={
+        <p>
+          Labs and utilities used to learn lower-level engineering concepts, deployment reliability, and debugging patterns across environments.
+        </p>
+      }
     >
-      <div className="project-gallery projects-grid">
+      <div className="projects-grid">
     <ProjectCard
       title="Triangle Shader Lab (WebGPU)"
-      meta="WebGPU study demo"
+      meta="A hands-on WebGPU lab with a toggle between Hello Triangle and a textured cube."
       summaryPreview={
         <>
           <p>
-            <strong>Problem:</strong> Needed a focused lab to learn the WebGPU pipeline without extra framework noise.
+            Built as a practical graphics lab so I could trace the full WebGPU path from device request to final frame output.
           </p>
           <p>
-            <strong>Solution:</strong> Built a small WebGPU demo with a hello triangle and textured cube, deployed to GitHub Pages.
+            <strong>What I learned:</strong> Pipeline setup clarity matters more than visual complexity when learning new graphics APIs.
           </p>
         </>
       }
+      impact="The lab provides a side-by-side toggle between a minimal triangle and textured cube so pipeline changes can be validated quickly."
       summaryDetails={
         <>
           <p>
-            <strong>My Role:</strong>
+            <strong>Your role:</strong> I implemented the WebGPU initialization, pipeline setup, and shader wiring, then wrapped the demo in a simple Next.js experience with clear experiment notes.
           </p>
-          <ul>
-            <li>Implemented the WebGPU setup, pipeline, and shader wiring</li>
-            <li>Wrapped the demo in a simple Next.js layout with clear notes</li>
-            <li>Published the static demo to GitHub Pages</li>
-          </ul>
           <p>
-            <strong>Outcomes & Proof:</strong>
+            <strong>Technical approach:</strong> The project isolates rendering stages and exposes two modes so state changes and shader effects are easier to reason about during debugging.
           </p>
-          <ul>
-            <li>GitHub repo: <a href="https://github.com/BradleyMatera/TriangleDemo" target="_blank" rel="noopener noreferrer">TriangleDemo</a></li>
-            <li>Live demo: <a href="https://bradleymatera.github.io/TriangleDemo/" target="_blank" rel="noopener noreferrer">TriangleDemo</a></li>
-          </ul>
+          <p>
+            <strong>Outcomes and proof:</strong> The two-mode demo is public at <a href="https://bradleymatera.github.io/TriangleDemo/" target="_blank" rel="noopener noreferrer">GitHub Pages</a>, and the editable TypeScript pipeline code is documented in <a href="https://github.com/BradleyMatera/TriangleDemo" target="_blank" rel="noopener noreferrer">GitHub</a>.
+          </p>
+          <p>
+            <strong>Limitations:</strong> The lab is intentionally narrow and educational, not a production rendering engine.
+          </p>
         </>
       }
       stack={["Next.js", "TypeScript", "WebGPU", "GitHub Pages"]}
+      metrics={["2 render modes", "WebGPU pipeline learning lab"]}
       thumbnail="/assets/visuals/projects/triangle-shader-lab.png"
       links={[
-        { label: "Live demo", href: "https://bradleymatera.github.io/TriangleDemo/", variant: "primary", external: true },
-        { label: "GitHub", href: "https://github.com/BradleyMatera/TriangleDemo", external: true },
+        { label: "Live Demo", href: "https://bradleymatera.github.io/TriangleDemo/", variant: "primary", external: true },
+        { label: "View GitHub", href: "https://github.com/BradleyMatera/TriangleDemo", external: true },
       ]}
     />
     <ProjectCard
       title="EthicsFrontEndDemo"
-      meta="Secrets management tutorial"
+      meta="An interactive workshop that teaches how to move from hardcoded secrets to safe environment-variable workflows."
       summaryPreview={
         <>
           <p>
-            <strong>Problem:</strong> Needed a simple way to teach secure secrets handling in frontend workflows.
+            Built to answer a common beginner question directly: "Why is hardcoding secrets dangerous, and what should I do instead?"
           </p>
           <p>
-            <strong>Solution:</strong> Built an interactive tutorial covering hard‑coded secrets, env vars, and best practices.
+            <strong>What I learned:</strong> Security guidance lands better when people can compare bad and good patterns side-by-side.
           </p>
         </>
       }
+      impact="The workshop turns abstract secrets advice into hands-on comparisons that show safer environment-variable workflows in practice."
       summaryDetails={
         <>
           <p>
-            <strong>My Role:</strong>
+            <strong>Your role:</strong> I built the interactive tutorial flow, authored scenarios, and mapped each lesson to practical secrets-management principles.
           </p>
-          <ul>
-            <li>Built the demo pages and scenarios in Next.js</li>
-            <li>Styled the tutorial with Tailwind CSS</li>
-            <li>Documented the lessons and usage steps in the repo</li>
-          </ul>
           <p>
-            <strong>Outcomes & Proof:</strong>
+            <strong>Technical approach:</strong> The app uses step-based pages in Next.js + Tailwind with progression cues and side-by-side examples, including references aligned to HashiCorp-style secrets-management pillars.
           </p>
-          <ul>
-            <li>GitHub repo: <a href="https://github.com/BradleyMatera/EthicsFrontEndDemo" target="_blank" rel="noopener noreferrer">EthicsFrontEndDemo</a></li>
-            <li>Live demo: <a href="https://bradleymatera.github.io/EthicsFrontEndDemo/" target="_blank" rel="noopener noreferrer">EthicsFrontEndDemo</a></li>
-            <li>Tutorial steps documented in the repository README</li>
-          </ul>
+          <p>
+            <strong>Outcomes and proof:</strong> The public workshop is available at <a href="https://bradleymatera.github.io/EthicsFrontEndDemo/" target="_blank" rel="noopener noreferrer">Live Demo</a> and fully documented in <a href="https://github.com/BradleyMatera/EthicsFrontEndDemo" target="_blank" rel="noopener noreferrer">GitHub</a>.
+          </p>
+          <p>
+            <strong>Limitations:</strong> It teaches foundational patterns and does not replace a full enterprise secrets platform rollout.
+          </p>
         </>
       }
       stack={["Next.js", "Tailwind CSS", "Secrets management", "GitHub Pages"]}
+      metrics={["Interactive security walkthrough", "Hardcoded vs env-var patterns"]}
       thumbnail="/assets/visuals/projects/ethics-frontend-demo.png"
       links={[
-        { label: "Live demo", href: "https://bradleymatera.github.io/EthicsFrontEndDemo/", variant: "primary", external: true },
-        { label: "GitHub", href: "https://github.com/BradleyMatera/EthicsFrontEndDemo", external: true },
+        { label: "Live Demo", href: "https://bradleymatera.github.io/EthicsFrontEndDemo/", variant: "primary", external: true },
+        { label: "View GitHub", href: "https://github.com/BradleyMatera/EthicsFrontEndDemo", external: true },
       ]}
     />
     <ProjectCard
       title="CheeseMath Jest tests"
-      meta="Calculator + Jest demos"
+      meta="A multi-tool calculator suite rebuilt in Next.js with testing-focused architecture."
       summaryPreview={
         <>
           <p>
-            <strong>Problem:</strong> Needed to demonstrate both UI component development and unit testing practices in a single project.
+            Built to prove a utility-heavy app can stay maintainable when rebuilt from legacy React into a modern test-first stack.
           </p>
           <p>
-            <strong>Solution:</strong> Built a calculator application with Next.js UI and comprehensive Jest test suite, fully documented for learning and reference.
+            <strong>What I learned:</strong> Rebuilding a legacy app in a modern stack is the fastest way to spot architecture and testability gaps.
           </p>
         </>
       }
+      impact="The project preserves utility features while documenting a clear migration path from legacy Jest coverage to a modern Next.js architecture."
       summaryDetails={
         <>
           <p>
-            <strong>My Role:</strong>
+            <strong>Your role:</strong> I rebuilt the calculator suite, implemented utilities for regex and card validation, and maintained testing coverage while documenting migration decisions.
           </p>
-          <ul>
-            <li>Designed and implemented calculator UI with Next.js</li>
-            <li>Wrote Jest unit tests for calculator logic</li>
-            <li>Documented testing patterns and component structure</li>
-            <li>Deployed live demo for interactive testing</li>
-          </ul>
           <p>
-            <strong>Outcomes & Proof:</strong>
+            <strong>Technical approach:</strong> The current build uses Next.js + Tailwind + NextUI for UI structure and keeps Jest-based verification while documenting planned Vitest/Playwright expansion.
           </p>
-          <ul>
-            <li>GitHub repo: <a href="https://github.com/BradleyMatera/CheeseMath-Jest-Tests" target="_blank" rel="noopener noreferrer">CheeseMath-Jest-Tests</a></li>
-            <li>Live demo: <a href="https://bradleymatera.github.io/CheeseMath-Jest-Tests/" target="_blank" rel="noopener noreferrer">CheeseMath-Jest-Tests</a></li>
-            <li>Verified Jest test suite in repository</li>
-            <li>Verified Next.js component implementation</li>
-            <li>Test coverage documented in repository</li>
-          </ul>
+          <p>
+            <strong>Version comparison:</strong>
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>Version</th>
+                <th>Focus</th>
+                <th>Testing state</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Legacy React app</td>
+                <td>Original utility workflow baseline</td>
+                <td>Jest-oriented validation flow</td>
+              </tr>
+              <tr>
+                <td>Modern Next.js rebuild</td>
+                <td>Improved component structure + UI delivery</td>
+                <td>Jest now, Vitest/Playwright planned</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            <strong>Outcomes and proof:</strong> Repo-level test and migration documentation are in <a href="https://github.com/BradleyMatera/CheeseMath-Jest-Tests" target="_blank" rel="noopener noreferrer">GitHub</a>, with a runnable build at <a href="https://bradleymatera.github.io/CheeseMath-Jest-Tests/" target="_blank" rel="noopener noreferrer">Live Demo</a>.
+          </p>
+          <p>
+            <strong>Limitations:</strong> Advanced e2e coverage is still in the roadmap and not yet fully implemented.
+          </p>
         </>
       }
-      stack={["JavaScript", "Jest", "Next.js"]}
+      stack={["JavaScript", "TypeScript", "Jest", "Next.js", "Tailwind", "NextUI"]}
+      metrics={["Legacy + modern app versions", "Regex + card-check utilities"]}
       thumbnail="/assets/visuals/projects/cheesemath-jest.png"
       links={[
-        { label: "Live demo", href: "https://bradleymatera.github.io/CheeseMath-Jest-Tests/", variant: "primary", external: true },
-        { label: "GitHub", href: "https://github.com/BradleyMatera/CheeseMath-Jest-Tests", external: true },
+        { label: "Live Demo", href: "https://bradleymatera.github.io/CheeseMath-Jest-Tests/", variant: "primary", external: true },
+        { label: "View GitHub", href: "https://github.com/BradleyMatera/CheeseMath-Jest-Tests", external: true },
       ]}
     />
     <ProjectCard
       title="OBJ parser"
-      meta="Geometry learning repo"
+      meta="A Zig parsing lab for OBJ/MTL geometry files and explicit memory management."
       summaryPreview={
         <>
           <p>
-            <strong>Problem:</strong> Needed to understand Zig's memory model and file I/O by working with real-world data formats.
+            Built to learn Zig by parsing real geometry files instead of reading only toy examples.
           </p>
           <p>
-            <strong>Solution:</strong> Built a parser for OBJ and MTL geometry files that demonstrates Zig's memory management and file handling patterns.
+            <strong>What I learned:</strong> Manual memory ownership decisions become much clearer when tied to concrete binary parsing tasks.
           </p>
         </>
       }
+      impact="The parser strengthened systems-level reasoning around memory ownership, file I/O paths, and malformed-input handling."
       summaryDetails={
         <>
           <p>
-            <strong>My Role:</strong>
+            <strong>Your role:</strong> I designed the parser architecture in Zig, implemented OBJ/MTL reading, defined geometry structures, and added error handling for malformed inputs.
           </p>
-          <ul>
-            <li>Designed parser architecture using Zig's memory model</li>
-            <li>Implemented file I/O for OBJ and MTL format parsing</li>
-            <li>Created custom data structures for geometry data</li>
-            <li>Implemented error handling for malformed files</li>
-            <li>Documented parsing logic and future improvements</li>
-          </ul>
           <p>
-            <strong>Outcomes & Proof:</strong>
+            <strong>Technical approach:</strong> The implementation focuses on explicit memory management and binary-safe parsing paths, with documentation that compares Zig ownership tradeoffs against JavaScript workflows.
           </p>
-          <ul>
-            <li>GitHub repo: <a href="https://github.com/BradleyMatera/obj-parser" target="_blank" rel="noopener noreferrer">obj-parser</a></li>
-            <li>Verified parser implementation in repository</li>
-            <li>Verified OBJ/MTL file format handling</li>
-            <li>Verified error handling for edge cases</li>
-            <li>Documentation available in README</li>
-          </ul>
+          <p>
+            <strong>Outcomes and proof:</strong> Source implementation and README design notes are available in <a href="https://github.com/BradleyMatera/obj-parser" target="_blank" rel="noopener noreferrer">GitHub</a>.
+          </p>
+          <p>
+            <strong>Limitations:</strong> This remains an exploratory parser lab and does not yet include a fully optimized rendering pipeline integration.
+          </p>
         </>
       }
       stack={["Zig"]}
+      metrics={["OBJ + MTL parsing path", "Manual memory-management practice"]}
       thumbnail="/assets/visuals/projects/obj-parser.png"
       links={[
-        { label: "GitHub", href: "https://github.com/BradleyMatera/obj-parser", external: true },
+        { label: "View GitHub", href: "https://github.com/BradleyMatera/obj-parser", external: true },
       ]}
     />
       </div>
@@ -557,10 +555,10 @@ import InfoIcon from "../../../src/components/visuals/icons/InfoIcon";
   <aside className="projects-layout__aside">
     <AnchorNav
       items={[
-        { id: "featured", label: "Featured" },
+        { id: "featured", label: "Full-Stack" },
         { id: "frontend", label: "Front-End" },
-        { id: "fullstack", label: "Full-Stack" },
-        { id: "tools", label: "Tools" },
+        { id: "fullstack", label: "AI Systems" },
+        { id: "tools", label: "Tools & Infra" },
       ]}
     />
   </aside>

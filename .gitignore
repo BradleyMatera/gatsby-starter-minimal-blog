@@ -87,3 +87,9 @@ projecthub-proxy/
 
 # Local Netlify folder
 .netlify
+
+# Local agent/devtools preview artifacts
+.devtools/
+scripts/agent-share.sh
+scripts/dev-agent-preview.sh
+scripts/dev-agent-static-preview.sh

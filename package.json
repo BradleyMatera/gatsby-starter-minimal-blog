@@ -10,8 +10,12 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
+    "develop:agent": "gatsby develop -H 0.0.0.0 -p 8000",
     "dev": "netlify dev --no-open",
+    "dev:agent": "bash scripts/dev-agent-preview.sh",
+    "dev:agent:fast": "bash scripts/dev-agent-static-preview.sh",
     "dev:gatsby": "gatsby develop",
+    "dev:agent:share": "bash scripts/agent-share.sh",
     "develop:cypress": "cross-env CYPRESS_SUPPORT=y yarn develop",
     "build:cypress": "cross-env CYPRESS_SUPPORT=y yarn build",
     "start": "gatsby develop",

@@ -55,6 +55,19 @@ const ProjectCard = ({
   const hasDetails = Boolean(summaryDetails);
   const previewContent = summaryPreview ?? summary;
   const previewClassName = hasDetails ? "project-card__summary" : "project-card__description";
+  const hasThumbnail = Boolean(thumbnail);
+  const orderedLinks = React.useMemo(() => {
+    if (!links || links.length === 0) return [];
+    const rank = (link: ProjectLink) => {
+      const label = link.label.toLowerCase();
+      const href = link.href.toLowerCase();
+      if (label.includes("github") || href.includes("github.com")) return 0;
+      if (label.includes("live demo")) return 1;
+      if (label.includes("case study")) return 2;
+      return 3;
+    };
+    return [...links].sort((a, b) => rank(a) - rank(b));
+  }, [links]);
 
   const handleMouseMove = (event: React.MouseEvent<HTMLElement>) => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -83,16 +96,20 @@ const ProjectCard = ({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="project-card__frame">
+      <div
+        className="project-card__frame"
+        style={hasThumbnail ? { flexDirection: "column", gap: "0.75rem" } : undefined}
+      >
         {thumbnail ? (
-          <div className="project-card__thumbnail">
+          <div className="project-card__thumbnail" style={{ width: "100%", flex: "0 0 auto" }}>
             <img
               src={thumbnail}
               alt={thumbnailAlt ?? `${title} project thumbnail`}
               loading="lazy"
               decoding="async"
-              width="120"
-              height="120"
+              width="104"
+              height="104"
+              style={{ width: "100%", height: "160px", objectFit: "cover" }}
             />
           </div>
         ) : null}
@@ -100,16 +117,7 @@ const ProjectCard = ({
           {/* Title - Top horizontal bar (F-pattern first fixation) */}
           <h3 className="project-card__title">{title}</h3>
 
-          {/* Stack - Second horizontal bar (scannable keywords) */}
-          {stack && stack.length > 0 ? (
-            <div className="project-card__stack">
-              {stack.map((item) => (
-                <span key={item}>{item}</span>
-              ))}
-            </div>
-          ) : null}
-
-          {/* Meta - De-emphasized context */}
+          {/* Meta hook - Quick non-technical summary */}
           {meta ? <p className="project-card__meta">{meta}</p> : null}
 
           {/* Metrics badges */}
@@ -132,11 +140,13 @@ const ProjectCard = ({
           {previewContent ? (
             <div className={previewClassName}>
               {previewContent}
-              {stack && stack.length > 0 ? (
-                <p className="project-card__tech">
-                  <strong>Tech:</strong> {stack.join(", ")}
-                </p>
-              ) : null}
+            </div>
+          ) : null}
+          {stack && stack.length > 0 ? (
+            <div className="project-card__stack">
+              {stack.map((item) => (
+                <span key={item}>{item}</span>
+              ))}
             </div>
           ) : null}
           {summaryDetails ? (
@@ -147,9 +157,9 @@ const ProjectCard = ({
           ) : null}
 
           {/* CTAs - Call to action links */}
-          {links && links.length > 0 ? (
+          {orderedLinks.length > 0 ? (
             <div className="card-actions">
-              {links.map((link) => (
+              {orderedLinks.map((link) => (
                 <Link
                   key={`${link.label}-${link.href}`}
                   href={link.href}
