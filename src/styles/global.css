@@ -3942,7 +3942,7 @@ body {
   border-radius: 24px;
   overflow: hidden;
   padding: clamp(1.75rem, 3vw, 2.5rem);
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.75), rgba(2, 6, 23, 0.6));
+  background: linear-gradient(135deg, rgba(28, 28, 28, 0.9), rgba(10, 10, 10, 0.82));
   box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
 }
 
@@ -3958,7 +3958,18 @@ body {
   );
   background-size: cover;
   background-position: center;
-  opacity: 0.25;
+  opacity: 0.22;
+  filter: grayscale(1) saturate(0) brightness(0.48) contrast(1.08);
+  pointer-events: none;
+}
+
+.about-profile__hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(8, 8, 8, 0.58), rgba(18, 18, 18, 0.42)),
+    radial-gradient(circle at 22% 24%, rgba(255, 255, 255, 0.04), transparent 48%);
   pointer-events: none;
 }
 
@@ -3974,6 +3985,23 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  color: #f3f3f3;
+}
+
+.about-profile__hero .section-title,
+.about-profile__hero .about-profile__bio,
+.about-profile__hero .about-profile__bio p,
+.about-profile__hero .about-profile__intro,
+.about-profile__hero strong {
+  color: #f3f3f3;
+}
+
+.about-profile__hero .section-title {
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.about-profile__hero .about-profile__bio p {
+  color: rgba(243, 243, 243, 0.96);
 }
 
 .about-profile__intro {
@@ -5074,4 +5102,23 @@ body {
 
 :root[data-theme="dark"] .about-profile__hero {
   background: linear-gradient(135deg, rgba(22, 22, 22, 0.85), rgba(5, 5, 5, 0.9));
+}
+
+:root[data-theme="dark"] .about-profile__hero .section-title,
+:root[data-theme="dark"] .about-profile__hero .about-profile__bio,
+:root[data-theme="dark"] .about-profile__hero .about-profile__bio p,
+:root[data-theme="dark"] .about-profile__hero .about-profile__intro,
+:root[data-theme="dark"] .about-profile__hero strong {
+  color: #f5f5f5;
+}
+
+:root[data-theme="dark"] .about-profile__hero::before {
+  opacity: 0.18;
+  filter: grayscale(1) saturate(0) brightness(0.38) contrast(1.12);
+}
+
+:root[data-theme="dark"] .about-profile__hero::after {
+  background:
+    linear-gradient(135deg, rgba(4, 4, 4, 0.72), rgba(10, 10, 10, 0.54)),
+    radial-gradient(circle at 22% 24%, rgba(255, 255, 255, 0.03), transparent 46%);
 }
