@@ -98,7 +98,12 @@ const isExternalHref = (href: string) => /^https?:\/\//i.test(href);
 const isAgentPreviewMode = () => {
   if (typeof window !== "undefined") {
     const host = window.location.hostname.toLowerCase();
-    if (host.endsWith(".loca.lt") || host.endsWith(".trycloudflare.com")) return true;
+    if (
+      host.endsWith(".loca.lt") ||
+      host.endsWith(".trycloudflare.com") ||
+      host.endsWith(".localhost.run") ||
+      host.endsWith(".lhr.life")
+    ) return true;
   }
   return process.env.GATSBY_AGENT_PREVIEW === "1";
 };

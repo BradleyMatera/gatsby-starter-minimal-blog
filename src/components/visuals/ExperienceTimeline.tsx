@@ -1,4 +1,5 @@
 import * as React from "react";
+
 type TimelineEntry = {
   id: string;
   dates: string;
@@ -9,39 +10,22 @@ type TimelineEntry = {
   responsibilities: { label: string; detail: string }[];
   skills: string[];
   proof: { label: string; href: string }[];
+  condensed?: boolean;
 };
 
 const entries: TimelineEntry[] = [
-  /*{
-    id: "maintenance-2025",
-    dates: "Dec 2025 – Present",
-    title: "Maintenance Technician",
-    company: "Rock Walworth Comprehensive Family Services Inc.",
-    location: "On-site (Full-time)",
-    summary:
-      "Manage facility upkeep, coordinate repairs, and keep equipment operational so staff focus on care delivery while systems stay stable.",
-    responsibilities: [
-      { label: "Preventative maintenance", detail: "Perform preventative and corrective routines on HVAC, plumbing, and electrical systems." },
-      { label: "Coordination", detail: "Align leadership and staff to schedule repairs with minimal disruption to care." },
-      { label: "Documentation", detail: "Log work orders and report recurring faults for long-term fixes." },
-    ],
-    skills: ["Preventative maintenance", "Troubleshooting", "Communication"],
-    proof: [
-      { label: "Facility info", href: "https://www.rockwalworthinc.com/" },
-    ],
-  },*/
   {
     id: "aws-internship-2025",
-    dates: "May 2025 – Aug 2025",
+    dates: "May 2025 - Aug 2025",
     title: "Cloud Support Engineer Intern (Capstone Project)",
     company: "Amazon Web Services (AWS)",
     location: "Seattle, WA (On-site internship)",
     summary:
-      "Completed guided support rotations in training environments and produced internal-style documentation and repeatable troubleshooting notes.",
+      "Completed guided support rotations in training environments and produced review-ready documentation, cost reasoning, and repeatable troubleshooting notes for cloud workflows.",
     responsibilities: [
       { label: "Capstone", detail: "Built a serverless metadata extraction workflow using AWS Lambda, DynamoDB, and S3 with an accessible front end deployed on AWS Amplify." },
-      { label: "Cost model", detail: "Implemented a transparent cost model using measurable inputs to estimate cost per upload and retrieval." },
-      { label: "Documentation", detail: "Documented assumptions and calculation logic so results are reproducible and explainable during review." },
+      { label: "Cost model", detail: "Created a transparent cost model that estimated cost per upload and retrieval using measurable inputs instead of vague assumptions." },
+      { label: "Documentation", detail: "Recorded assumptions, calculation logic, and troubleshooting steps so reviewers could follow the reasoning and reproduce the results." },
     ],
     skills: [
       "Amazon S3, EC2, RDS, DynamoDB",
@@ -54,16 +38,16 @@ const entries: TimelineEntry[] = [
   },
   {
     id: "ciris-2024",
-    dates: "Jan 2024 – Dec 2024",
+    dates: "Jan 2024 - Dec 2024",
     title: "Junior Frontend Developer (Volunteer)",
     company: "CIRIS Ethical AI",
     location: "Remote (Part-time)",
     summary:
-      "Improved onboarding docs and tooling in open-source ethics projects, helping new contributors set up local environments securely.",
+      "Improved onboarding docs and tooling in open-source ethics projects so new contributors could get local environments running with less guesswork.",
     responsibilities: [
-      { label: "Onboarding docs", detail: "Updated READMEs, workflows, and contributor guides after testing each project." },
-      { label: "Issue triage", detail: "Logged issues and documented AI-assisted debugging steps for maintainers." },
-      { label: "Environment notes", detail: "Clarified environment variables, preview URLs, and shared troubleshooting steps for new members." },
+      { label: "Onboarding docs", detail: "Updated READMEs, workflows, and contributor guides after testing each project setup myself." },
+      { label: "Issue triage", detail: "Logged issues and documented AI-assisted debugging steps so maintainers had clearer reproduction notes." },
+      { label: "Environment notes", detail: "Clarified environment variables, preview URLs, and token-verification troubleshooting for new contributors." },
     ],
     skills: ["React.js", "JavaScript", "Technical documentation", "GitHub workflows"],
     proof: [
@@ -71,94 +55,24 @@ const entries: TimelineEntry[] = [
     ],
   },
   {
-    id: "case-management-2022",
-    dates: "Sep 2022 – Jan 2023",
-    title: "Case Manager",
-    company: "Mason County, WA",
-    location: "On-site (Full-time)",
+    id: "earlier-roles",
+    dates: "2011 - 2023",
+    title: "Earlier roles outside tech",
+    company: "Army, logistics, case management, rescue work",
+    location: "Mostly on-site roles",
     summary:
-      "Coordinated court compliance for Veterans Court, Drug Court, and Mental Health Court, keeping participants engaged and documentation accurate.",
+      "Before I started building software in public, I worked across military, operations, care, and logistics roles that taught me discipline, documentation, and how to stay useful when things are messy.",
     responsibilities: [
-      { label: "Court coordination", detail: "Tracked court-mandated milestones while maintaining crisis readiness." },
-      { label: "Documentation", detail: "Logged client progress and coordinated with legal teams for safety checks." },
-      { label: "Project tracking", detail: "Applied Agile-style tracking to keep multiple caseloads moving forward." },
+      { label: "Documentation habits", detail: "Learned to keep notes clear, track details carefully, and communicate changes in environments where missing information had real consequences." },
+      { label: "Steady execution", detail: "Worked in jobs that required patience, safety awareness, teamwork, and calm problem-solving under pressure." },
+      { label: "Why it matters now", detail: "Those roles do not replace engineering experience, but they do shape how I approach learning, collaboration, and responsibility in technical work." },
     ],
-    skills: ["Crisis intervention", "Project tracking", "Communication"],
+    skills: ["Documentation", "Communication", "Discipline", "Calm under pressure"],
     proof: [
-      { label: "Mason County services", href: "https://www.sheltonwa.gov/government/municipal_court/therapeutic_court.php" },
+      { label: "Rescue work", href: "https://www.kittenresq.net/" },
+      { label: "Army medic role", href: "https://www.goarmy.com/careers-and-jobs/specialty-careers/medical" },
     ],
-  },
-  {
-    id: "animal-care-2020",
-    dates: "Jun 2020 – Sep 2022",
-    title: "Animal Care Associate",
-    company: "Mason County Kitten Rescue",
-    location: "Mason County, WA (Part-time)",
-    summary:
-      "Provided veterinarian-style care for rescued kittens, trained volunteers, and supported intake/adoption efforts.",
-    responsibilities: [
-      { label: "Caretaking", detail: "Handled feeding, cleaning, and behavioral monitoring for at-risk kittens." },
-      { label: "Volunteer training", detail: "Trained volunteers on intake procedures and hygiene best practices." },
-      { label: "Community support", detail: "Supported fostering, adoption, and outreach events." },
-    ],
-    skills: ["Compassion", "Volunteer leadership", "Problem-solving"],
-    proof: [
-      { label: "Rescue page", href: "https://www.kittenresq.net/" },
-    ],
-  },
-  {
-    id: "roof-loader-2018",
-    dates: "Jan 2018 – Jan 2020",
-    title: "Roof Loader",
-    company: "Stoneway Roofing Supply",
-    location: "On-site (Full-time)",
-    summary:
-      "Loaded, delivered, and coordinated roofing materials under tight timelines, building endurance and communication across crews.",
-    responsibilities: [
-      { label: "Logistics", detail: "Loaded heavy materials onto conveyors and rooftops." },
-      { label: "Delivery", detail: "Delivered materials to job sites while aligning schedules with crews." },
-      { label: "Safety", detail: "Prioritized safety standards on high-rise roofs and in rough weather." },
-    ],
-    skills: ["Teamwork", "Logistics", "Safety awareness"],
-    proof: [
-      { label: "Stoneway Roofing", href: "https://stonewayroofing.com/" },
-    ],
-  },
-  {
-    id: "construction-2017",
-    dates: "2017 – Aug 2018",
-    title: "General Contracting / Construction Worker",
-    company: "Ascend Roofing Company LLC",
-    location: "On-site (Full-time)",
-    summary:
-      "Supported residential and commercial roofing projects with demolition, installations, and maintenance work.",
-    responsibilities: [
-      { label: "Project support", detail: "Assisted with tear-offs, shingle installations, and clean-up." },
-      { label: "Material prep", detail: "Managed material prep and collaborated with lead roofers." },
-      { label: "Progress tracking", detail: "Documented site progress and communicated issues to supervisors." },
-    ],
-    skills: ["Construction management", "Customer service", "Problem-solving"],
-    proof: [
-      { label: "Ascend Roofing", href: "https://www.ascendroofing.com/" },
-    ],
-  },
-  {
-    id: "army-2011",
-    dates: "Jun 2011 – Apr 2014",
-    title: "Healthcare Specialist (Combat Medic)",
-    company: "U.S. Army",
-    location: "North Carolina, USA (Hybrid)",
-    summary:
-      "Delivered medical care in training and field operations, specializing in triage, medication administration, and supply management.",
-    responsibilities: [
-      { label: "Medical care", detail: "Performed exams, medication administration, and emergency responses." },
-      { label: "Supply management", detail: "Managed medical supplies for training environments." },
-      { label: "Leadership", detail: "Stayed calm under pressure while leading high-stress teams." },
-    ],
-    skills: ["Crisis care", "Leadership", "Critical thinking"],
-    proof: [
-      { label: "Army MOS 68W", href: "https://www.goarmy.com/careers-and-jobs/specialty-careers/medical?iom=CUGA-26NMTF_N_PSEA_23377500180_2562092152_301694989599_190528454156_army+medic&goarmy-git-open=ebrc&&&&&gclsrc=aw.ds&gclid=Cj0KCQiA8KTNBhD_ARIsAOvp6DJ0v7CO0_t9cACELcSaJmBjeH4zSlDjqU8UR0hjkj3VwUcExBfDBmUaAnLjEALw_wcB" },
-    ],
+    condensed: true,
   },
 ];
 
@@ -166,7 +80,7 @@ const ExperienceTimeline = () => (
   <section className="timeline" aria-label="Professional experience timeline">
     <div className="experience-cards">
       {entries.map((item) => (
-        <article key={item.id} className="experience-card">
+        <article key={item.id} className={`experience-card${item.condensed ? " experience-card--condensed" : ""}`}>
           <div className="experience-card__header">
             <div className="experience-card__title">
               {item.title} · <strong>{item.company}</strong>
@@ -175,9 +89,9 @@ const ExperienceTimeline = () => (
               {item.dates} · {item.location}
             </div>
           </div>
-          {item.summary && (
+          {item.summary ? (
             <p className="experience-card__summary">{item.summary}</p>
-          )}
+          ) : null}
           <ul className="experience-card__list">
             {item.responsibilities.map((line, index) => (
               <li key={`${item.id}-${index}`}>
