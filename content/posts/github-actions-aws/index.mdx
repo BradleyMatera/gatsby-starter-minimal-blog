@@ -17,6 +17,10 @@ Without CI, the only person verifying builds is you, on your machine, in your en
 
 GitHub Actions is simply the execution platform. It spins up a temporary machine, checks out your code, runs the commands you specify, and reports success or failure. Nothing more mysterious than that is happening.
 
+
+{/* visual-break:github-actions-aws:1 */}
+![Cloud architecture checkpoint illustration for this section.](/assets/visuals/blog/github-actions-aws-break-1.png)
+
 ## What you will add
 
 You will add a single YAML file under `.github/workflows`. That file describes when the workflow runs, what environment it uses, and which commands to execute. Once committed, GitHub reads it automatically and starts running it on every push to your main branch and every pull request targeting that branch.
@@ -113,6 +117,10 @@ In every case, the fix is to make the local and CI environments match more close
 Once this baseline works, you can add tests, caching, artifact uploads, or deployments. Those are all additive. None of them are worth doing until this core loop is stable.
 
 A workflow that runs real commands and gives reliable feedback is already useful. Fancy pipelines that do not run real checks are not.
+
+
+{/* visual-break:github-actions-aws:2 */}
+![Cloud operations checkpoint illustration for this section.](/assets/visuals/blog/github-actions-aws-break-2.png)
 
 ## Closing
 

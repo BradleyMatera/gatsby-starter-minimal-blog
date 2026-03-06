@@ -19,6 +19,10 @@ Another reason Zig works well here is that it treats errors as part of the type 
 
 Finally, Zig’s compile-time safety checks catch common parser mistakes. Array bounds, null handling, and integer conversions are checked where possible. That means the example you are about to build is small, but it uses the same safety and performance model that scales to large real-world parsers.
 
+
+{/* visual-break:exploring-zig-efficient-parsing:1 */}
+![Execution process checkpoint illustration for this section.](/assets/visuals/blog/exploring-zig-efficient-parsing-break-1.png)
+
 ## What you are building
 
 You will build a single Zig executable that reads a small `.obj` file, extracts `v` vertex lines, parses floats, stores them in a dynamic list, and prints them back out. This is the smallest complete parsing loop: input → tokenize → parse → store → output.
@@ -223,6 +227,10 @@ Once the basic vertex loop works, extending the parser is mainly about adding mo
 - Store data in buffers used by a renderer
 
 The core loop remains the same: read → tokenize → parse → store → verify.
+
+
+{/* visual-break:exploring-zig-efficient-parsing:2 */}
+![Delivery workflow checkpoint illustration for this section.](/assets/visuals/blog/exploring-zig-efficient-parsing-break-2.png)
 
 ## Closing
 

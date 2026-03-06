@@ -17,6 +17,10 @@ A dropdown is not a DOM thing. In React it is almost always a boolean. If that b
 
 The second half of the problem is visibility changes. If your nav collapses on mobile, or hides on scroll, or mounts and unmounts during route transitions, your dropdown state can survive in the wrong moment. That’s where it starts looking haunted. The UI is doing exactly what you told it to do, you just forgot to tell it when to stop.
 
+
+{/* visual-break:gatsby-nav-bar-haunted:1 */}
+![Debugging process checkpoint illustration for this section.](/assets/visuals/blog/gatsby-nav-bar-haunted-break-1.png)
+
 ## The fix in one sentence
 
 You add a document-level click listener that closes the dropdown when the click happens outside the dropdown, and you add a second effect that forces the dropdown closed whenever the nav visibility state goes false.
@@ -139,6 +143,10 @@ I’m not including those changes here because the post is about the stuck dropd
 ## Related reference
 
 - https://react.dev/reference/react/useEffect
+
+
+{/* visual-break:gatsby-nav-bar-haunted:2 */}
+![Troubleshooting checkpoint illustration for this section.](/assets/visuals/blog/gatsby-nav-bar-haunted-break-2.png)
 
 ## Closing
 

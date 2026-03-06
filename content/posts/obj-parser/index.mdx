@@ -31,6 +31,10 @@ You are building a tiny command line tool that:
 
 Then you progressively harden it so it behaves like a real parser: it trims whitespace, ignores comments, doesn’t confuse `vn` with `v`, validates face tokens, tracks line numbers, and reports what it skipped.
 
+
+{/* visual-break:obj-parser:1 */}
+![Debugging process checkpoint illustration for this section.](/assets/visuals/blog/obj-parser-break-1.png)
+
 ## What an OBJ file really looks like
 
 OBJ is plain text. That is both the reason it is popular and the reason parsers get messy. Lines are records. Records are identified by a keyword at the front of the line. The simplest mental model is “first token is the record type, the rest are fields.”
@@ -368,6 +372,10 @@ If you see face counts increase even when face lines are malformed, you are coun
 If you see failures only on Windows-formatted OBJ files, you forgot to trim `\r`.
 
 If you see weird behavior on lines with indentation, you are not trimming whitespace before tokenizing.
+
+
+{/* visual-break:obj-parser:2 */}
+![Troubleshooting checkpoint illustration for this section.](/assets/visuals/blog/obj-parser-break-2.png)
 
 ## Next steps that are actually worth doing
 

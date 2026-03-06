@@ -19,6 +19,10 @@ Then I hit the live URL with `curl` and it returned the correct new markup. But 
 
 And that something was a service worker I did not even know existed.
 
+
+{/* visual-break:service-worker-held-site-hostage:1 */}
+![Security flow checkpoint illustration for this section.](/assets/visuals/blog/service-worker-held-site-hostage-break-1.png)
+
 ## What the actual root problem was
 
 A stale service worker was still registered in the browser from an earlier version of the site. I did not write the service worker myself. AI generated it once, and I never questioned it. I did not know what “sw.js” even meant at the time.
@@ -28,6 +32,10 @@ A service worker sits between the browser and the network. It can intercept requ
 The browser trusted the service worker more than the server.
 
 This is the exact kind of bug that does not feel logical until you understand how aggressive service worker caching is.
+
+
+{/* visual-break:service-worker-held-site-hostage:2 */}
+![Verification and access checkpoint illustration for this section.](/assets/visuals/blog/service-worker-held-site-hostage-break-2.png)
 
 ## The fix that finally worked
 

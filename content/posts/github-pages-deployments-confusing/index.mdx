@@ -19,6 +19,10 @@ By the end, three things will be true. Your project will build into a static fol
 
 ## What GitHub Pages actually is
 
+{/* visual-break:github-pages-deployments-confusing:1 */}
+![Debugging process checkpoint illustration for this section.](/assets/visuals/blog/github-pages-deployments-confusing-break-1.png)
+
+
 At a high level, GitHub Pages is just a static file host wired directly into your repository. You push a folder of HTML, CSS, and JavaScript to a specific branch, and GitHub serves it at a predictable URL. No servers. No containers. No runtime. Just files on disk served over HTTP.
 
 At a low level, GitHub Pages does exactly three things. It watches a branch. It copies the files from that branch to its hosting layer. It assigns your repo a URL. Everything else people get stuck on is configuration around paths and build output.
@@ -319,6 +323,10 @@ A blank page with red console errors is a wrong base path. A 404 at the Pages UR
 GitHub Pages itself is simple. The confusion comes from modern front-end tools defaulting to `/` as the base path, while GitHub Pages requires `/repo-name/`. Once you align those two, the rest is mechanical.
 
 You are not configuring a server. You are not managing infrastructure. You are just building files and telling GitHub which branch to serve. That’s all that’s happening.
+
+
+{/* visual-break:github-pages-deployments-confusing:2 */}
+![Troubleshooting checkpoint illustration for this section.](/assets/visuals/blog/github-pages-deployments-confusing-break-2.png)
 
 ## Closing
 

@@ -26,6 +26,10 @@ Before touching anything, here is the end state so the steps make sense.
 
 Once these exist, you will be able to build the image, run the container, and confirm it responds.
 
+
+{/* visual-break:containerization-orchestration:1 */}
+![Cloud architecture checkpoint illustration for this section.](/assets/visuals/blog/containerization-orchestration-break-1.png)
+
 ## Prerequisites
 
 You need Docker Desktop installed and Node.js available on your machine. No other tooling is required. If Docker is not installed, install Docker Desktop first and confirm this works before continuing:
@@ -188,6 +192,10 @@ A Node service was created. A Docker image packaged it. Compose ran the image wi
 | Container exits immediately | Start command missing | Ensure `scripts.start` exists in package.json |
 | `curl` connection refused | Port mapping missing or container not running | Confirm `3000:3000` in compose and container logs |
 | Docker build fails on lockfile | `package-lock.json` missing | Run `npm install` before building image |
+
+
+{/* visual-break:containerization-orchestration:2 */}
+![Cloud operations checkpoint illustration for this section.](/assets/visuals/blog/containerization-orchestration-break-2.png)
 
 ## Closing
 

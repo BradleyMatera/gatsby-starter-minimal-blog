@@ -23,6 +23,10 @@ This post is the blueprint for that stack.
 
 ---
 
+
+{/* visual-break:testing-matters:1 */}
+![Execution process checkpoint illustration for this section.](/assets/visuals/blog/testing-matters-break-1.png)
+
 ## Level 1: The Infrastructure (Why Vitest Won)
 
 For the better part of a decade, **Jest** was the undisputed king of JavaScript testing. But as the ecosystem shifted toward ESM (ECMAScript Modules) and TypeScript, Jest started showing its age.
@@ -108,7 +112,7 @@ interface UserUI {
 export function formatUser(user: UserAPIResponse): UserUI {
   const first = user.first_name ?? 'Guest';
   const last = user.last_name ?? '';
-  
+
   // Format Date (simple implementation for demo)
   const date = new Date(user.created_at);
   const year = date.getFullYear();
@@ -136,7 +140,7 @@ describe('formatUser utility', () => {
       created_at: '2023-01-01', 
       role: 'user' 
     } as const;
-    
+
     expect(formatUser(input).fullName).toBe('Jane Doe');
   });
 
@@ -147,7 +151,7 @@ describe('formatUser utility', () => {
       created_at: '2023-01-01', 
       role: 'guest' 
     } as const;
-    
+
     expect(formatUser(input).fullName).toBe('Guest');
   });
 
@@ -161,7 +165,7 @@ describe('formatUser utility', () => {
 
     expect(formatUser(input).isAdmin).toBe(true);
   });
-  
+
   it('handles invalid dates', () => {
       const input = { 
           first_name: 'Test', 
@@ -169,7 +173,7 @@ describe('formatUser utility', () => {
           created_at: 'invalid-date', 
           role: 'user' 
       } as const;
-      
+
       expect(formatUser(input).memberSince).toBe('Unknown');
   });
 });
@@ -236,7 +240,6 @@ To be an honest engineer, you must admit what you are *not* testing. In this "Sm
 * *Acceptance:* 90% of my traffic is Chrome/Mobile Safari. The Smoke Check covers the Mobile Safari viewport.
 
 
-
 ---
 
 ## Bonus: Automating the Bedrock (GitHub Actions)
@@ -259,26 +262,30 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-      
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
-          
+
       - name: Install Dependencies
         run: npm ci
-        
+
       - name: Run Vitest
         run: npm test
 
 ```
 
 This ensures that no code can be merged into `main` unless the math functions and data formatters are working perfectly.
+
+
+{/* visual-break:testing-matters:2 */}
+![Delivery workflow checkpoint illustration for this section.](/assets/visuals/blog/testing-matters-break-2.png)
 
 ## Final Verdict
 

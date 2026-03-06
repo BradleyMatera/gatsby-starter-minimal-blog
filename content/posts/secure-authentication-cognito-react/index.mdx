@@ -23,6 +23,10 @@ By the end of this guide, you will:
 - Configure a React application to communicate with AWS.
 - Verify that a user can log in and that an ID token is stored in the browser.
 
+
+{/* visual-break:secure-authentication-cognito-react:1 */}
+![Cloud architecture checkpoint illustration for this section.](/assets/visuals/blog/secure-authentication-cognito-react-break-1.png)
+
 ## What this is
 
 **High level:** Amazon Cognito is a hosted identity service. It stores user accounts and issues JSON Web Tokens (JWTs) when users sign in.
@@ -244,7 +248,7 @@ Implement the login logic using the Amplify Auth library.
         <div style={{ padding: 24, fontFamily: "system-ui" }}>
           <h1>Cognito Verification</h1>
           <p>Status: <strong>{status}</strong></p>
-          
+
           <form onSubmit={handleSignIn} style={{ display: 'flex', flexDirection: 'column', gap: 10, maxWidth: 300 }}>
             <input 
               value={email} 
@@ -260,7 +264,7 @@ Implement the login logic using the Amplify Auth library.
             />
             <button type="submit">Sign in</button>
           </form>
-          
+
           <br />
           <button onClick={handleSignOut}>Sign out</button>
         </div>
@@ -315,6 +319,10 @@ To confirm this is a real authentication session:
 4.  **Deps:** `npm install aws-amplify`.
 5.  **Config:** `Amplify.configure` with `userPoolId` and `userPoolClientId`.
 6.  **Code:** `signIn({ username, password })`.
+
+
+{/* visual-break:secure-authentication-cognito-react:2 */}
+![Cloud operations checkpoint illustration for this section.](/assets/visuals/blog/secure-authentication-cognito-react-break-2.png)
 
 ## Next steps
 
