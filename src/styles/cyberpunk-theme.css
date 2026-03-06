@@ -1,6 +1,6 @@
 /**
  * Cyberpunk Theme - Unified CSS Variables
- * Dark aesthetic with neon accents (cyan #00ffff, magenta #ff00ff, electric blue)
+ * Dark aesthetic remapped to neutral grayscale accents
  */
 
 /* ============================================
@@ -9,44 +9,44 @@
 
 :root {
   /* Core Cyberpunk Colors */
-  --neon-cyan: #00ffff;
-  --neon-magenta: #ff00ff;
-  --neon-yellow: #ffff00;
-  --neon-green: #00ff9d;
-  --neon-purple: #b829dd;
-  --neon-blue: #00a8ff;
-  --neon-pink: #ff006e;
-  --neon-orange: #ff6b35;
+  --neon-cyan: #d4d4d4;
+  --neon-magenta: #bcbcbc;
+  --neon-yellow: #e5e5e5;
+  --neon-green: #cfcfcf;
+  --neon-purple: #a8a8a8;
+  --neon-blue: #c4c4c4;
+  --neon-pink: #b3b3b3;
+  --neon-orange: #c7c7c7;
   
   /* Dark Backgrounds */
-  --dark-900: #0a0a0f;
-  --dark-800: #0f0f1a;
-  --dark-700: #151520;
-  --dark-600: #1a1a2e;
-  --dark-500: #252540;
+  --dark-900: #000000;
+  --dark-800: #0a0a0a;
+  --dark-700: #111111;
+  --dark-600: #181818;
+  --dark-500: #262626;
   
   /* Text Colors */
-  --text-primary: #e0e0ff;
-  --text-secondary: #a0a0c0;
-  --text-muted: #606080;
-  --text-inverse: #0a0a0f;
+  --text-primary: #f5f5f5;
+  --text-secondary: #c7c7c7;
+  --text-muted: #8a8a8a;
+  --text-inverse: #000000;
   
   /* Glow Effects */
-  --glow-cyan: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.3), 0 0 30px rgba(0, 255, 255, 0.1);
-  --glow-magenta: 0 0 10px rgba(255, 0, 255, 0.5), 0 0 20px rgba(255, 0, 255, 0.3), 0 0 30px rgba(255, 0, 255, 0.1);
-  --glow-blue: 0 0 10px rgba(0, 168, 255, 0.5), 0 0 20px rgba(0, 168, 255, 0.3);
-  --glow-purple: 0 0 10px rgba(184, 41, 221, 0.5), 0 0 20px rgba(184, 41, 221, 0.3);
+  --glow-cyan: 0 0 10px rgba(212, 212, 212, 0.45), 0 0 20px rgba(212, 212, 212, 0.25), 0 0 30px rgba(212, 212, 212, 0.1);
+  --glow-magenta: 0 0 10px rgba(188, 188, 188, 0.4), 0 0 20px rgba(188, 188, 188, 0.24), 0 0 30px rgba(188, 188, 188, 0.1);
+  --glow-blue: 0 0 10px rgba(196, 196, 196, 0.4), 0 0 20px rgba(196, 196, 196, 0.2);
+  --glow-purple: 0 0 10px rgba(168, 168, 168, 0.4), 0 0 20px rgba(168, 168, 168, 0.2);
   
   /* Gradients */
   --gradient-cyber: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-blue) 50%, var(--neon-purple) 100%);
-  --gradient-hero: linear-gradient(135deg, rgba(0, 255, 255, 0.15) 0%, rgba(184, 41, 221, 0.1) 100%);
-  --gradient-section: linear-gradient(135deg, rgba(0, 168, 255, 0.12) 0%, rgba(255, 0, 255, 0.08) 100%);
+  --gradient-hero: linear-gradient(135deg, rgba(212, 212, 212, 0.13) 0%, rgba(163, 163, 163, 0.08) 100%);
+  --gradient-section: linear-gradient(135deg, rgba(196, 196, 196, 0.12) 0%, rgba(188, 188, 188, 0.08) 100%);
   --gradient-dark: linear-gradient(180deg, var(--dark-800) 0%, var(--dark-900) 100%);
   
   /* Scroll Layers */
-  --scroll-layer-1: rgba(0, 255, 255, 0.15);
-  --scroll-layer-2: rgba(255, 0, 255, 0.12);
-  --scroll-layer-3: rgba(0, 168, 255, 0.1);
+  --scroll-layer-1: rgba(212, 212, 212, 0.12);
+  --scroll-layer-2: rgba(188, 188, 188, 0.1);
+  --scroll-layer-3: rgba(163, 163, 163, 0.09);
 }
 
 /* ============================================
@@ -54,38 +54,38 @@
    ============================================ */
 
 :root {
-  /* Light mode - bright, readable theme */
-  --color-page-bg: #f8f9fc;
-  --color-surface: #ffffff;
-  --color-surface-alt: #f0f2f8;
-  --color-surface-muted: #e8ebf3;
-  --color-text: #1a1a2e;
-  --color-text-subtle: #4a4a6a;
-  --color-text-inverse: #ffffff;
-  --color-border: #d0d4e0;
-  --color-border-strong: #b8bcd0;
+  /* Light mode - soft neutral surfaces */
+  --color-page-bg: #f3efe8;
+  --color-surface: #fbf9f4;
+  --color-surface-alt: #efe9e0;
+  --color-surface-muted: #e6dfd4;
+  --color-text: #1f1b17;
+  --color-text-subtle: #5b554e;
+  --color-text-inverse: #faf7f2;
+  --color-border: #d8d0c4;
+  --color-border-strong: #c8bfb3;
   
-  /* Accent Colors - Cyberpunk Neon (visible on light) */
-  --color-accent: #0088cc;
-  --color-accent-secondary: #cc00cc;
-  --color-accent-hover: #006699;
-  --color-accent-soft: rgba(0, 136, 204, 0.12);
+  /* Accent Colors - Neutral grayscale */
+  --color-accent: #6f675f;
+  --color-accent-secondary: #837970;
+  --color-accent-hover: #4f4841;
+  --color-accent-soft: rgba(111, 103, 95, 0.12);
   
   /* Links */
-  --color-link: #0066cc;
-  --color-focus: #cc00cc;
-  --color-muted: #8a8aaa;
+  --color-link: #4f4841;
+  --color-focus: #7e746a;
+  --color-muted: #b9b0a4;
   
   /* UI Elements */
-  --color-highlight-line-bg: rgba(0, 136, 204, 0.1);
-  --color-badge-bg: rgba(0, 136, 204, 0.12);
-  --color-badge-text: #1a1a2e;
+  --color-highlight-line-bg: rgba(111, 103, 95, 0.1);
+  --color-badge-bg: rgba(111, 103, 95, 0.12);
+  --color-badge-text: #2b2621;
   --color-card-shadow: rgba(0, 0, 0, 0.08);
-  --color-toc-bg: #f0f2f8;
-  --color-code-bg: #f4f6fa;
-  --color-code-text: #2d2d4a;
-  --color-nav-bg: rgba(255, 255, 255, 0.95);
-  --color-shadow: rgba(0, 0, 0, 0.1);
+  --color-toc-bg: #f0ebe3;
+  --color-code-bg: #ece5db;
+  --color-code-text: #2a241e;
+  --color-nav-bg: rgba(251, 249, 244, 0.94);
+  --color-shadow: rgba(41, 34, 28, 0.08);
   
   /* Aliases */
   --color-primary: var(--color-accent);
@@ -140,14 +140,14 @@
   --heading-letter-relaxed: -0.005em;
   
   /* Chip Colors */
-  --chip-bg-1: var(--dark-700);
-  --chip-bg-2: var(--dark-600);
-  --chip-bg-3: var(--dark-500);
-  --chip-bg-4: rgba(0, 255, 255, 0.1);
-  --chip-bg-5: rgba(255, 0, 255, 0.1);
-  --chip-text: var(--text-primary);
+  --chip-bg-1: #f1ece4;
+  --chip-bg-2: #e4ddd2;
+  --chip-bg-3: #d7cec2;
+  --chip-bg-4: #c9c0b3;
+  --chip-bg-5: #b8aea1;
+  --chip-text: #2b2621;
   
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 /* ============================================
@@ -167,32 +167,32 @@
   --color-accent: var(--neon-cyan);
   --color-accent-secondary: var(--neon-magenta);
   --color-accent-hover: var(--neon-blue);
-  --color-accent-soft: rgba(0, 255, 255, 0.15);
+  --color-accent-soft: rgba(212, 212, 212, 0.14);
   --color-link: var(--neon-cyan);
   --color-focus: var(--neon-magenta);
   --color-muted: var(--dark-600);
-  --color-highlight-line-bg: rgba(0, 255, 255, 0.12);
-  --color-badge-bg: rgba(0, 255, 255, 0.15);
+  --color-highlight-line-bg: rgba(212, 212, 212, 0.12);
+  --color-badge-bg: rgba(212, 212, 212, 0.16);
   --color-badge-text: var(--text-primary);
   --color-card-shadow: rgba(0, 0, 0, 0.5);
   --color-toc-bg: var(--dark-800);
   --color-code-bg: var(--dark-700);
   --color-code-text: var(--neon-green);
-  --color-nav-bg: rgba(10, 10, 15, 0.95);
+  --color-nav-bg: rgba(0, 0, 0, 0.95);
   --color-shadow: rgba(0, 0, 0, 0.5);
-  --scroll-layer-1: rgba(0, 255, 255, 0.15);
-  --scroll-layer-2: rgba(255, 0, 255, 0.12);
-  --scroll-layer-3: rgba(0, 168, 255, 0.1);
+  --scroll-layer-1: rgba(212, 212, 212, 0.12);
+  --scroll-layer-2: rgba(188, 188, 188, 0.1);
+  --scroll-layer-3: rgba(163, 163, 163, 0.09);
   --chip-bg-1: var(--dark-700);
   --chip-bg-2: var(--dark-600);
   --chip-bg-3: var(--dark-500);
-  --chip-bg-4: rgba(0, 255, 255, 0.1);
-  --chip-bg-5: rgba(255, 0, 255, 0.1);
+  --chip-bg-4: rgba(212, 212, 212, 0.12);
+  --chip-bg-5: rgba(188, 188, 188, 0.12);
   --chip-text: var(--text-primary);
   --color-secondary: var(--color-accent-secondary);
   --color-heading: var(--color-text);
-  --gradient-hero: linear-gradient(135deg, rgba(0, 255, 255, 0.15) 0%, rgba(184, 41, 221, 0.1) 100%);
-  --gradient-section: linear-gradient(135deg, rgba(0, 168, 255, 0.12) 0%, rgba(255, 0, 255, 0.08) 100%);
+  --gradient-hero: linear-gradient(135deg, rgba(212, 212, 212, 0.13) 0%, rgba(163, 163, 163, 0.08) 100%);
+  --gradient-section: linear-gradient(135deg, rgba(196, 196, 196, 0.12) 0%, rgba(188, 188, 188, 0.08) 100%);
   color-scheme: dark;
 }
 
@@ -203,28 +203,28 @@
 /* Neon Text Effects */
 .text-neon-cyan {
   color: var(--neon-cyan);
-  text-shadow: 0 0 5px rgba(0, 255, 255, 0.5), 0 0 10px rgba(0, 255, 255, 0.3);
+  text-shadow: 0 0 5px rgba(212, 212, 212, 0.45), 0 0 10px rgba(212, 212, 212, 0.25);
 }
 
 .text-neon-magenta {
   color: var(--neon-magenta);
-  text-shadow: 0 0 5px rgba(255, 0, 255, 0.5), 0 0 10px rgba(255, 0, 255, 0.3);
+  text-shadow: 0 0 5px rgba(188, 188, 188, 0.45), 0 0 10px rgba(188, 188, 188, 0.25);
 }
 
 .text-neon-blue {
   color: var(--neon-blue);
-  text-shadow: 0 0 5px rgba(0, 168, 255, 0.5), 0 0 10px rgba(0, 168, 255, 0.3);
+  text-shadow: 0 0 5px rgba(196, 196, 196, 0.45), 0 0 10px rgba(196, 196, 196, 0.25);
 }
 
 /* Neon Borders */
 .border-neon-cyan {
   border-color: var(--neon-cyan);
-  box-shadow: 0 0 5px rgba(0, 255, 255, 0.3), inset 0 0 5px rgba(0, 255, 255, 0.1);
+  box-shadow: 0 0 5px rgba(212, 212, 212, 0.3), inset 0 0 5px rgba(212, 212, 212, 0.12);
 }
 
 .border-neon-magenta {
   border-color: var(--neon-magenta);
-  box-shadow: 0 0 5px rgba(255, 0, 255, 0.3), inset 0 0 5px rgba(255, 0, 255, 0.1);
+  box-shadow: 0 0 5px rgba(188, 188, 188, 0.3), inset 0 0 5px rgba(188, 188, 188, 0.12);
 }
 
 /* Glow Effects */
@@ -268,7 +268,7 @@
 
 .cyber-card:hover {
   border-color: var(--neon-cyan);
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2), 0 4px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 20px rgba(212, 212, 212, 0.18), 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 /* Cyberpunk Button */
@@ -293,12 +293,12 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(212, 212, 212, 0.2), transparent);
   transition: left 0.5s ease;
 }
 
 .cyber-button:hover {
-  background: rgba(0, 255, 255, 0.1);
+  background: rgba(212, 212, 212, 0.1);
   box-shadow: var(--glow-cyan);
 }
 
@@ -328,7 +328,7 @@
 
 .cyber-link:hover {
   color: var(--neon-blue);
-  text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+  text-shadow: 0 0 8px rgba(212, 212, 212, 0.45);
 }
 
 .cyber-link:hover::after {
@@ -357,8 +357,8 @@
 /* Grid Background */
 .grid-bg {
   background-image: 
-    linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(212, 212, 212, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212, 212, 212, 0.03) 1px, transparent 1px);
   background-size: 50px 50px;
 }
 
@@ -366,11 +366,11 @@
 @keyframes border-glow {
   0%, 100% {
     border-color: var(--neon-cyan);
-    box-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+    box-shadow: 0 0 5px rgba(212, 212, 212, 0.5);
   }
   50% {
     border-color: var(--neon-magenta);
-    box-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
+    box-shadow: 0 0 5px rgba(188, 188, 188, 0.5);
   }
 }
 
@@ -432,7 +432,7 @@
 
 /* Selection */
 ::selection {
-  background: rgba(0, 255, 255, 0.3);
+  background: rgba(212, 212, 212, 0.3);
   color: var(--text-primary);
 }
 

@@ -16,8 +16,13 @@ const ColorModeToggle = () => {
 
   React.useEffect(() => {
     if (!isMounted) return;
-    const mode = colorMode ?? "light";
+    if (!colorMode) {
+      setColorMode("dark");
+      return;
+    }
+    const mode = colorMode;
     document.body.setAttribute("data-theme", mode);
+    document.documentElement.setAttribute("data-theme", mode);
   }, [colorMode, isMounted]);
 
   if (!isMounted) {
@@ -28,7 +33,7 @@ const ColorModeToggle = () => {
     );
   }
 
-  const currentMode = colorMode ?? "light";
+  const currentMode = colorMode ?? "dark";
   const nextMode = currentMode === "dark" ? "light" : "dark";
   const label = labels[currentMode] ?? "Toggle color mode";
 

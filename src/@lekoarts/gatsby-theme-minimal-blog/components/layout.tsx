@@ -90,7 +90,7 @@ const Layout = ({ children, className = `` }: LayoutProps) => {
             color: "var(--color-text)",
           },
           "::selection": {
-            backgroundColor: "rgba(0, 255, 255, 0.3)",
+            backgroundColor: "rgba(255, 255, 255, 0.25)",
             color: "var(--color-text)",
           },
         }}
@@ -100,7 +100,7 @@ const Layout = ({ children, className = `` }: LayoutProps) => {
         <div className="cyber-grid-bg" aria-hidden="true" />
         <div className="scroll-color-layer" aria-hidden="true" />
         
-        {/* Animated SVG Curves with Neon Colors */}
+        {/* Animated SVG Curves */}
         <svg
           className="global-curves"
           viewBox="0 0 1440 900"
@@ -109,24 +109,24 @@ const Layout = ({ children, className = `` }: LayoutProps) => {
           focusable="false"
         >
           <defs>
-            <linearGradient id="neonCyan" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#00ffff" stopOpacity="0.8" />
-              <stop offset="100%" stopColor="#00a8ff" stopOpacity="0.4" />
+            <linearGradient id="curveGrayPrimary" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#E5E5E5" stopOpacity="0.62" />
+              <stop offset="100%" stopColor="#A3A3A3" stopOpacity="0.26" />
             </linearGradient>
-            <linearGradient id="neonMagenta" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#ff00ff" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#b829dd" stopOpacity="0.3" />
+            <linearGradient id="curveGraySecondary" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#D4D4D4" stopOpacity="0.48" />
+              <stop offset="100%" stopColor="#8A8A8A" stopOpacity="0.22" />
             </linearGradient>
           </defs>
           <path
             className="global-curves__path"
             d="M-50,180 C220,80 420,260 690,180 C980,90 1170,260 1490,150"
-            stroke="url(#neonCyan)"
+            stroke="url(#curveGrayPrimary)"
           />
           <path
             className="global-curves__path global-curves__path--alt"
             d="M-80,520 C180,420 460,600 740,520 C980,450 1180,620 1500,520"
-            stroke="url(#neonMagenta)"
+            stroke="url(#curveGraySecondary)"
           />
         </svg>
         

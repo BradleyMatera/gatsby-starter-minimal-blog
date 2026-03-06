@@ -398,5 +398,5 @@
 .cyber-nav__actions [role="switch"]:hover {
   border-color: var(--neon-cyan);
   color: var(--neon-cyan);
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+  box-shadow: 0 0 15px rgba(212, 212, 212, 0.22);
 }
