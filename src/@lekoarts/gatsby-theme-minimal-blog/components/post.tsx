@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx, Heading } from "theme-ui";
+import { Link } from "gatsby";
 import type { HeadFC, PageProps } from "gatsby";
 import * as React from "react";
 import Layout from "./layout";
@@ -586,6 +587,19 @@ const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({ data,
         </div>
         <article className="surface-card" itemScope itemType="http://schema.org/Article">
           <header sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+            <nav className="breadcrumbs" aria-label="Breadcrumb">
+              <ol className="breadcrumbs__list">
+                <li className="breadcrumbs__item">
+                  <Link to="/">Home</Link>
+                </li>
+                <li className="breadcrumbs__item">
+                  <Link to="/blog/">Blog</Link>
+                </li>
+                <li className="breadcrumbs__item" aria-current="page">
+                  {post.title}
+                </li>
+              </ol>
+            </nav>
             <span className="eyebrow">Blog post</span>
             <Heading as="h1" className="section-title" sx={{ mb: 0 }} itemProp="headline">
               {post.title}
@@ -683,6 +697,12 @@ export const Head: HeadFC<MBPostProps> = ({ data }) => {
   if (!post) {
     return <Seo title="Post not found" description="This post could not be loaded." />;
   }
+  const publishedTime = (() => {
+    const parsed = new Date(post.date);
+    return Number.isNaN(parsed.getTime()) ? undefined : parsed.toISOString();
+  })();
+  const articleTags = post.tags?.map((tag) => tag.name).filter((tag): tag is string => Boolean(tag));
+
   return (
     <Seo
       title={post.title}
@@ -690,6 +710,16 @@ export const Head: HeadFC<MBPostProps> = ({ data }) => {
       image={post.banner ? post.banner?.childImageSharp?.resize?.src : undefined}
       pathname={post.slug}
       canonicalUrl={post.canonicalUrl}
+      ogType="article"
+      article={{
+        publishedTime,
+        tags: articleTags,
+      }}
+      breadcrumbs={[
+        { name: "Home", path: "/" },
+        { name: "Blog", path: "/blog/" },
+        { name: post.title, path: post.slug },
+      ]}
     />
   );
 };

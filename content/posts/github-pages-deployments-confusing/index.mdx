@@ -22,7 +22,6 @@ By the end, three things will be true. Your project will build into a static fol
 {/* visual-break:github-pages-deployments-confusing:1 */}
 ![Debugging process checkpoint illustration for this section.](/assets/visuals/blog/github-pages-deployments-confusing-break-1.png)
 
-
 At a high level, GitHub Pages is just a static file host wired directly into your repository. You push a folder of HTML, CSS, and JavaScript to a specific branch, and GitHub serves it at a predictable URL. No servers. No containers. No runtime. Just files on disk served over HTTP.
 
 At a low level, GitHub Pages does exactly three things. It watches a branch. It copies the files from that branch to its hosting layer. It assigns your repo a URL. Everything else people get stuck on is configuration around paths and build output.
@@ -134,7 +133,6 @@ Open the URL GitHub provides. The page should load with styling and JavaScript w
 ![Live site online](https://media.giphy.com/media/3o7btPCcdNniyf0ArS/giphy.gif)
 
 If you see a blank page or console errors, go back to Step 1. It is almost always the base path.
-
 
 ## Deploying a plain HTML page with GitHub Actions (no gh-pages branch)
 
@@ -324,10 +322,34 @@ GitHub Pages itself is simple. The confusion comes from modern front-end tools d
 
 You are not configuring a server. You are not managing infrastructure. You are just building files and telling GitHub which branch to serve. That’s all that’s happening.
 
-
 {/* visual-break:github-pages-deployments-confusing:2 */}
 ![Troubleshooting checkpoint illustration for this section.](/assets/visuals/blog/github-pages-deployments-confusing-break-2.png)
 
 ## Closing
 
 If you set the base path, build locally, push the build folder to `gh-pages`, and enable Pages in repo settings, your deployment will work. Every time. If it doesn’t, one of those four steps is wrong, not GitHub Pages itself.
+
+{/* auto-enhancement:voice-start */}
+
+## Personal Build Reflection
+
+This guide reflects how I actually execute work when the goal is frontend delivery quality, accessibility, and clear user-facing behavior.
+
+I prefer explicit checklists over vague advice because that is what keeps delivery stable when timelines are tight.
+
+Use the steps as a baseline, then annotate your own environment differences as you go.
+
+{/* auto-enhancement:voice-end */}
+
+{/* auto-enhancement:links-start */}
+
+## Continue Reading on This Site
+
+If you want connected breakdowns, these posts are the best next stops:
+
+- [GitHub Actions Basics: One CI Check You Can Trust](/github-actions-aws/)
+- [Service Worker Held My Site Hostage: How I Removed It](/service-worker-held-site-hostage/)
+- [Interactive Portfolio Basics: Keep It Fun and Still Clear](/interactive-portfolios-recruiter-expectations/)
+
+{/* auto-enhancement:links-end */}
+

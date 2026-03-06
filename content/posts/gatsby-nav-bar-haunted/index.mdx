@@ -17,7 +17,6 @@ A dropdown is not a DOM thing. In React it is almost always a boolean. If that b
 
 The second half of the problem is visibility changes. If your nav collapses on mobile, or hides on scroll, or mounts and unmounts during route transitions, your dropdown state can survive in the wrong moment. That’s where it starts looking haunted. The UI is doing exactly what you told it to do, you just forgot to tell it when to stop.
 
-
 {/* visual-break:gatsby-nav-bar-haunted:1 */}
 ![Debugging process checkpoint illustration for this section.](/assets/visuals/blog/gatsby-nav-bar-haunted-break-1.png)
 
@@ -144,10 +143,34 @@ I’m not including those changes here because the post is about the stuck dropd
 
 - https://react.dev/reference/react/useEffect
 
-
 {/* visual-break:gatsby-nav-bar-haunted:2 */}
 ![Troubleshooting checkpoint illustration for this section.](/assets/visuals/blog/gatsby-nav-bar-haunted-break-2.png)
 
 ## Closing
 
 Fix the close behavior first. Fancy styling can wait. A dropdown that can’t close is not a visual issue, it’s a state issue, and this is the smallest reliable set of transitions that keeps it sane.
+
+{/* auto-enhancement:voice-start */}
+
+## Personal Build Reflection
+
+I wrote this from my own build notes while focusing on frontend delivery quality, accessibility, and clear user-facing behavior.
+
+I keep this kind of post operational on purpose so another person, or future me, can rerun it without guessing where decisions came from.
+
+If you adapt this flow, track what you changed and why at each step so your final setup stays explainable.
+
+{/* auto-enhancement:voice-end */}
+
+{/* auto-enhancement:links-start */}
+
+## Continue Reading on This Site
+
+If you want connected breakdowns, these posts are the best next stops:
+
+- [Service Worker Held My Site Hostage: How I Removed It](/service-worker-held-site-hostage/)
+- [Cognito Authentication With React: A Small, Verifiable Setup](/secure-authentication-cognito-react/)
+- [WebGPU Demo Honesty Audit: Make the Write Up Match the Repo](/making-triangle-webgpu-demo-match-reality/)
+
+{/* auto-enhancement:links-end */}
+

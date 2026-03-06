@@ -19,7 +19,6 @@ Then I hit the live URL with `curl` and it returned the correct new markup. But 
 
 And that something was a service worker I did not even know existed.
 
-
 {/* visual-break:service-worker-held-site-hostage:1 */}
 ![Security flow checkpoint illustration for this section.](/assets/visuals/blog/service-worker-held-site-hostage-break-1.png)
 
@@ -32,7 +31,6 @@ A service worker sits between the browser and the network. It can intercept requ
 The browser trusted the service worker more than the server.
 
 This is the exact kind of bug that does not feel logical until you understand how aggressive service worker caching is.
-
 
 {/* visual-break:service-worker-held-site-hostage:2 */}
 ![Verification and access checkpoint illustration for this section.](/assets/visuals/blog/service-worker-held-site-hostage-break-2.png)
@@ -119,3 +117,28 @@ Caching bugs like this are sneaky and they waste time, but once you see how they
 If your website refuses to update even though your deploy is clean, it might be a stale service worker. You can confirm this by comparing the server output with curl and checking the Application tab in DevTools. Unregistering the worker fixes the issue instantly.
 
 This bug taught me more about how the browser actually works than almost anything else I have built so far.
+
+{/* auto-enhancement:voice-start */}
+
+## Personal Build Reflection
+
+I wrote this from my own build notes while focusing on frontend delivery quality, accessibility, and clear user-facing behavior.
+
+I keep this kind of post operational on purpose so another person, or future me, can rerun it without guessing where decisions came from.
+
+If you adapt this flow, track what you changed and why at each step so your final setup stays explainable.
+
+{/* auto-enhancement:voice-end */}
+
+{/* auto-enhancement:links-start */}
+
+## Continue Reading on This Site
+
+If you want connected breakdowns, these posts are the best next stops:
+
+- [Gatsby Nav Bar Haunted: Fixing a Stuck Dropdown](/gatsby-nav-bar-haunted/)
+- [Interactive Portfolio Basics: Keep It Fun and Still Clear](/interactive-portfolios-recruiter-expectations/)
+- [GitHub Pages Deployments That Stop Being Confusing](/github-pages-deployments-confusing/)
+
+{/* auto-enhancement:links-end */}
+

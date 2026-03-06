@@ -28,7 +28,6 @@ If you only decode a token, you can see the header and payload. That is useful f
 
 If you verify a token, the library recomputes the signature using the secret/key you provide and checks that it matches the signature in the token. That is the moment the token becomes trustworthy.
 
-
 {/* visual-break:JWT's:1 */}
 ![Execution process checkpoint illustration for this section.](/assets/visuals/blog/JWT's-break-1.png)
 
@@ -50,7 +49,6 @@ If you don’t see those states happen, you didn’t actually learn JWT behavior
 ## What you need before starting
 
 You need Node 18+ and a terminal. No frameworks. No web server. No database. This is intentionally small so you can see what is happening.
-
 
 {/* visual-break:JWT's:2 */}
 ![Delivery workflow checkpoint illustration for this section.](/assets/visuals/blog/JWT's-break-2.png)
@@ -325,3 +323,28 @@ Decode answers: “What does this token claim?”
 Verify answers: “Was this claim set issued by a trusted signer and still valid?”
 
 Auth systems must always call verify before trusting anything from a token.
+
+{/* auto-enhancement:voice-start */}
+
+## Personal Build Reflection
+
+I wrote this from my own build notes while focusing on security validation and reducing false confidence from partial checks.
+
+I keep this kind of post operational on purpose so another person, or future me, can rerun it without guessing where decisions came from.
+
+If you adapt this flow, track what you changed and why at each step so your final setup stays explainable.
+
+{/* auto-enhancement:voice-end */}
+
+{/* auto-enhancement:links-start */}
+
+## Continue Reading on This Site
+
+If you want connected breakdowns, these posts are the best next stops:
+
+- [Containerization and Orchestration: A Small Lab You Can Run](/containerization-and-orchestration/)
+- [OBJ Parser Lab: Count Vertices and Faces in Zig](/obj-parser/)
+- [WebGPU Triangle Demo: Start, Fix, and Keep It Honest](/webgpu-getting-started/)
+
+{/* auto-enhancement:links-end */}
+

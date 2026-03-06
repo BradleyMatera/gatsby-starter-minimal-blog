@@ -88,8 +88,8 @@ const brandTheme = merge(tailwind, {
     bold: 700,
   },
   lineHeights: {
-    body: 1.7,
-    heading: 1.25,
+    body: 1.6,
+    heading: 1.3,
   },
   space: [0, 4, 8, 12, 16, 20, 24, 32, 40, 48, 56, 64, 72],
   radii: {
@@ -137,17 +137,17 @@ const brandTheme = merge(tailwind, {
       },
     },
     p: {
-      fontSize: [2, 2, 3],
+      fontSize: [1, 2, 2],
       color: `subtle`,
       lineHeight: `body`,
-      letterSpacing: `-0.01em`,
+      letterSpacing: `-0.008em`,
       mt: 0,
       mb: 4,
     },
     h1: {
       fontFamily: `heading`,
       color: `heading`,
-      fontSize: [5, 6, 6, 7],
+      fontSize: [4, 5, 5, 6],
       fontWeight: 700,
       letterSpacing: `-0.02em`,
       mt: 5,
@@ -156,7 +156,7 @@ const brandTheme = merge(tailwind, {
     h2: {
       fontFamily: `heading`,
       color: `heading`,
-      fontSize: [4, 5, 5, 6],
+      fontSize: [3, 4, 4, 5],
       fontWeight: 600,
       letterSpacing: `-0.01em`,
       mt: 5,
@@ -165,7 +165,7 @@ const brandTheme = merge(tailwind, {
     h3: {
       fontFamily: `heading`,
       color: `heading`,
-      fontSize: [3, 4, 4, 5],
+      fontSize: [2, 3, 3, 4],
       fontWeight: 600,
       letterSpacing: `-0.01em`,
       mt: 5,
@@ -174,7 +174,7 @@ const brandTheme = merge(tailwind, {
     h4: {
       fontFamily: `heading`,
       color: `heading`,
-      fontSize: [2, 3, 3, 4],
+      fontSize: [2, 2, 2, 3],
       fontWeight: 600,
       mt: 4,
       mb: 3,
@@ -218,7 +218,7 @@ const brandTheme = merge(tailwind, {
       color: `subtle`,
       li: {
         mb: 3,
-        fontSize: [2, 2, 3],
+        fontSize: [1, 2, 2],
         lineHeight: `body`,
       },
     },
@@ -227,7 +227,7 @@ const brandTheme = merge(tailwind, {
       color: `subtle`,
       li: {
         mb: 3,
-        fontSize: [2, 2, 3],
+        fontSize: [1, 2, 2],
         lineHeight: `body`,
       },
     },

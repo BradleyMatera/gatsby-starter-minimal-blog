@@ -23,7 +23,6 @@ By the end of this guide, you will:
 - Configure a React application to communicate with AWS.
 - Verify that a user can log in and that an ID token is stored in the browser.
 
-
 {/* visual-break:secure-authentication-cognito-react:1 */}
 ![Cloud architecture checkpoint illustration for this section.](/assets/visuals/blog/secure-authentication-cognito-react-break-1.png)
 
@@ -320,7 +319,6 @@ To confirm this is a real authentication session:
 5.  **Config:** `Amplify.configure` with `userPoolId` and `userPoolClientId`.
 6.  **Code:** `signIn({ username, password })`.
 
-
 {/* visual-break:secure-authentication-cognito-react:2 */}
 ![Cloud operations checkpoint illustration for this section.](/assets/visuals/blog/secure-authentication-cognito-react-break-2.png)
 
@@ -337,3 +335,28 @@ This setup is the foundation. To make it production ready:
 
 - [Amazon Cognito Documentation](https://docs.aws.amazon.com/cognito/)
 - [Amplify Auth Library (Gen 2)](https://docs.amplify.aws/javascript/build-a-backend/auth/)
+
+{/* auto-enhancement:voice-start */}
+
+## Personal Build Reflection
+
+I wrote this from my own build notes while focusing on cloud reliability, cost control, and repeatable troubleshooting.
+
+I keep this kind of post operational on purpose so another person, or future me, can rerun it without guessing where decisions came from.
+
+If you adapt this flow, track what you changed and why at each step so your final setup stays explainable.
+
+{/* auto-enhancement:voice-end */}
+
+{/* auto-enhancement:links-start */}
+
+## Continue Reading on This Site
+
+If you want connected breakdowns, these posts are the best next stops:
+
+- [AWS Free Tier: What Actually Costs Money](/aws-free-tier-honest-guide/)
+- [AWS Cloud Support Internship: What I Actually Practiced](/aws-cloud-support-internship-mastering-troubleshooting-and-architecture/)
+- [Gatsby Nav Bar Haunted: Fixing a Stuck Dropdown](/gatsby-nav-bar-haunted/)
+
+{/* auto-enhancement:links-end */}
+
