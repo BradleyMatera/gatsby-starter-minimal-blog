@@ -143,6 +143,7 @@
   margin-bottom: 0;
   margin-right: 0;
   padding: 0;
+  width: auto;
   font-size: 1.5rem;
   flex: 0 0 auto;
   color: var(--color-accent, #e05a5a);
@@ -152,6 +153,7 @@
   transition: color 0.2s;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
 }
 .vertical-nav--top .vertical-nav__list {
   display: flex;
@@ -168,6 +170,7 @@
   align-items: center;
   margin: 0;
   padding: 0;
+  width: auto;
 }
 .vertical-nav__actions {
   display: inline-flex;
