@@ -154,9 +154,6 @@ const Seo = ({
       <meta name="twitter:creator" content={author} />
       <meta name="twitter:site" content={author} />
       <meta name="robots" content="index,follow" />
-      <link rel="icon" type="image/png" sizes="32x32" href={withPrefix(`/favicon-32x32-32x32.png`)} />
-      <link rel="icon" type="image/png" sizes="16x16" href={withPrefix(`/favicon-16x16-16x16.png`)} />
-      <link rel="apple-touch-icon" sizes="180x180" href={withPrefix(`/apple-touch-icon-180x180.png`)} />
       <link rel="alternate" type="application/rss+xml" title={`${siteTitle} RSS Feed`} href={withPrefix(`/rss.xml`)} />
       <link rel="canonical" href={canonical} />
       {structuredDataNodes.map((node, index) => (

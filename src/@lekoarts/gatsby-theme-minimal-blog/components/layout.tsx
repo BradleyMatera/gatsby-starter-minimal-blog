@@ -3,6 +3,7 @@ import { jsx } from "theme-ui";
 import * as React from "react";
 import { Global } from "@emotion/react";
 import { MDXProvider } from "@mdx-js/react";
+import type { MDXComponents } from "mdx/types";
 import MdxComponents from "./mdx-components";
 import Header from "./header";
 import Footer from "./footer";
@@ -79,7 +80,7 @@ const Layout = ({ children, className = `` }: LayoutProps) => {
   };
 
   return (
-    <MDXProvider components={MdxComponents}>
+    <MDXProvider components={MdxComponents as MDXComponents}>
       <Global
         styles={{
           "*": { boxSizing: "border-box" },

@@ -4,11 +4,22 @@ import { Link as GatsbyLink } from "gatsby";
 type LinkProps = {
   href?: string;
   to?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   activeClassName?: string;
+  external?: boolean;
 } & React.AnchorHTMLAttributes<HTMLAnchorElement>;
 
-const Link = ({ href, to, children, target, rel, className, ...rest }: LinkProps) => {
+const Link = ({
+  href,
+  to,
+  children,
+  target,
+  rel,
+  className,
+  activeClassName: _activeClassName,
+  external: _external,
+  ...rest
+}: LinkProps) => {
   const finalHref = href ?? to ?? "#";
   const isHash = finalHref.startsWith("#");
   const isInternal = isHash || /^\/(?!\/)/.test(finalHref);

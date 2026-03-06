@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Link } from "gatsby";
+import type { IdentityUser, IdentityWidget } from "netlify-identity-widget";
 import Layout from "../@lekoarts/gatsby-theme-minimal-blog/components/layout";
 import "../styles/store.css";
 
@@ -26,20 +27,6 @@ type DownloadItem = {
   quantity: number;
   download_url: string;
   expires_at: number;
-};
-
-type IdentityUser = {
-  email?: string;
-  jwt: () => Promise<string>;
-};
-
-type IdentityWidget = {
-  init: () => void;
-  open: (type?: "login" | "signup") => void;
-  close: () => void;
-  currentUser: () => IdentityUser | null;
-  on: (event: "login" | "logout", handler: (user?: IdentityUser) => void) => void;
-  off: (event: "login" | "logout", handler: (user?: IdentityUser) => void) => void;
 };
 
 const getFunctionsBase = () => {
@@ -93,7 +80,7 @@ const PurchasesPage = () => {
 
   React.useEffect(() => {
     if (typeof window === "undefined") return;
-    let widget;
+    let widget: IdentityWidget | null = null;
     let mounted = true;
 
     const initIdentity = async () => {
@@ -118,7 +105,7 @@ const PurchasesPage = () => {
 
       const handleLogin = (loggedInUser?: IdentityUser) => {
         setUser(loggedInUser || null);
-        widget.close();
+        widget?.close();
       };
 
       const handleLogout = () => {
@@ -129,8 +116,8 @@ const PurchasesPage = () => {
       widget.on("logout", handleLogout);
 
       return () => {
-        widget.off("login", handleLogin);
-        widget.off("logout", handleLogout);
+        widget?.off("login", handleLogin);
+        widget?.off("logout", handleLogout);
       };
     };
 

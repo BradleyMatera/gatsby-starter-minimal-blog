@@ -30,7 +30,7 @@ const HeroBanner = ({ title, subtitle, ctaText, ctaLink }: HeroBannerProps) => (
           height="1500"
           loading="eager"
           decoding="async"
-          fetchpriority="high"
+          {...({ fetchpriority: "high" } as React.ImgHTMLAttributes<HTMLImageElement>)}
         />
       </picture>
     </div>

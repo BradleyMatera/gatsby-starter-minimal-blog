@@ -37,6 +37,10 @@
   gap: 1.5rem;
 }
 
+.store-grid--spaced {
+  margin-top: 1.5rem;
+}
+
 .store-sections {
   display: grid;
   gap: 2.5rem;
@@ -432,6 +436,10 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+}
+
+.store-pill-group--tight {
+  margin-top: 0.35rem;
 }
 
 .store-asin-row {

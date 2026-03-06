@@ -28,8 +28,8 @@ export function useScrollReveal(delay = 0, options?: ScrollRevealOptions) {
 
     const element = ref.current;
     if (!element) {
-      const timeout = window.setTimeout(() => setRevealed(true), 0);
-      return () => window.clearTimeout(timeout);
+      const timeout = globalThis.setTimeout(() => setRevealed(true), 0);
+      return () => globalThis.clearTimeout(timeout);
     }
 
     const revealNow = () => setRevealed(true);
@@ -37,25 +37,25 @@ export function useScrollReveal(delay = 0, options?: ScrollRevealOptions) {
     const elementCurrentlyVisible = isElementInViewport(element);
     if (elementCurrentlyVisible) {
       if (delay > 0) {
-        const immediateTimeout = window.setTimeout(revealNow, delay);
-        return () => window.clearTimeout(immediateTimeout);
+        const immediateTimeout = globalThis.setTimeout(revealNow, delay);
+        return () => globalThis.clearTimeout(immediateTimeout);
       }
       revealNow();
       return undefined;
     }
 
     if (!("IntersectionObserver" in window)) {
-      const fallback = window.setTimeout(revealNow, delay);
-      return () => window.clearTimeout(fallback);
+      const fallback = globalThis.setTimeout(revealNow, delay);
+      return () => globalThis.clearTimeout(fallback);
     }
 
-    let timeoutId: number | null = null;
-    let failSafeId: number | null = null;
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+    let failSafeId: ReturnType<typeof setTimeout> | null = null;
 
     const observer = new window.IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          timeoutId = window.setTimeout(() => {
+          timeoutId = globalThis.setTimeout(() => {
             revealNow();
             observer.unobserve(entry.target);
           }, delay);
@@ -67,7 +67,7 @@ export function useScrollReveal(delay = 0, options?: ScrollRevealOptions) {
     observer.observe(element);
 
     if (failSafeDelay >= 0) {
-      failSafeId = window.setTimeout(() => {
+      failSafeId = globalThis.setTimeout(() => {
         revealNow();
         observer.disconnect();
       }, failSafeDelay + Math.max(delay, 0));
@@ -75,10 +75,10 @@ export function useScrollReveal(delay = 0, options?: ScrollRevealOptions) {
 
     return () => {
       if (timeoutId !== null) {
-        window.clearTimeout(timeoutId);
+        globalThis.clearTimeout(timeoutId);
       }
       if (failSafeId !== null) {
-        window.clearTimeout(failSafeId);
+        globalThis.clearTimeout(failSafeId);
       }
       observer.disconnect();
     };

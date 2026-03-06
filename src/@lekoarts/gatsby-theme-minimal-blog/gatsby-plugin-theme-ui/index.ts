@@ -1,20 +1,17 @@
-import { merge, Theme, ThemeUIStyleObject } from "theme-ui";
+import { merge, type ThemeUIStyleObject } from "theme-ui";
 import tailwind from "@theme-ui/preset-tailwind";
 
-declare module "theme-ui" {
-  // allow custom theme keys without TS complaints
-  interface Theme {
-    cards?: Record<string, ThemeUIStyleObject>;
-    layout?: ThemeUIStyleObject & {
-      container?: ThemeUIStyleObject;
-      content?: ThemeUIStyleObject;
-    };
-    gradients?: Record<string, string>;
-    badges?: Record<string, ThemeUIStyleObject>;
-    copyButton?: ThemeUIStyleObject;
-    dividers?: Record<string, ThemeUIStyleObject>;
-  }
-}
+type ExtendedTheme = import("theme-ui").Theme & {
+  cards?: Record<string, ThemeUIStyleObject>;
+  layout?: ThemeUIStyleObject & {
+    container?: ThemeUIStyleObject;
+    content?: ThemeUIStyleObject;
+  };
+  gradients?: Record<string, string>;
+  badges?: Record<string, ThemeUIStyleObject>;
+  copyButton?: ThemeUIStyleObject;
+  dividers?: Record<string, ThemeUIStyleObject>;
+};
 
 const glassShadow = `0 18px 48px rgba(41, 34, 28, 0.12)`;
 const neonGlow = `0 0 8px rgba(229, 229, 229, 0.28), 0 0 16px rgba(163, 163, 163, 0.2)`;
@@ -22,7 +19,7 @@ const neonGlowMagenta = `0 0 8px rgba(212, 212, 212, 0.24), 0 0 16px rgba(140, 1
 
 const brandTheme = merge(tailwind, {
   config: {
-    initialColorModeName: `dark`,
+    initialColorModeName: `default`,
     useColorSchemeMediaQuery: false,
   },
   colors: {
@@ -423,6 +420,6 @@ const brandTheme = merge(tailwind, {
       boxShadow: `outline`,
     },
   },
-}) as Theme;
+} as ExtendedTheme) as ExtendedTheme;
 
 export default brandTheme;

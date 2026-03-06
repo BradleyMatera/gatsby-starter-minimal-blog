@@ -169,7 +169,7 @@ export const StorePrimaryTabs: React.FC<StorePrimaryTabsProps> = ({
           type="button"
           role="tab"
           aria-controls={getPanelId(tab.key)}
-          aria-selected={activeTab === tab.key}
+          aria-selected={activeTab === tab.key ? "true" : "false"}
           tabIndex={activeTab === tab.key ? 0 : -1}
           className={`store-tab ${activeTab === tab.key ? "store-tab--active" : ""}`}
           onClick={() => onTabChange(tab.key)}
@@ -189,7 +189,7 @@ type ProductGridProps = {
 };
 
 export const ProductGrid: React.FC<ProductGridProps> = ({ items, getGoUrl }) => (
-  <div className="store-grid" style={{ marginTop: "1.5rem" }}>
+  <div className="store-grid store-grid--spaced">
     {items.map((product) => (
       <div key={product.id} className="store-card">
         <div className="store-card__image">
@@ -198,7 +198,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({ items, getGoUrl }) => 
         <div className="store-card__body">
           <div>
             <h3>{product.name}</h3>
-            <div className="store-pill-group" style={{ marginTop: "0.35rem" }}>
+            <div className="store-pill-group store-pill-group--tight">
               <span className="store-pill">{getProductBadge(product)}</span>
               {product.badge && <span className="store-pill store-pill--accent">{product.badge}</span>}
             </div>
@@ -285,7 +285,7 @@ export const AmazonCollectionTabs: React.FC<AmazonCollectionTabsProps> = ({
           <button
             key={tab.key}
             type="button"
-            aria-pressed={activeTab === tab.key}
+            aria-pressed={activeTab === tab.key ? "true" : "false"}
             className={`store-tab ${activeTab === tab.key ? "store-tab--active" : ""}`}
             onClick={() => onChange(tab.key)}
           >

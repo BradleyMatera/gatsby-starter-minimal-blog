@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx } from "theme-ui";
+import { jsx, type ThemeUIStyleObject } from "theme-ui";
 import * as React from "react";
 import BlogCard from "../../../components/blog/BlogCard";
 
@@ -19,7 +19,7 @@ type ListingProps = {
   className?: string;
   showTags?: boolean;
   id?: string;
-  sx?: Record<string, unknown>;
+  sx?: ThemeUIStyleObject;
 };
 
 const Listing = ({ posts, className = "", showTags = true, id, sx }: ListingProps) => (

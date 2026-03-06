@@ -1,5 +1,11 @@
 import * as React from "react";
 
+type CSSWithPaintWorklet = typeof CSS & {
+  paintWorklet?: {
+    addModule: (url: string) => Promise<void>;
+  };
+};
+
 const GlobalScrollEffects = () => {
   React.useEffect(() => {
     let isMounted = true;
@@ -14,8 +20,9 @@ const GlobalScrollEffects = () => {
         return;
       }
 
-      if ("paintWorklet" in CSS) {
-        CSS.paintWorklet.addModule("/worklets/hero-spotlight.js").catch(() => {});
+      const cssWithPaintWorklet = CSS as CSSWithPaintWorklet;
+      if (cssWithPaintWorklet.paintWorklet) {
+        cssWithPaintWorklet.paintWorklet.addModule("/worklets/hero-spotlight.js").catch(() => {});
       }
 
       const gsapModule = await import("gsap");

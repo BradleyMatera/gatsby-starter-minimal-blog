@@ -58,9 +58,58 @@ const Tip: React.FC<TipProps> = ({ children }) => (
 
 type ParagraphProps = React.HTMLAttributes<HTMLParagraphElement>;
 
-const Paragraph: React.FC<ParagraphProps> = ({ className, ...props }) => (
-  <p className={joinClasses("mdx-paragraph", className)} {...props} />
-);
+const BLOCK_LEVEL_TAGS = new Set([
+  "address",
+  "article",
+  "aside",
+  "blockquote",
+  "div",
+  "dl",
+  "fieldset",
+  "figure",
+  "footer",
+  "form",
+  "h1",
+  "h2",
+  "h3",
+  "h4",
+  "h5",
+  "h6",
+  "header",
+  "hr",
+  "main",
+  "nav",
+  "ol",
+  "p",
+  "pre",
+  "section",
+  "table",
+  "ul",
+]);
+
+const hasBlockChild = (children: React.ReactNode): boolean =>
+  React.Children.toArray(children).some((child) => {
+    if (!React.isValidElement(child)) return false;
+    return typeof child.type === "string" && BLOCK_LEVEL_TAGS.has(child.type);
+  });
+
+const Paragraph: React.FC<ParagraphProps> = ({ className, children, ...props }) => {
+  const sharedClassName = joinClasses("mdx-paragraph", className);
+
+  if (hasBlockChild(children)) {
+    return (
+      <div className={sharedClassName} {...(props as React.HTMLAttributes<HTMLDivElement>)}>
+        {children}
+      </div>
+    );
+  }
+
+  return (
+    <p className={sharedClassName} {...props}>
+      {children}
+    </p>
+  );
+};
 
 const components = {
   Section,

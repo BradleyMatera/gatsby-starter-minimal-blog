@@ -41,8 +41,8 @@
 .cyber-nav {
   background: var(--color-nav-bg) !important;
   border-bottom: 1px solid var(--color-border);
-  backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }
 
 .cyber-nav__inner {
