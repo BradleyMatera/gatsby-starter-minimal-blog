@@ -66,15 +66,21 @@ function dayDiff(a, b) {
 
 function detectGroup(post) {
   const tags = new Set((post.tags || []).map((t) => t.toLowerCase()));
-  const text = `${post.title || ''} ${post.slug || ''}`.toLowerCase();
-  const hasAny = (...vals) => vals.some((v) => tags.has(v) || text.includes(v));
+  const textWords = new Set(
+    `${post.title || ''} ${post.slug || ''}`
+      .toLowerCase()
+      .replace(/[^a-z0-9-]+/g, ' ')
+      .split(/\s+/)
+      .filter(Boolean)
+  );
+  const hasAny = (...vals) => vals.some((v) => tags.has(v) || textWords.has(v));
 
   if (hasAny('webgpu', 'graphics', 'rendering')) return 'graphics';
   if (hasAny('aws', 'azure', 'gcp', 'cloud', 'free-tier', 'costs', 'troubleshooting')) return 'cloud';
-  if (hasAny('docker', 'kubernetes', 'devops', 'containers', 'ci', 'deployment', 'github-actions')) return 'devops';
+  if (hasAny('docker', 'kubernetes', 'devops', 'containers', 'deployment', 'github-actions')) return 'devops';
   if (hasAny('security', 'jwt', 'ctf', 'auth', 'authentication', 'cognito')) return 'security';
   if (hasAny('zig', 'parsing', 'performance', 'obj-parser')) return 'systems';
-  if (hasAny('ai', 'workflow', 'automation', 'productivity')) return 'ai';
+  if (hasAny('ai', 'llm', 'workflow', 'automation', 'productivity')) return 'ai';
   if (hasAny('portfolio', 'ux', 'web', 'react', 'frontend', 'nextjs', 'gatsby', 'service-worker', 'github-pages')) return 'frontend';
   if (hasAny('career', 'learning', 'process', 'writing', 'mindset', 'education', 'certifications', 'time-management')) return 'career';
   return 'general';
@@ -147,15 +153,36 @@ function makeVoiceBlock(post) {
   ].join('\n');
 }
 
-function makeLinksBlock(post, related) {
+function groupLabel(group) {
+  const labels = {
+    graphics: 'Graphics',
+    cloud: 'Cloud',
+    devops: 'DevOps',
+    security: 'Security',
+    systems: 'Systems',
+    ai: 'AI Workflow',
+    frontend: 'Frontend',
+    career: 'Career',
+    general: 'Related',
+  };
+  return labels[group] || labels.general;
+}
+
+function makeLinksBlock(post, related, group) {
   const bullets = related.map((r) => `- [${r.title}](${normalizeSlug(r.slug)})`).join('\n');
+  const label = groupLabel(group);
+  const heading = group === 'general' ? 'Continue Reading on This Site' : `Continue Reading in This ${label} Series`;
+  const intro =
+    group === 'general'
+      ? 'If you want connected breakdowns, these posts are the best next stops:'
+      : 'If you want to go deeper on this topic cluster, these are the best next reads:';
 
   return [
     LINKS_START,
     '',
-    '## Continue Reading on This Site',
+    `## ${heading}`,
     '',
-    'If you want connected breakdowns, these posts are the best next stops:',
+    intro,
     '',
     bullets,
     '',
@@ -218,7 +245,7 @@ function main() {
       .map((r) => r.other);
 
     const voiceBlock = makeVoiceBlock(post);
-    const linksBlock = makeLinksBlock(post, related);
+    const linksBlock = makeLinksBlock(post, related, group);
 
     let body = post.body;
     body = replaceOrAppend(body, VOICE_START, VOICE_END, voiceBlock);

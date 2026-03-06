@@ -284,6 +284,13 @@ const inferPostTopic = (post: MBPostProps["post"]) => {
   return "general";
 };
 
+const inferReadDifficulty = (timeToRead?: number) => {
+  if (typeof timeToRead !== "number") return null;
+  if (timeToRead <= 6) return "Beginner";
+  if (timeToRead <= 11) return "Intermediate";
+  return "Advanced";
+};
+
 const buildHouseAds = (post: MBPostProps["post"]): HouseAd[] => {
   const topic = inferPostTopic(post);
 
@@ -477,10 +484,15 @@ const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({ data,
   const [hideNativeBanner, setHideNativeBanner] = React.useState(false);
   const houseAds = React.useMemo(() => (post ? buildHouseAds(post) : []), [post]);
   const postTopic = React.useMemo(() => (post ? inferPostTopic(post) : "general"), [post]);
+  const readDifficulty = React.useMemo(() => inferReadDifficulty(post?.timeToRead), [post?.timeToRead]);
   const activeAds = React.useMemo(() => {
     const cardAds = Array.isArray(networkAds) ? networkAds : [];
-    return [...houseAds, ...cardAds].slice(0, 6);
+    return [...houseAds, ...cardAds].slice(0, 2);
   }, [houseAds, networkAds]);
+  const articleOutline = React.useMemo(
+    () => tocItems.filter((item) => item.level === 2).slice(0, 6),
+    [tocItems],
+  );
   const leftAds: HouseAd[] = [];
   const rightAds = activeAds;
 
@@ -611,6 +623,7 @@ const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({ data,
                 </time>
               </span>
               {typeof post.timeToRead === "number" ? <span>{post.timeToRead} min read</span> : null}
+              {readDifficulty ? <span>{readDifficulty}</span> : null}
               {post.tags ? <ItemTags tags={post.tags} /> : null}
             </div>
           </header>
@@ -635,6 +648,18 @@ const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({ data,
               </aside>
             ) : null}
             <section className="post-content" itemProp="articleBody">
+              {articleOutline.length > 0 ? (
+                <section className="article-outline" aria-label="What this article covers">
+                  <p className="article-outline__title">In this article</p>
+                  <ol className="article-outline__list">
+                    {articleOutline.map((item) => (
+                      <li key={`outline-${item.id}`}>
+                        <a href={`#${item.id}`}>{item.text}</a>
+                      </li>
+                    ))}
+                  </ol>
+                </section>
+              ) : null}
               {children}
             </section>
             <aside className="post-rail">
@@ -652,34 +677,37 @@ const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({ data,
                   </nav>
                 </div>
               ) : null}
-              <div className="house-ads house-ads--right" aria-label="Promoted links">
-                {networkPlacements?.banner_160x600?.enabled ? (
-                  <AdsterraIframeUnit placement={networkPlacements.banner_160x600} />
-                ) : null}
-                {networkPlacements?.banner_300x250?.enabled ? (
-                  <AdsterraIframeUnit placement={networkPlacements.banner_300x250} />
-                ) : null}
-                {networkPlacements?.native_banner?.enabled && !hideNativeBanner ? (
-                  <AdsterraNativeBannerUnit
-                    placement={networkPlacements.native_banner}
-                    onNoFill={() => setHideNativeBanner(true)}
-                  />
-                ) : null}
-                {rightAds.map((ad) => (
-                  <a
-                    key={ad.id}
-                    className={`house-ad house-ad--${ad.theme}`}
-                    href={ad.href}
-                    target={isExternalHref(ad.href) ? "_blank" : undefined}
-                    rel={isExternalHref(ad.href) ? "sponsored noopener noreferrer" : undefined}
-                  >
-                    <span className="house-ad__eyebrow">{ad.label}</span>
-                    <span className="house-ad__title">{ad.title}</span>
-                    <span className="house-ad__body">{ad.body}</span>
-                    <span className="house-ad__cta">{ad.cta}</span>
-                  </a>
-                ))}
-              </div>
+              <details className="sponsored-panel">
+                <summary>Sponsored tools and downloads</summary>
+                <div className="house-ads house-ads--right" aria-label="Promoted links">
+                  {networkPlacements?.banner_160x600?.enabled ? (
+                    <AdsterraIframeUnit placement={networkPlacements.banner_160x600} />
+                  ) : null}
+                  {networkPlacements?.banner_300x250?.enabled ? (
+                    <AdsterraIframeUnit placement={networkPlacements.banner_300x250} />
+                  ) : null}
+                  {networkPlacements?.native_banner?.enabled && !hideNativeBanner ? (
+                    <AdsterraNativeBannerUnit
+                      placement={networkPlacements.native_banner}
+                      onNoFill={() => setHideNativeBanner(true)}
+                    />
+                  ) : null}
+                  {rightAds.map((ad) => (
+                    <a
+                      key={ad.id}
+                      className={`house-ad house-ad--${ad.theme}`}
+                      href={ad.href}
+                      target={isExternalHref(ad.href) ? "_blank" : undefined}
+                      rel={isExternalHref(ad.href) ? "sponsored noopener noreferrer" : undefined}
+                    >
+                      <span className="house-ad__eyebrow">{ad.label}</span>
+                      <span className="house-ad__title">{ad.title}</span>
+                      <span className="house-ad__body">{ad.body}</span>
+                      <span className="house-ad__cta">{ad.cta}</span>
+                    </a>
+                  ))}
+                </div>
+              </details>
             </aside>
           </div>
 
