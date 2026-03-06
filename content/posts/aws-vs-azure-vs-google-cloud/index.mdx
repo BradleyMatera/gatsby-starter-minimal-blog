@@ -19,6 +19,23 @@ We are going to pit **AWS**, **Microsoft Azure**, and **Google Cloud Platform (G
 
 ---
 
+## Why I ran this comparison in real projects
+
+I built this comparison after running all three platforms in small, real project reps and tracking where I lost time and where billing risk showed up first. I was not looking for marketing claims. I was looking for a repeatable answer to this practical question: "Which provider gives me the safest path to learn and ship without accidental charges?"
+
+The short answer is that each provider can work, but they fail differently. AWS and Azure have more obvious career signaling, while GCP has the strongest long-term always-free compute story. The right choice depends on whether your priority is hiring-market alignment, permanent low-cost hosting, or specific enterprise tooling.
+
+## Side-by-side quick matrix (compute + database + billing risk)
+
+| Category | AWS | Azure | GCP |
+|---|---|---|---|
+| Free compute baseline | 750 hrs `t2.micro/t3.micro` for 12 months | 750 hrs `B1s` for 12 months | `e2-micro` Always Free in supported regions |
+| Compute strength (small workloads) | Solid general baseline, burst credits | Weaker single-vCPU baseline | Strong value if region is eligible |
+| Managed SQL free option | RDS micro for 12 months | Azure SQL allowance (SQL Server ecosystem) | Cloud SQL not generous on free tier |
+| NoSQL free option | DynamoDB free usage limits | Cosmos DB limited free options | Firestore is strong for NoSQL |
+| Common first billing surprise | EBS volumes + Elastic IP + egress | Disk tier selection + network egress | Region mismatch + egress |
+| Best fit from my testing | Resume alignment + broad docs | Microsoft-heavy environments | Long-running hobby/personal workloads |
+
 ## The Philosophy of "Free"
 
 Before looking at the numbers, you have to understand the business model, because it dictates the limitations you will face.
@@ -77,6 +94,40 @@ GCP does **not** offer a generous free tier for Cloud SQL (their managed relatio
 * **Pros:** Firestore is incredibly fast and easy for mobile apps.
 * **Cons:** It is NoSQL. If you are trying to learn traditional SQL table relationships, GCP forces you to pay roughly $10-$15/month for the smallest SQL instance.
 
+## Quick commands I use to verify usage before surprises
+
+The easiest way to lose control is to rely only on UI dashboards. I use quick CLI checks so I can verify state before shutdown and before monthly billing rollover.
+
+### AWS
+
+```bash
+# Compute still running?
+aws ec2 describe-instances --query "Reservations[].Instances[].{Id:InstanceId,State:State.Name,Type:InstanceType}" --output table
+
+# Unattached EBS volumes (common hidden charge)
+aws ec2 describe-volumes --filters Name=status,Values=available --query "Volumes[].{Id:VolumeId,Size:Size,AZ:AvailabilityZone}" --output table
+```
+
+### Azure
+
+```bash
+# VMs still allocated
+az vm list -d --query "[].{name:name,rg:resourceGroup,power:powerState}" -o table
+
+# Public IPs and allocation method
+az network public-ip list --query "[].{name:name,rg:resourceGroup,allocation:publicIPAllocationMethod,sku:sku.name}" -o table
+```
+
+### GCP
+
+```bash
+# Running compute instances
+gcloud compute instances list --format="table(name,zone,status,machineType)"
+
+# Persistent disks (watch for detached/unused resources)
+gcloud compute disks list --format="table(name,zone,status,sizeGb,type)"
+```
+
 ---
 
 ## 3. The "Silent Killers" of Cloud Billing
@@ -99,6 +150,15 @@ You can check out any time you like, but you can never leave—without paying.
 * **Egress (Data Out):** Charged per GB after a small threshold.
 * **The Risk:** If you host a large media file and it gets hotlinked on a popular site, your egress fees will skyrocket instantly.
 
+## Official docs I cross-check before launching
+
+- [AWS Free Tier](https://aws.amazon.com/free/)
+- [AWS Pricing Calculator](https://calculator.aws/)
+- [Azure Free Account](https://azure.microsoft.com/free/)
+- [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)
+- [Google Cloud Free Program](https://cloud.google.com/free)
+- [Google Cloud Pricing Calculator](https://cloud.google.com/products/calculator)
+
 ---
 
 {/* visual-break:aws-vs-azure-vs-google-cloud:2 */}
@@ -119,6 +179,16 @@ After deploying stacks on all three, here is my decision matrix for new projects
 ### Choose Azure If:
 1.  **You work in the .NET ecosystem.** Visual Studio integration with Azure is seamless.
 2.  **You need massive database storage.** The 250GB SQL limit is generous if you are willing to use Microsoft SQL Server.
+
+### Final decision matrix (fast pick)
+
+| If your priority is... | Choose | Why |
+|---|---|---|
+| Resume visibility in the current cloud market | AWS | Largest share and broad role alignment |
+| Long-term always-free baseline server | GCP | `e2-micro` Always Free model in eligible regions |
+| Microsoft ecosystem alignment | Azure | Strong integration for .NET and enterprise Microsoft stacks |
+| Fast SQL learning path with familiar managed relational setup | AWS | RDS micro path is straightforward for learners |
+| Minimal accidental-cost risk from interface complexity | GCP (with strict region discipline) | Cleaner defaults if you pick supported regions early |
 
 ### The Golden Rule
 The only true way to stay free is **vigilance**. Set up "Billing Alerts" the moment you create your account. Set an alert for $0.01. The moment you get that email, you know you have crossed a line, and you can fix it before it becomes a $500 problem.
@@ -152,4 +222,3 @@ If you want to go deeper on this topic cluster, these are the best next reads:
 - [Cloud Ready Web Checks: A Small, Honest Prelaunch Checklist](/cloud-ready-web-experiences/)
 
 {/* auto-enhancement:links-end */}
-

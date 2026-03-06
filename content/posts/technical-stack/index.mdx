@@ -13,6 +13,12 @@ Looking back at the code I wrote over the last 12 months, a pattern emerges. The
 
 This isn't just a list of libraries. This is a breakdown of how web development actually felt in 2025, the stack that survived the hype cycle, and why I (mostly) stopped worrying about the next big thing.
 
+## Why this inventory exists
+
+I built this post to document what I actually ship with, not what looked impressive on social feeds. I wanted a single technical record that answered these three questions clearly: what I default to, why I default to it, and where I intentionally deviate when constraints change.
+
+In other words, this is not a trend prediction post. It is my operating baseline for project execution in 2025.
+
 ## 1. The "Post-React" Era: Server Components Won
 
 For years, React Server Components (RSC) were a controversial, confusing mess. In 2025, they finally clicked.
@@ -66,6 +72,106 @@ Perhaps as a reaction to rising cloud costs, 2025 saw a massive surge in "PaaS-o
 
 While Vercel is still the default for "getting it live," I moved several long-running background workers and heavy projects to a $5 Hetzner VPS running Coolify. It is the Heroku experience, but you own the data. It felt like reclaiming a bit of the internet from the giants.
 
+## Default stack decision table (component + reason)
+
+| Component | Default choice | Why I chose it in 2025 | When I intentionally switch |
+|---|---|---|---|
+| App framework | Next.js App Router | Stable server/client split and strong deployment ecosystem | Smaller static experiences where Astro is simpler |
+| Language | TypeScript strict mode | Better refactor safety and fewer runtime surprises | Tiny throwaway scripts |
+| DB | Postgres (Neon/Supabase) | Fast setup + reliable relational model + branching workflows | Document-heavy workloads that fit NoSQL better |
+| ORM/query layer | Drizzle ORM | SQL-like control with low abstraction overhead | Direct SQL for one-off performance-critical queries |
+| Auth | Auth.js or Clerk | Faster production-ready auth flows | Extremely custom auth and identity integration needs |
+| Styling | Tailwind + shadcn/ui | High speed UI composition with component ownership | Bespoke brand systems with fully custom design tokens |
+| Local runtime | Bun | Faster local iteration and script startup | Tooling that still expects Node-only behavior |
+| Prod runtime | Node/Edge | Predictable hosting support and runtime compatibility | Workloads requiring specialized container setups |
+
+## Minimal examples from this stack
+
+### Server Component data query (no client-side fetch boilerplate)
+
+```tsx
+// app/users/page.tsx
+import { db } from "@/db";
+import { users } from "@/db/schema";
+
+export default async function UsersPage() {
+  const rows = await db.select().from(users).limit(20);
+
+  return (
+    <main>
+      <h1>Users</h1>
+      <ul>
+        {rows.map((user) => (
+          <li key={user.id}>{user.email}</li>
+        ))}
+      </ul>
+    </main>
+  );
+}
+```
+
+### Server Action mutation pattern
+
+```tsx
+// app/settings/actions.ts
+"use server";
+
+import { db } from "@/db";
+import { users } from "@/db/schema";
+import { eq } from "drizzle-orm";
+
+export async function updateDisplayName(formData: FormData) {
+  const id = Number(formData.get("id"));
+  const displayName = String(formData.get("displayName") || "");
+
+  await db.update(users).set({ displayName }).where(eq(users.id, id));
+}
+```
+
+### Bun local workflow scripts
+
+```json
+{
+  "scripts": {
+    "dev": "next dev",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "check": "bun run typecheck && bun run lint"
+  }
+}
+```
+
+## Bun vs Node tradeoff table (how I decide)
+
+| Area | Bun locally | Node in production |
+|---|---|---|
+| Install speed | Very fast package install for daily loops | Slower, but broadly standardized in CI/CD |
+| TS/JS execution | Great zero-config DX for scripts | Mature ecosystem and long-term runtime parity |
+| Tooling compatibility | Mostly good, occasional edge cases | Highest compatibility across hosting/tooling |
+| Where I use it | Local iteration, scripts, fast checks | Hosted apps, serverless targets, production workloads |
+
+## Reference architecture flow (my default SaaS baseline)
+
+```text
+Browser
+  |
+Next.js App Router (Server Components + selective Client Components)
+  |
+Server Actions / Route Handlers
+  |
+Drizzle ORM
+  |
+Postgres (Neon or Supabase)
+```
+
+## Common mistakes I made during the 2025 stack shift
+
+- Treating every component as client-side first, then paying the hydration cost later.
+- Letting AI-generated code land without tracing data flow boundaries and error handling.
+- Over-abstracting DB access too early instead of validating queries directly.
+- Assuming Bun and Node are fully interchangeable for every dependency.
+- Shipping styling systems without a documented token baseline.
+
 {/* visual-break:technical-stack:2 */}
 ![Delivery workflow checkpoint illustration for this section.](/assets/visuals/blog/technical-stack-break-2.png)
 
@@ -112,4 +218,3 @@ If you want to go deeper on this topic cluster, these are the best next reads:
 - [What I Learned From Three Small Projects](/what-i-learned-three-simple-projects/)
 
 {/* auto-enhancement:links-end */}
-

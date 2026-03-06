@@ -37,6 +37,37 @@ The workflow started with an S3 bucket that accepted file uploads. Each upload g
 
 What mattered was not that the system was complex. What mattered was that every step forced me to confirm assumptions. Did the S3 event actually fire. Did the Lambda receive the event structure I expected. Did the IAM role allow the DynamoDB write. Did the frontend actually point at the right API endpoint. Did the deployed build behave the same way as the local one. Those questions are the heart of cloud troubleshooting, and that is what I practiced.
 
+### Capstone architecture map
+
+```text
+User Upload
+   |
+Amazon S3 (bucket event)
+   |
+AWS Lambda (metadata extraction)
+   |
+Amazon DynamoDB (metadata row write)
+   |
+Frontend (AWS Amplify) -> reads and renders records
+```
+
+### Example validation commands I used in labs
+
+```bash
+# Confirm Lambda invocation count moved after upload test
+aws cloudwatch get-metric-statistics \
+  --namespace AWS/Lambda \
+  --metric-name Invocations \
+  --dimensions Name=FunctionName,Value=<your-function-name> \
+  --statistics Sum \
+  --start-time 2025-08-01T00:00:00Z \
+  --end-time 2025-08-01T23:59:59Z \
+  --period 300
+
+# Confirm S3 object exists in target bucket path
+aws s3api list-objects-v2 --bucket <your-bucket-name> --prefix uploads/
+```
+
 ## What I actually learned
 
 ![Debugging and logs](https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif)
@@ -45,6 +76,34 @@ By the end of the internship, AWS stopped feeling like a collection of mysteriou
 ![AWS learning curve meme](https://media.giphy.com/media/3oEduQAsYcJKQH2XsI/giphy.gif)
 
 I also learned the difference between theory and reality. On paper, connecting S3 to Lambda to DynamoDB to a frontend is a clean four-box diagram. In reality, there are region settings, permission policies, event structures, SDK versions, deployment quirks, and caching behavior that make or break the build. Working through that gap is where the real growth happened.
+
+### CloudWatch troubleshooting example (lab-style)
+
+```text
+START RequestId: 8fd2... Version: $LATEST
+2025-08-14T16:41:22.198Z 8fd2... INFO Processing key: uploads/test-file.csv
+2025-08-14T16:41:22.366Z 8fd2... ERROR AccessDeniedException:
+User: arn:aws:sts::<acct-id>:assumed-role/lambda-metadata-role/... is not authorized
+to perform: dynamodb:PutItem on resource: arn:aws:dynamodb:us-east-1:<acct-id>:table/FileMetadata
+END RequestId: 8fd2...
+```
+
+That log pattern was a common training signal: event trigger worked, function ran, downstream permission failed. The fix path was not guesswork. It was: inspect execution role, verify policy action/resource scope, redeploy, and rerun the upload test.
+
+### IAM policy pattern that fixed the write failure in labs
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": ["dynamodb:PutItem", "dynamodb:UpdateItem"],
+      "Resource": "arn:aws:dynamodb:us-east-1:<account-id>:table/FileMetadata"
+    }
+  ]
+}
+```
 
 ## Quick skill reality table
 
@@ -64,6 +123,13 @@ Sometimes it helps to see this laid out side by side instead of only in paragrap
 | On-call experience | None | Pager duty or outage response |
 
 This is not meant to downplay the work. It is simply the honest boundary of what the internship covered and what it did not. That clarity is more useful than pretending everything was production-level experience.
+
+## If you want to practice this same lab path
+
+- [AWS Lambda with Amazon S3](https://docs.aws.amazon.com/lambda/latest/dg/with-s3.html)
+- [DynamoDB `PutItem` API](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_PutItem.html)
+- [CloudWatch Logs for Lambda](https://docs.aws.amazon.com/lambda/latest/dg/monitoring-cloudwatchlogs.html)
+- [IAM policy examples](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_examples.html)
 
 ## What I did not do
 
@@ -109,4 +175,3 @@ If you want to go deeper on this topic cluster, these are the best next reads:
 - [Cognito Authentication With React: A Small, Verifiable Setup](/secure-authentication-cognito-react/)
 
 {/* auto-enhancement:links-end */}
-
