@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Link } from "gatsby";
 import Layout from "../@lekoarts/gatsby-theme-minimal-blog/components/layout";
+import Seo from "../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import "../styles/store.css";
 
 type DownloadItem = {
@@ -140,3 +141,7 @@ const SuccessPage = () => {
 };
 
 export default SuccessPage;
+
+export const Head = () => (
+  <Seo title="Payment confirmed" description="Purchase confirmation page." pathname="/success/" robots="noindex,nofollow" />
+);

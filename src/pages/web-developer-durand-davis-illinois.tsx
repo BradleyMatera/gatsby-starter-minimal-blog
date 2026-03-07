@@ -204,6 +204,32 @@ const LocalWebDeveloperPage = () => (
         </>
       }
     >
+      <div className="grid-two">
+        <Card variant="outline">
+          <h3 className="feature-card__title">Common questions</h3>
+          <p className="feature-card__body">
+            I broke the common fit, scope, and process questions into a separate FAQ so the answers are
+            easier to skim.
+          </p>
+          <div className="card-actions">
+            <Link data-variant="primary" to="/northwest-illinois-web-development-faq/">
+              Read the FAQ
+            </Link>
+          </div>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">How I usually help</h3>
+          <p className="feature-card__body">
+            If you want the practical version of what I usually fix first, the process page explains it
+            without turning it into agency copy.
+          </p>
+          <div className="card-actions">
+            <Link data-variant="primary" to="/website-help-northwest-illinois/">
+              Website help page
+            </Link>
+          </div>
+        </Card>
+      </div>
       <div className="card-actions">
         <Link data-variant="primary" to="/contact/">
           Contact Bradley Matera

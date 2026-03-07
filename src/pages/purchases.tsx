@@ -2,6 +2,7 @@ import * as React from "react";
 import { Link } from "gatsby";
 import type { IdentityUser, IdentityWidget } from "netlify-identity-widget";
 import Layout from "../@lekoarts/gatsby-theme-minimal-blog/components/layout";
+import Seo from "../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import "../styles/store.css";
 
 type OrderItem = {
@@ -431,3 +432,7 @@ const PurchasesPage = () => {
 };
 
 export default PurchasesPage;
+
+export const Head = () => (
+  <Seo title="Customer portal" description="Customer portal for order access." pathname="/purchases/" robots="noindex,nofollow" />
+);

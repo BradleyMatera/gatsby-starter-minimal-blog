@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Link } from "gatsby";
 import Layout from "../@lekoarts/gatsby-theme-minimal-blog/components/layout";
+import Seo from "../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import "../styles/store.css";
 
 const CancelPage = () => (
@@ -19,3 +20,7 @@ const CancelPage = () => (
 );
 
 export default CancelPage;
+
+export const Head = () => (
+  <Seo title="Checkout canceled" description="Checkout canceled page." pathname="/cancel/" robots="noindex,nofollow" />
+);

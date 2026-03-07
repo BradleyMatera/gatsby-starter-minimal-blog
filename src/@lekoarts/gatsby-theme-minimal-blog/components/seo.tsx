@@ -22,6 +22,7 @@ type SEOProps = {
     path?: string;
     url?: string;
   }>;
+  robots?: string;
 };
 
 const Seo = ({
@@ -35,6 +36,7 @@ const Seo = ({
   article,
   structuredData,
   breadcrumbs,
+  robots = "index,follow",
 }: SEOProps) => {
   const site = useSiteMetadata();
 
@@ -95,6 +97,19 @@ const Seo = ({
           ...(article?.tags?.length ? { keywords: article.tags.join(", ") } : {}),
         }
       : null;
+  const websiteStructuredData: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: siteTitle,
+    url: siteUrl,
+    description: defaultDescription,
+    inLanguage: siteLanguage,
+    publisher: {
+      "@type": "Person",
+      name: "Bradley Matera",
+      url: siteUrl,
+    },
+  };
   const customStructuredData = Array.isArray(structuredData)
     ? structuredData
     : structuredData
@@ -102,6 +117,7 @@ const Seo = ({
       : [];
   const structuredDataNodes = [
     personStructuredData,
+    websiteStructuredData,
     ...(articleStructuredData ? [articleStructuredData] : []),
     ...(breadcrumbs && breadcrumbs.length > 1
       ? [
@@ -153,7 +169,7 @@ const Seo = ({
       <meta name="twitter:image:alt" content={seo.description} />
       <meta name="twitter:creator" content={author} />
       <meta name="twitter:site" content={author} />
-      <meta name="robots" content="index,follow" />
+      <meta name="robots" content={robots} />
       <link rel="alternate" type="application/rss+xml" title={`${siteTitle} RSS Feed`} href={withPrefix(`/rss.xml`)} />
       <link rel="canonical" href={canonical} />
       {structuredDataNodes.map((node, index) => (

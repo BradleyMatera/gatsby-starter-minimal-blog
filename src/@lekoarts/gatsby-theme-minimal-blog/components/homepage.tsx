@@ -11,6 +11,7 @@ import useSiteMetadata from "../hooks/use-site-metadata";
 import replaceSlashes from "../utils/replaceSlashes";
 import { visuallyHidden } from "../styles/utils";
 import Seo from "./seo";
+import { buildProfessionalServiceSchema, serviceAreaDescription } from "../../../site/seo/local-seo";
 import Hero from "../texts/hero.mdx";
 import Bottom from "../texts/bottom.mdx";
 import { TinyTriangleAccent } from "../../../site/accents";
@@ -56,4 +57,15 @@ const Homepage = ({ posts }: MBHomepageProps) => {
 
 export default Homepage;
 
-export const Head: HeadFC = () => <Seo />;
+export const Head: HeadFC = () => (
+  <Seo
+    title="Web Developer in Durand, Davis, and Northwest Illinois"
+    description={serviceAreaDescription}
+    pathname="/"
+    structuredData={buildProfessionalServiceSchema({
+      path: "/",
+      serviceName: "Web development and front-end engineering",
+      description: serviceAreaDescription,
+    })}
+  />
+);

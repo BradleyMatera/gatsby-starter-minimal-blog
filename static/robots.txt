@@ -1,3 +1,5 @@
 User-agent: *
 
-sitemap: https://minimal-blog.lekoarts.de/sitemap-index.xml
+Allow: /
+
+Sitemap: https://bradleymatera.dev/sitemap.xml/sitemap-index.xml
