@@ -1,59 +1,13 @@
-/* ===== Media Utilities: Never Distort Images ===== */
+/* Media helpers
+   Used by:
+   - src/components/HeroSystemScene.tsx
+   - any shared image wrapper using the media-img helper
+
+   Owns:
+   - the shared responsive image reset that is still referenced by the app
+*/
 
 .media-img {
   display: block;
   max-width: 100%;
-}
-
-.media-heroWrap {
-  width: 100%;
-  height: clamp(220px, 32vw, 420px);
-  overflow: hidden;
-  border-radius: 14px;
-  position: relative;
-}
-
-.media-heroImg {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.media-heroOverlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.35),
-    rgba(0, 0, 0, 0.6)
-  );
-  pointer-events: none;
-}
-
-.media-contained {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-}
-
-.media-scrollX {
-  overflow-x: auto;
-  padding-bottom: 10px;
-}
-
-.media-timeline {
-  min-width: 720px;
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-}
-
-.media-iconsWrap {
-  max-width: 520px;
-}
-
-.media-iconsImg {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
 }

@@ -24,7 +24,7 @@ type ListingProps = {
 
 const Listing = ({ posts, className = "", showTags = true, id, sx }: ListingProps) => (
   <section className={className} id={id} sx={sx}>
-    <div className="grid-two" sx={{ gap: `clamp(1.5rem, 2.5vw, 2.5rem)` }}>
+    <div className="grid-two u-section-gap">
       {posts.map((post) => (
         <BlogCard key={post.slug} post={post} showTags={showTags} />
       ))}

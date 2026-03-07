@@ -49,6 +49,7 @@ const ProjectCard = ({
   const articleClassName = joinClasses(
     "project-card",
     "reveal-card",
+    "u-reveal",
     className,
     revealed ? "is-revealed" : undefined
   );
@@ -96,12 +97,9 @@ const ProjectCard = ({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      <div
-        className="project-card__frame"
-        style={hasThumbnail ? { flexDirection: "column", gap: "0.75rem" } : undefined}
-      >
+      <div className={joinClasses("project-card__frame", hasThumbnail ? "u-flex-col u-gap-3" : undefined)}>
         {thumbnail ? (
-          <div className="project-card__thumbnail" style={{ width: "100%", flex: "0 0 auto" }}>
+          <div className="project-card__thumbnail u-w-full u-flex-none">
             <img
               src={thumbnail}
               alt={thumbnailAlt ?? `${title} project thumbnail`}
@@ -109,7 +107,7 @@ const ProjectCard = ({
               decoding="async"
               width="104"
               height="104"
-              style={{ width: "100%", height: "160px", objectFit: "cover" }}
+              className="u-project-thumb"
             />
           </div>
         ) : null}

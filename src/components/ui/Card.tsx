@@ -21,7 +21,7 @@ import TinyDotClusterAccent from "../TinyDotClusterAccent";
 const Card = ({ as: Tag = "div", variant = "default", className, children }: CardProps) => {
   const variantClass = variantClassMap[variant] ?? variantClassMap.default;
   return (
-    <Tag className={joinClasses(variantClass, className)} style={{ position: "relative" }}>
+    <Tag className={joinClasses(variantClass, "u-relative", className)}>
       <TinyDotClusterAccent />
       {children}
     </Tag>

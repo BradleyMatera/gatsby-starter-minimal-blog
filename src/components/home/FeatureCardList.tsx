@@ -1,4 +1,5 @@
 import * as React from "react";
+import joinClasses from "../../utils/joinClasses";
 
 type Feature = {
   icon: string;
@@ -32,12 +33,7 @@ const FeatureCardList = () => {
   return (
     <div
       ref={ref as React.RefObject<HTMLDivElement>}
-      className="feature-list"
-      style={{
-        opacity: revealed ? 1 : 0,
-        transform: revealed ? "translateY(0)" : "translateY(32px)",
-        transition: "opacity 0.7s cubic-bezier(.22,.9,.2,1), transform 0.7s cubic-bezier(.22,.9,.2,1)",
-      }}
+      className={joinClasses("feature-list", "u-reveal", revealed ? "is-revealed" : undefined)}
     >
       {features.map((feature, i) => (
         <div className="feature-card" key={i}>

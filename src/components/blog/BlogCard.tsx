@@ -4,6 +4,7 @@ import useMinimalBlogConfig from "../../@lekoarts/gatsby-theme-minimal-blog/hook
 import replaceSlashes from "../../@lekoarts/gatsby-theme-minimal-blog/utils/replaceSlashes";
 import TinyDotClusterAccent from "../TinyDotClusterAccent";
 import { useScrollReveal } from "../home/useScrollReveal";
+import joinClasses from "../../utils/joinClasses";
 
 type BlogTag = {
   name: string;
@@ -36,13 +37,7 @@ const BlogCard = ({ post, showTags = true }: BlogCardProps) => {
   return (
     <article
       ref={ref as React.RefObject<HTMLElement>}
-      className="blog-card"
-      style={{
-        position: "relative",
-        opacity: revealed ? 1 : 0,
-        transform: revealed ? "translateY(0)" : "translateY(32px)",
-        transition: "opacity 0.7s cubic-bezier(.22,.9,.2,1), transform 0.7s cubic-bezier(.22,.9,.2,1)",
-      }}
+      className={joinClasses("blog-card", "u-relative", "u-reveal", revealed ? "is-revealed" : undefined)}
     >
       {/* Title - Top horizontal bar (F-pattern first fixation) */}
       <Link to={post.slug} className="blog-card__title">

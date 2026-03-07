@@ -57,18 +57,7 @@ const ThreeScene = () => {
   }, []);
 
   return (
-    <div
-      ref={mountRef}
-      style={{
-        width: "100%",
-        height: "400px",
-        maxWidth: "100%",
-        margin: "0 auto",
-        borderRadius: "12px",
-        overflow: "hidden",
-        background: "#f0f0f0",
-      }}
-    />
+    <div ref={mountRef} className="u-three-stage u-three-stage--medium" />
   );
 };
 

@@ -13,7 +13,7 @@ const Title = ({ text, as: HeadingTag = "h2", className, kicker, children }: Tit
   <div className={joinClasses("section-header-inline", className)}>
     <div>
       {kicker ? <span className="eyebrow">{kicker}</span> : null}
-      <HeadingTag className="section-title" style={{ marginBottom: 0 }}>
+      <HeadingTag className="section-title u-mb-0">
         {text}
       </HeadingTag>
     </div>

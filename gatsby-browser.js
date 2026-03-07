@@ -1,8 +1,8 @@
 
-// Cyberpunk Theme - Load in order of specificity
-import "./src/styles/cyberpunk-theme.css";
-import "./src/styles/cyberpunk-nav.css";
+// Active site styles. Order matters: tokens/base -> chrome -> utilities -> feature scopes.
 import "./src/styles/global.css";
+import "./src/styles/site-chrome.css";
+import "./src/styles/utilities.css";
 import "./src/styles/vertical-nav.css";
 import "./src/styles/media.css";
 

@@ -113,81 +113,20 @@ const ThreeHeroPlain: React.FC = () => {
     };
   }, []);
 
-  const height = typeof window !== "undefined" ? Math.max(320, window.innerHeight * 0.55) : 400;
-
   return (
-    <div
-      style={{
-        position: "relative",
-        width: "100%",
-        height,
-        maxWidth: "100vw",
-        margin: "0 auto",
-        background: "#fff",
-        borderRadius: "16px",
-        overflow: "hidden",
-        boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
-      }}
-    >
-      <div ref={mountRef} style={{ width: "100%", height: "100%" }} />
-      <div
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -60%)",
-          width: "100%",
-          textAlign: "center",
-          pointerEvents: "none",
-          zIndex: 2,
-          color: "#000",
-          fontFamily: "'Space Grotesk Variable', 'Montserrat', sans-serif",
-          fontWeight: 700,
-          fontSize: "2.2rem",
-          letterSpacing: "-0.02em",
-          textShadow: "0 2px 12px #fff",
-        }}
-      >
+    <div className="u-three-stage u-three-stage--tall">
+      <div ref={mountRef} className="u-w-full u-h-full" />
+      <div className="u-three-overlay u-three-overlay--surface">
         Bradley Matera — Full Stack Software Engineer / Cloud Architect.
         <a
           href="/contact"
-          style={{
-            fontSize: "1rem",
-            padding: "0.2rem 0.7rem",
-            borderRadius: "1rem",
-            background: "#fff",
-            color: "#333",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
-            border: "none",
-            cursor: "pointer",
-            marginLeft: "1rem",
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "0.4rem",
-            height: "1.8rem",
-            lineHeight: "1",
-            textDecoration: "none",
-            whiteSpace: "nowrap",
-          }}
+          className="u-three-cta"
         >
           <span aria-hidden="true">✉</span>
           <span>Email me!</span>
         </a>
       </div>
-      <p
-        style={{
-          position: "absolute",
-          bottom: "1.5rem",
-          left: "50%",
-          transform: "translateX(-50%)",
-          margin: 0,
-          color: "#444",
-          fontSize: "1rem",
-          fontWeight: 500,
-          letterSpacing: "0.01em",
-          textShadow: "0 2px 12px rgba(255,255,255,0.6)",
-        }}
-      >
+      <p className="u-three-caption u-three-caption--surface">
         Shipping resilient cloud apps, experiment-driven UI, and platform automation workflows.
       </p>
     </div>

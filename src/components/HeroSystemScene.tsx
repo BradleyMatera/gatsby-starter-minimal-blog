@@ -18,7 +18,6 @@ const HeroSystemScene: React.FC = () => (
             className="media-img"
             width="1536"
             height="1024"
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
           />
         </picture>
       </div>

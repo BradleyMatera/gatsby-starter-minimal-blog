@@ -95,7 +95,7 @@ const SuccessPage = () => {
         {status === "error" && (
           <div className="store-status store-error">
             {message}
-            <div style={{ marginTop: "0.75rem" }}>
+            <div className="u-mt-3">
               <Link className="store-link" to="/support/">Support & refunds</Link>
             </div>
           </div>
@@ -126,9 +126,9 @@ const SuccessPage = () => {
                 </div>
               ))}
             </div>
-            <div style={{ marginTop: "1.5rem" }}>
+            <div className="store-inline-links u-mt-6">
               <Link className="store-link" to="/store/">Back to store</Link>
-              <span style={{ marginLeft: "1rem" }}>
+              <span>
                 <Link className="store-link" to="/purchases/">Customer portal</Link>
               </span>
             </div>

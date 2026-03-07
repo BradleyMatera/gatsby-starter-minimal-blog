@@ -1,0 +1,226 @@
+/* Utility classes
+   Used by:
+   - shared UI components in src/components/ui
+   - blog/project/home/store components that need repeatable spacing/layout helpers
+
+   Owns:
+   - low-level spacing, layout, reveal, and reusable stage helpers
+   - only classes currently referenced by the app
+*/
+
+:root {
+  --u-space-2: 0.5rem;
+  --u-space-3: 0.75rem;
+  --u-space-6: 1.5rem;
+  --u-space-8: 2rem;
+  --u-transition-reveal: opacity 0.7s cubic-bezier(.22,.9,.2,1), transform 0.7s cubic-bezier(.22,.9,.2,1);
+}
+
+.u-relative { position: relative; }
+.u-w-full { width: 100%; }
+.u-h-full { height: 100%; }
+
+.u-flex { display: flex; }
+.u-inline-block { display: inline-block; }
+.u-flex-col { flex-direction: column; }
+.u-items-center { align-items: center; }
+.u-gap-3 { gap: var(--u-space-3); }
+.u-flex-none { flex: 0 0 auto; }
+
+.u-mt-2 { margin-top: var(--u-space-2); }
+.u-mt-3 { margin-top: var(--u-space-3); }
+.u-mt-6 { margin-top: var(--u-space-6); }
+.u-mt-8 { margin-top: var(--u-space-8); }
+.u-mb-0 { margin-bottom: 0; }
+.u-mb-3 { margin-bottom: var(--u-space-3); }
+
+.u-align-middle { vertical-align: middle; }
+.u-list-none {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.u-reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: var(--u-transition-reveal);
+}
+
+.u-reveal.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.u-project-thumb {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.u-three-stage {
+  position: relative;
+  width: 100%;
+  max-width: 100vw;
+  margin: 0 auto;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  background: var(--color-surface);
+}
+
+.u-three-stage--tall {
+  height: clamp(320px, 55vh, 640px);
+}
+
+.u-three-stage--medium {
+  height: 400px;
+}
+
+.u-three-canvas {
+  width: 100%;
+  height: 100%;
+  background: var(--color-surface);
+}
+
+.u-three-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -60%);
+  text-align: center;
+  pointer-events: none;
+  z-index: 2;
+  color: var(--color-text);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 2.2rem;
+  letter-spacing: -0.02em;
+}
+
+.u-three-overlay--surface {
+  text-shadow: 0 2px 12px rgba(255, 255, 255, 0.65);
+}
+
+.u-three-caption {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  color: var(--color-text-subtle);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.u-three-caption--surface {
+  text-shadow: 0 2px 12px rgba(255, 255, 255, 0.6);
+}
+
+.u-three-cta {
+  font-size: 1rem;
+  padding: 0.2rem 0.7rem;
+  border-radius: 1rem;
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: none;
+  cursor: pointer;
+  margin-left: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  height: 1.8rem;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  pointer-events: auto;
+}
+
+.status-row {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--u-space-2);
+  transition: box-shadow 0.3s, background 0.3s;
+  border-radius: 1rem;
+}
+
+.status-row[data-active="true"] {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  background: var(--color-surface-alt);
+}
+
+.status-row__icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+}
+
+.status-row__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  margin-left: 4px;
+  background: var(--color-border);
+  opacity: 0.5;
+}
+
+.status-row[data-active="true"] .status-row__dot {
+  background: var(--color-accent);
+  box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.15);
+  opacity: 1;
+  animation: statusPulse 1.2s infinite cubic-bezier(.22,.9,.2,1);
+}
+
+.status-row__label {
+  font-weight: 600;
+  color: var(--color-text-subtle);
+  transition: color 0.3s;
+}
+
+.status-row[data-active="true"] .status-row__label {
+  color: var(--color-accent);
+}
+
+.status-row__text {
+  margin-left: 8px;
+  opacity: 0.8;
+  transform: translateY(8px);
+  transition: opacity 0.4s, transform 0.4s;
+  color: var(--color-text);
+}
+
+.status-row[data-active="true"] .status-row__text {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.u-code-block {
+  padding: 10px;
+  overflow: auto;
+}
+
+.u-section-gap {
+  gap: clamp(1.5rem, 2.5vw, 2.5rem);
+}
+
+.u-home-hero {
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.u-home-bottom {
+  margin-top: clamp(2rem, 4vw, 3.5rem);
+}
+
+.u-page-content {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+@keyframes statusPulse {
+  0% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.2); }
+  100% { opacity: 1; transform: scale(1); }
+}

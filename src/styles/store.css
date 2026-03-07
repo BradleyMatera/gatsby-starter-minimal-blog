@@ -1,3 +1,17 @@
+/* Store styles
+   Used by:
+   - src/pages/store.tsx
+   - src/pages/purchases.tsx
+   - src/pages/success.tsx
+   - src/pages/cancel.tsx
+   - src/components/store/*
+
+   Owns:
+   - store catalog
+   - product detail routes
+   - purchase portal and success/cancel states
+*/
+
 .store-shell {
   --store-accent: #7a7a7a;
   --store-accent-hover: #949494;
@@ -263,6 +277,18 @@
   border: 1px solid var(--color-border);
 }
 
+.store-status--spaced-sm {
+  margin-top: 1rem;
+}
+
+.store-status--spaced-md {
+  margin-top: 1.25rem;
+}
+
+.store-status--spaced-lg {
+  margin-top: 1.5rem;
+}
+
 .store-error {
   border-color: rgba(244, 63, 94, 0.4);
   background: rgba(244, 63, 94, 0.08);
@@ -296,6 +322,21 @@
   font-size: 0.9rem;
 }
 
+.store-meta--spaced {
+  margin-bottom: 0.75rem;
+}
+
+.store-price--spaced {
+  margin-bottom: 1rem;
+}
+
+.store-inline-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
 .store-empty {
   border: 1px dashed var(--color-border);
   border-radius: 14px;
@@ -317,11 +358,6 @@
   color: var(--color-text-subtle);
 }
 
-.store-form {
-  display: grid;
-  gap: 0.75rem;
-  max-width: 420px;
-}
 
 .store-access {
   display: grid;
@@ -351,23 +387,7 @@
   align-items: center;
 }
 
-.store-label {
-  font-weight: 600;
-  color: var(--color-text);
-}
 
-.store-input {
-  border-radius: 12px;
-  border: 1px solid var(--color-border);
-  background: var(--color-surface);
-  padding: 0.65rem 0.85rem;
-  color: var(--color-text);
-}
-
-.store-input:focus {
-  outline: 3px solid rgba(163, 163, 163, 0.3);
-  border-color: var(--store-accent);
-}
 
 .store-orders {
   margin-top: 2rem;

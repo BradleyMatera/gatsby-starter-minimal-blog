@@ -293,10 +293,9 @@ const PurchasesPage = () => {
               <div>
                 <div className="store-meta">Signed in as {user.email}</div>
                 <button
-                  className="store-button store-button--ghost"
+                  className="store-button store-button--ghost u-mt-2"
                   type="button"
                   onClick={handleLogout}
-                  style={{ marginTop: "0.5rem" }}
                 >
                   Sign out
                 </button>
@@ -325,10 +324,10 @@ const PurchasesPage = () => {
         </div>
 
         {message && (
-          <div className={`store-status ${status === "error" ? "store-error" : ""}`} style={{ marginTop: "1.25rem" }}>
+          <div className={`store-status store-status--spaced-md ${status === "error" ? "store-error" : ""}`}>
             {message}
             {status === "error" && (
-              <div style={{ marginTop: "0.75rem" }}>
+              <div className="u-mt-3">
                 <Link className="store-link" to="/support/">Support & refunds</Link>
               </div>
             )}
@@ -336,7 +335,7 @@ const PurchasesPage = () => {
         )}
 
         {actionMessage && (
-          <div className="store-status" style={{ marginTop: "1rem" }}>
+          <div className="store-status store-status--spaced-sm">
             {actionMessage}
           </div>
         )}
@@ -423,7 +422,7 @@ const PurchasesPage = () => {
           </div>
         )}
 
-        <div style={{ marginTop: "2rem" }}>
+        <div className="u-mt-8">
           <Link className="store-link" to="/store/">Back to store</Link>
         </div>
       </div>

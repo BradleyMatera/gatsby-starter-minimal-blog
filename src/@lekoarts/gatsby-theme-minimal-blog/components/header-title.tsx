@@ -10,12 +10,11 @@ const HeaderTitle = () => {
   const { basePath } = useMinimalBlogConfig();
 
   return (
-    <div className="brand" style={{ display: "flex", alignItems: "center" }}>
+    <div className="brand u-flex u-items-center">
       <Link
-        className="brand__title"
+        className="brand__title u-inline-block u-align-middle"
         to={replaceSlashes(`/${basePath}`)}
         aria-label={`${siteTitle} — back to home`}
-        style={{ display: "inline-block", verticalAlign: "middle" }}
       >
         {siteTitle}
       </Link>

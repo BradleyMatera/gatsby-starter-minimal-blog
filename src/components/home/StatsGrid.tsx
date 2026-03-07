@@ -1,4 +1,5 @@
 import * as React from "react";
+import joinClasses from "../../utils/joinClasses";
 
 type Stat = {
   value: string;
@@ -19,13 +20,8 @@ const StatsGrid = () => {
   return (
     <div
       ref={ref as React.RefObject<HTMLDivElement>}
-      className="stats-grid"
+      className={joinClasses("stats-grid", "u-reveal", revealed ? "is-revealed" : undefined)}
       aria-label="Quick stats"
-      style={{
-        opacity: revealed ? 1 : 0,
-        transform: revealed ? "translateY(0)" : "translateY(32px)",
-        transition: "opacity 0.7s cubic-bezier(.22,.9,.2,1), transform 0.7s cubic-bezier(.22,.9,.2,1)",
-      }}
     >
       {stats.map((stat, i) => (
         <div className="stat-card" key={i}>

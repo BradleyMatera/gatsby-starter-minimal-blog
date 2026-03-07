@@ -97,24 +97,11 @@ function Lighting() {
 }
 
 const ThreeHero: React.FC = () => {
-  // Responsive canvas height
-  const height = typeof window !== "undefined" ? Math.max(320, window.innerHeight * 0.55) : 400;
-
   return (
-    <div style={{
-      position: "relative",
-      width: "100%",
-      height,
-      maxWidth: "100vw",
-      margin: "0 auto",
-      background: "#fff",
-      borderRadius: "16px",
-      overflow: "hidden",
-      boxShadow: "0 8px 32px rgba(0,0,0,0.08)"
-    }}>
+    <div className="u-three-stage u-three-stage--tall">
       <Canvas
         camera={{ position: [0, 0, 3.5], fov: 60 }}
-        style={{ width: "100%", height: "100%", background: "#fff" }}
+        className="u-three-canvas"
         dpr={[1, 2]}
         gl={{ antialias: true }}
       >
@@ -123,22 +110,7 @@ const ThreeHero: React.FC = () => {
         {/* Remove OrbitControls for production, use only for debugging */}
         {/* <OrbitControls enablePan={false} enableZoom={false} enableRotate={false} /> */}
       </Canvas>
-      <div style={{
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -60%)",
-        width: "100%",
-        textAlign: "center",
-        pointerEvents: "none",
-        zIndex: 2,
-        color: "#000",
-        fontFamily: "'Space Grotesk Variable', 'Montserrat', sans-serif",
-        fontWeight: 700,
-        fontSize: "2.2rem",
-        letterSpacing: "-0.02em",
-        textShadow: "0 2px 12px #fff"
-      }}>
+      <div className="u-three-overlay u-three-overlay--surface">
         Bradley Matera — Full Stack Software Engineer / Cloud Architect.
       </div>
     </div>

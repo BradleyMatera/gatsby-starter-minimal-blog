@@ -35,17 +35,17 @@ const Homepage = ({ posts }: MBHomepageProps) => {
   return (
     <Layout>
       <h1 sx={visuallyHidden}>{siteTitle}</h1>
-      <section sx={{ mb: [3, 4, 5] }}>
+      <section className="u-home-hero">
         <Hero />
       </section>
-      <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+      <div className="homepage-title-row">
         <TinyTriangleAccent />
         <Title text="Latest writing">
           <Link to={replaceSlashes(`/${basePath}/${blogPath}`)}>Browse the archive</Link>
         </Title>
       </div>
       <Listing posts={posts} id="latest-posts" showTags={false} />
-      <section sx={{ mt: [5, 6, 7] }}>
+      <section className="u-home-bottom">
         <Bottom />
       </section>
     </Layout>

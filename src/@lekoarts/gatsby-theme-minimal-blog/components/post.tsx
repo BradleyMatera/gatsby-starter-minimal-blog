@@ -144,6 +144,13 @@ const loadOneScriptPerSession = ({
   }
 };
 
+const getBannerSlotClassName = (placement: BannerPlacement) => {
+  if ((placement.width || 160) === 300 && (placement.height || 600) === 250) {
+    return "house-ad__banner-slot house-ad__banner-slot--300x250";
+  }
+  return "house-ad__banner-slot";
+};
+
 const AdsterraIframeUnit: React.FC<{ placement: BannerPlacement }> = ({ placement }) => {
   const containerRef = React.useRef<HTMLDivElement | null>(null);
 
@@ -205,8 +212,7 @@ const AdsterraIframeUnit: React.FC<{ placement: BannerPlacement }> = ({ placemen
       <span className="house-ad__eyebrow">Sponsored</span>
       <div
         ref={containerRef}
-        className="house-ad__banner-slot"
-        style={{ width: placement.width || 160, minHeight: placement.height || 600 }}
+        className={getBannerSlotClassName(placement)}
       />
     </div>
   );
@@ -598,9 +604,9 @@ const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({ data,
       <Layout className="layout--post">
         <Section className="post-entry" disableReveal>
           <article className="surface-card">
-            <header sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+            <header className="post-entry__header">
               <span className="eyebrow">Blog post</span>
-              <Heading as="h1" className="section-title" sx={{ mb: 0 }}>
+              <Heading as="h1" className="section-title u-mb-0">
                 Post not found
               </Heading>
             </header>
@@ -618,7 +624,7 @@ const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({ data,
           <BlogAccent />
         </div>
         <article className="surface-card" itemScope itemType="http://schema.org/Article">
-          <header sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+          <header className="post-entry__header">
             <nav className="breadcrumbs" aria-label="Breadcrumb">
               <ol className="breadcrumbs__list">
                 <li className="breadcrumbs__item">
@@ -633,7 +639,7 @@ const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({ data,
               </ol>
             </nav>
             <span className="eyebrow">Blog post</span>
-            <Heading as="h1" className="section-title" sx={{ mb: 0 }} itemProp="headline">
+            <Heading as="h1" className="section-title u-mb-0" itemProp="headline">
               {post.title}
             </Heading>
             <div className="post-meta">
@@ -689,7 +695,10 @@ const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({ data,
                   <nav>
                     <ul className="toc__list">
                       {tocItems.map((item) => (
-                        <li key={item.id} style={{ paddingLeft: item.level === 3 ? "0.75rem" : 0 }}>
+                        <li
+                          key={item.id}
+                          className={item.level === 3 ? "toc__item--nested" : undefined}
+                        >
                           <a href={`#${item.id}`}>{item.text}</a>
                         </li>
                       ))}

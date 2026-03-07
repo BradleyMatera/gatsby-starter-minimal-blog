@@ -23,7 +23,7 @@ const PostFooter = ({ post }: MBPostProps) => {
         </div>
       </div>
       <div>
-        <p className="feature-card__body" style={{ marginBottom: "0.75rem" }}>
+        <p className="feature-card__body u-mb-3">
           Have thoughts about “{post.title}”? I’d love to hear them—reach out on LinkedIn or open a discussion on GitHub.
         </p>
         <div className="card-actions">

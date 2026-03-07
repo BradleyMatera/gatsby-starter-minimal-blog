@@ -22,7 +22,7 @@ const Code: React.FC<{ children?: React.ReactNode; className?: string }> = ({ ch
       theme={undefined}
     >
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <pre className={`${className} custom-pre`} style={{ ...style, padding: '10px', overflow: 'auto' }}>
+        <pre className={`${className} custom-pre u-code-block`} style={style}>
           {tokens.map((line, lineIndex) => {
             const lineProps = getLineProps({ line, key: lineIndex });
             return (

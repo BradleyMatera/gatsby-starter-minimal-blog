@@ -75,7 +75,7 @@ const StoreProductRoute: React.FC<StoreProductRouteProps> = ({
     return (
       <div className="store-shell">
         <div className="store-status store-error">{error || "Product not found."}</div>
-        <div style={{ marginTop: "1.5rem" }}>
+        <div className="u-mt-6">
           <Link className="store-link" to="/store/">Back to store</Link>
         </div>
       </div>
@@ -93,21 +93,21 @@ const StoreProductRoute: React.FC<StoreProductRouteProps> = ({
       <div className="store-detail__media">
         <img src={getProductImage(product)} alt={getProductAlt(product)} />
       </div>
-      <div className="store-pill" style={{ marginBottom: "0.75rem" }}>
+      <div className="store-pill store-meta--spaced">
         {getProductBadge(product)}
       </div>
       {product.badge && (
-        <div className="store-pill store-pill--accent" style={{ marginBottom: "0.75rem" }}>
+        <div className="store-pill store-pill--accent store-meta--spaced">
           {product.badge}
         </div>
       )}
       {product.product_type === "affiliate" && product.affiliate_source === "amazon" && (
-        <p className="store-meta" style={{ marginBottom: "0.75rem" }}>
+        <p className="store-meta store-meta--spaced">
           Part of Brad&apos;s Amazon Picks.
         </p>
       )}
       {renderAmazonMeta(product)}
-      <div className="store-price" style={{ marginBottom: "1rem" }}>
+      <div className="store-price store-price--spaced">
         {formatPrice(product)}
       </div>
       <div className="store-actions">
@@ -117,7 +117,7 @@ const StoreProductRoute: React.FC<StoreProductRouteProps> = ({
         <Link className="store-link" to="/store/">Back to store</Link>
         <Link className="store-link" to="/purchases/">Customer portal</Link>
       </div>
-      {error && <div className="store-status store-error" style={{ marginTop: "1.5rem" }}>{error}</div>}
+      {error && <div className="store-status store-error store-status--spaced-lg">{error}</div>}
     </div>
   );
 };
