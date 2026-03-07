@@ -15,6 +15,9 @@ const ContactContent = () => (
           <p>
             <strong>Send the essentials up front</strong> - the problem, desired outcomes, and any constraints - and I will reply within one business day with the next steps.
           </p>
+          <p>
+            I am open to remote work and to projects in Durand, Davis, and nearby Northwest Illinois communities.
+          </p>
           <p>bradmatera@gmail.com</p>
         </>
       }
@@ -47,6 +50,35 @@ const ContactContent = () => (
           <p className="contact-info__note">
             Need NDAs or procurement docs? Attach them to the email and I will return a countersigned copy with the kickoff notes.
           </p>
+        </div>
+      </Card>
+    </Section>
+
+    <Section
+      eyebrow="Local work"
+      title={
+        <>
+          <strong>Northwest Illinois</strong> projects have a dedicated page too.
+        </>
+      }
+      description={
+        <p>
+          If you found the site by searching for a web developer in Durand, Illinois, Davis, Illinois,
+          or nearby communities, use the local page below. It pulls the relevant proof and service-area
+          language into one place.
+        </p>
+      }
+    >
+      <Card variant="outline">
+        <h3 className="project-card__title">Local service-area page</h3>
+        <p className="project-card__description">
+          Review the local overview for Durand, Davis, and nearby Northwest Illinois, then contact me
+          with the project details if the fit looks right.
+        </p>
+        <div className="card-actions">
+          <Link to="/web-developer-durand-davis-illinois/" data-variant="primary">
+            Open local services page
+          </Link>
         </div>
       </Card>
     </Section>
