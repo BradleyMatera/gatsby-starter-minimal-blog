@@ -1,32 +1,30 @@
-
 # bradleymatera.dev
 
-Production Gatsby site with a real store and customer portal.
+Production Gatsby site for `bradleymatera.dev`.
+
+## Purpose
+This branch is the application branch.
+It stays focused on the running site code, content, functions, scripts, and deploy config.
 
 ## Documentation
-Start at `docs/README.md` for the full documentation flow.
+Full repository documentation lives on the `docs` branch.
+
+- Docs branch: `docs`
+- Docs index: `https://github.com/BradleyMatera/gatsby-starter-minimal-blog/tree/docs/docs`
 
 ## Quick start
 ```bash
 npm install
-npm run develop        # Gatsby at http://localhost:8000
-netlify dev --no-open  # Site + functions at http://localhost:8888
+npm run develop
+netlify dev --no-open
 ```
 
-## What this repo includes
-- Portfolio + blog (Gatsby).
-- Store with two product types:
-  - Direct digital downloads (Stripe Checkout).
-  - Affiliate picks (Amazon links).
-- Customer portal for purchases (Netlify Identity).
+## Main areas
+- `src/` app code, components, styles, and features
+- `content/` public site content
+- `netlify/functions/` serverless functions
+- `scripts/` local workflow and automation scripts
+- `static/` bundled static assets
 
-## Key routes
-- `/store` (listing)
-- `/store/:slug` (detail)
-- `/go/:slug` (affiliate redirect or direct checkout)
-- `/purchases` (customer portal)
-- `/success` and `/cancel`
-- `/support`
-
-## Source of truth
-Code is the source of truth. Docs are aligned to the current codebase.
+## Rule
+If documentation changes are needed, update them on the `docs` branch.
