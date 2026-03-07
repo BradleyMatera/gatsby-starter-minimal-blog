@@ -2,7 +2,6 @@ import * as React from "react";
 import { Link } from "gatsby";
 import { Router, RouteComponentProps } from "@reach/router";
 import Layout from "../@lekoarts/gatsby-theme-minimal-blog/components/layout";
-import StoreProductRoute from "../components/store/store-detail-route";
 import {
   AmazonCollectionTabs,
   collectionOrder,
@@ -10,11 +9,12 @@ import {
   FeaturedSection,
   Product,
   ProductGrid,
+  StoreProductRoute,
   slugify,
   StoreHero,
   StorePrimaryTabs,
   StoreTab,
-} from "../components/store/store-view";
+} from "../features/store/components";
 import "../styles/store.css";
 
 const getFunctionsBase = () => {

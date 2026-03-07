@@ -1,3 +1,4 @@
+// Gatsby theme shadow file for the blog index route.
 import * as React from "react";
 import { HeadFC, Link } from "gatsby";
 import { useLocation } from "@reach/router";
@@ -6,9 +7,9 @@ import Listing from "./listing";
 import useMinimalBlogConfig from "../hooks/use-minimal-blog-config";
 import replaceSlashes from "../utils/replaceSlashes";
 import Seo from "./seo";
-import BlogAccent from "../../../components/BlogAccent";
-import { Section } from "../../../components/ui";
-import { SearchIcon, TagIcon, ChevronLeftIcon, ChevronRightIcon } from "../../../components/visuals/icons";
+import BlogAccent from "../../../site/accents/BlogAccent";
+import { Section } from "../../../ui";
+import { SearchIcon, TagIcon, ChevronLeftIcon, ChevronRightIcon } from "../../../site/icons";
 
 declare global {
   interface Window {

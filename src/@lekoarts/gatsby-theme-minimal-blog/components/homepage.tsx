@@ -1,4 +1,6 @@
 /** @jsx jsx */
+// Gatsby theme shadow file: keep this path for the theme override,
+// but treat src/features and src/site as the source of truth for real app code.
 import { jsx } from "theme-ui";
 import { HeadFC, Link } from "gatsby";
 import Layout from "./layout";
@@ -11,7 +13,7 @@ import { visuallyHidden } from "../styles/utils";
 import Seo from "./seo";
 import Hero from "../texts/hero.mdx";
 import Bottom from "../texts/bottom.mdx";
-import TinyTriangleAccent from "../../../components/TinyTriangleAccent";
+import { TinyTriangleAccent } from "../../../site/accents";
 
 export type MBHomepageProps = {
   posts: {

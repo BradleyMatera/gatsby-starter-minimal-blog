@@ -1,9 +1,10 @@
+// Gatsby theme shadow file for the brand title row.
 import * as React from "react";
 import { Link } from "gatsby";
 import useSiteMetadata from "../hooks/use-site-metadata";
 import useMinimalBlogConfig from "../hooks/use-minimal-blog-config";
 import replaceSlashes from "../utils/replaceSlashes";
-import NavSystemBadge from "../../../components/NavSystemBadge";
+import { NavSystemBadge } from "../../../site/components";
 
 const HeaderTitle = () => {
   const { siteTitle } = useSiteMetadata();

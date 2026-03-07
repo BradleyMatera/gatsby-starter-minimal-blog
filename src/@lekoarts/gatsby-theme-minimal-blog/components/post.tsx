@@ -1,4 +1,5 @@
 /** @jsx jsx */
+// Gatsby theme shadow file for blog post pages.
 import { jsx, Heading } from "theme-ui";
 import { Link } from "gatsby";
 import type { HeadFC, PageProps } from "gatsby";
@@ -7,8 +8,8 @@ import Layout from "./layout";
 import ItemTags from "./item-tags";
 import Seo from "./seo";
 import PostFooter from "./post-footer";
-import BlogAccent from "../../../components/BlogAccent";
-import { Section } from "../../../components/ui";
+import BlogAccent from "../../../site/accents/BlogAccent";
+import { Section } from "../../../ui";
 
 export type MBPostProps = {
   post: {

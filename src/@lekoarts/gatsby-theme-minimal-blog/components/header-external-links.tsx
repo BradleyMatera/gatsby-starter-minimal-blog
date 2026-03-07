@@ -1,6 +1,6 @@
 import * as React from "react";
 import useMinimalBlogConfig from "../hooks/use-minimal-blog-config";
-import { GitHubIcon, LinkedInIcon, TwitterIcon } from "../../../components/visuals/icons";
+import { GitHubIcon, LinkedInIcon, TwitterIcon } from "../../../site/icons";
 
 const iconMap: Record<string, JSX.Element> = {
   GitHub: <GitHubIcon size={20} />,

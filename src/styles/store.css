@@ -4,7 +4,7 @@
    - src/pages/purchases.tsx
    - src/pages/success.tsx
    - src/pages/cancel.tsx
-   - src/components/store/*
+   - src/features/store/components/*
 
    Owns:
    - store catalog

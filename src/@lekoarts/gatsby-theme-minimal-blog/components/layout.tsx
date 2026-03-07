@@ -1,4 +1,5 @@
 /** @jsx jsx */
+// Gatsby theme shadow file: this wires the theme shell to app-owned modules in src/site and src/ui.
 import { jsx } from "theme-ui";
 import * as React from "react";
 import { Global } from "@emotion/react";
@@ -9,7 +10,7 @@ import Header from "./header";
 import Footer from "./footer";
 import SkipNavLink from "./skip-nav";
 import CodeStyles from "../styles/code";
-import GlobalScrollEffects from "../../../components/visuals/GlobalScrollEffects";
+import { GlobalScrollEffects } from "../../../site/components";
 
 type LayoutProps = {
   children: React.ReactNode;

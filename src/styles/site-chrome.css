@@ -5,7 +5,7 @@
    - src/@lekoarts/gatsby-theme-minimal-blog/components/colormode-toggle.tsx
    - src/@lekoarts/gatsby-theme-minimal-blog/components/header-title.tsx
    - src/components/SiteHeader.js
-   - src/components/home/*
+   - src/features/home/components/*
 
    Owns:
    - header shell and primary nav

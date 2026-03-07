@@ -2,7 +2,7 @@
 import React from "react";
 import { Text, Heading } from "@theme-ui/components";
 import Code from "./code";
-import { Section, Card, Link, Badge } from "../../../components/ui";
+import { Section, Card, Link, Badge } from "../../../ui";
 import joinClasses from "../../../utils/joinClasses";
 
 // Map MDX headings to Theme UI Heading component

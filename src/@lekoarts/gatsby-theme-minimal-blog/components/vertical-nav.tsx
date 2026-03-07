@@ -1,6 +1,7 @@
+// Gatsby theme shadow file for navigation chrome; shared site pieces live in src/site.
 import * as React from "react";
 import { Link } from "gatsby";
-import ThemeToggle from "../../../components/ThemeToggle";
+import { ThemeToggle } from "../../../site/components";
 import {
   HomeIcon,
   ProjectsIcon,
@@ -11,7 +12,7 @@ import {
   EmailIcon,
   MenuIcon,
   CloseIcon,
-} from "../../../components/visuals/icons";
+} from "../../../site/icons";
 
 type NavItem = {
   title: string;

@@ -1,7 +1,7 @@
 // src/pages/404.tsx
 import React from 'react';
 import { ColorModeProvider } from '@theme-ui/color-modes';
-import ThreeScene from '../components/ThreeScene';
+import { ThreeScene } from '../site/components';
 
 const NotFoundPage = () => (
   <div>

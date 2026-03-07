@@ -1,0 +1,6 @@
+// Shared UI primitives only. Feature-specific cards and modules live under src/features.
+export { default as Section } from "./Section";
+export { default as Card } from "./Card";
+export { default as AnchorNav } from "./AnchorNav";
+export { default as Link } from "./Link";
+export { default as Badge } from "./Badge";

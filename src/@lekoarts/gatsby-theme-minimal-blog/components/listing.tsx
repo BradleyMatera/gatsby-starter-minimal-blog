@@ -1,7 +1,8 @@
 /** @jsx jsx */
+// Gatsby theme shadow helper: delegates actual card rendering to src/features/blog.
 import { jsx, type ThemeUIStyleObject } from "theme-ui";
 import * as React from "react";
-import BlogCard from "../../../components/blog/BlogCard";
+import { BlogCard } from "../../../features/blog/components";
 
 type ListingProps = {
   posts: {
