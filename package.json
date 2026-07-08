@@ -7,6 +7,9 @@
   "license": "0BSD",
   "starter-name": "gatsby-starter-minimal-blog",
   "packageManager": "npm@10.8.2",
+  "engines": {
+    "node": ">=20 <24"
+  },
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
@@ -62,7 +65,7 @@
     "react-code-blocks": "^0.1.6",
     "react-dom": "^18.2.0",
     "react-icons": "^5.5.0",
-    "sharp": "^0.33.4",
+    "sharp": "0.33.5",
     "stripe": "^15.12.0",
     "theme-ui": "^0.16.2",
     "three": "^0.181.0",
@@ -89,5 +92,8 @@
     "tailwindcss": "^4.1.4",
     "typescript": "^5.5.3",
     "typescript-eslint": "^7.18.0"
+  },
+  "overrides": {
+    "sharp": "$sharp"
   }
 }
