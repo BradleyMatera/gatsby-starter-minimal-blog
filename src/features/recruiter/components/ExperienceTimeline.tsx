@@ -1,7 +1,10 @@
 import * as React from "react";
 
 /* --------------------------------------------------------------------------
-   Experience Timeline — Animated, expandable career timeline.
+   Experience Timeline — Artistic scroll-revealed career timeline.
+   - Alternating left/right cards on desktop
+   - Smooth GSAP/CSS scroll reveals
+   - Expandable detail panels with animated progress dots
    -------------------------------------------------------------------------- */
 
 type TimelineEntry = {
@@ -101,22 +104,62 @@ const TIMELINE: TimelineEntry[] = [
   },
 ];
 
+const ChevronIcon: React.FC<{ expanded: boolean }> = ({ expanded }) => (
+  <svg
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    style={{
+      transform: expanded ? "rotate(180deg)" : "rotate(0deg)",
+      transition: "transform 0.3s cubic-bezier(.22,.9,.2,1)",
+      flexShrink: 0,
+    }}
+  >
+    <polyline points="6 9 12 15 18 9" />
+  </svg>
+);
+
 const ExperienceTimeline: React.FC = () => {
-  const [expandedIndex, setExpandedIndex] = React.useState<number | null>(null);
+  const [expandedIndex, setExpandedIndex] = React.useState<number | null>(1); // open AWS by default
+
+  const toggle = (index: number) => {
+    setExpandedIndex((current) => (current === index ? null : index));
+  };
 
   return (
-    <section id="experience-timeline" className="recruiter-section reveal-section">
-      <div className="recruiter-section__header">
-        <div className="recruiter-section__eyebrow">Experience</div>
-        <h2 className="recruiter-section__title">
-          Career <span className="recruiter-gradient-text">Timeline</span>
-        </h2>
-        <p className="recruiter-section__subtitle">
-          From military service to cloud engineering. Every step built the engineer I am today.
-        </p>
+    <section id="experience-timeline" className="recruiter-section recruiter-section--media reveal-section">
+      {/* Background media layer */}
+      <div className="recruiter-section__media" aria-hidden="true">
+        <video
+          className="recruiter-section__video"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/hero-amazon-2000.webp"
+        >
+          <source src="/career-timeline.mp4" type="video/mp4" />
+        </video>
+        <div className="recruiter-section__media-overlay" />
       </div>
 
-      <div className="recruiter-timeline" style={{ padding: "0 clamp(1rem, 4vw, 3rem)" }}>
+      <div className="recruiter-section__content">
+        <div className="recruiter-section__header">
+          <div className="recruiter-section__eyebrow">Experience</div>
+          <h2 className="recruiter-section__title">
+            Career <span className="recruiter-gradient-text">Timeline</span>
+          </h2>
+          <p className="recruiter-section__subtitle">
+            From military service to cloud engineering. Every step built the engineer I am today.
+          </p>
+        </div>
+
+        <div className="recruiter-timeline">
         <div className="recruiter-timeline__line" />
 
         {TIMELINE.map((entry, index) => {
@@ -124,148 +167,61 @@ const ExperienceTimeline: React.FC = () => {
           const isLeft = index % 2 === 0;
 
           return (
-            <div
+            <article
               key={index}
-              style={{
-                display: "flex",
-                justifyContent: isLeft ? "flex-start" : "flex-end",
-                marginBottom: "2rem",
-                position: "relative",
-              }}
+              className={`recruiter-timeline__item ${isLeft ? "recruiter-timeline__item--left" : "recruiter-timeline__item--right"}`}
             >
-              {/* Timeline dot */}
-              <div
-                style={{
-                  position: "absolute",
-                  left: "50%",
-                  top: "1.5rem",
-                  transform: "translateX(-50%)",
-                  width: 16,
-                  height: 16,
-                  borderRadius: "50%",
-                  background: isExpanded ? "var(--recruiter-purple)" : "var(--recruiter-surface-solid)",
-                  border: `2px solid ${isExpanded ? "var(--recruiter-purple)" : "var(--recruiter-border)"}`,
-                  zIndex: 2,
-                  transition: "all 0.3s ease",
-                  boxShadow: isExpanded ? "0 0 12px var(--recruiter-purple-glow)" : "none",
-                }}
-              />
-
-              {/* Card */}
-              <div
-                className="recruiter-glass reveal-child"
-                style={{
-                  width: "calc(50% - 2rem)",
-                  padding: "1.5rem",
-                  cursor: "pointer",
-                  transition: "border-color 0.3s ease",
-                }}
-                onClick={() => setExpandedIndex(isExpanded ? null : index)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    setExpandedIndex(isExpanded ? null : index);
-                  }
-                }}
+              <button
+                type="button"
+                className={`recruiter-timeline__card ${isExpanded ? "recruiter-timeline__card--active" : ""}`}
+                onClick={() => toggle(index)}
                 aria-expanded={isExpanded}
               >
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.5rem",
-                    marginBottom: "0.5rem",
-                  }}
-                >
-                  <span
-                    style={{
-                      fontSize: "0.75rem",
-                      fontWeight: 600,
-                      color: "var(--recruiter-purple)",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.05em",
-                    }}
-                  >
-                    {entry.period}
-                  </span>
-                  <span
-                    style={{
-                      fontSize: "0.6875rem",
-                      padding: "0.125rem 0.5rem",
-                      borderRadius: 9999,
-                      background: "rgba(255,255,255,0.05)",
-                      color: "var(--recruiter-text-muted)",
-                    }}
-                  >
-                    {entry.type}
-                  </span>
+                <div className="recruiter-timeline__meta">
+                  <span className="recruiter-timeline__period">{entry.period}</span>
+                  <span className="recruiter-timeline__type">{entry.type}</span>
                 </div>
 
-                <h3 style={{ fontSize: "1.125rem", fontWeight: 700, marginBottom: "0.25rem" }}>
-                  {entry.title}
-                </h3>
-                <div
-                  style={{
-                    fontSize: "0.875rem",
-                    color: "var(--recruiter-text-secondary)",
-                    marginBottom: "0.75rem",
-                  }}
-                >
-                  {entry.org}
-                </div>
-
-                {isExpanded && (
-                  <div style={{ marginTop: "1rem" }}>
-                    <ul style={{ listStyle: "none", padding: 0, margin: "0 0 1rem" }}>
-                      {entry.highlights.map((h, i) => (
-                        <li
-                          key={i}
-                          style={{
-                            display: "flex",
-                            gap: "0.625rem",
-                            padding: "0.375rem 0",
-                            fontSize: "0.875rem",
-                            color: "var(--recruiter-text-secondary)",
-                            lineHeight: 1.55,
-                          }}
-                        >
-                          <span style={{ color: "var(--recruiter-purple)", flexShrink: 0 }}>▸</span>
-                          {h}
-                        </li>
-                      ))}
-                    </ul>
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: "0.375rem" }}>
-                      {entry.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="recruiter-tag"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
+                <div className="recruiter-timeline__header-row">
+                  <div className="recruiter-timeline__role">
+                    <h3 className="recruiter-timeline__title">{entry.title}</h3>
+                    <span className="recruiter-timeline__org">{entry.org}</span>
                   </div>
-                )}
+                  <span className="recruiter-timeline__chevron">
+                    <ChevronIcon expanded={isExpanded} />
+                  </span>
+                </div>
 
                 <div
+                  className="recruiter-timeline__details"
                   style={{
-                    fontSize: "0.75rem",
-                    color: "var(--recruiter-text-muted)",
-                    marginTop: "0.75rem",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.25rem",
+                    maxHeight: isExpanded ? 400 : 0,
+                    opacity: isExpanded ? 1 : 0,
                   }}
                 >
-                  {isExpanded ? "Show less ↑" : "Show more ↓"}
+                  <ul className="recruiter-timeline__highlights">
+                    {entry.highlights.map((h, i) => (
+                      <li key={i}>
+                        <span className="recruiter-timeline__bullet" />
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="recruiter-timeline__tags">
+                    {entry.tags.map((tag) => (
+                      <span key={tag} className="recruiter-tag">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </div>
+              </button>
+            </article>
           );
         })}
       </div>
+    </div>
     </section>
   );
 };

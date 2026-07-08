@@ -22,17 +22,33 @@ const RecruiterPainPoints: React.FC = () => {
   ];
 
   return (
-    <section id="why-this-exists" className="recruiter-section reveal-section">
-      <div className="recruiter-section__header">
-        <div className="recruiter-section__eyebrow">Why I Built This</div>
-        <h2 className="recruiter-section__title">
-          Recruiting shouldn't feel like <span className="recruiter-gradient-text">detective work</span>
-        </h2>
-        <p className="recruiter-section__subtitle">
-          Hiring managers spend too much time piecing together candidate stories from scattered sources.
-          I built this hub to eliminate every friction point in evaluating me as a candidate.
-        </p>
+    <section id="why-this-exists" className="recruiter-section recruiter-section--media reveal-section">
+      {/* Background media layer */}
+      <div className="recruiter-section__media" aria-hidden="true">
+        <video
+          className="recruiter-section__video"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/hero-amazon-2000.webp"
+        >
+          <source src="/why-built-this.mp4" type="video/mp4" />
+        </video>
+        <div className="recruiter-section__media-overlay" />
       </div>
+
+      <div className="recruiter-section__content">
+        <div className="recruiter-section__header">
+          <div className="recruiter-section__eyebrow">Why I Built This</div>
+          <h2 className="recruiter-section__title">
+            Recruiting shouldn't feel like <span className="recruiter-gradient-text">detective work</span>
+          </h2>
+          <p className="recruiter-section__subtitle">
+            Hiring managers spend too much time piecing together candidate stories from scattered sources.
+            I built this hub to eliminate every friction point in evaluating me as a candidate.
+          </p>
+        </div>
 
       <div className="recruiter-grid reveal-child recruiter-grid--2" style={{ maxWidth: 960, margin: "0 auto" }}>
         <div className="recruiter-glass reveal-child" style={{ padding: "2rem" }}>
@@ -118,6 +134,7 @@ const RecruiterPainPoints: React.FC = () => {
           attention to detail, user empathy, and technical execution.
         </p>
       </div>
+    </div>
     </section>
   );
 };

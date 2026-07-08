@@ -78,18 +78,34 @@ const CertificationsWall: React.FC = () => {
   const [expandedId, setExpandedId] = React.useState<string | null>(null);
 
   return (
-    <section id="certifications" className="recruiter-section reveal-section">
-      <div className="recruiter-section__header">
-        <div className="recruiter-section__eyebrow">Credentials</div>
-        <h2 className="recruiter-section__title">
-          Certifications <span className="recruiter-title-accent">Wall</span>
-        </h2>
-        <p className="recruiter-section__subtitle">
-          Verified credentials with links. Every certification includes skills gained and verification details.
-        </p>
+    <section id="certifications" className="recruiter-section recruiter-section--media reveal-section">
+      {/* Background media layer */}
+      <div className="recruiter-section__media" aria-hidden="true">
+        <video
+          className="recruiter-section__video"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/hero-amazon-2000.webp"
+        >
+          <source src="/certifications-wall.mp4" type="video/mp4" />
+        </video>
+        <div className="recruiter-section__media-overlay" />
       </div>
 
-      <div className="recruiter-grid reveal-child recruiter-grid--2" style={{ maxWidth: 900, margin: "0 auto" }}>
+      <div className="recruiter-section__content">
+        <div className="recruiter-section__header">
+          <div className="recruiter-section__eyebrow">Credentials</div>
+          <h2 className="recruiter-section__title">
+            Certifications <span className="recruiter-title-accent">Wall</span>
+          </h2>
+          <p className="recruiter-section__subtitle">
+            Verified credentials with links. Every certification includes skills gained and verification details.
+          </p>
+        </div>
+
+        <div className="recruiter-grid reveal-child recruiter-grid--2" style={{ maxWidth: 900, margin: "0 auto" }}>
         {CERTIFICATIONS.map((cert) => {
           const isExpanded = expandedId === cert.id;
 
@@ -227,6 +243,7 @@ const CertificationsWall: React.FC = () => {
           );
         })}
       </div>
+    </div>
     </section>
   );
 };

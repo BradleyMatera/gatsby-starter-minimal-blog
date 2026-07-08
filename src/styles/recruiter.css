@@ -213,8 +213,62 @@
 }
 
 .recruiter-hero__content {
+  position: relative;
+  z-index: 2;
   max-width: 56rem;
   margin: 0 auto;
+  text-align: center;
+}
+
+/* ---- Section background media (used by Why I Built This) --------------- */
+.recruiter-section--media {
+  position: relative;
+  overflow: hidden;
+}
+
+.recruiter-section--media:nth-child(even) {
+  background: transparent;
+}
+
+.recruiter-section__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.recruiter-section__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.recruiter-section__media-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(var(--r-bg-rgb, 243, 239, 232), 0.88) 0%,
+    rgba(var(--r-bg-rgb, 243, 239, 232), 0.95) 60%,
+    rgba(var(--r-bg-rgb, 243, 239, 232), 0.98) 100%
+  );
+  backdrop-filter: blur(1.5px);
+  -webkit-backdrop-filter: blur(1.5px);
+}
+
+:root[data-theme="dark"] .recruiter-section__media-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(12, 12, 12, 0.84) 0%,
+    rgba(12, 12, 12, 0.94) 60%,
+    rgba(12, 12, 12, 0.98) 100%
+  );
+}
+
+.recruiter-section__content {
+  position: relative;
+  z-index: 2;
 }
 
 .recruiter-hero__eyebrow {
@@ -265,11 +319,12 @@
   letter-spacing: 0.01em;
 }
 
-/* ---- Timeline: warm vertical line ------------------------------------ */
+/* ---- Timeline: artistic alternating career path ---------------------- */
 .recruiter-timeline {
   position: relative;
-  max-width: 48rem;
+  max-width: 56rem;
   margin: 0 auto;
+  padding: 2rem 0;
 }
 
 .recruiter-timeline__line {
@@ -277,9 +332,234 @@
   left: 50%;
   top: 0;
   bottom: 0;
-  width: 1px;
-  background: var(--r-border);
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    var(--r-border-strong) 5%,
+    var(--r-border-strong) 95%,
+    transparent 100%
+  );
   transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.recruiter-timeline__item {
+  position: relative;
+  width: 50%;
+  padding: 0 2.5rem 2.5rem;
+  opacity: 0;
+  transition: opacity 0.7s cubic-bezier(.22,.9,.2,1),
+              transform 0.7s cubic-bezier(.22,.9,.2,1);
+}
+
+.recruiter-timeline__item--left {
+  margin-right: auto;
+  padding-right: 2.5rem;
+  transform: translateX(-40px);
+  text-align: right;
+}
+
+.recruiter-timeline__item--right {
+  margin-left: auto;
+  padding-left: 2.5rem;
+  transform: translateX(40px);
+  text-align: left;
+}
+
+.recruiter-timeline__item.is-revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Timeline dot on the center line */
+.recruiter-timeline__item::before {
+  content: "";
+  position: absolute;
+  top: 1.75rem;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--r-surface-raised);
+  border: 2px solid var(--r-border-strong);
+  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  z-index: 2;
+}
+
+.recruiter-timeline__item--left::before {
+  right: -7px;
+}
+
+.recruiter-timeline__item--right::before {
+  left: -7px;
+}
+
+.recruiter-timeline__item.is-revealed::before {
+  border-color: var(--r-accent);
+  background: var(--r-accent);
+  box-shadow: 0 0 0 4px var(--r-accent-light);
+}
+
+.recruiter-timeline__card {
+  width: 100%;
+  text-align: inherit;
+  background: var(--r-surface-raised);
+  border: 1px solid var(--r-border);
+  border-radius: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  cursor: pointer;
+  transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  color: inherit;
+  font-family: inherit;
+}
+
+.recruiter-timeline__card:hover,
+.recruiter-timeline__card--active {
+  border-color: var(--r-accent);
+  box-shadow: 0 8px 30px var(--r-shadow);
+}
+
+.recruiter-timeline__card--active {
+  background: linear-gradient(
+    145deg,
+    var(--r-surface-raised) 0%,
+    var(--r-accent-light) 120%
+  );
+}
+
+.recruiter-timeline__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin-bottom: 0.625rem;
+  flex-wrap: wrap;
+  justify-content: inherit;
+}
+
+.recruiter-timeline__period {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--r-accent);
+}
+
+.recruiter-timeline__type {
+  font-size: 0.6875rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999;
+  background: var(--r-surface);
+  color: var(--r-text-muted);
+}
+
+.recruiter-timeline__header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.recruiter-timeline__role {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.recruiter-timeline__title {
+  font-family: var(--r-font-heading);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--r-text);
+  margin: 0;
+  line-height: 1.25;
+}
+
+.recruiter-timeline__org {
+  font-size: 0.875rem;
+  color: var(--r-text-secondary);
+  line-height: 1.4;
+}
+
+.recruiter-timeline__chevron {
+  display: inline-flex;
+  color: var(--r-text-muted);
+  margin-top: 0.25rem;
+  flex-shrink: 0;
+}
+
+.recruiter-timeline__details {
+  overflow: hidden;
+  transition: max-height 0.45s cubic-bezier(.22,.9,.2,1),
+              opacity 0.35s ease;
+}
+
+.recruiter-timeline__highlights {
+  list-style: none;
+  padding: 1.25rem 0 0;
+  margin: 0 0 1rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.recruiter-timeline__highlights li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  font-size: 0.875rem;
+  color: var(--r-text-secondary);
+  line-height: 1.55;
+}
+
+.recruiter-timeline__bullet {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--r-accent);
+  margin-top: 0.45rem;
+  flex-shrink: 0;
+}
+
+.recruiter-timeline__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  justify-content: inherit;
+}
+
+@media (max-width: 768px) {
+  .recruiter-timeline__line {
+    left: 1.25rem;
+  }
+
+  .recruiter-timeline__item,
+  .recruiter-timeline__item--left,
+  .recruiter-timeline__item--right {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 3rem;
+    padding-right: 0;
+    text-align: left;
+    transform: translateX(-20px);
+  }
+
+  .recruiter-timeline__item.is-revealed {
+    transform: translateX(0);
+  }
+
+  .recruiter-timeline__item--left::before,
+  .recruiter-timeline__item--right::before {
+    left: calc(1.25rem - 7px);
+    right: auto;
+  }
+
+  .recruiter-timeline__meta,
+  .recruiter-timeline__tags {
+    justify-content: flex-start;
+  }
 }
 
 /* ---- Search input: minimal, warm ------------------------------------- */
@@ -463,6 +743,49 @@
   );
   pointer-events: none;
   animation: hero-breathe 12s ease-in-out infinite;
+  z-index: 1;
+}
+
+/* Background media (video / image) behind hero content */
+.recruiter-hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.recruiter-hero__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.recruiter-hero__media-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(var(--r-bg-rgb, 243, 239, 232), 0.82) 0%,
+    rgba(var(--r-bg-rgb, 243, 239, 232), 0.92) 55%,
+    rgba(var(--r-bg-rgb, 243, 239, 232), 0.98) 100%
+  );
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+:root[data-theme="dark"] .recruiter-hero__media-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(12, 12, 12, 0.78) 0%,
+    rgba(12, 12, 12, 0.9) 55%,
+    rgba(12, 12, 12, 0.98) 100%
+  );
+}
+
+.recruiter-hero__content {
+  position: relative;
+  z-index: 2;
 }
 
 @keyframes hero-breathe {

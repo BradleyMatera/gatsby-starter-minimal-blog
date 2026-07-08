@@ -170,14 +170,30 @@ const SkillsExplorer: React.FC = () => {
   };
 
   return (
-    <section id="skills-explorer" className="recruiter-section reveal-section">
-      <div className="recruiter-section__header">
-        <span className="recruiter-section__eyebrow">Technical Skills</span>
-        <h2 className="recruiter-section__title">
-          Skills <span className="recruiter-title-accent">Explorer</span>
-        </h2>
-        <p className="recruiter-section__subtitle">
-          Click any skill to expand it. See real-world projects, proficiency, and how it fits the work.
+    <section id="skills-explorer" className="recruiter-section recruiter-section--media reveal-section">
+      {/* Background media layer */}
+      <div className="recruiter-section__media" aria-hidden="true">
+        <video
+          className="recruiter-section__video"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/hero-amazon-2000.webp"
+        >
+          <source src="/skills-explorer.mp4" type="video/mp4" />
+        </video>
+        <div className="recruiter-section__media-overlay" />
+      </div>
+
+      <div className="recruiter-section__content">
+        <div className="recruiter-section__header">
+          <span className="recruiter-section__eyebrow">Technical Skills</span>
+          <h2 className="recruiter-section__title">
+            Skills <span className="recruiter-title-accent">Explorer</span>
+          </h2>
+          <p className="recruiter-section__subtitle">
+            Click any skill to expand it. See real-world projects, proficiency, and how it fits the work.
         </p>
       </div>
 
@@ -446,6 +462,7 @@ const SkillsExplorer: React.FC = () => {
           );
         })}
       </div>
+    </div>
     </section>
   );
 };

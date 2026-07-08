@@ -66,7 +66,7 @@ const RecruiterFAQ: React.FC = () => {
   const [openIndex, setOpenIndex] = React.useState<number | null>(0);
 
   return (
-    <section id="recruiter-faq" className="recruiter-section reveal-section">
+    <section id="recruiter-faq" className="recruiter-section" data-static-visibility="true">
       <div className="recruiter-section__header">
         <div className="recruiter-section__eyebrow">FAQ</div>
         <h2 className="recruiter-section__title">

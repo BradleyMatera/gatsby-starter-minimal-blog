@@ -54,18 +54,34 @@ const CONTRIBUTIONS: Contribution[] = [
 
 const ContributionsShowcase: React.FC = () => {
   return (
-    <section id="contributions-showcase" className="recruiter-section reveal-section">
-      <div className="recruiter-section__header">
-        <div className="recruiter-section__eyebrow">Open Source</div>
-        <h2 className="recruiter-section__title">
-          Community <span className="recruiter-gradient-text">Contributions</span>
-        </h2>
-        <p className="recruiter-section__subtitle">
-          Unpaid, student-level contributions with documentation focus and honest scope.
-        </p>
+    <section id="contributions-showcase" className="recruiter-section recruiter-section--media reveal-section">
+      {/* Background media layer */}
+      <div className="recruiter-section__media" aria-hidden="true">
+        <video
+          className="recruiter-section__video"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/hero-amazon-2000.webp"
+        >
+          <source src="/community-contributions.mp4" type="video/mp4" />
+        </video>
+        <div className="recruiter-section__media-overlay" />
       </div>
 
-      <div className="recruiter-grid reveal-child recruiter-grid--2" style={{ maxWidth: 960, margin: "0 auto" }}>
+      <div className="recruiter-section__content">
+        <div className="recruiter-section__header">
+          <div className="recruiter-section__eyebrow">Open Source</div>
+          <h2 className="recruiter-section__title">
+            Community <span className="recruiter-gradient-text">Contributions</span>
+          </h2>
+          <p className="recruiter-section__subtitle">
+            Unpaid, student-level contributions with documentation focus and honest scope.
+          </p>
+        </div>
+
+        <div className="recruiter-grid reveal-child recruiter-grid--2" style={{ maxWidth: 960, margin: "0 auto" }}>
         {CONTRIBUTIONS.map((contrib) => (
           <div
             key={contrib.id}
@@ -183,6 +199,7 @@ const ContributionsShowcase: React.FC = () => {
           </div>
         ))}
       </div>
+    </div>
     </section>
   );
 };

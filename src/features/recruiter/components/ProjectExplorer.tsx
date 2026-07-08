@@ -183,27 +183,43 @@ const ProjectExplorer: React.FC = () => {
   );
 
   return (
-    <section id="project-explorer" className="recruiter-section reveal-section">
-      <div className="recruiter-section__header">
-        <span className="recruiter-section__eyebrow">Projects</span>
-        <h2 className="recruiter-section__title">
-          Project <span className="recruiter-title-accent">Explorer</span>
-        </h2>
-        <p className="recruiter-section__subtitle">
-          All live demos, repos, and case studies in one place. Tap a card to expand details.
-        </p>
+    <section id="project-explorer" className="recruiter-section recruiter-section--media reveal-section">
+      {/* Background media layer */}
+      <div className="recruiter-section__media" aria-hidden="true">
+        <video
+          className="recruiter-section__video"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/hero-amazon-2000.webp"
+        >
+          <source src="/project-explorer.mp4" type="video/mp4" />
+        </video>
+        <div className="recruiter-section__media-overlay" />
       </div>
 
-      {/* Category filter */}
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "0.5rem",
-          justifyContent: "center",
-          marginBottom: "2rem",
-        }}
-      >
+      <div className="recruiter-section__content">
+        <div className="recruiter-section__header">
+          <span className="recruiter-section__eyebrow">Projects</span>
+          <h2 className="recruiter-section__title">
+            Project <span className="recruiter-title-accent">Explorer</span>
+          </h2>
+          <p className="recruiter-section__subtitle">
+            All live demos, repos, and case studies in one place. Tap a card to expand details.
+          </p>
+        </div>
+
+        {/* Category filter */}
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "0.5rem",
+            justifyContent: "center",
+            marginBottom: "2rem",
+          }}
+        >
         {CATEGORIES.map((cat) => (
           <button
             key={cat}
@@ -407,6 +423,7 @@ const ProjectExplorer: React.FC = () => {
           );
         })}
       </div>
+    </div>
     </section>
   );
 };

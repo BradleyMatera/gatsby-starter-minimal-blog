@@ -2,12 +2,28 @@ import * as React from "react";
 import { Link } from "gatsby";
 
 /* --------------------------------------------------------------------------
-   Recruiter Hero — Warm, editorial, no decorative noise.
+   Recruiter Hero — Warm editorial hero with a background video/image layer.
    -------------------------------------------------------------------------- */
 
 const RecruiterHero: React.FC = () => {
   return (
     <section id="recruiter-hero" className="recruiter-hero reveal-section">
+      {/* Background media layer */}
+      <div className="recruiter-hero__media" aria-hidden="true">
+        <video
+          className="recruiter-hero__video"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/hero-amazon-2000.webp"
+        >
+          <source src="/hero-recruiter.webm" type="video/webm" />
+          <source src="/hero-recruiter.mp4" type="video/mp4" />
+        </video>
+        <div className="recruiter-hero__media-overlay" />
+      </div>
+
       <div className="recruiter-hero__content">
         <span className="recruiter-hero__eyebrow">Recruiter Resource Hub</span>
 

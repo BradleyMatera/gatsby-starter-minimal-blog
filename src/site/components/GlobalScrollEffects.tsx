@@ -153,18 +153,28 @@ const GlobalScrollEffects = () => {
       });
 
       /* ---- Recruiter Timeline Item Stagger Reveals ---- */
-      document.querySelectorAll<HTMLElement>(".recruiter-timeline__item").forEach((item, i) => {
+      document.querySelectorAll<HTMLElement>(".recruiter-timeline__item").forEach((item) => {
+        const isLeft = item.classList.contains("recruiter-timeline__item--left");
+        const startX = isLeft ? -60 : 60;
+
+        ScrollTrigger.create({
+          trigger: item,
+          start: "top 85%",
+          onEnter: () => item.classList.add("is-revealed"),
+          onEnterBack: () => item.classList.add("is-revealed"),
+        });
+
         gsap.fromTo(
           item,
-          { opacity: 0, x: -30 },
+          { opacity: 0, x: startX },
           {
             opacity: 1,
             x: 0,
-            duration: 0.5,
+            duration: 0.7,
             ease: "power2.out",
             scrollTrigger: {
               trigger: item,
-              start: "top 88%",
+              start: "top 85%",
               toggleActions: "play none none reverse",
             },
           }
