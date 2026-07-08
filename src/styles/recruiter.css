@@ -501,8 +501,8 @@
 .reveal-section.is-revealed .reveal-child:nth-child(5),
 .reveal-section.is-snap-active .reveal-child:nth-child(5) { transition-delay: 0.32s; opacity: 1; transform: translateY(0); }
 .reveal-section.is-revealed .reveal-child:nth-child(6),
-.reveal-section.is-snap-active .reveal-child:nth-child(6) { transition-delay: 0.40s; opacity: 1; transform: translateY(0); }
-
+.reveal-section.is-snap-active .reveal-child:nth-child(6) { transition-delay: 0.40s; opacity: 1; transform: translateY(0); }.reveal-section.is-revealed .reveal-child:nth-child(n+7),
+.recruiter-section.is-snap-active .reveal-child:nth-child(n+7) { transition-delay: 0.48s; opacity: 1; transform: translateY(0); }
 /* ---- Magnetic Button Effect -------------------------------------------- */
 .recruiter-btn.magnetic-btn {
   position: relative;
