@@ -5,9 +5,8 @@ import useMinimalBlogConfig from "../hooks/use-minimal-blog-config";
 import replaceSlashes from "../utils/replaceSlashes";
 
 const PostFooter = ({ post }: MBPostProps) => {
-  const { basePath, blogPath, navigation } = useMinimalBlogConfig();
+  const { basePath, blogPath } = useMinimalBlogConfig();
   const blogRoot = replaceSlashes(`/${basePath}/${blogPath}`);
-  const projectsPath = navigation.find((item) => item.slug === "/projects")?.slug ?? "/projects";
 
   return (
     <footer className="post-footer-nav">
@@ -17,7 +16,7 @@ const PostFooter = ({ post }: MBPostProps) => {
           <Link data-variant="primary" to={blogRoot}>
             Back to blog
           </Link>
-          <Link data-variant="ghost" to={replaceSlashes(`/${basePath}/${projectsPath}`)}>
+          <Link data-variant="ghost" to="/recruiter/#project-explorer">
             View projects
           </Link>
         </div>

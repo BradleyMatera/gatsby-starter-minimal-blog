@@ -22,7 +22,7 @@ const Footer = () => {
           <p className="footer__title">{siteTitle}</p>
           {description ? <p className="footer__description">{description}</p> : null}
           <div className="footer-cta">
-            <Link to={replaceSlashes(`/${basePath}/projects`)}>View project portfolio</Link>
+            <Link to="/recruiter/#project-explorer">View project portfolio</Link>
             <Link to={replaceSlashes(`/${basePath}/blog`)}>Read latest blog posts</Link>
           </div>
         </div>
@@ -73,11 +73,15 @@ const Footer = () => {
         </div>
       </div>
 
+      {/* Bottom bar */}
       <div className="footer-bottom">
-        <span>&copy; {currentYear} {siteTitle}. All rights reserved.</span>
-        <span>Designing and delivering resilient cloud-backed products.</span>
+        <span>&copy; {currentYear} {siteTitle}</span>
+        <span>
+          <Link to="/recruiter/" style={{ color: "inherit", textDecoration: "underline" }}>
+            Hiring? View the recruiter hub →
+          </Link>
+        </span>
         <span>As an Amazon Associate I earn from qualifying purchases.</span>
-        <span>Affiliate products are sold by third-party merchants; direct downloads are sold by Bradley Matera.</span>
       </div>
     </footer>
   );

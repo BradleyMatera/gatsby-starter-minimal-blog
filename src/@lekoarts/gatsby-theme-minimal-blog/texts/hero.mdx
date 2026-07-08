@@ -31,7 +31,7 @@ import { TinyDotClusterAccent, TinyTriangleAccent, BlogAccent } from "../../../s
   </picture>
 </figure>
 
-<section className="home-section home-section--snapshot home-snap">
+<section className="home-section home-section--snapshot home-snap reveal-section">
   <header className="section-strip" aria-hidden="true">
     <picture>
       <source type="image/avif" srcSet="/quick-snapshot.avif" />
@@ -93,7 +93,7 @@ import { TinyDotClusterAccent, TinyTriangleAccent, BlogAccent } from "../../../s
   <div className="section-lead">
     I keep the work measurable: shipping UI components, tying them to APIs, and automating manual ops so future maintainers can move faster.
   </div>
-  <div className="grid-three">
+  <div className="grid-three reveal-child">
     <div className="feature-card" style={{ position: "relative", overflow: "hidden" }}>
       <div style={{ position: "absolute", top: "1rem", right: "1rem", opacity: 0.15, pointerEvents: "none" }}>
         <TinyCloudAccent />
@@ -134,7 +134,7 @@ import { TinyDotClusterAccent, TinyTriangleAccent, BlogAccent } from "../../../s
     <img src="/graphic-section-divider.png" className="media-img" alt="" width="1536" height="1024" loading="lazy" decoding="async" />
   </picture>
 </figure>
-<section className="home-section home-section--featured home-snap">
+<section className="home-section home-section--featured home-snap reveal-section">
   <header className="section-strip" aria-hidden="true">
     <picture>
       <source type="image/avif" srcSet="/featured-work.avif" />
@@ -237,7 +237,7 @@ import { TinyDotClusterAccent, TinyTriangleAccent, BlogAccent } from "../../../s
     <img src="/graphic-section-divider.png" className="media-img" alt="" width="1536" height="1024" loading="lazy" decoding="async" />
   </picture>
 </figure>
-<section className="home-section home-section--collaborate home-snap">
+<section className="home-section home-section--collaborate home-snap reveal-section">
   <header className="section-strip" aria-hidden="true">
     <picture>
       <source type="image/avif" srcSet="/lets-collaborate.avif" />
@@ -291,4 +291,116 @@ import { TinyDotClusterAccent, TinyTriangleAccent, BlogAccent } from "../../../s
     </div>
   </div>
 </section>
+{/* About Brad — full story moved from /about page */}
+
+<figure className="section-divider" aria-hidden="true">
+  <picture>
+    <source type="image/avif" srcSet="/graphic-section-divider.avif" />
+    <source type="image/webp" srcSet="/graphic-section-divider.webp" />
+    <img src="/graphic-section-divider.png" className="media-img" alt="" width="1536" height="1024" loading="lazy" decoding="async" />
+  </picture>
+</figure>
+
+<section className="home-section home-section--about home-snap reveal-section" id="path-so-far">
+  <h2 className="sr-only">About Brad</h2>
+  <div className="home-section__content">
+    <div className="section-surface section-surface--about">
+      <div className="section-shell__header">
+        <h2 className="section-title"><strong>How I got into tech</strong> — Tinkering first, school later</h2>
+      </div>
+      <div className="section-content">
+        <p>I built my first PC when I was around 12. It was an old Gateway machine, and that is where a lot of this started. I spent a lot of time messing with HTML pages, installing game mods, and figuring out what broke when you changed things.</p>
+        <p>I did not go straight into software after high school. I spent years working in different fields, including the Army as a medic and later in operations, logistics, case management, and rescue work. Those jobs were intense, but they taught me how to stay calm when things get messy and how important clear documentation is.</p>
+        <p>I came back to tech seriously in 2023 when I enrolled in the Web Development program at Full Sail University. I graduated on October 31, 2025 with a Bachelor of Science in Web Development, finished as the salutatorian of the program, and graduated with a 3.64 GPA.</p>
+        <p>That is the version of me this page is meant to reflect. I am not trying to sound like a senior engineer. What I can say honestly is that I have been building a lot since March 2024, and GitHub has become the place where I work through ideas, test them, and keep a record of what I learned.</p>
+        <p>If you want the full timeline, certifications, and verified credentials, those live in the <Link to="/recruiter/">recruiter hub</Link>. If you are here because you searched for a web developer in Durand, Davis, or nearby Northwest Illinois, I also put together a separate <Link to="/web-developer-durand-davis-illinois/">local work page</Link> so the service area, proof, and fit are easy to scan.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<figure className="section-divider" aria-hidden="true">
+  <picture>
+    <source type="image/avif" srcSet="/graphic-section-divider.avif" />
+    <source type="image/webp" srcSet="/graphic-section-divider.webp" />
+    <img src="/graphic-section-divider.png" className="media-img" alt="" width="1536" height="1024" loading="lazy" decoding="async" />
+  </picture>
+</figure>
+
+<section className="home-section home-section--credentials home-snap reveal-section" id="credentials">
+  <div className="home-section__content">
+    <div className="section-surface section-surface--credentials">
+      <div className="section-shell__header">
+        <h2 className="section-title">Credentials</h2>
+        <p className="section-subtitle">The high-level facts. For full verification — dates, credential IDs, and badge links — see the <Link to="/recruiter/">recruiter hub</Link>.</p>
+      </div>
+      <div className="section-content">
+        <div className="how-i-work-grid">
+          <article className="about-panel about-panel--work feature-card how-i-work__focus">
+            <div className="about-work__panel">
+              <h3 className="feature-card__title"><strong>Degree</strong> - Full Sail University</h3>
+              <p>B.S. Web Development, October 2025. Salutatorian, 3.64 GPA.</p>
+            </div>
+          </article>
+          <article className="about-panel about-panel--work feature-card how-i-work__collaboration">
+            <div className="about-work__panel">
+              <h3 className="feature-card__title"><strong>Experience</strong> - AWS internship</h3>
+              <p>Cloud Support Engineer intern at Amazon, summer 2025. Training environments, cloud troubleshooting workflows.</p>
+            </div>
+          </article>
+        </div>
+        <div className="certification-cards">
+          <article className="certification-card">
+            <div className="certification-card__title">AWS Certified Solutions Architect – Associate</div>
+            <div className="certification-card__issuer">Amazon Web Services (AWS)</div>
+          </article>
+          <article className="certification-card">
+            <div className="certification-card__title">AWS Certified AI Practitioner</div>
+            <div className="certification-card__issuer">Amazon Web Services (AWS)</div>
+          </article>
+          <article className="certification-card">
+            <div className="certification-card__title">JavaScript Algorithms and Data Structures</div>
+            <div className="certification-card__issuer">freeCodeCamp</div>
+          </article>
+          <article className="certification-card">
+            <div className="certification-card__title">Foundational C# with Microsoft</div>
+            <div className="certification-card__issuer">freeCodeCamp</div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<figure className="section-divider" aria-hidden="true">
+  <picture>
+    <source type="image/avif" srcSet="/graphic-section-divider.avif" />
+    <source type="image/webp" srcSet="/graphic-section-divider.webp" />
+    <img src="/graphic-section-divider.png" className="media-img" alt="" width="1536" height="1024" loading="lazy" decoding="async" />
+  </picture>
+</figure>
+
+<section className="home-section home-section--contact home-snap reveal-section">
+  <div className="home-section__content">
+    <div className="section-surface section-surface--contact">
+      <div className="section-shell__header">
+        <h2 className="section-title"><strong>Let's talk</strong> — Open to junior roles, freelance work, and collaborations</h2>
+      </div>
+      <div className="section-content">
+        <p>I am looking for opportunities to grow and collaborate. If you need someone eager to learn, build useful things, and communicate clearly, whether that is a small freelance job or a junior developer role, I would like to talk.</p>
+        <ul className="feature-list about-cta__list">
+          <li><strong>Email:</strong> bradmatera@gmail.com</li>
+          <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/bradmatera" target="_blank" rel="noopener noreferrer">/in/bradmatera</a></li>
+          <li><strong>GitHub:</strong> <a href="https://github.com/BradleyMatera" target="_blank" rel="noopener noreferrer">@BradleyMatera</a></li>
+          <li><strong>Dev.to:</strong> <a href="https://dev.to/bradleymatera" target="_blank" rel="noopener noreferrer">@bradleymatera</a></li>
+        </ul>
+        <div className="card-actions">
+          <Link to="/recruiter/#project-explorer" data-variant="primary">View case studies</Link>
+          <Link to="/contact/" data-variant="ghost">Open contact page</Link>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 </>

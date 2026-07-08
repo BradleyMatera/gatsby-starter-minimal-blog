@@ -98,6 +98,12 @@ const Layout = ({ children, className = `` }: LayoutProps) => {
         }}
       />
       <div className="layout-shell cyberpunk-layout">
+        {/* Scroll Progress Bar */}
+        <div className="scroll-progress" aria-hidden="true" />
+
+        {/* Cursor Spotlight */}
+        <div className="cursor-spotlight" id="cursor-spotlight" aria-hidden="true" />
+
         {/* Cyberpunk Background Effects */}
         <div className="cyber-grid-bg" aria-hidden="true" />
         <div className="scroll-color-layer" aria-hidden="true" />

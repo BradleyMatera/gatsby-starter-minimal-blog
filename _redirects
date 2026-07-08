@@ -1,6 +1,10 @@
+
 # @netlify/plugin-gatsby redirects start
 
 # @netlify/plugin-gatsby redirects end
+/projects /recruiter/#project-explorer 301!
+/projects/* /recruiter/#project-explorer 301!
+
 ## Created with gatsby-plugin-netlify
 
 # @netlify/plugin-gatsby redirects start

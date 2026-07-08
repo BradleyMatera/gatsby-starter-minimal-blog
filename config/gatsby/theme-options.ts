@@ -1,15 +1,13 @@
 export const navigation = [
-  { title: `Home`, slug: `/` },
-  { title: `About`, slug: `/about` },
-  { title: `Projects`, slug: `/projects` },
-  { title: `Roles`, slug: `/roles` },
-  { title: `Contributions`, slug: `/contributions` },
+  { title: `About Brad`, slug: `/` },
   { title: `Blog`, slug: `/blog` },
+  { title: `For Recruiter`, slug: `/recruiter` },
   { title: `Contact`, slug: `/contact` },
 ];
 
 export const externalLinks = [
   { name: `LinkedIn`, url: `https://www.linkedin.com/in/bradmatera` },
   { name: `GitHub`, url: `https://github.com/BradleyMatera` },
+  { name: `Dev.to`, url: `https://dev.to/bradleymatera` },
   { name: `YouTube`, url: `https://www.youtube.com/@bradmatera` },
 ];

@@ -199,7 +199,7 @@ const LocalWebDeveloperPage = () => (
           <p>
             The best starting point is still email through the <Link to="/contact/">contact page</Link>.
             If you want to vet the work first, start with the <Link to="/projects/">project pages</Link>{" "}
-            or the <Link to="/about/">about page</Link>.
+            or the <Link to="/">about page</Link>.
           </p>
         </>
       }

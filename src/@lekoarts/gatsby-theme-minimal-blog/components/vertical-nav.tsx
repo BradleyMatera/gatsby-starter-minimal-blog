@@ -4,11 +4,8 @@ import { Link } from "gatsby";
 import { ThemeToggle } from "../../../site/components";
 import {
   HomeIcon,
-  ProjectsIcon,
-  AboutIcon,
-  RolesIcon,
-  ContributionsIcon,
   BlogIcon,
+  UserIcon,
   EmailIcon,
   MenuIcon,
   CloseIcon,
@@ -46,9 +43,9 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
     }
   }, []);
 
-  // Filter to core links only: Home, Projects, About, Contact, Roles, Contributions, Blog
+  // Filter to core links only: About Brad, Blog, For Recruiter
   const coreLinks = nav.filter(item =>
-    ["/", "/projects", "/about", "/roles", "/contributions", "/posts"].includes(item.slug)
+    ["/", "/posts", "/recruiter"].includes(item.slug)
   );
 
   return (
@@ -79,7 +76,7 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
             </Link>
             <ul className="vertical-nav__list cyber-nav__list">
               {coreLinks.map((item) => {
-                const label = item.slug === "/" ? "Home" : item.title;
+                const label = item.slug === "/" ? "About Brad" : item.title;
                 const icon = getNavIcon(item.slug);
                 const isActive = activeLink === item.slug || activeLink.startsWith(item.slug + '/');
 
@@ -135,7 +132,7 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
             <ThemeToggle />
             <ul className="vertical-nav__list cyber-drawer__list">
               {coreLinks.map((item) => {
-                const label = item.slug === "/" ? "Home" : item.title;
+                const label = item.slug === "/" ? "About Brad" : item.title;
                 const icon = getNavIcon(item.slug);
                 const isActive = activeLink === item.slug || activeLink.startsWith(item.slug + '/');
 
@@ -177,16 +174,10 @@ function getNavIcon(slug: string): React.ReactNode {
   switch (slug) {
     case "/":
       return <HomeIcon size={18} />;
-    case "/projects":
-      return <ProjectsIcon size={18} />;
-    case "/about":
-      return <AboutIcon size={18} />;
     case "/contact":
       return <EmailIcon size={18} />;
-    case "/roles":
-      return <RolesIcon size={18} />;
-    case "/contributions":
-      return <ContributionsIcon size={18} />;
+    case "/recruiter":
+      return <UserIcon size={18} />;
     case "/posts":
       return <BlogIcon size={18} />;
     default:
