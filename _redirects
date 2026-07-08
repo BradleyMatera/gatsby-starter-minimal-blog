@@ -1,6 +1,5 @@
-
 # @netlify/plugin-gatsby redirects start
-
+/api/* /.netlify/functions/__api 200
 # @netlify/plugin-gatsby redirects end
 /projects /recruiter/#project-explorer 301!
 /projects/* /recruiter/#project-explorer 301!
