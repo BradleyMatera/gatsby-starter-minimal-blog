@@ -1,8 +1,12 @@
 import * as React from "react";
 
 /* --------------------------------------------------------------------------
-   Skills Explorer — Inline detail panels. Hover a skill, details appear
-   directly beneath it. No sticky sidebar that scrolls away.
+   Skills Explorer — Polished accordion-style skill cards.
+   - Click/tap to expand and keep the panel open
+   - Smooth height + opacity transition
+   - Rotating chevron indicator
+   - Category filter tabs with counts
+   - Progress bars animate in on first reveal
    -------------------------------------------------------------------------- */
 
 type Skill = {
@@ -109,10 +113,36 @@ const SKILLS: Skill[] = [
 
 const CATEGORIES = ["All", "Frontend", "Backend", "Cloud", "DevOps", "Soft Skills", "AI"];
 
+const ChevronIcon: React.FC<{ expanded: boolean }> = ({ expanded }) => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    style={{
+      transform: expanded ? "rotate(180deg)" : "rotate(0deg)",
+      transition: "transform 0.3s cubic-bezier(.22,.9,.2,1)",
+      flexShrink: 0,
+    }}
+  >
+    <polyline points="6 9 12 15 18 9" />
+  </svg>
+);
+
 const SkillsExplorer: React.FC = () => {
   const [activeCategory, setActiveCategory] = React.useState("All");
-  const [hoveredSkill, setHoveredSkill] = React.useState<string | null>(null);
-  const [touchedSkill, setTouchedSkill] = React.useState<string | null>(null);
+  const [expandedSkill, setExpandedSkill] = React.useState<string | null>(null);
+  const [animateBars, setAnimateBars] = React.useState(false);
+
+  React.useEffect(() => {
+    // Trigger progress bar animation after mount
+    const timer = setTimeout(() => setAnimateBars(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
 
   const filtered = React.useMemo(
     () =>
@@ -122,7 +152,22 @@ const SkillsExplorer: React.FC = () => {
     [activeCategory]
   );
 
-  const activeSkill = touchedSkill || hoveredSkill;
+  const categoryCounts = React.useMemo(() => {
+    const counts: Record<string, number> = { All: SKILLS.length };
+    SKILLS.forEach((s) => {
+      counts[s.category] = (counts[s.category] || 0) + 1;
+    });
+    return counts;
+  }, []);
+
+  const toggleSkill = (name: string) => {
+    setExpandedSkill((current) => (current === name ? null : name));
+  };
+
+  const handleCategoryChange = (cat: string) => {
+    setActiveCategory(cat);
+    setExpandedSkill(null);
+  };
 
   return (
     <section id="skills-explorer" className="recruiter-section reveal-section">
@@ -132,7 +177,7 @@ const SkillsExplorer: React.FC = () => {
           Skills <span className="recruiter-title-accent">Explorer</span>
         </h2>
         <p className="recruiter-section__subtitle">
-          Hover or tap any skill to see depth, projects, and real-world application — inline, not in a sidebar.
+          Click any skill to expand it. See real-world projects, proficiency, and how it fits the work.
         </p>
       </div>
 
@@ -146,132 +191,206 @@ const SkillsExplorer: React.FC = () => {
           marginBottom: "2.5rem",
         }}
       >
-        {CATEGORIES.map((cat) => (
-          <button
-            key={cat}
-            onClick={() => setActiveCategory(cat)}
-            className="recruiter-btn magnetic-btn"
-            style={{
-              padding: "0.5rem 1.25rem",
-              fontSize: "0.875rem",
-              borderRadius: 9999,
-              border: "1px solid",
-              borderColor:
-                activeCategory === cat
+        {CATEGORIES.map((cat) => {
+          const isActive = activeCategory === cat;
+          return (
+            <button
+              key={cat}
+              onClick={() => handleCategoryChange(cat)}
+              className="recruiter-btn magnetic-btn"
+              aria-pressed={isActive}
+              style={{
+                padding: "0.5rem 1rem",
+                fontSize: "0.8125rem",
+                fontWeight: 600,
+                borderRadius: 9999,
+                border: "1px solid",
+                borderColor: isActive
                   ? "var(--r-accent)"
                   : "var(--r-border)",
-              background:
-                activeCategory === cat
+                background: isActive
                   ? "var(--r-accent-light)"
                   : "var(--r-surface-raised)",
-              color:
-                activeCategory === cat
+                color: isActive
                   ? "var(--r-accent)"
                   : "var(--r-text-secondary)",
-              cursor: "pointer",
-              transition: "all 0.2s ease",
-            }}
-          >
-            {cat}
-          </button>
-        ))}
+                cursor: "pointer",
+                transition: "all 0.2s ease",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.375rem",
+              }}
+            >
+              {cat}
+              <span
+                style={{
+                  fontSize: "0.6875rem",
+                  fontWeight: 700,
+                  padding: "0.125rem 0.375rem",
+                  borderRadius: 9999,
+                  background: isActive
+                    ? "rgba(255,255,255,0.25)"
+                    : "var(--r-surface)",
+                  color: isActive ? "var(--r-accent)" : "var(--r-text-muted)",
+                }}
+              >
+                {categoryCounts[cat] || 0}
+              </span>
+            </button>
+          );
+        })}
       </div>
 
-      {/* Skills list with inline details */}
-      <div style={{ maxWidth: 800, margin: "0 auto", display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+      {/* Skills accordion */}
+      <div
+        style={{
+          maxWidth: 800,
+          margin: "0 auto",
+          display: "flex",
+          flexDirection: "column",
+          gap: "0.875rem",
+        }}
+      >
         {filtered.map((skill) => {
-          const isActive = activeSkill === skill.name;
+          const isActive = expandedSkill === skill.name;
           return (
-            <div
+            <article
               key={skill.name}
               className="recruiter-card"
               style={{
-                padding: "1.25rem",
-                cursor: "pointer",
-                transition: "border-color 0.2s ease",
-                borderColor: isActive ? "var(--r-accent)" : undefined,
+                padding: 0,
+                borderRadius: 12,
+                border: "1px solid",
+                borderColor: isActive
+                  ? "var(--r-accent)"
+                  : "var(--r-border)",
+                background: isActive
+                  ? "var(--r-surface-raised)"
+                  : "var(--r-surface)",
+                transition: "border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease",
+                boxShadow: isActive
+                  ? "0 8px 30px rgba(0,0,0,0.08)"
+                  : "0 2px 8px rgba(0,0,0,0.04)",
+                overflow: "hidden",
               }}
-              onMouseEnter={() => setHoveredSkill(skill.name)}
-              onMouseLeave={() => setHoveredSkill(null)}
-              onClick={() => setTouchedSkill(isActive ? null : skill.name)}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  setTouchedSkill(isActive ? null : skill.name);
-                }
-              }}
-              aria-expanded={isActive}
             >
-              {/* Bar row */}
-              <div
+              <button
+                type="button"
+                onClick={() => toggleSkill(skill.name)}
+                aria-expanded={isActive}
                 style={{
+                  width: "100%",
+                  textAlign: "left",
+                  background: "transparent",
+                  border: "none",
+                  padding: "1.125rem 1.25rem",
+                  cursor: "pointer",
                   display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  marginBottom: "0.625rem",
+                  flexDirection: "column",
+                  gap: "0.75rem",
+                  color: "inherit",
+                  fontFamily: "inherit",
                 }}
               >
-                <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-                  <span
-                    style={{
-                      fontSize: "0.9375rem",
-                      fontWeight: 700,
-                      color: "var(--r-text)",
-                    }}
-                  >
-                    {skill.name}
-                  </span>
-                  <span
-                    style={{
-                      fontSize: "0.6875rem",
-                      padding: "0.125rem 0.5rem",
-                      borderRadius: 9999,
-                      background: "var(--r-surface)",
-                      color: "var(--r-text-muted)",
-                    }}
-                  >
-                    {skill.category}
-                  </span>
-                </div>
-                <span
+                {/* Top row: name / badge / level / chevron */}
+                <div
                   style={{
-                    fontSize: "0.875rem",
-                    fontWeight: 700,
-                    color: "var(--r-accent)",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    gap: "0.75rem",
                   }}
                 >
-                  {skill.level}%
-                </span>
-              </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.75rem",
+                      minWidth: 0,
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontSize: "0.9375rem",
+                        fontWeight: 700,
+                        color: "var(--r-text)",
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                      }}
+                    >
+                      {skill.name}
+                    </span>
+                    <span
+                      style={{
+                        fontSize: "0.6875rem",
+                        padding: "0.125rem 0.5rem",
+                        borderRadius: 9999,
+                        background: "var(--r-surface)",
+                        color: "var(--r-text-muted)",
+                        flexShrink: 0,
+                      }}
+                    >
+                      {skill.category}
+                    </span>
+                  </div>
 
-              {/* Progress bar */}
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.75rem",
+                      flexShrink: 0,
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontSize: "0.875rem",
+                        fontWeight: 700,
+                        color: "var(--r-accent)",
+                      }}
+                    >
+                      {skill.level}%
+                    </span>
+                    <span style={{ color: "var(--r-text-muted)" }}>
+                      <ChevronIcon expanded={isActive} />
+                    </span>
+                  </div>
+                </div>
+
+                {/* Progress bar */}
+                <div
+                  style={{
+                    height: 6,
+                    borderRadius: 3,
+                    background: "var(--r-surface)",
+                    overflow: "hidden",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: animateBars ? `${skill.level}%` : "0%",
+                      height: "100%",
+                      borderRadius: 3,
+                      background: "var(--r-accent)",
+                      transition: "width 0.8s cubic-bezier(.22,.9,.2,1)",
+                    }}
+                  />
+                </div>
+              </button>
+
+              {/* Expandable detail panel */}
               <div
                 style={{
-                  height: 6,
-                  borderRadius: 3,
-                  background: "var(--r-surface)",
+                  maxHeight: isActive ? 500 : 0,
+                  opacity: isActive ? 1 : 0,
                   overflow: "hidden",
+                  transition: "max-height 0.4s cubic-bezier(.22,.9,.2,1), opacity 0.3s ease",
                 }}
               >
                 <div
                   style={{
-                    width: `${skill.level}%`,
-                    height: "100%",
-                    borderRadius: 3,
-                    background: "var(--r-accent)",
-                    transition: "width 0.6s ease",
-                  }}
-                />
-              </div>
-
-              {/* Inline detail panel */}
-              {isActive && (
-                <div
-                  style={{
-                    marginTop: "1rem",
-                    paddingTop: "1rem",
+                    padding: "0 1.25rem 1.25rem",
                     borderTop: "1px solid var(--r-border)",
                   }}
                 >
@@ -279,12 +398,13 @@ const SkillsExplorer: React.FC = () => {
                     style={{
                       fontSize: "0.875rem",
                       color: "var(--r-text-secondary)",
-                      lineHeight: 1.6,
-                      marginBottom: "1rem",
+                      lineHeight: 1.65,
+                      margin: "1rem 0",
                     }}
                   >
                     {skill.description}
                   </p>
+
                   <div style={{ marginBottom: "0.75rem" }}>
                     <div
                       style={{
@@ -297,7 +417,13 @@ const SkillsExplorer: React.FC = () => {
                     >
                       Used in
                     </div>
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: "0.375rem" }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        gap: "0.375rem",
+                      }}
+                    >
                       {skill.projects.map((p) => (
                         <span key={p} className="recruiter-tag">
                           {p}
@@ -305,6 +431,7 @@ const SkillsExplorer: React.FC = () => {
                       ))}
                     </div>
                   </div>
+
                   <div
                     style={{
                       fontSize: "0.75rem",
@@ -314,8 +441,8 @@ const SkillsExplorer: React.FC = () => {
                     Proficiency: {skill.level}/100
                   </div>
                 </div>
-              )}
-            </div>
+              </div>
+            </article>
           );
         })}
       </div>
