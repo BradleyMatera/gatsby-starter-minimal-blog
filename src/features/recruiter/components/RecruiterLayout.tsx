@@ -89,6 +89,12 @@ const RecruiterLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
           © {new Date().getFullYear()} Bradley Matera · Recruiter Portal
         </div>
       </footer>
+
+      {/* ProjectHub AI chat widget */}
+      <script
+        src="https://bradleymatera.github.io/ProjectHub/ProjectHub.js"
+        defer
+      />
     </div>
   );
 };
