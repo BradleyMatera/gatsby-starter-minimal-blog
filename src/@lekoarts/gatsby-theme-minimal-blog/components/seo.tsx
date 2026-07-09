@@ -50,11 +50,12 @@ const Seo = ({
     siteLanguage,
   } = site;
 
+  const resolvedImage = image ? (image.startsWith("http") ? image : `${siteUrl}${image}`) : `${siteUrl}${defaultImage}`;
   const seo = {
     title: title ? `${title} | ${siteTitle}` : defaultTitle,
     description: description || defaultDescription,
     url: `${siteUrl}${pathname || ``}`,
-    image: `${siteUrl}${image || defaultImage}`,
+    image: resolvedImage,
   };
   const canonical = canonicalUrl || seo.url;
 
@@ -74,10 +75,10 @@ const Seo = ({
     ogType === "article"
       ? {
           "@context": "https://schema.org",
-          "@type": "Article",
+          "@type": "BlogPosting",
           headline: title || defaultTitle,
           description: seo.description,
-          image: [seo.image],
+          image: seo.image ? [seo.image] : undefined,
           mainEntityOfPage: canonical,
           author: {
             "@type": "Person",

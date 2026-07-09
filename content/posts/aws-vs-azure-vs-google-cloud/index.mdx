@@ -1,9 +1,9 @@
 ---
-title: "AWS vs. Azure vs. Google Cloud: A Free Tier Comparison From Real Use"
-date: "2025-07-18"
+title: "AWS vs. Azure vs. Google Cloud: A 2026 Free Tier Comparison From Real Use"
+date: "2026-07-08"
 slug: "/aws-vs-azure-vs-google-cloud"
 tags: ["cloud", "free-tier", "comparison"]
-description: "What I actually noticed when running small projects on AWS, Azure, and GCP free tiers."
+description: "What I actually noticed when running small projects on AWS, Azure, and GCP free tiers in 2026."
 theme: "Cloud"
 ---
 
@@ -30,7 +30,9 @@ Compute is usually the biggest line item, so this is where the free tiers matter
 | Azure | 750 hours/month of `B1s` for 12 months | One vCPU, similar burstable model. Slightly weaker baseline. |
 | GCP | `e2-micro` Always Free | Two shared vCPUs, but only free in certain regions. No 12-month clock. |
 
-AWS and Azure both give you a year. That sounds generous, but on day 366 the free ride is over. GCP's `e2-micro` is the only option here that is designed to stay free indefinitely, as long as you stay inside the eligible regions.
+AWS and Azure both give you a year. That sounds generous, but on day 366 the free ride is over. GCP's `e2-micro` is the only option here that is designed to stay free indefinitely, as long as you stay inside the eligible regions. GCP publishes the Always Free limits directly on its pricing page, and the eligible regions are part of that same doc.
+
+- **Sources:** [AWS EC2 free tier](https://aws.amazon.com/free/?all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc&awsf.Free%20Tier%20Types=*all&awsf.Free%20Tier%20Categories=*all), [Azure free services](https://azure.microsoft.com/en-us/pricing/free-services/), [GCP Always Free](https://cloud.google.com/free/docs/free-cloud-features)
 
 The catch with GCP is location. If you deploy in the wrong region, it is not free. I accidentally left something in `us-east4` once and saw a small charge the next month. The fix was just moving it to `us-central1`, but it taught me to check the region list before creating anything.
 
@@ -38,17 +40,29 @@ The catch with GCP is location. If you deploy in the wrong region, it is not fre
 
 Free compute is easy to understand. Free databases are where the providers start splitting hairs.
 
-AWS RDS gives you a managed MySQL, Postgres, or MariaDB micro instance for 12 months. Azure gives you a generous 250 GB of Azure SQL Database, but that is Microsoft SQL Server. If your project expects Postgres, that free tier does not help you. GCP does not offer a strong free relational tier, but Firestore has a generous NoSQL free allowance.
+- **AWS RDS:** gives you a managed MySQL, Postgres, or MariaDB micro instance for 12 months, plus 20 GB of storage.
+- **Azure:** gives you 250 GB of Azure SQL Database, but that is Microsoft SQL Server. If your project expects Postgres, that free tier does not help you.
+- **GCP:** does not offer a strong free relational tier, but Firestore has a generous NoSQL free allowance.
+
+- **Sources:** [Amazon RDS pricing](https://aws.amazon.com/rds/pricing/), [Azure SQL Database pricing](https://azure.microsoft.com/en-us/pricing/details/sql-database/), [Firestore pricing](https://cloud.google.com/firestore/pricing)
 
 For learning relational databases, AWS was the clearest path. For a tiny side project that needed a small NoSQL store, Firestore was simpler than I expected. For anything Microsoft-specific, Azure made sense, but I do not use .NET day to day, so I ended up fighting the portal more than I expected.
 
-## The billing surprises I actually hit
+## Billing surprises I actually hit
 
 These are not edge cases. They are the things that got me on each provider.
 
-- **AWS:** I deleted an EC2 instance but forgot the EBS volume. A month later I had a charge for an unattached 8 GB disk. The fix takes ten seconds once you know where to look.
-- **Azure:** I picked a disk tier that looked standard but was not covered by the free tier. The charge was small, but the reason was not obvious from the portal summary.
-- **GCP:** I deployed in the wrong region. That is the whole story. Region discipline matters more on GCP because the Always Free regions are specific.
+### AWS: the orphaned EBS volume
+
+I deleted an EC2 instance but forgot the EBS volume. A month later I had a charge for an unattached 8 GB disk. The fix takes ten seconds once you know where to look. I now clean up volumes as a separate step every time I terminate an instance.
+
+### Azure: a disk tier that was not free
+
+I picked a disk tier that looked standard but was not covered by the free tier. The charge was small, but the reason was not obvious from the portal summary. Now I double-check that a disk SKU is listed in the [Azure free services](https://azure.microsoft.com/en-us/pricing/free-services/) scope before I create it.
+
+### GCP: wrong region
+
+I deployed in the wrong region. That is the whole story. Region discipline matters more on GCP because the Always Free regions are specific. I keep the [Always Free region list](https://cloud.google.com/free/docs/free-cloud-features) open when I create resources.
 
 The common thread is that the cloud provider will not stop you. You have to verify what is still running and where.
 
@@ -102,6 +116,12 @@ These commands take seconds and catch the most common leftover resources.
 | Avoiding accidental charges | Any, with discipline | Set a billing alert for $0.01 and check it weekly |
 
 The golden rule is the same across all three. Set a billing alert the moment you create the account. A $0.01 alert tells you the instant something starts charging. That early warning is worth more than any free tier comparison.
+
+## What changed in 2026
+
+The core free tier structures have not shifted dramatically, but the defaults and UI keep moving. AWS still leads the job market. Azure still leans into the Microsoft ecosystem. GCP still offers the only long-term free compute tier if you stay inside the eligible regions. The biggest change is that all three providers now surface billing alerts more aggressively, which helps, but it does not replace your own weekly resource check.
+
+If I were starting fresh today, I would open an AWS account for resume relevance, a GCP account for long-term hobby hosting, and only touch Azure when a project is already using Microsoft services.
 
 ## Closing
 

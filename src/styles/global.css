@@ -312,25 +312,156 @@ textarea {
 
 img {
   max-width: 100%;
+  height: auto;
   display: block;
 }
 
 .skip-to-content {
   position: fixed;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(-120%);
   top: 1rem;
   padding: 0.75rem 1.75rem;
   border-radius: 4px;
   background: var(--color-accent);
   color: var(--color-text-inverse);
   z-index: 9999;
-  clip-path: inset(50%);
-  transition: clip-path 0.2s ease;
+  transition: transform 0.2s ease, clip-path 0.2s ease;
+  clip-path: inset(0);
 }
 
 .skip-to-content:focus {
-  clip-path: inset(0);
+  transform: translateX(-50%) translateY(0);
+}
+
+.skip-to-content:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+/* Responsive post tables */
+.post-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: var(--text-sm);
+}
+
+.post-content thead {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .post-content thead {
+    display: table-header-group;
+  }
+}
+
+.post-content th,
+.post-content td {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.post-content th {
+  background: var(--color-surface-alt);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.post-content tbody tr:nth-child(odd) {
+  background: var(--color-surface);
+}
+
+@media (max-width: 639px) {
+  .post-content table,
+  .post-content thead,
+  .post-content tbody,
+  .post-content th,
+  .post-content td,
+  .post-content tr {
+    display: block;
+  }
+
+  .post-content tr {
+    margin-bottom: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .post-content td {
+    border: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .post-content td:last-child {
+    border-bottom: none;
+  }
+
+  .post-content td::before {
+    content: attr(data-label);
+    display: block;
+    font-weight: 600;
+    color: var(--color-text-subtle);
+    margin-bottom: 0.25rem;
+  }
+}
+
+/* Post images and figures */
+.post-content img,
+.post-content figure,
+.post-content .gatsby-resp-image-wrapper {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin: 1.5rem 0;
+}
+
+.post-content figcaption {
+  font-size: var(--text-sm);
+  color: var(--color-text-subtle);
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.post-content figure {
+  margin: 1.5rem 0;
+}
+
+/* Ensure focus states are visible throughout */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* Post layout spacing */
+.post-content {
+  line-height: var(--leading-relaxed);
+}
+
+.post-content p,
+.post-content ul,
+.post-content ol,
+.post-content pre,
+.post-content blockquote,
+.post-content table,
+.post-content figure {
+  margin-bottom: 1.25rem;
+}
+
+.post-content h2 {
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.post-content h3 {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
 }
 
 .layout-shell {

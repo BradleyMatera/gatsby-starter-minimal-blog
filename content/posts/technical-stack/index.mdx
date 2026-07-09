@@ -1,15 +1,15 @@
 ---
-title: "What I Actually Use: A Personal Technical Stack Inventory"
+title: "What I Actually Use: My 2026 Technical Stack Inventory"
 date: "2026-07-08"
-slug: "/technical-stack-2025"
+slug: "/technical-stack-2026"
 tags: ["stack", "process", "documentation"]
-description: "A plain list of what I ship with, why I chose it, and where I deviate."
+description: "A scannable inventory of what I ship with in 2026, why I chose each tool, and where I intentionally deviate."
 theme: "Process"
 ---
 
 I get asked about my stack a lot, and I used to answer with whatever sounded current. That made my answers unreliable. A few months ago I started keeping a single inventory of what I actually build with, not what I think about building with. This post is that inventory.
 
-It is not a prediction. It is what I use on this site and on the projects I ship.
+It is not a prediction. It is what I use on this site and on the projects I ship in 2026.
 
 ## Why a written inventory helps
 
@@ -21,21 +21,69 @@ When I do not write this down, three things happen:
 
 A written inventory fixes that. It is just a reference I can point to and update when my real choices change.
 
-## What I default to
+## Languages and runtime
 
-| Component | My default | Why I use it |
+| Tool | Role | Why I keep it |
 |---|---|---|
-| Site framework | Gatsby + React + TypeScript | Static generation, fast builds, GraphQL data layer I already understand |
-| Styling | Tailwind CSS + custom CSS variables | Utility speed plus full control over tokens for dark/light themes |
-| Components | Theme UI primitives + custom UI in `src/ui` | Consistent base components with shadows when I need them |
-| Animations | GSAP + ScrollTrigger + CSS scroll-timeline progressive enhancement | Fine-grained scroll-driven animations with a fallback |
-| Deployment | Netlify | Branch previews, redirects, identity widget, serverless functions |
-| Images | sharp (pinned) + Gatsby image pipeline | Reliable processing, avoids the upgrade churn I have hit before |
-| Auth/identity | Netlify Identity | Fits the hosting stack; simple widget for protected routes |
-| Content | MDX in `content/` | Lets me write posts with JSX components and keeps content in version control |
-| Version control | Git + GitHub | Standard, familiar, good CI integration |
+| TypeScript | Primary language | Catches shape errors before runtime; same language across frontend and Node scripts |
+| JavaScript | Browser and quick scripts | Still the runtime target; useful for small glue code and Gatsby configuration |
+| Node.js | Runtime | Hosting compatibility and the package ecosystem I already know |
+| Bash | Automation | Deployment scripts, CI one-liners, and local shortcuts |
 
-This is the stack running this site right now. I did not pick it to be trendy. I picked it because it lets me ship a fast, maintainable site without fighting the tooling every week.
+I do not try to learn a new language for every project. TypeScript covers most of what I build. I reach for something else only when the project genuinely requires it.
+
+## Frontend framework and site generator
+
+| Tool | Role | Why I keep it |
+|---|---|---|
+| Gatsby | Static site generator | GraphQL data layer, fast builds, and image pipeline I already understand |
+| React | UI library | Component model I have used for years; huge ecosystem |
+| Next.js | App-like projects | Better fit when I need dynamic routing, server components, or heavy client state |
+
+Gatsby runs this site. Next.js is what I reach for when the project feels more like an app than a content site. The decision usually comes down to whether the content or the interaction is the star.
+
+## Styling and design tokens
+
+| Tool | Role | Why I keep it |
+|---|---|---|
+| Tailwind CSS | Utility styling | Fast layout work without leaving the markup |
+| Custom CSS variables | Theme tokens | Light/dark mode and accent colors in one controlled layer |
+| Theme UI | Base primitives | Consistent spacing and typography defaults I can override when needed |
+
+I use Tailwind for speed and custom variables for control. I do not want a component library to own my tokens, so I keep the design system in CSS and apply it with Tailwind utilities.
+
+## Animation and interaction
+
+| Tool | Role | Why I keep it |
+|---|---|---|
+| GSAP + ScrollTrigger | Scroll-driven animation | Fine-grained control over reveal and parallax effects |
+| CSS scroll-timeline | Progressive enhancement | Native performance where supported, no JS overhead |
+
+GSAP is my default for anything complex. CSS scroll-timeline is the fallback and enhancement I add when browser support is good enough.
+
+## Deployment, hosting, and services
+
+| Tool | Role | Why I keep it |
+|---|---|---|
+| Netlify | Hosting | Branch previews, redirects, identity widget, serverless functions |
+| sharp | Image processing | Reliable and pinned to avoid the upgrade churn I have hit before |
+| Netlify Identity | Auth | Fits the hosting stack; simple widget for protected routes |
+| Git + GitHub | Version control | Standard, familiar, good CI integration |
+
+Netlify is the simplest path from a Git push to a live site for my content projects. I use GitHub Actions when I need custom build or deploy steps.
+
+## Content and data
+
+| Tool | Role | Why I keep it |
+|---|---|---|
+| MDX | Blog and page content | Lets me write posts with JSX components and keeps content in version control |
+| Supabase | Quick database prototype | Fastest path to persisted state in a demo |
+| JSON files | Tiny data needs | No setup when the dataset is small and read-only |
+
+MDX is what you are reading right now. I only add a real database when the project needs authentication, real-time updates, or relational data.
+
+{/* visual-break:technical-stack:1 */}
+![Execution process checkpoint illustration for this section.](/assets/visuals/blog/technical-stack-break-1.png)
 
 ## Where I intentionally deviate
 
@@ -49,14 +97,10 @@ This is the stack running this site right now. I did not pick it to be trendy. I
 
 The pattern is simple: I start with the default stack, then switch only when the project genuinely needs something else. Not when I am bored.
 
-{/* visual-break:technical-stack:1 */}
-![Execution process checkpoint illustration for this section.](/assets/visuals/blog/technical-stack-break-1.png)
-
 ## Tools I tried but did not keep
 
 I have used a lot of frameworks over the last few years. Here is where some of them landed:
 
-- **Next.js:** Excellent for apps. I keep reaching for Gatsby for content-heavy sites because the content pipeline is smoother for me.
 - **Prisma:** Great DX, but I usually do not need an ORM on small projects. Raw SQL or a thin query layer is enough.
 - **shadcn/ui:** Good components. I use it as inspiration more than a dependency because I want to own my CSS tokens.
 - **Bun:** Fast. I use it for scripts, but I still deploy Node because hosting compatibility matters more than local speed.
@@ -75,6 +119,6 @@ The rule I try to follow now: use the default for at least two projects before s
 
 ## Closing
 
-A stack inventory is not exciting. It is useful. If you do not have one, write yours down. Keep it honest. Update it when your real choices change, not when your Twitter feed changes.
+A stack inventory is not exciting. It is useful. If you do not have one, write yours down. Keep it honest. Update it when your real choices change, not when your social feed changes.
 
 If you want to see this stack in action, you are already looking at it.
