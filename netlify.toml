@@ -5,4 +5,10 @@
     NODE_VERSION = "20"
 
 [functions]
+  node_bundler = "esbuild"
   included_files = ["netlify/functions/downloads/**"]
+
+[[headers]]
+  for = "/.netlify/functions/chat-router"
+  [headers.values]
+    Cache-Control = "no-store"
