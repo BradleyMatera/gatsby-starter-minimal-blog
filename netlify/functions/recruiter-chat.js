@@ -212,55 +212,77 @@ async function callGemini(prompt) {
     throw new Error('GEMINI_API_KEY not configured');
   }
 
-  const url = `https://generativelanguage.googleapis.com/v1/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
+  const modelsToTry = [
+    GEMINI_MODEL,
+    'gemini-1.5-flash-latest',
+    'gemini-1.5-flash',
+    'gemini-1.5-flash-001',
+    'gemini-1.5-pro-latest',
+    'gemini-1.5-pro',
+    'gemini-1.5-pro-001',
+    'gemini-pro'
+  ];
 
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), DEFAULT_TIMEOUT);
+  let lastError = null;
 
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      signal: controller.signal,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ role: 'user', parts: [{ text: prompt }] }],
-        generationConfig: {
-          temperature: 0.35,
-          maxOutputTokens: 150,
-          topP: 0.85,
-          topK: 40
-        },
-        safetySettings: [
-          { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
-          { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
-          { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
-          { category: 'HARM_CATEGORY_DANGEROUS_CONTENT', threshold: 'BLOCK_MEDIUM_AND_ABOVE' }
-        ]
-      })
-    });
+  for (const model of modelsToTry) {
+    const url = `https://generativelanguage.googleapis.com/v1/models/${model}:generateContent?key=${GEMINI_API_KEY}`;
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), DEFAULT_TIMEOUT);
 
-    clearTimeout(timeout);
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        signal: controller.signal,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ role: 'user', parts: [{ text: prompt }] }],
+          generationConfig: {
+            temperature: 0.35,
+            maxOutputTokens: 150,
+            topP: 0.85,
+            topK: 40
+          },
+          safetySettings: [
+            { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
+            { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
+            { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
+            { category: 'HARM_CATEGORY_DANGEROUS_CONTENT', threshold: 'BLOCK_MEDIUM_AND_ABOVE' }
+          ]
+        })
+      });
 
-    if (!response.ok) {
-      const text = await response.text();
-      throw new Error(`Gemini HTTP ${response.status}: ${text.slice(0, 200)}`);
+      clearTimeout(timer);
+
+      if (!response.ok) {
+        const text = await response.text();
+        lastError = new Error(`Gemini HTTP ${response.status}: ${text.slice(0, 200)}`);
+        console.warn(`Model ${model} failed:`, lastError.message);
+        continue;
+      }
+
+      const data = await response.json();
+      const candidate = data.candidates?.[0];
+      if (!candidate) {
+        lastError = new Error('No candidates in Gemini response');
+        continue;
+      }
+      if (candidate.finishReason === 'SAFETY') {
+        lastError = new Error('Gemini blocked response for safety');
+        continue;
+      }
+
+      console.log(`Model ${model} succeeded`);
+      const text = candidate.content?.parts?.[0]?.text || '';
+      return text.trim();
+    } catch (error) {
+      clearTimeout(timer);
+      lastError = error;
+      console.warn(`Model ${model} error:`, error.message);
     }
-
-    const data = await response.json();
-    const candidate = data.candidates?.[0];
-    if (!candidate) {
-      throw new Error('No candidates in Gemini response');
-    }
-    if (candidate.finishReason === 'SAFETY') {
-      throw new Error('Gemini blocked response for safety');
-    }
-
-    const text = candidate.content?.parts?.[0]?.text || '';
-    return text.trim();
-  } catch (error) {
-    clearTimeout(timeout);
-    throw error;
   }
+
+  throw lastError || new Error('All Gemini model attempts failed');
 }
 
 function cleanGeminiReply(reply, knowledge) {
