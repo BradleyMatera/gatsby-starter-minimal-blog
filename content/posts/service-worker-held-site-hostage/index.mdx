@@ -39,33 +39,15 @@ This is the exact kind of bug that does not feel logical until you understand ho
 
 Here is the fix that instantly solved it:
 
-### Step 1  
-Open your site in Chrome.
+1. Open your site in Chrome.
+2. Open DevTools with `Ctrl + Shift + I` or `Cmd + Option + I`.
+3. Go to the **Application** tab.
+4. Click **Service Workers** on the left.
+5. You will see one or more registered service workers. Look for anything like `sw.js` or `service-worker.js`, or anything showing “activated.”
+6. Click **Unregister**.
+7. Refresh the page.
 
-### Step 2  
-Open DevTools with:  
-`Ctrl + Shift + I` or `Cmd + Option + I`
-
-### Step 3  
-Go to the **Application** tab.
-
-### Step 4  
-Click **Service Workers** on the left.
-
-### Step 5  
-You will see one or more registered service workers.  
-Look for anything like:  
-`sw.js`  
-`service-worker.js`  
-or anything showing “activated”.
-
-### Step 6  
-Click **Unregister**.
-
-### Step 7  
-Refresh the page.
-
-If the service worker was the problem, the new version of the site will load instantly. No delay. No waiting. It is one of the most dramatic "instant fix" moments you can have in web development.
+If the service worker was the problem, the new version of the site will load instantly. No delay. No waiting. It is one of the most dramatic “instant fix” moments you can have in web development.
 
 This is the exact moment it hit me that the entire issue was not my code or GitHub Pages. It was a cached worker from a build that did not exist anymore.
 
@@ -73,17 +55,22 @@ This is the exact moment it hit me that the entire issue was not my code or GitH
 
 Here are the fastest ways to check if you have the same problem.
 
-### 1. Hit your site with curl  
+### 1. Hit your site with curl
+
 Run this in your terminal:
 
+```bash
 curl -sL https://your-site.github.io | head
+```
 
 If the HTML here is newer than what your browser is showing, your browser is being lied to.
 
-### 2. Open your site in Incognito  
+### 2. Open your site in Incognito
+
 If Incognito shows the new version but your normal browser does not, that is almost always a service worker or cache problem.
 
-### 3. Check DevTools  
+### 3. Check DevTools
+
 Look for an active service worker. If you see one and you did not explicitly write it, that is probably the issue.
 
 ## Why this problem happens to many developers
@@ -104,11 +91,11 @@ Service workers can hold a website hostage if you are not careful.
 
 Since hitting this issue, here is what I changed in my workflow:
 
-- I never generate a service worker unless I know why I need it  
-- I always check DevTools when a deploy looks stuck  
-- I test live sites in Incognito to avoid cache issues  
-- I keep build processes simple until I fully understand what is happening  
-- I clean out all AI generated files before deploying anything  
+- I never generate a service worker unless I know why I need it.
+- I always check DevTools when a deploy looks stuck.
+- I test live sites in Incognito to avoid cache issues.
+- I keep build processes simple until I fully understand what is happening.
+- I clean out all AI-generated files before deploying anything.
 
 Caching bugs like this are sneaky and they waste time, but once you see how they work, they are easy to avoid.
 
@@ -118,27 +105,8 @@ If your website refuses to update even though your deploy is clean, it might be 
 
 This bug taught me more about how the browser actually works than almost anything else I have built so far.
 
-{/* auto-enhancement:voice-start */}
-
-## Personal Build Reflection
-
-I wrote this from my own build notes while focusing on frontend delivery quality, accessibility, and clear user-facing behavior.
-
-I keep this kind of post operational on purpose so another person, or future me, can rerun it without guessing where decisions came from.
-
-If you adapt this flow, track what you changed and why at each step so your final setup stays explainable.
-
-{/* auto-enhancement:voice-end */}
-
-{/* auto-enhancement:links-start */}
-
-## Continue Reading in This Frontend Series
-
-If you want to go deeper on this topic cluster, these are the best next reads:
+## Keep reading
 
 - [Gatsby Nav Bar Haunted: Fixing a Stuck Dropdown](/gatsby-nav-bar-haunted/)
 - [Interactive Portfolio Basics: Keep It Fun and Still Clear](/interactive-portfolios-recruiter-expectations/)
 - [GitHub Pages Deployments That Stop Being Confusing](/github-pages-deployments-confusing/)
-
-{/* auto-enhancement:links-end */}
-

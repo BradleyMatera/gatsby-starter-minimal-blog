@@ -3,47 +3,25 @@ title: "Testing That I Actually Run: A Small Pyramid"
 date: "2025-09-29"
 slug: "/why-testing-matters"
 tags: ["testing", "quality", "devops"]
-description: "A small, honest testing stack with exact commands, checks, and gaps."
+description: "The small testing stack I use for personal projects without over-engineering."
 theme: "Front-End & Full-Stack"
 ---
 
-## The "Testing Guilt" Cycle
+I have abandoned more test suites than I care to admit. I would start with a vow to write 100% coverage, add a Cypress suite, then spend weeks debugging flaky tests because a div moved two pixels. Eventually I stopped running `npm test` altogether.
 
-There is a cycle that every developer goes through. It starts with a vow: *"This time, I will have 100% code coverage. I will write E2E tests for every button click. I will be a 'Responsible Engineer'."*
+The problem was not a lack of desire. It was the strategy. I was building an ice cream cone: a few unit tests at the bottom and a massive layer of slow UI tests on top. That is exhausting.
 
-Two months later, the CI pipeline takes 20 minutes to run. The E2E tests flake out randomly because a div moved 2 pixels. You start commenting out tests just to get a hotfix deployed. Eventually, you stop running `npm test` altogether.
+Now I use a much smaller stack: fast unit tests for pure logic, and a short manual smoke protocol for the rest.
 
-I have abandoned more test suites than I care to admit.
+## Level 1: unit tests with vitest
 
-The problem isn't the *desire* to test; it's the *strategy*. We often build an "Ice Cream Cone" of testing: massive, slow, expensive UI tests on top, with a tiny cone of unit tests at the bottom. This is unstable and exhausting.
+For a while I used Jest, but ESM and TypeScript kept creating configuration friction. Vitest reads my existing Vite config, supports ESM out of the box, and runs fast.
 
-In 2025, I flipped the script. I use a "Small Pyramid" strategy. It relies on a high volume of ultra-fast unit tests, a complete absence of complex E2E frameworks (for personal projects), and a rigorous, documented "Smoke Protocol."
+Setup is minimal:
 
-This post is the blueprint for that stack.
-
----
-
-{/* visual-break:testing-matters:1 */}
-![Execution process checkpoint illustration for this section.](/assets/visuals/blog/testing-matters-break-1.png)
-
-## Level 1: The Infrastructure (Why Vitest Won)
-
-For the better part of a decade, **Jest** was the undisputed king of JavaScript testing. But as the ecosystem shifted toward ESM (ECMAScript Modules) and TypeScript, Jest started showing its age.
-
-* **The Problem with Jest:** Jest operates by overriding the Node.js require system. To make it work with modern TypeScript or Vite projects, you essentially have to configure a Babel pipeline *just for your tests*. It is slow, memory-hungry, and debugging "SyntaxError: Cannot use import statement outside a module" is a rite of passage I never want to repeat.
-* **The Solution (Vitest):** Vitest is a native Vite-powered test runner. It reads your existing `vite.config.ts`. It supports ESM out of the box. It uses Worker threads for true parallelism.
-
-### The Setup
-
-We don't just install a library; we define a standard. The `package.json` is the contract.
-
-**Command:**
 ```bash
 npm install -D vitest @vitest/coverage-v8
-
 ```
-
-**Configuration (`package.json`):**
 
 ```json
 {
@@ -53,198 +31,64 @@ npm install -D vitest @vitest/coverage-v8
     "test:coverage": "vitest run --coverage"
   }
 }
-
 ```
 
-**The Config File (`vitest.config.ts`):**
-We create a dedicated config to ensure our testing environment isolates side effects.
-
-```typescript
-import { defineConfig } from 'vitest/config';
-
-export default defineConfig({
-  test: {
-    environment: 'node', // Use 'jsdom' if testing React components
-    include: ['src/**/*.test.ts'],
-    coverage: {
-      provider: 'v8',
-      reporter: ['text', 'json', 'html'],
-    },
-    // Fail the build if we accidentally leave a .only() in the code
-    allowOnly: false, 
-  },
-});
-
-```
-
-**Why this matters:**
-Using `vitest run` (single pass) vs `vitest` (watch mode) is a crucial distinction for CI/CD pipelines. If you put `vitest` in your GitHub Action, it will hang forever waiting for input.
-
----
-
-## Level 2: The Unit Test (The Bedrock)
-
-The bottom of the pyramid must be wide and stable. These tests verify **Pure Logic**.
-
-A "Pure Function" is a function that, given the same input, always returns the same output and produces no side effects (no API calls, no DOM updates). These are the easiest to test and the most critical to verify.
-
-### Real World Example: Data Transformation
-
-Imagine an e-commerce app where we need to format a messy API response into a clean UI object.
-
-**The Logic (`src/utils/formatter.ts`):**
-
-```typescript
-interface UserAPIResponse {
-  first_name: string | null;
-  last_name: string | null;
-  created_at: string; // ISO Date string
-  role: 'admin' | 'user' | 'guest';
-}
-
-interface UserUI {
-  fullName: string;
-  memberSince: string;
-  isAdmin: boolean;
-}
-
-export function formatUser(user: UserAPIResponse): UserUI {
-  const first = user.first_name ?? 'Guest';
-  const last = user.last_name ?? '';
-
-  // Format Date (simple implementation for demo)
-  const date = new Date(user.created_at);
-  const year = date.getFullYear();
-
-  return {
-    fullName: `${first} ${last}`.trim(),
-    memberSince: isNaN(year) ? 'Unknown' : year.toString(),
-    isAdmin: user.role === 'admin',
-  };
-}
-
-```
-
-**The Test Suite (`src/utils/formatter.test.ts`):**
+I keep tests focused on pure logic: data transformations, formatters, anything where the same input should always produce the same output. For example:
 
 ```typescript
 import { describe, it, expect } from 'vitest';
 import { formatUser } from './formatter';
 
 describe('formatUser utility', () => {
-  it('combines names correctly', () => {
-    const input = { 
-      first_name: 'Jane', 
-      last_name: 'Doe', 
-      created_at: '2023-01-01', 
-      role: 'user' 
-    } as const;
-
-    expect(formatUser(input).fullName).toBe('Jane Doe');
-  });
-
   it('handles null names gracefully', () => {
-    const input = { 
-      first_name: null, 
-      last_name: null, 
-      created_at: '2023-01-01', 
-      role: 'guest' 
+    const input = {
+      first_name: null,
+      last_name: null,
+      created_at: '2023-01-01',
+      role: 'guest'
     } as const;
 
     expect(formatUser(input).fullName).toBe('Guest');
   });
 
   it('identifies admin privileges', () => {
-    const input = { 
-        first_name: 'Admin', 
-        last_name: 'User', 
-        created_at: '2023-01-01', 
-        role: 'admin' 
+    const input = {
+      first_name: 'Admin',
+      last_name: 'User',
+      created_at: '2023-01-01',
+      role: 'admin'
     } as const;
 
     expect(formatUser(input).isAdmin).toBe(true);
   });
-
-  it('handles invalid dates', () => {
-      const input = { 
-          first_name: 'Test', 
-          last_name: 'User', 
-          created_at: 'invalid-date', 
-          role: 'user' 
-      } as const;
-
-      expect(formatUser(input).memberSince).toBe('Unknown');
-  });
 });
-
 ```
 
-**The Lesson:**
-This suite runs in 4 milliseconds. It protects us against `null` pointer exceptions and ensures our UI never says "undefined undefined". This is the highest ROI (Return on Investment) coding you can do.
+These run in milliseconds. They catch the boring mistakes: null values, bad date parsing, wrong booleans. That is the highest return I get from testing.
 
----
+{/* visual-break:testing-matters:1 */}
+![Execution process checkpoint illustration for this section.](/assets/visuals/blog/testing-matters-break-1.png)
 
-## Level 3: The "Smoke Protocol" (The Human Element)
+## Level 2: the manual smoke protocol
 
-This is where I diverge from the "Best Practices" dogma.
+I do not run E2E tests on personal projects. Cypress and Playwright are powerful, but maintaining them for a solo project is often more work than the bugs they catch.
 
-Standard advice says "Automate Everything." But setting up Cypress or Playwright to click a "Login" button, handle Authentication tokens, deal with 2FA, and wait for animations to finish is a massive maintenance burden. For a solo developer or a small team, **maintenance is the enemy.**
-
-Instead, I use a rigorous **Manual Smoke Protocol**.
-
-This isn't just "clicking around." It is a standardized checklist committed to the repository that must be physically checked off before a release.
-
-**The Protocol File (`docs/QA_SMOKE_CHECK.md`):**
+Instead I keep a short checklist in `docs/QA_SMOKE_CHECK.md` and walk through it before a release:
 
 ```markdown
-# 🛑 Release Smoke Check Protocol
-**Do not merge to main until all items are verified.**
+# Release smoke check
 
-## 1. Critical User Flows
-- [ ] **Authentication:** Log out and Log back in using Google Auth.
-- [ ] **Data Persistence:** Update the user profile name, refresh the page. Does the new name persist?
-- [ ] **Payment Flow:** Go to /pricing, click "Buy", reach the Stripe Checkout hosted page. (Do not need to complete purchase).
-
-## 2. Responsive Check
-- [ ] **Mobile Menu:** Open on iPhone viewport (Chrome DevTools). Does the hamburger menu expand?
-- [ ] **Grid Layout:** Resize window to 768px. Does the 3-column grid snap to 1-column?
-
-## 3. The "Stupid" Check
-- [ ] **Console Errors:** Open DevTools console. Are there any red text blocks on the homepage?
-- [ ] **Links:** Click the "Contact Us" link in the footer. Does it 404?
-
+- Home page loads with no console errors.
+- Primary user flow works end to end.
+- Mobile menu opens and closes.
+- Footer links do not 404.
 ```
 
-**Why this works:**
-It forces you to look at your application. Automated tests pass silently. Manual tests force you to feel the latency, see the layout shifts, and notice the janky animations that a script would ignore.
+Manual checks force me to look at the app. I notice layout shifts, slow interactions, and broken links that automated assertions would miss.
 
----
+## Level 3: CI for the unit tests only
 
-## The "Gap" Analysis: What Are We Missing?
-
-To be an honest engineer, you must admit what you are *not* testing. In this "Small Pyramid" stack, we have deliberate gaps:
-
-1. **Visual Regression:** We are not using Percy or Chromatic to check pixel-perfect rendering.
-* *Risk:* I might accidentally change the button color from blue to slightly-less-blue.
-* *Acceptance:* I can live with this risk in exchange for development speed.
-
-2. **Integration Tests:** We are not mocking the full API and testing the connection between the Frontend and Backend components.
-* *Risk:* The API contract might change (e.g., `firstName` becomes `first_name`) and the frontend will crash.
-* *Mitigation:* This is caught during the Manual Smoke Check.
-
-3. **Cross-Browser Testing:** I am mostly testing on Chrome.
-* *Risk:* Safari might render flexbox differently.
-* *Acceptance:* 90% of my traffic is Chrome/Mobile Safari. The Smoke Check covers the Mobile Safari viewport.
-
----
-
-## Bonus: Automating the Bedrock (GitHub Actions)
-
-We can't automate the Smoke Check easily, but we *must* automate the Unit Tests. If tests only run on your laptop, they don't exist.
-
-Here is the exact workflow file I drop into every project.
-
-**File: `.github/workflows/test.yml**`
+I automate the fast part. The smoke check stays manual. My GitHub Actions workflow looks like this:
 
 ```yaml
 name: Unit Tests
@@ -258,59 +102,27 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
-
-      - name: Install Dependencies
-        run: npm ci
-
-      - name: Run Vitest
-        run: npm test
-
+      - run: npm ci
+      - run: npm test
 ```
 
-This ensures that no code can be merged into `main` unless the math functions and data formatters are working perfectly.
+Nothing fancy. It just makes sure the unit tests run somewhere other than my laptop.
 
 {/* visual-break:testing-matters:2 */}
 ![Delivery workflow checkpoint illustration for this section.](/assets/visuals/blog/testing-matters-break-2.png)
 
-## Final Verdict
+## What I deliberately skip
 
-Testing is not binary. It is not "Tested" vs "Untested." It is a spectrum of confidence.
+I am honest about the gaps. No visual regression testing. No full integration tests. Mostly Chrome-based checks.
 
-By using **Vitest** for the logic that *must* be correct (math, data formatting) and a **Smoke Protocol** for the things that *must* look right (layout, navigation), you achieve 95% of the confidence with 10% of the maintenance cost of a full E2E suite.
+Those are real risks, but for personal projects the maintenance cost is not worth it. I would rather ship and verify by hand than maintain a brittle E2E suite I stop running.
 
-That is a trade I will take every single time.
+## Closing
 
-{/* auto-enhancement:voice-start */}
-
-## Personal Build Reflection
-
-I assembled this post from real implementation reps centered on deployment consistency, environment parity, and safer release workflows.
-
-The structure is intentional: I want the sequence to be audit-friendly so troubleshooting later is faster.
-
-When you run this yourself, capture outcomes after each major step to keep your changes reproducible.
-
-{/* auto-enhancement:voice-end */}
-
-{/* auto-enhancement:links-start */}
-
-## Continue Reading in This DevOps Series
-
-If you want to go deeper on this topic cluster, these are the best next reads:
-
-- [Containerization and Orchestration: A Small Lab You Can Run](/containerization-and-orchestration/)
-- [GitHub Actions Basics: One CI Check You Can Trust](/github-actions-aws/)
-- [Docker Multilang: One Compose File, Three Runtimes](/containerizing-multi-language-projects-with-docker-a-practical-guide/)
-
-{/* auto-enhancement:links-end */}
-
+Testing is not binary. It is a confidence trade-off. I use fast unit tests for logic that must be right and a short smoke protocol for everything else. That gives me most of the confidence with a fraction of the maintenance.

@@ -24,6 +24,9 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
   const [mobileDrawerOpen, setMobileDrawerOpen] = React.useState(false);
   const [isMobile, setIsMobile] = React.useState(false);
   const [activeLink, setActiveLink] = React.useState("");
+  const mobileMenuRef = React.useRef<HTMLButtonElement>(null);
+  const drawerRef = React.useRef<HTMLElement>(null);
+  const previousActiveElement = React.useRef<HTMLElement | null>(null);
 
   React.useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 1024);
@@ -43,24 +46,86 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
     }
   }, []);
 
+  // Lock body scroll when mobile drawer is open
+  React.useEffect(() => {
+    if (typeof document === "undefined") return;
+    if (mobileDrawerOpen) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [mobileDrawerOpen]);
+
+  // Close drawer on Escape and restore focus
+  React.useEffect(() => {
+    if (typeof document === "undefined") return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && mobileDrawerOpen) {
+        setMobileDrawerOpen(false);
+      }
+      if (event.key === "Tab" && mobileDrawerOpen && drawerRef.current) {
+        const focusable = drawerRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    };
+
+    if (mobileDrawerOpen) {
+      previousActiveElement.current = document.activeElement as HTMLElement;
+      const closeBtn = drawerRef.current?.querySelector("button");
+      window.setTimeout(() => closeBtn?.focus(), 0);
+      document.addEventListener("keydown", onKeyDown);
+    } else {
+      previousActiveElement.current?.focus?.();
+    }
+
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [mobileDrawerOpen]);
+
   // Filter to core links only: About Brad, Blog, For Recruiter
   const coreLinks = nav.filter(item =>
     ["/", "/posts", "/recruiter"].includes(item.slug)
   );
 
+  const openDrawer = () => setMobileDrawerOpen(true);
+  const closeDrawer = () => setMobileDrawerOpen(false);
+
   return (
     <>
       {isMobile && (
         <button
+          ref={mobileMenuRef}
           className="vertical-nav__toggle-icon cyber-toggle"
           aria-label={mobileDrawerOpen ? "Close menu" : "Open menu"}
-          onClick={() => setMobileDrawerOpen(!mobileDrawerOpen)}
+          aria-expanded={mobileDrawerOpen}
+          aria-controls="mobile-navigation-drawer"
+          onClick={() => {
+            if (mobileDrawerOpen) {
+              closeDrawer();
+            } else {
+              openDrawer();
+            }
+          }}
         >
           {mobileDrawerOpen ? (
             <CloseIcon size={24} />
           ) : (
             <MenuIcon size={24} />
           )}
+          <span className="vertical-nav__toggle-label sr-only">Menu</span>
         </button>
       )}
       {/* Desktop Nav */}
@@ -114,8 +179,11 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
       {/* Mobile Drawer Nav */}
       {isMobile && mobileDrawerOpen && (
         <nav
+          ref={drawerRef}
+          id="mobile-navigation-drawer"
           className="vertical-nav vertical-nav--drawer cyber-drawer"
-          role="navigation"
+          role="dialog"
+          aria-modal="true"
           aria-label="Main Navigation"
         >
           <div className="vertical-nav__inner cyber-drawer__inner">
@@ -124,7 +192,7 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
             </Link>
             <button
               className="vertical-nav__close-btn cyber-close-btn"
-              onClick={() => setMobileDrawerOpen(false)}
+              onClick={() => closeDrawer()}
               aria-label="Close Menu"
             >
               Close
@@ -143,7 +211,7 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
                       className={`vertical-nav__link cyber-drawer__link ${isActive ? 'cyber-drawer__link--active' : ''}`}
                       activeClassName="vertical-nav__link--active cyber-drawer__link--active"
                       title={label}
-                      onClick={() => setMobileDrawerOpen(false)}
+                      onClick={() => closeDrawer()}
                     >
                       <span className="vertical-nav__icon cyber-drawer__icon" aria-hidden="true">
                         {icon}

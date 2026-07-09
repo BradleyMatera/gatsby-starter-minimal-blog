@@ -3,72 +3,29 @@ title: "Docker Multilang: One Compose File, Three Runtimes"
 date: "2025-02-10"
 slug: "/containerizing-multi-language-projects-with-docker-a-practical-guide"
 tags: ["docker", "containers", "devops"]
-description: "A concrete guide to containerizing a small multi-language project with exact files and commands."
+description: "How I containerized a small multi-language project to see the wiring clearly."
 theme: "DevOps"
 ---
 
-Most Docker tutorials either feel like abstract theory or giant production stacks you’ll never build just to learn the basics. This guide does neither. It builds a small system that actually feels like a real application: an API, a background worker, and a web front end all running together.
+Most Docker tutorials are either too abstract or too production-heavy. This is the small multi-service stack I built to understand how containers actually wire together: a Node API, a Python worker, and a static web front end, all started with one command.
 
-The point is not the code itself. The point is seeing three different runtimes packaged, wired, and launched as one system with a single command. Once you’ve done that once, containerization stops feeling mysterious and starts feeling mechanical.
-
-By the end, you will not just have read about containers. You will have a running multi‑service stack on your machine that you can break, modify, and extend.
-
-## What you are building
-
-This lab creates a minimal multi-language stack. Each service has one responsibility so the container boundaries are obvious.
+## The services
 
 | Service | Runtime | Purpose | Port |
-|----------|----------|----------|------|
-| API | Node + Express | Exposes `/numbers` and `/sorted` endpoints returning random and sorted values | 3001 |
-| Worker | Python | Background loop fetching and logging sorted numbers from API | none |
-| Web | Nginx | Serves a static page that fetches and displays sorted data | 8080 → 80 |
-
-At the end of the guide, all three will run with a single command.
+|---|---|---|---|
+| API | Node + Express | Returns random and sorted numbers | 3001 |
+| Worker | Python | Polls the API and logs results | none |
+| Web | Nginx | Serves a static page that displays data | 8080 |
 
 {/* visual-break:docker-multilang-proj:1 */}
 ![Cloud architecture checkpoint illustration for this section.](/assets/visuals/blog/docker-multilang-proj-break-1.png)
 
-## Prerequisites
-
-Install Docker Desktop and verify it runs before continuing.
+## The API
 
 ```bash
-docker version
-```
-
-If this prints a version, Docker is ready. Node and Python will be installed inside containers, so you do not need them locally.
-
-## Step 1: Create the project structure
-
-Start by creating a clean workspace. Each folder will become a Docker build context.
-
-```bash
-mkdir multilang
+mkdir -p multilang/api multilang/worker multilang/web
 cd multilang
-mkdir api worker web
-```
 
-Confirm the structure exists.
-
-```bash
-ls
-```
-
-Expected output:
-
-```
-api  worker  web
-```
-
-This separation prevents accidental file leakage between containers and keeps each runtime isolated.
-
-## Step 2: Create the Node API service
-
-The API exposes `/numbers` and `/sorted` endpoints returning random and sorted values.
-
-Create the API source file.
-
-```bash
 cat > api/index.js <<'EOF'
 const express = require("express");
 const app = express();
@@ -78,8 +35,7 @@ function generateNumbers() {
 }
 
 app.get("/numbers", (_req, res) => {
-  const nums = generateNumbers();
-  res.json({ numbers: nums });
+  res.json({ numbers: generateNumbers() });
 });
 
 app.get("/sorted", (_req, res) => {
@@ -88,45 +44,23 @@ app.get("/sorted", (_req, res) => {
   res.json({ original: nums, sorted });
 });
 
-app.listen(3001, () => {
-  console.log("api running on 3001");
-});
+app.listen(3001, () => console.log("api running on 3001"));
 EOF
-```
 
-Create the package manifest.
-
-```bash
 cat > api/package.json <<'EOF'
 {
   "name": "api",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {
-    "start": "node index.js"
-  },
-  "dependencies": {
-    "express": "^4.19.2"
-  }
+  "scripts": { "start": "node index.js" },
+  "dependencies": { "express": "^4.19.2" }
 }
 EOF
+
+cd api && npm install && cd ..
 ```
 
-Install dependencies to generate the lockfile.
-
-```bash
-cd api
-npm install
-cd ..
-```
-
-The API code is now complete and ready for containerization.
-
-## Step 3: Create the Python worker service
-
-The worker periodically fetches from the API and logs sorted results.
-
-Create the worker script.
+## The worker
 
 ```bash
 cat > worker/main.py <<'EOF'
@@ -147,34 +81,23 @@ while True:
 
     time.sleep(5)
 EOF
-```
 
-Create the requirements file with `requests`.
-
-```bash
 cat > worker/requirements.txt <<'EOF'
 requests
 EOF
 ```
 
-No local install is required. Dependencies will be installed inside the container.
-
-## Step 4: Create the static web service
-
-The web page fetches sorted data from the API and displays it.
+## The web page
 
 ```bash
 cat > web/index.html <<'EOF'
 <!doctype html>
 <html>
-  <head>
-    <title>Docker Multilang Sorting Demo</title>
-  </head>
+  <head><title>Sorting Demo</title></head>
   <body>
     <h1>Sorting Demo</h1>
     <button onclick="loadData()">Generate & Sort</button>
     <pre id="output"></pre>
-
     <script>
       async function loadData() {
         const res = await fetch('http://localhost:3001/sorted');
@@ -189,13 +112,7 @@ cat > web/index.html <<'EOF'
 EOF
 ```
 
-This file is enough to verify Nginx container behavior.
-
-## Step 5: Create Dockerfiles for each service
-
-Each service now needs a container build definition.
-
-Node API Dockerfile:
+## Dockerfiles
 
 ```bash
 cat > api/Dockerfile <<'EOF'
@@ -207,11 +124,7 @@ COPY . .
 EXPOSE 3001
 CMD ["npm", "start"]
 EOF
-```
 
-Python worker Dockerfile:
-
-```bash
 cat > worker/Dockerfile <<'EOF'
 FROM python:3.11-slim
 WORKDIR /app
@@ -220,22 +133,14 @@ RUN pip install -r requirements.txt
 COPY . .
 CMD ["python", "main.py"]
 EOF
-```
 
-Web Dockerfile:
-
-```bash
 cat > web/Dockerfile <<'EOF'
 FROM nginx:alpine
 COPY index.html /usr/share/nginx/html/index.html
 EOF
 ```
 
-At this point, each folder contains runnable source code and a Dockerfile that defines how to package it.
-
-## Step 6: Create the Compose file
-
-Docker Compose will build and run all services together.
+## Compose
 
 ```bash
 cat > docker-compose.yml <<'EOF'
@@ -244,10 +149,8 @@ services:
     build: ./api
     ports:
       - "3001:3001"
-
   worker:
     build: ./worker
-
   web:
     build: ./web
     ports:
@@ -255,127 +158,29 @@ services:
 EOF
 ```
 
-This file declares three services, two exposed ports, and local build contexts.
-
-## Step 7: Build and run the stack
-
-Run the full stack with one command.
+Run it:
 
 ```bash
 docker compose up --build
 ```
 
-You should see logs showing:
+Verify:
 
-- API container printing `api running on 3001`
-- Worker container printing original and sorted arrays fetched from the API
-- Web container starting Nginx
-
-Leave this running and open a second terminal for verification.
-
-## Step 8: Verify each service
-
-Verify the web service in a browser.
-
-Open:
-
-```
-http://localhost:8080
-```
-
-Expected result: the page displays a button. Clicking it fetches and shows original and sorted arrays from the API.
-
-Verify the API service.
-
-```bash
-curl http://localhost:3001/sorted
-```
-
-Expected response:
-
-```
-{"original":[34,7,88,...],"sorted":[7,34,88,...]}
-```
-
-Verify the worker service.
-
-Look at the Compose logs and confirm repeated output:
-
-```
-original: [34, 7, 88, ...]
-sorted:   [7, 34, 88, ...]
----
-```
-
-If all three checks succeed, the multi-runtime container stack is functioning correctly.
-
-## Common failure points
-
-| Symptom | Cause | Fix |
-|----------|--------|-----|
-| API container exits immediately | `package-lock.json` missing | Run `npm install` in `api/` and rebuild |
-| Web page returns 404 | Incorrect COPY path in web Dockerfile | Confirm `index.html` exists in `web/` |
-| Ports unavailable | Port already in use | Change host ports in compose file |
-| Worker prints errors | File name mismatch | Ensure `worker/main.py` exists |
-| Web page shows CORS error | Browser blocks API call | Run browser with disabled CORS for demo or proxy API through web container |
-
-These issues account for most failures when assembling small multi-container stacks.
-
-## What you now have
-
-At this point, your project directory contains:
-
-```text
-multilang/
-  api/
-    index.js
-    package.json
-    package-lock.json
-    Dockerfile
-  worker/
-    main.py
-    requirements.txt
-    Dockerfile
-  web/
-    index.html
-    Dockerfile
-  docker-compose.yml
-```
-
-You can stop the stack with `Ctrl+C` and restart it any time with `docker compose up`.
+- `http://localhost:8080` shows the page.
+- `curl http://localhost:3001/sorted` returns sorted data.
+- Compose logs show the worker printing arrays.
 
 {/* visual-break:docker-multilang-proj:2 */}
 ![Cloud operations checkpoint illustration for this section.](/assets/visuals/blog/docker-multilang-proj-break-2.png)
 
-## Closing
+## What I learned
 
-At this point you have something most Docker introductions never give you: a working multi‑runtime system you can actually play with.
+The value was not the code. It was seeing three runtimes packaged, wired by service names, and launched with one command. Once you do that once, containerization stops feeling mysterious and starts feeling mechanical.
 
-You can change the API response and watch the container rebuild. You can slow the worker loop and see log behavior. You can replace the static page with a real frontend. None of that requires guessing how the pieces connect anymore — you already wired them once.
+Common problems I hit:
 
-That is the real value of this lab. Not memorizing commands. Not reading diagrams. Actually building a small system that behaves like a real one.
+- Missing `package-lock.json` caused the API build to fail.
+- The web page hit a CORS error because the browser made the API call directly. I either disabled CORS for the demo or proxied through Nginx.
+- Port conflicts happened when another project was already on 3001 or 8080.
 
-{/* auto-enhancement:voice-start */}
-
-## Personal Build Reflection
-
-This guide reflects how I actually execute work when the goal is deployment consistency, environment parity, and safer release workflows.
-
-I prefer explicit checklists over vague advice because that is what keeps delivery stable when timelines are tight.
-
-Use the steps as a baseline, then annotate your own environment differences as you go.
-
-{/* auto-enhancement:voice-end */}
-
-{/* auto-enhancement:links-start */}
-
-## Continue Reading in This DevOps Series
-
-If you want to go deeper on this topic cluster, these are the best next reads:
-
-- [Containerization and Orchestration: A Small Lab You Can Run](/containerization-and-orchestration/)
-- [GitHub Actions Basics: One CI Check You Can Trust](/github-actions-aws/)
-- [Testing That I Actually Run: A Small Pyramid](/why-testing-matters/)
-
-{/* auto-enhancement:links-end */}
-
+That is the normal debugging noise of multi-container setups. This lab gives you a small enough stack that the noise is manageable.

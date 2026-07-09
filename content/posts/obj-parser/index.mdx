@@ -20,16 +20,12 @@ If you only take one thing from this post, take this: parsing is not about writi
 You are building a tiny command line tool that:
 
 1) Opens an OBJ file from `data/sample.obj`.
-
 2) Reads the file line by line.
-
 3) Classifies each line into one of the OBJ record types you care about.
-
 4) Increments counters for `v` (position vertices) and `f` (faces).
-
 5) Prints counts in a stable format.
 
-Then you progressively harden it so it behaves like a real parser: it trims whitespace, ignores comments, doesn’t confuse `vn` with `v`, validates face tokens, tracks line numbers, and reports what it skipped.
+Then you progressively harden it so it behaves like a real parser: it trims whitespace, ignores comments, does not confuse `vn` with `v`, validates face tokens, tracks line numbers, and reports what it skipped.
 
 {/* visual-break:obj-parser:1 */}
 ![Debugging process checkpoint illustration for this section.](/assets/visuals/blog/obj-parser-break-1.png)
@@ -75,7 +71,7 @@ zig version
 
 If that prints a version, you are good.
 
-## Start to finish
+## How to build the parser
 
 ### Step 1: Scaffold the project and create the test file
 
@@ -88,8 +84,6 @@ mkdir -p data
 ```
 
 Now create `data/sample.obj` with known counts. This file includes `v`, `vt`, and `vn` on purpose so your parser has to be correct.
-
-Create the file:
 
 ```text
 # sample.obj - tiny verification file
@@ -196,7 +190,7 @@ pub fn main() !void {
 
 What this is doing, line by line, in plain terms.
 
-It opens `data/sample.obj`, wraps the file reader in a buffered reader so reads are efficient, and then loops line by line. Each line is cleaned up in a way that matches real files. We trim a Windows `\r` if it exists, we trim whitespace so indentation doesn’t break parsing, and we ignore blank lines and comments.
+It opens `data/sample.obj`, wraps the file reader in a buffered reader so reads are efficient, and then loops line by line. Each line is cleaned up in a way that matches real files. We trim a Windows `\r` if it exists, we trim whitespace so indentation does not break parsing, and we ignore blank lines and comments.
 
 Then we tokenize the line by whitespace. The first token is the record type. That is what we match on. This is the difference between an honest parser and a fragile “first character” trick.
 
@@ -216,7 +210,7 @@ faces: 2
 skipped: 6
 ```
 
-That skipped count is correct for this sample file: 4 `vt` lines + 1 `vn` line + 1 `mtllib/usemtl` is not in the sample, so in this file it is `vt` + `vn` only plus any other non-counted type you add. If your skipped number differs, don’t guess. Re-open `data/sample.obj` and count the lines you expect to be skipped.
+That skipped count is correct for this sample file: 4 `vt` lines + 1 `vn` line + 1 other non-counted line. If your skipped number differs, do not guess. Re-open `data/sample.obj` and count the lines you expect to be skipped.
 
 ### Step 3: Stop counting garbage as faces by validating face tokens
 
@@ -268,7 +262,7 @@ if (std.mem.eql(u8, head, "f")) {
 }
 ```
 
-Now the parser is doing something important: it refuses to count a face that doesn’t look like a face. That is what makes your counts meaningful.
+Now the parser is doing something important: it refuses to count a face that does not look like a face. That is what makes your counts meaningful.
 
 Run again:
 
@@ -318,7 +312,7 @@ This step makes vertex counting honest in the same way face validation made face
 
 ### Step 5: Track line numbers and show a helpful error message
 
-Right now if an error happens, Zig will return it, but you won’t know which line caused it unless you guess. A parser should tell you.
+Right now if an error happens, Zig will return it, but you will not know which line caused it unless you guess. A parser should tell you.
 
 The simplest approach is to replace `return error...` with printing a message that includes the line number and content, then returning an error.
 
@@ -336,7 +330,7 @@ Now when you intentionally break the file, you should see which line broke.
 
 ![Baseline established](https://media.giphy.com/media/R5dspTNJBVL51hiSN7/giphy.gif)
 
-## A stronger “verify” section
+## A stronger verify section
 
 At this point you have a lab that can fail loudly, not quietly. So verification becomes more than “it printed numbers.” It becomes: you can predict what will happen when the input changes.
 
@@ -383,7 +377,7 @@ The first upgrade is range validation. Once you have counted vertices, you can v
 
 The second upgrade is triangulation. OBJ faces can have more than three vertices. If you ever want to render, you need to triangulate polygons (fan triangulation is fine for a lab).
 
-The third upgrade is memory strategy. Right now we validate floats but we don’t store them. If you decide to store geometry, you need a plan for allocations and growth, and Zig forces you to be explicit about that. That’s a good thing.
+The third upgrade is memory strategy. Right now we validate floats but we do not store them. If you decide to store geometry, you need a plan for allocations and growth, and Zig forces you to be explicit about that. That is a good thing.
 
 This is the part that makes it “more than a guide.” The code is not trying to accept everything. It is trying to reject broken input quickly and with context.
 
@@ -398,27 +392,12 @@ This lab is not impressive by itself. That is the point. It is small enough that
 - https://ziglang.org/learn/
 - https://en.wikipedia.org/wiki/Wavefront_.obj_file
 
-{/* auto-enhancement:voice-start */}
+## Closing
 
-## Personal Build Reflection
+Parsing well is not about being clever. It is about being strict enough that bad input cannot silently become bad output. This OBJ lab is tiny, but the habits it teaches — tokenize carefully, validate aggressively, report line numbers, test with broken input — are the same ones that matter in every parser you will ever write.
 
-This guide reflects how I actually execute work when the goal is performance-sensitive implementation details and verifiable parser behavior.
-
-I prefer explicit checklists over vague advice because that is what keeps delivery stable when timelines are tight.
-
-Use the steps as a baseline, then annotate your own environment differences as you go.
-
-{/* auto-enhancement:voice-end */}
-
-{/* auto-enhancement:links-start */}
-
-## Continue Reading in This Systems Series
-
-If you want to go deeper on this topic cluster, these are the best next reads:
+## Keep reading
 
 - [Zig OBJ Parsing: A Small, Fast Parser You Can Verify](/exploring-zig-efficient-parsing/)
 - [Designing Systems That Actually Ship: A Small Template](/designing-systems-that-actually-ship/)
 - [Containerization and Orchestration: A Small Lab You Can Run](/containerization-and-orchestration/)
-
-{/* auto-enhancement:links-end */}
-

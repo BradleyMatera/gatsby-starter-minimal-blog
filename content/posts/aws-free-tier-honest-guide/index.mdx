@@ -24,19 +24,17 @@ On paper, the AWS free tier is a list of monthly allowances. In practice, it is 
 
 ![Watching AWS costs](https://media.giphy.com/media/3o7btPCcdNniyf0ArS/giphy.gif)
 
-On paper, the AWS free tier sounds generous. In practice, a few specific services are responsible for almost every surprise bill. I like to keep a simple mental model of what is truly "dangerous" if left running, what is usually safe, and what only costs money when you move data around. A table makes this clearer than a long explanation.
+On paper, the AWS free tier sounds generous. In practice, a few specific services are responsible for almost every surprise bill. I like to keep a simple mental model of what is truly “dangerous” if left running, what is usually safe, and what only costs money when you move data around. A table makes this clearer than a long explanation.
 
 | Service | Free tier allowance | What actually causes charges | Why people get surprised |
 |--------|---------------------|------------------------------|--------------------------|
 | EC2 | 750 hours per month of t2.micro or t3.micro (first 12 months) | Running an instance outside free tier size, or running 24/7 for months | People forget instances are still running after testing |
-| RDS | 750 hours per month of db.t2.micro or db.t3.micro (first 12 months) | Leaving a database running continuously | Databases feel "small" but charge every hour |
+| RDS | 750 hours per month of db.t2.micro or db.t3.micro (first 12 months) | Leaving a database running continuously | Databases feel “small” but charge every hour |
 | S3 | 5 GB standard storage | Storing large files or keeping old test data | Storage accumulates quietly over time |
 | Lambda | 1 million requests per month | High request volume or long execution time | Rare for beginners, but possible in loops |
 | Data Transfer | Limited free outbound data | Downloading large files or heavy frontend traffic | Bandwidth is easy to forget to measure |
 
 This table is not meant to be perfect or exhaustive. It is just the handful of services that matter most when you are learning. If you watch EC2, RDS, and S3, you already avoid most free tier mistakes.
-
----
 
 ## Before you start
 
@@ -121,27 +119,8 @@ If you take five minutes to audit running resources, add a small budget alert, a
 
 No hype. No fear. Just staying aware of what is actually running in your account.
 
-{/* auto-enhancement:voice-start */}
-
-## Personal Build Reflection
-
-I wrote this from my own build notes while focusing on cloud reliability, cost control, and repeatable troubleshooting.
-
-I keep this kind of post operational on purpose so another person, or future me, can rerun it without guessing where decisions came from.
-
-If you adapt this flow, track what you changed and why at each step so your final setup stays explainable.
-
-{/* auto-enhancement:voice-end */}
-
-{/* auto-enhancement:links-start */}
-
-## Continue Reading in This Cloud Series
-
-If you want to go deeper on this topic cluster, these are the best next reads:
+## Keep reading
 
 - [AWS Cloud Support Internship: What I Actually Practiced](/aws-cloud-support-internship-mastering-troubleshooting-and-architecture/)
 - [AWS vs. Azure vs. Google Cloud: The Ultimate Free Tier Battle & Survival Guide](/aws-vs-azure-vs-google-cloud/)
 - [Cognito Authentication With React: A Small, Verifiable Setup](/secure-authentication-cognito-react/)
-
-{/* auto-enhancement:links-end */}
-

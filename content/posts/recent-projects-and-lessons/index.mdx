@@ -1,167 +1,67 @@
 ---
-title: "Recent Projects and Lessons: A Short, Verifiable Format"
+title: "Two Recent Demos and What I Actually Learned From Them"
 date: "2025-06-01"
 slug: "/recent-projects-and-lessons"
 tags: ["projects", "learning", "process"]
-description: "A compact format for sharing recent demos with proof links."
+description: "A short breakdown of a soundboard deploy bug and a WebGPU triangle setup, with the one lesson each left behind."
 theme: "Process"
 ---
 
-In the modern engineering landscape, a resume is simply a list of unverified claims. Anyone can write "Proficient in WebGL" or "Experienced with CI/CD." The only metric that separates a senior engineer from a junior enthusiast is **verifiable proof of work**.
+I used to write project summaries that listed every feature and called them wins. That felt empty. Now I force myself to write down one concrete thing that broke and how I fixed it. Here are two recent demos and the single lesson each one left me.
 
-For the past quarter, I have adopted a strict discipline: I do not claim to know a technology until I have shipped a public, working URL that demonstrates it. This discipline forces me to confront the boring, difficult parts of software engineering—deployment, configuration, and environment isolation—that tutorials conveniently skip.
+## AnimalSounds: the base path bug
 
-This post is a technical retrospective on my two most recent "Proof of Work" projects: **AnimalSounds** and the **WebGPU Triangle Demo**. Below is a detailed breakdown of the architecture, the specific failure points encountered, and the engineering lessons codified from each.
+- Live demo: [https://bradleymatera.github.io/AnimalSounds/](https://bradleymatera.github.io/AnimalSounds/)
+- Source: [https://github.com/bradleymatera/AnimalSounds](https://github.com/bradleymatera/AnimalSounds)
+- Stack: vanilla JavaScript, Vite, GitHub Actions
 
----
+I built a simple soundboard. The code worked locally. Then I deployed it to GitHub Pages and every asset 404'd.
 
-## Case Study 1: AnimalSounds
-**The Artifact:** [Live Demo](https://bradleymatera.github.io/AnimalSounds/) | [Source Code](https://github.com/bradleymatera/AnimalSounds)
-**The Stack:** Vanilla JavaScript, Vite, GitHub Actions.
+The browser was asking for `https://bradleymatera.github.io/assets/sound.mp3`, but GitHub Pages had hosted it at `https://bradleymatera.github.io/AnimalSounds/assets/sound.mp3`. I knew about base paths in theory, but I had never had to think about it because Vercel and Netlify usually hide that from you.
 
-### The Engineering Challenge: Sub-Path Routing in Static Environments
-The goal was ostensibly simple: build a responsive soundboard. However, the true engineering challenge emerged during the deployment phase to GitHub Pages.
-
-Modern frontend tooling (like Vite, Next.js, or Webpack) generally assumes the application is hosted at the **Root Domain** (e.g., `https://myapp.com/`). When an asset is referenced as `/assets/sound.mp3`, the browser resolves this to `https://myapp.com/assets/sound.mp3`.
-
-GitHub Pages, however, hosts project repositories on a **Sub-Path** (e.g., `https://username.github.io/repo-name/`).
-
-### The Failure State
-Upon the initial deploy, the application loaded the HTML, but the console was flooded with `404 Not Found` errors for every JavaScript and CSS asset.
-
-The browser was requesting:
-`https://bradleymatera.github.io/assets/index.js`
-
-But the file actually existed at:
-`https://bradleymatera.github.io/AnimalSounds/assets/index.js`
-
-This is a classic "Base Path" configuration error. A naive solution is to change all paths to relative (`./assets/...`), but this breaks client-side routing and makes the codebase brittle.
-
-### The Architectural Resolution
-The robust solution required modifying the build pipeline to inject the base path dynamically based on the environment.
-
-I modified the `vite.config.js` to accept a `base` argument.
+The fix was in `vite.config.js`:
 
 ```javascript
-// vite.config.js
 import { defineConfig } from 'vite'
 
-// [https://vitejs.dev/config/](https://vitejs.dev/config/)
-export default defineConfig(({ command, mode }) => {
-  return {
-    // When building for production, assume the repo name is the base.
-    // When in dev mode, assume root (localhost:3000/).
-    base: mode === 'production' ? '/AnimalSounds/' : '/',
-    build: {
-      outDir: 'dist',
-    }
-  }
-})
-
+export default defineConfig(({ mode }) => ({
+  base: mode === 'production' ? '/AnimalSounds/' : '/',
+  build: { outDir: 'dist' },
+}))
 ```
 
-Furthermore, I had to ensure my automated deployment pipeline (GitHub Actions) was correctly triggering this production mode. By explicitly defining the environment in the CI yaml, I ensured that every commit to `main` resulted in a correctly routed build artifact.
+That is the whole thing. I also made sure the GitHub Actions workflow set `NODE_ENV=production` so the build picked up the right branch.
 
-**The Lesson:**
-
-> "Infrastructure awareness is not optional. You must configure your bundler (Vite/Webpack) to understand the physical location of its deployment, or your manifest will fail to resolve."
-
----
+The lesson I kept: deployment is part of the feature. A demo that only runs locally is not finished.
 
 {/* visual-break:recent-projects-and-lessons:1 */}
 ![Execution process checkpoint illustration for this section.](/assets/visuals/blog/recent-projects-and-lessons-break-1.png)
 
-## Case Study 2: WebGPU Triangle Demo
+## WebGPU Triangle Demo: the pipeline is the program
 
-**The Artifact:** [Live Demo](https://bradleymatera.github.io/TriangleDemo/) | [Source Code](https://github.com/bradleymatera/TriangleDemo)
-**The Stack:** TypeScript, WebGPU API, WGSL (WebGPU Shading Language).
+- Live demo: [https://bradleymatera.github.io/TriangleDemo/](https://bradleymatera.github.io/TriangleDemo/)
+- Source: [https://github.com/bradleymatera/TriangleDemo](https://github.com/bradleymatera/TriangleDemo)
+- Stack: TypeScript, WebGPU API, WGSL
 
-### The Engineering Challenge: The "Hello World" of Next-Gen Graphics
+Drawing a triangle in the 2D canvas API is three lines of code. In WebGPU it took me about 150 lines of boilerplate just to get a red triangle on screen. That is not a complaint. It is the point.
 
-WebGPU is the successor to WebGL. While WebGL is a JavaScript wrapper around OpenGL (an older state-machine API), WebGPU is a modern, low-level API designed to map closely to Vulkan, Metal, and DirectX 12.
+WebGPU makes you configure the pipeline explicitly:
 
-The challenge here was the sheer verbosity required to render a single triangle. In the HTML5 Canvas 2D API, drawing a triangle takes 3 lines of code. In WebGPU, it takes approximately 150 lines of boilerplate to set up the **Render Pipeline**.
+1. Request an adapter from the browser.
+2. Request a device from the adapter.
+3. Configure the canvas context with a texture format.
+4. Create a render pipeline with vertex and fragment shaders.
+5. Encode a command to draw.
 
-### The Implementation Details
+The shader language, WGSL, is stricter than GLSL. One wrong type and the GPU validation layer throws an error that looks like a crash. I spent an hour debugging a `vec2` passed where a `vec4` was expected. It was a single line.
 
-To render this demo, I had to architect a specific pipeline of asynchronous hardware requests:
-
-1. **Request Adapter:** The code asks the browser for access to the physical GPU (Graphics Processing Unit).
-2. **Request Device:** The code asks for a logical instance to interact with that GPU.
-3. **Configure Context:** The HTML `<canvas>` element must be configured with a specific texture format (usually `bgra8unorm`) to match the screen's color space.
-
-### The Shader Challenge (WGSL)
-
-The hardest part was writing the shaders. WebGPU does not use GLSL (the language used by WebGL). It uses **WGSL** (WebGPU Shading Language), a Rust-like language that is strictly typed.
-
-I had to define a Vertex Shader that manually positioned the three points of the triangle in Normalized Device Coordinates (NDC):
-
-```wgsl
-// triangle.wgsl
-@vertex
-fn vs_main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4<f32> {
-    var pos = array<vec2<f32>, 3>(
-        vec2<f32>( 0.0,  0.5),  // Top
-        vec2<f32>(-0.5, -0.5),  // Bottom Left
-        vec2<f32>( 0.5, -0.5)   // Bottom Right
-    );
-
-    return vec4<f32>(pos[VertexIndex], 0.0, 1.0);
-}
-
-```
-
-If I made a single type error in this shader—for example, passing a `float` where the pipeline expected a `vec4`—the application would crash silently with a GPU validation error.
-
-**The Lesson:**
-
-> "Modern graphics programming requires a mental shift from 'drawing shapes' to 'configuring pipelines.' You are not telling the computer *what* to draw; you are building a machine that knows *how* to draw."
-
----
+The lesson I kept: in modern graphics programming, you are not drawing shapes. You are configuring a machine that draws shapes. The mental model is pipeline first, pixels second.
 
 {/* visual-break:recent-projects-and-lessons:2 */}
 ![Delivery workflow checkpoint illustration for this section.](/assets/visuals/blog/recent-projects-and-lessons-break-2.png)
 
-## The "Micro-Lesson" Methodology
+## Why I write this way
 
-Why document these small projects with such rigor?
+Each project now gets one sentence: what it taught me. AnimalSounds is my reference for Vite base paths on GitHub Pages. TriangleDemo is my reference for WebGPU device initialization. When I hit the same problem again, I do not start from zero. I start from the note.
 
-Cognitive science tells us that we retain information better when we attach it to a specific episode or struggle. By forcing myself to write down exactly **one** primary lesson per project, I create a searchable index of my own experience.
-
-* **AnimalSounds** is not just a soundboard; it is my reference for **Vite Base Path Configuration**.
-* **TriangleDemo** is not just a triangle; it is my boilerplate for **WebGPU Device Initialization**.
-
-### Keeping the Portfolio "Alive"
-
-The final component of this system is the **Update Date**.
-
-A portfolio is a living document. Technology rots. A WebGPU demo written in 2023 might not compile in 2025 because the API specification changed. By prominently displaying `Updated: 2025-06-01` at the top of my documentation, I signal to the reader (and to recruiters) that this code is maintained, current, and verified against today's browser standards.
-
-If you are building a portfolio, stop listing languages you read about once. Build a thing. Break the thing. Fix the thing. Then write down exactly how you fixed it.
-
-**That is the only proof that matters.**
-
-{/* auto-enhancement:voice-start */}
-
-## Personal Build Reflection
-
-This guide reflects how I actually execute work when the goal is career execution with practical systems, documentation, and measurable progress.
-
-I prefer explicit checklists over vague advice because that is what keeps delivery stable when timelines are tight.
-
-Use the steps as a baseline, then annotate your own environment differences as you go.
-
-{/* auto-enhancement:voice-end */}
-
-{/* auto-enhancement:links-start */}
-
-## Continue Reading in This Career Series
-
-If you want to go deeper on this topic cluster, these are the best next reads:
-
-- [How I Learn by Doing: A Repeatable Mini Project Loop](/how-i-learn-by-doing/)
-- [What I Learned From Three Small Projects](/what-i-learned-three-simple-projects/)
-- [Balancing Work, School, and Projects: A Simple Schedule](/balancing-school-work-projects/)
-
-{/* auto-enhancement:links-end */}
-
+If you are building a portfolio, you do not need more features. You need more notes about what broke.

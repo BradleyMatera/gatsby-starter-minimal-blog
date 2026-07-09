@@ -3,360 +3,92 @@ title: "Cognito Authentication With React: A Small, Verifiable Setup"
 date: "2025-05-14"
 slug: "/secure-authentication-cognito-react"
 tags: ["aws", "authentication", "react"]
-description: "A step by step Cognito setup with exact files, commands, and verification checks."
+description: "The minimal Cognito and React setup I use to understand auth flows."
 theme: "Cloud"
 ---
 
-Authentication is not magic. It is configuration, tokens, and clear verification checks.
+Authentication is not magic. It is configuration, tokens, and clear verification checks. This is the minimal Cognito plus React setup I run when I need to understand the flow.
 
-This post documents a minimal Cognito plus React setup. It avoids abstractions like the Amplify UI components to show exactly how the authentication flow works.
+It avoids pre-built Amplify UI components so I can see exactly what is happening.
 
-You will create a user pool, wire a frontend, and confirm the login process.
+## The moving parts
 
-This is a lab guide. You should run these steps locally to verify the results.
-
-## The promise
-
-By the end of this guide, you will:
-
-- Create a Cognito user pool with email sign in.
-- Configure a React application to communicate with AWS.
-- Verify that a user can log in and that an ID token is stored in the browser.
+- **User pool:** the directory of users.
+- **App client:** the public interface that lets your frontend talk to the pool.
+- **ID token:** a JWT containing claims about the authenticated user.
+- **Amplify Auth:** the client library that manages sign-in and token storage.
 
 {/* visual-break:secure-authentication-cognito-react:1 */}
 ![Cloud architecture checkpoint illustration for this section.](/assets/visuals/blog/secure-authentication-cognito-react-break-1.png)
 
-## What this is
+## Step 1: create the user pool
 
-**High level:** Amazon Cognito is a hosted identity service. It stores user accounts and issues JSON Web Tokens (JWTs) when users sign in.
+In the AWS Console, go to Amazon Cognito and create a user pool:
 
-**Low level:** You will create a "User Pool" to store accounts and an "App Client" to allow your React application to make public API calls to that pool.
+1. Select **Email** as the sign-in option.
+2. Set **No MFA** for the lab. Enable MFA later for real apps.
+3. Leave sign-up defaults.
+4. Select **Send email with Cognito** for message delivery.
+5. Name the pool, for example `react-demo-pool`.
+6. **Uncheck** "Generate a client secret." Browser apps cannot keep secrets.
+7. Create the pool.
 
-**Key terms:**
+Save the **User Pool ID**. You will need it in Step 4.
 
-- **User pool:** The directory of users.
-- **App client:** The interface that allows your frontend to interact with the pool.
-- **ID token:** A token containing claims about the identity of the authenticated user.
-- **Amplify Auth:** The client library that manages the OAuth handshake and token storage.
+## Step 2: create a user and app client
 
-## What you need
+Inside the pool:
 
-- An active AWS account.
-- Node.js version 18 or later.
-- A terminal and code editor.
+1. Go to the **Users** tab and create a user. Mark the email verified and set a known password.
+2. Go to the **App integration** tab and copy the **Client ID**.
 
-## Start to Finish
+You now have a User Pool ID, a Client ID, and a test user.
 
-### Step 1: Create the user pool
+## Step 3: create the React app
 
-**Goal:**
-Create a database for your users that allows sign in via email address.
+```bash
+npm create vite@latest cognito-demo -- --template react
+cd cognito-demo
+npm install aws-amplify
+```
 
-**Actions:**
+Run `npm run dev` and confirm the default Vite screen loads.
 
-1.  Log in to the **AWS Console**.
-2.  Navigate to **Amazon Cognito**.
-3.  Select **User pools** and click **Create user pool**.
-4.  **Step 1: Configure sign-in experience**
-    - Select **Email** under "Cognito user pool sign-in options".
-    - Click Next.
-5.  **Step 2: Configure security requirements**
-    - For "MFA enforcement", select **No MFA**. (This simplifies the lab; enable MFA for production).
-    - Leave "User account recovery" as default.
-    - Click Next.
-6.  **Step 3: Configure sign-up experience**
-    - Leave defaults.
-    - Click Next.
-7.  **Step 4: Configure message delivery**
-    - Select **Send email with Cognito**.
-    - Click Next.
-8.  **Step 5: Integrate your app**
-    - Enter a "User pool name" (e.g., `react-demo-pool`).
-    - **Important:** Uncheck "Generate a client secret". Browser-based applications cannot secure a client secret.
-    - Click Next.
-9.  **Step 6: Review and create**
-    - Review settings and click **Create user pool**.
+## Step 4: configure Amplify
 
-**Why:**
-The user pool is the source of truth for identities. Configuring email sign-in reduces friction. Disabling the client secret is a strict requirement for frontend JavaScript applications.
+Create `src/aws-exports.js`:
 
-**Verify:**
-1.  Click on the name of your new user pool to open the details page.
-2.  Copy the **User Pool ID** (e.g., `us-east-1_XyZ123`). Save this for Step 4.
-3.  Navigate to the **Users** tab.
-4.  You should see an empty list and a button labeled "Create user". This confirms the pool is active.
-
-**If it fails:**
-- **Symptom:** Error creating pool regarding permissions.
-- **Fix:** Ensure your AWS IAM user has `AmazonCognitoPowerUser` or Administrator permissions.
-
-### Step 2: Create a user and app client
-
-**Goal:**
-Create a test user for login and retrieve the Client ID required for the React app.
-
-**Actions:**
-
-1.  **Create a User:**
-    - Inside your User Pool, go to the **Users** tab.
-    - Click **Create user**.
-    - Enter an email address you control.
-    - Select "Send an email invitation" or "Mark email address as verified". For this lab, select **Mark email address as verified** and set a known password.
-    - Click **Create user**.
-2.  **Get Client ID:**
-    - Go to the **App integration** tab.
-    - Scroll down to the **App clients and analytics** list.
-    - Click on the app client name created during setup (or create a new one if missed).
-    - Copy the **Client ID** (e.g., `5m4n3o2p1q0r9s8t7u6v`).
-
-**Why:**
-You need a pre-existing user to test the login flow immediately without building a registration form. The Client ID is the public identifier your React app will use to introduce itself to AWS.
-
-**Verify:**
-- You have a **User Pool ID** string.
-- You have a **Client ID** string.
-- You have a valid username (email) and password ready to use.
-
-**If it fails:**
-- **Symptom:** You cannot find the Client ID.
-- **Fix:** Navigate to the "App integration" tab of your User Pool dashboard.
-
-### Step 3: Create the React app
-
-**Goal:**
-Initialize a clean React application and install the AWS Amplify library.
-
-**Actions:**
-
-1.  Open your terminal.
-2.  Run the following commands:
-    ```bash
-    npm create vite@latest cognito-demo -- --template react
-    cd cognito-demo
-    npm install aws-amplify
-    ```
-3.  Open the project in your code editor.
-
-**Why:**
-Vite provides a minimal, fast build tool for React. The `aws-amplify` package contains the logic needed to sign requests and manage tokens. We avoid the `amplify-cli` to keep the project structure transparent.
-
-**Verify:**
-1.  Run `npm run dev`.
-2.  Open the localhost URL provided.
-3.  Confirm the default Vite splash screen loads.
-
-**If it fails:**
-- **Symptom:** Command not found.
-- **Fix:** Ensure Node.js is installed by running `node -v`.
-
-### Step 4: Configure Amplify
-
-**Goal:**
-Connect the React application to your specific Cognito resources.
-
-**Actions:**
-
-1.  Create a new file `src/aws-exports.js`.
-2.  Paste the following code, replacing the placeholders with your actual IDs from Step 1 and Step 2:
-    ```javascript
-    export const awsConfig = {
-      Auth: {
-        Cognito: {
-          userPoolId: "YOUR_USER_POOL_ID", // e.g., us-east-1_xxxxxx
-          userPoolClientId: "YOUR_APP_CLIENT_ID", // e.g., 5xxxxxxxxx
-        }
-      }
-    };
-    ```
-3.  Open `src/main.jsx`.
-4.  Add the configuration logic before the React render:
-    ```javascript
-    import React from 'react';
-    import ReactDOM from 'react-dom/client';
-    import App from './App.jsx';
-    import './index.css';
-    import { Amplify } from 'aws-amplify';
-    import { awsConfig } from './aws-exports';
-
-    Amplify.configure(awsConfig);
-
-    ReactDOM.createRoot(document.getElementById('root')).render(
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>,
-    );
-    ```
-
-**Why:**
-Amplify must be initialized with your AWS coordinates before it can function. Storing config in a separate file mimics production best practices.
-
-**Verify:**
-1.  Run `npm run dev`.
-2.  Open the browser console (F12).
-3.  Ensure there are no red errors regarding `Amplify` or `Auth`.
-
-**If it fails:**
-- **Symptom:** `TypeError: Cannot read properties of undefined`.
-- **Fix:** Double check the object structure in `aws-exports.js`. It must match `{ Auth: { Cognito: { ... } } }`.
-
-### Step 5: Add a basic sign in form
-
-**Goal:**
-Implement the login logic using the Amplify Auth library.
-
-**Actions:**
-
-1.  Open `src/App.jsx`.
-2.  Replace the entire file content with:
-    ```jsx
-    import { useState } from "react";
-    import { signIn, signOut, getCurrentUser } from "aws-amplify/auth";
-
-    export default function App() {
-      const [email, setEmail] = useState("");
-      const [password, setPassword] = useState("");
-      const [status, setStatus] = useState("signed out");
-
-      async function handleSignIn(e) {
-        e.preventDefault();
-        try {
-          const { isSignedIn, nextStep } = await signIn({ username: email, password });
-          if (isSignedIn) {
-            const user = await getCurrentUser();
-            setStatus(`signed in as ${user.username}`);
-          } else {
-             // Handle next steps like NEW_PASSWORD_REQUIRED
-            setStatus(`Next step: ${nextStep.signInStep}`);
-          }
-        } catch (error) {
-          console.error('error signing in', error);
-          setStatus(`Error: ${error.message}`);
-        }
-      }
-
-      async function handleSignOut() {
-        try {
-          await signOut();
-          setStatus("signed out");
-        } catch (error) {
-          console.error('error signing out', error);
-        }
-      }
-
-      return (
-        <div style={{ padding: 24, fontFamily: "system-ui" }}>
-          <h1>Cognito Verification</h1>
-          <p>Status: <strong>{status}</strong></p>
-
-          <form onSubmit={handleSignIn} style={{ display: 'flex', flexDirection: 'column', gap: 10, maxWidth: 300 }}>
-            <input 
-              value={email} 
-              onChange={(e) => setEmail(e.target.value)} 
-              placeholder="Email" 
-              type="email"
-            />
-            <input 
-              value={password} 
-              onChange={(e) => setPassword(e.target.value)} 
-              placeholder="Password" 
-              type="password" 
-            />
-            <button type="submit">Sign in</button>
-          </form>
-
-          <br />
-          <button onClick={handleSignOut}>Sign out</button>
-        </div>
-      );
+```javascript
+export const awsConfig = {
+  Auth: {
+    Cognito: {
+      userPoolId: "YOUR_USER_POOL_ID",
+      userPoolClientId: "YOUR_APP_CLIENT_ID",
     }
-    ```
+  }
+};
+```
 
-**Why:**
-This component demonstrates the raw `signIn` API call. It handles the happy path (successful login) and basic error states.
+Then wire it into `src/main.jsx`:
 
-**Verify:**
-1.  Enter the email and password of the test user created in Step 2.
-2.  Click **Sign in**.
-3.  **Expected:** The status text updates to `signed in as <user_id>`.
+```javascript
+import { Amplify } from 'aws-amplify';
+import { awsConfig } from './aws-exports';
 
-**If it fails:**
-- **Symptom:** `NewPasswordRequiredException`.
-- **Fix:** If you created the user in the console, you may need to change the password on first login. The console user creation flow often sets the user to a "Force change password" state. For this lab, handle the error or create a user with a permanent password via the CLI.
+Amplify.configure(awsConfig);
+```
 
-## Verify it worked
-
-To confirm this is a real authentication session:
-
-1.  **Check the UI:** The status should read "signed in".
-2.  **Check the Storage:**
-    - Open Chrome DevTools.
-    - Go to the **Application** tab.
-    - Expand **Local Storage**.
-    - Look for keys starting with `CognitoIdentityServiceProvider`.
-    - You will see an `idToken` and an `accessToken`.
-3.  **Check Persistence:** Refresh the page. The tokens remain in Local Storage, meaning the user is still technically authenticated (though the simple React state in this demo will reset to "signed out" on refresh because we did not add a `useEffect` to check `getCurrentUser` on load).
-
-## Common mistakes
-
-- **Symptom:** `NotAuthorizedException: Incorrect username or password.`
-  **Cause:** You are using the wrong region or the user is not in "Confirmed" status.
-  **Fix:** Check the User Pool region and ensure the user status in the console is "Confirmed".
-
-- **Symptom:** `Network Error` or CORS issues.
-  **Cause:** The `userPoolId` in your config does not match the region the app is running in, or the ID is typoed.
-  **Fix:** Copy the ID directly from the AWS Console.
-
-- **Symptom:** `Unable to verify secret hash for client`.
-  **Cause:** You enabled a "Client Secret" when creating the App Client.
-  **Fix:** Delete the App Client and create a new one. Ensure "Generate client secret" is **unchecked**.
-
-## Cheat sheet
-
-1.  **User Pool:** Create with default email settings.
-2.  **App Client:** Create a public client, **no secret**.
-3.  **Project:** `npm create vite@latest`.
-4.  **Deps:** `npm install aws-amplify`.
-5.  **Config:** `Amplify.configure` with `userPoolId` and `userPoolClientId`.
-6.  **Code:** `signIn({ username, password })`.
+At this point, the app can talk to Cognito. The next step is a sign-in form that calls `Amplify.signIn`. I usually verify the config first by checking the console for errors before adding UI.
 
 {/* visual-break:secure-authentication-cognito-react:2 */}
 ![Cloud operations checkpoint illustration for this section.](/assets/visuals/blog/secure-authentication-cognito-react-break-2.png)
 
-## Next steps
+## Common mistakes I have made
 
-This setup is the foundation. To make it production ready:
+- Forgetting to uncheck the client secret. Browser apps cannot use secrets.
+- Using the wrong region in the User Pool ID.
+- Skipping the test user and trying to build sign-up first. Create a user manually, verify login works, then add registration.
 
-- Add a `useEffect` hook to check for an existing session on app load.
-- Implement the "Forgot Password" flow.
-- Add React Router to protect specific routes based on auth status.
-- Move credentials to `.env` files (though Client IDs are public, it is good practice).
+## Closing
 
-## Related links
-
-- [Amazon Cognito Documentation](https://docs.aws.amazon.com/cognito/)
-- [Amplify Auth Library (Gen 2)](https://docs.amplify.aws/javascript/build-a-backend/auth/)
-
-{/* auto-enhancement:voice-start */}
-
-## Personal Build Reflection
-
-I wrote this from my own build notes while focusing on cloud reliability, cost control, and repeatable troubleshooting.
-
-I keep this kind of post operational on purpose so another person, or future me, can rerun it without guessing where decisions came from.
-
-If you adapt this flow, track what you changed and why at each step so your final setup stays explainable.
-
-{/* auto-enhancement:voice-end */}
-
-{/* auto-enhancement:links-start */}
-
-## Continue Reading in This Cloud Series
-
-If you want to go deeper on this topic cluster, these are the best next reads:
-
-- [AWS Free Tier: What Actually Costs Money](/aws-free-tier-honest-guide/)
-- [AWS Cloud Support Internship: What I Actually Practiced](/aws-cloud-support-internship-mastering-troubleshooting-and-architecture/)
-- [Gatsby Nav Bar Haunted: Fixing a Stuck Dropdown](/gatsby-nav-bar-haunted/)
-
-{/* auto-enhancement:links-end */}
-
+Cognito is not complicated once you separate the pieces: the pool holds users, the client identifies your app, and Amplify handles the token exchange. Verify each piece before adding the next.

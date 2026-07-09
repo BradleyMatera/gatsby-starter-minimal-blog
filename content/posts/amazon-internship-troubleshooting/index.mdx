@@ -29,7 +29,8 @@ The value in those labs was not the final diagram. The value was learning how to
 ## The capstone project
 
 ![Connecting services](https://media.giphy.com/media/l0HlNQ03J5JxX6lva/giphy.gif)
-Toward the end of the internship, I completed a capstone build that pulled together several services into one end to end workflow. The goal was simple: simulate a small cloud system that ingests uploaded files, processes metadata, stores results, and displays them in a web interface. Nothing exotic. Just enough moving parts to prove I could connect services, understand data flow, and verify behavior.
+
+Toward the end of the internship, I completed a capstone build that pulled together several services into one end-to-end workflow. The goal was simple: simulate a small cloud system that ingests uploaded files, processes metadata, stores results, and displays them in a web interface. Nothing exotic. Just enough moving parts to prove I could connect services, understand data flow, and verify behavior.
 
 ![Connecting all the things meme](https://media.giphy.com/media/3o7qE1YN7aBOFPRw8E/giphy.gif)
 
@@ -71,6 +72,7 @@ aws s3api list-objects-v2 --bucket <your-bucket-name> --prefix uploads/
 ## What I actually learned
 
 ![Debugging and logs](https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif)
+
 By the end of the internship, AWS stopped feeling like a collection of mysterious services and started feeling like a toolbox I could open with confidence. I became comfortable navigating the console, reading service documentation, interpreting CloudWatch logs, and following structured troubleshooting paths instead of guessing blindly. I learned how small misconfigurations in permissions, triggers, or environment variables can silently break a system, and how to methodically find where the chain failed.
 
 ![AWS learning curve meme](https://media.giphy.com/media/3oEduQAsYcJKQH2XsI/giphy.gif)
@@ -88,7 +90,7 @@ to perform: dynamodb:PutItem on resource: arn:aws:dynamodb:us-east-1:<acct-id>:t
 END RequestId: 8fd2...
 ```
 
-That log pattern was a common training signal: event trigger worked, function ran, downstream permission failed. The fix path was not guesswork. It was: inspect execution role, verify policy action/resource scope, redeploy, and rerun the upload test.
+That log pattern was a common training signal: event trigger worked, function ran, downstream permission failed. The fix path was not guesswork. It was: inspect execution role, verify policy action and resource scope, redeploy, and rerun the upload test.
 
 ### IAM policy pattern that fixed the write failure in labs
 
@@ -152,26 +154,8 @@ This internship was not about collecting buzzwords. It was about learning how to
 
 That foundation is what I carry forward into every project I build now. Not pretending lab work is production. Not pretending I know everything. Just a real base of cloud troubleshooting experience that I continue to grow from.
 
-{/* auto-enhancement:voice-start */}
-
-## Personal Build Reflection
-
-I wrote this from my own build notes while focusing on cloud reliability, cost control, and repeatable troubleshooting.
-
-I keep this kind of post operational on purpose so another person, or future me, can rerun it without guessing where decisions came from.
-
-If you adapt this flow, track what you changed and why at each step so your final setup stays explainable.
-
-{/* auto-enhancement:voice-end */}
-
-{/* auto-enhancement:links-start */}
-
-## Continue Reading in This Cloud Series
-
-If you want to go deeper on this topic cluster, these are the best next reads:
+## Keep reading
 
 - [AWS Free Tier: What Actually Costs Money](/aws-free-tier-honest-guide/)
 - [AWS vs. Azure vs. Google Cloud: The Ultimate Free Tier Battle & Survival Guide](/aws-vs-azure-vs-google-cloud/)
 - [Cognito Authentication With React: A Small, Verifiable Setup](/secure-authentication-cognito-react/)
-
-{/* auto-enhancement:links-end */}

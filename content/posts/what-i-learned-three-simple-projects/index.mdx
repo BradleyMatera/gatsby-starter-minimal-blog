@@ -6,33 +6,39 @@ tags: ["projects", "process", "web-development"]
 description: "Three small demos, the real lessons, and a repeatable format with proof."
 theme: "Process"
 ---
-In 2025, I focused on building small, focused projects to sharpen my technical skills and address specific engineering challenges. Large applications often obscure the root causes of issues behind layers of abstraction. By isolating problems in smaller codebases, I was able to confront and resolve foundational misunderstandings.
-The most effective way to validate technical understanding is to ship isolated, functional units of code. Large-scale applications often obscure foundational misunderstandings behind framework abstractions. By building three distinct "micro-projects" throughout 2025, I isolated and resolved specific engineering deficits regarding static hosting architecture, test environment configuration, and CSS layout algorithms.
 
-This report details the technical implementation, specific failure points, and architectural resolutions for **AnimalSounds**, **CheeseMath**, and **EthicsFrontEndDemo**.
+In 2025 I focused on building small, focused projects to sharpen specific skills. Large applications often hide the root cause of a problem behind layers of abstraction. By isolating issues in smaller codebases, I could confront and fix the actual misunderstanding instead of patching around it.
+
+This post walks through three of those projects: AnimalSounds, CheeseMath, and EthicsFrontEndDemo. For each one I will explain the real failure, what I changed, and why the lesson stuck.
 
 ## Project 1: AnimalSounds
-**Repository:** [AnimalSounds](https://github.com/bradleymatera/AnimalSounds)
-**Live Deployment:** [View Demo](https://bradleymatera.github.io/AnimalSounds/)
 
-### The Engineering Challenge: Browser Autoplay Policies and Static Subpaths
-The initial scope was trivial: a DOM manipulation exercise triggering HTML5 `<audio>` elements via JavaScript event listeners. The implementation utilized a standard Next.js App Router structure.
+**Repository:** [AnimalSounds](https://github.com/bradleymatera/AnimalSounds)  
+**Live deployment:** [View demo](https://bradleymatera.github.io/AnimalSounds/)
 
-#### Failure Point 1: The iOS Audio Context Lock
-Upon deployment, the application functioned correctly on desktop Chrome but failed silently on iOS Safari. The application attempted to instantiate the `AudioContext` and preload assets immediately upon the `window.onload` event.
+### The challenge: browser autoplay policies and static subpaths
 
-Mobile browsers enforce strict autoplay policies. The `AudioContext` starts in a `suspended` state by default on WebKit browsers. It cannot transition to `running` until a distinct user interaction event (specifically `touchend` or `click`) occurs. My code was attempting to play audio programmatically before this handshake occurred, causing the browser to reject the request.
+The initial scope was simple: a DOM manipulation exercise that triggers HTML5 `<audio>` elements via JavaScript event listeners. I used a standard Next.js App Router structure.
 
-**Resolution:**
-I refactored the audio engine to implement a "lazy-load" pattern. I removed the automatic initialization and replaced it with a singleton pattern that checks the context state. The first user interaction on the page now triggers a zero-volume buffer playback, which effectively "unlocks" the audio subsystem for the remainder of the session.
+### Failure point 1: the iOS audio context lock
 
-#### Failure Point 2: GitHub Pages Subpath Routing
-The second failure involved asset resolution. In a local development environment (`localhost:3000`), the application resides at the root level. An image reference to `/images/cow.png` resolves correctly to `localhost:3000/images/cow.png`.
+After deployment, the app worked on desktop Chrome but failed silently on iOS Safari. It tried to instantiate the `AudioContext` and preload assets on `window.onload`.
 
-However, GitHub Pages hosts project repositories on a subpath: `username.github.io/repo-name/`. When deployed, the application continued to request assets from the domain root (`username.github.io/images/cow.png`), resulting in 404 errors for all static media.
+Mobile browsers enforce strict autoplay policies. The `AudioContext` starts in a `suspended` state on WebKit browsers. It cannot transition to `running` until a distinct user interaction event, usually `touchend` or `click`, occurs. My code was trying to play audio before that handshake happened, so the browser rejected the request.
 
-**Resolution:**
-Hardcoding relative paths (`./`) proved brittle. The robust solution involved leveraging Next.js environment configuration. I implemented a `basePath` configuration in `next.config.js` that conditionally applies the repository name only during production builds.
+### Resolution
+
+I refactored the audio engine to use a lazy-load pattern. I removed the automatic initialization and replaced it with a singleton that checks the context state. The first user interaction on the page now triggers a zero-volume buffer playback, which effectively unlocks the audio subsystem for the rest of the session.
+
+### Failure point 2: GitHub Pages subpath routing
+
+The second failure was asset resolution. Locally, at `localhost:3000`, an image reference to `/images/cow.png` resolves to `localhost:3000/images/cow.png`.
+
+GitHub Pages hosts project repositories on a subpath: `username.github.io/repo-name/`. When deployed, the app kept requesting assets from the domain root, so every static media file 404ed.
+
+### Resolution
+
+Hardcoding relative paths (`./`) proved brittle. The robust fix was Next.js environment configuration. I added a `basePath` in `next.config.js` that applies the repository name only during production builds.
 
 ```javascript
 // next.config.mjs
@@ -49,35 +55,35 @@ const nextConfig = {
 };
 
 export default nextConfig;
-
 ```
 
-This configuration ensures that asset routing logic remains identical across environments while the build pipeline handles the path rewriting dynamically.
+This keeps asset routing logic identical across environments while the build pipeline rewrites paths dynamically.
 
 {/* visual-break:what-i-learned-three-simple-projects:1 */}
 ![Execution process checkpoint illustration for this section.](/assets/visuals/blog/what-i-learned-three-simple-projects-break-1.png)
 
-## Project 2: CheeseMath (Jest Tests)
+## Project 2: CheeseMath (Jest tests)
 
-**Repository:** [CheeseMath-Jest-Tests](https://github.com/bradleymatera/CheeseMath-Jest-Tests)
-**Live Deployment:** [View Demo](https://bradleymatera.github.io/CheeseMath-Jest-Tests/)
+**Repository:** [CheeseMath-Jest-Tests](https://github.com/bradleymatera/CheeseMath-Jest-Tests)  
+**Live deployment:** [View demo](https://bradleymatera.github.io/CheeseMath-Jest-Tests/)
 
-### The Engineering Challenge: ESM vs. CommonJS in Test Environments
+### The challenge: ESM vs. CommonJS in test environments
 
-The goal was to implement a robust unit testing suite using Jest. The application logic involved geometric calculations (volume, density, cost) written in modern JavaScript (ES6+).
+The goal was a robust unit testing suite using Jest. The app logic involved geometric calculations written in modern ES6+ JavaScript.
 
-#### Failure Point: The "Cannot Use Import Statement" Error
+### Failure point: the “Cannot use import statement” error
 
-The project utilized ES Modules (`import`/`export`) for the source code to maintain compatibility with modern bundlers. However, Jest runs in a Node.js environment, which historically defaults to CommonJS (`require`).
+The project used ES modules (`import`/`export`) to stay compatible with modern bundlers. But Jest runs in a Node.js environment, which historically defaults to CommonJS (`require`).
 
-When running the test suite, the process crashed immediately with `SyntaxError: Cannot use import statement outside a module`. This occurs because Node.js attempts to execute the source files directly without transpilation, and it does not natively recognize the `import` keyword in `.js` files unless the `package.json` specifies `"type": "module"` or the file extension is `.mjs`.
+Running the test suite crashed immediately with `SyntaxError: Cannot use import statement outside a module`. Node.js was executing the source files directly without transpilation, so it did not recognize `import` in `.js` files unless `package.json` specified `"type": "module"` or the file used `.mjs`.
 
-Simply changing the package type broke other tooling. I discovered that the testing environment (Jest) and the production environment (Browser) were effectively two different runtimes requiring distinct build pipelines.
+Simply changing the package type broke other tooling. I discovered the testing environment and the production environment were effectively two runtimes with different build pipelines.
 
-**Resolution:**
-I integrated Babel to act as a bridge between the source code and the test runner. This required installing `babel-jest`, `@babel/core`, and `@babel/preset-env`.
+### Resolution
 
-I configured a `babel.config.js` specifically to target the current Node version used by Jest, rather than the browser targets used for the build.
+I integrated Babel as a bridge between source code and the test runner. That required installing `babel-jest`, `@babel/core`, and `@babel/preset-env`.
+
+I configured `babel.config.js` to target the current Node version used by Jest, rather than the browser targets used for the build.
 
 ```javascript
 // babel.config.js
@@ -93,31 +99,30 @@ module.exports = {
     ],
   ],
 };
-
 ```
 
-This pipeline allows the source code to remain clean, modern ES6 while Jest receives the CommonJS code it expects during runtime. It reinforced the concept that "testable code" often requires a dedicated compilation infrastructure.
+This lets the source code stay clean, modern ES6 while Jest receives the CommonJS it expects at runtime. The lesson was that “testable code” often needs a dedicated compilation infrastructure.
 
 ## Project 3: EthicsFrontEndDemo
 
-**Repository:** [EthicsFrontEndDemo](https://github.com/bradleymatera/EthicsFrontEndDemo)
-**Live Deployment:** [View Demo](https://bradleymatera.github.io/EthicsFrontEndDemo/)
+**Repository:** [EthicsFrontEndDemo](https://github.com/bradleymatera/EthicsFrontEndDemo)  
+**Live deployment:** [View demo](https://bradleymatera.github.io/EthicsFrontEndDemo/)
 
-### The Engineering Challenge: CSS Grid vs. Flexbox for 2-Dimensional Layouts
+### The challenge: CSS Grid vs. Flexbox for two-dimensional layouts
 
-This project involved building a responsive corporate landing page without the aid of CSS frameworks like Bootstrap or Tailwind. The primary challenge was structuring the main layout grid.
+This project built a responsive corporate landing page without CSS frameworks. The main challenge was structuring the layout grid.
 
-#### Failure Point: The Flexbox Trap
+### Failure point: the Flexbox trap
 
-I initially attempted to layout the entire page using Flexbox. While Flexbox excels at 1-dimensional alignment (distributing items in a single row *or* a single column), it struggles with 2-dimensional layouts where elements must align on both the X and Y axes simultaneously.
+I initially laid out the entire page using Flexbox. Flexbox is great for one-dimensional alignment — distributing items in a single row or column — but it struggles when elements must align on both the X and Y axes at the same time.
 
-To force a grid structure using Flexbox, I had to use negative margins, complex `calc()` width percentages (e.g., `width: calc(33.33% - 20px)`), and container wrappers to handle wrapping behavior. This resulted in "layout thrashing" on mobile devices, where content would overflow the viewport horizontally because the padding calculations did not account for the scrollbar width.
+To force a grid with Flexbox, I had to use negative margins, complex `calc()` width percentages like `width: calc(33.33% - 20px)`, and extra container wrappers to handle wrapping. The result was layout thrashing on mobile, where content overflowed the viewport horizontally because the padding calculations did not account for the scrollbar width.
 
-#### Resolution: Implementing CSS Grid
+### Resolution: CSS Grid
 
 I scrapped the Flexbox approach for the main container and implemented CSS Grid. The difference in code complexity was substantial.
 
-**The Failed Flexbox Approach:**
+**The failed Flexbox approach:**
 
 ```css
 .container {
@@ -130,10 +135,9 @@ I scrapped the Flexbox approach for the main container and implemented CSS Grid.
     margin: 10px;
 }
 /* Media queries required to manually resize percentages for tablet/mobile */
-
 ```
 
-**The Successful Grid Approach:**
+**The successful Grid approach:**
 
 ```css
 .container {
@@ -141,45 +145,27 @@ I scrapped the Flexbox approach for the main container and implemented CSS Grid.
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
 }
-
 ```
 
-By using `grid-template-columns` with `auto-fit` and `minmax`, the browser's layout engine handles the mathematical distribution of space. It automatically determines how many columns fit in the viewport and wraps them to the next row when the minimum width (300px) is violated. This eliminated the need for multiple media queries and manual margin calculations, proving that CSS Grid is the superior engine for macro-layout architecture.
+Using `grid-template-columns` with `auto-fit` and `minmax` lets the browser handle space distribution. It automatically decides how many columns fit and wraps to the next row when the minimum width is violated. That eliminated multiple media queries and manual margin calculations, proving Grid is the better engine for macro layouts.
 
 {/* visual-break:what-i-learned-three-simple-projects:2 */}
 ![Delivery workflow checkpoint illustration for this section.](/assets/visuals/blog/what-i-learned-three-simple-projects-break-2.png)
 
-## Conclusion
+## What all three taught me
 
-These three projects demonstrate that perceived simplicity often masks significant architectural complexity.
+1. **AnimalSounds** proved that static hosting environments need path configuration strategies (`basePath`) that differ from local development.
+2. **CheeseMath** proved that modern JavaScript needs a transpilation pipeline (Babel) to bridge the gap between ESM source code and CommonJS test runners.
+3. **EthicsFrontEndDemo** proved that choosing the right layout engine (Grid over Flexbox) reduces code volume and technical debt.
 
-1. **AnimalSounds** proved that static hosting environments require strict path configuration strategies (basePath) that differ from local development.
-2. **CheeseMath** proved that modern JavaScript requires a transpilation pipeline (Babel) to bridge the gap between ESM source code and CommonJS test runners.
-3. **EthicsFrontEndDemo** proved that choosing the correct layout engine (Grid over Flexbox) reduces code volume and technical debt.
+Technical growth comes from encountering and resolving these specific environment-level conflicts, not from reading documentation alone.
 
-Technical growth comes not from reading documentation, but from encountering and resolving these specific environment-level conflicts.
+## Closing
 
-{/* auto-enhancement:voice-start */}
+Small projects are not practice dummies. They are the fastest way to find the real boundary between “I read about this” and “I can actually make this work.” These three demos were tiny, but each one fixed a misunderstanding I would have carried into larger projects.
 
-## Personal Build Reflection
-
-This guide reflects how I actually execute work when the goal is career execution with practical systems, documentation, and measurable progress.
-
-I prefer explicit checklists over vague advice because that is what keeps delivery stable when timelines are tight.
-
-Use the steps as a baseline, then annotate your own environment differences as you go.
-
-{/* auto-enhancement:voice-end */}
-
-{/* auto-enhancement:links-start */}
-
-## Continue Reading in This Career Series
-
-If you want to go deeper on this topic cluster, these are the best next reads:
+## Keep reading
 
 - [Recent Projects and Lessons: A Short, Verifiable Format](/recent-projects-and-lessons/)
 - [How I Learn by Doing: A Repeatable Mini Project Loop](/how-i-learn-by-doing/)
 - [Designing Systems That Actually Ship: A Small Template](/designing-systems-that-actually-ship/)
-
-{/* auto-enhancement:links-end */}
-

@@ -7,14 +7,13 @@ description: "A concrete audit checklist to align a WebGPU write up with actual 
 theme: "Graphics"
 ---
 
-
-A demo is only as honest as its write up. WebGPU is especially easy to oversell because most people reading a post cannot tell what is “one triangle” versus “real engine-ish work” unless you show them exactly where it lives in code. If you want the post to be credible, every claim needs a file path you can point at and a proof link that still works when someone clicks it six months later.
+A demo is only as honest as its write up. WebGPU is especially easy to oversell because most people reading a post cannot tell what is "one triangle" versus "real engine-ish work" unless you show them exactly where it lives in code. If you want the post to be credible, every claim needs a file path you can point at and a proof link that still works when someone clicks it six months later.
 
 This post is the audit process I use to make the write up match the repo. It is not about polishing the prose. It is about deleting anything that is not visible in code, labeling future work like future work, and fixing links so a reader can verify everything without guessing.
 
 ![Reality check](https://media.giphy.com/media/gZfHAM1ucPQ2c/giphy.gif)
 
-## The promise
+## What an honesty audit actually is
 
 When you finish this audit, your WebGPU demo post will only say what the repo actually does. Not what you planned, not what you think it does, not what you remember it doing on your machine three weeks ago. The end state is boring in the best way. A reader can open the repo, find the exact lines that back up each statement, and run the demo without stepping on a broken link.
 
@@ -23,13 +22,13 @@ That is the whole rule: if a claim is not visible in the repo, it gets cut or it
 {/* visual-break:making-triangle-webgpu-demo-match-reality:1 */}
 ![Rendering pipeline checkpoint illustration for this section.](/assets/visuals/blog/making-triangle-webgpu-demo-match-reality-break-1.png)
 
-## What this is
-
 An honesty audit is just a comparison: what the blog claims versus what the repository proves. High level, you treat the blog like marketing copy that needs receipts. Low level, you open the repo, identify the real behavior, and then rewrite the blog so every sentence can be backed up by a concrete reference.
 
 The audit has only three objects:
 
-A claim is a statement like “this demo renders a triangle with a render loop,” or “this uses one shader module,” or “this supports resizing.” Proof is whatever lets a stranger confirm the claim without trusting you, usually a link to a specific file, a function, or a demo URL that actually loads. A mismatch is any sentence you cannot prove in under one minute with the repo open.
+- **A claim** is a statement like “this demo renders a triangle with a render loop,” or “this uses one shader module,” or “this supports resizing.”
+- **Proof** is whatever lets a stranger confirm the claim without trusting you, usually a link to a specific file, a function, or a demo URL that actually loads.
+- **A mismatch** is any sentence you cannot prove in under one minute with the repo open.
 
 ## What you need
 
@@ -39,13 +38,13 @@ If you are auditing a repo on GitHub, the fastest proof links are deep links to 
 
 ![Digging through code](https://media.giphy.com/media/3o7aD9hC6GgT3KfX2k/giphy.gif)
 
-## Start to finish
+## How to audit your demo
 
 ### Step 1: Create a source-of-truth feature list from the repo
 
 Do not start by reading the blog post. Start by grounding yourself in the actual code. If you start from the blog, you will subconsciously try to justify it. If you start from the repo, you will naturally write smaller, more accurate claims.
 
-Open the README and the actual entry file that boots WebGPU. For a tiny demo, that is usually `index.html` and one JavaScript/TypeScript file, or a `main.ts` that sets up the device, pipeline, and render loop. Your goal is not to describe how WebGPU works. Your goal is to list what exists in this repo right now.
+Open the README and the actual entry file that boots WebGPU. For a tiny demo, that is usually `index.html` and one JavaScript or TypeScript file, or a `main.ts` that sets up the device, pipeline, and render loop. Your goal is not to describe how WebGPU works. Your goal is to list what exists in this repo right now.
 
 Create a scratch list in plain text. Keep it short. Each item must correspond to something you can point at.
 
@@ -107,7 +106,7 @@ Example of a verifiable sentence:
 
 “The demo renders one triangle using a single pipeline and a single shader module.”
 
-That sentence is tight, testable, and doesn’t imply features you do not have.
+That sentence is tight, testable, and does not imply features you do not have.
 
 ### Step 4: Label future work like future work
 
@@ -156,33 +155,14 @@ The third mistake is claiming performance wins without proof. If you want to tal
 {/* visual-break:making-triangle-webgpu-demo-match-reality:2 */}
 ![Graphics systems checkpoint illustration for this section.](/assets/visuals/blog/making-triangle-webgpu-demo-match-reality-break-2.png)
 
-## Final rule
+## Closing
 
 If a claim is not visible in the repo, remove it. That is the whole rule.
 
 If you follow that rule, your WebGPU post becomes something you can stand behind in an interview without sweating the details, because the details are literally in the links.
 
-{/* auto-enhancement:voice-start */}
-
-## Personal Build Reflection
-
-I assembled this post from real implementation reps centered on graphics pipelines, rendering correctness, and matching docs to real behavior.
-
-The structure is intentional: I want the sequence to be audit-friendly so troubleshooting later is faster.
-
-When you run this yourself, capture outcomes after each major step to keep your changes reproducible.
-
-{/* auto-enhancement:voice-end */}
-
-{/* auto-enhancement:links-start */}
-
-## Continue Reading in This Graphics Series
-
-If you want to go deeper on this topic cluster, these are the best next reads:
+## Keep reading
 
 - [WebGPU Triangle Demo: Start, Fix, and Keep It Honest](/webgpu-getting-started/)
 - [Rebuilding a WebGPU Triangle Demo: A Clean Fix Pass](/rebuilt-webgpu-triangle-demo/)
 - [Service Worker Held My Site Hostage: How I Removed It](/service-worker-held-site-hostage/)
-
-{/* auto-enhancement:links-end */}
-

@@ -9,7 +9,7 @@ import replaceSlashes from "../utils/replaceSlashes";
 import Seo from "./seo";
 import BlogAccent from "../../../site/accents/BlogAccent";
 import { Section } from "../../../ui";
-import { SearchIcon, TagIcon, ChevronLeftIcon, ChevronRightIcon } from "../../../site/icons";
+import { SearchIcon, TagIcon, ChevronLeftIcon, ChevronRightIcon, XIcon } from "../../../site/icons";
 
 declare global {
   interface Window {
@@ -39,13 +39,35 @@ const hiddenPostSlugs = new Set([
   "/rebuilt-webgpu-triangle-demo/",
 ]);
 
+const CATEGORIES: { id: string; label: string; matches: string[] }[] = [
+  { id: "all", label: "All", matches: [] },
+  { id: "webgpu", label: "WebGPU & Graphics", matches: ["webgpu", "graphics", "shaders", "webgl", "triangle", "gpu"] },
+  { id: "frontend", label: "Frontend & React", matches: ["react", "javascript", "frontend", "gatsby", "html", "css", "typescript"] },
+  { id: "cloud", label: "Cloud & AWS", matches: ["aws", "lambda", "dynamodb", "s3", "cloudfront", "docker", "devops", "cloud"] },
+  { id: "career", label: "Career & Learning", matches: ["career", "learning", "job-hunting", "full-sail", "certifications", "education"] },
+  { id: "projects", label: "Projects & Builds", matches: ["projects", "portfolio", "codepen", "case-study", "builds", "demo"] },
+];
+
+const getCategoryForPost = (tags?: { name: string; slug: string }[]) => {
+  if (!tags?.length) return "projects";
+  const tagSlugs = tags.map((t) => t.slug.toLowerCase());
+  for (let i = 1; i < CATEGORIES.length; i++) {
+    if (CATEGORIES[i].matches.some((m) => tagSlugs.includes(m))) {
+      return CATEGORIES[i].id;
+    }
+  }
+  return "projects";
+};
+
 const Blog = ({ posts }: MBBlogProps) => {
-  const PAGE_SIZE = 5;
+  const PAGE_SIZE = 9;
   const { tagsPath, basePath } = useMinimalBlogConfig();
   const location = useLocation();
   const [query, setQuery] = React.useState("");
   const [activeTag, setActiveTag] = React.useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = React.useState<string>("all");
   const [page, setPage] = React.useState(1);
+
   const visiblePosts = React.useMemo(
     () => posts.filter((post) => !hiddenPostSlugs.has(post.slug)),
     [posts]
@@ -83,9 +105,11 @@ const Blog = ({ posts }: MBBlogProps) => {
     const params = new URLSearchParams(window.location.search);
     const initialQuery = params.get("q") ?? "";
     const initialTag = params.get("tag");
+    const initialCategory = params.get("category") ?? "all";
     const initialPage = params.get("page");
     setQuery(initialQuery);
     setActiveTag(initialTag || null);
+    setActiveCategory(CATEGORIES.some((c) => c.id === initialCategory) ? initialCategory : "all");
     if (initialPage) {
       const parsed = parseInt(initialPage, 10);
       if (!Number.isNaN(parsed) && parsed > 0) {
@@ -107,6 +131,11 @@ const Blog = ({ posts }: MBBlogProps) => {
     } else {
       params.delete("tag");
     }
+    if (activeCategory && activeCategory !== "all") {
+      params.set("category", activeCategory);
+    } else {
+      params.delete("category");
+    }
     if (page > 1) {
       params.set("page", String(page));
     } else {
@@ -115,7 +144,7 @@ const Blog = ({ posts }: MBBlogProps) => {
     const search = params.toString();
     const url = search ? `${location.pathname}?${search}` : location.pathname;
     window.history.replaceState({}, "", url);
-  }, [query, activeTag, location.pathname, page]);
+  }, [query, activeTag, activeCategory, location.pathname, page]);
 
   React.useEffect(() => {
     const term = query.trim();
@@ -127,17 +156,19 @@ const Blog = ({ posts }: MBBlogProps) => {
         window.gtag("event", "blog_search", {
           search_term: term,
           tag: activeTag ?? "all",
+          category: activeCategory,
         });
       }
     }, 600);
     return () => window.clearTimeout(timeout);
-  }, [query, activeTag]);
+  }, [query, activeTag, activeCategory]);
 
   const filtered = React.useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
     return visiblePosts.filter((post) => {
       const matchesTag = activeTag ? post.tags?.some((tag) => tag.slug === activeTag) : true;
-      if (!matchesTag) return false;
+      const matchesCategory = activeCategory === "all" || getCategoryForPost(post.tags) === activeCategory;
+      if (!matchesTag || !matchesCategory) return false;
       if (!normalizedQuery) return true;
       const haystack = [post.title, post.description, post.excerpt, post.tags?.map((tag) => tag.name).join(" ")]
         .filter(Boolean)
@@ -145,7 +176,7 @@ const Blog = ({ posts }: MBBlogProps) => {
         .toLowerCase();
       return haystack.includes(normalizedQuery);
     });
-  }, [visiblePosts, query, activeTag]);
+  }, [visiblePosts, query, activeTag, activeCategory]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
 
@@ -163,22 +194,31 @@ const Blog = ({ posts }: MBBlogProps) => {
   const trimmedQuery = query.trim();
   const resultCount = filtered.length;
   const resultLabel = resultCount === 1 ? "article" : "articles";
+  const activeFilters = [
+    trimmedQuery ? `matching "${trimmedQuery}"` : "",
+    activeTagMeta ? `in #${activeTagMeta.name}` : "",
+    activeCategory !== "all" ? `under ${CATEGORIES.find((c) => c.id === activeCategory)?.label}` : "",
+  ].filter(Boolean);
+
   const listingTitle = activeTagMeta
     ? `Posts tagged #${activeTagMeta.name}`
     : trimmedQuery
     ? "Search results"
+    : activeCategory !== "all"
+    ? CATEGORIES.find((c) => c.id === activeCategory)?.label ?? "Articles"
     : "Latest articles";
-  const displayStart = resultCount === 0 ? 0 : (page - 1) * PAGE_SIZE + 1;
-  const displayEnd = resultCount === 0 ? 0 : Math.min(resultCount, displayStart + paginated.length - 1);
-  const qualifiers = [
-    trimmedQuery ? `matching "${trimmedQuery}"` : "",
-    activeTagMeta ? `in #${activeTagMeta.name}` : "",
-  ].filter(Boolean);
   const listingDescription = resultCount === 0
-    ? trimmedQuery || activeTagMeta
-      ? `No ${resultLabel} ${qualifiers.join(" ")}.`
+    ? trimmedQuery || activeTagMeta || activeCategory !== "all"
+      ? `No ${resultLabel} ${activeFilters.join(" ")}.`
       : "No articles available yet."
-    : `${`Showing ${displayStart}–${displayEnd} of ${resultCount} ${resultLabel}`}${qualifiers.length ? ` ${qualifiers.join(" ")}` : ""}.`;
+    : `${`Showing ${Math.min(resultCount, (page - 1) * PAGE_SIZE + 1)}–${Math.min(resultCount, page * PAGE_SIZE)} of ${resultCount} ${resultLabel}`}${activeFilters.length ? ` ${activeFilters.join(" ")}` : ""}.`;
+
+  const clearFilters = () => {
+    setQuery("");
+    setActiveTag(null);
+    setActiveCategory("all");
+    setPage(1);
+  };
 
   return (
     <Layout>
@@ -201,60 +241,84 @@ const Blog = ({ posts }: MBBlogProps) => {
         <div className="blog-search-accent">
           <BlogAccent />
         </div>
+
         <div className="surface-card surface-card--muted blog-search-card">
           <div className="blog-filter-controls">
             <form
               className="search-bar blog-filter-controls__search"
-            role="search"
-            onSubmit={(event) => {
-              event.preventDefault();
-              const formData = new FormData(event.currentTarget);
-              const value = formData.get("q");
-              if (typeof value === "string") {
-                setQuery(value);
-                setPage(1);
-              }
-            }}
-          >
-            <SearchIcon size={20} />
-            <label htmlFor="blog-search" className="sr-only">
-              Search blog posts
-            </label>
-            <input
-              id="blog-search"
-              name="q"
-              type="search"
-              placeholder="Search posts by topic, technology, or keyword"
-              value={query}
-              onChange={(event) => {
-                setQuery(event.target.value);
-                setPage(1);
+              role="search"
+              onSubmit={(event) => {
+                event.preventDefault();
+                const formData = new FormData(event.currentTarget);
+                const value = formData.get("q");
+                if (typeof value === "string") {
+                  setQuery(value);
+                  setPage(1);
+                }
               }}
-            />
-            </form>
-            {tags.length > 0 ? (
-              <div className="blog-filter-controls__select">
-                <label htmlFor="blog-tag-select" className="sr-only">
-                  Filter by tag
-                </label>
-                <select
-                  id="blog-tag-select"
-                  value={activeTag ?? ""}
-                  onChange={(event) => {
-                    const value = event.target.value;
-                    setActiveTag(value ? value : null);
+            >
+              <SearchIcon size={20} />
+              <label htmlFor="blog-search" className="sr-only">
+                Search blog posts
+              </label>
+              <input
+                id="blog-search"
+                name="q"
+                type="search"
+                placeholder="Search posts by topic, technology, or keyword"
+                value={query}
+                onChange={(event) => {
+                  setQuery(event.target.value);
+                  setPage(1);
+                }}
+              />
+              {query ? (
+                <button
+                  type="button"
+                  className="blog-filter-controls__clear"
+                  onClick={() => {
+                    setQuery("");
                     setPage(1);
                   }}
+                  aria-label="Clear search"
                 >
-                  <option value="">All topics ({posts.length})</option>
+                  <XIcon size={16} />
+                </button>
+              ) : null}
+            </form>
+
+            {tags.length > 0 ? (
+              <div className="blog-filter-controls__tags" role="group" aria-label="Filter by tag">
+                <div className="blog-filter-controls__tags-scroll">
+                  <button
+                    type="button"
+                    className={`tag-pill ${activeTag === null ? "tag-pill--active" : ""}`}
+                    onClick={() => {
+                      setActiveTag(null);
+                      setPage(1);
+                    }}
+                    aria-pressed={activeTag === null}
+                  >
+                    All topics
+                  </button>
                   {tags.map((tag) => (
-                    <option key={tag.slug} value={tag.slug}>
-                      {`${tag.name} (${tag.count})`}
-                    </option>
+                    <button
+                      key={tag.slug}
+                      type="button"
+                      className={`tag-pill ${activeTag === tag.slug ? "tag-pill--active" : ""}`}
+                      onClick={() => {
+                        setActiveTag(activeTag === tag.slug ? null : tag.slug);
+                        setPage(1);
+                      }}
+                      aria-pressed={activeTag === tag.slug}
+                    >
+                      #{tag.name} <span className="tag-pill__count">{tag.count}</span>
+                    </button>
                   ))}
-                </select>
+                </div>
               </div>
             ) : null}
+
             <Link
               className="card-link blog-filter-more"
               to={replaceSlashes(`/${basePath}/${tagsPath}`)}
@@ -264,6 +328,25 @@ const Blog = ({ posts }: MBBlogProps) => {
               <span aria-hidden="true">→</span>
             </Link>
           </div>
+
+          {CATEGORIES.length > 1 ? (
+            <div className="blog-category-bar" role="group" aria-label="Filter by category">
+              {CATEGORIES.map((cat) => (
+                <button
+                  key={cat.id}
+                  type="button"
+                  className={`category-pill ${activeCategory === cat.id ? "category-pill--active" : ""}`}
+                  onClick={() => {
+                    setActiveCategory(cat.id);
+                    setPage(1);
+                  }}
+                  aria-pressed={activeCategory === cat.id}
+                >
+                  {cat.label}
+                </button>
+              ))}
+            </div>
+          ) : null}
         </div>
       </Section>
 
@@ -274,41 +357,49 @@ const Blog = ({ posts }: MBBlogProps) => {
         className="blog-listing-section"
         disableReveal
       >
-        <Listing posts={paginated} className="blog-listing" />
-
         {filtered.length === 0 ? (
-          <p className="section-lead">
-            No posts match your filters yet. Try a different keyword or explore the tag directory.
-          </p>
-        ) : null}
-        {filtered.length > 0 && totalPages > 1 ? (
-          <nav className="blog-pagination" aria-label="Pagination">
-            <button
-              type="button"
-              onClick={() => setPage((prev) => Math.max(1, prev - 1))}
-              disabled={page === 1}
-              className="pagination-btn"
-            >
-              <ChevronLeftIcon size={16} />
-              <span>Previous</span>
+          <div className="blog-empty-state">
+            <p className="section-lead">
+              No posts match your filters yet. Try a different keyword, tag, or category.
+            </p>
+            <button type="button" className="pagination-btn" onClick={clearFilters}>
+              Clear all filters
             </button>
-            <span className="pagination-info">
-              Page {page} of {totalPages}
-            </span>
-            <button
-              type="button"
-              onClick={() => setPage((prev) => Math.min(totalPages, prev + 1))}
-              disabled={page === totalPages}
-              className="pagination-btn"
-            >
-              <span>Next</span>
-              <ChevronRightIcon size={16} />
-            </button>
-          </nav>
-        ) : null}
+          </div>
+        ) : (
+          <>
+            <Listing posts={paginated} className="blog-listing" />
+            {totalPages > 1 ? (
+              <nav className="blog-pagination" aria-label="Pagination">
+                <button
+                  type="button"
+                  onClick={() => setPage((prev) => Math.max(1, prev - 1))}
+                  disabled={page === 1}
+                  className="pagination-btn"
+                >
+                  <ChevronLeftIcon size={16} />
+                  <span>Previous</span>
+                </button>
+                <span className="pagination-info">
+                  Page {page} of {totalPages}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setPage((prev) => Math.min(totalPages, prev + 1))}
+                  disabled={page === totalPages}
+                  className="pagination-btn"
+                >
+                  <span>Next</span>
+                  <ChevronRightIcon size={16} />
+                </button>
+              </nav>
+            ) : null}
+          </>
+        )}
+
         <noscript>
           <p className="section-lead">
-            JavaScript is disabled, so interactive filtering is unavailable. Browse all tags instead:
+            JavaScript is disabled, so interactive filtering is unavailable. Browse all tags instead:{" "}
             <a className="card-link" href={replaceSlashes(`/${basePath}/${tagsPath}`)}>
               View all tags →
             </a>
@@ -321,4 +412,25 @@ const Blog = ({ posts }: MBBlogProps) => {
 
 export default Blog;
 
-export const Head: HeadFC = () => <Seo title="Blog" description="Short breakdowns of fixes, experiments, and lessons from the cloud and full-stack work I ship." />;
+export const Head: HeadFC = () => (
+  <>
+    <Seo
+      title="Blog"
+      description="Short breakdowns of fixes, experiments, and lessons from the cloud and full-stack work I ship."
+    />
+    <script type="application/ld+json">
+      {JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        name: "Bradley Matera — Blog",
+        url: "https://bradleymatera.dev/blog/",
+        description: "Field notes, experiments, and project retrospectives from a web developer in Northwest Illinois.",
+        author: {
+          "@type": "Person",
+          name: "Bradley Matera",
+          url: "https://bradleymatera.dev/",
+        },
+      })}
+    </script>
+  </>
+);

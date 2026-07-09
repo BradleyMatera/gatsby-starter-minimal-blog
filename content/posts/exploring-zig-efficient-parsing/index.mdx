@@ -3,76 +3,32 @@ title: "Zig OBJ Parsing: A Small, Fast Parser You Can Verify"
 date: "2025-06-18"
 slug: "/exploring-zig-efficient-parsing"
 tags: ["zig", "parsing", "performance"]
-description: "A complete, minimal OBJ parser in Zig with exact steps, checks, and debug tips."
+description: "How I built a tiny OBJ parser in Zig to understand manual memory and explicit errors."
 theme: "Systems"
 ---
 
-Parsing is not abstract. It is reading bytes, splitting tokens, converting types, and verifying output. If the output is predictable, the parser is correct.
+Parsing is reading bytes, splitting tokens, converting types, and verifying output. If the output is predictable, the parser is correct. I built a small OBJ vertex parser in Zig because Zig makes allocation and errors explicit, which forces you to understand what the parser is actually doing.
 
-This guide builds a real OBJ vertex parser in Zig. Every command is copy‑paste runnable. Every file path is explicit. Every verification step produces an expected result. There are no placeholders and no skipped steps.
+## What the parser does
 
-## Why Zig for parsing
+It reads a `.obj` file, extracts `v` vertex lines, parses the three floats, stores them in a dynamic list, and prints them back.
 
-Zig is a good fit for parsing tasks because it exposes memory, allocation, and I/O explicitly without adding runtime overhead. Unlike higher‑level languages, Zig does not hide allocations, implicit string copies, or garbage collection. That matters in parsing because the core work is moving bytes, splitting tokens, and converting them into typed values. Zig’s standard library provides these tools directly, but you remain in control of when memory is allocated, when it is freed, and how buffers are reused.
-
-Another reason Zig works well here is that it treats errors as part of the type system. File access, parsing, and numeric conversion can all fail. In Zig, those failures are not exceptions; they are explicit error unions that must be handled. That forces the parser to describe exactly which operations can fail and where. The result is code that is predictable under malformed input rather than silently ignoring problems.
-
-Finally, Zig’s compile-time safety checks catch common parser mistakes. Array bounds, null handling, and integer conversions are checked where possible. That means the example you are about to build is small, but it uses the same safety and performance model that scales to large real-world parsers.
+| File | Purpose |
+|---|---|
+| `data/sample.obj` | Known test input |
+| `src/main.zig` | The parser |
 
 {/* visual-break:exploring-zig-efficient-parsing:1 */}
 ![Execution process checkpoint illustration for this section.](/assets/visuals/blog/exploring-zig-efficient-parsing-break-1.png)
 
-## What you are building
-
-You will build a single Zig executable that reads a small `.obj` file, extracts `v` vertex lines, parses floats, stores them in a dynamic list, and prints them back out. This is the smallest complete parsing loop: input → tokenize → parse → store → output.
-
-Here is the end state.
-
-| Item | Path | Purpose |
-|------|------|---------|
-| OBJ input file | `data/sample.obj` | Known test input for verification |
-| Parser source | `src/main.zig` | Reads file, parses vertices, prints output |
-
-When the program runs, it prints exactly the vertex data from the file. If the output matches, the parser works.
-
-## Prerequisites
-
-You need Zig 0.12.x or later installed and available on your PATH.
-
-Verify Zig is installed:
-
-```bash
-zig version
-```
-
-If this prints a version number, you are ready.
-
-## Step 1: Create the Zig project
-
-Start with a clean executable project.
+## Setup
 
 ```bash
 mkdir zig-obj
 cd zig-obj
 zig init-exe
-```
-
-Verify the empty project builds.
-
-```bash
-zig build
-```
-
-Expected result: build completes with no errors.
-
-This confirms the Zig toolchain and project layout are correct before adding code.
-
-## Step 2: Create a known OBJ input file
-
-The parser needs fixed input so verification is deterministic. Create a small OBJ file containing only vertex lines.
-
-```bash
 mkdir -p data
+
 cat > data/sample.obj <<'EOF'
 v 0.0 1.0 0.0
 v -1.0 0.0 0.0
@@ -80,28 +36,9 @@ v 1.0 0.0 0.0
 EOF
 ```
 
-Verify the file contents.
+## The parser
 
-```bash
-cat data/sample.obj
-```
-
-Expected output:
-
-```
-v 0.0 1.0 0.0
-v -1.0 0.0 0.0
-v 1.0 0.0 0.0
-```
-
-This file is now the single source of truth for parser verification.
-
-## Step 3: Implement the vertex parser
-
-Replace the generated `src/main.zig` with a real parser. This program opens the OBJ file, reads it line‑by‑line, tokenizes vertex lines, parses floats, stores them in an ArrayList, and prints them back out.
-
-```bash
-cat > src/main.zig <<'EOF'
+```zig
 const std = @import("std");
 
 const Vertex = struct {
@@ -146,36 +83,9 @@ pub fn main() !void {
         try out.print("v {d:.1} {d:.1} {d:.1}\n", .{ v.x, v.y, v.z });
     }
 }
-EOF
 ```
 
-### Walking through the code
-
-The program begins by importing Zig’s standard library. In Zig, almost all I/O, memory allocation, and formatting lives inside `std`, so bringing it in once at the top is standard practice.
-
-The `Vertex` struct defines the in‑memory representation of a parsed vertex. Each OBJ vertex line contains three floating‑point values, so the struct mirrors that shape exactly. Using a struct instead of three loose floats makes later processing clearer and safer.
-
-Inside `main`, the first block creates a general‑purpose allocator. Zig does not allocate memory implicitly, so any dynamic container must be given an allocator. The `defer` line ensures the allocator is cleaned up when the program exits. This is Zig’s approach to deterministic resource cleanup without a garbage collector.
-
-The file open call uses `std.fs.cwd().openFile`. This returns an error union, so `try` is required. If the file does not exist, the program exits with a clear error instead of continuing in an invalid state.
-
-Zig’s buffered reader wraps the file reader to avoid reading one byte at a time from disk. The `readUntilDelimiterOrEof` call fills a fixed buffer with each line. This pattern avoids allocating a new string for every line, which is important in high‑throughput parsers.
-
-The `ArrayList(Vertex)` is a dynamically growing list. Zig does not guess capacity; it expands when needed using the provided allocator. This is how we store an unknown number of vertices without pre‑counting the file.
-
-Inside the loop, two early `continue` checks skip empty lines and non‑vertex lines. OBJ files contain many different record types. This keeps the example focused only on `v` records.
-
-The tokenizer splits the line on spaces. The first token is the literal `v`, so it is skipped. The next three tokens are parsed as floats using `std.fmt.parseFloat`. Each `parseFloat` returns an error union, which is why `try` appears again. If the file contains invalid numbers, the program fails immediately with a clear error rather than producing corrupt data.
-
-Each parsed vertex is appended to the `ArrayList`. Because the list owns its memory, the vertices remain valid after the loop ends.
-
-Finally, the program writes the parsed vertices to stdout. Printing is done through `std.io.getStdOut().writer()`, and formatted printing uses Zig’s type‑safe formatting syntax. The printed output mirrors the original OBJ lines so verification is simple.
-
-This parser ignores everything except `v` lines. It does not guess vertex counts. It dynamically grows storage. It prints parsed values so correctness is directly observable.
-
-## Step 4: Run the parser
-
-Build and execute the program.
+## Run it
 
 ```bash
 zig build run
@@ -189,74 +99,21 @@ v -1.0 0.0 0.0
 v 1.0 0.0 0.0
 ```
 
-At this stage, the parser has exercised all major systems Zig exposes for low‑level work: file I/O, buffered reading, tokenization, numeric conversion, dynamic allocation, and formatted output. None of these rely on hidden runtime services. Every allocation, read, and write is explicit in the code you just ran.
-
-If your output matches exactly, the parser is correct for this input.
-
-## Step 5: Confirm determinism
-
-Run the program again.
-
-```bash
-zig build run
-```
-
-The output should be identical. A deterministic parser producing stable output on fixed input is verified.
-
-## Common failure points
-
-| Symptom | Likely cause | Fix |
-|----------|--------------|-----|
-| `zig: command not found` | Zig not installed or PATH incorrect | Install Zig and verify `zig version` |
-| `FileNotFound` error | Wrong input path | Confirm `data/sample.obj` exists |
-| `parseFloat` error | Unexpected spacing in OBJ file | Ensure values are separated by single spaces |
-| No output | Lines not starting with `v` | Confirm sample file contents |
-
-Most of these errors occur because Zig does not silently ignore failures. Missing files, invalid numbers, and incorrect paths stop execution immediately. This is intentional. A parser that continues on invalid input often produces harder‑to‑debug downstream errors. Zig’s error‑first design keeps failures local and obvious.
-
-These cover the typical errors when implementing small text parsers.
-
-## Extending the parser
-
-Once the basic vertex loop works, extending the parser is mainly about adding more record types and mapping them into new structs. The core structure of the program does not change: open file, buffered read, tokenize line, parse tokens, append to typed storage. That repeatable pattern is what makes Zig attractive for building larger format parsers.
-
-- Add support for `vn` normal lines
-- Add support for `f` face indices
-- Skip comments and blank lines
-- Store data in buffers used by a renderer
-
-The core loop remains the same: read → tokenize → parse → store → verify.
+If the output matches the input exactly, the parser works for this input.
 
 {/* visual-break:exploring-zig-efficient-parsing:2 */}
 ![Delivery workflow checkpoint illustration for this section.](/assets/visuals/blog/exploring-zig-efficient-parsing-break-2.png)
 
+## Why this is useful
+
+This parser exercises the pieces that matter for low-level parsing: file I/O, buffered reading, tokenization, numeric conversion, dynamic allocation, and formatted output. Every allocation is explicit. Every failure is an error union. Zig does not let you ignore the hard parts, which is why it is a good teacher for parsing.
+
+Common mistakes I hit:
+
+- Forgetting the `try` on file open or parse calls.
+- Missing the defer to clean up the allocator.
+- Assuming a line always starts with `v` and not checking `line[0]`.
+
 ## Closing
 
-A parser is correct when input, logic, and output are all visible. This lab keeps each step explicit so nothing is hidden behind abstractions.
-
-When you can create input, run code, and predict output exactly, you have a verified parsing baseline you can build on.
-
-{/* auto-enhancement:voice-start */}
-
-## Personal Build Reflection
-
-This guide reflects how I actually execute work when the goal is performance-sensitive implementation details and verifiable parser behavior.
-
-I prefer explicit checklists over vague advice because that is what keeps delivery stable when timelines are tight.
-
-Use the steps as a baseline, then annotate your own environment differences as you go.
-
-{/* auto-enhancement:voice-end */}
-
-{/* auto-enhancement:links-start */}
-
-## Continue Reading in This Systems Series
-
-If you want to go deeper on this topic cluster, these are the best next reads:
-
-- [OBJ Parser Lab: Count Vertices and Faces in Zig](/obj-parser/)
-- [Containerization and Orchestration: A Small Lab You Can Run](/containerization-and-orchestration/)
-- [GitHub Actions Basics: One CI Check You Can Trust](/github-actions-aws/)
-
-{/* auto-enhancement:links-end */}
-
+A parser is correct when input, logic, and output are all visible. This example is small, but the same loop applies to larger formats: read, tokenize, parse, store, verify.

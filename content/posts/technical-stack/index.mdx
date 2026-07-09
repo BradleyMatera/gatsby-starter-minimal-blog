@@ -1,220 +1,80 @@
 ---
-title: "Technical Stack 2025: A Verifiable Inventory"
-date: "2025-10-12"
+title: "What I Actually Use: A Personal Technical Stack Inventory"
+date: "2026-07-08"
 slug: "/technical-stack-2025"
 tags: ["stack", "process", "documentation"]
-description: "A simple way to document what you actually use and what you are still learning."
+description: "A plain list of what I ship with, why I chose it, and where I deviate."
 theme: "Process"
 ---
 
-If 2024 was the year of "AI Hype," 2025 was the year the dust finally settled. We stopped asking *if* AI would replace us and started asking *how* we could use it to ship faster than ever before.
+I get asked about my stack a lot, and I used to answer with whatever sounded current. That made my answers unreliable. A few months ago I started keeping a single inventory of what I actually build with, not what I think about building with. This post is that inventory.
 
-Looking back at the code I wrote over the last 12 months, a pattern emerges. The fragmentation of the early 2020s—where every week brought a new framework—has collapsed into a highly efficient, opinionated "Meta Stack." We aren't fighting over tools anymore; we are fighting over shipping.
+It is not a prediction. It is what I use on this site and on the projects I ship.
 
-This isn't just a list of libraries. This is a breakdown of how web development actually felt in 2025, the stack that survived the hype cycle, and why I (mostly) stopped worrying about the next big thing.
+## Why a written inventory helps
 
-## Why this inventory exists
+When I do not write this down, three things happen:
 
-I built this post to document what I actually ship with, not what looked impressive on social feeds. I wanted a single technical record that answered these three questions clearly: what I default to, why I default to it, and where I intentionally deviate when constraints change.
+- I recommend tools I have not used in months.
+- I switch stacks mid-project because something new looks interesting.
+- I cannot explain why I chose one tool over another.
 
-In other words, this is not a trend prediction post. It is my operating baseline for project execution in 2025.
+A written inventory fixes that. It is just a reference I can point to and update when my real choices change.
 
-## 1. The "Post-React" Era: Server Components Won
+## What I default to
 
-For years, React Server Components (RSC) were a controversial, confusing mess. In 2025, they finally clicked.
+| Component | My default | Why I use it |
+|---|---|---|
+| Site framework | Gatsby + React + TypeScript | Static generation, fast builds, GraphQL data layer I already understand |
+| Styling | Tailwind CSS + custom CSS variables | Utility speed plus full control over tokens for dark/light themes |
+| Components | Theme UI primitives + custom UI in `src/ui` | Consistent base components with shadows when I need them |
+| Animations | GSAP + ScrollTrigger + CSS scroll-timeline progressive enhancement | Fine-grained scroll-driven animations with a fallback |
+| Deployment | Netlify | Branch previews, redirects, identity widget, serverless functions |
+| Images | sharp (pinned) + Gatsby image pipeline | Reliable processing, avoids the upgrade churn I have hit before |
+| Auth/identity | Netlify Identity | Fits the hosting stack; simple widget for protected routes |
+| Content | MDX in `content/` | Lets me write posts with JSX components and keeps content in version control |
+| Version control | Git + GitHub | Standard, familiar, good CI integration |
 
-I spent the first half of the year trying to avoid the Next.js App Router, clinging to the simplicity of `useEffect` and client-side fetching. But by Q3, I capitulated. The mental model shifted. We stopped building "Client Apps that fetch data" and started building "Server Apps that sprinkle interactivity."
+This is the stack running this site right now. I did not pick it to be trendy. I picked it because it lets me ship a fast, maintainable site without fighting the tooling every week.
 
-### The Big Shift
-* **Data Fetching:** I haven't written a `useEffect` to fetch data in six months. Direct database calls in async Server Components became the standard. It eliminates the "loading spinner hell" of 2023.
-* **Server Actions:** We stopped building dedicated API routes for simple mutations. Passing a function directly to a form action `<form action={updateUser}>` felt like PHP in 2005, but with full type safety. It is pragmatic and it works.
+## Where I intentionally deviate
 
-**The Verdict:** React 19 didn't kill other frameworks, but it made React feel less like a library and more like a full architecture. You either bought into the ecosystem (Next.js/Remix) or you left for something lighter like Svelte 5.
+| Situation | I switch to | Why |
+|---|---|---|
+| Tiny static landing page | Plain HTML + Tailwind CDN or Vite | Faster boot than Gatsby for one-pagers |
+| Heavy client-side interactivity | Next.js App Router or Vite + React | Better fit for dynamic routing and app-like behavior |
+| Long-running background task | Docker on a VPS or AWS Lambda | Netlify functions are great for short tasks, not long workers |
+| Quick database prototype | Supabase or a JSON file | Fastest path to persisted state in a demo |
+| Native mobile experiment | React Native | I am not great at it yet, but it is the fastest way to get a real app on a phone |
+
+The pattern is simple: I start with the default stack, then switch only when the project genuinely needs something else. Not when I am bored.
 
 {/* visual-break:technical-stack:1 */}
 ![Execution process checkpoint illustration for this section.](/assets/visuals/blog/technical-stack-break-1.png)
 
-## 2. The Database is Just an URL (Postgres is King)
+## Tools I tried but did not keep
 
-In 2025, the debate between SQL and NoSQL effectively ended for general-purpose apps. The winner wasn't just "SQL," it was **"Serverless Postgres."**
+I have used a lot of frameworks over the last few years. Here is where some of them landed:
 
-I used **Supabase** and **Neon** almost exclusively this year. The friction of setting up a Docker container or managing an RDS instance is gone. You get a connection string, you paste it into your `.env`, and you have a scalable, branching database instantly.
+- **Next.js:** Excellent for apps. I keep reaching for Gatsby for content-heavy sites because the content pipeline is smoother for me.
+- **Prisma:** Great DX, but I usually do not need an ORM on small projects. Raw SQL or a thin query layer is enough.
+- **shadcn/ui:** Good components. I use it as inspiration more than a dependency because I want to own my CSS tokens.
+- **Bun:** Fast. I use it for scripts, but I still deploy Node because hosting compatibility matters more than local speed.
+- **Redux/Zustand:** Rarely needed now. Server state or URL state usually covers what I used to put in global stores.
 
-### Why this stuck
-* **Drizzle ORM:** This was the breakout star of 2025. Prisma was great, but it was heavy. Drizzle gave us the SQL-like control we wanted with zero runtime overhead. Writing `db.select().from(users)` felt closer to the metal, and the TypeScript inference was magical.
-* **The Death of "Global State":** Because Server Components allow us to fetch data right where we need it, the complex Redux/Zustand global stores shrank. We let the database be the state manager.
+This list is not criticism. These tools are good. They are just not my defaults.
 
-## 3. AI Didn't Replace Us, But It Changed "Coding"
+## The most common mistake I make
 
-This is the uncomfortable truth: I wrote significantly less boilerplate code in 2025.
+The biggest mistake I make is switching tools before I understand the one I am using. I have abandoned perfectly good stacks because a new release got attention, then regretted it two weeks later.
 
-Tools like **Cursor** (the VS Code fork) and **v0** (for UI generation) became non-negotiable. My workflow shifted from "Typing syntax" to "Architectural Review."
-
-* **The New Workflow:** I don't type out a Tailwind card component anymore. I prompt v0: *"Give me a dashboard card with a sparkline chart and a glassmorphism effect,"* copy the code, and refine it.
-* **The Danger:** The "Junior Developer Gap" widened. It is easier than ever to *generate* code, but harder than ever to *understand* it. I spent more time debugging subtle hallucinations in AI-generated logic than I did writing logic from scratch. But the velocity increase was undeniable.
-
-## 4. The Runtime Wars: Bun vs. Node
-
-Node.js is still the reliable grandfather, but **Bun** became my default for local development and scripting.
-
-Why? **Speed.**
-`bun install` is instant. `bun run dev` is instant. The built-in support for TypeScript/JSX without configuration meant I stopped wrestling with `tsconfig.json` and Webpack. While I still deploy to Node environments (mostly on Vercel or AWS Lambda), my local machine runs Bun. It is the quality-of-life upgrade we desperately needed.
-
-## 5. CSS is Solved (Tailwind v4)
-
-I haven't written a pure CSS file in 2025. **Tailwind CSS v4** (the Rust-based engine) launched and made the "it's too slow" argument irrelevant.
-
-We also saw the rise of "Copy-Paste UI" libraries like **shadcn/ui**. We moved away from heavy component libraries (MUI, Bootstrap) that lock you into their design system. Instead, we want *code* we can own. 2025 was about owning your UI components but not writing them from scratch.
-
-## 6. The "Self-Host" Renaissance
-
-Perhaps as a reaction to rising cloud costs, 2025 saw a massive surge in "PaaS-on-your-own-server" tools like **Coolify**.
-
-While Vercel is still the default for "getting it live," I moved several long-running background workers and heavy projects to a $5 Hetzner VPS running Coolify. It is the Heroku experience, but you own the data. It felt like reclaiming a bit of the internet from the giants.
-
-## Default stack decision table (component + reason)
-
-| Component | Default choice | Why I chose it in 2025 | When I intentionally switch |
-|---|---|---|---|
-| App framework | Next.js App Router | Stable server/client split and strong deployment ecosystem | Smaller static experiences where Astro is simpler |
-| Language | TypeScript strict mode | Better refactor safety and fewer runtime surprises | Tiny throwaway scripts |
-| DB | Postgres (Neon/Supabase) | Fast setup + reliable relational model + branching workflows | Document-heavy workloads that fit NoSQL better |
-| ORM/query layer | Drizzle ORM | SQL-like control with low abstraction overhead | Direct SQL for one-off performance-critical queries |
-| Auth | Auth.js or Clerk | Faster production-ready auth flows | Extremely custom auth and identity integration needs |
-| Styling | Tailwind + shadcn/ui | High speed UI composition with component ownership | Bespoke brand systems with fully custom design tokens |
-| Local runtime | Bun | Faster local iteration and script startup | Tooling that still expects Node-only behavior |
-| Prod runtime | Node/Edge | Predictable hosting support and runtime compatibility | Workloads requiring specialized container setups |
-
-## Minimal examples from this stack
-
-### Server Component data query (no client-side fetch boilerplate)
-
-```tsx
-// app/users/page.tsx
-import { db } from "@/db";
-import { users } from "@/db/schema";
-
-export default async function UsersPage() {
-  const rows = await db.select().from(users).limit(20);
-
-  return (
-    <main>
-      <h1>Users</h1>
-      <ul>
-        {rows.map((user) => (
-          <li key={user.id}>{user.email}</li>
-        ))}
-      </ul>
-    </main>
-  );
-}
-```
-
-### Server Action mutation pattern
-
-```tsx
-// app/settings/actions.ts
-"use server";
-
-import { db } from "@/db";
-import { users } from "@/db/schema";
-import { eq } from "drizzle-orm";
-
-export async function updateDisplayName(formData: FormData) {
-  const id = Number(formData.get("id"));
-  const displayName = String(formData.get("displayName") || "");
-
-  await db.update(users).set({ displayName }).where(eq(users.id, id));
-}
-```
-
-### Bun local workflow scripts
-
-```json
-{
-  "scripts": {
-    "dev": "next dev",
-    "typecheck": "tsc --noEmit",
-    "lint": "eslint .",
-    "check": "bun run typecheck && bun run lint"
-  }
-}
-```
-
-## Bun vs Node tradeoff table (how I decide)
-
-| Area | Bun locally | Node in production |
-|---|---|---|
-| Install speed | Very fast package install for daily loops | Slower, but broadly standardized in CI/CD |
-| TS/JS execution | Great zero-config DX for scripts | Mature ecosystem and long-term runtime parity |
-| Tooling compatibility | Mostly good, occasional edge cases | Highest compatibility across hosting/tooling |
-| Where I use it | Local iteration, scripts, fast checks | Hosted apps, serverless targets, production workloads |
-
-## Reference architecture flow (my default SaaS baseline)
-
-```text
-Browser
-  |
-Next.js App Router (Server Components + selective Client Components)
-  |
-Server Actions / Route Handlers
-  |
-Drizzle ORM
-  |
-Postgres (Neon or Supabase)
-```
-
-## Common mistakes I made during the 2025 stack shift
-
-- Treating every component as client-side first, then paying the hydration cost later.
-- Letting AI-generated code land without tracing data flow boundaries and error handling.
-- Over-abstracting DB access too early instead of validating queries directly.
-- Assuming Bun and Node are fully interchangeable for every dependency.
-- Shipping styling systems without a documented token baseline.
+The rule I try to follow now: use the default for at least two projects before switching. That gives me enough real feedback to know whether a tool is actually better for my workflow, or just newer.
 
 {/* visual-break:technical-stack:2 */}
 ![Delivery workflow checkpoint illustration for this section.](/assets/visuals/blog/technical-stack-break-2.png)
 
-## Summary: The "Default" Stack of 2025
+## Closing
 
-If I started a new SaaS product today, I wouldn't spend a second debating the stack. This is the consensus architecture that dominated my year:
+A stack inventory is not exciting. It is useful. If you do not have one, write yours down. Keep it honest. Update it when your real choices change, not when your Twitter feed changes.
 
-* **Framework:** Next.js (App Router)
-* **Language:** TypeScript (Strict Mode)
-* **Database:** Postgres (Neon/Supabase) via Drizzle ORM
-* **Styling:** Tailwind CSS + shadcn/ui
-* **Auth:** Auth.js (formerly NextAuth) or Clerk
-* **Runtime:** Bun (Local), Node/Edge (Prod)
-
-2025 wasn't about discovery; it was about convergence. We stopped experimenting with the "how" so we could finally focus on the "what."
-
----
-
-### Author Bio
-
-**Bradley Matera**
-*I build real working systems with AI support, AWS knowledge, and repetition. I’m not a theory-heavy engineer. I learn through debugging, deployments, and shipping things people can actually click on.*
-
-{/* auto-enhancement:voice-start */}
-
-## Personal Build Reflection
-
-I assembled this post from real implementation reps centered on career execution with practical systems, documentation, and measurable progress.
-
-The structure is intentional: I want the sequence to be audit-friendly so troubleshooting later is faster.
-
-When you run this yourself, capture outcomes after each major step to keep your changes reproducible.
-
-{/* auto-enhancement:voice-end */}
-
-{/* auto-enhancement:links-start */}
-
-## Continue Reading in This Career Series
-
-If you want to go deeper on this topic cluster, these are the best next reads:
-
-- [Designing Systems That Actually Ship: A Small Template](/designing-systems-that-actually-ship/)
-- [Recent Projects and Lessons: A Short, Verifiable Format](/recent-projects-and-lessons/)
-- [What I Learned From Three Small Projects](/what-i-learned-three-simple-projects/)
-
-{/* auto-enhancement:links-end */}
+If you want to see this stack in action, you are already looking at it.

@@ -762,24 +762,55 @@ export const Head: HeadFC<MBPostProps> = ({ data }) => {
     return Number.isNaN(parsed.getTime()) ? undefined : parsed.toISOString();
   })();
   const articleTags = post.tags?.map((tag) => tag.name).filter((tag): tag is string => Boolean(tag));
+  const imageUrl = post.banner?.childImageSharp?.resize?.src;
+  const canonicalUrl = post.canonicalUrl || `https://bradleymatera.dev${post.slug}`;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.description || post.excerpt,
+    image: imageUrl ? `https://bradleymatera.dev${imageUrl}` : undefined,
+    url: canonicalUrl,
+    datePublished: publishedTime,
+    author: {
+      "@type": "Person",
+      name: "Bradley Matera",
+      url: "https://bradleymatera.dev/",
+    },
+    publisher: {
+      "@type": "Person",
+      name: "Bradley Matera",
+      url: "https://bradleymatera.dev/",
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": canonicalUrl,
+    },
+    keywords: articleTags?.join(", "),
+    articleSection: post.tags?.[0]?.name,
+  };
 
   return (
-    <Seo
-      title={post.title}
-      description={post.description ? post.description : post.excerpt}
-      image={post.banner ? post.banner?.childImageSharp?.resize?.src : undefined}
-      pathname={post.slug}
-      canonicalUrl={post.canonicalUrl}
-      ogType="article"
-      article={{
-        publishedTime,
-        tags: articleTags,
-      }}
-      breadcrumbs={[
-        { name: "Home", path: "/" },
-        { name: "Blog", path: "/blog/" },
-        { name: post.title, path: post.slug },
-      ]}
-    />
+    <>
+      <Seo
+        title={post.title}
+        description={post.description ? post.description : post.excerpt}
+        image={imageUrl}
+        pathname={post.slug}
+        canonicalUrl={post.canonicalUrl}
+        ogType="article"
+        article={{
+          publishedTime,
+          tags: articleTags,
+        }}
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Blog", path: "/blog/" },
+          { name: post.title, path: post.slug },
+        ]}
+      />
+      <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+    </>
   );
 };

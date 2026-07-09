@@ -1,161 +1,113 @@
 ---
-title: "Portfolio Case Studies: A Simple, Verifiable Template"
+title: "How I Write Portfolio Case Studies That Don't Sound Like Marketing"
 date: "2025-03-22"
 slug: "/portfolio-case-studies"
 tags: ["portfolio", "writing", "process"]
-description: "A short case study template you can verify with proof links."
+description: "A simple case-study format I use to document projects with proof instead of claims."
 theme: "Portfolio"
 ---
 
-Most developer portfolios are fundamentally broken. They function as "Galleries"—grids of pretty screenshots that tell me absolutely nothing about the candidate's ability to solve complex problems.
+I used to write portfolio entries like product landing pages. Big screenshots, feature lists, and phrases like "robust architecture." When I reread them a few months later, I could not tell what I had actually solved.
 
-As a hiring manager or senior engineer reviewing a portfolio, I do not care what the UI looks like (unless you are a designer). I care about the **decisions** you made.
+A recruiter scanning keywords might have been fooled. A senior engineer reviewing my code would not have been. This post is the case-study template I use now.
 
-* Why did you choose Postgres over MongoDB?
-* How did you handle invalidation when you implemented that cache?
-* What happened when the API latency spiked?
+## The basic rule
 
-A "Gallery" hides these answers. A "Case Study" reveals them.
+If I cannot link to the code that proves it, I do not write it.
 
-This post is a deep dive into the **Verifiable Case Study Architecture**. It is the standard I use to document my own work, designed specifically to pass the scrutiny of a technical audit.
+That turns this:
 
----
+> "Optimized database queries."
 
-## The Philosophy: Evidence Over Claims
+Into this:
 
-The core principle of this format is simple: **"If you cannot link to the code that proves it, do not write it."**
+> "Reduced query time from 500ms to 20ms by adding a composite index on `(user_id, status)` — see commit `8a4f2b`."
 
-A resume bullet point says: *"Optimized database queries."*
-A Case Study says: *"Reduced query time from 500ms to 20ms by adding a composite index on `(user_id, status)`, verified in commit `8a4f2b`."*
-
-The difference is credibility. The former is a marketing claim; the latter is an engineering fact.
-
----
+The second one is longer, but it is the only one that survives an interview.
 
 {/* visual-break:portfolio-case-studies:1 */}
 ![Project layout checkpoint illustration for this section.](/assets/visuals/blog/portfolio-case-studies-break-1.png)
 
-## The Architecture of a Technical Case Study
+## Four sections I stick to
 
-Do not write a "story." Write a report. Structure every project page on your portfolio with these four rigid sections.
+### 1. Context and constraint
 
-### Section 1: The Context & Constraints
-Stop telling me "I built a To-Do App." Tell me **why** the existing solutions failed or what specific constraint you were trying to satisfy.
+Bad context: "I built a to-do app to learn React."
 
-**Bad Context:**
-"I wanted to learn React, so I built a dashboard."
+Better context: "I needed to render 10,000 data points without dropping below 60fps on a low-end Android phone."
 
-**Good Context:**
-"I needed to visualize 10,000 data points in real-time without blocking the main thread. Existing libraries caused UI jank on low-end devices. The constraint was to achieve 60fps rendering on a Moto G4."
+The constraint is what makes the case study interesting. Without it, the project is just another demo.
 
-### Section 2: The "Stack Decision" Matrix
-Junior developers list tools. Senior developers justify tools. For every major technology in your stack, write one sentence explaining the *trade-off* that led to its selection.
+### 2. Stack decision
 
-| Technology | The Alternative | Why I Chose It |
-| :--- | :--- | :--- |
-| **Next.js** | Create React App | Needed Server-Side Rendering (SSR) for SEO and initial load performance. |
-| **Supabase** | Firebase | Needed a relational schema (SQL) for complex join queries that NoSQL couldn't handle efficiently. |
-| **Tailwind** | Styled Components | Prioritized build-time CSS extraction over runtime interpolation for performance. |
+For each major tool, I write one sentence about the trade-off that led to it.
 
-This table alone proves you understand the ecosystem, not just the syntax.
+| Tool | Alternative | Why I picked it |
+|---|---|---|
+| Next.js | Create React App | Needed SSR for initial page load and SEO |
+| Supabase | Firebase | Data was relational; joins were non-negotiable |
+| Tailwind | Styled Components | Build-time CSS kept the bundle smaller |
 
-### Section 3: The "Oh No" Moment (The Technical Hurdle)
-This is the most critical section. A project that went perfectly teaches you nothing. I want to read about the moment everything broke.
+This table shows I understand the ecosystem, not just the syntax.
 
-Identify the single hardest technical challenge you faced.
-* Was it a CORS error that wouldn't die?
-* Was it a race condition in your state management?
-* Was it a memory leak in your WebSocket connection?
+### 3. The moment it broke
 
-**Example from a recent project:**
-> "While building the real-time chat, I encountered a 'Prop Drilling' issue where updating a single message caused the entire chat window to re-render. This caused input lag.
->
-> **The Fix:** I refactored the state management to use **React Context** with a split provider pattern, separating the 'Message List' state from the 'Input' state. This reduced render cycles by 90%."
+Every case study needs one real problem. A project that went perfectly teaches nothing.
 
-### Section 4: The Outcomes & Permalinks
-Finally, verify your claims. Do not just link to the repo root. Link to the **specific file and line number** where the magic happens.
+Example from a recent project:
 
-GitHub allows you to press `y` on any file view to get a "Permalink" to that specific commit hash. Use this.
+> "Updating a single chat message caused the entire chat window to re-render, which created input lag. I split the message list state from the input state using a context provider pattern. Render cycles dropped by about 90%."
 
-**The Verification List:**
-* **The Claim:** "Implemented optimistic UI updates."
-* **The Proof:** [Link to `ChatProvider.tsx` Line 45](https://github.com/bradleymatera/project/blob/main/src/context/ChatProvider.tsx#L45)
-* **The Claim:** "Secured API endpoints with middleware."
-* **The Proof:** [Link to `middleware.ts` Line 12](https://github.com/bradleymatera/project/blob/main/src/middleware.ts#L12)
+That is the part people actually read.
+
+### 4. Proof links
+
+I do not just link to the repo root. I link to the specific file and line. GitHub lets you press `y` on a file view to get a permalink to a commit hash. I use those.
+
+- **Claim:** "Implemented optimistic UI updates."
+- **Proof:** `src/context/ChatProvider.tsx` line 45.
+- **Claim:** "Secured API endpoints with middleware."
+- **Proof:** `src/middleware.ts` line 12.
+
+Specific links turn claims into evidence.
 
 ---
 
-## A Concrete Template
-
-If you are rewriting your portfolio today, copy this markdown structure. It forces you to be honest.
+## A template I copy each time
 
 ```markdown
-# [Project Name]
-**Live Demo:** [URL]
-**Source Code:** [URL]
+# Project Name
+**Live demo:** [URL]
+**Source code:** [URL]
 
-## 1. The Goal
-One sentence describing the business value or user problem.
-*Constraint:* What was the limiting factor? (Time, Performance, Cost?)
+## Goal
+One sentence about the user problem or business value.
+*Constraint:* What made this hard? Time, cost, performance, data?
 
-## 2. Technical Decisions
-- **Database:** Postgres. *Why?* Strict schema validation required for financial data.
-- **Hosting:** Vercel. *Why?* Zero-config Edge Functions were cheaper than AWS Lambda for this scale.
+## Technical decisions
+- **Database:** Postgres. *Why?* Strict schema for financial data.
+- **Hosting:** Vercel. *Why?* Edge functions were cheaper than Lambda at this scale.
 
-## 3. The Hardest Challenge: [Name of Problem]
-Describe the bug or architectural bottleneck.
-**The Solution:** Describe how you fixed it.
-**Code Reference:** [Link to the specific commit or function]
+## The hardest challenge: [name]
+Describe the bug or bottleneck.
+**Solution:** How you fixed it.
+**Code reference:** Permalink to the commit or function.
 
-## 4. Retrospective
-What would you do differently if you built it again today?
-(e.g., "I would swap Redux for TanStack Query to handle caching better.")
-
+## Retrospective
+What would you do differently? (e.g., "I would swap Redux for TanStack Query.")
 ```
 
----
+## Why the retrospective matters
 
-## Why "Retrospectives" Get You Hired
+Junior engineers try to hide mistakes. Senior engineers point them out and explain what they learned.
 
-The final section of the template—the **Retrospective**—is a secret weapon.
-
-Junior engineers try to hide their mistakes. They want the project to look perfect.
-Senior engineers **advertise** their mistakes. They say, *"I shouldn't have used MongoDB here. The data was too relational. Next time I'd use SQL."*
-
-This shows self-awareness. It shows growth. It proves that you are a better engineer *today* than you were when you wrote the code.
+Saying *"I should have used SQL instead of MongoDB here; the data was too relational"* is more credible than pretending the project was perfect.
 
 {/* visual-break:portfolio-case-studies:2 */}
 ![Portfolio structure checkpoint illustration for this section.](/assets/visuals/blog/portfolio-case-studies-break-2.png)
 
-## Final Thoughts
+## Closing
 
-Stop building "Portfolios." Start building "Engineering Logs."
+A portfolio is not a display case. It is a lab notebook. The goal is not to look finished. The goal is to show how you think, what broke, and how you fixed it.
 
-A portfolio is a display case; it implies you are finished learning. An Engineering Log is a laboratory notebook; it proves you are constantly running experiments, analyzing data, and improving your methods.
-
-Write for the Engineer who will read your code, not the Recruiter who will scan your keywords. The Recruiter gets you the phone screen. The Case Study gets you the job.
-
-{/* auto-enhancement:voice-start */}
-
-## Personal Build Reflection
-
-This guide reflects how I actually execute work when the goal is frontend delivery quality, accessibility, and clear user-facing behavior.
-
-I prefer explicit checklists over vague advice because that is what keeps delivery stable when timelines are tight.
-
-Use the steps as a baseline, then annotate your own environment differences as you go.
-
-{/* auto-enhancement:voice-end */}
-
-{/* auto-enhancement:links-start */}
-
-## Continue Reading in This Frontend Series
-
-If you want to go deeper on this topic cluster, these are the best next reads:
-
-- [Job Search Notes That Actually Help](/job-hunting/)
-- [Interactive Portfolio Basics: Keep It Fun and Still Clear](/interactive-portfolios-recruiter-expectations/)
-- [Sell Your Skills With One Small Project](/sell-your-skills-with-a-small-project/)
-
-{/* auto-enhancement:links-end */}
-
+If a case study does not have a specific problem and a specific proof link, I rewrite it.

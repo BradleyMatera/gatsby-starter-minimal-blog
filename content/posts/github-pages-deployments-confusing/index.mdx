@@ -7,17 +7,13 @@ description: "Exact steps to deploy a static site to GitHub Pages and verify it 
 theme: "Deployment"
 ---
 
-GitHub Pages feels confusing for one reason: base paths. Once you understand that your site does not live at `/` but at `/your-repo/`, every broken deployment you’ve ever seen suddenly makes sense. This guide is start to finish. It uses real commands, real files, and real verification steps. No shortcuts. No magic. When you finish, you will have a live URL that works, refreshes correctly, and serves assets without 404s.
+GitHub Pages feels confusing for one reason: base paths. Once you understand that your site does not live at `/` but at `/your-repo/`, every broken deployment you have ever seen suddenly makes sense. This guide is start to finish. It uses real commands, real files, and real verification steps. No shortcuts. No magic. When you finish, you will have a live URL that works, refreshes correctly, and serves assets without 404s.
 
 This is not a theory post. It is a lab you can run in any static site project.
 
-## The promise
-
-By the end, three things will be true. Your project will build into a static folder. That folder will be published to a `gh-pages` branch. The live GitHub Pages URL will load with working CSS and JavaScript. If any of those are missing, the setup is incomplete.
+## What GitHub Pages actually is
 
 ![Deploying static site](https://media.giphy.com/media/xKDt6YcZy3qWfhwMdT/giphy.gif)
-
-## What GitHub Pages actually is
 
 {/* visual-break:github-pages-deployments-confusing:1 */}
 ![Debugging process checkpoint illustration for this section.](/assets/visuals/blog/github-pages-deployments-confusing-break-1.png)
@@ -38,7 +34,7 @@ You need a GitHub repository. You need a build command that outputs a static fol
 
 Nothing else is required. No paid services. No API keys. No secret configs.
 
-## Start to finish
+## How to deploy from a branch
 
 ### Step 1: Set the base path
 
@@ -134,7 +130,7 @@ Open the URL GitHub provides. The page should load with styling and JavaScript w
 
 If you see a blank page or console errors, go back to Step 1. It is almost always the base path.
 
-## Deploying a plain HTML page with GitHub Actions (no gh-pages branch)
+## How to deploy with GitHub Actions instead
 
 The `gh-pages` branch approach works, but it is not the only way, and it is not the cleanest way anymore. GitHub Pages can also be deployed directly from GitHub Actions. The mental model is different.
 
@@ -144,9 +140,9 @@ This section is a complete lab for a dead simple static site. It uses a single `
 
 ![GitHub Actions running](https://media.giphy.com/media/3o7aCTfyhYawdOXcFW/giphy.gif)
 
-### Step 0: Make sure Pages is set to “GitHub Actions”
+### Step 0: Make sure Pages is set to "GitHub Actions"
 
-Open your repository on GitHub. Go to Settings → Pages. Under “Build and deployment,” set the Source to GitHub Actions. If you leave it on “Deploy from a branch,” the workflow can run perfectly and you will still sit there wondering why nothing updates.
+Open your repository on GitHub. Go to Settings → Pages. Under "Build and deployment," set the Source to GitHub Actions. If you leave it on "Deploy from a branch," the workflow can run perfectly and you will still sit there wondering why nothing updates.
 
 ### Step 1: Create the simplest possible site
 
@@ -257,6 +253,7 @@ The `permissions` block matters. Pages deployments require `pages: write` and `i
 The `path: .` line is intentionally blunt for this demo. It uploads the repository root, which contains `index.html` and `styles.css`. In a real app, you would upload the build output directory, like `dist` or `build`.
 
 ![Deploy Success](https://media.giphy.com/media/5xaOcLGvzHxDKjufnLW/giphy.gif)
+
 ### Step 3: Push the repo to GitHub
 
 Create the repo on GitHub, add the remote, then push.
@@ -274,7 +271,7 @@ Open the deployed URL and refresh twice. You should see the timestamp change. Th
 
 If the page loads but CSS is missing, open DevTools → Network and look for a 404 on `styles.css`. In this plain HTML demo, that almost always means you uploaded the wrong folder, not that Pages is broken.
 
-## Deploying a built site with Actions (dist/build/public)
+## Deploying a built site with Actions
 
 Most real projects produce a build folder. The only change you make is what you upload.
 
@@ -299,57 +296,27 @@ The rest of the workflow stays the same. The only strict rule is that the upload
 
 ## Common Actions-based Pages failures
 
-| Symptom | What it usually means | Fix |
-|--------|------------------------|-----|
-| Workflow succeeds but Pages URL never changes | Pages Source is still set to branch deploy | Settings → Pages → Source → GitHub Actions |
-| Deploy step fails with permission/authorization errors | Missing Pages permissions | Add `pages: write` and `id-token: write` |
-| Page loads but assets 404 | Wrong upload folder or wrong base path | Upload the correct build folder and re-check base paths |
-| Build works locally but fails in Actions | Your local environment is hiding an assumption | Pin Node version and make build deterministic |
+| Symptom | Likely cause | Fix |
+|---------|--------------|-----|
+| Workflow passes, site does not update | Pages source still set to “Deploy from a branch” | Go to Settings → Pages → Source → GitHub Actions |
+| `Error: Could not retrieve token` | Missing `id-token: write` | Add it under `permissions` |
+| `Error: Failed to create deployment` | Missing `pages: write` | Add it under `permissions` |
+| 404 on CSS or JS after deploy | `path` points to the wrong folder | Confirm it matches your build output |
+| Page stays blank | Base path mismatch | Set `homepage` or equivalent for your build tool |
 
-This is still the same story as the branch method. Pages is simple. Your paths and your build output are what make it feel complex.
-
-## Verify it worked
-
-A correct deployment has three properties. The root URL loads. Refreshing the page does not break routing. Assets load without 404 errors. If those are true, your GitHub Pages deployment is complete.
-
-## Common failure patterns
-
-A blank page with red console errors is a wrong base path. A 404 at the Pages URL is a branch or settings issue. An old version showing after a successful deploy is browser caching. None of these require guesswork. Each maps directly to one of the steps above.
-
-## Why this feels harder than it is
-
-GitHub Pages itself is simple. The confusion comes from modern front-end tools defaulting to `/` as the base path, while GitHub Pages requires `/repo-name/`. Once you align those two, the rest is mechanical.
-
-You are not configuring a server. You are not managing infrastructure. You are just building files and telling GitHub which branch to serve. That’s all that’s happening.
+![Inspecting workflow logs](https://media.giphy.com/media/3o7aD9hC6GgT3KfX2k/giphy.gif)
 
 {/* visual-break:github-pages-deployments-confusing:2 */}
-![Troubleshooting checkpoint illustration for this section.](/assets/visuals/blog/github-pages-deployments-confusing-break-2.png)
+![Verification and access checkpoint illustration for this section.](/assets/visuals/blog/github-pages-deployments-confusing-break-2.png)
 
 ## Closing
 
-If you set the base path, build locally, push the build folder to `gh-pages`, and enable Pages in repo settings, your deployment will work. Every time. If it doesn’t, one of those four steps is wrong, not GitHub Pages itself.
+GitHub Pages is not complicated once you respect the base path and the deployment source. Whether you use a `gh-pages` branch or a GitHub Actions workflow, the same rule applies: your build output must know where it will live, and you must confirm the live URL actually serves the files you expect.
 
-{/* auto-enhancement:voice-start */}
+If you take one thing from this post, take the verification step. Open DevTools. Check for 404s. Refresh until the timestamp proves you are looking at the new build. That single habit will save you hours of confusion.
 
-## Personal Build Reflection
+## Keep reading
 
-This guide reflects how I actually execute work when the goal is frontend delivery quality, accessibility, and clear user-facing behavior.
-
-I prefer explicit checklists over vague advice because that is what keeps delivery stable when timelines are tight.
-
-Use the steps as a baseline, then annotate your own environment differences as you go.
-
-{/* auto-enhancement:voice-end */}
-
-{/* auto-enhancement:links-start */}
-
-## Continue Reading in This DevOps Series
-
-If you want to go deeper on this topic cluster, these are the best next reads:
-
-- [GitHub Actions Basics: One CI Check You Can Trust](/github-actions-aws/)
 - [Service Worker Held My Site Hostage: How I Removed It](/service-worker-held-site-hostage/)
-- [Interactive Portfolio Basics: Keep It Fun and Still Clear](/interactive-portfolios-recruiter-expectations/)
-
-{/* auto-enhancement:links-end */}
-
+- [Gatsby Nav Bar Haunted: Fixing a Stuck Dropdown](/gatsby-nav-bar-haunted/)
+- [How I Learn by Doing: A Repeatable Mini Project Loop](/how-i-learn-by-doing/)

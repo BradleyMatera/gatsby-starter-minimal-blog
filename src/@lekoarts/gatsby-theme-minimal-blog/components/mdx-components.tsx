@@ -56,6 +56,21 @@ const Tip: React.FC<TipProps> = ({ children }) => (
   </div>
 );
 
+type ImageProps = React.ImgHTMLAttributes<HTMLImageElement>;
+
+const AccessibleImage: React.FC<ImageProps> = ({ alt, className, loading, decoding, ...props }) => {
+  const hasAlt = typeof alt === "string" && alt.trim().length > 0;
+  return (
+    <img
+      alt={alt || ""}
+      loading={loading ?? "lazy"}
+      decoding={decoding ?? "async"}
+      className={joinClasses("mdx-image", !hasAlt ? "mdx-image--missing-alt" : undefined, className)}
+      {...props}
+    />
+  );
+};
+
 type ParagraphProps = React.HTMLAttributes<HTMLParagraphElement>;
 
 const BLOCK_LEVEL_TAGS = new Set([
@@ -125,6 +140,7 @@ const components = {
   h6: H6,
   a: Link,
   p: Paragraph,
+  img: AccessibleImage,
   Callout,
   Aside,
   Tip,

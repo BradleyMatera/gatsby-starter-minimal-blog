@@ -7,31 +7,28 @@ description: "A practical guide to building an interactive portfolio that still 
 theme: "Portfolio"
 ---
 
-
 Portfolios should be readable first and interactive second. Not because interaction is bad, but because the person viewing your site is usually scanning, not exploring. If the first ten seconds is motion, hidden panels, and clever transitions, you are making your best content harder to access.
 
-What I actually mean by “interactive portfolio” is simple. It is a normal portfolio that still works as plain HTML, and then you add one or two small interactions that make it feel alive without hiding the important parts. If you can turn off JavaScript and still understand who you are, what you built, and how to contact you, you are in a good spot.
+What I actually mean by "interactive portfolio" is simple. It is a normal portfolio that still works as plain HTML, and then you add one or two small interactions that make it feel alive without hiding the important parts. If you can turn off JavaScript and still understand who you are, what you built, and how to contact you, you are in a good spot.
 
 ![Recruiter scanning fast](https://media.giphy.com/media/CLvo7qdosBBHG/giphy.gif)
 
-## The promise
+## What this guide builds
 
 This guide builds one small interactive section the safe way. You will end with a page that scans quickly, still has personality, and has an interaction that does not break accessibility or bury your content.
 
-Here’s the standard I use: a recruiter should be able to answer three questions without clicking anything. Who is this person. What have they built. How do I contact them. If those answers require a toggle, a tab, or a hover effect, the structure is wrong.
+Here is the standard I use: a recruiter should be able to answer three questions without clicking anything. Who is this person. What have they built. How do I contact them. If those answers require a toggle, a tab, or a hover effect, the structure is wrong.
 
 {/* visual-break:interactive-portfolios:1 */}
 ![Project layout checkpoint illustration for this section.](/assets/visuals/blog/interactive-portfolios-break-1.png)
 
-## What counts as “safe” interaction
+## What counts as "safe" interaction
 
-Safe interaction is interaction that adds convenience or flavor, not interaction that gates information. A theme toggle is safe because it does not hide your projects. A “show more details” panel is usually safe if the summary is still visible. A filter for projects can be safe if the full list is still reachable and nothing becomes impossible to find.
+Safe interaction is interaction that adds convenience or flavor, not interaction that gates information. A theme toggle is safe because it does not hide your projects. A "show more details" panel is usually safe if the summary is still visible. A filter for projects can be safe if an "All" view exists and nothing disappears permanently.
 
-Unsafe interaction is anything that replaces the readable base. If your Projects section is only visible after a tab click, or your contact info is inside an accordion, you are betting your entire portfolio on someone choosing to interact. Most people won’t.
+Unsafe interaction is anything that replaces the readable base. If your Projects section is only visible after a tab click, or your contact info is inside an accordion, you are betting your entire portfolio on someone choosing to interact. Most people will not.
 
-## Start to finish
-
-### Step 1: Build the readable base first
+## Build the readable base first
 
 Create a folder and make a single HTML file. This is intentionally plain because the whole point is making sure the content is readable without styling or scripts.
 
@@ -51,7 +48,7 @@ File: `index.html`
 
     <header class="site-header">
       <h1>Bradley Matera</h1>
-      <p>Systems minded builder. I ship small demos and keep them readable.</p>
+      <p>Systems-minded builder. I ship small demos and keep them readable.</p>
 
       <nav aria-label="Primary">
         <a href="#projects">Projects</a>
@@ -79,7 +76,7 @@ File: `index.html`
 
       <section id="about" aria-labelledby="about-title">
         <h2 id="about-title">About</h2>
-        <p>I care about repeatable builds, clear structure, and projects that don’t fall apart once they are deployed. I would rather have one clean interaction that works everywhere than five effects that look good only on my machine.</p>
+        <p>I care about repeatable builds, clear structure, and projects that do not fall apart once they are deployed. I would rather have one clean interaction that works everywhere than five effects that look good only on my machine.</p>
       </section>
 
       <section id="contact" aria-labelledby="contact-title">
@@ -93,9 +90,9 @@ File: `index.html`
 
 At this point, open the file in a browser and do one boring check that matters. Hit Tab until the skip link appears, press Enter, and confirm focus jumps into the main content. If the page is readable and the skip link works, the foundation is solid.
 
-### Step 2: Add one interaction without hiding core content
+## Add one interaction without hiding core content
 
-The safest first interaction is a detail panel that is clearly “extra” and does not contain anything essential. The Projects list stays visible. The interaction simply gives a way to expand optional context.
+The safest first interaction is a detail panel that is clearly "extra" and does not contain anything essential. The Projects list stays visible. The interaction simply gives a way to expand optional context.
 
 Add this section right after the Projects list.
 
@@ -130,13 +127,13 @@ Add this section right after the Projects list.
 </script>
 ```
 
-This is the difference between “interaction” and “UI trick.” The content exists in the DOM. The button toggles visibility, and the ARIA attributes stay honest so assistive tech understands the state change.
+This is the difference between "interaction" and "UI trick." The content exists in the DOM. The button toggles visibility, and the ARIA attributes stay honest so assistive tech understands the state change.
 
 ![Toggling UI](https://media.giphy.com/media/Ws6T5PN7wHv3cY8xy8/giphy.gif)
 
 Now verify it like a normal person. Click the button. Confirm the list appears. Click again. Confirm it hides. Then hit Tab and confirm the button is reachable by keyboard and still works when you activate it.
 
-### Step 3: Add minimal styling that improves scanning
+## Add minimal styling that improves scanning
 
 Most portfolios get worse when styling becomes the main event. Keep the typography and spacing clean first. Effects can wait.
 
@@ -208,15 +205,15 @@ Reload the page and do the same scan test again. Can you read the header, see Pr
 
 ## The interaction rules I follow
 
-When people say “make it interactive,” they usually mean “make it feel alive.” That is fair. The problem is that most interactive ideas also hide content. The easiest way to avoid that trap is to keep a clear boundary between what must be visible and what can be optional.
+When people say "make it interactive," they usually mean "make it feel alive." That is fair. The problem is that most interactive ideas also hide content. The easiest way to avoid that trap is to keep a clear boundary between what must be visible and what can be optional.
 
 Below is a simple reference table. It is not theory. It is just a way to decide whether an idea is helping or harming the scan experience.
 
 | Interaction | Usually safe | Usually risky | Why it matters |
 |---|---|---|---|
-| Theme toggle | ✅ | ❌ | Doesn’t hide content, just changes presentation |
-| “Show more details” below a summary | ✅ | ❌ | Keeps the scan path intact |
-| Project filtering | ✅ | ⚠️ | Safe if an “All” view exists and nothing disappears permanently |
+| Theme toggle | ✅ | ❌ | Does not hide content, just changes presentation |
+| "Show more details" below a summary | ✅ | ❌ | Keeps the scan path intact |
+| Project filtering | ✅ | ⚠️ | Safe if an "All" view exists and nothing disappears permanently |
 | Hover-only reveals | ❌ | ✅ | Hover does not exist on touch devices and often hides important info |
 | Tabs for core sections | ❌ | ✅ | Forces clicks to discover basic content |
 | Auto-animations on load | ⚠️ | ⚠️ | Can be fine, but it can also distract from scanning |
@@ -235,40 +232,21 @@ Third, readability without JavaScript. Turn off scripts or use a browser extensi
 
 ## The part recruiters actually care about
 
-Most reviewers are not judging your animation skills. They are judging whether you can communicate clearly, structure information, and ship something that doesn’t break. If your portfolio makes them work to find basic facts, you are losing points for the wrong reason.
+Most reviewers are not judging your animation skills. They are judging whether you can communicate clearly, structure information, and ship something that does not break. If your portfolio makes them work to find basic facts, you are losing points for the wrong reason.
 
 The fastest win is always the same: make the first screen boring in the best way. Name, role, one sentence, projects, contact. Then add the small interaction after the essentials are already visible.
 
 ![Fixing bugs](https://media.giphy.com/media/oaDcc0LTCuIAiGYrzn/giphy.gif)
 
-## Closing
-
 {/* visual-break:interactive-portfolios:2 */}
 ![Portfolio structure checkpoint illustration for this section.](/assets/visuals/blog/interactive-portfolios-break-2.png)
 
+## Closing
+
 A good interactive portfolio is not a playground. It is a readable page with one or two deliberate interactions that do not hide the important content. Build the readable base first, add one safe interaction, and verify it works with keyboard navigation. If you do that, the portfolio stays fun without becoming a puzzle.
 
-{/* auto-enhancement:voice-start */}
-
-## Personal Build Reflection
-
-This guide reflects how I actually execute work when the goal is frontend delivery quality, accessibility, and clear user-facing behavior.
-
-I prefer explicit checklists over vague advice because that is what keeps delivery stable when timelines are tight.
-
-Use the steps as a baseline, then annotate your own environment differences as you go.
-
-{/* auto-enhancement:voice-end */}
-
-{/* auto-enhancement:links-start */}
-
-## Continue Reading in This Frontend Series
-
-If you want to go deeper on this topic cluster, these are the best next reads:
+## Keep reading
 
 - [Portfolio Case Studies: A Simple, Verifiable Template](/portfolio-case-studies/)
 - [Service Worker Held My Site Hostage: How I Removed It](/service-worker-held-site-hostage/)
 - [Sell Your Skills With One Small Project](/sell-your-skills-with-a-small-project/)
-
-{/* auto-enhancement:links-end */}
-

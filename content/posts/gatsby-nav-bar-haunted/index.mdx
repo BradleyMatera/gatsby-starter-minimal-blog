@@ -7,15 +7,15 @@ description: "A precise fix for a dropdown that stays open in a Gatsby navigatio
 theme: "Debugging"
 ---
 
-My nav dropdown stayed open when it should have closed. It felt haunted because the UI kept acting like it was still open even after I clicked somewhere else. The bug wasn’t styling. It wasn’t Gatsby. It was state that never got reset.
+My nav dropdown stayed open when it should have closed. It felt haunted because the UI kept acting like it was still open even after I clicked somewhere else. The bug was not styling. It was not Gatsby. It was state that never got reset.
 
-This post is a start-to-finish fix you can actually verify inside this repo. The goal is simple: when a dropdown is open, it must close when you click outside of it, and it must also close if the nav itself becomes hidden or collapsed. If either of those are missing, you get the classic “ghost menu” where state says open even though the user is done with it.
+This post is a start-to-finish fix you can actually verify inside this repo. The goal is simple: when a dropdown is open, it must close when you click outside of it, and it must also close if the nav itself becomes hidden or collapsed. If either of those are missing, you get the classic "ghost menu" where state says open even though the user is done with it.
 
-## What’s really happening
+## What is really happening
 
-A dropdown is not a DOM thing. In React it is almost always a boolean. If that boolean stays `true`, the dropdown stays “open” forever unless you explicitly change it back. Clicking outside does not magically update your state. React has no idea you want the menu closed unless you wire up an event that tells it.
+A dropdown is not a DOM thing. In React it is almost always a boolean. If that boolean stays `true`, the dropdown stays "open" forever unless you explicitly change it back. Clicking outside does not magically update your state. React has no idea you want the menu closed unless you wire up an event that tells it.
 
-The second half of the problem is visibility changes. If your nav collapses on mobile, or hides on scroll, or mounts and unmounts during route transitions, your dropdown state can survive in the wrong moment. That’s where it starts looking haunted. The UI is doing exactly what you told it to do, you just forgot to tell it when to stop.
+The second half of the problem is visibility changes. If your nav collapses on mobile, or hides on scroll, or mounts and unmounts during route transitions, your dropdown state can survive in the wrong moment. That is where it starts looking haunted. The UI is doing exactly what you told it to do, you just forgot to tell it when to stop.
 
 {/* visual-break:gatsby-nav-bar-haunted:1 */}
 ![Debugging process checkpoint illustration for this section.](/assets/visuals/blog/gatsby-nav-bar-haunted-break-1.png)
@@ -34,17 +34,17 @@ Start the dev server so you can verify every change as you make it.
 bun run dev
 ```
 
-If you’re using npm/yarn/pnpm, use whatever starts your Gatsby dev server. The important part is that you can reproduce the bug on demand.
+If you are using npm/yarn/pnpm, use whatever starts your Gatsby dev server. The important part is that you can reproduce the bug on demand.
 
 ## Reproduce the bug first
 
-Before fixing anything, reproduce it in the browser so you know exactly what “broken” looks like.
+Before fixing anything, reproduce it in the browser so you know exactly what "broken" looks like.
 
-Open the site, open the dropdown, and then click somewhere else on the page. If the dropdown stays open, or if it closes visually but the state is still stuck (you can usually tell because it reopens weirdly or won’t toggle correctly), you’re looking at the same class of bug.
+Open the site, open the dropdown, and then click somewhere else on the page. If the dropdown stays open, or if it closes visually but the state is still stuck (you can usually tell because it reopens weirdly or will not toggle correctly), you are looking at the same class of bug.
 
-Now collapse or hide the nav (mobile menu, scroll-hide behavior, whatever your setup is). If the dropdown state survives into the hidden nav state, you’ll see the menu behave out of sync when the nav returns.
+Now collapse or hide the nav (mobile menu, scroll-hide behavior, whatever your setup is). If the dropdown state survives into the hidden nav state, you will see the menu behave out of sync when the nav returns.
 
-That’s the baseline.
+That is the baseline.
 
 ## Start to finish
 
@@ -74,7 +74,7 @@ React.useEffect(() => {
 }, []);
 ```
 
-Now the critical part: the ref must be attached to the right DOM element. If you attach it to the wrong node, every click looks “outside” and the dropdown becomes unusable, or the outside click never registers and the dropdown never closes.
+Now the critical part: the ref must be attached to the right DOM element. If you attach it to the wrong node, every click looks "outside" and the dropdown becomes unusable, or the outside click never registers and the dropdown never closes.
 
 Make sure the dropdown container uses the ref:
 
@@ -88,11 +88,11 @@ Open the dropdown and click anywhere else on the page.
 
 Expected result: the dropdown closes immediately and reliably.
 
-If it fails, don’t guess. It is almost always one of these two issues: the `ref` is attached to the wrong element, or the dropdown content is rendered outside of that element (portals, absolute-positioned nodes rendered elsewhere, etc.). In this theme setup it is typically just the wrong element.
+If it fails, do not guess. It is almost always one of these two issues: the `ref` is attached to the wrong element, or the dropdown content is rendered outside of that element (portals, absolute-positioned nodes rendered elsewhere, etc.). In this theme setup it is typically just the wrong element.
 
 ### Step 2: Reset when the nav hides
 
-Outside click fixes the “I’m done with the dropdown” moment, but it doesn’t fix the “nav changed state” moment. If your nav hides or collapses, keeping dropdown open state around is a mistake. The dropdown should not exist as open when the nav is not visible.
+Outside click fixes the "I am done with the dropdown" moment, but it does not fix the "nav changed state" moment. If your nav hides or collapses, keeping dropdown open state around is a mistake. The dropdown should not exist as open when the nav is not visible.
 
 File:
 `src/@lekoarts/gatsby-theme-minimal-blog/components/navigation.tsx`
@@ -119,25 +119,25 @@ If it fails, the fix is not to tweak this effect. The fix is to confirm that `is
 
 ## Verify it worked
 
-You’re done when all three of these feel boring:
+You are done when all three of these feel boring:
 
 The dropdown closes when you click outside. The dropdown closes when the nav hides. The dropdown toggles normally without getting into a stuck half-state.
 
-If you want to be extra strict, do a full pass of “open dropdown → click outside → open dropdown again → collapse nav → expand nav → open dropdown again.” If that loop stays consistent, the bug is gone.
+If you want to be extra strict, do a full pass of "open dropdown → click outside → open dropdown again → collapse nav → expand nav → open dropdown again." If that loop stays consistent, the bug is gone.
 
 ## Why this bug keeps showing up
 
 This bug shows up because dropdowns are state machines pretending to be UI. A dropdown is either open or closed. If you do not define the transitions that lead back to closed, state will sit open forever. Outside click and visibility reset are just two transitions people forget to define.
 
-In Gatsby specifically, nav components often live across route transitions and layout changes. That means state can outlive the visual moment that created it. The fix is not Gatsby-specific. It is the same fix you’d ship in any React app.
+In Gatsby specifically, nav components often live across route transitions and layout changes. That means state can outlive the visual moment that created it. The fix is not Gatsby-specific. It is the same fix you would ship in any React app.
 
 ## Optional upgrades that are worth doing
 
 If you want to finish the job, there are two small upgrades that are actually useful.
 
-First, add Escape-to-close. This is a real usability win and it takes a few lines. Second, confirm focus behavior so keyboard users don’t get trapped in a hidden menu.
+First, add Escape-to-close. This is a real usability win and it takes a few lines. Second, confirm focus behavior so keyboard users do not get trapped in a hidden menu.
 
-I’m not including those changes here because the post is about the stuck dropdown bug, but if you’re already in this component, they’re worth the extra minute.
+I am not including those changes here because the post is about the stuck dropdown bug, but if you are already in this component, they are worth the extra minute.
 
 ## Related reference
 
@@ -148,29 +148,10 @@ I’m not including those changes here because the post is about the stuck dropd
 
 ## Closing
 
-Fix the close behavior first. Fancy styling can wait. A dropdown that can’t close is not a visual issue, it’s a state issue, and this is the smallest reliable set of transitions that keeps it sane.
+Fix the close behavior first. Fancy styling can wait. A dropdown that cannot close is not a visual issue, it is a state issue, and this is the smallest reliable set of transitions that keeps it sane.
 
-{/* auto-enhancement:voice-start */}
-
-## Personal Build Reflection
-
-I wrote this from my own build notes while focusing on frontend delivery quality, accessibility, and clear user-facing behavior.
-
-I keep this kind of post operational on purpose so another person, or future me, can rerun it without guessing where decisions came from.
-
-If you adapt this flow, track what you changed and why at each step so your final setup stays explainable.
-
-{/* auto-enhancement:voice-end */}
-
-{/* auto-enhancement:links-start */}
-
-## Continue Reading in This Frontend Series
-
-If you want to go deeper on this topic cluster, these are the best next reads:
+## Keep reading
 
 - [Service Worker Held My Site Hostage: How I Removed It](/service-worker-held-site-hostage/)
 - [Cognito Authentication With React: A Small, Verifiable Setup](/secure-authentication-cognito-react/)
 - [WebGPU Demo Honesty Audit: Make the Write Up Match the Repo](/making-triangle-webgpu-demo-match-reality/)
-
-{/* auto-enhancement:links-end */}
-
