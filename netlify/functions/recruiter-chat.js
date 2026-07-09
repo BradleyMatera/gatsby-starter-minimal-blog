@@ -1,5 +1,5 @@
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-1.5-pro';
+const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-pro';
 const KNOWLEDGE_URL = 'https://raw.githubusercontent.com/BradleyMatera/ProjectHub/master/data/recruiter-knowledge.json';
 const DEFAULT_TIMEOUT = 12000;
 const SESSION_TTL_MS = 1000 * 60 * 60 * 24 * 14;
