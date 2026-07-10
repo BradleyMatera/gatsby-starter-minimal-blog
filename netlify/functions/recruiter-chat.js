@@ -1,7 +1,5 @@
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-pro';
-const KNOWLEDGE_URL = 'https://raw.githubusercontent.com/BradleyMatera/ProjectHub/master/data/recruiter-knowledge.json';
-const DEFAULT_TIMEOUT = 12000;
+const CHAT_BACKEND_URL = process.env.CHAT_BACKEND_URL || 'https://projecthub-chat.bradleymatera.dev/api/chat';
+const DEFAULT_TIMEOUT = 14000;
 const SESSION_TTL_MS = 1000 * 60 * 60 * 24 * 14;
 const SESSION_MEMORY_LIMIT = 240;
 
@@ -152,156 +150,15 @@ async function fetchKnowledge() {
   }
 }
 
-function buildGeminiPrompt(knowledge, question, contextLines) {
-  const identity = knowledge?.identity || {};
-  const summary = knowledge?.summary || {};
-  const goals = knowledge?.goals || {};
-  const education = knowledge?.education || {};
-  const experience = knowledge?.experience || [];
-  const skills = knowledge?.skills || {};
-  const projects = knowledge?.projects || [];
-  const antiSlop = knowledge?.commonPatterns?.antiSlop || {};
-
-  const avoidWords = (antiSlop.avoidWords || []).join(', ');
-  const avoidPhrases = (antiSlop.avoidPhrases || []).join(', ');
-
-  const parts = [];
-  parts.push(`You are Bradley Matera's recruiter assistant. You answer naturally and conversationally, as if talking to a recruiter who is evaluating Bradley for a junior software engineering role.`);
-  parts.push(`CRITICAL RULES:`);
-  parts.push(`1. Use ONLY the verified facts below. Do NOT invent personal details, hobbies, food preferences, or facts not listed.`);
-  parts.push(`2. Answer in a friendly, professional tone. Write 1-3 complete sentences that sound human, not robotic.`);
-  parts.push(`3. If asked something not in the facts, say you don't have that detail and suggest a related recruiter topic you CAN answer.`);
-  parts.push(`4. Speak as an assistant ("Bradley has...", "He is..."), never as Bradley himself.`);
-  parts.push(`5. AVOID these AI-slop words: ${avoidWords || 'passionate, robust, leverage, synergy, dynamic, extensive expertise'}`);
-  parts.push(`6. AVOID these AI-slop phrases: ${avoidPhrases || 'Certainly, Absolutely, Great question, As an AI, I would be happy to'}`);
-  parts.push(`7. Keep answers SHORT. 1-3 sentences. Recruiters want quick facts, not essays.`);
-
-  if (contextLines && contextLines.length) {
-    parts.push('');
-    parts.push('CONVERSATION HISTORY (for context only):');
-    contextLines.forEach(line => parts.push(line));
-  }
-
-  parts.push('');
-  parts.push('VERIFIED PROFILE:');
-  parts.push(`Name: ${identity.name || 'Bradley Matera'}`);
-  parts.push(`Title: ${identity.title || 'Junior Software Engineer'}`);
-  parts.push(`Location: ${identity.location || 'Davis, Illinois'} (open to relocation)`);
-  if (education.degree) parts.push(`Education: ${education.degree} from ${education.school || 'Full Sail University'}${education.gpa ? `, GPA ${education.gpa}` : ''}`);
-  if (skills.languagesAndFrameworks) parts.push(`Skills: ${skills.languagesAndFrameworks.join(', ')}`);
-  if (skills.cloudAndInfrastructure) parts.push(`Cloud: ${skills.cloudAndInfrastructure.slice(0, 5).join(', ')}`);
-  if (goals.targetRoles) parts.push(`Target roles: ${goals.targetRoles.slice(0, 5).join(', ')}`);
-  if (summary.whoIAm) parts.push(`Summary: ${summary.whoIAm}`);
-  if (experience.length) {
-    parts.push('Experience:');
-    experience.slice(0, 4).forEach(e => parts.push(`- ${e.role} at ${e.company}: ${e.summary || ''}`));
-  }
-  if (projects.length) {
-    parts.push('Projects:');
-    projects.slice(0, 5).forEach(p => parts.push(`- ${p.name}: ${p.description}`));
-  }
-  parts.push('');
-  parts.push(`Recruiter asks: "${question}"`);
-  parts.push('Your answer:');
-
-  return parts.join('\n');
-}
-
-async function callGemini(prompt) {
-  if (!GEMINI_API_KEY) {
-    throw new Error('GEMINI_API_KEY not configured');
-  }
-
-  const modelsToTry = [
-    GEMINI_MODEL,
-    'gemini-1.5-flash-latest',
-    'gemini-1.5-flash',
-    'gemini-1.5-flash-001',
-    'gemini-1.5-pro-latest',
-    'gemini-1.5-pro',
-    'gemini-1.5-pro-001',
-    'gemini-pro'
-  ];
-
-  let lastError = null;
-
-  for (const model of modelsToTry) {
-    const url = `https://generativelanguage.googleapis.com/v1/models/${model}:generateContent?key=${GEMINI_API_KEY}`;
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), DEFAULT_TIMEOUT);
-
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        signal: controller.signal,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ role: 'user', parts: [{ text: prompt }] }],
-          generationConfig: {
-            temperature: 0.35,
-            maxOutputTokens: 150,
-            topP: 0.85,
-            topK: 40
-          },
-          safetySettings: [
-            { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
-            { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
-            { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
-            { category: 'HARM_CATEGORY_DANGEROUS_CONTENT', threshold: 'BLOCK_MEDIUM_AND_ABOVE' }
-          ]
-        })
-      });
-
-      clearTimeout(timer);
-
-      if (!response.ok) {
-        const text = await response.text();
-        lastError = new Error(`Gemini HTTP ${response.status}: ${text.slice(0, 200)}`);
-        console.warn(`Model ${model} failed:`, lastError.message);
-        continue;
-      }
-
-      const data = await response.json();
-      const candidate = data.candidates?.[0];
-      if (!candidate) {
-        lastError = new Error('No candidates in Gemini response');
-        continue;
-      }
-      if (candidate.finishReason === 'SAFETY') {
-        lastError = new Error('Gemini blocked response for safety');
-        continue;
-      }
-
-      console.log(`Model ${model} succeeded`);
-      const text = candidate.content?.parts?.[0]?.text || '';
-      return text.trim();
-    } catch (error) {
-      clearTimeout(timer);
-      lastError = error;
-      console.warn(`Model ${model} error:`, error.message);
+function memoryToHistory(memory) {
+  return (Array.isArray(memory) ? memory : []).reduce((acc, turn) => {
+    if (turn.role === 'user') {
+      acc.push({ user: turn.content, assistant: '' });
+    } else if (turn.role === 'assistant' && acc.length > 0) {
+      acc[acc.length - 1].assistant = turn.content;
     }
-  }
-
-  throw lastError || new Error('All Gemini model attempts failed');
-}
-
-function cleanGeminiReply(reply, knowledge) {
-  const cleaned = String(reply || '').trim().replace(/\s+/g, ' ');
-  const antiSlop = knowledge?.commonPatterns?.antiSlop || {};
-  const avoidWords = antiSlop.avoidWords || [];
-  const avoidPhrases = antiSlop.avoidPhrases || [];
-
-  const forbiddenRegex = new RegExp('\\b(' + avoidWords.join('|') + ')\\b', 'i');
-  const forbiddenPhrasesRegex = new RegExp('(' + avoidPhrases.join('|') + ')', 'i');
-  const inventedPersonal = /\b(pizza|sushi|burger|spaghetti|tacos|favorite food is|loves eating|hates eating|married|children|wife|husband|girlfriend|boyfriend|born in [0-9]{4}|age [0-9]{1,2})\b/i;
-  const looksIncomplete = /[,;:]$/i.test(cleaned);
-  const tooShort = cleaned.length < 10;
-  const tooLong = cleaned.length > 400;
-
-  if (tooShort || tooLong || forbiddenRegex.test(cleaned) || forbiddenPhrasesRegex.test(cleaned) || inventedPersonal.test(cleaned) || looksIncomplete) {
-    return null;
-  }
-  return cleaned;
+    return acc;
+  }, []).slice(-4);
 }
 
 exports.handler = async function handler(event) {
@@ -339,37 +196,37 @@ exports.handler = async function handler(event) {
   }
 
   try {
-    // Load knowledge + session memory
-    const [knowledge, memory] = await Promise.all([
-      fetchKnowledge(),
-      readSession(sessionId)
-    ]);
+    const memory = await readSession(sessionId);
+    const history = memoryToHistory(memory);
 
-    if (!knowledge) {
-      return json(503, { error: 'Knowledge file unavailable.', fallback: true }, headers);
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), DEFAULT_TIMEOUT);
+
+    const response = await fetch(CHAT_BACKEND_URL, {
+      method: 'POST',
+      signal: controller.signal,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message,
+        sessionId,
+        history
+      })
+    });
+
+    clearTimeout(timer);
+
+    if (!response.ok) {
+      throw new Error(`Backend HTTP ${response.status}`);
     }
 
-    // Build context lines from previous turns for the prompt
-    const contextLines = memory.length
-      ? memory.map(m => `${m.role === 'user' ? 'Recruiter' : 'Assistant'}: ${m.content}`)
-      : [];
-
-    const prompt = buildGeminiPrompt(knowledge, message, contextLines);
-    let reply = await callGemini(prompt);
-    let cleaned = cleanGeminiReply(reply, knowledge);
-
-    // Retry once if validation fails
-    if (!cleaned) {
-      const strictPrompt = prompt + '\n\nIMPORTANT: Your previous answer was rejected. Answer in exactly 1-2 short, natural sentences. Be direct and honest. Do not use buzzwords.';
-      reply = await callGemini(strictPrompt);
-      cleaned = cleanGeminiReply(reply, knowledge);
-    }
+    const data = await response.json();
+    const cleaned = String(data.reply || '').trim().slice(0, 600);
 
     if (!cleaned) {
       return json(200, {
         reply: 'I do not have that detail verified. I can answer questions about Bradley\'s projects, AWS background, skills, education, or how to contact him.',
         fallback: true,
-        source: 'gemini-fallback'
+        source: 'backend-fallback'
       }, headers);
     }
 
@@ -379,9 +236,11 @@ exports.handler = async function handler(event) {
 
     return json(200, {
       reply: cleaned,
-      model: GEMINI_MODEL,
-      generative: true,
-      source: 'gemini-flash',
+      provider: data.provider || 'backend',
+      model: data.model || 'unknown',
+      fallback: data.fallback || false,
+      generative: !data.fallback,
+      source: data.fallback ? 'backend-fallback' : 'backend-llm',
       memoryStore
     }, headers);
 
@@ -391,7 +250,7 @@ exports.handler = async function handler(event) {
     return json(200, {
       reply: 'I am having trouble generating an answer right now. I can still help with questions about Bradley\'s projects, skills, AWS experience, or contact info.',
       fallback: true,
-      source: 'gemini-error',
+      source: 'backend-error',
       error: error.message
     }, headers);
   }
