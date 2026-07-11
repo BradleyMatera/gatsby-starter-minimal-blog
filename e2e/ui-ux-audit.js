@@ -21,6 +21,7 @@ const pages = [
   { path: '/purchases/', name: 'purchases' },
   { path: '/contact/', name: 'contact' },
   { path: '/web-developer-durand-davis-illinois/', name: 'local-landing' },
+  { path: '/recruiter/', name: 'recruiter' },
   { path: '/404', name: '404' },
   { path: '/blog/custom-software-development-illinois/', name: 'blog-post' },
 ];
@@ -112,14 +113,23 @@ async function runThemeCheck(browser) {
   const page = await context.newPage();
   try {
     await page.goto(`${baseUrl}/`, { waitUntil: 'networkidle', timeout: 30000 });
-    const toggle = page.locator('button[aria-label="Toggle theme"], [data-testid="theme-toggle"], button:has-text("☀"):visible, button:has-text("🌙"):visible').first();
-    const before = await page.evaluate(() => document.documentElement.getAttribute('data-color-mode') || 'unknown');
+    const toggle = page.locator('button[aria-label="Open Web Designer Lab"]:visible').first();
+    const before = await page.evaluate(() => document.documentElement.getAttribute('data-theme') || 'unknown');
     if (await toggle.isVisible().catch(() => false)) {
       await toggle.click();
       await page.waitForTimeout(500);
-      const after = await page.evaluate(() => document.documentElement.getAttribute('data-color-mode') || 'unknown');
+      const panelVisible = await page.locator('.style-lab').isVisible().catch(() => false);
+      let after = before;
+      if (panelVisible) {
+        const darkBtn = page.locator('.style-lab__mode-btn', { hasText: 'Dark' }).first();
+        if (await darkBtn.isVisible().catch(() => false)) {
+          await darkBtn.click();
+          await page.waitForTimeout(500);
+          after = await page.evaluate(() => document.documentElement.getAttribute('data-theme') || 'unknown');
+        }
+      }
       await context.close();
-      return { before, after, toggleFound: true };
+      return { before, after, toggleFound: true, panelVisible };
     }
     await context.close();
     return { before, toggleFound: false };

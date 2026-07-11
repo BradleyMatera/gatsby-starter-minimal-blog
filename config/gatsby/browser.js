@@ -16,14 +16,8 @@ export const wrapRootElement = ({ element }) => {
 };
 
 export const onClientEntry = () => {
-  if (typeof window === "undefined") return;
-
-  // The StyleLabProvider will read localStorage and apply the stored style
-  // lab state in a hydration-safe useEffect. We only add the body class here
-  // for CSS backwards-compatibility.
-  requestAnimationFrame(() => {
-    document.body.classList.add("cyberpunk-theme");
-  });
+  // The StyleLabProvider reads localStorage and applies the stored style
+  // lab state in a hydration-safe useEffect; nothing else is needed here.
 };
 
 export const shouldUpdateScroll = ({ routerProps: { location }, prevRouterProps }) => {

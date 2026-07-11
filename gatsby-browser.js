@@ -1,1 +1,1 @@
-export { onClientEntry, wrapRootElement } from "./config/gatsby/browser";
+export { onClientEntry, wrapRootElement, onRouteUpdate, shouldUpdateScroll } from "./config/gatsby/browser";

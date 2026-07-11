@@ -30,6 +30,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "test": "node scripts/verify-main-route.js",
+    "test:e2e": "playwright test",
     "check": "npm run lint && npm run test",
     "postinstall": "if [ \"$NETLIFY\" = \"true\" ]; then npm rebuild sharp --platform=linux --arch=x64; fi"
   },

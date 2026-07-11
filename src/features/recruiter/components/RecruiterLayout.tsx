@@ -8,31 +8,50 @@ import { GlobalScrollEffects } from "../../../site/components";
 
 const PROJECTHUB_SCRIPT_URL = "https://bradleymatera.github.io/ProjectHub/ProjectHub.js";
 
+declare global {
+  interface Window {
+    __projectHubLoaded?: boolean;
+  }
+}
+
+// ProjectHub.js declares top-level `const`s in global scope, so it can only
+// be injected once per session. On subsequent recruiter visits we simply
+// unhide the existing widget; on unmount we hide it instead of removing it.
 const useProjectHubChat = () => {
   React.useEffect(() => {
     if (typeof document === "undefined") return;
-    if (document.getElementById("bradley-chat")) return;
 
-    const script = document.createElement("script");
-    script.src = PROJECTHUB_SCRIPT_URL;
-    script.async = true;
-    script.id = "projecthub-chat-script";
-
-    script.onload = () => {
-      document.dispatchEvent(new Event("DOMContentLoaded"));
-    };
-
-    document.body.appendChild(script);
+    const existingChat = document.getElementById("bradley-chat");
+    if (existingChat) {
+      existingChat.style.removeProperty("display");
+    } else if (!window.__projectHubLoaded) {
+      window.__projectHubLoaded = true;
+      const script = document.createElement("script");
+      script.src = PROJECTHUB_SCRIPT_URL;
+      script.async = true;
+      script.id = "projecthub-chat-script";
+      script.onload = () => {
+        // The widget initializes on DOMContentLoaded, which has already
+        // fired by the time this dynamically injected script loads.
+        document.dispatchEvent(new Event("DOMContentLoaded"));
+        // If the user navigated away while the script was downloading,
+        // keep the freshly created widget hidden.
+        if (!window.location.pathname.startsWith("/recruiter")) {
+          const chat = document.getElementById("bradley-chat");
+          if (chat) chat.style.setProperty("display", "none", "important");
+        }
+      };
+      script.onerror = () => {
+        // Allow a retry on the next visit if the network request failed.
+        window.__projectHubLoaded = false;
+        script.remove();
+      };
+      document.body.appendChild(script);
+    }
 
     return () => {
-      script.remove();
       const chat = document.getElementById("bradley-chat");
-      if (chat) chat.remove();
-      document.querySelectorAll("style").forEach((style) => {
-        if (style.textContent?.includes("#bradley-chat")) {
-          style.remove();
-        }
-      });
+      if (chat) chat.style.setProperty("display", "none", "important");
     };
   }, []);
 };
