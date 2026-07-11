@@ -111,6 +111,25 @@ const applyMode = (mode: StyleLabMode) => {
   if (body) body.style.colorScheme = mode;
 };
 
+const applyCurrentStyle = (nextState: StyleLabState, nextPathname: string) => {
+  if (typeof window === "undefined") return;
+  // The recruiter hub keeps its original dark styling and is untouched by
+  // the style lab.
+  if (isRecruiterPage(nextPathname)) {
+    clearVariablesFromRoot();
+    applyMode("dark");
+    return;
+  }
+  const baseVariables = nextState.activePresetId
+    ? getPresetById(nextState.activePresetId).variables
+    : nextState.mode === "light"
+    ? lightDefaultVariables
+    : darkDefaultVariables;
+  const mergedVariables = { ...baseVariables, ...nextState.customVariables };
+  applyMode(nextState.mode);
+  applyVariablesToRoot(mergedVariables);
+};
+
 export const StyleLabProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [state, setState] = React.useState<StyleLabState>(() => ({
     activePresetId: defaultPreset.id,
@@ -119,6 +138,9 @@ export const StyleLabProvider: React.FC<React.PropsWithChildren> = ({ children }
   }));
   const [hydrated, setHydrated] = React.useState(false);
   const [pathname, setPathname] = React.useState("");
+  // Guard that prevents the state-save effect from writing the default state
+  // back to localStorage before we have loaded the user's actual preference.
+  const hasLoaded = React.useRef(false);
 
   // Keep pathname in sync with the browser and with Gatsby client-side navigation.
   React.useEffect(() => {
@@ -133,41 +155,24 @@ export const StyleLabProvider: React.FC<React.PropsWithChildren> = ({ children }
     };
   }, []);
 
-  const applyCurrentStyle = React.useCallback(
-    (nextState: StyleLabState, nextPathname: string) => {
-      if (typeof window === "undefined") return;
-      // The recruiter hub keeps its original dark styling and is untouched by
-      // the style lab.
-      if (isRecruiterPage(nextPathname)) {
-        clearVariablesFromRoot();
-        applyMode("dark");
-        return;
-      }
-      const baseVariables = nextState.activePresetId
-        ? getPresetById(nextState.activePresetId).variables
-        : nextState.mode === "light"
-        ? lightDefaultVariables
-        : darkDefaultVariables;
-      const mergedVariables = { ...baseVariables, ...nextState.customVariables };
-      applyMode(nextState.mode);
-      applyVariablesToRoot(mergedVariables);
-    },
-    []
-  );
-
   React.useEffect(() => {
     const stored = loadStoredState();
     const initialPathname = typeof window !== "undefined" ? window.location.pathname : "";
     setState(stored);
     applyCurrentStyle(stored, initialPathname);
     setHydrated(true);
-  }, [applyCurrentStyle]);
+    hasLoaded.current = true;
+  }, []);
 
   React.useEffect(() => {
     if (!hydrated) return;
-    saveStoredState(state);
     applyCurrentStyle(state, pathname);
-  }, [state, hydrated, pathname, applyCurrentStyle]);
+    // Only persist state after the initial load from localStorage so we do not
+    // overwrite the user's saved preset with the React default state.
+    if (hasLoaded.current) {
+      saveStoredState(state);
+    }
+  }, [state, hydrated, pathname]);
 
   const applyPreset = React.useCallback((id: string) => {
     const preset = getPresetById(id);
