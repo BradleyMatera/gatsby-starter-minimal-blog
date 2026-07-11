@@ -18,7 +18,6 @@ const RecruiterHero: React.FC = () => {
           playsInline
           poster="/hero-amazon-2000.webp"
         >
-          <source src="/hero-recruiter.webm" type="video/webm" />
           <source src="/hero-recruiter.mp4" type="video/mp4" />
         </video>
         <div className="recruiter-hero__media-overlay" />
