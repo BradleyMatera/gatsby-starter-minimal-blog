@@ -10,10 +10,18 @@ const PROJECTHUB_SCRIPT_URL = "https://bradleymatera.github.io/ProjectHub/Projec
 
 const useProjectHubChat = () => {
   React.useEffect(() => {
+    if (typeof document === "undefined") return;
+    if (document.getElementById("bradley-chat")) return;
+
     const script = document.createElement("script");
     script.src = PROJECTHUB_SCRIPT_URL;
     script.async = true;
     script.id = "projecthub-chat-script";
+
+    script.onload = () => {
+      document.dispatchEvent(new Event("DOMContentLoaded"));
+    };
+
     document.body.appendChild(script);
 
     return () => {
