@@ -6,7 +6,32 @@ import { GlobalScrollEffects } from "../../../site/components";
    RecruiterLayout — Warm, editorial portal. No glass, no neon.
    -------------------------------------------------------------------------- */
 
+const PROJECTHUB_SCRIPT_URL = "https://bradleymatera.github.io/ProjectHub/ProjectHub.js";
+
+const useProjectHubChat = () => {
+  React.useEffect(() => {
+    const script = document.createElement("script");
+    script.src = PROJECTHUB_SCRIPT_URL;
+    script.async = true;
+    script.id = "projecthub-chat-script";
+    document.body.appendChild(script);
+
+    return () => {
+      script.remove();
+      const chat = document.getElementById("bradley-chat");
+      if (chat) chat.remove();
+      document.querySelectorAll("style").forEach((style) => {
+        if (style.textContent?.includes("#bradley-chat")) {
+          style.remove();
+        }
+      });
+    };
+  }, []);
+};
+
 const RecruiterLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  useProjectHubChat();
+
   return (
     <div className="recruiter-page" style={{ minHeight: "100vh" }}>
       {/* Scroll Progress Bar */}
@@ -89,12 +114,6 @@ const RecruiterLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
           © {new Date().getFullYear()} Bradley Matera · Recruiter Portal
         </div>
       </footer>
-
-      {/* ProjectHub AI chat widget */}
-      <script
-        src="https://bradleymatera.github.io/ProjectHub/ProjectHub.js"
-        defer
-      />
     </div>
   );
 };
