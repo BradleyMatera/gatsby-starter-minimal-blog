@@ -6,34 +6,22 @@ import "../../src/styles/site-transitions.css";
 import "../../src/styles/scroll-experience.css";
 import "../../src/styles/vertical-nav.css";
 import "../../src/styles/media.css";
+import "../../src/site/styles/style-lab.css";
+
+import * as React from "react";
+import { StyleLabProvider } from "../../src/site/components";
+
+export const wrapRootElement = ({ element }) => {
+  return React.createElement(StyleLabProvider, null, element);
+};
 
 export const onClientEntry = () => {
   if (typeof window === "undefined") return;
 
-  let storedThemeUiMode = null;
-  let storedTheme = null;
-
-  try {
-    storedThemeUiMode = window.localStorage.getItem("theme-ui-color-mode");
-  } catch (_) {}
-  try {
-    storedTheme = window.localStorage.getItem("bm-theme");
-  } catch (_) {}
-
-  const mode = storedThemeUiMode || storedTheme || "dark";
-
-  if (!storedThemeUiMode) {
-    try {
-      window.localStorage.setItem("theme-ui-color-mode", mode);
-    } catch (_) {}
-  }
-
-  // Defer DOM mutations until after React hydration to avoid mismatch errors.
+  // The StyleLabProvider will read localStorage and apply the stored style
+  // lab state in a hydration-safe useEffect. We only add the body class here
+  // for CSS backwards-compatibility.
   requestAnimationFrame(() => {
-    document.body.setAttribute("data-theme", mode);
-    document.documentElement.setAttribute("data-theme", mode);
-    document.documentElement.style.colorScheme = mode;
-    document.body.style.colorScheme = mode;
     document.body.classList.add("cyberpunk-theme");
   });
 };

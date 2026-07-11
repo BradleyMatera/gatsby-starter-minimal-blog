@@ -2,5 +2,6 @@
 export { default as GlobalScrollEffects } from "./GlobalScrollEffects";
 export { default as HeroBanner } from "./HeroBanner";
 export { default as NavSystemBadge } from "./NavSystemBadge";
-export { default as ThemeToggle } from "./ThemeToggle";
+export { default as StyleLabProvider } from "./StyleLabProvider";
+export { default as StyleLabToggle } from "./StyleLabToggle";
 export { default as ThreeScene } from "./ThreeScene";

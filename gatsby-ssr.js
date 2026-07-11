@@ -1,1 +1,1 @@
-export { onRenderBody } from "./config/gatsby/ssr";
+export { onRenderBody, wrapRootElement } from "./config/gatsby/ssr";

@@ -1,7 +1,7 @@
 // Gatsby theme shadow file for navigation chrome; shared site pieces live in src/site.
 import * as React from "react";
 import { Link } from "gatsby";
-import { ThemeToggle } from "../../../site/components";
+import { StyleLabToggle } from "../../../site/components";
 import {
   HomeIcon,
   BlogIcon,
@@ -164,7 +164,7 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
               })}
             </ul>
             <div className="vertical-nav__actions cyber-nav__actions">
-              <ThemeToggle />
+              <StyleLabToggle />
               <a href="/contact" className="vertical-nav__cta vertical-nav__cta--inline cyber-cta">
                 <span className="vertical-nav__cta-icon" aria-hidden="true">
                   <EmailIcon size={18} />
@@ -197,7 +197,7 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
             >
               Close
             </button>
-            <ThemeToggle />
+            <StyleLabToggle />
             <ul className="vertical-nav__list cyber-drawer__list">
               {coreLinks.map((item) => {
                 const label = item.slug === "/" ? "About Brad" : item.title;

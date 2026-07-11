@@ -1,5 +1,6 @@
 import React from "react";
 import { withPrefix } from "gatsby";
+import { StyleLabProvider } from "../../src/site/components";
 
 // Keep SSR style order aligned with gatsby-browser to avoid cascade mismatches.
 import "../../src/styles/global.css";
@@ -7,9 +8,14 @@ import "../../src/styles/site-chrome.css";
 import "../../src/styles/utilities.css";
 import "../../src/styles/vertical-nav.css";
 import "../../src/styles/media.css";
+import "../../src/site/styles/style-lab.css";
+
+export const wrapRootElement = ({ element }) => {
+  return <StyleLabProvider>{element}</StyleLabProvider>;
+};
 
 export const onRenderBody = ({ setHtmlAttributes, setHeadComponents }) => {
-  setHtmlAttributes({ lang: "en" });
+  setHtmlAttributes({ lang: "en", "data-theme": "light" });
   setHeadComponents([
     <link
       key="favicon-32"

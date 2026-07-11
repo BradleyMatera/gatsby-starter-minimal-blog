@@ -1,1 +1,1 @@
-export { onClientEntry } from "./config/gatsby/browser";
+export { onClientEntry, wrapRootElement } from "./config/gatsby/browser";
