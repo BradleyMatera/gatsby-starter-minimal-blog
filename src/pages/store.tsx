@@ -1,7 +1,8 @@
 import * as React from "react";
-import { Link } from "gatsby";
+import { Link, HeadFC } from "gatsby";
 import { Router, RouteComponentProps } from "@reach/router";
 import Layout from "../@lekoarts/gatsby-theme-minimal-blog/components/layout";
+import Seo from "../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import {
   AmazonCollectionTabs,
   collectionOrder,
@@ -339,3 +340,10 @@ const StorePage = () => {
 };
 
 export default StorePage;
+
+export const Head: HeadFC = () => (
+  <Seo
+    title="Store"
+    description="Browse and purchase software downloads, templates, and digital products by Bradley Matera."
+  />
+);

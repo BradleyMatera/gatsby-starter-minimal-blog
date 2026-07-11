@@ -17,15 +17,23 @@ const ThemeToggle: React.FC = () => {
     root.setAttribute("data-theme", next);
     body?.setAttribute("data-theme", next);
     root.style.colorScheme = next;
-    body.style.colorScheme = next;
-    window.localStorage.setItem(STORAGE_KEY, next);
-    window.localStorage.setItem(THEME_UI_KEY, next);
+    if (body) body.style.colorScheme = next;
+    try {
+      window.localStorage.setItem(STORAGE_KEY, next);
+      window.localStorage.setItem(THEME_UI_KEY, next);
+    } catch (_) {}
   };
 
   React.useEffect(() => {
     if (typeof window === "undefined") return;
-    const stored = window.localStorage.getItem(STORAGE_KEY) as Theme | null;
-    const themeUiStored = window.localStorage.getItem(THEME_UI_KEY) as Theme | null;
+    let stored: Theme | null = null;
+    let themeUiStored: Theme | null = null;
+    try {
+      stored = window.localStorage.getItem(STORAGE_KEY) as Theme | null;
+    } catch (_) {}
+    try {
+      themeUiStored = window.localStorage.getItem(THEME_UI_KEY) as Theme | null;
+    } catch (_) {}
     const resolvedMode = (colorMode as Theme | undefined) || stored || themeUiStored || "dark";
     applyTheme(resolvedMode);
 
@@ -44,7 +52,7 @@ const ThemeToggle: React.FC = () => {
   const theme = (colorMode as Theme | undefined) || "dark";
 
   return (
-    <button type="button" className="theme-toggle" onClick={toggle} aria-label="Toggle light and dark mode">
+    <button type="button" className="theme-toggle" onClick={toggle} aria-label="Toggle theme">
       <span className="theme-toggle__icon" aria-hidden="true">
         {theme === "light" ? <SunIcon size={20} /> : <MoonIcon size={20} />}
       </span>

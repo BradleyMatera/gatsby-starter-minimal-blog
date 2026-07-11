@@ -62,6 +62,7 @@ const LocalWebDeveloperPage = () => (
 
     <Section
       eyebrow="Local web development"
+      titleAs="h1"
       title={
         <>
           <strong>Web developer for Durand, Davis,</strong> and nearby Northwest Illinois

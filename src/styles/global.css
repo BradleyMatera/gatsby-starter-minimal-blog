@@ -115,9 +115,9 @@
   --color-text-inverse: #000000;
   --color-border: #2d2d2d;
   --color-border-strong: #3a3a3a;
-  --color-accent: #5f5f5f;
-  --color-accent-secondary: #737373;
-  --color-accent-hover: #7d7d7d;
+  --color-accent: #a3a3a3;
+  --color-accent-secondary: #b0b0b0;
+  --color-accent-hover: #c0c0c0;
   --color-accent-soft: rgba(163, 163, 163, 0.2);
   --color-link: #d4d4d4;
   --color-focus: #e5e5e5;
@@ -282,6 +282,17 @@ a {
   text-decoration: none;
   color: var(--color-accent);
   transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+/* Inline links inside text blocks must be underlined to be distinguishable without color */
+.mdx-paragraph a,
+.section-lead a,
+.section-subtitle a,
+.section-lead p > a,
+p > a[href] {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: var(--color-accent);
 }
 
 main a:visited {
@@ -3451,7 +3462,8 @@ body {
 
 .footer-cta a {
   color: var(--color-accent);
-  text-decoration: none;
+  text-decoration: underline;
+  text-underline-offset: 2px;
   font-weight: var(--weight-semibold);
 }
 

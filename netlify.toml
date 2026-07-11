@@ -4,6 +4,12 @@
   [build.environment]
     NODE_VERSION = "20"
 
+[dev]
+  command = "npm run develop"
+  targetPort = 8000
+  port = 8888
+  publish = "public"
+
 [functions]
   node_bundler = "esbuild"
   included_files = ["netlify/functions/downloads/**"]

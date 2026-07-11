@@ -34,6 +34,7 @@
     "postinstall": "if [ \"$NETLIFY\" = \"true\" ]; then npm rebuild sharp --platform=linux --arch=x64; fi"
   },
   "dependencies": {
+    "@babel/core": "^7.29.7",
     "@fontsource-variable/inter": "^5.1.0",
     "@fontsource-variable/space-grotesk": "^5.1.0",
     "@lekoarts/gatsby-theme-minimal-blog": "^6.2.1",
@@ -46,7 +47,7 @@
     "ajv": "^8.17.1",
     "ajv-keywords": "^5.1.0",
     "framer-motion": "^12.9.2",
-    "gatsby": "^5.13.6",
+    "gatsby": "^5.16.1",
     "gatsby-plugin-algolia": "^1.0.3",
     "gatsby-plugin-feed": "^5.13.1",
     "gatsby-plugin-google-analytics": "^5.14.0",
@@ -75,6 +76,8 @@
     "zustand": "^5.0.8"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
+    "@playwright/test": "^1.61.1",
     "@types/node": "^20.14.10",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
@@ -89,6 +92,7 @@
     "eslint-plugin-jsx-a11y": "^6.10.0",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^7.0.1",
+    "netlify-cli": "^26.2.0",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.1.4",
     "typescript": "^5.5.3",

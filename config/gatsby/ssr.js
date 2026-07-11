@@ -8,7 +8,8 @@ import "../../src/styles/utilities.css";
 import "../../src/styles/vertical-nav.css";
 import "../../src/styles/media.css";
 
-export const onRenderBody = ({ setHeadComponents }) => {
+export const onRenderBody = ({ setHtmlAttributes, setHeadComponents }) => {
+  setHtmlAttributes({ lang: "en" });
   setHeadComponents([
     <link
       key="favicon-32"

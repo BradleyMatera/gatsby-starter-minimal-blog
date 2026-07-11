@@ -226,6 +226,7 @@ const Blog = ({ posts }: MBBlogProps) => {
         className="blog-intro"
         eyebrow="Blog"
         title="Field notes, experiments, and project retrospectives"
+        titleAs="h1"
         disableReveal
         description={
           <>
