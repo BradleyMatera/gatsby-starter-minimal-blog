@@ -14,8 +14,9 @@ export const wrapRootElement = ({ element }) => {
   return <StyleLabProvider>{element}</StyleLabProvider>;
 };
 
-export const onRenderBody = ({ setHtmlAttributes, setHeadComponents }) => {
-  setHtmlAttributes({ lang: "en", "data-theme": "light" });
+export const onRenderBody = ({ pathname, setHtmlAttributes, setHeadComponents }) => {
+  const isRecruiter = pathname.startsWith("/recruiter") || pathname.startsWith("/roles");
+  setHtmlAttributes({ lang: "en", "data-theme": isRecruiter ? "dark" : "light" });
   setHeadComponents([
     <link
       key="favicon-32"

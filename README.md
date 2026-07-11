@@ -12,7 +12,7 @@ Production website and blog for Bradley Matera — a personal portfolio, blog, d
 |-------|-----------|
 | Static Site Generator | Gatsby 5 (React 18, TypeScript) |
 | Theme | `@lekoarts/gatsby-theme-minimal-blog` (shadowed) |
-| Styling | CSS custom properties, TailwindCSS, `theme-ui` |
+| Styling | CSS custom properties, TailwindCSS, `theme-ui` (live theme overrides via Web Designer Style Lab) |
 | Animations | GSAP + ScrollTrigger, Framer Motion, Three.js |
 | Content | MDX (posts and pages) |
 | Backend | Netlify serverless functions (esbuild) |
@@ -124,8 +124,15 @@ npm run products:seed:direct  # seed direct products
 - About page with certifications and timeline
 - Local SEO landing pages for Northwest Illinois
 
+### Dynamic Style Customization
+- Web Designer Style Lab accessible from the navigation
+- Preset themes: Brad's Default, Cyberpunk, Retro, Minimal, High Contrast, OLED Midnight, Forest, Ocean
+- Custom controls for colors, fonts, typography, and effects
+- Real-time updates via CSS custom properties and `localStorage` persistence
+- Replaces the previous light/dark theme toggle
+
 ### Accessibility & UX
-- Light/dark theme toggle with `localStorage` persistence
+- Web Designer Style Lab for customizable themes, with `localStorage` persistence
 - WCAG AA color contrast compliance
 - Skip-to-content link, ARIA labels, semantic HTML
 - `lang="en"` on all pages via SSR fallback

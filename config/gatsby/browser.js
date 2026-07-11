@@ -41,6 +41,14 @@ export const shouldUpdateScroll = ({ routerProps: { location }, prevRouterProps 
 };
 
 export const onRouteUpdate = ({ location }) => {
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(
+      new CustomEvent("gatsby-route-update", {
+        detail: { pathname: location.pathname, hash: location.hash },
+      })
+    );
+  }
+
   if (location.hash) {
     setTimeout(() => {
       const el = document.querySelector(location.hash);

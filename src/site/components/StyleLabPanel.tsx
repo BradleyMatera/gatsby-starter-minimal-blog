@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as ReactDOM from "react-dom";
 import { useStyleLab } from "./StyleLabProvider";
 import {
   fontOptions,
@@ -115,22 +116,15 @@ const getNumericValue = (value: string): number => {
 type SectionProps = {
   title: string;
   children: React.ReactNode;
-  defaultOpen?: boolean;
 };
 
-const Section: React.FC<SectionProps> = ({ title, children, defaultOpen = false }) => {
-  const [open, setOpen] = React.useState(defaultOpen);
+const Section: React.FC<SectionProps> = ({ title, children }) => {
   return (
     <div className="style-lab__section">
-      <button type="button" className="style-lab__section-title" onClick={() => setOpen(!open)} aria-expanded={open}>
+      <div className="style-lab__section-title style-lab__section-title--static">
         <span>{title}</span>
-        <span className={`style-lab__chevron ${open ? "style-lab__chevron--open" : ""}`} aria-hidden="true">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="6 9 12 15 18 9" />
-          </svg>
-        </span>
-      </button>
-      {open && <div className="style-lab__section-body">{children}</div>}
+      </div>
+      <div className="style-lab__section-body">{children}</div>
     </div>
   );
 };
@@ -288,7 +282,7 @@ const StyleLabPanel: React.FC<StyleLabPanelProps> = ({ isOpen, onClose }) => {
 
   if (!isOpen) return null;
 
-  return (
+  const panel = (
     <>
       <div className="style-lab__backdrop" onClick={onClose} aria-hidden="true" />
       <div className="style-lab" role="dialog" aria-modal="true" aria-labelledby="style-lab-title">
@@ -311,7 +305,7 @@ const StyleLabPanel: React.FC<StyleLabPanelProps> = ({ isOpen, onClose }) => {
         </div>
 
         <div className="style-lab__body">
-          <Section title="Presets" defaultOpen>
+          <Section title="Presets">
             <div className="style-lab__presets">
               {allPresets.map((preset) => (
                 <button
@@ -329,7 +323,7 @@ const StyleLabPanel: React.FC<StyleLabPanelProps> = ({ isOpen, onClose }) => {
             </div>
           </Section>
 
-          <Section title="Base mode" defaultOpen>
+          <Section title="Base mode">
             <div className="style-lab__mode-group">
               {(["light", "dark"] as StyleLabMode[]).map((m) => (
                 <button
@@ -389,6 +383,9 @@ const StyleLabPanel: React.FC<StyleLabPanelProps> = ({ isOpen, onClose }) => {
       </div>
     </>
   );
+
+  if (typeof document === "undefined" || !document.body) return null;
+  return ReactDOM.createPortal(panel, document.body);
 };
 
 export default StyleLabPanel;

@@ -162,9 +162,11 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
                   </li>
                 );
               })}
+              <li className="vertical-nav__item vertical-nav__item--style-lab">
+                <StyleLabToggle />
+              </li>
             </ul>
             <div className="vertical-nav__actions cyber-nav__actions">
-              <StyleLabToggle />
               <a href="/contact" className="vertical-nav__cta vertical-nav__cta--inline cyber-cta">
                 <span className="vertical-nav__cta-icon" aria-hidden="true">
                   <EmailIcon size={18} />

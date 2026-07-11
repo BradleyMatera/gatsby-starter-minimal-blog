@@ -77,6 +77,9 @@ const saveStoredState = (state: StyleLabState) => {
   } catch (_) {}
 };
 
+const isRecruiterPage = (pathname: string) =>
+  pathname.startsWith("/recruiter") || pathname.startsWith("/roles");
+
 const applyVariablesToRoot = (variables: StyleVariableOverrides) => {
   if (typeof document === "undefined") return;
   const root = document.documentElement;
@@ -87,6 +90,14 @@ const applyVariablesToRoot = (variables: StyleVariableOverrides) => {
     } else {
       root.style.removeProperty(key);
     }
+  });
+};
+
+const clearVariablesFromRoot = () => {
+  if (typeof document === "undefined") return;
+  const root = document.documentElement;
+  styleLabVariableKeys.forEach((key) => {
+    root.style.removeProperty(key);
   });
 };
 
@@ -107,33 +118,56 @@ export const StyleLabProvider: React.FC<React.PropsWithChildren> = ({ children }
     mode: defaultPreset.mode,
   }));
   const [hydrated, setHydrated] = React.useState(false);
+  const [pathname, setPathname] = React.useState("");
+
+  // Keep pathname in sync with the browser and with Gatsby client-side navigation.
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+    const updatePathname = () => setPathname(window.location.pathname);
+    updatePathname();
+    window.addEventListener("popstate", updatePathname);
+    window.addEventListener("gatsby-route-update", updatePathname);
+    return () => {
+      window.removeEventListener("popstate", updatePathname);
+      window.removeEventListener("gatsby-route-update", updatePathname);
+    };
+  }, []);
+
+  const applyCurrentStyle = React.useCallback(
+    (nextState: StyleLabState, nextPathname: string) => {
+      if (typeof window === "undefined") return;
+      // The recruiter hub keeps its original dark styling and is untouched by
+      // the style lab.
+      if (isRecruiterPage(nextPathname)) {
+        clearVariablesFromRoot();
+        applyMode("dark");
+        return;
+      }
+      const baseVariables = nextState.activePresetId
+        ? getPresetById(nextState.activePresetId).variables
+        : nextState.mode === "light"
+        ? lightDefaultVariables
+        : darkDefaultVariables;
+      const mergedVariables = { ...baseVariables, ...nextState.customVariables };
+      applyMode(nextState.mode);
+      applyVariablesToRoot(mergedVariables);
+    },
+    []
+  );
 
   React.useEffect(() => {
     const stored = loadStoredState();
+    const initialPathname = typeof window !== "undefined" ? window.location.pathname : "";
     setState(stored);
-    const baseVariables = stored.activePresetId
-      ? getPresetById(stored.activePresetId).variables
-      : stored.mode === "light"
-      ? lightDefaultVariables
-      : darkDefaultVariables;
-    const mergedVariables = { ...baseVariables, ...stored.customVariables };
-    applyMode(stored.mode);
-    applyVariablesToRoot(mergedVariables);
+    applyCurrentStyle(stored, initialPathname);
     setHydrated(true);
-  }, []);
+  }, [applyCurrentStyle]);
 
   React.useEffect(() => {
     if (!hydrated) return;
     saveStoredState(state);
-    const baseVariables = state.activePresetId
-      ? getPresetById(state.activePresetId).variables
-      : state.mode === "light"
-      ? lightDefaultVariables
-      : darkDefaultVariables;
-    const mergedVariables = { ...baseVariables, ...state.customVariables };
-    applyMode(state.mode);
-    applyVariablesToRoot(mergedVariables);
-  }, [state, hydrated]);
+    applyCurrentStyle(state, pathname);
+  }, [state, hydrated, pathname, applyCurrentStyle]);
 
   const applyPreset = React.useCallback((id: string) => {
     const preset = getPresetById(id);
