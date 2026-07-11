@@ -47,237 +47,10 @@ type HouseAd = {
   body: string;
   cta: string;
   href: string;
-  theme: "amazon" | "direct" | "portal" | "network";
-};
-
-type BannerPlacement = {
-  enabled?: boolean;
-  key?: string;
-  width?: number;
-  height?: number;
-  invoke_src?: string;
-};
-
-type NativeBannerPlacement = {
-  enabled?: boolean;
-  script_src?: string;
-  container_id?: string;
-};
-
-type PopunderPlacement = {
-  enabled?: boolean;
-  script_src?: string;
-};
-
-type SocialBarPlacement = {
-  enabled?: boolean;
-  script_src?: string;
-};
-
-type NetworkPlacements = {
-  banner_160x600?: BannerPlacement;
-  banner_300x250?: BannerPlacement;
-  native_banner?: NativeBannerPlacement;
-  popunder?: PopunderPlacement;
-  social_bar?: SocialBarPlacement;
-};
-
-const getFunctionsBase = () => {
-  if (typeof window === "undefined") return "";
-  const { hostname, port } = window.location;
-  if (hostname === "localhost" && port === "8000") return "http://localhost:8888";
-  return "";
-};
-
-const getFunctionsUrl = (path: string) => {
-  const base = getFunctionsBase();
-  return base ? `${base}/.netlify/functions/${path}` : `/.netlify/functions/${path}`;
+  theme: "amazon" | "direct" | "portal";
 };
 
 const isExternalHref = (href: string) => /^https?:\/\//i.test(href);
-
-const isAgentPreviewMode = () => {
-  if (typeof window !== "undefined") {
-    const host = window.location.hostname.toLowerCase();
-    if (
-      host.endsWith(".loca.lt") ||
-      host.endsWith(".trycloudflare.com") ||
-      host.endsWith(".localhost.run") ||
-      host.endsWith(".lhr.life")
-    ) return true;
-  }
-  return process.env.GATSBY_AGENT_PREVIEW === "1";
-};
-
-const loadOneScriptPerSession = ({
-  scriptSrc,
-  sessionKey,
-  dataAttr,
-}: {
-  scriptSrc: string | null | undefined;
-  sessionKey: string;
-  dataAttr: string;
-}) => {
-  if (typeof window === "undefined") return;
-  if (!scriptSrc) return;
-
-  try {
-    if (window.sessionStorage.getItem(sessionKey) === "1") return;
-  } catch (_error) {
-    // sessionStorage may be unavailable in hardened browser contexts.
-  }
-
-  const selector = `script[${dataAttr}][src="${scriptSrc}"]`;
-  const existing = document.querySelector(selector);
-  if (existing) return;
-
-  const script = document.createElement("script");
-  script.src = scriptSrc;
-  script.async = true;
-  script.crossOrigin = "anonymous";
-  script.setAttribute(dataAttr, "1");
-  document.body.appendChild(script);
-
-  try {
-    window.sessionStorage.setItem(sessionKey, "1");
-  } catch (_error) {
-    // Ignore storage errors and continue.
-  }
-};
-
-const getBannerSlotClassName = (placement: BannerPlacement) => {
-  if ((placement.width || 160) === 300 && (placement.height || 600) === 250) {
-    return "house-ad__banner-slot house-ad__banner-slot--300x250";
-  }
-  return "house-ad__banner-slot";
-};
-
-const AdsterraIframeUnit: React.FC<{ placement: BannerPlacement }> = ({ placement }) => {
-  const containerRef = React.useRef<HTMLDivElement | null>(null);
-
-  React.useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (!containerRef.current) return;
-    if (!placement.enabled || !placement.key || !placement.invoke_src) return;
-
-    let disposed = false;
-    const container = containerRef.current;
-
-    const adWindow = window as Window & {
-      atOptions?: Record<string, unknown>;
-      __adsterraIframeQueue?: Promise<void>;
-    };
-
-    const loadUnit = () =>
-      new Promise<void>((resolve) => {
-        if (disposed) {
-          resolve();
-          return;
-        }
-
-        container.innerHTML = "";
-        adWindow.atOptions = {
-          key: placement.key,
-          format: "iframe",
-          height: placement.height || 600,
-          width: placement.width || 160,
-          params: {},
-        };
-
-        const invokeScript = document.createElement("script");
-        invokeScript.src = placement.invoke_src || "";
-        invokeScript.async = true;
-        invokeScript.crossOrigin = "anonymous";
-
-        const finish = () => resolve();
-        invokeScript.onload = finish;
-        invokeScript.onerror = finish;
-        container.appendChild(invokeScript);
-
-        // Avoid hanging the queue forever if the ad network script doesn't fire.
-        window.setTimeout(finish, 4000);
-      });
-
-    adWindow.__adsterraIframeQueue = (adWindow.__adsterraIframeQueue || Promise.resolve())
-      .then(loadUnit)
-      .catch(() => undefined);
-
-    return () => {
-      disposed = true;
-      container.innerHTML = "";
-    };
-  }, [placement]);
-
-  return (
-    <div className="house-ad house-ad--network house-ad--network-banner">
-      <span className="house-ad__eyebrow">Sponsored</span>
-      <div
-        ref={containerRef}
-        className={getBannerSlotClassName(placement)}
-      />
-    </div>
-  );
-};
-
-const AdsterraNativeBannerUnit: React.FC<{
-  placement: NativeBannerPlacement;
-  onNoFill?: () => void;
-}> = ({ placement, onNoFill }) => {
-  const containerRef = React.useRef<HTMLDivElement | null>(null);
-
-  React.useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (!containerRef.current) return;
-    if (!placement.enabled || !placement.script_src || !placement.container_id) return;
-
-    const container = containerRef.current;
-    container.innerHTML = "";
-    let hasCreative = false;
-
-    const nativeContainer = document.createElement("div");
-    nativeContainer.id = placement.container_id;
-    container.appendChild(nativeContainer);
-
-    const observer = new MutationObserver(() => {
-      if (nativeContainer.childElementCount > 0) {
-        hasCreative = true;
-      }
-    });
-    observer.observe(nativeContainer, { childList: true, subtree: true });
-
-    const script = document.createElement("script");
-    script.src = placement.script_src;
-    script.async = true;
-    script.setAttribute("data-cfasync", "false");
-    script.crossOrigin = "anonymous";
-    script.onerror = () => {
-      onNoFill?.();
-    };
-    container.appendChild(script);
-
-    const noFillTimeout = window.setTimeout(() => {
-      const hasRenderable =
-        hasCreative ||
-        Boolean(nativeContainer.querySelector("iframe, img, a[href], video, object, embed"));
-      if (!hasRenderable) {
-        onNoFill?.();
-      }
-    }, 8000);
-
-    return () => {
-      observer.disconnect();
-      window.clearTimeout(noFillTimeout);
-      container.innerHTML = "";
-    };
-  }, [placement, onNoFill]);
-
-  return (
-    <div className="house-ad house-ad--network house-ad--network-native">
-      <span className="house-ad__eyebrow">Sponsored</span>
-      <div ref={containerRef} className="house-ad__banner-slot house-ad__banner-slot--native" />
-    </div>
-  );
-};
 
 const inferPostTopic = (post: MBPostProps["post"]) => {
   const haystack = [
@@ -492,100 +265,20 @@ const buildHouseAds = (post: MBPostProps["post"]): HouseAd[] => {
     },
   ];
 
-  const contextual = contextualByTopic[topic] || contextualByTopic.general;
-  return [...contextual, ...evergreen];
+  const contextual = (contextualByTopic[topic] || contextualByTopic.general).slice(0, 2);
+  return [...contextual, ...evergreen.slice(0, 2)];
 };
 
 const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({ data, children }) => {
   const post = data?.post;
-  const agentPreviewMode = React.useMemo(() => isAgentPreviewMode(), []);
   const [tocItems, setTocItems] = React.useState<TocItem[]>([]);
-  const [networkAds, setNetworkAds] = React.useState<HouseAd[] | null>(null);
-  const [networkPlacements, setNetworkPlacements] = React.useState<NetworkPlacements | null>(null);
-  const [hideNativeBanner, setHideNativeBanner] = React.useState(false);
   const houseAds = React.useMemo(() => (post ? buildHouseAds(post) : []), [post]);
-  const postTopic = React.useMemo(() => (post ? inferPostTopic(post) : "general"), [post]);
   const readDifficulty = React.useMemo(() => inferReadDifficulty(post?.timeToRead), [post?.timeToRead]);
-  const activeAds = React.useMemo(() => {
-    const cardAds = Array.isArray(networkAds) ? networkAds : [];
-    return [...houseAds, ...cardAds].slice(0, 2);
-  }, [houseAds, networkAds]);
+  const activeAds = React.useMemo(() => houseAds.slice(0, 4), [houseAds]);
   const articleOutline = React.useMemo(
     () => tocItems.filter((item) => item.level === 2).slice(0, 6),
     [tocItems],
   );
-  const leftAds: HouseAd[] = [];
-  const rightAds = activeAds;
-
-  React.useEffect(() => {
-    if (!post || typeof window === "undefined") return;
-    if (agentPreviewMode) {
-      setNetworkAds([]);
-      setNetworkPlacements(null);
-      return;
-    }
-
-    let cancelled = false;
-
-    const loadNetworkAds = async () => {
-      try {
-        const qs = new URLSearchParams({
-          topic: postTopic,
-          slug: post.slug,
-        });
-        const res = await fetch(getFunctionsUrl(`get_blog_ads?${qs.toString()}`));
-        const data = await res.json();
-        if (!res.ok || !Array.isArray(data?.ads)) {
-          if (!cancelled) {
-            setNetworkAds([]);
-            setNetworkPlacements(null);
-          }
-          return;
-        }
-        if (!cancelled) {
-          setNetworkAds(data.ads as HouseAd[]);
-          setNetworkPlacements((data?.placements || null) as NetworkPlacements | null);
-        }
-      } catch (error) {
-        if (!cancelled) {
-          setNetworkAds([]);
-          setNetworkPlacements(null);
-        }
-      }
-    };
-
-    loadNetworkAds();
-    return () => {
-      cancelled = true;
-    };
-  }, [post, postTopic, agentPreviewMode]);
-
-  React.useEffect(() => {
-    setHideNativeBanner(false);
-  }, [networkPlacements?.native_banner?.script_src, networkPlacements?.native_banner?.container_id]);
-
-  React.useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (agentPreviewMode) return;
-    const popunderSrc = networkPlacements?.popunder?.enabled
-      ? networkPlacements.popunder.script_src
-      : null;
-    const socialBarSrc = networkPlacements?.social_bar?.enabled
-      ? networkPlacements.social_bar.script_src
-      : null;
-
-    loadOneScriptPerSession({
-      scriptSrc: popunderSrc,
-      sessionKey: "adsterra_popunder_loaded",
-      dataAttr: "data-adsterra-popunder",
-    });
-
-    loadOneScriptPerSession({
-      scriptSrc: socialBarSrc,
-      sessionKey: "adsterra_social_bar_loaded",
-      dataAttr: "data-adsterra-social-bar",
-    });
-  }, [networkPlacements, agentPreviewMode]);
 
   React.useEffect(() => {
     if (!post || typeof window === "undefined") return;
@@ -655,25 +348,7 @@ const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({ data,
             </div>
           </header>
 
-          <div className={`post-layout${leftAds.length === 0 ? " post-layout--no-left-ads" : ""}`}>
-            {leftAds.length > 0 ? (
-              <aside className="house-ads house-ads--left" aria-label="Promoted links">
-                {leftAds.map((ad) => (
-                  <a
-                    key={ad.id}
-                    className={`house-ad house-ad--${ad.theme}`}
-                    href={ad.href}
-                    target={isExternalHref(ad.href) ? "_blank" : undefined}
-                    rel={isExternalHref(ad.href) ? "sponsored noopener noreferrer" : undefined}
-                  >
-                    <span className="house-ad__eyebrow">{ad.label}</span>
-                    <span className="house-ad__title">{ad.title}</span>
-                    <span className="house-ad__body">{ad.body}</span>
-                    <span className="house-ad__cta">{ad.cta}</span>
-                  </a>
-                ))}
-              </aside>
-            ) : null}
+          <div className="post-layout post-layout--no-left-ads">
             <section className="post-content" itemProp="articleBody">
               {articleOutline.length > 0 ? (
                 <section className="article-outline" aria-label="What this article covers">
@@ -707,39 +382,25 @@ const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({ data,
                   </nav>
                 </div>
               ) : null}
-              {!agentPreviewMode ? (
-                <details className="sponsored-panel">
-                  <summary>Sponsored tools and downloads</summary>
-                  <div className="house-ads house-ads--right" aria-label="Promoted links">
-                    {networkPlacements?.banner_160x600?.enabled ? (
-                      <AdsterraIframeUnit placement={networkPlacements.banner_160x600} />
-                    ) : null}
-                    {networkPlacements?.banner_300x250?.enabled ? (
-                      <AdsterraIframeUnit placement={networkPlacements.banner_300x250} />
-                    ) : null}
-                    {networkPlacements?.native_banner?.enabled && !hideNativeBanner ? (
-                      <AdsterraNativeBannerUnit
-                        placement={networkPlacements.native_banner}
-                        onNoFill={() => setHideNativeBanner(true)}
-                      />
-                    ) : null}
-                    {rightAds.map((ad) => (
-                      <a
-                        key={ad.id}
-                        className={`house-ad house-ad--${ad.theme}`}
-                        href={ad.href}
-                        target={isExternalHref(ad.href) ? "_blank" : undefined}
-                        rel={isExternalHref(ad.href) ? "sponsored noopener noreferrer" : undefined}
-                      >
-                        <span className="house-ad__eyebrow">{ad.label}</span>
-                        <span className="house-ad__title">{ad.title}</span>
-                        <span className="house-ad__body">{ad.body}</span>
-                        <span className="house-ad__cta">{ad.cta}</span>
-                      </a>
-                    ))}
-                  </div>
-                </details>
-              ) : null}
+              <div className="sponsored-panel" aria-label="Promoted links">
+                <p className="sponsored-panel__heading">Sponsored tools and downloads</p>
+                <div className="house-ads house-ads--right">
+                  {activeAds.map((ad: HouseAd) => (
+                    <a
+                      key={ad.id}
+                      className={`house-ad house-ad--${ad.theme}`}
+                      href={ad.href}
+                      target={isExternalHref(ad.href) ? "_blank" : undefined}
+                      rel={isExternalHref(ad.href) ? "sponsored noopener noreferrer" : undefined}
+                    >
+                      <span className="house-ad__eyebrow">{ad.label}</span>
+                      <span className="house-ad__title">{ad.title}</span>
+                      <span className="house-ad__body">{ad.body}</span>
+                      <span className="house-ad__cta">{ad.cta}</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
             </aside>
           </div>
 

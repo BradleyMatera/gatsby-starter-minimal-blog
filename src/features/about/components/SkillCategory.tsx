@@ -8,10 +8,11 @@ type SkillCategoryProps = {
 
 const SkillCategory = ({ icon, title, children }: SkillCategoryProps) => (
   <div className="skill-category">
+    <div className="skill-category__stripe" aria-hidden="true" />
     <div className="skill-category__glyph" aria-hidden="true">
       {icon}
     </div>
-    <div>
+    <div className="skill-category__body">
       <h3 className="skill-category__title">{title}</h3>
       <div className="skill-category__content">{children}</div>
     </div>
