@@ -19,8 +19,9 @@ const neonGlowMagenta = `0 0 8px rgba(212, 212, 212, 0.24), 0 0 16px rgba(140, 1
 
 const brandTheme = merge(tailwind, {
   config: {
-    initialColorModeName: `default`,
+    initialColorModeName: `light`,
     useColorSchemeMediaQuery: false,
+    useLocalStorage: false,
   },
   colors: {
     text: `#1f1b17`,

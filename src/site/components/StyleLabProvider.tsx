@@ -12,8 +12,6 @@ import {
 } from "../lib/styleLabPresets";
 
 const STORAGE_KEY = "bm-style-lab";
-const THEME_UI_KEY = "theme-ui-color-mode";
-const LEGACY_THEME_KEY = "bm-theme";
 
 export type StyleLabState = {
   activePresetId: string | null;
@@ -72,8 +70,6 @@ const saveStoredState = (state: StyleLabState) => {
   if (typeof window === "undefined") return;
   try {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    window.localStorage.setItem(THEME_UI_KEY, state.mode);
-    window.localStorage.setItem(LEGACY_THEME_KEY, state.mode);
   } catch (_) {}
 };
 
@@ -130,6 +126,8 @@ const applyCurrentStyle = (nextState: StyleLabState, nextPathname: string) => {
   applyVariablesToRoot(mergedVariables);
 };
 
+let __activeProvider: Symbol | null = null;
+
 export const StyleLabProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [state, setState] = React.useState<StyleLabState>(() => ({
     activePresetId: defaultPreset.id,
@@ -138,9 +136,23 @@ export const StyleLabProvider: React.FC<React.PropsWithChildren> = ({ children }
   }));
   const [hydrated, setHydrated] = React.useState(false);
   const [pathname, setPathname] = React.useState("");
-  // Guard that prevents the state-save effect from writing the default state
-  // back to localStorage before we have loaded the user's actual preference.
-  const hasLoaded = React.useRef(false);
+  // Guard that prevents the state-save effect from writing state that came
+  // from localStorage back to localStorage. This breaks the reset loop where
+  // a remounting provider could read its own default write and overwrite the
+  // user-selected preset.
+  const skipNextSave = React.useRef(false);
+  const isPrimary = React.useRef(false);
+
+  React.useEffect(() => {
+    if (!__activeProvider) {
+      __activeProvider = Symbol("style-lab-provider");
+      isPrimary.current = true;
+    }
+    return () => {
+      if (isPrimary.current) __activeProvider = null;
+    };
+  }, []);
+
 
   // Keep pathname in sync with the browser and with Gatsby client-side navigation.
   React.useEffect(() => {
@@ -156,64 +168,81 @@ export const StyleLabProvider: React.FC<React.PropsWithChildren> = ({ children }
   }, []);
 
   React.useEffect(() => {
+    if (!isPrimary.current) return;
     const stored = loadStoredState();
     const initialPathname = typeof window !== "undefined" ? window.location.pathname : "";
+    skipNextSave.current = true;
     setState(stored);
     applyCurrentStyle(stored, initialPathname);
     setHydrated(true);
-    hasLoaded.current = true;
   }, []);
 
+  // Re-apply styles when pathname changes (e.g. navigating to/from /recruiter/)
+  // but do NOT save to localStorage — the state hasn't changed, only the route.
   React.useEffect(() => {
-    if (!hydrated) return;
+    if (!hydrated || !isPrimary.current) return;
     applyCurrentStyle(state, pathname);
-    // Only persist state after the initial load from localStorage so we do not
-    // overwrite the user's saved preset with the React default state.
-    if (hasLoaded.current) {
-      saveStoredState(state);
-    }
   }, [state, hydrated, pathname]);
+
+  // Only persist to localStorage when state itself changes (user action).
+  React.useEffect(() => {
+    if (!hydrated || !isPrimary.current) return;
+    if (skipNextSave.current) {
+      skipNextSave.current = false;
+      return;
+    }
+    saveStoredState(state);
+  }, [state, hydrated]);
 
   const applyPreset = React.useCallback((id: string) => {
     const preset = getPresetById(id);
-    setState((prev) => ({
-      ...prev,
+    const nextState = {
       activePresetId: id,
       mode: preset.mode,
       customVariables: {},
-    }));
+    };
+    skipNextSave.current = false;
+    setState(nextState);
   }, []);
 
   const setCustomMode = React.useCallback((mode: StyleLabMode) => {
-    setState((prev) => ({
-      ...prev,
+    const nextState = {
+      ...state,
       mode,
       // Pressing Light/Dark drops the user into custom mode so the base
       // tokens actually change instead of being locked to a preset.
       activePresetId: null,
-    }));
-  }, []);
+    };
+    skipNextSave.current = false;
+    setState(nextState);
+  }, [state]);
 
   const setVariable = React.useCallback((key: string, value: string) => {
-    setState((prev) => ({
-      ...prev,
-      customVariables: { ...prev.customVariables, [key]: value },
-    }));
-  }, []);
+    const nextState = {
+      ...state,
+      customVariables: { ...state.customVariables, [key]: value },
+    };
+    skipNextSave.current = false;
+    setState(nextState);
+  }, [state]);
 
   const setVariables = React.useCallback((vars: StyleVariableOverrides) => {
-    setState((prev) => ({
-      ...prev,
-      customVariables: { ...prev.customVariables, ...vars },
-    }));
-  }, []);
+    const nextState = {
+      ...state,
+      customVariables: { ...state.customVariables, ...vars },
+    };
+    skipNextSave.current = false;
+    setState(nextState);
+  }, [state]);
 
   const resetAll = React.useCallback(() => {
-    setState({
+    const nextState = {
       activePresetId: defaultPreset.id,
       customVariables: {},
       mode: defaultPreset.mode,
-    });
+    };
+    skipNextSave.current = false;
+    setState(nextState);
   }, []);
 
   const value: StyleLabContextValue = React.useMemo(

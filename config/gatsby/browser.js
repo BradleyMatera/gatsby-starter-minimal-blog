@@ -16,8 +16,22 @@ export const wrapRootElement = ({ element }) => {
 };
 
 export const onClientEntry = () => {
-  // The StyleLabProvider reads localStorage and applies the stored style
-  // lab state in a hydration-safe useEffect; nothing else is needed here.
+  // The theme's gatsby-plugin-theme-ui injects a pre-body script that reads
+  // theme-ui-color-mode from localStorage and adds a theme-ui-{mode} class
+  // to <html>. This causes a hydration mismatch because SSR doesn't have that
+  // class. Remove it before React hydrates.
+  if (typeof document !== "undefined") {
+    const html = document.documentElement;
+    Array.from(html.classList).forEach((cls) => {
+      if (cls.startsWith("theme-ui-")) html.classList.remove(cls);
+    });
+  }
+  // Also clean up the legacy localStorage key so the script is a no-op on
+  // subsequent loads.
+  try {
+    window.localStorage.removeItem("theme-ui-color-mode");
+    window.localStorage.removeItem("bm-theme");
+  } catch (_) {}
 };
 
 export const shouldUpdateScroll = ({ routerProps: { location }, prevRouterProps }) => {
