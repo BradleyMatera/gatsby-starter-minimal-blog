@@ -35,6 +35,21 @@ const PROJECTS: Project[] = [
     demo: "https://bradleymatera.github.io/car-match/",
   },
   {
+    id: "projecthub",
+    name: "ProjectHub (Scout)",
+    tagline: "Embeddable AI recruiter assistant with grounded answers and free-tier LLM failover",
+    category: "AI Systems",
+    description:
+      "A vanilla JavaScript chat widget that drops onto any page with one script tag. Recruiters can ask about my projects, AWS experience, skills, target roles, and gaps. It builds deterministic grounded answers first, then routes open-ended questions through a network of free LLM providers with automatic failover. Includes safety checks, false-claim guards, per-tab memory, Think Mode self-improvement with an LLM-as-judge, and a live analytics dashboard.",
+    tech: ["JavaScript", "Node.js", "Express", "GCP e2-micro", "Caddy", "Vite", "Carbon Design System"],
+    metrics: [
+      { label: "Providers", value: "5+" },
+      { label: "Cost", value: "Free tier" },
+    ],
+    github: "https://github.com/BradleyMatera/ProjectHub",
+    demo: "https://bradleymatera.github.io/ProjectHub/",
+  },
+  {
     id: "pokedex",
     name: "Interactive Pokédex",
     tagline: "Gen 1 Pokémon search with build-time + client-side filtering",
