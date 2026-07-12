@@ -1,0 +1,59 @@
+:root[data-visual-theme="retrofuturism"] body {
+  background-image:
+    linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+:root[data-visual-theme="retrofuturism"] .section-surface,
+:root[data-visual-theme="retrofuturism"] .feature-card,
+:root[data-visual-theme="retrofuturism"] .build-card,
+:root[data-visual-theme="retrofuturism"] .snapshot-grid > li,
+:root[data-visual-theme="retrofuturism"] .article-outline,
+:root[data-visual-theme="retrofuturism"] .style-lab {
+  border: 1px solid rgba(0, 240, 255, 0.35) !important;
+  border-radius: 4px !important;
+  background: rgba(18, 13, 28, 0.85) !important;
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.12) !important;
+  backdrop-filter: blur(6px);
+}
+
+:root[data-visual-theme="retrofuturism"] .feature-card:hover,
+:root[data-visual-theme="retrofuturism"] .build-card:hover {
+  border-color: rgba(0, 240, 255, 0.7) !important;
+  box-shadow: 0 0 24px rgba(0, 240, 255, 0.22) !important;
+}
+
+:root[data-visual-theme="retrofuturism"] .section-title,
+:root[data-visual-theme="retrofuturism"] .hero-banner__title,
+:root[data-visual-theme="retrofuturism"] h1,
+:root[data-visual-theme="retrofuturism"] h2,
+:root[data-visual-theme="retrofuturism"] h3 {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+:root[data-visual-theme="retrofuturism"] button,
+:root[data-visual-theme="retrofuturism"] .hero-actions a,
+:root[data-visual-theme="retrofuturism"] .style-lab__mode-btn,
+:root[data-visual-theme="retrofuturism"] .style-lab__preset {
+  border: 1px solid rgba(0, 240, 255, 0.5) !important;
+  border-radius: 2px !important;
+  background: rgba(0, 240, 255, 0.08) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.75rem;
+}
+
+:root[data-visual-theme="retrofuturism"] button:hover,
+:root[data-visual-theme="retrofuturism"] .hero-actions a:hover {
+  background: rgba(0, 240, 255, 0.16) !important;
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.25) !important;
+}
+
+:root[data-visual-theme="retrofuturism"] .hero-banner {
+  border: 1px solid rgba(0, 240, 255, 0.4) !important;
+  border-radius: 4px !important;
+  background: linear-gradient(135deg, rgba(18, 13, 28, 0.95), rgba(0, 240, 255, 0.05)) !important;
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.12) !important;
+}

@@ -1,0 +1,74 @@
+:root[data-visual-theme="brutalism"] .section-surface,
+:root[data-visual-theme="brutalism"] .feature-card,
+:root[data-visual-theme="brutalism"] .build-card,
+:root[data-visual-theme="brutalism"] .snapshot-grid > li,
+:root[data-visual-theme="brutalism"] .article-outline,
+:root[data-visual-theme="brutalism"] .blog-card,
+:root[data-visual-theme="brutalism"] .style-lab {
+  border: 3px solid #000000 !important;
+  border-radius: 0 !important;
+  background: #ffffff !important;
+  box-shadow: 6px 6px 0 #000000 !important;
+}
+
+:root[data-visual-theme="brutalism"] .feature-card:hover,
+:root[data-visual-theme="brutalism"] .build-card:hover,
+:root[data-visual-theme="brutalism"] .blog-card:hover {
+  transform: translate(-3px, -3px) !important;
+  box-shadow: 9px 9px 0 #000000 !important;
+}
+
+:root[data-visual-theme="brutalism"] button,
+:root[data-visual-theme="brutalism"] .hero-actions a,
+:root[data-visual-theme="brutalism"] .style-lab__mode-btn,
+:root[data-visual-theme="brutalism"] .style-lab__preset,
+:root[data-visual-theme="brutalism"] .pagination-btn {
+  border: 3px solid #000000 !important;
+  border-radius: 0 !important;
+  background: #ffffff !important;
+  color: #000000 !important;
+  box-shadow: 4px 4px 0 #000000 !important;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+:root[data-visual-theme="brutalism"] button:hover,
+:root[data-visual-theme="brutalism"] .hero-actions a:hover,
+:root[data-visual-theme="brutalism"] .style-lab__mode-btn:hover,
+:root[data-visual-theme="brutalism"] .style-lab__preset:hover,
+:root[data-visual-theme="brutalism"] .pagination-btn:hover {
+  background: #ff0000 !important;
+  color: #ffffff !important;
+  box-shadow: 4px 4px 0 #000000 !important;
+}
+
+:root[data-visual-theme="brutalism"] .hero-banner {
+  border: 3px solid #000000 !important;
+  border-radius: 0 !important;
+  background: #ffffff !important;
+  box-shadow: 12px 12px 0 #000000 !important;
+}
+
+:root[data-visual-theme="brutalism"] .section-title,
+:root[data-visual-theme="brutalism"] .hero-banner__title,
+:root[data-visual-theme="brutalism"] h1,
+:root[data-visual-theme="brutalism"] h2,
+:root[data-visual-theme="brutalism"] h3 {
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+:root[data-visual-theme="brutalism"] .tag-badge,
+:root[data-visual-theme="brutalism"] .tag-pill,
+:root[data-visual-theme="brutalism"] .category-pill {
+  border: 2px solid #000000 !important;
+  border-radius: 0 !important;
+  background: #ff0000 !important;
+  color: #ffffff !important;
+}
+
+:root[data-visual-theme="brutalism"] .tag-badge:hover,
+:root[data-visual-theme="brutalism"] .tag-pill:hover,
+:root[data-visual-theme="brutalism"] .category-pill:hover {
+  background: #000000 !important;
+}

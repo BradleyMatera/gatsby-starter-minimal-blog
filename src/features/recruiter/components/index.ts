@@ -19,3 +19,8 @@ export { default as ObscuredContact } from "./ObscuredContact";
 export { default as PrivacyBanner } from "./PrivacyBanner";
 export { default as RolesExplorer } from "./RolesExplorer";
 export { default as ContributionsShowcase } from "./ContributionsShowcase";
+export { default as ProgressRail } from "./ProgressRail";
+export { default as TrackableSection } from "./TrackableSection";
+export { default as RecruiterCommandPalette } from "./RecruiterCommandPalette";
+export { default as RecruiterHero3D } from "./RecruiterHero3D";
+export { default as VoiceNavButton } from "./VoiceNavButton";

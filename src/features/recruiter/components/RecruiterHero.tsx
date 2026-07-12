@@ -1,6 +1,8 @@
 import * as React from "react";
 import { Link } from "gatsby";
 
+const RecruiterHero3D = React.lazy(() => import("./RecruiterHero3D"));
+
 /* --------------------------------------------------------------------------
    Recruiter Hero — Warm editorial hero with a background video/image layer.
    -------------------------------------------------------------------------- */
@@ -72,6 +74,12 @@ const RecruiterHero: React.FC = () => {
           <TrustBadge label="Cloud Support Trained" />
           <TrustBadge label="Open Source Contributor" />
         </div>
+      </div>
+
+      <div className="recruiter-hero__accent-3d" aria-hidden="true">
+        <React.Suspense fallback={<div className="recruiter-hero-3d" />}>
+          <RecruiterHero3D />
+        </React.Suspense>
       </div>
     </section>
   );

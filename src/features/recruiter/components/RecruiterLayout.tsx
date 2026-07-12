@@ -1,6 +1,10 @@
 import * as React from "react";
 import { Link } from "gatsby";
 import { GlobalScrollEffects } from "../../../site/components";
+import { RecruiterProgressProvider } from "../hooks/useRecruiterProgress";
+import ProgressRail from "./ProgressRail";
+import RecruiterCommandPalette from "./RecruiterCommandPalette";
+import VoiceNavButton from "./VoiceNavButton";
 
 /* --------------------------------------------------------------------------
    RecruiterLayout — Warm, editorial portal. No glass, no neon.
@@ -58,9 +62,26 @@ const useProjectHubChat = () => {
 
 const RecruiterLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   useProjectHubChat();
+  const [commandOpen, setCommandOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    if (typeof window === "undefined") return undefined;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setCommandOpen((open) => !open);
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
 
   return (
-    <div className="recruiter-page" style={{ minHeight: "100vh" }}>
+    <RecruiterProgressProvider>
+      <div className="recruiter-page" style={{ minHeight: "100vh" }}>
+      {/* Command Palette */}
+      <RecruiterCommandPalette isOpen={commandOpen} onClose={() => setCommandOpen(false)} />
+
       {/* Scroll Progress Bar */}
       <div className="scroll-progress" aria-hidden="true" />
 
@@ -118,10 +139,14 @@ const RecruiterLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
             >
               Resume
             </a>
+            <VoiceNavButton />
           </div>
         </div>
       </header>
 
+      <div className="recruiter-progress-rail__container">
+        <ProgressRail />
+      </div>
       <main>{children}</main>
 
       <footer className="recruiter-portal-footer">
@@ -142,6 +167,7 @@ const RecruiterLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
         </div>
       </footer>
     </div>
+    </RecruiterProgressProvider>
   );
 };
 

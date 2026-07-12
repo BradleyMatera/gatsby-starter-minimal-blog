@@ -4,6 +4,7 @@ import {
   defaultPreset,
   getPresetById,
   lightDefaultVariables,
+  resolvedMode,
   styleLabPresets,
   styleLabVariableKeys,
   type StyleLabMode,
@@ -97,14 +98,24 @@ const clearVariablesFromRoot = () => {
   });
 };
 
-const applyMode = (mode: StyleLabMode) => {
+const VISUAL_THEME_PRESETS = new Set(["neumorphism", "retrofuturism", "brutalism"]);
+
+const applyMode = (mode: StyleLabMode, activePresetId: string | null = null) => {
   if (typeof document === "undefined") return;
   const root = document.documentElement;
   const body = document.body;
-  root.setAttribute("data-theme", mode);
-  body?.setAttribute("data-theme", mode);
-  root.style.colorScheme = mode;
-  if (body) body.style.colorScheme = mode;
+  const resolved = resolvedMode(mode);
+  root.setAttribute("data-theme", resolved);
+  body?.setAttribute("data-theme", resolved);
+  root.style.colorScheme = resolved;
+  if (body) body.style.colorScheme = resolved;
+
+  const visualTheme = activePresetId && VISUAL_THEME_PRESETS.has(activePresetId) ? activePresetId : "";
+  if (visualTheme) {
+    root.setAttribute("data-visual-theme", visualTheme);
+  } else {
+    root.removeAttribute("data-visual-theme");
+  }
 };
 
 const applyCurrentStyle = (nextState: StyleLabState, nextPathname: string) => {
@@ -122,7 +133,7 @@ const applyCurrentStyle = (nextState: StyleLabState, nextPathname: string) => {
     ? lightDefaultVariables
     : darkDefaultVariables;
   const mergedVariables = { ...baseVariables, ...nextState.customVariables };
-  applyMode(nextState.mode);
+  applyMode(nextState.mode, nextState.activePresetId);
   applyVariablesToRoot(mergedVariables);
 };
 
@@ -183,6 +194,15 @@ export const StyleLabProvider: React.FC<React.PropsWithChildren> = ({ children }
     if (!hydrated || !isPrimary.current) return;
     applyCurrentStyle(state, pathname);
   }, [state, hydrated, pathname]);
+
+  // Listen for system color scheme changes when mode is "system" and re-apply.
+  React.useEffect(() => {
+    if (!hydrated || !isPrimary.current || state.mode !== "system") return;
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    const handler = () => applyMode("system");
+    media.addEventListener("change", handler);
+    return () => media.removeEventListener("change", handler);
+  }, [state.mode, hydrated]);
 
   // Only persist to localStorage when state itself changes (user action).
   React.useEffect(() => {

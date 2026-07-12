@@ -325,7 +325,7 @@ const StyleLabPanel: React.FC<StyleLabPanelProps> = ({ isOpen, onClose }) => {
 
           <Section title="Base mode">
             <div className="style-lab__mode-group">
-              {(["light", "dark"] as StyleLabMode[]).map((m) => (
+              {(["light", "dark", "system"] as StyleLabMode[]).map((m) => (
                 <button
                   key={m}
                   type="button"
@@ -333,11 +333,11 @@ const StyleLabPanel: React.FC<StyleLabPanelProps> = ({ isOpen, onClose }) => {
                   onClick={() => setCustomMode(m)}
                   aria-pressed={mode === m}
                 >
-                  {m === "light" ? "Light" : "Dark"}
+                  {m === "light" ? "Light" : m === "dark" ? "Dark" : "System"}
                 </button>
               ))}
             </div>
-            <p className="style-lab__hint">Switch the underlying base between light and dark tokens. Pressing a preset will switch to that preset's mode.</p>
+            <p className="style-lab__hint">Switch the underlying base between light and dark tokens. System follows your OS preference. Pressing a preset will switch to that preset's mode.</p>
           </Section>
 
           <Section title="Colors">

@@ -1,7 +1,7 @@
 // Gatsby theme shadow file for navigation chrome; shared site pieces live in src/site.
 import * as React from "react";
 import { Link } from "gatsby";
-import { StyleLabToggle } from "../../../site/components";
+import { StyleLabToggle, ThemeToggle } from "../../../site/components";
 import {
   HomeIcon,
   BlogIcon,
@@ -165,6 +165,9 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
               <li className="vertical-nav__item vertical-nav__item--style-lab">
                 <StyleLabToggle />
               </li>
+              <li className="vertical-nav__item vertical-nav__item--theme-toggle">
+                <ThemeToggle />
+              </li>
             </ul>
             <div className="vertical-nav__actions cyber-nav__actions">
               <a href="/contact" className="vertical-nav__cta vertical-nav__cta--inline cyber-cta">
@@ -199,6 +202,7 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
             >
               Close
             </button>
+            <ThemeToggle />
             <StyleLabToggle />
             <ul className="vertical-nav__list cyber-drawer__list">
               {coreLinks.map((item) => {

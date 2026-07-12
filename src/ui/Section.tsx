@@ -1,6 +1,7 @@
 import * as React from "react";
 import joinClasses from "../utils/joinClasses";
 import { useScrollReveal } from "../site/hooks/useScrollReveal";
+import { useReducedMotion } from "../utils/useReducedMotion";
 
 type SectionProps = {
   id?: string;
@@ -27,8 +28,9 @@ const Section = ({
   revealDelay = 0,
   children,
 }: SectionProps) => {
+  const reducedMotion = useReducedMotion();
   const { ref, revealed } = useScrollReveal(revealDelay, { initiallyVisible: true });
-  const isVisible = disableReveal || revealed;
+  const isVisible = disableReveal || revealed || reducedMotion;
   const sectionClassName = joinClasses(
     "section-shell",
     disableReveal ? undefined : "reveal-card",

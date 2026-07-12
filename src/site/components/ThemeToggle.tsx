@@ -1,61 +1,33 @@
-import React from "react";
-import { useColorMode } from "theme-ui";
+import * as React from "react";
+import { useStyleLab } from "./StyleLabProvider";
 import { SunIcon, MoonIcon } from "../icons";
 
-type Theme = "light" | "dark";
-
-const STORAGE_KEY = "bm-theme";
-const THEME_UI_KEY = "theme-ui-color-mode";
-
 const ThemeToggle: React.FC = () => {
-  const [colorMode, setColorMode] = useColorMode();
+  const { mode, setCustomMode } = useStyleLab();
 
-  const applyTheme = (next: Theme) => {
-    if (typeof document === "undefined") return;
-    const root = document.documentElement;
-    const body = document.body;
-    root.setAttribute("data-theme", next);
-    body?.setAttribute("data-theme", next);
-    root.style.colorScheme = next;
-    if (body) body.style.colorScheme = next;
-    try {
-      window.localStorage.setItem(STORAGE_KEY, next);
-      window.localStorage.setItem(THEME_UI_KEY, next);
-    } catch (_) {}
+  const cycleMode = () => {
+    const next = mode === "light" ? "dark" : mode === "dark" ? "system" : "light";
+    setCustomMode(next);
   };
 
-  React.useEffect(() => {
-    if (typeof window === "undefined") return;
-    let stored: Theme | null = null;
-    let themeUiStored: Theme | null = null;
-    try {
-      stored = window.localStorage.getItem(STORAGE_KEY) as Theme | null;
-    } catch (_) {}
-    try {
-      themeUiStored = window.localStorage.getItem(THEME_UI_KEY) as Theme | null;
-    } catch (_) {}
-    const resolvedMode = (colorMode as Theme | undefined) || stored || themeUiStored || "dark";
-    applyTheme(resolvedMode);
-
-    if (colorMode !== resolvedMode) {
-      setColorMode(resolvedMode);
-    }
-  }, [colorMode, setColorMode]);
-
-  const toggle = () => {
-    const current = (colorMode as Theme | undefined) || "dark";
-    const next: Theme = current === "light" ? "dark" : "light";
-    applyTheme(next);
-    setColorMode(next);
-  };
-
-  const theme = (colorMode as Theme | undefined) || "dark";
+  const label =
+    mode === "light" ? "Switch to dark mode" : mode === "dark" ? "Use system theme" : "Switch to light mode";
 
   return (
-    <button type="button" className="theme-toggle" onClick={toggle} aria-label="Toggle theme">
-      <span className="theme-toggle__icon" aria-hidden="true">
-        {theme === "light" ? <SunIcon size={20} /> : <MoonIcon size={20} />}
-      </span>
+    <button
+      type="button"
+      className="theme-toggle"
+      onClick={cycleMode}
+      aria-label={label}
+      title={label}
+    >
+      {mode === "light" ? (
+        <SunIcon size={20} />
+      ) : mode === "dark" ? (
+        <MoonIcon size={20} />
+      ) : (
+        <span style={{ fontSize: "0.75rem", fontWeight: 700 }}>OS</span>
+      )}
     </button>
   );
 };

@@ -22,6 +22,7 @@ type BlogCardProps = {
     tags?: BlogTag[];
   };
   showTags?: boolean;
+  featured?: boolean;
 };
 
 const formatExcerpt = (excerpt: string, maxLength = 180) => {
@@ -30,14 +31,14 @@ const formatExcerpt = (excerpt: string, maxLength = 180) => {
   return `${excerpt.substring(0, maxLength).trim()}…`;
 };
 
-const BlogCard = ({ post, showTags = true }: BlogCardProps) => {
+const BlogCard = ({ post, showTags = true, featured = false }: BlogCardProps) => {
   const { tagsPath, basePath } = useMinimalBlogConfig();
   const { ref, revealed } = useScrollReveal(0, { initiallyVisible: true });
 
   return (
     <article
       ref={ref as React.RefObject<HTMLElement>}
-      className={joinClasses("blog-card", "u-relative", "u-reveal", revealed ? "is-revealed" : undefined)}
+      className={joinClasses("blog-card", "u-relative", "u-reveal", featured ? "blog-card--featured" : "", revealed ? "is-revealed" : undefined)}
     >
       {/* Title - Top horizontal bar (F-pattern first fixation) */}
       <Link to={post.slug} className="blog-card__title">

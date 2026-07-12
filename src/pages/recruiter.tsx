@@ -20,28 +20,28 @@ import {
   PrivacyBanner,
   RolesExplorer,
   ContributionsShowcase,
+  TrackableSection,
 } from "../features/recruiter/components";
 import "../styles/recruiter.css";
 
 const RecruiterPage = () => {
   return (
     <RecruiterLayout>
-      <RecruiterHero />
-      <PrivacyBanner />
-      <WhyThisExists />
-      <RolesExplorer />
-      <ContributionsShowcase />
-      <ResourceLibrary />
-      <ExperienceTimeline />
-      <ProjectExplorer />
-      <SkillsExplorer />
-      <AWSSection />
-      <CertificationsWall />
-      <TechnicalWriting />
-      <RecruiterFAQ />
-      <LeadershipSection />
-      <ContactCTA />
-      <InterviewResources />
+      <TrackableSection id="hero"><RecruiterHero /></TrackableSection>
+      <TrackableSection id="why"><PrivacyBanner /><WhyThisExists /></TrackableSection>
+      <TrackableSection id="roles"><RolesExplorer /></TrackableSection>
+      <TrackableSection id="contributions"><ContributionsShowcase /></TrackableSection>
+      <TrackableSection id="resources"><ResourceLibrary /></TrackableSection>
+      <TrackableSection id="experience"><ExperienceTimeline /></TrackableSection>
+      <TrackableSection id="projects"><ProjectExplorer /></TrackableSection>
+      <TrackableSection id="skills"><SkillsExplorer /></TrackableSection>
+      <TrackableSection id="aws"><AWSSection /></TrackableSection>
+      <TrackableSection id="certifications"><CertificationsWall /></TrackableSection>
+      <TrackableSection id="writing"><TechnicalWriting /></TrackableSection>
+      <TrackableSection id="faq"><RecruiterFAQ /></TrackableSection>
+      <TrackableSection id="leadership"><LeadershipSection /></TrackableSection>
+      <TrackableSection id="contact"><ContactCTA /></TrackableSection>
+      <TrackableSection id="interview"><InterviewResources /></TrackableSection>
     </RecruiterLayout>
   );
 };

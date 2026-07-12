@@ -9,12 +9,33 @@ import "../../src/styles/utilities.css";
 import "../../src/styles/vertical-nav.css";
 import "../../src/styles/media.css";
 import "../../src/site/styles/style-lab.css";
+import "../../src/styles/themes/neumorphism.css";
+import "../../src/styles/themes/retrofuturism.css";
+import "../../src/styles/themes/brutalism.css";
 
 export const wrapRootElement = ({ element }) => {
   return <StyleLabProvider>{element}</StyleLabProvider>;
 };
 
-export const onRenderBody = ({ setHtmlAttributes, setHeadComponents }) => {
+const THEME_INIT_SCRIPT = `
+  (function() {
+    try {
+      const raw = window.localStorage.getItem("bm-style-lab");
+      const parsed = raw ? JSON.parse(raw) : {};
+      const mode = parsed.mode || "light";
+      const resolved =
+        mode === "system"
+          ? window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light"
+          : mode;
+      document.documentElement.setAttribute("data-theme", resolved);
+      document.documentElement.style.colorScheme = resolved;
+    } catch (_) {}
+  })();
+`;
+
+export const onRenderBody = ({ setHtmlAttributes, setHeadComponents, setPreBodyComponents }) => {
   setHtmlAttributes({ lang: "en", "data-theme": "light" });
   setHeadComponents([
     <link
@@ -36,6 +57,12 @@ export const onRenderBody = ({ setHtmlAttributes, setHeadComponents }) => {
       rel="apple-touch-icon"
       sizes="180x180"
       href={withPrefix(`/apple-touch-icon-180x180.png`)}
+    />,
+  ]);
+  setPreBodyComponents([
+    <script
+      key="theme-init"
+      dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }}
     />,
   ]);
 };

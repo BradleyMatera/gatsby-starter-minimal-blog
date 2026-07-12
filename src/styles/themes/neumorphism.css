@@ -1,0 +1,58 @@
+:root[data-visual-theme="neumorphism"] .section-surface,
+:root[data-visual-theme="neumorphism"] .feature-card,
+:root[data-visual-theme="neumorphism"] .build-card,
+:root[data-visual-theme="neumorphism"] .snapshot-grid > li,
+:root[data-visual-theme="neumorphism"] .article-outline,
+:root[data-visual-theme="neumorphism"] .post-rail,
+:root[data-visual-theme="neumorphism"] .style-lab {
+  border-radius: 24px !important;
+  background: #efedea !important;
+  box-shadow:
+    8px 8px 16px #d1cfcb,
+    -8px -8px 16px #ffffff !important;
+  border: none !important;
+}
+
+:root[data-visual-theme="neumorphism"] .feature-card:hover,
+:root[data-visual-theme="neumorphism"] .build-card:hover {
+  box-shadow:
+    12px 12px 24px #d1cfcb,
+    -12px -12px 24px #ffffff !important;
+  transform: translateY(-4px);
+}
+
+:root[data-visual-theme="neumorphism"] button,
+:root[data-visual-theme="neumorphism"] .hero-actions a,
+:root[data-visual-theme="neumorphism"] .style-lab__mode-btn,
+:root[data-visual-theme="neumorphism"] .style-lab__preset {
+  border-radius: 999px !important;
+  background: #efedea !important;
+  box-shadow:
+    4px 4px 10px #d1cfcb,
+    -4px -4px 10px #ffffff !important;
+  border: none !important;
+}
+
+:root[data-visual-theme="neumorphism"] button:hover,
+:root[data-visual-theme="neumorphism"] .hero-actions a:hover,
+:root[data-visual-theme="neumorphism"] .style-lab__mode-btn:hover,
+:root[data-visual-theme="neumorphism"] .style-lab__preset:hover {
+  box-shadow:
+    inset 4px 4px 10px #d1cfcb,
+    inset -4px -4px 10px #ffffff !important;
+}
+
+:root[data-visual-theme="neumorphism"] .hero-banner {
+  border-radius: 32px !important;
+  background: linear-gradient(145deg, #efedea, #e5e3e0) !important;
+  box-shadow:
+    16px 16px 32px #d1cfcb,
+    -16px -16px 32px #ffffff !important;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :root[data-visual-theme="neumorphism"] .feature-card,
+  :root[data-visual-theme="neumorphism"] .build-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  }
+}

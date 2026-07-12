@@ -972,12 +972,27 @@ button:focus-visible,
 
 .hero-banner__title {
   font-family: var(--font-heading);
-  font-size: var(--heading-display-size);
-  line-height: var(--heading-display-line);
-  font-weight: 700;
-  letter-spacing: var(--heading-letter-tight);
+  font-size: clamp(2.25rem, 5vw, 4.5rem);
+  line-height: 1.05;
+  font-weight: 800;
+  letter-spacing: -0.03em;
   color: var(--color-text);
-  margin: 0;
+  margin: 0 0 clamp(0.75rem, 1.5vw, 1rem);
+}
+
+.hero-banner__word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(18px);
+  animation: heroWordReveal 0.55s var(--transition-smooth) forwards;
+  margin-right: 0.25em;
+}
+
+@keyframes heroWordReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .hero-banner__subtitle {
@@ -2913,7 +2928,62 @@ body {
 }
 
 .blog-listing .grid-two {
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-auto-flow: dense;
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+@media (min-width: 900px) {
+  .blog-listing .grid-two {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .blog-listing .grid-two .blog-card:nth-child(6n + 1) {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  .blog-listing .grid-two .blog-card:nth-child(6n + 4) {
+    grid-column: span 2;
+  }
+
+  .blog-listing .grid-two .blog-card:nth-child(6n + 6) {
+    transform: rotate(-1.5deg);
+  }
+
+  .blog-listing .grid-two .blog-card:nth-child(6n + 3) {
+    transform: rotate(1deg);
+  }
+
+  .blog-listing .grid-two .blog-card:nth-child(6n + 1),
+  .blog-listing .grid-two .blog-card:nth-child(6n + 4) {
+    transform: rotate(0);
+  }
+}
+
+.blog-listing .grid-two .blog-card:hover {
+  transform: rotate(0) translateY(-4px) !important;
+  box-shadow: var(--shadow-card-hover);
+}
+
+.blog-listing .grid-two .blog-card--featured {
+  background: linear-gradient(135deg, var(--color-surface), var(--color-surface-alt));
+}
+
+.blog-listing .grid-two .tag-badge {
+  transform: rotate(-3deg);
+  margin-right: 0.25rem;
+}
+
+.blog-listing .grid-two .blog-card:nth-child(odd) .tag-badge {
+  transform: rotate(2deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blog-listing .grid-two .blog-card,
+  .blog-listing .grid-two .tag-badge {
+    transform: none !important;
+  }
 }
 
 .blog-card {
