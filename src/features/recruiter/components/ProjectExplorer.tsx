@@ -40,7 +40,7 @@ const PROJECTS: Project[] = [
     tagline: "Embeddable AI recruiter assistant with grounded answers and free-tier LLM failover",
     category: "AI Systems",
     description:
-      "I built Scout because my portfolio has too many pieces scattered around for a recruiter to dig through in one pass. One script tag embeds a chat widget that can answer real questions about my projects, AWS internship, skills, gaps, and target roles. It builds deterministic grounded answers first, then sends open-ended questions through a network of free LLM providers. If every provider fails, the grounded answer still works. It also has safety checks, false-claim guards, per-tab memory, a self-improvement loop called Think Mode, and a live analytics dashboard.",
+      "One script tag embeds a chat widget recruiters can use to ask about my projects, AWS internship, skills, and target roles. It builds grounded answers first, then routes open-ended questions through a network of free LLM providers with automatic failover.",
     tech: ["JavaScript", "Node.js", "Express", "GCP e2-micro", "Caddy", "Vite", "Carbon Design System"],
     metrics: [
       { label: "Providers", value: "5+" },
@@ -345,6 +345,10 @@ const ProjectExplorer: React.FC = () => {
                   color: "var(--r-text-secondary)",
                   lineHeight: 1.6,
                   marginBottom: "0.875rem",
+                  display: "-webkit-box",
+                  WebkitLineClamp: 3,
+                  WebkitBoxOrient: "vertical",
+                  overflow: "hidden",
                 }}
               >
                 {project.description}
