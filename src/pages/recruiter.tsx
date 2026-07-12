@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect } from "react";
 import type { HeadFC } from "gatsby";
 import Seo from "../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
@@ -24,6 +25,19 @@ import {
 import "../styles/recruiter.css";
 
 const RecruiterPage = () => {
+  useEffect(() => {
+    if (typeof window === "undefined" || document.getElementById("projecthub-widget-script")) return;
+    const script = document.createElement("script");
+    script.id = "projecthub-widget-script";
+    script.src = "https://bradleymatera.github.io/ProjectHub/ProjectHub.js?v=9";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => {
+      const existing = document.getElementById("projecthub-widget-script");
+      if (existing) existing.remove();
+    };
+  }, []);
+
   return (
     <RecruiterLayout>
       <RecruiterHero />
