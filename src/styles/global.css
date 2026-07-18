@@ -1793,7 +1793,7 @@ button:focus-visible,
 
 .hero-action[data-variant="primary"] .hero-action__label,
 .hero-action[data-variant="primary"] .hero-action__detail {
-  color: var(--color-text-inverse);
+  color: inherit;
 }
 
 .hero-action:hover,
@@ -2129,7 +2129,8 @@ button:focus-visible,
 }
 
 .hero-action[data-variant="primary"] .hero-action__detail {
-  color: rgba(255, 255, 255, 0.9);
+  color: inherit;
+  opacity: 0.85;
 }
 
 /* Contact list - label/value module */
