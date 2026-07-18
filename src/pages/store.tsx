@@ -348,7 +348,7 @@ export default StorePage;
 export const Head: HeadFC = () => (
   <Seo
     title="Store"
-    description="Browse and purchase software downloads, templates, and digital products by Bradley Matera."
+    description="Browse and purchase software downloads, templates, and digital products by Bradley Matera — developer tools, project templates, and code resources for web developers."
     pathname="/store/"
     canonicalUrl="https://bradleymatera.dev/store/"
   />

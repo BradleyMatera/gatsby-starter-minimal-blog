@@ -22,8 +22,8 @@ const Footer = () => {
           <p className="footer__title">{siteTitle}</p>
           {description ? <p className="footer__description">{description}</p> : null}
           <div className="footer-cta">
-            <Link to="/recruiter/#project-explorer">View project portfolio</Link>
-            <Link to={replaceSlashes(`/${basePath}/blog`)}>Read latest blog posts</Link>
+            <Link to="/recruiter/#project-explorer">View Bradley's project portfolio</Link>
+            <Link to={replaceSlashes(`/${basePath}/blog`)}>Read Bradley's latest blog posts</Link>
           </div>
         </div>
 

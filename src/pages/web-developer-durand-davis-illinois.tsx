@@ -8,7 +8,7 @@ import { Card, Link, Section } from "../ui";
 const pathname = "/web-developer-durand-davis-illinois/";
 const pageTitle = "Web Developer in Durand, Davis, and Northwest Illinois";
 const pageDescription =
-  "Bradley Matera builds websites, front-end interfaces, and full-stack web projects for Durand, Davis, and nearby Northwest Illinois communities, with remote collaboration available.";
+  "Web developer for Durand, Davis, and Northwest Illinois — websites, front-end interfaces, and full-stack projects with remote collaboration available.";
 
 const serviceBullets = [
   "Small-business and portfolio websites that are easier to update and maintain.",

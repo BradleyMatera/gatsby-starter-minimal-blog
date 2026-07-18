@@ -105,8 +105,38 @@ export const Head: HeadFC<MBPageProps> = ({ data: { page } }) => {
     "/roles/": {
       seoTitle: "Engineering Role Practice: Cloud, DevOps, Backend, Full-Stack, AI",
       seoDescription:
-        "Transparent breakdown of the engineering roles Bradley Matera is actively practicing through projects, experiments, and documented limitations.",
+        "Engineering role practice pages covering cloud, DevOps, backend, full-stack, and AI automation — each with case studies, verified skills, and honest scope notes.",
       breadcrumbs: [{ name: "Home", path: "/" }, { name: "Roles", path: "/roles/" }],
+    },
+    "/roles/ai-automation-engineer/": {
+      seoTitle: "AI & Automation Engineer | Bradley Matera — Portfolio",
+      seoDescription:
+        "AI and automation engineering practice — LLM integrations, agent workflows, and grounded AI projects with free-tier providers, safety checks, and honest limitations noted.",
+      breadcrumbs: [{ name: "Home", path: "/" }, { name: "Roles", path: "/roles/" }, { name: "AI & Automation Engineer", path: "/roles/ai-automation-engineer/" }],
+    },
+    "/roles/backend-engineer/": {
+      seoTitle: "Backend Engineer | Bradley Matera — Portfolio",
+      seoDescription:
+        "Backend engineering practice with Express APIs, FastAPI experiments, JWT auth, MongoDB, and honest documentation of what is production-ready versus what is still experimental.",
+      breadcrumbs: [{ name: "Home", path: "/" }, { name: "Roles", path: "/roles/" }, { name: "Backend Engineer", path: "/roles/backend-engineer/" }],
+    },
+    "/roles/cloud-engineer/": {
+      seoTitle: "Cloud Engineer | Bradley Matera — Portfolio",
+      seoDescription:
+        "Cloud engineering practice with AWS architecture, free-tier cost management, infrastructure-as-code, and verified deployment patterns from real project work and certifications.",
+      breadcrumbs: [{ name: "Home", path: "/" }, { name: "Roles", path: "/roles/" }, { name: "Cloud Engineer", path: "/roles/cloud-engineer/" }],
+    },
+    "/roles/devops-engineer/": {
+      seoTitle: "DevOps Engineer | Bradley Matera — Portfolio",
+      seoDescription:
+        "DevOps engineering practice with GitHub Actions CI, Docker containerization, deployment pipelines, and small orchestration labs — with exact steps and verification checks.",
+      breadcrumbs: [{ name: "Home", path: "/" }, { name: "Roles", path: "/roles/" }, { name: "DevOps Engineer", path: "/roles/devops-engineer/" }],
+    },
+    "/roles/full-stack-engineer/": {
+      seoTitle: "Full-Stack Engineer | Bradley Matera — Portfolio",
+      seoDescription:
+        "Full-stack engineering practice with React front ends, Express APIs, MongoDB, deployment pipelines, and real case studies showing the full stack from UI to database.",
+      breadcrumbs: [{ name: "Home", path: "/" }, { name: "Roles", path: "/roles/" }, { name: "Full-Stack Engineer", path: "/roles/full-stack-engineer/" }],
     },
     "/contributions/": {
       seoTitle: "Open Source and Public Contribution Work",

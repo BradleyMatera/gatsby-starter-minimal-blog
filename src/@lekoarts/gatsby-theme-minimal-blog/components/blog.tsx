@@ -417,7 +417,7 @@ export const Head: HeadFC = () => (
   <>
     <Seo
       title="Blog"
-      description="Short breakdowns of fixes, experiments, and lessons from the cloud and full-stack work I ship."
+      description="Short breakdowns of fixes, experiments, and lessons from the cloud and full-stack work I ship — AWS, React, Docker, CI/CD, and honest project notes from a junior software engineer."
       pathname="/blog/"
       canonicalUrl="https://bradleymatera.dev/blog/"
     />

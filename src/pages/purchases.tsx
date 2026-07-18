@@ -434,5 +434,5 @@ const PurchasesPage = () => {
 export default PurchasesPage;
 
 export const Head = () => (
-  <Seo title="Customer portal" description="Customer portal for order access." pathname="/purchases/" />
+  <Seo title="Customer portal" description="Sign in to access your software downloads, order history, and receipts. Manage your digital purchases from Bradley Matera's store." pathname="/purchases/" />
 );

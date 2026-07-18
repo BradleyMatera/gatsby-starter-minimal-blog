@@ -40,7 +40,7 @@ const Homepage = ({ posts }: MBHomepageProps) => {
       <div className="homepage-title-row">
         <TinyTriangleAccent />
         <Title text="Latest writing">
-          <Link to={replaceSlashes(`/${basePath}/${blogPath}`)}>Browse the archive</Link>
+          <Link to={replaceSlashes(`/${basePath}/${blogPath}`)}>Browse all blog posts</Link>
         </Title>
       </div>
       <Listing posts={posts} id="latest-posts" showTags={false} />
