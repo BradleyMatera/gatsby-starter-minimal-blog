@@ -13,6 +13,9 @@ const ContactContent = () => (
       description={
         <>
           <p>
+            The fastest way to reach Bradley Matera is through the contact form on this page or by emailing bradmatera@gmail.com. Typical response time is within 24-48 hours for project inquiries.
+          </p>
+          <p>
             <strong>Send the essentials up front</strong> - the problem, desired outcomes, and any constraints - and I will reply within one business day with the next steps.
           </p>
           <p>

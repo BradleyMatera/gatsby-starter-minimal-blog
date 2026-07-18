@@ -12,7 +12,7 @@ const StyleLabToggle: React.FC = () => {
         type="button"
         className="style-lab-toggle"
         onClick={() => setOpen(true)}
-        aria-label="Open Web Designer Lab"
+        aria-label="For Web Designers — Open Style Lab"
         aria-haspopup="dialog"
       >
         <span className="style-lab-toggle__icon" aria-hidden="true">

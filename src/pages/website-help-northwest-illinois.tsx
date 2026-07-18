@@ -29,6 +29,7 @@ const WebsiteHelpPage = () => (
     <Section
       eyebrow="Website help"
       title="How I approach website help in Northwest Illinois"
+      titleAs="h1"
       description={
         <>
           <p>

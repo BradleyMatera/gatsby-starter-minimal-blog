@@ -32,8 +32,10 @@ const RecruiterPainPoints: React.FC = () => {
           loop
           playsInline
           poster="/hero-amazon-2000.webp"
+          aria-hidden="true"
         >
           <source src="/why-built-this.mp4" type="video/mp4" />
+          <track kind="descriptions" srcLang="en" label="Decorative background animation" />
         </video>
         <div className="recruiter-section__media-overlay" />
       </div>

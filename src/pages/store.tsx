@@ -225,6 +225,10 @@ const StoreIndex: React.FC<RouteComponentProps> = () => {
     <div className="store-shell">
       <StoreHero amazonAnchorId="brads-amazon-picks" />
 
+      <p className="store-direct-answer" style={{ fontSize: "1.15rem", lineHeight: 1.6, margin: "1.5rem 0", maxWidth: "42rem" }}>
+        Browse digital downloads, templates, and development resources by Bradley Matera. All products are instant download after Stripe payment confirmation.
+      </p>
+
       {loading && <div className="store-status">Loading products…</div>}
 
       {error && (
@@ -345,5 +349,7 @@ export const Head: HeadFC = () => (
   <Seo
     title="Store"
     description="Browse and purchase software downloads, templates, and digital products by Bradley Matera."
+    pathname="/store/"
+    canonicalUrl="https://bradleymatera.dev/store/"
   />
 );

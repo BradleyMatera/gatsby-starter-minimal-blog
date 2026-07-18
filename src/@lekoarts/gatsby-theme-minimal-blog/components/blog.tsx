@@ -418,6 +418,8 @@ export const Head: HeadFC = () => (
     <Seo
       title="Blog"
       description="Short breakdowns of fixes, experiments, and lessons from the cloud and full-stack work I ship."
+      pathname="/blog/"
+      canonicalUrl="https://bradleymatera.dev/blog/"
     />
     <script type="application/ld+json">
       {JSON.stringify({

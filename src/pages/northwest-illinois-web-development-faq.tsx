@@ -62,6 +62,7 @@ const LocalFaqPage = () => (
     <Section
       eyebrow="FAQ"
       title="Questions about web development in Northwest Illinois"
+      titleAs="h1"
       description={
         <>
           <p>

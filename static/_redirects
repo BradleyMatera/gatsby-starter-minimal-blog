@@ -1,3 +1,5 @@
 /projects /recruiter/#project-explorer 301!
 /projects/* /recruiter/#project-explorer 301!
+/github-actions-aws-automation /github-actions-aws/ 301!
+/github-actions-aws-automation/ /github-actions-aws/ 301!
 /go/* /.netlify/functions/go/:splat 200

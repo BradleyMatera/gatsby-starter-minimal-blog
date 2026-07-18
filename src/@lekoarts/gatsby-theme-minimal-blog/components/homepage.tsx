@@ -7,9 +7,7 @@ import Layout from "./layout";
 import Title from "./title";
 import Listing from "./listing";
 import useMinimalBlogConfig from "../hooks/use-minimal-blog-config";
-import useSiteMetadata from "../hooks/use-site-metadata";
 import replaceSlashes from "../utils/replaceSlashes";
-import { visuallyHidden } from "../styles/utils";
 import Seo from "./seo";
 import { buildProfessionalServiceSchema, serviceAreaDescription } from "../../../site/seo/local-seo";
 import Hero from "../texts/hero.mdx";
@@ -33,11 +31,9 @@ export type MBHomepageProps = {
 
 const Homepage = ({ posts }: MBHomepageProps) => {
   const { basePath, blogPath } = useMinimalBlogConfig();
-  const { siteTitle } = useSiteMetadata();
 
   return (
     <Layout>
-      <h1 sx={visuallyHidden}>{siteTitle}</h1>
       <section className="u-home-hero">
         <Hero />
       </section>

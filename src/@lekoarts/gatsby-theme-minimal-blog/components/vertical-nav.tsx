@@ -198,7 +198,7 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
             <button
               className="vertical-nav__close-btn cyber-close-btn"
               onClick={() => closeDrawer()}
-              aria-label="Close Menu"
+              aria-label="Close"
             >
               Close
             </button>
