@@ -79,7 +79,7 @@ honestplan.md
 honesty.md
 update.md
 content/pages/about/index.mdx.bak
-docs/audits/*.json
+docs/audits/
 
 # Local tools and unused services
 .claude/
