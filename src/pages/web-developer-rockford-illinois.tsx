@@ -15,6 +15,8 @@ const serviceBullets = [
   "Website help and repair when your current site is broken, slow, or abandoned by whoever built it.",
   "SEO services focused on local Rockford search visibility — content structure, metadata, and technical cleanup.",
   "Small business websites built to be maintainable, fast, and honest about what they cost to keep running.",
+  "Google Business Profile setup and optimization — so you show up in local map results when people search for Rockford businesses.",
+  "Ongoing hosting and maintenance — month-to-month support with 24-hour response times, no long-term contracts.",
 ];
 
 const proofCards = [
@@ -42,7 +44,7 @@ const proofCards = [
       "This site is the proof. I rewrite, restructure, and document it continuously so the process is visible. That is the opposite of how most Rockford web agencies operate, and it is the point.",
     links: [
       { label: "About page", href: "/about/" },
-      { label: "Contact Bradley", href: "/contact/" },
+      { label: "Get a free consultation", href: "/contact/" },
     ],
   },
 ];
@@ -88,7 +90,7 @@ const LocalWebDeveloperPage = () => (
       actions={
         <>
           <Link data-variant="primary" to="/contact/">
-            Start a conversation
+            Free consultation
           </Link>
           <Link data-variant="ghost" to="/projects/">
             Review proof
@@ -117,6 +119,9 @@ const LocalWebDeveloperPage = () => (
             Rockford projects can be handled mostly remotely, with in-person meetings when the scope
             warrants it. The drive from Durand is short, and the work itself does not change based on
             where I sit — clear scope, visible proof, and a site that loads fast and ranks locally.
+          </p>
+          <p className="feature-card__body">
+            Every site I build loads in under 2 seconds on mobile — faster than most sites in Rockford. I test with Google PageSpeed Insights before launch.
           </p>
         </Card>
       </div>
@@ -294,6 +299,121 @@ const LocalWebDeveloperPage = () => (
     </Section>
 
     <Section
+      eyebrow="Process"
+      title="How it works — from first call to live site"
+    >
+      <div className="grid-three">
+        <Card>
+          <h3 className="feature-card__title">Free consultation</h3>
+          <p className="feature-card__body">
+            We talk about your business, what the site needs to do, and what's currently broken. I tell you honestly whether I'm the right fit. No pressure, no sales pitch.
+          </p>
+        </Card>
+        <Card>
+          <h3 className="feature-card__title">Design and build</h3>
+          <p className="feature-card__body">
+            I build a fast, mobile-ready site built for your business. You see real progress, not radio silence. Two rounds of revisions included so the final site matches what you actually want.
+          </p>
+        </Card>
+        <Card>
+          <h3 className="feature-card__title">Launch and support</h3>
+          <p className="feature-card__body">
+            I launch your site, set up hosting, and handle updates. You get 24-hour response times and a 30-day warranty after launch. Monthly support is month-to-month — no contract trap.
+          </p>
+        </Card>
+      </div>
+    </Section>
+
+    <Section
+      eyebrow="Industries"
+      title="Industries I work with"
+      description={
+        <p>
+          Small businesses across Rockford and Northwest Illinois — if you need a website that works on mobile and shows up on Google, I can help.
+        </p>
+      }
+    >
+      <Card variant="outline">
+        <ul className="feature-list">
+          <li>Automotive repair and dealerships</li>
+          <li>Landscaping and lawn care</li>
+          <li>Home services (HVAC, plumbing, roofing)</li>
+          <li>Restaurants and food trucks</li>
+          <li>Beauty and fitness</li>
+          <li>Real estate and property management</li>
+          <li>Consulting and professional services</li>
+          <li>Nonprofits and community organizations</li>
+          <li>Retail and e-commerce</li>
+          <li>Health and dental</li>
+        </ul>
+      </Card>
+    </Section>
+
+    <Section
+      eyebrow="Why it matters"
+      title="The hard truth about your website"
+    >
+      <div className="grid-three">
+        <Card>
+          <h3 className="feature-card__title">75% of consumers judge your business by its website alone</h3>
+          <p className="feature-card__body">
+            Source: Stanford Web Credibility Study
+          </p>
+        </Card>
+        <Card>
+          <h3 className="feature-card__title">53% of visitors leave a site that takes over 3 seconds to load</h3>
+          <p className="feature-card__body">
+            Source: Google PageSpeed research
+          </p>
+        </Card>
+        <Card>
+          <h3 className="feature-card__title">46% of Google searches are looking for a local business</h3>
+          <p className="feature-card__body">
+            Source: Google local search data
+          </p>
+        </Card>
+      </div>
+    </Section>
+
+    <Section
+      eyebrow="FAQ"
+      title="Common questions about web development in Rockford"
+    >
+      <div className="grid-two">
+        <Card variant="outline">
+          <h3 className="feature-card__title">How much does a website cost?</h3>
+          <p className="feature-card__body">
+            Starter sites begin at $447 for the build and $37/month for hosting and support. See the full pricing breakdown on the pricing page.
+          </p>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">How long does it take?</h3>
+          <p className="feature-card__body">
+            Starter sites typically take 14 days. Larger projects run 3-4 weeks. I'll give you a specific timeline during the free consultation.
+          </p>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">Do you offer a guarantee?</h3>
+          <p className="feature-card__body">
+            Yes. Every build includes a 24-hour response time guarantee and a 30-day warranty after launch. If you're not happy after the first round of revisions, you get your deposit back.
+          </p>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">Do I own my website?</h3>
+          <p className="feature-card__body">
+            Yes. The code, content, and domain are all yours. If you ever want to leave, I'll help you migrate at no extra charge.
+          </p>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">Can you fix my existing website?</h3>
+          <p className="feature-card__body">
+            Yes. Site refreshes start at $597, or I can work hourly at $65/hour with a 1-hour minimum.
+          </p>
+        </Card>
+      </div>
+    </Section>
+
+    <Section
       eyebrow="Next step"
       title="If you found this page by searching locally"
       description={
@@ -345,9 +465,33 @@ const LocalWebDeveloperPage = () => (
           </div>
         </Card>
       </div>
+      <div className="grid-two">
+        <Card variant="outline">
+          <h3 className="feature-card__title">Pricing</h3>
+          <p className="feature-card__body">
+            Transparent pricing for every budget. Starter sites from $447, growth sites from $797, premium from $1,497.
+          </p>
+          <div className="card-actions">
+            <Link data-variant="primary" to="/pricing/">
+              See pricing
+            </Link>
+          </div>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">Get in touch</h3>
+          <p className="feature-card__body">
+            Ready to talk about your project? Send me the details and I'll tell you honestly whether I'm the right fit.
+          </p>
+          <div className="card-actions">
+            <Link data-variant="primary" to="/contact/">
+              Get a free consultation
+            </Link>
+          </div>
+        </Card>
+      </div>
       <div className="card-actions">
         <Link data-variant="primary" to="/contact/">
-          Contact Bradley Matera
+          Get a free consultation
         </Link>
         <Link data-variant="ghost" to="/projects/">
           Browse project proof
