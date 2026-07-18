@@ -12,7 +12,7 @@ const Footer = () => {
   const quickStats = [
     "AWS Cloud Support Engineer Intern — Amazon",
     "Based in the Midwest — open to Seattle on-site or remote",
-    "Serving Durand, Davis, and nearby Northwest Illinois",
+    "Serving Durand, Davis, Rockford, Freeport, and Northwest Illinois",
   ];
 
   return (
@@ -44,6 +44,12 @@ const Footer = () => {
               </li>
               <li>
                 <Link to="/web-developer-durand-davis-illinois/">Northwest Illinois web development</Link>
+              </li>
+              <li>
+                <Link to="/web-developer-rockford-illinois/">Rockford web developer</Link>
+              </li>
+              <li>
+                <Link to="/web-developer-freeport-illinois/">Freeport web developer</Link>
               </li>
             </ul>
           </div>

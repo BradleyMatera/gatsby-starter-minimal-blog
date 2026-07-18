@@ -12,7 +12,9 @@ const pageDescription =
 
 const serviceBullets = [
   "Small-business and portfolio websites that are easier to update and maintain.",
-  "Landing pages, service pages, and contact flows that explain the offer clearly.",
+  "Website design and redesign — landing pages, service pages, and contact flows that explain the offer clearly.",
+  "Website help and repair — fixing broken layouts, slow pages, outdated content, and deployment issues on existing sites.",
+  "SEO services — local search optimization, Google Business Profile setup, schema markup, and content restructuring so people in Durand, Davis, and Northwest Illinois can actually find you.",
   "React, Next.js, Gatsby, and front-end cleanup work when an existing site needs fixing.",
   "Simple API-backed features, content updates, deployment cleanup, and SEO-focused restructuring.",
 ];
@@ -184,6 +186,58 @@ const LocalWebDeveloperPage = () => (
             </div>
           </Card>
         ))}
+      </div>
+    </Section>
+
+    <Section
+      eyebrow="Also serving"
+      title="Web development across Northwest Illinois"
+      description={
+        <p>
+          I also serve nearby communities with the same approach — honest scope, shipped proof, and
+          clear communication. If you are closer to one of these areas, there is a dedicated page with
+          local context.
+        </p>
+      }
+    >
+      <div className="grid-three">
+        <Card variant="outline">
+          <h3 className="feature-card__title">Rockford, Illinois</h3>
+          <p className="feature-card__body">
+            Website design, SEO services, and small business web development for Rockford and the
+            surrounding metro area.
+          </p>
+          <div className="card-actions">
+            <Link data-variant="primary" to="/web-developer-rockford-illinois/">
+              Rockford web developer page
+            </Link>
+          </div>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">Freeport, Illinois</h3>
+          <p className="feature-card__body">
+            Website help, design, and local SEO for small businesses in Freeport and Stephenson County.
+          </p>
+          <div className="card-actions">
+            <Link data-variant="primary" to="/web-developer-freeport-illinois/">
+              Freeport web developer page
+            </Link>
+          </div>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">Pecatonica &amp; Winnebago</h3>
+          <p className="feature-card__body">
+            Small-town web development for businesses in Pecatonica, Winnebago, and rural Winnebago County.
+          </p>
+          <div className="card-actions">
+            <Link data-variant="primary" to="/web-developer-pecatonica-illinois/">
+              Pecatonica web developer page
+            </Link>
+            <Link data-variant="ghost" to="/web-developer-winnebago-illinois/">
+              Winnebago web developer page
+            </Link>
+          </div>
+        </Card>
       </div>
     </Section>
 

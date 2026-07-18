@@ -1,11 +1,16 @@
-export const serviceAreaName = "Durand, Davis, and Northwest Illinois";
+export const serviceAreaName = "Durand, Davis, Rockford, Freeport, and Northwest Illinois";
 export const serviceAreaDescription =
-  "Websites, front-end interfaces, and full-stack web development for Durand, Davis, and nearby Northwest Illinois communities, with remote collaboration available.";
+  "Website design, web development, SEO services, and small business websites for Durand, Davis, Rockford, Freeport, and Northwest Illinois communities, with remote collaboration available.";
 
 export const serviceAreaPlaces = [
   "Durand, Illinois",
   "Davis, Illinois",
+  "Rockford, Illinois",
+  "Freeport, Illinois",
+  "Pecatonica, Illinois",
+  "Winnebago, Illinois",
   "Winnebago County, Illinois",
+  "Stephenson County, Illinois",
   "Northwest Illinois",
 ];
 
@@ -31,7 +36,15 @@ export const buildProfessionalServiceSchema = ({
     "@type": "Place",
     name,
   })),
-  serviceType: serviceName,
+  serviceType: [
+    "Web development",
+    "Website design",
+    "Website repair and maintenance",
+    "SEO services",
+    "Small business websites",
+    "Front-end development",
+    "Full-stack web development",
+  ],
   description,
   email: "bradmatera@gmail.com",
   founder: {
