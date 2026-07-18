@@ -7,6 +7,7 @@ export type HeroBannerProps = {
   subtitle: string;
   ctaText: string;
   ctaLink: string;
+  titleAs?: "h1" | "h2";
 };
 
 const AnimatedTitle: React.FC<{ title: string }> = ({ title }) => {
@@ -32,14 +33,16 @@ const AnimatedTitle: React.FC<{ title: string }> = ({ title }) => {
   );
 };
 
-const HeroBanner = ({ title, subtitle, ctaText, ctaLink }: HeroBannerProps) => (
+const HeroBanner = ({ title, subtitle, ctaText, ctaLink, titleAs = "h1" }: HeroBannerProps) => {
+  const TitleTag = titleAs as "h1";
+  return (
   <section className="hero-banner hero-banner--v2 section-surface" aria-label="Hero banner">
     <div className="hero-banner__mesh" aria-hidden="true" />
     <div className="hero-banner__text">
       <p className="hero-banner__eyebrow" style={{ animationDelay: "0s" }}>Bradley Matera · Systems software</p>
-      <h1 className="hero-banner__title" style={{ animationDelay: "0.1s" }}>
+      <TitleTag className="hero-banner__title" style={{ animationDelay: "0.1s" }}>
         <AnimatedTitle title={title} />
-      </h1>
+      </TitleTag>
       <p className="hero-banner__subtitle" style={{ animationDelay: "0.2s" }}>{subtitle}</p>
       <Link className="hero-banner__cta" to={ctaLink} style={{ animationDelay: "0.3s" }}>
         <span>{ctaText}</span>
@@ -71,6 +74,7 @@ const HeroBanner = ({ title, subtitle, ctaText, ctaLink }: HeroBannerProps) => (
       </svg>
     </div>
   </section>
-);
+  );
+};
 
 export default HeroBanner;

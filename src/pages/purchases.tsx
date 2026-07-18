@@ -434,5 +434,5 @@ const PurchasesPage = () => {
 export default PurchasesPage;
 
 export const Head = () => (
-  <Seo title="Customer portal" description="Customer portal for order access." pathname="/purchases/" robots="noindex,nofollow" />
+  <Seo title="Customer portal" description="Customer portal for order access." pathname="/purchases/" />
 );
