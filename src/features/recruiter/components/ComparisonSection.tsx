@@ -61,7 +61,7 @@ const ComparisonSection: React.FC = () => {
               fontSize: "1.125rem",
               fontWeight: 700,
               marginBottom: "1.5rem",
-              color: "#f87171",
+              color: "var(--r-error)",
               display: "flex",
               alignItems: "center",
               gap: "0.5rem",
@@ -81,7 +81,7 @@ const ComparisonSection: React.FC = () => {
                   color: "var(--recruiter-text-secondary)",
                 }}
               >
-                <span style={{ color: "#f87171", flexShrink: 0 }}>✕</span>
+                <span style={{ color: "var(--r-error)", flexShrink: 0 }}>✕</span>
                 {item}
               </li>
             ))}
@@ -102,7 +102,7 @@ const ComparisonSection: React.FC = () => {
               fontSize: "1.125rem",
               fontWeight: 700,
               marginBottom: "1.5rem",
-              color: "#34d399",
+              color: "var(--r-success)",
               display: "flex",
               alignItems: "center",
               gap: "0.5rem",
@@ -123,7 +123,7 @@ const ComparisonSection: React.FC = () => {
                   fontWeight: 500,
                 }}
               >
-                <span style={{ color: "#34d399", flexShrink: 0 }}>✓</span>
+                <span style={{ color: "var(--r-success)", flexShrink: 0 }}>✓</span>
                 {item}
               </li>
             ))}

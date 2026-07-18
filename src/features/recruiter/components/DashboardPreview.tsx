@@ -64,7 +64,7 @@ const MetricCard: React.FC<{
     <AnimatedCounter target={value} suffix={suffix} prefix={prefix} />
     <div className="recruiter-stat__label">{label}</div>
     {trend && (
-      <div style={{ fontSize: "0.75rem", color: "#34d399", marginTop: "0.25rem" }}>
+      <div style={{ fontSize: "0.75rem", color: "var(--r-success)", marginTop: "0.25rem" }}>
         {trend}
       </div>
     )}

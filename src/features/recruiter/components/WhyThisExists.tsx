@@ -25,18 +25,12 @@ const RecruiterPainPoints: React.FC = () => {
     <section id="why-this-exists" className="recruiter-section recruiter-section--media reveal-section">
       {/* Background media layer */}
       <div className="recruiter-section__media" aria-hidden="true">
-        <video
-          className="recruiter-section__video"
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="/hero-amazon-2000.webp"
+        <img
+          className="recruiter-section__video recruiter-ken-burns"
+          src="/hero-amazon-2000.webp"
+          alt=""
           aria-hidden="true"
-        >
-          <source src="/why-built-this.mp4" type="video/mp4" />
-          <track kind="descriptions" srcLang="en" label="Decorative background animation" />
-        </video>
+        />
         <div className="recruiter-section__media-overlay" />
       </div>
 
@@ -71,7 +65,7 @@ const RecruiterPainPoints: React.FC = () => {
                   fontSize: "0.9375rem",
                 }}
               >
-                <span style={{ color: "#f87171", flexShrink: 0, marginTop: 2 }}>✕</span>
+                <span style={{ color: "var(--r-error)", flexShrink: 0, marginTop: 2 }}>✕</span>
                 {point}
               </li>
             ))}
@@ -103,7 +97,7 @@ const RecruiterPainPoints: React.FC = () => {
                   fontSize: "0.9375rem",
                 }}
               >
-                <span style={{ color: "#34d399", flexShrink: 0, marginTop: 2 }}>✓</span>
+                <span style={{ color: "var(--r-success)", flexShrink: 0, marginTop: 2 }}>✓</span>
                 {sol}
               </li>
             ))}

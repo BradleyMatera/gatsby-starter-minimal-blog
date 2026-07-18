@@ -25,7 +25,7 @@ const CERTIFICATIONS: Certification[] = [
     credentialId: "SAA-C03",
     verifyUrl: "https://www.credly.com/badges/c585d7ac-44f9-41fe-87e6-c46f9998bb6a/linked_in_profile",
     skills: ["EC2", "S3", "Lambda", "VPC", "CloudFront", "DynamoDB", "RDS"],
-    color: "#FF9900",
+    color: "var(--r-aws-orange)",
     icon: "AWS",
   },
   {
@@ -36,7 +36,7 @@ const CERTIFICATIONS: Certification[] = [
     credentialId: "AIF-C01",
     verifyUrl: "https://www.credly.com/badges/fcbb3120-f086-4784-9cb5-80daca9fb61a/linked_in_profile",
     skills: ["SageMaker", "Bedrock", "Rekognition", "Comprehend", "Lex"],
-    color: "#FF9900",
+    color: "var(--r-aws-orange)",
     icon: "AWS",
   },
   {
@@ -47,7 +47,7 @@ const CERTIFICATIONS: Certification[] = [
     credentialId: "bradleymatera-jaads",
     verifyUrl: "https://freecodecamp.org/certification/bradleymatera/javascript-algorithms-and-data-structures-v8",
     skills: ["JavaScript", "Algorithms", "Data Structures"],
-    color: "#0a0a23",
+    color: "var(--r-text)",
     icon: "FCC",
   },
   {
@@ -58,7 +58,7 @@ const CERTIFICATIONS: Certification[] = [
     credentialId: "bradleymatera-rwd",
     verifyUrl: "https://freecodecamp.org/certification/bradleymatera/responsive-web-design",
     skills: ["HTML", "CSS", "Responsive Design", "Accessibility"],
-    color: "#0a0a23",
+    color: "var(--r-text)",
     icon: "FCC",
   },
   {
@@ -69,7 +69,7 @@ const CERTIFICATIONS: Certification[] = [
     credentialId: "bradleymatera-fcswm",
     verifyUrl: "https://freecodecamp.org/certification/bradleymatera/foundational-c-sharp-with-microsoft",
     skills: ["C#", ".NET", "Visual Studio", "OOP"],
-    color: "#0a0a23",
+    color: "var(--r-text)",
     icon: "FCC",
   },
 ];
@@ -81,18 +81,12 @@ const CertificationsWall: React.FC = () => {
     <section id="certifications" className="recruiter-section recruiter-section--media reveal-section">
       {/* Background media layer */}
       <div className="recruiter-section__media" aria-hidden="true">
-        <video
-          className="recruiter-section__video"
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="/hero-amazon-2000.webp"
+        <img
+          className="recruiter-section__video recruiter-ken-burns"
+          src="/hero-amazon-2000.webp"
+          alt=""
           aria-hidden="true"
-        >
-          <source src="/certifications-wall.mp4" type="video/mp4" />
-          <track kind="descriptions" srcLang="en" label="Decorative background animation" />
-        </video>
+        />
         <div className="recruiter-section__media-overlay" />
       </div>
 
@@ -144,8 +138,8 @@ const CertificationsWall: React.FC = () => {
                     width: 56,
                     height: 56,
                     borderRadius: 12,
-                    background: `linear-gradient(135deg, ${cert.color}22, ${cert.color}44)`,
-                    border: `1px solid ${cert.color}44`,
+                    background: "var(--r-accent-light)",
+                    border: "1px solid var(--r-border)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",

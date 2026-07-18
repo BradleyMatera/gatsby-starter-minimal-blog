@@ -191,7 +191,7 @@ const RolesExplorer: React.FC = () => {
                         fontWeight: 700,
                         textTransform: "uppercase",
                         letterSpacing: "0.05em",
-                        color: "#34d399",
+                        color: "var(--r-success)",
                         marginBottom: "0.5rem",
                       }}
                     >
@@ -218,7 +218,7 @@ const RolesExplorer: React.FC = () => {
                             gap: "0.5rem",
                           }}
                         >
-                          <span style={{ color: "#34d399", flexShrink: 0 }}>✓</span>
+                          <span style={{ color: "var(--r-success)", flexShrink: 0 }}>✓</span>
                           {item}
                         </li>
                       ))}
@@ -232,7 +232,7 @@ const RolesExplorer: React.FC = () => {
                         fontWeight: 700,
                         textTransform: "uppercase",
                         letterSpacing: "0.05em",
-                        color: "#f87171",
+                        color: "var(--r-error)",
                         marginBottom: "0.5rem",
                       }}
                     >
@@ -259,7 +259,7 @@ const RolesExplorer: React.FC = () => {
                             gap: "0.5rem",
                           }}
                         >
-                          <span style={{ color: "#f87171", flexShrink: 0 }}>✗</span>
+                          <span style={{ color: "var(--r-error)", flexShrink: 0 }}>✗</span>
                           {item}
                         </li>
                       ))}

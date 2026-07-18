@@ -288,7 +288,7 @@ const PurchasesPage = () => {
 
         <div className="store-access">
           <div className="store-access-card">
-            <h3>Sign in for instant access</h3>
+            <h2>Sign in for instant access</h2>
             <p className="store-meta">Use the same email you used at checkout.</p>
             {user?.email ? (
               <div>

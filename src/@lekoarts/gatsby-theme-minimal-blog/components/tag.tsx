@@ -40,8 +40,11 @@ const Tag = ({ data, pageContext }: { data: TagData; pageContext: TagPageContext
         <h1 sx={{ fontSize: `2.5rem`, marginBottom: `0.5rem` }}>
           Posts tagged &ldquo;{tagName}&rdquo;
         </h1>
-        <p sx={{ fontSize: `1.125rem`, opacity: 0.7, marginBottom: `2rem` }}>
+        <p sx={{ fontSize: `1.125rem`, opacity: 0.7, marginBottom: `1rem` }}>
           {posts.length} {posts.length === 1 ? "article" : "articles"} about {tagName} from Bradley Matera&apos;s portfolio.
+        </p>
+        <p sx={{ fontSize: `1rem`, opacity: 0.65, marginBottom: `2rem` }}>
+          This page collects {posts.length} {posts.length === 1 ? "article" : "articles"} tagged &ldquo;{tagName}&rdquo; from Bradley Matera, a web developer in Northwest Illinois. Each article includes project examples, code snippets, and verification steps related to {tagName}.
         </p>
         <Listing posts={posts} showTags={false} />
       </section>

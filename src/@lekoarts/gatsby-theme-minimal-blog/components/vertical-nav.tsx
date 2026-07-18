@@ -22,22 +22,19 @@ type VerticalNavProps = {
 
 const VerticalNav = ({ nav }: VerticalNavProps) => {
   const [mobileDrawerOpen, setMobileDrawerOpen] = React.useState(false);
-  const [isMobile, setIsMobile] = React.useState(false);
   const [activeLink, setActiveLink] = React.useState("");
   const mobileMenuRef = React.useRef<HTMLButtonElement>(null);
   const drawerRef = React.useRef<HTMLElement>(null);
   const previousActiveElement = React.useRef<HTMLElement | null>(null);
 
+  // Close drawer on resize to desktop
   React.useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    const onResize = () => {
+      if (window.innerWidth >= 1024) setMobileDrawerOpen(false);
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, []);
-
-  React.useEffect(() => {
-    if (!isMobile) setMobileDrawerOpen(false);
-  }, [isMobile]);
 
   // Set active link based on current path
   React.useEffect(() => {
@@ -105,38 +102,35 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
 
   return (
     <>
-      {isMobile && (
-        <button
-          ref={mobileMenuRef}
-          className="vertical-nav__toggle-icon cyber-toggle"
-          aria-label={mobileDrawerOpen ? "Close menu" : "Open menu"}
-          aria-expanded={mobileDrawerOpen}
-          aria-controls="mobile-navigation-drawer"
-          onClick={() => {
-            if (mobileDrawerOpen) {
-              closeDrawer();
-            } else {
-              openDrawer();
-            }
-          }}
-        >
-          {mobileDrawerOpen ? (
-            <CloseIcon size={24} />
-          ) : (
-            <MenuIcon size={24} />
-          )}
-          <span className="vertical-nav__toggle-label sr-only">Menu</span>
-        </button>
-      )}
+      <button
+        ref={mobileMenuRef}
+        className="vertical-nav__toggle-icon cyber-toggle vertical-nav__mobile-only"
+        aria-label={mobileDrawerOpen ? "Close menu" : "Open menu"}
+        aria-expanded={mobileDrawerOpen}
+        aria-controls="mobile-navigation-drawer"
+        onClick={() => {
+          if (mobileDrawerOpen) {
+            closeDrawer();
+          } else {
+            openDrawer();
+          }
+        }}
+      >
+        {mobileDrawerOpen ? (
+          <CloseIcon size={24} />
+        ) : (
+          <MenuIcon size={24} />
+        )}
+        <span className="vertical-nav__toggle-label sr-only">Menu</span>
+      </button>
       {/* Desktop Nav */}
-      {!isMobile && (
-        <nav
-          className="vertical-nav vertical-nav--top cyber-nav"
-          role="navigation"
-          aria-label="Main Navigation"
-        >
+      <nav
+        className="vertical-nav vertical-nav--top cyber-nav vertical-nav__desktop-only"
+        role="navigation"
+        aria-label="Main Navigation"
+      >
           <div className="vertical-nav__inner cyber-nav__inner">
-            <Link to="/" className="vertical-nav__brand cyber-brand" aria-label="Home">
+            <Link to="/" className="vertical-nav__brand cyber-brand" aria-label="BM — Home">
               <span className="vertical-nav__brand-text cyber-brand__text">BM</span>
             </Link>
             <ul className="vertical-nav__list cyber-nav__list">
@@ -179,10 +173,9 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
             </div>
           </div>
         </nav>
-      )}
 
       {/* Mobile Drawer Nav */}
-      {isMobile && mobileDrawerOpen && (
+      {mobileDrawerOpen && (
         <nav
           ref={drawerRef}
           id="mobile-navigation-drawer"
@@ -192,7 +185,7 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
           aria-label="Main Navigation"
         >
           <div className="vertical-nav__inner cyber-drawer__inner">
-            <Link to="/" className="vertical-nav__brand cyber-brand" aria-label="Home">
+            <Link to="/" className="vertical-nav__brand cyber-brand" aria-label="BM — Home">
               <span className="vertical-nav__brand-text cyber-brand__text">BM</span>
             </Link>
             <button

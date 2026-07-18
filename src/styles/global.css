@@ -21,12 +21,12 @@
   --color-text-inverse: #faf7f2;
   --color-border: #d8d0c4;
   --color-border-strong: #c8bfb3;
-  --color-accent: #7a6b5d;
+  --color-accent: #6f6052;
   --color-accent-secondary: #8d7d6e;
   --color-accent-hover: #5a4d42;
-  --color-accent-soft: rgba(122, 107, 93, 0.12);
+  --color-accent-soft: rgba(111, 96, 82, 0.12);
   --color-link: #5a4d42;
-  --color-focus: #8a7b6c;
+  --color-focus: #6f6052;
   --color-muted: #ddd5c9;
   --color-highlight-line-bg: rgba(122, 107, 93, 0.1);
   --color-badge-bg: rgba(122, 107, 93, 0.12);
@@ -859,32 +859,32 @@ button:focus-visible,
 /* Dark mode specific adjustments */
 :root[data-theme="dark"] .hero-banner__cta {
   background: var(--color-accent);
-  color: #FFFFFF;
+  color: #1f1b17;
   border-color: var(--color-accent);
 }
 
 :root[data-theme="dark"] .hero-banner__cta span {
-  color: #FFFFFF;
+  color: #1f1b17;
 }
 
 :root[data-theme="dark"] .hero-banner__cta:hover {
   background: var(--color-accent-hover);
   border-color: var(--color-accent-hover);
-  color: #FFFFFF;
+  color: #1f1b17;
 }
 
 :root[data-theme="dark"] .hero-banner__cta:hover span {
-  color: #FFFFFF;
+  color: #1f1b17;
 }
 
 :root[data-theme="dark"] .hero-banner__cta:focus-visible {
   outline-color: var(--color-accent);
   outline-offset: 3px;
-  color: #FFFFFF;
+  color: #1f1b17;
 }
 
 :root[data-theme="dark"] .hero-banner__cta:focus-visible span {
-  color: #FFFFFF;
+  color: #1f1b17;
 }
 
 .hero-banner__visual {
@@ -894,11 +894,13 @@ button:focus-visible,
   position: relative;
   overflow: hidden;
   border-radius: 24px;
+  min-height: 240px;
 }
 
 .hero-banner__visual img {
   width: min(320px, 100%);
   height: auto;
+  aspect-ratio: 2000 / 1500;
   display: block;
   border-radius: 24px;
   border: 1px solid var(--color-border-strong);
@@ -1843,12 +1845,12 @@ button:focus-visible,
 /* Dark mode back-to-top button */
 :root[data-theme="dark"] .back-to-top {
   background: var(--color-accent);
-  color: #FFFFFF;
+  color: #1f1b17;
 }
 
 :root[data-theme="dark"] .back-to-top:hover {
   background: var(--color-accent-hover);
-  color: #FFFFFF;
+  color: #1f1b17;
 }
 
 .sr-only {

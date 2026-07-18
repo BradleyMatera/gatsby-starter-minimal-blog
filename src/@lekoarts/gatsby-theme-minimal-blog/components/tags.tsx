@@ -19,8 +19,11 @@ const Tags = ({ data }: { data: TagsData }) => {
     <Layout>
       <section className="tags-page" sx={{ maxWidth: `900px`, margin: `0 auto`, padding: `4rem 1.5rem` }}>
         <h1 sx={{ fontSize: `2.5rem`, marginBottom: `0.5rem` }}>All Tags</h1>
-        <p sx={{ fontSize: `1.125rem`, opacity: 0.7, marginBottom: `2rem` }}>
+        <p sx={{ fontSize: `1.125rem`, opacity: 0.7, marginBottom: `1rem` }}>
           Browse all topics covered across Bradley Matera&apos;s portfolio. Each tag links to related articles on web development, AI, cloud, and more.
+        </p>
+        <p sx={{ fontSize: `1rem`, opacity: 0.65, marginBottom: `2rem` }}>
+          This page lists all {groups.length} topic tags from Bradley Matera&apos;s portfolio, organizing articles by subject area including web development, AI, cloud engineering, React, AWS, DevOps, and career insights from Northwest Illinois.
         </p>
         <ul sx={{ listStyle: `none`, padding: 0, display: `flex`, flexWrap: `wrap`, gap: `0.75rem` }}>
           {groups.map((group) => (

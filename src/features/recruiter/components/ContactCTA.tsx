@@ -101,7 +101,7 @@ const ContactCTA: React.FC = () => {
               <div style={{ fontSize: "0.75rem", color: "var(--recruiter-text-muted)", marginBottom: "0.25rem" }}>
                 Availability
               </div>
-              <div style={{ color: "#34d399", fontWeight: 600 }}>● Open to Opportunities</div>
+              <div style={{ color: "var(--r-success)", fontWeight: 600 }}>● Open to Opportunities</div>
             </div>
             <div>
               <div style={{ fontSize: "0.75rem", color: "var(--recruiter-text-muted)", marginBottom: "0.25rem" }}>

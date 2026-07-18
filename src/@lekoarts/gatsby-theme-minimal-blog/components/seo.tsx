@@ -51,10 +51,12 @@ const Seo = ({
   } = site;
 
   const resolvedImage = image ? (image.startsWith("http") ? image : `${siteUrl}${image}`) : `${siteUrl}${defaultImage}`;
+  // Normalize pathname: ensure trailing slash for non-root paths so canonical matches served URL
+  const normalizedPathname = pathname && pathname !== "/" && !pathname.endsWith("/") ? `${pathname}/` : pathname || "";
   const seo = {
     title: title ? `${title} | ${siteTitle}` : defaultTitle,
     description: description || defaultDescription,
-    url: `${siteUrl}${pathname || ``}`,
+    url: `${siteUrl}${normalizedPathname}`,
     image: resolvedImage,
   };
   const canonical = canonicalUrl || seo.url;

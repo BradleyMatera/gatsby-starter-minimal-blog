@@ -72,7 +72,7 @@ const BlogCard = ({ post, showTags = true, featured = false }: BlogCardProps) =>
       {/* CTA - Call to action */}
       <div className="card-actions">
         <Link to={post.slug} data-variant="primary">
-          Read article
+          Read: {post.title}
         </Link>
       </div>
 

@@ -550,7 +550,8 @@ export const Head: HeadFC<MBPostProps> = ({ data }) => {
   })();
   const articleTags = post.tags?.map((tag) => tag.name).filter((tag): tag is string => Boolean(tag));
   const imageUrl = post.banner?.childImageSharp?.resize?.src;
-  const canonicalUrl = post.canonicalUrl || `https://bradleymatera.dev${post.slug}`;
+  const normalizedPostSlug = post.slug && !post.slug.endsWith("/") ? `${post.slug}/` : post.slug;
+  const canonicalUrl = post.canonicalUrl || `https://bradleymatera.dev${normalizedPostSlug}`;
 
   const jsonLd = {
     "@context": "https://schema.org",

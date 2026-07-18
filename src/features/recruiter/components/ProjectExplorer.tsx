@@ -215,18 +215,12 @@ const ProjectExplorer: React.FC = () => {
     <section id="project-explorer" className="recruiter-section recruiter-section--media reveal-section">
       {/* Background media layer */}
       <div className="recruiter-section__media" aria-hidden="true">
-        <video
-          className="recruiter-section__video"
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="/hero-amazon-2000.webp"
+        <img
+          className="recruiter-section__video recruiter-ken-burns"
+          src="/hero-amazon-2000.webp"
+          alt=""
           aria-hidden="true"
-        >
-          <source src="/project-explorer.mp4" type="video/mp4" />
-          <track kind="descriptions" srcLang="en" label="Decorative background animation" />
-        </video>
+        />
         <div className="recruiter-section__media-overlay" />
       </div>
 

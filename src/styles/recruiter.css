@@ -28,6 +28,13 @@
   --r-shadow-hover: rgba(41, 34, 28, 0.1);
   --r-font-heading: var(--font-heading, "Space Grotesk", sans-serif);
   --r-font-body: var(--font-primary, "Inter", sans-serif);
+  /* Theme-aware inline colors for checkmarks, badges, status indicators */
+  --r-success: #1a7a3a;
+  --r-error: #b91c1c;
+  --r-aws-orange: #a05000;
+  --r-aws-orange-bg: rgba(160, 80, 0, 0.1);
+  --r-info: #6d28d9;
+  --r-badge-text: #1a1a1a;
 }
 
 :root[data-theme="dark"] {
@@ -45,6 +52,13 @@
   --r-rule: rgba(232, 228, 223, 0.08);
   --r-shadow: rgba(0, 0, 0, 0.3);
   --r-shadow-hover: rgba(0, 0, 0, 0.5);
+  /* Theme-aware inline colors for dark mode */
+  --r-success: #34d399;
+  --r-error: #f87171;
+  --r-aws-orange: #FF9900;
+  --r-aws-orange-bg: rgba(255, 153, 0, 0.1);
+  --r-info: #c4b5fd;
+  --r-badge-text: #1a1a1a;
 }
 
 /* ---- Page shell ------------------------------------------------------- */
@@ -152,6 +166,14 @@
   color: var(--r-bg);
 }
 
+:root[data-theme="dark"] .recruiter-btn--primary {
+  color: #1a1a1a;
+}
+
+:root[data-theme="dark"] .recruiter-btn--primary:hover {
+  color: var(--r-bg);
+}
+
 .recruiter-btn--secondary {
   background: transparent;
   color: var(--r-text);
@@ -242,6 +264,25 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
+}
+
+.recruiter-ken-burns {
+  animation: recruiterKenBurns 20s ease-in-out infinite alternate;
+}
+
+@keyframes recruiterKenBurns {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  100% {
+    transform: scale(1.08) translate(-1%, -1%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .recruiter-ken-burns {
+    animation: none;
+  }
 }
 
 .recruiter-section__media-overlay {

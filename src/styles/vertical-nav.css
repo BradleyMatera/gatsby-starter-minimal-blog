@@ -9,6 +9,24 @@
    - CTA layout inside the vertical/top nav system
 */
 
+/* Visibility helpers — prevent hydration mismatch by always rendering both navs */
+.vertical-nav__mobile-only {
+  display: none !important;
+}
+
+.vertical-nav__desktop-only {
+  display: flex;
+}
+
+@media (max-width: 1023px) {
+  .vertical-nav__mobile-only {
+    display: flex !important;
+  }
+  .vertical-nav__desktop-only {
+    display: none !important;
+  }
+}
+
 .vertical-nav {
   position: fixed;
   left: 0;

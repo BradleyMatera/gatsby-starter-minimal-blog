@@ -72,7 +72,7 @@ const AWSServiceCard: React.FC<{ service: Service }> = ({ service }) => (
           justifyContent: "center",
           fontSize: "0.6875rem",
           fontWeight: 800,
-          color: "#fff",
+          color: "var(--r-badge-text)",
         }}
       >
         AWS
@@ -106,8 +106,8 @@ const AWSServiceCard: React.FC<{ service: Service }> = ({ service }) => (
             fontSize: "0.6875rem",
             padding: "0.25rem 0.5rem",
             borderRadius: 4,
-            background: "rgba(255,153,0,0.1)",
-            color: "#FF9900",
+            background: "var(--r-aws-orange-bg)",
+            color: "var(--r-aws-orange)",
           }}
         >
           {p}
@@ -198,7 +198,7 @@ const AWSSection: React.FC = () => {
             justifyContent: "center",
             fontSize: "1.25rem",
             fontWeight: 800,
-            color: "#fff",
+            color: "var(--r-badge-text)",
             flexShrink: 0,
           }}
         >

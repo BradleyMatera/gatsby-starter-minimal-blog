@@ -12,18 +12,12 @@ const RecruiterHero: React.FC = () => {
     <section id="recruiter-hero" className="recruiter-hero reveal-section">
       {/* Background media layer */}
       <div className="recruiter-hero__media" aria-hidden="true">
-        <video
-          className="recruiter-hero__video"
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="/hero-amazon-2000.webp"
+        <img
+          className="recruiter-hero__video recruiter-ken-burns"
+          src="/hero-amazon-2000.webp"
+          alt=""
           aria-hidden="true"
-        >
-          <source src="/hero-recruiter.mp4" type="video/mp4" />
-          <track kind="descriptions" srcLang="en" label="Decorative background animation" />
-        </video>
+        />
         <div className="recruiter-hero__media-overlay" />
       </div>
 
