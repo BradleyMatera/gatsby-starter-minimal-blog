@@ -278,8 +278,8 @@ const PurchasesPage = () => {
     <Layout>
       <div className="store-shell">
         <header className="store-header">
-          <h1 className="store-title">Customer Portal</h1>
-          <p className="store-subtitle">Sign in to manage your purchases.</p>
+          <h1 className="store-title">Bradley Matera Customer Portal</h1>
+          <p className="store-subtitle">Sign in to manage your purchases from Bradley Matera's store.</p>
           <p className="store-legal">
             Affiliate products are sold by third-party merchants. Bradley Matera is not the seller or creator of affiliate products.
             Direct digital downloads are sold by Bradley Matera.
@@ -434,5 +434,5 @@ const PurchasesPage = () => {
 export default PurchasesPage;
 
 export const Head = () => (
-  <Seo title="Customer portal" description="Sign in to access your software downloads, order history, and receipts. Manage your digital purchases from Bradley Matera's store." pathname="/purchases/" />
+  <Seo title="Bradley Matera Customer Portal — Downloads & Orders" description="Sign in to the Bradley Matera customer portal to access your software downloads, order history, and receipts from Bradley Matera's digital store." pathname="/purchases/" />
 );
