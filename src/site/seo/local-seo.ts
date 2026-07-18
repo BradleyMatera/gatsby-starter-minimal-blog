@@ -46,6 +46,7 @@ export const buildProfessionalServiceSchema = ({
     "Full-stack web development",
   ],
   description,
+  telephone: "+16502651193",
   email: "bradmatera@gmail.com",
   founder: {
     "@type": "Person",

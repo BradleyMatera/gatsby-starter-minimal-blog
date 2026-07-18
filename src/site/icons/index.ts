@@ -12,6 +12,7 @@ export { default as GitHubIcon } from "./GitHubIcon";
 export { default as TwitterIcon } from "./TwitterIcon";
 export { default as LinkedInIcon } from "./LinkedInIcon";
 export { default as EmailIcon } from "./EmailIcon";
+export { default as PhoneIcon } from "./PhoneIcon";
 export { default as RssIcon } from "./RssIcon";
 
 // UI Element Icons

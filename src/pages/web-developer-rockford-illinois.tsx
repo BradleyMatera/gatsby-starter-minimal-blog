@@ -89,6 +89,9 @@ const LocalWebDeveloperPage = () => (
       }
       actions={
         <>
+          <a href="tel:+16502651193" data-variant="ghost" className="link">
+            (650) 265-1193
+          </a>
           <Link data-variant="primary" to="/contact/">
             Free consultation
           </Link>
@@ -524,6 +527,7 @@ export const Head: HeadFC = () => {
         "@type": "Person",
         name: "Bradley Matera",
         url: site.siteUrl,
+        telephone: "+16502651193",
       },
       areaServed: [
         { "@type": "City", name: "Rockford, Illinois" },
@@ -536,6 +540,7 @@ export const Head: HeadFC = () => {
       name: "Bradley Matera",
       url: site.siteUrl,
       description: pageDescription,
+      telephone: "+16502651193",
       areaServed: [
         { "@type": "City", name: "Rockford, Illinois" },
         { "@type": "AdministrativeArea", name: "Northwest Illinois" },

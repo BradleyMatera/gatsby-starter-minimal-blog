@@ -133,6 +133,16 @@ const PricingPage = () => (
           exactly what you pay, what you get, and what costs extra.
         </p>
       }
+      actions={
+        <>
+          <a href="tel:+16502651193" data-variant="ghost" className="link">
+            (650) 265-1193
+          </a>
+          <Link data-variant="primary" to="/contact/">
+            Free consultation
+          </Link>
+        </>
+      }
     >
       <div className="grid-three">
         <Card variant="outline">
@@ -344,6 +354,7 @@ export const Head: HeadFC = () => {
         "@type": "Person",
         name: "Bradley Matera",
         url: site.siteUrl,
+        telephone: "+16502651193",
       },
       areaServed: [
         { "@type": "City", name: "Durand, Illinois" },

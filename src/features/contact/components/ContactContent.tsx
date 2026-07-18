@@ -19,9 +19,12 @@ const ContactContent = () => (
             <strong>Send the essentials up front</strong> - the problem, desired outcomes, and any constraints - and I will reply within one business day with the next steps.
           </p>
           <p>
-            I am open to remote work and to projects in Durand, Davis, and nearby Northwest Illinois communities.
+            I am open to remote work and to projects in Durand, Davis, Rockford, Freeport, and nearby Northwest Illinois communities.
           </p>
-          <p>bradmatera@gmail.com</p>
+          <p>
+            <strong>Phone:</strong> <a href="tel:+16502651193">(650) 265-1193</a><br />
+            <strong>Email:</strong> bradmatera@gmail.com
+          </p>
         </>
       }
     >
@@ -38,6 +41,10 @@ const ContactContent = () => (
           <a className="contact-info__cta" href="mailto:bradmatera@gmail.com">
             <span>Email Bradley@:</span>
             <span>bradmatera@gmail.com</span>
+          </a>
+          <a className="contact-info__cta" href="tel:+16502651193" style={{ marginTop: "0.5rem" }}>
+            <span>Call Bradley@:</span>
+            <span>(650) 265-1193</span>
           </a>
           <p className="contact-info__note">
             Typical response time: within one business day. Mention if you prefer Slack, Teams, or scheduled calls.
