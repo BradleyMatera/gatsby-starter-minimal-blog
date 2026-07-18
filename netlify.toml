@@ -20,3 +20,10 @@
   for = "/.netlify/functions/chat-router"
   [headers.values]
     Cache-Control = "no-store"
+
+# Serve the sitemap index at /sitemap.xml for crawlers that expect it there
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/sitemap.xml/sitemap-index.xml"
+  status = 200
+  force = true

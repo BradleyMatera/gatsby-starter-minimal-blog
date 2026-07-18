@@ -7,4 +7,4 @@ Allow: /
 User-agent: Googlebot
 Allow: /
 
-Sitemap: https://bradleymatera.dev/sitemap.xml/sitemap-index.xml
+Sitemap: https://bradleymatera.dev/sitemap.xml
