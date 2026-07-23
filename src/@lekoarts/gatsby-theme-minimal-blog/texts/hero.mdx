@@ -165,58 +165,60 @@ import { TinyDotClusterAccent, TinyTriangleAccent, BlogAccent } from "../../../s
   <div className="home-section__content">
     <div className="section-surface section-surface--featured">
       <div className="section-shell__header">
-        <h2 className="section-title">Case studies that highlight the full stack</h2>
+        <h2 className="section-title">Project write-ups with real code you can verify</h2>
         <div className="hero-actions">
           <Link data-variant="primary" to="/projects">
-            Browse detailed case studies
+            Browse project write-ups
           </Link>
           <Link data-variant="ghost" to="/contributions">
             Review open-source contributions
           </Link>
         </div>
         <div className="section-lead">
-          These write-ups summarize the problems I solved, the technologies I chose, and the measurable results I delivered.
+          These are honest write-ups of what I built, the tech I chose, what worked, and what didn't. Every project links to a real GitHub repo — no inflated claims, no made-up metrics.
         </div>
       </div>
       <div className="section-content">
         <div className="grid-auto project-gallery">
           <ProjectCard
             title="Car-Match"
-            meta="Full-stack matchmaking experience"
-            summary="Problem: recruiters and hiring teams need a concise profile and chat flow for prospective hires. Role: product owner and engineer for UI, chat, and API. Approach: React front end, Express API, MongoDB, and Render or Netlify deployment with logging built in. Results: Real-time chat, community forum, and profile matching, all tied to automated tests that cover registration, search, and moderation routes."
-            impactPrefix="Impact"
-            impact="Helps a simulated 200+ requests/day scenario stay under 400ms with Render autoscaling, while the chat and forum modules keep user context and permissions consistent."
-            stack={["React", "Express", "MongoDB", "Render", "Netlify"]}
+            meta="Full-stack community MVP — profiles, forums, events, messaging"
+            summary="A React frontend with an Express backend, built as a Full Sail University course project. Frontend on GitHub Pages, backend on Google Cloud Run (free tier). Forums are mock-backed by default and persist when MongoDB is configured. 100+ commits, Docker support, and full docs in the repo."
+            impactPrefix="What's real"
+            impact="100+ commits, live frontend on GitHub Pages, backend on Google Cloud Run, Dockerfile, health check endpoint, and documented API. Honest limitation: forums are mock-backed without MongoDB configured, and no load testing has been done."
+            stack={["React", "Express", "MongoDB", "Google Cloud Run", "JWT", "Docker"]}
             links={[
-              { label: "Car-Match case study", href: "/projects/car-match/", variant: "primary" },
-              { label: "GitHub", href: "https://github.com/BradleyMatera/car-match", external: true }
+              { label: "Car-Match write-up", href: "/projects/car-match/", variant: "primary" },
+              { label: "GitHub", href: "https://github.com/BradleyMatera/car-match", external: true },
+              { label: "Live demo", href: "https://bradleymatera.github.io/car-match/", external: true }
             ]}
           />
 
           <ProjectCard
             title="Interactive Pokédex"
-            meta="API-driven interface"
-            summary="Problem: demonstrate accessible search/filter design. Role: front-end architect. Approach: consume the public Pokémon REST API, build keyboard-friendly filtering, and maintain responsive layouts with custom hooks for debounce/cache. Results: fast search (requests debounced at 300ms), keyboard navigation across cards, and skeleton states that keep users oriented."
-            impactPrefix="Impact"
-            impact="Serves as a reference for responsive filtering interfaces and reusable data hooks, with Lighthouse scores above 90 on mobile."
-            stack={["React", "PokeAPI", "Custom hooks", "Tailwind"]}
+            meta="Static Next.js 16 app — 151 Pokémon with build-time data fetch"
+            summary="A Next.js 16 static export that fetches PokéAPI data at build time and prerenders 151 detail pages. Client-side search and filtering with React context providers. Tailwind CSS v4 + NextUI. Deployed to GitHub Pages via GitHub Actions."
+            impactPrefix="What's real"
+            impact="Live demo with 151 prerendered Pokémon pages, build-time data fetch from PokéAPI, GitHub Actions auto-deploy workflow, and a README documenting architecture, deployment model, and known limitations. Honest limitation: fan-made educational project, no backend or user accounts."
+            stack={["Next.js 16", "TypeScript", "PokeAPI", "Tailwind v4", "NextUI"]}
             links={[
-              { label: "Pokédex case study", href: "/projects/interactive-pokedex/", variant: "primary" },
+              { label: "Pokédex write-up", href: "/projects/interactive-pokedex/", variant: "primary" },
               { label: "Live demo", href: "https://bradleymatera.github.io/Interactive-Pokedex/", variant: "primary", external: true },
-              { label: "GitHub", href: "https://github.com/BradleyMatera/Pokedex", external: true }
+              { label: "GitHub", href: "https://github.com/BradleyMatera/Interactive-Pokedex", external: true }
             ]}
           />
 
           <ProjectCard
             title="CIRIS AI contributions"
-            meta="Open-source collaboration"
-            summary="Problem: improve documentation, add missing health checks, and experiment with Docker deployments for the ethics engine. Role: contributor and reviewer. Approach: submitted PRs that clarified authentication notes, added logging for token validation, and documented Docker Compose for local testing. Results: maintainers merged documentation fixes and test templates; the community now has clearer onboarding for Docker and JWT flows."
-            impactPrefix="Impact"
-            impact="Maintains project momentum by making the stack easier to run locally and documenting how to verify tokens in deployed demos."
-            stack={["Node.js", "Express", "MongoDB", "Docker", "JWT"]}
+            meta="Open-source backend code — Python, JWT auth, API routes, deferral system"
+            summary="Submitted 10 PRs to CIRISNode (the CIRIS Ethics Engine backend, written in Python). 7 were merged. Work included implementing JWT authentication, building benchmark/DID/WA API routes, creating a deferral system, and refactoring the API route structure. Not just docs — real backend code."
+            impactPrefix="What's real"
+            impact="7 of 10 PRs merged into CIRISNode. PR #1 finalized Phase 2 — API fully functional, JWT set up, all README routes working, Docker support. Honest limitation: I was one of several contributors, and the project has evolved since my work."
+            stack={["Python", "TypeScript", "Docker", "JWT", "FastAPI"]}
             links={[
-              { label: "CIRIS AI case study", href: "/projects/ciris-ai/", variant: "primary" },
-              { label: "Organization", href: "https://github.com/CIRISAI", external: true }
+              { label: "CIRIS AI write-up", href: "/projects/ciris-ai/", variant: "primary" },
+              { label: "My PRs", href: "https://github.com/CIRISAI/CIRISNode/pulls?q=is%3Apr+author%3ABradleyMatera", external: true },
+              { label: "CIRISNode repo", href: "https://github.com/CIRISAI/CIRISNode", external: true }
             ]}
           />
         </div>
@@ -244,7 +246,7 @@ import { TinyDotClusterAccent, TinyTriangleAccent, BlogAccent } from "../../../s
     </li>
     <li className="reveal" style={{ transitionDelay: "0.3s" }}>
       <BlogAccent />
-      <div><strong>Honest storytelling</strong> - case studies highlight the problem, approach, and measurable impact so recruiters see exactly what shipped.</div>
+      <div><strong>Honest storytelling</strong> - write-ups highlight the problem, approach, and what actually shipped — including what didn't work and what I'd do differently.</div>
     </li>
   </ul>
 </Section>

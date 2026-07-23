@@ -6,9 +6,9 @@ slug: "/projects/ciris-ai"
 import { Section, Card, AnchorNav, Link } from "../../../src/ui";
 
 <Section
-  eyebrow="Case Study"
-  title="CIRIS AI · Open-source collaboration"
-  description="Documentation and code improvements contributed to the CIRIS Ethics Engine repositories. Contributions include JWT documentation updates, Docker configuration, and logging improvements."
+  eyebrow="Project Write-up"
+  title="CIRIS AI · Open-source backend contributions"
+  description="Code contributions to the CIRIS Ethics Engine (CIRISNode) — a Python backend server for alignment and communications. My PRs added JWT authentication, benchmark and DID routes, a deferral system, and API route refactoring."
 />
 
 <AnchorNav
@@ -16,38 +16,39 @@ import { Section, Card, AnchorNav, Link } from "../../../src/ui";
     { id: "overview", label: "Problem" },
     { id: "approach", label: "Solution" },
     { id: "role", label: "My Role" },
-    { id: "impact", label: "Outcomes & Proof" },
+    { id: "impact", label: "What's in the Repo" },
     { id: "artifacts", label: "Tech Stack" },
   ]}
 />
 
 <Section id="overview" eyebrow="Problem" title="Project need">
   <p>
-    The CIRIS ethics engine needed improved documentation, clearer onboarding instructions, and better observability for token verification. New contributors struggled with setup, and JWT authentication documentation lacked clarity.
+    CIRISNode is the backend server for the CIRIS Ethics Engine — an open-source project exploring AI alignment and communications. When I joined, the API routes listed in the README were not yet implemented, JWT authentication was not set up, and the benchmark/DID/WA pipelines were stubs. The project needed someone to build out the actual backend functionality.
   </p>
 </Section>
 
 <Section id="approach" eyebrow="Solution" title="What I contributed">
   <p>
-    Contributed documentation updates, Docker configuration, and logging improvements that were merged into the main repository. These changes improved onboarding for new contributors and enhanced debugging capabilities.
+    I submitted 10 pull requests to CIRISNode over May 2025. Seven were merged. The work was primarily Python backend code — not documentation. I implemented JWT authentication, built out API routes for benchmarks and DIDs (Decentralized Identifiers), created a deferral system, and refactored the API route structure.
   </p>
   <div className="grid-two">
     <Card>
-      <h3 className="feature-card__title">Documentation & onboarding</h3>
+      <h3 className="feature-card__title">Backend code</h3>
       <ul className="feature-list">
-        <li>Updated JWT authentication documentation with clearer examples</li>
-        <li>Clarified environment setup steps for Matrix and MongoDB</li>
-        <li>Improved onboarding documentation for new contributors</li>
-        <li>Created Docker Compose configuration for local development</li>
+        <li>Implemented JWT authentication guarding protected routes</li>
+        <li>Built benchmark pipeline with mock signing (HE-300)</li>
+        <li>Built DID issuance and WA (Wisdom Agent) ticketing routes</li>
+        <li>Created deferral system — backend only accepts 'defer' type</li>
+        <li>Refactored API routes and models for benchmarks, DIDs, and WAs</li>
       </ul>
     </Card>
     <Card>
-      <h3 className="feature-card__title">Code improvements</h3>
+      <h3 className="feature-card__title">Infrastructure</h3>
       <ul className="feature-list">
-        <li>Added logging around token verification for better debugging</li>
-        <li>Fixed lint errors and minor bugs</li>
-        <li>Improved error messages and API responses</li>
-        <li>Maintained transparent PR list for verification</li>
+        <li>Added Docker support for local development and testing</li>
+        <li>Set up logging around token verification for debugging</li>
+        <li>Added Matrix integration stubs for message posting</li>
+        <li>Wrote test coverage for the new routes</li>
       </ul>
     </Card>
   </div>
@@ -65,34 +66,40 @@ import { Section, Card, AnchorNav, Link } from "../../../src/ui";
   </div>
 </Section>
 
-<Section id="role" eyebrow="My Role" title="Responsibilities">
+<Section id="role" eyebrow="My Role" title="What I did">
   <ul className="feature-list">
-    <li>Updated JWT authentication documentation with clearer examples</li>
-    <li>Added logging around token verification for better debugging</li>
-    <li>Created Docker Compose configuration for local development</li>
-    <li>Improved onboarding documentation for new contributors</li>
-    <li>Fixed lint errors and minor bugs</li>
-    <li>Maintained transparent record of merged contributions</li>
+    <li>Open-source contributor — submitted PRs and coordinated with maintainers</li>
+    <li>Implemented JWT authentication for protected API routes</li>
+    <li>Built benchmark, DID, and WA API routes from README specifications</li>
+    <li>Created the deferral system for the ethics engine backend</li>
+    <li>Refactored API routes and models for cleaner structure</li>
+    <li>Added Docker configuration for local development</li>
+    <li>Wrote tests for the new routes and auth flows</li>
   </ul>
 </Section>
 
-<Section id="impact" eyebrow="Outcomes & Proof" title="Measurable results">
+<Section id="impact" eyebrow="What's in the Repo" title="Real artifacts you can verify">
   <ul className="feature-list">
-    <li><strong>GitHub organization:</strong> <Link to="https://github.com/CIRISAI" external>CIRISAI</Link></li>
-    <li><strong>Pull requests merged:</strong> <Link to="https://github.com/CIRISAI/CIRISNode/pulls?q=is%3Apr+author%3ABradleyMatera" external>View merged PRs</Link></li>
-    <li><strong>Verified documentation updates:</strong> JWT authentication docs improved in merged pull requests</li>
-    <li><strong>Verified Docker Compose configuration:</strong> Local development setup added to repository</li>
-    <li><strong>Verified logging improvements:</strong> Token verification logging added to codebase</li>
-    <li><strong>Verified code fixes:</strong> Lint errors and minor bugs fixed in merged PRs</li>
+    <li><strong>GitHub organization:</strong> <Link to="https://github.com/CIRISAI" external>github.com/CIRISAI</Link></li>
+    <li><strong>CIRISNode repo:</strong> <Link to="https://github.com/CIRISAI/CIRISNode" external>github.com/CIRISAI/CIRISNode</Link> — Python (645KB) + TypeScript (160KB), 4 stars</li>
+    <li><strong>My PRs:</strong> <Link to="https://github.com/CIRISAI/CIRISNode/pulls?q=is%3Apr+author%3ABradleyMatera" external>View all 10 PRs by BradleyMatera</Link></li>
+    <li><strong>PR #1 (merged):</strong> Phase 2 finalization — API fully functional, JWT set up, all README routes working, Docker support, Matrix stubs</li>
+    <li><strong>PR #2 (merged):</strong> Enhanced benchmark and DID routes with JWT authentication and logging</li>
+    <li><strong>PR #5 (merged):</strong> Refactored deferral handling to only accept 'defer' type in backend</li>
+    <li><strong>PR #6 (merged):</strong> Refactored API routes and models for benchmarks, DIDs, and WAs</li>
+    <li><strong>PR #8 (merged):</strong> Deferral System implementation</li>
+    <li><strong>Result:</strong> 7 of 10 PRs merged. 3 were closed without merge (including one I labeled "BAD PULL! DELETE ME!" — I learned from that mistake).</li>
+    <li><strong>Honest limitations:</strong> I was one of several contributors. The project has continued evolving since my contributions. My PR titles could have been more descriptive (e.g., "Fsd" was not a good PR title).</li>
   </ul>
 </Section>
 
 <Section id="artifacts" eyebrow="Tech Stack" title="Technologies used">
   <div className="project-card__stack">
-    <span>Node.js</span>
-    <span>Express</span>
-    <span>MongoDB</span>
+    <span>Python</span>
+    <span>TypeScript</span>
     <span>Docker</span>
     <span>JWT</span>
+    <span>FastAPI</span>
+    <span>MongoDB</span>
   </div>
 </Section>

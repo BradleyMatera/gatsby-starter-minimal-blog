@@ -1,5 +1,5 @@
 ---
-title: "Interactive Pokédex Case Study"
+title: "Interactive Pokédex Project Write-up"
 slug: "/projects/interactive-pokedex"
 theme: "Front-End & Full-Stack"
 ---
@@ -7,9 +7,9 @@ theme: "Front-End & Full-Stack"
 import { Section, Card, AnchorNav, Link } from "../../../src/ui";
 
 <Section
-  eyebrow="Case Study"
-  title="Interactive Pokédex · Static Next.js demo"
-  description="Next.js static export that builds a Pokédex for the first 151 Pokémon with client-side search and filtering. Hosted on GitHub Pages with build-time data from PokéAPI."
+  eyebrow="Project Write-up"
+  title="Interactive Pokédex · Static Next.js 16 app for GitHub Pages"
+  description="Next.js 16 static export that builds a Pokédex for the first 151 Pokémon with client-side search and filtering. Build-time data fetch from PokéAPI, prerendered detail pages, Tailwind CSS v4 + NextUI. Hosted on GitHub Pages."
 />
 
 <AnchorNav
@@ -17,38 +17,42 @@ import { Section, Card, AnchorNav, Link } from "../../../src/ui";
     { id: "overview", label: "Problem" },
     { id: "approach", label: "Solution" },
     { id: "role", label: "My Role" },
-    { id: "impact", label: "Outcomes & Proof" },
+    { id: "impact", label: "What's in the Repo" },
     { id: "artifacts", label: "Tech Stack" },
   ]}
 />
 
 <Section id="overview" eyebrow="Problem" title="User need">
   <p>
-    I wanted a static, serverless way to browse the original 151 Pokémon with fast search and filtering. The experience needed to be responsive, easy to scan, and fully usable without a backend.
+    I wanted to learn how to combine Next.js App Router with static export (<code>output: "export"</code>) for GitHub Pages. A Pokédex was a good fit — fixed dataset (151 Pokémon), public API, and enough complexity to exercise build-time data fetching, prerendered detail pages, and client-side search.
   </p>
 </Section>
 
 <Section id="approach" eyebrow="Solution" title="What I built">
   <p>
-    Built a Next.js app that fetches PokéAPI data at build time and exports a static site to GitHub Pages. The list view uses client-side search and filtering, and each Pokémon has a pre-rendered detail page.
+    A Next.js 16 app that fetches PokéAPI data at build time and exports a static site to GitHub Pages. The list view uses client-side search and filtering via <code>PokemonProvider</code> and <code>ItemProvider</code> context. Each Pokémon has a prerendered detail page with sprites, stats, moves (first 10), evolution chains, and item interactions — no runtime API calls needed on navigation.
   </p>
   <div className="grid-two">
     <Card>
       <h3 className="feature-card__title">User interface</h3>
       <ul className="feature-list">
-        <li>Search and filtering UI for the 151‑Pokémon list</li>
-        <li>Responsive grid layout for cards and detail pages</li>
-        <li>Clear card hierarchy with stats and type badges</li>
-        <li>Consistent navigation between list and detail views</li>
+        <li>Home page lists 151 Pokémon with search and pagination</li>
+        <li>Search page filters the in-memory list</li>
+        <li>Item Dex lists items with search and pagination</li>
+        <li>Detail pages show sprites, stats, moves, evolutions</li>
+        <li>Light/dark theme toggle</li>
+        <li>Tailwind CSS v4 + NextUI components</li>
       </ul>
     </Card>
     <Card>
       <h3 className="feature-card__title">Technical implementation</h3>
       <ul className="feature-list">
-        <li>Next.js static export with build-time data fetch</li>
-        <li>Pre-rendered detail pages for each Pokémon</li>
-        <li>Client-side search and filtering state management</li>
-        <li>Tailwind CSS for responsive styling</li>
+        <li>Next.js 16 App Router with <code>output: "export"</code></li>
+        <li><code>generateStaticParams</code> enumerates 151 names at build time</li>
+        <li><code>fetchPokemonDetails</code> runs per name — sprites, species, evolutions, moves</li>
+        <li>Trailing slashes for GitHub Pages static layout</li>
+        <li>Image optimization disabled (<code>unoptimized: true</code>) for static export</li>
+        <li>GitHub Actions workflow publishes <code>out/</code> to Pages on push to main</li>
       </ul>
     </Card>
   </div>
@@ -66,32 +70,40 @@ import { Section, Card, AnchorNav, Link } from "../../../src/ui";
   </div>
 </Section>
 
-<Section id="role" eyebrow="My Role" title="Responsibilities">
+<Section id="role" eyebrow="My Role" title="What I did">
   <ul className="feature-list">
-    <li>Configured Next.js static export for GitHub Pages deployment</li>
-    <li>Implemented build-time data fetching from PokéAPI</li>
-    <li>Built client-side search and filtering for the list view</li>
-    <li>Designed responsive layouts with Tailwind CSS</li>
-    <li>Documented setup and deployment steps in the repo</li>
+    <li>Solo developer — built the entire application</li>
+    <li>Configured Next.js 16 static export for GitHub Pages deployment</li>
+    <li>Implemented build-time data fetching from PokéAPI with <code>generateStaticParams</code></li>
+    <li>Built client-side search and filtering with React context providers</li>
+    <li>Designed responsive layouts with Tailwind CSS v4 and NextUI</li>
+    <li>Set up GitHub Actions workflow for automatic deployment</li>
+    <li>Documented architecture, deployment model, and known limitations in README</li>
   </ul>
 </Section>
 
-<Section id="impact" eyebrow="Outcomes & Proof" title="Measurable results">
+<Section id="impact" eyebrow="What's in the Repo" title="Real artifacts you can verify">
   <ul className="feature-list">
-    <li><strong>GitHub repo:</strong> <Link to="https://github.com/BradleyMatera/Interactive-Pokedex" external>Interactive-Pokedex</Link></li>
-    <li><strong>Live demo:</strong> <Link to="https://bradleymatera.github.io/Interactive-Pokedex/" external>Interactive-Pokedex</Link></li>
-    <li><strong>Static export:</strong> Build-time data fetch and export documented in the repository</li>
-    <li><strong>Search and filtering:</strong> Client-side list filtering available in the live demo</li>
-    <li><strong>Responsive UI:</strong> Grid and detail views adapt across screen sizes</li>
+    <li><strong>GitHub repo:</strong> <Link to="https://github.com/BradleyMatera/Interactive-Pokedex" external>github.com/BradleyMatera/Interactive-Pokedex</Link></li>
+    <li><strong>Live demo:</strong> <Link to="https://bradleymatera.github.io/Interactive-Pokedex/" external>bradleymatera.github.io/Interactive-Pokedex</Link></li>
+    <li><strong>Created:</strong> June 2024, last updated July 2026</li>
+    <li><strong>Languages:</strong> TypeScript (193KB), CSS (47KB), JavaScript</li>
+    <li><strong>Topic tag:</strong> "completed" on GitHub</li>
+    <li><strong>Static export:</strong> Build-time data fetch documented in README section 3 and 4</li>
+    <li><strong>Deployment:</strong> GitHub Actions workflow publishes <code>out/</code> to Pages on push to main</li>
+    <li><strong>Known issues documented:</strong> README section 6 lists limitations honestly</li>
+    <li><strong>Honest limitations:</strong> This is a fan-made educational project, not affiliated with Nintendo. No backend, no user accounts, no analytics. Image optimization is disabled for static export compatibility.</li>
   </ul>
 </Section>
 
 <Section id="artifacts" eyebrow="Tech Stack" title="Technologies used">
   <div className="project-card__stack">
-    <span>Next.js</span>
+    <span>Next.js 16</span>
+    <span>TypeScript</span>
     <span>PokeAPI</span>
+    <span>Tailwind CSS v4</span>
+    <span>NextUI</span>
     <span>Static export</span>
-    <span>Tailwind CSS</span>
     <span>GitHub Pages</span>
   </div>
 </Section>

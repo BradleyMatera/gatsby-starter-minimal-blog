@@ -22,14 +22,15 @@ const PROJECTS: Project[] = [
   {
     id: "car-match",
     name: "Car-Match",
-    tagline: "Full-stack matchmaking with profiles, forums, and real-time chat",
+    tagline: "Full-stack community MVP — profiles, forums, events, messaging",
     category: "Full-Stack",
     description:
-      "Built to solve the 'too many disconnected dating features' problem by combining profiles, matching, chat, and forums in one product flow. React frontend, Express API, MongoDB, split deployment on GitHub Pages + Render.",
-    tech: ["React", "Express", "MongoDB", "Render", "GitHub Pages", "JWT"],
+      "A React frontend with an Express backend, built as a Full Sail University course project. Frontend on GitHub Pages, backend on Google Cloud Run (free tier). Forums are mock-backed by default and persist when MongoDB is configured. 100+ commits, Docker support, and full docs in the repo.",
+    tech: ["React", "Express", "MongoDB", "Google Cloud Run", "GitHub Pages", "JWT", "Docker"],
     metrics: [
-      { label: "Response", value: "<400ms" },
+      { label: "Commits", value: "100+" },
       { label: "Stack", value: "MERN" },
+      { label: "Status", value: "MVP" },
     ],
     github: "https://github.com/BradleyMatera/car-match",
     demo: "https://bradleymatera.github.io/car-match/",
@@ -53,14 +54,15 @@ const PROJECTS: Project[] = [
   {
     id: "pokedex",
     name: "Interactive Pokédex",
-    tagline: "Gen 1 Pokémon search with build-time + client-side filtering",
+    tagline: "Static Next.js 16 app — 151 Pokémon with build-time data and client-side search",
     category: "Frontend",
     description:
-      "Consumes the public Pokémon REST API with keyboard-friendly filtering, debounced search (300ms), skeleton states, and responsive layouts. Static export for GitHub Pages.",
-    tech: ["Next.js", "PokeAPI", "Tailwind", "Static export"],
+      "A Next.js 16 static export that fetches PokéAPI data at build time and prerenders 151 detail pages. Client-side search and filtering with React context providers. Tailwind CSS v4 + NextUI. Deployed to GitHub Pages via GitHub Actions.",
+    tech: ["Next.js 16", "TypeScript", "PokeAPI", "Tailwind v4", "NextUI", "Static export"],
     metrics: [
-      { label: "Indexed", value: "151" },
-      { label: "Lighthouse", value: "90+" },
+      { label: "Pokémon", value: "151" },
+      { label: "Status", value: "Live" },
+      { label: "Export", value: "Static" },
     ],
     github: "https://github.com/BradleyMatera/Interactive-Pokedex",
     demo: "https://bradleymatera.github.io/Interactive-Pokedex/",
@@ -68,17 +70,18 @@ const PROJECTS: Project[] = [
   {
     id: "ciris",
     name: "CIRIS AI Contributions",
-    tagline: "Open-source ethics-engine docs, Docker, and auth logging",
+    tagline: "Open-source backend code — Python, JWT auth, API routes, deferral system",
     category: "Open Source",
     description:
-      "Joined CIRIS to reduce contributor onboarding friction by improving docs, local setup with Docker Compose, and adding token-verification logging. Coordinated docs + runtime changes as one contributor journey.",
-    tech: ["Node.js", "Express", "MongoDB", "Docker", "JWT"],
+      "Submitted 10 PRs to CIRISNode (the CIRIS Ethics Engine backend, written in Python). 7 were merged. Work included implementing JWT authentication, building benchmark/DID/WA API routes, creating a deferral system, and refactoring the API route structure. Not just docs — real backend code.",
+    tech: ["Python", "TypeScript", "Docker", "JWT", "FastAPI"],
     metrics: [
-      { label: "Merged", value: "PRs" },
-      { label: "Focus", value: "Docs + Docker" },
+      { label: "PRs", value: "10" },
+      { label: "Merged", value: "7" },
+      { label: "Focus", value: "Backend" },
     ],
     github: "https://github.com/CIRISAI/CIRISNode/pulls?q=is%3Apr+author%3ABradleyMatera",
-    demo: "https://github.com/CIRISAI",
+    demo: "https://github.com/CIRISAI/CIRISNode",
   },
   {
     id: "animal-sounds",
