@@ -279,7 +279,9 @@ const PurchasesPage = () => {
       <div className="store-shell">
         <header className="store-header">
           <h1 className="store-title">Bradley Matera Customer Portal</h1>
-          <p className="store-subtitle">Sign in to manage your purchases from Bradley Matera's store.</p>
+          <p className="direct-answer store-subtitle">
+            <strong>What is the customer portal?</strong> Sign in to manage your purchases from Bradley Matera&apos;s store. View order history, re-download digital products, and resend receipt emails. Affiliate products are sold by third-party merchants — direct digital downloads are sold by Bradley Matera.
+          </p>
           <p className="store-legal">
             Affiliate products are sold by third-party merchants. Bradley Matera is not the seller or creator of affiliate products.
             Direct digital downloads are sold by Bradley Matera.
@@ -434,5 +436,29 @@ const PurchasesPage = () => {
 export default PurchasesPage;
 
 export const Head = () => (
-  <Seo title="Bradley Matera Customer Portal — Downloads & Orders" description="Sign in to the Bradley Matera customer portal to access your software downloads, order history, and receipts from Bradley Matera's digital store." pathname="/purchases/" />
+  <Seo
+    title="Bradley Matera Customer Portal — Downloads & Orders"
+    description="Sign in to the Bradley Matera customer portal to access your software downloads, order history, and receipts from Bradley Matera's digital store."
+    pathname="/purchases/"
+    canonicalUrl="https://bradleymatera.dev/purchases/"
+    structuredData={[
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        name: "Bradley Matera Customer Portal — Downloads & Orders",
+        url: "https://bradleymatera.dev/purchases/",
+        description: "Sign in to the Bradley Matera customer portal to access your software downloads, order history, and receipts.",
+        author: {
+          "@type": "Person",
+          name: "Bradley Matera",
+          url: "https://bradleymatera.dev/",
+        },
+        publisher: {
+          "@type": "Person",
+          name: "Bradley Matera",
+          url: "https://bradleymatera.dev/",
+        },
+      },
+    ]}
+  />
 );

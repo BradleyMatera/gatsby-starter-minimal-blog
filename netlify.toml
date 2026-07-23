@@ -1,5 +1,5 @@
 [build]
-  command = "rm -rf .cache public && npm run build"
+  command = "rm -rf .cache public && npm run build && node scripts/ping-indexnow.js"
   publish = "public"
   functions = "netlify/functions"
 
@@ -21,9 +21,22 @@
   [headers.values]
     Cache-Control = "no-store"
 
+# Allow Bingbot and other crawlers access to all content
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "index, follow"
+
 # Serve the sitemap index at /sitemap.xml for crawlers that expect it there
 [[redirects]]
   from = "/sitemap.xml"
   to = "/sitemap.xml/sitemap-index.xml"
   status = 200
   force = true
+
+# IndexNow key for Bing instant indexing
+[[headers]]
+  for = "/066018fe01b8945f43b635cc715e4f50.txt"
+  [headers.values]
+    Content-Type = "text/plain"
+    Cache-Control = "public, max-age=86400"

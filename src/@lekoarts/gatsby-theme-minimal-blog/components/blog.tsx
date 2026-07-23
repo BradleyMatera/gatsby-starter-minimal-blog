@@ -230,11 +230,11 @@ const Blog = ({ posts }: MBBlogProps) => {
         disableReveal
         description={
           <>
-            <p className="section-lead">
-              I write quick breakdowns of problems I solve and cool tech I’m learning. Nothing long. No spam. If something breaks and I fix it, I write about it.
+            <p className="direct-answer section-lead">
+              <strong>What is Bradley Matera&apos;s blog about?</strong> Short breakdowns of fixes, experiments, and lessons from cloud and full-stack work — AWS, React, Docker, CI/CD, WebGPU, and honest project notes from a junior software engineer in Northwest Illinois. Most entries begin as AI-assisted drafts that I edit, annotate, and fact-check.
             </p>
             <p className="section-lead">
-              Most entries begin as AI-assisted drafts (ChatGPT/Copilot) that I edit, annotate, and fact-check. If a post is still rough or mostly generated, the header calls that out.
+              I write quick breakdowns of problems I solve and cool tech I&apos;m learning. Nothing long. No spam. If something breaks and I fix it, I write about it.
             </p>
           </>
         }
@@ -429,6 +429,11 @@ export const Head: HeadFC = () => (
         url: "https://bradleymatera.dev/blog/",
         description: "Field notes, experiments, and project retrospectives from a web developer in Northwest Illinois.",
         author: {
+          "@type": "Person",
+          name: "Bradley Matera",
+          url: "https://bradleymatera.dev/",
+        },
+        publisher: {
           "@type": "Person",
           name: "Bradley Matera",
           url: "https://bradleymatera.dev/",

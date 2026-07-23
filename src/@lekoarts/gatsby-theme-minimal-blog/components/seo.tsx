@@ -118,9 +118,35 @@ const Seo = ({
     : structuredData
       ? [structuredData]
       : [];
+  const buildDate = new Date().toISOString();
+  const webpageStructuredData: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: seo.title,
+    url: canonical,
+    description: seo.description,
+    inLanguage: siteLanguage,
+    isPartOf: {
+      "@type": "WebSite",
+      name: siteTitle,
+      url: siteUrl,
+    },
+    author: {
+      "@type": "Person",
+      name: "Bradley Matera",
+      url: siteUrl,
+    },
+    publisher: {
+      "@type": "Person",
+      name: "Bradley Matera",
+      url: siteUrl,
+    },
+    dateModified: buildDate,
+  };
   const structuredDataNodes = [
     personStructuredData,
     websiteStructuredData,
+    webpageStructuredData,
     ...(articleStructuredData ? [articleStructuredData] : []),
     ...(breadcrumbs && breadcrumbs.length > 1
       ? [

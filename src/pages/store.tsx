@@ -225,9 +225,22 @@ const StoreIndex: React.FC<RouteComponentProps> = () => {
     <div className="store-shell">
       <StoreHero amazonAnchorId="brads-amazon-picks" />
 
+      <h2 className="store-question-heading" style={{ fontSize: "1.25rem", margin: "2rem 0 0.5rem", maxWidth: "42rem" }}>
+        What can I buy in Bradley Matera&apos;s store?
+      </h2>
       <p className="store-direct-answer" style={{ fontSize: "1.15rem", lineHeight: 1.6, margin: "1.5rem 0", maxWidth: "42rem" }}>
-        Browse digital downloads, templates, and development resources by Bradley Matera. All products are instant download after Stripe payment confirmation.
+        Browse digital downloads, templates, and development resources by Bradley Matera. All products are instant download after Stripe payment confirmation. The store also features hand-picked Amazon gear recommendations for developers.
       </p>
+
+      <h2 className="store-question-heading" style={{ fontSize: "1.25rem", margin: "2rem 0 0.5rem", maxWidth: "42rem" }}>
+        How do purchases work?
+      </h2>
+      <ul style={{ maxWidth: "42rem", lineHeight: 1.8, margin: "0 0 2rem", paddingLeft: "1.5rem" }}>
+        <li><strong>Digital downloads:</strong> Pay with Stripe, receive an instant download link via email.</li>
+        <li><strong>Amazon picks:</strong> Redirect to Amazon for checkout. Using these links supports my work at no extra cost.</li>
+        <li><strong>Access your purchases:</strong> Visit the <Link to="/purchases/">customer portal</Link> to re-download anytime.</li>
+        <li><strong>Need help?</strong> Contact me via the <Link to="/support/">support page</Link> for refunds or download issues.</li>
+      </ul>
 
       {loading && <div className="store-status">Loading products…</div>}
 
@@ -351,5 +364,24 @@ export const Head: HeadFC = () => (
     description="Browse and purchase software downloads, templates, and digital products by Bradley Matera — developer tools, project templates, and code resources for web developers."
     pathname="/store/"
     canonicalUrl="https://bradleymatera.dev/store/"
+    structuredData={[
+      {
+        "@context": "https://schema.org",
+        "@type": "Store",
+        name: "Bradley Matera Digital Store",
+        url: "https://bradleymatera.dev/store/",
+        description: "Digital downloads, templates, and developer resources by Bradley Matera.",
+        author: {
+          "@type": "Person",
+          name: "Bradley Matera",
+          url: "https://bradleymatera.dev/",
+        },
+        publisher: {
+          "@type": "Person",
+          name: "Bradley Matera",
+          url: "https://bradleymatera.dev/",
+        },
+      },
+    ]}
   />
 );

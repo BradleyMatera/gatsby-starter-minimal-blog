@@ -3,8 +3,20 @@ Allow: /
 
 User-agent: Bingbot
 Allow: /
+Crawl-delay: 0
+
+User-agent: bingbot
+Allow: /
+Crawl-delay: 0
 
 User-agent: Googlebot
 Allow: /
 
+User-agent: AdsBot-Google
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
 Sitemap: https://bradleymatera.dev/sitemap.xml
+Sitemap: https://bradleymatera.dev/sitemap.xml/sitemap-index.xml

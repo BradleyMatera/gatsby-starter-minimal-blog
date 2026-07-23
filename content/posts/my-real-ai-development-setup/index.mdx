@@ -28,7 +28,7 @@ Models are the brains. Local models (like Qwen through Ollama) are fast and chea
 
 ## VS Code
 
-VS Code is just the editor. It is not an AI product. The reason it stays central for me is boring but real. It is where I can search across a repo, jump between definitions and references, compare diffs, keep multiple terminals open, and not lose my place. If you have ever tried to refactor a project without solid search and navigation, you know why that matters.
+VS Code is just the editor. It is not an AI product. The reason it stays central for me is boring but real. It is where I can search across a repo, jump between definitions and references, compare diffs, keep multiple terminals open, and not lose my place. If you have ever tried to refactor a project without solid search and navigation, you know why that matters. ([VS Code documentation](https://code.visualstudio.com/docs))
 
 When AI is involved, VS Code matters even more because it is the place where I can review what the AI changed. Most AI mistakes are not obvious until you look at the diff and notice it changed a pattern, renamed something inconsistently, or introduced a new style in a file that already had a standard. So VS Code is not “the AI tool.” It is the control room.
 
@@ -36,7 +36,7 @@ When AI is involved, VS Code matters even more because it is the place where I c
 
 ## Cline
 
-Cline is a VS Code extension that acts like an agent. The important detail is not that it can chat. The important detail is that it can see the repo and operate on it. It can browse the file tree, open files, propose patches in the right places, run commands, then react to the output that comes back.
+Cline is a VS Code extension that acts like an agent. The important detail is not that it can chat. The important detail is that it can see the repo and operate on it. It can browse the file tree, open files, propose patches in the right places, run commands, then react to the output that comes back. ([Cline on GitHub](https://github.com/cline/cline))
 
 That repo awareness is the whole reason it is useful. A normal chat model will happily give you a snippet that does not match your project. Cline can look at your actual project structure and aim the changes at real files.
 
@@ -46,7 +46,7 @@ Where Cline gets dangerous is when you let it do large refactors without tight b
 
 ## Ollama
 
-Ollama is a local model runner. That means it is not the model itself, it is the thing that hosts models on your machine. The reason I use it is because it makes AI help feel like a normal tool instead of a separate activity. No tabs, no waiting on a website, no thinking about tokens every time I ask for help.
+Ollama is a local model runner. That means it is not the model itself, it is the thing that hosts models on your machine. The reason I use it is because it makes AI help feel like a normal tool instead of a separate activity. No tabs, no waiting on a website, no thinking about tokens every time I ask for help. ([Ollama website](https://ollama.com/))
 
 Local running also changes the vibe in a practical way. You ask more questions because the cost is basically your hardware, not a meter. That matters when you are doing day-to-day cleanup work and you just want quick answers without turning it into a production.
 
@@ -54,7 +54,7 @@ The tradeoff is obvious too. Local models have a ceiling. They can be great for 
 
 ## Qwen models
 
-When I say Qwen here, I mean the Qwen models I have run locally through Ollama. I like them for the boring, constant, real tasks that every repo has. They are fast enough that you can keep them “on” mentally and just use them like a helper while you work.
+When I say Qwen here, I mean the Qwen models I have run locally through Ollama. I like them for the boring, constant, real tasks that every repo has. They are fast enough that you can keep them “on” mentally and just use them like a helper while you work. ([Qwen on Hugging Face](https://huggingface.co/Qwen))
 
 The kinds of tasks that fit Qwen well are things like cleaning up a component so it reads like a human wrote it, extracting repeated logic into a helper, fixing TypeScript errors where the intent is obvious, reorganizing imports, writing small utilities, or giving you a first pass implementation that you are going to review and adjust anyway.
 
@@ -64,7 +64,7 @@ The kinds of tasks that fit Qwen poorly are the ones where the model needs to ho
 
 ## Claude models
 
-Claude is the model I switch to when the problem stops being “small code work” and becomes “reasoning work.” Multi-file bugs. Messy code that needs a rewrite without changing behavior. Build errors that have more than one root cause. Situations where you need an explanation that maps back to your files and not just a generic answer.
+Claude is the model I switch to when the problem stops being “small code work” and becomes “reasoning work.” Multi-file bugs. Messy code that needs a rewrite without changing behavior. Build errors that have more than one root cause. Situations where you need an explanation that maps back to your files and not just a generic answer. ([Claude by Anthropic](https://www.anthropic.com/claude))
 
 The difference is not magic. The difference is that it tends to keep a larger mental model at once, and it is better at explaining why a fix is the fix. That matters because patching the symptom is easy, but patching the cause is what keeps the repo from turning into a haunted house.
 
@@ -72,7 +72,7 @@ The downside is cost and overkill. If you use a stronger model for every tiny ch
 
 ## Cursor
 
-Cursor is an AI-first editor. The way I think about it is that VS Code is my stable home, and Cursor is the tool I open when the codebase shape is the problem. That does not mean “I need help writing code.” It means the repo is messy enough that doing changes one file at a time is painful, and you need a broader restructuring pass.
+Cursor is an AI-first editor. The way I think about it is that VS Code is my stable home, and Cursor is the tool I open when the codebase shape is the problem. That does not mean “I need help writing code.” It means the repo is messy enough that doing changes one file at a time is painful, and you need a broader restructuring pass. ([Cursor website](https://cursor.com))
 
 Cursor is useful when you want consistent changes across many files. Renaming patterns. Reorganizing folders. Pulling a feature into a cleaner structure. Refactoring repeated patterns in a React codebase. Stuff that would be annoying and error-prone if you tried to do it manually across a lot of files.
 
@@ -88,7 +88,7 @@ The risk is when it starts hallucinating solutions that do not match what AWS is
 
 ## GitHub Copilot
 
-Copilot is autocomplete. That is the honest description. It is good at finishing JSX lines, filling in small helper functions, and saving you from typing boilerplate. It is not good at owning architecture decisions or understanding your whole repo.
+Copilot is autocomplete. That is the honest description. It is good at finishing JSX lines, filling in small helper functions, and saving you from typing boilerplate. It is not good at owning architecture decisions or understanding your whole repo. ([GitHub Copilot](https://github.com/features/copilot))
 
 If you treat Copilot like a small typing tool, it is helpful. If you treat it like a decision maker, it will push patterns that do not match your codebase and you will spend time cleaning up drift.
 
@@ -135,6 +135,14 @@ If you are trying to decide what to use, the best starting point is not buying a
 This is not a stack to copy. It is just the set of tools I have actually used and the reasons they ended up in the rotation.
 
 If you want one rule that keeps you honest, it is this. The tool is never the proof. The proof is the repo building and behaving, and the model you picked helping you get there without making a mess.
+
+## Proof this setup is real
+
+This site and its content were built using exactly this toolchain:
+
+- [This site's GitHub repo](https://github.com/BradleyMatera/gatsby-starter-minimal-blog) — visible commit history showing AI-assisted development
+- [Automated test suite](https://github.com/BradleyMatera/gatsby-starter-minimal-blog/blob/master/scripts/verify-site.js) — 234 assertions that verify every build
+- [Lighthouse scores](https://bradleymatera.dev) — SEO 100, Accessibility 98, verified on every deploy
 
 ## Keep reading
 

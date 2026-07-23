@@ -561,6 +561,7 @@ export const Head: HeadFC<MBPostProps> = ({ data }) => {
     image: imageUrl ? `https://bradleymatera.dev${imageUrl}` : undefined,
     url: canonicalUrl,
     datePublished: publishedTime,
+    dateModified: publishedTime,
     author: {
       "@type": "Person",
       name: "Bradley Matera",
@@ -590,6 +591,7 @@ export const Head: HeadFC<MBPostProps> = ({ data }) => {
         ogType="article"
         article={{
           publishedTime,
+          modifiedTime: publishedTime,
           tags: articleTags,
         }}
         breadcrumbs={[
