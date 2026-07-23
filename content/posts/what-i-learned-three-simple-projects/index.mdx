@@ -24,7 +24,7 @@ The initial scope was simple: a DOM manipulation exercise that triggers HTML5 `<
 
 After deployment, the app worked on desktop Chrome but failed silently on iOS Safari. It tried to instantiate the `AudioContext` and preload assets on `window.onload`.
 
-Mobile browsers enforce strict autoplay policies. The `AudioContext` starts in a `suspended` state on WebKit browsers. It cannot transition to `running` until a distinct user interaction event, usually `touchend` or `click`, occurs. My code was trying to play audio before that handshake happened, so the browser rejected the request.
+Mobile browsers enforce strict autoplay policies. (See [Apple's WebKit autoplay policy documentation](https://webkit.org/blog/6784/new-video-policies-for-ios/) and [Chrome's autoplay policy](https://developer.chrome.com/blog/autoplay/).) The `AudioContext` starts in a `suspended` state on WebKit browsers. It cannot transition to `running` until a distinct user interaction event, usually `touchend` or `click`, occurs. My code was trying to play audio before that handshake happened, so the browser rejected the request.
 
 ### Resolution
 
@@ -73,7 +73,7 @@ The goal was a robust unit testing suite using Jest. The app logic involved geom
 
 ### Failure point: the “Cannot use import statement” error
 
-The project used ES modules (`import`/`export`) to stay compatible with modern bundlers. But Jest runs in a Node.js environment, which historically defaults to CommonJS (`require`).
+The project used ES modules (`import`/`export`) to stay compatible with modern bundlers. But Jest runs in a Node.js environment, which historically defaults to CommonJS (`require`) ([Node.js modules documentation](https://nodejs.org/api/modules.html)).
 
 Running the test suite crashed immediately with `SyntaxError: Cannot use import statement outside a module`. Node.js was executing the source files directly without transpilation, so it did not recognize `import` in `.js` files unless `package.json` specified `"type": "module"` or the file used `.mjs`.
 
@@ -120,7 +120,7 @@ To force a grid with Flexbox, I had to use negative margins, complex `calc()` wi
 
 ### Resolution: CSS Grid
 
-I scrapped the Flexbox approach for the main container and implemented CSS Grid. The difference in code complexity was substantial.
+I scrapped the Flexbox approach for the main container and implemented CSS Grid. The difference in code complexity was substantial. (See the actual [CheeseMath repo](https://github.com/BradleyMatera/CheeseMath-Jest-Tests) for the real code.)
 
 **The failed Flexbox approach:**
 

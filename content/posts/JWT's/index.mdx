@@ -7,7 +7,7 @@ description: "A hands-on JWT security lab: generate real tokens, decode them, ve
 theme: "Security"
 ---
 
-JWTs are not "magic auth." A JWT is just a string. The only time it becomes useful is when you verify it correctly and treat its claims like untrusted input until that verification succeeds. Most JWT confusion comes from mixing up three different actions that sound similar but are not the same thing: creating a token, decoding a token, and verifying a token.
+JWTs are not "magic auth." A JWT is just a string. (See [RFC 7519](https://datatracker.ietf.org/doc/html/rfc7519) for the official specification.) The only time it becomes useful is when you verify it correctly and treat its claims like untrusted input until that verification succeeds. Most JWT confusion comes from mixing up three different actions that sound similar but are not the same thing: creating a token, decoding a token, and verifying a token.
 
 This post is a lab. You will generate real tokens, inspect them in multiple ways, verify them, and then deliberately break them so you can see exactly what failure looks like. The goal is not to memorize vocabulary. The goal is to understand where trust is created, where it is not, and what lines of code actually matter.
 
@@ -50,11 +50,11 @@ If you do not see those states happen, you did not actually learn JWT behavior y
 
 ## What you need before starting
 
-You need Node 18+ and a terminal. No frameworks. No web server. No database. This is intentionally small so you can see what is happening.
+You need [Node 18+](https://nodejs.org/en/about/previous-releases) and a terminal. No frameworks. No web server. No database. This is intentionally small so you can see what is happening.
 
 ## Step 1: Create a clean lab project
 
-Create a folder, initialize Node, and install one dependency.
+Create a folder, initialize Node, and install one dependency ([jsonwebtoken on npm](https://www.npmjs.com/package/jsonwebtoken)).
 
 ```bash
 mkdir jwt-lab

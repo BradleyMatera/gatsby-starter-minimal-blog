@@ -7,7 +7,7 @@ description: "A lightweight system design document template that lives inside yo
 theme: "Systems"
 ---
 
-Most systems I have seen fail to ship not because they were too hard, but because the design never became a real artifact. The idea stayed in someone’s head or in a long document that did not connect to actual files or testable outcomes.
+In my experience, systems that fail to ship usually do so not because they were too hard, but because the design never became a real artifact. The idea stayed in someone’s head or in a long document that did not connect to actual files or testable outcomes.
 
 I use a short system design document that lives inside the repo. It is not architecture theory. It is a few headings that keep the project from drifting.
 
@@ -94,6 +94,13 @@ Before I write code, I check the design against these questions:
 - Can every "done when" bullet be verified with a command, browser check, or test?
 
 If any answer is no, I fix the design first.
+
+## Where I use this
+
+This template is not theoretical. I use a version of it in real repos:
+
+- [This site's repo](https://github.com/BradleyMatera/gatsby-starter-minimal-blog) includes `AGENTS.md` and structured docs that map to real files
+- [Car-Match](https://github.com/BradleyMatera/car-match) includes `docs/` with DEPLOYMENT.md, API.md, and TROUBLESHOOTING.md that connect to actual code paths
 
 ## Closing
 

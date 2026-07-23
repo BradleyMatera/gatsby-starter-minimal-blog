@@ -7,7 +7,7 @@ description: "A concrete audit checklist for aligning a WebGPU demo write-up wit
 theme: "Graphics"
 ---
 
-A demo is only as honest as its write up. WebGPU is especially easy to oversell because most people reading a post cannot tell what is "one triangle" versus "real engine-ish work" unless you show them exactly where it lives in code. If you want the post to be credible, every claim needs a file path you can point at and a proof link that still works when someone clicks it six months later.
+A demo is only as honest as its write up. WebGPU is especially easy to oversell (See the [WebGPU specification](https://www.w3.org/TR/webgpu/) and [Chrome's WebGPU documentation](https://developer.chrome.com/docs/web-platform/webgpu/).) because most people reading a post cannot tell what is "one triangle" versus "real engine-ish work" unless you show them exactly where it lives in code. If you want the post to be credible, every claim needs a file path you can point at and a proof link that still works when someone clicks it six months later.
 
 This post is the audit process I use to make the write up match the repo. It is not about polishing the prose. It is about deleting anything that is not visible in code, labeling future work like future work, and fixing links so a reader can verify everything without guessing.
 
@@ -34,7 +34,7 @@ The audit has only three objects:
 
 You need the demo repo open somewhere you can search it, and you need this blog file open in your editor. If you can, open the demo running locally too, because “it compiles” and “it renders” are not the same thing in WebGPU.
 
-If you are auditing a repo on GitHub, the fastest proof links are deep links to a file and (when possible) a specific line range. If you are auditing locally, the fastest proof is a search command that lands you on the exact implementation.
+If you are auditing a repo on GitHub (For example, [my TriangleDemo repo](https://github.com/BradleyMatera/TriangleDemo) — a WebGPU lab with 16 lessons that I audited using this exact process.), the fastest proof links are deep links to a file and (when possible) a specific line range. If you are auditing locally, the fastest proof is a search command that lands you on the exact implementation.
 
 ![Digging through code](https://media.giphy.com/media/3o7aD9hC6GgT3KfX2k/giphy.gif)
 

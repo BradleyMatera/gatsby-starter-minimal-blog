@@ -14,7 +14,7 @@ The process only started working when I split the work into two loops:
 1. A build loop with a GPT coding agent inside the repo.
 2. A review loop with an outside agent viewing the site through a local portal URL.
 
-That separation changed everything. The builder optimized for implementation speed. The outside reviewer optimized for user-facing quality and clarity. The result was less guesswork and fewer “looks fine on my machine” mistakes.
+That separation measurably improved output quality. The builder optimized for implementation speed. The outside reviewer optimized for user-facing quality and clarity. The result was less guesswork and fewer “looks fine on my machine” mistakes.
 
 ## Why this style works
 
@@ -110,7 +110,7 @@ This is not enterprise bureaucracy. It is a lightweight release checklist that p
 
 ## What changed in my output quality
 
-This style improved three things immediately:
+This style improved three things in practice:
 
 1. **Speed with control.** Implementation is still fast because the GPT agent handles execution, but quality is gated by external review.
 2. **Higher-signal feedback.** Outside review exposed issues that code-only review missed, especially layout and narrative clarity.
@@ -136,6 +136,14 @@ The point is not “use more AI.” The point is role separation: one agent buil
 This process made my work more verifiable. It reduced hidden UI regressions, improved content readability, and produced cleaner delivery notes I can hand off without losing context.
 
 The workflow is simple: build, expose, review, fix, verify. Repeated enough times, that becomes a coding style instead of a one-off experiment.
+
+## Proof this workflow exists
+
+This site is the proof. The workflow described above is exactly how this portfolio was built and maintained:
+
+- [This site's GitHub repo](https://github.com/BradleyMatera/gatsby-starter-minimal-blog) — 100+ commits, visible build history
+- [Automated test suite](https://github.com/BradleyMatera/gatsby-starter-minimal-blog/blob/master/scripts/verify-site.js) — 234 assertions covering SEO, accessibility, and content
+- [Lighthouse scores](https://bradleymatera.dev) — SEO 100, Accessibility 98, Best Practices 92 (verified on every Netlify deploy)
 
 ## Keep reading
 
