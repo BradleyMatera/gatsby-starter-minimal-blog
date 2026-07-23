@@ -10,6 +10,7 @@ import "../../src/site/styles/style-lab.css";
 import "../../src/styles/themes/neumorphism.css";
 import "../../src/styles/themes/retrofuturism.css";
 import "../../src/styles/themes/brutalism.css";
+import "../../src/styles/demos.css";
 
 import * as React from "react";
 import { StyleLabProvider } from "../../src/site/components";

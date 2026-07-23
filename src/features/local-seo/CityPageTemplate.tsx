@@ -322,6 +322,80 @@ export const createCityPage = (config: CityPageConfig) => {
       </Section>
 
       <Section
+        eyebrow="See examples"
+        title={`Live demo websites for ${city} businesses`}
+        description={
+          <p>
+            Don't just take my word for it — see full, working demo websites built for different
+            industries. Each one shows what your {city} business site could look like, complete with
+            services, reviews, contact forms, and mobile-responsive design.
+          </p>
+        }
+      >
+        <div className="grid-three">
+          <Card variant="outline">
+            <h3 className="feature-card__title">🍽️ Restaurant Demo</h3>
+            <p className="feature-card__body">
+              Full restaurant website with menu, reservations, hours, photo gallery, and customer reviews.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="primary" to="/demos/restaurant/">View restaurant demo</Link>
+            </div>
+          </Card>
+          <Card variant="outline">
+            <h3 className="feature-card__title">🌿 Landscaping Demo</h3>
+            <p className="feature-card__body">
+              Landscaping company site with service packages, seasonal tips, gallery, and free quote form.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="primary" to="/demos/landscaping/">View landscaping demo</Link>
+            </div>
+          </Card>
+          <Card variant="outline">
+            <h3 className="feature-card__title">🔧 HVAC Demo</h3>
+            <p className="feature-card__body">
+              HVAC company with emergency service, maintenance plans, team bios, and financing info.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="primary" to="/demos/hvac/">View HVAC demo</Link>
+            </div>
+          </Card>
+          <Card variant="outline">
+            <h3 className="feature-card__title">🚗 Auto Repair Demo</h3>
+            <p className="feature-card__body">
+              Auto shop with service menu, online booking, tire lookup, and mechanic credentials.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="primary" to="/demos/auto-repair/">View auto repair demo</Link>
+            </div>
+          </Card>
+          <Card variant="outline">
+            <h3 className="feature-card__title">🏠 Real Estate Demo</h3>
+            <p className="feature-card__body">
+              Real estate office with featured listings, agent profiles, market reports, and neighborhood guides.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="primary" to="/demos/real-estate/">View real estate demo</Link>
+            </div>
+          </Card>
+          <Card variant="outline">
+            <h3 className="feature-card__title">💇 Beauty Salon Demo</h3>
+            <p className="feature-card__body">
+              Hair and beauty salon with service menu, stylist team, online booking, and gallery.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="primary" to="/demos/beauty-salon/">View salon demo</Link>
+            </div>
+          </Card>
+        </div>
+        <div className="card-actions" style={{ marginTop: "1.5rem" }}>
+          <Link data-variant="primary" to="/demos/">
+            View all demos
+          </Link>
+        </div>
+      </Section>
+
+      <Section
         eyebrow="Why it matters"
         title="The hard truth about your website"
       >

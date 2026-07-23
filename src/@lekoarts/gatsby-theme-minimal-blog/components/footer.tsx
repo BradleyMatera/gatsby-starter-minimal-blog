@@ -49,6 +49,9 @@ const Footer = () => {
                 <Link to="/purchases/">Customer portal</Link>
               </li>
               <li>
+                <Link to="/demos/">Website demos</Link>
+              </li>
+              <li>
                 <Link to="/web-developer-durand-davis-illinois/">Northwest Illinois web development</Link>
               </li>
               <li>
