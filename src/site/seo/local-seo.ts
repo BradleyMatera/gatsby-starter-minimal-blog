@@ -48,6 +48,7 @@ export const buildProfessionalServiceSchema = ({
   description,
   telephone: "+16502651193",
   email: "bradmatera@gmail.com",
+  dateModified: new Date().toISOString().split("T")[0],
   founder: {
     "@type": "Person",
     name: "Bradley Matera",

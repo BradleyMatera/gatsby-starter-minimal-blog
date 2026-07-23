@@ -292,6 +292,43 @@ const WinnebagoWebDeveloperPage = () => (
     </Section>
 
     <Section
+      eyebrow="Evidence & proof"
+      title="Work samples and case studies"
+      description={
+        <p>
+          Don't take my word for it — here's the actual work behind the claims above.
+        </p>
+      }
+    >
+      <div className="grid-two">
+        <Card variant="outline">
+          <h3 className="feature-card__title">Project case studies</h3>
+          <p className="feature-card__body">
+            See <Link to="/projects/">completed project case studies</Link> with code, screenshots, and honest notes on what worked and what didn't.
+          </p>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">Web development FAQ</h3>
+          <p className="feature-card__body">
+            Read the <Link to="/northwest-illinois-web-development-faq/">Northwest Illinois web development FAQ</Link> for process details, timelines, and pricing answers.
+          </p>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">Pricing breakdown</h3>
+          <p className="feature-card__body">
+            Transparent <Link to="/pricing/">pricing tiers</Link> starting at $447 with no hidden fees or contracts.
+          </p>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">Small business checklist</h3>
+          <p className="feature-card__body">
+            Download the <Link to="/small-business-website-checklist-northwest-illinois/">small business website checklist</Link> to see exactly what a complete site needs.
+          </p>
+        </Card>
+      </div>
+    </Section>
+
+    <Section
       eyebrow="FAQ"
       title="Common questions about web development in Winnebago"
     >

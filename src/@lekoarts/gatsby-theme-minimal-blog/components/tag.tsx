@@ -58,7 +58,7 @@ export const Head = ({ pageContext }: { pageContext: TagPageContext }) => {
   const { slug, name } = pageContext;
   const tagName = name || slug;
   const pathname = `/tags/${slug}/`;
-  const description = `Browse all articles tagged "${tagName}" on Bradley Matera's portfolio — web development, AI projects, cloud engineering, and career insights from Northwest Illinois.`;
+  const description = `Articles tagged "${tagName}" on Bradley Matera's portfolio — web development, AI, cloud engineering, and career insights from Northwest Illinois.`;
   const title = `Tag: ${tagName}`;
 
   return (

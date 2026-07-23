@@ -75,7 +75,7 @@ exports.onPostBuild = ({ store }) => {
     const canonical = `${siteUrl}/tags/${tag}/`;
     const tagName = tag.replace(/-/g, " ");
     const tagDisplay = tagName.charAt(0).toUpperCase() + tagName.slice(1);
-    const description = `Browse all articles tagged "${tagName}" on Bradley Matera's portfolio — web development, AI projects, cloud engineering, and career insights from Northwest Illinois.`;
+    const description = `Articles tagged "${tagName}" on Bradley Matera's portfolio — web development, AI, cloud engineering, and career insights from Northwest Illinois.`;
 
     // Fix canonical
     html = html.replace(
@@ -98,8 +98,8 @@ exports.onPostBuild = ({ store }) => {
       `<meta name="twitter:url" content="${canonical}"`,
     );
 
-    // Inject a direct answer paragraph after the first <h1> for AEO
-    const directAnswer = `<p class="direct-answer" style="max-width:720px;margin:1rem auto 1.5rem;font-size:1.05rem;line-height:1.6"><strong>What articles are tagged "${tagDisplay}"?</strong> This page lists all blog posts on Bradley Matera's portfolio tagged "${tagDisplay}" — covering ${tagName} topics with practical examples, code, and honest lessons learned from real projects.</p>`;
+    // Inject a direct answer paragraph and structured content after the first <h1> for AEO
+    const directAnswer = `<div class="direct-answer-block" style="max-width:720px;margin:1rem auto 2rem"><p class="direct-answer" style="font-size:1.05rem;line-height:1.6"><strong>What articles are tagged "${tagDisplay}"?</strong> This page lists all blog posts on Bradley Matera's portfolio tagged "${tagDisplay}" — covering ${tagName} topics with practical examples, code, and honest lessons learned from real projects.</p><h2 style="font-size:1.1rem;margin-top:1.5rem;margin-bottom:0.5rem">What you'll find in ${tagDisplay} articles</h2><ul style="list-style:disc;padding-left:1.5rem;line-height:1.8"><li>Practical code examples and project walkthroughs</li><li>Honest lessons learned from building and shipping real software</li><li>Step-by-step guides and checklists you can follow</li><li>Tool comparisons and recommendations from actual use</li></ul></div>`;
     if (html.includes('class="direct-answer"') === false) {
       html = html.replace(/(<h1[^>]*>.*?<\/h1>)/i, `$1${directAnswer}`);
     }
@@ -132,12 +132,64 @@ exports.onPostBuild = ({ store }) => {
       `<meta name="twitter:url" content="${canonical}"`,
     );
 
-    // Inject a direct answer paragraph after the first <h1> for AEO
-    const tagsDirectAnswer = `<p class="direct-answer" style="max-width:720px;margin:1rem auto 1.5rem;font-size:1.05rem;line-height:1.6"><strong>What tags are on this blog?</strong> This page lists all topic tags from Bradley Matera's portfolio — browse articles by tag covering web development, AI, cloud engineering, React, AWS, DevOps, Docker, security, and more.</p>`;
+    // Inject a direct answer paragraph and structured content after the first <h1> for AEO
+    const tagsDirectAnswer = `<div class="direct-answer-block" style="max-width:720px;margin:1rem auto 2rem"><p class="direct-answer" style="font-size:1.05rem;line-height:1.6"><strong>What tags are on this blog?</strong> This page lists all topic tags from Bradley Matera's portfolio — browse articles by tag covering web development, AI, cloud engineering, React, AWS, DevOps, Docker, security, and more.</p><h2 style="font-size:1.1rem;margin-top:1.5rem;margin-bottom:0.5rem">Popular topics</h2><ul style="list-style:disc;padding-left:1.5rem;line-height:1.8"><li>Web development and front-end engineering</li><li>Cloud computing (AWS, Azure, GCP) and DevOps</li><li>AI projects and automation workflows</li><li>Career notes and learning strategies</li><li>Security, testing, and reliability practices</li></ul></div>`;
     if (html.includes('class="direct-answer"') === false) {
       html = html.replace(/(<h1[^>]*>.*?<\/h1>)/i, `$1${tagsDirectAnswer}`);
     }
 
     fs.writeFileSync(tagsIndexPath, html);
   }
+
+  // Inject visible "Last updated" dates and dateModified schema on key pages
+  const today = new Date().toISOString().split("T")[0];
+  const freshnessPages = [
+    "pricing/index.html",
+    "contact/index.html",
+    "support/index.html",
+    "roles/index.html",
+    "roles/ai-automation-engineer/index.html",
+    "roles/backend-engineer/index.html",
+    "roles/cloud-engineer/index.html",
+    "roles/devops-engineer/index.html",
+    "roles/full-stack-engineer/index.html",
+    "contributions/index.html",
+    "open-source-contributions/index.html",
+    "recruiter/index.html",
+    "web-developer-durand-davis-illinois/index.html",
+    "web-developer-freeport-illinois/index.html",
+    "web-developer-pecatonica-illinois/index.html",
+    "web-developer-rockford-illinois/index.html",
+    "web-developer-winnebago-illinois/index.html",
+    "website-help-northwest-illinois/index.html",
+    "northwest-illinois-web-development-faq/index.html",
+  ];
+
+  freshnessPages.forEach((relPath) => {
+    const fullPath = path.join(publicDir, relPath);
+    if (!fs.existsSync(fullPath)) return;
+    let html = fs.readFileSync(fullPath, "utf8");
+
+    // Inject visible "Last updated" date before closing </main> or before the first <footer
+    const dateHtml = `<p class="last-updated" style="text-align:center;font-size:0.85rem;opacity:0.7;margin:1rem 0">Last updated: ${today}</p>`;
+    if (html.includes('class="last-updated"') === false) {
+      // Try to inject before the footer
+      if (html.includes('<footer')) {
+        html = html.replace(/(<footer)/i, `${dateHtml}$1`);
+      } else {
+        // Fallback: inject before </body>
+        html = html.replace(/(<\/body>)/i, `${dateHtml}$1`);
+      }
+    }
+
+    // Add dateModified to existing JSON-LD schema
+    if (html.includes('"dateModified"') === false && html.includes('application/ld+json')) {
+      html = html.replace(
+        /("@type":"ProfessionalService")/g,
+        `$1,"dateModified":"${today}"`
+      );
+    }
+
+    fs.writeFileSync(fullPath, html);
+  });
 };

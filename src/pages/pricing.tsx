@@ -297,7 +297,7 @@ const PricingPage = () => (
           <p style={{ fontSize: "0.9rem", marginTop: "0.5rem" }}>
             See <Link to="/projects/">project case studies</Link> for examples of completed work,
             or read the <Link to="/northwest-illinois-web-development-faq/">web development FAQ</Link> for
-            process details. Pricing rationale is documented in the <Link to="/PRICING_MODEL.md">pricing model breakdown</Link>.
+            process details. Pricing rationale is documented in the <Link to="/about/">about page</Link>.
           </p>
         </>
       }

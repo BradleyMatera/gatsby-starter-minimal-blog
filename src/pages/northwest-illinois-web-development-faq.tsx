@@ -87,6 +87,43 @@ const LocalFaqPage = () => (
       </div>
     </Section>
 
+    <Section
+      eyebrow="Evidence & proof"
+      title="Work samples and case studies"
+      description={
+        <p>
+          Don't take my word for it — here's the actual work behind the answers above.
+        </p>
+      }
+    >
+      <div className="grid-two">
+        <Card variant="outline">
+          <h3 className="feature-card__title">Project case studies</h3>
+          <p className="feature-card__body">
+            See <Link to="/projects/">completed project case studies</Link> with code, screenshots, and honest notes on what worked and what didn't.
+          </p>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">Pricing breakdown</h3>
+          <p className="feature-card__body">
+            Transparent <Link to="/pricing/">pricing tiers</Link> starting at $447 with no hidden fees or contracts.
+          </p>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">About Bradley Matera</h3>
+          <p className="feature-card__body">
+            Read <Link to="/about/">about my background</Link> — Full Sail University training, AWS Cloud Support internship, and real project work.
+          </p>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">Small business checklist</h3>
+          <p className="feature-card__body">
+            Download the <Link to="/small-business-website-checklist-northwest-illinois/">small business website checklist</Link> to see exactly what a complete site needs.
+          </p>
+        </Card>
+      </div>
+    </Section>
+
     <Section eyebrow="Related local pages" title="Keep going">
       <div className="card-actions">
         <Link data-variant="primary" to="/web-developer-durand-davis-illinois/">
