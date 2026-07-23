@@ -30,8 +30,13 @@ const assert = (condition, message) => {
 
 const readPage = (relPath) => {
   const fullPath = join(publicDir, relPath);
-  if (!existsSync(fullPath)) return null;
-  return readFileSync(fullPath, "utf8");
+  if (existsSync(fullPath)) return readFileSync(fullPath, "utf8");
+  // DSG fallback: store/[...].html may be the actual file for catch-all routes
+  if (relPath.endsWith("index.html")) {
+    const dsgPath = join(publicDir, relPath.replace("index.html", "[...].html"));
+    if (existsSync(dsgPath)) return readFileSync(dsgPath, "utf8");
+  }
+  return null;
 };
 
 const PHONE = "(650) 265-1193";
@@ -46,7 +51,7 @@ const PAGES = [
   { path: "contact/index.html", name: "Contact" },
   { path: "pricing/index.html", name: "Pricing" },
   { path: "recruiter/index.html", name: "Recruiter Hub" },
-  { path: "store/[...].html", name: "Store" },
+  { path: "store/index.html", name: "Store" },
   { path: "purchases/index.html", name: "Purchases" },
   { path: "support/index.html", name: "Support" },
   { path: "roles/index.html", name: "Roles Index" },
@@ -93,7 +98,7 @@ const CANONICAL_PAGES = [
   { file: "contact/index.html", expected: `${SITE_URL}/contact/` },
   { file: "pricing/index.html", expected: `${SITE_URL}/pricing/` },
   { file: "recruiter/index.html", expected: `${SITE_URL}/recruiter/` },
-  { file: "store/[...].html", expected: `${SITE_URL}/store/` },
+  { file: "store/index.html", expected: `${SITE_URL}/store/` },
   { file: "web-developer-durand-davis-illinois/index.html", expected: `${SITE_URL}/web-developer-durand-davis-illinois/` },
   { file: "web-developer-rockford-illinois/index.html", expected: `${SITE_URL}/web-developer-rockford-illinois/` },
   { file: "web-developer-freeport-illinois/index.html", expected: `${SITE_URL}/web-developer-freeport-illinois/` },

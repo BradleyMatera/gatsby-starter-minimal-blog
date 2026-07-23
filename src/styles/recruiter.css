@@ -1117,6 +1117,191 @@ html {
   padding-bottom: clamp(1.5rem, 3vw, 3rem);
 }
 
+/* ==========================================================================
+   Leadership / "Beyond the Code" — Professional card layout
+   ========================================================================== */
+
+.leadership-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: clamp(1rem, 2vw, 1.5rem);
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.leadership-card {
+  display: flex;
+  gap: 1.25rem;
+  background: var(--r-surface-raised);
+  border: 1px solid var(--r-border);
+  border-radius: 0.625rem;
+  padding: clamp(1.25rem, 2vw, 1.75rem);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.leadership-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--r-accent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.leadership-card:hover {
+  border-color: var(--r-border-strong);
+  box-shadow: 0 4px 20px var(--r-shadow-hover);
+  transform: translateY(-2px);
+}
+
+.leadership-card:hover::before {
+  opacity: 0.6;
+}
+
+/* ---- Left rail: number + icon ---- */
+.leadership-card__rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+  width: 3rem;
+}
+
+.leadership-card__number {
+  font-family: var(--r-font-heading);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--r-text-muted);
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--r-border);
+  border-radius: 0.25rem;
+  line-height: 1;
+}
+
+.leadership-card__icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.5rem;
+  background: var(--r-accent-light);
+  color: var(--r-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.leadership-card__icon svg {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.leadership-card:hover .leadership-card__icon {
+  transform: scale(1.05);
+}
+
+/* ---- Card body ---- */
+.leadership-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.leadership-card__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.leadership-card__title {
+  font-family: var(--r-font-heading);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--r-text);
+  margin: 0;
+}
+
+.leadership-card__org {
+  font-size: 0.8125rem;
+  color: var(--r-text-secondary);
+  line-height: 1.4;
+}
+
+.leadership-card__period {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--r-text-muted);
+  margin-top: 0.25rem;
+}
+
+.leadership-card__desc {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--r-text-secondary);
+  margin: 0;
+}
+
+/* ---- Highlight callout ---- */
+.leadership-card__highlight {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.75rem 0.875rem;
+  border-radius: 0.5rem;
+  background: var(--r-accent-light);
+  border-left: 2px solid var(--r-accent);
+}
+
+.leadership-card__highlight-label {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--r-accent);
+}
+
+.leadership-card__highlight-text {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--r-text);
+}
+
+/* ---- Skills ---- */
+.leadership-card__skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  margin-top: auto;
+}
+
+/* ---- Responsive: stack rail on narrow cards ---- */
+@media (max-width: 30rem) {
+  .leadership-card {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .leadership-card__rail {
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .leadership-card__icon {
+    flex: 0 0 2.75rem;
+  }
+}
+
 /* Map old hero overrides */
 .recruiter-hero__content {
   text-align: center;
