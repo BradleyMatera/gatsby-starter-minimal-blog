@@ -8,7 +8,7 @@ const { resolve } = require("node:path");
 
 const projectRoot = resolve(__dirname, "..");
 const build = () => {
-  execSync("npm run build", { cwd: projectRoot, stdio: "inherit" });
+  execSync("rm -rf .cache public && npm run build", { cwd: projectRoot, stdio: "inherit" });
 };
 
 const verifyHome = () => {

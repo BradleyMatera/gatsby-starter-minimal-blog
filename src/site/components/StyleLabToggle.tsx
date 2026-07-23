@@ -1,10 +1,8 @@
 import * as React from "react";
-import { useStyleLab } from "./StyleLabProvider";
 import StyleLabPanel from "./StyleLabPanel";
 
 const StyleLabToggle: React.FC = () => {
   const [open, setOpen] = React.useState(false);
-  const { activePresetId } = useStyleLab();
 
   return (
     <>

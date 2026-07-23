@@ -59,7 +59,7 @@ const loadStoredState = (): StyleLabState => {
         mode: parsed.mode ?? defaultPreset.mode,
       };
     }
-  } catch (_) {}
+  } catch (_) { /* localStorage may be unavailable */ }
   return {
     activePresetId: defaultPreset.id,
     customVariables: {},
@@ -71,7 +71,7 @@ const saveStoredState = (state: StyleLabState) => {
   if (typeof window === "undefined") return;
   try {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  } catch (_) {}
+  } catch (_) { /* localStorage may be unavailable */ }
 };
 
 const isRecruiterPage = (pathname: string) =>
@@ -137,7 +137,7 @@ const applyCurrentStyle = (nextState: StyleLabState, nextPathname: string) => {
   applyVariablesToRoot(mergedVariables);
 };
 
-let __activeProvider: Symbol | null = null;
+let __activeProvider: symbol | null = null;
 
 export const StyleLabProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [state, setState] = React.useState<StyleLabState>(() => ({

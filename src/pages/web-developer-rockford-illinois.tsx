@@ -435,8 +435,10 @@ const LocalWebDeveloperPage = () => (
           </p>
           <p>
             I also maintain local pages for nearby areas:{" "}
-            <Link to="/web-developer-durand-davis-illinois/">Durand and Davis</Link> and{" "}
-            <Link to="/web-developer-freeport-illinois/">Freeport</Link>. If you are in the broader
+            <Link to="/web-developer-durand-davis-illinois/">Durand and Davis</Link>,{" "}
+            <Link to="/web-developer-freeport-illinois/">Freeport</Link>,{" "}
+            <Link to="/web-developer-pecatonica-illinois/">Pecatonica</Link>, and{" "}
+            <Link to="/web-developer-winnebago-illinois/">Winnebago</Link>. If you are in the broader
             Northwest Illinois region, the same work applies.
           </p>
         </>

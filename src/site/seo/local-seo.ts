@@ -21,7 +21,7 @@ export const localBreadcrumb = {
 
 export const buildProfessionalServiceSchema = ({
   path,
-  serviceName,
+  serviceName: _serviceName,
   description,
 }: {
   path: string;

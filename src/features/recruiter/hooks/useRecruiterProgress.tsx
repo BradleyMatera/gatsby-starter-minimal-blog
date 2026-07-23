@@ -82,7 +82,7 @@ export const RecruiterProgressProvider: React.FC<React.PropsWithChildren> = ({ c
               next.add(id);
               try {
                 window.localStorage.setItem(STORAGE_KEY, JSON.stringify(Array.from(next)));
-              } catch (_) {}
+              } catch (_) { /* localStorage may be unavailable */ }
               return next;
             });
           }

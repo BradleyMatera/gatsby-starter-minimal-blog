@@ -14,16 +14,6 @@ const fromCharCodes = (codes: number[]): string =>
 const toCharCodes = (str: string): number[] =>
   Array.from(str).map((c) => c.charCodeAt(0));
 
-/** Shallow shuffle to break obvious sequential patterns in source */
-const shuffle = <T,>(arr: T[]): T[] => {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-};
-
 /*
   These arrays look like random numbers in the HTML source.
   Only decoded into real text in the browser after the user clicks "Reveal".

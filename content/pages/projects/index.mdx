@@ -1,0 +1,55 @@
+---
+title: Projects
+slug: "/projects"
+description: "Case studies and project portfolio by Bradley Matera — Car-Match, Interactive Pokédex, and CIRIS AI. Full-stack web development, cloud engineering, and AI projects."
+---
+
+import { Link } from "gatsby"
+import { ProjectCard } from "../../../src/features/projects/components"
+
+<section className="projects-index">
+
+## Project Case Studies
+
+Each project below is a full case study — what I built, why, the tech stack, and what I learned. These aren't toy demos; they're real applications with real users (or real architectural decisions that shaped how I work today).
+
+<div className="project-grid">
+
+<ProjectCard
+  title="Car-Match"
+  meta="Full-stack vehicle matching platform"
+  summary="A full-stack vehicle matching platform built with React, Node.js, and PostgreSQL. Features real-time search, preference scoring, and a dealer dashboard."
+  stack={["React", "Node.js", "PostgreSQL", "Full-stack"]}
+  metrics={["Stack: MERN", "Status: Production"]}
+  links={[{ label: "Car-Match case study", href: "/projects/car-match/", variant: "primary" }]}
+/>
+
+<ProjectCard
+  title="Interactive Pokédex"
+  meta="Searchable Pokédex with type charts and evolution chains"
+  summary="A searchable, filterable Pokédex with type effectiveness charts, evolution chains, and a clean responsive UI. Built with React and the PokéAPI."
+  stack={["React", "API", "TypeScript"]}
+  metrics={["Data: PokéAPI", "Status: Live"]}
+  links={[{ label: "Pokédex case study", href: "/projects/interactive-pokedex/", variant: "primary" }]}
+/>
+
+<ProjectCard
+  title="CIRIS AI"
+  meta="Context-aware AI assistant framework"
+  summary="A context-aware AI assistant framework with tool-use capabilities, memory management, and a modular agent architecture. Built with TypeScript and Python."
+  stack={["AI", "TypeScript", "Python", "Agents"]}
+  metrics={["Architecture: Modular", "Status: Active"]}
+  links={[{ label: "CIRIS AI case study", href: "/projects/ciris-ai/", variant: "primary" }]}
+/>
+
+</div>
+
+---
+
+### Want to see more?
+
+<Link to="/recruiter/#project-explorer" data-variant="primary">Open the full project explorer on the recruiter hub</Link>
+
+<Link to="/blog/" data-variant="ghost">Browse blog posts for technical write-ups</Link>
+
+</section>

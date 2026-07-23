@@ -17,9 +17,13 @@ export default tseslint.config(
       "node_modules/**",
       "public/**",
       ".cache/**",
+      ".netlify/**",
       "static/**",
       "src/@lekoarts/gatsby-theme-minimal-blog/components/**",
       "scripts/**",
+      "netlify/functions/**",
+      "config/gatsby/**",
+      "e2e/**",
     ],
   },
   js.configs.recommended,
@@ -51,7 +55,13 @@ export default tseslint.config(
       "react/react-in-jsx-scope": "off",
       "react/prop-types": "off",
       "react/no-unknown-property": "off",
+      "react/no-unescaped-entities": "off",
+      "react-hooks/set-state-in-effect": "off",
       "@typescript-eslint/no-explicit-any": "warn",
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
+      ],
       "@typescript-eslint/ban-ts-comment": [
         "error",
         {

@@ -428,8 +428,10 @@ const LocalWebDeveloperPage = () => (
             you want to vet the work first, start with the <Link to="/projects/">project pages</Link>{" "}
             or the <Link to="/about/">about page</Link>. If you are looking at other nearby areas, I
             also have pages for{" "}
-            <Link to="/web-developer-durand-davis-illinois/">web development in Durand and Davis</Link>{" "}
-            and <Link to="/web-developer-rockford-illinois/">web development in Rockford</Link>.
+            <Link to="/web-developer-durand-davis-illinois/">web development in Durand and Davis</Link>,{" "}
+            <Link to="/web-developer-rockford-illinois/">web development in Rockford</Link>,{" "}
+            <Link to="/web-developer-pecatonica-illinois/">Pecatonica</Link>, and{" "}
+            <Link to="/web-developer-winnebago-illinois/">Winnebago</Link>.
           </p>
         </>
       }

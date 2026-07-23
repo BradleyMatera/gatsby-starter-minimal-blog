@@ -4,7 +4,6 @@ import { useStyleLab } from "./StyleLabProvider";
 import {
   fontOptions,
   shadowPresets,
-  styleLabPresets,
   transitionPresets,
   type StyleLabMode,
   type StyleVariableOverrides,

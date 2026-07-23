@@ -41,6 +41,14 @@ const RecruiterCommandPalette: React.FC<RecruiterCommandPaletteProps> = ({ isOpe
     return undefined;
   }, [isOpen]);
 
+  const scrollTo = (id: RecruiterSectionId) => {
+    const el = document.querySelector(`[data-section-id="${id}"]`);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      onClose();
+    }
+  };
+
   React.useEffect(() => {
     if (!isOpen) {
       setQuery("");
@@ -70,14 +78,6 @@ const RecruiterCommandPalette: React.FC<RecruiterCommandPaletteProps> = ({ isOpe
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [isOpen, filtered, selectedIndex, onClose]);
 
-  const scrollTo = (id: RecruiterSectionId) => {
-    const el = document.querySelector(`[data-section-id="${id}"]`);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-      onClose();
-    }
-  };
-
   if (!isOpen) return null;
 
   const palette = (
@@ -104,6 +104,8 @@ const RecruiterCommandPalette: React.FC<RecruiterCommandPaletteProps> = ({ isOpe
               id={`cmd-palette-item-${item.id}`}
               className={`command-palette__item ${index === selectedIndex ? "command-palette__item--selected" : ""}`}
               onClick={() => scrollTo(item.id)}
+              onKeyDown={(e) => { if (e.key === "Enter") scrollTo(item.id); }}
+              tabIndex={0}
               role="option"
               aria-selected={index === selectedIndex}
             >
