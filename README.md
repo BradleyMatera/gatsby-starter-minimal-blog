@@ -1,8 +1,10 @@
 # bradleymatera.dev
 
-Production website and blog for Bradley Matera — a personal portfolio, blog, digital store, and recruiter hub built with Gatsby, React, and Netlify serverless functions.
+Production website and blog for Bradley Matera — a personal portfolio, blog, digital store, recruiter hub, and **local SEO web development service** built with Gatsby, React, and Netlify serverless functions.
 
 **Live site:** [bradleymatera.dev](https://bradleymatera.dev)
+**Phone:** (650) 265-1193
+**Email:** bradmatera@gmail.com
 
 ---
 
@@ -12,7 +14,7 @@ Production website and blog for Bradley Matera — a personal portfolio, blog, d
 |-------|-----------|
 | Static Site Generator | Gatsby 5 (React 18, TypeScript) |
 | Theme | `@lekoarts/gatsby-theme-minimal-blog` (shadowed) |
-| Styling | CSS custom properties, TailwindCSS, `theme-ui` (live theme overrides via Web Designer Style Lab) |
+| Styling | CSS custom properties, `theme-ui` (live theme overrides via Web Designer Style Lab) |
 | Animations | GSAP + ScrollTrigger, Framer Motion, Three.js |
 | Content | MDX (posts and pages) |
 | Backend | Netlify serverless functions (esbuild) |
@@ -58,6 +60,8 @@ npm run products:status  # check store product state
 npm run products:seed:direct  # seed direct products
 ```
 
+**Note:** The build command in `netlify.toml` includes `rm -rf .cache public &&` to ensure a fresh build on every deploy. This prevents stale Gatsby cache issues that caused canonical/SEO problems in the past.
+
 ---
 
 ## Project Structure
@@ -66,41 +70,113 @@ npm run products:seed:direct  # seed direct products
 ├── config/
 │   └── gatsby/
 │       ├── browser.js      # Client entry: theme init, scroll behavior, hydration fixes
+│       ├── node.js         # Gatsby node API: onPostBuild hook for tag page SEO fixes
+│       ├── plugins.ts      # Gatsby plugin configuration
 │       └── ssr.js          # SSR: html lang attr, head components, global styles
 ├── content/
-│   ├── posts/              # Blog posts (MDX)
+│   ├── posts/              # Blog posts (MDX) — 40 posts
 │   └── pages/              # Static pages (MDX)
-├── netlify/
-│   └── functions/          # Serverless API endpoints
-│       ├── chat-router.js          # Recruiter chat backend (GCP AI)
-│       ├── create_checkout_session.js  # Stripe checkout
-│       ├── stripe_webhook.js       # Stripe webhook handler
-│       ├── send_receipt_email.js   # Order email via Resend
-│       ├── recruiter-chat.js       # AI chat with knowledge base
-│       ├── get_order_downloads.js  # Download entitlements
-│       ├── download.js             # Signed download tokens (JWT)
-│       ├── list_products.js        # Store product catalog
+│       ├── about/          # About page
+│       ├── contact/        # Contact page
+│       ├── roles/          # Role-specific landing pages (5 roles)
+│       ├── support/        # Support page
 │       └── ...
+├── netlify/
+│   └── functions/          # Serverless API endpoints (see below)
 ├── src/
 │   ├── @lekoarts/          # Shadowed theme components
 │   │   └── gatsby-theme-minimal-blog/
 │   │       ├── components/     # Layout, header, footer, blog, listing, seo, etc.
+│   │       ├── texts/          # Hero.mdx and other theme text content
 │   │       └── gatsby-plugin-theme-ui/
 │   │           └── index.ts    # theme-ui color modes (light/dark)
-│   ├── pages/              # Route pages (404, store, purchases, recruiter, etc.)
+│   ├── pages/              # Route pages (see Page Routes below)
 │   ├── site/               # Site-specific components, hooks, icons, accents
-│   ├── features/           # Feature modules (store, blog, projects, contact)
+│   │   ├── icons/          # Custom SVG icon library (40+ icons)
+│   │   └── seo/            # Local SEO schema builders
+│   ├── features/           # Feature modules
+│   │   ├── contact/        # Contact form and content
+│   │   ├── home/           # Homepage components (hero, actions)
+│   │   ├── recruiter/      # Recruiter hub sections (15+ components)
+│   │   └── store/          # Store and product features
 │   ├── styles/             # Global CSS (tokens, chrome, utilities, media, nav)
+│   │   └── themes/         # Visual theme presets (brutalism, retrofuturism, neumorphism)
 │   ├── ui/                 # Reusable UI primitives (Section, Card, Link)
 │   └── utils/              # Shared utilities
-├── static/                 # Favicons, images, robots.txt
+├── static/                 # Favicons, images, robots.txt, documents
+├── docs/audits/            # SEO/accessibility audit reports (gitignored)
+├── PRICING_MODEL.md        # Pricing rationale with tax breakdowns
+├── GOOGLE_VOICE_SETUP.md   # Google Voice business phone setup guide
 ├── netlify.toml            # Netlify build & dev config
 └── package.json
 ```
 
 ---
 
+## Page Routes
+
+### Core Pages (MDX content)
+| Route | Source | Description |
+|-------|--------|-------------|
+| `/` | Homepage | Hero, skills, projects, blog preview |
+| `/about/` | `content/pages/about/` | Bio, background, certifications |
+| `/contact/` | `content/pages/contact/` | Contact form, phone, email |
+| `/roles/` | `content/pages/roles/` | Role-based capability pages |
+| `/support/` | `content/pages/support/` | Support page |
+| `/contributions/` | `content/pages/contributions/` | Open source contributions |
+
+### Role Pages (MDX content)
+| Route | Source |
+|-------|--------|
+| `/roles/ai-automation-engineer/` | `content/pages/roles/ai-automation-engineer.mdx` |
+| `/roles/backend-engineer/` | `content/pages/roles/backend-engineer.mdx` |
+| `/roles/cloud-engineer/` | `content/pages/roles/cloud-engineer.mdx` |
+| `/roles/devops-engineer/` | `content/pages/roles/devops-engineer.mdx` |
+| `/roles/full-stack-engineer/` | `content/pages/roles/full-stack-engineer.mdx` |
+
+### Local SEO Landing Pages (TSX)
+| Route | File | Target Keywords |
+|-------|------|-----------------|
+| `/web-developer-durand-davis-illinois/` | `src/pages/web-developer-durand-davis-illinois.tsx` | web developer Durand/Davis IL |
+| `/web-developer-rockford-illinois/` | `src/pages/web-developer-rockford-illinois.tsx` | web developer Rockford IL |
+| `/web-developer-freeport-illinois/` | `src/pages/web-developer-freeport-illinois.tsx` | web developer Freeport IL |
+| `/web-developer-pecatonica-illinois/` | `src/pages/web-developer-pecatonica-illinois.tsx` | web developer Pecatonica IL |
+| `/web-developer-winnebago-illinois/` | `src/pages/web-developer-winnebago-illinois.tsx` | web developer Winnebago IL |
+| `/pricing/` | `src/pages/pricing.tsx` | website pricing Northwest Illinois |
+| `/website-help-northwest-illinois/` | `src/pages/website-help-northwest-illinois.tsx` | website help Northwest Illinois |
+| `/northwest-illinois-web-development-faq/` | `src/pages/northwest-illinois-web-development-faq.tsx` | web development FAQ IL |
+
+### App Pages (TSX)
+| Route | File | Description |
+|-------|------|-------------|
+| `/recruiter/` | `src/pages/recruiter.tsx` | Recruiter hub with 15+ sections |
+| `/store/` | `src/pages/store.tsx` | Digital product store |
+| `/purchases/` | `src/pages/purchases.tsx` | Customer portal |
+| `/success/` | `src/pages/success.tsx` | Stripe checkout success |
+| `/cancel/` | `src/pages/cancel.tsx` | Stripe checkout cancel |
+| `/404/` | `src/pages/404.tsx` | 404 page |
+
+### Blog
+| Route | Description |
+|-------|-------------|
+| `/blog/` | Blog listing with pagination |
+| `/blog/[slug]/` | Individual blog posts (40 posts) |
+| `/tags/` | All tags listing |
+| `/tags/[tag]/` | Posts filtered by tag |
+
+---
+
 ## Key Features
+
+### Local SEO Service
+- **5 city landing pages** targeting Northwest Illinois (Durand/Davis, Rockford, Freeport, Pecatonica, Winnebago)
+- **Pricing page** with transparent tiered pricing ($447–$1,497)
+- **Service schema markup** (Service + ProfessionalService) on every city page
+- **LocalBusiness schema** with NAP consistency (Name, Address, Phone)
+- **Google Business Profile** integration (phone: (650) 265-1193)
+- Each city page includes: 3-step process, industries served, social proof stats, FAQ, pricing link
+- See `PRICING_MODEL.md` for full pricing rationale and tax breakdowns
+- See `GOOGLE_VOICE_SETUP.md` for business phone setup
 
 ### Blog
 - MDX-powered posts with tags, categories, search, and pagination
@@ -116,28 +192,75 @@ npm run products:seed:direct  # seed direct products
 
 ### Recruiter Hub
 - AI-powered chat backend (GCP) with knowledge base
-- Project explorer with case studies
-- Role-based capability pages
-
-### Portfolio
-- Project cards with impact metrics
-- About page with certifications and timeline
-- Local SEO landing pages for Northwest Illinois
+- 15+ sections: hero, roles, contributions, resources, experience timeline, project explorer, skills explorer, AWS section, certifications, technical writing, FAQ, leadership, contact, interview resources
+- Each section has a unique background image
+- Trackable sections for analytics
 
 ### Dynamic Style Customization
 - Web Designer Style Lab accessible from the navigation
 - Preset themes: Brad's Default, Cyberpunk, Retro, Minimal, High Contrast, OLED Midnight, Forest, Ocean
+- Visual theme presets: brutalism, retrofuturism, neumorphism
 - Custom controls for colors, fonts, typography, and effects
 - Real-time updates via CSS custom properties and `localStorage` persistence
-- Replaces the previous light/dark theme toggle
 
 ### Accessibility & UX
-- Web Designer Style Lab for customizable themes, with `localStorage` persistence
 - WCAG AA color contrast compliance
 - Skip-to-content link, ARIA labels, semantic HTML
 - `lang="en"` on all pages via SSR fallback
 - Scroll-to-top on route change, hash link scrolling
 - Responsive across mobile, tablet, and desktop
+
+---
+
+## Netlify Functions
+
+| Function | Purpose |
+|----------|---------|
+| `chat-router.js` | Recruiter chat backend (GCP AI) |
+| `create_checkout_session.js` | Stripe checkout session creation |
+| `stripe_webhook.js` | Stripe webhook handler |
+| `send_receipt_email.js` | Order email via Resend |
+| `recruiter-chat.js` | AI chat with knowledge base |
+| `get_order_downloads.js` | Download entitlements |
+| `download.js` | Signed download tokens (JWT) |
+| `list_products.js` | Store product catalog |
+| `get_product.js` | Single product lookup |
+| `get_entitlements.js` | Purchase entitlements |
+| `get_orders_by_email.js` | Orders by customer email |
+| `go.js` | URL redirect/shortener |
+| `send_test_receipt.js` | Test receipt email |
+
+Support modules (prefixed with `_`): `_db.js`, `_downloads.js`, `_email.js`, `_env.js`, `_identity.js`, `_response.js`, `_stripe.js`, `_downloadTokens.js`
+
+---
+
+## SEO Architecture
+
+### Canonical URLs
+- All pages have self-referencing canonical URLs
+- Tag pages use an `onPostBuild` hook in `config/gatsby/node.js` to inject correct canonicals and meta descriptions post-build (bypasses Gatsby shadowing issues in Netlify CI)
+
+### Sitemap
+- Gatsby generates `sitemap.xml/sitemap-index.xml`
+- Netlify redirect serves it at `/sitemap.xml` for crawlers
+- `robots.txt` points to `/sitemap.xml`
+
+### Schema Markup
+- `LocalBusiness` / `ProfessionalService` schema on all city pages
+- `Service` schema with `areaServed` for each city
+- `FAQPage` schema on pricing and FAQ pages
+- `Breadcrumb` schema on all pages
+- Schema builder in `src/site/seo/local-seo.ts`
+
+### Service Areas
+Durand, Davis, Rockford, Freeport, Pecatonica, Winnebago, Winnebago County, Stephenson County, Northwest Illinois
+
+### NAP (Name, Address, Phone)
+- **Name:** Bradley Matera
+- **Phone:** (650) 265-1193
+- **Email:** bradmatera@gmail.com
+- **Website:** https://bradleymatera.dev
+- Phone number must be consistent across: website header, footer, all city pages, pricing page, contact page, schema markup, and Google Business Profile
 
 ---
 
@@ -161,12 +284,15 @@ Required for full functionality (set in Netlify dashboard or `.env`):
 
 ## Deployment
 
-The site auto-deploys to Netlify on push to `main`.
+The site auto-deploys to Netlify on push to `master`.
 
 ```toml
 # netlify.toml
 [build]
+  command = "rm -rf .cache public && npm run build"
+  publish = "public"
   functions = "netlify/functions"
+
   [build.environment]
     NODE_VERSION = "20"
 
@@ -178,14 +304,29 @@ The site auto-deploys to Netlify on push to `main`.
 
 [functions]
   node_bundler = "esbuild"
+  included_files = ["netlify/functions/downloads/**"]
+
+# Serve the sitemap index at /sitemap.xml for crawlers
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/sitemap.xml/sitemap-index.xml"
+  status = 200
+  force = true
 ```
+
+**Netlify Plugins:**
+- `@netlify/plugin-gatsby` (v3)
+- `@netlify/plugin-lighthouse` (v6) — note: Performance score may show 0 due to a known Netlify plugin bug; local Lighthouse scores 83-85
 
 ---
 
-## Documentation
+## Business Documentation
 
-Full repository documentation lives on the `docs` branch:
-`https://github.com/BradleyMatera/gatsby-starter-minimal-blog/tree/docs/docs`
+| File | Purpose |
+|------|---------|
+| `PRICING_MODEL.md` | Full pricing rationale with tax breakdowns for each tier |
+| `GOOGLE_VOICE_SETUP.md` | Step-by-step Google Voice setup for business phone |
+| `docs/audits/` | SEO/accessibility audit reports (gitignored) |
 
 ---
 
