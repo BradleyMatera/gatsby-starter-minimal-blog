@@ -176,11 +176,21 @@ const PecatonicaWebDeveloperPage = () => (
         <Card>
           <h3 className="feature-card__title">Nearby communities I also serve</h3>
           <p className="feature-card__body">
-            I am based in Durand and work across Northwest Illinois. If you are in a nearby community,
-            I have dedicated pages for{" "}
-            <Link to="/web-developer-durand-davis-illinois/">Durand and Davis</Link> and{" "}
-            <Link to="/web-developer-rockford-illinois/">Rockford</Link> as well. The scope and honesty
-            are the same everywhere.
+            I am based in Durand and work across Northwest Illinois and Southern Wisconsin. If you are
+            in a nearby community, I have dedicated pages for{" "}
+            <Link to="/web-developer-durand-davis-illinois/">Durand and Davis</Link>,{" "}
+            <Link to="/web-developer-rockford-illinois/">Rockford</Link>,{" "}
+            <Link to="/web-developer-freeport-illinois/">Freeport</Link>,{" "}
+            <Link to="/web-developer-winnebago-illinois/">Winnebago</Link>,{" "}
+            <Link to="/web-developer-loves-park-illinois/">Loves Park</Link>,{" "}
+            <Link to="/web-developer-machesney-park-illinois/">Machesney Park</Link>,{" "}
+            <Link to="/web-developer-byron-illinois/">Byron</Link>,{" "}
+            <Link to="/web-developer-roscoe-illinois/">Roscoe</Link>,{" "}
+            <Link to="/web-developer-rockton-illinois/">Rockton</Link>,{" "}
+            <Link to="/web-developer-south-beloit-illinois/">South Beloit</Link>,{" "}
+            <Link to="/web-developer-beloit-wisconsin/">Beloit, WI</Link>, and{" "}
+            <Link to="/web-developer-janesville-wisconsin/">Janesville, WI</Link> as well. The scope and
+            honesty are the same everywhere.
           </p>
         </Card>
       </div>

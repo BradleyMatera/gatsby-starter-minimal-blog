@@ -247,6 +247,56 @@ const LocalWebDeveloperPage = () => (
           </div>
         </Card>
       </div>
+      <div className="grid-three" style={{ marginTop: "1.5rem" }}>
+        <Card variant="outline">
+          <h3 className="feature-card__title">Loves Park &amp; Machesney Park</h3>
+          <p className="feature-card__body">
+            Web development for businesses in the North Rockford metro — Loves Park and Machesney Park.
+          </p>
+          <div className="card-actions">
+            <Link data-variant="primary" to="/web-developer-loves-park-illinois/">
+              Loves Park
+            </Link>
+            <Link data-variant="ghost" to="/web-developer-machesney-park-illinois/">
+              Machesney Park
+            </Link>
+          </div>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">Byron, Roscoe &amp; Rockton</h3>
+          <p className="feature-card__body">
+            Small business websites for Byron in Ogle County and the IL/WI border towns of Roscoe and Rockton.
+          </p>
+          <div className="card-actions">
+            <Link data-variant="primary" to="/web-developer-byron-illinois/">
+              Byron
+            </Link>
+            <Link data-variant="ghost" to="/web-developer-roscoe-illinois/">
+              Roscoe
+            </Link>
+            <Link data-variant="ghost" to="/web-developer-rockton-illinois/">
+              Rockton
+            </Link>
+          </div>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">South Beloit, Beloit &amp; Janesville</h3>
+          <p className="feature-card__body">
+            Bi-state web development for South Beloit, IL and the Southern Wisconsin cities of Beloit and Janesville.
+          </p>
+          <div className="card-actions">
+            <Link data-variant="primary" to="/web-developer-south-beloit-illinois/">
+              South Beloit
+            </Link>
+            <Link data-variant="ghost" to="/web-developer-beloit-wisconsin/">
+              Beloit, WI
+            </Link>
+            <Link data-variant="ghost" to="/web-developer-janesville-wisconsin/">
+              Janesville, WI
+            </Link>
+          </div>
+        </Card>
+      </div>
     </Section>
 
     <Section

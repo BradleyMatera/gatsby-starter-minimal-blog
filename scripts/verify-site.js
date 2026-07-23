@@ -65,6 +65,14 @@ const PAGES = [
   { path: "web-developer-freeport-illinois/index.html", name: "Freeport IL" },
   { path: "web-developer-pecatonica-illinois/index.html", name: "Pecatonica IL" },
   { path: "web-developer-winnebago-illinois/index.html", name: "Winnebago IL" },
+  { path: "web-developer-loves-park-illinois/index.html", name: "Loves Park IL" },
+  { path: "web-developer-machesney-park-illinois/index.html", name: "Machesney Park IL" },
+  { path: "web-developer-byron-illinois/index.html", name: "Byron IL" },
+  { path: "web-developer-roscoe-illinois/index.html", name: "Roscoe IL" },
+  { path: "web-developer-rockton-illinois/index.html", name: "Rockton IL" },
+  { path: "web-developer-south-beloit-illinois/index.html", name: "South Beloit IL" },
+  { path: "web-developer-beloit-wisconsin/index.html", name: "Beloit WI" },
+  { path: "web-developer-janesville-wisconsin/index.html", name: "Janesville WI" },
   { path: "website-help-northwest-illinois/index.html", name: "Website Help NW IL" },
   { path: "northwest-illinois-web-development-faq/index.html", name: "NW IL FAQ" },
   { path: "404.html", name: "404" },
@@ -80,6 +88,14 @@ const CITY_PAGES = [
   "web-developer-freeport-illinois/index.html",
   "web-developer-pecatonica-illinois/index.html",
   "web-developer-winnebago-illinois/index.html",
+  "web-developer-loves-park-illinois/index.html",
+  "web-developer-machesney-park-illinois/index.html",
+  "web-developer-byron-illinois/index.html",
+  "web-developer-roscoe-illinois/index.html",
+  "web-developer-rockton-illinois/index.html",
+  "web-developer-south-beloit-illinois/index.html",
+  "web-developer-beloit-wisconsin/index.html",
+  "web-developer-janesville-wisconsin/index.html",
 ];
 
 // ─── Pages that should have the phone number (NAP) ────────────────────────
@@ -104,6 +120,14 @@ const CANONICAL_PAGES = [
   { file: "web-developer-freeport-illinois/index.html", expected: `${SITE_URL}/web-developer-freeport-illinois/` },
   { file: "web-developer-pecatonica-illinois/index.html", expected: `${SITE_URL}/web-developer-pecatonica-illinois/` },
   { file: "web-developer-winnebago-illinois/index.html", expected: `${SITE_URL}/web-developer-winnebago-illinois/` },
+  { file: "web-developer-loves-park-illinois/index.html", expected: `${SITE_URL}/web-developer-loves-park-illinois/` },
+  { file: "web-developer-machesney-park-illinois/index.html", expected: `${SITE_URL}/web-developer-machesney-park-illinois/` },
+  { file: "web-developer-byron-illinois/index.html", expected: `${SITE_URL}/web-developer-byron-illinois/` },
+  { file: "web-developer-roscoe-illinois/index.html", expected: `${SITE_URL}/web-developer-roscoe-illinois/` },
+  { file: "web-developer-rockton-illinois/index.html", expected: `${SITE_URL}/web-developer-rockton-illinois/` },
+  { file: "web-developer-south-beloit-illinois/index.html", expected: `${SITE_URL}/web-developer-south-beloit-illinois/` },
+  { file: "web-developer-beloit-wisconsin/index.html", expected: `${SITE_URL}/web-developer-beloit-wisconsin/` },
+  { file: "web-developer-janesville-wisconsin/index.html", expected: `${SITE_URL}/web-developer-janesville-wisconsin/` },
 ];
 
 // ─── City pages that should cross-link to each other ──────────────────────
@@ -113,6 +137,14 @@ const ALL_CITY_SLUGS = [
   "/web-developer-freeport-illinois/",
   "/web-developer-pecatonica-illinois/",
   "/web-developer-winnebago-illinois/",
+  "/web-developer-loves-park-illinois/",
+  "/web-developer-machesney-park-illinois/",
+  "/web-developer-byron-illinois/",
+  "/web-developer-roscoe-illinois/",
+  "/web-developer-rockton-illinois/",
+  "/web-developer-south-beloit-illinois/",
+  "/web-developer-beloit-wisconsin/",
+  "/web-developer-janesville-wisconsin/",
 ];
 
 // ═══════════════════════════════════════════════════════════════════════════

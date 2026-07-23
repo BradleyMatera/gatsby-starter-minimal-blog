@@ -57,6 +57,30 @@ const Footer = () => {
               <li>
                 <Link to="/web-developer-freeport-illinois/">Freeport web developer</Link>
               </li>
+              <li>
+                <Link to="/web-developer-loves-park-illinois/">Loves Park web developer</Link>
+              </li>
+              <li>
+                <Link to="/web-developer-machesney-park-illinois/">Machesney Park web developer</Link>
+              </li>
+              <li>
+                <Link to="/web-developer-byron-illinois/">Byron web developer</Link>
+              </li>
+              <li>
+                <Link to="/web-developer-roscoe-illinois/">Roscoe web developer</Link>
+              </li>
+              <li>
+                <Link to="/web-developer-rockton-illinois/">Rockton web developer</Link>
+              </li>
+              <li>
+                <Link to="/web-developer-south-beloit-illinois/">South Beloit web developer</Link>
+              </li>
+              <li>
+                <Link to="/web-developer-beloit-wisconsin/">Beloit WI web developer</Link>
+              </li>
+              <li>
+                <Link to="/web-developer-janesville-wisconsin/">Janesville WI web developer</Link>
+              </li>
             </ul>
           </div>
           {externalLinks && externalLinks.length > 0 ? (

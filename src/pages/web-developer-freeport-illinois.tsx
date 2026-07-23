@@ -467,8 +467,16 @@ const LocalWebDeveloperPage = () => (
             also have pages for{" "}
             <Link to="/web-developer-durand-davis-illinois/">web development in Durand and Davis</Link>,{" "}
             <Link to="/web-developer-rockford-illinois/">web development in Rockford</Link>,{" "}
-            <Link to="/web-developer-pecatonica-illinois/">Pecatonica</Link>, and{" "}
-            <Link to="/web-developer-winnebago-illinois/">Winnebago</Link>.
+            <Link to="/web-developer-pecatonica-illinois/">Pecatonica</Link>,{" "}
+            <Link to="/web-developer-winnebago-illinois/">Winnebago</Link>,{" "}
+            <Link to="/web-developer-loves-park-illinois/">Loves Park</Link>,{" "}
+            <Link to="/web-developer-machesney-park-illinois/">Machesney Park</Link>,{" "}
+            <Link to="/web-developer-byron-illinois/">Byron</Link>,{" "}
+            <Link to="/web-developer-roscoe-illinois/">Roscoe</Link>,{" "}
+            <Link to="/web-developer-rockton-illinois/">Rockton</Link>,{" "}
+            <Link to="/web-developer-south-beloit-illinois/">South Beloit</Link>,{" "}
+            <Link to="/web-developer-beloit-wisconsin/">Beloit, WI</Link>, and{" "}
+            <Link to="/web-developer-janesville-wisconsin/">Janesville, WI</Link>.
           </p>
         </>
       }

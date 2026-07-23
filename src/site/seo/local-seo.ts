@@ -1,6 +1,6 @@
-export const serviceAreaName = "Durand, Davis, Rockford, Freeport, and Northwest Illinois";
+export const serviceAreaName = "Durand, Davis, Rockford, Freeport, Loves Park, Machesney Park, Byron, Roscoe, Rockton, South Beloit, Beloit, Janesville, and Northwest Illinois";
 export const serviceAreaDescription =
-  "Website design, web development, SEO services, and small business websites for Durand, Davis, Rockford, Freeport, and Northwest Illinois — remote collaboration available.";
+  "Web developer and website design for Rockford, Beloit, Freeport, and Northwest Illinois small businesses — SEO, repair, and custom builds.";
 
 export const serviceAreaPlaces = [
   "Durand, Illinois",
@@ -9,9 +9,20 @@ export const serviceAreaPlaces = [
   "Freeport, Illinois",
   "Pecatonica, Illinois",
   "Winnebago, Illinois",
+  "Loves Park, Illinois",
+  "Machesney Park, Illinois",
+  "Byron, Illinois",
+  "Roscoe, Illinois",
+  "Rockton, Illinois",
+  "South Beloit, Illinois",
+  "Beloit, Wisconsin",
+  "Janesville, Wisconsin",
   "Winnebago County, Illinois",
   "Stephenson County, Illinois",
+  "Ogle County, Illinois",
+  "Rock County, Wisconsin",
   "Northwest Illinois",
+  "Southern Wisconsin",
 ];
 
 export const localBreadcrumb = {

@@ -474,9 +474,17 @@ const LocalWebDeveloperPage = () => (
             I also maintain local pages for nearby areas:{" "}
             <Link to="/web-developer-durand-davis-illinois/">Durand and Davis</Link>,{" "}
             <Link to="/web-developer-freeport-illinois/">Freeport</Link>,{" "}
-            <Link to="/web-developer-pecatonica-illinois/">Pecatonica</Link>, and{" "}
-            <Link to="/web-developer-winnebago-illinois/">Winnebago</Link>. If you are in the broader
-            Northwest Illinois region, the same work applies.
+            <Link to="/web-developer-pecatonica-illinois/">Pecatonica</Link>,{" "}
+            <Link to="/web-developer-winnebago-illinois/">Winnebago</Link>,{" "}
+            <Link to="/web-developer-loves-park-illinois/">Loves Park</Link>,{" "}
+            <Link to="/web-developer-machesney-park-illinois/">Machesney Park</Link>,{" "}
+            <Link to="/web-developer-byron-illinois/">Byron</Link>,{" "}
+            <Link to="/web-developer-roscoe-illinois/">Roscoe</Link>,{" "}
+            <Link to="/web-developer-rockton-illinois/">Rockton</Link>,{" "}
+            <Link to="/web-developer-south-beloit-illinois/">South Beloit</Link>,{" "}
+            <Link to="/web-developer-beloit-wisconsin/">Beloit, WI</Link>, and{" "}
+            <Link to="/web-developer-janesville-wisconsin/">Janesville, WI</Link>. If you are in the broader
+            Northwest Illinois or Southern Wisconsin region, the same work applies.
           </p>
         </>
       }
