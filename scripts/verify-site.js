@@ -46,7 +46,7 @@ const PAGES = [
   { path: "contact/index.html", name: "Contact" },
   { path: "pricing/index.html", name: "Pricing" },
   { path: "recruiter/index.html", name: "Recruiter Hub" },
-  { path: "store/index.html", name: "Store" },
+  { path: "store/[...].html", name: "Store" },
   { path: "purchases/index.html", name: "Purchases" },
   { path: "support/index.html", name: "Support" },
   { path: "roles/index.html", name: "Roles Index" },
@@ -93,7 +93,7 @@ const CANONICAL_PAGES = [
   { file: "contact/index.html", expected: `${SITE_URL}/contact/` },
   { file: "pricing/index.html", expected: `${SITE_URL}/pricing/` },
   { file: "recruiter/index.html", expected: `${SITE_URL}/recruiter/` },
-  { file: "store/index.html", expected: `${SITE_URL}/store/` },
+  { file: "store/[...].html", expected: `${SITE_URL}/store/` },
   { file: "web-developer-durand-davis-illinois/index.html", expected: `${SITE_URL}/web-developer-durand-davis-illinois/` },
   { file: "web-developer-rockford-illinois/index.html", expected: `${SITE_URL}/web-developer-rockford-illinois/` },
   { file: "web-developer-freeport-illinois/index.html", expected: `${SITE_URL}/web-developer-freeport-illinois/` },
@@ -304,7 +304,9 @@ if (homeHtml) {
     if (!existsSync(filePath)) {
       // Check if it's a tag page or blog post
       const altPath = join(publicDir, cleanLink, "index.html");
-      if (!existsSync(altPath)) {
+      // Check for DSG/SSR catch-all routes (e.g. store/[...].html)
+      const catchAllPath = join(publicDir, cleanLink, "[...].html");
+      if (!existsSync(altPath) && !existsSync(catchAllPath)) {
         brokenCount++;
         console.error(`    Broken link: ${link}`);
       }
