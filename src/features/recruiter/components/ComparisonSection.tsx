@@ -1,4 +1,5 @@
 import * as React from "react";
+import { CheckIcon, XIcon } from "../../../site/icons";
 
 /* --------------------------------------------------------------------------
    Comparison Section — Bradley vs typical candidate.
@@ -67,7 +68,7 @@ const ComparisonSection: React.FC = () => {
               gap: "0.5rem",
             }}
           >
-            <span>✕</span> Typical Candidate
+            <span><XIcon size={18} /></span> Typical Candidate
           </h3>
           <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.875rem" }}>
             {TYPICAL.map((item, i) => (
@@ -81,7 +82,7 @@ const ComparisonSection: React.FC = () => {
                   color: "var(--recruiter-text-secondary)",
                 }}
               >
-                <span style={{ color: "var(--r-error)", flexShrink: 0 }}>✕</span>
+                <span style={{ color: "var(--r-error)", flexShrink: 0 }}><XIcon size={14} /></span>
                 {item}
               </li>
             ))}
@@ -108,7 +109,7 @@ const ComparisonSection: React.FC = () => {
               gap: "0.5rem",
             }}
           >
-            <span>✓</span> Bradley Matera
+            <span><CheckIcon size={18} /></span> Bradley Matera
           </h3>
           <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.875rem" }}>
             {BRADLEY.map((item, i) => (
@@ -123,7 +124,7 @@ const ComparisonSection: React.FC = () => {
                   fontWeight: 500,
                 }}
               >
-                <span style={{ color: "var(--r-success)", flexShrink: 0 }}>✓</span>
+                <span style={{ color: "var(--r-success)", flexShrink: 0 }}><CheckIcon size={14} /></span>
                 {item}
               </li>
             ))}

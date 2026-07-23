@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useColorMode } from "theme-ui";
+import { MoonIcon, SunIcon } from "../../site/icons";
 
 const labels: Record<string, string> = {
   light: "Switch to dark mode",
@@ -28,7 +29,7 @@ const ColorModeToggle = () => {
   if (!isMounted) {
     return (
       <span className="color-mode-toggle color-mode-toggle--placeholder" aria-hidden="true">
-        ○
+        <MoonIcon size={16} />
       </span>
     );
   }
@@ -44,7 +45,9 @@ const ColorModeToggle = () => {
       onClick={() => setColorMode(nextMode)}
       aria-label={label}
     >
-      <span aria-hidden="true">{currentMode === "dark" ? "🌙" : "☀️"}</span>
+      <span aria-hidden="true" className="color-mode-toggle__icon">
+        {currentMode === "dark" ? <MoonIcon size={16} /> : <SunIcon size={16} />}
+      </span>
     </button>
   );
 };

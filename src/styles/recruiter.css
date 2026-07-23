@@ -1568,3 +1568,210 @@ html {
 .progress-rail__dot:hover {
   background: var(--r-accent-soft);
 }
+
+/* ---- Contact CTA ------------------------------------------------------- */
+.contact-cta {
+  text-align: center;
+}
+
+.contact-cta__inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.contact-cta__title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+.contact-cta__subtitle {
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contact-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.contact-cta__btn {
+  gap: 0.5rem;
+}
+
+.contact-cta__btn svg {
+  flex-shrink: 0;
+}
+
+.contact-cta__card {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  font-size: 0.875rem;
+  color: var(--recruiter-text-secondary);
+  align-items: center;
+}
+
+.contact-cta__meta-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 100%;
+  border-top: 1px solid var(--recruiter-border);
+  padding-top: 1.25rem;
+}
+
+.contact-cta__meta-item {
+  text-align: center;
+}
+
+.contact-cta__meta-label {
+  font-size: 0.75rem;
+  color: var(--recruiter-text-muted);
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.contact-cta__meta-value {
+  font-size: 0.875rem;
+  color: var(--recruiter-text);
+}
+
+.contact-cta__meta-value--success {
+  color: var(--r-success);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.contact-cta__status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--r-success);
+  flex-shrink: 0;
+}
+
+/* ---- Interview Resources Icons ----------------------------------------- */
+.interview-resource__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  background: var(--r-accent-soft);
+  color: var(--recruiter-purple);
+  margin: 0 auto 0.5rem;
+}
+
+.interview-resource__icon svg {
+  flex-shrink: 0;
+}
+
+.interview-resource-card {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  text-align: center;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.interview-resource-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(167, 139, 250, 0.25);
+}
+
+.interview-resource-card__badge {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  background: rgba(167, 139, 250, 0.15);
+  color: var(--recruiter-purple);
+  align-self: center;
+}
+
+.interview-resource-card__title {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--recruiter-text);
+  margin: 0;
+}
+
+.interview-resource-card__desc {
+  font-size: 0.8125rem;
+  color: var(--recruiter-text-secondary);
+  line-height: 1.55;
+  flex: 1;
+  margin: 0;
+}
+
+.interview-resource-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  justify-content: center;
+}
+
+.interview-resource-card__tag {
+  font-size: 0.625rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 9999px;
+  background: rgba(167, 139, 250, 0.1);
+  color: var(--recruiter-purple);
+  font-weight: 600;
+}
+
+.interview-resource-card__btn {
+  width: 100%;
+  margin-top: 0.25rem;
+  padding: 0.625rem;
+  font-size: 0.8125rem;
+  text-decoration: none;
+  display: inline-flex;
+  gap: 0.4rem;
+}
+
+/* ---- Resource Library Type Icons --------------------------------------- */
+.resource-type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.75rem;
+  color: var(--recruiter-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.resource-type-badge svg {
+  flex-shrink: 0;
+}
+
+/* ---- Privacy Banner Icon ----------------------------------------------- */
+.privacy-banner__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: rgba(251, 191, 36, 0.12);
+  color: rgba(251, 191, 36, 0.9);
+  flex-shrink: 0;
+}
+
+.privacy-banner__icon svg {
+  flex-shrink: 0;
+}

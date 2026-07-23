@@ -1,4 +1,5 @@
 import * as React from "react";
+import { LockIcon, XIcon } from "../../../site/icons";
 
 /* --------------------------------------------------------------------------
    PrivacyBanner — Professional explanation of PII protection.
@@ -23,7 +24,9 @@ const PrivacyBanner: React.FC = () => {
           "linear-gradient(145deg, rgba(251,191,36,0.04) 0%, rgba(13,13,18,0.72) 60%)",
       }}
     >
-      <span style={{ fontSize: "1.25rem", flexShrink: 0 }}>🔒</span>
+      <span className="privacy-banner__icon">
+        <LockIcon size={18} />
+      </span>
       <div style={{ flex: 1 }}>
         <p
           style={{
@@ -59,12 +62,13 @@ const PrivacyBanner: React.FC = () => {
           border: "none",
           color: "var(--recruiter-text-muted)",
           cursor: "pointer",
-          fontSize: "1rem",
           padding: "0.25rem",
           lineHeight: 1,
+          display: "flex",
+          alignItems: "center",
         }}
       >
-        ✕
+        <XIcon size={16} />
       </button>
     </div>
   );

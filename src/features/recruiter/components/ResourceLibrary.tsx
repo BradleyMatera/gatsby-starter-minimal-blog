@@ -1,4 +1,5 @@
 import * as React from "react";
+import { DocumentIcon, ImageIcon, LinkIcon } from "../../../site/icons";
 
 /* --------------------------------------------------------------------------
    Resource Library — Curated real documents from the Resumes folder.
@@ -405,7 +406,19 @@ const DocumentCard: React.FC<{ resource: Resource }> = ({ resource }) => {
             letterSpacing: "0.05em",
           }}
         >
-          {resource.type === "pdf" ? "📄 PDF" : resource.type === "image" ? "🖼️ Image" : "🔗 Link"}
+          {resource.type === "pdf" ? (
+            <span className="resource-type-badge">
+              <DocumentIcon size={14} /> PDF
+            </span>
+          ) : resource.type === "image" ? (
+            <span className="resource-type-badge">
+              <ImageIcon size={14} /> Image
+            </span>
+          ) : (
+            <span className="resource-type-badge">
+              <LinkIcon size={14} /> Link
+            </span>
+          )}
         </span>
       </div>
 

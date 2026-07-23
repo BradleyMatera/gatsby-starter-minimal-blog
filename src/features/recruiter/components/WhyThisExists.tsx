@@ -1,4 +1,5 @@
 import * as React from "react";
+import { CheckIcon, XIcon } from "../../../site/icons";
 
 /* --------------------------------------------------------------------------
    Why This Exists — Explain the value proposition for recruiters.
@@ -65,7 +66,7 @@ const RecruiterPainPoints: React.FC = () => {
                   fontSize: "0.9375rem",
                 }}
               >
-                <span style={{ color: "var(--r-error)", flexShrink: 0, marginTop: 2 }}>✕</span>
+                <span style={{ color: "var(--r-error)", flexShrink: 0, marginTop: 2 }}><XIcon size={16} /></span>
                 {point}
               </li>
             ))}
@@ -97,7 +98,7 @@ const RecruiterPainPoints: React.FC = () => {
                   fontSize: "0.9375rem",
                 }}
               >
-                <span style={{ color: "var(--r-success)", flexShrink: 0, marginTop: 2 }}>✓</span>
+                <span style={{ color: "var(--r-success)", flexShrink: 0, marginTop: 2 }}><CheckIcon size={16} /></span>
                 {sol}
               </li>
             ))}

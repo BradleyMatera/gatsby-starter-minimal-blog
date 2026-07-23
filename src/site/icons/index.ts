@@ -82,3 +82,13 @@ export { default as AccessibilityIcon } from "./AccessibilityIcon";
 export { default as BrainIcon } from "./BrainIcon";
 export { default as ServerIcon } from "./ServerIcon";
 export { default as MonitorIcon } from "./MonitorIcon";
+
+// Document & Status Icons
+export { default as ResumeIcon } from "./ResumeIcon";
+export { default as DocumentIcon } from "./DocumentIcon";
+export { default as TrophyIcon } from "./TrophyIcon";
+export { default as ToolsIcon } from "./ToolsIcon";
+export { default as GlobeIcon } from "./GlobeIcon";
+export { default as ScrollIcon } from "./ScrollIcon";
+export { default as LockIcon } from "./LockIcon";
+export { default as LinkIcon } from "./LinkIcon";

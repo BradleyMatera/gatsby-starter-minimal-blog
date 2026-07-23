@@ -1,4 +1,5 @@
 import * as React from "react";
+import { CheckIcon, XIcon } from "../../../site/icons";
 
 /* --------------------------------------------------------------------------
    Roles Explorer — Inline role cards for the recruiter hub.
@@ -218,7 +219,7 @@ const RolesExplorer: React.FC = () => {
                             gap: "0.5rem",
                           }}
                         >
-                          <span style={{ color: "var(--r-success)", flexShrink: 0 }}>✓</span>
+                          <span style={{ color: "var(--r-success)", flexShrink: 0 }}><CheckIcon size={14} /></span>
                           {item}
                         </li>
                       ))}
@@ -259,7 +260,7 @@ const RolesExplorer: React.FC = () => {
                             gap: "0.5rem",
                           }}
                         >
-                          <span style={{ color: "var(--r-error)", flexShrink: 0 }}>✗</span>
+                          <span style={{ color: "var(--r-error)", flexShrink: 0 }}><XIcon size={14} /></span>
                           {item}
                         </li>
                       ))}
