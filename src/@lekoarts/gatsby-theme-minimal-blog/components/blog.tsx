@@ -7,7 +7,6 @@ import Listing from "./listing";
 import useMinimalBlogConfig from "../hooks/use-minimal-blog-config";
 import replaceSlashes from "../utils/replaceSlashes";
 import Seo from "./seo";
-import BlogAccent from "../../../site/accents/BlogAccent";
 import { Section } from "../../../ui";
 import { SearchIcon, TagIcon, ChevronLeftIcon, ChevronRightIcon, XIcon } from "../../../site/icons";
 
@@ -233,16 +232,9 @@ const Blog = ({ posts }: MBBlogProps) => {
             <p className="direct-answer section-lead">
               <strong>What is Bradley Matera&apos;s blog about?</strong> Short breakdowns of fixes, experiments, and lessons from cloud and full-stack work — AWS, React, Docker, CI/CD, WebGPU, and honest project notes from a junior software engineer in Northwest Illinois. Most entries begin as AI-assisted drafts that I edit, annotate, and fact-check.
             </p>
-            <p className="section-lead">
-              I write quick breakdowns of problems I solve and cool tech I&apos;m learning. Nothing long. No spam. If something breaks and I fix it, I write about it.
-            </p>
           </>
         }
       >
-        <div className="blog-search-accent">
-          <BlogAccent />
-        </div>
-
         <div className="surface-card surface-card--muted blog-search-card">
           <div className="blog-filter-controls">
             <form

@@ -58,6 +58,7 @@
   letter-spacing: -0.02em;
 }
 
+:root[data-visual-theme="brutalism"] .blog-card__tag,
 :root[data-visual-theme="brutalism"] .tag-badge,
 :root[data-visual-theme="brutalism"] .tag-pill,
 :root[data-visual-theme="brutalism"] .category-pill {
@@ -67,6 +68,7 @@
   color: #ffffff !important;
 }
 
+:root[data-visual-theme="brutalism"] .blog-card__tag:hover,
 :root[data-visual-theme="brutalism"] .tag-badge:hover,
 :root[data-visual-theme="brutalism"] .tag-pill:hover,
 :root[data-visual-theme="brutalism"] .category-pill:hover {

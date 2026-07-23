@@ -2,7 +2,6 @@ import * as React from "react";
 import { Link } from "gatsby";
 import useMinimalBlogConfig from "../../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-minimal-blog-config";
 import replaceSlashes from "../../../@lekoarts/gatsby-theme-minimal-blog/utils/replaceSlashes";
-import TinyDotClusterAccent from "../../../site/accents/TinyDotClusterAccent";
 import { useScrollReveal } from "../../../site/hooks/useScrollReveal";
 import joinClasses from "../../../utils/joinClasses";
 
@@ -25,10 +24,20 @@ type BlogCardProps = {
   featured?: boolean;
 };
 
-const formatExcerpt = (excerpt: string, maxLength = 180) => {
+const formatExcerpt = (excerpt: string, maxLength = 160) => {
   if (!excerpt) return "";
   if (excerpt.length <= maxLength) return excerpt;
   return `${excerpt.substring(0, maxLength).trim()}…`;
+};
+
+const formatDate = (dateStr: string) => {
+  try {
+    const d = new Date(dateStr);
+    if (Number.isNaN(d.getTime())) return dateStr;
+    return d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+  } catch {
+    return dateStr;
+  }
 };
 
 const BlogCard = ({ post, showTags = true, featured = false }: BlogCardProps) => {
@@ -38,46 +47,35 @@ const BlogCard = ({ post, showTags = true, featured = false }: BlogCardProps) =>
   return (
     <article
       ref={ref as React.RefObject<HTMLElement>}
-      className={joinClasses("blog-card", "u-relative", "u-reveal", featured ? "blog-card--featured" : "", revealed ? "is-revealed" : undefined)}
+      className={joinClasses("blog-card", "u-reveal", featured ? "blog-card--featured" : "", revealed ? "is-revealed" : undefined)}
     >
-      {/* Title - Top horizontal bar (F-pattern first fixation) */}
-      <Link to={post.slug} className="blog-card__title">
-        {post.title}
-      </Link>
+      <div className="blog-card__header">
+        <div className="blog-card__meta">
+          <time dateTime={post.date}>{formatDate(post.date)}</time>
+          {typeof post.timeToRead === "number" ? <span className="blog-card__dot" aria-hidden="true">·</span> : null}
+          {typeof post.timeToRead === "number" ? <span>{post.timeToRead} min read</span> : null}
+        </div>
+      </div>
 
-      {/* Tags - Second horizontal bar (scannable keywords) */}
+      <h2 className="blog-card__title">
+        <Link to={post.slug}>{post.title}</Link>
+      </h2>
+
+      <p className="blog-card__excerpt">{formatExcerpt(post.description || post.excerpt)}</p>
+
       {showTags && post.tags && post.tags.length > 0 ? (
-        <div className="tag-list">
+        <div className="blog-card__tags">
           {post.tags.slice(0, 3).map((tag) => (
             <Link
               key={tag.slug}
-              className="tag-badge"
+              className="blog-card__tag"
               to={replaceSlashes(`/${basePath}/${tagsPath}/${tag.slug}`)}
             >
-              #{tag.name}
+              {tag.name}
             </Link>
           ))}
         </div>
       ) : null}
-
-      {/* Meta - De-emphasized (date, time) */}
-      <div className="blog-card__meta">
-        <time dateTime={post.date}>{post.date}</time>
-        {typeof post.timeToRead === "number" ? <span> · {post.timeToRead} min read</span> : null}
-      </div>
-
-      {/* Excerpt - Body content */}
-      <p className="blog-card__excerpt">{formatExcerpt(post.description || post.excerpt)}</p>
-
-      {/* CTA - Call to action */}
-      <div className="card-actions">
-        <Link to={post.slug} data-variant="primary">
-          Read: {post.title}
-        </Link>
-      </div>
-
-      {/* Decorative accent - moved to bottom */}
-      <TinyDotClusterAccent />
     </article>
   );
 };
