@@ -90,7 +90,7 @@ const Footer = () => {
               </a>
             </li>
             <li>
-              <a href="mailto:bradmatera@gmail.com" style={{ color: "inherit", textDecoration: "underline" }}>
+              <a href="mailto:bradmatera@gmail.com" aria-label="Email Bradley Matera at bradmatera@gmail.com" style={{ color: "inherit", textDecoration: "underline" }}>
                 bradmatera@gmail.com
               </a>
             </li>

@@ -84,7 +84,7 @@ const CertificationsWall: React.FC = () => {
         <img
           className="recruiter-section__video recruiter-ken-burns"
           src="/quick-snapshot.webp"
-          alt=""
+          alt="Quick snapshot of certifications — background for the certifications wall section"
           aria-hidden="true"
         />
         <div className="recruiter-section__media-overlay" />

@@ -138,7 +138,7 @@ const ExperienceTimeline: React.FC = () => {
         <img
           className="recruiter-section__video recruiter-ken-burns"
           src="/career-timeline.webp"
-          alt=""
+          alt="Career timeline graphic — background for the experience timeline section"
           aria-hidden="true"
         />
         <div className="recruiter-section__media-overlay" />

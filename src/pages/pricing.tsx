@@ -128,10 +128,18 @@ const PricingPage = () => (
         </>
       }
       description={
-        <p>
-          Most agencies hide their prices until you're already committed. I don't do that. Here's
-          exactly what you pay, what you get, and what costs extra.
-        </p>
+        <>
+          <p>
+            Most agencies hide their prices until you're already committed. I don't do that. Here's
+            exactly what you pay, what you get, and what costs extra.
+          </p>
+          <p className="direct-answer" style={{ fontSize: "1.05rem", lineHeight: 1.6, marginTop: "0.75rem" }}>
+            <strong>How much does a website cost?</strong> Website builds start at $447 for a Starter
+            site (5 pages, SEO-ready), $797 for a Growth site (10 pages, Google Business Profile setup),
+            and $1,497 for a Premium site (unlimited pages, e-commerce, multi-city SEO). Monthly
+            support ranges from $37 to $97. No contracts — cancel anytime.
+          </p>
+        </>
       }
       actions={
         <>
@@ -197,6 +205,28 @@ const PricingPage = () => (
           </div>
         </Card>
       </div>
+
+      <h2 className="section-title" style={{ marginTop: "2rem" }}>Pricing comparison at a glance</h2>
+      <table className="pricing-comparison-table" style={{ width: "100%", borderCollapse: "collapse", marginTop: "1rem" }}>
+        <thead>
+          <tr>
+            <th scope="col" style={{ textAlign: "left", padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Feature</th>
+            <th scope="col" style={{ padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Starter ($447)</th>
+            <th scope="col" style={{ padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Growth ($797)</th>
+            <th scope="col" style={{ padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Premium ($1,497)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Pages</td><td style={{ textAlign: "center" }}>Up to 5</td><td style={{ textAlign: "center" }}>Up to 10</td><td style={{ textAlign: "center" }}>Unlimited</td></tr>
+          <tr><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Monthly support</td><td style={{ textAlign: "center" }}>$37/mo</td><td style={{ textAlign: "center" }}>$67/mo</td><td style={{ textAlign: "center" }}>$97/mo</td></tr>
+          <tr><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>SEO-ready</td><td style={{ textAlign: "center" }}>Yes</td><td style={{ textAlign: "center" }}>Yes</td><td style={{ textAlign: "center" }}>Yes</td></tr>
+          <tr><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Google Business Profile</td><td style={{ textAlign: "center" }}>No</td><td style={{ textAlign: "center" }}>Yes</td><td style={{ textAlign: "center" }}>Yes</td></tr>
+          <tr><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Schema markup</td><td style={{ textAlign: "center" }}>Basic</td><td style={{ textAlign: "center" }}>Advanced</td><td style={{ textAlign: "center" }}>Full</td></tr>
+          <tr><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Revisions</td><td style={{ textAlign: "center" }}>2 rounds</td><td style={{ textAlign: "center" }}>3 rounds</td><td style={{ textAlign: "center" }}>Unlimited</td></tr>
+          <tr><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Build time</td><td style={{ textAlign: "center" }}>14 days</td><td style={{ textAlign: "center" }}>3-4 weeks</td><td style={{ textAlign: "center" }}>Scoped per project</td></tr>
+          <tr><td style={{ padding: "0.5rem" }}>E-commerce</td><td style={{ textAlign: "center" }}>No</td><td style={{ textAlign: "center" }}>No</td><td style={{ textAlign: "center" }}>Yes (custom quoted)</td></tr>
+        </tbody>
+      </table>
     </Section>
 
     <Section
@@ -263,6 +293,11 @@ const PricingPage = () => (
             Every build starts with a 50% deposit. After the first round of revisions, if you're not
             happy with the direction, you get the deposit back. No fight, no contract trap. The whole
             site is yours when it's done. The domain is yours. The code is yours.
+          </p>
+          <p style={{ fontSize: "0.9rem", marginTop: "0.5rem" }}>
+            See <Link to="/projects/">project case studies</Link> for examples of completed work,
+            or read the <Link to="/northwest-illinois-web-development-faq/">web development FAQ</Link> for
+            process details. Pricing rationale is documented in the <Link to="/PRICING_MODEL.md">pricing model breakdown</Link>.
           </p>
         </>
       }

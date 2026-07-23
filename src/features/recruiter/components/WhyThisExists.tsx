@@ -28,7 +28,7 @@ const RecruiterPainPoints: React.FC = () => {
         <img
           className="recruiter-section__video recruiter-ken-burns"
           src="/about-header-graphic.webp"
-          alt=""
+          alt="Abstract header graphic — background for the Why I Built This section"
           aria-hidden="true"
         />
         <div className="recruiter-section__media-overlay" />

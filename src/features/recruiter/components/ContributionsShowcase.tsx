@@ -60,7 +60,7 @@ const ContributionsShowcase: React.FC = () => {
         <img
           className="recruiter-section__video recruiter-ken-burns"
           src="/project-diagrams.webp"
-          alt=""
+          alt="Project diagrams — background for the open-source contributions showcase"
           aria-hidden="true"
         />
         <div className="recruiter-section__media-overlay" />

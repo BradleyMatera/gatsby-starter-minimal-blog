@@ -176,7 +176,7 @@ const SkillsExplorer: React.FC = () => {
         <img
           className="recruiter-section__video recruiter-ken-burns"
           src="/skills-icons.webp"
-          alt=""
+          alt="Skills icons grid — background for the technical skills explorer section"
           aria-hidden="true"
         />
         <div className="recruiter-section__media-overlay" />

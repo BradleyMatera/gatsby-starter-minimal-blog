@@ -15,7 +15,7 @@ const RecruiterHero: React.FC = () => {
         <img
           className="recruiter-hero__video recruiter-ken-burns"
           src="/hero-amazon-2000.webp"
-          alt=""
+          alt="Amazon warehouse interior — background image for the recruiter hub hero section"
           aria-hidden="true"
         />
         <div className="recruiter-hero__media-overlay" />

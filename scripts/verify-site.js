@@ -336,6 +336,136 @@ if (rss) {
 }
 console.log("");
 
+// ─── 17. Sitemap has lastmod ──────────────────────────────────────────────
+console.log("▶ Test 17: Sitemap entries have lastmod");
+if (existsSync(sitemapDir)) {
+  for (const sf of readdirSync(sitemapDir).filter((f) => f.endsWith(".xml"))) {
+    const content = readFileSync(join(sitemapDir, sf), "utf8");
+    if (content.includes("<urlset")) {
+      assert(content.includes("<lastmod>"), `${sf} should have <lastmod> entries`);
+    }
+  }
+}
+console.log("");
+
+// ─── 18. Recruiter page images have alt text ──────────────────────────────
+console.log("▶ Test 18: Recruiter page images have alt text (WCAG 1.1.1)");
+const recruiterHtmlAlt = readPage("recruiter/index.html");
+if (recruiterHtmlAlt) {
+  const imgMatches = recruiterHtmlAlt.match(/<img[^>]*>/g) || [];
+  for (const img of imgMatches) {
+    const hasAlt = img.includes('alt="') && !img.includes('alt=""');
+    assert(hasAlt, `Recruiter page img should have non-empty alt text: ${img.substring(0, 80)}...`);
+  }
+}
+console.log("");
+
+// ─── 19. Homepage mailto link has aria-label ──────────────────────────────
+console.log("▶ Test 19: Homepage mailto link has descriptive aria-label (WCAG 2.4.4)");
+if (homeHtml) {
+  const mailtoLinks = homeHtml.match(/<a[^>]*mailto:bradmatera@gmail.com[^>]*>/g) || [];
+  for (const link of mailtoLinks) {
+    assert(
+      link.includes('aria-label=') || link.includes("aria-label="),
+      `Homepage mailto link should have aria-label: ${link.substring(0, 80)}...`
+    );
+  }
+}
+console.log("");
+
+// ─── 20. Meta description lengths (110-170 chars) ─────────────────────────
+console.log("▶ Test 20: Meta description lengths (110-170 chars)");
+const META_LENGTH_PAGES = [
+  "index.html",
+  "pricing/index.html",
+  "about/index.html",
+  "contact/index.html",
+  "blog/index.html",
+  "contributions/index.html",
+  "roles/ai-automation-engineer/index.html",
+  "roles/backend-engineer/index.html",
+  "roles/cloud-engineer/index.html",
+  "roles/devops-engineer/index.html",
+  "roles/full-stack-engineer/index.html",
+];
+for (const file of META_LENGTH_PAGES) {
+  const html = readPage(file);
+  if (html) {
+    const match = html.match(/<meta name="description" content="([^"]*)"/);
+    if (match) {
+      const desc = match[1];
+      assert(
+        desc.length >= 110 && desc.length <= 170,
+        `${file} meta description should be 110-170 chars (got ${desc.length}): "${desc.substring(0, 60)}..."`
+      );
+    } else {
+      assert(false, `${file} should have a meta description`);
+    }
+  }
+}
+console.log("");
+
+// ─── 21. Direct answer on homepage ────────────────────────────────────────
+console.log("▶ Test 21: Homepage has a direct answer near the top (AEO)");
+if (homeHtml) {
+  assert(
+    homeHtml.includes("direct-answer") || homeHtml.includes("Who is Bradley Matera"),
+    "Homepage should have a direct answer paragraph"
+  );
+}
+console.log("");
+
+// ─── 22. Direct answer on pricing page ────────────────────────────────────
+console.log("▶ Test 22: Pricing page has a direct answer (AEO)");
+if (pricingHtml) {
+  assert(
+    pricingHtml.includes("direct-answer") || pricingHtml.includes("How much does a website cost"),
+    "Pricing page should have a direct answer paragraph"
+  );
+}
+console.log("");
+
+// ─── 23. Pricing comparison table ─────────────────────────────────────────
+console.log("▶ Test 23: Pricing page has a comparison table (AEO)");
+if (pricingHtml) {
+  assert(
+    pricingHtml.includes("<table") && pricingHtml.includes("pricing-comparison-table"),
+    "Pricing page should have a comparison table"
+  );
+}
+console.log("");
+
+// ─── 24. Tag pages have direct answers ────────────────────────────────────
+console.log("▶ Test 24: Tag pages have direct answer paragraphs (AEO)");
+const tagDir = join(publicDir, "tags");
+if (existsSync(tagDir)) {
+  const tagDirs = readdirSync(tagDir).filter((f) => {
+    const stat = statSync(join(tagDir, f));
+    return stat.isDirectory();
+  });
+  let checkedCount = 0;
+  for (const tag of tagDirs.slice(0, 10)) {
+    const tagHtml = readPage(`tags/${tag}/index.html`);
+    if (tagHtml) {
+      checkedCount++;
+      assert(
+        tagHtml.includes("direct-answer") || tagHtml.includes("What articles are tagged"),
+        `Tag page /tags/${tag}/ should have a direct answer paragraph`
+      );
+    }
+  }
+  assert(checkedCount > 0, "Should have checked at least 1 tag page");
+}
+console.log("");
+
+// ─── 25. Evidence links on pricing page (GEO) ─────────────────────────────
+console.log("▶ Test 25: Pricing page has evidence/citation links (GEO)");
+if (pricingHtml) {
+  assert(pricingHtml.includes("/projects/"), "Pricing page should link to project case studies as evidence");
+  assert(pricingHtml.includes("/northwest-illinois-web-development-faq/"), "Pricing page should link to FAQ as evidence");
+}
+console.log("");
+
 // ═══════════════════════════════════════════════════════════════════════════
 // SUMMARY
 // ═══════════════════════════════════════════════════════════════════════════

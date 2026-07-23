@@ -18,6 +18,40 @@ export const plugins: Array<PluginRef> = [
     options: {
       output: `/sitemap.xml`,
       excludes: [`/404`, `/404.html`, `/cancel`, `/cancel/`, `/purchases`, `/purchases/`, `/success`, `/success/`, `/contact/success`, `/contact/success/`],
+      serialize: (page, { resolvePagePath }) => {
+        const now = new Date().toISOString();
+        let changefreq = `weekly`;
+        let priority = 0.7;
+
+        const pagePath = page.path || ``;
+
+        if (pagePath === `/`) {
+          priority = 1.0;
+          changefreq = `daily`;
+        } else if (pagePath.startsWith(`/blog/`)) {
+          changefreq = `daily`;
+          priority = 0.8;
+        } else if (
+          pagePath.startsWith(`/web-developer-`) ||
+          pagePath === `/pricing/` ||
+          pagePath === `/about/` ||
+          pagePath === `/contact/` ||
+          pagePath === `/recruiter/`
+        ) {
+          priority = 0.9;
+          changefreq = `weekly`;
+        } else if (pagePath.startsWith(`/tags/`)) {
+          changefreq = `weekly`;
+          priority = 0.5;
+        }
+
+        return {
+          url: resolvePagePath(page),
+          lastmod: now,
+          changefreq,
+          priority,
+        };
+      },
     },
   },
   {

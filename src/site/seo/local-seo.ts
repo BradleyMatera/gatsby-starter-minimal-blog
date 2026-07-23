@@ -1,6 +1,6 @@
 export const serviceAreaName = "Durand, Davis, Rockford, Freeport, and Northwest Illinois";
 export const serviceAreaDescription =
-  "Website design, web development, SEO services, and small business websites for Durand, Davis, Rockford, Freeport, and Northwest Illinois communities, with remote collaboration available.";
+  "Website design, web development, SEO services, and small business websites for Durand, Davis, Rockford, Freeport, and Northwest Illinois — remote collaboration available.";
 
 export const serviceAreaPlaces = [
   "Durand, Illinois",

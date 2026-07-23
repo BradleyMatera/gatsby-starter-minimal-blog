@@ -218,7 +218,7 @@ const ProjectExplorer: React.FC = () => {
         <img
           className="recruiter-section__video recruiter-ken-burns"
           src="/featured-work.webp"
-          alt=""
+          alt="Featured work showcase — background for the project explorer section"
           aria-hidden="true"
         />
         <div className="recruiter-section__media-overlay" />

@@ -74,6 +74,7 @@ exports.onPostBuild = ({ store }) => {
     let html = fs.readFileSync(htmlPath, "utf8");
     const canonical = `${siteUrl}/tags/${tag}/`;
     const tagName = tag.replace(/-/g, " ");
+    const tagDisplay = tagName.charAt(0).toUpperCase() + tagName.slice(1);
     const description = `Browse all articles tagged "${tagName}" on Bradley Matera's portfolio — web development, AI projects, cloud engineering, and career insights from Northwest Illinois.`;
 
     // Fix canonical
@@ -96,6 +97,12 @@ exports.onPostBuild = ({ store }) => {
       /<meta name="twitter:url" content="[^"]*"/g,
       `<meta name="twitter:url" content="${canonical}"`,
     );
+
+    // Inject a direct answer paragraph after the first <h1> for AEO
+    const directAnswer = `<p class="direct-answer" style="max-width:720px;margin:1rem auto 1.5rem;font-size:1.05rem;line-height:1.6"><strong>What articles are tagged "${tagDisplay}"?</strong> This page lists all blog posts on Bradley Matera's portfolio tagged "${tagDisplay}" — covering ${tagName} topics with practical examples, code, and honest lessons learned from real projects.</p>`;
+    if (html.includes('class="direct-answer"') === false) {
+      html = html.replace(/(<h1[^>]*>.*?<\/h1>)/i, `$1${directAnswer}`);
+    }
 
     fs.writeFileSync(htmlPath, html);
   });
@@ -124,6 +131,12 @@ exports.onPostBuild = ({ store }) => {
       /<meta name="twitter:url" content="[^"]*"/g,
       `<meta name="twitter:url" content="${canonical}"`,
     );
+
+    // Inject a direct answer paragraph after the first <h1> for AEO
+    const tagsDirectAnswer = `<p class="direct-answer" style="max-width:720px;margin:1rem auto 1.5rem;font-size:1.05rem;line-height:1.6"><strong>What tags are on this blog?</strong> This page lists all topic tags from Bradley Matera's portfolio — browse articles by tag covering web development, AI, cloud engineering, React, AWS, DevOps, Docker, security, and more.</p>`;
+    if (html.includes('class="direct-answer"') === false) {
+      html = html.replace(/(<h1[^>]*>.*?<\/h1>)/i, `$1${tagsDirectAnswer}`);
+    }
 
     fs.writeFileSync(tagsIndexPath, html);
   }
