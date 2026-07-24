@@ -3,6 +3,7 @@ import type { HeadFC } from "gatsby";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
 import DemoLayout from "../../features/demos/DemoLayout";
+import { StarIcon, MapPinIcon, PhoneIcon, LeafIcon, TreeIcon, SnowflakeIcon, DropletIcon, FlameIcon } from "../../site/icons";
 
 const pathname = "/demos/landscaping/";
 const pageTitle = "GreenScape Pro — Professional Landscaping in Rockford, IL | Demo Website";
@@ -10,12 +11,12 @@ const pageDescription =
   "Demo landscaping company website with service packages, gallery, seasonal tips, and free quote form.";
 
 const services = [
-  { icon: "🌱", name: "Lawn Care & Mowing", desc: "Weekly mowing, edging, fertilization, and weed control to keep your lawn healthy and green all season.", price: "from $45/visit" },
-  { icon: "🌳", name: "Tree & Shrub Care", desc: "Pruning, trimming, tree removal, and stump grinding by certified arborists.", price: "from $120" },
-  { icon: "🪨", name: "Hardscaping", desc: "Patios, retaining walls, walkways, and fire pits built with natural stone and pavers.", price: "from $2,500" },
-  { icon: "💧", name: "Irrigation Systems", desc: "Installation, repair, and winterization of sprinkler systems for efficient watering.", price: "from $1,800" },
-  { icon: "🌸", name: "Garden Design", desc: "Custom flower beds, perennial gardens, and seasonal color rotation designed for your space.", price: "from $650" },
-  { icon: "❄️", name: "Snow Removal", desc: "Driveway and sidewalk plowing, salting, and ice management for residential and commercial.", price: "from $35/visit" },
+  { Icon: LeafIcon, name: "Lawn Care & Mowing", desc: "Weekly mowing, edging, fertilization, and weed control to keep your lawn healthy and green all season.", price: "from $45/visit" },
+  { Icon: TreeIcon, name: "Tree & Shrub Care", desc: "Pruning, trimming, tree removal, and stump grinding by certified arborists.", price: "from $120" },
+  { Icon: FlameIcon, name: "Hardscaping", desc: "Patios, retaining walls, walkways, and fire pits built with natural stone and pavers.", price: "from $2,500" },
+  { Icon: DropletIcon, name: "Irrigation Systems", desc: "Installation, repair, and winterization of sprinkler systems for efficient watering.", price: "from $1,800" },
+  { Icon: LeafIcon, name: "Garden Design", desc: "Custom flower beds, perennial gardens, and seasonal color rotation designed for your space.", price: "from $650" },
+  { Icon: SnowflakeIcon, name: "Snow Removal", desc: "Driveway and sidewalk plowing, salting, and ice management for residential and commercial.", price: "from $35/visit" },
 ];
 
 const testimonials = [
@@ -24,12 +25,18 @@ const testimonials = [
   { text: "After the big snowstorm last winter, they were out at 5 AM clearing our driveway. Best snow removal service in the area.", author: "Patricia L.", location: "Machesney Park, IL" },
 ];
 
+const StarRating: React.FC = () => (
+  <div className="demo-testimonial__stars" aria-label="5 out of 5 stars">
+    {[0, 1, 2, 3, 4].map((i) => <StarIcon key={i} size={18} />)}
+  </div>
+);
+
 const LandscapingDemo: React.FC = () => (
   <DemoLayout demoName="GreenScape Pro" industry="Landscaping" themeColor="#27ae60">
     {/* Hero */}
-    <section className="demo-hero" style={{ background: "linear-gradient(135deg, #27ae60, #145a32)" }}>
+    <section className="demo-hero" style={{ background: "linear-gradient(135deg, #1a6b3a, #0d3318)" }}>
       <div className="demo-hero__inner">
-        <div className="demo-hero__tagline">Serving Rockford & Northwest Illinois Since 2015</div>
+        <span className="demo-hero__tagline">Serving Rockford & Northwest Illinois Since 2015</span>
         <h1 className="demo-hero__title">GreenScape Pro</h1>
         <p className="demo-hero__subtitle">
           Professional landscaping, lawn care, hardscaping, and snow removal for homes and businesses
@@ -48,7 +55,7 @@ const LandscapingDemo: React.FC = () => (
         <div className="demo-stats">
           <div><div className="demo-stat__number">500+</div><div className="demo-stat__label">Properties Served</div></div>
           <div><div className="demo-stat__number">8</div><div className="demo-stat__label">Years in Business</div></div>
-          <div><div className="demo-stat__number">4.9★</div><div className="demo-stat__label">Google Rating</div></div>
+          <div><div className="demo-stat__number">4.9</div><div className="demo-stat__label">Google Rating</div></div>
           <div><div className="demo-stat__number">100%</div><div className="demo-stat__label">Satisfaction Guaranteed</div></div>
         </div>
       </div>
@@ -60,14 +67,17 @@ const LandscapingDemo: React.FC = () => (
         <h2 className="demo-section__title">Our Services</h2>
         <p className="demo-section__subtitle">Full-service landscaping for residential and commercial properties. Year-round care.</p>
         <div className="demo-services">
-          {services.map((s) => (
-            <div key={s.name} className="demo-service">
-              <div className="demo-service__icon">{s.icon}</div>
-              <h3 className="demo-service__name">{s.name}</h3>
-              <p className="demo-service__desc">{s.desc}</p>
-              <div className="demo-service__price">{s.price}</div>
-            </div>
-          ))}
+          {services.map((s) => {
+            const { Icon } = s;
+            return (
+              <div key={s.name} className="demo-service">
+                <div className="demo-service__icon"><Icon size={28} /></div>
+                <h3 className="demo-service__name">{s.name}</h3>
+                <p className="demo-service__desc">{s.desc}</p>
+                <div className="demo-service__price">{s.price}</div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -76,7 +86,7 @@ const LandscapingDemo: React.FC = () => (
     <section className="demo-section">
       <div className="demo-section__inner">
         <div className="demo-about">
-          <div className="demo-about__image" style={{ background: "linear-gradient(135deg, #27ae60, #145a32)" }}>🌿</div>
+          <div className="demo-about__image" style={{ background: "linear-gradient(135deg, #1a6b3a, #0d3318)" }} />
           <div>
             <h2 className="demo-about__title">Locally Owned. Locally Trusted.</h2>
             <p className="demo-about__text">
@@ -101,19 +111,19 @@ const LandscapingDemo: React.FC = () => (
         <p className="demo-section__subtitle">Free advice from our team to keep your yard looking great year-round.</p>
         <div className="demo-faq">
           <div className="demo-faq__item">
-            <h3 className="demo-faq__question">🌱 Spring (March–May)</h3>
+            <h3 className="demo-faq__question">Spring (March–May)</h3>
             <p className="demo-faq__answer">Aerate your lawn, apply pre-emergent crabgrass control, and seed bare spots. Clean up winter debris and trim back perennials before new growth starts.</p>
           </div>
           <div className="demo-faq__item">
-            <h3 className="demo-faq__question">☀️ Summer (June–August)</h3>
+            <h3 className="demo-faq__question">Summer (June–August)</h3>
             <p className="demo-faq__answer">Water deeply 2-3 times per week rather than daily shallow watering. Mow at 3.5 inches to shade roots and retain moisture. Watch for grub damage in late July.</p>
           </div>
           <div className="demo-faq__item">
-            <h3 className="demo-faq__question">🍂 Fall (September–November)</h3>
+            <h3 className="demo-faq__question">Fall (September–November)</h3>
             <p className="demo-faq__answer">Fall fertilization is the most important feeding of the year. Aerate again, overseed thin areas, and don't let leaves smother the grass — mulch or remove them.</p>
           </div>
           <div className="demo-faq__item">
-            <h3 className="demo-faq__question">❄️ Winter (December–February)</h3>
+            <h3 className="demo-faq__question">Winter (December–February)</h3>
             <p className="demo-faq__answer">Stay off frozen grass to prevent damage. Mark driveway edges with stakes before snow falls. Book snow removal service early — we fill up by October.</p>
           </div>
         </div>
@@ -127,7 +137,7 @@ const LandscapingDemo: React.FC = () => (
         <div className="demo-testimonials">
           {testimonials.map((t) => (
             <div key={t.author} className="demo-testimonial">
-              <div className="demo-testimonial__stars">★★★★★</div>
+              <StarRating />
               <p className="demo-testimonial__text">"{t.text}"</p>
               <div className="demo-testimonial__author">{t.author}</div>
               <div className="demo-testimonial__location">{t.location}</div>
@@ -138,16 +148,19 @@ const LandscapingDemo: React.FC = () => (
     </section>
 
     {/* Quote CTA */}
-    <section className="demo-contact" id="quote" style={{ background: "#27ae60" }}>
+    <section className="demo-contact" id="quote" style={{ background: "#1a6b3a" }}>
       <div className="demo-contact__inner">
         <h2 className="demo-contact__title">Get a Free Quote</h2>
         <p className="demo-contact__text">
           Call us at (815) 555-0456 for a free, no-obligation estimate. We serve Rockford, Loves Park,
           Machesney Park, Byron, Roscoe, and the surrounding Northwest Illinois area.
         </p>
-        <a href="tel:8155550456" className="demo-btn demo-btn--primary">Call (815) 555-0456</a>
+        <a href="tel:8155550456" className="demo-btn demo-btn--primary">
+          <PhoneIcon size={20} /> Call (815) 555-0456
+        </a>
         <div className="demo-contact__info">
           <div className="demo-contact__info-item">
+            <MapPinIcon size={20} />
             <span className="demo-contact__info-label">Service Area</span>
             <span>Rockford & NW Illinois</span>
           </div>

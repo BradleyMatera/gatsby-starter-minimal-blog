@@ -4,6 +4,7 @@ import Layout from "../@lekoarts/gatsby-theme-minimal-blog/components/layout";
 import Seo from "../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
 import { Card, Link, Section } from "../ui";
+import { UtensilsIcon, LeafIcon, GearIcon, CarIcon, HouseIcon, ScissorsIcon } from "../site/icons";
 
 const pathname = "/web-developer-rockford-illinois/";
 const pageTitle = "Web Developer & Website Design in Rockford, Illinois";
@@ -365,7 +366,8 @@ const LocalWebDeveloperPage = () => (
     >
       <div className="grid-three">
         <Card variant="outline">
-          <h3 className="feature-card__title">🍽️ Restaurant Demo</h3>
+          <div className="feature-card__icon"><UtensilsIcon size={24} /></div>
+          <h3 className="feature-card__title">Restaurant Demo</h3>
           <p className="feature-card__body">
             Full restaurant website with menu, reservations, hours, photo gallery, and customer reviews.
           </p>
@@ -374,7 +376,8 @@ const LocalWebDeveloperPage = () => (
           </div>
         </Card>
         <Card variant="outline">
-          <h3 className="feature-card__title">🌿 Landscaping Demo</h3>
+          <div className="feature-card__icon"><LeafIcon size={24} /></div>
+          <h3 className="feature-card__title">Landscaping Demo</h3>
           <p className="feature-card__body">
             Landscaping company site with service packages, seasonal tips, gallery, and free quote form.
           </p>
@@ -383,7 +386,8 @@ const LocalWebDeveloperPage = () => (
           </div>
         </Card>
         <Card variant="outline">
-          <h3 className="feature-card__title">🔧 HVAC Demo</h3>
+          <div className="feature-card__icon"><GearIcon size={24} /></div>
+          <h3 className="feature-card__title">HVAC Demo</h3>
           <p className="feature-card__body">
             HVAC company with emergency service, maintenance plans, team bios, and financing info.
           </p>
@@ -392,7 +396,8 @@ const LocalWebDeveloperPage = () => (
           </div>
         </Card>
         <Card variant="outline">
-          <h3 className="feature-card__title">🚗 Auto Repair Demo</h3>
+          <div className="feature-card__icon"><CarIcon size={24} /></div>
+          <h3 className="feature-card__title">Auto Repair Demo</h3>
           <p className="feature-card__body">
             Auto shop with service menu, online booking, tire lookup, and mechanic credentials.
           </p>
@@ -401,7 +406,8 @@ const LocalWebDeveloperPage = () => (
           </div>
         </Card>
         <Card variant="outline">
-          <h3 className="feature-card__title">🏠 Real Estate Demo</h3>
+          <div className="feature-card__icon"><HouseIcon size={24} /></div>
+          <h3 className="feature-card__title">Real Estate Demo</h3>
           <p className="feature-card__body">
             Real estate office with featured listings, agent profiles, market reports, and neighborhood guides.
           </p>
@@ -410,7 +416,8 @@ const LocalWebDeveloperPage = () => (
           </div>
         </Card>
         <Card variant="outline">
-          <h3 className="feature-card__title">💇 Beauty Salon Demo</h3>
+          <div className="feature-card__icon"><ScissorsIcon size={24} /></div>
+          <h3 className="feature-card__title">Beauty Salon Demo</h3>
           <p className="feature-card__body">
             Hair and beauty salon with service menu, stylist team, online booking, and gallery.
           </p>

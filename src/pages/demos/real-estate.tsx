@@ -3,6 +3,7 @@ import type { HeadFC } from "gatsby";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
 import DemoLayout from "../../features/demos/DemoLayout";
+import { StarIcon, MapPinIcon, PhoneIcon, HouseIcon } from "../../site/icons";
 
 const pathname = "/demos/real-estate/";
 const pageTitle = "Rockford Heritage Realty — Real Estate | Demo Website";
@@ -31,12 +32,18 @@ const testimonials = [
   { text: "Professional, responsive, and genuinely cares about her clients. Jessica found us the perfect home in Roscoe in two weeks.", author: "Diana M.", location: "Roscoe, IL" },
 ];
 
+const StarRating: React.FC = () => (
+  <div className="demo-testimonial__stars" aria-label="5 out of 5 stars">
+    {[0, 1, 2, 3, 4].map((i) => <StarIcon key={i} size={18} />)}
+  </div>
+);
+
 const RealEstateDemo: React.FC = () => (
   <DemoLayout demoName="Rockford Heritage Realty" industry="Real Estate" themeColor="#8e44ad">
     {/* Hero */}
-    <section className="demo-hero" style={{ background: "linear-gradient(135deg, #8e44ad, #4a235a)" }}>
+    <section className="demo-hero" style={{ background: "linear-gradient(135deg, #6c3483, #2c1140)" }}>
       <div className="demo-hero__inner">
-        <div className="demo-hero__tagline">Rockford's Trusted Real Estate Team Since 2006</div>
+        <span className="demo-hero__tagline">Rockford's Trusted Real Estate Team Since 2006</span>
         <h1 className="demo-hero__title">Rockford Heritage Realty</h1>
         <p className="demo-hero__subtitle">
           Buying or selling a home in Rockford, Loves Park, Roscoe, Byron, or anywhere in Northwest
@@ -56,7 +63,7 @@ const RealEstateDemo: React.FC = () => (
           <div><div className="demo-stat__number">$450M+</div><div className="demo-stat__label">Total Sales</div></div>
           <div><div className="demo-stat__number">1,200+</div><div className="demo-stat__label">Homes Sold</div></div>
           <div><div className="demo-stat__number">18</div><div className="demo-stat__label">Years in Rockford</div></div>
-          <div><div className="demo-stat__number">4.9★</div><div className="demo-stat__label">Client Rating</div></div>
+          <div><div className="demo-stat__number">4.9</div><div className="demo-stat__label">Client Rating</div></div>
         </div>
       </div>
     </section>
@@ -69,7 +76,9 @@ const RealEstateDemo: React.FC = () => (
         <div className="demo-listings">
           {listings.map((l) => (
             <div key={l.title} className="demo-listing">
-              <div className="demo-listing__image" style={{ background: "linear-gradient(135deg, #8e44ad, #4a235a)" }}>🏠</div>
+              <div className="demo-listing__image">
+                <HouseIcon size={40} />
+              </div>
               <div className="demo-listing__body">
                 <div className="demo-listing__price">{l.price}</div>
                 <h3 className="demo-listing__title">{l.title}</h3>
@@ -87,7 +96,7 @@ const RealEstateDemo: React.FC = () => (
     <section className="demo-section">
       <div className="demo-section__inner">
         <div className="demo-about">
-          <div className="demo-about__image" style={{ background: "linear-gradient(135deg, #8e44ad, #4a235a)" }}>🏠</div>
+          <div className="demo-about__image" style={{ background: "linear-gradient(135deg, #6c3483, #2c1140)" }} />
           <div>
             <h2 className="demo-about__title">Local Experts. Proven Results.</h2>
             <p className="demo-about__text">
@@ -128,7 +137,7 @@ const RealEstateDemo: React.FC = () => (
         <div className="demo-testimonials">
           {testimonials.map((t) => (
             <div key={t.author} className="demo-testimonial">
-              <div className="demo-testimonial__stars">★★★★★</div>
+              <StarRating />
               <p className="demo-testimonial__text">"{t.text}"</p>
               <div className="demo-testimonial__author">{t.author}</div>
               <div className="demo-testimonial__location">{t.location}</div>
@@ -153,16 +162,19 @@ const RealEstateDemo: React.FC = () => (
     </section>
 
     {/* CTA */}
-    <section className="demo-contact" id="contact" style={{ background: "#8e44ad" }}>
+    <section className="demo-contact" id="contact" style={{ background: "#6c3483" }}>
       <div className="demo-contact__inner">
         <h2 className="demo-contact__title">Ready to Buy or Sell?</h2>
         <p className="demo-contact__text">
           Call (815) 555-0567 to speak with an agent today. Free home valuations for sellers, and
           buyer consultations at no cost.
         </p>
-        <a href="tel:8155550567" className="demo-btn demo-btn--primary">Call (815) 555-0567</a>
+        <a href="tel:8155550567" className="demo-btn demo-btn--primary">
+          <PhoneIcon size={20} /> Call (815) 555-0567
+        </a>
         <div className="demo-contact__info">
           <div className="demo-contact__info-item">
+            <MapPinIcon size={20} />
             <span className="demo-contact__info-label">Office</span>
             <span>789 E State St, Rockford, IL</span>
           </div>

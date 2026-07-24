@@ -3,6 +3,7 @@ import type { HeadFC } from "gatsby";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
 import DemoLayout from "../../features/demos/DemoLayout";
+import { StarIcon, MapPinIcon, PhoneIcon, FlameIcon, SnowflakeIcon, WindIcon, ClipboardIcon, AlertIcon, GearIcon, ShieldIcon } from "../../site/icons";
 
 const pathname = "/demos/hvac/";
 const pageTitle = "ComfortAir Heating & Cooling — Rockford HVAC | Demo Website";
@@ -10,12 +11,12 @@ const pageDescription =
   "Demo HVAC company website with emergency service, maintenance plans, financing, and technician bios.";
 
 const services = [
-  { icon: "🔥", name: "Furnace Repair & Installation", desc: "Fast, reliable furnace repair for all brands. New high-efficiency furnace installation with free estimates.", price: "Repair from $89" },
-  { icon: "❄️", name: "AC Repair & Installation", desc: "Central air repair, replacement, and new installation. We service all major brands and offer financing.", price: "Repair from $89" },
-  { icon: "🏠", name: "Indoor Air Quality", desc: "Air purifiers, humidifiers, UV lights, and duct cleaning to keep your home's air clean and healthy.", price: "from $299" },
-  { icon: "📋", name: "Maintenance Plans", desc: "Annual tune-ups, priority service, 15% repair discount, and no overtime fees. Peace of mind for one low price.", price: "$14.99/month" },
-  { icon: "💨", name: "Ductless Mini-Splits", desc: "Zoned heating and cooling without ductwork. Perfect for additions, garages, and older homes.", price: "from $3,200" },
-  { icon: "🚨", name: "24/7 Emergency Service", desc: "Heat out in January? AC down in July? We're available 24/7 for emergency repairs across the Rockford area.", price: "Available now" },
+  { Icon: FlameIcon, name: "Furnace Repair & Installation", desc: "Fast, reliable furnace repair for all brands. New high-efficiency furnace installation with free estimates.", price: "Repair from $89" },
+  { Icon: SnowflakeIcon, name: "AC Repair & Installation", desc: "Central air repair, replacement, and new installation. We service all major brands and offer financing.", price: "Repair from $89" },
+  { Icon: WindIcon, name: "Indoor Air Quality", desc: "Air purifiers, humidifiers, UV lights, and duct cleaning to keep your home's air clean and healthy.", price: "from $299" },
+  { Icon: ClipboardIcon, name: "Maintenance Plans", desc: "Annual tune-ups, priority service, 15% repair discount, and no overtime fees. Peace of mind for one low price.", price: "$14.99/month" },
+  { Icon: WindIcon, name: "Ductless Mini-Splits", desc: "Zoned heating and cooling without ductwork. Perfect for additions, garages, and older homes.", price: "from $3,200" },
+  { Icon: AlertIcon, name: "24/7 Emergency Service", desc: "Heat out in January? AC down in July? We're available 24/7 for emergency repairs across the Rockford area.", price: "Available now" },
 ];
 
 const team = [
@@ -38,28 +39,37 @@ const faqs = [
   { q: "What areas do you serve?", a: "Rockford, Loves Park, Machesney Park, Byron, Roscoe, Rockton, South Beloit, Pecatonica, Winnebago, and Freeport. If you're in Northwest Illinois, we can help." },
 ];
 
+const StarRating: React.FC = () => (
+  <div className="demo-testimonial__stars" aria-label="5 out of 5 stars">
+    {[0, 1, 2, 3, 4].map((i) => <StarIcon key={i} size={18} />)}
+  </div>
+);
+
 const HvacDemo: React.FC = () => (
   <DemoLayout demoName="ComfortAir Heating & Cooling" industry="HVAC / Home Services" themeColor="#2980b9">
     {/* Hero */}
-    <section className="demo-hero" style={{ background: "linear-gradient(135deg, #2980b9, #1a4a6e)" }}>
+    <section className="demo-hero" style={{ background: "linear-gradient(135deg, #1a5276, #0d2b3a)" }}>
       <div className="demo-hero__inner">
-        <div className="demo-hero__tagline">24/7 Emergency Service · Rockford's Trusted HVAC Since 2010</div>
+        <span className="demo-hero__tagline">24/7 Emergency Service · Rockford's Trusted HVAC Since 2010</span>
         <h1 className="demo-hero__title">ComfortAir Heating &amp; Cooling</h1>
         <p className="demo-hero__subtitle">
           Furnace repair, AC installation, maintenance plans, and indoor air quality for homes and
           businesses across Northwest Illinois. Licensed, bonded, and insured.
         </p>
         <div className="demo-hero__actions">
-          <a href="tel:8155550789" className="demo-btn demo-btn--primary">📞 (815) 555-0789</a>
+          <a href="tel:8155550789" className="demo-btn demo-btn--primary">
+            <PhoneIcon size={20} /> (815) 555-0789
+          </a>
           <a href="#services" className="demo-btn demo-btn--ghost">View Services</a>
         </div>
       </div>
     </section>
 
     {/* Emergency Banner */}
-    <section style={{ background: "#e74c3c", color: "#fff", padding: "1rem 1.5rem", textAlign: "center", fontSize: "1.0625rem", fontWeight: 600 }}>
-      🚨 Heating or AC emergency? We're available 24/7 · Call (815) 555-0789 now
-    </section>
+    <div className="demo-emergency-banner">
+      <AlertIcon size={20} />
+      Heating or AC emergency? We're available 24/7 · Call (815) 555-0789 now
+    </div>
 
     {/* Stats */}
     <section className="demo-section">
@@ -67,7 +77,7 @@ const HvacDemo: React.FC = () => (
         <div className="demo-stats">
           <div><div className="demo-stat__number">14</div><div className="demo-stat__label">Years in Business</div></div>
           <div><div className="demo-stat__number">8,000+</div><div className="demo-stat__label">Service Calls</div></div>
-          <div><div className="demo-stat__number">4.9★</div><div className="demo-stat__label">Google Rating</div></div>
+          <div><div className="demo-stat__number">4.9</div><div className="demo-stat__label">Google Rating</div></div>
           <div><div className="demo-stat__number">24/7</div><div className="demo-stat__label">Emergency Service</div></div>
         </div>
       </div>
@@ -79,14 +89,17 @@ const HvacDemo: React.FC = () => (
         <h2 className="demo-section__title">Our Services</h2>
         <p className="demo-section__subtitle">Complete heating and cooling services for residential and commercial properties.</p>
         <div className="demo-services">
-          {services.map((s) => (
-            <div key={s.name} className="demo-service">
-              <div className="demo-service__icon">{s.icon}</div>
-              <h3 className="demo-service__name">{s.name}</h3>
-              <p className="demo-service__desc">{s.desc}</p>
-              <div className="demo-service__price">{s.price}</div>
-            </div>
-          ))}
+          {services.map((s) => {
+            const { Icon } = s;
+            return (
+              <div key={s.name} className="demo-service">
+                <div className="demo-service__icon"><Icon size={28} /></div>
+                <h3 className="demo-service__name">{s.name}</h3>
+                <p className="demo-service__desc">{s.desc}</p>
+                <div className="demo-service__price">{s.price}</div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -95,7 +108,7 @@ const HvacDemo: React.FC = () => (
     <section className="demo-section">
       <div className="demo-section__inner">
         <div className="demo-about">
-          <div className="demo-about__image" style={{ background: "linear-gradient(135deg, #2980b9, #1a4a6e)" }}>🔧</div>
+          <div className="demo-about__image" style={{ background: "linear-gradient(135deg, #1a5276, #0d2b3a)" }} />
           <div>
             <h2 className="demo-about__title">Honest HVAC Service. No Games.</h2>
             <p className="demo-about__text">
@@ -137,7 +150,7 @@ const HvacDemo: React.FC = () => (
         <div className="demo-testimonials">
           {testimonials.map((t) => (
             <div key={t.author} className="demo-testimonial">
-              <div className="demo-testimonial__stars">★★★★★</div>
+              <StarRating />
               <p className="demo-testimonial__text">"{t.text}"</p>
               <div className="demo-testimonial__author">{t.author}</div>
               <div className="demo-testimonial__location">{t.location}</div>
@@ -163,16 +176,19 @@ const HvacDemo: React.FC = () => (
     </section>
 
     {/* CTA */}
-    <section className="demo-contact" style={{ background: "#2980b9" }}>
+    <section className="demo-contact" style={{ background: "#1a5276" }}>
       <div className="demo-contact__inner">
         <h2 className="demo-contact__title">Need Service Today?</h2>
         <p className="demo-contact__text">
           Call (815) 555-0789 for same-day service or 24/7 emergency repairs. We serve Rockford,
           Loves Park, Machesney Park, Byron, Roscoe, and all of Northwest Illinois.
         </p>
-        <a href="tel:8155550789" className="demo-btn demo-btn--primary">Call (815) 555-0789</a>
+        <a href="tel:8155550789" className="demo-btn demo-btn--primary">
+          <PhoneIcon size={20} /> Call (815) 555-0789
+        </a>
         <div className="demo-contact__info">
           <div className="demo-contact__info-item">
+            <ShieldIcon size={20} />
             <span className="demo-contact__info-label">License</span>
             <span>IL #058-204993</span>
           </div>

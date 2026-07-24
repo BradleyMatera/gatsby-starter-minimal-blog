@@ -3,6 +3,7 @@ import type { HeadFC } from "gatsby";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
 import DemoLayout from "../../features/demos/DemoLayout";
+import { StarIcon, MapPinIcon, PhoneIcon, UtensilsIcon, FlameIcon, ClockIcon } from "../../site/icons";
 
 const pathname = "/demos/restaurant/";
 const pageTitle = "Riverside Grill — Rockford's Finest Dining | Demo Website";
@@ -24,19 +25,27 @@ const testimonials = [
   { text: "Great atmosphere, excellent food, reasonable prices for the quality. Our go-to date night spot.", author: "Tom & Lisa", location: "Roscoe, IL" },
 ];
 
+const StarRating: React.FC = () => (
+  <div className="demo-testimonial__stars" aria-label="5 out of 5 stars">
+    {[0, 1, 2, 3, 4].map((i) => <StarIcon key={i} size={18} />)}
+  </div>
+);
+
 const RestaurantDemo: React.FC = () => (
   <DemoLayout demoName="Riverside Grill" industry="Restaurant" themeColor="#c0392b">
     {/* Hero */}
-    <section className="demo-hero" style={{ background: "linear-gradient(135deg, #c0392b, #4a0e0a)" }}>
+    <section className="demo-hero" style={{ background: "linear-gradient(135deg, #8b1a12, #2a0a08)" }}>
       <div className="demo-hero__inner">
-        <div className="demo-hero__tagline">Rockford's Finest Dining Since 2008</div>
+        <span className="demo-hero__tagline">Rockford's Finest Dining Since 2008</span>
         <h1 className="demo-hero__title">Riverside Grill</h1>
         <p className="demo-hero__subtitle">
           Wood-fired steaks, fresh Great Lakes fish, and hand-crafted pasta in the heart of downtown Rockford.
           Join us for dinner Wednesday through Sunday.
         </p>
         <div className="demo-hero__actions">
-          <a href="#menu" className="demo-btn demo-btn--primary">View Menu</a>
+          <a href="#menu" className="demo-btn demo-btn--primary">
+            <UtensilsIcon size={20} /> View Menu
+          </a>
           <a href="#reserve" className="demo-btn demo-btn--ghost">Make a Reservation</a>
         </div>
       </div>
@@ -47,7 +56,7 @@ const RestaurantDemo: React.FC = () => (
       <div className="demo-section__inner">
         <div className="demo-stats">
           <div><div className="demo-stat__number">15+</div><div className="demo-stat__label">Years Serving Rockford</div></div>
-          <div><div className="demo-stat__number">4.8★</div><div className="demo-stat__label">Google Rating</div></div>
+          <div><div className="demo-stat__number">4.8</div><div className="demo-stat__label">Google Rating</div></div>
           <div><div className="demo-stat__number">200+</div><div className="demo-stat__label">5-Star Reviews</div></div>
           <div><div className="demo-stat__number">6</div><div className="demo-stat__label">Days a Week</div></div>
         </div>
@@ -62,7 +71,7 @@ const RestaurantDemo: React.FC = () => (
         <div className="demo-menu">
           {menuItems.map((item) => (
             <div key={item.name} className="demo-menu-item">
-              <div className="demo-menu-item__image">🍽️</div>
+              <div className="demo-menu-item__image" />
               <div>
                 <h3 className="demo-menu-item__name">{item.name}</h3>
                 <p className="demo-menu-item__desc">{item.desc}</p>
@@ -78,7 +87,7 @@ const RestaurantDemo: React.FC = () => (
     <section className="demo-section">
       <div className="demo-section__inner">
         <div className="demo-about">
-          <div className="demo-about__image">🍴</div>
+          <div className="demo-about__image" />
           <div>
             <h2 className="demo-about__title">A Rockford Original</h2>
             <p className="demo-about__text">
@@ -104,7 +113,7 @@ const RestaurantDemo: React.FC = () => (
         <div className="demo-testimonials">
           {testimonials.map((t) => (
             <div key={t.author} className="demo-testimonial">
-              <div className="demo-testimonial__stars">★★★★★</div>
+              <StarRating />
               <p className="demo-testimonial__text">"{t.text}"</p>
               <div className="demo-testimonial__author">{t.author}</div>
               <div className="demo-testimonial__location">{t.location}</div>
@@ -134,7 +143,8 @@ const RestaurantDemo: React.FC = () => (
           </div>
           <div>
             <div className="demo-map">
-              📍 123 Main Street, Rockford, IL 61101
+              <MapPinIcon size={32} />
+              123 Main Street, Rockford, IL 61101
             </div>
           </div>
         </div>
@@ -142,24 +152,29 @@ const RestaurantDemo: React.FC = () => (
     </section>
 
     {/* Reservation CTA */}
-    <section className="demo-contact" id="reserve" style={{ background: "#c0392b" }}>
+    <section className="demo-contact" id="reserve" style={{ background: "#8b1a12" }}>
       <div className="demo-contact__inner">
         <h2 className="demo-contact__title">Make a Reservation</h2>
         <p className="demo-contact__text">
           Call us at (815) 555-0123 or fill out our online form. Walk-ins welcome but reservations
           are recommended for Friday and Saturday evenings.
         </p>
-        <a href="tel:8155550123" className="demo-btn demo-btn--primary">Call (815) 555-0123</a>
+        <a href="tel:8155550123" className="demo-btn demo-btn--primary">
+          <PhoneIcon size={20} /> Call (815) 555-0123
+        </a>
         <div className="demo-contact__info">
           <div className="demo-contact__info-item">
+            <MapPinIcon size={20} />
             <span className="demo-contact__info-label">Address</span>
             <span>123 Main Street, Rockford, IL</span>
           </div>
           <div className="demo-contact__info-item">
+            <PhoneIcon size={20} />
             <span className="demo-contact__info-label">Phone</span>
             <span>(815) 555-0123</span>
           </div>
           <div className="demo-contact__info-item">
+            <ClockIcon size={20} />
             <span className="demo-contact__info-label">Email</span>
             <span>info@riversidegrill.com</span>
           </div>

@@ -3,6 +3,7 @@ import type { HeadFC } from "gatsby";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
 import DemoLayout from "../../features/demos/DemoLayout";
+import { StarIcon, MapPinIcon, PhoneIcon, ScissorsIcon, BrushIcon, SpaIcon, HandIcon, RingIcon } from "../../site/icons";
 
 const pathname = "/demos/beauty-salon/";
 const pageTitle = "Bella Vista Salon — Hair & Beauty in Rockford, IL | Demo Website";
@@ -10,12 +11,12 @@ const pageDescription =
   "Demo beauty salon website with service menu, stylist team, online booking, and before/after gallery.";
 
 const services = [
-  { icon: "✂️", name: "Haircut & Style", desc: "Women's, men's, and children's cuts. Includes wash, cut, and style. Consultation included.", price: "from $35" },
-  { icon: "🎨", name: "Color & Highlights", desc: "Full color, partial highlights, balayage, and color correction. Free patch test for new clients.", price: "from $85" },
-  { icon: "💅", name: "Manicure & Pedicure", desc: "Classic, gel, and dip powder nails. Luxury spa pedicure with massage and paraffin treatment.", price: "from $30" },
-  { icon: "💆", name: "Facials & Skincare", desc: "Customized facials, chemical peels, and microdermabrasion. Free skin consultation.", price: "from $65" },
-  { icon: "💄", name: "Makeup & Special Events", desc: "Wedding makeup, prom, photo shoots, and special occasions. Trial run included for weddings.", price: "from $75" },
-  { icon: "👰", name: "Bridal Packages", desc: "Hair, makeup, and nails for the bride and bridal party. On-site service available.", price: "from $250" },
+  { Icon: ScissorsIcon, name: "Haircut & Style", desc: "Women's, men's, and children's cuts. Includes wash, cut, and style. Consultation included.", price: "from $35" },
+  { Icon: BrushIcon, name: "Color & Highlights", desc: "Full color, partial highlights, balayage, and color correction. Free patch test for new clients.", price: "from $85" },
+  { Icon: HandIcon, name: "Manicure & Pedicure", desc: "Classic, gel, and dip powder nails. Luxury spa pedicure with massage and paraffin treatment.", price: "from $30" },
+  { Icon: SpaIcon, name: "Facials & Skincare", desc: "Customized facials, chemical peels, and microdermabrasion. Free skin consultation.", price: "from $65" },
+  { Icon: BrushIcon, name: "Makeup & Special Events", desc: "Wedding makeup, prom, photo shoots, and special occasions. Trial run included for weddings.", price: "from $75" },
+  { Icon: RingIcon, name: "Bridal Packages", desc: "Hair, makeup, and nails for the bride and bridal party. On-site service available.", price: "from $250" },
 ];
 
 const stylists = [
@@ -31,12 +32,18 @@ const testimonials = [
   { text: "Best pedicure in Rockford. The spa treatment is so relaxing and Tina does the most beautiful nail art.", author: "Sandra W.", location: "Loves Park, IL" },
 ];
 
+const StarRating: React.FC = () => (
+  <div className="demo-testimonial__stars" aria-label="5 out of 5 stars">
+    {[0, 1, 2, 3, 4].map((i) => <StarIcon key={i} size={18} />)}
+  </div>
+);
+
 const BeautySalonDemo: React.FC = () => (
   <DemoLayout demoName="Bella Vista Salon" industry="Beauty Salon" themeColor="#d63384">
     {/* Hero */}
-    <section className="demo-hero" style={{ background: "linear-gradient(135deg, #d63384, #6b1235)" }}>
+    <section className="demo-hero" style={{ background: "linear-gradient(135deg, #a02463, #4a1230)" }}>
       <div className="demo-hero__inner">
-        <div className="demo-hero__tagline">Rockford's Premier Hair & Beauty Salon Since 2014</div>
+        <span className="demo-hero__tagline">Rockford's Premier Hair & Beauty Salon Since 2014</span>
         <h1 className="demo-hero__title">Bella Vista Salon</h1>
         <p className="demo-hero__subtitle">
           Haircuts, color, nails, facials, and makeup in a relaxing, modern salon in the heart of
@@ -55,7 +62,7 @@ const BeautySalonDemo: React.FC = () => (
         <div className="demo-stats">
           <div><div className="demo-stat__number">10</div><div className="demo-stat__label">Years in Business</div></div>
           <div><div className="demo-stat__number">5,000+</div><div className="demo-stat__label">Happy Clients</div></div>
-          <div><div className="demo-stat__number">4.9★</div><div className="demo-stat__label">Google Rating</div></div>
+          <div><div className="demo-stat__number">4.9</div><div className="demo-stat__label">Google Rating</div></div>
           <div><div className="demo-stat__number">4</div><div className="demo-stat__label">Expert Stylists</div></div>
         </div>
       </div>
@@ -67,14 +74,17 @@ const BeautySalonDemo: React.FC = () => (
         <h2 className="demo-section__title">Our Services</h2>
         <p className="demo-section__subtitle">Full-service hair, beauty, and nail care in a relaxing environment.</p>
         <div className="demo-services">
-          {services.map((s) => (
-            <div key={s.name} className="demo-service">
-              <div className="demo-service__icon">{s.icon}</div>
-              <h3 className="demo-service__name">{s.name}</h3>
-              <p className="demo-service__desc">{s.desc}</p>
-              <div className="demo-service__price">{s.price}</div>
-            </div>
-          ))}
+          {services.map((s) => {
+            const { Icon } = s;
+            return (
+              <div key={s.name} className="demo-service">
+                <div className="demo-service__icon"><Icon size={28} /></div>
+                <h3 className="demo-service__name">{s.name}</h3>
+                <p className="demo-service__desc">{s.desc}</p>
+                <div className="demo-service__price">{s.price}</div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -83,7 +93,7 @@ const BeautySalonDemo: React.FC = () => (
     <section className="demo-section">
       <div className="demo-section__inner">
         <div className="demo-about">
-          <div className="demo-about__image" style={{ background: "linear-gradient(135deg, #d63384, #6b1235)" }}>💇</div>
+          <div className="demo-about__image" style={{ background: "linear-gradient(135deg, #a02463, #4a1230)" }} />
           <div>
             <h2 className="demo-about__title">Where Beauty Meets Expertise</h2>
             <p className="demo-about__text">
@@ -125,7 +135,7 @@ const BeautySalonDemo: React.FC = () => (
         <div className="demo-testimonials">
           {testimonials.map((t) => (
             <div key={t.author} className="demo-testimonial">
-              <div className="demo-testimonial__stars">★★★★★</div>
+              <StarRating />
               <p className="demo-testimonial__text">"{t.text}"</p>
               <div className="demo-testimonial__author">{t.author}</div>
               <div className="demo-testimonial__location">{t.location}</div>
@@ -155,7 +165,8 @@ const BeautySalonDemo: React.FC = () => (
           </div>
           <div>
             <div className="demo-map">
-              💇 321 N Main Street, Rockford, IL 61103
+              <MapPinIcon size={32} />
+              321 N Main Street, Rockford, IL 61103
             </div>
           </div>
         </div>
@@ -163,16 +174,19 @@ const BeautySalonDemo: React.FC = () => (
     </section>
 
     {/* Booking CTA */}
-    <section className="demo-contact" id="book" style={{ background: "#d63384" }}>
+    <section className="demo-contact" id="book" style={{ background: "#a02463" }}>
       <div className="demo-contact__inner">
         <h2 className="demo-contact__title">Book Your Appointment</h2>
         <p className="demo-contact__text">
           Call (815) 555-0987 or book online. New clients get 20% off their first service. Walk-ins
           welcome based on availability.
         </p>
-        <a href="tel:8155550987" className="demo-btn demo-btn--primary">Call (815) 555-0987</a>
+        <a href="tel:8155550987" className="demo-btn demo-btn--primary">
+          <PhoneIcon size={20} /> Call (815) 555-0987
+        </a>
         <div className="demo-contact__info">
           <div className="demo-contact__info-item">
+            <MapPinIcon size={20} />
             <span className="demo-contact__info-label">Address</span>
             <span>321 N Main Street, Rockford, IL</span>
           </div>
