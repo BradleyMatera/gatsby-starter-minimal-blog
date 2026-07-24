@@ -13,6 +13,18 @@ The problem was not a lack of desire. It was the strategy. I was building an ice
 
 Now I use a much smaller stack: fast unit tests for pure logic, and a short manual smoke protocol for the rest.
 
+## Why do my test suites keep failing or getting abandoned?
+
+Most test suites get abandoned because they become a maintenance burden instead of a safety net. The common pattern is building an ice cream cone: a few unit tests at the bottom and a massive layer of slow, flaky UI tests on top. When tests break because a div moved two pixels, you eventually stop running them. The fix is a smaller, faster stack.
+
+## What is the best testing strategy for small and solo projects?
+
+For solo and small projects, the best strategy is a small testing pyramid: fast unit tests with Vitest for pure logic like data transformations and formatters, plus a short manual smoke checklist for the rest. Skip E2E frameworks like Cypress and Playwright unless you have a team to maintain them. Automate the unit tests in CI and keep the smoke check manual.
+
+## How do I set up Vitest for unit testing in a Vite project?
+
+Vitest is the easiest unit test runner for Vite projects because it reads your existing Vite config and supports ESM and TypeScript out of the box. Install it with npm install -D vitest, add test scripts to your package.json, and write focused tests on pure logic. Tests run in milliseconds and catch null values, bad date parsing, and wrong booleans.
+
 ## Level 1: unit tests with vitest
 
 For a while I used Jest, but ESM and TypeScript kept creating configuration friction. Vitest reads my existing Vite config, supports ESM out of the box, and runs fast.

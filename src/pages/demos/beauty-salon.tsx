@@ -341,6 +341,12 @@ const BeautySalonDemo: React.FC = () => (
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Book Your Appointment</h2>
         <p className="demo-section__subtitle">Book online in seconds. Choose your stylist, service, and time.</p>
+        <ol style={{ maxWidth: "600px", margin: "0 auto 2rem", paddingLeft: "1.5rem", color: "var(--demo-text-muted)", fontSize: "0.9375rem", lineHeight: 1.8 }}>
+          <li>Choose your service — haircut, color, nails, skincare, or makeup.</li>
+          <li>Select your preferred stylist from our team of four professionals.</li>
+          <li>Pick a date and time that works for you — real-time availability shown instantly.</li>
+          <li>Enter your name and phone number to confirm — you will receive a text reminder 48 hours before your appointment.</li>
+        </ol>
         <div className="demo-two-col">
           <div>
             <div className="demo-booking-widget">

@@ -346,6 +346,13 @@ const AutoRepairDemo: React.FC = () => (
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Book an Appointment</h2>
         <p className="demo-section__subtitle">Fill out the form and we'll confirm by text or email within 1 business hour.</p>
+        <ol style={{ maxWidth: "600px", margin: "0 auto 2rem", paddingLeft: "1.5rem", color: "var(--demo-text-muted)", fontSize: "0.9375rem", lineHeight: 1.8 }}>
+          <li>Enter your vehicle make, model, and year — or use the VIN lookup above to auto-fill.</li>
+          <li>Select the service you need from the dropdown (oil change, brakes, diagnostics, etc.).</li>
+          <li>Choose your preferred date and time for drop-off.</li>
+          <li>Provide your name and phone number — we will text or email confirmation within 1 business hour.</li>
+          <li>Drop off your vehicle at the scheduled time. Most repairs are completed same-day.</li>
+        </ol>
         <div className="demo-booking-form">
           <div className="demo-form__row">
             <div className="demo-form__field"><label className="demo-form__label" htmlFor="appt-make">Vehicle Make</label><input id="appt-make" className="demo-form__input" type="text" placeholder="e.g. Toyota" /></div>

@@ -360,6 +360,12 @@ const RestaurantDemo: React.FC = () => (
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Make a Reservation</h2>
         <p className="demo-section__subtitle">Book your table online in seconds. Powered by OpenTable.</p>
+        <ol style={{ maxWidth: "600px", margin: "0 auto 2rem", paddingLeft: "1.5rem", color: "var(--demo-text-muted)", fontSize: "0.9375rem", lineHeight: 1.8 }}>
+          <li>Select your preferred date, time, and party size in the form below.</li>
+          <li>Enter your name, phone number, and any special requests (dietary needs, seating preferences).</li>
+          <li>Click "Find a Table" to see available reservation times.</li>
+          <li>Confirm your selected time slot — you will receive a text and email confirmation instantly.</li>
+        </ol>
         <div className="demo-booking-widget">
           <div className="demo-booking-widget__header">
             <h3 className="demo-booking-widget__title">Find a Table</h3>

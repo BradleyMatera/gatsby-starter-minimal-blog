@@ -11,6 +11,18 @@ A "cloud ready" web launch is not a certification. It just means I can build, de
 
 This is the checklist I run before I ship.
 
+## What should I check before deploying a web app?
+
+Before deploying a web app, verify that npm run build passes locally, npm run lint passes, the home page loads on the deployed URL, one primary user flow works end to end, and the 404 page loads or falls back cleanly. These boring checks catch the most common launch problems: missing env vars, broken builds, and pages that 404 in production.
+
+## How do I make sure my web project is cloud ready?
+
+A cloud ready web project means you can build, deploy, and verify the basics without guessing. Keep a prelaunch checklist in your repo with repeatable build and lint commands, run a short manual smoke check on the live URL after every deploy, and write a one-line release note per deploy. Local success does not always match production, so always verify live.
+
+## Why do web deployments fail in production?
+
+Most web deployment failures are boring and predictable: the build fails in CI, lint was skipped, an environment variable is missing, a page 404s, a form does nothing, or the deployed site serves old cached assets. A short prelaunch checklist that lives in your repo and uses repeatable commands catches these issues before they reach real users.
+
 ## The three files
 
 I keep this in the repo so it survives beyond my memory:

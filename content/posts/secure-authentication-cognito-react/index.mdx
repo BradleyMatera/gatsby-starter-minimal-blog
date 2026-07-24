@@ -11,6 +11,18 @@ Authentication is not magic. It is configuration, tokens, and clear verification
 
 It avoids pre-built Amplify UI components so I can see exactly what is happening.
 
+## How do I set up AWS Cognito authentication with React?
+
+To set up Cognito authentication with React, create a user pool in the AWS Console with email sign-in and no client secret, create a test user and app client, then install aws-amplify in your React app. Configure Amplify with your User Pool ID and Client ID in an aws-exports file, and wire it into your main entry point. Verify the config before adding UI.
+
+## Do I need a client secret for Cognito with a browser app?
+
+No, you should uncheck the client secret option when creating a Cognito app client for a browser-based React app. Browser apps cannot keep secrets because everything in client-side JavaScript is visible to users. If you accidentally generate a client secret, create a new app client without one. This is one of the most common mistakes when configuring Cognito for frontend apps.
+
+## What are the common mistakes when configuring Cognito with React?
+
+The most common Cognito mistakes are forgetting to uncheck the client secret, using the wrong region in the User Pool ID, and skipping the test user to build sign-up first. Always create a user manually, verify that login works end to end, then add registration. Also confirm your Amplify config loads without console errors before building any sign-in UI on top of it.
+
 ## The moving parts
 
 - **User pool:** the directory of users.
