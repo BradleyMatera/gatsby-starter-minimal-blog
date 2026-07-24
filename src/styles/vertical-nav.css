@@ -43,11 +43,13 @@
 .vertical-nav--top {
   position: static;
   width: 100%;
+  max-width: 100vw;
   height: auto;
   flex-direction: row;
   border-right: none;
   border-top: 1px solid var(--color-border);
   box-shadow: 0 2px 8px rgba(224,90,90,0.08);
+  overflow: hidden;
 }
 
 /* Mobile Drawer */
@@ -161,10 +163,13 @@
   grid-template-columns: auto 1fr auto;
   align-items: center;
   height: 64px;
-  padding: 0 1.5rem;
+  padding: 0 1rem;
   background: var(--color-page-bg, #fff);
   box-shadow: 0 2px 8px rgba(224,90,90,0.08);
   gap: 0;
+  max-width: 100%;
+  overflow: hidden;
+  min-width: 0;
 }
 .vertical-nav--top .vertical-nav__brand {
   margin-bottom: 0;
@@ -187,10 +192,12 @@
   flex-direction: row !important;
   align-items: center;
   justify-content: center;
-  gap: 1.5rem;
+  gap: 1rem;
   flex: 1 1 auto;
-  margin: 0 1rem;
+  margin: 0 0.5rem;
   padding: 0;
+  min-width: 0;
+  overflow: hidden;
 }
 .vertical-nav--top .vertical-nav__list li {
   display: inline-flex;
@@ -203,7 +210,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 0.75rem;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  max-width: 100%;
+  overflow: hidden;
 }
 .vertical-nav__actions--stacked {
   flex-direction: column;
@@ -272,14 +282,14 @@
   display: inline-flex;
   flex-direction: row;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.65rem 1rem;
+  gap: 0.35rem;
+  padding: 0.5rem 0.75rem;
   margin: 0;
   background: none;
   color: var(--color-text, #222);
   border-radius: 0;
   box-shadow: none;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 600;
   line-height: 1;
   white-space: nowrap;
@@ -300,7 +310,8 @@
   background: var(--color-accent, #6f6052);
   color: #fff !important;
   border-radius: 999px;
-  padding: 0.6rem 1.1rem;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.85rem;
   box-shadow: 0 4px 14px var(--color-shadow, rgba(0,0,0,0.12));
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
