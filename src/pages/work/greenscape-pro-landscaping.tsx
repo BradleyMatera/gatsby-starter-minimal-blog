@@ -8,7 +8,7 @@ import { Card, Link, Section } from "../../ui";
 const pathname = "/work/greenscape-pro-landscaping/";
 const pageTitle = "Example: Landscaping Website for Small Businesses | Bradley Matera";
 const pageDescription =
-  "An illustrative example of a 5-page Gatsby website for a landscaping company. Shows the structure, features, and technical approach Bradley would use for a similar business.";
+  "An illustrative example of a 5-page Gatsby website for a landscaping company. Shows the structure, features, and technical approach for a similar business.";
 
 const CaseStudyPage = () => (
   <Layout>

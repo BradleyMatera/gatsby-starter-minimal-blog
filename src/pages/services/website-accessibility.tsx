@@ -186,6 +186,79 @@ const WebsiteAccessibilityPage = () => (
     </Section>
 
     <Section
+      eyebrow="Compare"
+      title="Which option fits your business?"
+      description={
+        <p>
+          Three accessibility service options from audit-only to full compliance. No hidden fees, written agreements included.
+        </p>
+      }
+    >
+      <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Website accessibility comparison table">
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+          <thead>
+            <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Audit only — $297</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Audit + fixes — $65/hr</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Full compliance — $897+</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>WCAG level</td>
+              <td style={{ padding: "0.75rem" }}>AA audit report</td>
+              <td style={{ padding: "0.75rem" }}>AA audit + targeted fixes</td>
+              <td style={{ padding: "0.75rem" }}>Full AA compliance</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Manual testing</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Automated scan</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Keyboard navigation fixes</td>
+              <td style={{ padding: "0.75rem" }}>No</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Color contrast fixes</td>
+              <td style={{ padding: "0.75rem" }}>No</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>ARIA labels</td>
+              <td style={{ padding: "0.75rem" }}>Reported only</td>
+              <td style={{ padding: "0.75rem" }}>Fixed as needed</td>
+              <td style={{ padding: "0.75rem" }}>Full remediation</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Screen reader testing</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes + re-test after fixes</td>
+              <td style={{ padding: "0.75rem" }}>Yes + final verification</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Documentation</td>
+              <td style={{ padding: "0.75rem" }}>Audit report</td>
+              <td style={{ padding: "0.75rem" }}>Audit + fix log</td>
+              <td style={{ padding: "0.75rem" }}>Full compliance report</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </Section>
+
+    <Section
       eyebrow="FAQ"
       title="Common questions about accessibility"
     >

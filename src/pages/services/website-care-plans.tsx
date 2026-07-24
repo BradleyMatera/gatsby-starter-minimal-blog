@@ -225,6 +225,85 @@ const WebsiteCarePlansPage = () => (
     </Section>
 
     <Section
+      eyebrow="Compare"
+      title="Which option fits your business?"
+      description={
+        <p>
+          Side-by-side comparison of what is included in each care plan tier.
+        </p>
+      }
+    >
+      <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Website care plans comparison table">
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+          <thead>
+            <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Essential — $37/mo</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Growth — $67/mo</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Search — $97/mo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Updates/month</td>
+              <td style={{ padding: "0.75rem" }}>Monthly</td>
+              <td style={{ padding: "0.75rem" }}>Bi-weekly</td>
+              <td style={{ padding: "0.75rem" }}>Weekly</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Backups</td>
+              <td style={{ padding: "0.75rem" }}>Weekly</td>
+              <td style={{ padding: "0.75rem" }}>Daily</td>
+              <td style={{ padding: "0.75rem" }}>Daily</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Uptime monitoring</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Security scans</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Content updates</td>
+              <td style={{ padding: "0.75rem" }}>—</td>
+              <td style={{ padding: "0.75rem" }}>2 per month</td>
+              <td style={{ padding: "0.75rem" }}>2 per month</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Performance checks</td>
+              <td style={{ padding: "0.75rem" }}>—</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Priority support</td>
+              <td style={{ padding: "0.75rem" }}>—</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Response time</td>
+              <td style={{ padding: "0.75rem" }}>48 hours</td>
+              <td style={{ padding: "0.75rem" }}>24 hours</td>
+              <td style={{ padding: "0.75rem" }}>Same day</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Monthly report</td>
+              <td style={{ padding: "0.75rem" }}>—</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </Section>
+
+    <Section
       eyebrow="FAQ"
       title="Common questions about care plans"
     >

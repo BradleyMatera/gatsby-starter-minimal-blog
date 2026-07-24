@@ -197,6 +197,85 @@ const WebsiteRepairPage = () => (
     </Section>
 
     <Section
+      eyebrow="Compare"
+      title="Which option fits your business?"
+      description={
+        <p>
+          Three ways to get your site fixed — pick the one that matches how much work you need.
+        </p>
+      }
+    >
+      <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Website repair comparison table">
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+          <thead>
+            <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Hourly — $65/hr</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Half-day — $260</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Full refresh — $597</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Best for</td>
+              <td style={{ padding: "0.75rem" }}>One or two specific fixes</td>
+              <td style={{ padding: "0.75rem" }}>Several issues at once</td>
+              <td style={{ padding: "0.75rem" }}>Outdated site needing a full update</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Response time</td>
+              <td style={{ padding: "0.75rem" }}>24-48 hours</td>
+              <td style={{ padding: "0.75rem" }}>24-48 hours</td>
+              <td style={{ padding: "0.75rem" }}>3-4 week build</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Includes diagnostics</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Broken forms</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Layout fixes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Content updates</td>
+              <td style={{ padding: "0.75rem" }}>Limited</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>SEO fixes</td>
+              <td style={{ padding: "0.75rem" }}>—</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Mobile fixes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Warranty</td>
+              <td style={{ padding: "0.75rem" }}>30-day</td>
+              <td style={{ padding: "0.75rem" }}>30-day</td>
+              <td style={{ padding: "0.75rem" }}>30-day</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </Section>
+
+    <Section
       eyebrow="FAQ"
       title="Common questions about repair"
     >

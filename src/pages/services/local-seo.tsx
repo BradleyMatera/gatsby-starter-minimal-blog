@@ -195,6 +195,73 @@ const LocalSeoPage = () => (
     </Section>
 
     <Section
+      eyebrow="Compare"
+      title="Which option fits your business?"
+      description={
+        <p>
+          Three local SEO tiers with clear deliverables. Month-to-month, written agreements included, cancel anytime.
+        </p>
+      }
+    >
+      <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Local SEO comparison table">
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+          <thead>
+            <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Basic — $67/mo</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Growth — $97/mo</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Premium — custom</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Keywords tracked</td>
+              <td style={{ padding: "0.75rem" }}>Up to 10</td>
+              <td style={{ padding: "0.75rem" }}>Up to 25</td>
+              <td style={{ padding: "0.75rem" }}>Unlimited</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>GBP management</td>
+              <td style={{ padding: "0.75rem" }}>Setup + optimization</td>
+              <td style={{ padding: "0.75rem" }}>Setup + ongoing optimization</td>
+              <td style={{ padding: "0.75rem" }}>Full management + posts</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Schema markup</td>
+              <td style={{ padding: "0.75rem" }}>Local business schema</td>
+              <td style={{ padding: "0.75rem" }}>Local business + service schema</td>
+              <td style={{ padding: "0.75rem" }}>Full schema suite</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Citation building</td>
+              <td style={{ padding: "0.75rem" }}>Top 5 directories</td>
+              <td style={{ padding: "0.75rem" }}>Top 15 directories</td>
+              <td style={{ padding: "0.75rem" }}>Top 30+ directories</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Competitor analysis</td>
+              <td style={{ padding: "0.75rem" }}>No</td>
+              <td style={{ padding: "0.75rem" }}>Top 3 competitors</td>
+              <td style={{ padding: "0.75rem" }}>Top 5 competitors + ongoing</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Monthly reports</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes + strategy call</td>
+              <td style={{ padding: "0.75rem" }}>Yes + monthly strategy call</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Review management</td>
+              <td style={{ padding: "0.75rem" }}>Setup only</td>
+              <td style={{ padding: "0.75rem" }}>Setup + automated follow-up</td>
+              <td style={{ padding: "0.75rem" }}>Full review management</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </Section>
+
+    <Section
       eyebrow="FAQ"
       title="Common questions about local SEO"
     >

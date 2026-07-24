@@ -195,6 +195,85 @@ const WebsiteSpeedPage = () => (
     </Section>
 
     <Section
+      eyebrow="Compare"
+      title="Which option fits your business?"
+      description={
+        <p>
+          Three ways to speed up your site — from a standalone audit to a complete optimization.
+        </p>
+      }
+    >
+      <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Website speed optimization comparison table">
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+          <thead>
+            <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Audit only — $197</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Audit + fixes — $65/hr</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Full optimization — $497+</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Core Web Vitals audit</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>LCP optimization</td>
+              <td style={{ padding: "0.75rem" }}>—</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>CLS fixes</td>
+              <td style={{ padding: "0.75rem" }}>—</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>INP optimization</td>
+              <td style={{ padding: "0.75rem" }}>—</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Image optimization</td>
+              <td style={{ padding: "0.75rem" }}>—</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>CSS/JS minification</td>
+              <td style={{ padding: "0.75rem" }}>—</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Lazy loading</td>
+              <td style={{ padding: "0.75rem" }}>—</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Font optimization</td>
+              <td style={{ padding: "0.75rem" }}>—</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Before/after report</td>
+              <td style={{ padding: "0.75rem" }}>Audit report only</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </Section>
+
+    <Section
       eyebrow="FAQ"
       title="Common questions about speed optimization"
     >

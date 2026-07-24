@@ -210,6 +210,91 @@ const SmallBusinessWebDesignPage = () => (
     </Section>
 
     <Section
+      eyebrow="Compare"
+      title="Which option fits your business?"
+      description={
+        <p>
+          Three fixed-price packages for new websites. No hidden fees, written agreements included, you own everything.
+        </p>
+      }
+    >
+      <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Small business web design comparison table">
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+          <thead>
+            <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Starter — $447</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Growth — $797</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Premium — $1,497</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Pages</td>
+              <td style={{ padding: "0.75rem" }}>1 page</td>
+              <td style={{ padding: "0.75rem" }}>Up to 5 pages</td>
+              <td style={{ padding: "0.75rem" }}>Up to 10 pages</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Build time</td>
+              <td style={{ padding: "0.75rem" }}>7-14 days</td>
+              <td style={{ padding: "0.75rem" }}>14-21 days</td>
+              <td style={{ padding: "0.75rem" }}>21-28 days</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Mobile responsive</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Contact form</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>SEO setup</td>
+              <td style={{ padding: "0.75rem" }}>Basic</td>
+              <td style={{ padding: "0.75rem" }}>Local SEO</td>
+              <td style={{ padding: "0.75rem" }}>Local SEO + schema</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Google Business Profile</td>
+              <td style={{ padding: "0.75rem" }}>No</td>
+              <td style={{ padding: "0.75rem" }}>Setup included</td>
+              <td style={{ padding: "0.75rem" }}>Setup + optimization</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Schema markup</td>
+              <td style={{ padding: "0.75rem" }}>Basic</td>
+              <td style={{ padding: "0.75rem" }}>Service + FAQ</td>
+              <td style={{ padding: "0.75rem" }}>Service + FAQ + Breadcrumb</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Accessibility</td>
+              <td style={{ padding: "0.75rem" }}>Baseline</td>
+              <td style={{ padding: "0.75rem" }}>WCAG 2.2 AA</td>
+              <td style={{ padding: "0.75rem" }}>WCAG 2.2 AA + audit</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Revisions</td>
+              <td style={{ padding: "0.75rem" }}>1 round</td>
+              <td style={{ padding: "0.75rem" }}>2 rounds</td>
+              <td style={{ padding: "0.75rem" }}>3 rounds</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>30-day warranty</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </Section>
+
+    <Section
       eyebrow="FAQ"
       title="Common questions about web design"
     >

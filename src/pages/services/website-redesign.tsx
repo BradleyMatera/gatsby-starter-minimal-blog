@@ -209,6 +209,91 @@ const WebsiteRedesignPage = () => (
     </Section>
 
     <Section
+      eyebrow="Compare"
+      title="Which option fits your business?"
+      description={
+        <p>
+          Three redesign options from a quick refresh to a full premium rebuild. No hidden fees, written agreements included.
+        </p>
+      }
+    >
+      <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Website redesign comparison table">
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+          <thead>
+            <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Site Refresh — $597</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Full Redesign — $797</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Premium Redesign — $1,497</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Pages</td>
+              <td style={{ padding: "0.75rem" }}>Up to 3 pages</td>
+              <td style={{ padding: "0.75rem" }}>Up to 5 pages</td>
+              <td style={{ padding: "0.75rem" }}>Up to 10 pages</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Design changes</td>
+              <td style={{ padding: "0.75rem" }}>Layout + styling refresh</td>
+              <td style={{ padding: "0.75rem" }}>Full visual redesign</td>
+              <td style={{ padding: "0.75rem" }}>Full redesign + custom features</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Content migration</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes + copywriting assistance</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Mobile responsive</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>SEO setup</td>
+              <td style={{ padding: "0.75rem" }}>Basic</td>
+              <td style={{ padding: "0.75rem" }}>Local SEO</td>
+              <td style={{ padding: "0.75rem" }}>Local SEO + schema</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Schema markup</td>
+              <td style={{ padding: "0.75rem" }}>Basic</td>
+              <td style={{ padding: "0.75rem" }}>Service + FAQ</td>
+              <td style={{ padding: "0.75rem" }}>Service + FAQ + Breadcrumb</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Accessibility</td>
+              <td style={{ padding: "0.75rem" }}>Baseline</td>
+              <td style={{ padding: "0.75rem" }}>WCAG 2.2 AA</td>
+              <td style={{ padding: "0.75rem" }}>WCAG 2.2 AA + audit</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Revisions</td>
+              <td style={{ padding: "0.75rem" }}>1 round</td>
+              <td style={{ padding: "0.75rem" }}>2 rounds</td>
+              <td style={{ padding: "0.75rem" }}>3 rounds</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>30-day warranty</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Build time</td>
+              <td style={{ padding: "0.75rem" }}>7-14 days</td>
+              <td style={{ padding: "0.75rem" }}>3-4 weeks</td>
+              <td style={{ padding: "0.75rem" }}>4-6 weeks</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </Section>
+
+    <Section
       eyebrow="FAQ"
       title="Common questions about redesigns"
     >
