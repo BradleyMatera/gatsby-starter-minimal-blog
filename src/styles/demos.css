@@ -136,7 +136,7 @@
   --demo-radius: 12px;
   --demo-radius-lg: 20px;
   --demo-shadow: 0 6px 24px rgba(74,124,58,0.12);
-  --demo-hero-overlay: rgba(15,30,12,0.55);
+  --demo-hero-overlay: rgba(15,30,12,0.75);
 }
 
 /* 3. INDUSTRIAL — HVAC: bold, condensed, blue + orange */
@@ -193,7 +193,7 @@
   --demo-radius: 2px;
   --demo-radius-lg: 4px;
   --demo-shadow: 0 8px 30px rgba(26,40,69,0.12);
-  --demo-hero-overlay: rgba(15,25,50,0.55);
+  --demo-hero-overlay: rgba(15,25,50,0.78);
 }
 
 /* 6. SOFT — Beauty Salon: feminine, script + sans, pink + rose */
@@ -277,7 +277,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 60% 50% at center, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 50%, transparent 80%);
+  background: radial-gradient(ellipse 70% 60% at center, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.2) 80%);
   z-index: 1;
 }
 .demo-hero__inner {
@@ -308,11 +308,12 @@
 }
 .demo-hero__subtitle {
   font-size: clamp(1rem, 2.5vw, 1.25rem);
-  color: rgba(255,255,255,0.9);
+  color: #fff;
   margin-bottom: 2rem;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.5);
 }
 .demo-hero__actions {
   display: flex;
