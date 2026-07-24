@@ -39,8 +39,8 @@ const readPage = (relPath) => {
   return null;
 };
 
-const PHONE = "(650) 265-1193";
-const PHONE_TEL = "tel:+16502651193";
+const PHONE = "(608) 313-5373";
+const PHONE_TEL = "tel:+16083135373";
 const EMAIL = "bradmatera@gmail.com";
 const SITE_URL = "https://bradleymatera.dev";
 

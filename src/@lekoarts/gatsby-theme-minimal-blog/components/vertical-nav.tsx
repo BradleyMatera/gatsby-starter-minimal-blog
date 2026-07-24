@@ -165,11 +165,11 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
               </li>
             </ul>
             <div className="vertical-nav__actions cyber-nav__actions">
-              <a href="tel:+16502651193" className="vertical-nav__cta vertical-nav__cta--inline cyber-cta vertical-nav__phone">
+              <a href="tel:+16083135373" className="vertical-nav__cta vertical-nav__cta--inline cyber-cta vertical-nav__phone">
                 <span className="vertical-nav__cta-icon" aria-hidden="true">
                   <PhoneIcon size={18} />
                 </span>
-                <span>(650) 265-1193</span>
+                <span>(608) 313-5373</span>
               </a>
               <a href="/contact" className="vertical-nav__cta vertical-nav__cta--inline cyber-cta">
                 <span className="vertical-nav__cta-icon" aria-hidden="true">
@@ -229,11 +229,11 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
               })}
             </ul>
             <div className="vertical-nav__actions vertical-nav__actions--stacked cyber-drawer__actions">
-              <a href="tel:+16502651193" className="vertical-nav__cta cyber-cta cyber-cta--drawer">
+              <a href="tel:+16083135373" className="vertical-nav__cta cyber-cta cyber-cta--drawer">
                 <span className="vertical-nav__cta-icon" aria-hidden="true">
                   <PhoneIcon size={18} />
                 </span>
-                <span>(650) 265-1193</span>
+                <span>(608) 313-5373</span>
               </a>
               <a href="/contact" className="vertical-nav__cta cyber-cta cyber-cta--drawer">
                 <span className="vertical-nav__cta-icon" aria-hidden="true">

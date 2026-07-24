@@ -9,7 +9,7 @@ Guide for AI agents (Devin, Claude, Copilot, etc.) working on this codebase.
 **bradleymatera.dev** is a Gatsby 5 + React 18 + TypeScript portfolio, blog, digital store, recruiter hub, and local SEO web development service for Bradley Matera, based in Durand, Illinois.
 
 - **Live site:** https://bradleymatera.dev
-- **Phone:** (650) 265-1193 (Google Voice — records calls, emails transcripts)
+- **Phone:** (608) 313-5373 (Google Voice — records calls, emails transcripts)
 - **Email:** bradmatera@gmail.com
 - **Hosting:** Netlify (auto-deploys on push to `master`)
 
@@ -41,7 +41,7 @@ Tag pages had persistent canonical URL and meta description issues because Gatsb
 `/sitemap.xml` is a directory in Gatsby's build output, not a file. A Netlify redirect in `netlify.toml` serves `/sitemap.xml/sitemap-index.xml` when `/sitemap.xml` is requested. `robots.txt` points to `/sitemap.xml`. **Do not change this redirect.**
 
 ### 3. NAP Consistency (Local SEO)
-The phone number (650) 265-1193 must be consistent across:
+The phone number (608) 313-5373 must be consistent across:
 - Header navigation (`src/@lekoarts/gatsby-theme-minimal-blog/components/vertical-nav.tsx`)
 - Footer (`src/@lekoarts/gatsby-theme-minimal-blog/components/footer.tsx`)
 - All 5 city landing pages (`src/pages/web-developer-*.tsx`)

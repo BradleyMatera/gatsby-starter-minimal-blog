@@ -22,7 +22,7 @@ const ContactContent = () => (
             I am open to remote work and to projects in Durand, Davis, Rockford, Freeport, and nearby Northwest Illinois communities.
           </p>
           <p>
-            <strong>Phone:</strong> <a href="tel:+16502651193">(650) 265-1193</a><br />
+            <strong>Phone:</strong> <a href="tel:+16083135373">(608) 313-5373</a><br />
             <strong>Email:</strong> bradmatera@gmail.com
           </p>
         </>
@@ -42,9 +42,9 @@ const ContactContent = () => (
             <span>Email Bradley@:</span>
             <span>bradmatera@gmail.com</span>
           </a>
-          <a className="contact-info__cta" href="tel:+16502651193" style={{ marginTop: "0.5rem" }}>
+          <a className="contact-info__cta" href="tel:+16083135373" style={{ marginTop: "0.5rem" }}>
             <span>Call Bradley@:</span>
-            <span>(650) 265-1193</span>
+            <span>(608) 313-5373</span>
           </a>
           <p className="contact-info__note">
             Typical response time: within one business day. Mention if you prefer Slack, Teams, or scheduled calls.

@@ -57,7 +57,7 @@ export const buildProfessionalServiceSchema = ({
     "Full-stack web development",
   ],
   description,
-  telephone: "+16502651193",
+  telephone: "+16083135373",
   email: "bradmatera@gmail.com",
   dateModified: new Date().toISOString().split("T")[0],
   founder: {

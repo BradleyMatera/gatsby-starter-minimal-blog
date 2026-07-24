@@ -112,8 +112,8 @@ const Footer = () => {
           <p className="footer-nav__title" style={{ marginTop: "1rem" }}>Contact</p>
           <ul>
             <li>
-              <a href="tel:+16502651193" style={{ color: "inherit", textDecoration: "underline" }}>
-                (650) 265-1193
+              <a href="tel:+16083135373" style={{ color: "inherit", textDecoration: "underline" }}>
+                (608) 313-5373
               </a>
             </li>
             <li>

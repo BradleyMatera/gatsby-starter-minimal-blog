@@ -89,8 +89,8 @@ const LocalWebDeveloperPage = () => (
       }
       actions={
         <>
-          <a href="tel:+16502651193" data-variant="ghost" className="link">
-            (650) 265-1193
+          <a href="tel:+16083135373" data-variant="ghost" className="link">
+            (608) 313-5373
           </a>
           <Link data-variant="primary" to="/contact/">
             Free consultation
@@ -566,7 +566,7 @@ export const Head: HeadFC = () => {
         "@type": "Person",
         name: "Bradley Matera",
         url: site.siteUrl,
-        telephone: "+16502651193",
+        telephone: "+16083135373",
       },
       areaServed: [
         { "@type": "City", name: "Freeport, Illinois" },
@@ -580,7 +580,7 @@ export const Head: HeadFC = () => {
       name: "Bradley Matera",
       url: site.siteUrl,
       description: pageDescription,
-      telephone: "+16502651193",
+      telephone: "+16083135373",
       areaServed: [
         { "@type": "City", name: "Freeport, Illinois" },
         { "@type": "AdministrativeArea", name: "Stephenson County, Illinois" },

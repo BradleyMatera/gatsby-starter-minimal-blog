@@ -3,7 +3,7 @@
 Production website and blog for Bradley Matera — a personal portfolio, blog, digital store, recruiter hub, and **local SEO web development service** built with Gatsby, React, and Netlify serverless functions.
 
 **Live site:** [bradleymatera.dev](https://bradleymatera.dev)
-**Phone:** (650) 265-1193
+**Phone:** (608) 313-5373
 **Email:** bradmatera@gmail.com
 
 ---
@@ -173,7 +173,7 @@ npm run products:seed:direct  # seed direct products
 - **Pricing page** with transparent tiered pricing ($447–$1,497)
 - **Service schema markup** (Service + ProfessionalService) on every city page
 - **LocalBusiness schema** with NAP consistency (Name, Address, Phone)
-- **Google Business Profile** integration (phone: (650) 265-1193)
+- **Google Business Profile** integration (phone: (608) 313-5373)
 - Each city page includes: 3-step process, industries served, social proof stats, FAQ, pricing link
 - See `PRICING_MODEL.md` for full pricing rationale and tax breakdowns
 - See `GOOGLE_VOICE_SETUP.md` for business phone setup
@@ -257,7 +257,7 @@ Durand, Davis, Rockford, Freeport, Pecatonica, Winnebago, Winnebago County, Step
 
 ### NAP (Name, Address, Phone)
 - **Name:** Bradley Matera
-- **Phone:** (650) 265-1193
+- **Phone:** (608) 313-5373
 - **Email:** bradmatera@gmail.com
 - **Website:** https://bradleymatera.dev
 - Phone number must be consistent across: website header, footer, all city pages, pricing page, contact page, schema markup, and Google Business Profile
