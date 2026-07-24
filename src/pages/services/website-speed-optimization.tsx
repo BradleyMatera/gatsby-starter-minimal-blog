@@ -30,11 +30,21 @@ const faqs = [
   },
   {
     q: "What are Core Web Vitals?",
-    a: "Core Web Vitals are Google's three key speed metrics: LCP (Largest Contentful Paint) measures how fast the main content loads — target 2.5 seconds or less. INP (Interaction to Next Paint) measures how fast the page responds to clicks — target 200 milliseconds or less. CLS (Cumulative Layout Shift) measures visual stability — target 0.1 or less. Google uses these as ranking signals.",
+    a: (
+      <>
+        <a href="https://web.dev/articles/vitals">Core Web Vitals</a> are Google's three key speed metrics: LCP (Largest Contentful Paint) measures how fast the main content loads — target 2.5 seconds or less. INP (Interaction to Next Paint) measures how fast the page responds to clicks — target 200 milliseconds or less. CLS (Cumulative Layout Shift) measures visual stability — target 0.1 or less. Google uses these as ranking signals.
+      </>
+    ),
+    text: "Core Web Vitals are Google's three key speed metrics: LCP (Largest Contentful Paint) measures how fast the main content loads — target 2.5 seconds or less. INP (Interaction to Next Paint) measures how fast the page responds to clicks — target 200 milliseconds or less. CLS (Cumulative Layout Shift) measures visual stability — target 0.1 or less. Google uses these as ranking signals.",
   },
   {
     q: "Will speed optimization improve my search rankings?",
-    a: "Speed is a confirmed ranking factor, but it is one of many. If your site is very slow, fixing it can produce a noticeable improvement. If your site is already reasonably fast, the ranking impact may be small. The bigger benefit is usually user experience — faster sites convert better and have lower bounce rates.",
+    a: (
+      <>
+        Speed is a <a href="https://developers.google.com/search/docs/appearance/page-experience">confirmed ranking factor</a>, but it is one of many. If your site is very slow, fixing it can produce a noticeable improvement. If your site is already reasonably fast, the ranking impact may be small. The bigger benefit is usually user experience — faster sites convert better and have lower bounce rates.
+      </>
+    ),
+    text: "Speed is a confirmed ranking factor, but it is one of many. If your site is very slow, fixing it can produce a noticeable improvement. If your site is already reasonably fast, the ranking impact may be small. The bigger benefit is usually user experience — faster sites convert better and have lower bounce rates.",
   },
   {
     q: "Can you optimize a WordPress site?",
@@ -304,6 +314,14 @@ const WebsiteSpeedPage = () => (
         <Link data-variant="ghost" to="/pricing/">See pricing</Link>
       </div>
     </Section>
+    <div className="attribution-block" style={{ maxWidth: "42rem", margin: "2rem auto", padding: "1rem 1.5rem", fontSize: "0.875rem", opacity: 0.7, borderTop: "1px solid var(--color-border)" }}>
+      <p>
+        <strong>By Bradley Matera</strong> — web developer in Durand, Illinois, serving Northwest Illinois and Southern Wisconsin. <Link to="/about/">About</Link> · <Link to="/contact/">Contact</Link> · <Link to="/pricing/">Pricing</Link>
+      </p>
+      <p style={{ marginTop: "0.5rem" }}>
+        Last updated: July 2026. Prices and services subject to change — see <Link to="/terms/">terms of service</Link>.
+      </p>
+    </div>
   </Layout>
 );
 
@@ -357,7 +375,7 @@ export const Head: HeadFC = () => {
         name: faq.q,
         acceptedAnswer: {
           "@type": "Answer",
-          text: faq.a,
+          text: faq.text ?? faq.a,
         },
       })),
     },

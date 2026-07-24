@@ -99,6 +99,31 @@ const ServiceScopePage = () => (
     </Section>
 
     <Section
+      eyebrow="What's included"
+      title="Every project includes these fundamentals"
+      description={
+        <p>
+          No matter which package you choose — Starter, Growth, or Lead Engine — these items are part of every build. There is no "basic tier" that skips the essentials.
+        </p>
+      }
+    >
+      <Card variant="outline">
+        <ul className="feature-list">
+          <li><strong>SSL certificate setup and renewal</strong> — HTTPS encryption configured at launch and renewed automatically.</li>
+          <li><strong>Mobile-responsive design</strong> — tested on iOS and Android devices, not just browser dev tools.</li>
+          <li><strong>Google Analytics 4 setup</strong> — GA4 installed, verified, and sending data before launch.</li>
+          <li><strong>Google Search Console verification</strong> — your property claimed and linked to Analytics.</li>
+          <li><strong>XML sitemap generation and submission</strong> — sitemap built and submitted to Google for indexing.</li>
+          <li><strong>Basic on-page SEO</strong> — title tags, meta descriptions, and heading structure on every page.</li>
+          <li><strong>Contact form with spam protection</strong> — working form with honeypot and submission filtering.</li>
+          <li><strong>Cross-browser testing</strong> — verified in Chrome, Safari, Firefox, and Edge.</li>
+          <li><strong>30-day post-launch warranty</strong> — bugs and functionality issues fixed free for 30 days after launch.</li>
+          <li><strong>Written agreement</strong> — a signed document outlining scope, timeline, and cost before work begins.</li>
+        </ul>
+      </Card>
+    </Section>
+
+    <Section
       eyebrow="Not included"
       title="What's NOT included"
     >
@@ -259,6 +284,14 @@ const ServiceScopePage = () => (
         Last updated: {POLICY_LAST_UPDATED}
       </p>
     </Section>
+    <div className="attribution-block" style={{ maxWidth: "42rem", margin: "2rem auto", padding: "1rem 1.5rem", fontSize: "0.875rem", opacity: 0.7, borderTop: "1px solid var(--color-border)" }}>
+      <p>
+        <strong>By Bradley Matera</strong> — web developer in Durand, Illinois, serving Northwest Illinois and Southern Wisconsin. <Link to="/about/">About</Link> · <Link to="/contact/">Contact</Link> · <Link to="/pricing/">Pricing</Link>
+      </p>
+      <p style={{ marginTop: "0.5rem" }}>
+        Last updated: July 2026. Prices and services subject to change — see <Link to="/terms/">terms of service</Link>.
+      </p>
+    </div>
   </Layout>
 );
 

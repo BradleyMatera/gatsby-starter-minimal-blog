@@ -4,6 +4,25 @@ import { Section, Card, Link } from "../../../ui";
 const ContactContent = () => (
   <>
     <Section
+      eyebrow="What happens next"
+      title="Your free consultation, step by step"
+      description={
+        <p>
+          Here is exactly what happens after you reach out — no mystery, no pressure.
+        </p>
+      }
+    >
+      <Card variant="outline">
+        <ol className="feature-list" style={{ paddingLeft: "1.5rem" }}>
+          <li><strong>You fill out the form or call</strong> — I respond within 1 business day, usually sooner.</li>
+          <li><strong>We talk for 15-30 minutes</strong> — a quick call about your business, your goals, and what you need from a website.</li>
+          <li><strong>I send a written proposal</strong> — scope, price, and timeline in writing. No verbal-only quotes.</li>
+          <li><strong>You decide</strong> — no pressure, no obligation. Take the proposal and think it over.</li>
+        </ol>
+      </Card>
+    </Section>
+
+    <Section
       eyebrow="Contact"
       title={
         <>

@@ -291,6 +291,31 @@ import { HeroBanner } from "../../../site/components";
 </Section>
 
 <Section
+  eyebrow="About the developer"
+  title="Who builds your website"
+  description={<p className="section-lead">I'm Bradley Matera — a web developer in Durand, Illinois. Here's what backs up the work.</p>}
+  actions={<Link data-variant="ghost" to="/about/">Read my full story</Link>}
+>
+  <div className="grid-three">
+    <div className="feature-card">
+      <h3 className="feature-card__title">AWS Cloud Support Intern</h3>
+      <div className="feature-card__body"><p>Completed a 6-month internship at Amazon Web Services on the Cloud Support Engineer team. Hands-on experience troubleshooting real customer infrastructure issues across AWS services.</p></div>
+      <div className="card-actions"><Link data-variant="ghost" to="/aws-cloud-support-internship-mastering-troubleshooting-and-architecture/">Read the internship write-up</Link></div>
+    </div>
+    <div className="feature-card">
+      <h3 className="feature-card__title">Full Sail University student</h3>
+      <div className="feature-card__body"><p>Currently pursuing a degree in Web Development at Full Sail University. Coursework covers front-end, back-end, databases, and deployment — not just theory.</p></div>
+      <div className="card-actions"><Link data-variant="ghost" to="/full-sail-university-web-development/">Read about my program</Link></div>
+    </div>
+    <div className="feature-card">
+      <h3 className="feature-card__title">Real projects, not tutorials</h3>
+      <div className="feature-card__body"><p>I build real applications — an interactive Pokédex with 151 entries, a car-matching app, a JWT CTF lab, WebGPU demos. Every project has source code you can inspect.</p></div>
+      <div className="card-actions"><Link data-variant="ghost" to="/projects/">See project source code</Link></div>
+    </div>
+  </div>
+</Section>
+
+<Section
   eyebrow="Next step"
   title="Get a free website plan"
   description={<p className="section-lead">Call (608) 313-5373 or send a message through the contact page. I'll tell you honestly whether I'm the right fit for your project.</p>}

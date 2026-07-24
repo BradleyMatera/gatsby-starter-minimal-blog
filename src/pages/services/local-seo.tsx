@@ -52,7 +52,12 @@ const faqs = [
   },
   {
     q: "What is a Google Business Profile and why does it matter?",
-    a: "Google Business Profile is the free listing that appears in Google Maps and local search results. It shows your business name, address, phone, hours, photos, and reviews. Optimizing it is the single most impactful thing you can do for local search.",
+    a: (
+      <>
+        <a href="https://www.google.com/business/">Google Business Profile</a> is the free listing that appears in Google Maps and local search results. It shows your business name, address, phone, hours, photos, and reviews. Optimizing it is the single most impactful thing you can do for local search.
+      </>
+    ),
+    text: "Google Business Profile is the free listing that appears in Google Maps and local search results. It shows your business name, address, phone, hours, photos, and reviews. Optimizing it is the single most impactful thing you can do for local search.",
   },
 ];
 
@@ -83,7 +88,7 @@ const LocalSeoPage = () => (
       description={
         <>
           <p className="direct-answer">
-            <strong>What are local SEO services?</strong> Optimization of your Google Business Profile, local search rankings, and website schema markup so customers in your area find you when they search. Starting at $67/month, written agreements included, monthly reporting included.
+            <strong>What are local SEO services?</strong> Optimization of your <a href="https://www.google.com/business/">Google Business Profile</a>, local search rankings, and website schema markup so customers in your area find you when they search. Starting at $67/month, written agreements included, monthly reporting included.
           </p>
         </>
       }
@@ -292,6 +297,14 @@ const LocalSeoPage = () => (
         <Link data-variant="ghost" to="/pricing/">See pricing</Link>
       </div>
     </Section>
+    <div className="attribution-block" style={{ maxWidth: "42rem", margin: "2rem auto", padding: "1rem 1.5rem", fontSize: "0.875rem", opacity: 0.7, borderTop: "1px solid var(--color-border)" }}>
+      <p>
+        <strong>By Bradley Matera</strong> — web developer in Durand, Illinois, serving Northwest Illinois and Southern Wisconsin. <Link to="/about/">About</Link> · <Link to="/contact/">Contact</Link> · <Link to="/pricing/">Pricing</Link>
+      </p>
+      <p style={{ marginTop: "0.5rem" }}>
+        Last updated: July 2026. Prices and services subject to change — see <Link to="/terms/">terms of service</Link>.
+      </p>
+    </div>
   </Layout>
 );
 
@@ -353,7 +366,7 @@ export const Head: HeadFC = () => {
         name: faq.q,
         acceptedAnswer: {
           "@type": "Answer",
-          text: faq.a,
+          text: faq.text ?? faq.a,
         },
       })),
     },

@@ -321,6 +321,59 @@ const PricingPage = () => (
     </Section>
 
     <Section
+      eyebrow="How pricing works"
+      title="Transparent pricing, no surprises"
+      description={
+        <p>
+          Here is the reasoning behind the numbers — why prices are fixed, what every package includes, and what the monthly fee actually covers.
+        </p>
+      }
+    >
+      <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+        <Card variant="outline">
+          <h3 className="feature-card__title">Why prices are fixed, not hourly</h3>
+          <p className="feature-card__body">
+            New website builds are priced as fixed packages, not billed by the hour. You know the total cost before work begins, so there are no surprise invoices or scope creep charges. A fixed price means I absorb the risk of unexpected complexity — not you. If a build takes longer than estimated, you still pay the agreed price.
+          </p>
+          <p className="feature-card__body">
+            A 5-page Growth package typically takes 14-21 days from kickoff to launch. That timeline includes design, development, content review, revisions, and a final QA pass before going live.
+          </p>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">What's included in every package</h3>
+          <p className="feature-card__body">
+            Regardless of which tier you choose, every build includes:
+          </p>
+          <ul className="feature-list">
+            <li>Hosting setup and configuration</li>
+            <li>Domain connection (pointing your existing domain to the new site)</li>
+            <li>SSL certificate installation and renewal</li>
+            <li>Google Analytics 4 setup and verification</li>
+            <li>Mobile-responsive design tested on real devices</li>
+            <li>Basic on-page SEO (title tags, meta descriptions, heading structure)</li>
+            <li>XML sitemap generation and submission to Google</li>
+            <li>Contact form with spam protection</li>
+          </ul>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">What the monthly fee covers</h3>
+          <p className="feature-card__body">
+            The monthly care plan fee covers hosting, security updates, and ongoing support — not a lock-in contract. Plans are month-to-month. You can cancel before the next billing period with no penalty, and you take your site with you.
+          </p>
+          <p className="feature-card__body">
+            The ${starterPkg.monthlyPrice}/month Starter hosting includes SSL renewal, weekly backups, and uptime monitoring. Higher tiers add content updates, performance reports, and local SEO monitoring.
+          </p>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">Written agreement on every project</h3>
+          <p className="feature-card__body">
+            Every build includes a written service agreement that outlines the scope, timeline, cost, and payment schedule before any work begins. No verbal-only deals, no vague promises. Read the full <Link to="/terms/">Terms of Service</Link> for the complete terms.
+          </p>
+        </Card>
+      </div>
+    </Section>
+
+    <Section
       eyebrow="Deposit guarantee"
       title="Deposit refund guarantee"
       description={
@@ -404,6 +457,14 @@ const PricingPage = () => (
     <p style={{ fontSize: "0.85rem", color: "var(--color-text-secondary)", marginTop: "2rem", textAlign: "center" }}>
       {SELLER_DISCLOSURE_SHORT} Maintained by <Link to="/about/">{SELLER_LEGAL_NAME}</Link>, web developer in Durand, Illinois. Prices current as of 2026. See <Link to="/service-scope/">service scope</Link> and <Link to="/payment-terms/">payment terms</Link> for details.
     </p>
+    <div className="attribution-block" style={{ maxWidth: "42rem", margin: "2rem auto", padding: "1rem 1.5rem", fontSize: "0.875rem", opacity: 0.7, borderTop: "1px solid var(--color-border)" }}>
+      <p>
+        <strong>By Bradley Matera</strong> — web developer in Durand, Illinois, serving Northwest Illinois and Southern Wisconsin. <Link to="/about/">About</Link> · <Link to="/contact/">Contact</Link> · <Link to="/pricing/">Pricing</Link>
+      </p>
+      <p style={{ marginTop: "0.5rem" }}>
+        Last updated: July 2026. Prices and services subject to change — see <Link to="/terms/">terms of service</Link>.
+      </p>
+    </div>
   </Layout>
 );
 

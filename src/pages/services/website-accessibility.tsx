@@ -26,11 +26,21 @@ const auditItems = [
 const faqs = [
   {
     q: "What is WCAG 2.2 AA compliance?",
-    a: "WCAG 2.2 AA is the accessibility standard referenced by the Americans with Disabilities Act (ADA) and Section 508. It covers keyboard navigation, screen reader support, color contrast, form labels, and more. AA is the middle level — the one most businesses target.",
+    a: (
+      <>
+        <a href="https://www.w3.org/TR/WCAG22/">WCAG 2.2 AA</a> is the accessibility standard referenced by the Americans with Disabilities Act (ADA) and Section 508. It covers keyboard navigation, screen reader support, color contrast, form labels, and more. AA is the middle level — the one most businesses target.
+      </>
+    ),
+    text: "WCAG 2.2 AA is the accessibility standard referenced by the Americans with Disabilities Act (ADA) and Section 508. It covers keyboard navigation, screen reader support, color contrast, form labels, and more. AA is the middle level — the one most businesses target.",
   },
   {
     q: "Does my website need to be ADA compliant?",
-    a: "If your business serves the public, your website is likely covered by the ADA. Recent lawsuits and Department of Justice guidance make clear that websites are places of public accommodation. Compliance reduces legal risk and makes your site usable for more customers.",
+    a: (
+      <>
+        If your business serves the public, your website is likely covered by the ADA. Recent lawsuits and <a href="https://www.ada.gov/resources/web-guidance/">Department of Justice guidance</a> make clear that websites are places of public accommodation. Compliance reduces legal risk and makes your site usable for more customers.
+      </>
+    ),
+    text: "If your business serves the public, your website is likely covered by the ADA. Recent lawsuits and Department of Justice guidance make clear that websites are places of public accommodation. Compliance reduces legal risk and makes your site usable for more customers.",
   },
   {
     q: "How much does an accessibility audit cost?",
@@ -88,7 +98,7 @@ const WebsiteAccessibilityPage = () => (
         <Card variant="outline">
           <h2 className="feature-card__title">WCAG 2.2 AA</h2>
           <p className="feature-card__body">
-            The standard referenced by the ADA and Section 508. Covers keyboard, screen reader, contrast, and form accessibility.
+            The standard referenced by the <a href="https://www.ada.gov/">ADA</a> and <a href="https://www.section508.gov/">Section 508</a>. Covers keyboard, screen reader, contrast, and form accessibility.
           </p>
           <div className="card-actions">
             <Link data-variant="ghost" to="/contact/">Request an audit</Link>
@@ -289,6 +299,14 @@ const WebsiteAccessibilityPage = () => (
         <Link data-variant="ghost" to="/pricing/">See pricing</Link>
       </div>
     </Section>
+    <div className="attribution-block" style={{ maxWidth: "42rem", margin: "2rem auto", padding: "1rem 1.5rem", fontSize: "0.875rem", opacity: 0.7, borderTop: "1px solid var(--color-border)" }}>
+      <p>
+        <strong>By Bradley Matera</strong> — web developer in Durand, Illinois, serving Northwest Illinois and Southern Wisconsin. <Link to="/about/">About</Link> · <Link to="/contact/">Contact</Link> · <Link to="/pricing/">Pricing</Link>
+      </p>
+      <p style={{ marginTop: "0.5rem" }}>
+        Last updated: July 2026. Prices and services subject to change — see <Link to="/terms/">terms of service</Link>.
+      </p>
+    </div>
   </Layout>
 );
 
@@ -349,7 +367,7 @@ export const Head: HeadFC = () => {
         name: faq.q,
         acceptedAnswer: {
           "@type": "Answer",
-          text: faq.a,
+          text: faq.text ?? faq.a,
         },
       })),
     },
