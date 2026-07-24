@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400" fill="none">
+  <rect width="600" height="400" fill="#1a1a2e"/>
+  <path d="M300 60 L460 120 L460 220 Q460 300 300 340 Q140 300 140 220 L140 120 Z" fill="#16213e" stroke="#0f3460" stroke-width="2"/>
+  <path d="M300 80 L440 132 L440 218 Q440 288 300 322 Q160 288 160 218 L160 132 Z" fill="#0f3460" opacity="0.5"/>
+  <path d="M240 180 L280 220 L360 140" stroke="#0fa3b1" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <text x="300" y="260" font-family="monospace" font-size="16" fill="#0fa3b1" text-anchor="middle" font-weight="bold">SECURE</text>
+  <rect x="60" y="360" width="140" height="30" rx="6" fill="#16213e" stroke="#0f3460" stroke-width="1"/>
+  <circle cx="78" cy="375" r="5" fill="#0fa3b1"/>
+  <text x="92" y="380" font-family="monospace" font-size="11" fill="#0fa3b1">Updates</text>
+  <rect x="220" y="360" width="140" height="30" rx="6" fill="#16213e" stroke="#0f3460" stroke-width="1"/>
+  <circle cx="238" cy="375" r="5" fill="#f5a623"/>
+  <text x="252" y="380" font-family="monospace" font-size="11" fill="#f5a623">Backups</text>
+  <rect x="380" y="360" width="140" height="30" rx="6" fill="#16213e" stroke="#0f3460" stroke-width="1"/>
+  <circle cx="398" cy="375" r="5" fill="#e94560"/>
+  <text x="412" y="380" font-family="monospace" font-size="11" fill="#e94560">Monitoring</text>
+</svg>
