@@ -45,18 +45,27 @@ const ExamplePage = () => (
       }
     >
       <div className="grid-three">
-        <Card variant="outline">
-          <h2 className="feature-card__title">Industry</h2>
-          <p className="feature-card__body">Restaurant and diner</p>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">Location</h2>
-          <p className="feature-card__body">Small city, Midwest US (illustrative)</p>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">Example type: Restaurant website</h2>
-          <p className="feature-card__body">WordPress-to-Gatsby rebuild</p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Industry</h2>
+            <p className="pkg-card__desc">Restaurant and diner</p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Location</h2>
+            <p className="pkg-card__desc">Small city, Midwest US (illustrative)</p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Example type: Restaurant website</h2>
+            <p className="pkg-card__desc">WordPress-to-Gatsby rebuild</p>
+          </div>
+        </div>
       </div>
     </Section>
 
@@ -116,18 +125,27 @@ const ExamplePage = () => (
 
     <Section eyebrow="Common starting point" title="What a typical restaurant site looks like before a rebuild">
       <div className="grid-three">
-        <Card variant="outline">
-          <h3 className="feature-card__title">Page load time</h3>
-          <p className="feature-card__body">Typically 6-10 seconds on mobile (throttled 4G). LCP often above 5 seconds. CLS and INP frequently in the poor range due to unoptimized images and plugin overhead.</p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Reservations</h3>
-          <p className="feature-card__body">Reservation forms are often broken or unreliable. Owners may not realize the form is failing until a customer mentions it.</p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Mobile menu</h3>
-          <p className="feature-card__body">PDF menus are common and require pinching and zooming on phones. The majority of restaurant visitors are on mobile, and a poor mobile menu experience drives high bounce rates.</p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Page load time</h3>
+            <p className="pkg-card__desc">Typically 6-10 seconds on mobile (throttled 4G). LCP often above 5 seconds. CLS and INP frequently in the poor range due to unoptimized images and plugin overhead.</p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Reservations</h3>
+            <p className="pkg-card__desc">Reservation forms are often broken or unreliable. Owners may not realize the form is failing until a customer mentions it.</p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Mobile menu</h3>
+            <p className="pkg-card__desc">PDF menus are common and require pinching and zooming on phones. The majority of restaurant visitors are on mobile, and a poor mobile menu experience drives high bounce rates.</p>
+          </div>
+        </div>
       </div>
     </Section>
 
@@ -160,24 +178,33 @@ const ExamplePage = () => (
 
     <Section eyebrow="Technical work" title="Accessibility, performance, and SEO">
       <div className="grid-three">
-        <Card variant="outline">
-          <h3 className="feature-card__title">Performance</h3>
-          <p className="feature-card__body">
-            Target LCP under 2.5 seconds. Target CLS under 0.1. Target INP under 200ms. WordPress plugins are eliminated entirely. No JavaScript framework overhead.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Accessibility</h3>
-          <p className="feature-card__body">
-            WCAG 2.2 AA compliant. Menu is semantic HTML, not a PDF. Form has proper labels, error messages, and keyboard navigation. Alt text on all photos. Skip-to-content link added.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">SEO</h3>
-          <p className="feature-card__body">
-            Restaurant schema markup with menu, hours, price range, and location. Google Business Profile updated with new website URL. Sitemap submitted to Google Search Console.
-          </p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Performance</h3>
+            <p className="pkg-card__desc">
+              Target LCP under 2.5 seconds. Target CLS under 0.1. Target INP under 200ms. WordPress plugins are eliminated entirely. No JavaScript framework overhead.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Accessibility</h3>
+            <p className="pkg-card__desc">
+              WCAG 2.2 AA compliant. Menu is semantic HTML, not a PDF. Form has proper labels, error messages, and keyboard navigation. Alt text on all photos. Skip-to-content link added.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">SEO</h3>
+            <p className="pkg-card__desc">
+              Restaurant schema markup with menu, hours, price range, and location. Google Business Profile updated with new website URL. Sitemap submitted to Google Search Console.
+            </p>
+          </div>
+        </div>
       </div>
     </Section>
 

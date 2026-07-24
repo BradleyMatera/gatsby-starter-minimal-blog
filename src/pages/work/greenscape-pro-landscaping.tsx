@@ -45,18 +45,27 @@ const CaseStudyPage = () => (
       }
     >
       <div className="grid-three">
-        <Card variant="outline">
-          <h2 className="feature-card__title">Industry</h2>
-          <p className="feature-card__body">Landscaping and lawn care services</p>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">Location</h2>
-          <p className="feature-card__body">Rockford, Illinois (Winnebago County)</p>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">Example type</h2>
-          <p className="feature-card__body">Landscaping website</p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Industry</h2>
+            <p className="pkg-card__desc">Landscaping and lawn care services</p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Location</h2>
+            <p className="pkg-card__desc">Rockford, Illinois (Winnebago County)</p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Example type</h2>
+            <p className="pkg-card__desc">Landscaping website</p>
+          </div>
+        </div>
       </div>
     </Section>
 
@@ -116,18 +125,27 @@ const CaseStudyPage = () => (
 
     <Section eyebrow="Baseline" title="Common starting point">
       <div className="grid-three">
-        <Card variant="outline">
-          <h3 className="feature-card__title">Web presence</h3>
-          <p className="feature-card__body">Facebook page only. No website. Not indexed by Google for any service keyword.</p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Lead sources</h3>
-          <p className="feature-card__body">Phone calls and word of mouth. No online quote requests. No way to capture leads outside business hours.</p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Google Business Profile</h3>
-          <p className="feature-card__body">Claimed but incomplete. No photos, no service list, no website link.</p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Web presence</h3>
+            <p className="pkg-card__desc">Facebook page only. No website. Not indexed by Google for any service keyword.</p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Lead sources</h3>
+            <p className="pkg-card__desc">Phone calls and word of mouth. No online quote requests. No way to capture leads outside business hours.</p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Google Business Profile</h3>
+            <p className="pkg-card__desc">Claimed but incomplete. No photos, no service list, no website link.</p>
+          </div>
+        </div>
       </div>
     </Section>
 
@@ -161,53 +179,74 @@ const CaseStudyPage = () => (
 
     <Section eyebrow="Technical work" title="Accessibility, performance, and SEO">
       <div className="grid-three">
-        <Card variant="outline">
-          <h3 className="feature-card__title">Performance</h3>
-          <p className="feature-card__body">
-            Target LCP under 1.5 seconds on a throttled 4G connection, with minimal CLS and low INP. All images served in WebP with proper width and height attributes. No render-blocking JavaScript.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Accessibility</h3>
-          <p className="feature-card__body">
-            Built to WCAG 2.2 AA standards. Keyboard-navigable, proper heading order, alt text on all project photos, form labels and error messages, 4.5:1 contrast ratio on all text.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Local SEO</h3>
-          <p className="feature-card__body">
-            LocalBusiness schema markup, Google Business Profile completed with photos and service list, NAP consistency across the site, service area pages for the target region.
-          </p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Performance</h3>
+            <p className="pkg-card__desc">
+              Target LCP under 1.5 seconds on a throttled 4G connection, with minimal CLS and low INP. All images served in WebP with proper width and height attributes. No render-blocking JavaScript.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Accessibility</h3>
+            <p className="pkg-card__desc">
+              Built to WCAG 2.2 AA standards. Keyboard-navigable, proper heading order, alt text on all project photos, form labels and error messages, 4.5:1 contrast ratio on all text.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Local SEO</h3>
+            <p className="pkg-card__desc">
+              LocalBusiness schema markup, Google Business Profile completed with photos and service list, NAP consistency across the site, service area pages for the target region.
+            </p>
+          </div>
+        </div>
       </div>
     </Section>
 
     <Section eyebrow="Questions about this example" title="Common questions about a landscaping website build">
       <div className="grid-two">
-        <Card variant="outline">
-          <h3 className="feature-card__title">How much would a website like this cost?</h3>
-          <p className="feature-card__body">
-            A 5-page landscaping website like this example falls under the Local Growth package. This includes 5 pages, a quote form, project gallery, Google Business Profile setup, and local SEO foundations. See the pricing page for current rates.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">How long does the build take?</h3>
-          <p className="feature-card__body">
-            A build like this typically takes about 3 weeks from kickoff to launch. The business owner provides project photos and service descriptions in week 1. The site is designed and built in weeks 2-3, with one revision round before launch.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">How are quote requests handled?</h3>
-          <p className="feature-card__body">
-            Quote requests are captured through a contact form with submissions logged on Netlify. Each form submission includes a timestamp, service type, and contact info so the business owner can follow up with leads.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Can I see a live demo?</h3>
-          <p className="feature-card__body">
-            Yes. The demo version of this landscaping site is available at the landscaping demo page. It shows the same layout, quote form, and gallery structure described in this example.
-          </p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/why-fixed.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">How much would a website like this cost?</h3>
+            <p className="pkg-card__desc">
+              A 5-page landscaping website like this example falls under the Local Growth package. This includes 5 pages, a quote form, project gallery, Google Business Profile setup, and local SEO foundations. See the pricing page for current rates.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/why-fixed.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">How long does the build take?</h3>
+            <p className="pkg-card__desc">
+              A build like this typically takes about 3 weeks from kickoff to launch. The business owner provides project photos and service descriptions in week 1. The site is designed and built in weeks 2-3, with one revision round before launch.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/why-fixed.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">How are quote requests handled?</h3>
+            <p className="pkg-card__desc">
+              Quote requests are captured through a contact form with submissions logged on Netlify. Each form submission includes a timestamp, service type, and contact info so the business owner can follow up with leads.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/why-fixed.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Can I see a live demo?</h3>
+            <p className="pkg-card__desc">
+              Yes. The demo version of this landscaping site is available at the landscaping demo page. It shows the same layout, quote form, and gallery structure described in this example.
+            </p>
+          </div>
+        </div>
       </div>
     </Section>
 

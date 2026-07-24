@@ -47,18 +47,27 @@ const ExamplePage = () => (
       }
     >
       <div className="grid-three">
-        <Card variant="outline">
-          <h2 className="feature-card__title">Industry</h2>
-          <p className="feature-card__body">HVAC installation and repair</p>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">Location</h2>
-          <p className="feature-card__body">Beloit, Wisconsin (Rock County)</p>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">Example type: HVAC website</h2>
-          <p className="feature-card__body">Service area website</p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Industry</h2>
+            <p className="pkg-card__desc">HVAC installation and repair</p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Location</h2>
+            <p className="pkg-card__desc">Beloit, Wisconsin (Rock County)</p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Example type: HVAC website</h2>
+            <p className="pkg-card__desc">Service area website</p>
+          </div>
+        </div>
       </div>
     </Section>
 
@@ -118,18 +127,27 @@ const ExamplePage = () => (
 
     <Section eyebrow="Common starting point" title="What a typical HVAC business looks like before getting a website">
       <div className="grid-three">
-        <Card variant="outline">
-          <h3 className="feature-card__title">Web presence</h3>
-          <p className="feature-card__body">No website. Unclaimed or outdated Google Business Profile. Not indexed for any service keyword.</p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Lead sources</h3>
-          <p className="feature-card__body">Phone book ads, word of mouth, repeat customers. No online lead capture. No way to schedule service outside business hours.</p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Service area</h3>
-          <p className="feature-card__body">Serving multiple cities and counties, but with no way to communicate this online or capture searches for each location.</p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Web presence</h3>
+            <p className="pkg-card__desc">No website. Unclaimed or outdated Google Business Profile. Not indexed for any service keyword.</p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Lead sources</h3>
+            <p className="pkg-card__desc">Phone book ads, word of mouth, repeat customers. No online lead capture. No way to schedule service outside business hours.</p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Service area</h3>
+            <p className="pkg-card__desc">Serving multiple cities and counties, but with no way to communicate this online or capture searches for each location.</p>
+          </div>
+        </div>
       </div>
     </Section>
 
@@ -165,49 +183,67 @@ const ExamplePage = () => (
 
     <Section eyebrow="Technical work" title="Accessibility, performance, and SEO">
       <div className="grid-three">
-        <Card variant="outline">
-          <h3 className="feature-card__title">Performance</h3>
-          <p className="feature-card__body">
-            Target LCP under 2 seconds. CLS near 0. INP under 200ms. Financing calculator uses minimal JavaScript. All images served in WebP with proper dimensions.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Accessibility</h3>
-          <p className="feature-card__body">
-            WCAG 2.2 AA compliant. Calculator is keyboard-accessible with ARIA live regions for results. Form has proper labels, error handling, and emergency priority indicator.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Local SEO</h3>
-          <p className="feature-card__body">
-            LocalBusiness schema on every page. Service area pages with unique content for each city. Google Business Profile claimed, completed, and linked. Bing Places set up. NAP consistent across all citations.
-          </p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Performance</h3>
+            <p className="pkg-card__desc">
+              Target LCP under 2 seconds. CLS near 0. INP under 200ms. Financing calculator uses minimal JavaScript. All images served in WebP with proper dimensions.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Accessibility</h3>
+            <p className="pkg-card__desc">
+              WCAG 2.2 AA compliant. Calculator is keyboard-accessible with ARIA live regions for results. Form has proper labels, error handling, and emergency priority indicator.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Local SEO</h3>
+            <p className="pkg-card__desc">
+              LocalBusiness schema on every page. Service area pages with unique content for each city. Google Business Profile claimed, completed, and linked. Bing Places set up. NAP consistent across all citations.
+            </p>
+          </div>
+        </div>
       </div>
     </Section>
 
     <Section eyebrow="Q&A" title="Common questions about HVAC websites">
-      <Card variant="outline">
-        <h3 className="feature-card__title">Why does an HVAC business need service area pages?</h3>
-        <p className="feature-card__body">
-          Customers search for HVAC services by city, not by company name. Dedicated service area pages with unique, locally relevant content help the site rank for searches like "furnace repair Beloit WI" and "AC installation Janesville."
-        </p>
-      </Card>
-      <div style={{ marginTop: "1.5rem" }}>
-        <Card variant="outline">
-          <h3 className="feature-card__title">What is a financing calculator and why include one?</h3>
-          <p className="feature-card__body">
-            HVAC installations are a significant expense. A financing calculator lets visitors estimate monthly payments based on system cost and term length, which helps them move from browsing to requesting a quote.
+      <div className="pkg-card">
+        <img src="/package-images/why-fixed.svg" alt="" className="pkg-card__bg" loading="lazy" />
+        <div className="pkg-card__body">
+          <h3 className="pkg-card__title">Why does an HVAC business need service area pages?</h3>
+          <p className="pkg-card__desc">
+            Customers search for HVAC services by city, not by company name. Dedicated service area pages with unique, locally relevant content help the site rank for searches like "furnace repair Beloit WI" and "AC installation Janesville."
           </p>
-        </Card>
+        </div>
       </div>
       <div style={{ marginTop: "1.5rem" }}>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Why seasonal promotion pages?</h3>
-          <p className="feature-card__body">
-            HVAC demand is seasonal. Winter heating check-up and summer AC tune-up pages with limited-time offers capture demand at the right moment and give the business a reason to promote the site throughout the year.
-          </p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/why-fixed.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">What is a financing calculator and why include one?</h3>
+            <p className="pkg-card__desc">
+              HVAC installations are a significant expense. A financing calculator lets visitors estimate monthly payments based on system cost and term length, which helps them move from browsing to requesting a quote.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div style={{ marginTop: "1.5rem" }}>
+        <div className="pkg-card">
+          <img src="/package-images/why-fixed.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Why seasonal promotion pages?</h3>
+            <p className="pkg-card__desc">
+              HVAC demand is seasonal. Winter heating check-up and summer AC tune-up pages with limited-time offers capture demand at the right moment and give the business a reason to promote the site throughout the year.
+            </p>
+          </div>
+        </div>
       </div>
     </Section>
 

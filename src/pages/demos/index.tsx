@@ -151,31 +151,40 @@ const DemosIndex: React.FC = () => (
       title="How do the demo websites work?"
     >
       <div className="grid-three">
-        <Card variant="outline">
-          <h3 className="feature-card__title">Can I click through the demos?</h3>
-          <p className="feature-card__body">
-            Each demo opens as a full standalone website — not a screenshot. You can scroll through
-            every section, see the layout, read the copy, and experience the mobile responsiveness.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">How do I get back to this page?</h3>
-          <p className="feature-card__body">
-            Every demo has a sticky bar at the top with a back button. Click "All Demos" to return
-            here, or "Get a site like this" to contact me directly.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Can these demos be customized for my business?</h3>
-          <p className="feature-card__body">
-            These demos show what's possible. Your real site would be customized with your business
-            name, photos, menu, services, colors, and branding. Starting at $447.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="primary" to="/pricing/">See pricing</Link>
-            <Link data-variant="ghost" to="/contact/">Get a quote</Link>
+        <div className="pkg-card">
+          <img src="/package-images/demo-click.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Can I click through the demos?</h3>
+            <p className="pkg-card__desc">
+              Each demo opens as a full standalone website — not a screenshot. You can scroll through
+              every section, see the layout, read the copy, and experience the mobile responsiveness.
+            </p>
           </div>
-        </Card>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/demo-back.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">How do I get back to this page?</h3>
+            <p className="pkg-card__desc">
+              Every demo has a sticky bar at the top with a back button. Click "All Demos" to return
+              here, or "Get a site like this" to contact me directly.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/demo-customize.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Can these demos be customized for my business?</h3>
+            <p className="pkg-card__desc">
+              These demos show what's possible. Your real site would be customized with your business
+              name, photos, menu, services, colors, and branding. Starting at $447.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="primary" to="/pricing/">See pricing</Link>
+              <Link data-variant="ghost" to="/contact/">Get a quote</Link>
+            </div>
+          </div>
+        </div>
       </div>
     </Section>
 

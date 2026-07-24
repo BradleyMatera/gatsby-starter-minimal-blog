@@ -159,18 +159,27 @@ const ContactContent = () => (
       title="What you can expect"
     >
       <div className="grid-three">
-        <Card variant="outline">
-          <h3 className="feature-card__title">No obligation</h3>
-          <p className="feature-card__body">The free website plan is exactly that — free. You are not committing to anything by asking for one.</p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Honest assessment</h3>
-          <p className="feature-card__body">If I am not the right fit for your project, I will tell you and suggest alternatives. No upselling, no pressure.</p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Direct contact</h3>
-          <p className="feature-card__body">You talk to the person who will actually build your site. No account managers, no handoffs.</p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/contact-phone.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">No obligation</h3>
+            <p className="pkg-card__desc">The free website plan is exactly that — free. You are not committing to anything by asking for one.</p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/contact-email.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Honest assessment</h3>
+            <p className="pkg-card__desc">If I am not the right fit for your project, I will tell you and suggest alternatives. No upselling, no pressure.</p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/contact-form.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Direct contact</h3>
+            <p className="pkg-card__desc">You talk to the person who will actually build your site. No account managers, no handoffs.</p>
+          </div>
+        </div>
       </div>
     </Section>
 
@@ -199,26 +208,38 @@ const ContactContent = () => (
       title="Related pages"
     >
       <div className="grid-two">
-        <Card variant="outline">
-          <h3 className="feature-card__title">Pricing</h3>
-          <p className="feature-card__body">See all package options, care plans, and what is included.</p>
-          <div className="card-actions"><Link data-variant="primary" to="/pricing/">View pricing</Link></div>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Services</h3>
-          <p className="feature-card__body">Web design, redesign, local SEO, repair, accessibility, and care plans.</p>
-          <div className="card-actions"><Link data-variant="primary" to="/services/">View services</Link></div>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Website examples</h3>
-          <p className="feature-card__body">Full clickable sample websites built for real industries.</p>
-          <div className="card-actions"><Link data-variant="primary" to="/demos/">See demos</Link></div>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Process</h3>
-          <p className="feature-card__body">How a website project works from first call to launch.</p>
-          <div className="card-actions"><Link data-variant="primary" to="/process/">View process</Link></div>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/contact-phone.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Pricing</h3>
+            <p className="pkg-card__desc">See all package options, care plans, and what is included.</p>
+            <div className="card-actions"><Link data-variant="primary" to="/pricing/">View pricing</Link></div>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/contact-email.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Services</h3>
+            <p className="pkg-card__desc">Web design, redesign, local SEO, repair, accessibility, and care plans.</p>
+            <div className="card-actions"><Link data-variant="primary" to="/services/">View services</Link></div>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/contact-form.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Website examples</h3>
+            <p className="pkg-card__desc">Full clickable sample websites built for real industries.</p>
+            <div className="card-actions"><Link data-variant="primary" to="/demos/">See demos</Link></div>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/contact-phone.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Process</h3>
+            <p className="pkg-card__desc">How a website project works from first call to launch.</p>
+            <div className="card-actions"><Link data-variant="primary" to="/process/">View process</Link></div>
+          </div>
+        </div>
       </div>
     </Section>
   </>

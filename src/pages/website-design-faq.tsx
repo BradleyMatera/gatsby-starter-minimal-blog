@@ -101,18 +101,27 @@ const FAQPage = () => (
       }
     >
       <div className="grid-three">
-        <Card variant="outline">
-          <h2 className="feature-card__title">Packages from $447</h2>
-          <p className="feature-card__body">Flat-rate pricing, no hidden fees, no agency overhead.</p>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">You own everything</h2>
-          <p className="feature-card__body">Code, content, domain, and hosting are all yours.</p>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">No long-term contract</h2>
-          <p className="feature-card__body">Care plans are month-to-month. Cancel anytime.</p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/city-evidence-pricing.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Packages from $447</h2>
+            <p className="pkg-card__desc">Flat-rate pricing, no hidden fees, no agency overhead.</p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">You own everything</h2>
+            <p className="pkg-card__desc">Code, content, domain, and hosting are all yours.</p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/why-fixed.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">No long-term contract</h2>
+            <p className="pkg-card__desc">Care plans are month-to-month. Cancel anytime.</p>
+          </div>
+        </div>
       </div>
     </Section>
 

@@ -147,24 +147,33 @@ const WebsiteRepairPage = () => (
       title="From broken to fixed"
     >
       <div className="grid-three">
-        <Card>
-          <h3 className="feature-card__title">1. Diagnose</h3>
-          <p className="feature-card__body">
-            You describe the problem. I look at your site, identify the root cause, and give you a clear scope and cost estimate.
-          </p>
-        </Card>
-        <Card>
-          <h3 className="feature-card__title">2. Fix</h3>
-          <p className="feature-card__body">
-            I fix the issue and test it across devices and browsers. You approve the work before any payment changes hands.
-          </p>
-        </Card>
-        <Card>
-          <h3 className="feature-card__title">3. Document</h3>
-          <p className="feature-card__body">
-            I document what was wrong and what I changed, so you have a record. 30-day warranty on all repairs.
-          </p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/step-1-diagnose.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">1. Diagnose</h3>
+            <p className="pkg-card__desc">
+              You describe the problem. I look at your site, identify the root cause, and give you a clear scope and cost estimate.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/step-2-build.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">2. Fix</h3>
+            <p className="pkg-card__desc">
+              I fix the issue and test it across devices and browsers. You approve the work before any payment changes hands.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/step-3-launch.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">3. Document</h3>
+            <p className="pkg-card__desc">
+              I document what was wrong and what I changed, so you have a record. 30-day warranty on all repairs.
+            </p>
+          </div>
+        </div>
       </div>
     </Section>
 

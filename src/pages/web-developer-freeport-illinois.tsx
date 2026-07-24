@@ -74,31 +74,37 @@ const LocalWebDeveloperPage = () => (
       }
     >
       <div className="grid-two">
-        <Card variant="outline">
-          <h2 className="feature-card__title">What I can help a Freeport business with</h2>
-          <ul className="feature-list">
-            {serviceBullets.map((bullet) => (
-              <li key={bullet}>{bullet}</li>
-            ))}
-          </ul>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">How I work with local clients</h2>
-          <p className="feature-card__body">
-            I am not a boutique studio with a sales pipeline. I am one developer who writes the code,
-            writes the content, and documents what changed. For a Freeport small business that means
-            you talk to the person doing the work, not an account manager relaying messages.
-          </p>
-          <p className="feature-card__body">
-            Most of the collaboration happens remotely — email, shared docs, and preview links. If an
-            in-person meeting in Freeport makes sense for scoping a larger project, that is easy
-            enough given the drive from Durand. The important part is still clear scope and visible
-            proof, not proximity for its own sake.
-          </p>
-          <p className="feature-card__body">
-            Every site I build loads in under 2 seconds on mobile — faster than most sites in Freeport. I test with Google PageSpeed Insights before launch.
-          </p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">What I can help a Freeport business with</h2>
+            <ul className="feature-list">
+              {serviceBullets.map((bullet) => (
+                <li key={bullet}>{bullet}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">How I work with local clients</h2>
+            <p className="pkg-card__desc">
+              I am not a boutique studio with a sales pipeline. I am one developer who writes the code,
+              writes the content, and documents what changed. For a Freeport small business that means
+              you talk to the person doing the work, not an account manager relaying messages.
+            </p>
+            <p className="pkg-card__desc">
+              Most of the collaboration happens remotely — email, shared docs, and preview links. If an
+              in-person meeting in Freeport makes sense for scoping a larger project, that is easy
+              enough given the drive from Durand. The important part is still clear scope and visible
+              proof, not proximity for its own sake.
+            </p>
+            <p className="pkg-card__desc">
+              Every site I build loads in under 2 seconds on mobile — faster than most sites in Freeport. I test with Google PageSpeed Insights before launch.
+            </p>
+          </div>
+        </div>
       </div>
     </Section>
 
@@ -116,42 +122,54 @@ const LocalWebDeveloperPage = () => (
       }
     >
       <div className="grid-two">
-        <Card variant="outline">
-          <h3 className="feature-card__title">Website design</h3>
-          <p className="feature-card__body">
-            New websites built for Freeport businesses that want a clean, fast, mobile-friendly
-            presence without paying agency prices for a template swap. Service pages, contact forms,
-            and layouts that explain what you do in plain language. Built so you can update the
-            basics yourself.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Website help and repair</h3>
-          <p className="feature-card__body">
-            If your existing Freeport business website is broken, slow, showing errors, or impossible
-            to edit without calling the original developer, that is the kind of cleanup work I do
-            regularly. React, Gatsby, static sites, and common CMS setups — I can diagnose what is
-            wrong and fix it without starting from scratch unless that is actually warranted.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">SEO services</h3>
-          <p className="feature-card__body">
-            Local SEO for Freeport and Stephenson County means more than stuffing keywords. It is
-            title tags, heading structure, page speed, schema markup, and content that actually
-            answers what someone in Freeport is searching for. I handle the technical and structural
-            side so your site has a real chance of ranking locally.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Small business websites</h3>
-          <p className="feature-card__body">
-            Small businesses in Freeport — shops, contractors, service providers, restaurants along
-            the historic downtown — need websites that are affordable, maintainable, and honest about
-            scope. I build sites that fit a small business budget and leave you with something you can
-            actually manage, not a dependency on a developer for every text change.
-          </p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Website design</h3>
+            <p className="pkg-card__desc">
+              New websites built for Freeport businesses that want a clean, fast, mobile-friendly
+              presence without paying agency prices for a template swap. Service pages, contact forms,
+              and layouts that explain what you do in plain language. Built so you can update the
+              basics yourself.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Website help and repair</h3>
+            <p className="pkg-card__desc">
+              If your existing Freeport business website is broken, slow, showing errors, or impossible
+              to edit without calling the original developer, that is the kind of cleanup work I do
+              regularly. React, Gatsby, static sites, and common CMS setups — I can diagnose what is
+              wrong and fix it without starting from scratch unless that is actually warranted.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">SEO services</h3>
+            <p className="pkg-card__desc">
+              Local SEO for Freeport and Stephenson County means more than stuffing keywords. It is
+              title tags, heading structure, page speed, schema markup, and content that actually
+              answers what someone in Freeport is searching for. I handle the technical and structural
+              side so your site has a real chance of ranking locally.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Small business websites</h3>
+            <p className="pkg-card__desc">
+              Small businesses in Freeport — shops, contractors, service providers, restaurants along
+              the historic downtown — need websites that are affordable, maintainable, and honest about
+              scope. I build sites that fit a small business budget and leave you with something you can
+              actually manage, not a dependency on a developer for every text change.
+            </p>
+          </div>
+        </div>
       </div>
     </Section>
 
@@ -168,31 +186,40 @@ const LocalWebDeveloperPage = () => (
       }
     >
       <div className="grid-three">
-        <Card>
-          <h3 className="feature-card__title">I know the area</h3>
-          <p className="feature-card__body">
-            I know Freeport is the Stephenson County seat, that the historic downtown matters to the
-            local economy, and that small businesses here compete with Rockford and online sellers for
-            the same customers. That context shows up in how I write your site copy and structure your
-            local SEO — a remote developer has to guess at it.
-          </p>
-        </Card>
-        <Card>
-          <h3 className="feature-card__title">You can actually reach me</h3>
-          <p className="feature-card__body">
-            No ticketing system, no timezone lag, no account manager. Email me directly, get a direct
-            answer. If a project warrants sitting down in Freeport to scope it out, the drive from
-            Durand is short enough that it is not a production.
-          </p>
-        </Card>
-        <Card>
-          <h3 className="feature-card__title">Local search understands local</h3>
-          <p className="feature-card__body">
-            Ranking for "website design Freeport" or "SEO services Freeport IL" requires understanding
-            how Stephenson County searches. A developer who lives in the region and is already writing
-            local landing pages has a better handle on that than a national agency running a template.
-          </p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">I know the area</h3>
+            <p className="pkg-card__desc">
+              I know Freeport is the Stephenson County seat, that the historic downtown matters to the
+              local economy, and that small businesses here compete with Rockford and online sellers for
+              the same customers. That context shows up in how I write your site copy and structure your
+              local SEO — a remote developer has to guess at it.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">You can actually reach me</h3>
+            <p className="pkg-card__desc">
+              No ticketing system, no timezone lag, no account manager. Email me directly, get a direct
+              answer. If a project warrants sitting down in Freeport to scope it out, the drive from
+              Durand is short enough that it is not a production.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Local search understands local</h3>
+            <p className="pkg-card__desc">
+              Ranking for "website design Freeport" or "SEO services Freeport IL" requires understanding
+              how Stephenson County searches. A developer who lives in the region and is already writing
+              local landing pages has a better handle on that than a national agency running a template.
+            </p>
+          </div>
+        </div>
       </div>
     </Section>
 
@@ -223,22 +250,28 @@ const LocalWebDeveloperPage = () => (
       }
     >
       <div className="grid-two">
-        <Card variant="outline">
-          <h3 className="feature-card__title">What I am best at</h3>
-          <p className="feature-card__body">
-            Website design and rebuilds, front-end repair, local SEO structure, and small business
-            sites that stay maintainable. Direct communication, documented work, and pricing that
-            fits a small business rather than an enterprise marketing budget.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">When a studio is the better call</h3>
-          <p className="feature-card__body">
-            Full brand identity design, ongoing paid ad management, large e-commerce builds with
-            complex inventory, or projects that need a dedicated design team iterating on visuals. I
-            will tell you that directly rather than oversell what I do.
-          </p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">What I am best at</h3>
+            <p className="pkg-card__desc">
+              Website design and rebuilds, front-end repair, local SEO structure, and small business
+              sites that stay maintainable. Direct communication, documented work, and pricing that
+              fits a small business rather than an enterprise marketing budget.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">When a studio is the better call</h3>
+            <p className="pkg-card__desc">
+              Full brand identity design, ongoing paid ad management, large e-commerce builds with
+              complex inventory, or projects that need a dedicated design team iterating on visuals. I
+              will tell you that directly rather than oversell what I do.
+            </p>
+          </div>
+        </div>
       </div>
     </Section>
 
@@ -264,24 +297,33 @@ const LocalWebDeveloperPage = () => (
       title="How it works — from first call to live site"
     >
       <div className="grid-three">
-        <Card>
-          <h3 className="feature-card__title">Free consultation</h3>
-          <p className="feature-card__body">
-            We talk about your business, what the site needs to do, and what's currently broken. I tell you honestly whether I'm the right fit. No pressure, no sales pitch.
-          </p>
-        </Card>
-        <Card>
-          <h3 className="feature-card__title">Design and build</h3>
-          <p className="feature-card__body">
-            I build a fast, mobile-ready site built for your business. You see real progress, not radio silence. Two rounds of revisions included so the final site matches what you actually want.
-          </p>
-        </Card>
-        <Card>
-          <h3 className="feature-card__title">Launch and support</h3>
-          <p className="feature-card__body">
-            I launch your site, set up hosting, and handle updates. You get 24-hour response times and a 30-day warranty after launch. Monthly support is month-to-month — no long-term commitment.
-          </p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/city-step-call.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Free consultation</h3>
+            <p className="pkg-card__desc">
+              We talk about your business, what the site needs to do, and what's currently broken. I tell you honestly whether I'm the right fit. No pressure, no sales pitch.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/city-step-build.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Design and build</h3>
+            <p className="pkg-card__desc">
+              I build a fast, mobile-ready site built for your business. You see real progress, not radio silence. Two rounds of revisions included so the final site matches what you actually want.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/city-step-launch.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Launch and support</h3>
+            <p className="pkg-card__desc">
+              I launch your site, set up hosting, and handle updates. You get 24-hour response times and a 30-day warranty after launch. Monthly support is month-to-month — no long-term commitment.
+            </p>
+          </div>
+        </div>
       </div>
     </Section>
 
@@ -315,24 +357,33 @@ const LocalWebDeveloperPage = () => (
       title="The hard truth about your website"
     >
       <div className="grid-three">
-        <Card>
-          <h3 className="feature-card__title">75% of consumers judge your business by its website alone</h3>
-          <p className="feature-card__body">
-            Source: Stanford Web Credibility Study
-          </p>
-        </Card>
-        <Card>
-          <h3 className="feature-card__title">53% of visitors leave a site that takes over 3 seconds to load</h3>
-          <p className="feature-card__body">
-            Source: Google PageSpeed research
-          </p>
-        </Card>
-        <Card>
-          <h3 className="feature-card__title">46% of Google searches are looking for a local business</h3>
-          <p className="feature-card__body">
-            Source: Google local search data
-          </p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">75% of consumers judge your business by its website alone</h3>
+            <p className="pkg-card__desc">
+              Source: Stanford Web Credibility Study
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">53% of visitors leave a site that takes over 3 seconds to load</h3>
+            <p className="pkg-card__desc">
+              Source: Google PageSpeed research
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">46% of Google searches are looking for a local business</h3>
+            <p className="pkg-card__desc">
+              Source: Google local search data
+            </p>
+          </div>
+        </div>
       </div>
     </Section>
 
@@ -346,30 +397,42 @@ const LocalWebDeveloperPage = () => (
       }
     >
       <div className="grid-two">
-        <Card variant="outline">
-          <h3 className="feature-card__title">Project case studies</h3>
-          <p className="feature-card__body">
-            See <Link to="/projects/">completed project case studies</Link> with code, screenshots, and honest notes on what worked and what didn't.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Web development FAQ</h3>
-          <p className="feature-card__body">
-            Read the <Link to="/northwest-illinois-web-development-faq/">Northwest Illinois web development FAQ</Link> for process details, timelines, and pricing answers.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Pricing breakdown</h3>
-          <p className="feature-card__body">
-            Transparent <Link to="/pricing/">pricing tiers</Link> starting at $447 with no hidden fees or contracts.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Small business checklist</h3>
-          <p className="feature-card__body">
-            Download the <Link to="/small-business-website-checklist-northwest-illinois/">small business website checklist</Link> to see exactly what a complete site needs.
-          </p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/city-evidence-work.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Project case studies</h3>
+            <p className="pkg-card__desc">
+              See <Link to="/projects/">completed project case studies</Link> with code, screenshots, and honest notes on what worked and what didn't.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Web development FAQ</h3>
+            <p className="pkg-card__desc">
+              Read the <Link to="/northwest-illinois-web-development-faq/">Northwest Illinois web development FAQ</Link> for process details, timelines, and pricing answers.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/city-evidence-pricing.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Pricing breakdown</h3>
+            <p className="pkg-card__desc">
+              Transparent <Link to="/pricing/">pricing tiers</Link> starting at $447 with no hidden fees or contracts.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Small business checklist</h3>
+            <p className="pkg-card__desc">
+              Download the <Link to="/small-business-website-checklist-northwest-illinois/">small business website checklist</Link> to see exactly what a complete site needs.
+            </p>
+          </div>
+        </div>
       </div>
     </Section>
 
@@ -378,36 +441,51 @@ const LocalWebDeveloperPage = () => (
       title="Common questions about web development in Freeport"
     >
       <div className="grid-two">
-        <Card variant="outline">
-          <h3 className="feature-card__title">How much does a website cost?</h3>
-          <p className="feature-card__body">
-            Starter sites begin at $447 for the build and $37/month for hosting and support. See the full pricing breakdown on the pricing page.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">How long does it take?</h3>
-          <p className="feature-card__body">
-            Starter sites typically take 14 days. Larger projects run 3-4 weeks. I'll give you a specific timeline during the free consultation.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Do you offer a guarantee?</h3>
-          <p className="feature-card__body">
-            Yes. Every build includes a 24-hour response time guarantee and a 30-day warranty after launch. If you're not happy after the first round of revisions, you get your deposit back.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Do I own my website?</h3>
-          <p className="feature-card__body">
-            Yes. The code, content, and domain are all yours. If you ever want to leave, I'll help you migrate at no extra charge.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Can you fix my existing website?</h3>
-          <p className="feature-card__body">
-            Yes. Site refreshes start at $597, or I can work hourly at $65/hour with a 1-hour minimum.
-          </p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/why-fixed.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">How much does a website cost?</h3>
+            <p className="pkg-card__desc">
+              Starter sites begin at $447 for the build and $37/month for hosting and support. See the full pricing breakdown on the pricing page.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/why-fixed.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">How long does it take?</h3>
+            <p className="pkg-card__desc">
+              Starter sites typically take 14 days. Larger projects run 3-4 weeks. I'll give you a specific timeline during the free consultation.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/why-fixed.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Do you offer a guarantee?</h3>
+            <p className="pkg-card__desc">
+              Yes. Every build includes a 24-hour response time guarantee and a 30-day warranty after launch. If you're not happy after the first round of revisions, you get your deposit back.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/why-fixed.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Do I own my website?</h3>
+            <p className="pkg-card__desc">
+              Yes. The code, content, and domain are all yours. If you ever want to leave, I'll help you migrate at no extra charge.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/why-fixed.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Can you fix my existing website?</h3>
+            <p className="pkg-card__desc">
+              Yes. Site refreshes start at $597, or I can work hourly at $65/hour with a 1-hour minimum.
+            </p>
+          </div>
+        </div>
       </div>
     </Section>
 
@@ -443,54 +521,66 @@ const LocalWebDeveloperPage = () => (
       }
     >
       <div className="grid-two">
-        <Card variant="outline">
-          <h3 className="feature-card__title">Common questions</h3>
-          <p className="feature-card__body">
-            I broke the common fit, scope, pricing, and process questions into a separate FAQ so the
-            answers are easier to skim before you reach out.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="primary" to="/northwest-illinois-web-development-faq/">
-              Read the FAQ
-            </Link>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Common questions</h3>
+            <p className="pkg-card__desc">
+              I broke the common fit, scope, pricing, and process questions into a separate FAQ so the
+              answers are easier to skim before you reach out.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="primary" to="/northwest-illinois-web-development-faq/">
+                Read the FAQ
+              </Link>
+            </div>
           </div>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Website help and repair</h3>
-          <p className="feature-card__body">
-            If your Freeport site is already live but broken, slow, or hard to update, the website
-            help page explains the practical version of what I usually fix first.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="primary" to="/website-help-northwest-illinois/">
-              Website help page
-            </Link>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Website help and repair</h3>
+            <p className="pkg-card__desc">
+              If your Freeport site is already live but broken, slow, or hard to update, the website
+              help page explains the practical version of what I usually fix first.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="primary" to="/website-help-northwest-illinois/">
+                Website help page
+              </Link>
+            </div>
           </div>
-        </Card>
+        </div>
       </div>
       <div className="grid-two">
-        <Card variant="outline">
-          <h3 className="feature-card__title">Pricing</h3>
-          <p className="feature-card__body">
-            Transparent pricing for every budget. Starter sites from $447, growth sites from $797, premium from $1,497.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="primary" to="/pricing/">
-              See pricing
-            </Link>
+        <div className="pkg-card">
+          <img src="/package-images/city-evidence-pricing.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Pricing</h3>
+            <p className="pkg-card__desc">
+              Transparent pricing for every budget. Starter sites from $447, growth sites from $797, premium from $1,497.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="primary" to="/pricing/">
+                See pricing
+              </Link>
+            </div>
           </div>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Get in touch</h3>
-          <p className="feature-card__body">
-            Ready to talk about your project? Send me the details and I'll tell you honestly whether I'm the right fit.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="primary" to="/contact/">
-              Get a free consultation
-            </Link>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/city-evidence-contact.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Get in touch</h3>
+            <p className="pkg-card__desc">
+              Ready to talk about your project? Send me the details and I'll tell you honestly whether I'm the right fit.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="primary" to="/contact/">
+                Get a free consultation
+              </Link>
+            </div>
           </div>
-        </Card>
+        </div>
       </div>
       <div className="card-actions">
         <Link data-variant="primary" to="/contact/">

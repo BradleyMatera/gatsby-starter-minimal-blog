@@ -11,12 +11,12 @@ const pageDescription =
   "Website examples and demos by Bradley Matera. Live demo sites for restaurants, landscaping, HVAC, auto repair, real estate, and salons, plus project write-ups.";
 
 const demoCards = [
-  { title: "Restaurant", desc: "Menu, reservations, gallery, and location.", href: "/demos/restaurant/" },
-  { title: "Landscaping", desc: "Service packages, project gallery, free quote form.", href: "/demos/landscaping/" },
-  { title: "HVAC", desc: "Financing calculator, service areas, booking form.", href: "/demos/hvac/" },
-  { title: "Auto Repair", desc: "VIN lookup, service menu, reviews, appointments.", href: "/demos/auto-repair/" },
-  { title: "Real Estate", desc: "Property listings, agent profiles, search filters.", href: "/demos/real-estate/" },
-  { title: "Salon", desc: "Service menu, stylist bios, gallery, online booking.", href: "/demos/beauty-salon/" },
+  { title: "Restaurant", desc: "Menu, reservations, gallery, and location.", href: "/demos/restaurant/", img: "/package-images/work-restaurant.svg" },
+  { title: "Landscaping", desc: "Service packages, project gallery, free quote form.", href: "/demos/landscaping/", img: "/package-images/work-landscaping.svg" },
+  { title: "HVAC", desc: "Financing calculator, service areas, booking form.", href: "/demos/hvac/", img: "/package-images/work-hvac.svg" },
+  { title: "Auto Repair", desc: "VIN lookup, service menu, reviews, appointments.", href: "/demos/auto-repair/", img: "/package-images/evidence-projects.svg" },
+  { title: "Real Estate", desc: "Property listings, agent profiles, search filters.", href: "/demos/real-estate/", img: "/package-images/evidence-projects.svg" },
+  { title: "Salon", desc: "Service menu, stylist bios, gallery, online booking.", href: "/demos/beauty-salon/", img: "/package-images/evidence-projects.svg" },
 ];
 
 const WorkPage = () => (
@@ -59,33 +59,42 @@ const WorkPage = () => (
       }
     >
       <div className="grid-three">
-        <Card variant="outline">
-          <h2 className="feature-card__title">Live demo websites</h2>
-          <p className="feature-card__body">
-            Full clickable sample websites for six industries. Not templates — real, working sites you can explore.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="ghost" to="/demos/">See all demos</Link>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Live demo websites</h2>
+            <p className="pkg-card__desc">
+              Full clickable sample websites for six industries. Not templates — real, working sites you can explore.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="ghost" to="/demos/">See all demos</Link>
+            </div>
           </div>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">Project case studies</h2>
-          <p className="feature-card__body">
-            Technical write-ups with code, architecture decisions, and honest limitations.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="ghost" to="/projects/">Browse projects</Link>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Project case studies</h2>
+            <p className="pkg-card__desc">
+              Technical write-ups with code, architecture decisions, and honest limitations.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="ghost" to="/projects/">Browse projects</Link>
+            </div>
           </div>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">Open-source contributions</h2>
-          <p className="feature-card__body">
-            Pull requests, fixes, and tools shared with the developer community.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="ghost" to="/contributions/">See contributions</Link>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Open-source contributions</h2>
+            <p className="pkg-card__desc">
+              Pull requests, fixes, and tools shared with the developer community.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="ghost" to="/contributions/">See contributions</Link>
+            </div>
           </div>
-        </Card>
+        </div>
       </div>
     </Section>
 
@@ -100,13 +109,16 @@ const WorkPage = () => (
     >
       <div className="grid-three">
         {demoCards.map((demo) => (
-          <Card key={demo.title} variant="outline">
-            <h3 className="feature-card__title">{demo.title} Website</h3>
-            <p className="feature-card__body">{demo.desc}</p>
-            <div className="card-actions">
-              <Link data-variant="primary" to={demo.href}>See {demo.title.toLowerCase()} sample</Link>
+          <div key={demo.title} className="pkg-card">
+            <img src={demo.img} alt="" className="pkg-card__bg" loading="lazy" />
+            <div className="pkg-card__body">
+              <h3 className="pkg-card__title">{demo.title} Website</h3>
+              <p className="pkg-card__desc">{demo.desc}</p>
+              <div className="card-actions">
+                <Link data-variant="primary" to={demo.href}>See {demo.title.toLowerCase()} sample</Link>
+              </div>
             </div>
-          </Card>
+          </div>
         ))}
       </div>
       <div className="card-actions" style={{ marginTop: "1.5rem" }}>
@@ -161,33 +173,42 @@ const WorkPage = () => (
         </table>
       </div>
       <div className="grid-three">
-        <Card variant="outline">
-          <h3 className="feature-card__title">Landscaping website example</h3>
-          <p className="feature-card__body">
-            A 5-page Gatsby site structure for a landscaping company — service pages, project gallery, quote form, local SEO foundations, and weather-based service recommendations.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="primary" to="/work/greenscape-pro-landscaping/">View example</Link>
+        <div className="pkg-card">
+          <img src="/package-images/work-landscaping.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Landscaping website example</h3>
+            <p className="pkg-card__desc">
+              A 5-page Gatsby site structure for a landscaping company — service pages, project gallery, quote form, local SEO foundations, and weather-based service recommendations.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="primary" to="/work/greenscape-pro-landscaping/">View example</Link>
+            </div>
           </div>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Restaurant website example</h3>
-          <p className="feature-card__body">
-            A WordPress-to-Gatsby rebuild structure for a restaurant — menu, reservations, gallery, hours, and reviews. Shows the migration approach and performance targets.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="primary" to="/work/rock-river-diner/">View example</Link>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/work-restaurant.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Restaurant website example</h3>
+            <p className="pkg-card__desc">
+              A WordPress-to-Gatsby rebuild structure for a restaurant — menu, reservations, gallery, hours, and reviews. Shows the migration approach and performance targets.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="primary" to="/work/rock-river-diner/">View example</Link>
+            </div>
           </div>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">HVAC website example</h3>
-          <p className="feature-card__body">
-            A 7-page service area website structure for an HVAC company — service pages, financing calculator, seasonal promotions, and service area architecture.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="primary" to="/work/northstar-hvac/">View example</Link>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/work-hvac.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">HVAC website example</h3>
+            <p className="pkg-card__desc">
+              A 7-page service area website structure for an HVAC company — service pages, financing calculator, seasonal promotions, and service area architecture.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="primary" to="/work/northstar-hvac/">View example</Link>
+            </div>
           </div>
-        </Card>
+        </div>
       </div>
     </Section>
 

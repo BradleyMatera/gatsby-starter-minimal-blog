@@ -124,30 +124,42 @@ const LocalFaqPage = () => (
       }
     >
       <div className="grid-two">
-        <Card variant="outline">
-          <h3 className="feature-card__title">Project case studies</h3>
-          <p className="feature-card__body">
-            See <Link to="/projects/">completed project case studies</Link> with code, screenshots, and honest notes on what worked and what didn't.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Pricing breakdown</h3>
-          <p className="feature-card__body">
-            Transparent <Link to="/pricing/">pricing tiers</Link> starting at $447 with no hidden fees, written agreements included.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">About Bradley Matera</h3>
-          <p className="feature-card__body">
-            Read <Link to="/about/">about my background</Link> — Full Sail University training, AWS Cloud Support internship, and real project work.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Small business checklist</h3>
-          <p className="feature-card__body">
-            Download the <Link to="/small-business-website-checklist-northwest-illinois/">small business website checklist</Link> to see exactly what a complete site needs.
-          </p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/faq-evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Project case studies</h3>
+            <p className="pkg-card__desc">
+              See <Link to="/projects/">completed project case studies</Link> with code, screenshots, and honest notes on what worked and what didn't.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/faq-evidence-pricing.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Pricing breakdown</h3>
+            <p className="pkg-card__desc">
+              Transparent <Link to="/pricing/">pricing tiers</Link> starting at $447 with no hidden fees, written agreements included.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/faq-evidence-about.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">About Bradley Matera</h3>
+            <p className="pkg-card__desc">
+              Read <Link to="/about/">about my background</Link> — Full Sail University training, AWS Cloud Support internship, and real project work.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/faq-evidence-checklist.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Small business checklist</h3>
+            <p className="pkg-card__desc">
+              Download the <Link to="/small-business-website-checklist-northwest-illinois/">small business website checklist</Link> to see exactly what a complete site needs.
+            </p>
+          </div>
+        </div>
       </div>
     </Section>
 

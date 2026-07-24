@@ -148,24 +148,33 @@ const WebsiteSpeedPage = () => (
       title="From slow to fast"
     >
       <div className="grid-three">
-        <Card>
-          <h3 className="feature-card__title">1. Audit</h3>
-          <p className="feature-card__body">
-            I test your site with Lighthouse, PageSpeed Insights, and real-device testing on a throttled mobile connection. You get a report showing exactly what is slow and why.
-          </p>
-        </Card>
-        <Card>
-          <h3 className="feature-card__title">2. Optimize</h3>
-          <p className="feature-card__body">
-            I fix the issues in priority order — biggest impact first. Images get compressed and served in WebP/AVIF. JavaScript gets deferred or removed. Fonts get preloaded or self-hosted.
-          </p>
-        </Card>
-        <Card>
-          <h3 className="feature-card__title">3. Verify</h3>
-          <p className="feature-card__body">
-            I re-test on the same throttled connection and show you before-and-after numbers. Core Web Vitals are checked against real field data, not just lab scores.
-          </p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/step-1-diagnose.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">1. Audit</h3>
+            <p className="pkg-card__desc">
+              I test your site with Lighthouse, PageSpeed Insights, and real-device testing on a throttled mobile connection. You get a report showing exactly what is slow and why.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/step-2-build.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">2. Optimize</h3>
+            <p className="pkg-card__desc">
+              I fix the issues in priority order — biggest impact first. Images get compressed and served in WebP/AVIF. JavaScript gets deferred or removed. Fonts get preloaded or self-hosted.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/step-3-launch.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">3. Verify</h3>
+            <p className="pkg-card__desc">
+              I re-test on the same throttled connection and show you before-and-after numbers. Core Web Vitals are checked against real field data, not just lab scores.
+            </p>
+          </div>
+        </div>
       </div>
     </Section>
 

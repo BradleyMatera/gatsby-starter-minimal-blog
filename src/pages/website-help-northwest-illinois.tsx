@@ -45,26 +45,32 @@ const WebsiteHelpPage = () => (
       }
     >
       <div className="grid-two">
-        <Card variant="outline">
-          <h2 className="feature-card__title">Typical starting problems</h2>
-          <ul className="feature-list">
-            <li>The site looks outdated or hard to trust.</li>
-            <li>Important services are buried under unclear layout or weak copy.</li>
-            <li>Mobile behavior is messy, slow, or visually inconsistent.</li>
-            <li>The site exists, but no one knows what to fix first.</li>
-            <li>There is code already, but it needs cleanup before adding more.</li>
-          </ul>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">What I usually do first</h2>
-          <ul className="feature-list">
-            <li>Figure out the real goal of the page or site.</li>
-            <li>Cut confusion in the heading structure, navigation, and calls to action.</li>
-            <li>Fix obvious layout and readability problems across desktop and mobile.</li>
-            <li>Make the page easier to explain to both users and search engines.</li>
-            <li>Document what changed so later edits do not become guesswork.</li>
-          </ul>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/help-diagnose.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Typical starting problems</h2>
+            <ul className="feature-list">
+              <li>The site looks outdated or hard to trust.</li>
+              <li>Important services are buried under unclear layout or weak copy.</li>
+              <li>Mobile behavior is messy, slow, or visually inconsistent.</li>
+              <li>The site exists, but no one knows what to fix first.</li>
+              <li>There is code already, but it needs cleanup before adding more.</li>
+            </ul>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/help-fix.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">What I usually do first</h2>
+            <ul className="feature-list">
+              <li>Figure out the real goal of the page or site.</li>
+              <li>Cut confusion in the heading structure, navigation, and calls to action.</li>
+              <li>Fix obvious layout and readability problems across desktop and mobile.</li>
+              <li>Make the page easier to explain to both users and search engines.</li>
+              <li>Document what changed so later edits do not become guesswork.</li>
+            </ul>
+          </div>
+        </div>
         <Card>
           <h2 className="feature-card__title">Best-fit project types</h2>
           <p className="feature-card__body">
@@ -94,30 +100,42 @@ const WebsiteHelpPage = () => (
       }
     >
       <div className="grid-two">
-        <Card variant="outline">
-          <h3 className="feature-card__title">Project case studies</h3>
-          <p className="feature-card__body">
-            See <Link to="/projects/">completed project case studies</Link> with code, screenshots, and honest notes on what worked and what didn't.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Web development FAQ</h3>
-          <p className="feature-card__body">
-            Read the <Link to="/northwest-illinois-web-development-faq/">Northwest Illinois web development FAQ</Link> for process details, timelines, and pricing answers.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Pricing breakdown</h3>
-          <p className="feature-card__body">
-            Transparent <Link to="/pricing/">pricing tiers</Link> starting at $447 with no hidden fees or contracts.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">About Bradley Matera</h3>
-          <p className="feature-card__body">
-            Read <Link to="/about/">about my background</Link> — Full Sail University training, AWS Cloud Support internship, and real project work.
-          </p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/help-launch.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Project case studies</h3>
+            <p className="pkg-card__desc">
+              See <Link to="/projects/">completed project case studies</Link> with code, screenshots, and honest notes on what worked and what didn't.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/help-diagnose.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Web development FAQ</h3>
+            <p className="pkg-card__desc">
+              Read the <Link to="/northwest-illinois-web-development-faq/">Northwest Illinois web development FAQ</Link> for process details, timelines, and pricing answers.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/help-fix.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Pricing breakdown</h3>
+            <p className="pkg-card__desc">
+              Transparent <Link to="/pricing/">pricing tiers</Link> starting at $447 with no hidden fees or contracts.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/help-launch.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">About Bradley Matera</h3>
+            <p className="pkg-card__desc">
+              Read <Link to="/about/">about my background</Link> — Full Sail University training, AWS Cloud Support internship, and real project work.
+            </p>
+          </div>
+        </div>
       </div>
     </Section>
 

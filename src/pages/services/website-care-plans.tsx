@@ -333,10 +333,13 @@ const WebsiteCarePlansPage = () => (
     >
       <div className="grid-three">
         {faqs.map((faq) => (
-          <Card key={faq.q} variant="outline">
-            <h3 className="feature-card__title">{faq.q}</h3>
-            <p className="feature-card__body">{faq.a}</p>
-          </Card>
+          <div key={faq.q} className="pkg-card">
+            <img src="/package-images/why-fixed.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <div className="pkg-card__body">
+              <h3 className="pkg-card__title">{faq.q}</h3>
+              <p className="pkg-card__desc">{faq.a}</p>
+            </div>
+          </div>
         ))}
       </div>
     </Section>

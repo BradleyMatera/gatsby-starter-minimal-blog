@@ -154,24 +154,33 @@ const LocalSeoPage = () => (
       title="From audit to ranking"
     >
       <div className="grid-three">
-        <Card>
-          <h3 className="feature-card__title">1. Audit and research</h3>
-          <p className="feature-card__body">
-            I audit your current local search presence, research your target keywords, and analyze the top 3 competitors in your area.
-          </p>
-        </Card>
-        <Card>
-          <h3 className="feature-card__title">2. Optimize and submit</h3>
-          <p className="feature-card__body">
-            I optimize your Google Business Profile, add local schema markup to your site, and build citations across local directories.
-          </p>
-        </Card>
-        <Card>
-          <h3 className="feature-card__title">3. Track and adjust</h3>
-          <p className="feature-card__body">
-            Monthly ranking reports show what's working. I adjust the strategy based on real data, not guesses.
-          </p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/step-1-diagnose.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">1. Audit and research</h3>
+            <p className="pkg-card__desc">
+              I audit your current local search presence, research your target keywords, and analyze the top 3 competitors in your area.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/step-2-build.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">2. Optimize and submit</h3>
+            <p className="pkg-card__desc">
+              I optimize your Google Business Profile, add local schema markup to your site, and build citations across local directories.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/step-3-launch.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">3. Track and adjust</h3>
+            <p className="pkg-card__desc">
+              Monthly ranking reports show what's working. I adjust the strategy based on real data, not guesses.
+            </p>
+          </div>
+        </div>
       </div>
     </Section>
 

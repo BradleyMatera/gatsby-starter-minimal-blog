@@ -149,24 +149,33 @@ const SmallBusinessWebDesignPage = () => (
       title="From first call to live site"
     >
       <div className="grid-three">
-        <Card>
-          <h3 className="feature-card__title">1. Free consultation</h3>
-          <p className="feature-card__body">
-            We talk about your business, what the site needs to do, and your goals. No pressure, no sales pitch.
-          </p>
-        </Card>
-        <Card>
-          <h3 className="feature-card__title">2. Design and build</h3>
-          <p className="feature-card__body">
-            I build a fast, mobile-ready site for your business. You see real progress. Two rounds of revisions included.
-          </p>
-        </Card>
-        <Card>
-          <h3 className="feature-card__title">3. Launch and support</h3>
-          <p className="feature-card__body">
-            I launch your site, set up hosting, and handle updates. 24-hour response times, 30-day warranty, month-to-month care plans.
-          </p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/step-1-diagnose.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">1. Free consultation</h3>
+            <p className="pkg-card__desc">
+              We talk about your business, what the site needs to do, and your goals. No pressure, no sales pitch.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/step-2-build.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">2. Design and build</h3>
+            <p className="pkg-card__desc">
+              I build a fast, mobile-ready site for your business. You see real progress. Two rounds of revisions included.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/step-3-launch.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">3. Launch and support</h3>
+            <p className="pkg-card__desc">
+              I launch your site, set up hosting, and handle updates. 24-hour response times, 30-day warranty, month-to-month care plans.
+            </p>
+          </div>
+        </div>
       </div>
     </Section>
 

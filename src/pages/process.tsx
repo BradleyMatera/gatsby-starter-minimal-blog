@@ -67,36 +67,51 @@ const ProcessPage = () => (
       }
     >
       <div className="grid-three">
-        <Card variant="outline">
-          <h2 className="feature-card__title">Step 1 — Free consultation</h2>
-          <p className="feature-card__body">
-            We talk about your business, your goals, and what's currently broken. No pressure, no sales pitch. I tell you honestly whether a new site makes sense or if you just need a few fixes.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">Step 2 — Scope and proposal</h2>
-          <p className="feature-card__body">
-            You get a clear scope, fixed price, and timeline in writing. No vague estimates. You know exactly what you're paying for and when it will be done before any work starts.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">Step 3 — Design and build</h2>
-          <p className="feature-card__body">
-            I build mobile-first with accessibility and SEO baked in from the start. You see real progress, not radio silence. Code is clean, fast, and owned by you.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">Step 4 — Review and revisions</h2>
-          <p className="feature-card__body">
-            You see the site on a preview link, click around, and request changes. Two rounds of revisions included with every build. Nothing launches until you're happy.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">Step 5 — Launch and support</h2>
-          <p className="feature-card__body">
-            I handle hosting setup, DNS, and go-live. Every build includes a 30-day warranty for bug fixes. Ongoing support starts at $37/month with written agreements included.
-          </p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/process-call.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Step 1 — Free consultation</h2>
+            <p className="pkg-card__desc">
+              We talk about your business, your goals, and what's currently broken. No pressure, no sales pitch. I tell you honestly whether a new site makes sense or if you just need a few fixes.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/process-build.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Step 2 — Scope and proposal</h2>
+            <p className="pkg-card__desc">
+              You get a clear scope, fixed price, and timeline in writing. No vague estimates. You know exactly what you're paying for and when it will be done before any work starts.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/process-launch.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Step 3 — Design and build</h2>
+            <p className="pkg-card__desc">
+              I build mobile-first with accessibility and SEO baked in from the start. You see real progress, not radio silence. Code is clean, fast, and owned by you.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/process-call.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Step 4 — Review and revisions</h2>
+            <p className="pkg-card__desc">
+              You see the site on a preview link, click around, and request changes. Two rounds of revisions included with every build. Nothing launches until you're happy.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/process-launch.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Step 5 — Launch and support</h2>
+            <p className="pkg-card__desc">
+              I handle hosting setup, DNS, and go-live. Every build includes a 30-day warranty for bug fixes. Ongoing support starts at $37/month with written agreements included.
+            </p>
+          </div>
+        </div>
       </div>
     </Section>
 

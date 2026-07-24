@@ -149,24 +149,33 @@ const WebsiteRedesignPage = () => (
       title="From audit to launch"
     >
       <div className="grid-three">
-        <Card>
-          <h3 className="feature-card__title">1. Audit and plan</h3>
-          <p className="feature-card__body">
-            I review your current site, identify what's broken or outdated, and plan the redesign. You get a clear scope and timeline.
-          </p>
-        </Card>
-        <Card>
-          <h3 className="feature-card__title">2. Redesign and migrate</h3>
-          <p className="feature-card__body">
-            I build the new design and migrate your existing content. You see real progress. Two rounds of revisions included.
-          </p>
-        </Card>
-        <Card>
-          <h3 className="feature-card__title">3. Launch with redirects</h3>
-          <p className="feature-card__body">
-            I set up 301 redirects, launch the new site, and verify your search rankings hold. 30-day warranty, month-to-month care plans.
-          </p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/step-1-diagnose.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">1. Audit and plan</h3>
+            <p className="pkg-card__desc">
+              I review your current site, identify what's broken or outdated, and plan the redesign. You get a clear scope and timeline.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/step-2-build.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">2. Redesign and migrate</h3>
+            <p className="pkg-card__desc">
+              I build the new design and migrate your existing content. You see real progress. Two rounds of revisions included.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/step-3-launch.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">3. Launch with redirects</h3>
+            <p className="pkg-card__desc">
+              I set up 301 redirects, launch the new site, and verify your search rankings hold. 30-day warranty, month-to-month care plans.
+            </p>
+          </div>
+        </div>
       </div>
     </Section>
 

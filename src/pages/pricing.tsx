@@ -217,28 +217,34 @@ const PricingPage = () => (
       }
     >
       <div className="grid-two">
-        <Card variant="outline">
-          <h2 className="feature-card__title">Site Refresh — ${SITE_REFRESH_PRICE}</h2>
-          <p className="feature-card__body">
-            Visual updates, content restructuring, mobile improvements, SEO basics.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="primary" to="/contact/">
-              Get a refresh
-            </Link>
+        <div className="pkg-card">
+          <img src="/package-images/addon-refresh.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Site Refresh — ${SITE_REFRESH_PRICE}</h2>
+            <p className="pkg-card__desc">
+              Visual updates, content restructuring, mobile improvements, SEO basics.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="primary" to="/contact/">
+                Get a refresh
+              </Link>
+            </div>
           </div>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">Hourly Work — ${HOURLY_RATE}/hour</h2>
-          <p className="feature-card__body">
-            Light maintenance, one-off changes, targeted fixes. 1-hour minimum.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="primary" to="/contact/">
-              Book hourly work
-            </Link>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/addon-hourly.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Hourly Work — ${HOURLY_RATE}/hour</h2>
+            <p className="pkg-card__desc">
+              Light maintenance, one-off changes, targeted fixes. 1-hour minimum.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="primary" to="/contact/">
+                Book hourly work
+              </Link>
+            </div>
           </div>
-        </Card>
+        </div>
       </div>
     </Section>
 
@@ -252,47 +258,56 @@ const PricingPage = () => (
       }
     >
       <div className="grid-three">
-        <Card variant="outline">
-          <h2 className="feature-card__title">Essential Care — ${starterPkg.monthlyPrice}/month</h2>
-          <ul className="feature-list">
-            <li>Software and dependency updates</li>
-            <li>Weekly backups</li>
-            <li>Uptime monitoring</li>
-            <li>Security checks</li>
-            <li>24-hour response time (acknowledgment)</li>
-          </ul>
-          <div className="card-actions">
-            <Link data-variant="ghost" to="/services/website-care-plans/">View Essential Care details</Link>
+        <div className="pkg-card">
+          <img src="/package-images/essential-care.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Essential Care — ${starterPkg.monthlyPrice}/month</h2>
+            <ul className="feature-list">
+              <li>Software and dependency updates</li>
+              <li>Weekly backups</li>
+              <li>Uptime monitoring</li>
+              <li>Security checks</li>
+              <li>24-hour response time (acknowledgment)</li>
+            </ul>
+            <div className="card-actions">
+              <Link data-variant="ghost" to="/services/website-care-plans/">View Essential Care details</Link>
+            </div>
           </div>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">Growth Care — ${growthPkg.monthlyPrice}/month</h2>
-          <p className="feature-card__body"><strong>Essential Care plus:</strong></p>
-          <ul className="feature-list">
-            <li>Content changes and updates</li>
-            <li>Monthly performance report</li>
-            <li>SEO monitoring and fixes</li>
-            <li>Form and lead tracking</li>
-            <li>24-hour response time (acknowledgment)</li>
-          </ul>
-          <div className="card-actions">
-            <Link data-variant="ghost" to="/services/website-care-plans/">View Growth Care details</Link>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/growth-care.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Growth Care — ${growthPkg.monthlyPrice}/month</h2>
+            <p className="pkg-card__desc"><strong>Essential Care plus:</strong></p>
+            <ul className="feature-list">
+              <li>Content changes and updates</li>
+              <li>Monthly performance report</li>
+              <li>SEO monitoring and fixes</li>
+              <li>Form and lead tracking</li>
+              <li>24-hour response time (acknowledgment)</li>
+            </ul>
+            <div className="card-actions">
+              <Link data-variant="ghost" to="/services/website-care-plans/">View Growth Care details</Link>
+            </div>
           </div>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">Search Care — ${leadEnginePkg.monthlyPrice}/month</h2>
-          <p className="feature-card__body"><strong>Growth Care plus:</strong></p>
-          <ul className="feature-list">
-            <li>Content optimization</li>
-            <li>Local visibility work</li>
-            <li>Quarterly strategy call</li>
-            <li>Competitor monitoring</li>
-            <li>Priority support (same-day acknowledgment)</li>
-          </ul>
-          <div className="card-actions">
-            <Link data-variant="ghost" to="/services/website-care-plans/">View Search Care details</Link>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/search-care.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Search Care — ${leadEnginePkg.monthlyPrice}/month</h2>
+            <p className="pkg-card__desc"><strong>Growth Care plus:</strong></p>
+            <ul className="feature-list">
+              <li>Content optimization</li>
+              <li>Local visibility work</li>
+              <li>Quarterly strategy call</li>
+              <li>Competitor monitoring</li>
+              <li>Priority support (same-day acknowledgment)</li>
+            </ul>
+            <div className="card-actions">
+              <Link data-variant="ghost" to="/services/website-care-plans/">View Search Care details</Link>
+            </div>
           </div>
-        </Card>
+        </div>
       </div>
     </Section>
 
@@ -325,46 +340,58 @@ const PricingPage = () => (
       }
     >
       <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Why prices are fixed, not hourly</h3>
-          <p className="feature-card__body">
-            New website builds are priced as fixed packages, not billed by the hour. You know the total cost before work begins, so there are no surprise invoices or scope creep charges. A fixed price means I absorb the risk of unexpected complexity — not you. If a build takes longer than estimated, you still pay the agreed price.
-          </p>
-          <p className="feature-card__body">
-            A 5-page Growth package typically takes 14-21 days from kickoff to launch. That timeline includes design, development, content review, revisions, and a final QA pass before going live.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">What's included in every package</h3>
-          <p className="feature-card__body">
-            Regardless of which tier you choose, every build includes:
-          </p>
-          <ul className="feature-list">
-            <li>Hosting setup and configuration</li>
-            <li>Domain connection (pointing your existing domain to the new site)</li>
-            <li>SSL certificate installation and renewal</li>
-            <li>Google Analytics 4 setup and verification</li>
-            <li>Mobile-responsive design tested on real devices</li>
-            <li>Basic on-page SEO (title tags, meta descriptions, heading structure)</li>
-            <li>XML sitemap generation and submission to Google</li>
-            <li>Contact form with spam protection</li>
-          </ul>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">What the monthly fee covers</h3>
-          <p className="feature-card__body">
-            The monthly care plan fee covers hosting, security updates, and ongoing support — not a lock-in contract. Plans are month-to-month. You can cancel before the next billing period with no penalty, and you take your site with you.
-          </p>
-          <p className="feature-card__body">
-            The ${starterPkg.monthlyPrice}/month Starter hosting includes SSL renewal, weekly backups, and uptime monitoring. Higher tiers add content updates, performance reports, and local SEO monitoring.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Written agreement on every project</h3>
-          <p className="feature-card__body">
-            Every build includes a written service agreement that outlines the scope, timeline, cost, and payment schedule before any work begins. No verbal-only deals, no vague promises. Read the full <Link to="/terms/">Terms of Service</Link> for the complete terms.
-          </p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/why-fixed.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Why prices are fixed, not hourly</h3>
+            <p className="pkg-card__desc">
+              New website builds are priced as fixed packages, not billed by the hour. You know the total cost before work begins, so there are no surprise invoices or scope creep charges. A fixed price means I absorb the risk of unexpected complexity — not you. If a build takes longer than estimated, you still pay the agreed price.
+            </p>
+            <p className="pkg-card__desc">
+              A 5-page Growth package typically takes 14-21 days from kickoff to launch. That timeline includes design, development, content review, revisions, and a final QA pass before going live.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/whats-included.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">What's included in every package</h3>
+            <p className="pkg-card__desc">
+              Regardless of which tier you choose, every build includes:
+            </p>
+            <ul className="feature-list">
+              <li>Hosting setup and configuration</li>
+              <li>Domain connection (pointing your existing domain to the new site)</li>
+              <li>SSL certificate installation and renewal</li>
+              <li>Google Analytics 4 setup and verification</li>
+              <li>Mobile-responsive design tested on real devices</li>
+              <li>Basic on-page SEO (title tags, meta descriptions, heading structure)</li>
+              <li>XML sitemap generation and submission to Google</li>
+              <li>Contact form with spam protection</li>
+            </ul>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/monthly-fee.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">What the monthly fee covers</h3>
+            <p className="pkg-card__desc">
+              The monthly care plan fee covers hosting, security updates, and ongoing support — not a lock-in contract. Plans are month-to-month. You can cancel before the next billing period with no penalty, and you take your site with you.
+            </p>
+            <p className="pkg-card__desc">
+              The ${starterPkg.monthlyPrice}/month Starter hosting includes SSL renewal, weekly backups, and uptime monitoring. Higher tiers add content updates, performance reports, and local SEO monitoring.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/written-agreement-card.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Written agreement on every project</h3>
+            <p className="pkg-card__desc">
+              Every build includes a written service agreement that outlines the scope, timeline, cost, and payment schedule before any work begins. No verbal-only deals, no vague promises. Read the full <Link to="/terms/">Terms of Service</Link> for the complete terms.
+            </p>
+          </div>
+        </div>
       </div>
     </Section>
 

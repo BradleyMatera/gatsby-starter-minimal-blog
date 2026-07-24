@@ -157,24 +157,33 @@ const WebsiteAccessibilityPage = () => (
       title="From audit to compliance"
     >
       <div className="grid-three">
-        <Card>
-          <h3 className="feature-card__title">1. Audit</h3>
-          <p className="feature-card__body">
-            I test your site against WCAG 2.2 AA criteria using automated tools and manual testing with screen readers and keyboard-only navigation.
-          </p>
-        </Card>
-        <Card>
-          <h3 className="feature-card__title">2. Report</h3>
-          <p className="feature-card__body">
-            You receive a detailed report listing every issue, its severity, location, and recommended fix. You decide what to fix and when.
-          </p>
-        </Card>
-        <Card>
-          <h3 className="feature-card__title">3. Remediate</h3>
-          <p className="feature-card__body">
-            I fix the issues you choose to address, re-test to verify compliance, and document the changes. 30-day warranty on all fixes.
-          </p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/step-1-diagnose.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">1. Audit</h3>
+            <p className="pkg-card__desc">
+              I test your site against WCAG 2.2 AA criteria using automated tools and manual testing with screen readers and keyboard-only navigation.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/step-2-build.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">2. Report</h3>
+            <p className="pkg-card__desc">
+              You receive a detailed report listing every issue, its severity, location, and recommended fix. You decide what to fix and when.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/step-3-launch.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">3. Remediate</h3>
+            <p className="pkg-card__desc">
+              I fix the issues you choose to address, re-test to verify compliance, and document the changes. 30-day warranty on all fixes.
+            </p>
+          </div>
+        </div>
       </div>
     </Section>
 
