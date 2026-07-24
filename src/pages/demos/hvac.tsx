@@ -8,6 +8,7 @@ import SocialLinks, { SocialLink } from "../../features/demos/SocialLinks";
 import ReviewBadges from "../../features/demos/ReviewBadges";
 import WeatherWidget from "../../features/demos/WeatherWidget";
 import IntegrationsSection, { Integration } from "../../features/demos/IntegrationsSection";
+import FAQSection, { FAQItem } from "../../features/demos/FAQSection";
 import { StarIcon, MapPinIcon, PhoneIcon, FlameIcon, SnowflakeIcon, WindIcon, AlertIcon, ShieldIcon, CheckIcon, XIcon, ClockIcon } from "../../site/icons";
 
 const pathname = "/demos/hvac/";
@@ -67,7 +68,7 @@ const coupons = [
   { label: "AC Season", offer: "FREE Diagnostic", desc: "We waive the $89 diagnostic fee if you approve the repair.", code: "FREEDIAG" },
 ];
 
-const faqs = [
+const faqs: FAQItem[] = [
   { q: "How much does a new furnace cost?", a: "A new high-efficiency furnace typically runs $3,500–$6,500 installed, depending on size and efficiency rating. We offer free in-home estimates and financing options with payments as low as $59/month." },
   { q: "Do you offer financing?", a: "Yes. We partner with Synchrony Financial to offer 0% APR for 12 months on qualified purchases, and longer terms with low monthly payments. Apply online or in person — most decisions are instant." },
   { q: "What does the maintenance plan include?", a: "Two annual tune-ups (heating and cooling), priority same-day service, 15% discount on all repairs, no overtime fees, and a written record of all service for warranty purposes." },
@@ -342,19 +343,7 @@ const HvacDemo: React.FC = () => (
     </section>
 
     {/* FAQ */}
-    <section className="demo-section demo-section--alt">
-      <div className="demo-section__inner">
-        <h2 className="demo-section__title">Frequently Asked Questions</h2>
-        <div className="demo-faq">
-          {faqs.map((f) => (
-            <div key={f.q} className="demo-faq__item">
-              <h3 className="demo-faq__question">{f.q}</h3>
-              <p className="demo-faq__answer">{f.a}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+    <FAQSection faqs={faqs} />
 
     {/* Google Maps */}
     <section className="demo-section">
@@ -398,5 +387,5 @@ export default HvacDemo;
 export const Head: HeadFC = () => {
   const site = useSiteMetadata();
   const pageUrl = `${site.siteUrl}${pathname}`;
-  return <Seo title={pageTitle} description={pageDescription} pathname={pathname} canonicalUrl={pageUrl} robots="index,follow" breadcrumbs={[{ name: "Demos", path: "/demos/" }, { name: "HVAC Demo", path: pathname }]} />;
+  return <Seo title={pageTitle} description={pageDescription} pathname={pathname} canonicalUrl={pageUrl} robots="index,follow" breadcrumbs={[{ name: "Demos", path: "/demos/" }, { name: "HVAC Demo", path: pathname }]} structuredData={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqs.map(f => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) }} />;
 };

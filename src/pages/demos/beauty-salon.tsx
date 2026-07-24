@@ -7,6 +7,7 @@ import GoogleMapsEmbed from "../../features/demos/GoogleMapsEmbed";
 import SocialLinks, { SocialLink } from "../../features/demos/SocialLinks";
 import ReviewBadges from "../../features/demos/ReviewBadges";
 import IntegrationsSection, { Integration } from "../../features/demos/IntegrationsSection";
+import FAQSection, { FAQItem } from "../../features/demos/FAQSection";
 import { StarIcon, MapPinIcon, PhoneIcon, ScissorsIcon, BrushIcon, SpaIcon, HandIcon, RingIcon, ClockIcon, InstagramIcon } from "../../site/icons";
 
 const pathname = "/demos/beauty-salon/";
@@ -80,6 +81,15 @@ const stylists = [
 ];
 
 const productBrands = ["Olaplex", "Redken", "OPI", "Dermalogica", "Gelish", "Wella", "Moroccanoil", "It's a 10", "Kevin Murphy"];
+
+const faqs: FAQItem[] = [
+  { q: "How much does a haircut cost?", a: "Adult haircuts at Bella Vista Salon start at $45 for a basic cut and style. Senior cuts (65+) are $35, and children's cuts (under 12) are $25. Prices vary by stylist level — master stylists charge $55 to $65. All haircuts include a consultation, wash, cut, and style." },
+  { q: "Do I need an appointment or can I walk in?", a: "We recommend booking an appointment to guarantee your preferred stylist and time. Walk-ins are accepted when stylists are available, but wait times can be 30 to 60 minutes during peak hours. Book online through our website or call (815) 555-0987." },
+  { q: "How long does hair color last?", a: "Permanent hair color typically lasts 4 to 6 weeks before noticeable fading. Semi-permanent color lasts 2 to 4 weeks. Balayage and highlights can last 3 to 4 months before needing a touch-up. Using color-safe shampoo and avoiding hot water extends color life." },
+  { q: "Do you do bridal and event styling?", a: "Yes. We offer bridal hair and makeup packages starting at $150 for the bride and $75 per bridesmaid. Trial runs are $75 and are credited toward your final booking. We also do prom, homecoming, and special event styling. Book bridal services at least 3 months in advance." },
+  { q: "What products do you use?", a: "We use professional-grade products from Olaplex, Redken, OPI, Dermalogica, and Moroccanoil. All products are available for purchase at the salon. Our stylists can recommend the best products for your hair type and styling routine." },
+  { q: "What is your cancellation policy?", a: "We require 24 hours notice for cancellations or rescheduling. Appointments cancelled with less than 24 hours notice are charged 50% of the service price. No-shows are charged the full service price. We send text and email reminders 48 hours before your appointment." },
+];
 
 const testimonials = [
   { text: "Angela is a color genius. She fixed a box-dye disaster and my hair has never looked better. I won't go anywhere else.", author: "Rachel B.", location: "Rockford, IL" },
@@ -306,6 +316,8 @@ const BeautySalonDemo: React.FC = () => (
       </div>
     </section>
 
+    <FAQSection faqs={faqs} />
+
     {/* Gift Cards */}
     <section className="demo-section">
       <div className="demo-section__inner">
@@ -417,5 +429,5 @@ export default BeautySalonDemo;
 export const Head: HeadFC = () => {
   const site = useSiteMetadata();
   const pageUrl = `${site.siteUrl}${pathname}`;
-  return <Seo title={pageTitle} description={pageDescription} pathname={pathname} canonicalUrl={pageUrl} robots="index,follow" breadcrumbs={[{ name: "Demos", path: "/demos/" }, { name: "Beauty Salon Demo", path: pathname }]} />;
+  return <Seo title={pageTitle} description={pageDescription} pathname={pathname} canonicalUrl={pageUrl} robots="index,follow" breadcrumbs={[{ name: "Demos", path: "/demos/" }, { name: "Beauty Salon Demo", path: pathname }]} structuredData={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqs.map(f => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) }} />;
 };

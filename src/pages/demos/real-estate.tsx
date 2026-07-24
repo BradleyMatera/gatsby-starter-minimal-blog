@@ -8,6 +8,7 @@ import SocialLinks, { SocialLink } from "../../features/demos/SocialLinks";
 import ReviewBadges from "../../features/demos/ReviewBadges";
 import MortgageCalculator from "../../features/demos/MortgageCalculator";
 import IntegrationsSection, { Integration } from "../../features/demos/IntegrationsSection";
+import FAQSection, { FAQItem } from "../../features/demos/FAQSection";
 import { StarIcon, MapPinIcon, PhoneIcon, HouseIcon, SearchIcon, ShieldIcon } from "../../site/icons";
 
 const pathname = "/demos/real-estate/";
@@ -55,6 +56,15 @@ const neighborhoods = [
   { name: "Byron", desc: "Small-town charm with a strong community and great value per square foot.", stat: "Median: $198K", img: "neighborhood-4" },
   { name: "Rockton", desc: "Historic village on the Rock River. Quaint downtown and excellent schools.", stat: "Median: $265K", img: "neighborhood-5" },
   { name: "Downtown Rockford", desc: "Lofts, condos, and walkable living near restaurants, bars, and the river.", stat: "Median: $155K", img: "neighborhood-6" },
+];
+
+const faqs: FAQItem[] = [
+  { q: "How much are closing costs when buying a home?", a: "Closing costs in Illinois typically range from 2% to 5% of the purchase price. For a $200,000 home, expect $4,000 to $10,000 in closing costs, which include lender fees, title insurance, appraisal, and prepaid property taxes. Your lender will provide a detailed estimate within 3 days of applying." },
+  { q: "How long does it take to buy a house?", a: "From offer acceptance to closing, the typical timeline is 30 to 45 days for a conventional loan and 45 to 60 days for FHA or VA loans. Cash purchases can close in as little as 7 to 14 days. The process includes inspection, appraisal, loan underwriting, and final walkthrough." },
+  { q: "What credit score do I need to buy a home?", a: "Most conventional loans require a minimum credit score of 620. FHA loans accept scores as low as 580 with a 3.5% down payment. VA and USDA loans have no minimum score requirement but most lenders look for 580 or higher. Higher scores qualify you for better interest rates." },
+  { q: "How do I get pre-approved for a mortgage?", a: "To get pre-approved, you need to provide your lender with W-2s, pay stubs from the last 30 days, two months of bank statements, and tax returns from the past two years. The lender pulls your credit and issues a pre-approval letter stating how much you can borrow. The process takes 1 to 3 business days." },
+  { q: "What is the difference between a buyer's agent and a listing agent?", a: "A buyer's agent represents you, the buyer, and negotiates the best price and terms on your behalf. A listing agent represents the seller and works to get the highest price. At Rockford Heritage Realty, our agents exclusively represent buyers or sellers on each transaction — never both sides." },
+  { q: "How much is the commission to sell my home?", a: "The standard real estate commission in the Rockford area is 5% to 6% of the sale price, typically split between the buyer's agent and listing agent. For a $250,000 home at 6%, the total commission is $15,000. We offer reduced commission rates for sellers who also buy through us." },
 ];
 
 const testimonials = [
@@ -269,6 +279,8 @@ const RealEstateDemo: React.FC = () => (
       </div>
     </section>
 
+    <FAQSection faqs={faqs} />
+
     <IntegrationsSection industry="real estate" integrations={integrations} />
 
     {/* Contact */}
@@ -302,5 +314,5 @@ export default RealEstateDemo;
 export const Head: HeadFC = () => {
   const site = useSiteMetadata();
   const pageUrl = `${site.siteUrl}${pathname}`;
-  return <Seo title={pageTitle} description={pageDescription} pathname={pathname} canonicalUrl={pageUrl} robots="index,follow" breadcrumbs={[{ name: "Demos", path: "/demos/" }, { name: "Real Estate Demo", path: pathname }]} />;
+  return <Seo title={pageTitle} description={pageDescription} pathname={pathname} canonicalUrl={pageUrl} robots="index,follow" breadcrumbs={[{ name: "Demos", path: "/demos/" }, { name: "Real Estate Demo", path: pathname }]} structuredData={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqs.map(f => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) }} />;
 };

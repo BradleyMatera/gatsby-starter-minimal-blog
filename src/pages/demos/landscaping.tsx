@@ -8,6 +8,7 @@ import SocialLinks, { SocialLink } from "../../features/demos/SocialLinks";
 import ReviewBadges from "../../features/demos/ReviewBadges";
 import WeatherWidget from "../../features/demos/WeatherWidget";
 import IntegrationsSection, { Integration } from "../../features/demos/IntegrationsSection";
+import FAQSection, { FAQItem } from "../../features/demos/FAQSection";
 import { StarIcon, MapPinIcon, PhoneIcon, LeafIcon, TreeIcon, SnowflakeIcon, FlameIcon, CheckIcon, InstagramIcon } from "../../site/icons";
 
 const pathname = "/demos/landscaping/";
@@ -63,6 +64,15 @@ const projects = [
   { title: "Koi Pond & Waterfall", desc: "Custom pond with waterfall, filtration, and landscaping.", img: "project-4" },
   { title: "Outdoor Living Room", desc: "Patio with fire pit, seating wall, and landscape lighting.", img: "project-5" },
   { title: "Garden Pergola", desc: "Cedar pergola with climbing vines and shade canopy.", img: "project-6" },
+];
+
+const faqs: FAQItem[] = [
+  { q: "What areas do you serve?", a: "GreenScape Pro serves Rockford, Loves Park, Roscoe, Byron, Rockton, Pecatonica, and surrounding communities in Northwest Illinois. If you are unsure whether we cover your area, call (815) 555-0456 for a free consultation." },
+  { q: "Do you offer free estimates?", a: "Yes. Every project starts with a free on-site consultation and written estimate. We measure your property, discuss your goals, and provide a detailed quote with no obligation. Most estimates are completed within 48 hours." },
+  { q: "How much does landscaping cost?", a: "Pricing depends on project scope. Weekly lawn care starts at $35 per visit. Full landscape design and installation typically ranges from $2,000 to $15,000 depending on property size and materials. We offer three service plans — Basic, Complete Care, and Full Service — to fit different budgets." },
+  { q: "Are you licensed and insured?", a: "Yes. GreenScape Pro is fully licensed in Illinois and carries $1 million in general liability insurance. Our team is trained in safe equipment operation and follows OSHA guidelines on every job site." },
+  { q: "Do you work year-round?", a: "Yes. We provide lawn mowing and maintenance from April through October, leaf removal in fall, snow removal in winter, and spring cleanup and planting in March and April. We also install hardscaping projects like patios and retaining walls year-round when weather permits." },
+  { q: "What is your guarantee?", a: "All plant installations come with a 1-year survival guarantee. If any plant we install dies within the first year, we replace it free of charge. Hardscaping work carries a 3-year warranty against structural defects." },
 ];
 
 const testimonials = [
@@ -366,6 +376,8 @@ const LandscapingDemo: React.FC = () => (
       </div>
     </section>
 
+    <FAQSection faqs={faqs} />
+
     {/* Service Area + Google Maps */}
     <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
@@ -411,5 +423,5 @@ export default LandscapingDemo;
 export const Head: HeadFC = () => {
   const site = useSiteMetadata();
   const pageUrl = `${site.siteUrl}${pathname}`;
-  return <Seo title={pageTitle} description={pageDescription} pathname={pathname} canonicalUrl={pageUrl} robots="index,follow" breadcrumbs={[{ name: "Demos", path: "/demos/" }, { name: "Landscaping Demo", path: pathname }]} />;
+  return <Seo title={pageTitle} description={pageDescription} pathname={pathname} canonicalUrl={pageUrl} robots="index,follow" breadcrumbs={[{ name: "Demos", path: "/demos/" }, { name: "Landscaping Demo", path: pathname }]} structuredData={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqs.map(f => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) }} />;
 };

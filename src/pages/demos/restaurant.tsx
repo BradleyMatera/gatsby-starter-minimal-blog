@@ -7,6 +7,7 @@ import GoogleMapsEmbed from "../../features/demos/GoogleMapsEmbed";
 import SocialLinks, { SocialLink } from "../../features/demos/SocialLinks";
 import ReviewBadges from "../../features/demos/ReviewBadges";
 import IntegrationsSection, { Integration } from "../../features/demos/IntegrationsSection";
+import FAQSection, { FAQItem } from "../../features/demos/FAQSection";
 import { StarIcon, MapPinIcon, PhoneIcon, UtensilsIcon, ClockIcon, RingIcon, ClipboardIcon, InstagramIcon } from "../../site/icons";
 
 const pathname = "/demos/restaurant/";
@@ -80,6 +81,15 @@ const team = [
   { name: "Rachel Chen", role: "General Manager", bio: "Wine specialist with sommelier certification. Oversees front-of-house and private events.", img: "manager" },
   { name: "Diego Ramirez", role: "Bar Manager", bio: "Craft cocktail expert. Curates our seasonal drink menu and local beer selection.", img: "bartender" },
   { name: "Aisha Williams", role: "Lead Server", bio: "10 years in fine dining. Known for remembering every regular's favorite order.", img: "server" },
+];
+
+const faqs: FAQItem[] = [
+  { q: "Do I need a reservation?", a: "Reservations are recommended for dinner, especially on weekends. You can book online through our reservation widget or call (815) 555-0123. Walk-ins are welcome at the bar and patio, subject to availability." },
+  { q: "What are your hours?", a: "Riverside Grill is open Tuesday through Thursday from 4:00 PM to 10:00 PM, Friday from 4:00 PM to 11:00 PM, Saturday from 12:00 PM to 11:00 PM, and Sunday from 12:00 PM to 9:00 PM. We are closed on Mondays." },
+  { q: "Do you offer vegetarian and vegan options?", a: "Yes. Our menu includes three vegetarian entrees and one vegan option — the roasted vegetable pasta with olive oil and herbs. Our chef can also modify most dishes to accommodate dietary restrictions. Just ask your server." },
+  { q: "Is parking available?", a: "Free parking is available in the lot behind the restaurant and along Main Street. Valet parking is offered on Friday and Saturday evenings starting at 5:00 PM for $5." },
+  { q: "Do you do private events or large parties?", a: "Yes. We host private events for groups of 8 to 50 in our private dining room. Custom menus are available. Contact us at (815) 555-0123 or email events@riversidegrill.example to book." },
+  { q: "Can I order takeout or delivery?", a: "Yes. Takeout is available by calling ahead. We also deliver through DoorDash, Grubhub, and Uber Eats. Links to all three are on our ordering page." },
 ];
 
 const testimonials = [
@@ -343,6 +353,8 @@ const RestaurantDemo: React.FC = () => (
       </div>
     </section>
 
+    <FAQSection faqs={faqs} />
+
     {/* OpenTable Reservation Widget Mock */}
     <section className="demo-section demo-section--alt" id="reserve">
       <div className="demo-section__inner">
@@ -422,5 +434,5 @@ export default RestaurantDemo;
 export const Head: HeadFC = () => {
   const site = useSiteMetadata();
   const pageUrl = `${site.siteUrl}${pathname}`;
-  return <Seo title={pageTitle} description={pageDescription} pathname={pathname} canonicalUrl={pageUrl} robots="index,follow" breadcrumbs={[{ name: "Demos", path: "/demos/" }, { name: "Restaurant Demo", path: pathname }]} />;
+  return <Seo title={pageTitle} description={pageDescription} pathname={pathname} canonicalUrl={pageUrl} robots="index,follow" breadcrumbs={[{ name: "Demos", path: "/demos/" }, { name: "Restaurant Demo", path: pathname }]} structuredData={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqs.map(f => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) }} />;
 };

@@ -7,6 +7,7 @@ import GoogleMapsEmbed from "../../features/demos/GoogleMapsEmbed";
 import SocialLinks, { SocialLink } from "../../features/demos/SocialLinks";
 import ReviewBadges from "../../features/demos/ReviewBadges";
 import IntegrationsSection, { Integration } from "../../features/demos/IntegrationsSection";
+import FAQSection, { FAQItem } from "../../features/demos/FAQSection";
 import { StarIcon, MapPinIcon, PhoneIcon, ShieldIcon, CheckIcon, ClockIcon, CarIcon } from "../../site/icons";
 
 const pathname = "/demos/auto-repair/";
@@ -64,6 +65,15 @@ const coupons = [
   { label: "Oil Change Special", offer: "$29.99", desc: "Conventional oil change with 21-point inspection. Most vehicles.", code: "OIL29" },
   { label: "Brake Special", offer: "$50 OFF", desc: "Front or rear brake pad replacement. Includes rotor resurfacing.", code: "BRAKES50" },
   { label: "AC Season", offer: "$25 OFF", desc: "AC recharge and performance check. Before the summer heat hits.", code: "AC25" },
+];
+
+const faqs: FAQItem[] = [
+  { q: "How much does an oil change cost?", a: "A conventional oil change at Northside Auto Repair costs $39.95, and a full synthetic oil change costs $59.95. Both include a 21-point inspection, fluid top-off, and tire pressure check. Most oil changes are completed in under 30 minutes." },
+  { q: "Do you work on all car makes and models?", a: "Yes. Our ASE-certified mechanics service all major domestic, Asian, and European brands including Toyota, Honda, Ford, Chevy, Subaru, BMW, Audi, and Mercedes. We have the diagnostic tools and parts supply to handle most vehicles on the road." },
+  { q: "Do you offer a warranty on repairs?", a: "Yes. All repairs come with a 12-month, 12,000-mile warranty on parts and labor. If a repaired component fails within that period, we fix it free of charge. Warranty work must be done at our shop." },
+  { q: "How long does a brake job take?", a: "A standard brake pad replacement takes 45 to 60 minutes per axle. If rotors need resurfacing or replacement, add 30 minutes per axle. We stock common brake parts for most vehicles, so same-day service is usually available." },
+  { q: "Can you diagnose a check engine light?", a: "Yes. Our OBD-II diagnostic scan costs $89.95 and includes a full computer diagnostic, printed report of all trouble codes, and a written estimate for any needed repairs. The diagnostic fee is waived if you proceed with the repair." },
+  { q: "Do you offer financing?", a: "Yes. We offer 0% APR financing for 12 months on repairs over $500 through Synchrony Financial, subject to credit approval. You can apply in person or online and get a decision in minutes." },
 ];
 
 const testimonials = [
@@ -329,6 +339,8 @@ const AutoRepairDemo: React.FC = () => (
       </div>
     </section>
 
+    <FAQSection faqs={faqs} />
+
     {/* Booking Form */}
     <section className="demo-section demo-section--alt" id="book">
       <div className="demo-section__inner">
@@ -396,5 +408,5 @@ export default AutoRepairDemo;
 export const Head: HeadFC = () => {
   const site = useSiteMetadata();
   const pageUrl = `${site.siteUrl}${pathname}`;
-  return <Seo title={pageTitle} description={pageDescription} pathname={pathname} canonicalUrl={pageUrl} robots="index,follow" breadcrumbs={[{ name: "Demos", path: "/demos/" }, { name: "Auto Repair Demo", path: pathname }]} />;
+  return <Seo title={pageTitle} description={pageDescription} pathname={pathname} canonicalUrl={pageUrl} robots="index,follow" breadcrumbs={[{ name: "Demos", path: "/demos/" }, { name: "Auto Repair Demo", path: pathname }]} structuredData={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqs.map(f => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) }} />;
 };
