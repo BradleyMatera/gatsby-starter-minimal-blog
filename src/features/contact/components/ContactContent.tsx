@@ -14,10 +14,10 @@ const ContactContent = () => {
       formData.forEach((value, key) => {
         data[key] = value.toString();
       });
-      const response = await fetch("/", {
+      const response = await fetch("/.netlify/functions/contact-submit", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(data).toString(),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
       });
       if (response.ok) {
         setStatus("success");
@@ -32,16 +32,6 @@ const ContactContent = () => {
 
   return (
   <>
-    <form name="website-plan" netlify-honeypot="bot-field" hidden>
-      <input type="hidden" name="form-name" value="website-plan" />
-      <input name="name" />
-      <input name="business" />
-      <input name="contact" />
-      <input name="website" />
-      <textarea name="goal" />
-      <input name="range" />
-      <input name="launch" />
-    </form>
     <Section
       eyebrow="What happens next"
       title="Your free consultation, step by step"
@@ -122,13 +112,10 @@ const ContactContent = () => {
           <form
             name="website-plan"
             method="POST"
-            data-netlify="true"
-            netlify-honeypot="bot-field"
             onSubmit={handleSubmit}
             style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
             data-analytics-form="website_plan"
           >
-            <input type="hidden" name="form-name" value="website-plan" />
             <p style={{ display: "none" }}>
               <label>Don't fill this out: <input name="bot-field" /></label>
             </p>

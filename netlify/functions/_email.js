@@ -364,7 +364,7 @@ Reply directly to this email or call them back.`;
         <h3 style="margin: 16px 0 6px;">Main goal</h3>
         <p style="margin: 0 0 16px;">${goal || "Not specified"}</p>
         <p style="margin: 16px 0 0; font-size: 12px; color: #666;">
-          Reply directly to this email or call them back. This submission is also stored in Netlify Forms under Forms → website-plan.
+          Reply directly to this email or call them back.
         </p>
       </div>
     </div>
