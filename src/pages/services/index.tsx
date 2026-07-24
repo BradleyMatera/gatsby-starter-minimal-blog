@@ -96,8 +96,9 @@ const ServicesPage = () => (
     >
       <div className="grid-three">
         {serviceCards.map((service) => (
-          <Link key={service.href} to={service.href} className="service-card" style={{ backgroundImage: `url(/service-images/${service.image})` }}>
-            <div className="service-card__overlay">
+          <Link key={service.href} to={service.href} className="service-card">
+            <img src={`/service-images/${service.image}`} alt={service.title} className="service-card__image" loading="lazy" />
+            <div className="service-card__body">
               <h2 className="service-card__title">{service.title}</h2>
               <p className="service-card__desc">{service.desc}</p>
               <span className="service-card__link">View details →</span>
