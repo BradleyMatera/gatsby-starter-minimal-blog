@@ -192,7 +192,6 @@ export const Head: HeadFC = () => {
         title={pageTitle}
         description={pageDescription}
         pathname={pathname}
-        siteMetadata={site}
       />
       {structuredData.map((sd) => (
         <script key={sd["@type"]} type="application/ld+json">
