@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300" fill="none">
+<rect width="400" height="300" fill="#0d1117"/>
+<circle cx="200" cy="160" r="60" fill="none" stroke="#a371f7" stroke-width="2.5"/>
+<circle cx="200" cy="160" r="60" fill="#a371f7" opacity="0.05"/>
+<text x="200" y="155" font-family="monospace" font-size="22" fill="#a371f7" text-anchor="middle" font-weight="bold">WCAG</text>
+<text x="200" y="180" font-family="monospace" font-size="16" fill="#a371f7" text-anchor="middle">2.2 AA</text>
+<rect x="170" y="245" width="60" height="3" rx="1.5" fill="#a371f7" opacity="0.4"/>
+</svg>

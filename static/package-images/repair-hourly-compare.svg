@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300" fill="none">
+<rect width="400" height="300" fill="#0d1117"/>
+<circle cx="200" cy="150" r="55" fill="none" stroke="#e5534b" stroke-width="2.5"/>
+<circle cx="200" cy="150" r="55" fill="#e5534b" opacity="0.05"/>
+<path d="M200 150 L200 110" stroke="#e5534b" stroke-width="3" stroke-linecap="round"/>
+<path d="M200 150 L225 160" stroke="#e5534b" stroke-width="3" stroke-linecap="round"/>
+<circle cx="200" cy="150" r="5" fill="#e5534b"/>
+<text x="200" y="230" font-family="monospace" font-size="14" fill="#e5534b" text-anchor="middle" font-weight="bold">$65/hr</text>
+<text x="200" y="250" font-family="monospace" font-size="10" fill="#e5534b" text-anchor="middle" opacity="0.5">HOURLY REPAIR</text>
+</svg>

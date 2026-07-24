@@ -95,24 +95,33 @@ const WebsiteSpeedPage = () => (
       }
     >
       <div className="grid-three">
-        <Card variant="outline">
-          <h2 className="feature-card__title">LCP under 2.5s</h2>
-          <p className="feature-card__body">
-            Largest Contentful Paint measures how fast your main content appears. I optimize images, fonts, and server response to hit the green range.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">INP under 200ms</h2>
-          <p className="feature-card__body">
-            Interaction to Next Paint measures how fast your page responds to clicks. I reduce JavaScript execution time and defer non-critical scripts.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">CLS under 0.1</h2>
-          <p className="feature-card__body">
-            Cumulative Layout Shift measures visual stability. I reserve space for images, ads, and embeds so content does not jump as the page loads.
-          </p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/speed-lcp.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">LCP under 2.5s</h2>
+            <p className="pkg-card__desc">
+              Largest Contentful Paint measures how fast your main content appears. I optimize images, fonts, and server response to hit the green range.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/speed-inp.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">INP under 200ms</h2>
+            <p className="pkg-card__desc">
+              Interaction to Next Paint measures how fast your page responds to clicks. I reduce JavaScript execution time and defer non-critical scripts.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/speed-cls.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">CLS under 0.1</h2>
+            <p className="pkg-card__desc">
+              Cumulative Layout Shift measures visual stability. I reserve space for images, ads, and embeds so content does not jump as the page loads.
+            </p>
+          </div>
+        </div>
       </div>
     </Section>
 

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300" fill="none">
+<rect width="400" height="300" fill="#0d1117"/>
+<rect x="130" y="110" width="140" height="90" rx="6" fill="none" stroke="#e5534b" stroke-width="2"/>
+<rect x="130" y="110" width="140" height="90" rx="6" fill="#e5534b" opacity="0.05"/>
+<text x="200" y="165" font-family="monospace" font-size="28" fill="#e5534b" text-anchor="middle" font-weight="bold">$597</text>
+<text x="200" y="185" font-family="monospace" font-size="10" fill="#e5534b" text-anchor="middle" opacity="0.5">full refresh</text>
+</svg>

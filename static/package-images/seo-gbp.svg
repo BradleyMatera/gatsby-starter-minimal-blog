@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300" fill="none">
+<rect width="400" height="300" fill="#0d1117"/>
+<rect x="140" y="100" width="120" height="120" rx="8" fill="none" stroke="#bc8cff" stroke-width="2"/>
+<rect x="140" y="100" width="120" height="120" rx="8" fill="#bc8cff" opacity="0.05"/>
+<circle cx="180" cy="135" r="12" fill="none" stroke="#bc8cff" stroke-width="2"/>
+<rect x="165" y="155" width="30" height="3" rx="1.5" fill="#bc8cff" opacity="0.4"/>
+<rect x="165" y="162" width="20" height="3" rx="1.5" fill="#bc8cff" opacity="0.3"/>
+<rect x="200" y="130" width="50" height="50" rx="4" fill="none" stroke="#bc8cff" stroke-width="1.5" opacity="0.4"/>
+<path d="M210 145 L240 145 M210 155 L235 155 M210 165 L240 165" stroke="#bc8cff" stroke-width="1.5" opacity="0.3"/>
+<text x="200" y="250" font-family="monospace" font-size="9" fill="#bc8cff" text-anchor="middle" opacity="0.5">GOOGLE BUSINESS PROFILE</text>
+</svg>

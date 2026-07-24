@@ -85,33 +85,42 @@ const WebsiteRepairPage = () => (
       }
     >
       <div className="grid-three">
-        <Card variant="outline">
-          <h2 className="feature-card__title">$65/hour</h2>
-          <p className="feature-card__body">
-            One-hour minimum for individual fixes. You approve the scope before work starts. No surprise invoices.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="ghost" to="/pricing/">See full pricing</Link>
+        <div className="pkg-card">
+          <img src="/package-images/repair-hourly.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">$65/hour</h2>
+            <p className="pkg-card__desc">
+              One-hour minimum for individual fixes. You approve the scope before work starts. No surprise invoices.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="ghost" to="/pricing/">See full pricing</Link>
+            </div>
           </div>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">$597 full refresh</h2>
-          <p className="feature-card__body">
-            For sites with multiple issues. A complete update with modern, fast, mobile-ready code. Keep your content and domain.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="ghost" to="/services/website-redesign/">See redesign services</Link>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/repair-refresh.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">$597 full refresh</h2>
+            <p className="pkg-card__desc">
+              For sites with multiple issues. A complete update with modern, fast, mobile-ready code. Keep your content and domain.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="ghost" to="/services/website-redesign/">See redesign services</Link>
+            </div>
           </div>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">24-48 hour turnaround</h2>
-          <p className="feature-card__body">
-            Most small fixes done within 24-48 hours. Emergency fixes for broken sites often done same-day.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="ghost" to="/contact/">Report your issue</Link>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/repair-turnaround.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">24-48 hour turnaround</h2>
+            <p className="pkg-card__desc">
+              Most small fixes done within 24-48 hours. Emergency fixes for broken sites often done same-day.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="ghost" to="/contact/">Report your issue</Link>
+            </div>
           </div>
-        </Card>
+        </div>
       </div>
     </Section>
 
@@ -169,30 +178,39 @@ const WebsiteRepairPage = () => (
       }
     >
       <div className="grid-three">
-        <Card variant="outline">
-          <h3 className="feature-card__title">Hourly repair — $65/hr</h3>
-          <p className="feature-card__body">
-            Best for one or two specific problems on a site that otherwise works. Broken form, broken page, slow load time.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Full refresh — $597</h3>
-          <p className="feature-card__body">
-            Best for sites with multiple issues that are also outdated. Complete update with modern code, keep your content.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="ghost" to="/services/website-redesign/">See redesign details</Link>
+        <div className="pkg-card">
+          <img src="/package-images/repair-hourly-compare.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Hourly repair — $65/hr</h3>
+            <p className="pkg-card__desc">
+              Best for one or two specific problems on a site that otherwise works. Broken form, broken page, slow load time.
+            </p>
           </div>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">New build — from $447</h3>
-          <p className="feature-card__body">
-            Best for sites beyond repair or when you want a fresh start. New custom site built from scratch.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="ghost" to="/services/small-business-web-design/">See web design</Link>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/repair-refresh-compare.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Full refresh — $597</h3>
+            <p className="pkg-card__desc">
+              Best for sites with multiple issues that are also outdated. Complete update with modern code, keep your content.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="ghost" to="/services/website-redesign/">See redesign details</Link>
+            </div>
           </div>
-        </Card>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/repair-newbuild-compare.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">New build — from $447</h3>
+            <p className="pkg-card__desc">
+              Best for sites beyond repair or when you want a fresh start. New custom site built from scratch.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="ghost" to="/services/small-business-web-design/">See web design</Link>
+            </div>
+          </div>
+        </div>
       </div>
     </Section>
 

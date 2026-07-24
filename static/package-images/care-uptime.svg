@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300" fill="none">
+<rect width="400" height="300" fill="#0d1117"/>
+<polyline points="130,200 160,180 190,190 220,150 250,165 280,120" fill="none" stroke="#39d353" stroke-width="2.5" stroke-linecap="round"/>
+<circle cx="280" cy="120" r="5" fill="#39d353"/>
+<text x="200" y="100" font-family="monospace" font-size="14" fill="#39d353" text-anchor="middle" font-weight="bold">99.9%</text>
+<text x="200" y="250" font-family="monospace" font-size="10" fill="#39d353" text-anchor="middle" opacity="0.5">UPTIME MONITORING</text>
+</svg>

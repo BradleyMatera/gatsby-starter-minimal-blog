@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300" fill="none">
+<rect width="400" height="300" fill="#0d1117"/>
+<rect x="140" y="100" width="120" height="120" rx="6" fill="none" stroke="#bc8cff" stroke-width="2"/>
+<rect x="140" y="100" width="120" height="120" rx="6" fill="#bc8cff" opacity="0.05"/>
+<rect x="155" y="120" width="90" height="3" rx="1.5" fill="#bc8cff" opacity="0.3"/>
+<rect x="155" y="130" width="70" height="3" rx="1.5" fill="#bc8cff" opacity="0.2"/>
+<rect x="155" y="145" width="90" height="50" rx="3" fill="none" stroke="#bc8cff" stroke-width="1.5" opacity="0.4"/>
+<polyline points="165,185 180,170 195,175 210,160 225,165 235,150" fill="none" stroke="#bc8cff" stroke-width="2" stroke-linecap="round"/>
+<circle cx="235" cy="150" r="3" fill="#bc8cff"/>
+<text x="200" y="250" font-family="monospace" font-size="9" fill="#bc8cff" text-anchor="middle" opacity="0.5">MONTHLY REPORTS</text>
+</svg>

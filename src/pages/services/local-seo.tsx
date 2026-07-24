@@ -92,33 +92,42 @@ const LocalSeoPage = () => (
       }
     >
       <div className="grid-three">
-        <Card variant="outline">
-          <h2 className="feature-card__title">Starting at $67/month</h2>
-          <p className="feature-card__body">
-            Month-to-month, written agreements included. Cancel anytime. Higher tiers include more keywords and competitor tracking.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="ghost" to="/pricing/">See full pricing</Link>
+        <div className="pkg-card">
+          <img src="/package-images/seo-price.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Starting at $67/month</h2>
+            <p className="pkg-card__desc">
+              Month-to-month, written agreements included. Cancel anytime. Higher tiers include more keywords and competitor tracking.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="ghost" to="/pricing/">See full pricing</Link>
+            </div>
           </div>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">Google Business Profile</h2>
-          <p className="feature-card__body">
-            Setup, optimization, and verification of your Google Business Profile — the most impactful local SEO action.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="ghost" to="/contact/">Get started</Link>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/seo-gbp.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Google Business Profile</h2>
+            <p className="pkg-card__desc">
+              Setup, optimization, and verification of your Google Business Profile — the most impactful local SEO action.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="ghost" to="/contact/">Get started</Link>
+            </div>
           </div>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">Monthly reports</h2>
-          <p className="feature-card__body">
-            You get ranking reports for your target keywords every month. No black-box reporting — you see the data.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="ghost" to="/contact/">Request a sample report</Link>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/seo-reports.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Monthly reports</h2>
+            <p className="pkg-card__desc">
+              You get ranking reports for your target keywords every month. No black-box reporting — you see the data.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="ghost" to="/contact/">Request a sample report</Link>
+            </div>
           </div>
-        </Card>
+        </div>
       </div>
     </Section>
 

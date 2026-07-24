@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300" fill="none">
+<rect width="400" height="300" fill="#0d1117"/>
+<rect x="120" y="110" width="160" height="90" rx="6" fill="none" stroke="#bc8cff" stroke-width="2"/>
+<rect x="120" y="110" width="160" height="90" rx="6" fill="#bc8cff" opacity="0.05"/>
+<text x="200" y="150" font-family="monospace" font-size="11" fill="#bc8cff" text-anchor="middle" opacity="0.6">STARTING AT</text>
+<text x="200" y="180" font-family="monospace" font-size="28" fill="#bc8cff" text-anchor="middle" font-weight="bold">$67/mo</text>
+</svg>

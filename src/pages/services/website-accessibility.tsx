@@ -95,33 +95,42 @@ const WebsiteAccessibilityPage = () => (
       }
     >
       <div className="grid-three">
-        <Card variant="outline">
-          <h2 className="feature-card__title">WCAG 2.2 AA</h2>
-          <p className="feature-card__body">
-            The standard referenced by the <a href="https://www.ada.gov/">ADA</a> and <a href="https://www.section508.gov/">Section 508</a>. Covers keyboard, screen reader, contrast, and form accessibility.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="ghost" to="/contact/">Request an audit</Link>
+        <div className="pkg-card">
+          <img src="/package-images/a11y-wcag.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">WCAG 2.2 AA</h2>
+            <p className="pkg-card__desc">
+              The standard referenced by the <a href="https://www.ada.gov/">ADA</a> and <a href="https://www.section508.gov/">Section 508</a>. Covers keyboard, screen reader, contrast, and form accessibility.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="ghost" to="/contact/">Request an audit</Link>
+            </div>
           </div>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">Audits from $197</h2>
-          <p className="feature-card__body">
-            Full report listing every issue with severity, location, and fix recommendation. No obligation to hire me for remediation.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="ghost" to="/pricing/">See full pricing</Link>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/a11y-audit.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Audits from $197</h2>
+            <p className="pkg-card__desc">
+              Full report listing every issue with severity, location, and fix recommendation. No obligation to hire me for remediation.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="ghost" to="/pricing/">See full pricing</Link>
+            </div>
           </div>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">Remediation at $65/hr</h2>
-          <p className="feature-card__body">
-            Fixing the issues found in the audit. Most small business sites need 4-8 hours. Fixed project quotes available.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="ghost" to="/contact/">Get a quote</Link>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/a11y-remediation.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Remediation at $65/hr</h2>
+            <p className="pkg-card__desc">
+              Fixing the issues found in the audit. Most small business sites need 4-8 hours. Fixed project quotes available.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="ghost" to="/contact/">Get a quote</Link>
+            </div>
           </div>
-        </Card>
+        </div>
       </div>
     </Section>
 

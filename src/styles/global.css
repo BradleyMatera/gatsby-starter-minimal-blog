@@ -5484,6 +5484,42 @@ body {
   margin-bottom: 1.5rem;
 }
 
+/* Package/feature cards with SVG backgrounds */
+.pkg-card {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--color-border, #e2e8f0);
+  background: var(--color-surface, #fff);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.pkg-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.pkg-card__bg {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  display: block;
+}
+.pkg-card__body {
+  padding: 1rem 1.25rem;
+  color: inherit;
+}
+.pkg-card__title {
+  margin: 0 0 0.35rem 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-heading, #1a202c);
+}
+.pkg-card__desc {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--color-text-secondary, #4a5568);
+}
+
 /* Service image cards */
 .service-card {
   display: flex;

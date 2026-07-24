@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300" fill="none">
+<rect width="400" height="300" fill="#0d1117"/>
+<circle cx="200" cy="160" r="50" fill="none" stroke="#58a6ff" stroke-width="2.5"/>
+<circle cx="200" cy="160" r="50" fill="#58a6ff" opacity="0.06"/>
+<path d="M175 160 L200 135 L225 160 L200 185 Z" fill="none" stroke="#58a6ff" stroke-width="2"/>
+<circle cx="200" cy="160" r="8" fill="#58a6ff"/>
+<path d="M200 110 L200 90 M200 230 L200 210 M150 160 L130 160 M270 160 L250 160 M165 125 L150 110 M235 195 L250 210 M235 125 L250 110 M165 195 L150 210" stroke="#58a6ff" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+<rect x="160" y="255" width="80" height="3" rx="1.5" fill="#58a6ff" opacity="0.4"/>
+<text x="200" y="275" font-family="monospace" font-size="11" fill="#58a6ff" text-anchor="middle" opacity="0.6">GROWTH</text>
+</svg>

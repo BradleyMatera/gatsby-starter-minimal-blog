@@ -87,33 +87,42 @@ const SmallBusinessWebDesignPage = () => (
       }
     >
       <div className="grid-three">
-        <Card variant="outline">
-          <h2 className="feature-card__title">Starting at $447</h2>
-          <p className="feature-card__body">
-            50% deposit to start, 50% on launch. No hidden fees. Optional support from $37/month.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="ghost" to="/pricing/">See full pricing</Link>
+        <div className="pkg-card">
+          <img src="/package-images/web-design-price.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Starting at $447</h2>
+            <p className="pkg-card__desc">
+              50% deposit to start, 50% on launch. No hidden fees. Optional support from $37/month.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="ghost" to="/pricing/">See full pricing</Link>
+            </div>
           </div>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">14-day builds</h2>
-          <p className="feature-card__body">
-            Starter sites delivered in 14 days. You see real progress, not radio silence.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="ghost" to="/contact/">Start your build</Link>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/web-design-14day.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">14-day builds</h2>
+            <p className="pkg-card__desc">
+              Starter sites delivered in 14 days. You see real progress, not radio silence.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="ghost" to="/contact/">Start your build</Link>
+            </div>
           </div>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">You own everything</h2>
-          <p className="feature-card__body">
-            Site, code, content, and domain are yours. Written agreements included. Cancel support anytime.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="ghost" to="/northwest-illinois-web-development-faq/">Read the FAQ</Link>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/web-design-own.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">You own everything</h2>
+            <p className="pkg-card__desc">
+              Site, code, content, and domain are yours. Written agreements included. Cancel support anytime.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="ghost" to="/northwest-illinois-web-development-faq/">Read the FAQ</Link>
+            </div>
           </div>
-        </Card>
+        </div>
       </div>
     </Section>
 

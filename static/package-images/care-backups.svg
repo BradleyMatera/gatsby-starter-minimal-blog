@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300" fill="none">
+<rect width="400" height="300" fill="#0d1117"/>
+<ellipse cx="200" cy="120" rx="40" ry="15" fill="none" stroke="#39d353" stroke-width="2"/>
+<ellipse cx="200" cy="120" rx="40" ry="15" fill="#39d353" opacity="0.05"/>
+<path d="M160 120 L160 200 Q160 215 200 215 Q240 215 240 200 L240 120" fill="none" stroke="#39d353" stroke-width="2"/>
+<path d="M160 160 Q160 175 200 175 Q240 175 240 160" fill="none" stroke="#39d353" stroke-width="1.5" opacity="0.4"/>
+<text x="200" y="250" font-family="monospace" font-size="10" fill="#39d353" text-anchor="middle" opacity="0.5">DAILY BACKUPS</text>
+</svg>

@@ -135,57 +135,52 @@ const PricingPage = () => (
       }
     >
       <div className="grid-three">
-        <Card variant="outline">
-          <h2 className="feature-card__title">{starterPkg.name} — ${starterPkg.buildPrice} build + ${starterPkg.monthlyPrice}/month</h2>
-          <p className="feature-card__body">
-            For: New businesses or solo operators who need a clean website
-          </p>
-          <ul className="feature-list">
-            {starterPkg.features.map((feature) => (
-              <li key={feature}>{feature}</li>
-            ))}
-          </ul>
-          <div className="card-actions">
-            <Link data-variant="primary" to="/contact/">
-              Get started
-            </Link>
+        <div className="pkg-card">
+          <img src="/package-images/starter-presence.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">{starterPkg.name} — ${starterPkg.buildPrice} build + ${starterPkg.monthlyPrice}/month</h2>
+            <p className="pkg-card__desc">For: New businesses or solo operators who need a clean website</p>
+            <ul className="feature-list">
+              {starterPkg.features.map((feature) => (
+                <li key={feature}>{feature}</li>
+              ))}
+            </ul>
+            <div className="card-actions">
+              <Link data-variant="primary" to="/contact/">Get started</Link>
+            </div>
           </div>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">{growthPkg.name} — ${growthPkg.buildPrice} build + ${growthPkg.monthlyPrice}/month</h2>
-          <p className="feature-card__body">
-            For: Established service businesses ready to compete online
-          </p>
-          <p className="feature-card__body">
-            <strong>Best value for established businesses</strong>
-          </p>
-          <ul className="feature-list">
-            {growthPkg.features.map((feature) => (
-              <li key={feature}>{feature}</li>
-            ))}
-          </ul>
-          <div className="card-actions">
-            <Link data-variant="primary" to="/contact/">
-              Choose Local Growth
-            </Link>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/local-growth.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">{growthPkg.name} — ${growthPkg.buildPrice} build + ${growthPkg.monthlyPrice}/month</h2>
+            <p className="pkg-card__desc">For: Established service businesses ready to compete online</p>
+            <p className="pkg-card__desc"><strong>Best value for established businesses</strong></p>
+            <ul className="feature-list">
+              {growthPkg.features.map((feature) => (
+                <li key={feature}>{feature}</li>
+              ))}
+            </ul>
+            <div className="card-actions">
+              <Link data-variant="primary" to="/contact/">Choose Local Growth</Link>
+            </div>
           </div>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">{leadEnginePkg.name} — from ${leadEnginePkg.buildPrice.toLocaleString()} build + ${leadEnginePkg.monthlyPrice}/month</h2>
-          <p className="feature-card__body">
-            For: Businesses ready to dominate their local market
-          </p>
-          <ul className="feature-list">
-            {leadEnginePkg.features.map((feature) => (
-              <li key={feature}>{feature}</li>
-            ))}
-          </ul>
-          <div className="card-actions">
-            <Link data-variant="primary" to="/contact/">
-              Choose Lead Engine
-            </Link>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/lead-engine.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">{leadEnginePkg.name} — from ${leadEnginePkg.buildPrice.toLocaleString()} build + ${leadEnginePkg.monthlyPrice}/month</h2>
+            <p className="pkg-card__desc">For: Businesses ready to dominate their local market</p>
+            <ul className="feature-list">
+              {leadEnginePkg.features.map((feature) => (
+                <li key={feature}>{feature}</li>
+              ))}
+            </ul>
+            <div className="card-actions">
+              <Link data-variant="primary" to="/contact/">Choose Lead Engine</Link>
+            </div>
           </div>
-        </Card>
+        </div>
       </div>
 
       <h2 className="section-title" style={{ marginTop: "2rem" }}>Pricing comparison at a glance</h2>

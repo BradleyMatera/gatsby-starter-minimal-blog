@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300" fill="none">
+<rect width="400" height="300" fill="#0d1117"/>
+<circle cx="200" cy="150" r="50" fill="none" stroke="#39d353" stroke-width="2.5"/>
+<circle cx="200" cy="150" r="50" fill="#39d353" opacity="0.05"/>
+<path d="M175 145 Q200 125 225 145" fill="none" stroke="#39d353" stroke-width="2.5" stroke-linecap="round"/>
+<circle cx="180" cy="155" r="4" fill="#39d353"/>
+<circle cx="220" cy="155" r="4" fill="#39d353"/>
+<path d="M185 175 Q200 185 215 175" fill="none" stroke="#39d353" stroke-width="2.5" stroke-linecap="round"/>
+<text x="200" y="250" font-family="monospace" font-size="10" fill="#39d353" text-anchor="middle" opacity="0.5">PRIORITY SUPPORT</text>
+</svg>

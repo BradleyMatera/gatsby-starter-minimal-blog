@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300" fill="none">
+<rect width="400" height="300" fill="#0d1117"/>
+<polyline points="80,220 140,190 200,150 260,100 320,60" fill="none" stroke="#f0883e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="80,220 140,190 200,150 260,100 320,60 320,220 80,220" fill="#f0883e" opacity="0.08"/>
+<circle cx="80" cy="220" r="5" fill="#f0883e"/>
+<circle cx="140" cy="190" r="5" fill="#f0883e"/>
+<circle cx="200" cy="150" r="5" fill="#f0883e"/>
+<circle cx="260" cy="100" r="5" fill="#f0883e"/>
+<circle cx="320" cy="60" r="7" fill="#f0883e"/>
+<path d="M310 70 L330 50 M330 50 L325 52 M330 50 L328 55" stroke="#f0883e" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+<rect x="60" y="240" width="80" height="3" rx="1.5" fill="#f0883e" opacity="0.4"/>
+<text x="200" y="270" font-family="monospace" font-size="11" fill="#f0883e" text-anchor="middle" opacity="0.6">GROWTH</text>
+</svg>

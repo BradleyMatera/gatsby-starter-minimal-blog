@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300" fill="none">
+<rect width="400" height="300" fill="#0d1117"/>
+<path d="M200 80 L260 105 L260 165 Q260 210 200 235 Q140 210 140 165 L140 105 Z" fill="none" stroke="#39d353" stroke-width="2.5"/>
+<path d="M200 95 L245 115 L245 162 Q245 198 200 218 Q155 198 155 162 L155 115 Z" fill="#39d353" opacity="0.06"/>
+<path d="M175 160 L195 180 L230 140" stroke="#39d353" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<rect x="160" y="255" width="80" height="3" rx="1.5" fill="#39d353" opacity="0.4"/>
+<text x="200" y="275" font-family="monospace" font-size="11" fill="#39d353" text-anchor="middle" opacity="0.6">ESSENTIAL</text>
+</svg>

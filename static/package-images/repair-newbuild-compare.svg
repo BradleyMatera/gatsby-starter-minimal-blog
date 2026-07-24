@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300" fill="none">
+<rect width="400" height="300" fill="#0d1117"/>
+<rect x="140" y="100" width="120" height="100" rx="6" fill="none" stroke="#e5534b" stroke-width="2"/>
+<rect x="140" y="100" width="120" height="24" rx="6" fill="#e5534b" opacity="0.15"/>
+<circle cx="152" cy="112" r="3" fill="#e5534b"/>
+<circle cx="162" cy="112" r="3" fill="#e5534b" opacity="0.6"/>
+<circle cx="172" cy="112" r="3" fill="#e5534b" opacity="0.3"/>
+<rect x="155" y="140" width="90" height="6" rx="2" fill="#e5534b" opacity="0.3"/>
+<rect x="155" y="155" width="70" height="6" rx="2" fill="#e5534b" opacity="0.2"/>
+<rect x="155" y="170" width="80" height="6" rx="2" fill="#e5534b" opacity="0.2"/>
+<text x="200" y="230" font-family="monospace" font-size="14" fill="#e5534b" text-anchor="middle" font-weight="bold">from $447</text>
+<text x="200" y="250" font-family="monospace" font-size="10" fill="#e5534b" text-anchor="middle" opacity="0.5">NEW BUILD</text>
+</svg>

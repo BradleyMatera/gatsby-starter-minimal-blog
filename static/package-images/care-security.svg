@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300" fill="none">
+<rect width="400" height="300" fill="#0d1117"/>
+<path d="M200 90 L250 110 L250 160 Q250 200 200 225 Q150 200 150 160 L150 110 Z" fill="none" stroke="#39d353" stroke-width="2"/>
+<path d="M200 90 L250 110 L250 160 Q250 200 200 225 Q150 200 150 160 L150 110 Z" fill="#39d353" opacity="0.05"/>
+<path d="M180 155 L195 170 L220 140" stroke="#39d353" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<text x="200" y="250" font-family="monospace" font-size="10" fill="#39d353" text-anchor="middle" opacity="0.5">SECURITY UPDATES</text>
+</svg>

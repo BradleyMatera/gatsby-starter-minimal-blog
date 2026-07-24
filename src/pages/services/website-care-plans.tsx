@@ -16,6 +16,7 @@ const careTiers = [
     price: "$37",
     period: "/month",
     desc: "Keep your site secure, backed up, and online.",
+    image: "/package-images/essential-care.svg",
     features: [
       "Monthly security updates",
       "Weekly off-site backups",
@@ -29,6 +30,7 @@ const careTiers = [
     price: "$67",
     period: "/month",
     desc: "Updates, content changes, and faster support.",
+    image: "/package-images/growth-care.svg",
     features: [
       "Everything in Essential",
       "Bi-weekly security and plugin updates",
@@ -43,6 +45,7 @@ const careTiers = [
     price: "$97",
     period: "/month",
     desc: "Maintenance plus local SEO and strategy.",
+    image: "/package-images/search-care.svg",
     features: [
       "Everything in Growth",
       "Weekly security updates",
@@ -129,20 +132,23 @@ const WebsiteCarePlansPage = () => (
     >
       <div className="grid-three">
         {careTiers.map((tier) => (
-          <Card key={tier.name} variant="outline">
-            <h2 className="feature-card__title">{tier.name}</h2>
-            <p className="feature-card__body">
-              <strong>{tier.price}{tier.period}</strong> — {tier.desc}
-            </p>
-            <ul className="feature-list">
-              {tier.features.map((feature) => (
-                <li key={feature}>{feature}</li>
-              ))}
-            </ul>
-            <div className="card-actions">
-              <Link data-variant="primary" to="/contact/">Choose {tier.name}</Link>
+          <div key={tier.name} className="pkg-card">
+            <img src={tier.image} alt="" className="pkg-card__bg" loading="lazy" />
+            <div className="pkg-card__body">
+              <h2 className="pkg-card__title">{tier.name}</h2>
+              <p className="pkg-card__desc">
+                <strong>{tier.price}{tier.period}</strong> — {tier.desc}
+              </p>
+              <ul className="feature-list">
+                {tier.features.map((feature) => (
+                  <li key={feature}>{feature}</li>
+                ))}
+              </ul>
+              <div className="card-actions">
+                <Link data-variant="primary" to="/contact/">Choose {tier.name}</Link>
+              </div>
             </div>
-          </Card>
+          </div>
         ))}
       </div>
     </Section>
@@ -185,42 +191,60 @@ const WebsiteCarePlansPage = () => (
       title="What care plans include"
     >
       <div className="grid-three">
-        <Card variant="outline">
-          <h3 className="feature-card__title">Security updates</h3>
-          <p className="feature-card__body">
-            Regular updates to your CMS, plugins, and themes to patch security vulnerabilities before they're exploited.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Backups</h3>
-          <p className="feature-card__body">
-            Off-site backups stored separately from your hosting. If your site breaks or gets hacked, I restore from backup.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Uptime monitoring</h3>
-          <p className="feature-card__body">
-            Your site is checked every 5 minutes. If it goes down, I'm alerted and investigate immediately.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Content updates</h3>
-          <p className="feature-card__body">
-            Growth and Search plans include content changes — text edits, image swaps, new pages, blog posts.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Local SEO</h3>
-          <p className="feature-card__body">
-            Search plan includes Google Business Profile management and monthly local ranking reports.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Support</h3>
-          <p className="feature-card__body">
-            Email support with target response times. Search plan includes a monthly strategy call.
-          </p>
-        </Card>
+        <div className="pkg-card">
+          <img src="/package-images/care-security.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Security updates</h3>
+            <p className="pkg-card__desc">
+              Regular updates to your CMS, plugins, and themes to patch security vulnerabilities before they're exploited.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/care-backups.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Backups</h3>
+            <p className="pkg-card__desc">
+              Off-site backups stored separately from your hosting. If your site breaks or gets hacked, I restore from backup.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/care-uptime.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Uptime monitoring</h3>
+            <p className="pkg-card__desc">
+              Your site is checked every 5 minutes. If it goes down, I'm alerted and investigate immediately.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/care-content.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Content updates</h3>
+            <p className="pkg-card__desc">
+              Growth and Search plans include content changes — text edits, image swaps, new pages, blog posts.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/care-localseo.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Local SEO</h3>
+            <p className="pkg-card__desc">
+              Search plan includes Google Business Profile management and monthly local ranking reports.
+            </p>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/care-support.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Support</h3>
+            <p className="pkg-card__desc">
+              Email support with target response times. Search plan includes a monthly strategy call.
+            </p>
+          </div>
+        </div>
       </div>
     </Section>
 

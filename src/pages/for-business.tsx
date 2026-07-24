@@ -62,33 +62,36 @@ const ForBusinessPage = () => (
       }
     >
       <div className="grid-three">
-        <Card variant="outline">
-          <h2 className="feature-card__title">$447 starting price</h2>
-          <p className="feature-card__body">
-            No hidden fees. 50% deposit to start, 50% on launch. Month-to-month support starting at $37/month.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="ghost" to="/pricing/">See full pricing</Link>
+        <div className="pkg-card">
+          <img src="/package-images/starting-price.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">$447 starting price</h2>
+            <p className="pkg-card__desc">No hidden fees. 50% deposit to start, 50% on launch. Month-to-month support starting at $37/month.</p>
+            <div className="card-actions">
+              <Link data-variant="ghost" to="/pricing/">See full pricing</Link>
+            </div>
           </div>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">14-day builds</h2>
-          <p className="feature-card__body">
-            Starter sites in 14 days. Growth sites in 3-4 weeks. You see real progress, not radio silence.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="ghost" to="/northwest-illinois-web-development-faq/">Read the FAQ</Link>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/fast-builds.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">14-day builds</h2>
+            <p className="pkg-card__desc">Starter sites in 14 days. Growth sites in 3-4 weeks. You see real progress, not radio silence.</p>
+            <div className="card-actions">
+              <Link data-variant="ghost" to="/northwest-illinois-web-development-faq/">Read the FAQ</Link>
+            </div>
           </div>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">Written agreements</h2>
-          <p className="feature-card__body">
-            You own your site, code, content, and domain. Cancel support anytime. I help you migrate if you leave.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="ghost" to="/contact/">Get started</Link>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/written-agreements.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Written agreements</h2>
+            <p className="pkg-card__desc">You own your site, code, content, and domain. Cancel support anytime. I help you migrate if you leave.</p>
+            <div className="card-actions">
+              <Link data-variant="ghost" to="/contact/">Get started</Link>
+            </div>
           </div>
-        </Card>
+        </div>
       </div>
     </Section>
 

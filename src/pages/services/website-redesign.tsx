@@ -87,33 +87,42 @@ const WebsiteRedesignPage = () => (
       }
     >
       <div className="grid-three">
-        <Card variant="outline">
-          <h2 className="feature-card__title">Starting at $597</h2>
-          <p className="feature-card__body">
-            50% deposit to start, 50% on launch. Price depends on page count and site complexity.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="ghost" to="/pricing/">See full pricing</Link>
+        <div className="pkg-card">
+          <img src="/package-images/redesign-price.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Starting at $597</h2>
+            <p className="pkg-card__desc">
+              50% deposit to start, 50% on launch. Price depends on page count and site complexity.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="ghost" to="/pricing/">See full pricing</Link>
+            </div>
           </div>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">3-4 week builds</h2>
-          <p className="feature-card__body">
-            Full redesigns completed in 3-4 weeks. You see real progress, not radio silence.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="ghost" to="/contact/">Start your redesign</Link>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/redesign-timeline.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">3-4 week builds</h2>
+            <p className="pkg-card__desc">
+              Full redesigns completed in 3-4 weeks. You see real progress, not radio silence.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="ghost" to="/contact/">Start your redesign</Link>
+            </div>
           </div>
-        </Card>
-        <Card variant="outline">
-          <h2 className="feature-card__title">Keep your rankings</h2>
-          <p className="feature-card__body">
-            301 redirects, preserved content, and improved SEO structure protect your search rankings.
-          </p>
-          <div className="card-actions">
-            <Link data-variant="ghost" to="/services/local-seo/">See local SEO services</Link>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/redesign-rankings.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h2 className="pkg-card__title">Keep your rankings</h2>
+            <p className="pkg-card__desc">
+              301 redirects, preserved content, and improved SEO structure protect your search rankings.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="ghost" to="/services/local-seo/">See local SEO services</Link>
+            </div>
           </div>
-        </Card>
+        </div>
       </div>
     </Section>
 
