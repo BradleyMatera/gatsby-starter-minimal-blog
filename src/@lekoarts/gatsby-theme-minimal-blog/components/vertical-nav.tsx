@@ -10,6 +10,7 @@ import {
   MenuIcon,
   CloseIcon,
   PhoneIcon,
+  BoltIcon,
 } from "../../../site/icons";
 
 type NavItem = {
@@ -164,6 +165,12 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
               </li>
             </ul>
             <div className="vertical-nav__actions cyber-nav__actions">
+              <Link to="/for-business/" className="vertical-nav__cta vertical-nav__cta--inline cyber-cta vertical-nav__cta--business">
+                <span className="vertical-nav__cta-icon" aria-hidden="true">
+                  <BoltIcon size={18} />
+                </span>
+                <span>For Business</span>
+              </Link>
               <a href="tel:+16083135373" className="vertical-nav__cta vertical-nav__cta--inline cyber-cta vertical-nav__phone">
                 <span className="vertical-nav__cta-icon" aria-hidden="true">
                   <PhoneIcon size={18} />
@@ -228,6 +235,12 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
               })}
             </ul>
             <div className="vertical-nav__actions vertical-nav__actions--stacked cyber-drawer__actions">
+              <Link to="/for-business/" className="vertical-nav__cta cyber-cta cyber-cta--drawer cyber-cta--business" onClick={() => closeDrawer()}>
+                <span className="vertical-nav__cta-icon" aria-hidden="true">
+                  <BoltIcon size={18} />
+                </span>
+                <span>For Business</span>
+              </Link>
               <a href="tel:+16083135373" className="vertical-nav__cta cyber-cta cyber-cta--drawer">
                 <span className="vertical-nav__cta-icon" aria-hidden="true">
                   <PhoneIcon size={18} />
@@ -257,6 +270,8 @@ function getNavIcon(slug: string): React.ReactNode {
       return <EmailIcon size={18} />;
     case "/recruiter":
       return <UserIcon size={18} />;
+    case "/for-business":
+      return <BoltIcon size={18} />;
     case "/posts":
       return <BlogIcon size={18} />;
     default:

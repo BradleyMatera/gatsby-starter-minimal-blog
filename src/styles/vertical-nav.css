@@ -296,6 +296,29 @@
   font-size: 1rem;
   color: currentColor;
 }
+.vertical-nav__cta--business {
+  background: var(--color-accent, #6f6052);
+  color: var(--color-text-inverse, #fff) !important;
+  border-radius: 999px;
+  padding: 0.6rem 1.1rem;
+  box-shadow: 0 4px 14px var(--color-shadow, rgba(0,0,0,0.12));
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+.vertical-nav__cta--business:hover,
+.vertical-nav__cta--business:focus-visible {
+  background: var(--color-accent-hover, #5a4d42);
+  color: var(--color-text-inverse, #fff) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px var(--color-glow, rgba(0,0,0,0.2));
+}
+.vertical-nav__cta--business .vertical-nav__cta-icon {
+  color: currentColor;
+}
+.cyber-cta--business {
+  background: var(--color-accent, #6f6052);
+  color: var(--color-text-inverse, #fff) !important;
+  border-radius: 999px;
+}
 .vertical-nav__toggle {
   width: 100%;
   background: none;
