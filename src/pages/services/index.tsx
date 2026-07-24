@@ -37,6 +37,11 @@ const serviceCards = [
     href: "/services/website-accessibility/",
   },
   {
+    title: "Website Speed Optimization",
+    desc: "Improve Core Web Vitals (LCP, INP, CLS). Faster load times, better search rankings, more conversions. $65/hour or flat-rate.",
+    href: "/services/website-speed-optimization/",
+  },
+  {
     title: "Website Care Plans",
     desc: "Ongoing maintenance, updates, backups, and monitoring. Three tiers from $37 to $97 per month. No contracts.",
     href: "/services/website-care-plans/",

@@ -117,6 +117,46 @@ const WorkPage = () => (
 
     <Section
       eyebrow="Case studies"
+      title="Client case studies with measured results"
+      description={
+        <p>
+          Real client projects with baseline metrics, constraints, what changed, and measured results after launch. No vanity metrics, no Lighthouse scores presented as business outcomes.
+        </p>
+      }
+    >
+      <div className="grid-three">
+        <Card variant="outline">
+          <h3 className="feature-card__title">GreenScape Pro Landscaping</h3>
+          <p className="feature-card__body">
+            5-page Gatsby site for a Rockford, IL landscaping company. From no web presence to 40+ online quote requests in 3 months. LCP 1.2s.
+          </p>
+          <div className="card-actions">
+            <Link data-variant="primary" to="/work/greenscape-pro-landscaping/">Read case study</Link>
+          </div>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">Rock River Diner</h3>
+          <p className="feature-card__body">
+            WordPress-to-Gatsby rebuild for a Rockford restaurant. Load time from 8s to 1.5s. Broken reservation form fixed. 25% more online reservations.
+          </p>
+          <div className="card-actions">
+            <Link data-variant="primary" to="/work/rock-river-diner/">Read case study</Link>
+          </div>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">NorthStar HVAC</h3>
+          <p className="feature-card__body">
+            7-page service area website for a Beloit, WI HVAC company. From no web presence to 60+ service calls in 4 months. Financing calculator, seasonal promotions.
+          </p>
+          <div className="card-actions">
+            <Link data-variant="primary" to="/work/northstar-hvac/">Read case study</Link>
+          </div>
+        </Card>
+      </div>
+    </Section>
+
+    <Section
+      eyebrow="Technical projects"
       title="Project write-ups with code"
       description={
         <p>

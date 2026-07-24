@@ -69,4 +69,69 @@ export const onRouteUpdate = ({ location }) => {
       }
     }, 100);
   }
+
+  // Analytics: track pricing page views
+  if (location.pathname === "/pricing/" && typeof window !== "undefined" && typeof window.gtag === "function") {
+    window.gtag("event", "pricing_view", { source: document.referrer || "direct" });
+  }
+
+  // Analytics: track case study views
+  if (location.pathname.startsWith("/work/") && location.pathname !== "/work/" && typeof window !== "undefined" && typeof window.gtag === "function") {
+    window.gtag("event", "case_study_view", { slug: location.pathname });
+  }
+
+  // Analytics: attach listeners to data-analytics-* elements
+  if (typeof document !== "undefined") {
+    // Phone click tracking
+    document.querySelectorAll('a[href^="tel:"]').forEach((el) => {
+      if (el.dataset.analyticsBound) return;
+      el.dataset.analyticsBound = "true";
+      el.addEventListener("click", () => {
+        if (typeof window !== "undefined" && typeof window.gtag === "function") {
+          window.gtag("event", "phone_click", { source: location.pathname });
+        }
+      });
+    });
+
+    // Email click tracking
+    document.querySelectorAll('a[href^="mailto:"]').forEach((el) => {
+      if (el.dataset.analyticsBound) return;
+      el.dataset.analyticsBound = "true";
+      el.addEventListener("click", () => {
+        if (typeof window !== "undefined" && typeof window.gtag === "function") {
+          window.gtag("event", "email_click", { source: location.pathname });
+        }
+      });
+    });
+
+    // CTA click tracking
+    document.querySelectorAll("[data-analytics-click]").forEach((el) => {
+      if (el.dataset.analyticsBound) return;
+      el.dataset.analyticsBound = "true";
+      el.addEventListener("click", () => {
+        const eventName = el.getAttribute("data-analytics-click");
+        if (typeof window !== "undefined" && typeof window.gtag === "function" && eventName) {
+          window.gtag("event", eventName, {
+            label: el.textContent?.trim().substring(0, 50) || "",
+            location: location.pathname,
+          });
+        }
+      });
+    });
+
+    // Form start tracking
+    document.querySelectorAll("[data-analytics-form]").forEach((el) => {
+      if (el.dataset.analyticsBound) return;
+      el.dataset.analyticsBound = "true";
+      const formName = el.getAttribute("data-analytics-form");
+      const fired = el.dataset.formStartFired === "true";
+      el.addEventListener("focusin", () => {
+        if (el.dataset.formStartFired === "true") return;
+        el.dataset.formStartFired = "true";
+        if (typeof window !== "undefined" && typeof window.gtag === "function" && formName) {
+          window.gtag("event", "form_start", { form_name: formName });
+        }
+      }, { once: true });
+    });
+  }
 };

@@ -54,17 +54,82 @@ const ContactContent = () => (
           </p>
         </div>
         <div className="contact-form">
-          <h2 className="contact-info__headline">What to include in your message</h2>
-          <ul className="contact-info__list">
-            <li><strong>Your name</strong> and business name</li>
-            <li><strong>Email or phone</strong> for follow-up</li>
-            <li><strong>Existing website</strong> if you have one (optional)</li>
-            <li><strong>Main goal</strong> — what should the website do for you?</li>
-            <li><strong>Approximate budget range</strong> — packages start at $447</li>
-            <li><strong>Desired launch window</strong> — when do you need this live?</li>
-          </ul>
-          <p className="contact-info__note">
-            Keep it short. I will ask follow-up questions if needed. Do not send a 20-question discovery document — a few sentences is enough to start.
+          <h2 className="contact-info__headline">Send a message</h2>
+          <form
+            name="website-plan"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            action="/contact/?submitted=true"
+            style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
+            data-analytics-form="website_plan"
+          >
+            <input type="hidden" name="form-name" value="website-plan" />
+            <p style={{ display: "none" }}>
+              <label>Don't fill this out: <input name="bot-field" /></label>
+            </p>
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+              <label htmlFor="name" style={{ fontWeight: 600, fontSize: "0.9rem" }}>Name *</label>
+              <input type="text" id="name" name="name" required style={{ padding: "0.75rem", borderRadius: "8px", border: "1px solid var(--color-border)", fontSize: "1rem" }} />
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+              <label htmlFor="business" style={{ fontWeight: 600, fontSize: "0.9rem" }}>Business name *</label>
+              <input type="text" id="business" name="business" required style={{ padding: "0.75rem", borderRadius: "8px", border: "1px solid var(--color-border)", fontSize: "1rem" }} />
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+              <label htmlFor="contact" style={{ fontWeight: 600, fontSize: "0.9rem" }}>Email or phone *</label>
+              <input type="text" id="contact" name="contact" required style={{ padding: "0.75rem", borderRadius: "8px", border: "1px solid var(--color-border)", fontSize: "1rem" }} />
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+              <label htmlFor="website" style={{ fontWeight: 600, fontSize: "0.9rem" }}>Existing website (optional)</label>
+              <input type="url" id="website" name="website" placeholder="https://" style={{ padding: "0.75rem", borderRadius: "8px", border: "1px solid var(--color-border)", fontSize: "1rem" }} />
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+              <label htmlFor="goal" style={{ fontWeight: 600, fontSize: "0.9rem" }}>Main goal — what should the website do for you?</label>
+              <textarea id="goal" name="goal" rows={3} style={{ padding: "0.75rem", borderRadius: "8px", border: "1px solid var(--color-border)", fontSize: "1rem", resize: "vertical" }} />
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+              <label htmlFor="range" style={{ fontWeight: 600, fontSize: "0.9rem" }}>Approximate project range</label>
+              <select id="range" name="range" style={{ padding: "0.75rem", borderRadius: "8px", border: "1px solid var(--color-border)", fontSize: "1rem" }}>
+                <option value="">Select a range</option>
+                <option value="under-500">Under $500</option>
+                <option value="500-1000">$500 - $1,000</option>
+                <option value="1000-1500">$1,000 - $1,500</option>
+                <option value="1500-plus">$1,500+</option>
+                <option value="not-sure">Not sure yet</option>
+              </select>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+              <label htmlFor="launch" style={{ fontWeight: 600, fontSize: "0.9rem" }}>Desired launch window</label>
+              <select id="launch" name="launch" style={{ padding: "0.75rem", borderRadius: "8px", border: "1px solid var(--color-border)", fontSize: "1rem" }}>
+                <option value="">Select a timeframe</option>
+                <option value="asap">As soon as possible</option>
+                <option value="1-month">Within 1 month</option>
+                <option value="1-3-months">1-3 months</option>
+                <option value="3-6-months">3-6 months</option>
+                <option value="no-rush">No rush, just exploring</option>
+              </select>
+            </div>
+            <button
+              type="submit"
+              style={{
+                background: "var(--color-accent)",
+                color: "var(--color-text-inverse)",
+                border: "none",
+                borderRadius: "999px",
+                padding: "0.875rem 2rem",
+                fontSize: "1rem",
+                fontWeight: 600,
+                cursor: "pointer",
+                marginTop: "0.5rem",
+              }}
+              data-analytics-click="form_submit"
+            >
+              Get my free website plan
+            </button>
+          </form>
+          <p className="contact-info__note" style={{ marginTop: "0.75rem" }}>
+            Typical response time: within 24 hours. No obligation, no long-term contract.
           </p>
         </div>
       </Card>

@@ -26,12 +26,29 @@
   for = "/*"
   [headers.values]
     X-Robots-Tag = "index, follow"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.openweathermap.org; media-src 'self'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io; frame-ancestors 'none';"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
 
 # Serve the sitemap index at /sitemap.xml for crawlers that expect it there
 [[redirects]]
   from = "/sitemap.xml"
   to = "/sitemap.xml/sitemap-index.xml"
   status = 200
+  force = true
+
+# Redirect /resources/ to /blog/ (blueprint calls for /resources/ but blog already exists)
+[[redirects]]
+  from = "/resources"
+  to = "/blog/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/resources/*"
+  to = "/blog/:splat"
+  status = 301
   force = true
 
 # IndexNow key for Bing instant indexing

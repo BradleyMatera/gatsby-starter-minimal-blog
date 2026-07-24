@@ -1,0 +1,60 @@
+# Bradley Matera — Small Business Web Design
+
+> Fast, accessible, locally optimized websites built directly by Bradley Matera, with transparent pricing, measurable deliverables, no long contract, and no agency handoff. Based in Durand, Illinois. Serving Northwest Illinois and Southern Wisconsin.
+
+## Services
+
+- [Small Business Web Design](https://bradleymatera.dev/services/small-business-web-design/) — Custom websites from $447
+- [Website Redesign](https://bradleymatera.dev/services/website-redesign/) — Update outdated sites from $597
+- [Local SEO](https://bradleymatera.dev/services/local-seo/) — Google Business Profile, citations, local search
+- [Website Repair](https://bradleymatera.dev/services/website-repair/) — $65/hour, 24-48 hour turnaround
+- [Website Accessibility](https://bradleymatera.dev/services/website-accessibility/) — WCAG 2.2 AA remediation
+- [Website Speed Optimization](https://bradleymatera.dev/services/website-speed-optimization/) — Core Web Vitals improvement
+- [Website Care Plans](https://bradleymatera.dev/services/website-care-plans/) — Ongoing maintenance from $37/month
+
+## Pricing
+
+- [Full pricing page](https://bradleymatera.dev/pricing/) — Starter $447, Local Growth $797, Lead Engine $1,497
+- Care plans: Essential $37/mo, Growth $67/mo, Search $97/mo
+- Hourly repair: $65/hour
+- Site refresh: $597
+
+## Work
+
+- [Work hub](https://bradleymatera.dev/work/) — Live demo websites and case studies
+- [Live demos](https://bradleymatera.dev/demos/) — Restaurant, landscaping, HVAC, auto repair, real estate, salon
+
+## Service Areas
+
+- [Service areas hub](https://bradleymatera.dev/service-areas/)
+- [Rockford, IL](https://bradleymatera.dev/web-developer-rockford-illinois/)
+- [Freeport, IL](https://bradleymatera.dev/web-developer-freeport-illinois/)
+- [Loves Park, IL](https://bradleymatera.dev/web-developer-loves-park-illinois/)
+- [Durand/Davis, IL](https://bradleymatera.dev/web-developer-durand-davis-illinois/)
+- [Beloit, WI](https://bradleymatera.dev/web-developer-beloit-wisconsin/)
+- [Janesville, WI](https://bradleymatera.dev/web-developer-janesville-wisconsin/)
+
+## Process and FAQ
+
+- [Process](https://bradleymatera.dev/process/) — How a website project works
+- [FAQ](https://bradleymatera.dev/website-design-faq/) — Common questions about cost, timeline, ownership, maintenance
+- [About](https://bradleymatera.dev/about/) — Bradley Matera background
+
+## Contact
+
+- [Contact page](https://bradleymatera.dev/contact/) — Free 5-point website review
+- Phone: (608) 313-5373
+- Email: bradmatera@gmail.com
+
+## Key Facts
+
+- Business type: Solo web developer serving small businesses
+- Location: Durand, Illinois (Northwest Illinois)
+- Service radius: Rockford, Freeport, Loves Park, Belvidere, Beloit WI, Janesville WI
+- Starting price: $447 for a one-page website
+- No long-term contracts required
+- Client owns all code, content, domain, and hosting
+- 50% deposit, 50% on launch
+- Typical timeline: 2-4 weeks for a 5-page site
+- Platforms: Gatsby (static), WordPress, custom HTML/CSS/JS
+- Accessibility target: WCAG 2.2 AA

@@ -134,6 +134,8 @@ const Footer = () => {
           <Link to="/terms/" style={{ color: "inherit", textDecoration: "underline" }}>Terms</Link>
           {" · "}
           <Link to="/service-scope/" style={{ color: "inherit", textDecoration: "underline" }}>Service Scope</Link>
+          {" · "}
+          <Link to="/website-design-faq/" style={{ color: "inherit", textDecoration: "underline" }}>FAQ</Link>
         </span>
         <span>
           <Link to="/recruiter/" style={{ color: "inherit", textDecoration: "underline" }}>
