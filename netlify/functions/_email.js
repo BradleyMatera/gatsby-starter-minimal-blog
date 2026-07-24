@@ -314,4 +314,100 @@ const sendRefundEmail = async ({ to, orderId, refundDate }) => {
   return true;
 };
 
-module.exports = { sendReceiptEmail, sendDownloadReadyEmail, sendRefundEmail };
+const buildContactNotificationEmail = ({ name, business, contact, website, goal, range, launch }) => {
+  const subject = `New website plan request — ${name || business || "Unknown"}`;
+  const rangeLabels = {
+    "under-500": "Under $500",
+    "500-1000": "$500 - $1,000",
+    "1000-1500": "$1,000 - $1,500",
+    "1500-plus": "$1,500+",
+    "not-sure": "Not sure yet",
+  };
+  const launchLabels = {
+    asap: "As soon as possible",
+    "1-month": "Within 1 month",
+    "1-3-months": "1-3 months",
+    "3-6-months": "3-6 months",
+    "no-rush": "No rush, just exploring",
+  };
+  const rangeText = rangeLabels[range] || range || "Not specified";
+  const launchText = launchLabels[launch] || launch || "Not specified";
+  const websiteText = website ? website : "No existing website";
+
+  const text = `New website plan request from the contact form.
+
+Name: ${name}
+Business: ${business}
+Email/Phone: ${contact}
+Existing website: ${websiteText}
+Main goal: ${goal || "Not specified"}
+Project range: ${rangeText}
+Launch window: ${launchText}
+
+Reply directly to this email or call them back.`;
+
+  const html = `
+    <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111; background: #f5f6fb; padding: 24px;">
+      <div style="max-width: 640px; margin: 0 auto; background: #ffffff; border-radius: 16px; padding: 24px; border: 1px solid #e2e6f0;">
+        <p style="margin: 0 0 6px; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #7c7c9a;">
+          Bradley Matera — Contact Form
+        </p>
+        <h2 style="margin: 0 0 16px;">New website plan request</h2>
+        <table style="width: 100%; border-collapse: collapse;">
+          <tr><td style="padding: 6px 0; font-weight: bold; width: 140px;">Name</td><td style="padding: 6px 0;">${name}</td></tr>
+          <tr><td style="padding: 6px 0; font-weight: bold;">Business</td><td style="padding: 6px 0;">${business}</td></tr>
+          <tr><td style="padding: 6px 0; font-weight: bold;">Email/Phone</td><td style="padding: 6px 0;">${contact}</td></tr>
+          <tr><td style="padding: 6px 0; font-weight: bold;">Website</td><td style="padding: 6px 0;">${websiteText}</td></tr>
+          <tr><td style="padding: 6px 0; font-weight: bold;">Project range</td><td style="padding: 6px 0;">${rangeText}</td></tr>
+          <tr><td style="padding: 6px 0; font-weight: bold;">Launch window</td><td style="padding: 6px 0;">${launchText}</td></tr>
+        </table>
+        <h3 style="margin: 16px 0 6px;">Main goal</h3>
+        <p style="margin: 0 0 16px;">${goal || "Not specified"}</p>
+        <p style="margin: 16px 0 0; font-size: 12px; color: #666;">
+          Reply directly to this email or call them back. This submission is also stored in Netlify Forms under Forms → website-plan.
+        </p>
+      </div>
+    </div>
+  `;
+
+  return { subject, text, html };
+};
+
+const sendContactNotification = async (data) => {
+  const apiKey = process.env.RESEND_API_KEY;
+  const from = process.env.ORDER_EMAIL_FROM;
+  const to = process.env.CONTACT_EMAIL_TO || process.env.ORDER_SUPPORT_EMAIL || "bradmatera@gmail.com";
+
+  if (!apiKey || !from) {
+    console.warn("Contact notification skipped: RESEND_API_KEY or ORDER_EMAIL_FROM not set.");
+    return false;
+  }
+
+  const email = buildContactNotificationEmail(data);
+
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from,
+      to,
+      reply_to: data.contact || undefined,
+      subject: email.subject,
+      text: email.text,
+      html: email.html,
+    }),
+  });
+
+  if (!response.ok) {
+    const body = await response.text();
+    console.error("Resend contact notification failed", response.status, body);
+    return false;
+  }
+
+  return true;
+};
+
+module.exports = { sendReceiptEmail, sendDownloadReadyEmail, sendRefundEmail, sendContactNotification };

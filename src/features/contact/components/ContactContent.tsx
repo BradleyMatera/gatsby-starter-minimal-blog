@@ -1,8 +1,47 @@
 import * as React from "react";
 import { Section, Card, Link } from "../../../ui";
 
-const ContactContent = () => (
+const ContactContent = () => {
+  const [status, setStatus] = React.useState<"idle" | "submitting" | "success" | "error">("idle");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus("submitting");
+    try {
+      const form = e.currentTarget;
+      const formData = new FormData(form);
+      const data: Record<string, string> = {};
+      formData.forEach((value, key) => {
+        data[key] = value.toString();
+      });
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(data).toString(),
+      });
+      if (response.ok) {
+        setStatus("success");
+        form.reset();
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  };
+
+  return (
   <>
+    <form name="website-plan" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="website-plan" />
+      <input name="name" />
+      <input name="business" />
+      <input name="contact" />
+      <input name="website" />
+      <textarea name="goal" />
+      <input name="range" />
+      <input name="launch" />
+    </form>
     <Section
       eyebrow="What happens next"
       title="Your free consultation, step by step"
@@ -74,12 +113,18 @@ const ContactContent = () => (
         </div>
         <div className="contact-form">
           <h2 className="contact-info__headline">Send a message</h2>
+          {status === "success" ? (
+            <div style={{ padding: "1.5rem", borderRadius: "12px", background: "var(--color-primaryMuted)", border: "1px solid var(--color-border)" }}>
+              <h3 style={{ margin: "0 0 0.5rem", color: "var(--color-accent)" }}>Thanks — your message is on its way.</h3>
+              <p style={{ margin: 0 }}>I will get back to you within 1 business day. Check your email (and spam folder) for a reply from bradmatera@gmail.com.</p>
+            </div>
+          ) : (
           <form
             name="website-plan"
             method="POST"
             data-netlify="true"
             netlify-honeypot="bot-field"
-            action="/contact/?submitted=true"
+            onSubmit={handleSubmit}
             style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
             data-analytics-form="website_plan"
           >
@@ -147,9 +192,17 @@ const ContactContent = () => (
               Get my free website plan
             </button>
           </form>
+          )}
+          {status === "error" && (
+            <p style={{ marginTop: "0.75rem", color: "var(--color-danger)" }}>
+              Something went wrong. Please try again, or email me directly at bradmatera@gmail.com.
+            </p>
+          )}
+          {status !== "success" && (
           <p className="contact-info__note" style={{ marginTop: "0.75rem" }}>
             Typical response time: within 24 hours. No obligation, no long-term contract.
           </p>
+          )}
         </div>
       </Card>
     </Section>
@@ -243,6 +296,7 @@ const ContactContent = () => (
       </div>
     </Section>
   </>
-);
+  );
+};
 
 export default ContactContent;
