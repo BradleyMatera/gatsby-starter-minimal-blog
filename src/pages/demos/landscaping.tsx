@@ -3,12 +3,90 @@ import type { HeadFC } from "gatsby";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
 import DemoLayout from "../../features/demos/DemoLayout";
+import GoogleMapsEmbed from "../../features/demos/GoogleMapsEmbed";
+import SocialLinks, { SocialLink } from "../../features/demos/SocialLinks";
+import ReviewBadges from "../../features/demos/ReviewBadges";
+import WeatherWidget from "../../features/demos/WeatherWidget";
+import IntegrationsSection, { Integration } from "../../features/demos/IntegrationsSection";
 import { StarIcon, MapPinIcon, PhoneIcon, LeafIcon, TreeIcon, SnowflakeIcon, DropletIcon, FlameIcon, CheckIcon } from "../../site/icons";
 
 const pathname = "/demos/landscaping/";
 const pageTitle = "GreenScape Pro — Professional Landscaping in Rockford, IL | Demo Website";
 const pageDescription =
   "Demo landscaping company website with service packages, gallery, seasonal tips, and free quote form.";
+
+const socialLinks: SocialLink[] = [
+  { platform: "facebook", url: "https://facebook.com" },
+  { platform: "instagram", url: "https://instagram.com" },
+  { platform: "google", url: "https://google.com" },
+];
+
+const integrations: Integration[] = [
+  {
+    name: "Google Maps Embed",
+    category: "Maps & Service Area",
+    description: "Interactive map showing your service area boundary. Customers can see if you cover their neighborhood.",
+    freeTier: "28,000 embed loads/month (free). $7/1k loads after.",
+    url: "https://developers.google.com/maps/documentation/embed/start",
+    status: "live",
+  },
+  {
+    name: "OpenWeatherMap API",
+    category: "Weather Data",
+    description: "Live weather conditions displayed on your site. Shows customers when it's time for snow removal, watering, or lawn care. Auto-recommends seasonal services based on weather.",
+    freeTier: "1,000 API calls/day (free). $0.09/1k calls after.",
+    url: "https://openweathermap.org/api",
+    status: "mocked",
+  },
+  {
+    name: "Google Business Profile API",
+    category: "Reviews & Ratings",
+    description: "Live Google reviews and star rating on your site. Auto-updates when customers leave new reviews.",
+    freeTier: "$200/month API credit (≈28k requests).",
+    url: "https://developers.google.com/my-business",
+    status: "mocked",
+  },
+  {
+    name: "Houzz Pro Integration",
+    category: "Project Portfolio",
+    description: "Sync your Houzz project portfolio with your website. Customers browse before/after photos without leaving your site.",
+    freeTier: "Free Houzz profile. Houzz Pro from $99/month.",
+    url: "https://houzz.com/pro",
+    status: "available",
+  },
+  {
+    name: "Instagram Graph API",
+    category: "Social Media",
+    description: "Auto-display your latest landscaping project photos from Instagram. Perfect for showing daily work.",
+    freeTier: "200 requests/hour (free). Facebook Business account required.",
+    url: "https://developers.facebook.com/docs/instagram-api",
+    status: "available",
+  },
+  {
+    name: "Jobber / ServiceTitan",
+    category: "Field Service Management",
+    description: "Online booking, dispatching, invoicing, and customer CRM. Customers book online, crew gets the job on their phone.",
+    freeTier: "Jobber from $69/month. ServiceTitan from $300/month.",
+    url: "https://getjobber.com",
+    status: "available",
+  },
+  {
+    name: "Stripe Payment Links",
+    category: "Online Payments",
+    description: "Let customers pay invoices online with credit card or ACH. Send payment links via text or email.",
+    freeTier: "2.9% + 30¢ per transaction. No monthly fee.",
+    url: "https://stripe.com/payments",
+    status: "available",
+  },
+  {
+    name: "Twilio SMS Notifications",
+    category: "Customer Communication",
+    description: "Automated text alerts: 'Your crew is on the way', 'Service completed', 'Invoice ready'. Reduces no-shows and improves satisfaction.",
+    freeTier: "Free trial. $0.0079 per SMS after.",
+    url: "https://twilio.com/sms",
+    status: "available",
+  },
+];
 
 const beforeAfter = [
   { title: "Backyard Patio Transformation", desc: "Removed overgrown shrubs, installed paver patio, fire pit, and landscape lighting" },
@@ -63,19 +141,32 @@ const LandscapingDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Stats */}
+    {/* Weather Widget — landscaping is weather-dependent */}
     <section className="demo-section">
       <div className="demo-section__inner">
-        <div className="demo-stats">
-          <div><div className="demo-stat__number">500+</div><div className="demo-stat__label">Properties Served</div></div>
-          <div><div className="demo-stat__number">8</div><div className="demo-stat__label">Years in Business</div></div>
-          <div><div className="demo-stat__number">4.9</div><div className="demo-stat__label">Google Rating</div></div>
-          <div><div className="demo-stat__number">100%</div><div className="demo-stat__label">Satisfaction Guaranteed</div></div>
+        <div className="demo-two-col">
+          <div>
+            <div className="demo-stats" style={{ gridTemplateColumns: "1fr 1fr" }}>
+              <div><div className="demo-stat__number">500+</div><div className="demo-stat__label">Properties Served</div></div>
+              <div><div className="demo-stat__number">8</div><div className="demo-stat__label">Years in Business</div></div>
+              <div><div className="demo-stat__number">4.9</div><div className="demo-stat__label">Google Rating</div></div>
+              <div><div className="demo-stat__number">100%</div><div className="demo-stat__label">Satisfaction Guaranteed</div></div>
+            </div>
+            <div style={{ marginTop: "1.5rem" }}>
+              <ReviewBadges
+                googleRating={4.9}
+                googleReviewCount={156}
+                yelpRating={4.5}
+                yelpReviewCount={42}
+              />
+            </div>
+          </div>
+          <WeatherWidget city="Rockford" temp={28} condition="snow" context="landscaping" />
         </div>
       </div>
     </section>
 
-    {/* Before/After Gallery — the #1 thing landscaping customers want to see */}
+    {/* Before/After Gallery */}
     <section className="demo-section demo-section--alt" id="gallery">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Before &amp; After</h2>
@@ -101,7 +192,7 @@ const LandscapingDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Process — landscaping customers want to know how it works */}
+    {/* Process */}
     <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">How It Works</h2>
@@ -118,7 +209,7 @@ const LandscapingDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Seasonal Services — landscaping is seasonal, this is industry-specific */}
+    {/* Seasonal Services */}
     <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Year-Round Service</h2>
@@ -141,7 +232,7 @@ const LandscapingDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Service Packages with pricing — landscaping customers want packages */}
+    {/* Service Packages */}
     <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Service Packages</h2>
@@ -204,20 +295,24 @@ const LandscapingDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Service Area — landscaping companies need to show where they work */}
+    {/* Service Area + Google Maps */}
     <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Areas We Serve</h2>
         <p className="demo-section__subtitle">Based in Rockford, serving all of Northwest Illinois and Southern Wisconsin.</p>
-        <div className="demo-brands">
+        <div className="demo-brands" style={{ marginBottom: "2rem" }}>
           {serviceAreas.map((area) => (
             <div key={area} className="demo-brand">{area}</div>
           ))}
         </div>
+        <GoogleMapsEmbed address="Rockford, IL" height={300} title="GreenScape Pro service area map" />
       </div>
     </section>
 
-    {/* Quote CTA */}
+    {/* Integrations */}
+    <IntegrationsSection industry="landscaping & lawn care" integrations={integrations} />
+
+    {/* Quote CTA + Social */}
     <section className="demo-contact" id="quote" style={{ background: "#1a6b3a" }}>
       <div className="demo-contact__inner">
         <h2 className="demo-contact__title">Get a Free Quote</h2>
@@ -228,6 +323,9 @@ const LandscapingDemo: React.FC = () => (
         <a href="tel:8155550456" className="demo-btn demo-btn--primary">
           <PhoneIcon size={20} /> Call (815) 555-0456
         </a>
+        <div style={{ marginTop: "1.5rem" }}>
+          <SocialLinks links={socialLinks} />
+        </div>
         <div className="demo-contact__info">
           <div className="demo-contact__info-item">
             <MapPinIcon size={20} />
@@ -251,6 +349,9 @@ const LandscapingDemo: React.FC = () => (
       <div className="demo-footer__inner">
         <div className="demo-footer__name">GreenScape Pro</div>
         <div>Serving Rockford & Northwest Illinois · (815) 555-0456</div>
+        <div style={{ marginTop: "1rem" }}>
+          <SocialLinks links={socialLinks} />
+        </div>
         <div className="demo-footer__demo-note">
           This is a demo website built by <a href="https://bradleymatera.dev">Bradley Matera</a>.
           <br />

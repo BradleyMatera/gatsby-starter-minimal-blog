@@ -3,12 +3,90 @@ import type { HeadFC } from "gatsby";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
 import DemoLayout from "../../features/demos/DemoLayout";
-import { StarIcon, MapPinIcon, PhoneIcon, OilDropIcon, TireIcon, WrenchIcon, BoltIcon, GearIcon, SnowflakeIcon, ShieldIcon, CheckIcon, ClockIcon } from "../../site/icons";
+import GoogleMapsEmbed from "../../features/demos/GoogleMapsEmbed";
+import SocialLinks, { SocialLink } from "../../features/demos/SocialLinks";
+import ReviewBadges from "../../features/demos/ReviewBadges";
+import IntegrationsSection, { Integration } from "../../features/demos/IntegrationsSection";
+import { StarIcon, MapPinIcon, PhoneIcon, OilDropIcon, TireIcon, WrenchIcon, BoltIcon, GearIcon, SnowflakeIcon, ShieldIcon, CheckIcon, ClockIcon, CarIcon } from "../../site/icons";
 
 const pathname = "/demos/auto-repair/";
 const pageTitle = "Northside Auto Repair — Rockford Mechanic | Demo Website";
 const pageDescription =
   "Demo auto repair shop website with service menu, online booking, tire lookup, and ASE-certified mechanic credentials.";
+
+const socialLinks: SocialLink[] = [
+  { platform: "facebook", url: "https://facebook.com" },
+  { platform: "yelp", url: "https://yelp.com" },
+  { platform: "google", url: "https://google.com" },
+  { platform: "youtube", url: "https://youtube.com" },
+];
+
+const integrations: Integration[] = [
+  {
+    name: "NHTSA VIN Decoder API",
+    category: "Vehicle Identification",
+    description: "Customer enters their VIN, site auto-fills year, make, model, and engine. Eliminates wrong-part orders and speeds up booking. Free government API.",
+    freeTier: "Completely free. No API key required. Unlimited calls.",
+    url: "https://vpic.nhtsa.dot.gov/api/",
+    status: "mocked",
+  },
+  {
+    name: "Google Maps Embed",
+    category: "Maps & Location",
+    description: "Interactive map showing shop location with directions. Customers tap to navigate.",
+    freeTier: "28,000 embed loads/month (free). $7/1k loads after.",
+    url: "https://developers.google.com/maps/documentation/embed/start",
+    status: "live",
+  },
+  {
+    name: "Google Business Profile API",
+    category: "Reviews & Ratings",
+    description: "Live Google reviews on your site. Auto-updates when customers leave new reviews.",
+    freeTier: "$200/month API credit (≈28k requests).",
+    url: "https://developers.google.com/my-business",
+    status: "mocked",
+  },
+  {
+    name: "RepairPal Price Estimator",
+    category: "Price Transparency",
+    description: "Embeddable widget that shows fair price ranges for common repairs based on your location and vehicle. Builds trust with price transparency.",
+    freeTier: "Free to embed. RepairPal Certified Shop program from $199/month.",
+    url: "https://repairpal.com/shops",
+    status: "mocked",
+  },
+  {
+    name: "CARFAX Service Shop Program",
+    category: "Service History",
+    description: "Every repair you do is logged to CARFAX. Customers see their service history online. Builds loyalty and increases resale value of cars you service.",
+    freeTier: "Free for repair shops. CARFAX pays you for service records.",
+    url: "https://carfax.com/service-shop",
+    status: "available",
+  },
+  {
+    name: "Tekmetric / Shop-Ware",
+    category: "Shop Management Software",
+    description: "Digital vehicle inspections with photos. Customer approves repairs via text link with photos of worn parts. Increases approval rates by 40%.",
+    freeTier: "Tekmetric from $129/month. Shop-Ware from $249/month.",
+    url: "https://tekmetric.com",
+    status: "available",
+  },
+  {
+    name: "Worldpac / AutoZone ProAccess",
+    category: "Parts Ordering",
+    description: "Real-time parts inventory and pricing. Customer sees if parts are in stock before booking. Auto-orders parts for scheduled appointments.",
+    freeTier: "Free for registered shops. Wholesale pricing on parts.",
+    url: "https://worldpac.com",
+    status: "available",
+  },
+  {
+    name: "Stripe Payment Links",
+    category: "Online Payments",
+    description: "Text a payment link after service. Customer pays with card or ACH. No more 'I forgot my checkbook'.",
+    freeTier: "2.9% + 30¢ per transaction. No monthly fee.",
+    url: "https://stripe.com/payments",
+    status: "available",
+  },
+];
 
 const serviceCategories = [
   {
@@ -76,6 +154,46 @@ const StarRating: React.FC = () => (
   </div>
 );
 
+const VinLookup: React.FC = () => {
+  const [vin, setVin] = React.useState("");
+  const [result, setResult] = React.useState<null | { year: string; make: string; model: string }>(null);
+
+  const handleLookup = () => {
+    if (vin.length >= 17) {
+      setResult({ year: "2019", make: "Toyota", model: "Camry SE" });
+    } else if (vin.length > 0) {
+      setResult({ year: "—", make: "VIN must be 17 characters", model: "" });
+    }
+  };
+
+  return (
+    <div className="demo-vin-lookup">
+      <h3 className="demo-vin-lookup__title">VIN Lookup</h3>
+      <p className="demo-vin-lookup__desc">Enter your 17-character VIN and we'll auto-fill your vehicle info for faster booking.</p>
+      <div className="demo-vin-lookup__row">
+        <input
+          className="demo-vin-lookup__input"
+          type="text"
+          placeholder="1HGCM82633A123456"
+          maxLength={17}
+          value={vin}
+          onChange={(e) => setVin(e.target.value.toUpperCase())}
+        />
+        <button type="button" className="demo-vin-lookup__btn" onClick={handleLookup}>Look Up</button>
+      </div>
+      {result && (
+        <div style={{ marginTop: "1rem", padding: "0.75rem", background: "var(--demo-surface)", borderRadius: "6px" }}>
+          <strong>Vehicle:</strong> {result.year} {result.make} {result.model}
+        </div>
+      )}
+      <div className="demo-vin-lookup__note">
+        Mock VIN lookup. Production sites use the free NHTSA VIN Decoder API (no API key required,
+        unlimited calls) to auto-fill year, make, model, and engine info.
+      </div>
+    </div>
+  );
+};
+
 const AutoRepairDemo: React.FC = () => (
   <DemoLayout demoName="Northside Auto Repair" industry="Auto Repair" themeColor="#e67e22">
     {/* Hero */}
@@ -96,7 +214,7 @@ const AutoRepairDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Trust Badges — auto repair customers need to see credentials */}
+    {/* Trust Badges */}
     <div className="demo-trust-bar">
       <div className="demo-trust-bar__inner">
         {trustBadges.map((b) => {
@@ -110,7 +228,7 @@ const AutoRepairDemo: React.FC = () => (
       </div>
     </div>
 
-    {/* Stats */}
+    {/* Stats + Review Badges + CARFAX */}
     <section className="demo-section">
       <div className="demo-section__inner">
         <div className="demo-stats">
@@ -119,11 +237,36 @@ const AutoRepairDemo: React.FC = () => (
           <div><div className="demo-stat__number">4.8</div><div className="demo-stat__label">Google Rating</div></div>
           <div><div className="demo-stat__number">12mo</div><div className="demo-stat__label">Warranty on Repairs</div></div>
         </div>
+        <div style={{ marginTop: "2rem" }}>
+          <ReviewBadges
+            googleRating={4.8}
+            googleReviewCount={198}
+            yelpRating={4.5}
+            yelpReviewCount={54}
+          />
+        </div>
+        <div style={{ marginTop: "1rem", display: "flex", justifyContent: "center", gap: "0.75rem", flexWrap: "wrap" }}>
+          <span className="demo-trust-logo">
+            <CarIcon size={20} /> CARFAX Service Partner
+          </span>
+          <span className="demo-trust-logo">
+            <ShieldIcon size={20} /> BBB <span className="demo-trust-logo__rating">A+</span> Accredited
+          </span>
+        </div>
       </div>
     </section>
 
-    {/* Service Menu — categorized like a real auto shop price sheet */}
-    <section className="demo-section demo-section--alt" id="services">
+    {/* VIN Lookup — auto repair specific */}
+    <section className="demo-section demo-section--alt">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Quick Vehicle Lookup</h2>
+        <p className="demo-section__subtitle">Don't know your exact vehicle details? Enter your VIN and we'll figure it out.</p>
+        <VinLookup />
+      </div>
+    </section>
+
+    {/* Service Menu */}
+    <section className="demo-section" id="services">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Service Menu</h2>
         <p className="demo-section__subtitle">Transparent pricing on the most common services. All work backed by a 12-month warranty.</p>
@@ -147,8 +290,8 @@ const AutoRepairDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Makes We Service — auto repair customers want to know if you can fix their car */}
-    <section className="demo-section">
+    {/* Makes We Service */}
+    <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Makes We Service</h2>
         <p className="demo-section__subtitle">Domestic, import, and European. If your make isn't listed, call us — we probably work on it.</p>
@@ -158,8 +301,8 @@ const AutoRepairDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Coupons — auto shops always run specials */}
-    <section className="demo-section demo-section--alt">
+    {/* Coupons */}
+    <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Current Specials</h2>
         <p className="demo-section__subtitle">Mention the code when you book. Cannot be combined with other offers.</p>
@@ -177,7 +320,7 @@ const AutoRepairDemo: React.FC = () => (
     </section>
 
     {/* Reviews */}
-    <section className="demo-section">
+    <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">What Our Customers Say</h2>
         <div className="demo-testimonials">
@@ -193,8 +336,8 @@ const AutoRepairDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Booking Form — auto shops need online booking */}
-    <section className="demo-section demo-section--alt" id="book">
+    {/* Booking Form */}
+    <section className="demo-section" id="book">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Book an Appointment</h2>
         <p className="demo-section__subtitle">Fill out the form and we'll confirm by text or email within 1 business hour.</p>
@@ -249,7 +392,19 @@ const AutoRepairDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* CTA */}
+    {/* Google Maps */}
+    <section className="demo-section demo-section--alt">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Find Us</h2>
+        <p className="demo-section__subtitle">456 North Ave, Rockford, IL 61101 — corner of North Ave and Main.</p>
+        <GoogleMapsEmbed address="456 North Ave, Rockford, IL 61101" height={300} title="Northside Auto Repair location" />
+      </div>
+    </section>
+
+    {/* Integrations */}
+    <IntegrationsSection industry="auto repair" integrations={integrations} />
+
+    {/* CTA + Social */}
     <section className="demo-contact" style={{ background: "#b35414" }}>
       <div className="demo-contact__inner">
         <h2 className="demo-contact__title">Have Questions?</h2>
@@ -260,6 +415,9 @@ const AutoRepairDemo: React.FC = () => (
         <a href="tel:8155550321" className="demo-btn demo-btn--primary">
           <PhoneIcon size={20} /> Call (815) 555-0321
         </a>
+        <div style={{ marginTop: "1.5rem" }}>
+          <SocialLinks links={socialLinks} />
+        </div>
         <div className="demo-contact__info">
           <div className="demo-contact__info-item">
             <MapPinIcon size={20} />
@@ -284,6 +442,9 @@ const AutoRepairDemo: React.FC = () => (
       <div className="demo-footer__inner">
         <div className="demo-footer__name">Northside Auto Repair</div>
         <div>456 North Ave, Rockford, IL 61101 · (815) 555-0321</div>
+        <div style={{ marginTop: "1rem" }}>
+          <SocialLinks links={socialLinks} />
+        </div>
         <div className="demo-footer__demo-note">
           This is a demo website built by <a href="https://bradleymatera.dev">Bradley Matera</a>.
           <br />

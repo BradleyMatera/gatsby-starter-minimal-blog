@@ -118,3 +118,10 @@ export { default as HouseIcon } from "./HouseIcon";
 export { default as WrenchIcon } from "./WrenchIcon";
 export { default as DropletIcon } from "./DropletIcon";
 export { default as ShieldIcon } from "./ShieldIcon";
+
+// Social Media Icons (for demos)
+export { default as FacebookIcon } from "./FacebookIcon";
+export { default as InstagramIcon } from "./InstagramIcon";
+export { default as YelpIcon } from "./YelpIcon";
+export { default as YouTubeIcon } from "./YouTubeIcon";
+export { default as GoogleIcon } from "./GoogleIcon";

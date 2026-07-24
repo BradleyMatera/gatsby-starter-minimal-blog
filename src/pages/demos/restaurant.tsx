@@ -3,12 +3,90 @@ import type { HeadFC } from "gatsby";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
 import DemoLayout from "../../features/demos/DemoLayout";
-import { StarIcon, MapPinIcon, PhoneIcon, UtensilsIcon, ClockIcon, RingIcon, ClipboardIcon } from "../../site/icons";
+import GoogleMapsEmbed from "../../features/demos/GoogleMapsEmbed";
+import SocialLinks, { SocialLink } from "../../features/demos/SocialLinks";
+import ReviewBadges from "../../features/demos/ReviewBadges";
+import IntegrationsSection, { Integration } from "../../features/demos/IntegrationsSection";
+import { StarIcon, MapPinIcon, PhoneIcon, UtensilsIcon, ClockIcon, RingIcon, ClipboardIcon, InstagramIcon } from "../../site/icons";
 
 const pathname = "/demos/restaurant/";
 const pageTitle = "Riverside Grill — Rockford's Finest Dining | Demo Website";
 const pageDescription =
   "Demo restaurant website for Riverside Grill in Rockford, Illinois. Menu, reservations, hours, reviews, and photo gallery.";
+
+const socialLinks: SocialLink[] = [
+  { platform: "facebook", url: "https://facebook.com" },
+  { platform: "instagram", url: "https://instagram.com" },
+  { platform: "yelp", url: "https://yelp.com" },
+  { platform: "google", url: "https://google.com" },
+];
+
+const integrations: Integration[] = [
+  {
+    name: "OpenTable Reservation Widget",
+    category: "Reservations",
+    description: "Real-time table availability and booking. Customers reserve online without calling. Syncs with your POS and table management system.",
+    freeTier: "$1 per cover (diner seated). No monthly fee.",
+    url: "https://opentable.com/restaurant",
+    status: "mocked",
+  },
+  {
+    name: "Google Maps Embed",
+    category: "Maps & Location",
+    description: "Interactive map showing your restaurant location with directions. Customers tap to navigate.",
+    freeTier: "28,000 embed loads/month (free). $7/1k loads after.",
+    url: "https://developers.google.com/maps/documentation/embed/start",
+    status: "live",
+  },
+  {
+    name: "Google Business Profile API",
+    category: "Reviews & Ratings",
+    description: "Pulls live Google reviews and star rating directly onto your site. Auto-updates when new reviews come in.",
+    freeTier: "$200/month API credit (≈28k requests). Pay-as-you-go after.",
+    url: "https://developers.google.com/my-business",
+    status: "mocked",
+  },
+  {
+    name: "Yelp Fusion API",
+    category: "Reviews & Ratings",
+    description: "Displays Yelp reviews and rating on your site. Links to your Yelp profile for more reviews.",
+    freeTier: "500 API calls/day (free). No credit card required.",
+    url: "https://docs.developer.yelp.com/",
+    status: "mocked",
+  },
+  {
+    name: "DoorDash / Grubhub / Uber Eats",
+    category: "Online Ordering",
+    description: "Direct ordering links to delivery platforms. Customers order takeout or delivery without leaving the platform they already use.",
+    freeTier: "Free to list. 15-30% commission per order.",
+    url: "https://doordash.com/merchants",
+    status: "live",
+  },
+  {
+    name: "Instagram Graph API",
+    category: "Social Media",
+    description: "Auto-displays your latest Instagram posts as a photo gallery on your site. Perfect for food photos.",
+    freeTier: "200 requests/hour (free). Requires Facebook Business account.",
+    url: "https://developers.facebook.com/docs/instagram-api",
+    status: "mocked",
+  },
+  {
+    name: "Square POS Integration",
+    category: "Point of Sale",
+    description: "Syncs online orders and gift card sales with your in-restaurant POS. Unified reporting and inventory.",
+    freeTier: "2.6% + 10¢ per transaction. No monthly fee.",
+    url: "https://square.com/pos",
+    status: "available",
+  },
+  {
+    name: "Toast Restaurant POS",
+    category: "Point of Sale",
+    description: "Restaurant-specific POS with online ordering, loyalty program, and gift cards built in. Integrates with your website.",
+    freeTier: "From $69/month hardware + 2.49% + 15¢ per transaction.",
+    url: "https://pos.toasttab.com",
+    status: "available",
+  },
+];
 
 const menuCategories = [
   {
@@ -101,7 +179,7 @@ const RestaurantDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Hours strip — restaurants need hours front and center */}
+    {/* Hours strip */}
     <div className="demo-trust-bar">
       <div className="demo-trust-bar__inner">
         <span className="demo-trust-badge"><ClockIcon size={18} /> Wed–Thu 4–10 PM</span>
@@ -112,7 +190,7 @@ const RestaurantDemo: React.FC = () => (
       </div>
     </div>
 
-    {/* Stats */}
+    {/* Stats + Review Badges */}
     <section className="demo-section">
       <div className="demo-section__inner">
         <div className="demo-stats">
@@ -121,10 +199,18 @@ const RestaurantDemo: React.FC = () => (
           <div><div className="demo-stat__number">200+</div><div className="demo-stat__label">5-Star Reviews</div></div>
           <div><div className="demo-stat__number">6</div><div className="demo-stat__label">Days a Week</div></div>
         </div>
+        <div style={{ marginTop: "2rem" }}>
+          <ReviewBadges
+            googleRating={4.8}
+            googleReviewCount={247}
+            yelpRating={4.5}
+            yelpReviewCount={89}
+          />
+        </div>
       </div>
     </section>
 
-    {/* Menu — categorized like a real restaurant menu, not a generic grid */}
+    {/* Menu */}
     <section className="demo-section demo-section--alt" id="menu">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Our Menu</h2>
@@ -148,7 +234,7 @@ const RestaurantDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Chef Spotlight — restaurants have chefs, not "teams" */}
+    {/* Chef Spotlight */}
     <section className="demo-section">
       <div className="demo-section__inner">
         <div className="demo-chef">
@@ -171,7 +257,7 @@ const RestaurantDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Wine Selection — restaurants have wine lists, not "service grids" */}
+    {/* Wine Selection */}
     <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">From the Cellar</h2>
@@ -191,7 +277,7 @@ const RestaurantDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Private Events — restaurants host events */}
+    {/* Private Events */}
     <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Private Events</h2>
@@ -219,6 +305,43 @@ const RestaurantDemo: React.FC = () => (
       </div>
     </section>
 
+    {/* Online Ordering — DoorDash, Grubhub, Uber Eats */}
+    <section className="demo-section demo-section--alt">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Order Online</h2>
+        <p className="demo-section__subtitle">Prefer to eat at home? Order delivery or takeout through your favorite platform.</p>
+        <div className="demo-ordering-links">
+          <a href="https://doordash.com" target="_blank" rel="noopener noreferrer" className="demo-ordering-link demo-ordering-link--doordash">
+            DoorDash
+          </a>
+          <a href="https://grubhub.com" target="_blank" rel="noopener noreferrer" className="demo-ordering-link demo-ordering-link--grubhub">
+            Grubhub
+          </a>
+          <a href="https://ubereats.com" target="_blank" rel="noopener noreferrer" className="demo-ordering-link demo-ordering-link--ubereats">
+            Uber Eats
+          </a>
+        </div>
+      </div>
+    </section>
+
+    {/* Instagram Feed Mock */}
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">
+          <InstagramIcon size={24} /> Follow @riversidegrill
+        </h2>
+        <p className="demo-section__subtitle">See what's coming out of our kitchen. New specials posted daily.</p>
+        <div className="demo-instagram-feed">
+          {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
+            <div key={i} className="demo-instagram-feed__item" />
+          ))}
+        </div>
+        <div className="demo-instagram-feed__note">
+          Mock Instagram feed. Production sites use the Instagram Graph API to auto-display latest posts.
+        </div>
+      </div>
+    </section>
+
     {/* Reviews */}
     <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
@@ -237,17 +360,84 @@ const RestaurantDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Reservation CTA */}
-    <section className="demo-contact" id="reserve" style={{ background: "#8b1a12" }}>
+    {/* OpenTable Reservation Widget Mock */}
+    <section className="demo-section" id="reserve">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Make a Reservation</h2>
+        <p className="demo-section__subtitle">Book your table online in seconds. Powered by OpenTable.</p>
+        <div className="demo-booking-widget">
+          <div className="demo-booking-widget__header">
+            <h3 className="demo-booking-widget__title">Find a Table</h3>
+            <span className="demo-booking-widget__powered-by">Powered by OpenTable</span>
+          </div>
+          <div className="demo-booking-widget__row">
+            <div className="demo-form__field" style={{ margin: 0 }}>
+              <label className="demo-form__label">Date</label>
+              <input className="demo-form__input" type="date" />
+            </div>
+            <div className="demo-form__field" style={{ margin: 0 }}>
+              <label className="demo-form__label">Time</label>
+              <select className="demo-form__select">
+                <option>4:00 PM</option>
+                <option>4:30 PM</option>
+                <option>5:00 PM</option>
+                <option>5:30 PM</option>
+                <option>6:00 PM</option>
+                <option>6:30 PM</option>
+                <option>7:00 PM</option>
+                <option>7:30 PM</option>
+                <option>8:00 PM</option>
+                <option>8:30 PM</option>
+                <option>9:00 PM</option>
+              </select>
+            </div>
+          </div>
+          <div className="demo-form__field" style={{ margin: 0 }}>
+            <label className="demo-form__label">Party Size</label>
+            <select className="demo-form__select">
+              <option>1 person</option>
+              <option>2 people</option>
+              <option>3 people</option>
+              <option>4 people</option>
+              <option>5 people</option>
+              <option>6 people</option>
+              <option>7+ people (call us)</option>
+            </select>
+          </div>
+          <button type="button" className="demo-booking-widget__find">Find a Table</button>
+          <div className="demo-booking-widget__note">
+            Mock OpenTable widget. Production sites embed the real OpenTable widget for live
+            availability and booking. $1 per diner seated, no monthly fee.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Google Maps */}
+    <section className="demo-section demo-section--alt">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Find Us</h2>
+        <p className="demo-section__subtitle">123 Main Street, Rockford, IL 61101 — downtown, near the Rock River.</p>
+        <GoogleMapsEmbed address="123 Main Street, Rockford, IL 61101" height={350} />
+      </div>
+    </section>
+
+    {/* Integrations Section */}
+    <IntegrationsSection industry="restaurant" integrations={integrations} />
+
+    {/* Contact + Social */}
+    <section className="demo-contact" style={{ background: "#8b1a12" }}>
       <div className="demo-contact__inner">
-        <h2 className="demo-contact__title">Make a Reservation</h2>
+        <h2 className="demo-contact__title">Get in Touch</h2>
         <p className="demo-contact__text">
-          Call us at (815) 555-0123 or fill out our online form. Walk-ins welcome but reservations
-          are recommended for Friday and Saturday evenings.
+          Call us at (815) 555-0123 or follow us on social media for daily specials and updates.
         </p>
         <a href="tel:8155550123" className="demo-btn demo-btn--primary">
           <PhoneIcon size={20} /> Call (815) 555-0123
         </a>
+        <div style={{ marginTop: "1.5rem" }}>
+          <SocialLinks links={socialLinks} />
+        </div>
         <div className="demo-contact__info">
           <div className="demo-contact__info-item">
             <MapPinIcon size={20} />
@@ -272,6 +462,9 @@ const RestaurantDemo: React.FC = () => (
       <div className="demo-footer__inner">
         <div className="demo-footer__name">Riverside Grill</div>
         <div>123 Main Street, Rockford, IL 61101 · (815) 555-0123</div>
+        <div style={{ marginTop: "1rem" }}>
+          <SocialLinks links={socialLinks} />
+        </div>
         <div className="demo-footer__demo-note">
           This is a demo website built by <a href="https://bradleymatera.dev">Bradley Matera</a>.
           <br />

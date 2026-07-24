@@ -2109,3 +2109,741 @@
 .demo-split-cta__btn:hover {
   opacity: 0.9;
 }
+
+/* ==========================================================================
+   API / INTEGRATION COMPONENTS
+   ========================================================================== */
+
+/* ---- Google Maps Embed -------------------------------------------------- */
+.demo-map-embed {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--demo-border);
+}
+
+.demo-map-embed__note {
+  background: var(--demo-surface);
+  padding: 0.625rem 1rem;
+  font-size: 0.75rem;
+  color: var(--demo-text-muted);
+  line-height: 1.5;
+  border-top: 1px solid var(--demo-border);
+}
+
+/* ---- Social Links ------------------------------------------------------- */
+.demo-social {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.demo-social__link {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--demo-surface);
+  border: 1px solid var(--demo-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--demo-text-muted);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.demo-social__link:hover {
+  background: var(--demo-accent);
+  color: #fff;
+  border-color: var(--demo-accent);
+  transform: translateY(-2px);
+}
+
+.demo-social__link svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* ---- Review Badges (Google + Yelp) -------------------------------------- */
+.demo-review-badges {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.demo-review-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #fff;
+  border: 1px solid var(--demo-border);
+  border-radius: 10px;
+  padding: 0.875rem 1.25rem;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  min-width: 200px;
+}
+
+.demo-review-badge:hover {
+  border-color: var(--demo-accent);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.demo-review-badge--google .demo-review-badge__icon {
+  color: #4285f4;
+}
+
+.demo-review-badge--yelp .demo-review-badge__icon {
+  color: #d32323;
+}
+
+.demo-review-badge__platform {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--demo-text);
+  margin-bottom: 0.125rem;
+}
+
+.demo-review-badge__rating {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.demo-review-badge__score {
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: var(--demo-text);
+}
+
+.demo-review-badge__stars {
+  display: flex;
+  color: #f5a623;
+}
+
+.demo-review-badge__stars svg {
+  width: 14px;
+  height: 14px;
+}
+
+.demo-review-badge__count {
+  font-size: 0.75rem;
+  color: var(--demo-text-muted);
+}
+
+/* ---- Weather Widget ----------------------------------------------------- */
+.demo-weather {
+  background: linear-gradient(135deg, #1a5276, #0d2b3a);
+  border-radius: 12px;
+  padding: 1.5rem;
+  color: #fff;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.demo-weather__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.demo-weather__label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+}
+
+.demo-weather__city {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.demo-weather__body {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.demo-weather__icon {
+  color: #fff;
+}
+
+.demo-weather__temp {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.demo-weather__condition {
+  font-size: 0.9375rem;
+  opacity: 0.8;
+}
+
+.demo-weather__alert {
+  background: rgba(255,255,255,0.1);
+  border-left: 3px solid #f39c12;
+  padding: 0.625rem 0.875rem;
+  border-radius: 4px;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.demo-weather__api-note {
+  font-size: 0.6875rem;
+  opacity: 0.6;
+  line-height: 1.5;
+}
+
+/* ---- Mortgage Calculator ----------------------------------------------- */
+.demo-mortgage-calc {
+  background: #fff;
+  border: 1px solid var(--demo-border);
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.demo-mortgage-calc__title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--demo-text);
+  margin: 0 0 0.25rem;
+}
+
+.demo-mortgage-calc__subtitle {
+  font-size: 0.8125rem;
+  color: var(--demo-text-muted);
+  margin: 0 0 1.5rem;
+}
+
+.demo-mortgage-calc__results {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--demo-border);
+}
+
+.demo-mortgage-calc__result {
+  text-align: center;
+}
+
+.demo-mortgage-calc__result-label {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--demo-text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.demo-mortgage-calc__result-value {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--demo-accent);
+}
+
+.demo-mortgage-calc__result-unit {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.demo-mortgage-calc__result-value-sm {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--demo-text);
+}
+
+.demo-mortgage-calc__disclaimer {
+  font-size: 0.6875rem;
+  color: var(--demo-text-muted);
+  line-height: 1.5;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--demo-border);
+}
+
+/* ---- Integrations Section ---------------------------------------------- */
+.demo-integrations {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+
+.demo-integration {
+  background: #fff;
+  border: 1px solid var(--demo-border);
+  border-radius: 10px;
+  padding: 1.5rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.demo-integration:hover {
+  border-color: var(--demo-accent);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.demo-integration__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.375rem;
+}
+
+.demo-integration__name {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--demo-text);
+  margin: 0;
+}
+
+.demo-integration__status {
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.5rem;
+  border-radius: 9999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.demo-integration__status--live {
+  background: #d4edda;
+  color: #155724;
+}
+
+.demo-integration__status--mocked {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.demo-integration__status--available {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+.demo-integration__category {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--demo-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.demo-integration__desc {
+  font-size: 0.875rem;
+  color: var(--demo-text-muted);
+  line-height: 1.55;
+  margin: 0 0 0.625rem;
+}
+
+.demo-integration__free-tier {
+  font-size: 0.75rem;
+  color: var(--demo-text);
+  background: var(--demo-surface);
+  padding: 0.375rem 0.625rem;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.demo-integration__link {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--demo-accent);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.demo-integration__link:hover {
+  text-decoration: underline;
+}
+
+.demo-integration__link svg {
+  width: 14px;
+  height: 14px;
+}
+
+.demo-integrations__note {
+  text-align: center;
+  font-size: 0.8125rem;
+  color: var(--demo-text-muted);
+  line-height: 1.55;
+  margin-top: 2rem;
+  padding: 1rem;
+  background: var(--demo-surface);
+  border-radius: 8px;
+}
+
+/* ---- Instagram Feed Mock ----------------------------------------------- */
+.demo-instagram-feed {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.5rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.demo-instagram-feed__item {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--demo-accent), #2a2a2a);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.demo-instagram-feed__item::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08), transparent 60%);
+}
+
+.demo-instagram-feed__note {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--demo-text-muted);
+  margin-top: 1rem;
+}
+
+/* ---- Booking Widget Mock (OpenTable / Vagaro / Square) ------------------ */
+.demo-booking-widget {
+  background: #fff;
+  border: 1px solid var(--demo-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.demo-booking-widget__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--demo-border);
+}
+
+.demo-booking-widget__title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--demo-text);
+  margin: 0;
+}
+
+.demo-booking-widget__powered-by {
+  font-size: 0.6875rem;
+  color: var(--demo-text-muted);
+  font-weight: 600;
+}
+
+.demo-booking-widget__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+@media (max-width: 480px) {
+  .demo-booking-widget__row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.demo-booking-widget__find {
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--demo-accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.demo-booking-widget__note {
+  font-size: 0.6875rem;
+  color: var(--demo-text-muted);
+  text-align: center;
+  margin-top: 0.75rem;
+  line-height: 1.5;
+}
+
+/* ---- Trust Badge (BBB, CARFAX, etc.) ------------------------------------ */
+.demo-trust-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #fff;
+  border: 1px solid var(--demo-border);
+  border-radius: 8px;
+  padding: 0.625rem 1rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--demo-text);
+}
+
+.demo-trust-logo__rating {
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: var(--demo-accent);
+}
+
+/* ---- VIN Lookup Mock ---------------------------------------------------- */
+.demo-vin-lookup {
+  background: #fff;
+  border: 1px solid var(--demo-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.demo-vin-lookup__title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--demo-text);
+  margin: 0 0 0.25rem;
+}
+
+.demo-vin-lookup__desc {
+  font-size: 0.8125rem;
+  color: var(--demo-text-muted);
+  margin: 0 0 1rem;
+}
+
+.demo-vin-lookup__row {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.demo-vin-lookup__input {
+  flex: 1;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid var(--demo-border);
+  border-radius: 6px;
+  font-size: 0.9375rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: monospace;
+}
+
+.demo-vin-lookup__btn {
+  padding: 0.625rem 1.25rem;
+  background: var(--demo-accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.demo-vin-lookup__note {
+  font-size: 0.6875rem;
+  color: var(--demo-text-muted);
+  margin-top: 0.75rem;
+  line-height: 1.5;
+}
+
+/* ---- Walk Score / School Rating Badges ---------------------------------- */
+.demo-score-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #fff;
+  border: 1px solid var(--demo-border);
+  border-radius: 10px;
+  padding: 0.875rem 1.25rem;
+}
+
+.demo-score-badge__circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.demo-score-badge__circle--walk {
+  background: #27ae60;
+}
+
+.demo-score-badge__circle--school {
+  background: #8e44ad;
+}
+
+.demo-score-badge__label {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--demo-text);
+}
+
+.demo-score-badge__desc {
+  font-size: 0.75rem;
+  color: var(--demo-text-muted);
+}
+
+/* ---- Financing Calculator Mock ------------------------------------------ */
+.demo-financing-calc {
+  background: #fff;
+  border: 1px solid var(--demo-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.demo-financing-calc__title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--demo-text);
+  margin: 0 0 0.25rem;
+}
+
+.demo-financing-calc__subtitle {
+  font-size: 0.8125rem;
+  color: var(--demo-text-muted);
+  margin: 0 0 1rem;
+}
+
+.demo-financing-calc__slider-row {
+  margin-bottom: 1rem;
+}
+
+.demo-financing-calc__slider-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--demo-text);
+  margin-bottom: 0.375rem;
+}
+
+.demo-financing-calc__slider-value {
+  color: var(--demo-accent);
+  font-weight: 800;
+}
+
+.demo-financing-calc__slider {
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  background: var(--demo-border);
+  border-radius: 3px;
+  outline: none;
+}
+
+.demo-financing-calc__slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--demo-accent);
+  cursor: pointer;
+}
+
+.demo-financing-calc__slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--demo-accent);
+  cursor: pointer;
+  border: none;
+}
+
+.demo-financing-calc__result {
+  text-align: center;
+  padding: 1rem;
+  background: var(--demo-surface);
+  border-radius: 8px;
+  margin-top: 0.5rem;
+}
+
+.demo-financing-calc__result-label {
+  font-size: 0.75rem;
+  color: var(--demo-text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.demo-financing-calc__result-value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--demo-accent);
+}
+
+.demo-financing-calc__result-period {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.demo-financing-calc__note {
+  font-size: 0.6875rem;
+  color: var(--demo-text-muted);
+  text-align: center;
+  margin-top: 0.75rem;
+  line-height: 1.5;
+}
+
+/* ---- Online Ordering Links (DoorDash, Grubhub, etc.) -------------------- */
+.demo-ordering-links {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.demo-ordering-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: #fff;
+  transition: opacity 0.15s ease;
+}
+
+.demo-ordering-link:hover {
+  opacity: 0.9;
+}
+
+.demo-ordering-link--doordash {
+  background: #ff3008;
+}
+
+.demo-ordering-link--grubhub {
+  background: #f63440;
+}
+
+.demo-ordering-link--ubereats {
+  background: #06c167;
+}

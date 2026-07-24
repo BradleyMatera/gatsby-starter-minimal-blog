@@ -3,12 +3,90 @@ import type { HeadFC } from "gatsby";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
 import DemoLayout from "../../features/demos/DemoLayout";
-import { StarIcon, MapPinIcon, PhoneIcon, ScissorsIcon, BrushIcon, SpaIcon, HandIcon, RingIcon, ClockIcon } from "../../site/icons";
+import GoogleMapsEmbed from "../../features/demos/GoogleMapsEmbed";
+import SocialLinks, { SocialLink } from "../../features/demos/SocialLinks";
+import ReviewBadges from "../../features/demos/ReviewBadges";
+import IntegrationsSection, { Integration } from "../../features/demos/IntegrationsSection";
+import { StarIcon, MapPinIcon, PhoneIcon, ScissorsIcon, BrushIcon, SpaIcon, HandIcon, RingIcon, ClockIcon, InstagramIcon } from "../../site/icons";
 
 const pathname = "/demos/beauty-salon/";
 const pageTitle = "Bella Vista Salon — Hair & Beauty in Rockford, IL | Demo Website";
 const pageDescription =
   "Demo beauty salon website with service menu, stylist team, online booking, and before/after gallery.";
+
+const socialLinks: SocialLink[] = [
+  { platform: "facebook", url: "https://facebook.com" },
+  { platform: "instagram", url: "https://instagram.com" },
+  { platform: "yelp", url: "https://yelp.com" },
+  { platform: "google", url: "https://google.com" },
+];
+
+const integrations: Integration[] = [
+  {
+    name: "Vagaro Booking Widget",
+    category: "Online Booking",
+    description: "Real-time booking with stylist availability. Customer picks service, stylist, date, and time. Syncs with your calendar automatically. Sends text reminders to reduce no-shows.",
+    freeTier: "Vagaro from $25/month. 2.19% + $0.59 per booking fee.",
+    url: "https://vagaro.com",
+    status: "mocked",
+  },
+  {
+    name: "Square Appointments",
+    category: "Online Booking + POS",
+    description: "Free online booking with built-in payment processing. Customer books and pays deposit online. Syncs with Square POS for retail product sales.",
+    freeTier: "Free booking software. 2.6% + 10¢ per transaction.",
+    url: "https://square.com/appointments",
+    status: "available",
+  },
+  {
+    name: "Google Maps Embed",
+    category: "Maps & Location",
+    description: "Interactive map showing salon location with directions. Customers tap to navigate.",
+    freeTier: "28,000 embed loads/month (free). $7/1k loads after.",
+    url: "https://developers.google.com/maps/documentation/embed/start",
+    status: "live",
+  },
+  {
+    name: "Google Business Profile API",
+    category: "Reviews & Ratings",
+    description: "Live Google reviews on your site. Auto-updates. Links to your Google profile for new reviews.",
+    freeTier: "$200/month API credit (≈28k requests).",
+    url: "https://developers.google.com/my-business",
+    status: "mocked",
+  },
+  {
+    name: "Instagram Graph API",
+    category: "Social Media Gallery",
+    description: "Auto-displays your latest Instagram posts as a photo gallery. Perfect for showing hair transformations, nail art, and makeup work.",
+    freeTier: "200 requests/hour (free). Facebook Business account required.",
+    url: "https://developers.facebook.com/docs/instagram-api",
+    status: "mocked",
+  },
+  {
+    name: "Yelp Fusion API",
+    category: "Reviews & Ratings",
+    description: "Displays Yelp reviews and rating on your site. Links to your Yelp profile for more reviews.",
+    freeTier: "500 API calls/day (free). No credit card required.",
+    url: "https://docs.developer.yelp.com/",
+    status: "mocked",
+  },
+  {
+    name: "Giftfly / Square Gift Cards",
+    category: "Gift Cards",
+    description: "Sell digital gift cards online. Customer purchases, recipient gets email with code. Redeemable in-salon or online. Perfect for holidays.",
+    freeTier: "Square gift cards: 2.6% + 10¢ per transaction. Cards from $2 each.",
+    url: "https://square.com/gift-cards",
+    status: "available",
+  },
+  {
+    name: "KlientBoost / Zenoti",
+    category: "Salon Management Software",
+    description: "Full salon management: booking, POS, inventory, loyalty program, marketing campaigns, and client history. All-in-one platform.",
+    freeTier: "Zenoti from $199/month. 14-day free trial.",
+    url: "https://zenoti.com",
+    status: "available",
+  },
+];
 
 const serviceCategories = [
   {
@@ -113,7 +191,7 @@ const BeautySalonDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* New client special banner — salons always have promotions */}
+    {/* New client special banner */}
     <div className="demo-trust-bar">
       <div className="demo-trust-bar__inner">
         <span className="demo-trust-badge"><ScissorsIcon size={18} /> New Clients: 20% Off</span>
@@ -123,7 +201,7 @@ const BeautySalonDemo: React.FC = () => (
       </div>
     </div>
 
-    {/* Stats */}
+    {/* Stats + Review Badges */}
     <section className="demo-section">
       <div className="demo-section__inner">
         <div className="demo-stats">
@@ -132,10 +210,18 @@ const BeautySalonDemo: React.FC = () => (
           <div><div className="demo-stat__number">4.9</div><div className="demo-stat__label">Google Rating</div></div>
           <div><div className="demo-stat__number">4</div><div className="demo-stat__label">Expert Stylists</div></div>
         </div>
+        <div style={{ marginTop: "2rem" }}>
+          <ReviewBadges
+            googleRating={4.9}
+            googleReviewCount={143}
+            yelpRating={4.5}
+            yelpReviewCount={38}
+          />
+        </div>
       </div>
     </section>
 
-    {/* Service Menu — categorized by type (hair, nails, skincare, makeup) with times */}
+    {/* Service Menu */}
     <section className="demo-section demo-section--alt" id="services">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Services &amp; Pricing</h2>
@@ -162,7 +248,7 @@ const BeautySalonDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Before & After Gallery — salon clients want to see results */}
+    {/* Before & After Gallery */}
     <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Our Work</h2>
@@ -188,7 +274,7 @@ const BeautySalonDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Stylists with specialties — salon clients choose by stylist */}
+    {/* Stylists with specialties */}
     <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Meet Our Stylists</h2>
@@ -208,11 +294,29 @@ const BeautySalonDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Product Brands — salons sell products and clients want to know what you use */}
+    {/* Instagram Feed Mock */}
     <section className="demo-section">
       <div className="demo-section__inner">
+        <h2 className="demo-section__title">
+          <InstagramIcon size={24} /> Follow @bellavistasalon
+        </h2>
+        <p className="demo-section__subtitle">See our latest transformations, nail art, and behind-the-scenes. New posts daily.</p>
+        <div className="demo-instagram-feed">
+          {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
+            <div key={i} className="demo-instagram-feed__item" />
+          ))}
+        </div>
+        <div className="demo-instagram-feed__note">
+          Mock Instagram feed. Production sites use the Instagram Graph API to auto-display latest posts.
+        </div>
+      </div>
+    </section>
+
+    {/* Product Brands */}
+    <section className="demo-section demo-section--alt">
+      <div className="demo-section__inner">
         <h2 className="demo-section__title">Products We Use</h2>
-        <p className="demo-section__subtitle">Premium professional products available in-salon and for purchase.</p>
+        <p className="demo-section__subtitle">Premium professional products available in-salon and for purchase online.</p>
         <div className="demo-product-brands">
           {productBrands.map((b) => <div key={b} className="demo-product-brand">{b}</div>)}
         </div>
@@ -220,7 +324,7 @@ const BeautySalonDemo: React.FC = () => (
     </section>
 
     {/* Reviews */}
-    <section className="demo-section demo-section--alt">
+    <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">What Our Clients Say</h2>
         <div className="demo-testimonials">
@@ -236,8 +340,8 @@ const BeautySalonDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Gift Cards — salons sell gift cards heavily */}
-    <section className="demo-section">
+    {/* Gift Cards */}
+    <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <div className="demo-gift-card">
           <h2 className="demo-gift-card__title">Gift Cards</h2>
@@ -250,15 +354,75 @@ const BeautySalonDemo: React.FC = () => (
             <span className="demo-gift-card__amount">Custom</span>
           </div>
         </div>
+        <div style={{ textAlign: "center", marginTop: "1rem", fontSize: "0.75rem", color: "var(--demo-text-muted)" }}>
+          Mock gift card. Production sites use Square Gift Cards or Giftfly for digital gift cards with email delivery.
+        </div>
       </div>
     </section>
 
-    {/* Hours & Booking */}
-    <section className="demo-section demo-section--alt" id="book">
+    {/* Booking Widget Mock (Vagaro) + Hours */}
+    <section className="demo-section" id="book">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Book Your Appointment</h2>
-        <p className="demo-section__subtitle">Call us or book online. Walk-ins welcome based on availability.</p>
+        <p className="demo-section__subtitle">Book online in seconds. Choose your stylist, service, and time.</p>
         <div className="demo-two-col">
+          <div>
+            <div className="demo-booking-widget">
+              <div className="demo-booking-widget__header">
+                <h3 className="demo-booking-widget__title">Book Now</h3>
+                <span className="demo-booking-widget__powered-by">Powered by Vagaro</span>
+              </div>
+              <div className="demo-form__field" style={{ margin: 0 }}>
+                <label className="demo-form__label">Service</label>
+                <select className="demo-form__select">
+                  <option>Haircut & Style</option>
+                  <option>Color / Highlights</option>
+                  <option>Balayage</option>
+                  <option>Manicure / Pedicure</option>
+                  <option>Facial</option>
+                  <option>Makeup</option>
+                  <option>Bridal Package</option>
+                </select>
+              </div>
+              <div className="demo-form__field" style={{ margin: "0.75rem 0 0" }}>
+                <label className="demo-form__label">Stylist</label>
+                <select className="demo-form__select">
+                  <option>No preference</option>
+                  <option>Angela Rossi</option>
+                  <option>Lisa Chen</option>
+                  <option>Maya Kim</option>
+                  <option>Tina Santos</option>
+                </select>
+              </div>
+              <div className="demo-booking-widget__row" style={{ marginTop: "0.75rem" }}>
+                <div className="demo-form__field" style={{ margin: 0 }}>
+                  <label className="demo-form__label">Date</label>
+                  <input className="demo-form__input" type="date" />
+                </div>
+                <div className="demo-form__field" style={{ margin: 0 }}>
+                  <label className="demo-form__label">Time</label>
+                  <select className="demo-form__select">
+                    <option>9:00 AM</option>
+                    <option>10:00 AM</option>
+                    <option>11:00 AM</option>
+                    <option>12:00 PM</option>
+                    <option>1:00 PM</option>
+                    <option>2:00 PM</option>
+                    <option>3:00 PM</option>
+                    <option>4:00 PM</option>
+                    <option>5:00 PM</option>
+                    <option>6:00 PM</option>
+                    <option>7:00 PM</option>
+                  </select>
+                </div>
+              </div>
+              <button type="button" className="demo-booking-widget__find">Book Appointment</button>
+              <div className="demo-booking-widget__note">
+                Mock Vagaro widget. Production sites embed the real Vagaro booking widget for live
+                availability. $25/month + 2.19% per booking. Sends automatic text reminders.
+              </div>
+            </div>
+          </div>
           <div>
             <table className="demo-hours">
               <tbody>
@@ -272,45 +436,48 @@ const BeautySalonDemo: React.FC = () => (
               </tbody>
             </table>
           </div>
-          <div>
-            <div className="demo-booking-form">
-              <div className="demo-form__field">
-                <label className="demo-form__label">Your Name</label>
-                <input className="demo-form__input" type="text" placeholder="First and last name" />
-              </div>
-              <div className="demo-form__field">
-                <label className="demo-form__label">Phone</label>
-                <input className="demo-form__input" type="tel" placeholder="(815) 555-0000" />
-              </div>
-              <div className="demo-form__row">
-                <div className="demo-form__field">
-                  <label className="demo-form__label">Service</label>
-                  <select className="demo-form__select">
-                    <option>Haircut & Style</option>
-                    <option>Color / Highlights</option>
-                    <option>Manicure / Pedicure</option>
-                    <option>Facial</option>
-                    <option>Makeup</option>
-                    <option>Other</option>
-                  </select>
-                </div>
-                <div className="demo-form__field">
-                  <label className="demo-form__label">Stylist</label>
-                  <select className="demo-form__select">
-                    <option>No preference</option>
-                    <option>Angela Rossi</option>
-                    <option>Lisa Chen</option>
-                    <option>Maya Kim</option>
-                    <option>Tina Santos</option>
-                  </select>
-                </div>
-              </div>
-              <div className="demo-form__field">
-                <label className="demo-form__label">Preferred Date</label>
-                <input className="demo-form__input" type="text" placeholder="MM/DD/YYYY" />
-              </div>
-              <button type="button" className="demo-form__submit">Request Appointment</button>
-            </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Google Maps */}
+    <section className="demo-section demo-section--alt">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Find Us</h2>
+        <p className="demo-section__subtitle">321 N Main Street, Rockford, IL 61103 — free parking in the back.</p>
+        <GoogleMapsEmbed address="321 N Main Street, Rockford, IL 61103" height={300} title="Bella Vista Salon location" />
+      </div>
+    </section>
+
+    {/* Integrations */}
+    <IntegrationsSection industry="beauty salon & spa" integrations={integrations} />
+
+    {/* Contact + Social */}
+    <section className="demo-contact" style={{ background: "#a02463" }}>
+      <div className="demo-contact__inner">
+        <h2 className="demo-contact__title">Get in Touch</h2>
+        <p className="demo-contact__text">
+          Call (815) 555-0987 or book online. New clients get 20% off their first service.
+        </p>
+        <a href="tel:8155550987" className="demo-btn demo-btn--primary">
+          <PhoneIcon size={20} /> Call (815) 555-0987
+        </a>
+        <div style={{ marginTop: "1.5rem" }}>
+          <SocialLinks links={socialLinks} />
+        </div>
+        <div className="demo-contact__info">
+          <div className="demo-contact__info-item">
+            <MapPinIcon size={20} />
+            <span className="demo-contact__info-label">Address</span>
+            <span>321 N Main Street, Rockford, IL</span>
+          </div>
+          <div className="demo-contact__info-item">
+            <span className="demo-contact__info-label">New Client Special</span>
+            <span>20% off first service</span>
+          </div>
+          <div className="demo-contact__info-item">
+            <span className="demo-contact__info-label">Email</span>
+            <span>hello@bellavistasalon.com</span>
           </div>
         </div>
       </div>
@@ -321,6 +488,9 @@ const BeautySalonDemo: React.FC = () => (
       <div className="demo-footer__inner">
         <div className="demo-footer__name">Bella Vista Salon</div>
         <div>321 N Main Street, Rockford, IL 61103 · (815) 555-0987</div>
+        <div style={{ marginTop: "1rem" }}>
+          <SocialLinks links={socialLinks} />
+        </div>
         <div className="demo-footer__demo-note">
           This is a demo website built by <a href="https://bradleymatera.dev">Bradley Matera</a>.
           <br />

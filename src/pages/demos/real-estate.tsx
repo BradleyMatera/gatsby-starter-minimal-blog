@@ -3,20 +3,99 @@ import type { HeadFC } from "gatsby";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
 import DemoLayout from "../../features/demos/DemoLayout";
-import { StarIcon, MapPinIcon, PhoneIcon, HouseIcon, SearchIcon } from "../../site/icons";
+import GoogleMapsEmbed from "../../features/demos/GoogleMapsEmbed";
+import SocialLinks, { SocialLink } from "../../features/demos/SocialLinks";
+import ReviewBadges from "../../features/demos/ReviewBadges";
+import MortgageCalculator from "../../features/demos/MortgageCalculator";
+import IntegrationsSection, { Integration } from "../../features/demos/IntegrationsSection";
+import { StarIcon, MapPinIcon, PhoneIcon, HouseIcon, SearchIcon, ShieldIcon } from "../../site/icons";
 
 const pathname = "/demos/real-estate/";
 const pageTitle = "Rockford Heritage Realty — Real Estate | Demo Website";
 const pageDescription =
   "Demo real estate office website with featured listings, agent profiles, market reports, and neighborhood guides.";
 
+const socialLinks: SocialLink[] = [
+  { platform: "facebook", url: "https://facebook.com" },
+  { platform: "instagram", url: "https://instagram.com" },
+  { platform: "youtube", url: "https://youtube.com" },
+  { platform: "google", url: "https://google.com" },
+];
+
+const integrations: Integration[] = [
+  {
+    name: "MLS IDX/RETS Feed",
+    category: "Property Listings",
+    description: "Live MLS listings on your site. Every property your board has, auto-synced. Required for real estate sites — buyers expect to search all listings, not just yours.",
+    freeTier: "IDX subscription from $39-99/month via your MLS board. RESO Web API standard.",
+    url: "https://www.reso.org/",
+    status: "mocked",
+  },
+  {
+    name: "Google Maps Embed",
+    category: "Maps & Location",
+    description: "Interactive map on every listing page showing property location, nearby schools, and amenities.",
+    freeTier: "28,000 embed loads/month (free). $7/1k loads after.",
+    url: "https://developers.google.com/maps/documentation/embed/start",
+    status: "live",
+  },
+  {
+    name: "Walk Score API",
+    category: "Neighborhood Data",
+    description: "Shows walkability, transit, and bike scores for any property address. Buyers use this to evaluate neighborhoods without visiting.",
+    freeTier: "Free for up to 5,000 calls/day with attribution. $0.04/call after.",
+    url: "https://walkscore.com/professional/api.php",
+    status: "mocked",
+  },
+  {
+    name: "GreatSchools API",
+    category: "School Ratings",
+    description: "School ratings and reviews for any address. Parents search for homes by school district — this data is essential for family buyers.",
+    freeTier: "Free API for up to 2,000 calls/day. Attribution required.",
+    url: "https://greatschools.org/api/",
+    status: "mocked",
+  },
+  {
+    name: "Freddie Mac PMMS API",
+    category: "Mortgage Rates",
+    description: "Live mortgage rate data for your calculator. Updated weekly. Shows buyers current rates so they can estimate payments accurately.",
+    freeTier: "Completely free. Public API, no key required.",
+    url: "https://freddiemac.com/pmms",
+    status: "available",
+  },
+  {
+    name: "Zillow Trulia Network",
+    category: "Syndication",
+    description: "Your listings auto-post to Zillow, Trulia, and 30+ other sites. Maximum exposure with zero extra work. Leads route back to you.",
+    freeTier: "Free via MLS syndication. Premier Agent from $200/month for lead routing.",
+    url: "https://zillow.com/professionals",
+    status: "available",
+  },
+  {
+    name: "Follow Up Boss / LionDesk",
+    category: "CRM & Lead Management",
+    description: "Every website lead auto-enters your CRM with property interest, budget, and timeline. Automated follow-up sequences. Never lose a lead again.",
+    freeTier: "Follow Up Boss from $69/month. LionDesk from $39/month.",
+    url: "https://followupboss.com",
+    status: "available",
+  },
+  {
+    name: "DocuSign for Real Estate",
+    category: "Digital Signatures",
+    description: "Send offers, counter-offers, and contracts for e-signature directly from your site. Closes deals faster — no printing, no faxing.",
+    freeTier: "Real Estate edition from $45/month per agent.",
+    url: "https://docusign.com/real-estate",
+    status: "available",
+  },
+];
+
 const listings = [
-  { price: "$285,000", title: "4 Bed Colonial in East Rockford", address: "1427 Eastwood Dr, Rockford, IL", beds: 4, baths: 2.5, sqft: "2,100", badge: "New" },
-  { price: "$189,000", title: "3 Bed Ranch — Updated Kitchen", address: "882 Maple Ln, Loves Park, IL", beds: 3, baths: 2, sqft: "1,450", badge: "Price Reduced" },
-  { price: "$425,000", title: "5 Bed Luxury Home on 1.1 Acres", address: "3401 River Rd, Roscoe, IL", beds: 5, baths: 3, sqft: "3,200", badge: "Open Sat" },
-  { price: "$145,000", title: "2 Bed Condo — Downtown Rockford", address: "211 N Main St #4B, Rockford, IL", beds: 2, baths: 1, sqft: "980", badge: null },
-  { price: "$365,000", title: "4 Bed New Build — Rockton", address: "55 Stonebridge Ct, Rockton, IL", beds: 4, baths: 2.5, sqft: "2,400", badge: "New Construction" },
-  { price: "$225,000", title: "3 Bed Split Level — Byron", address: "718 Oak St, Byron, IL", beds: 3, baths: 2, sqft: "1,680", badge: null },
+  { price: "$285,000", title: "4 Bed Colonial in East Rockford", address: "1427 Eastwood Dr, Rockford, IL", beds: 4, baths: 2.5, sqft: "2,100", badge: "New", walkScore: 72, schoolRating: 8 },
+  { price: "$189,000", title: "3 Bed Ranch — Updated Kitchen", address: "882 Maple Ln, Loves Park, IL", beds: 3, baths: 2, sqft: "1,450", badge: "Price Reduced", walkScore: 45, schoolRating: 7 },
+  { price: "$425,000", title: "5 Bed Luxury Home on 1.1 Acres", address: "3401 River Rd, Roscoe, IL", beds: 5, baths: 3, sqft: "3,200", badge: "Open Sat", walkScore: 12, schoolRating: 9 },
+  { price: "$145,000", title: "2 Bed Condo — Downtown Rockford", address: "211 N Main St #4B, Rockford, IL", beds: 2, baths: 1, sqft: "980", badge: null, walkScore: 88, schoolRating: 6 },
+  { price: "$365,000", title: "4 Bed New Build — Rockton", address: "55 Stonebridge Ct, Rockton, IL", beds: 4, baths: 2.5, sqft: "2,400", badge: "New Construction", walkScore: 28, schoolRating: 9 },
+  { price: "$225,000", title: "3 Bed Split Level — Byron", address: "718 Oak St, Byron, IL", beds: 3, baths: 2, sqft: "1,680", badge: null, walkScore: 35, schoolRating: 8 },
 ];
 
 const agents = [
@@ -61,7 +140,7 @@ const RealEstateDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Property Search Bar — real estate sites have search bars */}
+    {/* Property Search Bar */}
     <div className="demo-section__inner" style={{ padding: "0 1.5rem" }}>
       <div className="demo-search-bar">
         <div className="demo-form__field" style={{ margin: 0 }}>
@@ -101,7 +180,7 @@ const RealEstateDemo: React.FC = () => (
       </div>
     </div>
 
-    {/* Featured Listings — THE main content of a real estate site */}
+    {/* Featured Listings with Walk Score + School Rating */}
     <section className="demo-section" id="listings">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Featured Listings</h2>
@@ -130,15 +209,46 @@ const RealEstateDemo: React.FC = () => (
                   </div>
                 </div>
                 <p className="demo-listing-detail__address">{l.address}</p>
+                <div style={{ display: "flex", gap: "0.75rem", marginTop: "0.75rem", flexWrap: "wrap" }}>
+                  <div className="demo-score-badge" style={{ padding: "0.375rem 0.625rem" }}>
+                    <div className="demo-score-badge__circle demo-score-badge__circle--walk" style={{ width: "32px", height: "32px", fontSize: "0.875rem" }}>{l.walkScore}</div>
+                    <div>
+                      <div className="demo-score-badge__label" style={{ fontSize: "0.75rem" }}>Walk Score</div>
+                    </div>
+                  </div>
+                  <div className="demo-score-badge" style={{ padding: "0.375rem 0.625rem" }}>
+                    <div className="demo-score-badge__circle demo-score-badge__circle--school" style={{ width: "32px", height: "32px", fontSize: "0.875rem" }}>{l.schoolRating}</div>
+                    <div>
+                      <div className="demo-score-badge__label" style={{ fontSize: "0.75rem" }}>School Rating</div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           ))}
         </div>
+        <div style={{ marginTop: "1.5rem", display: "flex", justifyContent: "center", gap: "0.75rem", flexWrap: "wrap" }}>
+          <span className="demo-trust-logo">
+            <ShieldIcon size={20} /> MLS Listed
+          </span>
+          <span className="demo-trust-logo">
+            <HouseIcon size={20} /> Zillow Premier Agent
+          </span>
+        </div>
       </div>
     </section>
 
-    {/* Market Dashboard — real estate is data-driven */}
+    {/* Mortgage Calculator */}
     <section className="demo-section demo-section--alt">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Mortgage Calculator</h2>
+        <p className="demo-section__subtitle">Estimate your monthly payment. Adjust the numbers to see what fits your budget.</p>
+        <MortgageCalculator />
+      </div>
+    </section>
+
+    {/* Market Dashboard */}
+    <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Rockford Market Report</h2>
         <p className="demo-section__subtitle">Live data from the Rockford MLS — updated monthly.</p>
@@ -151,8 +261,8 @@ const RealEstateDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Neighborhood Guides — buyers research neighborhoods */}
-    <section className="demo-section">
+    {/* Neighborhood Guides */}
+    <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Neighborhood Guides</h2>
         <p className="demo-section__subtitle">Local knowledge that Zillow can't tell you. We live in these communities.</p>
@@ -171,8 +281,8 @@ const RealEstateDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Agent Bios — real estate is relationship-based, agents need full bios */}
-    <section className="demo-section demo-section--alt">
+    {/* Agent Bios */}
+    <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Meet Our Agents</h2>
         <p className="demo-section__subtitle">Experienced, licensed, and dedicated to finding your perfect home.</p>
@@ -196,7 +306,7 @@ const RealEstateDemo: React.FC = () => (
     </section>
 
     {/* Reviews */}
-    <section className="demo-section">
+    <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">What Our Clients Say</h2>
         <div className="demo-testimonials">
@@ -209,11 +319,19 @@ const RealEstateDemo: React.FC = () => (
             </div>
           ))}
         </div>
+        <div style={{ marginTop: "1.5rem" }}>
+          <ReviewBadges
+            googleRating={4.9}
+            googleReviewCount={87}
+            yelpRating={5.0}
+            yelpReviewCount={23}
+          />
+        </div>
       </div>
     </section>
 
-    {/* Split CTA — buyers and sellers get different CTAs */}
-    <section className="demo-section demo-section--alt">
+    {/* Split CTA */}
+    <section className="demo-section">
       <div className="demo-section__inner">
         <div className="demo-split-cta">
           <div className="demo-split-cta__card">
@@ -234,7 +352,19 @@ const RealEstateDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Contact */}
+    {/* Google Maps */}
+    <section className="demo-section demo-section--alt">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Our Office</h2>
+        <p className="demo-section__subtitle">789 E State St, Rockford, IL — stop by or schedule a consultation.</p>
+        <GoogleMapsEmbed address="789 E State St, Rockford, IL 61104" height={300} title="Heritage Realty office location" />
+      </div>
+    </section>
+
+    {/* Integrations */}
+    <IntegrationsSection industry="real estate" integrations={integrations} />
+
+    {/* Contact + Social */}
     <section className="demo-contact" style={{ background: "#6c3483" }}>
       <div className="demo-contact__inner">
         <h2 className="demo-contact__title">Let's Find Your Next Home</h2>
@@ -244,6 +374,9 @@ const RealEstateDemo: React.FC = () => (
         <a href="tel:8155550567" className="demo-btn demo-btn--primary">
           <PhoneIcon size={20} /> Call (815) 555-0567
         </a>
+        <div style={{ marginTop: "1.5rem" }}>
+          <SocialLinks links={socialLinks} />
+        </div>
         <div className="demo-contact__info">
           <div className="demo-contact__info-item">
             <MapPinIcon size={20} />
@@ -267,6 +400,9 @@ const RealEstateDemo: React.FC = () => (
       <div className="demo-footer__inner">
         <div className="demo-footer__name">Rockford Heritage Realty</div>
         <div>789 E State St, Rockford, IL 61104 · (815) 555-0567</div>
+        <div style={{ marginTop: "1rem" }}>
+          <SocialLinks links={socialLinks} />
+        </div>
         <div className="demo-footer__demo-note">
           This is a demo website built by <a href="https://bradleymatera.dev">Bradley Matera</a>.
           <br />
