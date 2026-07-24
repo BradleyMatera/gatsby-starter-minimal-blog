@@ -315,23 +315,25 @@
   border-radius: var(--demo-radius);
   font-family: var(--demo-font-body);
 }
-.demo-btn--primary {
+.demo-btn.demo-btn--primary {
   background: var(--demo-accent);
   color: #fff;
 }
-.demo-btn--primary:hover {
+.demo-btn.demo-btn--primary:hover {
   filter: brightness(1.1);
   transform: translateY(-1px);
   box-shadow: var(--demo-shadow);
+  color: #fff;
 }
-.demo-btn--ghost {
+.demo-btn.demo-btn--ghost {
   background: transparent;
   color: #fff;
   border: 2px solid rgba(255,255,255,0.6);
 }
-.demo-btn--ghost:hover {
+.demo-btn.demo-btn--ghost:hover {
   border-color: #fff;
   background: rgba(255,255,255,0.1);
+  color: #fff;
 }
 .demo-theme--industrial .demo-btn {
   text-transform: uppercase;
@@ -347,7 +349,7 @@
   border-radius: 0;
   border: 2px solid var(--demo-accent);
 }
-.demo-theme--garage .demo-btn--primary {
+.demo-theme--garage .demo-btn.demo-btn--primary {
   border-color: var(--demo-accent);
 }
 .demo-theme--soft .demo-btn {
@@ -845,7 +847,7 @@
   justify-content: center;
   flex-wrap: wrap;
 }
-.demo-ordering-link {
+.demo-page .demo-ordering-link {
   display: inline-flex;
   align-items: center;
   padding: 1rem 2rem;
@@ -856,7 +858,7 @@
   transition: transform 0.2s ease;
   color: #fff;
 }
-.demo-ordering-link:hover { transform: translateY(-2px); }
+.demo-page .demo-ordering-link:hover { transform: translateY(-2px); color: #fff; }
 .demo-ordering-link--doordash { background: #ff3008; }
 .demo-ordering-link--grubhub { background: #f63440; }
 .demo-ordering-link--ubereats { background: #06c167; }
