@@ -37,6 +37,7 @@ const DemoLayout: React.FC<DemoLayoutProps> = ({
           body: {
             backgroundColor: "var(--demo-bg, #ffffff)",
             color: "var(--demo-text, #1a1a1a)",
+            margin: 0,
           },
         }}
       />
