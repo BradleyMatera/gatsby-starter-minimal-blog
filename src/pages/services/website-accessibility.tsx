@@ -8,7 +8,7 @@ import { Card, Link, Section } from "../../ui";
 const pathname = "/services/website-accessibility/";
 const pageTitle = "Website Accessibility Services — WCAG 2.2 AA Compliance | Bradley Matera";
 const pageDescription =
-  "Website accessibility audits and fixes for WCAG 2.2 AA compliance. Keyboard navigation, screen reader support, color contrast, and ARIA labels for small business websites.";
+  "Website accessibility audits and fixes for WCAG 2.2 AA compliance. Keyboard navigation, screen reader support, color contrast, and ARIA labels for small businesses.";
 
 const auditItems = [
   "Keyboard navigation testing — every page reachable and usable without a mouse",

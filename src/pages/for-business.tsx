@@ -8,7 +8,7 @@ import { Card, Link, Section } from "../ui";
 const pathname = "/for-business/";
 const pageTitle = "For Business — Website Design & Development | Bradley Matera";
 const pageDescription =
-  "Websites for small businesses in Northwest Illinois. See live website examples, transparent pricing, and city-specific pages. Free consultation, 14-day builds, no contracts.";
+  "Websites for small businesses in Northwest Illinois. Live website examples, transparent pricing, and city-specific pages. Free consultation, no contracts.";
 
 const demoCards = [
   { title: "Restaurant", desc: "Menu, reservations, gallery, and location.", href: "/demos/restaurant/" },

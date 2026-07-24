@@ -8,7 +8,7 @@ import { Card, Link, Section } from "../../ui";
 const pathname = "/services/website-repair/";
 const pageTitle = "Website Repair and Troubleshooting | Bradley Matera";
 const pageDescription =
-  "Website repair and troubleshooting for small businesses. Fix broken pages, forms, layouts, and errors. $65/hour or a full $597 site refresh. Fast turnaround, no contracts.";
+  "Website repair and troubleshooting for small businesses. Fix broken pages, forms, layouts, and errors. $65/hour or a full $597 site refresh. Fast turnaround.";
 
 const commonIssues = [
   "Broken contact forms that don't send emails",

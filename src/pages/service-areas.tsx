@@ -8,7 +8,7 @@ import { Card, Link, Section } from "../ui";
 const pathname = "/service-areas/";
 const pageTitle = "Service Areas — Northwest Illinois and Southern Wisconsin | Bradley Matera";
 const pageDescription =
-  "Bradley Matera serves Northwest Illinois and Southern Wisconsin from Durand/Davis, IL. See all service area cities including Rockford, Freeport, Beloit WI, and Janesville WI. Remote and in-person available.";
+  "Web development service areas in Northwest Illinois and Southern Wisconsin. Durand, Rockford, Freeport, Beloit WI, Janesville WI. Remote and in-person.";
 
 const cityCards = [
   { title: "Durand & Davis", href: "/web-developer-durand-davis-illinois/" },
@@ -79,7 +79,7 @@ const ServiceAreasPage = () => (
       <div className="grid-three">
         {cityCards.map((city) => (
           <Card key={city.href} variant="outline">
-            <h3 className="feature-card__title">{city.title}</h3>
+            <h2 className="feature-card__title">{city.title}</h2>
             <div className="card-actions">
               <Link data-variant="ghost" to={city.href}>{city.title} web developer</Link>
             </div>

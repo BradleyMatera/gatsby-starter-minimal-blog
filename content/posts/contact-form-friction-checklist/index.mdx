@@ -13,7 +13,9 @@ Your contact form is the point where a visitor becomes a lead. Every extra field
 
 Here is the checklist I run through when auditing a contact form.
 
-## 1. Too many fields
+## How many fields should a contact form have?
+
+A contact form should have three to four fields: name, email or phone, a message, and optionally a service type dropdown. Every additional field reduces completion rates. A form with 12 required fields might see a 2% completion rate, while reducing it to three fields can raise that to 18%. Collect the rest of the information when you actually speak with the person.
 
 This is the most common problem. Every field you add reduces the number of people who complete the form. It is that simple.
 
@@ -29,7 +31,9 @@ This is the most common problem. Every field you add reduces the number of peopl
 
 You can collect the rest of the information when you actually talk to the person. The form's only job is to start the conversation.
 
-## 2. Required fields that should be optional
+## Which form fields should be required vs optional?
+
+Only the fields you need to respond should be required: a name and one contact method. Make either phone or email required, not both, since some people prefer one over the other. Forcing both means you lose people who would have submitted with just one. Everything else — company name, address, preferred contact time — should be optional or removed entirely.
 
 Some fields are useful but not necessary. Making them required means people who do not want to share that information just leave instead of skipping it.
 
@@ -40,7 +44,9 @@ Some fields are useful but not necessary. Making them required means people who 
 - Label it clearly: "Phone or Email (required)."
 - Make everything else optional.
 
-## 3. No mobile keyboard optimization
+## How do I optimize contact form inputs for mobile?
+
+Use the correct HTML input types so mobile devices show the right keyboard. Set email fields to `type="email"` so phones display a keyboard with the @ symbol. Set phone fields to `type="tel"` so phones show a number pad. This is a five-minute fix that makes a real difference on mobile, where most of your form submissions come from.
 
 On a phone, the keyboard that appears depends on the input type. If your email field is a plain text input, the phone shows a standard keyboard with no @ symbol readily available. If your phone field is plain text, the phone shows letters instead of a number pad.
 
@@ -54,7 +60,9 @@ On a phone, the keyboard that appears depends on the input type. If your email f
 
 This is a 5-minute fix that makes a real difference on mobile, where most of your form submissions come from.
 
-## 4. Unclear submit button
+## What should the submit button say?
+
+Use action-oriented text that tells the visitor what happens next, such as "Send Message," "Get a Quote," or "Request Callback." Avoid generic labels like "Submit." Make the button a contrasting color so it stands out from the rest of the form, and make it full-width on mobile so it is easy to tap. A clear button can triple click-through rates.
 
 The submit button is the last thing a visitor sees before they decide to send. "Submit" is not a great label. It tells the person nothing about what happens next.
 
@@ -69,7 +77,9 @@ The submit button is the last thing a visitor sees before they decide to send. "
 **Before:** Gray "Submit" button, 3% click-through from form view.
 **After:** Blue "Send Message" button, full-width on mobile, 11% click-through.
 
-## 5. No confirmation message
+## What should happen after a form is submitted?
+
+Show a clear confirmation message immediately after submission so the visitor knows it worked. Something like "Thanks, I got your message. I will get back to you within 24 hours." If possible, send an auto-reply email so they have a record. Never just clear the form and show nothing — visitors will not know if their message went through.
 
 After someone submits a form, they need to know it worked. If the form just clears and shows nothing, or reloads the same page with no feedback, the person does not know if their message went through. They might submit it again, or they might assume it failed and leave.
 
@@ -80,7 +90,9 @@ After someone submits a form, they need to know it worked. If the form just clea
 - If you can, send an auto-reply email so they have a record of their submission.
 - Do not just clear the form and show nothing.
 
-## 6. Captcha that blocks real users
+## How do I stop form spam without blocking real users?
+
+Use invisible captcha or honeypot fields instead of visible image challenges. A honeypot is a hidden field that bots fill out but humans do not — if it has a value, you discard the submission. If you must use reCAPTCHA, use v3, which scores submissions in the background without any user interaction. Always test the form yourself after adding captcha.
 
 Captcha is meant to block bots. In practice, aggressive captcha blocks real people too. If a visitor has to identify traffic lights in 9 squares, select all crosswalks, or solve a puzzle to send a message to a plumber, they are going to leave.
 
@@ -92,7 +104,9 @@ Captcha is meant to block bots. In practice, aggressive captcha blocks real peop
 - If you must use reCAPTCHA, use v3 which scores submissions in the background without user interaction.
 - Test the form yourself after adding captcha. If you struggle to get through it, your visitors will too.
 
-## The full checklist
+## What is the full contact form friction checklist?
+
+The checklist covers six friction points: too many fields, required fields that should be optional, no mobile keyboard optimization, an unclear submit button, no confirmation message, and captcha that blocks real users. Each one reduces submissions on its own. The table below summarizes the problem, fix, and impact for each point.
 
 | Friction Point | Problem | Fix | Impact |
 |---|---|---|---|
@@ -103,7 +117,9 @@ Captcha is meant to block bots. In practice, aggressive captcha blocks real peop
 | Confirmation | No feedback after submit | Clear success message | High |
 | Captcha | Visible image challenge | Invisible captcha or honeypot | High |
 
-## What a good form looks like
+## What does a good contact form look like?
+
+A good contact form has three to four fields — name, phone or email, message, and optionally a service dropdown. It uses mobile-optimized input types, a clear action-oriented submit button in a contrasting color, a confirmation message after submission, and invisible spam protection that does not challenge real users. You can see an example on my contact page.
 
 A well-designed contact form has:
 - 3-4 fields: Name, Phone or Email, Message, and optionally a Service dropdown.
@@ -114,7 +130,7 @@ A well-designed contact form has:
 
 You can see this on [my contact page](/contact/). Three fields, mobile-optimized, clear button, confirmation message. Not complicated.
 
-## Bottom line
+## What is the bottom line on contact form friction?
 
 Contact form friction is a series of small problems that add up to one big one: people give up before they submit. The fixes are not hard. Reduce fields, optimize for mobile, make the button clear, confirm submission, and stop challenging real users with captcha. Run through the checklist on your own form. Every friction point you remove is a few more leads you actually receive.
 

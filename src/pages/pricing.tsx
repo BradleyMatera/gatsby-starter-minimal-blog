@@ -292,7 +292,7 @@ const PricingPage = () => (
             <li>24-hour response time</li>
           </ul>
           <div className="card-actions">
-            <Link data-variant="ghost" to="/services/website-care-plans/">Learn more</Link>
+            <Link data-variant="ghost" to="/services/website-care-plans/">View Essential Care details</Link>
           </div>
         </Card>
         <Card variant="outline">
@@ -305,7 +305,7 @@ const PricingPage = () => (
             <li>Form and lead tracking</li>
           </ul>
           <div className="card-actions">
-            <Link data-variant="ghost" to="/services/website-care-plans/">Learn more</Link>
+            <Link data-variant="ghost" to="/services/website-care-plans/">View Growth Care details</Link>
           </div>
         </Card>
         <Card variant="outline">
@@ -319,7 +319,7 @@ const PricingPage = () => (
             <li>Priority support (same-day response)</li>
           </ul>
           <div className="card-actions">
-            <Link data-variant="ghost" to="/services/website-care-plans/">Learn more</Link>
+            <Link data-variant="ghost" to="/services/website-care-plans/">View Search Care details</Link>
           </div>
         </Card>
       </div>
@@ -424,6 +424,10 @@ const PricingPage = () => (
         ))}
       </div>
     </Section>
+
+    <p style={{ fontSize: "0.85rem", color: "var(--color-text-secondary)", marginTop: "2rem", textAlign: "center" }}>
+      Maintained by <Link to="/about/">Bradley Matera</Link>, web developer in Durand, Illinois. Prices current as of 2026. See <Link to="/service-scope/">service scope</Link> for what is included.
+    </p>
   </Layout>
 );
 

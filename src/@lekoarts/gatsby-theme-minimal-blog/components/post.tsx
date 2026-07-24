@@ -298,7 +298,7 @@ const allHouseAds: HouseAd[] = [
     category: "Service",
     title: "Northwest Illinois web development",
     body: "Custom sites, Gatsby builds, and full-stack help for local businesses.",
-    cta: "Learn more",
+    cta: "View web development services",
     href: "/web-developer-durand-davis-illinois/",
     theme: "direct",
     topics: ["frontend", "cloud", "general"],

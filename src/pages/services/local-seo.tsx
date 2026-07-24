@@ -8,7 +8,7 @@ import { Card, Link, Section } from "../../ui";
 const pathname = "/services/local-seo/";
 const pageTitle = "Local SEO Services for Northwest Illinois Businesses | Bradley Matera";
 const pageDescription =
-  "Local SEO services for Northwest Illinois businesses. Google Business Profile setup, local search optimization, schema markup, and review management. Starting at $67/month, no contracts.";
+  "Local SEO services for Northwest Illinois businesses. Google Business Profile setup, local search optimization, schema markup, and review management. From $67/month.";
 
 const deliverables = [
   "Google Business Profile setup, optimization, and verification",

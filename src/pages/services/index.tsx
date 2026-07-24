@@ -8,7 +8,7 @@ import { Card, Link, Section } from "../../ui";
 const pathname = "/services/";
 const pageTitle = "Website Services for Small Businesses in Northwest Illinois | Bradley Matera";
 const pageDescription =
-  "Website design, redesign, local SEO, repair, accessibility, and care plans for small businesses in Northwest Illinois. Starter sites from $447, builds in 14 days, no contracts.";
+  "Website design, redesign, local SEO, repair, accessibility, and care plans for small businesses in Northwest Illinois. Starter sites from $447, no contracts.";
 
 const serviceCards = [
   {
@@ -94,11 +94,112 @@ const ServicesPage = () => (
             <p className="feature-card__body">{service.desc}</p>
             <div className="card-actions">
               <Link data-variant="primary" to={service.href}>
-                Learn more
+                View {service.title} details
               </Link>
             </div>
           </Card>
         ))}
+      </div>
+    </Section>
+
+    <Section
+      eyebrow="Compare packages"
+      title="Which package fits your business?"
+      description={
+        <p>
+          Three fixed-price packages for new sites, plus hourly repair and ongoing care. No hidden fees, no contracts.
+        </p>
+      }
+    >
+      <div style={{ overflowX: "auto" }}>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+          <thead>
+            <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Starter — $447</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Growth — $797</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Premium — $1,497</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Pages</td>
+              <td style={{ padding: "0.75rem" }}>1 page</td>
+              <td style={{ padding: "0.75rem" }}>Up to 5 pages</td>
+              <td style={{ padding: "0.75rem" }}>Up to 10 pages</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Build time</td>
+              <td style={{ padding: "0.75rem" }}>7-14 days</td>
+              <td style={{ padding: "0.75rem" }}>14-21 days</td>
+              <td style={{ padding: "0.75rem" }}>21-28 days</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Mobile responsive</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Contact form</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>SEO setup</td>
+              <td style={{ padding: "0.75rem" }}>Basic</td>
+              <td style={{ padding: "0.75rem" }}>Local SEO</td>
+              <td style={{ padding: "0.75rem" }}>Local SEO + schema</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Google Business Profile</td>
+              <td style={{ padding: "0.75rem" }}>No</td>
+              <td style={{ padding: "0.75rem" }}>Setup included</td>
+              <td style={{ padding: "0.75rem" }}>Setup + optimization</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Schema markup</td>
+              <td style={{ padding: "0.75rem" }}>Basic</td>
+              <td style={{ padding: "0.75rem" }}>Service + FAQ</td>
+              <td style={{ padding: "0.75rem" }}>Service + FAQ + Breadcrumb</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Accessibility</td>
+              <td style={{ padding: "0.75rem" }}>Baseline</td>
+              <td style={{ padding: "0.75rem" }}>WCAG 2.2 AA</td>
+              <td style={{ padding: "0.75rem" }}>WCAG 2.2 AA + audit</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Revisions</td>
+              <td style={{ padding: "0.75rem" }}>1 round</td>
+              <td style={{ padding: "0.75rem" }}>2 rounds</td>
+              <td style={{ padding: "0.75rem" }}>3 rounds</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>30-day warranty</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+              <td style={{ padding: "0.75rem" }}>Yes</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Post-launch review</td>
+              <td style={{ padding: "0.75rem" }}>No</td>
+              <td style={{ padding: "0.75rem" }}>No</td>
+              <td style={{ padding: "0.75rem" }}>30-day measurement</td>
+            </tr>
+            <tr>
+              <td style={{ padding: "0.75rem" }}>Monthly care</td>
+              <td style={{ padding: "0.75rem" }}>$37/month optional</td>
+              <td style={{ padding: "0.75rem" }}>$67/month optional</td>
+              <td style={{ padding: "0.75rem" }}>$97/month optional</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div className="card-actions" style={{ marginTop: "1.5rem" }}>
+        <Link data-variant="primary" to="/pricing/">See full pricing</Link>
+        <Link data-variant="ghost" to="/contact/">Get a free plan</Link>
       </div>
     </Section>
 
@@ -128,6 +229,38 @@ const ServicesPage = () => (
       </div>
     </Section>
 
+    <Section eyebrow="Common questions" title="Frequently asked questions about website services">
+      <div className="grid-two">
+        <Card variant="outline">
+          <h3 className="feature-card__title">How much do website services cost?</h3>
+          <p className="feature-card__body">
+            Starter sites start at $447, Growth sites at $797, and Premium sites at $1,497. Hourly repair work is $65/hour. Monthly care plans range from $37 to $97. All prices are flat-rate with no hidden fees.
+          </p>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">How long does a website build take?</h3>
+          <p className="feature-card__body">
+            A Starter site takes 7-14 days, a Growth site takes 14-21 days, and a Premium site takes 21-28 days. Timelines assume you provide content and feedback promptly. Rush builds are available if you have a deadline.
+          </p>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">Do I own my website after it is built?</h3>
+          <p className="feature-card__body">
+            Yes. You own the code, content, domain, and hosting. Everything is registered in your name. If you ever want to move to another developer, I help you migrate at no extra charge. No vendor lock-in.
+          </p>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">What areas do you serve?</h3>
+          <p className="feature-card__body">
+            I serve Durand, Davis, Rockford, Freeport, Loves Park, Beloit WI, Janesville WI, and surrounding communities in Northwest Illinois and Southern Wisconsin. Remote work is available for clients outside this area.
+          </p>
+        </Card>
+      </div>
+      <div className="card-actions" style={{ marginTop: "1.5rem" }}>
+        <Link data-variant="ghost" to="/website-design-faq/">See all 12 FAQ topics</Link>
+      </div>
+    </Section>
+
     <Section
       eyebrow="Ready to start?"
       title="Get a free consultation"
@@ -145,6 +278,10 @@ const ServicesPage = () => (
         <Link data-variant="ghost" to="/pricing/">See pricing</Link>
       </div>
     </Section>
+
+    <p style={{ fontSize: "0.85rem", color: "var(--color-text-secondary)", marginTop: "2rem", textAlign: "center" }}>
+      Maintained by <Link to="/about/">Bradley Matera</Link>, web developer in Durand, Illinois. Last reviewed July 2026. Prices current as of 2026.
+    </p>
   </Layout>
 );
 

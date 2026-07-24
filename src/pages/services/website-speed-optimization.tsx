@@ -8,7 +8,7 @@ import { Card, Link, Section } from "../../ui";
 const pathname = "/services/website-speed-optimization/";
 const pageTitle = "Website Speed Optimization and Core Web Vitals | Bradley Matera";
 const pageDescription =
-  "Website speed optimization for small businesses. Improve LCP, INP, and CLS scores. Faster load times, better search rankings, and more conversions. $65/hour or flat-rate project pricing.";
+  "Website speed optimization for small businesses. Improve LCP, INP, and CLS scores. Faster load times, better search rankings, more conversions. $65/hour.";
 
 const speedIssues = [
   "Largest Contentful Paint above 2.5 seconds",

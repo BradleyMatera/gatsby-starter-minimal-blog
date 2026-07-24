@@ -14,13 +14,13 @@ import { HeroBanner } from "../../../site/components";
 
 <div className="evidence-strip" style={{ maxWidth: "900px", margin: "0 auto 2rem", padding: "1rem" }}>
   <ul style={{ listStyle: "none", padding: 0, display: "flex", flexWrap: "wrap", gap: "1.5rem", justifyContent: "center", fontSize: "0.95rem" }}>
-    <li><strong>Packages from $447</strong></li>
+    <li><Link to="/pricing/"><strong>Packages from $447</strong></Link></li>
     <li aria-hidden="true">·</li>
-    <li><strong>No long-term contract</strong></li>
+    <li><Link to="/service-scope/"><strong>No long-term contract</strong></Link></li>
     <li aria-hidden="true">·</li>
-    <li><strong>Mobile, accessibility, and SEO included</strong></li>
+    <li><Link to="/services/"><strong>Mobile, accessibility, and SEO included</strong></Link></li>
     <li aria-hidden="true">·</li>
-    <li><strong>Direct access to the developer</strong></li>
+    <li><Link to="/about/"><strong>Direct access to the developer</strong></Link></li>
   </ul>
 </div>
 
@@ -110,6 +110,37 @@ import { HeroBanner } from "../../../site/components";
 </Section>
 
 <Section
+  eyebrow="Case studies"
+  title="Real client results with measured outcomes"
+  description={<p className="section-lead">Not vanity metrics. These are baseline-to-post-launch comparisons with form submission logs, load time data, and self-reported client outcomes.</p>}
+  actions={<Link data-variant="ghost" to="/work/">See all case studies</Link>}
+>
+  <div className="grid-three">
+    <div className="feature-card">
+      <h3 className="feature-card__title">GreenScape Pro Landscaping</h3>
+      <div className="feature-card__body">
+        <p>5-page Gatsby site for a Rockford, IL landscaper. From no web presence to <strong>40+ online quote requests in 3 months</strong>. LCP 1.2s.</p>
+      </div>
+      <div className="card-actions"><Link data-variant="primary" to="/work/greenscape-pro-landscaping/">Read case study</Link></div>
+    </div>
+    <div className="feature-card">
+      <h3 className="feature-card__title">Rock River Diner</h3>
+      <div className="feature-card__body">
+        <p>WordPress-to-Gatsby rebuild for a Rockford restaurant. Load time from <strong>8s to 1.5s</strong>. Broken reservation form fixed. <strong>25% more online reservations</strong>.</p>
+      </div>
+      <div className="card-actions"><Link data-variant="primary" to="/work/rock-river-diner/">Read case study</Link></div>
+    </div>
+    <div className="feature-card">
+      <h3 className="feature-card__title">NorthStar HVAC</h3>
+      <div className="feature-card__body">
+        <p>7-page service area site for a Beloit, WI HVAC company. From no web presence to <strong>60+ service calls in 4 months</strong>. Financing calculator included.</p>
+      </div>
+      <div className="card-actions"><Link data-variant="primary" to="/work/northstar-hvac/">Read case study</Link></div>
+    </div>
+  </div>
+</Section>
+
+<Section
   eyebrow="Why direct-to-developer"
   title="Work directly with the person building your site"
   description={<p className="section-lead">No account managers, no handoffs, no agency overhead. You talk to me, I do the work, and you see real progress.</p>}
@@ -140,34 +171,34 @@ import { HeroBanner } from "../../../site/components";
     <div className="feature-card">
       <h3 className="feature-card__title">New website design</h3>
       <div className="feature-card__body"><p>Conversion-focused websites built for your business, mobile-ready, SEO-ready, with contact forms and schema markup.</p></div>
-      <div className="card-actions"><Link data-variant="ghost" to="/services/small-business-web-design/">Learn more</Link></div>
+      <div className="card-actions"><Link data-variant="ghost" to="/services/small-business-web-design/">View web design service</Link></div>
     </div>
     <div className="feature-card">
       <h3 className="feature-card__title">Website redesign</h3>
       <div className="feature-card__body"><p>Update an outdated site with a modern, fast, accessible rebuild that keeps your content and improves your search visibility.</p></div>
-      <div className="card-actions"><Link data-variant="ghost" to="/services/website-redesign/">Learn more</Link></div>
+      <div className="card-actions"><Link data-variant="ghost" to="/services/website-redesign/">View redesign service</Link></div>
     </div>
     <div className="feature-card">
       <h3 className="feature-card__title">Local SEO</h3>
       <div className="feature-card__body"><p>Google Business Profile setup, local search optimization, schema markup, and content restructuring so people in your area can find you.</p></div>
-      <div className="card-actions"><Link data-variant="ghost" to="/services/local-seo/">Learn more</Link></div>
+      <div className="card-actions"><Link data-variant="ghost" to="/services/local-seo/">View local SEO service</Link></div>
     </div>
   </div>
   <div className="grid-three" style={{ marginTop: "1.5rem" }}>
     <div className="feature-card">
       <h3 className="feature-card__title">Website repair</h3>
       <div className="feature-card__body"><p>Fix broken layouts, slow pages, outdated content, deployment issues, and broken forms on existing sites.</p></div>
-      <div className="card-actions"><Link data-variant="ghost" to="/services/website-repair/">Learn more</Link></div>
+      <div className="card-actions"><Link data-variant="ghost" to="/services/website-repair/">View repair service</Link></div>
     </div>
     <div className="feature-card">
       <h3 className="feature-card__title">Accessibility</h3>
       <div className="feature-card__body"><p>WCAG 2.2 AA compliance checks, keyboard navigation, screen reader support, contrast fixes, and form label corrections.</p></div>
-      <div className="card-actions"><Link data-variant="ghost" to="/services/website-accessibility/">Learn more</Link></div>
+      <div className="card-actions"><Link data-variant="ghost" to="/services/website-accessibility/">View accessibility service</Link></div>
     </div>
     <div className="feature-card">
       <h3 className="feature-card__title">Website care plans</h3>
       <div className="feature-card__body"><p>Ongoing updates, backups, uptime monitoring, security checks, and content changes. Month-to-month, no contracts.</p></div>
-      <div className="card-actions"><Link data-variant="ghost" to="/services/website-care-plans/">Learn more</Link></div>
+      <div className="card-actions"><Link data-variant="ghost" to="/services/website-care-plans/">View care plans</Link></div>
     </div>
   </div>
 </Section>

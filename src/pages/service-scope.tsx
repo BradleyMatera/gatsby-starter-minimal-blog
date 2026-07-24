@@ -8,7 +8,7 @@ import { Card, Link, Section } from "../ui";
 const pathname = "/service-scope/";
 const pageTitle = "Service Scope and What's Included | Bradley Matera";
 const pageDescription =
-  "What's included in every website build: mobile responsive, SEO, contact form, hosting setup, analytics, 30-day warranty. Package inclusions, care plans, and hourly work scope.";
+  "What is included in every website build: mobile responsive, SEO, contact form, hosting setup, analytics, 30-day warranty, care plans, and hourly work scope.";
 
 const ServiceScopePage = () => (
   <Layout>

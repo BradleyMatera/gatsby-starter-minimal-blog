@@ -10,7 +10,7 @@ const ContactContent = () => (
           <strong>Get a free website plan</strong>
         </>
       }
-      titleAs="h1"
+      titleAs="h2"
       description={
         <>
           <p className="direct-answer">

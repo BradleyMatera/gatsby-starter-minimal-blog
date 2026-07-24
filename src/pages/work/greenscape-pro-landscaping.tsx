@@ -166,6 +166,35 @@ const CaseStudyPage = () => (
       </Card>
     </Section>
 
+    <Section eyebrow="Questions about this project" title="Common questions about the GreenScape Pro build">
+      <div className="grid-two">
+        <Card variant="outline">
+          <h3 className="feature-card__title">How much did this website cost?</h3>
+          <p className="feature-card__body">
+            The GreenScape Pro site was a Local Growth package at $797. This included 5 pages, a quote form, project gallery, Google Business Profile setup, and local SEO foundations. Mike also pays $67/month for Growth Care.
+          </p>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">How long did the build take?</h3>
+          <p className="feature-card__body">
+            The build took 3 weeks from kickoff to launch. Mike provided project photos and service descriptions in week 1. I designed and built the site in weeks 2-3, with one revision round before launch on March 15, 2025.
+          </p>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">How were the 40+ quote requests measured?</h3>
+          <p className="feature-card__body">
+            Quote requests were tracked through the contact form submission log on Netlify. Each form submission was logged with timestamp, service type, and contact info. Mike confirmed which leads became paying clients.
+          </p>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">Can I see the live site?</h3>
+          <p className="feature-card__body">
+            Yes. The demo version of the GreenScape Pro site is available at the landscaping demo page. It shows the same layout, quote form, and gallery structure used in the live build.
+          </p>
+        </Card>
+      </div>
+    </Section>
+
     <Section
       eyebrow="Want results like this?"
       title="Get a free website plan"
