@@ -1,0 +1,99 @@
+---
+title: "Core Web Vitals for Small Businesses: What Actually Matters"
+date: "2026-07-23"
+slug: "/core-web-vitals-small-businesses"
+tags: ["performance", "technical-seo", "small-business"]
+description: "Core Web Vitals explained for small business owners. LCP, INP, CLS targets and the practical fixes that actually improve real user experience."
+theme: "Technical"
+---
+
+Core Web Vitals are Google's three measurements of how a page feels to a real person loading it. They are not a vanity metric. They affect search rankings and they affect whether visitors stay on your site or leave. For a small business, the difference between a 2-second load and a 6-second load is the difference between a phone call and a bounce.
+
+## The short answer
+
+Core Web Vitals are three numbers: LCP (how fast the main content appears), INP (how fast the page responds to clicks), and CLS (how much the layout shifts around). Google wants LCP under 2.5 seconds, INP under 200 milliseconds, and CLS under 0.1. Most small business sites fail at least one of these, and the fixes are usually straightforward: resize images, defer JavaScript, and reserve space for anything that loads after the page.
+
+## The three metrics
+
+### LCP: Largest Contentful Paint
+
+LCP measures how long it takes for the largest visible element on the screen to finish loading. For most small business sites, that element is a hero image or a banner at the top of the page.
+
+**Target:** 2.5 seconds or faster.
+
+**What causes it to fail:**
+- Images that are too large (a 4000px-wide photo served to a phone)
+- No image compression or modern format (WebP, AVIF)
+- Slow server response time (TTFB over 600ms)
+- Render-blocking CSS or JavaScript in the head
+
+**Practical fixes:**
+- Resize images to the actual display size. A hero image does not need to be wider than 1920px.
+- Serve WebP or AVIF instead of JPEG. Most CMS platforms and static site generators handle this automatically now.
+- Use a CDN. Cloudflare's free tier is enough for most small sites.
+- Lazy-load images below the fold so they do not block the initial paint.
+
+### INP: Interaction to Next Paint
+
+INP replaced FID in 2024. It measures how long it takes for the page to respond when a user clicks, taps, or types. It captures the full interaction, not just the first input.
+
+**Target:** 200 milliseconds or faster.
+
+**What causes it to fail:**
+- Heavy JavaScript running on the main thread
+- Third-party scripts (analytics, chat widgets, ad scripts) blocking interaction
+- Large bundle sizes from frameworks or page builders
+- Event handlers that do expensive work on every input
+
+**Practical fixes:**
+- Defer or async-load non-critical JavaScript. If a script does not need to run immediately, it should not block interaction.
+- Audit third-party scripts. Every chat widget, tracking pixel, and embed adds latency. Remove the ones you do not actually use.
+- If you are on WordPress, limit plugins. Each plugin can add its own JavaScript to every page.
+- Break up long tasks. If a script does a lot of work on load, split it into smaller chunks.
+
+### CLS: Cumulative Layout Shift
+
+CLS measures how much the page layout moves around as it loads. If you have ever tried to click a link and the page jumped at the last second, that is a layout shift.
+
+**Target:** 0.1 or lower.
+
+**What causes it to fail:**
+- Images without width and height attributes
+- Ads or embeds that push content down after loading
+- Web fonts that cause text to reflow when they finish loading
+- Dynamically injected content above existing content
+
+**Practical fixes:**
+- Always include width and height attributes on images. The browser reserves the space before the image loads.
+- Reserve space for ads and embeds. If an ad slot is 250px tall, give it a 250px container even before the ad loads.
+- Use `font-display: swap` or `font-display: optional` so text renders immediately with a fallback font.
+- Do not inject banners or popups above existing content after the page has loaded.
+
+## Lab data vs field data
+
+This is where most people get confused. You will see different numbers depending on where you look.
+
+**Lab data** comes from tools like Lighthouse and PageSpeed Insights. It runs a simulated test in a controlled environment. It is useful for debugging because it gives you a consistent baseline, but it does not reflect real user experience.
+
+**Field data** comes from the Chrome User Experience Report (CrUX). It is real data from real Chrome users who visited your site. This is what Google uses for ranking signals.
+
+The numbers will not match. A page might score 95 on Lighthouse but show poor field data because real users are on slow phones with bad connections. When the two disagree, field data is what matters for rankings. Lab data is what you use to figure out what to fix.
+
+## What to actually do
+
+If you are a small business owner and not a developer, here is the priority order:
+
+1. **Fix your images.** This solves LCP and CLS in one step. Resize, compress, and add dimensions. This single change fixes more Core Web Vitals issues than anything else.
+2. **Remove unused third-party scripts.** Go through every script on your site and ask whether you actually need it. Most small business sites have tracking scripts they never look at.
+3. **Test on a real phone.** Not your laptop. Open your site on a mid-range Android device on cellular data. If it feels slow, it is slow.
+4. **Check Search Console.** Google Search Console shows you the field data for your site. It tells you which URLs are failing and which metrics need work.
+
+## When to get help
+
+If you have done the basics (image optimization, script cleanup) and your field data is still poor, the problem is likely in the site's architecture. Page builders, heavy themes, and shared hosting can create performance problems that require a developer to fix.
+
+I help small businesses fix Core Web Vitals as part of my [website speed optimization service](/services/website-speed-optimization/). If you want a real audit with specific fixes, [get in touch](/contact/).
+
+## The bottom line
+
+Core Web Vitals are not a guessing game. The targets are public, the tools are free, and the fixes are well-documented. The reason most small business sites fail is not because the problems are hard. It is because nobody looked. Run a PageSpeed Insights test, read the numbers, and fix the biggest problem first. That is 80% of the work.

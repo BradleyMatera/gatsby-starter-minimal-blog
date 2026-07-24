@@ -1,0 +1,95 @@
+---
+title: "Website Accessibility Basics for Small Businesses"
+date: "2026-07-23"
+slug: "/website-accessibility-basics"
+tags: ["accessibility", "wcag", "small-business"]
+description: "WCAG 2.2 AA basics for small business owners. Keyboard navigation, alt text, color contrast, form labels, and why accessibility matters legally."
+theme: "Technical"
+---
+
+Website accessibility is not a nice-to-have. It is a legal requirement, a business obligation, and a practical way to make sure every visitor can use your site. For small businesses, the risk is not theoretical. ADA lawsuits over inaccessible websites are filed every day, and they target small companies as often as large ones.
+
+## The short answer
+
+WCAG 2.2 AA is the standard most accessibility laws point to. It means your site works with a keyboard, has text alternatives for images, uses sufficient color contrast, labels every form field, and lets users skip to main content. The most common failures are missing alt text, low contrast, no keyboard navigation, unlabeled forms, and no skip link. You can catch most of these with three free tests: keyboard-only navigation, a screen reader pass, and a contrast checker.
+
+## What WCAG 2.2 AA means
+
+WCAG stands for Web Content Accessibility Guidelines. Version 2.2 is the current standard, published in October 2023. The "AA" level is the middle tier and the one most laws reference, including the ADA and Section 508.
+
+WCAG is organized around four principles. Content must be:
+
+- **Perceivable:** Users can see or hear it. Images need alt text, videos need captions, content needs sufficient contrast.
+- **Operable:** Users can navigate it. Keyboard access, no keyboard traps, enough time to read content.
+- **Understandable:** Users can comprehend it. Clear language, predictable navigation, error prevention on forms.
+- **Robust:** It works with assistive technology. Proper HTML, ARIA where needed, compatible with screen readers.
+
+You do not need to memorize all 86 success criteria. You need to fix the ones that fail most often.
+
+## The most common accessibility failures
+
+### 1. Missing alt text
+
+Every image that conveys information needs an `alt` attribute that describes what the image shows. Decorative images should have empty alt text (`alt=""`) so screen readers skip them.
+
+The failure: images with no alt attribute at all, or alt text that says "image" or "photo" or the filename. That tells a screen reader user nothing.
+
+The fix: write alt text that describes the content and function of the image. "Team meeting at Durand office" is good alt text. "IMG_4821.jpg" is not.
+
+### 2. Low color contrast
+
+Text needs enough contrast against its background to be readable. WCAG 2.2 AA requires a contrast ratio of at least 4.5:1 for normal text and 3:1 for large text (18pt or 14pt bold).
+
+The failure: light gray text on a white background, or colored text that looks fine to someone with full color vision but is invisible to someone with color blindness.
+
+The fix: use a contrast checker (WebAIM's is free and browser-based). Test every text and background combination. If the ratio is below 4.5:1, darken the text or lighten the background.
+
+### 3. No keyboard navigation
+
+Not everyone uses a mouse. Some users navigate with a keyboard alone (Tab, Shift+Tab, Enter, Space). Every interactive element (links, buttons, form fields) must be reachable and operable with a keyboard.
+
+The failure: custom JavaScript widgets that trap focus, links that only work on click, dropdown menus that do not open with keyboard, and no visible focus indicator (the outline that shows which element is selected).
+
+The fix: tab through your site without touching the mouse. If you get stuck, that is a keyboard trap. If you cannot tell which element is focused, the focus indicator is missing or removed.
+
+### 4. Unlabeled form fields
+
+Every form input needs a label. Not a placeholder. A placeholder disappears the moment you start typing, and screen readers often do not announce placeholders at all.
+
+The failure: forms that use placeholders instead of labels, or labels that are not programmatically connected to their inputs.
+
+The fix: use a `<label>` element with a `for` attribute that matches the input's `id`. Every field should have a visible, persistent label.
+
+### 5. Missing skip link
+
+A skip link is a hidden link at the top of the page that lets keyboard users jump directly to the main content. Without it, a keyboard user has to tab through your entire header and navigation on every page.
+
+The failure: no skip link, or a skip link that is not visible when focused.
+
+The fix: add a "Skip to main content" link as the first element in the body. It should be visually hidden until focused, then appear when a keyboard user tabs to it.
+
+## The legal risk
+
+ADA Title III applies to websites. Courts have ruled repeatedly that websites are places of public accommodation. You do not need to be a Fortune 500 company to get sued. Plaintiffs' firms file hundreds of these lawsuits per year, many against small businesses, restaurants, and local services.
+
+A typical ADA web accessibility lawsuit costs between $5,000 and $25,000 to settle, plus your own legal fees. The cost of fixing the accessibility issues is almost always lower than the cost of a single settlement.
+
+## How to test your site
+
+You do not need expensive tools. Three free tests catch most problems:
+
+1. **Keyboard-only test:** Unplug your mouse. Try to navigate your site using only Tab, Shift+Tab, Enter, Space, and arrow keys. If you get stuck or cannot reach something, that is a failure.
+2. **Screen reader test:** Install NVDA (free, Windows) or VoiceOver (built into macOS). Close your eyes and try to use your site. If you cannot tell what is on the page or what each element does, your screen reader users cannot either.
+3. **Contrast checker:** Run your site through WebAIM's Contrast Checker or the WAVE accessibility extension. It flags every contrast failure automatically.
+
+For a broader audit, use the WAVE browser extension. It scans a page and reports structural issues, missing labels, alt text problems, and contrast failures in one pass.
+
+## When to get help
+
+The basics (alt text, contrast, labels, skip links) you can fix yourself if you are comfortable editing content. Structural issues (keyboard traps, ARIA implementation, custom widgets) usually need a developer.
+
+I help small businesses make their sites accessible and compliant. If you want an audit or remediation work, check my [website accessibility service](/services/website-accessibility/) or [reach out directly](/contact/).
+
+## The bottom line
+
+Accessibility is not about checking a box. It is about making sure every person who visits your site can actually use it. The legal risk is real, but the bigger reason is simpler: if someone cannot use your site, they cannot be your customer. Run the three free tests, fix what you find, and you will have handled the majority of accessibility problems on most small business sites.

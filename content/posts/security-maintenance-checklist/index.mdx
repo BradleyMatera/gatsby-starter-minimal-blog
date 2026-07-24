@@ -1,0 +1,117 @@
+---
+title: "Website Security and Maintenance Checklist"
+date: "2026-07-23"
+slug: "/security-maintenance-checklist"
+tags: ["security", "maintenance", "small-business"]
+description: "A practical security and maintenance checklist for small business websites. Updates, backups, SSL, passwords, monitoring, and spam protection."
+theme: "Technical"
+---
+
+Your website is not a brochure you build once and forget. It is software running on a server, and software needs maintenance. The sites that get hacked are almost never the ones with sophisticated attackers. They are the ones that nobody updated for eight months.
+
+## The short answer
+
+Website maintenance comes down to eight things: keep your SSL certificate valid, use strong passwords with 2FA, update your CMS and plugins regularly, run weekly backups, monitor uptime, scan for security issues, protect against spam, and review access logs. If you skip maintenance, the risks are hacks, downtime, data loss, and the cost of emergency recovery, which is always more expensive than prevention.
+
+## The checklist
+
+### SSL certificate
+
+Your site needs HTTPS. This is non-negotiable. Browsers flag HTTP sites as insecure, Google downgrades them in search results, and users leave.
+
+- **Check:** Does your site load over HTTPS without warnings?
+- **Frequency:** Check monthly. Most SSL certificates renew automatically via Let's Encrypt, but auto-renewal can fail silently.
+- **Action:** If you see a certificate warning, renew immediately. If your host does not offer free SSL, switch hosts.
+
+### Strong passwords and 2FA
+
+Weak passwords are the number one way sites get compromised. Not zero-day exploits. Not sophisticated attacks. Someone guessed "admin123."
+
+- **Check:** Every admin account uses a unique password of at least 16 characters, stored in a password manager.
+- **Frequency:** Review access quarterly. Remove accounts for people who no longer need them.
+- **Action:** Enable two-factor authentication on every admin account. Use an authenticator app, not SMS. Limit admin access to the people who actually need it.
+
+### Regular updates
+
+CMS platforms (WordPress, Drupal, Shopify), plugins, themes, and server dependencies all release updates. Most updates fix security vulnerabilities. The longer you wait, the more exposed you are.
+
+- **Check:** Is your CMS on the latest stable version? Are all plugins and themes updated?
+- **Frequency:** Check weekly. Update within 7 days of a security patch release.
+- **Action:** Update in this order: plugins, then theme, then CMS core. Test after each update. If a plugin update breaks something, you need to know which one caused it.
+
+For static sites, the maintenance is lighter. Update your dependencies (npm packages, framework versions) when security patches are released. Rebuild and redeploy.
+
+### Backups
+
+If your site gets hacked or your server dies, a backup is the difference between a bad afternoon and a dead business. Backups need to be automatic, regular, and stored somewhere other than the same server as your site.
+
+- **Check:** Can you restore your site from a backup in under an hour?
+- **Frequency:** Daily for e-commerce sites. Weekly for most small business sites.
+- **Action:** Use a backup tool that stores copies off-site (cloud storage, not the same server). Test your restore process at least once. An untested backup is a guess, not a backup.
+
+### Uptime monitoring
+
+You should know your site is down before your customers do. Uptime monitoring sends you an alert when your site stops responding.
+
+- **Check:** Do you get notified within 5 minutes of downtime?
+- **Frequency:** Continuous (monitoring runs 24/7).
+- **Action:** Use a free monitoring service like UptimeRobot. Set it to check your homepage every 5 minutes. Configure alerts to your email and phone.
+
+### Security scanning
+
+Malware and vulnerability scans catch problems before they become breaches. A scan tells you if your site has been compromised or if a known vulnerability exists in your setup.
+
+- **Check:** Has your site been scanned for malware and known vulnerabilities in the last 30 days?
+- **Frequency:** Monthly at minimum. Weekly if you run e-commerce.
+- **Action:** Use a scanner appropriate to your platform. WordPress has Wordfence and Sucuri. Static sites need fewer scans but should still check for exposed secrets in the repository.
+
+### Spam protection
+
+Comment spam, form spam, and fake account registrations are not just annoying. They can pollute your database, skew your analytics, and in some cases inject malicious links into your content.
+
+- **Check:** Are your forms and comment sections protected?
+- **Frequency:** Ongoing.
+- **Action:** Use a spam filter (hCaptcha, Cloudflare Turnstile, or your CMS's built-in filtering). Review spam logs periodically to make sure legitimate submissions are not getting caught.
+
+### Access and activity logs
+
+You should be able to look back and see who logged in, what they changed, and when. If your site gets hacked, activity logs are how you figure out what happened.
+
+- **Check:** Are login attempts and content changes logged?
+- **Frequency:** Review monthly. Review immediately if you suspect a problem.
+- **Action:** Most CMS platforms have logging plugins. For static sites, your hosting provider's access logs are the place to look.
+
+## What happens if you ignore maintenance
+
+I have seen the aftermath enough times to be blunt about it.
+
+**Hacks.** Outdated WordPress sites are the most common target. Attackers inject malicious code, redirect your traffic to scam sites, or use your server to send spam. Your host may suspend your account. Google may flag your site in search results with a "This site may be hacked" warning.
+
+**Downtime.** A failed update, an expired SSL certificate, or a server issue can take your site offline. Without monitoring, you find out from a customer. Without a backup, recovery takes days instead of minutes.
+
+**Data loss.** If your only copy of your site lives on one server and that server fails, you lose everything. Content, customer data, order history. Businesses have lost years of work this way.
+
+**Cost.** Emergency recovery from a hack typically costs $500 to $3,000 for a small business site. A maintenance plan costs a fraction of that and prevents the problem entirely.
+
+## The maintenance schedule at a glance
+
+| Task | Frequency |
+|------|-----------|
+| SSL check | Monthly |
+| Password and access review | Quarterly |
+| CMS and plugin updates | Weekly |
+| Backups | Daily or weekly |
+| Uptime monitoring | Continuous |
+| Security scan | Monthly |
+| Spam review | Ongoing |
+| Activity log review | Monthly |
+
+## When to get help
+
+If you are comfortable logging into your CMS and clicking update, you can handle the basics yourself. If you want someone else to own it so you do not have to think about it, that is what care plans are for.
+
+I run [website care plans](/services/website-care-plans/) that handle updates, backups, monitoring, and security scanning for small business sites. If you want to stop worrying about this, [get in touch](/contact/).
+
+## The bottom line
+
+Maintenance is not exciting. Nobody gets excited about updating plugins. But the sites that stay online, stay secure, and stay ranked are the ones that get maintained. Run through the checklist above, set up the automated pieces (backups, monitoring), and make the manual pieces (updates, reviews) a recurring calendar event. That is the whole job.

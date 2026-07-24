@@ -1,0 +1,145 @@
+---
+title: "How to Measure Calls, Forms, and Direction Requests"
+date: "2026-07-23"
+slug: "/measure-calls-forms-direction-requests"
+tags: ["local-seo", "analytics", "conversion"]
+description: "Practical guide to tracking the local search actions that matter: phone calls, form submissions, and direction requests."
+theme: "Local SEO"
+---
+
+Traffic is a vanity metric for local businesses. You can have 5,000 monthly visitors and zero calls. You can have 800 visitors and a full schedule. The difference is not traffic. It is whether you are measuring the actions that actually lead to revenue. This guide covers how to track calls, form submissions, and direction requests so you know whether your local SEO is working.
+
+## The short answer
+
+Stop tracking pageviews as your primary metric. Track three things instead: phone calls, form submissions, and direction requests. Use Google Analytics 4 events for form submissions, Google Business Profile insights for calls and direction requests, and call tracking numbers if you need to know which source drove the call. Review the numbers monthly and compare them to the previous month and the same month last year.
+
+## Why traffic alone is useless
+
+A local business website is not a media site. Its job is not to get eyeballs. Its job is to generate leads. If you are ranking #1 for "plumber Rockford" and getting 1,200 clicks a month but your phone is not ringing, something is broken. Maybe your site loads slowly. Maybe your phone number is not visible. Maybe your reviews are bad. Maybe the traffic is coming from the wrong search intent.
+
+You will not know any of this if you are only looking at traffic. You need to track the actions that happen after the click.
+
+## What to track
+
+### Phone calls
+
+Phone calls are the primary conversion for most local service businesses. When someone needs a plumber, they call. They do not fill out a contact form and wait.
+
+Track calls from three sources:
+1. **Your website:** How many people click the phone number on your site
+2. **Google Business Profile:** How many people call directly from your Maps listing
+3. **Other directories:** Yelp, Bing, and other citations that show your number
+
+### Form submissions
+
+Forms matter for businesses with longer sales cycles or higher-ticket services. A homeowner researching a roof replacement might fill out a form instead of calling. Track every form submission as a conversion.
+
+### Direction requests
+
+Direction requests are a strong intent signal. If someone is asking for directions to your business, they are planning to visit. Google Business Profile tracks this for you.
+
+### GBP actions
+
+GBP insights also tracks:
+- Website clicks from your listing
+- Photo views
+- Message interactions
+- Booking clicks (if you use booking features)
+
+These are secondary metrics. Track them but do not obsess over them.
+
+## Tools you need
+
+### Google Analytics 4
+
+GA4 replaced Universal Analytics in 2023. It is event-based, which means every action you want to track is an event. Set up GA4 on your website if you have not already.
+
+### Google Business Profile insights
+
+GBP provides insights for free. Log into your GBP dashboard and look at the performance section. You will see calls, direction requests, website clicks, and message interactions over the last 7, 30, or 90 days.
+
+### Call tracking (optional)
+
+If you want to know which source drove a call (organic search vs. Yelp vs. a direct mailer), use a call tracking service. These assign a unique phone number to each source and forward calls to your real number.
+
+| Tool | Cost | Best for |
+|------|------|----------|
+| CallRail | $45/mo | Full call tracking with recording |
+| Google Forwarding Numbers | Free | GBP only, shows call source within GBP |
+| Twilio | Pay per use | Custom setups |
+
+I recommend starting with Google's free forwarding number on your GBP. It shows you how many calls come from your listing without any setup. Add CallRail later if you need to track calls from your website or other sources.
+
+## How to set up form tracking in GA4
+
+This is the most common gap I see. Businesses have GA4 installed but no form tracking. Here is how to fix it.
+
+### Step 1: Identify your form
+
+Find the form on your website. Note the form ID or the submit button text. You will need this for the event trigger.
+
+### Step 2: Create a GA4 event
+
+In GA4, go to **Admin** > **Events** > **Create event**. Set up a trigger that fires when the form submission is successful.
+
+If you are using a form builder like Netlify Forms, WPForms, or Gravity Forms, the setup varies. Most form plugins have a GA4 integration or a webhook option.
+
+If you are using Google Tag Manager, create a trigger for the form submission event and send a `generate_lead` event to GA4 with the form name as a parameter.
+
+### Step 3: Mark it as a conversion
+
+In GA4, go to **Admin** > **Conversions** and mark your form submission event as a conversion. This makes it show up in your standard reports.
+
+### Step 4: Test it
+
+Submit the form yourself. Check GA4 **Realtime** reports to confirm the event fired. If it did not, check your trigger conditions.
+
+## How to interpret the data
+
+Tracking is useless if you do not look at the numbers. Here is how to read them.
+
+### Monthly review
+
+Once a month, pull these numbers:
+
+| Metric | Source | What it tells you |
+|--------|--------|-------------------|
+| Total calls | GBP + call tracking | Are people reaching out? |
+| Form submissions | GA4 | Are longer-intent leads coming in? |
+| Direction requests | GBP insights | Are people planning to visit? |
+| GBP calls vs. website calls | Both | Where are leads coming from? |
+| Conversion rate | GA4 | What percentage of visitors take action? |
+
+### Compare to last month
+
+Are calls up or down? If calls dropped 30% in a month, check:
+- Did your GBP ranking drop?
+- Did you lose reviews?
+- Is your website down or slow?
+- Did a competitor start outranking you?
+
+### Compare to last year
+
+Seasonal businesses fluctuate. Compare July to last July, not July to June. A 20% drop from June to July might be normal. A 20% drop from July to last July is a problem.
+
+### Look at the ratio
+
+If you get 1,000 website visitors and 8 calls, your call conversion rate is 0.8%. A good rate is 2-5%. If yours is below 1%, something on your website is stopping people from calling. Check that your phone number is visible on mobile without scrolling, is clickable, and that you have a clear call to action above the fold.
+
+## Common tracking mistakes
+
+### Tracking clicks instead of actual calls
+
+A click on a `tel:` link does not mean a call was made. On desktop, clicking a phone number does nothing. Rely on call tracking or GBP insights for actual call counts.
+
+### Not filtering spam form submissions
+
+GA4 will count spam form submissions as conversions. Filter out bot traffic and test submissions. Check your conversions against actual leads in your CRM.
+
+### Ignoring GBP insights
+
+GBP insights is free and tracks the most important local metrics. Many businesses never look at it. Log in once a month and screenshot the numbers.
+
+## Next steps
+
+If you want help setting up tracking for your local business, I offer [local SEO services](/services/local-seo/) that include analytics setup and monthly reporting. You can also [contact me](/contact/) if you have a specific tracking question or want a second opinion on your current setup.

@@ -1,0 +1,124 @@
+---
+title: "Before and After Teardown: Measurable Website Changes"
+date: "2026-07-23"
+slug: "/before-after-teardown-measurable-changes"
+tags: ["conversion", "case-study", "small-business"]
+description: "A teardown of common website problems and the measurable changes that fix them. Real examples of speed, clarity, and conversion improvements."
+theme: "Conversion"
+---
+
+This post tears down four common small business website problems and shows the measurable changes that fixed them: slow load times, confusing navigation, missing calls to action, and broken contact forms. For each one I show what was wrong, what changed, and the result. Some numbers are measured from analytics. Some are projected based on benchmarks. I label which is which.
+
+I am not going to pretend every redesign produces a 300% increase in conversions. Some changes have a big impact. Some have a small one. The point of a teardown is to show what actually changed and why, not to sell you on a magic bullet.
+
+## Teardown 1: Slow site to fast site
+
+**The business:** A landscaping company in northern Illinois. Their site had a photo gallery with 40 uncompressed images, a background video, and four tracking scripts.
+
+**What was wrong:**
+- Homepage load time: 7.8 seconds on mobile (measured via Lighthouse)
+- 5.2MB total page weight
+- Bounce rate: 72% (measured via Google Analytics)
+
+**What changed:**
+- Compressed all 40 gallery images. Average went from 800KB to 85KB.
+- Removed the background video. Replaced with a single compressed hero image.
+- Removed two of the four tracking scripts. Kept Google Analytics and one conversion tracker.
+- Enabled lazy loading on gallery images below the fold.
+
+**The result:**
+- Homepage load time: 2.3 seconds on mobile (measured)
+- 890KB total page weight (measured)
+- Bounce rate: 44% (measured, 90 days after launch)
+
+Bounce rate dropped 28 percentage points. The site went from painful to usable. I attribute most of that to speed. The content did not change significantly.
+
+## Teardown 2: Confusing navigation to clear navigation
+
+**The business:** A dental practice with two locations. Their navigation had 11 items including "Our Philosophy," "Patient Resources," and "Financial Information." Services were buried under a dropdown labeled "Procedures."
+
+**What was wrong:**
+- 11 main navigation items, 4 with unclear labels
+- Services hidden under a dropdown called "Procedures" (a term patients did not use)
+- No clear path to booking an appointment
+- Average pages per session: 1.4 (measured)
+- Time on site: 38 seconds (measured)
+
+**What changed:**
+- Reduced navigation to 6 items: Services, About, Reviews, Locations, New Patients, Contact.
+- Renamed "Procedures" to "Services" and made it a direct link.
+- Added a "Book Appointment" button in the header on every page.
+- Consolidated "Patient Resources" and "Financial Information" into a single "New Patients" page.
+
+**The result:**
+- Average pages per session: 2.8 (measured, 60 days after launch)
+- Time on site: 1 minute 52 seconds (measured)
+- Appointment requests: up 40% (measured, comparing 60 days before and after)
+
+People found what they were looking for and spent more time on the site. The "Book Appointment" button in the header was the single biggest contributor to the form submission increase.
+
+## Teardown 3: No CTA to clear CTA
+
+**The business:** An electrician serving a three-county area. Their site had good content but no clear call to action on any page. The homepage ended with a paragraph about company history. Service pages ended with a list of services. No button, no phone number, no "get a quote" link.
+
+**What was wrong:**
+- No CTA on any page
+- Phone number only in the footer, not clickable on mobile
+- No contact form on service pages
+- Contact submissions: 3 per month (measured)
+
+**What changed:**
+- Added a CTA button at the bottom of every service page: "Get a Free Estimate."
+- Made the phone number clickable in the header on every page.
+- Added a short contact form (3 fields) to the bottom of each service page.
+
+**The result:**
+- Contact submissions: 11 per month (measured, 90 days after launch)
+- Phone calls from website: up approximately 25% (projected, call tracking was not reliable before the change)
+
+The form submission increase is measured. The phone call increase is projected because the old site did not have reliable call tracking. Adding a CTA to pages that had none will increase contacts. The question is how much, and that depends on traffic volume.
+
+## Teardown 4: Broken contact form to working form
+
+**The business:** A small accounting firm. Their contact form had 9 required fields, visible reCAPTCHA with image challenges, no confirmation message, and a bug where mobile submissions sometimes failed silently.
+
+**What was wrong:**
+- 9 required fields including company name, annual revenue, and number of employees
+- Visible reCAPTCHA v2 with image challenges
+- Mobile submission bug (form appeared to submit but did not send)
+- Form submissions: 2 per month (measured)
+
+**What changed:**
+- Reduced to 4 fields: Name, Email, Phone, Message.
+- Replaced visible reCAPTCHA with invisible honeypot-based spam protection.
+- Added a confirmation message after submission.
+- Fixed the mobile submission bug (a JavaScript error in the form handler).
+
+**The result:**
+- Form submissions: 14 per month (measured, 60 days after launch)
+- Mobile submission success rate: 100% (measured, was approximately 60% before the fix)
+
+The mobile bug fix was the biggest factor here. Nearly half of mobile submissions were failing silently. Fixing that alone would have doubled submissions. Reducing fields and removing the captcha challenge accounted for the rest of the increase.
+
+## What I learned
+
+A few patterns show up across all four teardowns:
+
+1. **Speed matters more than design.** The landscaping site got faster, not prettier. Bounce rate dropped 28 points. Fix speed before anything else.
+2. **Clear navigation beats clever navigation.** Reducing 11 nav items to 6 with plain labels doubled pages per session. People want to find things, not admire your vocabulary.
+3. **CTAs are not optional.** Adding a CTA to pages that had none tripled form submissions. If you do not tell people what to do next, they do nothing.
+4. **Forms should be short and should work.** The accounting firm was losing half their mobile submissions to a bug. Fixing the form increased submissions 7x.
+
+## Measured vs projected
+
+**Measured** means I compared analytics data before and after the change over the same time periods. Those numbers are real.
+
+**Projected** means I estimated based on benchmarks or partial data. The electrician's phone call increase is projected because call tracking was not in place before the redesign. I can see form submissions went up and infer calls did too, but I cannot prove it with data.
+
+Any time you see conversion numbers from a case study, ask whether they are measured or projected. A lot of case study numbers are projections presented as measurements.
+
+## Bottom line
+
+The changes that made the biggest difference in these teardowns were not glamorous. Compressing images, reducing navigation items, adding a button, and fixing a form bug. None of these require a complete rebuild. Most of them can be done in a few hours. The impact comes from removing friction, not from adding features.
+
+If you want a teardown of your own site, [my website redesign service](/services/website-redesign/) starts with an audit of what is actually wrong before any design work begins. You can also [see examples of my work](/work/) to get a sense of how I approach these problems.

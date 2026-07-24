@@ -1,0 +1,130 @@
+---
+title: "How to Migrate a Website Without Losing Rankings"
+date: "2026-07-23"
+slug: "/migrate-without-losing-rankings"
+tags: ["migration", "seo", "technical"]
+description: "A step-by-step guide to migrating a website without losing search rankings. 301 redirects, content preservation, and post-launch SEO checks."
+theme: "Technical"
+---
+
+A website migration is the most common way businesses destroy their own search rankings. Not because migrations are inherently dangerous, but because most people treat them as a design project and forget about SEO until after launch.
+
+## The short answer
+
+To migrate without losing rankings, do three things: before launch, audit every URL and record current rankings. During launch, implement 301 redirects from every old URL to its new equivalent and preserve your content. After launch, submit the new sitemap to Search Console, monitor for 404 errors, and watch your rankings for two to four weeks. The most common mistakes are forgetting redirects, rewriting content during the migration, and not updating the sitemap.
+
+## Before the migration
+
+### Audit your current URLs
+
+Before you change anything, you need a complete list of every URL on your current site that search engines have indexed. If you do not know what you have, you cannot protect it.
+
+1. Go to Google Search Console. Export your indexed pages report.
+2. Run a site crawl using Screaming Frog or a similar tool. This catches pages Google has not indexed but that still exist.
+3. Combine both lists into a master URL inventory.
+
+### Record your current rankings
+
+Document where you currently rank for your target keywords. If rankings drop after launch, you need to know what you lost.
+
+1. Use a rank tracking tool (Ahrefs, Semrush, or Search Console's performance report).
+2. Record the top 20 to 50 keywords you care about, the URL that ranks for each, and the position.
+3. Save this. You will compare against it after launch.
+
+### Map old URLs to new URLs
+
+This is the most important pre-migration step. For every URL on your current site, decide what its new URL will be. Create a redirect map.
+
+| Old URL | New URL | Status |
+|--------|---------|--------|
+| /about-us/ | /about/ | 301 |
+| /services/web-design/ | /services/web-design/ | No change |
+| /old-blog-post/ | /blog/new-blog-post/ | 301 |
+| /contact-form/ | /contact/ | 301 |
+
+Rules for the redirect map:
+
+- If a page's content is moving, map it to the closest equivalent new page.
+- If a page is being deleted, redirect it to the most relevant parent page, not the homepage.
+- If a page's URL is not changing, no redirect is needed.
+- Do not redirect everything to the homepage. That wastes the link equity.
+
+## During the migration
+
+### Implement 301 redirects
+
+A 301 redirect is a permanent redirect. It tells search engines and browsers that a page has permanently moved, and it passes most of the original page's search ranking value to the new page.
+
+- Use 301 (permanent) redirects, not 302 (temporary). A 302 tells Google the move is temporary, so it does not transfer ranking signals.
+- Implement redirects at the server level, not via JavaScript or meta refresh tags. Server-level redirects are the only type search engines reliably follow.
+- Test every redirect before launch. Load the old URL and confirm it goes to the correct new URL with a 301 status code.
+
+### Preserve your content
+
+People use the redesign as an opportunity to rewrite everything. Do not do this.
+
+- Keep the content on each page as close to the original as possible during the migration.
+- If you want to rewrite content, do it as a separate project after the migration is stable. Mixing a redesign with a content rewrite makes it impossible to tell which change caused a ranking drop.
+- Preserve title tags, meta descriptions, and heading structure where possible.
+
+### Keep URL structure where possible
+
+The fewer URLs that change, the fewer redirects you need. If your current URL structure is reasonable, keep it. If it is messy, this may be the time to clean it up, but do so with the redirect map ready.
+
+### Update internal links
+
+Every internal link that points to an old URL needs to point to the new URL. If your internal links go through redirects, it still works, but it is cleaner to point directly to the final URL.
+
+- Crawl the new site before launch.
+- Find every internal link.
+- Update any that point to old URLs.
+
+## After the migration
+
+### Submit the new sitemap
+
+Once the new site is live, generate a new XML sitemap and submit it to Google Search Console.
+
+1. Generate the sitemap (most CMS platforms and static site generators do this automatically).
+2. Submit it in Search Console under Sitemaps.
+3. Keep the old sitemap active for a few weeks so Google can process the redirects.
+
+### Monitor for 404 errors
+
+A 404 means a page was not found. After a migration, 404s usually mean a redirect is missing or an internal link is broken.
+
+1. Check Search Console's Coverage report daily for the first week.
+2. For every 404, either add a redirect or fix the internal link.
+
+### Check Search Console
+
+Search Console tells you what Google sees on the new site. Watch for:
+
+- New pages being indexed (good)
+- Old URLs still showing as indexed (normal for a few weeks, then they should drop)
+- Coverage errors and mobile usability errors (fix immediately)
+
+### Watch your rankings
+
+Compare your post-migration rankings to the pre-migration baseline.
+
+- Expect some fluctuation in the first 1 to 2 weeks. Rankings may dip and recover as Google processes the redirects.
+- If rankings have not recovered after 3 to 4 weeks, something is wrong. Check for missing redirects, changed content, or indexing errors.
+- If a specific page dropped, compare its old and new content. Did the title tag change? Did the content get shorter?
+
+## Common mistakes
+
+- **Forgetting redirects.** Every old URL that is not redirected loses its ranking value.
+- **Rewriting content during the migration.** Google sees a new URL with new content and treats it as a new page. The old page's ranking signals do not transfer cleanly.
+- **Not updating the sitemap.** If Google does not know about the new URLs, it cannot index them.
+- **Redirecting everything to the homepage.** This tells Google nothing about where the content actually went.
+- **Not testing before launch.** Redirects that point to the wrong place are only caught if you test them.
+- **Ignoring it after launch.** The post-launch monitoring is where you catch problems before they become permanent ranking losses.
+
+## When to get help
+
+If you are migrating a site that currently ranks well and brings in business, the risk is real. A botched migration can wipe out years of SEO work in a week. If you want someone to handle the redirect mapping and post-launch monitoring, I do this as part of my [website redesign service](/services/website-redesign/). [Get in touch](/contact/) before you start the migration.
+
+## The bottom line
+
+Migrations do not have to cost you rankings. The process is straightforward: know what you have, map where it is going, redirect every old URL, preserve the content, and watch what happens after launch. The businesses that lose rankings skip the pre-migration audit. The ones that keep their rankings treat SEO as part of the migration, not an afterthought.
