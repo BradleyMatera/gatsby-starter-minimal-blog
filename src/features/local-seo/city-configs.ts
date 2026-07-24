@@ -28,13 +28,6 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     distance: "20 minutes",
     direction: "west",
     county: "Winnebago County",
-    cityImage: "janesville-wi.jpg",
-    cityImage: "beloit-wi.jpg",
-    cityImage: "south-beloit.jpg",
-    cityImage: "rockton.jpg",
-    cityImage: "roscoe.jpg",
-    cityImage: "byron.jpg",
-    cityImage: "machesney-park.jpg",
     cityImage: "loves-park.jpg",
     cityContext:
       "Loves Park is a growing community just north of Rockford, with a strong mix of small businesses, manufacturing, and retail along East Riverside Boulevard and North Second Street. Businesses here need websites that compete with Rockford agencies without paying Rockford agency prices.",
@@ -55,6 +48,7 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     distance: "22 minutes",
     direction: "west",
     county: "Winnebago County",
+    cityImage: "machesney-park.jpg",
     cityContext:
       "Machesney Park sits along the Rock River north of Rockford, with a growing retail corridor along Illinois Route 251 and a mix of small businesses, restaurants, and service companies. Businesses here benefit from websites that capture local search traffic from the broader Rockford metro area.",
     marketContext:
@@ -74,6 +68,7 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     distance: "15 minutes",
     direction: "east",
     county: "Ogle County",
+    cityImage: "byron.jpg",
     cityContext:
       "Byron is a growing community in Ogle County, about 15 minutes east of Durand. Known for the Byron Nuclear Generating Station and a strong small-town business community along IL Route 2, Byron businesses need websites that reflect their local roots while competing in the broader Rockford-area market.",
     marketContext:
@@ -93,6 +88,7 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     distance: "30 minutes",
     direction: "east",
     county: "Winnebago County",
+    cityImage: "roscoe.jpg",
     cityContext:
       "Roscoe is a fast-growing village north of Rockford along the Illinois-Wisconsin border, with a thriving small business scene along IL Route 251 and Hononegah Road. Businesses here sit at the crossroads of the Rockford metro and the Beloit, WI market, making local SEO critical for capturing both audiences.",
     marketContext:
@@ -112,6 +108,7 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     distance: "35 minutes",
     direction: "east",
     county: "Winnebago County",
+    cityImage: "rockton.jpg",
     cityContext:
       "Rockton is a historic village at the Illinois-Wisconsin border, known for its charming downtown, the annual Old Settlers Days festival, and a growing business community. Rockton businesses need websites that reflect their small-town character while reaching customers across the state line in Beloit and the broader Rockford metro.",
     marketContext:
@@ -131,6 +128,7 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     distance: "35 minutes",
     direction: "east",
     county: "Winnebago County",
+    cityImage: "south-beloit.jpg",
     cityContext:
       "South Beloit sits right at the Illinois-Wisconsin state line, directly adjacent to Beloit, Wisconsin. Businesses here serve a bi-state market and need websites that rank on both sides of the border. Local SEO that targets both the Rockford metro and the Beloit area is essential.",
     marketContext:
@@ -150,6 +148,7 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     distance: "40 minutes",
     direction: "south of",
     county: "Rock County",
+    cityImage: "beloit-wi.jpg",
     cityContext:
       "Beloit, Wisconsin is a growing city just across the state line from Illinois, with a revitalized downtown along the Rock River, a strong manufacturing base, and Beloit College. Beloit businesses need websites that compete in both the Wisconsin and Illinois markets, capturing search traffic from the Rockford metro and the broader Southern Wisconsin region.",
     marketContext:
@@ -169,6 +168,7 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     distance: "55 minutes",
     direction: "south of",
     county: "Rock County",
+    cityImage: "janesville-wi.jpg",
     cityContext:
       "Janesville is the largest city in Rock County, Wisconsin, with a population of over 65,000 and a strong mix of manufacturing, healthcare, retail, and small businesses. As the economic hub of Southern Wisconsin, Janesville businesses need websites that rank locally and capture search traffic from Madison, Beloit, and the broader region.",
     marketContext:
