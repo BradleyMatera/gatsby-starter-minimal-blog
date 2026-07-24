@@ -46,6 +46,7 @@ const SocialLinks: React.FC<SocialLinksProps> = ({ links }) => (
           title={link.label || labelMap[link.platform]}
         >
           <Icon size={22} />
+          <span className="sr-only">{link.label || labelMap[link.platform]}</span>
         </a>
       );
     })}

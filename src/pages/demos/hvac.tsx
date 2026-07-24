@@ -96,11 +96,11 @@ const FinancingCalculator: React.FC = () => {
       <p className="demo-financing-calc__subtitle">0% APR for 12 months. Estimate your monthly payment.</p>
       <div className="demo-financing-calc__slider-row">
         <div className="demo-financing-calc__slider-label"><span>Project Amount</span><span className="demo-financing-calc__slider-value">{fmt(amount)}</span></div>
-        <input className="demo-financing-calc__slider" type="range" min="500" max="10000" step="100" value={amount} aria-label="Project amount in dollars" onChange={(e) => setAmount(Number(e.target.value))} />
+        <input className="demo-financing-calc__slider" type="range" min="500" max="10000" step="100" value={amount} aria-label="Project Amount" onChange={(e) => setAmount(Number(e.target.value))} />
       </div>
       <div className="demo-financing-calc__slider-row">
         <div className="demo-financing-calc__slider-label"><span>Term</span><span className="demo-financing-calc__slider-value">{months} months</span></div>
-        <input className="demo-financing-calc__slider" type="range" min="12" max="72" step="12" value={months} aria-label="Loan term in months" onChange={(e) => setMonths(Number(e.target.value))} />
+        <input className="demo-financing-calc__slider" type="range" min="12" max="72" step="12" value={months} aria-label="Term" onChange={(e) => setMonths(Number(e.target.value))} />
       </div>
       <div className="demo-financing-calc__result">
         <div className="demo-financing-calc__result-label">Estimated Monthly Payment</div>
@@ -398,5 +398,5 @@ export default HvacDemo;
 export const Head: HeadFC = () => {
   const site = useSiteMetadata();
   const pageUrl = `${site.siteUrl}${pathname}`;
-  return <Seo title={pageTitle} description={pageDescription} pathname={pathname} canonicalUrl={pageUrl} robots="noindex,nofollow" breadcrumbs={[{ name: "Demos", path: "/demos/" }, { name: "HVAC Demo", path: pathname }]} />;
+  return <Seo title={pageTitle} description={pageDescription} pathname={pathname} canonicalUrl={pageUrl} robots="index,follow" breadcrumbs={[{ name: "Demos", path: "/demos/" }, { name: "HVAC Demo", path: pathname }]} />;
 };

@@ -17,7 +17,7 @@ export const plugins: Array<PluginRef> = [
     resolve: `gatsby-plugin-sitemap`,
     options: {
       output: `/sitemap.xml`,
-      excludes: [`/404`, `/404.html`, `/cancel`, `/cancel/`, `/purchases`, `/purchases/`, `/success`, `/success/`, `/contact/success`, `/contact/success/`, `/demos/*`, `/demos/`],
+      excludes: [`/404`, `/404.html`, `/cancel`, `/cancel/`, `/purchases`, `/purchases/`, `/success`, `/success/`, `/contact/success`, `/contact/success/`],
       serialize: (page, { resolvePagePath }) => {
         const now = new Date().toISOString();
         let changefreq = `weekly`;

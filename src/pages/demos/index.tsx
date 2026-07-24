@@ -115,7 +115,7 @@ const DemosIndex: React.FC = () => (
               key={demo.slug}
               to={`/demos/${demo.slug}/`}
               className="demo-card"
-              aria-label={`View ${demo.name} demo — ${demo.industry} website example`}
+              aria-label={`${demo.name} — view ${demo.industry} demo website`}
               style={{ ["--demo-accent" as string]: demo.color } as React.CSSProperties}
             >
               <div
@@ -128,7 +128,7 @@ const DemosIndex: React.FC = () => (
               </div>
               <div className="demo-card__body">
                 <div className="demo-card__industry">{demo.industry}</div>
-                <h3 className="demo-card__name">{demo.name}</h3>
+                <h2 className="demo-card__name">{demo.name}</h2>
                 <p className="demo-card__desc">{demo.description}</p>
                 <div className="demo-card__features">
                   {demo.features.map((f) => (
@@ -173,6 +173,32 @@ const DemosIndex: React.FC = () => (
           </div>
         </Card>
       </div>
+    </Section>
+
+    <Section
+      eyebrow="Compare"
+      title="Which demo fits your business?"
+    >
+      <table>
+        <thead>
+          <tr>
+            <th>Demo</th>
+            <th>Industry</th>
+            <th>Key Features</th>
+            <th>Starting Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {DEMOS.map((demo) => (
+            <tr key={demo.slug}>
+              <td><Link to={`/demos/${demo.slug}/`}>{demo.name}</Link></td>
+              <td>{demo.industry}</td>
+              <td>{demo.features.join(", ")}</td>
+              <td>$447</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </Section>
   </Layout>
 );
