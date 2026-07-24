@@ -63,6 +63,41 @@ Here is what each step in the workflow does:
 - **`npm run lint`** — runs your linter (e.g. ESLint) to catch style and syntax errors
 - **`npm run build`** — runs your production build to verify the project compiles cleanly
 
+## Extending it with AWS
+
+The baseline above is CI only — it verifies the build. When I need to actually deploy, I extend the same workflow with AWS steps. The services I use and why:
+
+- **S3** — hosts the static build output. Cheaper and simpler than running a web server. The build artifacts go to a bucket configured for static website hosting.
+- **CloudFront** — CDN in front of S3. Caches at the edge and gives me HTTPS without managing certificates on the origin.
+- **IAM OIDC** — lets GitHub Actions authenticate to AWS without long-lived access keys. You set up an identity provider in IAM, create a role with a trust policy scoped to your repo, and the workflow assumes that role using `aws-actions/configure-aws-credentials`.
+
+Here is the deploy portion I add after the build step:
+
+```yaml
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::123456789012:role/github-actions-deploy
+          aws-region: us-east-1
+      - run: aws s3 sync public/ s3://my-bucket --delete
+      - run: aws cloudfront create-invalidation --distribution-id E1ABCDEF23 --paths "/*"
+```
+
+The `permissions: id-token: write` line is required for OIDC. Without it, the `configure-aws-credentials` action cannot request the temporary credentials.
+
 ## How I verify it works
 
 I commit the file, push to GitHub, then open the Actions tab ([Source](https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/viewing-workflow-run-history)). If the run is green, CI is working. If it fails, the log tells me exactly which command failed. I fix it locally, commit again, and CI re-runs.
@@ -93,6 +128,26 @@ Here is the verification loop:
 | Build fails with "command not found" | `package.json` script is missing | Verify `lint` and `build` scripts exist in `package.json` ([Source](https://docs.npmjs.com/cli/v10/using-npm/scripts)) |
 
 The fix is always to make local and CI more similar, not to weaken the checks.
+
+## Debugging AWS-specific failures
+
+Once the deploy step is in place, a new class of failures shows up:
+
+- **`Not authorized to perform: sts:AssumeRoleWithWebIdentity`** — the IAM role's trust policy does not include your repo. The trust policy must list `repo:your-org/your-repo:ref:refs/heads/main` in the `StringLike` condition. I once spent an hour on this because the condition had `ref:refs/heads/master` and the branch was `main`.
+- **`AccessDenied` on `s3 sync`** — the role lacks `s3:PutObject` and `s3:DeleteObject` on the bucket. Scope the policy to the bucket ARN, not `*`.
+- **CloudFront invalidation hangs** — invalidating `/*` on a large distribution can take 5-10 minutes. If the job times out, scope the invalidation to the paths that actually changed.
+
+## Cost considerations
+
+GitHub gives 2,000 free Actions minutes per month on a personal account. A single workflow that runs lint + build takes about 2-3 minutes per run. At 10 pushes a day, that is roughly 900 minutes a month — well within the free tier. The deploy job adds another 2-3 minutes but only runs on pushes to `main`, so it is less frequent.
+
+On the AWS side, S3 storage for a static site is negligible — a few cents a month for a typical blog. CloudFront costs more if traffic is high, but for a personal site it stays under $1. The real cost trap is forgetting to clean up old S3 object versions if you enable versioning; those accumulate silently.
+
+## Alternative approaches I considered
+
+- **Netlify deploys instead of AWS.** For static sites, Netlify is simpler — no IAM, no bucket, no invalidation. I use it for this blog. The AWS pipeline above is for projects where I need more control over the CDN config or where the client already has an AWS account.
+- **GitHub Pages.** Free and built-in, but no CDN configuration and no custom headers. Fine for docs, not for a production site.
+- **Self-hosted runners.** Only worth it if you are burning through the free minutes or need access to private network resources. For everything I do, the hosted runners are fine.
 
 {/* visual-break:github-actions-aws:2 */}
 ![Cloud operations checkpoint illustration for this section.](/assets/visuals/blog/github-actions-aws-break-2.png)

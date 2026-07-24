@@ -78,12 +78,30 @@ describe('formatUser utility', () => {
 
 These run in milliseconds. They catch the boring mistakes: null values, bad date parsing, wrong booleans. That is the highest return I get from testing.
 
+Here are three real bugs that unit tests caught before they shipped:
+
+1. A `formatDate` function that parsed ISO strings with `new Date(input)` worked for valid dates but returned `"Invalid Date"` for empty strings instead of falling back to a default. The test fed it `""` and the assertion failed loudly.
+2. A price formatter that was supposed to round to two decimals used `Math.round` instead of `toFixed(2)`, so `$19.995` became `20` instead of `"20.00"`. The test caught the type mismatch — the function returned a number when the contract said string.
+3. A role-check helper returned `true` for the string `"admin"` but also for `"administrator"` because it used `startsWith("admin")`. The test asserted that only exact `"admin"` should pass, and it failed.
+
+None of those are glamorous. But each one would have surfaced in production as a visible bug, and each took under five minutes to write a test for.
+
 {/* visual-break:testing-matters:1 */}
 ![Execution process checkpoint illustration for this section.](/assets/visuals/blog/testing-matters-break-1.png)
 
 ## Level 2: the manual smoke protocol
 
 I do not run E2E tests on personal projects. Cypress and Playwright are powerful, but maintaining them for a solo project is often more work than the bugs they catch.
+
+That said, I do use a small number of integration tests for the boundaries between modules — not full E2E, but tests that exercise two or three functions together. For example, a test that calls a `fetchUser` function (which hits a mocked fetch) and pipes the result through `formatUser` catches wiring bugs that a pure unit test on `formatUser` alone would miss. I keep these in Vitest alongside the unit tests using `vi.mock()` to stub the network layer.
+
+Here is the breakdown of test types I actually use:
+
+- **Unit tests (Vitest)** — pure functions, formatters, parsers, role checks. Same input, same output. These are 90% of my test files.
+- **Integration tests (Vitest with mocks)** — two or three modules wired together, network stubbed. Maybe 10% of files. Example: `fetchUser` + `formatUser` + a cache layer.
+- **E2E (manual smoke check)** — the checklist below. No Playwright, no Cypress. I am the runner.
+
+The one time I did add a Playwright suite for a client project, it caught a real production issue: a form submission flow that worked in Chrome but failed in Firefox because of a `submit` event ordering difference. That was worth the maintenance cost on a team. On a solo project, I would have caught the same thing in the manual smoke check the first time I tested in Firefox.
 
 Instead I keep a short checklist in `docs/QA_SMOKE_CHECK.md` and walk through it before a release:
 
@@ -125,6 +143,18 @@ jobs:
 ```
 
 Nothing fancy. It just makes sure the unit tests run somewhere other than my laptop.
+
+## How testing fits into my workflow
+
+The workflow is simple and I do not over-engineer it:
+
+1. **Write the function.** Get it working in the REPL or a scratch file.
+2. **Write one or two unit tests** for the edge cases I already thought about while writing it — null inputs, empty strings, boundary values.
+3. **Run `npm test` locally.** If it passes, commit.
+4. **Push.** CI runs the same `vitest run` command. If it fails, I get a red X on the commit and fix it before merging.
+5. **Before a release**, walk the smoke checklist manually in Chrome and Firefox.
+
+I do not write tests first. I do not aim for a coverage number. I write tests for the functions where a bug would be embarrassing or hard to trace — formatters, parsers, permission checks, anything with money or dates in it. Everything else gets the smoke check.
 
 {/* visual-break:testing-matters:2 */}
 ![Delivery workflow checkpoint illustration for this section.](/assets/visuals/blog/testing-matters-break-2.png)

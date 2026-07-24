@@ -142,6 +142,51 @@ No external libraries.
 - Re-rendering the full list on every keystroke is acceptable at 500 items but would need virtualization at larger sizes.
 ```
 
+## What makes a small project better than a tutorial
+
+A tutorial teaches you a concept. A small project proves you can apply it. The difference matters to anyone reviewing your work.
+
+When a reviewer looks at a tutorial repo, they see the same structure they have seen a hundred times: the same component names, the same file layout, the same CSS. It tells them you followed instructions. It does not tell them you can make decisions.
+
+A small project, by contrast, has your fingerprints on it. You picked the constraint. You wrote the README. You chose what to leave out. You hit a bug and fixed it. Those choices are what a reviewer actually evaluates, because those are the choices you will make on the job.
+
+The specific things a small project shows that a tutorial does not:
+
+- **Scope judgment.** You decided what was in and what was out. Tutorials do not let you practice this.
+- **Constraint reasoning.** You picked a constraint and stuck to it. That shows discipline, not just capability.
+- **Deployment literacy.** You shipped it to a live URL. That means you understand build, deploy, and the difference between local and production.
+- **Written communication.** Your README explains decisions in plain language. That is a skill most tutorials never exercise.
+
+## Specific small projects I have used
+
+Here are real examples of small projects I built to demonstrate specific skills, and what each one was for:
+
+- **AnimalSounds** — a vanilla JS soundboard deployed to GitHub Pages. The skill I was proving was "I can ship a Vite project to GitHub Pages and handle base path configuration." It led to a concrete debugging note about deployment that I still reference. ([Live demo](https://bradleymatera.github.io/AnimalSounds/), [Source](https://github.com/bradleymatera/AnimalSounds))
+- **TriangleDemo** — a TypeScript WebGPU project that renders a single triangle. The skill was "I can configure a WebGPU render pipeline from scratch." It proved low-level graphics literacy, which is hard to fake. ([Live demo](https://bradleymatera.github.io/TriangleDemo/), [Source](https://github.com/bradleymatera/TriangleDemo))
+- **The client-side search demo above** — vanilla JS, no libraries, 500 records. The skill was "I can do performant DOM filtering without a framework." It is small enough to read in one file and verify in one click.
+
+None of these are full applications. None of them have auth or a database. That is the point. Each one proves exactly one thing, and a reviewer can verify it in under a minute.
+
+## How to present a small project to an employer
+
+A small project only works as evidence if it is presented well. Here is how I structure the presentation so a reviewer can evaluate it fast:
+
+1. **Put the live demo link first.** Before the README prose, before the repo link. The reviewer should be able to click once and see it run. If the demo does not load, nothing else matters.
+2. **Write a README that leads with the goal and constraint.** Two lines at the top: what skill this proves, and what you deliberately left out. A reviewer who reads only those two lines still understands the project.
+3. **Include a short "what I learned" section.** This is where judgment shows. If you write "I learned React," you have said nothing. If you write "native filter is fast enough at 500 rows but would need virtualization at 5,000," you have shown you understand the trade-off.
+4. **Link the source code next to the demo.** Not buried at the bottom. A reviewer who wants to audit the implementation should not have to hunt for it.
+5. **Add it to your portfolio or resume as a bullet with a link.** Not "Built a search demo." Instead: "Built a vanilla JS client-side search filtering 500 records in under 16ms per keystroke — [live demo], [source]." The specificity is what makes it credible.
+
+## Projects that led to conversations
+
+I will be honest: a small project does not guarantee an interview. But it changes the conversation when one happens.
+
+When a recruiter or hiring manager has clicked through a live demo before a call, the call starts differently. They do not ask "so, do you know JavaScript?" They ask "I saw your search demo — why did you choose vanilla JS over React for that?" That is a better question, and it is the question a small project is designed to produce.
+
+The AnimalSounds project specifically has been useful as a deployment reference. When a conversation turns to CI/CD or static hosting, I can point to a real repo with a working GitHub Actions workflow and say "here is how I handled it." That is more convincing than claiming I understand deployment on a resume.
+
+The pattern is consistent: the project does not get you the job. It gets you a better conversation. And a better conversation is where the actual hiring decision happens.
+
 ## Closing
 
 If you want to prove a skill, build the smallest possible demo that exercises it, ship it, and write down what you learned. One skill. One URL. One note. That is more useful than a feature list no one reads.

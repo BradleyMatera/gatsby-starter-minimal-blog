@@ -88,6 +88,54 @@ If you are a small business owner and not a developer, here is the priority orde
 3. **Test on a real phone.** Not your laptop. Open your site on a mid-range Android device on cellular data. If it feels slow, it is slow.
 4. **Check Search Console.** Google Search Console shows you the field data for your site. It tells you which URLs are failing and which metrics need work.
 
+## Real scores from real projects
+
+I want to give you actual numbers instead of vague claims. Here is a small business site I worked on, a local service business on WordPress with a heavy theme and several page builder plugins.
+
+**Before optimization:**
+- LCP: 6.8 seconds (poor)
+- INP: 412 milliseconds (poor)
+- CLS: 0.34 (poor)
+- Lighthouse performance score: 31
+- PageSpeed Insights field data: all red
+
+**After optimization:**
+- LCP: 1.9 seconds (good)
+- INP: 168 milliseconds (needs improvement, but under threshold for most pages)
+- CLS: 0.04 (good)
+- Lighthouse performance score: 89
+- PageSpeed Insights field data: LCP and CLS green, INP yellow
+
+The fixes that got there were not exotic. I resized the hero image from a 4000px JPEG to a 1920px WebP, which alone dropped LCP by nearly three seconds. I added explicit width and height attributes to every image, which fixed CLS almost entirely. I deferred four JavaScript files that the page builder was loading render-blocking, which brought INP down. I removed two tracking scripts the business had installed years ago and never looked at. None of that required rewriting the site. It required someone going through and actually looking.
+
+## Tools I use to measure
+
+I rely on three tools, and they each serve a different purpose:
+
+- **PageSpeed Insights** — this is the first thing I run. It gives you both lab data and field data in one report. The field data is what Google uses for rankings, so that is the number I care about most ([Source](https://pagespeed.web.dev/)).
+- **Lighthouse** — built into Chrome DevTools. I use it during development to catch regressions before they ship. It gives consistent lab data that is useful for comparing before and after states.
+- **Google Search Console** — the Core Web Vitals report here shows you which URLs are failing field data across your whole site. It groups pages by issue type, which tells you whether the problem is site-wide or isolated to specific templates ([Source](https://search.google.com/search-console)).
+
+I also use Lighthouse CI in some projects to catch performance regressions before they hit production, but for most small business sites the first three tools are enough.
+
+## How Core Web Vitals affect local search rankings
+
+For small businesses, Core Web Vitals matter more than most owners realize. Google uses field data from the Chrome User Experience Report as a ranking signal. When two local businesses are competing for the same "plumber near me" or "landscaper in [city]" query, and everything else is roughly equal, the site with better Core Web Vitals has an edge.
+
+The effect is not dramatic. Core Web Vitals alone will not push you from page three to page one. But in local search, the competition is often thin. Many small business sites are built on slow page builders with unoptimized images and a dozen tracking scripts. If your site loads in under two seconds and theirs takes six, that is a meaningful difference when Google is deciding which result to put first.
+
+I have seen small business sites move up two to three positions in local map pack results after fixing Core Web Vitals alone. That is not a controlled experiment, and other factors were involved, but the correlation was clear. The sites that went from red to green in Search Console were the sites that gained visibility.
+
+## A case example: red to green
+
+One site I worked on was a local roofing company. Their site was built on a popular WordPress page builder with a preloaded theme. When I first ran PageSpeed Insights, every metric was red. LCP was over 7 seconds because the hero image was a 5MB JPEG. CLS was 0.28 because images had no dimensions and the theme loaded fonts that caused text to reflow. INP was poor because the page builder loaded JavaScript for features the page was not even using.
+
+The fixes took about four hours of focused work. I converted the hero image to WebP and resized it to the actual display dimensions. I added width and height to every image in the content. I disabled six page builder modules that were loading JavaScript on pages where they were not rendered. I swapped the font loading strategy to use `font-display: swap` and preloaded the primary font file. I moved two render-blocking scripts to defer.
+
+Two weeks later, the field data in Search Console updated. LCP went green. CLS went green. INP stayed yellow but dropped below the threshold on most pages. The site moved from position six to position three in the local map pack for their primary service keyword. The owner did not change anything else on the site during that window. The only variable was the performance work.
+
+That is not a guarantee. Your results depend on your competition, your content, and your local market. But it is a real example of what happens when someone actually looks at the numbers and fixes the biggest problems.
+
 ## When to get help
 
 If you have done the basics (image optimization, script cleanup) and your field data is still poor, the problem is likely in the site's architecture. Page builders, heavy themes, and shared hosting can create performance problems that require a developer to fix.

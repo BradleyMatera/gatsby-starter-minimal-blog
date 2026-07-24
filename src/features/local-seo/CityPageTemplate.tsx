@@ -22,6 +22,8 @@ export type CityPageConfig = {
   cityContext: string;
   /** What makes this city's businesses unique */
   marketContext: string;
+  /** City-specific details: landmarks, neighborhoods, local business types */
+  localDetails: string;
   /** All city slugs for cross-linking (including this one) */
   allCitySlugs: Array<{ slug: string; label: string }>;
   /** County name */
@@ -38,7 +40,7 @@ const serviceBullets = (city: string) => [
 ];
 
 export const createCityPage = (config: CityPageConfig) => {
-  const { city, state, stateAbbrev, slug, pageTitle, pageDescription, distance, direction, cityContext, marketContext, allCitySlugs, county } = config;
+  const { city, state, stateAbbrev, slug, pageTitle, pageDescription, distance, direction, cityContext, marketContext, localDetails, allCitySlugs, county } = config;
   const pathname = `/${slug}/`;
   const otherCities = allCitySlugs.filter((c) => c.slug !== slug);
 
@@ -177,6 +179,23 @@ export const createCityPage = (config: CityPageConfig) => {
             </p>
           </Card>
         </div>
+      </Section>
+
+      <Section
+        eyebrow="Local context"
+        title={`What makes ${city} different for web design`}
+        description={
+          <p>
+            {localDetails}
+          </p>
+        }
+      >
+        <Card variant="outline">
+          <h3 className="feature-card__title">{city} businesses I typically work with</h3>
+          <p className="feature-card__body">
+            {marketContext}
+          </p>
+        </Card>
       </Section>
 
       <Section

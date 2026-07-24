@@ -88,6 +88,24 @@ The lesson I kept: in modern graphics programming, you are not drawing shapes. Y
 {/* visual-break:recent-projects-and-lessons:2 */}
 ![Delivery workflow checkpoint illustration for this section.](/assets/visuals/blog/recent-projects-and-lessons-break-2.png)
 
+## More detail on what each project actually is
+
+The table above gives the overview, but here is what each project actually involved.
+
+**AnimalSounds** is a soundboard app. You click an animal name, it plays a sound. That is the entire feature set. The stack is vanilla JavaScript with Vite as the build tool and GitHub Actions for CI. The problem it solved was not the app itself — a soundboard is trivial. The problem was deploying a Vite project to GitHub Pages, which has a non-obvious base path requirement that I had not hit before because I had always deployed to Vercel or Netlify. The repo is at [github.com/bradleymatera/AnimalSounds](https://github.com/bradleymatera/AnimalSounds) and the live demo is at [bradleymatera.github.io/AnimalSounds](https://bradleymatera.github.io/AnimalSounds/).
+
+**TriangleDemo** is a WebGPU rendering demo. It draws a single colored triangle on a canvas. The stack is TypeScript, the WebGPU API, and WGSL (WebGPU Shading Language) for the shaders. The problem it solved was learning the WebGPU pipeline model, which is fundamentally different from the 2D canvas API. Where canvas gives you drawing commands, WebGPU gives you a pipeline you have to configure stage by stage. The repo is at [github.com/bradleymatera/TriangleDemo](https://github.com/bradleymatera/TriangleDemo) and the live demo is at [bradleymatera.github.io/TriangleDemo](https://bradleymatera.github.io/TriangleDemo/). Note: WebGPU only works in Chromium-based browsers and Safari Technology Preview as of this writing, so the demo will not render in Firefox.
+
+## Specific lessons from each project
+
+The table lists one lesson per project. Here is the fuller version of what each one taught me.
+
+**From AnimalSounds — deployment is part of the feature.** The specific lesson was about Vite's `base` option, but the broader lesson is that a demo that only runs locally is not finished. I now treat deployment as a first-class concern, not an afterthought. Before I start a project, I know where it will be hosted and what the build output looks like. That sounds obvious, but it took a 404 error on every asset to make it a habit instead of a theory. The other specific thing I learned: GitHub Actions environment variables need to be set explicitly in the workflow file. Setting `NODE_ENV=production` in my shell did nothing — the CI runner has its own environment, and the config branch depends on that variable.
+
+**From TriangleDemo — the pipeline is the program.** The specific lesson was about WGSL type strictness (a `vec2` passed where a `vec4` was expected caused a validation error that took an hour to track down), but the broader lesson is about mental models. In 2D canvas, you think in terms of drawing. In WebGPU, you think in terms of configuring a machine that draws. You set up the adapter, the device, the canvas context, the render pipeline, the shaders, the command encoder — and only then do you submit a draw command. If any stage is misconfigured, you get nothing or a validation error. The lesson I kept is that in low-level graphics APIs, the setup is the work. The draw call is the easy part.
+
+**A lesson that applies to both — write the note while the pain is fresh.** I wrote the AnimalSounds base path fix within an hour of solving it. I wrote the WebGPU type mismatch note the same day. When I revisit these projects months later, the notes are more useful than the code, because the notes capture the context I would otherwise lose: what I tried, what failed, and why the fix worked.
+
 ## Why I write this way
 
 Each project now gets one sentence: what it taught me. AnimalSounds is my reference for Vite base paths on GitHub Pages. TriangleDemo is my reference for WebGPU device initialization. When I hit the same problem again, I do not start from zero. I start from the note.

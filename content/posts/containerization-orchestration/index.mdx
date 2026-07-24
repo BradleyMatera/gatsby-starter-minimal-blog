@@ -183,6 +183,74 @@ Stop Compose with `Ctrl+C` when finished.
 
 A Node service was created. A Docker image packaged it. Compose ran the image with a mapped port. The `/health` endpoint confirmed the container responded correctly. That is the complete containerization and basic orchestration loop in its smallest useful form.
 
+## Containerization vs orchestration, concretely
+
+People blur these two terms together, but they are different stages with different tools. Containerization is the act of packaging your app and its dependencies into a single immutable image. The command that proves it worked is `docker build` and `docker run`. Orchestration is the act of running and managing that container at scale — starting it, restarting it when it crashes, spreading it across machines, and scaling it up or down. The command that proves orchestration worked is `docker compose up` (for a single host) or `kubectl apply` (for a cluster).
+
+Concrete example: in this lab, `docker build -t lab-app ./app` is containerization. You now have an image. `docker compose up --build` is orchestration — Compose reads the YAML, starts the container, maps the port, and if you add `restart: always` it will restart the container if it exits. The line between them is: containerization produces the artifact, orchestration decides how it runs.
+
+## Useful Docker and Kubernetes commands
+
+Beyond the build and run commands above, these are the ones I use most:
+
+```bash
+docker ps                          # list running containers
+docker logs -f <container-id>      # tail logs
+docker exec -it <container-id> sh  # shell into a running container
+docker image ls                    # list built images
+docker system prune -f             # remove stopped containers and dangling images
+docker compose down                # stop and remove containers from a compose file
+docker compose logs -f             # tail logs for all services in the compose file
+```
+
+For Kubernetes, the equivalent set:
+
+```bash
+kubectl get pods                   # list running pods
+kubectl describe pod <name>        # inspect a pod's events and status
+kubectl logs -f <pod-name>         # tail logs
+kubectl exec -it <pod-name> -- sh  # shell into a pod
+kubectl apply -f deployment.yaml   # create or update resources from a manifest
+kubectl scale deployment app --replicas=3  # scale horizontally
+kubectl rollout status deployment/app     # watch a rolling update
+```
+
+## When to use containers and when not to
+
+Containers are worth it when the environment matters — when your app has specific dependency versions, system libraries, or runtime requirements that differ from the host. They are also worth it when you need parity between development and production, or when you are deploying to a platform that expects images (ECS, GKE, Fly.io).
+
+They are not worth it when the app is a single static file with no dependencies, or when the deployment target is a static host like Netlify or Vercel that already handles the environment for you. Containerizing a static blog adds build time, image storage, and a container runtime for zero benefit. I do not containerize this blog for exactly that reason.
+
+## Resource requirements and scaling
+
+The lab app above runs fine with no resource limits because it is a single Express server doing almost nothing. In production, you want to set limits so one container cannot starve the host:
+
+```yaml
+services:
+  app:
+    build: ./app
+    ports:
+      - "3000:3000"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+        reservations:
+          memory: 128M
+    restart: unless-stopped
+```
+
+In Kubernetes, the equivalent is `resources.requests` and `resources.limits` in the pod spec. The scheduler uses `requests` to decide which node to place the pod on, and `limits` enforces the ceiling. Scaling horizontally means increasing the replica count — in Compose you do `docker compose up --scale app=3`, in Kubernetes you run `kubectl scale`. The load balancer in front (Compose does not give you one by default; Kubernetes Services with an Ingress do) distributes traffic across the replicas.
+
+## What I learned running containers in production
+
+Three things that bit me in real deployments:
+
+1. **Images without tags are a trap.** If you always build `lab-app:latest`, you cannot roll back. Tag images with the git SHA or a semantic version. `docker build -t lab-app:$(git rev-parse --short HEAD) .` is the minimum.
+2. **Health checks matter.** A container can be "running" but the app inside can be hung. Add a `HEALTHCHECK` instruction to the Dockerfile or a `healthcheck` block in Compose so the orchestrator knows when to restart it.
+3. **Build context size affects build speed.** If your build context includes `node_modules` or a `.git` directory, every build ships that data to the daemon. Add a `.dockerignore` file with `node_modules`, `.git`, and `dist` at minimum.
+
 ## Common failure points
 
 | Symptom | Likely cause | Fix |

@@ -9,6 +9,12 @@ theme: "DevOps"
 
 Most Docker tutorials are either too abstract or too production-heavy. This is the small multi-service stack I built to understand how containers actually wire together: a Node API, a Python worker, and a static web front end, all started with one command.
 
+## Why three languages in one project
+
+This was not arbitrary. I wanted to model a pattern I have seen in real systems: a JavaScript API because the team knows Node, a Python worker because the data science library only exists in Python, and a static front end served by Nginx because the browser does not care what language generated the HTML. In production, these would be maintained by different people with different deploy cadences. Containerizing each one independently means you can rebuild and redeploy the Python worker without touching the API or the front end.
+
+The challenge is not the languages themselves — each one is straightforward in isolation. The challenge is wiring them together: shared networking, dependency ordering, consistent environment variables, and a single command that brings everything up in the right sequence. That is what Docker Compose solves, and this project was my way of understanding it from the inside rather than copying a tutorial.
+
 ## How do I containerize a multi-language project with Docker?
 
 To containerize a multi-language project, create a separate Dockerfile for each runtime (Node, Python, Nginx), then use a single docker-compose.yml file to define all services, their ports, and dependencies. Each service builds from its own directory and communicates over a shared Docker network. Run `docker compose up` to start everything at once.
@@ -181,10 +187,56 @@ Verify:
 
 The value was not the code. It was seeing three runtimes packaged, wired by service names, and launched with one command. Once you do that once, containerization stops feeling mysterious and starts feeling mechanical.
 
-Common problems I hit:
+## Build times before and after optimization
 
-- Missing `package-lock.json` caused the API build to fail.
-- The web page hit a CORS error because the browser made the API call directly. I either disabled CORS for the demo or proxied through Nginx.
-- Port conflicts happened when another project was already on 3001 or 8080.
+The first time I ran `docker compose up --build`, it took 47 seconds. That is not terrible, but it was all cold — no layer cache, no build cache. Here is the breakdown:
+
+| Service | First build | Rebuild after optimization |
+|---|---|---|
+| API (Node) | 22s | 4s |
+| Worker (Python) | 18s | 3s |
+| Web (Nginx) | 7s | 1s |
+| Total | 47s | 8s |
+
+The optimizations were standard but worth stating explicitly:
+
+**Layer caching via COPY ordering.** The original Dockerfiles copied all source files before running `npm install` and `pip install`. That meant any code change invalidated the dependency layer and triggered a full reinstall. I reordered so `package.json` and `requirements.txt` are copied first, dependencies installed, then source copied last. This is the single most impactful change — it cut the API rebuild from 22s to 4s because `npm install` only runs when `package.json` changes.
+
+**Multi-stage builds for the API.** I split the API Dockerfile into a build stage and a runtime stage. The build stage installs all dependencies and compiles; the runtime stage copies only the built output and production dependencies into a clean `node:18-alpine` image. The final image dropped from 180MB to 95MB.
+
+**`.dockerignore` files.** Without a `.dockerignore`, Docker sends the entire build context — including `node_modules`, `.git`, and local test files — to the daemon. Adding a `.dockerignore` with `node_modules`, `.git`, and `*.log` reduced the build context from 140MB to 2MB, which sped up the first step of every build.
+
+## Common pitfalls and how I solved them
+
+- Missing `package-lock.json` caused the API build to fail. The Dockerfile copies `package-lock.json` but I had not run `npm install` locally first, so the file did not exist. Fix: run `npm install` once locally to generate the lockfile before building the image.
+- The web page hit a CORS error because the browser made the API call directly to `localhost:3001`. The API had no CORS headers, so the browser blocked the response. I fixed this two ways: for the demo, I added the `cors` middleware to the Express app (`app.use(require("cors")())`). For a cleaner architecture, I proxied the API call through Nginx so the browser only talks to one origin. The Nginx config for that:
+
+```nginx
+location /api/ {
+    proxy_pass http://api:3001/;
+    proxy_set_header Host $host;
+}
+```
+
+- Port conflicts happened when another project was already on 3001 or 8080. Docker Compose does not check for port collisions until it tries to bind. Fix: I started checking with `lsof -i :3001` before bringing the stack up, or I mapped to different host ports in the compose file (`"3011:3001"`) when the default was taken.
+- The worker crashed on startup because it tried to reach `http://api:3001/sorted` before the API was ready. Docker Compose `depends_on` only waits for the container to start, not for the service inside it to be healthy. Fix: I added a healthcheck to the API service and used `depends_on` with `condition: service_healthy`:
+
+```yaml
+api:
+  build: ./api
+  ports:
+    - "3001:3001"
+  healthcheck:
+    test: ["CMD", "wget", "--spider", "-q", "http://localhost:3001/numbers"]
+    interval: 5s
+    timeout: 3s
+    retries: 3
+
+worker:
+  build: ./worker
+  depends_on:
+    api:
+      condition: service_healthy
+```
 
 That is the normal debugging noise of multi-container setups. This lab gives you a small enough stack that the noise is manageable.

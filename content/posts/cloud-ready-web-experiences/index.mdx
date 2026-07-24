@@ -11,6 +11,16 @@ A "cloud ready" web launch is not a certification. It just means I can build, de
 
 This is the checklist I run before I ship.
 
+## What "cloud ready" actually means in practice
+
+People use "cloud ready" loosely. For me it means three concrete things, and I can point at each one:
+
+**Static-first architecture.** The site is pre-rendered at build time. Gatsby generates HTML for every route, and the deployed output is a folder of static files. No server process needs to stay alive for the pages to load. This means the CDN can cache everything, and there is no cold-start problem. If a page requires dynamic data, I fetch it client-side after the initial HTML loads — the page shell still renders instantly.
+
+**CDN distribution.** Netlify pushes the built files to its edge CDN automatically. I verify this by checking response headers — `x-nf-request-id` confirms the request hit Netlify's edge, and `cache-control` tells me whether the browser and CDN are caching as intended. For a recent deploy, I ran `curl -I https://bradleymatera.dev` and confirmed `age` and `x-cache` headers showed the page was served from cache, not origin. If those headers are missing or wrong, the CDN is not doing its job.
+
+**Edge functions for dynamic behavior.** When I need server-side logic — form handling, redirects based on geography, or API proxying — I use Netlify Functions (or Netlify Edge Functions for lower latency). These run at the edge, not on a single origin server. For this site, the contact form submits to a Netlify Function that validates input and sends an email. The function is defined in `netlify/functions/` and deploys alongside the static files. No separate server to manage, no separate deploy pipeline.
+
 ## What should I check before deploying a web app?
 
 Before deploying a web app, verify that npm run build passes locally, npm run lint passes, the home page loads on the deployed URL, one primary user flow works end to end, and the 404 page loads or falls back cleanly. These boring checks catch the most common launch problems: missing env vars, broken builds, and pages that 404 in production.
@@ -71,6 +81,32 @@ After deploying, I repeat those same three clicks on the live URL. Local success
 
 {/* visual-break:cloud-ready-web-experiences:2 */}
 ![Cloud operations checkpoint illustration for this section.](/assets/visuals/blog/cloud-ready-web-experiences-break-2.png)
+
+## A concrete example: this site
+
+I use this exact checklist on bradleymatera.dev. The stack is Gatsby 5, React 18, TypeScript, deployed to Netlify. Here is what the prelaunch pass looks like for a real deploy:
+
+1. `npm run build` — confirms the production build compiles. Gatsby's build is stricter than the dev server; type errors that dev tolerates will fail the build.
+2. `npm run lint` — catches unused imports and inconsistent formatting. I have had builds pass with lint failures, and the deployed site had a dead import that broke a component silently.
+3. Deploy via Netlify CLI or git push. Netlify runs the same build command (`rm -rf .cache public && npm run build`) in CI.
+4. Smoke check on the live URL: load the homepage, click through to a blog post, submit the contact form, check a 404 URL like `/does-not-exist`.
+
+The contact form is the one most likely to break. It depends on a Netlify Function, environment variables for email delivery, and a redirect rule in `netlify.toml`. If any of those are misconfigured, the form silently fails — it looks like it submitted, but no email arrives. That is why the smoke check includes actually submitting the form and confirming I receive the email.
+
+## Tools and services I use, with honest assessment
+
+| Tool | What I use it for | Honest take |
+|---|---|---|
+| Netlify | Hosting, CDN, Functions, deploy previews | Deploy previews are the best feature — every PR gets a live URL. The build plugin ecosystem is fragile; I disabled the Lighthouse plugin because it consistently reports a performance score of 0 due to a CI environment bug, not an actual site problem. |
+| Gatsby | Static site generation | Build times are slow for a site this size (30-45 seconds). The data layer is powerful but overkill for a blog. I would consider Astro or Next.js for a new project, but migrating is not worth the disruption. |
+| Cloudflare | DNS and additional caching layer in front of Netlify | Free, fast, and the analytics are better than Netlify's. The downside is an extra hop — if Cloudflare's cache is stale, users see old content even after Netlify deploys. I set a short TTL (5 minutes) to limit this. |
+| GitHub Actions | CI for lint and build on every PR | Reliable, but I keep it minimal. Running the full build in CI and again on Netlify is redundant. I lint in CI and let Netlify handle the build. |
+
+## What worked and what didn't
+
+The checklist itself works. I have caught missing env vars, broken redirects, and a 404 on a blog post slug that I had renamed — all before users saw them. The checklist takes about five minutes to run, which is why I actually do it every time.
+
+What did not work: I tried automating the smoke check with a headless browser script early on. It was brittle — selectors changed, the dev server port conflicted with the test runner, and maintaining the script took longer than just clicking three things manually. For a site this size, manual smoke checking is faster and more reliable than a flaky E2E test. I would revisit automation if the site grew to dozens of user flows, but at three clicks, it is not worth the overhead.
 
 ## Optional release note
 

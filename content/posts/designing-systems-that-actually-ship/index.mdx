@@ -127,6 +127,41 @@ This template is not theoretical. I use a version of it in real repos:
 | Done when | Lighthouse passes, build is clean, NAP is consistent | API returns matches, UI renders flow, data persists |
 | Design artifact | `AGENTS.md` | `docs/DEPLOYMENT.md`, `docs/API.md`, `docs/TROUBLESHOOTING.md` |
 
+## What "actually ships" means in practice
+
+A system that ships is not a system with every feature. It is a system where the scope was bounded, the timeline was honest, and the compromises were made on purpose instead of by accident.
+
+In practice, "actually ships" means three things:
+
+- **Scope is bounded and written down.** The design doc lists what is inside the system and what is outside it. If a feature is not in the boundaries, it does not get built in this iteration. It can go in the next one.
+- **The timeline reflects the scope.** A system with four inputs and two outputs should not take three months. A system with external auth, a database, and a third-party API should not take a weekend. The design doc makes the mismatch visible before you commit to a date.
+- **Compromises are explicit.** You will cut something. The question is whether you cut it on purpose or let it get cut by entropy. A design doc lets you say "we are shipping without caching in v1" instead of discovering at deploy time that nobody built caching.
+
+The systems that did not ship in my experience all failed the same way: the scope was never written down, so it grew silently until the timeline broke, and then the whole thing got shelved. The systems that did ship had a document small enough that someone actually read it before writing code.
+
+## Concrete examples: shipped vs. did not ship
+
+I can point at specific projects on both sides.
+
+**Shipped — this site (gatsby-starter-minimal-blog).** The scope was clear: portfolio, blog, and local SEO service pages. The design doc (in the form of `AGENTS.md`) maps every feature to a real file path. The constraints were explicit — Gatsby 5, Netlify, no backend. The compromise was no custom CMS; content lives in MDX files in the repo. That shipped and has been live and deploying on every push since.
+
+**Shipped — Car-Match.** The scope was a location-based matching API with a thin UI. The design doc lived in `docs/` as `DEPLOYMENT.md`, `API.md`, and `TROUBLESHOOTING.md`. The constraint was MongoDB as the only data store. The compromise was no real-time updates — matches are computed on request, not pushed. That shipped with a working API and a deployed UI.
+
+**Did not ship — an internal dashboard project.** I started building a dashboard that was supposed to show "analytics." No design doc. No written scope. Within a week it had auth, three chart libraries, a settings page, and a notification system. None of them were finished. There was no "done when" list, so there was no way to know if it was done. It sat unfinished for months and was eventually abandoned. The failure was not technical. The failure was that the scope was never bounded.
+
+The difference between the shipped projects and the abandoned one was not skill or effort. It was the presence of a short, connected design artifact. The shipped projects had one. The abandoned one did not.
+
+## Design decisions and trade-offs I keep making
+
+Every system design involves trade-offs. Writing them down is what separates a decision from a default. Here are the ones I run into most often:
+
+- **One data store vs. multiple.** One store is simpler to deploy and reason about. Multiple stores fit different access patterns but multiply operational complexity. I default to one unless the design doc can articulate a specific reason for the second.
+- **Auth built in vs. delegated.** Building auth yourself is a trap. Delegating to a provider (Auth0, Clerk, Supabase Auth) costs money or vendor lock-in but removes a class of bugs I do not want to own. I delegate unless the system is a toy.
+- **SSG vs. SSR vs. SPA.** Static generation is the default for content sites because it is cheap, fast, and deployable anywhere. Server rendering is justified when content changes per-request. SPAs are justified when the app is interactive and stateful. I write the choice and the reason in the design doc so it does not get relitigated later.
+- **Monorepo vs. split repos.** For small systems, one repo is easier to navigate and deploy. For systems with independent deploy cycles, splitting reduces coupling. I lean toward one repo until the deploy cadences actually diverge.
+
+These are not universal rules. They are the defaults I write down so that when I deviate, I have to explain why.
+
 ## Closing
 
 A system design document does not need to be long. It needs to be connected to the codebase. If the design does not point to real files and real verification steps, it is not ready to drive implementation.

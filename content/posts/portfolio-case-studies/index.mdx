@@ -103,6 +103,61 @@ Junior engineers try to hide mistakes. Senior engineers point them out and expla
 
 Saying *"I should have used SQL instead of MongoDB here; the data was too relational"* is more credible than pretending the project was perfect.
 
+## Three real case studies
+
+Here is what this format looks like applied to actual projects I have shipped. These are the projects I point recruiters and hiring managers to.
+
+### Project 1: bradleymatera.dev (this site)
+
+**Live demo:** [bradleymatera.dev](https://bradleymatera.dev)
+**Source code:** [github.com/bradleymatera/gatsby-starter-minimal-blog](https://github.com/bradleymatera/gatsby-starter-minimal-blog)
+
+**Goal:** A portfolio, blog, and local SEO service site for a solo web developer serving small businesses in rural Illinois.
+**Constraint:** The site had to score well on Lighthouse, load fast on rural broadband (many clients are on DSL or satellite), and rank for local search terms like "web developer Durand Illinois."
+
+**Stack decisions:**
+- **Gatsby 5** over Next.js — I needed static generation with zero server costs. Netlify's free tier handles static files with no cold starts.
+- **TypeScript** over JavaScript — the site has 50+ components and a custom theme system. Type safety caught at least a dozen prop mismatches during refactoring.
+- **MDX** over Markdown — I needed to embed React components inside blog posts for interactive code examples.
+
+**The hardest challenge: tag page SEO.** Gatsby's tag pages had broken canonical URLs and missing meta descriptions. Component shadowing did not work reliably in Netlify's CI environment. I wrote an `onPostBuild` hook in `config/gatsby/node.js` that directly modifies the built HTML files to inject correct canonicals and descriptions. It is a hack, but it is bulletproof — it runs after the build, on the actual output, so it cannot be overridden by framework internals.
+
+**What I learned:** I over-invested in the theme system early. I built a style lab with brutalism, retrofuturism, and neumorphism themes before I had a single blog post. The themes are cool but they did not bring traffic or clients. I should have shipped content first and themed later.
+
+### Project 2: Zig OBJ parser
+
+**Source code:** [github.com/bradleymatera/zig-obj](https://github.com/bradleymatera/zig-obj)
+
+**Goal:** Understand manual memory allocation and explicit error handling by building a parser from scratch.
+**Constraint:** No libraries beyond Zig's standard library. Every allocation visible.
+
+**Stack decision:** Zig over C — I wanted memory safety checks (the allocator reports leaks at shutdown) without giving up control. C would have been faster to write but slower to debug.
+
+**The hardest challenge: handling malformed input.** The parser assumed every `v` line had exactly three floats. A line with two floats would crash at `it.next().?` with a panic. I added length checks on the tokenizer output before parsing, but the fix felt bolted-on. A production parser would need a proper error recovery strategy — skip the bad line, log it, and continue.
+
+**What I learned:** Explicit error handling slows you down at first and speeds you up later. The parser was correct on the first run, which almost never happens for me in Python. But the Zig ecosystem is young — I spent more time than expected figuring out which std module names were stable.
+
+### Project 3: Docker multi-language stack
+
+**Source code:** [github.com/bradleymatera/multilang](https://github.com/bradleymatera/multilang)
+
+**Goal:** Understand how containers wire together by building a three-service stack from scratch.
+**Constraint:** One `docker compose up` command had to bring up a Node API, a Python worker, and an Nginx front end, all talking to each other.
+
+**The hardest challenge: service startup ordering.** The Python worker crashed on startup because it tried to reach the API before the API was ready. Docker Compose's `depends_on` only waits for the container to start, not for the service inside it to be healthy. I added a healthcheck to the API and used `condition: service_healthy` on the worker's `depends_on`. That fixed the race condition completely.
+
+**What I learned:** Layer caching is the single most impactful Docker optimization. Reordering `COPY` commands so dependencies install before source code is copied cut my rebuild time from 47 seconds to 8 seconds. I also learned that `.dockerignore` matters more than people say — without it, Docker sends your entire `node_modules` and `.git` directory to the daemon on every build.
+
+## How these projects demonstrate skills to employers
+
+Each case study maps to a specific skill that shows up in job descriptions:
+
+- **bradleymatera.dev** demonstrates full-stack web development, SEO, performance optimization, and CI/CD. The `onPostBuild` hook shows I can debug framework internals, not just use the happy path. The Netlify deploy pipeline shows I understand modern hosting.
+- **The Zig parser** demonstrates systems programming, memory management, and low-level debugging. It shows I can work outside a garbage-collected environment and reason about allocation and error propagation explicitly.
+- **The Docker stack** demonstrates containerization, multi-service architecture, and DevOps fundamentals. The healthcheck solution shows I understand that "the container started" is not the same as "the service is ready."
+
+A recruiter scanning these sees keywords: Gatsby, TypeScript, Docker, Python, Node, Nginx, CI/CD, SEO. A senior engineer reading the case studies sees someone who hit real problems, debugged them, and can explain the trade-offs. That is the audience I am writing for.
+
 {/* visual-break:portfolio-case-studies:2 */}
 ![Portfolio structure checkpoint illustration for this section.](/assets/visuals/blog/portfolio-case-studies-break-2.png)
 
