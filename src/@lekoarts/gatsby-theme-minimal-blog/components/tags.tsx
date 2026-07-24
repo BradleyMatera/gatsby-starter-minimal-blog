@@ -103,7 +103,7 @@ const Tags = ({ data }: { data: TagsData }) => {
         </p>
 
         {/* Comparison table of all tags for AEO extraction */}
-        <h2 sx={{ fontSize: `1.5rem`, marginBottom: `1rem` }}>All tags by article count</h2>
+        <h2 sx={{ fontSize: `1.5rem`, marginBottom: `1rem` }}>Which tags have the most articles?</h2>
         <table sx={{ width: `100%`, borderCollapse: `collapse`, marginBottom: `2rem`, fontSize: `0.9rem` }}>
           <thead>
             <tr>
@@ -135,9 +135,13 @@ const Tags = ({ data }: { data: TagsData }) => {
         </table>
 
         {/* Categorized tag clouds for content depth */}
+        <h2 sx={{ fontSize: `1.5rem`, marginTop: `2rem`, marginBottom: `0.5rem` }}>What categories are the tags organized into?</h2>
+        <p sx={{ fontSize: `1rem`, opacity: 0.7, marginBottom: `1.5rem` }}>
+          Tags are grouped into {categoryNames.length} categories: {categoryNames.join(", ")}. Click any tag to see all articles tagged with that topic.
+        </p>
         {categoryNames.map((cat) => (
           <React.Fragment key={cat}>
-            <h2 sx={{ fontSize: `1.25rem`, marginTop: `2rem`, marginBottom: `1rem` }}>{cat}</h2>
+            <h3 sx={{ fontSize: `1.25rem`, marginTop: `2rem`, marginBottom: `1rem` }}>{cat}</h3>
             <ul sx={{ listStyle: `none`, padding: 0, display: `flex`, flexWrap: `wrap`, gap: `0.75rem`, marginBottom: `1rem` }}>
               {categorized[cat].map((group) => (
                 <li key={group.fieldValue}>
@@ -164,7 +168,7 @@ const Tags = ({ data }: { data: TagsData }) => {
 
         {uncategorized.length > 0 && (
           <>
-            <h2 sx={{ fontSize: `1.25rem`, marginTop: `2rem`, marginBottom: `1rem` }}>General</h2>
+            <h3 sx={{ fontSize: `1.25rem`, marginTop: `2rem`, marginBottom: `1rem` }}>General</h3>
             <ul sx={{ listStyle: `none`, padding: 0, display: `flex`, flexWrap: `wrap`, gap: `0.75rem` }}>
               {uncategorized.map((group) => (
                 <li key={group.fieldValue}>

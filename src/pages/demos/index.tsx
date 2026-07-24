@@ -107,6 +107,11 @@ const DemosIndex: React.FC = () => (
         </p>
       }
     >
+      {/* Direct answer for AEO — question heading + 40-70 word answer */}
+      <h2 className="sr-only">What demo websites are available?</h2>
+      <p className="direct-answer" style={{ fontSize: "1.125rem", opacity: 0.8, marginBottom: "2rem", lineHeight: 1.6 }}>
+        Six full demo websites are available: a restaurant with online ordering, a landscaping company with quote forms, an HVAC company with financing calculator, an auto repair shop with VIN lookup, a real estate office with mortgage calculator, and a beauty salon with online booking. Each demo starts at $447 and can be customized with your branding.
+      </p>
       <div className="demo-gallery__grid">
         {DEMOS.map((demo) => {
           const { Icon } = demo;
@@ -143,25 +148,25 @@ const DemosIndex: React.FC = () => (
 
     <Section
       eyebrow="How this works"
-      title="Every demo is a real, working website"
+      title="How do the demo websites work?"
     >
       <div className="grid-three">
         <Card variant="outline">
-          <h3 className="feature-card__title">Click any demo</h3>
+          <h3 className="feature-card__title">Can I click through the demos?</h3>
           <p className="feature-card__body">
             Each demo opens as a full standalone website — not a screenshot. You can scroll through
             every section, see the layout, read the copy, and experience the mobile responsiveness.
           </p>
         </Card>
         <Card variant="outline">
-          <h3 className="feature-card__title">Back button at top</h3>
+          <h3 className="feature-card__title">How do I get back to this page?</h3>
           <p className="feature-card__body">
             Every demo has a sticky bar at the top with a back button. Click "All Demos" to return
             here, or "Get a site like this" to contact me directly.
           </p>
         </Card>
         <Card variant="outline">
-          <h3 className="feature-card__title">Built for your industry</h3>
+          <h3 className="feature-card__title">Can these demos be customized for my business?</h3>
           <p className="feature-card__body">
             These demos show what's possible. Your real site would be customized with your business
             name, photos, menu, services, colors, and branding. Starting at $447.
