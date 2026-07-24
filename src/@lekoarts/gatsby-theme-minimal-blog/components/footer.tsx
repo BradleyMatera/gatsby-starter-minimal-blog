@@ -129,11 +129,17 @@ const Footer = () => {
       <div className="footer-bottom">
         <span>&copy; {currentYear} {siteTitle}</span>
         <span>
+          <Link to="/privacy/" style={{ color: "inherit", textDecoration: "underline" }}>Privacy</Link>
+          {" · "}
+          <Link to="/terms/" style={{ color: "inherit", textDecoration: "underline" }}>Terms</Link>
+          {" · "}
+          <Link to="/service-scope/" style={{ color: "inherit", textDecoration: "underline" }}>Service Scope</Link>
+        </span>
+        <span>
           <Link to="/recruiter/" style={{ color: "inherit", textDecoration: "underline" }}>
             Hiring? View the recruiter hub →
           </Link>
         </span>
-        <span>As an Amazon Associate I earn from qualifying purchases.</span>
       </div>
     </footer>
   );

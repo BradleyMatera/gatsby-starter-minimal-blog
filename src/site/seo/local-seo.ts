@@ -1,6 +1,8 @@
+export const SITE_URL = "https://bradleymatera.dev";
+
 export const serviceAreaName = "Durand, Davis, Rockford, Freeport, Loves Park, Machesney Park, Byron, Roscoe, Rockton, South Beloit, Beloit, Janesville, and Northwest Illinois";
 export const serviceAreaDescription =
-  "Web developer and website design for Rockford, Beloit, Freeport, and Northwest Illinois small businesses — SEO, repair, and custom builds.";
+  "Fast, accessible websites, local SEO, repairs, and website care for Northwest Illinois small businesses. Work directly with Bradley. Packages start at $447.";
 
 export const serviceAreaPlaces = [
   "Durand, Illinois",
@@ -30,9 +32,85 @@ export const localBreadcrumb = {
   path: "/web-developer-durand-davis-illinois/",
 };
 
+export const personSchema = {
+  "@type": "Person",
+  "@id": `${SITE_URL}/#bradley`,
+  name: "Bradley Matera",
+  url: `${SITE_URL}/about/`,
+  email: "bradmatera@gmail.com",
+  telephone: "+16083135373",
+  jobTitle: "Web Developer",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Durand",
+    addressRegion: "IL",
+    addressCountry: "US",
+  },
+  sameAs: [
+    "https://www.linkedin.com/in/bradmatera",
+    "https://github.com/BradleyMatera",
+    "https://dev.to/bradleymatera",
+  ],
+};
+
+export const websiteSchema = {
+  "@type": "WebSite",
+  "@id": `${SITE_URL}/#website`,
+  url: SITE_URL,
+  name: "Bradley Matera",
+  publisher: { "@id": `${SITE_URL}/#bradley` },
+  inLanguage: "en",
+};
+
+export const buildConnectedSchema = ({
+  path,
+  serviceName,
+  description,
+  offers,
+}: {
+  path: string;
+  serviceName: string;
+  description: string;
+  offers?: Array<{
+    name: string;
+    price: string;
+    priceCurrency: string;
+    description?: string;
+  }>;
+}) => ({
+  "@context": "https://schema.org",
+  "@graph": [
+    personSchema,
+    websiteSchema,
+    {
+      "@type": "Service",
+      "@id": `${SITE_URL}${path}#service`,
+      name: serviceName,
+      provider: { "@id": `${SITE_URL}/#bradley` },
+      areaServed: serviceAreaPlaces.map((name) => ({
+        "@type": "Place",
+        name,
+      })),
+      url: `${SITE_URL}${path}`,
+      description,
+      ...(offers && offers.length > 0
+        ? {
+            offers: offers.map((o) => ({
+              "@type": "Offer",
+              name: o.name,
+              price: o.price,
+              priceCurrency: o.priceCurrency,
+              ...(o.description ? { description: o.description } : {}),
+            })),
+          }
+        : {}),
+    },
+  ],
+});
+
 export const buildProfessionalServiceSchema = ({
   path,
-  serviceName: _serviceName,
+  serviceName,
   description,
 }: {
   path: string;
@@ -40,29 +118,43 @@ export const buildProfessionalServiceSchema = ({
   description: string;
 }) => ({
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: "Bradley Matera",
-  url: `https://bradleymatera.dev${path}`,
-  areaServed: serviceAreaPlaces.map((name) => ({
-    "@type": "Place",
-    name,
-  })),
-  serviceType: [
-    "Web development",
-    "Website design",
-    "Website repair and maintenance",
-    "SEO services",
-    "Small business websites",
-    "Front-end development",
-    "Full-stack web development",
+  "@graph": [
+    personSchema,
+    websiteSchema,
+    {
+      "@type": "ProfessionalService",
+      "@id": `${SITE_URL}${path}#service`,
+      name: serviceName,
+      provider: { "@id": `${SITE_URL}/#bradley` },
+      url: `${SITE_URL}${path}`,
+      areaServed: serviceAreaPlaces.map((name) => ({
+        "@type": "Place",
+        name,
+      })),
+      serviceType: [
+        "Web development",
+        "Website design",
+        "Website repair and maintenance",
+        "SEO services",
+        "Small business websites",
+        "Local SEO",
+        "Website accessibility",
+      ],
+      description,
+      telephone: "+16083135373",
+      email: "bradmatera@gmail.com",
+      dateModified: new Date().toISOString().split("T")[0],
+    },
   ],
-  description,
-  telephone: "+16083135373",
-  email: "bradmatera@gmail.com",
-  dateModified: new Date().toISOString().split("T")[0],
-  founder: {
-    "@type": "Person",
-    name: "Bradley Matera",
-    url: "https://bradleymatera.dev",
-  },
+});
+
+export const buildBreadcrumbSchema = (items: Array<{ name: string; path: string }>) => ({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: items.map((item, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: item.name,
+    item: `${SITE_URL}${item.path}`,
+  })),
 });
