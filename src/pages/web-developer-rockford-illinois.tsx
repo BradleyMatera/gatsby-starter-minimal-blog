@@ -155,6 +155,26 @@ const LocalWebDeveloperPage = () => (
     </Section>
 
     <Section
+      eyebrow="Local context"
+      title="What makes Rockford different for web design"
+      description={
+        <p>
+          Rockford is the largest city in Northwest Illinois with a population of about 150,000. The
+          business landscape is diverse — from downtown restaurants and shops along State Street and
+          North Main Street to manufacturing companies along the I-90 corridor and healthcare
+          providers like Mercyhealth and SwedishAmerican. Rockford businesses face more online
+          competition than smaller towns in the region, making website quality and local SEO more
+          impactful. The city has invested in downtown revitalization along the Rock River, and new
+          businesses are opening regularly. For web design, Rockford businesses need sites that can
+          compete with Chicago and Madison agencies for local search visibility while reflecting the
+          city's character.
+        </p>
+      }
+    >
+      <></>
+    </Section>
+
+    <Section
       eyebrow="Why local"
       title="Why choose a local developer over a remote freelancer or big agency"
       description={
@@ -574,6 +594,11 @@ const LocalWebDeveloperPage = () => (
         </Link>
       </div>
     </Section>
+
+    <div className="attribution-block" style={{ maxWidth: "42rem", margin: "2rem auto", padding: "1rem 1.5rem", fontSize: "0.875rem", opacity: 0.7, borderTop: "1px solid var(--color-border)" }}>
+      <p><strong>By Bradley Matera</strong> — web developer in Durand, Illinois, serving Durand, Davis, and Northwest Illinois. <Link to="/about/">About</Link> · <Link to="/contact/">Contact</Link> · <Link to="/pricing/">Pricing</Link></p>
+      <p style={{ marginTop: "0.5rem" }}>Last updated: July 2026. Prices and services subject to change — see <Link to="/terms/">terms of service</Link>.</p>
+    </div>
   </Layout>
 );
 

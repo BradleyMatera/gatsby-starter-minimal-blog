@@ -241,6 +241,23 @@ const LocalWebDeveloperPage = () => (
     </Section>
 
     <Section
+      eyebrow="Local context"
+      title="What makes Freeport different for web design"
+    >
+      <Card variant="outline">
+        <p className="feature-card__body">
+          Freeport is the county seat of Stephenson County with a population of about 25,000. The
+          downtown area along Stephenson Street has seen revitalization efforts, and the city has a
+          strong manufacturing heritage. Freeport is home to the Stephenson County Fair, Highland
+          Community College, and the Jane Addams Trail. Businesses here serve both city residents and
+          the broader rural Stephenson County area. For web design, Freeport businesses need sites that
+          target Freeport-specific searches while also capturing rural Stephenson County traffic that
+          might otherwise go to Rockford or Galena.
+        </p>
+      </Card>
+    </Section>
+
+    <Section
       eyebrow="Process"
       title="How it works — from first call to live site"
     >
@@ -482,6 +499,11 @@ const LocalWebDeveloperPage = () => (
         </Link>
       </div>
     </Section>
+
+    <div className="attribution-block" style={{ maxWidth: "42rem", margin: "2rem auto", padding: "1rem 1.5rem", fontSize: "0.875rem", opacity: 0.7, borderTop: "1px solid var(--color-border)" }}>
+      <p><strong>By Bradley Matera</strong> — web developer in Durand, Illinois, serving Freeport and Northwest Illinois. <Link to="/about/">About</Link> · <Link to="/contact/">Contact</Link> · <Link to="/pricing/">Pricing</Link></p>
+      <p style={{ marginTop: "0.5rem" }}>Last updated: July 2026. Prices and services subject to change — see <Link to="/terms/">terms of service</Link>.</p>
+    </div>
   </Layout>
 );
 

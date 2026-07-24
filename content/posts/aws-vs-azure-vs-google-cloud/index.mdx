@@ -123,6 +123,62 @@ The core free tier structures have not shifted dramatically, but the defaults an
 
 If I were starting fresh today, I would open an AWS account for resume relevance, a GCP account for long-term hobby hosting, and only touch Azure when a project is already using Microsoft services.
 
+## Specific service comparison beyond compute
+
+Compute and databases are the headline items, but you will use other services too. Here is what I actually touched across the three providers.
+
+| Category | AWS | Azure | GCP |
+|----------|-----|-------|-----|
+| Object storage | S3 (5 GB free, 12 months) | Blob Storage (5 GB free, 12 months) | Cloud Storage (5 GB Always Free) |
+| Serverless functions | Lambda (1M free requests/month, always) | Functions (1M free requests/month, always) | Cloud Functions (2M free requests/month, always) |
+| CDN | CloudFront (1 TB free, 12 months) | Front Door (limited free) | Cloud CDN (limited free via Cloud Storage) |
+| DNS | Route 53 (not free) | Azure DNS (not free) | Cloud DNS (not free) |
+
+The serverless comparison is interesting. All three give you a million or more free invocations per month, and all three make it permanent, not just 12 months. For a small API or a webhook handler, Lambda, Azure Functions, and Cloud Functions are all viable. I found Lambda the easiest to deploy because the ecosystem of tutorials and SAM/Serverless Framework tooling is the largest. Cloud Functions was the simplest to wire up to Firestore if you are already in GCP. Azure Functions felt fine but the portal-based setup was slower than I wanted.
+
+For storage, S3 is the industry default and every tool integrates with it. Cloud Storage is compatible with the S3 API in most cases. Azure Blob Storage works but its naming conventions (containers, not buckets) and tooling felt more Microsoft-specific.
+
+## Pricing comparison for a typical small project
+
+I ran the same project on all three: a static site with a small backend API and a database. Here is what the monthly cost looked like after the free tier expired or where it did not apply.
+
+| Resource | AWS | Azure | GCP |
+|----------|-----|-------|-----|
+| Compute (smallest instance) | ~$8/mo (t3.micro) | ~$8/mo (B1s) | ~$7/mo (e2-micro, Always Free in eligible region) |
+| Database (smallest managed) | ~$13/mo (RDS micro) | ~$15/mo (Azure SQL Basic) | ~$10/mo (Firestore on free tier) |
+| Storage | ~$0.23/mo (5 GB S3) | ~$0.20/mo (5 GB Blob) | ~$0.20/mo (5 GB Cloud Storage) |
+| Bandwidth | ~$0.90/mo (10 GB out) | ~$0.87/mo (10 GB out) | ~$0.12/mo (10 GB out, first 200 GB free) |
+| **Total** | **~$22/mo** | **~$24/mo** | **~$0-10/mo** |
+
+GCP wins on cost for a small always-on project because of the Always Free compute tier and the generous egress allowance (200 GB/month free vs. AWS's 100 GB and Azure's 100 GB). AWS and Azure are close to each other once the 12-month free tier ends. These are small numbers, but they add up over a year, and they are the difference between a hobby project that costs nothing and one that quietly drains $20/month.
+
+## Which cloud is best for different use cases
+
+- **Resume and job hunting:** AWS. It has the largest market share and the most job postings. If you want cloud experience that hiring managers recognize, AWS is the default.
+- **Long-term hobby hosting with zero budget:** GCP. The `e2-micro` Always Free tier and Firestore free allowance let you run a real project indefinitely for free if you stay in the eligible regions.
+- **Microsoft ecosystem (.NET, Active Directory, enterprise):** Azure. If your company already uses Microsoft 365 or Windows Server, Azure is the natural extension.
+- **Machine learning and data work:** GCP. BigQuery, Vertex AI, and the TensorFlow ecosystem are strongest here, though AWS SageMaker is competitive.
+- **E-commerce or high-traffic web apps:** AWS. The breadth of services (CloudFront, ElastiCache, RDS, ECS) is unmatched for production web infrastructure.
+- **Simple static sites:** Any of them, or none of them. A static site on Netlify or Vercel is cheaper and simpler than any cloud provider. I use Netlify for my own site and do not pay for cloud hosting at all.
+
+## Personal experience with each
+
+**AWS** is where I spent the most time, starting with my internship. I set up EC2 instances, RDS databases, S3 buckets, and Lambda functions. The console is overwhelming at first because there are 200+ services, but once you learn the core ones (EC2, S3, IAM, RDS, Lambda), the rest are variations. The IAM permission model was the hardest part. I locked myself out of my own resources more than once before I understood policies. The orphaned EBS volume I mentioned earlier was an AWS-specific mistake.
+
+**Azure** was the most frustrating for me because I do not work in the Microsoft stack day to day. The portal is visually clean but I found it slower to navigate than AWS's console. Resource groups are a good concept but they added a layer of mental overhead I did not need for a small project. The free SQL Database was useful, but since it was SQL Server and not Postgres, I could not use it for the project I was testing. I would use Azure again if a client was already in the Microsoft ecosystem, but I would not choose it for a personal project.
+
+**GCP** was the most pleasant surprise. The console is the cleanest of the three. Firestore was easier to use than I expected, and the Always Free tier is genuinely free if you are careful about regions. The one mistake I made was deploying in `us-east4` instead of `us-central1`, which cost me about $2 before I caught it. GCP is my default for personal tools that need to stay running without a budget.
+
+## How to choose if you are starting fresh
+
+If you are new to cloud and picking one provider today, here is my recommendation:
+
+1. **Open an AWS account first.** The job market value is real. Even if you never deploy anything serious, learning the AWS console and the core services is worth it for your resume. Set a $0.01 billing alert the moment you create the account.
+2. **Use GCP for anything you want to run long-term for free.** The Always Free tier is the best deal in cloud computing. Deploy in `us-central1` or `us-west1` and check the region list every time.
+3. **Only use Azure if you are already in the Microsoft ecosystem** or you want to learn .NET deployment. It is a fine platform, but it adds friction if you are not already a Microsoft user.
+
+The most important habit across all three: set billing alerts immediately, check your resources weekly, and clean up anything you are not using. The provider will not warn you. The bill will.
+
 ## Closing
 
 AWS, Azure, and GCP all have usable free tiers. None of them will protect you from your own forgetfulness. The provider that is best for you depends on whether you care more about career signal, long-term free hosting, or ecosystem fit.

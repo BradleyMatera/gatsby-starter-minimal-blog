@@ -316,6 +316,84 @@ const LocalWebDeveloperPage = () => (
     </Section>
 
     <Section
+      eyebrow="Why local"
+      title="Why a local developer matters in Durand and Davis"
+      description={
+        <p>
+          Durand and Davis are small communities, and that changes what matters when you hire a web
+          developer. Here is why being local is an advantage for a project like yours.
+        </p>
+      }
+    >
+      <div className="grid-three">
+        <Card>
+          <h3 className="feature-card__title">I live here</h3>
+          <p className="feature-card__body">
+            Durand is where I live and work. When you hire me, you are hiring someone who can meet at
+            the Durand Village Hall, the Davis Community Center, or anywhere in between. No travel
+            fees, no scheduling delays.
+          </p>
+        </Card>
+        <Card>
+          <h3 className="feature-card__title">Knows the community</h3>
+          <p className="feature-card__body">
+            Durand and Davis are small communities where word of mouth matters. A good website for a
+            Durand business needs to reflect the community character, not look like a generic
+            corporate template.
+          </p>
+        </Card>
+        <Card>
+          <h3 className="feature-card__title">Invested in the area</h3>
+          <p className="feature-card__body">
+            My reputation here is tied to the work I do. If a Durand or Davis business has a problem,
+            it gets fixed because I am still local and still reachable.
+          </p>
+        </Card>
+      </div>
+    </Section>
+
+    <Section
+      eyebrow="Comparison"
+      title="How this compares to hiring a Rockford or remote developer"
+      description={
+        <p>
+          You have options — Rockford agencies, remote freelancers, and DIY website builders among
+          them. Here is an honest comparison so you can decide what fits your project.
+        </p>
+      }
+    >
+      <div className="grid-two">
+        <Card variant="outline">
+          <h3 className="feature-card__title">No commute overhead</h3>
+          <p className="feature-card__body">
+            Rockford developers factor drive time into their rates. I am already here.
+          </p>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">More transparent on cost</h3>
+          <p className="feature-card__body">
+            I separate the build cost from the ongoing cost so you know what the site costs to make
+            and what it costs to keep.
+          </p>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">No sales pipeline</h3>
+          <p className="feature-card__body">
+            You tell me what you need, I tell you whether I can do it, what it costs, and how long it
+            takes.
+          </p>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">When a bigger shop is the right call</h3>
+          <p className="feature-card__body">
+            If you need a large e-commerce platform or a dedicated marketing team, a larger agency
+            may be the better fit. I will tell you that directly.
+          </p>
+        </Card>
+      </div>
+    </Section>
+
+    <Section
       eyebrow="Process"
       title="How it works — from first call to live site"
     >
@@ -544,6 +622,11 @@ const LocalWebDeveloperPage = () => (
         </Link>
       </div>
     </Section>
+
+    <div className="attribution-block" style={{ maxWidth: "42rem", margin: "2rem auto", padding: "1rem 1.5rem", fontSize: "0.875rem", opacity: 0.7, borderTop: "1px solid var(--color-border)" }}>
+      <p><strong>By Bradley Matera</strong> — web developer in Durand, Illinois, serving Durand, Davis, and Northwest Illinois. <Link to="/about/">About</Link> · <Link to="/contact/">Contact</Link> · <Link to="/pricing/">Pricing</Link></p>
+      <p style={{ marginTop: "0.5rem" }}>Last updated: July 2026. Prices and services subject to change — see <Link to="/terms/">terms of service</Link>.</p>
+    </div>
   </Layout>
 );
 

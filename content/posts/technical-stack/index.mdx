@@ -108,6 +108,38 @@ I have used a lot of frameworks over the last few years. Here is where some of t
 
 This list is not criticism. These tools are good. They are just not my defaults.
 
+## How this stack has evolved
+
+This is not the stack I started with. Three years ago, this site was plain HTML and CSS with no framework. Two years ago, it was Gatsby with JavaScript and styled-components. The current version is Gatsby with TypeScript, Theme UI, and Tailwind.
+
+The evolution was driven by real problems, not novelty. I moved from JavaScript to TypeScript after spending two days debugging a shape error that TypeScript would have caught at compile time. I added Tailwind after realizing I was writing the same utility classes over and over in custom CSS. I kept Theme UI because ripping it out would mean rewriting every page's styling, and the benefit did not justify the risk.
+
+The one change I regret is not adopting TypeScript sooner. I resisted it because it felt like overhead on small projects. In practice, it saves me more time on small projects than on large ones, because small projects have less test coverage and fewer eyes on the code.
+
+## Trade-offs of the current stack
+
+Every stack has costs. Here are the real ones I live with.
+
+**Build speed.** Gatsby builds this site in about 90 seconds locally. For a site with 50+ pages and a heavy image pipeline, that is acceptable but not fast. Next.js with the App Router builds comparable sites in 30-40 seconds. I accept the slower build because the GraphQL data layer and image pipeline save me more time during development than I lose during builds.
+
+**Bundle size.** The inlined CSS is about 194KB. That is larger than I would like, but it is a known Gatsby behavior and the site scores well on Core Web Vitals regardless. If bundle size became a real problem, I would externalize the CSS, but I am not willing to re-test every theme to save 100KB that does not affect the metrics that matter.
+
+**Developer experience.** TypeScript adds friction for quick edits. Tailwind's class lists get long and hard to read. Theme UI's `sx` prop causes a persistent type error in the layout component that I have chosen not to fix because it is a theme-ui typing issue, not a real bug. These are tolerable annoyances, not dealbreakers.
+
+**Hosting lock-in.** Netlify's functions, identity widget, and redirect system are convenient, but they create mild lock-in. Moving to Vercel or a VPS would require reworking serverless functions and auth. I accept this because the convenience outweighs the migration cost for the projects I actually ship.
+
+## What I would choose if starting fresh today
+
+If I were building this site from scratch tomorrow, the stack would be different in a few specific ways.
+
+- **Astro instead of Gatsby.** Astro builds faster, has a smaller output, and supports MDX natively. Gatsby's GraphQL layer is powerful but unnecessary for a content site. Astro's content collections give me the type safety I need without the build overhead.
+- **TypeScript from day one.** No question. The type safety is worth the setup cost.
+- **Tailwind, same as now.** Nothing has replaced it for my workflow.
+- **No Theme UI.** I would use CSS variables and Tailwind exclusively. Theme UI works, but the typing issues and the overlap with Tailwind create more friction than value on a new project.
+- **Netlify or Vercel.** Both are fine. I would pick based on which had the better free tier at the time.
+
+The core principles would not change: TypeScript, utility-first CSS, static generation, and git-based deployment. The specific tools would shift, but the philosophy is the same. Start simple, add complexity only when a real problem demands it.
+
 ## The most common mistake I make
 
 The biggest mistake I make is switching tools before I understand the one I am using. I have abandoned perfectly good stacks because a new release got attention, then regretted it two weeks later.

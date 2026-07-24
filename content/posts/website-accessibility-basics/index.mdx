@@ -26,6 +26,22 @@ WCAG is organized around four principles. Content must be:
 
 You do not need to memorize all 86 success criteria. You need to fix the ones that fail most often.
 
+### The criteria that matter most for small businesses
+
+If you focus on the handful of criteria that fail most often on small business sites, you cover the majority of real-world risk:
+
+- **1.1.1 Non-text Content** — every image has alt text (or empty alt if decorative). This is the single most cited failure in ADA lawsuits.
+- **1.4.3 Contrast (Minimum)** — text meets 4.5:1 contrast against its background. Light gray on white is the usual offender.
+- **1.4.11 Non-text Contrast** — form borders, focus indicators, and icons need 3:1 contrast against adjacent colors. Most sites miss this one entirely.
+- **2.1.1 Keyboard** — every interactive element works with a keyboard. No mouse required.
+- **2.1.2 No Keyboard Trap** — focus can move in and out of any component without getting stuck.
+- **2.4.1 Bypass Blocks** — a skip link or landmark lets keyboard users jump past repeated navigation.
+- **2.4.7 Focus Visible** — the focused element has a visible focus indicator. Removing `outline` without a replacement is a failure.
+- **3.3.2 Labels or Instructions** — every form field has a programmatic label, not just a placeholder.
+- **4.1.3 Status Messages** — success and error messages are announced to assistive technology without moving focus.
+
+These nine criteria are where most small business sites break. Fix them first and you have addressed the bulk of what plaintiffs' attorneys scan for.
+
 ## The most common accessibility failures
 
 ### 1. Missing alt text
@@ -68,11 +84,48 @@ The failure: no skip link, or a skip link that is not visible when focused.
 
 The fix: add a "Skip to main content" link as the first element in the body. It should be visually hidden until focused, then appear when a keyboard user tabs to it.
 
+## A before and after: fixing color contrast
+
+Here is the kind of fix I make on almost every small business site I audit. A site has a contact button styled like this:
+
+**Before:**
+
+```html
+<a href="/contact/" style="color: #999; background: #fff;">
+  Contact Us
+</a>
+```
+
+That gray on white has a contrast ratio of about 2.85:1. It fails 1.4.3 (minimum is 4.5:1). It looks fine to the designer, but it is unreadable for anyone with low vision or in bright ambient light, and it is one of the first things an automated scanner flags.
+
+**After:**
+
+```html
+<a href="/contact/" style="color: #4a4a4a; background: #fff;">
+  Contact Us
+</a>
+```
+
+`#4a4a4a` on white is roughly 9.2:1. It passes AAA. The change is a single hex value, it still looks clean, and it resolves a criteria failure that shows up in every audit tool. This is the kind of fix that takes five minutes and eliminates a real legal exposure.
+
 ## The legal risk
 
 ADA Title III applies to websites. Courts have ruled repeatedly that websites are places of public accommodation. You do not need to be a Fortune 500 company to get sued. Plaintiffs' firms file hundreds of these lawsuits per year, many against small businesses, restaurants, and local services.
 
 A typical ADA web accessibility lawsuit costs between $5,000 and $25,000 to settle, plus your own legal fees. The cost of fixing the accessibility issues is almost always lower than the cost of a single settlement.
+
+According to the [2023 UsableNet ADA Digital Lawsuit Report](https://blog.usablenet.com/ada-lawsuit-report), over 4,500 ADA web accessibility lawsuits were filed in federal court in 2023, and the majority targeted small and mid-size businesses. Plaintiffs' firms use automated scanners to find sites with contrast and alt text failures, then file in bulk. You do not need to be a target on purpose. You just need to be on the list of sites that fail a scan.
+
+## How accessibility helps your SEO
+
+Accessibility and SEO overlap more than most people realize. Search engines read your site the way a screen reader does: they rely on structure, not visual design. When you fix accessibility issues, you usually improve your search rankings at the same time.
+
+- **Semantic HTML helps both.** Using `<nav>`, `<main>`, `<article>`, and `<button>` instead of generic `<div>` tags gives screen readers and crawlers the same context. A `<div onclick>` is invisible to a screen reader and ambiguous to Google.
+- **Heading structure matters.** A single `<h1>` followed by `<h2>` and `<h3>` in order helps screen reader users navigate and helps Google understand your content hierarchy. Skipped levels or multiple `<h1>` tags confuse both.
+- **Alt text is indexable.** Image alt text is how Google understands what an image shows. Good alt text improves image search traffic and reinforces the page's topic.
+- **Fast, keyboard-friendly pages tend to rank better.** Core Web Vitals reward the same lean, well-structured markup that accessibility demands.
+
+If you need a reason to prioritize accessibility beyond the legal one, the SEO upside is real and measurable.
 
 ## How to test your site
 
@@ -83,6 +136,14 @@ You do not need expensive tools. Three free tests catch most problems:
 3. **Contrast checker:** Run your site through WebAIM's Contrast Checker or the WAVE accessibility extension. It flags every contrast failure automatically.
 
 For a broader audit, use the WAVE browser extension. It scans a page and reports structural issues, missing labels, alt text problems, and contrast failures in one pass.
+
+### The tools I actually use
+
+- **[axe DevTools](https://www.deque.com/axe/devtools/)** — a browser extension (Chrome, Firefox, Edge) that runs the same axe engine used in automated CI testing. It flags violations by WCAG criteria number, tells you which element failed, and suggests the fix. This is the first tool I run on any audit.
+- **[WAVE](https://wave.webaim.org/)** — WebAIM's accessibility evaluation tool. Available as a web form and a browser extension. It gives you a visual overlay of errors, contrast failures, and structural issues directly on the page. Good for a quick pass on a single page.
+- **Lighthouse accessibility audit** — built into Chrome DevTools under the Lighthouse tab. It runs axe under the hood and scores the page 0-100. The score is not the point, but the list of failed checks is useful, and it packages accessibility alongside performance and SEO so you see the overlap.
+
+Run axe DevTools and WAVE on every page. They will not catch everything (no automated tool catches more than about 30-40% of issues), but they catch the mechanical failures that get sites sued.
 
 ## When to get help
 

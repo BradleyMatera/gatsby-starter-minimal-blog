@@ -81,6 +81,17 @@ You should be able to look back and see who logged in, what they changed, and wh
 - **Frequency:** Review monthly. Review immediately if you suspect a problem.
 - **Action:** Most CMS platforms have logging plugins. For static sites, your hosting provider's access logs are the place to look.
 
+## Tools for each task
+
+You do not need enterprise software. These are the tools I use or recommend for small business sites:
+
+- **SSL monitoring:** [UptimeRobot](https://uptimerobot.com/) checks your SSL certificate expiry and alerts you before it lapses. Most hosts auto-renew via Let's Encrypt, but renewal fails silently more often than people think.
+- **Dependency scanning:** For static sites and Node-based projects, run `npm audit` weekly or use [Dependabot](https://docs.github.com/en/code-security/dependabot) on GitHub to open PRs automatically when a vulnerability is reported. For WordPress, use [Wordfence](https://www.wordfence.com/) or [Sucuri](https://sucuri.net/) for plugin vulnerability scanning.
+- **Backup verification:** [UpdraftPlus](https://updraftplus.com/) for WordPress backs up to cloud storage (S3, Google Drive, Dropbox). For static sites, your Git repository is the backup, but verify your hosting deploy previews still build. The key step most people skip: actually run a restore once. An untested backup is a guess.
+- **Uptime monitoring:** [UptimeRobot](https://uptimerobot.com/) (free tier covers 50 monitors at 5-minute intervals). Set it to ping your homepage and your contact form endpoint.
+- **Security scanning:** [Wordfence](https://www.wordfence.com/) for WordPress malware scans. [Snyk](https://snyk.io/) or [GitHub Security Advisories](https://docs.github.com/en/code-security/security-advisories) for dependency vulnerabilities in Node projects.
+- **Spam protection:** [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/) (free, privacy-friendly) or [hCaptcha](https://www.hcaptcha.com/). Both are drop-in replacements for reCAPTCHA without the privacy concerns.
+
 ## What happens if you ignore maintenance
 
 I have seen the aftermath enough times to be blunt about it.
@@ -92,6 +103,26 @@ I have seen the aftermath enough times to be blunt about it.
 **Data loss.** If your only copy of your site lives on one server and that server fails, you lose everything. Content, customer data, order history. Businesses have lost years of work this way.
 
 **Cost.** Emergency recovery from a hack typically costs $500 to $3,000 for a small business site. A maintenance plan costs a fraction of that and prevents the problem entirely.
+
+According to [IBM's Cost of a Data Breach Report](https://www.ibm.com/reports/data-breach), the average cost of a data breach for a small business (under 500 employees) is around $108,000 when you factor in detection, containment, lost business, and notification costs. Most small business hacks are not full data breaches, but even a defaced site or a redirect injection can cost $2,000-$10,000 in lost revenue, recovery labor, and reputational damage. The math is simple: prevention is cheaper than recovery by an order of magnitude.
+
+### Real examples I have seen
+
+- A restaurant site that had not been updated in 14 months. Attackers exploited a known plugin vulnerability and injected a redirect that sent mobile visitors to a phishing page. The owner found out when a customer called to ask why the menu page was showing a fake Apple login. Cleanup took three days. The site was delisted from Google for a week.
+- A small e-commerce site on WooCommerce with no backups. A bad plugin update corrupted the database. Two years of order history and customer accounts were gone. The owner had to rebuild the product catalog from memory and email customers individually to apologize.
+- A local service business with an expired SSL certificate. Browsers flagged the site as insecure. The owner did not notice for two weeks because nobody was monitoring. During that time, their contact form submissions dropped to near zero. The fix was a 10-minute certificate renewal that should have been automatic.
+
+## How to prioritize if you have limited time
+
+If you can only do a few things, do these in order:
+
+1. **Backups (daily or weekly).** If everything else fails, a backup saves your business. This is the one non-negotiable.
+2. **Updates (weekly).** Outdated software is the most common entry point. Update plugins, then theme, then core.
+3. **Uptime monitoring (continuous, set it once).** Free and takes 10 minutes to configure. You should never learn your site is down from a customer.
+4. **Strong passwords and 2FA (one-time setup).** Enable it on every admin account and never look back.
+5. **SSL check (monthly).** Takes 30 seconds. Most failures are silent auto-renewal issues.
+
+Everything else (security scanning, log review, spam review) matters, but if you are time-constrained, the first five cover the highest-impact risks.
 
 ## The maintenance schedule at a glance
 

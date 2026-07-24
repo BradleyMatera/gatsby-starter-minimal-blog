@@ -46,6 +46,36 @@ A quick checklist to avoid these mistakes:
 - **A test user is created** and login is verified before building sign-up.
 - **`Amplify.configure` runs** with no console errors before adding UI.
 
+## The actual authentication flow
+
+The full flow has four stages, and it helps to understand each one before you write any UI:
+
+1. **Signup.** The user submits an email and password. Cognito creates the user in the pool with a `UNCONFIRMED` status. No tokens are issued yet.
+2. **Confirmation.** Cognito sends a verification code to the user's email. The user submits the code, and Cognito marks the account `CONFIRMED`. This is the step people forget when they build signup first and wonder why login fails.
+3. **Login.** The user submits credentials. Cognito validates them and returns three tokens: an ID token (user identity claims), an access token (authorization for APIs), and a refresh token (used to get new tokens without re-entering the password).
+4. **Token refresh.** The ID and access tokens expire (default is 1 hour). The refresh token (default 30 days) is used silently to get new tokens. Amplify handles this automatically if you let it, but you need to understand it because it affects how you manage session state.
+
+Here is what the key calls look like in Amplify v6:
+
+```javascript
+import { signIn, signUp, confirmSignUp, fetchAuthSession } from 'aws-amplify/auth';
+
+await signUp({
+  username: email,
+  password,
+  options: { userAttributes: { email } }
+});
+
+await confirmSignUp({ username: email, confirmationCode });
+
+const { isSignedIn, nextStep } = await signIn({ username: email, password });
+
+const session = await fetchAuthSession();
+const idToken = session.tokens?.idToken?.toString();
+```
+
+The `idToken` is a JWT you can decode at [jwt.io](https://jwt.io) to inspect the claims. That is how you verify the flow worked end to end.
+
 ## The moving parts
 
 - **User pool:** the directory of users. ([Cognito user pools docs](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html))
@@ -140,6 +170,31 @@ To verify the config is correct:
 - Forgetting to uncheck the client secret. Browser apps cannot use secrets. ([Client secret docs](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-client-apps.html))
 - Using the wrong region in the User Pool ID.
 - Skipping the test user and trying to build sign-up first. Create a user manually, verify login works, then add registration.
+
+## Pitfalls and security considerations
+
+A few things that bite people once they get past the basic flow:
+
+**Token storage.** Amplify v6 stores tokens in `localStorage` by default. That makes them accessible to any JavaScript running on your page, including third-party scripts. For most small apps this is an acceptable tradeoff, but if you handle sensitive data, consider using a custom storage adapter or moving to a backend-for-frontend pattern where tokens never touch the browser.
+
+**Refresh handling.** Amplify refreshes tokens automatically, but only if the app is open and making calls. If a user leaves the app idle past the refresh token expiry, they get silently logged out. If your UI does not handle the signed-out state gracefully, users see a blank screen or stale data. Always check `fetchAuthSession()` on app load and redirect to login if it throws.
+
+**MFA setup.** The lab setup uses No MFA. For a real app, enable TOTP-based MFA (not SMS). SMS MFA has SIM-swap risk and per-message costs. TOTP uses an authenticator app like Google Authenticator or 1Password. Configure it at the user pool level, then handle the `MFA_SETUP` and `SMS_MFA` / `TOTP` challenge steps in your `signIn` response.
+
+**OAuth flows and PKCE.** If you use Cognito's hosted UI (the OAuth endpoint) instead of the Amplify SDK, use the Authorization Code flow with PKCE, never the Implicit flow. PKCE prevents authorization code interception in browser apps. The Amplify SDK handles this internally if you use `signInWithRedirect`, but if you build the OAuth URL yourself, you must generate and verify the PKCE challenge manually.
+
+**Token expiration.** The ID token's `exp` claim is in seconds. If you pass it to a backend API, your backend must validate `exp` and reject expired tokens. Do not trust the token just because it exists in the request.
+
+## How Cognito compares to alternatives
+
+Cognito is not the only option. Here is how it stacks up against the common alternatives for a React app:
+
+- **[Auth0](https://auth0.com/)** — the most polished developer experience. Hosted login pages, social logins, and enterprise SSO work out of the box. The tradeoff is cost: the free tier covers 7,500 active users, but paid plans start at $35/month and scale with users. If you want to move fast and do not mind paying, Auth0 is the easiest.
+- **[Firebase Auth](https://firebase.google.com/docs/auth)** — Google's offering. Free for most small apps (phone auth has per-use costs). Good if you are already in the Firebase ecosystem. The tradeoff is vendor lock-in to Google Cloud and a different token format that does not play as cleanly with AWS backends.
+- **[Supabase Auth](https://supabase.com/docs/guides/auth)** — built on PostgreSQL with row-level security. If you want your auth and database in one place, it is a strong choice. The free tier is generous. The tradeoff is a smaller ecosystem and less enterprise feature maturity than Cognito or Auth0.
+- **Cognito** — the cheapest at scale if you are already on AWS. The free tier covers 50,000 monthly active users. The tradeoff is the developer experience: the console is clunky, the docs are scattered, and you do more wiring yourself. If you are building on AWS anyway, it is the natural choice.
+
+For a small React app on AWS, Cognito is what I reach for. If I am not on AWS, I reach for Auth0 or Supabase depending on the stack.
 
 ## Closing
 

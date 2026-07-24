@@ -77,6 +77,67 @@ But the result for you is the same. When that developer stops responding, you ar
 
 The fix is simple: own your accounts from the start. It takes 20 minutes to register a domain and set up a hosting account. A developer who will not let you do that is not worth hiring.
 
+## How to verify you own your website
+
+If you are not sure whether you actually own your website, here is how to check each layer in under 10 minutes.
+
+### Domain
+
+Go to your domain registrar (GoDaddy, Namecheap, Google Domains, Cloudflare). Log in with your email. Do you see your domain listed? Is your name on the registrant contact? If you cannot log in, or the domain is not in your account, you do not own it. Call the registrar and ask who the registrant is. If it is your developer, you need to initiate a transfer.
+
+### Hosting
+
+Log into your hosting account (Netlify, Vercel, Bluehost, SiteGround). Is the account in your name with your payment method? Can you see your site listed? If your developer logs in with their own credentials and you have no access, you do not own the hosting.
+
+### Source code
+
+Ask your developer for the Git repository. If they say "it is on our platform" and cannot give you a repo you can clone, you do not own the source code. If your site is on WordPress, ask for an export of the database and a copy of the theme files. If you cannot get either, you are renting your site.
+
+### Content
+
+Do you have the original text files and images somewhere outside the website? If the only copy of your content lives inside a CMS you cannot access, you do not fully own your content. Export it now.
+
+## What happens when you do not own your website
+
+I have seen this play out three times in the last year.
+
+A restaurant in northern Illinois had their site built by a freelancer who registered the domain in his own name. He stopped responding to emails. The domain expired. The site went down. The restaurant had to file a domain recovery dispute with the registrar, which took six weeks. During that time, their Google Business Profile pointed to a dead site.
+
+A landscaping company had their site hosted on their developer's personal server. The developer got a full-time job and shut down the server. No warning. No backup. The company lost three years of content and had to rebuild from scratch.
+
+A consulting firm had a custom CMS built by an agency. When they wanted to switch developers, they discovered the CMS was proprietary. No other developer could work with it. They had to rebuild the entire site on a standard platform.
+
+In every case, the fix was the same: own your accounts from the start. The recovery is always harder and more expensive than the prevention.
+
+## How to transfer ownership if your developer holds the keys
+
+If you are already locked in, here is how to get out.
+
+**Domain transfer:** Ask your developer to unlock the domain and give you the authorization code (EPP code). Create an account at a registrar in your name. Initiate a transfer using the EPP code. If they refuse, file a complaint with the registrar. ICANN has a domain transfer dispute process. It is slow but it works if you can prove you paid for the domain.
+
+**Hosting migration:** If your site is on a standard platform (WordPress, Gatsby, etc.), set up a new hosting account in your name, deploy the site there, and update your domain's DNS to point to the new host. If your developer will not give you the source files, you may need to scrape the live site and rebuild. That is painful but possible.
+
+**Content recovery:** If you can still access the site, copy every page's text into a document. Download every image. If you cannot access the site, use the Wayback Machine at archive.org to recover older versions of your content.
+
+## Domain registration best practices
+
+- **Turn on auto-renew.** Domains expire. If you miss the renewal email, someone else can grab your domain. Auto-renew costs nothing extra and prevents disaster.
+- **Enable domain privacy (WHOIS privacy).** This hides your personal contact info from the public WHOIS database. Most registrars include it free now. If yours charges for it, switch registrars.
+- **Keep the registrar login somewhere safe.** Not in your developer's password manager. In yours.
+- **Use a business email for the registrant contact, not a personal one.** If you leave the business, the domain stays with the business.
+- **Register for multiple years if you can.** It locks in the price and signals stability to search engines.
+
+## Hosting options explained
+
+| Type | Cost | Best for | Tradeoff |
+|------|------|----------|----------|
+| Shared hosting | $5-15/mo | Simple sites, low traffic | Slow, shared resources |
+| VPS | $20-80/mo | Growing sites, more control | You manage the server |
+| Dedicated | $100+/mo | High traffic, full control | Expensive, overkill for most small businesses |
+| Static/CDN (Netlify, Vercel) | Free-$20/mo | Static sites, Gatsby, Next.js | No server-side processing |
+
+For the Gatsby sites I build, Netlify's free or Pro tier ($19/mo) is all most small businesses need. The site is static, so it loads fast, and the hosting cost is minimal. Shared hosting (Bluehost, SiteGround) makes sense for WordPress sites. VPS and dedicated hosting are overkill for a five-page local business site.
+
 ## What I do differently
 
 I do not hold anything hostage. Here is the short version:

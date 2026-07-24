@@ -49,6 +49,19 @@ If those five pieces line up, you get a triangle. If one is missing or mismatche
 
 I recommend a local server because module scripts and WebGPU can behave differently when opened as a raw `file://` URL.
 
+### Browser support matrix
+
+WebGPU shipped stable in Chrome 113 (May 2023). Here is where things stand as of writing:
+
+| Browser | Support | Notes |
+|---------|---------|-------|
+| Chrome / Edge | 113+ | Stable, enabled by default |
+| Safari | 17+ (macOS 14, iOS 17) | Stable as of Safari 17.4 |
+| Firefox | Nightly only | Behind `dom.webgpu.enabled` flag in Nightly. Not in stable release builds yet. |
+| Mobile Chrome (Android) | 121+ | Stable on supported devices |
+
+If `navigator.gpu` is undefined, your browser either does not support WebGPU or it is behind a flag. On Linux, you may need to launch Chrome with `--enable-features=Vulkan` if hardware acceleration is not detected automatically. On older hardware without a compatible GPU driver, `requestAdapter()` returns `null` and there is no workaround.
+
 ## Step 1: Create the HTML shell
 
 Create `index.html` with a canvas and a module script:
@@ -73,6 +86,16 @@ const device = await adapter.requestDevice();
 ```
 
 This is the first real gate. `requestAdapter` asks the browser for a GPU. If it returns `null`, WebGPU is not enabled or not available. `requestDevice` gives you the object every later call depends on.
+
+You can pass options to `requestAdapter` to request a specific power preference:
+
+```js
+const adapter = await navigator.gpu.requestAdapter({
+  powerPreference: "high-performance"
+});
+```
+
+Use `"high-performance"` on laptops with dual GPUs to force the discrete card. Use `"low-power"` for battery-sensitive contexts. If you omit it, the browser picks a default, which is usually the integrated GPU on laptops, and that can be slower than you expect.
 
 Open DevTools. No thrown error means you passed.
 

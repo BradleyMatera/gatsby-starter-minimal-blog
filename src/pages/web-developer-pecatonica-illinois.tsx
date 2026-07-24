@@ -167,6 +167,88 @@ const PecatonicaWebDeveloperPage = () => (
     </Section>
 
     <Section
+      eyebrow="Why local"
+      title="Why choose a local developer over a remote freelancer or big agency"
+    >
+      <div className="grid-three">
+        <Card>
+          <h3 className="feature-card__title">Knows the Pecatonica market</h3>
+          <p className="feature-card__body">
+            Pecatonica is a small village in Winnebago County along the Pecatonica River. The business
+            community is tight-knit, serving local residents and farmers. A developer who knows the area
+            understands that Pecatonica businesses need different language than Rockford or Chicago
+            businesses.
+          </p>
+        </Card>
+        <Card>
+          <h3 className="feature-card__title">Available in person</h3>
+          <p className="feature-card__body">
+            Being just 15 minutes from Durand means I can show up when the project needs it. Sometimes a
+            face-to-face meeting is worth more than ten emails.
+          </p>
+        </Card>
+        <Card>
+          <h3 className="feature-card__title">Accountable to the region</h3>
+          <p className="feature-card__body">
+            I am not going to disappear into a different time zone. My reputation in the region is tied to
+            the work I do here.
+          </p>
+        </Card>
+      </div>
+    </Section>
+
+    <Section
+      eyebrow="Local context"
+      title="What makes Pecatonica different for web design"
+    >
+      <Card variant="outline">
+        <p className="feature-card__body">
+          Pecatonica sits along the Pecatonica River in Winnebago County, with businesses concentrated
+          along IL Route 70 and Main Street. The village has a strong agricultural heritage and a growing
+          residential base. The Pecatonica Prairie Trail runs through town, bringing cyclists and outdoor
+          enthusiasts. Local businesses serve both long-time residents and commuters to Rockford and
+          Freeport. For web design, this means sites need to target Pecatonica-specific searches while
+          also capturing broader Winnebago County traffic.
+        </p>
+      </Card>
+    </Section>
+
+    <Section
+      eyebrow="Comparison"
+      title="How this compares to a Pecatonica web agency"
+    >
+      <div className="grid-two">
+        <Card>
+          <h3 className="feature-card__title">Smaller and more personal</h3>
+          <p className="feature-card__body">
+            When you hire me you are hiring the person who does the work.
+          </p>
+        </Card>
+        <Card>
+          <h3 className="feature-card__title">More transparent on cost</h3>
+          <p className="feature-card__body">
+            I separate the build cost from the ongoing cost so you know what the site costs to make and
+            what it costs to keep.
+          </p>
+        </Card>
+        <Card>
+          <h3 className="feature-card__title">No sales pipeline</h3>
+          <p className="feature-card__body">
+            You tell me what you need, I tell you whether I can do it, what it costs, and how long it
+            takes.
+          </p>
+        </Card>
+        <Card>
+          <h3 className="feature-card__title">When an agency is the right call</h3>
+          <p className="feature-card__body">
+            If you need a large e-commerce platform or dedicated marketing team, a larger agency may be
+            the better fit.
+          </p>
+        </Card>
+      </div>
+    </Section>
+
+    <Section
       eyebrow="Process"
       title="How it works — from first call to live site"
     >
@@ -398,6 +480,11 @@ const PecatonicaWebDeveloperPage = () => (
         </Link>
       </div>
     </Section>
+
+    <div className="attribution-block" style={{ maxWidth: "42rem", margin: "2rem auto", padding: "1rem 1.5rem", fontSize: "0.875rem", opacity: 0.7, borderTop: "1px solid var(--color-border)" }}>
+      <p><strong>By Bradley Matera</strong> — web developer in Durand, Illinois, serving Pecatonica and Northwest Illinois. <Link to="/about/">About</Link> · <Link to="/contact/">Contact</Link> · <Link to="/pricing/">Pricing</Link></p>
+      <p style={{ marginTop: "0.5rem" }}>Last updated: July 2026. Prices and services subject to change — see <Link to="/terms/">terms of service</Link>.</p>
+    </div>
   </Layout>
 );
 

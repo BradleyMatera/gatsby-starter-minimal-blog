@@ -140,6 +140,50 @@ GA4 will count spam form submissions as conversions. Filter out bot traffic and 
 
 GBP insights is free and tracks the most important local metrics. Many businesses never look at it. Log in once a month and screenshot the numbers.
 
+## How to attribute a phone call to a website visit
+
+This is the question I get most often. Someone calls you and says "I found you online." That is not attribution. That is a vibe. You need to know whether that call came from your website, your Google Business Profile, Yelp, or a paid ad.
+
+The cleanest way is call tracking with dynamic number insertion (DNI). CallRail and similar services do this. You place a small JavaScript snippet on your site. When a visitor lands on your site from organic search, the script swaps your real phone number for a tracking number on the page. When they call that tracking number, CallRail forwards it to your real line and logs the source as organic search. If the same visitor came from a Google Ad, the script shows a different tracking number, and the call is attributed to that ad.
+
+You do not need DNI for every business. If you only have one traffic source (your GBP listing), the free GBP forwarding number is enough. But if you are running ads, doing SEO, and listed on multiple directories, DNI is the only way to know which channel is actually driving calls.
+
+A simpler approach that works for smaller budgets: use a unique phone number on your website that is not listed anywhere else. Any call to that number came from your site. It is not as precise as DNI (it cannot tell you organic vs. paid), but it tells you website calls vs. everything else. I have set this up for clients using Twilio numbers that cost about $1/month plus per-minute usage. It is not free, but it is close.
+
+## What metrics matter most for local businesses
+
+If you can only track three numbers, track these:
+
+1. **Total calls per month** — from GBP insights plus call tracking. This is your primary revenue signal.
+2. **Form submissions per month** — from GA4. This captures the longer-intent leads who would not pick up the phone.
+3. **Direction requests per month** — from GBP insights. This tells you whether people are planning to visit your physical location.
+
+Everything else is secondary. Website clicks, photo views, and search impressions are useful context, but they do not pay the bills. If calls are up and traffic is flat, you are winning. If traffic is up and calls are flat, you are wasting attention.
+
+## Tools for call tracking and form analytics
+
+The tools I have actually used and can recommend:
+
+- **CallRail** ($45/mo and up) — full call tracking with DNI, call recording, and source attribution. The best option if you are running multiple marketing channels.
+- **Google Forwarding Numbers** (free) — built into GBP. Shows call counts and source within GBP only. No website tracking.
+- **Twilio** (pay per use) — build your own call tracking. Cheapest if you are technical, but you maintain it yourself.
+- **Google Tag Manager** (free) — the bridge between your website forms and GA4. If you are not using GTM, form tracking is harder than it needs to be.
+- **Formspark or Netlify Forms** — if your site is static, these handle form submissions and can fire GA4 events on success without a backend.
+
+I start most clients with GBP forwarding numbers and GA4 form tracking through GTM. That covers 80% of what matters for free. CallRail gets added when the business is spending money on ads or needs to know which directory is actually driving calls.
+
+## How to use this data to improve the website
+
+Tracking is not the goal. Acting on the data is. Once you have a month of numbers, look for the gaps.
+
+If your call conversion rate is below 1%, the problem is on the website. Check whether your phone number is visible above the fold on mobile without scrolling. Check whether it is a clickable `tel:` link. Check whether there is a clear call to action within the first screen. I have seen call rates double just by moving the phone number from the footer to the header.
+
+If form submissions are high but call volume is low, your audience may prefer written contact. Make the form easier to find and shorten it. Remove fields you do not need. Every extra field reduces submissions.
+
+If direction requests are high but calls are low, people want to visit you in person. Make sure your hours, address, and parking instructions are easy to find. Add a photo of the front of your building so they recognize it when they arrive.
+
+The data tells you where to look. The fix is almost always making the next step easier for the customer.
+
 ## Next steps
 
 If you want help setting up tracking for your local business, I offer [local SEO services](/services/local-seo/) that include analytics setup and monthly reporting. You can also [contact me](/contact/) if you have a specific tracking question or want a second opinion on your current setup.

@@ -158,6 +158,24 @@ For each page, write down:
 - **Changing URLs for no reason.** Every URL change is a risk. Only change if there is a real reason.
 - **Not testing on mobile.** Most of your traffic is mobile. If it is broken on a phone, it is broken.
 - **Launching on a Friday and not checking until Monday.** Launch when you can monitor it for the first 48 hours.
+- **Ignoring the redirect map.** I have seen businesses lose 60% of their traffic because nobody built the 301 redirect list before launch. Old URLs started returning 404s, Google dropped them from the index, and it took months to recover.
+- **Changing the domain without proper redirects.** If you are moving from `oldsite.com` to `newsite.com`, you need site-wide redirects, not just a homepage redirect. Every old URL needs to point to its equivalent on the new domain.
+- **Removing pages that have backlinks.** A page with 20 backlinks pointing to it has real SEO value. Deleting it without a redirect wastes that value entirely. Always check backlinks before removing any page.
+- **Forgetting to update internal links.** After changing URLs, every internal link on your site that pointed to the old URL is now broken. Run a broken link checker after launch and fix every internal 404.
+- **Not updating your Google Business Profile.** If your URL changes, update it on your GBP, your social profiles, and every directory listing. Inconsistent URLs confuse Google's local ranking signals.
+
+## Timeline for a typical small business redesign
+
+A 5 to 15 page small business website redesign should take 4 to 8 weeks if done properly. Here is a realistic breakdown:
+
+- **Week 1: Audit and discovery.** Traffic audit, ranking audit, content audit, backlink audit. Define goals for the new site. This is the most important week and the one most people skip.
+- **Week 2: Planning and structure.** Sitemap, redirect map, page-by-page plan, wireframes for key pages. You should know exactly what every page will contain before any design work starts.
+- **Weeks 3-5: Design and build.** Build the new site on a staging URL. Write or update content. Design layouts. Implement schema markup. This is where most of the actual work happens.
+- **Week 6: Testing.** Mobile testing, speed testing, redirect testing, form testing, broken link checking. Click every link. Fill out every form. View the site on an actual phone.
+- **Week 7: Launch and monitoring.** Deploy redirects, submit sitemap, switch DNS, and monitor Search Console for the first 48 hours. Fix any issues immediately.
+- **Week 8: Post-launch adjustments.** Compare traffic and rankings to pre-redesign baselines. Fix any pages that dropped. Make small improvements based on real user behavior.
+
+If a freelancer or agency quotes you 1-2 weeks for a redesign, they are skipping the audit and planning phases. That is a rebuild, not a redesign. You will lose SEO value. If they quote 3-6 months for a 10-page site, they are either overcharging or have too much process for your scope.
 
 ## Want help with your redesign?
 

@@ -29,6 +29,14 @@ Example of a doorway page:
 
 That paragraph with "Rockford" swapped for "Belvidere" swapped for "Machesney Park" is a doorway page. Google has been penalizing these since 2015.
 
+Here are a few more specific examples of doorway page patterns to avoid:
+
+**The near-duplicate footer trick:** Some businesses write a unique 200-word intro paragraph for each city page, then paste the same 600-word "About Our Services" block at the bottom of every page. Google's duplicate content detection catches this. The unique intro does not save you if 80% of the page is identical across 30 cities.
+
+**The generated review block:** A page that pulls the same five reviews onto every city page, just with the city name inserted into a template sentence ("See what our customers in `{City}` say"). Those reviews are not from customers in that city. Google can tell, and so can users who click through to two different city pages and see the same names.
+
+**The multiple domain doorway:** Buying `plumber-rockford.com`, `plumber-belvidere.com`, and `plumber-machesneypark.com`, then redirecting all of them to the same homepage. This is explicitly called out in Google's guidelines as a doorway pattern. It worked in 2012. It gets penalized now.
+
 ## Google's guidelines on doorway pages
 
 From Google's Search Central documentation:
@@ -40,6 +48,23 @@ Google specifically calls out local doorway pages as a violation:
 > "Having multiple domain names or pages targeted at specific regions or cities that funnel users to one page"
 
 If you have 20 city pages that all link to the same contact page with no other unique content, you are funneling users. That is a doorway page.
+
+### How Google distinguishes doorway pages from legitimate local pages
+
+Google does not penalize city landing pages. It penalizes pages that exist only to manipulate rankings. The distinction comes down to whether the page serves a user or serves a search query. Google's algorithms look at several signals:
+
+- **Content uniqueness:** Is the page substantially different from your other city pages, or is it a find-and-replace job?
+- **Standalone value:** If a user landed on this page directly, would it answer their question, or would they need to click through to another page to get anything useful?
+- **Real connection to the area:** Does the page reference specific local details that could only come from actually working there?
+- **Proportion of unique content:** A page with 100 unique words and 500 duplicated words is mostly a doorway page, even if it has some unique content.
+
+The practical test: if you removed the city name from the page, would it still make sense? If the only thing tying it to that city is the city name itself, it is a doorway page.
+
+### Real businesses that got penalized
+
+Google has taken manual action against doorway pages in several documented cases. In 2015, Google rolled out a doorway page algorithm update that specifically targeted pages created to capture local search traffic. Sites that relied on mass-generated city pages saw traffic drop 40-80% overnight. A well-known personal injury law firm had over 300 city pages deindexed after a manual review found they were template-generated with no unique content. A national HVAC franchise lost map pack visibility in multiple markets after Google flagged their location pages as doorway spam because each page was identical except for the city name and a swapped stock photo.
+
+The pattern in every case: the business built pages faster than they could write real content for them. If you are generating 50 city pages in a weekend, you are building doorway pages. If you are writing one city page per week with real examples and local context, you are building legitimate local content.
 
 ## What makes a local landing page good
 
@@ -131,6 +156,32 @@ Add `Service` or `ProfessionalService` schema to each city page with the city in
 ## How many city pages should you create?
 
 One per city you actually serve. Not one per city you wish you served. If you regularly do jobs in 4 cities, make 4 pages. If you serve 12, make 12. Quality matters more than quantity. 4 excellent city pages will outperform 20 thin ones every time.
+
+## A template for a compliant local landing page
+
+Here is the structure I use for city pages that rank without triggering doorway penalties. Adapt it to your business, but follow the order:
+
+1. **H1 with city and service:** "Plumbing Services in Rockford, IL" — not just "Our Services."
+2. **Unique intro (150-200 words):** Why you serve this city, how long, what neighborhoods you work in. Reference specific streets or landmarks.
+3. **Services offered in this city (list with short descriptions):** Not every service you offer everywhere. The ones you actually provide here.
+4. **2-3 real job examples:** One paragraph each. Address (street only, no house number), what the job was, how long it took, what it cost if you are comfortable sharing.
+5. **City-specific FAQs (5-8 questions):** Real questions you have been asked by customers in this city. Include travel time, local code requirements, neighborhood-specific issues.
+6. **Service area map or ZIP code list:** Be specific. "61101, 61102, 61103, 61104, 61107, 61108" is better than "Rockford and surrounding areas."
+7. **Reviews from customers in this city:** 2-3 reviews where the customer mentions the city or neighborhood. If you do not have reviews from this specific city, do not fake it.
+8. **Internal links:** Link to 2-3 nearby city pages and to your main service pages. Use descriptive anchor text.
+9. **CTA with city name:** "Get a plumbing estimate in Rockford" — not just "Contact Us."
+
+This structure gives Google unique content, local relevance, and a clear reason for the page to exist. It also gives a user everything they need without clicking elsewhere.
+
+## How to test if your local pages are compliant
+
+Before you publish a batch of city pages, run these checks:
+
+- **The find-and-replace test:** Open two city pages side by side. If you could turn one into the other by swapping the city name, you have a doorway page problem. Fix it before publishing.
+- **The standalone test:** Read the page without any context. Does it tell you something specific about your work in that city, or could it be about any city? If it could be about any city, it is not specific enough.
+- **The duplicate content check:** Run the page through a duplicate content checker like Siteliner or Copyscape. If more than 30% of the text appears on another page on your site, rewrite it.
+- **The word count check:** If the page is under 400 words, it is thin. Aim for 500-800 words of genuinely useful content. If you cannot write 500 words about your work in a city, reconsider whether you need a page for it.
+- **The Search Console test:** After publishing, monitor Search Console for manual actions. If Google flags your pages, you will see a notification in the Security and Manual Actions section. If you get flagged, remove the thin pages and submit a reconsideration request.
 
 ## What to do next
 

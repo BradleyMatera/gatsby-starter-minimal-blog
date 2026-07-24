@@ -17,6 +17,12 @@ A dropdown is not a DOM thing. In React it is almost always a boolean. If that b
 
 The second half of the problem is visibility changes. If your nav collapses on mobile, or hides on scroll, or mounts and unmounts during route transitions, your dropdown state can survive in the wrong moment. That is where it starts looking haunted. The UI is doing exactly what you told it to do, you just forgot to tell it when to stop.
 
+### The specific bug
+
+Here is exactly what I saw. I opened the dropdown menu on desktop, clicked elsewhere on the page, and the dropdown stayed open. On mobile, I opened the dropdown inside the mobile menu, closed the mobile menu, reopened it, and the dropdown was still open from the last session. It looked like the component was remembering state it should have forgotten.
+
+The worst version: open the dropdown, navigate to another page via a Gatsby Link, come back, and the dropdown was open again. That one made it feel genuinely haunted because I had not touched anything. The component had just survived the route transition with its state intact.
+
 {/* visual-break:gatsby-nav-bar-haunted:1 */}
 ![Debugging process checkpoint illustration for this section.](/assets/visuals/blog/gatsby-nav-bar-haunted-break-1.png)
 
@@ -45,6 +51,18 @@ Open the site, open the dropdown, and then click somewhere else on the page. If 
 Now collapse or hide the nav (mobile menu, scroll-hide behavior, whatever your setup is). If the dropdown state survives into the hidden nav state, you will see the menu behave out of sync when the nav returns.
 
 That is the baseline.
+
+## How I debugged it
+
+I started in the browser console. No errors. No warnings. That ruled out a JavaScript crash or a thrown exception. The component was rendering fine, it just had the wrong state.
+
+Next I opened React DevTools and found the navigation component in the component tree. I located the `dropdownOpen` state (or whatever the boolean was named in this theme). I watched it while I reproduced the bug. When I clicked outside the dropdown, the state stayed `true`. When I collapsed the mobile menu and reopened it, the state was still `true`. That confirmed the problem was not a rendering issue or a CSS issue. The state was never being reset.
+
+Then I traced the source code. I opened `navigation.tsx` and looked for every place that called `setDropdownOpen`. There was a toggle on the dropdown button click. That was it. No outside-click handler. No visibility effect. No reset on route change. The only way to close the dropdown was to click the toggle button again, which nobody does once they have mentally moved on.
+
+### The root cause
+
+The root cause was simple: the component only had a transition from closed to open. It had no transitions back to closed except the toggle. In state machine terms, it was missing the transitions that should fire on outside click and on nav visibility change. React does not infer those transitions. You have to wire them up explicitly.
 
 ## Start to finish
 
@@ -145,6 +163,16 @@ I am not including those changes here because the post is about the stuck dropdo
 
 {/* visual-break:gatsby-nav-bar-haunted:2 */}
 ![Troubleshooting checkpoint illustration for this section.](/assets/visuals/blog/gatsby-nav-bar-haunted-break-2.png)
+
+## Lessons about debugging Gatsby component shadowing
+
+A few things I learned from this that apply beyond this one bug.
+
+Component shadowing in Gatsby means you are overriding a theme component, not editing the original. When you debug, you need to look at your shadowed version in `src/@lekoarts/gatsby-theme-minimal-blog/components/`, not the theme's internal files. I wasted 20 minutes reading the original theme source before realizing the bug was in my shadow. If you are shadowing a component, that is the file that runs. The original is irrelevant.
+
+State persistence across route transitions is a Gatsby-specific gotcha. Because Gatsby uses a single-page app architecture with `@reach/router`, components in the layout do not unmount when you navigate between pages. State survives. If you have a dropdown, a modal, or a search bar in your layout, you need to reset its state on route change or it will haunt you.
+
+The general lesson: every piece of UI state needs defined exit conditions. If you open something, you must define every event that closes it. Outside click, Escape key, route change, visibility change. List them out. Wire them up. If you miss one, the UI will feel broken in a way that is hard to reproduce and easy to dismiss as a fluke.
 
 ## Closing
 

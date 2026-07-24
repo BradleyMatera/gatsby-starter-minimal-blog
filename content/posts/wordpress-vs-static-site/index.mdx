@@ -79,6 +79,68 @@ Static sites make sense when:
 | Hosting cost | $5-$30/month typical | Free to $20/month typical |
 | Best for | Content-heavy, frequently updated | Fixed content, speed-critical |
 
+## Performance comparison
+
+The speed difference is not subtle. I have benchmarked both on identical content, and the numbers are consistent.
+
+A typical small business WordPress site on shared hosting (a homepage, services page, about page, blog) loads in 3-5 seconds on a mobile connection with a Lighthouse performance score of 30-50. The same content on a static site (Gatsby, Astro, or plain HTML) loads in under 1 second with a Lighthouse performance score of 90-100.
+
+The gap comes from what happens on each request. WordPress runs a PHP process, queries a database, renders templates, and sends the result. A static site sends a pre-built HTML file. There is no compute on the request path.
+
+WordPress can get faster with caching plugins (WP Rocket, W3 Total Cache), a CDN (Cloudflare), and image optimization. But you are adding complexity to approach what a static site gives you for free. I have seen well-optimized WordPress sites hit 70-80 on Lighthouse, but it takes ongoing work to keep it there. A static site starts at 95 and stays there without effort.
+
+## Monthly cost comparison
+
+The cost difference adds up over a year.
+
+**WordPress:**
+
+- Managed WordPress hosting: $10-$30/month (SiteGround, Kinsta, WP Engine)
+- Premium plugins (caching, security, SEO, backups): $100-$300/year
+- Theme (if premium): $50-$100 one-time
+- Total: roughly $20-$55/month ongoing
+
+**Static site:**
+
+- Hosting (Netlify, Vercel, Cloudflare Pages): $0-$20/month
+- No plugins to buy
+- No theme marketplace (you build or use a free starter)
+- Total: $0-$20/month ongoing
+
+For a small business on a budget, the static site saves $200-$400/year minimum. That is not life-changing money, but it is real, and it compounds with the lower maintenance burden.
+
+## Security comparison
+
+WordPress is the most attacked CMS on the web, and it is not close. According to [Sucuri's annual Website Threat Research Report](https://sucuri.net/reports/), WordPress accounted for over 90% of all hacked CMS sites in their dataset. The reasons are structural:
+
+- **The admin panel is a target.** Brute force attacks on `/wp-login.php` run constantly. A weak password or a missing login limiter and you are in.
+- **Plugins are the main attack vector.** Most vulnerabilities are in third-party plugins, not WordPress core. One outdated plugin with a known CVE is an open door.
+- **The database is exposed.** SQL injection, even with prepared statements, is a risk surface that static sites do not have at all.
+
+A static site has no admin panel, no database, and no server-side code execution. The attack surface is your hosting provider and your DNS. Those can still be compromised, but the surface is dramatically smaller. You cannot brute-force a login page that does not exist.
+
+## When WordPress is still the right choice
+
+I build static sites most of the time, but I still recommend WordPress for specific situations:
+
+- **Content-heavy sites with non-technical authors.** If your marketing team publishes three blog posts a week and none of them write code, WordPress is the right tool. A headless CMS can work, but it adds complexity that most small teams do not want to manage.
+- **E-commerce with WooCommerce.** If you need inventory management, shipping integrations, and a product catalog that non-technical staff can update, WooCommerce is mature and well-supported. Static e-commerce (Snipcart, Stripe links) works for simple stores but falls short for complex catalogs.
+- **Sites that rely on specific plugins.** If you need a booking calendar, a learning management system, a membership portal, or a directory plugin, and you do not have the budget to build those custom, WordPress has them off the shelf.
+
+The decision is not about which platform is better. It is about which one fits the team that will run it.
+
+## Migrating from WordPress to static
+
+If you are moving from WordPress to a static site, the migration path is straightforward but not automatic:
+
+1. **Export your content.** Use the WordPress XML exporter (Tools > Export > All Content). This gives you a WXR file with posts, pages, comments, and authors.
+2. **Convert content to Markdown.** Tools like `wordpress-export-to-markdown` or `@staticish/wxr-to-md` convert the WXR file to Markdown files with frontmatter. Images need to be downloaded and referenced separately.
+3. **Set up URL redirects.** Your old WordPress URLs (especially `/?p=123` style or `/category/` archives) need redirects to the new static URLs. Configure these in your hosting provider's redirect rules (Netlify `_redirects`, Vercel `vercel.json`) or in a `_redirects` file.
+4. **Preserve SEO metadata.** Map WordPress SEO titles and descriptions (from Yoast or Rank Math) to your new frontmatter. Keep the same slugs where possible to minimize redirect chains.
+5. **Rebuild forms.** WordPress form plugins (Contact Form 7, Gravity Forms) do not carry over. Replace them with a form service (Netlify Forms, Formspree) or a serverless function.
+
+A typical migration takes 1-3 days for a small site (under 50 pages) and a week or more for larger content archives.
+
 ## The middle ground: headless WordPress
 
 There is a third option that some businesses should know about. Headless WordPress uses WordPress as the content management backend but serves the front end as a static or statically-generated site. You get the WordPress dashboard for content editing and the performance and security of a static site.

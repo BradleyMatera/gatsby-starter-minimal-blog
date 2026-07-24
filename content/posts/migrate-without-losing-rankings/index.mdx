@@ -121,6 +121,68 @@ Compare your post-migration rankings to the pre-migration baseline.
 - **Not testing before launch.** Redirects that point to the wrong place are only caught if you test them.
 - **Ignoring it after launch.** The post-launch monitoring is where you catch problems before they become permanent ranking losses.
 
+## Specific redirect patterns that work
+
+The redirect map is only useful if the patterns cover the real cases. Here are the mappings I see most often, with the exact old-to-new structure.
+
+| Old URL pattern | New URL pattern | Redirect type | Notes |
+|---|---|---|---|
+| `/about-us/` | `/about/` | 301 | Shorter, cleaner slug |
+| `/services/web-design/` | `/services/website-redesign/` | 301 | Renamed service offering |
+| `/blog/old-post-title/` | `/blog/new-post-title/` | 301 | Content updated and retitled |
+| `/contact-form/` | `/contact/` | 301 | Consolidated contact pages |
+| `/category/seo/` | `/tags/seo/` | 301 | Moved from categories to tags |
+| `/index.html` | `/` | 301 | Static file to clean root |
+| `/services/old-service/` | `/services/` | 301 | Deleted service, redirect to parent |
+| `/2019/12/old-post/` | `/blog/old-post/` | 301 | Removed date from URL structure |
+
+For Gatsby and Netlify, these go in `netlify.toml` or a `_redirects` file. The format is:
+
+```text
+/about-us/    /about/    301
+/services/web-design/    /services/website-redesign/    301
+/blog/old-post-title/    /blog/new-post-title/    301
+/contact-form/    /contact/    301
+```
+
+Test each one with `curl -I https://yoursite.com/old-url/` and confirm the response includes `HTTP/2 301` and a `location` header pointing to the correct new URL. Do this before you celebrate launch.
+
+## Pre-migration checklist
+
+Before you touch anything, complete this checklist. If you skip a step, you are flying blind after launch.
+
+- [ ] **Sitemap exported.** Download your current XML sitemap and save a copy. This is your URL inventory baseline.
+- [ ] **Backlink report pulled.** Use Ahrefs, Semrush, or Google Search Console to export every URL that has external backlinks. These pages must redirect perfectly, or you lose link equity.
+- [ ] **Analytics baseline recorded.** Note your current organic traffic, top landing pages, top keywords, and conversion rates. Screenshot the charts. You need a before picture to compare against.
+- [ ] **Rank tracking snapshot saved.** Record the top 20-50 keywords, the ranking URL, and the position. Save it in a spreadsheet.
+- [ ] **Redirect map built and reviewed.** Every old URL mapped to a new URL. Reviewed by someone other than the person who built it.
+- [ ] **Crawl completed.** Run Screaming Frog on the current site. Export the full URL list plus status codes. This catches pages that are not in the sitemap.
+- [ ] **Staging environment tested.** The new site is built on a staging URL. Redirects are tested there before production launch.
+
+## Post-migration monitoring
+
+The first 30 days after launch are when you catch problems. Here is what to check and when.
+
+**Day 1:** Submit the new sitemap in Search Console. Check the Coverage report for immediate errors. Crawl the new site with Screaming Frog and look for 404s, broken internal links, and missing canonical tags. Compare the URL count against your redirect map — if the new site has 50 fewer pages than expected, something is missing.
+
+**Day 7:** Check Search Console's Performance report. Compare impressions and clicks to your pre-migration baseline. A small dip is normal. A 30%+ drop is a red flag. Check the Coverage report for new errors. Look at the old URLs — they should be dropping out of the index as Google processes the redirects.
+
+**Day 30:** Rankings should be back to baseline or close to it. If they are not, check for missing redirects, changed content, or pages that lost their title tags. Pull a fresh backlink report and confirm no external links are pointing at URLs that 404.
+
+## A real migration timeline
+
+Here is what a clean migration actually looks like, day by day.
+
+**Day 1 (launch):** New site goes live. Redirects are active. Sitemap submitted. Traffic dips 10-15% as Google re-crawls. This is expected.
+
+**Day 2-3:** Search Console starts showing the new URLs in the Coverage report. Old URLs are still indexed. Some 404s appear — usually internal links you missed. Fix them immediately.
+
+**Day 7:** Traffic is recovering. Most old URLs have been re-crawled and redirected. Rankings are fluctuating but trending toward baseline. The old sitemap can be removed from Search Console.
+
+**Day 14:** Rankings are stable. Traffic is at or above pre-migration levels. The new site is fully indexed.
+
+**Day 30:** Migration is complete. Old URLs are mostly de-indexed. No new 404s. If you are not here by day 30, something went wrong and you need to investigate.
+
 ## When to get help
 
 If you are migrating a site that currently ranks well and brings in business, the risk is real. A botched migration can wipe out years of SEO work in a week. If you want someone to handle the redirect mapping and post-launch monitoring, I do this as part of my [website redesign service](/services/website-redesign/). [Get in touch](/contact/) before you start the migration.

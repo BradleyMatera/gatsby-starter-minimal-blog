@@ -128,6 +128,61 @@ This style improved three things in practice:
 2. **Higher-signal feedback.** Outside review exposed issues that code-only review missed, especially layout and narrative clarity.
 3. **Better writing tone.** Posts and project summaries shifted from generic AI phrasing to clearer first-person, outcome-driven language.
 
+## What agents consistently flag
+
+After running this loop across dozens of changes, patterns emerged. The reviewer agent flags the same categories of issues over and over, and they map almost exactly to what a senior human reviewer would catch — but faster and without ego.
+
+**Naming.** This is the most common flag. The agent catches vague variable and function names that describe the mechanism instead of the intent. A before/after from this very codebase:
+
+```tsx
+const arr = posts.filter(p => p.node.frontmatter.tags.includes(tag))
+```
+
+became:
+
+```tsx
+const postsWithTag = posts.filter(post =>
+  post.node.frontmatter.tags.includes(tag)
+)
+```
+
+The agent flagged `arr` as meaningless and `p` as too short to scan. The fix is trivial, but I would have skipped it in a solo session because the code worked.
+
+**Error handling.** The agent consistently catches swallowed errors and missing fallbacks. It flagged this pattern in a Netlify function:
+
+```js
+try {
+  const data = await fetchProfile(id)
+  return data
+} catch (e) {
+  return null
+}
+```
+
+and recommended surfacing the error context instead of silently returning null, which made debugging a real outage two weeks later much faster. A human reviewer might have let this slide if they were in a hurry. The agent flags it every single time.
+
+**Comments.** The agent catches comments that restate the code instead of explaining the why. It flagged `// filter posts by tag` above a line that literally filters posts by tag. That is noise. It pushed me toward comments that explain decisions — why a fallback exists, why a specific threshold was chosen — and to remove the rest.
+
+## How agent feedback differs from human code review
+
+I have run both loops on the same changes, and the differences are consistent.
+
+Human reviewers bring context the agent does not have. A human knows the business reason for a feature, remembers the last outage, and can say "we tried this approach six months ago and it broke the build." The agent has none of that. It evaluates the code in front of it, not the history behind it.
+
+But the agent has advantages humans do not. It is patient. It will check every card on every breakpoint every time. A human reviewer checks the first three cards, assumes the rest are fine, and moves on. The agent flags card number eleven because its action button is misaligned. That is the kind of regression that ships to production when only humans review.
+
+The agent also does not get tired or diplomatic. A human reviewer might soften feedback to avoid friction. The agent says "this heading is generic and does not communicate the value proposition" without worrying about my feelings. That bluntness produces better fixes, faster.
+
+The best results came from using both. The agent catches the mechanical and structural issues. The human catches the strategic ones.
+
+## Whether the feedback actually improved the code
+
+Yes, measurably. The most concrete proof is the test suite. Before I started the two-agent loop, the automated verification script had 180 assertions. After three months of build-review cycles, it has 234. Each round of external review surfaced an edge case or a consistency requirement that became a new assertion.
+
+The Lighthouse scores tell the same story. Accessibility sat at 91 before the loop. It is 98 now, and the two-point gap is a single color-contrast warning on a themed demo page that I have not prioritized. Every other accessibility issue the agent flagged got fixed.
+
+The feedback did not just make the code cleaner. It made the code more verifiable. That is the real win.
+
 ## What to copy if you want the same workflow
 
 If you want this exact style, copy this minimal sequence:
