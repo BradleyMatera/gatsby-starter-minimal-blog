@@ -33,34 +33,34 @@ const integrations: Integration[] = [
 
 const menuCategories = [
   { title: "Starters", items: [
-    { name: "Seared Scallops", desc: "Pan-seared sea scallops, cauliflower puree, brown butter", price: "$16" },
-    { name: "Charcuterie Board", desc: "Cured meats, artisan cheeses, olives, house jam, crostini", price: "$22" },
-    { name: "French Onion Soup", desc: "Slow-simmered beef broth, caramelized onions, gruyere crouton", price: "$11" },
+    { name: "Seared Scallops", desc: "Pan-seared sea scallops, cauliflower puree, brown butter", price: "$16", img: "seafood" },
+    { name: "Charcuterie Board", desc: "Cured meats, artisan cheeses, olives, house jam, crostini", price: "$22", img: "salad" },
+    { name: "French Onion Soup", desc: "Slow-simmered beef broth, caramelized onions, gruyere crouton", price: "$11", img: "soup" },
   ]},
   { title: "From the Grill", items: [
-    { name: "Wood-Grilled Ribeye", desc: "12oz USDA Choice ribeye, rosemary butter, roasted vegetables", price: "$34" },
-    { name: "Filet Mignon", desc: "8oz tenderloin, red wine reduction, truffle mashed potatoes", price: "$42" },
-    { name: "Pork Chop", desc: "Bone-in chop, apple chutney, Brussels sprouts, bacon jam", price: "$28" },
+    { name: "Wood-Grilled Ribeye", desc: "12oz USDA Choice ribeye, rosemary butter, roasted vegetables", price: "$34", img: "steak" },
+    { name: "Filet Mignon", desc: "8oz tenderloin, red wine reduction, truffle mashed potatoes", price: "$42", img: "food-4" },
+    { name: "Pork Chop", desc: "Bone-in chop, apple chutney, Brussels sprouts, bacon jam", price: "$28", img: "food-5" },
   ]},
   { title: "From the Lake", items: [
-    { name: "Seared Salmon", desc: "Atlantic salmon, lemon-dill sauce, wild rice, asparagus", price: "$26" },
-    { name: "Walleye Special", desc: "Fresh Wisconsin walleye, beer-battered, coleslaw, fries", price: "$24" },
-    { name: "Trout Almondine", desc: "Rainbow trout, brown butter almonds, capers, parsley", price: "$27" },
+    { name: "Seared Salmon", desc: "Atlantic salmon, lemon-dill sauce, wild rice, asparagus", price: "$26", img: "food-6" },
+    { name: "Walleye Special", desc: "Fresh Wisconsin walleye, beer-battered, coleslaw, fries", price: "$24", img: "food-2" },
+    { name: "Trout Almondine", desc: "Rainbow trout, brown butter almonds, capers, parsley", price: "$27", img: "food-3" },
   ]},
   { title: "Pasta", items: [
-    { name: "Truffle Fettuccine", desc: "Hand-cut fettuccine, black truffle, parmesan, cream sauce", price: "$22" },
-    { name: "Lobster Ravioli", desc: "House-made ravioli, lobster, vodka cream, fresh basil", price: "$29" },
-    { name: "Wild Mushroom Linguine", desc: "Mixed wild mushrooms, garlic, white wine, parmesan", price: "$19" },
+    { name: "Truffle Fettuccine", desc: "Hand-cut fettuccine, black truffle, parmesan, cream sauce", price: "$22", img: "pasta" },
+    { name: "Lobster Ravioli", desc: "House-made ravioli, lobster, vodka cream, fresh basil", price: "$29", img: "food-1" },
+    { name: "Wild Mushroom Linguine", desc: "Mixed wild mushrooms, garlic, white wine, parmesan", price: "$19", img: "food-3" },
   ]},
   { title: "Desserts", items: [
-    { name: "Chocolate Lava Cake", desc: "Warm chocolate cake, vanilla bean ice cream, raspberry coulis", price: "$9" },
-    { name: "Crème Brûlée", desc: "Classic vanilla custard, caramelized sugar crust", price: "$8" },
-    { name: "Seasonal Tart", desc: "Ask your server for today's selection", price: "$10" },
+    { name: "Chocolate Lava Cake", desc: "Warm chocolate cake, vanilla bean ice cream, raspberry coulis", price: "$9", img: "dessert" },
+    { name: "Crème Brûlée", desc: "Classic vanilla custard, caramelized sugar crust", price: "$8", img: "dessert" },
+    { name: "Seasonal Tart", desc: "Ask your server for today's selection", price: "$10", img: "dessert" },
   ]},
   { title: "Burgers & Sandwiches", items: [
-    { name: "Riverside Burger", desc: "Half-pound Angus beef, aged cheddar, caramelized onions, brioche", price: "$16" },
-    { name: "Walleye Sandwich", desc: "Beer-battered walleye, tartar sauce, lettuce, tomato", price: "$15" },
-    { name: "French Dip", desc: "Shaved prime rib, provolone, au jus, horseradish cream", price: "$17" },
+    { name: "Riverside Burger", desc: "Half-pound Angus beef, aged cheddar, caramelized onions, brioche", price: "$16", img: "burger" },
+    { name: "Walleye Sandwich", desc: "Beer-battered walleye, tartar sauce, lettuce, tomato", price: "$15", img: "food-2" },
+    { name: "French Dip", desc: "Shaved prime rib, provolone, au jus, horseradish cream", price: "$17", img: "food-5" },
   ]},
 ];
 
@@ -71,6 +71,15 @@ const wineSelection = [
   { name: "Sauvignon Blanc", origin: "Marlborough, NZ", price: "$9 / $36" },
   { name: "Malbec", origin: "Mendoza, AR", price: "$10 / $38" },
   { name: "Prosecco", origin: "Veneto, IT", price: "$8 / $32" },
+];
+
+const team = [
+  { name: "Marcus Lindqvist", role: "Owner & Executive Chef", bio: "CIA graduate, 15+ years in Michelin-starred kitchens. Born and raised in Rockford.", img: "owner" },
+  { name: "Sofia Antonelli", role: "Head Chef", bio: "Trained in Bologna, Italy. Specializes in house-made pasta and regional Italian cuisine.", img: "head-chef" },
+  { name: "James O'Brien", role: "Sous Chef", bio: "5 years at Riverside Grill. Manages daily specials and the grill station.", img: "sous-chef" },
+  { name: "Rachel Chen", role: "General Manager", bio: "Wine specialist with sommelier certification. Oversees front-of-house and private events.", img: "manager" },
+  { name: "Diego Ramirez", role: "Bar Manager", bio: "Craft cocktail expert. Curates our seasonal drink menu and local beer selection.", img: "bartender" },
+  { name: "Aisha Williams", role: "Lead Server", bio: "10 years in fine dining. Known for remembering every regular's favorite order.", img: "server" },
 ];
 
 const testimonials = [
@@ -140,8 +149,22 @@ const RestaurantDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Menu */}
-    <section className="demo-section" id="menu">
+    {/* Split image + text: Interior */}
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <div className="demo-split-image-text">
+          <div className="demo-split-image-text__content">
+            <h2 className="demo-split-image-text__title">An Atmosphere to Match</h2>
+            <p className="demo-split-image-text__text">Warm lighting, exposed brick, and hand-built wooden tables create an intimate dining experience. Whether it's a first date or a 50th anniversary, our space sets the stage.</p>
+            <p className="demo-split-image-text__text">Private dining room available for parties up to 30. Full venue buyout for events up to 120 guests.</p>
+          </div>
+          <div className="demo-split-image-text__image" style={{ backgroundImage: "url(/images/demos/restaurant/interior.jpg)" }} />
+        </div>
+      </div>
+    </section>
+
+    {/* Menu with item images */}
+    <section className="demo-section demo-section--alt" id="menu">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Our Menu</h2>
         <p className="demo-section__subtitle">Everything is made from scratch in our kitchen. No freezers, no shortcuts.</p>
@@ -150,7 +173,8 @@ const RestaurantDemo: React.FC = () => (
             <div key={cat.title}>
               <h3 className="demo-menu-category__title">{cat.title}</h3>
               {cat.items.map((item) => (
-                <div key={item.name} className="demo-menu-category__item">
+                <div key={item.name} className="demo-menu-category__item demo-menu-item--with-image">
+                  <div className="demo-menu-item__image" style={{ backgroundImage: `url(/images/demos/restaurant/${item.img}.jpg)` }} />
                   <div className="demo-menu-category__item-info">
                     <h4 className="demo-menu-category__item-name">{item.name}</h4>
                     <p className="demo-menu-category__item-desc">{item.desc}</p>
@@ -172,20 +196,69 @@ const RestaurantDemo: React.FC = () => (
       </div>
     </div>
 
-    {/* Wine Selection */}
+    {/* Food Gallery - all 6 food photos */}
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">From Our Kitchen</h2>
+        <p className="demo-section__subtitle">A taste of what's on the menu. Every dish made to order.</p>
+        <div className="demo-food-gallery">
+          <div className="demo-food-gallery__item" style={{ backgroundImage: "url(/images/demos/restaurant/food-1.jpg)" }}><span className="demo-food-gallery__label">Lobster Ravioli</span></div>
+          <div className="demo-food-gallery__item" style={{ backgroundImage: "url(/images/demos/restaurant/food-2.jpg)" }}><span className="demo-food-gallery__label">Walleye Special</span></div>
+          <div className="demo-food-gallery__item" style={{ backgroundImage: "url(/images/demos/restaurant/food-3.jpg)" }}><span className="demo-food-gallery__label">Trout Almondine</span></div>
+          <div className="demo-food-gallery__item" style={{ backgroundImage: "url(/images/demos/restaurant/food-4.jpg)" }}><span className="demo-food-gallery__label">Filet Mignon</span></div>
+          <div className="demo-food-gallery__item" style={{ backgroundImage: "url(/images/demos/restaurant/food-5.jpg)" }}><span className="demo-food-gallery__label">Pork Chop</span></div>
+          <div className="demo-food-gallery__item" style={{ backgroundImage: "url(/images/demos/restaurant/food-6.jpg)" }}><span className="demo-food-gallery__label">Seared Salmon</span></div>
+        </div>
+      </div>
+    </section>
+
+    {/* Wine Selection with wine image */}
     <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
-        <h2 className="demo-section__title">From the Cellar</h2>
-        <p className="demo-section__subtitle">A curated selection of wines by the glass and bottle. Ask your server for the full list.</p>
-        <div className="demo-wine-list">
-          <h3 className="demo-wine-list__title">By the Glass / Bottle</h3>
-          {wineSelection.map((w) => (
-            <div key={w.name} className="demo-wine-list__item">
-              <div>
-                <div className="demo-wine-list__item-name">{w.name}</div>
-                <div className="demo-wine-list__item-origin">{w.origin}</div>
+        <div className="demo-two-col">
+          <div>
+            <h2 className="demo-section__title" style={{ textAlign: "left" }}>From the Cellar</h2>
+            <p className="demo-section__subtitle" style={{ textAlign: "left" }}>A curated selection of wines by the glass and bottle. Ask your server for the full list.</p>
+            <div className="demo-wine-list">
+              <h3 className="demo-wine-list__title">By the Glass / Bottle</h3>
+              {wineSelection.map((w) => (
+                <div key={w.name} className="demo-wine-list__item">
+                  <div>
+                    <div className="demo-wine-list__item-name">{w.name}</div>
+                    <div className="demo-wine-list__item-origin">{w.origin}</div>
+                  </div>
+                  <div className="demo-wine-list__item-price">{w.price}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="demo-split-image-text__image" style={{ backgroundImage: "url(/images/demos/restaurant/wine.jpg)", minHeight: "400px", borderRadius: "var(--demo-radius)" }} />
+        </div>
+      </div>
+    </section>
+
+    {/* Cocktails feature image */}
+    <div className="demo-feature-image" style={{ backgroundImage: "url(/images/demos/restaurant/cocktail.jpg)" }}>
+      <div className="demo-feature-image__content">
+        <h2 className="demo-feature-image__title">Craft Cocktails</h2>
+        <p className="demo-feature-image__text">House-made syrups, fresh juices, and premium spirits. Diego crafts seasonal cocktails you won't find anywhere else in Rockford.</p>
+      </div>
+    </div>
+
+    {/* Team Section with headshots */}
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Meet the Team</h2>
+        <p className="demo-section__subtitle">The people who make Riverside Grill what it is.</p>
+        <div className="demo-team-grid">
+          {team.map((member) => (
+            <div key={member.name} className="demo-team-card">
+              <div className="demo-team-card__photo" style={{ backgroundImage: `url(/images/demos/restaurant/${member.img}.jpg)` }} />
+              <div className="demo-team-card__body">
+                <h3 className="demo-team-card__name">{member.name}</h3>
+                <p className="demo-team-card__role">{member.role}</p>
+                <p className="demo-team-card__bio">{member.bio}</p>
               </div>
-              <div className="demo-wine-list__item-price">{w.price}</div>
             </div>
           ))}
         </div>
@@ -193,7 +266,7 @@ const RestaurantDemo: React.FC = () => (
     </section>
 
     {/* Private Events */}
-    <section className="demo-section">
+    <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Private Events</h2>
         <p className="demo-section__subtitle">Host your next celebration with us. Private dining and semi-private spaces available.</p>
@@ -221,7 +294,7 @@ const RestaurantDemo: React.FC = () => (
     </section>
 
     {/* Online Ordering */}
-    <section className="demo-section demo-section--alt">
+    <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Order Online</h2>
         <p className="demo-section__subtitle">Prefer to eat at home? Order delivery or takeout through your favorite platform.</p>
@@ -233,27 +306,27 @@ const RestaurantDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Instagram Feed with real food photos */}
-    <section className="demo-section">
+    {/* Instagram Feed with real food photos - all unique */}
+    <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <h2 className="demo-section__title"><InstagramIcon size={24} /> Follow @riversidegrill</h2>
         <p className="demo-section__subtitle">See what's coming out of our kitchen. New specials posted daily.</p>
         <div className="demo-instagram-feed">
           <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/restaurant/steak.jpg)" }} />
           <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/restaurant/pasta.jpg)" }} />
-          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/restaurant/food-1.jpg)" }} />
-          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/restaurant/food-2.jpg)" }} />
-          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/restaurant/interior.jpg)" }} />
-          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/restaurant/chef.jpg)" }} />
-          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/restaurant/hero.jpg)" }} />
-          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/restaurant/food-1.jpg)" }} />
+          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/restaurant/seafood.jpg)" }} />
+          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/restaurant/burger.jpg)" }} />
+          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/restaurant/dessert.jpg)" }} />
+          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/restaurant/cocktail.jpg)" }} />
+          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/restaurant/wine.jpg)" }} />
+          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/restaurant/soup.jpg)" }} />
         </div>
         <div className="demo-instagram-feed__note">Mock Instagram feed. Production sites use the Instagram Graph API to auto-display latest posts.</div>
       </div>
     </section>
 
     {/* Reviews */}
-    <section className="demo-section demo-section--alt">
+    <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">What Our Guests Say</h2>
         <p className="demo-section__subtitle">Real reviews from real diners across the Rockford area.</p>
@@ -271,7 +344,7 @@ const RestaurantDemo: React.FC = () => (
     </section>
 
     {/* OpenTable Reservation Widget Mock */}
-    <section className="demo-section" id="reserve">
+    <section className="demo-section demo-section--alt" id="reserve">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Make a Reservation</h2>
         <p className="demo-section__subtitle">Book your table online in seconds. Powered by OpenTable.</p>
@@ -308,7 +381,7 @@ const RestaurantDemo: React.FC = () => (
     </section>
 
     {/* Google Maps */}
-    <section className="demo-section demo-section--alt">
+    <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Find Us</h2>
         <p className="demo-section__subtitle">123 Main Street, Rockford, IL 61101 — downtown, near the Rock River.</p>

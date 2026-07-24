@@ -8,7 +8,7 @@ import SocialLinks, { SocialLink } from "../../features/demos/SocialLinks";
 import ReviewBadges from "../../features/demos/ReviewBadges";
 import WeatherWidget from "../../features/demos/WeatherWidget";
 import IntegrationsSection, { Integration } from "../../features/demos/IntegrationsSection";
-import { StarIcon, MapPinIcon, PhoneIcon, LeafIcon, TreeIcon, SnowflakeIcon, FlameIcon, CheckIcon } from "../../site/icons";
+import { StarIcon, MapPinIcon, PhoneIcon, LeafIcon, TreeIcon, SnowflakeIcon, FlameIcon, CheckIcon, InstagramIcon } from "../../site/icons";
 
 const pathname = "/demos/landscaping/";
 const pageTitle = "GreenScape Pro — Professional Landscaping in Rockford, IL | Demo Website";
@@ -43,6 +43,26 @@ const seasonal = [
   { Icon: LeafIcon, season: "Summer", title: "Maintenance", list: ["Weekly mowing", "Fertilizing", "Weed control", "Pruning"] },
   { Icon: TreeIcon, season: "Fall", title: "Winter Prep", list: ["Leaf removal", "Aeration", "Overseeding", "Winterizer"] },
   { Icon: SnowflakeIcon, season: "Winter", title: "Snow & Ice", list: ["Driveway plowing", "Sidewalk clearing", "Salting", "Ice management"] },
+];
+
+const services = [
+  { name: "Lawn Care", desc: "Weekly mowing, edging, fertilizing, and weed control.", img: "lawn-care" },
+  { name: "Hardscaping", desc: "Patios, walkways, retaining walls, and fire pits.", img: "patio" },
+  { name: "Garden Design", desc: "Flower beds, shrubs, trees, and seasonal color.", img: "garden-design" },
+  { name: "Planting", desc: "Tree and shrub installation, flower bed prep.", img: "planting" },
+  { name: "Tree Work", desc: "Pruning, trimming, and safe tree removal.", img: "tree-removal" },
+  { name: "Irrigation", desc: "Sprinkler installation, repair, and winterization.", img: "sprinkler" },
+  { name: "Snow Removal", desc: "Driveway plowing, sidewalk clearing, salting.", img: "snow-removal" },
+  { name: "Retaining Walls", desc: "Stone and timber walls for erosion control.", img: "hardscaping" },
+];
+
+const projects = [
+  { title: "Front Yard Makeover", desc: "Complete front yard redesign with new walkway, beds, and lighting.", img: "project-1" },
+  { title: "Backyard Oasis", desc: "Multi-level garden with patio, pergola, and water feature.", img: "project-2" },
+  { title: "Stone Pathway", desc: "Natural stone walkway through perennial garden.", img: "project-3" },
+  { title: "Koi Pond & Waterfall", desc: "Custom pond with waterfall, filtration, and landscaping.", img: "project-4" },
+  { title: "Outdoor Living Room", desc: "Patio with fire pit, seating wall, and landscape lighting.", img: "project-5" },
+  { title: "Garden Pergola", desc: "Cedar pergola with climbing vines and shade canopy.", img: "project-6" },
 ];
 
 const testimonials = [
@@ -92,8 +112,27 @@ const LandscapingDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Before/After Gallery with real photos */}
-    <section className="demo-section demo-section--alt" id="gallery">
+    {/* Services Grid with images */}
+    <section className="demo-section demo-section--alt">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Our Services</h2>
+        <p className="demo-section__subtitle">Full-service landscaping from weekly mowing to complete outdoor transformations.</p>
+        <div className="demo-services-grid">
+          {services.map((s) => (
+            <div key={s.name} className="demo-service-card">
+              <div className="demo-service-card__image" style={{ backgroundImage: `url(/images/demos/landscaping/${s.img}.jpg)` }} />
+              <div className="demo-service-card__body">
+                <h3 className="demo-service-card__name">{s.name}</h3>
+                <p className="demo-service-card__desc">{s.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* Before/After Gallery with real different photos - 3 pairs */}
+    <section className="demo-section" id="gallery">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Before & After</h2>
         <p className="demo-section__subtitle">Real projects we've completed for homeowners across the Rockford area.</p>
@@ -108,8 +147,8 @@ const LandscapingDemo: React.FC = () => (
               </div>
             </div>
             <div className="demo-before-after__body">
-              <h3 className="demo-before-after__title">Backyard Garden Transformation</h3>
-              <p className="demo-before-after__desc">Removed overgrown shrubs, installed new garden beds, edging, and fresh mulch.</p>
+              <h3 className="demo-before-after__title">Overgrown Yard Cleanup</h3>
+              <p className="demo-before-after__desc">Removed overgrown weeds, installed new garden beds, edging, and fresh mulch.</p>
             </div>
           </div>
           <div className="demo-before-after__item">
@@ -126,12 +165,26 @@ const LandscapingDemo: React.FC = () => (
               <p className="demo-before-after__desc">Built paver patio with fire pit, seating wall, and landscape lighting.</p>
             </div>
           </div>
+          <div className="demo-before-after__item">
+            <div className="demo-before-after__images">
+              <div className="demo-before-after__before" style={{ backgroundImage: "url(/images/demos/landscaping/before-3.jpg)" }}>
+                <span className="demo-before-after__label">Before</span>
+              </div>
+              <div className="demo-before-after__after" style={{ backgroundImage: "url(/images/demos/landscaping/after-3.jpg)" }}>
+                <span className="demo-before-after__label">After</span>
+              </div>
+            </div>
+            <div className="demo-before-after__body">
+              <h3 className="demo-before-after__title">Lawn Restoration</h3>
+              <p className="demo-before-after__desc">Aerated, overseeded, and fertilized. Transformed patchy dirt into lush green lawn.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     {/* Split image + text: lawn care */}
-    <section className="demo-section">
+    <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <div className="demo-split-image-text">
           <div className="demo-split-image-text__content">
@@ -140,6 +193,21 @@ const LandscapingDemo: React.FC = () => (
             <p className="demo-split-image-text__text">Our 5-step fertilization program is customized to Northern Illinois soil conditions. No cookie-cutter treatments — we test your soil first.</p>
           </div>
           <div className="demo-split-image-text__image" style={{ backgroundImage: "url(/images/demos/landscaping/lawn-care.jpg)" }} />
+        </div>
+      </div>
+    </section>
+
+    {/* Project Gallery with all 6 project photos */}
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Project Gallery</h2>
+        <p className="demo-section__subtitle">A selection of our recent work across Northwest Illinois.</p>
+        <div className="demo-food-gallery">
+          {projects.map((p) => (
+            <div key={p.title} className="demo-food-gallery__item" style={{ backgroundImage: `url(/images/demos/landscaping/${p.img}.jpg)` }}>
+              <span className="demo-food-gallery__label">{p.title}</span>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -235,6 +303,51 @@ const LandscapingDemo: React.FC = () => (
         <p className="demo-feature-image__text">Patios, walkways, retaining walls, and fire pits built to last decades.</p>
       </div>
     </div>
+
+    {/* Team Section */}
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Meet the Crew</h2>
+        <p className="demo-section__subtitle">Same crew every visit. We're not a faceless national chain.</p>
+        <div className="demo-team-grid">
+          <div className="demo-team-card">
+            <div className="demo-team-card__photo" style={{ backgroundImage: "url(/images/demos/landscaping/owner.jpg)" }} />
+            <div className="demo-team-card__body">
+              <h3 className="demo-team-card__name">Tom Bradley</h3>
+              <p className="demo-team-card__role">Owner & Lead Designer</p>
+              <p className="demo-team-card__bio">Started GreenScape Pro in 2015. Certified horticulturist with 20 years of experience. Personally visits every new client.</p>
+            </div>
+          </div>
+          <div className="demo-team-card">
+            <div className="demo-team-card__photo" style={{ backgroundImage: "url(/images/demos/landscaping/team-photo.jpg)" }} />
+            <div className="demo-team-card__body">
+              <h3 className="demo-team-card__name">The Crew</h3>
+              <p className="demo-team-card__role">Field Team</p>
+              <p className="demo-team-card__bio">Our 6-person crew has been together for 5+ years. Trained, uniformed, and equipped with commercial-grade tools.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Instagram Feed with project photos */}
+    <section className="demo-section demo-section--alt">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title"><InstagramIcon size={24} /> Follow @greenscapepro</h2>
+        <p className="demo-section__subtitle">See our latest projects. New photos posted after every job.</p>
+        <div className="demo-instagram-feed">
+          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/landscaping/project-1.jpg)" }} />
+          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/landscaping/project-2.jpg)" }} />
+          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/landscaping/project-3.jpg)" }} />
+          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/landscaping/project-4.jpg)" }} />
+          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/landscaping/project-5.jpg)" }} />
+          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/landscaping/project-6.jpg)" }} />
+          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/landscaping/garden-design.jpg)" }} />
+          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/landscaping/sprinkler.jpg)" }} />
+        </div>
+        <div className="demo-instagram-feed__note">Mock Instagram feed. Production sites use the Instagram Graph API to auto-display latest posts.</div>
+      </div>
+    </section>
 
     {/* Reviews */}
     <section className="demo-section">

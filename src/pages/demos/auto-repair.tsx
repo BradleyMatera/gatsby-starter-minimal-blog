@@ -154,8 +154,50 @@ const AutoRepairDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Service Menu */}
+    {/* Services Grid with images */}
     <section className="demo-section" id="services">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Our Services</h2>
+        <p className="demo-section__subtitle">From oil changes to engine rebuilds. Transparent pricing, 12-month warranty on everything.</p>
+        <div className="demo-services-grid">
+          <div className="demo-service-card">
+            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/auto-repair/oil-change.jpg)" }} />
+            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Oil Change</h3><p className="demo-service-card__desc">Conventional, synthetic blend, and full synthetic. 21-point inspection included.</p></div>
+          </div>
+          <div className="demo-service-card">
+            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/auto-repair/brakes.jpg)" }} />
+            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Brake Service</h3><p className="demo-service-card__desc">Pad replacement, rotor resurfacing, caliper service, and brake fluid flush.</p></div>
+          </div>
+          <div className="demo-service-card">
+            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/auto-repair/engine.jpg)" }} />
+            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Engine Diagnostics</h3><p className="demo-service-card__desc">Check engine light, OBD-II scan, and advanced diagnostics. Written estimate provided.</p></div>
+          </div>
+          <div className="demo-service-card">
+            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/auto-repair/tire-service.jpg)" }} />
+            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Tire Service</h3><p className="demo-service-card__desc">Rotation, balancing, mounting, and flat repair. All major tire brands available.</p></div>
+          </div>
+          <div className="demo-service-card">
+            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/auto-repair/battery.jpg)" }} />
+            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Battery & Electrical</h3><p className="demo-service-card__desc">Battery testing and replacement, alternator, starter, and electrical diagnostics.</p></div>
+          </div>
+          <div className="demo-service-card">
+            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/auto-repair/diagnostics.jpg)" }} />
+            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Computer Diagnostics</h3><p className="demo-service-card__desc">Advanced computer diagnostics for complex electrical and engine management issues.</p></div>
+          </div>
+          <div className="demo-service-card">
+            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/auto-repair/transmission.jpg)" }} />
+            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Transmission</h3><p className="demo-service-card__desc">Fluid flush, filter replacement, and transmission repair for all makes.</p></div>
+          </div>
+          <div className="demo-service-card">
+            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/auto-repair/ac-service.jpg)" }} />
+            <div className="demo-service-card__body"><h3 className="demo-service-card__name">AC & Heating</h3><p className="demo-service-card__desc">AC recharge, compressor replacement, and heating system repair.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Service Menu - detailed pricing */}
+    <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Service Menu</h2>
         <p className="demo-section__subtitle">Transparent pricing on the most common services. All work backed by a 12-month warranty.</p>
@@ -220,13 +262,55 @@ const AutoRepairDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Feature image: brakes */}
-    <div className="demo-feature-image" style={{ backgroundImage: "url(/images/demos/auto-repair/brakes.jpg)" }}>
+    {/* Feature image: car on lift */}
+    <div className="demo-feature-image" style={{ backgroundImage: "url(/images/demos/auto-repair/lift.jpg)" }}>
       <div className="demo-feature-image__content">
         <h2 className="demo-feature-image__title">Brakes Done Right</h2>
         <p className="demo-feature-image__text">Ceramic, semi-metallic, or performance — we use the right pads for your driving style.</p>
       </div>
     </div>
+
+    {/* Team Section with mechanic headshots */}
+    <section className="demo-section demo-section--alt">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Meet Our Mechanics</h2>
+        <p className="demo-section__subtitle">ASE-certified, honest, and experienced. The same faces every time you visit.</p>
+        <div className="demo-team-grid">
+          <div className="demo-team-card">
+            <div className="demo-team-card__photo" style={{ backgroundImage: "url(/images/demos/auto-repair/owner.jpg)" }} />
+            <div className="demo-team-card__body">
+              <h3 className="demo-team-card__name">Frank Delgado</h3>
+              <p className="demo-team-card__role">Owner / Master Mechanic</p>
+              <p className="demo-team-card__bio">25 years turning wrenches. ASE Master Certified. Opened Northside Auto in 2008. Still works on cars every day.</p>
+            </div>
+          </div>
+          <div className="demo-team-card">
+            <div className="demo-team-card__photo" style={{ backgroundImage: "url(/images/demos/auto-repair/mechanic-1.jpg)" }} />
+            <div className="demo-team-card__body">
+              <h3 className="demo-team-card__name">Tyler Jackson</h3>
+              <p className="demo-team-card__role">Lead Mechanic</p>
+              <p className="demo-team-card__bio">10 years experience. ASE certified in brakes, steering, and suspension. Specializes in diagnostics.</p>
+            </div>
+          </div>
+          <div className="demo-team-card">
+            <div className="demo-team-card__photo" style={{ backgroundImage: "url(/images/demos/auto-repair/mechanic-2.jpg)" }} />
+            <div className="demo-team-card__body">
+              <h3 className="demo-team-card__name">Maria Santos</h3>
+              <p className="demo-team-card__role">Service Technician</p>
+              <p className="demo-team-card__bio">6 years experience. ASE certified. Handles oil changes, tire service, and multi-point inspections.</p>
+            </div>
+          </div>
+          <div className="demo-team-card">
+            <div className="demo-team-card__photo" style={{ backgroundImage: "url(/images/demos/auto-repair/mechanic-3.jpg)" }} />
+            <div className="demo-team-card__body">
+              <h3 className="demo-team-card__name">Kevin O'Neil</h3>
+              <p className="demo-team-card__role">Service Technician</p>
+              <p className="demo-team-card__bio">8 years experience. ASE certified in electrical and engine performance. European car specialist.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     {/* Reviews */}
     <section className="demo-section">

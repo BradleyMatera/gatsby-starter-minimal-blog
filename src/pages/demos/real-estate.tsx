@@ -33,28 +33,28 @@ const integrations: Integration[] = [
 ];
 
 const listings = [
-  { price: "$285,000", title: "4 Bed Colonial in East Rockford", address: "1427 Eastwood Dr, Rockford, IL", beds: 4, baths: 2.5, sqft: "2,100", badge: "New", walkScore: 72, schoolRating: 8, img: "listing-1" },
-  { price: "$189,000", title: "3 Bed Ranch — Updated Kitchen", address: "882 Maple Ln, Loves Park, IL", beds: 3, baths: 2, sqft: "1,450", badge: "Price Reduced", walkScore: 45, schoolRating: 7, img: "listing-2" },
-  { price: "$425,000", title: "5 Bed Luxury Home on 1.1 Acres", address: "3401 River Rd, Roscoe, IL", beds: 5, baths: 3, sqft: "3,200", badge: "Open Sat", walkScore: 12, schoolRating: 9, img: "listing-3" },
-  { price: "$145,000", title: "2 Bed Condo — Downtown Rockford", address: "211 N Main St #4B, Rockford, IL", beds: 2, baths: 1, sqft: "980", badge: null, walkScore: 88, schoolRating: 6, img: "listing-4" },
-  { price: "$365,000", title: "4 Bed New Build — Rockton", address: "55 Stonebridge Ct, Rockton, IL", beds: 4, baths: 2.5, sqft: "2,400", badge: "New Construction", walkScore: 28, schoolRating: 9, img: "listing-5" },
-  { price: "$225,000", title: "3 Bed Split Level — Byron", address: "718 Oak St, Byron, IL", beds: 3, baths: 2, sqft: "1,680", badge: null, walkScore: 35, schoolRating: 8, img: "listing-1" },
+  { price: "$285,000", title: "4 Bed Colonial in East Rockford", address: "1427 Eastwood Dr, Rockford, IL", beds: 4, baths: 2.5, sqft: "2,100", badge: "New", walkScore: 72, schoolRating: 8, img: "listing-1", interiorImg: "listing-1-interior" },
+  { price: "$189,000", title: "3 Bed Ranch — Updated Kitchen", address: "882 Maple Ln, Loves Park, IL", beds: 3, baths: 2, sqft: "1,450", badge: "Price Reduced", walkScore: 45, schoolRating: 7, img: "listing-2", interiorImg: "listing-2-interior" },
+  { price: "$425,000", title: "5 Bed Luxury Home on 1.1 Acres", address: "3401 River Rd, Roscoe, IL", beds: 5, baths: 3, sqft: "3,200", badge: "Open Sat", walkScore: 12, schoolRating: 9, img: "listing-3", interiorImg: "listing-3-interior" },
+  { price: "$145,000", title: "2 Bed Condo — Downtown Rockford", address: "211 N Main St #4B, Rockford, IL", beds: 2, baths: 1, sqft: "980", badge: null, walkScore: 88, schoolRating: 6, img: "listing-4", interiorImg: "listing-4-interior" },
+  { price: "$365,000", title: "4 Bed New Build — Rockton", address: "55 Stonebridge Ct, Rockton, IL", beds: 4, baths: 2.5, sqft: "2,400", badge: "New Construction", walkScore: 28, schoolRating: 9, img: "listing-5", interiorImg: "listing-5-interior" },
+  { price: "$225,000", title: "3 Bed Split Level — Byron", address: "718 Oak St, Byron, IL", beds: 3, baths: 2, sqft: "1,680", badge: null, walkScore: 35, schoolRating: 8, img: "listing-6", interiorImg: "listing-6-interior" },
 ];
 
 const agents = [
-  { initials: "SH", name: "Sarah Henderson", title: "Broker/Owner", bio: "18 years selling homes in Rockford. Specializes in historic homes and first-time buyers.", sales: "340+ sold", rating: "4.9" },
-  { initials: "MK", name: "Mike Kowalski", title: "Realtor", bio: "12 years experience. Rockford native. Expert in investment properties and multi-family.", sales: "210+ sold", rating: "4.8" },
-  { initials: "JD", name: "Jessica Davis", title: "Realtor", bio: "7 years. Roscoe and Rockton specialist. Works with relocating families and new construction.", sales: "130+ sold", rating: "5.0" },
-  { initials: "RB", name: "Robert Brown", title: "Realtor", bio: "10 years. Commercial and residential. Byron and Freeport market expert.", sales: "180+ sold", rating: "4.9" },
+  { name: "Sarah Henderson", title: "Broker/Owner", bio: "18 years selling homes in Rockford. Specializes in historic homes and first-time buyers.", sales: "340+ sold", rating: "4.9", img: "agent-1" },
+  { name: "Mike Kowalski", title: "Realtor", bio: "12 years experience. Rockford native. Expert in investment properties and multi-family.", sales: "210+ sold", rating: "4.8", img: "agent-2" },
+  { name: "Jessica Davis", title: "Realtor", bio: "7 years. Roscoe and Rockton specialist. Works with relocating families and new construction.", sales: "130+ sold", rating: "5.0", img: "agent-3" },
+  { name: "Robert Brown", title: "Realtor", bio: "10 years. Commercial and residential. Byron and Freeport market expert.", sales: "180+ sold", rating: "4.9", img: "agent-4" },
 ];
 
 const neighborhoods = [
-  { name: "East Rockford", desc: "Established neighborhoods with mature trees, larger lots, and great schools.", stat: "Median: $245K", img: "listing-1" },
-  { name: "Loves Park", desc: "Family-friendly with parks, affordable homes, and easy highway access.", stat: "Median: $175K", img: "listing-2" },
-  { name: "Roscoe", desc: "Growing community with new construction, top-rated schools, and rural feel.", stat: "Median: $310K", img: "listing-3" },
-  { name: "Byron", desc: "Small-town charm with a strong community and great value per square foot.", stat: "Median: $198K", img: "listing-5" },
-  { name: "Rockton", desc: "Historic village on the Rock River. Quaint downtown and excellent schools.", stat: "Median: $265K", img: "modern-home" },
-  { name: "Downtown Rockford", desc: "Lofts, condos, and walkable living near restaurants, bars, and the river.", stat: "Median: $155K", img: "listing-4" },
+  { name: "East Rockford", desc: "Established neighborhoods with mature trees, larger lots, and great schools.", stat: "Median: $245K", img: "neighborhood-1" },
+  { name: "Loves Park", desc: "Family-friendly with parks, affordable homes, and easy highway access.", stat: "Median: $175K", img: "neighborhood-2" },
+  { name: "Roscoe", desc: "Growing community with new construction, top-rated schools, and rural feel.", stat: "Median: $310K", img: "neighborhood-3" },
+  { name: "Byron", desc: "Small-town charm with a strong community and great value per square foot.", stat: "Median: $198K", img: "neighborhood-4" },
+  { name: "Rockton", desc: "Historic village on the Rock River. Quaint downtown and excellent schools.", stat: "Median: $265K", img: "neighborhood-5" },
+  { name: "Downtown Rockford", desc: "Lofts, condos, and walkable living near restaurants, bars, and the river.", stat: "Median: $155K", img: "neighborhood-6" },
 ];
 
 const testimonials = [
@@ -105,8 +105,11 @@ const RealEstateDemo: React.FC = () => (
         <div className="demo-listings">
           {listings.map((l) => (
             <div key={l.title} className="demo-listing-detail">
-              <div className="demo-listing-detail__image" style={{ backgroundImage: `url(/images/demos/real-estate/${l.img}.jpg)` }}>
-                {l.badge && <div className="demo-listing-detail__badge">{l.badge}</div>}
+              <div className="demo-listing-detail__images">
+                <div className="demo-listing-detail__image demo-listing-detail__image--exterior" style={{ backgroundImage: `url(/images/demos/real-estate/${l.img}.jpg)` }}>
+                  {l.badge && <div className="demo-listing-detail__badge">{l.badge}</div>}
+                </div>
+                <div className="demo-listing-detail__image demo-listing-detail__image--interior" style={{ backgroundImage: `url(/images/demos/real-estate/${l.interiorImg}.jpg)` }} />
               </div>
               <div className="demo-listing-detail__body">
                 <div className="demo-listing-detail__price">{l.price}</div>
@@ -203,7 +206,7 @@ const RealEstateDemo: React.FC = () => (
         <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
           {agents.map((a) => (
             <div key={a.name} className="demo-agent">
-              <div className="demo-agent__photo">{a.initials}</div>
+              <div className="demo-agent__photo" style={{ backgroundImage: `url(/images/demos/real-estate/${a.img}.jpg)` }} />
               <div>
                 <h3 className="demo-agent__name">{a.name}</h3>
                 <p className="demo-agent__title">{a.title}</p>

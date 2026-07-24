@@ -616,6 +616,116 @@
   border-bottom: 2px solid var(--demo-accent);
 }
 
+/* Menu item with thumbnail image */
+.demo-menu-item--with-image {
+  align-items: center;
+}
+.demo-menu-item__image {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--demo-radius);
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+}
+.demo-theme--elegant .demo-menu-item__image { border-radius: 4px; }
+.demo-theme--organic .demo-menu-item__image { border-radius: 12px; }
+.demo-theme--industrial .demo-menu-item__image,
+.demo-theme--garage .demo-menu-item__image { border-radius: 0; }
+.demo-theme--luxury .demo-menu-item__image { border-radius: 6px; }
+.demo-theme--soft .demo-menu-item__image { border-radius: 16px; }
+
+/* Food Gallery - grid of food photos with labels */
+.demo-food-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+.demo-food-gallery__item {
+  height: 250px;
+  background-size: cover;
+  background-position: center;
+  border-radius: var(--demo-radius);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+.demo-food-gallery__item:hover { transform: scale(1.02); }
+.demo-food-gallery__item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
+}
+.demo-food-gallery__label {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 0.75rem;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  z-index: 1;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+.demo-theme--elegant .demo-food-gallery__item { border-radius: 4px; }
+.demo-theme--organic .demo-food-gallery__item { border-radius: 12px; }
+.demo-theme--industrial .demo-food-gallery__item,
+.demo-theme--garage .demo-food-gallery__item { border-radius: 0; }
+.demo-theme--luxury .demo-food-gallery__item { border-radius: 6px; }
+.demo-theme--soft .demo-food-gallery__item { border-radius: 16px; }
+
+/* Team Grid - cards with photos and bios */
+.demo-team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+.demo-team-card {
+  background: var(--demo-card-bg);
+  border: 1px solid var(--demo-border);
+  border-radius: var(--demo-radius);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.demo-team-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--demo-shadow);
+}
+.demo-team-card__photo {
+  height: 280px;
+  background-size: cover;
+  background-position: center top;
+}
+.demo-team-card__body {
+  padding: 1.25rem;
+}
+.demo-team-card__name {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--demo-heading);
+  margin-bottom: 0.25rem;
+  font-family: var(--demo-font-heading);
+}
+.demo-team-card__role {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--demo-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+}
+.demo-team-card__bio {
+  font-size: 0.875rem;
+  color: var(--demo-text-muted);
+  line-height: 1.5;
+}
+.demo-theme--elegant .demo-team-card { border-radius: 4px; }
+.demo-theme--organic .demo-team-card { border-radius: 12px; }
+.demo-theme--industrial .demo-team-card,
+.demo-theme--garage .demo-team-card { border-radius: 0; }
+.demo-theme--luxury .demo-team-card { border-radius: 6px; }
+.demo-theme--soft .demo-team-card { border-radius: 16px; }
+
 /* ==========================================================================
    CHEF / TEAM SPOTLIGHT
    ========================================================================== */
@@ -1739,6 +1849,10 @@
   transition: transform 0.2s ease;
 }
 .demo-listing-detail:hover { transform: translateY(-4px); }
+.demo-listing-detail__images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
 .demo-listing-detail__image {
   position: relative;
   height: 220px;
@@ -1903,18 +2017,14 @@
   .demo-agent { grid-template-columns: 1fr; text-align: center; }
 }
 .demo-agent__photo {
-  width: 120px;
-  height: 120px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--demo-accent-soft);
-  border-radius: 50%;
-  font-family: var(--demo-font-heading);
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--demo-accent);
+  width: 160px;
+  height: 200px;
+  background-size: cover;
+  background-position: center top;
+  border-radius: var(--demo-radius);
+  background-color: var(--demo-accent-soft);
 }
+.demo-theme--luxury .demo-agent__photo { border-radius: 6px; }
 .demo-agent__name {
   font-size: 1.25rem;
   margin-bottom: 0.25rem;
@@ -2219,6 +2329,50 @@
   color: var(--demo-accent);
   font-size: 0.9375rem;
 }
+
+/* Services Grid with Images (image-based service cards) */
+.demo-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+.demo-service-card {
+  background: var(--demo-card-bg, #fff);
+  border: 1px solid var(--demo-border);
+  border-radius: var(--demo-radius);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.demo-service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--demo-shadow);
+}
+.demo-service-card__image {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+}
+.demo-service-card__body {
+  padding: 1.25rem;
+}
+.demo-service-card__name {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--demo-heading);
+  margin-bottom: 0.5rem;
+  font-family: var(--demo-font-heading);
+}
+.demo-service-card__desc {
+  font-size: 0.875rem;
+  color: var(--demo-text-muted);
+  line-height: 1.5;
+}
+.demo-theme--elegant .demo-service-card { border-radius: 4px; }
+.demo-theme--organic .demo-service-card { border-radius: 12px; }
+.demo-theme--industrial .demo-service-card,
+.demo-theme--garage .demo-service-card { border-radius: 0; }
+.demo-theme--luxury .demo-service-card { border-radius: 6px; }
+.demo-theme--soft .demo-service-card { border-radius: 16px; }
 
 /* ==========================================================================
    FEATURED IMAGE SECTION (full-width image with text)

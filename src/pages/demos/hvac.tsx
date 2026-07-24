@@ -153,16 +153,36 @@ const HvacDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Services */}
+    {/* Services with images */}
     <section className="demo-section demo-section--alt" id="services">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">What We Do</h2>
         <p className="demo-section__subtitle">Complete heating, cooling, and indoor air quality services for residential and commercial.</p>
-        <div className="demo-services">
-          <div className="demo-service"><div className="demo-service__icon"><FlameIcon size={28} /></div><h3 className="demo-service__name">Heating</h3><p className="demo-service__desc">Furnace repair, installation, and maintenance for all brands. Heat pumps and boilers too.</p><div className="demo-service__price">Repair from $89</div></div>
-          <div className="demo-service"><div className="demo-service__icon"><SnowflakeIcon size={28} /></div><h3 className="demo-service__name">Cooling</h3><p className="demo-service__desc">Central AC repair, replacement, and new installation. Ductless mini-splits for additions.</p><div className="demo-service__price">Repair from $89</div></div>
-          <div className="demo-service"><div className="demo-service__icon"><WindIcon size={28} /></div><h3 className="demo-service__name">Indoor Air Quality</h3><p className="demo-service__desc">Air purifiers, humidifiers, UV lights, and duct cleaning for healthier home air.</p><div className="demo-service__price">from $299</div></div>
-          <div className="demo-service"><div className="demo-service__icon"><AlertIcon size={28} /></div><h3 className="demo-service__name">24/7 Emergency</h3><p className="demo-service__desc">Available nights, weekends, and holidays. No answering service — you talk to a real tech.</p><div className="demo-service__price">Call anytime</div></div>
+        <div className="demo-services-grid">
+          <div className="demo-service-card">
+            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/hvac/heating.jpg)" }} />
+            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Heating</h3><p className="demo-service-card__desc">Furnace repair, installation, and maintenance for all brands. Heat pumps and boilers too.</p><div className="demo-service__price" style={{ marginTop: "0.5rem", fontWeight: 700, color: "var(--demo-accent)" }}>Repair from $89</div></div>
+          </div>
+          <div className="demo-service-card">
+            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/hvac/ac-unit.jpg)" }} />
+            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Cooling</h3><p className="demo-service-card__desc">Central AC repair, replacement, and new installation. Ductless mini-splits for additions.</p><div className="demo-service__price" style={{ marginTop: "0.5rem", fontWeight: 700, color: "var(--demo-accent)" }}>Repair from $89</div></div>
+          </div>
+          <div className="demo-service-card">
+            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/hvac/indoor-air-quality.jpg)" }} />
+            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Indoor Air Quality</h3><p className="demo-service-card__desc">Air purifiers, humidifiers, UV lights, and duct cleaning for healthier home air.</p><div className="demo-service__price" style={{ marginTop: "0.5rem", fontWeight: 700, color: "var(--demo-accent)" }}>from $299</div></div>
+          </div>
+          <div className="demo-service-card">
+            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/hvac/maintenance.jpg)" }} />
+            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Maintenance</h3><p className="demo-service-card__desc">Tune-ups, inspections, and preventative maintenance. Keep your system running efficiently.</p><div className="demo-service__price" style={{ marginTop: "0.5rem", fontWeight: 700, color: "var(--demo-accent)" }}>from $89</div></div>
+          </div>
+          <div className="demo-service-card">
+            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/hvac/thermostat.jpg)" }} />
+            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Smart Thermostats</h3><p className="demo-service-card__desc">Nest, Ecobee, and Honeywell installation. Save 10-15% on energy bills with smart controls.</p><div className="demo-service__price" style={{ marginTop: "0.5rem", fontWeight: 700, color: "var(--demo-accent)" }}>from $199</div></div>
+          </div>
+          <div className="demo-service-card">
+            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/hvac/duct-cleaning.jpg)" }} />
+            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Duct Cleaning</h3><p className="demo-service-card__desc">Remove dust, allergens, and debris from your ductwork. Breathe cleaner air.</p><div className="demo-service__price" style={{ marginTop: "0.5rem", fontWeight: 700, color: "var(--demo-accent)" }}>from $399</div></div>
+          </div>
         </div>
       </div>
     </section>
@@ -171,12 +191,26 @@ const HvacDemo: React.FC = () => (
     <section className="demo-section">
       <div className="demo-section__inner">
         <div className="demo-split-image-text">
-          <div className="demo-split-image-text__image" style={{ backgroundImage: "url(/images/demos/hvac/heating.jpg)" }} />
+          <div className="demo-split-image-text__image" style={{ backgroundImage: "url(/images/demos/hvac/furnace-install.jpg)" }} />
           <div className="demo-split-image-text__content">
             <h2 className="demo-split-image-text__title">Furnace Installation & Repair</h2>
             <p className="demo-split-image-text__text">We install and service all major furnace brands. From a simple pilot light fix to a complete high-efficiency system replacement, our licensed technicians get it done right the first time.</p>
             <p className="demo-split-image-text__text">Every installation includes a free thermostat, carbon monoxide test, and 12-month warranty on all parts and labor.</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Split image + text: AC installation */}
+    <section className="demo-section demo-section--alt">
+      <div className="demo-section__inner">
+        <div className="demo-split-image-text">
+          <div className="demo-split-image-text__content">
+            <h2 className="demo-split-image-text__title">AC Installation & Service</h2>
+            <p className="demo-split-image-text__text">Central air, ductless mini-splits, and heat pumps. We size your system correctly using Manual J calculations — not guesswork. An oversized AC wastes energy and doesn't dehumidify.</p>
+            <p className="demo-split-image-text__text">All AC installations include a free spring tune-up for the first year and a 10-year parts warranty on qualifying systems.</p>
+          </div>
+          <div className="demo-split-image-text__image" style={{ backgroundImage: "url(/images/demos/hvac/ac-install.jpg)" }} />
         </div>
       </div>
     </section>
@@ -247,6 +281,48 @@ const HvacDemo: React.FC = () => (
         <p className="demo-feature-image__text">Don't wait until the first cold snap. Schedule your furnace tune-up today.</p>
       </div>
     </div>
+
+    {/* Team Section with technician headshots */}
+    <section className="demo-section demo-section--alt">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Meet Our Technicians</h2>
+        <p className="demo-section__subtitle">Licensed, background-checked, and drug-tested. The same faces every time.</p>
+        <div className="demo-team-grid">
+          <div className="demo-team-card">
+            <div className="demo-team-card__photo" style={{ backgroundImage: "url(/images/demos/hvac/owner.jpg)" }} />
+            <div className="demo-team-card__body">
+              <h3 className="demo-team-card__name">Bob Anderson</h3>
+              <p className="demo-team-card__role">Owner / Master Tech</p>
+              <p className="demo-team-card__bio">30 years in HVAC. Started ComfortAir in 2010. EPA 608 Universal certified. Still goes on calls every week.</p>
+            </div>
+          </div>
+          <div className="demo-team-card">
+            <div className="demo-team-card__photo" style={{ backgroundImage: "url(/images/demos/hvac/tech-1.jpg)" }} />
+            <div className="demo-team-card__body">
+              <h3 className="demo-team-card__name">John Martinez</h3>
+              <p className="demo-team-card__role">Lead Technician</p>
+              <p className="demo-team-card__bio">12 years experience. NATE-certified in heating and cooling. Specializes in high-efficiency system installations.</p>
+            </div>
+          </div>
+          <div className="demo-team-card">
+            <div className="demo-team-card__photo" style={{ backgroundImage: "url(/images/demos/hvac/tech-2.jpg)" }} />
+            <div className="demo-team-card__body">
+              <h3 className="demo-team-card__name">Sarah Johnson</h3>
+              <p className="demo-team-card__role">Service Technician</p>
+              <p className="demo-team-card__bio">7 years experience. NATE-certified. Handles maintenance, diagnostics, and indoor air quality installations.</p>
+            </div>
+          </div>
+          <div className="demo-team-card">
+            <div className="demo-team-card__photo" style={{ backgroundImage: "url(/images/demos/hvac/tech-3.jpg)" }} />
+            <div className="demo-team-card__body">
+              <h3 className="demo-team-card__name">Mike Thompson</h3>
+              <p className="demo-team-card__role">Service Technician</p>
+              <p className="demo-team-card__bio">5 years experience. EPA 608 certified. Handles emergency calls and weekend service. Rockford native.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     {/* Reviews */}
     <section className="demo-section">

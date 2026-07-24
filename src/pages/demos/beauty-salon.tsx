@@ -73,10 +73,10 @@ const serviceCategories = [
 ];
 
 const stylists = [
-  { initials: "AR", name: "Angela Rossi", role: "Owner & Master Stylist", specialties: ["Balayage", "Color Correction", "Bridal"] },
-  { initials: "LC", name: "Lisa Chen", role: "Senior Colorist", specialties: ["Vivid Color", "Highlights", "Blonde Specialist"] },
-  { initials: "MK", name: "Maya Kim", role: "Esthetician", specialties: ["Facials", "Peels", "Brow Artistry"] },
-  { initials: "TS", name: "Tina Santos", role: "Nail Technician", specialties: ["Nail Art", "Gel", "Spa Pedicures"] },
+  { name: "Angela Rossi", role: "Owner & Master Stylist", specialties: ["Balayage", "Color Correction", "Bridal"], bio: "20 years experience. Trained at Vidal Sassoon. Specializes in balayage and bridal styling.", img: "stylist-1" },
+  { name: "Lisa Chen", role: "Senior Colorist", specialties: ["Vivid Color", "Highlights", "Blonde Specialist"], bio: "12 years experience. Redken certified. Known for her stunning vivid color transformations.", img: "stylist-2" },
+  { name: "Maya Kim", role: "Esthetician", specialties: ["Facials", "Peels", "Brow Artistry"], bio: "8 years experience. Dermalogica certified. Specializes in anti-aging treatments and brow artistry.", img: "stylist-3" },
+  { name: "Tina Santos", role: "Nail Technician", specialties: ["Nail Art", "Gel", "Spa Pedicures"], bio: "10 years experience. OPI certified. Creates intricate nail art designs that go viral on Instagram.", img: "stylist-4" },
 ];
 
 const productBrands = ["Olaplex", "Redken", "OPI", "Dermalogica", "Gelish", "Wella", "Moroccanoil", "It's a 10", "Kevin Murphy"];
@@ -131,22 +131,78 @@ const BeautySalonDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Split image + text: hair styling */}
+    {/* Split image + text: salon interior */}
     <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <div className="demo-split-image-text">
-          <div className="demo-split-image-text__image" style={{ backgroundImage: "url(/images/demos/beauty-salon/hair-styling.jpg)" }} />
+          <div className="demo-split-image-text__image" style={{ backgroundImage: "url(/images/demos/beauty-salon/salon-interior.jpg)" }} />
           <div className="demo-split-image-text__content">
-            <h2 className="demo-split-image-text__title">Your Best Look Starts Here</h2>
-            <p className="demo-split-image-text__text">Our master stylists stay current with the latest techniques — balayage, vivid colors, precision cuts, and bridal styling. We listen to what you want and deliver results that exceed your expectations.</p>
-            <p className="demo-split-image-text__text">Every visit includes a complimentary consultation and style recommendation based on your face shape, hair type, and lifestyle.</p>
+            <h2 className="demo-split-image-text__title">A Relaxing Escape</h2>
+            <p className="demo-split-image-text__text">Step into our modern, welcoming salon and leave the stress behind. Complimentary beverages, comfortable seating, and a relaxing atmosphere designed for your comfort.</p>
+            <p className="demo-split-image-text__text">Our 2,000 sq ft space features 6 styling stations, 2 nail stations, a private facial room, and a dedicated makeup area.</p>
           </div>
         </div>
       </div>
     </section>
 
-    {/* Service Menu */}
+    {/* Salon interior gallery */}
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Inside Bella Vista</h2>
+        <p className="demo-section__subtitle">A modern, welcoming space designed for your comfort.</p>
+        <div className="demo-food-gallery">
+          <div className="demo-food-gallery__item" style={{ backgroundImage: "url(/images/demos/beauty-salon/salon-chairs.jpg)" }}><span className="demo-food-gallery__label">Styling Stations</span></div>
+          <div className="demo-food-gallery__item" style={{ backgroundImage: "url(/images/demos/beauty-salon/salon-reception.jpg)" }}><span className="demo-food-gallery__label">Reception Area</span></div>
+          <div className="demo-food-gallery__item" style={{ backgroundImage: "url(/images/demos/beauty-salon/salon-nail-area.jpg)" }}><span className="demo-food-gallery__label">Nail Station</span></div>
+          <div className="demo-food-gallery__item" style={{ backgroundImage: "url(/images/demos/beauty-salon/products.jpg)" }}><span className="demo-food-gallery__label">Retail Products</span></div>
+        </div>
+      </div>
+    </section>
+
+    {/* Services Gallery with real photos */}
     <section className="demo-section" id="services">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Our Services</h2>
+        <p className="demo-section__subtitle">Hair, nails, skincare, and makeup — all under one roof.</p>
+        <div className="demo-services-grid">
+          <div className="demo-service-card">
+            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/beauty-salon/hair-styling.jpg)" }} />
+            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Hair Styling</h3><p className="demo-service-card__desc">Cuts, styling, blowouts, and treatments for all hair types.</p></div>
+          </div>
+          <div className="demo-service-card">
+            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/beauty-salon/hair-color.jpg)" }} />
+            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Hair Color</h3><p className="demo-service-card__desc">Full color, highlights, balayage, and vivid color transformations.</p></div>
+          </div>
+          <div className="demo-service-card">
+            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/beauty-salon/manicure.jpg)" }} />
+            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Manicures</h3><p className="demo-service-card__desc">Classic, gel, dip powder, and custom nail art designs.</p></div>
+          </div>
+          <div className="demo-service-card">
+            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/beauty-salon/pedicure.jpg)" }} />
+            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Pedicures</h3><p className="demo-service-card__desc">Classic, spa, and luxury pedicures with paraffin treatment.</p></div>
+          </div>
+          <div className="demo-service-card">
+            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/beauty-salon/facial.jpg)" }} />
+            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Facials</h3><p className="demo-service-card__desc">Custom, deep cleansing, anti-aging, and microdermabrasion.</p></div>
+          </div>
+          <div className="demo-service-card">
+            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/beauty-salon/makeup.jpg)" }} />
+            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Makeup</h3><p className="demo-service-card__desc">Everyday, special event, bridal, and makeup lessons.</p></div>
+          </div>
+          <div className="demo-service-card">
+            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/beauty-salon/lash-extensions.jpg)" }} />
+            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Lash Extensions</h3><p className="demo-service-card__desc">Classic, volume, and hybrid lash extensions. Lash tinting too.</p></div>
+          </div>
+          <div className="demo-service-card">
+            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/beauty-salon/products.jpg)" }} />
+            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Products</h3><p className="demo-service-card__desc">Olaplex, Redken, OPI, Dermalogica, and more. Available in-salon.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Service Menu - detailed pricing */}
+    <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Services & Pricing</h2>
         <p className="demo-section__subtitle">Full menu of services. Prices vary by hair length and stylist level — call for a custom quote.</p>
@@ -180,19 +236,22 @@ const BeautySalonDemo: React.FC = () => (
       </div>
     </div>
 
-    {/* Stylists */}
+    {/* Stylists with real photos */}
     <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Meet Our Stylists</h2>
         <p className="demo-section__subtitle">Request your stylist by name when booking. Each has their own specialty.</p>
-        <div className="demo-team">
+        <div className="demo-team-grid">
           {stylists.map((s) => (
-            <div key={s.name} className="demo-stylist">
-              <div className="demo-stylist__photo">{s.initials}</div>
-              <div className="demo-stylist__name">{s.name}</div>
-              <div className="demo-stylist__role">{s.role}</div>
-              <div className="demo-stylist__specialties">
-                {s.specialties.map((sp) => <span key={sp} className="demo-stylist__specialty">{sp}</span>)}
+            <div key={s.name} className="demo-team-card">
+              <div className="demo-team-card__photo" style={{ backgroundImage: `url(/images/demos/beauty-salon/${s.img}.jpg)` }} />
+              <div className="demo-team-card__body">
+                <h3 className="demo-team-card__name">{s.name}</h3>
+                <p className="demo-team-card__role">{s.role}</p>
+                <p className="demo-team-card__bio">{s.bio}</p>
+                <div className="demo-stylist__specialties" style={{ marginTop: "0.75rem" }}>
+                  {s.specialties.map((sp) => <span key={sp} className="demo-stylist__specialty">{sp}</span>)}
+                </div>
               </div>
             </div>
           ))}
@@ -207,13 +266,13 @@ const BeautySalonDemo: React.FC = () => (
         <p className="demo-section__subtitle">See our latest transformations, nail art, and behind-the-scenes. New posts daily.</p>
         <div className="demo-instagram-feed">
           <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/beauty-salon/hair-styling.jpg)" }} />
+          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/beauty-salon/hair-color.jpg)" }} />
+          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/beauty-salon/balayage.jpg)" }} />
           <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/beauty-salon/manicure.jpg)" }} />
           <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/beauty-salon/manicure-2.jpg)" }} />
-          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/beauty-salon/products.jpg)" }} />
-          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/beauty-salon/hero.jpg)" }} />
-          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/beauty-salon/hair-styling.jpg)" }} />
-          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/beauty-salon/manicure.jpg)" }} />
-          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/beauty-salon/manicure-2.jpg)" }} />
+          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/beauty-salon/pedicure.jpg)" }} />
+          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/beauty-salon/facial.jpg)" }} />
+          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/beauty-salon/makeup.jpg)" }} />
         </div>
         <div className="demo-instagram-feed__note">Mock Instagram feed. Production sites use the Instagram Graph API to auto-display latest posts.</div>
       </div>
