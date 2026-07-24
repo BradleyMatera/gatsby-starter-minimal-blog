@@ -11,6 +11,9 @@ import {
   CloseIcon,
   PhoneIcon,
   BoltIcon,
+  GlobeIcon,
+  MonitorIcon,
+  StarIcon,
 } from "../../../site/icons";
 
 type NavItem = {
@@ -94,9 +97,9 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [mobileDrawerOpen]);
 
-  // Filter to core links only: Home, Blog, For Recruiter
+  // Filter to core commercial links: Home, Services, Work, Pricing, Service Areas, About, Contact
   const coreLinks = nav.filter(item =>
-    ["/", "/posts", "/recruiter"].includes(item.slug)
+    ["/", "/services", "/work", "/pricing", "/service-areas", "/about", "/contact"].includes(item.slug)
   );
 
   const openDrawer = () => setMobileDrawerOpen(true);
@@ -266,6 +269,16 @@ function getNavIcon(slug: string): React.ReactNode {
   switch (slug) {
     case "/":
       return <HomeIcon size={18} />;
+    case "/services":
+      return <BoltIcon size={18} />;
+    case "/work":
+      return <MonitorIcon size={18} />;
+    case "/pricing":
+      return <StarIcon size={18} />;
+    case "/service-areas":
+      return <GlobeIcon size={18} />;
+    case "/about":
+      return <UserIcon size={18} />;
     case "/contact":
       return <EmailIcon size={18} />;
     case "/recruiter":
@@ -273,6 +286,7 @@ function getNavIcon(slug: string): React.ReactNode {
     case "/for-business":
       return <BoltIcon size={18} />;
     case "/posts":
+    case "/blog":
       return <BlogIcon size={18} />;
     default:
       return <span>•</span>;

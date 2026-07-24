@@ -15,6 +15,7 @@ const verifyHome = () => {
   const indexPath = resolve(projectRoot, "public", "index.html");
   const html = readFileSync(indexPath, "utf8");
   const acceptedMarkers = [
+    "Small Business Web Design in Northwest Illinois | Bradley Matera",
     "Bradley Matera — Portfolio",
     "Bradley Matera — Full-stack and cloud systems",
   ];

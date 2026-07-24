@@ -1,8 +1,13 @@
 export const navigation = [
   { title: `Home`, slug: `/` },
+  { title: `Services`, slug: `/services` },
+  { title: `Work`, slug: `/work` },
+  { title: `Pricing`, slug: `/pricing` },
+  { title: `Service Areas`, slug: `/service-areas` },
+  { title: `About`, slug: `/about` },
+  { title: `Contact`, slug: `/contact` },
   { title: `Blog`, slug: `/blog` },
   { title: `For Recruiter`, slug: `/recruiter` },
-  { title: `Contact`, slug: `/contact` },
 ];
 
 export const externalLinks = [

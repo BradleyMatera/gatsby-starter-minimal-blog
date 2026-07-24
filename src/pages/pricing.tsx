@@ -11,40 +11,41 @@ const pageDescription =
   "Transparent website pricing for Northwest Illinois. Starter sites from $447, growth sites from $797, premium from $1,497. No hidden fees, no contracts.";
 
 const starterFeatures = [
-  "Up to 5 pages",
-  "Mobile-ready, SEO-ready",
+  "One conversion-focused page (up to 5 pages available)",
+  "Mobile responsive",
   "Contact form with spam protection",
+  "Basic on-page SEO",
+  "Basic local business structured data when eligible",
+  "Accessibility baseline",
+  "Analytics and Search Console setup",
   "Hosting setup (Netlify or equivalent)",
-  "Google Search Console + sitemap submission",
-  "Schema markup (LocalBusiness, Service)",
-  "2 rounds of revisions",
+  "One revision round",
   "14-day build time",
   "30-day post-launch warranty",
   "24-hour response guarantee",
 ];
 
 const growthFeatures = [
-  "Everything in Starter, plus:",
-  "Up to 10 pages",
-  "Google Business Profile setup and optimization",
-  "Advanced schema markup (FAQ, Breadcrumbs)",
-  "3 rounds of revisions",
-  "Copywriting assistance for all pages",
-  "Google Analytics 4 setup",
-  "Social media meta tags",
-  "30-day post-launch warranty",
-  "24-hour response guarantee",
+  "Everything in Starter Presence, plus:",
+  "Up to 5 core pages",
+  "Keyword and competitor mapping",
+  "Local SEO foundations",
+  "Conversion tracking",
+  "Google Business Profile alignment checklist",
+  "Two revision rounds",
+  "Launch and indexation checks",
 ];
 
-const premiumFeatures = [
-  "Everything in Growth, plus:",
-  "Unlimited pages",
-  "Custom integrations and API connections",
-  "AI chat assistant setup",
-  "Priority support (same-day response)",
-  "Monthly strategy call (30 min)",
-  "Unlimited small fixes during build",
-  "30-day post-launch warranty",
+const leadEngineFeatures = [
+  "Everything in Local Growth, plus:",
+  "Up to 10 pages",
+  "Custom conversion plan",
+  "Service and service-area architecture",
+  "Original copy collaboration",
+  "Technical SEO and structured data",
+  "Performance and accessibility QA",
+  "Three revision rounds",
+  "30-day post-launch measurement review",
 ];
 
 const alaCarteItems = [
@@ -100,9 +101,14 @@ const faqs = [
 ];
 
 const internalLinks = [
+  { label: "Small Business Web Design", href: "/services/small-business-web-design/" },
+  { label: "Website Redesign", href: "/services/website-redesign/" },
+  { label: "Local SEO Services", href: "/services/local-seo/" },
+  { label: "Website Repair", href: "/services/website-repair/" },
+  { label: "Website Accessibility", href: "/services/website-accessibility/" },
+  { label: "Website Care Plans", href: "/services/website-care-plans/" },
   { label: "Web Developer in Durand & Davis, Illinois", href: "/web-developer-durand-davis-illinois/" },
   { label: "Web Developer in Rockford, Illinois", href: "/web-developer-rockford-illinois/" },
-  { label: "Web Developer in Freeport, Illinois", href: "/web-developer-freeport-illinois/" },
   { label: "Northwest Illinois Web Development FAQ", href: "/northwest-illinois-web-development-faq/" },
 ];
 
@@ -154,7 +160,7 @@ const PricingPage = () => (
     >
       <div className="grid-three">
         <Card variant="outline">
-          <h2 className="feature-card__title">Starter — $447 build + $37/month</h2>
+          <h2 className="feature-card__title">Starter Presence — $447 build + $37/month</h2>
           <p className="feature-card__body">
             For: New businesses or solo operators who need a clean website
           </p>
@@ -170,7 +176,7 @@ const PricingPage = () => (
           </div>
         </Card>
         <Card variant="outline">
-          <h2 className="feature-card__title">Growth — $797 build + $67/month</h2>
+          <h2 className="feature-card__title">Local Growth — $797 build + $67/month</h2>
           <p className="feature-card__body">
             For: Established service businesses ready to compete online
           </p>
@@ -184,23 +190,23 @@ const PricingPage = () => (
           </ul>
           <div className="card-actions">
             <Link data-variant="primary" to="/contact/">
-              Choose Growth
+              Choose Local Growth
             </Link>
           </div>
         </Card>
         <Card variant="outline">
-          <h2 className="feature-card__title">Premium — $1,497 build + $97/month</h2>
+          <h2 className="feature-card__title">Lead Engine — $1,497 build + $97/month</h2>
           <p className="feature-card__body">
             For: Businesses ready to dominate their local market
           </p>
           <ul className="feature-list">
-            {premiumFeatures.map((feature) => (
+            {leadEngineFeatures.map((feature) => (
               <li key={feature}>{feature}</li>
             ))}
           </ul>
           <div className="card-actions">
             <Link data-variant="primary" to="/contact/">
-              Choose Premium
+              Choose Lead Engine
             </Link>
           </div>
         </Card>
@@ -211,9 +217,9 @@ const PricingPage = () => (
         <thead>
           <tr>
             <th scope="col" style={{ textAlign: "left", padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Feature</th>
-            <th scope="col" style={{ padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Starter ($447)</th>
-            <th scope="col" style={{ padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Growth ($797)</th>
-            <th scope="col" style={{ padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Premium ($1,497)</th>
+            <th scope="col" style={{ padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Starter Presence ($447)</th>
+            <th scope="col" style={{ padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Local Growth ($797)</th>
+            <th scope="col" style={{ padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Lead Engine ($1,497)</th>
           </tr>
         </thead>
         <tbody>
@@ -260,6 +266,60 @@ const PricingPage = () => (
             <Link data-variant="primary" to="/contact/">
               Book hourly work
             </Link>
+          </div>
+        </Card>
+      </div>
+    </Section>
+
+    <Section
+      eyebrow="Ongoing care"
+      title="Website care plans"
+      description={
+        <p>
+          Monthly support is month-to-month — no contracts. Cancel anytime. These care plans cover
+          the ongoing work that keeps your site fast, secure, and visible.
+        </p>
+      }
+    >
+      <div className="grid-three">
+        <Card variant="outline">
+          <h2 className="feature-card__title">Essential Care — $37/month</h2>
+          <ul className="feature-list">
+            <li>Software and dependency updates</li>
+            <li>Weekly backups</li>
+            <li>Uptime monitoring</li>
+            <li>Security checks</li>
+            <li>24-hour response time</li>
+          </ul>
+          <div className="card-actions">
+            <Link data-variant="ghost" to="/services/website-care-plans/">Learn more</Link>
+          </div>
+        </Card>
+        <Card variant="outline">
+          <h2 className="feature-card__title">Growth Care — $67/month</h2>
+          <p className="feature-card__body"><strong>Essential Care plus:</strong></p>
+          <ul className="feature-list">
+            <li>Content changes and updates</li>
+            <li>Monthly performance report</li>
+            <li>SEO monitoring and fixes</li>
+            <li>Form and lead tracking</li>
+          </ul>
+          <div className="card-actions">
+            <Link data-variant="ghost" to="/services/website-care-plans/">Learn more</Link>
+          </div>
+        </Card>
+        <Card variant="outline">
+          <h2 className="feature-card__title">Search Care — $97/month</h2>
+          <p className="feature-card__body"><strong>Growth Care plus:</strong></p>
+          <ul className="feature-list">
+            <li>Content optimization</li>
+            <li>Local visibility work</li>
+            <li>Quarterly strategy call</li>
+            <li>Competitor monitoring</li>
+            <li>Priority support (same-day response)</li>
+          </ul>
+          <div className="card-actions">
+            <Link data-variant="ghost" to="/services/website-care-plans/">Learn more</Link>
           </div>
         </Card>
       </div>
@@ -401,27 +461,27 @@ export const Head: HeadFC = () => {
       offers: [
         {
           "@type": "Offer",
-          name: "Starter — $447 build + $37/month",
+          name: "Starter Presence — $447 build + $37/month",
           price: "447",
           priceCurrency: "USD",
           description:
-            "Up to 5 pages, mobile-ready, SEO-ready, contact form, hosting setup, schema markup, 2 rounds of revisions, 14-day build time.",
+            "One conversion-focused page, mobile responsive, contact form, basic SEO, accessibility baseline, analytics setup, one revision round, 14-day build time.",
         },
         {
           "@type": "Offer",
-          name: "Growth — $797 build + $67/month",
+          name: "Local Growth — $797 build + $67/month",
           price: "797",
           priceCurrency: "USD",
           description:
-            "Up to 10 pages, Google Business Profile setup, advanced schema markup, copywriting assistance, GA4 setup, 3 rounds of revisions.",
+            "Up to 5 core pages, keyword and competitor mapping, local SEO foundations, conversion tracking, Google Business Profile alignment, two revision rounds.",
         },
         {
           "@type": "Offer",
-          name: "Premium — $1,497 build + $97/month",
+          name: "Lead Engine — $1,497 build + $97/month",
           price: "1497",
           priceCurrency: "USD",
           description:
-            "Unlimited pages, custom integrations, AI chat assistant setup, priority support, monthly strategy call, unlimited small fixes during build.",
+            "Up to 10 pages, custom conversion plan, service and service-area architecture, original copy collaboration, technical SEO, performance and accessibility QA, three revision rounds, 30-day post-launch review.",
         },
         {
           "@type": "Offer",

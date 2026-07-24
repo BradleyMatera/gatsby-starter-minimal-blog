@@ -1,446 +1,288 @@
-import { HomeHero, StatusRow } from "../../../features/home/components";
 import { Section, Link } from "../../../ui";
-import { ProjectCard } from "../../../features/projects/components";
 import { HeroBanner } from "../../../site/components";
-
-import TinyCloudAccent from "../components/TinyCloudAccent";
-import TinyMedalAccent from "../components/TinyMedalAccent";
-import TinyGearAccent from "../components/TinyGearAccent";
-import TinyNodeAccent from "../components/TinyNodeAccent";
-import TinyGoalAccent from "../components/TinyGoalAccent";
-import { TinyDotClusterAccent, TinyTriangleAccent, BlogAccent } from "../../../site/accents";
 
 <>
 
 <div className="home-snap">
   <HeroBanner
-    title="Reliable, measurable software"
-    subtitle="I build accessible front-end experiences paired with dependable back-end systems and clear automation."
-    ctaText="Collaborate"
+    title="Small-business websites built to earn trust and generate leads"
+    subtitle="I design, build, repair, and improve websites for businesses in Rockford, Freeport, Durand, Davis, and nearby communities. You work directly with me, see the price before the project starts, and own the finished work."
+    ctaText="Get a free website plan"
     ctaLink="/contact/"
   />
 </div>
 
-<p className="direct-answer" style={{ maxWidth: "720px", margin: "1.5rem auto", fontSize: "1.1rem", lineHeight: 1.6, textAlign: "center" }}>
-  <strong>Who is Bradley Matera?</strong> Bradley Matera is a full-stack web developer and cloud engineer based in Durand, Illinois, serving Northwest Illinois with website design, SEO services, and small business web development. He also builds AI projects, holds <Link to="/recruiter/#certifications">AWS certifications</Link> (verified on the recruiter hub), and is open to remote or Seattle-based roles.
-</p>
-
-<div className="evidence-strip" style={{ maxWidth: "720px", margin: "0 auto 2rem", padding: "0 1rem" }}>
-  <h2 style={{ fontSize: "1.1rem", textAlign: "center", marginBottom: "0.75rem" }}>Evidence and proof</h2>
-  <ul style={{ listStyle: "none", padding: 0, display: "flex", flexWrap: "wrap", gap: "0.5rem", justifyContent: "center", fontSize: "0.9rem" }}>
-    <li><Link to="/projects/">Project case studies</Link></li>
+<div className="evidence-strip" style={{ maxWidth: "900px", margin: "0 auto 2rem", padding: "1rem" }}>
+  <ul style={{ listStyle: "none", padding: 0, display: "flex", flexWrap: "wrap", gap: "1.5rem", justifyContent: "center", fontSize: "0.95rem" }}>
+    <li><strong>Packages from $447</strong></li>
     <li aria-hidden="true">·</li>
-    <li><Link to="/recruiter/">Recruiter hub with verified credentials</Link></li>
+    <li><strong>No long-term contract</strong></li>
     <li aria-hidden="true">·</li>
-    <li><Link to="/pricing/">Transparent pricing</Link></li>
+    <li><strong>Mobile, accessibility, and SEO included</strong></li>
     <li aria-hidden="true">·</li>
-    <li><Link to="/northwest-illinois-web-development-faq/">Web dev FAQ</Link></li>
-    <li aria-hidden="true">·</li>
-    <li><Link to="/about/">About and background</Link></li>
+    <li><strong>Direct access to the developer</strong></li>
   </ul>
 </div>
 
-<HomeHero />
-
-<figure className="section-divider" aria-hidden="true">
-  <picture>
-    <source type="image/avif" srcSet="/graphic-section-divider.avif" />
-    <source type="image/webp" srcSet="/graphic-section-divider.webp" />
-    <img src="/graphic-section-divider.png" className="media-img" alt="Decorative section divider graphic" width="1536" height="1024" loading="lazy" decoding="async" />
-  </picture>
-</figure>
-
-<section className="home-section home-section--snapshot home-snap reveal-section">
-  <header className="section-strip" aria-hidden="true">
-    <picture>
-      <source type="image/avif" srcSet="/quick-snapshot.avif" />
-      <source type="image/webp" srcSet="/quick-snapshot.webp" />
-      <img className="section-strip__img" src="/quick-snapshot.png" alt="Quick snapshot banner showing Bradley Matera's development focus areas" width="1536" height="1024" loading="lazy" decoding="async" />
-    </picture>
-  </header>
-  <h2 className="sr-only">Quick snapshot</h2>
-  <div className="home-section__content">
-    <div className="section-surface section-surface--snapshot">
-      <div className="section-shell__header">
-        <h2 className="section-title">Building visible, reliable work</h2>
-        <p className="section-lead">I work best with mentorship and clear feedback loops while I build accessible React interfaces backed by observable APIs, monitoring, and automation. The goal: ship features people can rely on and document under pressure.</p>
-        <p className="section-lead">
-          Looking for a <Link to="/web-developer-durand-davis-illinois/">web developer in Durand, Davis, or nearby Northwest Illinois</Link>? I also serve <Link to="/web-developer-rockford-illinois/">Rockford</Link>, <Link to="/web-developer-freeport-illinois/">Freeport</Link>, <Link to="/web-developer-pecatonica-illinois/">Pecatonica</Link>, and <Link to="/web-developer-winnebago-illinois/">Winnebago</Link> with website design, SEO services, and small business web development.
-        </p>
-      </div>
-      <div className="section-content">
-        <ul className="snapshot-grid">
-          <StatusRow
-            icon={<TinyMedalAccent />}
-            label="Background"
-            text="Army combat medic (Healthcare Specialist, 82nd Airborne, Ft. Bragg, 2011–2014 — see the career timeline), trained to stay calm, document every step, and keep systems steady under stress."
-          />
-          <StatusRow
-            icon={<TinyGearAccent />}
-            label="Current focus"
-            text="Pairing UI craft with AWS/Express tooling, shipping responsive hero sections, automation scripts, and documented troubleshooting steps."
-          />
-          <StatusRow
-            icon={<TinyNodeAccent />}
-            label="Recent wins"
-            text="Shipped multiple public demos with clear proof links (see projects below), tightened accessibility and documentation across projects, and added test-backed examples where it makes sense."
-          />
-          <StatusRow
-            icon={<TinyGoalAccent />}
-            label="Next step"
-            text="Seeking a mentorship-focused environment that values clear communication and measurable progress."
-          />
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<figure className="section-divider" aria-hidden="true">
-  <picture>
-    <source type="image/avif" srcSet="/graphic-section-divider.avif" />
-    <source type="image/webp" srcSet="/graphic-section-divider.webp" />
-    <img src="/graphic-section-divider.png" className="media-img" alt="Decorative section divider graphic" width="1536" height="1024" loading="lazy" decoding="async" />
-  </picture>
-</figure>
-
 <Section
-  className="section-surface section-surface--alt home-snap"
-  eyebrow="Current focus"
-  title="Delivery, automation, and clarity"
+  eyebrow="Packages"
+  title="Three simple options, transparent pricing"
+  description={<p className="section-lead">No hidden fees, no agency overhead. Pick the package that fits your business, see the price upfront, and own the finished site.</p>}
+  actions={<><Link data-variant="primary" to="/pricing/">See full pricing</Link><Link data-variant="ghost" to="/contact/">Get a free website plan</Link></>}
 >
-  <div className="section-lead">
-    I keep the work measurable: shipping UI components, tying them to APIs, and automating manual ops so future maintainers can move faster.
-  </div>
-  <div className="grid-three reveal-child">
-    <div className="feature-card" style={{ position: "relative", overflow: "hidden" }}>
-      <div style={{ position: "absolute", top: "1rem", right: "1rem", opacity: 0.15, pointerEvents: "none" }}>
-        <TinyCloudAccent />
-      </div>
-      <span className="feature-card__icon">UI</span>
-      <h3 className="feature-card__title">Front-end leadership</h3>
+  <div className="grid-three">
+    <div className="feature-card">
+      <span className="feature-card__icon">$447</span>
+      <h3 className="feature-card__title">Starter Presence</h3>
       <div className="feature-card__body">
-        I deliver responsive dashboards, feature cards, and accessible navigation by pairing Theme UI tokens with custom CSS. Every component ships with focused copy and keyboard support.
+        <p>One conversion-focused page, mobile responsive, contact form, basic SEO and local business structured data, accessibility baseline, analytics setup, one revision round.</p>
+        <p><strong>$447 build + $37/month hosting and support</strong></p>
+      </div>
+      <div className="card-actions">
+        <Link data-variant="ghost" to="/pricing/">See what's included</Link>
       </div>
     </div>
-    <div className="feature-card" style={{ position: "relative", overflow: "hidden" }}>
-      <div style={{ position: "absolute", top: "1rem", right: "1rem", opacity: 0.15, pointerEvents: "none" }}>
-        <TinyNodeAccent />
-      </div>
-      <span className="feature-card__icon">Ops</span>
-      <h3 className="feature-card__title">Automation & reliability</h3>
+    <div className="feature-card">
+      <span className="feature-card__icon">$797</span>
+      <h3 className="feature-card__title">Local Growth</h3>
       <div className="feature-card__body">
-        I maintain Express proxies, GitHub Actions, and Render-hosted APIs with monitoring, retries, and documentation so simple projects behave like services.
+        <p>Up to five core pages, keyword and competitor mapping, local SEO foundations, conversion tracking, Google Business Profile alignment, two revision rounds, launch and indexation checks.</p>
+        <p><strong>$797 build + $67/month hosting and support</strong></p>
+      </div>
+      <div className="card-actions">
+        <Link data-variant="ghost" to="/pricing/">See what's included</Link>
       </div>
     </div>
-    <div className="feature-card" style={{ position: "relative", overflow: "hidden" }}>
-      <div style={{ position: "absolute", top: "1rem", right: "1rem", opacity: 0.15, pointerEvents: "none" }}>
-        <TinyGearAccent />
-      </div>
-      <span className="feature-card__icon">Communication</span>
-      <h3 className="feature-card__title">Transparent storytelling</h3>
+    <div className="feature-card">
+      <span className="feature-card__icon">$1,497</span>
+      <h3 className="feature-card__title">Lead Engine</h3>
       <div className="feature-card__body">
-        Every case study includes challenges, solutions, and results. I log what shipped, what still needs polish, and how I would scale it for broader use.
+        <p>Up to ten pages, custom conversion plan, service and service-area architecture, original copy collaboration, technical SEO and structured data, performance and accessibility QA, three revision rounds, 30-day post-launch review.</p>
+        <p><strong>$1,497 build + $97/month hosting and support</strong></p>
+      </div>
+      <div className="card-actions">
+        <Link data-variant="ghost" to="/pricing/">See what's included</Link>
       </div>
     </div>
   </div>
 </Section>
 
 <Section
-  className="section-surface home-snap"
-  eyebrow="At a glance"
-  title="Services and pricing comparison"
+  eyebrow="Website examples"
+  title="See what your website could look like"
+  description={<p className="section-lead">These are full clickable sample websites built for real industries — not templates. Click any one to look around.</p>}
+  actions={<><Link data-variant="primary" to="/demos/">See all website examples</Link><Link data-variant="ghost" to="/contact/">Get a free website plan</Link></>}
 >
-  <div className="section-lead">
-    A quick comparison of what I offer, who it is for, and what it costs. See the <Link to="/pricing/">full pricing page</Link> for details.
-  </div>
-  <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.9rem" }}>
-    <thead>
-      <tr>
-        <th style={{ textAlign: "left", padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Service</th>
-        <th style={{ textAlign: "left", padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Best for</th>
-        <th style={{ textAlign: "left", padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Starting price</th>
-        <th style={{ textAlign: "left", padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Timeline</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Starter website</td><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>New businesses, solo operators</td><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>$447 + $37/mo</td><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>14 days</td></tr>
-      <tr><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Growth website</td><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Established service businesses</td><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>$797 + $67/mo</td><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>3-4 weeks</td></tr>
-      <tr><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Premium website</td><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Full local market domination</td><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>$1,497 + $97/mo</td><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Scoped per project</td></tr>
-      <tr><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Site refresh</td><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Updating an existing site</td><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>$597</td><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>1-2 weeks</td></tr>
-      <tr><td style={{ padding: "0.5rem" }}>Hourly work</td><td style={{ padding: "0.5rem" }}>Small fixes, maintenance</td><td style={{ padding: "0.5rem" }}>$65/hour</td><td style={{ padding: "0.5rem" }}>As needed</td></tr>
-    </tbody>
-  </table>
-</Section>
-<section className="home-section home-section--featured home-snap reveal-section">
-  <header className="section-strip" aria-hidden="true">
-    <picture>
-      <source type="image/avif" srcSet="/featured-work.avif" />
-      <source type="image/webp" srcSet="/featured-work.webp" />
-      <img className="section-strip__img" src="/featured-work.png" alt="Featured work banner highlighting case studies and projects" width="1536" height="1024" loading="lazy" decoding="async" />
-    </picture>
-  </header>
-  <h2 className="sr-only">Featured work</h2>
-  <div className="home-section__content">
-    <div className="section-surface section-surface--featured">
-      <div className="section-shell__header">
-        <h2 className="section-title">Project write-ups with real code you can verify</h2>
-        <div className="hero-actions">
-          <Link data-variant="primary" to="/projects">
-            Browse project write-ups
-          </Link>
-          <Link data-variant="ghost" to="/contributions">
-            Review open-source contributions
-          </Link>
-        </div>
-        <div className="section-lead">
-          These are honest write-ups of what I built, the tech I chose, what worked, and what didn't. Every project links to a real GitHub repo — no inflated claims, no made-up metrics.
-        </div>
-      </div>
-      <div className="section-content">
-        <div className="grid-auto project-gallery">
-          <ProjectCard
-            title="Car-Match"
-            meta="Full-stack community MVP — profiles, forums, events, messaging"
-            summary="A React frontend with an Express backend, built as a Full Sail University course project. Frontend on GitHub Pages, backend on Google Cloud Run (free tier). Forums are mock-backed by default and persist when MongoDB is configured. 100+ commits, Docker support, and full docs in the repo."
-            impactPrefix="What's real"
-            impact="100+ commits, live frontend on GitHub Pages, backend on Google Cloud Run, Dockerfile, health check endpoint, and documented API. Honest limitation: forums are mock-backed without MongoDB configured, and no load testing has been done."
-            stack={["React", "Express", "MongoDB", "Google Cloud Run", "JWT", "Docker"]}
-            links={[
-              { label: "Car-Match write-up", href: "/projects/car-match/", variant: "primary" },
-              { label: "GitHub", href: "https://github.com/BradleyMatera/car-match", external: true },
-              { label: "Live demo", href: "https://bradleymatera.github.io/car-match/", external: true }
-            ]}
-          />
-
-          <ProjectCard
-            title="Interactive Pokédex"
-            meta="Static Next.js 16 app — 151 Pokémon with build-time data fetch"
-            summary="A Next.js 16 static export that fetches PokéAPI data at build time and prerenders 151 detail pages. Client-side search and filtering with React context providers. Tailwind CSS v4 + NextUI. Deployed to GitHub Pages via GitHub Actions."
-            impactPrefix="What's real"
-            impact="Live demo with 151 prerendered Pokémon pages, build-time data fetch from PokéAPI, GitHub Actions auto-deploy workflow, and a README documenting architecture, deployment model, and known limitations. Honest limitation: fan-made educational project, no backend or user accounts."
-            stack={["Next.js 16", "TypeScript", "PokeAPI", "Tailwind v4", "NextUI"]}
-            links={[
-              { label: "Pokédex write-up", href: "/projects/interactive-pokedex/", variant: "primary" },
-              { label: "Live demo", href: "https://bradleymatera.github.io/Interactive-Pokedex/", variant: "primary", external: true },
-              { label: "GitHub", href: "https://github.com/BradleyMatera/Interactive-Pokedex", external: true }
-            ]}
-          />
-
-          <ProjectCard
-            title="CIRIS AI contributions"
-            meta="Open-source backend code — Python, JWT auth, API routes, deferral system"
-            summary="Submitted 10 PRs to CIRISNode (the CIRIS Ethics Engine backend, written in Python). 7 were merged. Work included implementing JWT authentication, building benchmark/DID/WA API routes, creating a deferral system, and refactoring the API route structure. Not just docs — real backend code."
-            impactPrefix="What's real"
-            impact="7 of 10 PRs merged into CIRISNode. PR #1 finalized Phase 2 — API fully functional, JWT set up, all README routes working, Docker support. Honest limitation: I was one of several contributors, and the project has evolved since my work."
-            stack={["Python", "TypeScript", "Docker", "JWT", "FastAPI"]}
-            links={[
-              { label: "CIRIS AI write-up", href: "/projects/ciris-ai/", variant: "primary" },
-              { label: "My PRs", href: "https://github.com/CIRISAI/CIRISNode/pulls?q=is%3Apr+author%3ABradleyMatera", external: true },
-              { label: "CIRISNode repo", href: "https://github.com/CIRISAI/CIRISNode", external: true }
-            ]}
-          />
-        </div>
-      </div>
+  <div className="grid-three">
+    <div className="feature-card">
+      <h3 className="feature-card__title">Restaurant</h3>
+      <div className="feature-card__body"><p>Menu, reservations, photo gallery, and location info.</p></div>
+      <div className="card-actions"><Link data-variant="primary" to="/demos/restaurant/">See restaurant sample</Link></div>
+    </div>
+    <div className="feature-card">
+      <h3 className="feature-card__title">Landscaping</h3>
+      <div className="feature-card__body"><p>Service packages, project gallery, seasonal tips, and free quote form.</p></div>
+      <div className="card-actions"><Link data-variant="primary" to="/demos/landscaping/">See landscaping sample</Link></div>
+    </div>
+    <div className="feature-card">
+      <h3 className="feature-card__title">HVAC</h3>
+      <div className="feature-card__body"><p>Financing calculator, service areas, seasonal promotions, and booking form.</p></div>
+      <div className="card-actions"><Link data-variant="primary" to="/demos/hvac/">See HVAC sample</Link></div>
     </div>
   </div>
-</section>
+  <div className="grid-three" style={{ marginTop: "1.5rem" }}>
+    <div className="feature-card">
+      <h3 className="feature-card__title">Auto Repair</h3>
+      <div className="feature-card__body"><p>VIN lookup, service menu, customer reviews, and appointment scheduling.</p></div>
+      <div className="card-actions"><Link data-variant="primary" to="/demos/auto-repair/">See auto repair sample</Link></div>
+    </div>
+    <div className="feature-card">
+      <h3 className="feature-card__title">Real Estate</h3>
+      <div className="feature-card__body"><p>Property listings, agent profiles, search filters, and contact form.</p></div>
+      <div className="card-actions"><Link data-variant="primary" to="/demos/real-estate/">See real estate sample</Link></div>
+    </div>
+    <div className="feature-card">
+      <h3 className="feature-card__title">Salon</h3>
+      <div className="feature-card__body"><p>Service menu, stylist bios, photo gallery, and online booking.</p></div>
+      <div className="card-actions"><Link data-variant="primary" to="/demos/beauty-salon/">See salon sample</Link></div>
+    </div>
+  </div>
+</Section>
 
 <Section
-  className="section-surface section-surface--alt home-snap"
-  eyebrow="Why I build in public"
-  title="Clarity, documentation, and measurable progress"
-  description={<p className="section-lead">I treat every project like it needs to be repeatable: document assumptions, log deployments, and capture the troubleshooting steps that keep handoffs smooth.</p>}
+  eyebrow="Why direct-to-developer"
+  title="Work directly with the person building your site"
+  description={<p className="section-lead">No account managers, no handoffs, no agency overhead. You talk to me, I do the work, and you see real progress.</p>}
 >
-  <ul className="feature-list feature-list--why">
-    <li className="reveal" style={{ transitionDelay: "0.1s" }}>
-      <TinyTriangleAccent />
-      <div><strong>Design-first work</strong> - accessibility, responsive layouts, and clear storytelling keep interfaces professional from day one.</div>
-    </li>
-    <li className="reveal" style={{ transitionDelay: "0.2s", position: "relative", paddingRight: "3rem" }}>
-      <div><strong>Operational discipline</strong> - GitHub Actions, monitoring scripts, and infrastructure notes accompany every deploy so future collaborators can trust the stack.</div>
-      <div style={{ position: "absolute", right: "1rem", top: "50%", transform: "translateY(-50%)" }}>
-        <TinyDotClusterAccent />
-      </div>
-    </li>
-    <li className="reveal" style={{ transitionDelay: "0.3s" }}>
-      <BlogAccent />
-      <div><strong>Honest storytelling</strong> - write-ups highlight the problem, approach, and what actually shipped — including what didn't work and what I'd do differently.</div>
-    </li>
-  </ul>
+  <div className="grid-three">
+    <div className="feature-card">
+      <h3 className="feature-card__title">No agency handoff</h3>
+      <div className="feature-card__body"><p>The person you talk to is the person who builds your site. No sales rep forwarding messages to a developer who never heard your goals.</p></div>
+    </div>
+    <div className="feature-card">
+      <h3 className="feature-card__title">Transparent pricing</h3>
+      <div className="feature-card__body"><p>You see the price before the project starts. No surprise invoices, no scope creep charges, no retainer traps. 50% deposit, 50% on launch.</p></div>
+    </div>
+    <div className="feature-card">
+      <h3 className="feature-card__title">You own everything</h3>
+      <div className="feature-card__body"><p>The code, content, domain, and hosting are all yours. If you ever want to leave, I help you migrate at no extra charge. No vendor lock-in.</p></div>
+    </div>
+  </div>
 </Section>
 
-<figure className="section-divider" aria-hidden="true">
-  <picture>
-    <source type="image/avif" srcSet="/graphic-section-divider.avif" />
-    <source type="image/webp" srcSet="/graphic-section-divider.webp" />
-    <img src="/graphic-section-divider.png" className="media-img" alt="Decorative section divider graphic" width="1536" height="1024" loading="lazy" decoding="async" />
-  </picture>
-</figure>
-<section className="home-section home-section--collaborate home-snap reveal-section">
-  <header className="section-strip" aria-hidden="true">
-    <picture>
-      <source type="image/avif" srcSet="/lets-collaborate.avif" />
-      <source type="image/webp" srcSet="/lets-collaborate.webp" />
-      <img className="section-strip__img" src="/lets-collaborate.png" alt="Let's collaborate banner inviting contact for web development projects" width="1536" height="1024" loading="lazy" decoding="async" />
-    </picture>
-  </header>
-  <h2 className="sr-only">Let's collaborate</h2>
-  <div className="home-section__content">
-    <div className="section-surface section-surface--collaborate">
-      <div className="section-shell__header">
-        <h2 className="section-title">Let's work together</h2>
-        <div className="section-lead">
-          I respond within 24 hours with availability, relevant case studies, and a short plan for how we can collaborate. Need my resume? Email me at <strong><a href="mailto:bradmatera@gmail.com" aria-label="Email Bradley Matera at bradmatera@gmail.com">{"bradmatera@gmail.com"}</a></strong> and I'll send the PDF right away.
-        </div>
-        <div className="section-lead">
-          If you found me while searching for a web developer in Durand or Davis, Illinois, start with the <Link to="/web-developer-durand-davis-illinois/">Northwest Illinois web development services</Link> or go straight to <Link to="/contact/">contact me directly</Link>.
-        </div>
-      </div>
-      <div className="section-content">
-        <div className="grid-two">
-          <div className="surface-card surface-card--outline reveal" style={{ transitionDelay: "0.1s" }}>
-            <h3 className="feature-card__title">Contact & next steps</h3>
-            <ul className="feature-list feature-list--contact">
-              <li>
-                <strong>Email:</strong>{" "}
-                <a href="mailto:bradmatera@gmail.com" aria-label="Email Bradley Matera at bradmatera@gmail.com" style={{ color: "#e23b2d", fontWeight: 600 }}>{"bradmatera@gmail.com"}</a>
-              </li>
-              <li>
-                <strong>LinkedIn:</strong>{" "}
-                <a href="https://www.linkedin.com/in/bradmatera" target="_blank" rel="noopener noreferrer" className="contact-link">
-                  /in/bradmatera
-                </a>
-              </li>
-              <li>
-                <strong>GitHub:</strong>{" "}
-                <a href="https://github.com/BradleyMatera" target="_blank" rel="noopener noreferrer" className="contact-link">
-                  @BradleyMatera
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="surface-card surface-card--muted reveal" style={{ transitionDelay: "0.2s" }}>
-            <h3 className="feature-card__title">Collaborative delivery</h3>
-            <div className="feature-card__body">
-              I work best with mentorship and clear feedback loops, and I thrive in environments that value documentation, metrics, and thoughtful automation as much as clean interfaces.
-            </div>
-          </div>
-        </div>
-      </div>
+<Section
+  eyebrow="Services"
+  title="What I can help with"
+  description={<p className="section-lead">From new builds to repairs to local SEO, I cover the full range of website work a small business needs.</p>}
+  actions={<Link data-variant="ghost" to="/services/">See all services</Link>}
+>
+  <div className="grid-three">
+    <div className="feature-card">
+      <h3 className="feature-card__title">New website design</h3>
+      <div className="feature-card__body"><p>Conversion-focused websites built for your business, mobile-ready, SEO-ready, with contact forms and schema markup.</p></div>
+      <div className="card-actions"><Link data-variant="ghost" to="/services/small-business-web-design/">Learn more</Link></div>
+    </div>
+    <div className="feature-card">
+      <h3 className="feature-card__title">Website redesign</h3>
+      <div className="feature-card__body"><p>Update an outdated site with a modern, fast, accessible rebuild that keeps your content and improves your search visibility.</p></div>
+      <div className="card-actions"><Link data-variant="ghost" to="/services/website-redesign/">Learn more</Link></div>
+    </div>
+    <div className="feature-card">
+      <h3 className="feature-card__title">Local SEO</h3>
+      <div className="feature-card__body"><p>Google Business Profile setup, local search optimization, schema markup, and content restructuring so people in your area can find you.</p></div>
+      <div className="card-actions"><Link data-variant="ghost" to="/services/local-seo/">Learn more</Link></div>
     </div>
   </div>
-</section>
-{/* About Brad — full story moved from /about page */}
-
-<figure className="section-divider" aria-hidden="true">
-  <picture>
-    <source type="image/avif" srcSet="/graphic-section-divider.avif" />
-    <source type="image/webp" srcSet="/graphic-section-divider.webp" />
-    <img src="/graphic-section-divider.png" className="media-img" alt="Decorative section divider graphic" width="1536" height="1024" loading="lazy" decoding="async" />
-  </picture>
-</figure>
-
-<section className="home-section home-section--about home-snap reveal-section" id="path-so-far">
-  <h2 className="sr-only">About Brad</h2>
-  <div className="home-section__content">
-    <div className="section-surface section-surface--about">
-      <div className="section-shell__header">
-        <h2 className="section-title"><strong>How I got into tech</strong> — Tinkering first, school later</h2>
-      </div>
-      <div className="section-content">
-        <p>I built my first PC when I was around 12. It was an old Gateway machine, and that is where a lot of this started. I spent a lot of time messing with HTML pages, installing game mods, and figuring out what broke when you changed things.</p>
-        <p>I did not go straight into software after high school. I spent years working in different fields, including the Army as a medic and later in operations, logistics, case management, and rescue work. Those jobs were intense, but they taught me how to stay calm when things get messy and how important clear documentation is.</p>
-        <p>I came back to tech seriously in 2023 when I enrolled in the Web Development program at Full Sail University. I graduated on October 31, 2025 with a Bachelor of Science in Web Development, finished as the salutatorian of the program, and graduated with a 3.64 GPA.</p>
-        <p>That is the version of me this page is meant to reflect. I am not trying to sound like a senior engineer. What I can say honestly is that I have been building a lot since March 2024, and GitHub has become the place where I work through ideas, test them, and keep a record of what I learned.</p>
-        <p>If you want the full timeline, certifications, and verified credentials, those live in the <Link to="/recruiter/">recruiter hub</Link>. If you are here because you searched for a web developer in Durand, Davis, or nearby Northwest Illinois, I also put together a separate <Link to="/web-developer-durand-davis-illinois/">Northwest Illinois web development overview</Link> so the service area, proof, and fit are easy to scan.</p>
-      </div>
+  <div className="grid-three" style={{ marginTop: "1.5rem" }}>
+    <div className="feature-card">
+      <h3 className="feature-card__title">Website repair</h3>
+      <div className="feature-card__body"><p>Fix broken layouts, slow pages, outdated content, deployment issues, and broken forms on existing sites.</p></div>
+      <div className="card-actions"><Link data-variant="ghost" to="/services/website-repair/">Learn more</Link></div>
+    </div>
+    <div className="feature-card">
+      <h3 className="feature-card__title">Accessibility</h3>
+      <div className="feature-card__body"><p>WCAG 2.2 AA compliance checks, keyboard navigation, screen reader support, contrast fixes, and form label corrections.</p></div>
+      <div className="card-actions"><Link data-variant="ghost" to="/services/website-accessibility/">Learn more</Link></div>
+    </div>
+    <div className="feature-card">
+      <h3 className="feature-card__title">Website care plans</h3>
+      <div className="feature-card__body"><p>Ongoing updates, backups, uptime monitoring, security checks, and content changes. Month-to-month, no contracts.</p></div>
+      <div className="card-actions"><Link data-variant="ghost" to="/services/website-care-plans/">Learn more</Link></div>
     </div>
   </div>
-</section>
+</Section>
 
-<figure className="section-divider" aria-hidden="true">
-  <picture>
-    <source type="image/avif" srcSet="/graphic-section-divider.avif" />
-    <source type="image/webp" srcSet="/graphic-section-divider.webp" />
-    <img src="/graphic-section-divider.png" className="media-img" alt="Decorative section divider graphic" width="1536" height="1024" loading="lazy" decoding="async" />
-  </picture>
-</figure>
-
-<section className="home-section home-section--credentials home-snap reveal-section" id="credentials">
-  <div className="home-section__content">
-    <div className="section-surface section-surface--credentials">
-      <div className="section-shell__header">
-        <h2 className="section-title">Credentials</h2>
-        <p className="section-subtitle">The high-level facts. For full verification — dates, credential IDs, and badge links — see the <Link to="/recruiter/">recruiter hub</Link>.</p>
-      </div>
-      <div className="section-content">
-        <div className="how-i-work-grid">
-          <article className="about-panel about-panel--work feature-card how-i-work__focus">
-            <div className="about-work__panel">
-              <h3 className="feature-card__title"><strong>Degree</strong> - Full Sail University</h3>
-              <p>B.S. Web Development, October 2025. Salutatorian, 3.64 GPA.</p>
-            </div>
-          </article>
-          <article className="about-panel about-panel--work feature-card how-i-work__collaboration">
-            <div className="about-work__panel">
-              <h3 className="feature-card__title"><strong>Experience</strong> - AWS internship</h3>
-              <p>Cloud Support Engineer intern at Amazon, summer 2025. Training environments, cloud troubleshooting workflows.</p>
-            </div>
-          </article>
-        </div>
-        <div className="certification-cards">
-          <article className="certification-card">
-            <div className="certification-card__title">AWS Certified Solutions Architect – Associate</div>
-            <div className="certification-card__issuer">Amazon Web Services (AWS)</div>
-          </article>
-          <article className="certification-card">
-            <div className="certification-card__title">AWS Certified AI Practitioner</div>
-            <div className="certification-card__issuer">Amazon Web Services (AWS)</div>
-          </article>
-          <article className="certification-card">
-            <div className="certification-card__title">JavaScript Algorithms and Data Structures</div>
-            <div className="certification-card__issuer">freeCodeCamp</div>
-          </article>
-          <article className="certification-card">
-            <div className="certification-card__title">Foundational C# with Microsoft</div>
-            <div className="certification-card__issuer">freeCodeCamp</div>
-          </article>
-        </div>
-      </div>
+<Section
+  eyebrow="Process"
+  title="From first call to live site"
+  description={<p className="section-lead">A clear, simple process with no surprises. You see progress at every step.</p>}
+  actions={<Link data-variant="ghost" to="/process/">See the full process</Link>}
+>
+  <div className="grid-three">
+    <div className="feature-card">
+      <span className="feature-card__icon">1</span>
+      <h3 className="feature-card__title">Free consultation</h3>
+      <div className="feature-card__body"><p>We talk about your business, what the site needs to do, and what's currently broken. I tell you honestly whether I'm the right fit. No pressure, no sales pitch.</p></div>
+    </div>
+    <div className="feature-card">
+      <span className="feature-card__icon">2</span>
+      <h3 className="feature-card__title">Design and build</h3>
+      <div className="feature-card__body"><p>I build a fast, mobile-ready site for your business. You see real progress, not radio silence. Revision rounds included so the final site matches what you actually want.</p></div>
+    </div>
+    <div className="feature-card">
+      <span className="feature-card__icon">3</span>
+      <h3 className="feature-card__title">Launch and support</h3>
+      <div className="feature-card__body"><p>I launch your site, set up hosting, and handle updates. 24-hour response times, 30-day warranty after launch. Monthly support is month-to-month — no contract trap.</p></div>
     </div>
   </div>
-</section>
+</Section>
 
-<figure className="section-divider" aria-hidden="true">
-  <picture>
-    <source type="image/avif" srcSet="/graphic-section-divider.avif" />
-    <source type="image/webp" srcSet="/graphic-section-divider.webp" />
-    <img src="/graphic-section-divider.png" className="media-img" alt="Decorative section divider graphic" width="1536" height="1024" loading="lazy" decoding="async" />
-  </picture>
-</figure>
-
-<section className="home-section home-section--contact home-snap reveal-section">
-  <div className="home-section__content">
-    <div className="section-surface section-surface--contact">
-      <div className="section-shell__header">
-        <h2 className="section-title"><strong>Let's talk</strong> — Open to junior roles, freelance work, and collaborations</h2>
-      </div>
-      <div className="section-content">
-        <p>I am looking for opportunities to grow and collaborate. If you need someone eager to learn, build useful things, and communicate clearly, whether that is a small freelance job or a junior developer role, I would like to talk.</p>
-        <ul className="feature-list about-cta__list">
-          <li><strong>Email:</strong> <a href="mailto:bradmatera@gmail.com" aria-label="Email Bradley Matera at bradmatera@gmail.com">{"bradmatera@gmail.com"}</a></li>
-          <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/bradmatera" target="_blank" rel="noopener noreferrer">/in/bradmatera</a></li>
-          <li><strong>GitHub:</strong> <a href="https://github.com/BradleyMatera" target="_blank" rel="noopener noreferrer">@BradleyMatera</a></li>
-          <li><strong>Dev.to:</strong> <a href="https://dev.to/bradleymatera" target="_blank" rel="noopener noreferrer">@bradleymatera</a></li>
-        </ul>
-        <div className="card-actions">
-          <Link to="/recruiter/#project-explorer" data-variant="primary">View project case studies</Link>
-          <Link to="/contact/" data-variant="ghost">Contact me about your project</Link>
-        </div>
-      </div>
+<Section
+  eyebrow="Service area"
+  title="Northwest Illinois and Southern Wisconsin"
+  description={<p className="section-lead">I serve small businesses across the region. Find your city below for local-specific information.</p>}
+  actions={<Link data-variant="ghost" to="/service-areas/">See all service areas</Link>}
+>
+  <div className="grid-three">
+    <div className="feature-card">
+      <h3 className="feature-card__title">Rockford, IL</h3>
+      <div className="card-actions"><Link data-variant="ghost" to="/web-developer-rockford-illinois/">Rockford web developer</Link></div>
+    </div>
+    <div className="feature-card">
+      <h3 className="feature-card__title">Freeport, IL</h3>
+      <div className="card-actions"><Link data-variant="ghost" to="/web-developer-freeport-illinois/">Freeport web developer</Link></div>
+    </div>
+    <div className="feature-card">
+      <h3 className="feature-card__title">Durand & Davis, IL</h3>
+      <div className="card-actions"><Link data-variant="ghost" to="/web-developer-durand-davis-illinois/">Durand/Davis web developer</Link></div>
     </div>
   </div>
-</section>
+  <div className="grid-three" style={{ marginTop: "1.5rem" }}>
+    <div className="feature-card">
+      <h3 className="feature-card__title">Loves Park, IL</h3>
+      <div className="card-actions"><Link data-variant="ghost" to="/web-developer-loves-park-illinois/">Loves Park web developer</Link></div>
+    </div>
+    <div className="feature-card">
+      <h3 className="feature-card__title">Beloit, WI</h3>
+      <div className="card-actions"><Link data-variant="ghost" to="/web-developer-beloit-wisconsin/">Beloit web developer</Link></div>
+    </div>
+    <div className="feature-card">
+      <h3 className="feature-card__title">Janesville, WI</h3>
+      <div className="card-actions"><Link data-variant="ghost" to="/web-developer-janesville-wisconsin/">Janesville web developer</Link></div>
+    </div>
+  </div>
+</Section>
+
+<Section
+  eyebrow="FAQ"
+  title="Common questions about websites"
+  description={<p className="section-lead">Straight answers to the questions small business owners ask most.</p>}
+  actions={<Link data-variant="ghost" to="/northwest-illinois-web-development-faq/">Read the full FAQ</Link>}
+>
+  <div className="grid-two">
+    <div className="feature-card">
+      <h3 className="feature-card__title">How much does a website cost?</h3>
+      <div className="feature-card__body"><p>Starter sites begin at $447 for the build and $37/month for hosting and support. Growth sites start at $797. See the <Link to="/pricing/">full pricing breakdown</Link>.</p></div>
+    </div>
+    <div className="feature-card">
+      <h3 className="feature-card__title">How long does it take?</h3>
+      <div className="feature-card__body"><p>Starter sites typically take 14 days. Growth sites run 3-4 weeks. I give you a specific timeline during the free consultation.</p></div>
+    </div>
+    <div className="feature-card">
+      <h3 className="feature-card__title">Do I own my website?</h3>
+      <div className="feature-card__body"><p>Yes. The code, content, and domain are all yours. If you ever want to leave, I help you migrate at no extra charge.</p></div>
+    </div>
+    <div className="feature-card">
+      <h3 className="feature-card__title">Can you fix my existing website?</h3>
+      <div className="feature-card__body"><p>Yes. Site refreshes start at $597, or I can work hourly at $65/hour with a 1-hour minimum.</p></div>
+    </div>
+  </div>
+</Section>
+
+<Section
+  eyebrow="Next step"
+  title="Get a free website plan"
+  description={<p className="section-lead">Call (608) 313-5373 or send a message through the contact page. I'll tell you honestly whether I'm the right fit for your project.</p>}
+  actions={
+    <>
+      <Link data-variant="primary" to="/contact/">Get a free website plan</Link>
+      <a href="tel:+16083135373" data-variant="ghost" className="link">(608) 313-5373</a>
+      <Link data-variant="ghost" to="/pricing/">See pricing</Link>
+    </>
+  }
+>
+  <div className="grid-two">
+    <div className="feature-card">
+      <h3 className="feature-card__title">Free 5-point website review</h3>
+      <div className="feature-card__body"><p>One-page review covering clarity, mobile usability, speed, local search, and the most important next step. No obligation, no sales pressure.</p></div>
+      <div className="card-actions"><Link data-variant="primary" to="/contact/">Request your review</Link></div>
+    </div>
+    <div className="feature-card">
+      <h3 className="feature-card__title">For developers and recruiters</h3>
+      <div className="feature-card__body"><p>If you are a recruiter or developer evaluating my technical work, case studies, code, and verified credentials live on the <Link to="/recruiter/">recruiter hub</Link>.</p></div>
+      <div className="card-actions"><Link data-variant="ghost" to="/recruiter/">View technical portfolio</Link></div>
+    </div>
+  </div>
+</Section>
 
 </>
