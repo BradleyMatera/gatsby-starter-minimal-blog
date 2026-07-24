@@ -279,8 +279,9 @@ const PurchasesPage = () => {
       <div className="store-shell">
         <header className="store-header">
           <h1 className="store-title">Bradley Matera Customer Portal</h1>
-          <p className="direct-answer store-subtitle">
-            <strong>What is the customer portal?</strong> Sign in to manage your purchases from Bradley Matera&apos;s store. View order history, re-download digital products, and resend receipt emails. Affiliate products are sold by third-party merchants — direct digital downloads are sold by Bradley Matera.
+          <h2 className="store-subtitle">What is the customer portal?</h2>
+          <p className="direct-answer store-subtitle-body">
+            Sign in to manage your purchases from Bradley Matera&apos;s store. View order history, re-download digital products, and resend receipt emails. Affiliate products are sold by third-party merchants — direct digital downloads are sold by Bradley Matera.
           </p>
           <p className="store-legal">
             Affiliate products are sold by third-party merchants. Bradley Matera is not the seller or creator of affiliate products.
@@ -290,7 +291,7 @@ const PurchasesPage = () => {
 
         <div className="store-access">
           <div className="store-access-card">
-            <h2>Sign in for instant access</h2>
+            <h2>How do I access my purchases?</h2>
             <p className="store-meta">Use the same email you used at checkout.</p>
             {user?.email ? (
               <div>

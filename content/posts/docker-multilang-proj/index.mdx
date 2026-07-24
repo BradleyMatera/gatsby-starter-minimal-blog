@@ -9,6 +9,10 @@ theme: "DevOps"
 
 Most Docker tutorials are either too abstract or too production-heavy. This is the small multi-service stack I built to understand how containers actually wire together: a Node API, a Python worker, and a static web front end, all started with one command.
 
+## How do I containerize a multi-language project with Docker?
+
+To containerize a multi-language project, create a separate Dockerfile for each runtime (Node, Python, Nginx), then use a single docker-compose.yml file to define all services, their ports, and dependencies. Each service builds from its own directory and communicates over a shared Docker network. Run `docker compose up` to start everything at once.
+
 ## The services
 
 | Service | Runtime | Purpose | Port |
