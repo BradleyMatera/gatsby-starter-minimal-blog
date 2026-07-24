@@ -8,7 +8,7 @@ import { Card, Link, Section } from "../ui";
 const pathname = "/process/";
 const pageTitle = "How I Build Websites — From First Call to Launch | Bradley Matera";
 const pageDescription =
-  "A clear 5-step process for building small business websites: free consultation, scope and proposal, design and build, review and revisions, launch and support. Starter sites in 14 days.";
+  "A clear 5-step process for building small business websites: consultation, scope, design, revisions, and launch. Starter sites built in 14 days.";
 
 const timelineRows = [
   { tier: "Starter", time: "14 days", detail: "Up to 5 pages, mobile-ready, SEO-ready" },

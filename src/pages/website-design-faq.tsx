@@ -8,7 +8,7 @@ import { Card, Link, Section, FAQAccordion } from "../ui";
 const pathname = "/website-design-faq/";
 const pageTitle = "Website Design FAQ — Cost, Timeline, Ownership | Bradley Matera";
 const pageDescription =
-  "Answers to common questions about small business website design in Northwest Illinois. How much it costs, how long it takes, who owns the site, maintenance, WordPress, local SEO, and more.";
+  "Common questions about small business website design in Northwest Illinois. Pricing, timelines, ownership, maintenance, WordPress, and local SEO.";
 
 const faqs = [
   {

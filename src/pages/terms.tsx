@@ -20,7 +20,7 @@ import {
 const pathname = "/terms/";
 const pageTitle = "Terms of Service | Bradley F. Matera";
 const pageDescription =
-  "Terms of service for Bradley F. Matera, an Illinois sole proprietor. Website services, project agreements, payment schedule, refunds, IP, warranty, and limitation of liability.";
+  "Terms of service for Bradley F. Matera, an Illinois sole proprietor. Covers project agreements, payment schedule, refunds, IP, warranty, and liability.";
 
 const TermsPage = () => (
   <Layout>

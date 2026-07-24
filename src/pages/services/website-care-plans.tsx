@@ -8,7 +8,7 @@ import { Card, Link, Section } from "../../ui";
 const pathname = "/services/website-care-plans/";
 const pageTitle = "Website Care Plans and Maintenance | Bradley Matera";
 const pageDescription =
-  "Website care plans and ongoing maintenance for small businesses. Three tiers from $37 to $97 per month. Updates, backups, monitoring, and support. Written agreements included.";
+  "Website care plans and ongoing maintenance for small businesses. Three tiers from $37 to $97 per month with updates, backups, monitoring, and support.";
 
 const careTiers = [
   {

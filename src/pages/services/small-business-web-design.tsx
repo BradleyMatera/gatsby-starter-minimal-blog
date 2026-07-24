@@ -8,7 +8,7 @@ import { Card, Link, Section } from "../../ui";
 const pathname = "/services/small-business-web-design/";
 const pageTitle = "Small Business Web Design in Northwest Illinois | Bradley Matera";
 const pageDescription =
-  "Custom small business websites built from scratch. Up to 5 pages, mobile-ready, SEO-ready, contact form, schema markup. Starting at $447, 14-day builds, written agreements included.";
+  "Custom small business websites built from scratch. Up to 5 pages, mobile-ready, SEO-ready, contact form. Starting at $447 with 14-day builds.";
 
 const deliverables = [
   "Up to 5 custom pages (Home, About, Services, Contact, plus one more)",

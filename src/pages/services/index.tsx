@@ -8,7 +8,7 @@ import { Card, Link, Section } from "../../ui";
 const pathname = "/services/";
 const pageTitle = "Website Services for Small Businesses in Northwest Illinois | Bradley Matera";
 const pageDescription =
-  "Website design, redesign, local SEO, repair, accessibility, and care plans for small businesses in Northwest Illinois. Starter sites from $447, written agreements included.";
+  "Website design, redesign, local SEO, repair, and care plans for small businesses in Northwest Illinois. Starter sites from $447 with written agreements.";
 
 const serviceCards = [
   {
@@ -111,7 +111,7 @@ const ServicesPage = () => (
         </p>
       }
     >
-      <div style={{ overflowX: "auto" }}>
+      <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Package comparison table">
         <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
           <thead>
             <tr style={{ borderBottom: "2px solid var(--color-border)" }}>

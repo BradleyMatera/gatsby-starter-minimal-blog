@@ -8,7 +8,7 @@ import { Card, Link, Section } from "../../ui";
 const pathname = "/work/northstar-hvac/";
 const pageTitle = "Example: HVAC Service Area Website | Bradley Matera";
 const pageDescription =
-  "An illustrative example of an HVAC service area website built with Gatsby. Shows the structure, features, and approach for a typical HVAC company website, including a financing calculator, seasonal promotions, and local SEO.";
+  "An illustrative example of an HVAC service area website built with Gatsby. Shows structure, financing calculator, seasonal promotions, and local SEO.";
 
 const ExamplePage = () => (
   <Layout>

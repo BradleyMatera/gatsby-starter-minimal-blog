@@ -8,7 +8,7 @@ import { Card, Link, Section } from "../../ui";
 const pathname = "/work/rock-river-diner/";
 const pageTitle = "Example: Restaurant Website Rebuild | Bradley Matera";
 const pageDescription =
-  "An illustrative example showing the structure and approach for rebuilding a slow WordPress restaurant website into a fast Gatsby static site. Covers mobile-first menus, working reservation forms, and accessibility improvements.";
+  "An illustrative example of rebuilding a slow WordPress restaurant site into a fast Gatsby static site. Covers menus, reservation forms, and accessibility.";
 
 const ExamplePage = () => (
   <Layout>

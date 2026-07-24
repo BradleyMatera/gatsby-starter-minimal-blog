@@ -8,7 +8,7 @@ import { Card, Link, Section } from "../ui";
 const pathname = "/work/";
 const pageTitle = "Website Work and Examples | Bradley Matera";
 const pageDescription =
-  "Website work and case studies by Bradley Matera. See live demo websites for restaurants, landscaping, HVAC, auto repair, real estate, and salons, plus project write-ups and open-source contributions.";
+  "Website examples and demos by Bradley Matera. Live demo sites for restaurants, landscaping, HVAC, auto repair, real estate, and salons, plus project write-ups.";
 
 const demoCards = [
   { title: "Restaurant", desc: "Menu, reservations, gallery, and location.", href: "/demos/restaurant/" },
