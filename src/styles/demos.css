@@ -255,6 +255,14 @@
   color: #fff !important;
   text-shadow: 0 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.5) !important;
 }
+.demo-page .demo-hero__title {
+  color: #fff !important;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.9), 0 0 30px rgba(0,0,0,0.5) !important;
+}
+.demo-page .demo-hero__subtitle {
+  color: #fff !important;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.5) !important;
+}
 .demo-page a { color: var(--demo-accent); text-decoration: none; }
 .demo-page img { max-width: 100%; height: auto; display: block; }
 .demo-page strong, .demo-page b { color: var(--demo-heading); }
