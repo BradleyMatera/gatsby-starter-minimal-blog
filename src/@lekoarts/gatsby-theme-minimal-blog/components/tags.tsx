@@ -92,9 +92,10 @@ const Tags = ({ data }: { data: TagsData }) => {
       <section className="tags-page" sx={{ maxWidth: `900px`, margin: `0 auto`, padding: `4rem 1.5rem` }}>
         <h1 sx={{ fontSize: `2.5rem`, marginBottom: `0.5rem` }}>All Tags</h1>
 
-        {/* Direct answer for AEO (40-70 words) */}
+        {/* Direct answer for AEO — question heading + 40-70 word answer */}
+        <h2 sx={{ fontSize: `1.25rem`, marginTop: `1rem`, marginBottom: `0.5rem` }}>What topics does Bradley Matera write about?</h2>
         <p className="direct-answer" sx={{ fontSize: `1.125rem`, opacity: 0.8, marginBottom: `1rem`, lineHeight: 1.6 }}>
-          <strong>What topics does Bradley Matera write about?</strong> Bradley Matera&apos;s portfolio covers {groups.length} topic tags across {totalArticles} articles, organized into categories like Cloud, DevOps, Frontend, Security, Career, and Local SEO. Each article includes real project examples, code snippets, and verification steps from a web developer in Northwest Illinois.
+          Bradley Matera&apos;s portfolio covers {groups.length} topic tags across {totalArticles} articles, organized into categories like Cloud, DevOps, Frontend, Security, Career, and Local SEO. Each article includes real project examples, code snippets, and verification steps from a web developer in Northwest Illinois.
         </p>
 
         <p sx={{ fontSize: `1rem`, opacity: 0.65, marginBottom: `2rem` }}>

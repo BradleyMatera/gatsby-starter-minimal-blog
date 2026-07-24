@@ -158,7 +158,6 @@ const Layout = ({ children, className = `` }: LayoutProps) => {
           className="back-to-top cyber-back-to-top"
           data-visible={isBackToTopVisible}
           onClick={handleBackToTop}
-          aria-label="Back to top"
         >
           <span aria-hidden="true" className="cyber-arrow">↑</span>
           <span className="sr-only">Back to top</span>

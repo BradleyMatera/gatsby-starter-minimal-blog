@@ -64,7 +64,6 @@ const IntegrationsSection: React.FC<IntegrationsSectionProps> = ({ industry, int
                 target="_blank"
                 rel="noopener noreferrer"
                 className="demo-integration__link"
-                aria-label={`${integration.name} — documentation and pricing`}
               >
                 {integration.name} docs <ExternalLinkIcon size={14} />
               </a>

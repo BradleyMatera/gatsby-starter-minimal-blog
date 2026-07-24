@@ -106,7 +106,6 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
       <button
         ref={mobileMenuRef}
         className="vertical-nav__toggle-icon cyber-toggle vertical-nav__mobile-only"
-        aria-label={mobileDrawerOpen ? "Close menu" : "Open menu"}
         aria-expanded={mobileDrawerOpen}
         aria-controls="mobile-navigation-drawer"
         onClick={() => {
@@ -122,7 +121,7 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
         ) : (
           <MenuIcon size={24} />
         )}
-        <span className="vertical-nav__toggle-label sr-only">Menu</span>
+        <span className="vertical-nav__toggle-label sr-only">{mobileDrawerOpen ? "Close menu" : "Open menu"}</span>
       </button>
       {/* Desktop Nav */}
       <nav

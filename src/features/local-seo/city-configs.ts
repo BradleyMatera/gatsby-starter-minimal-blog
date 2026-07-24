@@ -126,7 +126,7 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     slug: "web-developer-beloit-wisconsin",
     pageTitle: "Web Developer & Website Design in Beloit, Wisconsin",
     pageDescription:
-      "Need a web developer in Beloit, Wisconsin? I build affordable, fast websites for small businesses — SEO, site repair, and custom builds from 40 minutes south in Durand, Illinois.",
+      "Web developer in Beloit, Wisconsin — affordable website design, SEO, and site repair for small businesses. Based 40 minutes south in Durand, Illinois.",
     distance: "40 minutes",
     direction: "south of",
     county: "Rock County",
@@ -143,7 +143,7 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     slug: "web-developer-janesville-wisconsin",
     pageTitle: "Web Developer & Website Design in Janesville, Wisconsin",
     pageDescription:
-      "Need a web developer in Janesville, Wisconsin? I build affordable, fast websites for small businesses — SEO, site repair, and custom builds from 55 minutes south in Durand, Illinois.",
+      "Web developer in Janesville, Wisconsin — affordable website design, SEO, and site repair for small businesses. Based 55 minutes south in Durand, Illinois.",
     distance: "55 minutes",
     direction: "south of",
     county: "Rock County",

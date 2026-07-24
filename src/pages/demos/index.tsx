@@ -115,7 +115,6 @@ const DemosIndex: React.FC = () => (
               key={demo.slug}
               to={`/demos/${demo.slug}/`}
               className="demo-card"
-              aria-label={`${demo.name} — view ${demo.industry} demo website`}
               style={{ ["--demo-accent" as string]: demo.color } as React.CSSProperties}
             >
               <div

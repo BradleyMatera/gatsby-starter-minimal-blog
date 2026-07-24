@@ -13,7 +13,7 @@ import { StarIcon, MapPinIcon, PhoneIcon, FlameIcon, SnowflakeIcon, WindIcon, Al
 
 const pathname = "/demos/hvac/";
 const pageTitle = "ComfortAir Heating & Cooling — Rockford HVAC | Demo Website";
-const pageDescription = "Demo HVAC company website for ComfortAir Heating & Cooling — emergency service callout, maintenance plans, financing calculator, and technician bios. Built by Bradley Matera.";
+const pageDescription = "Demo HVAC website for ComfortAir Heating & Cooling — emergency service, maintenance plans, financing calculator, and technician bios. Built by Bradley Matera.";
 
 const socialLinks: SocialLink[] = [
   { platform: "facebook", url: "https://facebook.com" },
