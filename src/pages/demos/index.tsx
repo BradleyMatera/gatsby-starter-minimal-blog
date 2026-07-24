@@ -98,6 +98,7 @@ const DemosIndex: React.FC = () => (
     <Section
       eyebrow="Portfolio Demos"
       title="See what your website could look like"
+      titleAs="h1"
       description={
         <p>
           These are full, working demo websites built for different industries. Each one is a complete
@@ -114,6 +115,7 @@ const DemosIndex: React.FC = () => (
               key={demo.slug}
               to={`/demos/${demo.slug}/`}
               className="demo-card"
+              aria-label={`View ${demo.name} demo — ${demo.industry} website example`}
               style={{ ["--demo-accent" as string]: demo.color } as React.CSSProperties}
             >
               <div

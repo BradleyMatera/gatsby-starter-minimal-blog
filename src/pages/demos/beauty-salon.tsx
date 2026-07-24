@@ -11,7 +11,7 @@ import { StarIcon, MapPinIcon, PhoneIcon, ScissorsIcon, BrushIcon, SpaIcon, Hand
 
 const pathname = "/demos/beauty-salon/";
 const pageTitle = "Bella Vista Salon — Hair & Beauty in Rockford, IL | Demo Website";
-const pageDescription = "Demo beauty salon website with service menu, stylist team, online booking, and before/after gallery.";
+const pageDescription = "Demo beauty salon website for Bella Vista Salon — service menu, stylist team bios, online booking widget, before/after gallery, and gift cards. Built by Bradley Matera.";
 
 const socialLinks: SocialLink[] = [
   { platform: "facebook", url: "https://facebook.com" },
@@ -337,21 +337,21 @@ const BeautySalonDemo: React.FC = () => (
                 <span className="demo-booking-widget__powered-by">Powered by Vagaro</span>
               </div>
               <div className="demo-form__field" style={{ margin: 0 }}>
-                <label className="demo-form__label">Service</label>
-                <select className="demo-form__select"><option>Haircut & Style</option><option>Color / Highlights</option><option>Balayage</option><option>Manicure / Pedicure</option><option>Facial</option><option>Makeup</option><option>Bridal Package</option></select>
+                <label className="demo-form__label" htmlFor="salon-service">Service</label>
+                <select id="salon-service" className="demo-form__select"><option>Haircut & Style</option><option>Color / Highlights</option><option>Balayage</option><option>Manicure / Pedicure</option><option>Facial</option><option>Makeup</option><option>Bridal Package</option></select>
               </div>
               <div className="demo-form__field" style={{ margin: "0.75rem 0 0" }}>
-                <label className="demo-form__label">Stylist</label>
-                <select className="demo-form__select"><option>No preference</option><option>Angela Rossi</option><option>Lisa Chen</option><option>Maya Kim</option><option>Tina Santos</option></select>
+                <label className="demo-form__label" htmlFor="salon-stylist">Stylist</label>
+                <select id="salon-stylist" className="demo-form__select"><option>No preference</option><option>Angela Rossi</option><option>Lisa Chen</option><option>Maya Kim</option><option>Tina Santos</option></select>
               </div>
               <div className="demo-booking-widget__row" style={{ marginTop: "0.75rem" }}>
                 <div className="demo-form__field" style={{ margin: 0 }}>
-                  <label className="demo-form__label">Date</label>
-                  <input className="demo-form__input" type="date" />
+                  <label className="demo-form__label" htmlFor="salon-date">Date</label>
+                  <input id="salon-date" className="demo-form__input" type="date" />
                 </div>
                 <div className="demo-form__field" style={{ margin: 0 }}>
-                  <label className="demo-form__label">Time</label>
-                  <select className="demo-form__select"><option>9:00 AM</option><option>10:00 AM</option><option>11:00 AM</option><option>1:00 PM</option><option>2:00 PM</option><option>3:00 PM</option><option>4:00 PM</option><option>5:00 PM</option><option>6:00 PM</option><option>7:00 PM</option></select>
+                  <label className="demo-form__label" htmlFor="salon-time">Time</label>
+                  <select id="salon-time" className="demo-form__select"><option>9:00 AM</option><option>10:00 AM</option><option>11:00 AM</option><option>1:00 PM</option><option>2:00 PM</option><option>3:00 PM</option><option>4:00 PM</option><option>5:00 PM</option><option>6:00 PM</option><option>7:00 PM</option></select>
                 </div>
               </div>
               <button type="button" className="demo-booking-widget__find">Book Appointment</button>

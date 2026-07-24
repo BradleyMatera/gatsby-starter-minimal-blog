@@ -12,7 +12,7 @@ import { StarIcon, MapPinIcon, PhoneIcon, LeafIcon, TreeIcon, SnowflakeIcon, Fla
 
 const pathname = "/demos/landscaping/";
 const pageTitle = "GreenScape Pro — Professional Landscaping in Rockford, IL | Demo Website";
-const pageDescription = "Demo landscaping company website with service packages, gallery, seasonal tips, and free quote form.";
+const pageDescription = "Demo landscaping company website for GreenScape Pro — service packages, before/after project gallery, seasonal tips, and free quote form. Built by Bradley Matera.";
 
 const socialLinks: SocialLink[] = [
   { platform: "facebook", url: "https://facebook.com" },

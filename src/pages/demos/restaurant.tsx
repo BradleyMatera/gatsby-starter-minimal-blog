@@ -355,20 +355,20 @@ const RestaurantDemo: React.FC = () => (
           </div>
           <div className="demo-booking-widget__row">
             <div className="demo-form__field" style={{ margin: 0 }}>
-              <label className="demo-form__label">Date</label>
-              <input className="demo-form__input" type="date" />
+              <label className="demo-form__label" htmlFor="rsvp-date">Date</label>
+              <input id="rsvp-date" className="demo-form__input" type="date" />
             </div>
             <div className="demo-form__field" style={{ margin: 0 }}>
-              <label className="demo-form__label">Time</label>
-              <select className="demo-form__select">
+              <label className="demo-form__label" htmlFor="rsvp-time">Time</label>
+              <select id="rsvp-time" className="demo-form__select">
                 <option>4:00 PM</option><option>5:00 PM</option><option>6:00 PM</option>
                 <option>7:00 PM</option><option>8:00 PM</option><option>9:00 PM</option>
               </select>
             </div>
           </div>
           <div className="demo-form__field" style={{ margin: 0 }}>
-            <label className="demo-form__label">Party Size</label>
-            <select className="demo-form__select">
+            <label className="demo-form__label" htmlFor="rsvp-party">Party Size</label>
+            <select id="rsvp-party" className="demo-form__select">
               <option>1 person</option><option>2 people</option><option>3 people</option>
               <option>4 people</option><option>5 people</option><option>6 people</option>
               <option>7+ people (call us)</option>

@@ -12,7 +12,7 @@ import { StarIcon, MapPinIcon, PhoneIcon, FlameIcon, SnowflakeIcon, WindIcon, Al
 
 const pathname = "/demos/hvac/";
 const pageTitle = "ComfortAir Heating & Cooling — Rockford HVAC | Demo Website";
-const pageDescription = "Demo HVAC company website with emergency service, maintenance plans, financing, and technician bios.";
+const pageDescription = "Demo HVAC company website for ComfortAir Heating & Cooling — emergency service callout, maintenance plans, financing calculator, and technician bios. Built by Bradley Matera.";
 
 const socialLinks: SocialLink[] = [
   { platform: "facebook", url: "https://facebook.com" },
@@ -96,11 +96,11 @@ const FinancingCalculator: React.FC = () => {
       <p className="demo-financing-calc__subtitle">0% APR for 12 months. Estimate your monthly payment.</p>
       <div className="demo-financing-calc__slider-row">
         <div className="demo-financing-calc__slider-label"><span>Project Amount</span><span className="demo-financing-calc__slider-value">{fmt(amount)}</span></div>
-        <input className="demo-financing-calc__slider" type="range" min="500" max="10000" step="100" value={amount} onChange={(e) => setAmount(Number(e.target.value))} />
+        <input className="demo-financing-calc__slider" type="range" min="500" max="10000" step="100" value={amount} aria-label="Project amount in dollars" onChange={(e) => setAmount(Number(e.target.value))} />
       </div>
       <div className="demo-financing-calc__slider-row">
         <div className="demo-financing-calc__slider-label"><span>Term</span><span className="demo-financing-calc__slider-value">{months} months</span></div>
-        <input className="demo-financing-calc__slider" type="range" min="12" max="72" step="12" value={months} onChange={(e) => setMonths(Number(e.target.value))} />
+        <input className="demo-financing-calc__slider" type="range" min="12" max="72" step="12" value={months} aria-label="Loan term in months" onChange={(e) => setMonths(Number(e.target.value))} />
       </div>
       <div className="demo-financing-calc__result">
         <div className="demo-financing-calc__result-label">Estimated Monthly Payment</div>

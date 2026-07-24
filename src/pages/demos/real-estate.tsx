@@ -82,16 +82,16 @@ const RealEstateDemo: React.FC = () => (
     <div className="demo-section__inner" style={{ padding: "0 1.5rem" }}>
       <div className="demo-search-bar">
         <div className="demo-form__field" style={{ margin: 0 }}>
-          <label className="demo-form__label">Location</label>
-          <select className="demo-form__select"><option>Any Area</option><option>Rockford</option><option>Loves Park</option><option>Roscoe</option><option>Byron</option><option>Rockton</option></select>
+          <label className="demo-form__label" htmlFor="search-location">Location</label>
+          <select id="search-location" className="demo-form__select"><option>Any Area</option><option>Rockford</option><option>Loves Park</option><option>Roscoe</option><option>Byron</option><option>Rockton</option></select>
         </div>
         <div className="demo-form__field" style={{ margin: 0 }}>
-          <label className="demo-form__label">Price Range</label>
-          <select className="demo-form__select"><option>Any Price</option><option>Under $150K</option><option>$150K - $250K</option><option>$250K - $400K</option><option>$400K+</option></select>
+          <label className="demo-form__label" htmlFor="search-price">Price Range</label>
+          <select id="search-price" className="demo-form__select"><option>Any Price</option><option>Under $150K</option><option>$150K - $250K</option><option>$250K - $400K</option><option>$400K+</option></select>
         </div>
         <div className="demo-form__field" style={{ margin: 0 }}>
-          <label className="demo-form__label">Bedrooms</label>
-          <select className="demo-form__select"><option>Any</option><option>2+</option><option>3+</option><option>4+</option><option>5+</option></select>
+          <label className="demo-form__label" htmlFor="search-beds">Bedrooms</label>
+          <select id="search-beds" className="demo-form__select"><option>Any</option><option>2+</option><option>3+</option><option>4+</option><option>5+</option></select>
         </div>
         <button type="button" className="demo-form__submit" style={{ width: "auto", padding: "0.75rem 1.5rem", margin: 0, display: "flex", alignItems: "center", gap: "0.5rem" }}><SearchIcon size={18} /> Search</button>
       </div>

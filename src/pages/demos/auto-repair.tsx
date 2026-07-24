@@ -95,7 +95,7 @@ const VinLookup: React.FC = () => {
       <h3 className="demo-vin-lookup__title">VIN Lookup</h3>
       <p className="demo-vin-lookup__desc">Enter your 17-character VIN and we'll auto-fill your vehicle info for faster booking.</p>
       <div className="demo-vin-lookup__row">
-        <input className="demo-vin-lookup__input" type="text" placeholder="1HGCM82633A123456" maxLength={17} value={vin} onChange={(e) => setVin(e.target.value.toUpperCase())} />
+        <input className="demo-vin-lookup__input" type="text" placeholder="1HGCM82633A123456" maxLength={17} aria-label="Vehicle Identification Number" value={vin} onChange={(e) => setVin(e.target.value.toUpperCase())} />
         <button type="button" className="demo-vin-lookup__btn" onClick={handleLookup}>Look Up</button>
       </div>
       {result && <div style={{ marginTop: "1rem", padding: "0.75rem", background: "var(--demo-bg)", borderRadius: "var(--demo-radius)" }}><strong>Vehicle:</strong> {result.year} {result.make} {result.model}</div>}
@@ -336,19 +336,19 @@ const AutoRepairDemo: React.FC = () => (
         <p className="demo-section__subtitle">Fill out the form and we'll confirm by text or email within 1 business hour.</p>
         <div className="demo-booking-form">
           <div className="demo-form__row">
-            <div className="demo-form__field"><label className="demo-form__label">Vehicle Make</label><input className="demo-form__input" type="text" placeholder="e.g. Toyota" /></div>
-            <div className="demo-form__field"><label className="demo-form__label">Vehicle Model</label><input className="demo-form__input" type="text" placeholder="e.g. Camry" /></div>
+            <div className="demo-form__field"><label className="demo-form__label" htmlFor="appt-make">Vehicle Make</label><input id="appt-make" className="demo-form__input" type="text" placeholder="e.g. Toyota" /></div>
+            <div className="demo-form__field"><label className="demo-form__label" htmlFor="appt-model">Vehicle Model</label><input id="appt-model" className="demo-form__input" type="text" placeholder="e.g. Camry" /></div>
           </div>
           <div className="demo-form__row">
-            <div className="demo-form__field"><label className="demo-form__label">Year</label><input className="demo-form__input" type="text" placeholder="e.g. 2019" /></div>
-            <div className="demo-form__field"><label className="demo-form__label">Service Needed</label><select className="demo-form__select"><option>Oil Change</option><option>Brake Service</option><option>Check Engine Light</option><option>AC / Heating</option><option>Tire Service</option><option>Other (describe below)</option></select></div>
+            <div className="demo-form__field"><label className="demo-form__label" htmlFor="appt-year">Year</label><input id="appt-year" className="demo-form__input" type="text" placeholder="e.g. 2019" /></div>
+            <div className="demo-form__field"><label className="demo-form__label" htmlFor="appt-service">Service Needed</label><select id="appt-service" className="demo-form__select"><option>Oil Change</option><option>Brake Service</option><option>Check Engine Light</option><option>AC / Heating</option><option>Tire Service</option><option>Other (describe below)</option></select></div>
           </div>
-          <div className="demo-form__field"><label className="demo-form__label">Your Name</label><input className="demo-form__input" type="text" placeholder="First and last name" /></div>
+          <div className="demo-form__field"><label className="demo-form__label" htmlFor="appt-name">Your Name</label><input id="appt-name" className="demo-form__input" type="text" placeholder="First and last name" /></div>
           <div className="demo-form__row">
-            <div className="demo-form__field"><label className="demo-form__label">Phone</label><input className="demo-form__input" type="tel" placeholder="(815) 555-0000" /></div>
-            <div className="demo-form__field"><label className="demo-form__label">Email</label><input className="demo-form__input" type="email" placeholder="you@example.com" /></div>
+            <div className="demo-form__field"><label className="demo-form__label" htmlFor="appt-phone">Phone</label><input id="appt-phone" className="demo-form__input" type="tel" placeholder="(815) 555-0000" /></div>
+            <div className="demo-form__field"><label className="demo-form__label" htmlFor="appt-email">Email</label><input id="appt-email" className="demo-form__input" type="email" placeholder="you@example.com" /></div>
           </div>
-          <div className="demo-form__field"><label className="demo-form__label">Describe the Problem</label><input className="demo-form__input" type="text" placeholder="e.g. Brakes squeaking when stopping" /></div>
+          <div className="demo-form__field"><label className="demo-form__label" htmlFor="appt-problem">Describe the Problem</label><input id="appt-problem" className="demo-form__input" type="text" placeholder="e.g. Brakes squeaking when stopping" /></div>
           <button type="button" className="demo-form__submit">Request Appointment</button>
         </div>
       </div>

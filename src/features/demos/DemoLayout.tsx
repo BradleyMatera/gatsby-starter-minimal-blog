@@ -49,12 +49,12 @@ const DemoLayout: React.FC<DemoLayoutProps> = ({
         backHref={backHref}
         backLabel={backLabel}
       />
-      <div
+      <main
         className={`demo-page demo-theme--${designSystem}`}
         style={themeColor ? ({ ["--demo-accent" as string]: themeColor } as React.CSSProperties) : undefined}
       >
         {children}
-      </div>
+      </main>
     </>
   );
 };
