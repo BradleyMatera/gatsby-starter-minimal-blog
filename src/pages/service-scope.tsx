@@ -4,9 +4,17 @@ import Layout from "../@lekoarts/gatsby-theme-minimal-blog/components/layout";
 import Seo from "../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
 import { Card, Link, Section } from "../ui";
+import {
+  SELLER_PHONE,
+  SELLER_PHONE_HREF,
+  POLICY_LAST_UPDATED,
+  PACKAGES,
+} from "../site/legal/business-identity";
+
+const leadEnginePkg = PACKAGES[2];
 
 const pathname = "/service-scope/";
-const pageTitle = "Service Scope and What's Included | Bradley Matera";
+const pageTitle = "Service Scope and What's Included | Bradley F. Matera";
 const pageDescription =
   "What is included in every website build: mobile responsive, SEO, contact form, hosting setup, analytics, 30-day warranty, care plans, and hourly work scope.";
 
@@ -136,7 +144,7 @@ const ServiceScopePage = () => (
         <Card variant="outline">
           <h3 className="feature-card__title">Lead Engine</h3>
           <p className="feature-card__body">
-            Unlimited pages, custom integrations, AI chat assistant, priority support, monthly strategy call, 3 revision rounds.
+            {leadEnginePkg.maxPages}. Advanced integrations (custom quoted), custom conversion planning, service-area architecture, technical SEO, post-launch measurement review, {leadEnginePkg.revisionRounds} revision rounds.
           </p>
         </Card>
       </div>
@@ -151,7 +159,7 @@ const ServiceScopePage = () => (
       title="Care plan scope"
       description={
         <p>
-          Monthly support plans keep your site updated, secure, and performing. Month-to-month, no contracts.
+          Monthly support plans keep your site updated, secure, and performing. No long-term commitment. Website care plans are month-to-month. Every website project still uses a written service agreement and scope of work.
         </p>
       }
     >
@@ -207,7 +215,7 @@ const ServiceScopePage = () => (
 
     <Section
       eyebrow="Response times"
-      title="Response time guarantees"
+      title="Response time targets"
     >
       <div className="grid-three">
         <Card variant="outline">
@@ -236,19 +244,19 @@ const ServiceScopePage = () => (
       title="Get a free consultation"
       description={
         <p>
-          Call (608) 313-5373 or send a message through the contact page. I'll tell you honestly which package fits your needs.
+          Call {SELLER_PHONE} or send a message through the contact page. I'll tell you honestly which package fits your needs.
         </p>
       }
     >
       <div className="card-actions">
         <Link data-variant="primary" to="/contact/">Contact me</Link>
-        <a href="tel:+16083135373" data-variant="ghost" className="link">
-          (608) 313-5373
+        <a href={SELLER_PHONE_HREF} data-variant="ghost" className="link">
+          {SELLER_PHONE}
         </a>
         <Link data-variant="ghost" to="/pricing/">See pricing</Link>
       </div>
       <p className="feature-card__body" style={{ marginTop: "1.5rem" }}>
-        Last updated: July 2026
+        Last updated: {POLICY_LAST_UPDATED}
       </p>
     </Section>
   </Layout>

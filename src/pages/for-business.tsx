@@ -8,7 +8,7 @@ import { Card, Link, Section } from "../ui";
 const pathname = "/for-business/";
 const pageTitle = "For Business — Website Design & Development | Bradley Matera";
 const pageDescription =
-  "Websites for small businesses in Northwest Illinois. Live website examples, transparent pricing, and city-specific pages. Free consultation, no contracts.";
+  "Websites for small businesses in Northwest Illinois. Live website examples, transparent pricing, and city-specific pages. Free consultation, written agreements included.";
 
 const demoCards = [
   { title: "Restaurant", desc: "Menu, reservations, gallery, and location.", href: "/demos/restaurant/" },
@@ -59,7 +59,7 @@ const ForBusinessPage = () => (
       description={
         <>
           <p className="direct-answer">
-            <strong>What does Bradley Matera offer small businesses?</strong> Website design, development, and local SEO for small businesses in Northwest Illinois and Southern Wisconsin. Starter sites from $447, builds in 14 days, no contracts. See live website examples below, then request a free consultation.
+            <strong>What does Bradley Matera offer small businesses?</strong> Website design, development, and local SEO for small businesses in Northwest Illinois and Southern Wisconsin. Starter sites from $447, builds in 14 days, written agreements included. See live website examples below, then request a free consultation.
           </p>
         </>
       }
@@ -94,7 +94,7 @@ const ForBusinessPage = () => (
           </div>
         </Card>
         <Card variant="outline">
-          <h2 className="feature-card__title">No contracts</h2>
+          <h2 className="feature-card__title">Written agreements</h2>
           <p className="feature-card__body">
             You own your site, code, content, and domain. Cancel support anytime. I help you migrate if you leave.
           </p>
@@ -172,7 +172,7 @@ const ForBusinessPage = () => (
         <Card>
           <h3 className="feature-card__title">3. Launch and support</h3>
           <p className="feature-card__body">
-            I launch your site, set up hosting, and handle updates. 24-hour response times, 30-day warranty, no contract trap.
+            I launch your site, set up hosting, and handle updates. 24-hour response times, 30-day warranty, month-to-month care plans.
           </p>
         </Card>
       </div>
@@ -250,7 +250,7 @@ export const Head: HeadFC = () => {
           name: "Premium — $1,497 build + $97/month",
           price: "1497",
           priceCurrency: "USD",
-          description: "Unlimited pages, custom integrations, AI chat assistant, priority support, monthly strategy call.",
+          description: "Page count defined in the written scope, custom integrations, AI chat assistant, priority support, monthly strategy call.",
         },
       ],
     },

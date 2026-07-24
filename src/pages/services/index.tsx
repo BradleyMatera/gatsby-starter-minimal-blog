@@ -8,7 +8,7 @@ import { Card, Link, Section } from "../../ui";
 const pathname = "/services/";
 const pageTitle = "Website Services for Small Businesses in Northwest Illinois | Bradley Matera";
 const pageDescription =
-  "Website design, redesign, local SEO, repair, accessibility, and care plans for small businesses in Northwest Illinois. Starter sites from $447, no contracts.";
+  "Website design, redesign, local SEO, repair, accessibility, and care plans for small businesses in Northwest Illinois. Starter sites from $447, written agreements included.";
 
 const serviceCards = [
   {
@@ -43,7 +43,7 @@ const serviceCards = [
   },
   {
     title: "Website Care Plans",
-    desc: "Ongoing maintenance, updates, backups, and monitoring. Three tiers from $37 to $97 per month. No contracts.",
+    desc: "Ongoing maintenance, updates, backups, and monitoring. Three tiers from $37 to $97 per month. Written agreements included.",
     href: "/services/website-care-plans/",
   },
 ];
@@ -72,7 +72,7 @@ const ServicesPage = () => (
       description={
         <>
           <p className="direct-answer">
-            <strong>What website services does Bradley Matera offer?</strong> Website design, redesign, local SEO, repair, accessibility audits, and ongoing care plans for small businesses in Northwest Illinois and Southern Wisconsin. Starter sites from $447, builds in 14 days, no contracts. Pick a service below to see pricing, deliverables, and process.
+            <strong>What website services does Bradley Matera offer?</strong> Website design, redesign, local SEO, repair, accessibility audits, and ongoing care plans for small businesses in Northwest Illinois and Southern Wisconsin. Starter sites from $447, builds in 14 days, written agreements included. Pick a service below to see pricing, deliverables, and process.
           </p>
         </>
       }
@@ -107,7 +107,7 @@ const ServicesPage = () => (
       title="Which package fits your business?"
       description={
         <p>
-          Three fixed-price packages for new sites, plus hourly repair and ongoing care. No hidden fees, no contracts.
+          Three fixed-price packages for new sites, plus hourly repair and ongoing care. No hidden fees, written agreements included.
         </p>
       }
     >
@@ -223,7 +223,7 @@ const ServicesPage = () => (
         <Card>
           <h3 className="feature-card__title">3. Launch and support</h3>
           <p className="feature-card__body">
-            I launch your site, set up hosting, and handle updates. 24-hour response times, 30-day warranty, no contract trap.
+            I launch your site, set up hosting, and handle updates. 24-hour response times, 30-day warranty, month-to-month care plans.
           </p>
         </Card>
       </div>

@@ -3,6 +3,14 @@ import { Link } from "gatsby";
 import useSiteMetadata from "../hooks/use-site-metadata";
 import useMinimalBlogConfig from "../hooks/use-minimal-blog-config";
 import replaceSlashes from "../utils/replaceSlashes";
+import {
+  SELLER_IDENTITY_LINE,
+  SELLER_DISCLOSURE_SHORT,
+  SELLER_EMAIL,
+  SELLER_PHONE,
+  SELLER_PHONE_HREF,
+  POLICY_LINKS,
+} from "../../../site/legal/business-identity";
 
 const Footer = () => {
   const { siteTitle, siteDescription, siteHeadline } = useSiteMetadata();
@@ -112,13 +120,13 @@ const Footer = () => {
           <p className="footer-nav__title" style={{ marginTop: "1rem" }}>Contact</p>
           <ul>
             <li>
-              <a href="tel:+16083135373" style={{ color: "inherit", textDecoration: "underline" }}>
-                (608) 313-5373
+              <a href={SELLER_PHONE_HREF} style={{ color: "inherit", textDecoration: "underline" }}>
+                {SELLER_PHONE}
               </a>
             </li>
             <li>
-              <a href="mailto:bradmatera@gmail.com" aria-label="Email Bradley Matera at bradmatera@gmail.com" style={{ color: "inherit", textDecoration: "underline" }}>
-                bradmatera@gmail.com
+              <a href={`mailto:${SELLER_EMAIL}`} aria-label={`Email Bradley Matera at ${SELLER_EMAIL}`} style={{ color: "inherit", textDecoration: "underline" }}>
+                {SELLER_EMAIL}
               </a>
             </li>
           </ul>
@@ -127,21 +135,23 @@ const Footer = () => {
 
       {/* Bottom bar */}
       <div className="footer-bottom">
-        <span>&copy; {currentYear} {siteTitle}</span>
-        <span>
-          <Link to="/privacy/" style={{ color: "inherit", textDecoration: "underline" }}>Privacy</Link>
-          {" · "}
-          <Link to="/terms/" style={{ color: "inherit", textDecoration: "underline" }}>Terms</Link>
-          {" · "}
-          <Link to="/service-scope/" style={{ color: "inherit", textDecoration: "underline" }}>Service Scope</Link>
-          {" · "}
-          <Link to="/website-design-faq/" style={{ color: "inherit", textDecoration: "underline" }}>FAQ</Link>
+        <span>&copy; {currentYear} {siteTitle} — {SELLER_IDENTITY_LINE}</span>
+        <span className="footer-legal-links">
+          {POLICY_LINKS.map((link, i) => (
+            <React.Fragment key={link.path}>
+              {i > 0 && " · "}
+              <Link to={link.path} style={{ color: "inherit", textDecoration: "underline" }}>{link.label}</Link>
+            </React.Fragment>
+          ))}
         </span>
         <span>
           <Link to="/recruiter/" style={{ color: "inherit", textDecoration: "underline" }}>
             Hiring? View the recruiter hub →
           </Link>
         </span>
+      </div>
+      <div className="footer-disclosure" style={{ borderTop: "1px solid var(--color-border)", padding: "0.75rem 1rem", fontSize: "0.8rem", color: "var(--color-text-secondary)", textAlign: "center" }}>
+        {SELLER_DISCLOSURE_SHORT}
       </div>
     </footer>
   );

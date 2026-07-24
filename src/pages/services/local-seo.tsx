@@ -40,7 +40,7 @@ const serviceAreaCities = [
 const faqs = [
   {
     q: "How much does local SEO cost?",
-    a: "Local SEO services start at $67/month with no contracts. This includes Google Business Profile management, local schema markup, and monthly ranking reports. Higher tiers include more keywords and competitor tracking.",
+    a: "Local SEO services start at $67/month with written agreements included. This includes Google Business Profile management, local schema markup, and monthly ranking reports. Higher tiers include more keywords and competitor tracking.",
   },
   {
     q: "How long does it take to see local SEO results?",
@@ -83,7 +83,7 @@ const LocalSeoPage = () => (
       description={
         <>
           <p className="direct-answer">
-            <strong>What are local SEO services?</strong> Optimization of your Google Business Profile, local search rankings, and website schema markup so customers in your area find you when they search. Starting at $67/month, no contracts, monthly reporting included.
+            <strong>What are local SEO services?</strong> Optimization of your Google Business Profile, local search rankings, and website schema markup so customers in your area find you when they search. Starting at $67/month, written agreements included, monthly reporting included.
           </p>
         </>
       }
@@ -102,7 +102,7 @@ const LocalSeoPage = () => (
         <Card variant="outline">
           <h2 className="feature-card__title">Starting at $67/month</h2>
           <p className="feature-card__body">
-            Month-to-month, no contracts. Cancel anytime. Higher tiers include more keywords and competitor tracking.
+            Month-to-month, written agreements included. Cancel anytime. Higher tiers include more keywords and competitor tracking.
           </p>
           <div className="card-actions">
             <Link data-variant="ghost" to="/pricing/">See full pricing</Link>

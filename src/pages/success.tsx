@@ -87,7 +87,7 @@ const SuccessPage = () => {
           <h1 className="store-title">Payment confirmed</h1>
           <p className="store-subtitle">Your download links are below.</p>
           <p className="store-legal">
-            Direct digital downloads are sold by Bradley Matera. Affiliate products are sold by third-party merchants.
+            Direct digital downloads are sold by Bradley F. Matera, an Illinois sole proprietor. Affiliate products are sold by third-party merchants.
           </p>
         </header>
 

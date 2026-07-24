@@ -8,7 +8,7 @@ import { Card, Link, Section } from "../../ui";
 const pathname = "/services/website-care-plans/";
 const pageTitle = "Website Care Plans and Maintenance | Bradley Matera";
 const pageDescription =
-  "Website care plans and ongoing maintenance for small businesses. Three tiers from $37 to $97 per month. Updates, backups, monitoring, and support. No contracts.";
+  "Website care plans and ongoing maintenance for small businesses. Three tiers from $37 to $97 per month. Updates, backups, monitoring, and support. Written agreements included.";
 
 const careTiers = [
   {
@@ -112,7 +112,7 @@ const WebsiteCarePlansPage = () => (
       description={
         <>
           <p className="direct-answer">
-            <strong>What are website care plans?</strong> Ongoing maintenance, security updates, backups, and support for your website. Three tiers from $37 to $97 per month. No contracts, cancel anytime. Your site stays secure, backed up, and online.
+            <strong>What are website care plans?</strong> Ongoing maintenance, security updates, backups, and support for your website. Three tiers from $37 to $97 per month. No long-term commitment. Website care plans are month-to-month. Every website project still uses a written service agreement and scope of work. Your site stays secure, backed up, and online.
           </p>
         </>
       }
@@ -218,7 +218,7 @@ const WebsiteCarePlansPage = () => (
         <Card variant="outline">
           <h3 className="feature-card__title">Support</h3>
           <p className="feature-card__body">
-            Email support with guaranteed response times. Search plan includes a monthly strategy call.
+            Email support with target response times. Search plan includes a monthly strategy call.
           </p>
         </Card>
       </div>

@@ -8,7 +8,7 @@ import { Card, Link, Section } from "../../ui";
 const pathname = "/services/website-redesign/";
 const pageTitle = "Website Redesign for Small Businesses | Bradley Matera";
 const pageDescription =
-  "Update your outdated website with a modern, fast, mobile-ready design. Keep your content and domain. Starting at $597, 3-4 week builds, no contracts.";
+  "Update your outdated website with a modern, fast, mobile-ready design. Keep your content and domain. Starting at $597, 3-4 week builds, written agreements included.";
 
 const deliverables = [
   "Modern, mobile-ready responsive design that replaces your outdated layout",
@@ -83,7 +83,7 @@ const WebsiteRedesignPage = () => (
       description={
         <>
           <p className="direct-answer">
-            <strong>What is a website redesign?</strong> A full refresh of your existing outdated website with a modern, fast, mobile-ready design. You keep your content, domain, and search rankings. Starting at $597, builds in 3-4 weeks, no contracts.
+            <strong>What is a website redesign?</strong> A full refresh of your existing outdated website with a modern, fast, mobile-ready design. You keep your content, domain, and search rankings. Starting at $597, builds in 3-4 weeks, written agreements included.
           </p>
         </>
       }
@@ -167,7 +167,7 @@ const WebsiteRedesignPage = () => (
         <Card>
           <h3 className="feature-card__title">3. Launch with redirects</h3>
           <p className="feature-card__body">
-            I set up 301 redirects, launch the new site, and verify your search rankings hold. 30-day warranty, no contract trap.
+            I set up 301 redirects, launch the new site, and verify your search rankings hold. 30-day warranty, month-to-month care plans.
           </p>
         </Card>
       </div>

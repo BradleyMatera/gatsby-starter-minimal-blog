@@ -4,11 +4,23 @@ import Layout from "../@lekoarts/gatsby-theme-minimal-blog/components/layout";
 import Seo from "../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
 import { Card, Link, Section } from "../ui";
+import {
+  SELLER_LEGAL_NAME,
+  SELLER_DISCLOSURE_SHORT,
+  SELLER_EMAIL,
+  SELLER_PHONE,
+  SELLER_PHONE_HREF,
+  POLICY_LAST_UPDATED,
+  PAYMENT_TERMS,
+  REFUND_POLICY,
+  IP_WORDING,
+  NO_CONTRACTS_REPLACEMENT,
+} from "../site/legal/business-identity";
 
 const pathname = "/terms/";
-const pageTitle = "Terms of Service | Bradley Matera";
+const pageTitle = "Terms of Service | Bradley F. Matera";
 const pageDescription =
-  "Terms of service for website design, development, and SEO work with Bradley Matera. 50% deposit, defined revisions, 30-day warranty, month-to-month support.";
+  "Terms of service for Bradley F. Matera, an Illinois sole proprietor. Website services, project agreements, payment schedule, refunds, IP, warranty, and limitation of liability.";
 
 const TermsPage = () => (
   <Layout>
@@ -34,14 +46,14 @@ const TermsPage = () => (
       description={
         <>
           <p className="direct-answer">
-            <strong>What are the terms of working with Bradley Matera?</strong> Website design, development, and SEO services with a 50% deposit to start and 50% on launch. You own all final work, revisions are defined per package, and monthly support is month-to-month with no contracts. Last updated July 2026.
+            <strong>What are the terms of working with {SELLER_LEGAL_NAME}?</strong> {SELLER_DISCLOSURE_SHORT} These Terms cover informational website use and general service expectations. Every custom website project also uses a signed project-specific service agreement and scope of work. If the signed project agreement and these Terms conflict, the signed project agreement controls for that project. Last updated {POLICY_LAST_UPDATED}.
           </p>
         </>
       }
       actions={
         <>
-          <a href="tel:+16083135373" data-variant="ghost" className="link">
-            (608) 313-5373
+          <a href={SELLER_PHONE_HREF} data-variant="ghost" className="link">
+            {SELLER_PHONE}
           </a>
           <Link data-variant="primary" to="/contact/">
             Contact me
@@ -53,91 +65,97 @@ const TermsPage = () => (
         <Card variant="outline">
           <h2 className="feature-card__title">50% deposit</h2>
           <p className="feature-card__body">
-            50% to start, 50% on launch. Deposit is refundable until the first revision round.
+            {PAYMENT_TERMS.depositDescription}
           </p>
         </Card>
         <Card variant="outline">
-          <h2 className="feature-card__title">You own the work</h2>
+          <h2 className="feature-card__title">Written agreement</h2>
           <p className="feature-card__body">
-            All final deliverables are yours. I retain rights only to reusable code libraries.
+            Every website project uses a signed service agreement and scope of work. {NO_CONTRACTS_REPLACEMENT}
           </p>
         </Card>
         <Card variant="outline">
-          <h2 className="feature-card__title">No contracts</h2>
+          <h2 className="feature-card__title">You own the final work</h2>
           <p className="feature-card__body">
-            Monthly support is month-to-month. Cancel anytime, no penalties.
+            {IP_WORDING.ownership}
           </p>
         </Card>
       </div>
     </Section>
 
-    <Section
-      eyebrow="Services"
-      title="Services provided"
-    >
+    <Section eyebrow="Seller identity" title="Who provides these services">
       <Card variant="outline">
         <p className="feature-card__body">
-          Bradley Matera provides the following services to small businesses:
+          {SELLER_DISCLOSURE_SHORT} &ldquo;Matera Digital&rdquo; is an informal trade name only, not a registered LLC or corporation. Bradley F. Matera operates as an Illinois sole proprietor. These Terms and any signed project agreement are between you and Bradley F. Matera individually.
+        </p>
+        <p className="feature-card__body">
+          Contact: {SELLER_EMAIL} · {SELLER_PHONE}
+        </p>
+      </Card>
+    </Section>
+
+    <Section eyebrow="Website use" title="Informational website use">
+      <Card variant="outline">
+        <p className="feature-card__body">
+          This website (bradleymatera.dev) provides information about services, pricing, portfolio work, and blog content. Using this site does not create a service relationship. A service relationship begins only when both parties sign a project-specific service agreement and the deposit is received.
+        </p>
+        <p className="feature-card__body">
+          You agree not to misuse this site, including attempting unauthorized access, scraping content for resale, introducing malware, or interfering with normal operation.
+        </p>
+      </Card>
+    </Section>
+
+    <Section eyebrow="Services" title="Website services">
+      <Card variant="outline">
+        <p className="feature-card__body">
+          {SELLER_LEGAL_NAME} provides the following services to small businesses:
         </p>
         <ul>
           <li>Website design and development</li>
           <li>Search engine optimization (SEO) and local SEO</li>
-          <li>Website maintenance and ongoing support</li>
+          <li>Website maintenance and ongoing support (care plans)</li>
           <li>Website refreshes and redesigns</li>
+          <li>Website repair and troubleshooting</li>
+          <li>Website accessibility audits and improvements</li>
+          <li>Digital products sold through the store</li>
         </ul>
         <p className="feature-card__body">
-          See the <Link to="/service-scope/">service scope page</Link> for full details on what's included.
+          See the <Link to="/service-scope/">service scope page</Link> for full details on what is included in each package.
         </p>
       </Card>
     </Section>
 
-    <Section
-      eyebrow="Scope & quotes"
-      title="Project scope and quotes"
-    >
+    <Section eyebrow="Project agreements" title="Project-specific service agreements">
+      <Card variant="outline">
+        <p className="feature-card__body">
+          Every custom website project begins with a written service agreement that includes:
+        </p>
+        <ul>
+          <li>The scope of work — pages, features, deliverables, and timeline</li>
+          <li>The total price and payment schedule</li>
+          <li>The number of revision rounds included</li>
+          <li>Client responsibilities (content, feedback, access)</li>
+          <li>Warranty terms</li>
+          <li>Intellectual property terms</li>
+        </ul>
+        <p className="feature-card__body">
+          These Terms do not replace the signed project-specific service agreement. If the documents conflict, the signed project agreement controls for that project.
+        </p>
+      </Card>
+    </Section>
+
+    <Section eyebrow="Scope changes" title="Scope changes">
       <Card variant="outline">
         <ul>
-          <li>A written scope of work is agreed before any work begins.</li>
-          <li>The scope includes pages, features, deliverables, and timeline.</li>
-          <li>Any changes or additions to the agreed scope are quoted separately before work begins.</li>
+          <li>Any changes or additions to the agreed scope require written approval before work begins.</li>
+          <li>Additional work outside the approved scope is quoted separately.</li>
           <li>Quotes are valid for 30 days from the date issued.</li>
+          <li>Delays in providing content or feedback may extend the project timeline.</li>
         </ul>
       </Card>
     </Section>
 
-    <Section
-      eyebrow="Payment"
-      title="Payment terms"
-    >
-      <div className="grid-three">
-        <Card variant="outline">
-          <h3 className="feature-card__title">Build payments</h3>
-          <p className="feature-card__body">
-            50% deposit to start, 50% on launch. Deposit is refundable until the first revision round.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Monthly support</h3>
-          <p className="feature-card__body">
-            Month-to-month, billed in advance. Cancel anytime with no penalties.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Hourly work</h3>
-          <p className="feature-card__body">
-            $65/hour with a 1-hour minimum. Invoiced after work is completed.
-          </p>
-        </Card>
-      </div>
-      <div className="card-actions" style={{ marginTop: "1.5rem" }}>
-        <Link data-variant="ghost" to="/pricing/">See full pricing</Link>
-      </div>
-    </Section>
-
-    <Section
-      eyebrow="Client responsibilities"
-      title="Client responsibilities"
-    >
+    <Section eyebrow="Client responsibilities" title="Customer responsibilities">
       <Card variant="outline">
         <p className="feature-card__body">
           To keep projects on schedule, clients are responsible for:
@@ -147,89 +165,151 @@ const TermsPage = () => (
           <li>Giving feedback and approval within agreed review periods.</li>
           <li>Providing access to existing accounts (hosting, domain, analytics) when needed.</li>
           <li>Communicating changes or concerns as early as possible.</li>
-        </ul>
-        <p className="feature-card__body">
-          Delays in providing content or feedback may extend the project timeline.
-        </p>
-      </Card>
-    </Section>
-
-    <Section
-      eyebrow="Intellectual property"
-      title="Intellectual property"
-    >
-      <Card variant="outline">
-        <ul>
-          <li><strong>Client ownership:</strong> You own all final deliverables — design, code, content, and domain — upon final payment.</li>
-          <li><strong>Reusable code:</strong> Bradley Matera retains rights to reusable code libraries, frameworks, and tools developed independently or used across multiple projects.</li>
-          <li><strong>Third-party assets:</strong> Any third-party fonts, images, or plugins are licensed under their respective terms.</li>
+          <li>Reviewing and signing the service agreement before work begins.</li>
         </ul>
       </Card>
     </Section>
 
-    <Section
-      eyebrow="Revisions"
-      title="Revisions"
-    >
+    <Section eyebrow="Payment" title="Payment schedule">
       <div className="grid-three">
         <Card variant="outline">
-          <h3 className="feature-card__title">Starter Presence</h3>
+          <h3 className="feature-card__title">Project deposits</h3>
           <p className="feature-card__body">
-            1 revision round included. Additional revisions at $65/hour.
+            {PAYMENT_TERMS.depositDescription} {PAYMENT_TERMS.finalBalanceDescription}
           </p>
         </Card>
         <Card variant="outline">
-          <h3 className="feature-card__title">Local Growth</h3>
+          <h3 className="feature-card__title">Monthly care plans</h3>
           <p className="feature-card__body">
-            2 revision rounds included. Additional revisions at $65/hour.
+            {PAYMENT_TERMS.monthlyBillingDescription} {NO_CONTRACTS_REPLACEMENT}
           </p>
         </Card>
         <Card variant="outline">
-          <h3 className="feature-card__title">Lead Engine</h3>
+          <h3 className="feature-card__title">Hourly work</h3>
           <p className="feature-card__body">
-            3 revision rounds included. Additional revisions at $65/hour.
+            $65/hour with a 1-hour minimum. Invoiced after work is completed. You approve scope before work begins.
           </p>
         </Card>
       </div>
-    </Section>
-
-    <Section
-      eyebrow="Cancellation"
-      title="Cancellation and refunds"
-    >
-      <Card variant="outline">
+      <Card variant="outline" style={{ marginTop: "1rem" }}>
         <ul>
-          <li><strong>Deposit refund:</strong> The 50% deposit is fully refundable until the first revision round is delivered. After that, work completed is billable.</li>
-          <li><strong>Monthly support:</strong> Cancel anytime. You only pay for the current month already billed. No penalties, no notice required.</li>
-          <li><strong>Project cancellation:</strong> If a project is cancelled mid-build, you receive all completed work to date and are billed for hours worked beyond the deposit.</li>
+          <li>{PAYMENT_TERMS.feePolicy}</li>
+          <li>{PAYMENT_TERMS.currency}</li>
+          <li>See the <Link to="/payment-terms/">Payment Terms page</Link> for accepted payment methods and detailed terms.</li>
         </ul>
       </Card>
     </Section>
 
-    <Section
-      eyebrow="Warranty"
-      title="Warranty"
-    >
+    <Section eyebrow="Late payments" title="Late or failed payments">
+      <Card variant="outline">
+        <ul>
+          <li>If a final balance is not received before launch, the site will not be published or transferred until payment is received.</li>
+          <li>If a monthly care plan payment fails, service continues for the current billing period and pauses at the next renewal until payment is resolved.</li>
+          <li>Repeated payment failures may require prepayment for future work.</li>
+        </ul>
+      </Card>
+    </Section>
+
+    <Section eyebrow="Cancellation" title="Cancellation">
+      <Card variant="outline">
+        <ul>
+          <li><strong>Client-requested project cancellation:</strong> If you cancel a project after the first revision round is delivered, you receive all completed work to date and are billed for work completed beyond the deposit. See the <Link to="/refund-policy/">Refund and Cancellation Policy</Link> for details.</li>
+          <li><strong>Bradley-requested cancellation:</strong> If Bradley cancels a project for any reason, any paid deposit is refunded in full and all completed work is transferred to you.</li>
+          <li><strong>Monthly care plans:</strong> Cancel before the next billing period. No penalties, no notice required. See the <Link to="/refund-policy/">Refund and Cancellation Policy</Link> for details.</li>
+        </ul>
+      </Card>
+    </Section>
+
+    <Section eyebrow="Refunds" title="Refunds">
       <Card variant="outline">
         <p className="feature-card__body">
-          A 30-day post-launch warranty covers bugs and functionality issues caused by the build. This includes broken links, layout errors, and non-functioning features.
+          {REFUND_POLICY.depositRefund} {REFUND_POLICY.refundMethod} {REFUND_POLICY.nonwaivableRights}
         </p>
         <p className="feature-card__body">
-          The warranty does <strong>not</strong> cover content changes, new feature requests, issues caused by third-party services, or changes you make to the site after launch.
+          See the <Link to="/refund-policy/">Refund and Cancellation Policy</Link> for the full policy covering project deposits, milestone refunds, monthly plan cancellation, duplicate payments, and digital-product problems.
         </p>
       </Card>
     </Section>
 
-    <Section
-      eyebrow="Liability"
-      title="Limitation of liability"
-    >
+    <Section eyebrow="Intellectual property" title="Intellectual property">
+      <Card variant="outline">
+        <ul>
+          <li><strong>Custom deliverables:</strong> {IP_WORDING.ownership}</li>
+          <li><strong>Domains and accounts:</strong> {IP_WORDING.domains}</li>
+          <li><strong>Third-party assets:</strong> Any third-party fonts, images, plugins, or components are licensed under their respective terms and remain governed by those terms.</li>
+          <li><strong>Store products:</strong> Digital products sold through the store are governed by the <Link to="/digital-product-license/">Digital Product License</Link>, not this intellectual property section.</li>
+        </ul>
+      </Card>
+    </Section>
+
+    <Section eyebrow="Third-party tools" title="Third-party tools and licenses">
       <Card variant="outline">
         <p className="feature-card__body">
-          Bradley Matera is not liable for indirect, incidental, or consequential damages arising from the use of a website, including lost revenue, lost profits, or business interruption. Total liability is limited to the amount paid for the project.
+          Websites may use third-party tools, libraries, fonts, plugins, and services (e.g., Google Analytics, Google Fonts, Stripe, Netlify, Resend). These are governed by their own terms and privacy policies. Bradley F. Matera is not responsible for changes to third-party services, their availability, or their data practices.
+        </p>
+      </Card>
+    </Section>
+
+    <Section eyebrow="Portfolio" title="Portfolio-display permission">
+      <Card variant="outline">
+        <p className="feature-card__body">
+          Unless you opt out in writing, Bradley F. Matera may display your completed website in a portfolio and case studies, including screenshots, descriptions of work performed, and measured outcomes. Client contact information is never published without separate written permission.
         </p>
         <p className="feature-card__body">
-          I do my best work and stand behind it with a 30-day warranty, but no service provider can guarantee specific business outcomes.
+          To opt out of portfolio display, notify Bradley in writing at any time.
+        </p>
+      </Card>
+    </Section>
+
+    <Section eyebrow="Warranty" title="Warranty boundaries">
+      <Card variant="outline">
+        <p className="feature-card__body">
+          A 30-day post-launch warranty covers bugs and functionality issues caused by the build. This includes broken links, layout errors, and non-functioning features that existed at launch.
+        </p>
+        <p className="feature-card__body">
+          The warranty does <strong>not</strong> cover:
+        </p>
+        <ul>
+          <li>Content changes or new feature requests after launch.</li>
+          <li>Issues caused by third-party services, plugins, or hosting changes.</li>
+          <li>Changes you or anyone else makes to the site after launch.</li>
+          <li>Issues arising from failure to apply recommended updates.</li>
+        </ul>
+      </Card>
+    </Section>
+
+    <Section eyebrow="No guarantees" title="No guarantee of rankings, revenue, leads, or uninterrupted third-party services">
+      <Card variant="outline">
+        <p className="feature-card__body">
+          Bradley F. Matera does not guarantee specific search engine rankings, revenue, leads, traffic, conversions, or business outcomes. SEO and web development results depend on many factors outside any service provider&rsquo;s control, including search engine algorithm changes, competitor activity, market conditions, and client follow-through.
+        </p>
+        <p className="feature-card__body">
+          No service provider can guarantee complete security, complete accessibility compliance, or uninterrupted operation of third-party services (hosting, email, analytics, payment processors). Bradley uses industry-standard practices but does not represent that any website is immune to security incidents, accessibility gaps, or service interruptions.
+        </p>
+        <p className="feature-card__body">
+          &ldquo;Response time&rdquo; means acknowledging a support request, not necessarily resolving it. Resolution time depends on the nature and complexity of the issue.
+        </p>
+      </Card>
+    </Section>
+
+    <Section eyebrow="Liability" title="Reasonable limitation of liability">
+      <Card variant="outline">
+        <p className="feature-card__body">
+          To the extent permitted by law, Bradley F. Matera&rsquo;s total liability arising from any website project is limited to the amount you paid for that project. This limitation does not apply to liability that cannot legally be limited or excluded under applicable law.
+        </p>
+        <p className="feature-card__body">
+          Bradley F. Matera is not liable for indirect, incidental, special, or consequential damages, including lost revenue, lost profits, or business interruption, to the extent permitted by law. Nothing in these Terms limits any statutory rights you may have that cannot legally be waived.
+        </p>
+        <p className="feature-card__body">
+          These Terms were not reviewed by an attorney. If you have specific legal concerns, consult a licensed attorney in your jurisdiction.
+        </p>
+      </Card>
+    </Section>
+
+    <Section eyebrow="Governing law" title="Illinois governing law">
+      <Card variant="outline">
+        <p className="feature-card__body">
+          These Terms and any service relationship with Bradley F. Matera are governed by the laws of the State of Illinois, without regard to conflict-of-law principles. Any disputes shall be resolved in the courts located in Winnebago County, Illinois, or as otherwise required by law.
         </p>
       </Card>
     </Section>
@@ -244,16 +324,18 @@ const TermsPage = () => (
       }
     >
       <div className="card-actions">
-        <a href="mailto:bradmatera@gmail.com" data-variant="primary" className="link">
-          bradmatera@gmail.com
+        <a href={`mailto:${SELLER_EMAIL}`} data-variant="primary" className="link">
+          {SELLER_EMAIL}
         </a>
-        <a href="tel:+16083135373" data-variant="ghost" className="link">
-          (608) 313-5373
+        <a href={SELLER_PHONE_HREF} data-variant="ghost" className="link">
+          {SELLER_PHONE}
         </a>
         <Link data-variant="ghost" to="/privacy/">Privacy Policy</Link>
+        <Link data-variant="ghost" to="/refund-policy/">Refund and Cancellation Policy</Link>
+        <Link data-variant="ghost" to="/payment-terms/">Payment Terms</Link>
       </div>
       <p className="feature-card__body" style={{ marginTop: "1.5rem" }}>
-        Last updated: July 2026
+        Effective date: {POLICY_LAST_UPDATED}. Last updated: {POLICY_LAST_UPDATED}.
       </p>
     </Section>
   </Layout>

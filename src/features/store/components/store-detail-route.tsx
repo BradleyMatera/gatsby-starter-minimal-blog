@@ -12,6 +12,7 @@ import {
   Product,
   renderAmazonMeta,
 } from "./store-view";
+import { SELLER_DISCLOSURE_SHORT } from "../../../site/legal/business-identity";
 
 type StoreProductRouteProps = RouteComponentProps & {
   getFunctionsUrl: (path: string) => string;
@@ -27,6 +28,7 @@ const StoreProductRoute: React.FC<StoreProductRouteProps> = ({
   const [product, setProduct] = React.useState<Product | null>(null);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
+  const [agreed, setAgreed] = React.useState(false);
 
   React.useEffect(() => {
     if (!slug) {
@@ -110,10 +112,38 @@ const StoreProductRoute: React.FC<StoreProductRouteProps> = ({
       <div className="store-price store-price--spaced">
         {formatPrice(product)}
       </div>
+      {product.product_type !== "affiliate" && (
+        <div className="store-checkout-agreement" style={{ margin: "1rem 0", padding: "0.75rem", border: "1px solid var(--color-border)", borderRadius: "4px" }}>
+          <label style={{ display: "flex", alignItems: "flex-start", gap: "0.5rem", cursor: "pointer", fontSize: "0.9rem" }}>
+            <input
+              type="checkbox"
+              checked={agreed}
+              onChange={(e) => setAgreed(e.target.checked)}
+              aria-required="true"
+              style={{ marginTop: "0.2rem" }}
+            />
+            <span>
+              I agree to the{" "}
+              <Link to="/terms/" target="_blank" rel="noopener noreferrer">Terms of Service</Link>,{" "}
+              <Link to="/refund-policy/" target="_blank" rel="noopener noreferrer">Refund and Cancellation Policy</Link>, and applicable{" "}
+              <Link to="/digital-product-license/" target="_blank" rel="noopener noreferrer">Digital Product License</Link>.
+            </span>
+          </label>
+          <p style={{ fontSize: "0.8rem", color: "var(--color-text-secondary)", marginTop: "0.5rem", marginBottom: 0 }}>
+            {SELLER_DISCLOSURE_SHORT}
+          </p>
+        </div>
+      )}
       <div className="store-actions">
-        <a className="store-button" href={getGoUrl(product.slug)}>
-          {getBuyLabel(product, "detail")}
-        </a>
+        {product.product_type !== "affiliate" && !agreed ? (
+          <button className="store-button" disabled aria-disabled="true" title="Please accept the terms to continue">
+            {getBuyLabel(product, "detail")}
+          </button>
+        ) : (
+          <a className="store-button" href={getGoUrl(product.slug)}>
+            {getBuyLabel(product, "detail")}
+          </a>
+        )}
         <Link className="store-link" to="/store/">Back to store</Link>
         <Link className="store-link" to="/purchases/">Customer portal</Link>
       </div>

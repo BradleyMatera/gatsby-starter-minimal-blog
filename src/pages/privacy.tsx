@@ -4,11 +4,19 @@ import Layout from "../@lekoarts/gatsby-theme-minimal-blog/components/layout";
 import Seo from "../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
 import { Card, Link, Section } from "../ui";
+import {
+  SELLER_LEGAL_NAME,
+  SELLER_DISCLOSURE_SHORT,
+  SELLER_EMAIL,
+  SELLER_PHONE,
+  SELLER_PHONE_HREF,
+  POLICY_LAST_UPDATED,
+} from "../site/legal/business-identity";
 
 const pathname = "/privacy/";
-const pageTitle = "Privacy Policy | Bradley Matera";
+const pageTitle = "Privacy Policy | Bradley F. Matera";
 const pageDescription =
-  "How Bradley Matera collects, uses, and protects your information. No selling of data, no advertising tracking. Request deletion or a copy anytime.";
+  "How Bradley F. Matera collects, uses, and retains your information. Contact-form data, order metadata, analytics, hosting, email, and payment processors.";
 
 const PrivacyPage = () => (
   <Layout>
@@ -34,14 +42,14 @@ const PrivacyPage = () => (
       description={
         <>
           <p className="direct-answer">
-            <strong>What information does Bradley Matera collect and how is it used?</strong> I collect only what you voluntarily provide through the contact form — name, email, phone, and business details — to respond to inquiries and deliver services. I do not sell your data, use it for advertising, or share it with third parties. Last updated July 2026.
+            <strong>What information does {SELLER_LEGAL_NAME} collect and how is it used?</strong> {SELLER_DISCLOSURE_SHORT} This policy explains what information is collected through this website, how it is used, who it is shared with, how long it is kept, and how to request access, correction, or deletion. Last updated {POLICY_LAST_UPDATED}.
           </p>
         </>
       }
       actions={
         <>
-          <a href="mailto:bradmatera@gmail.com" data-variant="ghost" className="link">
-            bradmatera@gmail.com
+          <a href={`mailto:${SELLER_EMAIL}`} data-variant="ghost" className="link">
+            {SELLER_EMAIL}
           </a>
           <Link data-variant="primary" to="/contact/">
             Contact me
@@ -53,142 +61,157 @@ const PrivacyPage = () => (
         <Card variant="outline">
           <h2 className="feature-card__title">No selling of data</h2>
           <p className="feature-card__body">
-            Your information is never sold, rented, or traded to anyone.
+            Your personal information is never sold, rented, or licensed to third parties for marketing purposes.
           </p>
         </Card>
         <Card variant="outline">
-          <h2 className="feature-card__title">No advertising tracking</h2>
+          <h2 className="feature-card__title">Limited sharing</h2>
           <p className="feature-card__body">
-            No ad pixels, no cross-site tracking, no remarketing lists.
+            Limited information is shared with service providers when necessary to operate the site, process payments, prevent fraud, and deliver purchases.
           </p>
         </Card>
         <Card variant="outline">
-          <h2 className="feature-card__title">Delete on request</h2>
+          <h2 className="feature-card__title">Your rights</h2>
           <p className="feature-card__body">
-            Request deletion of your data at any time and I will remove it within 30 days.
+            You can request access to, correction of, or deletion of your personal data, subject to legal recordkeeping obligations.
           </p>
         </Card>
       </div>
     </Section>
 
-    <Section
-      eyebrow="Data collection"
-      title="What information we collect"
-    >
+    <Section eyebrow="Data collected" title="What information we collect">
       <Card variant="outline">
+        <h3 className="feature-card__title">Contact-form data</h3>
         <p className="feature-card__body">
-          I collect only the information you voluntarily provide when you use the contact form or work with me directly:
+          When you use the contact form, you voluntarily provide: name, email address, phone number (if included), and business information (business name, services, project details). This is used to respond to your inquiry and provide a quote.
         </p>
-        <ul>
-          <li><strong>Name</strong> — so I know who I'm talking to.</li>
-          <li><strong>Email address</strong> — to respond to inquiries and send project updates.</li>
-          <li><strong>Phone number</strong> — for follow-up calls if you request them.</li>
-          <li><strong>Business information</strong> — business name, services, and details you share through the contact form so I can give you an accurate quote.</li>
-        </ul>
+      </Card>
+      <Card variant="outline" style={{ marginTop: "1rem" }}>
+        <h3 className="feature-card__title">Account and customer-portal data</h3>
         <p className="feature-card__body">
-          I do not collect information passively beyond basic analytics (see below).
+          If you create an account through the customer portal (using Netlify Identity), your email address and authentication data are collected. This allows you to view your orders and download purchased products.
+        </p>
+      </Card>
+      <Card variant="outline" style={{ marginTop: "1rem" }}>
+        <h3 className="feature-card__title">Order and transaction metadata</h3>
+        <p className="feature-card__body">
+          When you make a purchase, the following metadata is stored: order ID, customer email, product ID, quantity, purchase date, payment provider transaction ID, and order status. Payment card numbers and bank account details are never stored on this site — they are handled entirely by Stripe and other payment processors.
+        </p>
+      </Card>
+      <Card variant="outline" style={{ marginTop: "1rem" }}>
+        <h3 className="feature-card__title">Analytics and cookies</h3>
+        <p className="feature-card__body">
+          This site may use Google Analytics or similar tools to collect aggregated or pseudonymous analytics information — which pages are visited, general geographic regions, device types, and referral sources. This information is not used to identify you personally. Cookies may be set by analytics providers. You can control cookies through your browser settings. See the &ldquo;Cookies and analytics&rdquo; section below for details.
         </p>
       </Card>
     </Section>
 
-    <Section
-      eyebrow="Use of data"
-      title="How we use your information"
-    >
+    <Section eyebrow="How data is used" title="How we use your information">
       <Card variant="outline">
         <ul>
           <li>Responding to your inquiries and providing quotes.</li>
-          <li>Delivering website design, development, and SEO services you've requested.</li>
+          <li>Delivering website design, development, and SEO services you have requested.</li>
+          <li>Processing payments and delivering purchased digital products.</li>
           <li>Sending project updates and communications related to your engagement.</li>
-          <li>Billing and record-keeping for active projects.</li>
+          <li>Billing, recordkeeping, and tax compliance.</li>
+          <li>Preventing fraud and abuse.</li>
         </ul>
         <p className="feature-card__body">
-          That's it. No marketing emails you didn't ask for, no newsletters unless you opt in.
+          No marketing emails are sent unless you explicitly opt in.
         </p>
       </Card>
     </Section>
 
-    <Section
-      eyebrow="What we don't do"
-      title="What we do NOT do with your data"
-    >
-      <div className="grid-three">
-        <Card variant="outline">
-          <h3 className="feature-card__title">No selling</h3>
-          <p className="feature-card__body">
-            Your data is never sold, rented, or licensed to third parties.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">No advertising</h3>
-          <p className="feature-card__body">
-            Your data is not used for targeted advertising or ad retargeting.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">No sharing</h3>
-          <p className="feature-card__body">
-            Your data is not shared with third parties except where required to deliver services you've requested (e.g., hosting providers).
-          </p>
-        </Card>
-      </div>
-    </Section>
-
-    <Section
-      eyebrow="Cookies & analytics"
-      title="Cookies and analytics"
-    >
+    <Section eyebrow="Who data is shared with" title="Service providers and data sharing">
       <Card variant="outline">
         <p className="feature-card__body">
-          This site uses Google Analytics to understand aggregate traffic patterns — which pages are visited, general geographic regions, and device types. No personally identifiable tracking is used.
+          Your data is not sold or licensed to third parties. However, limited information is provided to service providers when necessary to operate this site, process payments, prevent fraud, and deliver purchases. These providers include:
         </p>
         <ul>
-          <li>Google Analytics collects anonymous, aggregated data only.</li>
-          <li>No personally identifiable information is tracked.</li>
-          <li>No cross-site tracking or remarketing pixels.</li>
-          <li>You can opt out of analytics by using a browser ad blocker or Do Not Track setting.</li>
+          <li><strong>Hosting providers</strong> (Netlify) — serve the website and store server logs.</li>
+          <li><strong>Email providers</strong> (Resend) — send receipt emails and project communications.</li>
+          <li><strong>Stripe</strong> — processes credit card payments. Stripe receives your email, payment amount, and product description. Card details are handled entirely by Stripe and never touch this site.</li>
+          <li><strong>PayPal</strong> (if enabled) — processes payments through PayPal checkout or invoices. PayPal receives your email, payment amount, and product description.</li>
+          <li><strong>Authentication/database providers</strong> (Netlify Identity, PostgreSQL database) — manage customer portal accounts and store order metadata.</li>
+          <li><strong>Analytics providers</strong> (Google Analytics, if enabled) — receive aggregated or pseudonymous usage data.</li>
         </ul>
+        <p className="feature-card__body">
+          Each service provider has its own privacy policy governing how they handle data. Bradley F. Matera is not responsible for the data practices of third-party providers.
+        </p>
       </Card>
     </Section>
 
-    <Section
-      eyebrow="Retention"
-      title="Data retention"
-    >
+    <Section eyebrow="Legal basis" title="Legal and tax recordkeeping">
       <Card variant="outline">
         <p className="feature-card__body">
-          Project-related data (files, communications, account access) is kept for the duration of our engagement plus 30 days, then deleted. Contact form submissions from non-clients are deleted after 90 days unless we begin a working relationship.
-        </p>
-        <p className="feature-card__body">
-          If you request deletion, I will remove your data within 30 days of the request.
+          Certain transaction records (invoices, payment metadata, customer email) are retained as required for tax compliance, fraud prevention, and legal recordkeeping. These records may be kept for the period required by applicable tax and business laws, even if you request deletion of other data.
         </p>
       </Card>
     </Section>
 
-    <Section
-      eyebrow="Your rights"
-      title="Your rights"
-    >
+    <Section eyebrow="Cookies & analytics" title="Cookies and analytics">
+      <Card variant="outline">
+        <p className="feature-card__body">
+          This site may use cookies and similar technologies for analytics. Specifically:
+        </p>
+        <ul>
+          <li>Google Analytics (if enabled) collects aggregated or pseudonymous analytics information about page visits, device types, and general geographic regions.</li>
+          <li>Cookies set by analytics providers may persist on your device.</li>
+          <li>This site does not use advertising pixels, cross-site tracking, or remarketing lists.</li>
+          <li>This site does not use cookies for targeted advertising.</li>
+        </ul>
+        <p className="feature-card__body">
+          You can control or disable cookies through your browser settings. A consent mechanism may be shown depending on your region and the analytics configuration in use. Nonessential analytics scripts are loaded only after the applicable consent rule is satisfied where required.
+        </p>
+      </Card>
+    </Section>
+
+    <Section eyebrow="Retention" title="Data retention">
+      <Card variant="outline">
+        <ul>
+          <li><strong>Project-related data</strong> (files, communications, account access) is kept for the duration of the engagement plus 30 days, then deleted unless required for legal or tax recordkeeping.</li>
+          <li><strong>Contact form submissions</strong> from non-clients are deleted after 90 days unless a working relationship begins.</li>
+          <li><strong>Transaction records</strong> (order ID, customer email, payment metadata) are retained for the period required by applicable tax and business laws. This may be several years.</li>
+          <li><strong>Deletion requests</strong> are processed within 30 days, except for records that must be retained for legal, tax, or fraud-prevention purposes. You will be informed if deletion is limited by these obligations.</li>
+        </ul>
+        <p className="feature-card__body">
+          This site does not promise a retention period that the code and business cannot follow. If deletion is limited by legal obligations, that is disclosed to you.
+        </p>
+      </Card>
+    </Section>
+
+    <Section eyebrow="Your rights" title="Your rights — access, correction, and deletion">
       <div className="grid-three">
+        <Card variant="outline">
+          <h3 className="feature-card__title">Request access</h3>
+          <p className="feature-card__body">
+            Ask for a copy of the personal data held about you. You will receive it within 30 days.
+          </p>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">Request correction</h3>
+          <p className="feature-card__body">
+            If any personal data is inaccurate or outdated, request a correction.
+          </p>
+        </Card>
         <Card variant="outline">
           <h3 className="feature-card__title">Request deletion</h3>
           <p className="feature-card__body">
-            Ask me to delete your data and I will remove it within 30 days.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Request a copy</h3>
-          <p className="feature-card__body">
-            Ask me for a copy of the data I hold about you and I will provide it.
-          </p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Opt out of analytics</h3>
-          <p className="feature-card__body">
-            Use a browser ad blocker or Do Not Track setting to opt out of Google Analytics.
+            Request deletion of your personal data. Deletion is subject to legal recordkeeping obligations for transaction and tax records.
           </p>
         </Card>
       </div>
+    </Section>
+
+    <Section eyebrow="Security" title="Security limitations">
+      <Card variant="outline">
+        <p className="feature-card__body">
+          This site uses HTTPS for all connections. Payment processing is handled by Stripe and PayPal, which are PCI-compliant. No card numbers or bank details are stored on this site. Authentication tokens are handled server-side.
+        </p>
+        <p className="feature-card__body">
+          No website or online service can guarantee complete security. Bradley F. Matera uses industry-standard practices but cannot represent that this site is immune to security incidents. If a data breach occurs, affected users will be notified as required by applicable law.
+        </p>
+      </Card>
     </Section>
 
     <Section
@@ -196,21 +219,21 @@ const PrivacyPage = () => (
       title="Questions about privacy?"
       description={
         <p>
-          If you have any questions about this privacy policy or want to exercise your rights, reach out directly.
+          To exercise any of your rights or ask questions about this privacy policy, reach out directly.
         </p>
       }
     >
       <div className="card-actions">
-        <a href="mailto:bradmatera@gmail.com" data-variant="primary" className="link">
-          bradmatera@gmail.com
+        <a href={`mailto:${SELLER_EMAIL}`} data-variant="primary" className="link">
+          {SELLER_EMAIL}
         </a>
-        <a href="tel:+16083135373" data-variant="ghost" className="link">
-          (608) 313-5373
+        <a href={SELLER_PHONE_HREF} data-variant="ghost" className="link">
+          {SELLER_PHONE}
         </a>
         <Link data-variant="ghost" to="/terms/">Terms of Service</Link>
       </div>
       <p className="feature-card__body" style={{ marginTop: "1.5rem" }}>
-        Last updated: July 2026
+        Effective date: {POLICY_LAST_UPDATED}. Last updated: {POLICY_LAST_UPDATED}.
       </p>
     </Section>
   </Layout>

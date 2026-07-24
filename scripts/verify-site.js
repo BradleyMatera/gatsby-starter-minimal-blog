@@ -171,7 +171,7 @@ console.log("");
 console.log("▶ Test 2: Homepage content markers");
 const homeHtml = readPage("index.html");
 if (homeHtml) {
-  const titleMarkers = ["Bradley Matera — Portfolio", "Bradley Matera — Full-stack and cloud systems"];
+  const titleMarkers = ["Bradley Matera", "Small Business Web Design in Northwest Illinois"];
   assert(titleMarkers.some((m) => homeHtml.includes(m)), "Homepage should have expected title");
   assert(homeHtml.includes("bradmatera@gmail.com"), "Homepage should have email (hero action)");
   assert(homeHtml.includes("/pricing/"), "Homepage should link to pricing page");
@@ -448,7 +448,7 @@ console.log("");
 console.log("▶ Test 21: Homepage has a direct answer near the top (AEO)");
 if (homeHtml) {
   assert(
-    homeHtml.includes("direct-answer") || homeHtml.includes("Who is Bradley Matera"),
+    homeHtml.includes("direct-answer") || homeHtml.includes("Small-business websites") || homeHtml.includes("Packages from"),
     "Homepage should have a direct answer paragraph"
   );
 }

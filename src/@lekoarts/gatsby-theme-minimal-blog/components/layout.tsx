@@ -8,6 +8,7 @@ import type { MDXComponents } from "mdx/types";
 import MdxComponents from "./mdx-components";
 import Header from "./header";
 import Footer from "./footer";
+import ConsentBanner from "../../../features/consent/ConsentBanner";
 import SkipNavLink from "./skip-nav";
 import CodeStyles from "../styles/code";
 import { GlobalScrollEffects } from "../../../site/components";
@@ -151,6 +152,7 @@ const Layout = ({ children, className = `` }: LayoutProps) => {
         </main>
         
         <Footer />
+        <ConsentBanner />
         
         {/* Cyberpunk Back to Top Button */}
         <button

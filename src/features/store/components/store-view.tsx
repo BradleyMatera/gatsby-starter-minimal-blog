@@ -24,7 +24,7 @@ export type StoreTab = { key: string; label: string; count: number };
 
 export const disclosureText = "As an Amazon Associate I earn from qualifying purchases.";
 export const legalText =
-  "Affiliate products are sold by third-party merchants. Bradley Matera is not the seller or creator of affiliate products. Direct digital downloads are sold by Bradley Matera.";
+  "Affiliate products are sold by third-party merchants. Bradley F. Matera is not the seller or creator of affiliate products. Direct digital downloads are sold by Bradley F. Matera, an Illinois sole proprietor.";
 export const collectionOrder = ["Core Desk & Streaming", "Home Lab & Maker Gear", "Learning & Hobby"];
 
 export const slugify = (value: string) =>

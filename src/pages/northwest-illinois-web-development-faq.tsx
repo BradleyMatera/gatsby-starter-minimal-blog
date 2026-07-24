@@ -100,7 +100,7 @@ const LocalFaqPage = () => (
           </tr>
         </thead>
         <tbody>
-          <tr><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Pages</td><td style={{ textAlign: "center" }}>Up to 5</td><td style={{ textAlign: "center" }}>Up to 10</td><td style={{ textAlign: "center" }}>Unlimited</td></tr>
+          <tr><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Pages</td><td style={{ textAlign: "center" }}>Up to 5</td><td style={{ textAlign: "center" }}>Up to 10</td><td style={{ textAlign: "center" }}>Per scope</td></tr>
           <tr><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Monthly support</td><td style={{ textAlign: "center" }}>$37/mo</td><td style={{ textAlign: "center" }}>$67/mo</td><td style={{ textAlign: "center" }}>$97/mo</td></tr>
           <tr><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>SEO-ready</td><td style={{ textAlign: "center" }}>Yes</td><td style={{ textAlign: "center" }}>Yes</td><td style={{ textAlign: "center" }}>Yes</td></tr>
           <tr><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Google Business Profile</td><td style={{ textAlign: "center" }}>No</td><td style={{ textAlign: "center" }}>Yes</td><td style={{ textAlign: "center" }}>Yes</td></tr>
@@ -133,7 +133,7 @@ const LocalFaqPage = () => (
         <Card variant="outline">
           <h3 className="feature-card__title">Pricing breakdown</h3>
           <p className="feature-card__body">
-            Transparent <Link to="/pricing/">pricing tiers</Link> starting at $447 with no hidden fees or contracts.
+            Transparent <Link to="/pricing/">pricing tiers</Link> starting at $447 with no hidden fees, written agreements included.
           </p>
         </Card>
         <Card variant="outline">

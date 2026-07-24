@@ -368,7 +368,7 @@ export const Head: HeadFC = () => (
       {
         "@context": "https://schema.org",
         "@type": "Store",
-        name: "Bradley Matera Digital Store",
+        name: "Bradley F. Matera — Digital Store",
         url: "https://bradleymatera.dev/store/",
         description: "Digital downloads, templates, and developer resources by Bradley Matera.",
         author: {

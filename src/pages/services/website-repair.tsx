@@ -69,7 +69,7 @@ const WebsiteRepairPage = () => (
       description={
         <>
           <p className="direct-answer">
-            <strong>What is website repair?</strong> Fixing broken pages, forms, layouts, errors, and performance issues on your existing website. $65/hour for individual fixes, or a full $597 refresh for outdated sites. Fast turnaround, no contracts.
+            <strong>What is website repair?</strong> Fixing broken pages, forms, layouts, errors, and performance issues on your existing website. $65/hour for individual fixes, or a full $597 refresh for outdated sites. Fast turnaround, written agreements included.
           </p>
         </>
       }

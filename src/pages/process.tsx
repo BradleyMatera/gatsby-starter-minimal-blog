@@ -13,7 +13,7 @@ const pageDescription =
 const timelineRows = [
   { tier: "Starter", time: "14 days", detail: "Up to 5 pages, mobile-ready, SEO-ready" },
   { tier: "Growth", time: "3-4 weeks", detail: "Up to 10 pages, Google Business Profile, advanced schema" },
-  { tier: "Lead Engine", time: "Scoped per project", detail: "Custom integrations, unlimited pages, AI features" },
+  { tier: "Lead Engine", time: "Scoped per project", detail: "Custom integrations, page count defined in the written scope, AI features" },
 ];
 
 const includedItems = [
@@ -94,7 +94,7 @@ const ProcessPage = () => (
         <Card variant="outline">
           <h2 className="feature-card__title">Step 5 — Launch and support</h2>
           <p className="feature-card__body">
-            I handle hosting setup, DNS, and go-live. Every build includes a 30-day warranty for bug fixes. Ongoing support starts at $37/month with no contracts.
+            I handle hosting setup, DNS, and go-live. Every build includes a 30-day warranty for bug fixes. Ongoing support starts at $37/month with written agreements included.
           </p>
         </Card>
       </div>

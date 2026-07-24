@@ -186,7 +186,7 @@ const PecatonicaWebDeveloperPage = () => (
         <Card>
           <h3 className="feature-card__title">Launch and support</h3>
           <p className="feature-card__body">
-            I launch your site, set up hosting, and handle updates. You get 24-hour response times and a 30-day warranty after launch. Monthly support is month-to-month — no contract trap.
+            I launch your site, set up hosting, and handle updates. You get 24-hour response times and a 30-day warranty after launch. Monthly support is month-to-month — no long-term commitment.
           </p>
         </Card>
       </div>

@@ -68,6 +68,12 @@ exports.handler = async (event) => {
       metadata: {
         product_id: product.id,
         quantity: String(quantity),
+        seller: "Bradley F. Matera, Illinois sole proprietor",
+        terms_url: `${baseUrl}/terms/`,
+        refund_policy_url: `${baseUrl}/refund-policy/`,
+        payment_terms_url: `${baseUrl}/payment-terms/`,
+        digital_product_license_url: `${baseUrl}/digital-product-license/`,
+        policy_last_updated: "July 2026",
       },
     });
 

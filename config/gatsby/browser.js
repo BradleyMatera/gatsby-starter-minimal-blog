@@ -70,13 +70,22 @@ export const onRouteUpdate = ({ location }) => {
     }, 100);
   }
 
+  // Analytics: only fire if consent has been granted
+  const hasConsent = () => {
+    try {
+      return localStorage.getItem("analytics-consent") === "granted";
+    } catch {
+      return false;
+    }
+  };
+
   // Analytics: track pricing page views
-  if (location.pathname === "/pricing/" && typeof window !== "undefined" && typeof window.gtag === "function") {
+  if (location.pathname === "/pricing/" && typeof window !== "undefined" && typeof window.gtag === "function" && hasConsent()) {
     window.gtag("event", "pricing_view", { source: document.referrer || "direct" });
   }
 
   // Analytics: track case study views
-  if (location.pathname.startsWith("/work/") && location.pathname !== "/work/" && typeof window !== "undefined" && typeof window.gtag === "function") {
+  if (location.pathname.startsWith("/work/") && location.pathname !== "/work/" && typeof window !== "undefined" && typeof window.gtag === "function" && hasConsent()) {
     window.gtag("event", "case_study_view", { slug: location.pathname });
   }
 
@@ -87,7 +96,7 @@ export const onRouteUpdate = ({ location }) => {
       if (el.dataset.analyticsBound) return;
       el.dataset.analyticsBound = "true";
       el.addEventListener("click", () => {
-        if (typeof window !== "undefined" && typeof window.gtag === "function") {
+        if (typeof window !== "undefined" && typeof window.gtag === "function" && hasConsent()) {
           window.gtag("event", "phone_click", { source: location.pathname });
         }
       });
@@ -98,7 +107,7 @@ export const onRouteUpdate = ({ location }) => {
       if (el.dataset.analyticsBound) return;
       el.dataset.analyticsBound = "true";
       el.addEventListener("click", () => {
-        if (typeof window !== "undefined" && typeof window.gtag === "function") {
+        if (typeof window !== "undefined" && typeof window.gtag === "function" && hasConsent()) {
           window.gtag("event", "email_click", { source: location.pathname });
         }
       });
@@ -110,7 +119,7 @@ export const onRouteUpdate = ({ location }) => {
       el.dataset.analyticsBound = "true";
       el.addEventListener("click", () => {
         const eventName = el.getAttribute("data-analytics-click");
-        if (typeof window !== "undefined" && typeof window.gtag === "function" && eventName) {
+        if (typeof window !== "undefined" && typeof window.gtag === "function" && eventName && hasConsent()) {
           window.gtag("event", eventName, {
             label: el.textContent?.trim().substring(0, 50) || "",
             location: location.pathname,
@@ -128,7 +137,7 @@ export const onRouteUpdate = ({ location }) => {
       el.addEventListener("focusin", () => {
         if (el.dataset.formStartFired === "true") return;
         el.dataset.formStartFired = "true";
-        if (typeof window !== "undefined" && typeof window.gtag === "function" && formName) {
+        if (typeof window !== "undefined" && typeof window.gtag === "function" && formName && hasConsent()) {
           window.gtag("event", "form_start", { form_name: formName });
         }
       }, { once: true });

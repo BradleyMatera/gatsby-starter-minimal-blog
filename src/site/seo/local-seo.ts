@@ -35,7 +35,7 @@ export const localBreadcrumb = {
 export const personSchema = {
   "@type": "Person",
   "@id": `${SITE_URL}/#bradley`,
-  name: "Bradley Matera",
+  name: "Bradley F. Matera",
   url: `${SITE_URL}/about/`,
   email: "bradmatera@gmail.com",
   telephone: "+16083135373",

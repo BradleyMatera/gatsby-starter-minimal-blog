@@ -8,7 +8,7 @@ import { Card, Link, Section } from "../../ui";
 const pathname = "/services/small-business-web-design/";
 const pageTitle = "Small Business Web Design in Northwest Illinois | Bradley Matera";
 const pageDescription =
-  "Custom small business websites built from scratch. Up to 5 pages, mobile-ready, SEO-ready, contact form, schema markup. Starting at $447, 14-day builds, no contracts.";
+  "Custom small business websites built from scratch. Up to 5 pages, mobile-ready, SEO-ready, contact form, schema markup. Starting at $447, 14-day builds, written agreements included.";
 
 const deliverables = [
   "Up to 5 custom pages (Home, About, Services, Contact, plus one more)",
@@ -48,7 +48,7 @@ const faqs = [
   },
   {
     q: "Do I own my website after it's built?",
-    a: "Yes. You own your site, code, content, and domain. There are no contracts. If you decide to leave, I help you migrate everything to a new host or provider.",
+    a: "Yes. You own your site, code, content, and domain. No long-term commitment. Website care plans are month-to-month. Every website project still uses a written service agreement and scope of work. If you decide to leave, I help you migrate everything to a new host or provider.",
   },
   {
     q: "What do you need from me to get started?",
@@ -83,7 +83,7 @@ const SmallBusinessWebDesignPage = () => (
       description={
         <>
           <p className="direct-answer">
-            <strong>What is small business web design?</strong> A custom website built from scratch for your small business — up to 5 pages, mobile-ready, SEO-ready, with a contact form and schema markup. Built in 14 days, starting at $447. No contracts, you own everything.
+            <strong>What is small business web design?</strong> A custom website built from scratch for your small business — up to 5 pages, mobile-ready, SEO-ready, with a contact form and schema markup. Built in 14 days, starting at $447. Written agreements included, you own everything.
           </p>
         </>
       }
@@ -120,7 +120,7 @@ const SmallBusinessWebDesignPage = () => (
         <Card variant="outline">
           <h2 className="feature-card__title">You own everything</h2>
           <p className="feature-card__body">
-            Site, code, content, and domain are yours. No contracts. Cancel support anytime.
+            Site, code, content, and domain are yours. Written agreements included. Cancel support anytime.
           </p>
           <div className="card-actions">
             <Link data-variant="ghost" to="/northwest-illinois-web-development-faq/">Read the FAQ</Link>
@@ -167,7 +167,7 @@ const SmallBusinessWebDesignPage = () => (
         <Card>
           <h3 className="feature-card__title">3. Launch and support</h3>
           <p className="feature-card__body">
-            I launch your site, set up hosting, and handle updates. 24-hour response times, 30-day warranty, no contract trap.
+            I launch your site, set up hosting, and handle updates. 24-hour response times, 30-day warranty, month-to-month care plans.
           </p>
         </Card>
       </div>
