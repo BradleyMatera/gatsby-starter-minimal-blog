@@ -4,6 +4,7 @@ import Layout from "../../@lekoarts/gatsby-theme-minimal-blog/components/layout"
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
 import { Card, Link, Section } from "../../ui";
+import { SERVICE_AREA_CITIES, CITY_IMAGES } from "../../shared/city-data";
 
 const pathname = "/services/small-business-web-design/";
 const pageTitle = "Small Business Web Design in Northwest Illinois | Bradley Matera";
@@ -22,20 +23,7 @@ const deliverables = [
   "30-day post-launch warranty covering bugs and fixes",
 ];
 
-const serviceAreaCities = [
-  { title: "Durand & Davis", href: "/web-developer-durand-davis-illinois/" },
-  { title: "Rockford", href: "/web-developer-rockford-illinois/" },
-  { title: "Freeport", href: "/web-developer-freeport-illinois/" },
-  { title: "Pecatonica", href: "/web-developer-pecatonica-illinois/" },
-  { title: "Winnebago", href: "/web-developer-winnebago-illinois/" },
-  { title: "Loves Park", href: "/web-developer-loves-park-illinois/" },
-  { title: "Byron", href: "/web-developer-byron-illinois/" },
-  { title: "Rockton", href: "/web-developer-rockton-illinois/" },
-  { title: "Roscoe", href: "/web-developer-roscoe-illinois/" },
-  { title: "South Beloit", href: "/web-developer-south-beloit-illinois/" },
-  { title: "Beloit, WI", href: "/web-developer-beloit-wisconsin/" },
-  { title: "Janesville, WI", href: "/web-developer-janesville-wisconsin/" },
-];
+const serviceAreaCities = SERVICE_AREA_CITIES;
 
 const faqs = [
   {
@@ -199,12 +187,12 @@ const SmallBusinessWebDesignPage = () => (
     >
       <div className="grid-three">
         {serviceAreaCities.map((city) => (
-          <Card key={city.href} variant="outline">
-            <h3 className="feature-card__title">{city.title}</h3>
-            <div className="card-actions">
-              <Link data-variant="ghost" to={city.href}>{city.title} web developer</Link>
+          <Link key={city.href} to={city.href} className="city-card" style={{ backgroundImage: `url(/city-images/${CITY_IMAGES[city.href]})` }}>
+            <div className="city-card__overlay">
+              <h3 className="city-card__title">{city.title}</h3>
+              <span className="city-card__link">{city.title} web developer →</span>
             </div>
-          </Card>
+          </Link>
         ))}
       </div>
     </Section>

@@ -1,0 +1,31 @@
+export const CITY_IMAGES: Record<string, string> = {
+  "/web-developer-durand-davis-illinois/": "durand-davis.jpg",
+  "/web-developer-rockford-illinois/": "rockford.jpg",
+  "/web-developer-freeport-illinois/": "freeport.jpg",
+  "/web-developer-pecatonica-illinois/": "pecatonica.jpg",
+  "/web-developer-winnebago-illinois/": "winnebago.jpg",
+  "/web-developer-loves-park-illinois/": "loves-park.jpg",
+  "/web-developer-machesney-park-illinois/": "machesney-park.jpg",
+  "/web-developer-byron-illinois/": "byron.jpg",
+  "/web-developer-rockton-illinois/": "rockton.jpg",
+  "/web-developer-roscoe-illinois/": "roscoe.jpg",
+  "/web-developer-south-beloit-illinois/": "south-beloit.jpg",
+  "/web-developer-beloit-wisconsin/": "beloit-wi.jpg",
+  "/web-developer-janesville-wisconsin/": "janesville-wi.jpg",
+};
+
+export const SERVICE_AREA_CITIES = [
+  { title: "Durand & Davis", href: "/web-developer-durand-davis-illinois/" },
+  { title: "Rockford", href: "/web-developer-rockford-illinois/" },
+  { title: "Freeport", href: "/web-developer-freeport-illinois/" },
+  { title: "Pecatonica", href: "/web-developer-pecatonica-illinois/" },
+  { title: "Winnebago", href: "/web-developer-winnebago-illinois/" },
+  { title: "Loves Park", href: "/web-developer-loves-park-illinois/" },
+  { title: "Machesney Park", href: "/web-developer-machesney-park-illinois/" },
+  { title: "Byron", href: "/web-developer-byron-illinois/" },
+  { title: "Rockton", href: "/web-developer-rockton-illinois/" },
+  { title: "Roscoe", href: "/web-developer-roscoe-illinois/" },
+  { title: "South Beloit", href: "/web-developer-south-beloit-illinois/" },
+  { title: "Beloit, WI", href: "/web-developer-beloit-wisconsin/" },
+  { title: "Janesville, WI", href: "/web-developer-janesville-wisconsin/" },
+];

@@ -4,6 +4,7 @@ import Layout from "../@lekoarts/gatsby-theme-minimal-blog/components/layout";
 import Seo from "../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
 import { Card, Link, Section } from "../ui";
+import { SERVICE_AREA_CITIES, CITY_IMAGES } from "../shared/city-data";
 
 const pathname = "/for-business/";
 const pageTitle = "For Business — Website Design & Development | Bradley Matera";
@@ -19,21 +20,7 @@ const demoCards = [
   { title: "Salon", desc: "Service menu, stylist bios, gallery, online booking.", href: "/demos/beauty-salon/" },
 ];
 
-const cityCards = [
-  { title: "Durand & Davis", href: "/web-developer-durand-davis-illinois/", image: "durand-davis.jpg" },
-  { title: "Rockford", href: "/web-developer-rockford-illinois/", image: "rockford.jpg" },
-  { title: "Freeport", href: "/web-developer-freeport-illinois/", image: "freeport.jpg" },
-  { title: "Pecatonica", href: "/web-developer-pecatonica-illinois/", image: "pecatonica.jpg" },
-  { title: "Winnebago", href: "/web-developer-winnebago-illinois/", image: "winnebago.jpg" },
-  { title: "Loves Park", href: "/web-developer-loves-park-illinois/", image: "loves-park.jpg" },
-  { title: "Machesney Park", href: "/web-developer-machesney-park-illinois/", image: "machesney-park.jpg" },
-  { title: "Byron", href: "/web-developer-byron-illinois/", image: "byron.jpg" },
-  { title: "Rockton", href: "/web-developer-rockton-illinois/", image: "rockton.jpg" },
-  { title: "Roscoe", href: "/web-developer-roscoe-illinois/", image: "roscoe.jpg" },
-  { title: "South Beloit", href: "/web-developer-south-beloit-illinois/", image: "south-beloit.jpg" },
-  { title: "Beloit, WI", href: "/web-developer-beloit-wisconsin/", image: "beloit-wi.jpg" },
-  { title: "Janesville, WI", href: "/web-developer-janesville-wisconsin/", image: "janesville-wi.jpg" },
-];
+const cityCards = SERVICE_AREA_CITIES.map((c) => ({ ...c, image: CITY_IMAGES[c.href] }));
 
 const ForBusinessPage = () => (
   <Layout>
