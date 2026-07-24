@@ -972,3 +972,1140 @@
   margin-bottom: 0.25rem;
   opacity: 0.8;
 }
+
+/* ==========================================================================
+   INDUSTRY-SPECIFIC SECTIONS
+   ========================================================================== */
+
+/* ---- Restaurant: Menu Categories ---------------------------------------- */
+.demo-menu-categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2.5rem;
+}
+
+.demo-menu-category__title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--demo-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 1.25rem;
+  padding-bottom: 0.625rem;
+  border-bottom: 2px solid var(--demo-accent);
+}
+
+.demo-menu-category__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.demo-menu-category__item-info {
+  flex: 1;
+}
+
+.demo-menu-category__item-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--demo-text);
+  margin: 0 0 0.2rem;
+}
+
+.demo-menu-category__item-desc {
+  font-size: 0.8125rem;
+  color: var(--demo-text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.demo-menu-category__item-price {
+  font-size: 1.0625rem;
+  font-weight: 800;
+  color: var(--demo-accent);
+  white-space: nowrap;
+}
+
+/* ---- Restaurant: Chef Spotlight ----------------------------------------- */
+.demo-chef {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .demo-chef {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.demo-chef__photo {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--demo-accent), #2a2a2a);
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.demo-chef__photo::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1), transparent 60%);
+}
+
+.demo-chef__name {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--demo-text);
+  margin: 0 0 0.25rem;
+}
+
+.demo-chef__title {
+  font-size: 0.9375rem;
+  color: var(--demo-accent);
+  font-weight: 600;
+  margin: 0 0 1rem;
+}
+
+.demo-chef__bio {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--demo-text-muted);
+  margin: 0 0 0.75rem;
+}
+
+/* ---- Restaurant: Private Events ----------------------------------------- */
+.demo-events {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.demo-event-card {
+  background: #fff;
+  border: 1px solid var(--demo-border);
+  border-radius: 10px;
+  padding: 1.75rem;
+  text-align: center;
+}
+
+.demo-event-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: var(--demo-accent-soft, rgba(192,57,43,0.1));
+  color: var(--demo-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
+
+.demo-event-card__title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--demo-text);
+  margin: 0 0 0.5rem;
+}
+
+.demo-event-card__desc {
+  font-size: 0.875rem;
+  color: var(--demo-text-muted);
+  line-height: 1.55;
+  margin: 0 0 0.75rem;
+}
+
+.demo-event-card__capacity {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--demo-accent);
+}
+
+/* ---- Restaurant: Wine List ---------------------------------------------- */
+.demo-wine-list {
+  background: #fff;
+  border: 1px solid var(--demo-border);
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.demo-wine-list__title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--demo-text);
+  margin: 0 0 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--demo-border);
+}
+
+.demo-wine-list__item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  font-size: 0.9375rem;
+}
+
+.demo-wine-list__item-name {
+  color: var(--demo-text);
+}
+
+.demo-wine-list__item-origin {
+  color: var(--demo-text-muted);
+  font-size: 0.8125rem;
+}
+
+.demo-wine-list__item-price {
+  font-weight: 700;
+  color: var(--demo-accent);
+}
+
+/* ---- Landscaping: Before/After Gallery ---------------------------------- */
+.demo-before-after {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.5rem;
+}
+
+.demo-before-after__item {
+  border: 1px solid var(--demo-border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.demo-before-after__images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 180px;
+}
+
+.demo-before-after__before,
+.demo-before-after__after {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.8);
+}
+
+.demo-before-after__before {
+  background: linear-gradient(135deg, #999, #666);
+}
+
+.demo-before-after__after {
+  background: linear-gradient(135deg, var(--demo-accent), #1a5a2a);
+}
+
+.demo-before-after__label {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0.5rem;
+  background: rgba(0,0,0,0.6);
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+}
+
+.demo-before-after__body {
+  padding: 1rem;
+}
+
+.demo-before-after__title {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--demo-text);
+  margin: 0 0 0.25rem;
+}
+
+.demo-before-after__desc {
+  font-size: 0.8125rem;
+  color: var(--demo-text-muted);
+  margin: 0;
+}
+
+/* ---- Landscaping: Process Steps ----------------------------------------- */
+.demo-process {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+  counter-reset: step;
+}
+
+.demo-process__step {
+  text-align: center;
+  position: relative;
+}
+
+.demo-process__number {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--demo-accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin: 0 auto 0.75rem;
+}
+
+.demo-process__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--demo-text);
+  margin: 0 0 0.375rem;
+}
+
+.demo-process__desc {
+  font-size: 0.8125rem;
+  color: var(--demo-text-muted);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ---- Landscaping: Seasonal Services ------------------------------------- */
+.demo-seasonal {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.demo-seasonal__card {
+  background: #fff;
+  border: 1px solid var(--demo-border);
+  border-radius: 10px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.demo-seasonal__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--demo-accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.75rem;
+}
+
+.demo-seasonal__season {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--demo-accent);
+  margin: 0 0 0.25rem;
+}
+
+.demo-seasonal__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--demo-text);
+  margin: 0 0 0.5rem;
+}
+
+.demo-seasonal__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--demo-text-muted);
+  text-align: left;
+}
+
+.demo-seasonal__list li {
+  padding: 0.2rem 0;
+  border-bottom: 1px solid var(--demo-border);
+}
+
+.demo-seasonal__list li:last-child {
+  border-bottom: none;
+}
+
+/* ---- HVAC: Maintenance Plan Comparison ---------------------------------- */
+.demo-plans {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.demo-plan {
+  background: #fff;
+  border: 1px solid var(--demo-border);
+  border-radius: 12px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.demo-plan--featured {
+  border: 2px solid var(--demo-accent);
+  position: relative;
+}
+
+.demo-plan--featured::before {
+  content: "Most Popular";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--demo-accent);
+  color: #fff;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  white-space: nowrap;
+}
+
+.demo-plan__name {
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: var(--demo-text);
+  margin: 0 0 0.25rem;
+}
+
+.demo-plan__price {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--demo-accent);
+  margin: 0.5rem 0;
+}
+
+.demo-plan__price-period {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--demo-text-muted);
+}
+
+.demo-plan__features {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  flex: 1;
+}
+
+.demo-plan__features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  font-size: 0.875rem;
+  color: var(--demo-text);
+  border-bottom: 1px solid var(--demo-border);
+}
+
+.demo-plan__features li:last-child {
+  border-bottom: none;
+}
+
+.demo-plan__features li svg {
+  width: 16px;
+  height: 16px;
+  color: var(--demo-accent);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.demo-plan__features li--excluded {
+  color: var(--demo-text-muted);
+  opacity: 0.5;
+}
+
+.demo-plan__features li--excluded svg {
+  color: #ccc;
+}
+
+/* ---- HVAC: Brands We Service -------------------------------------------- */
+.demo-brands {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.demo-brand {
+  background: #fff;
+  border: 1px solid var(--demo-border);
+  border-radius: 8px;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--demo-text-muted);
+  text-align: center;
+  min-width: 100px;
+}
+
+/* ---- HVAC: Coupon ------------------------------------------------------- */
+.demo-coupons {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.demo-coupon {
+  background: #fff;
+  border: 2px dashed var(--demo-accent);
+  border-radius: 10px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.demo-coupon__label {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--demo-accent);
+  margin: 0 0 0.5rem;
+}
+
+.demo-coupon__offer {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--demo-text);
+  margin: 0 0 0.25rem;
+}
+
+.demo-coupon__desc {
+  font-size: 0.8125rem;
+  color: var(--demo-text-muted);
+  margin: 0 0 0.5rem;
+}
+
+.demo-coupon__code {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--demo-accent);
+  background: var(--demo-surface);
+  padding: 0.25rem 0.625rem;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+/* ---- Auto Repair: Makes We Service -------------------------------------- */
+.demo-makes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.75rem;
+}
+
+.demo-make {
+  background: #fff;
+  border: 1px solid var(--demo-border);
+  border-radius: 8px;
+  padding: 0.875rem 0.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--demo-text);
+}
+
+/* ---- Auto Repair: Booking Form ------------------------------------------ */
+.demo-booking-form {
+  background: #fff;
+  border: 1px solid var(--demo-border);
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.demo-form__field {
+  margin-bottom: 1rem;
+}
+
+.demo-form__label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--demo-text);
+  margin-bottom: 0.375rem;
+}
+
+.demo-form__input,
+.demo-form__select {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid var(--demo-border);
+  border-radius: 6px;
+  font-size: 0.9375rem;
+  color: var(--demo-text);
+  background: var(--demo-surface);
+  font-family: inherit;
+}
+
+.demo-form__input:focus,
+.demo-form__select:focus {
+  outline: none;
+  border-color: var(--demo-accent);
+}
+
+.demo-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .demo-form__row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.demo-form__submit {
+  width: 100%;
+  padding: 0.875rem;
+  background: var(--demo-accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: opacity 0.15s ease;
+}
+
+.demo-form__submit:hover {
+  opacity: 0.9;
+}
+
+/* ---- Real Estate: Property Search Bar ----------------------------------- */
+.demo-search-bar {
+  background: #fff;
+  border: 1px solid var(--demo-border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  max-width: 800px;
+  margin: -2.5rem auto 0;
+  position: relative;
+  z-index: 10;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 0.75rem;
+  align-items: end;
+}
+
+@media (max-width: 768px) {
+  .demo-search-bar {
+    grid-template-columns: 1fr;
+    margin-top: 1rem;
+  }
+}
+
+/* ---- Real Estate: Listing Detail ---------------------------------------- */
+.demo-listing-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--demo-border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.demo-listing-detail:hover {
+  border-color: var(--demo-accent);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+}
+
+@media (max-width: 600px) {
+  .demo-listing-detail {
+    grid-template-columns: 1fr;
+  }
+}
+
+.demo-listing-detail__image {
+  min-height: 220px;
+  background: linear-gradient(135deg, var(--demo-accent), #2a2a2a);
+  position: relative;
+  overflow: hidden;
+}
+
+.demo-listing-detail__image::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(circle at 40% 50%, rgba(255,255,255,0.06), transparent 50%),
+    linear-gradient(to top, rgba(0,0,0,0.2), transparent);
+}
+
+.demo-listing-detail__badge {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  background: var(--demo-accent);
+  color: #fff;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.25rem 0.625rem;
+  border-radius: 4px;
+}
+
+.demo-listing-detail__body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.demo-listing-detail__price {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--demo-accent);
+  margin: 0 0 0.375rem;
+}
+
+.demo-listing-detail__title {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--demo-text);
+  margin: 0 0 0.75rem;
+}
+
+.demo-listing-detail__specs {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+.demo-listing-detail__spec {
+  text-align: center;
+}
+
+.demo-listing-detail__spec-number {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--demo-text);
+}
+
+.demo-listing-detail__spec-label {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--demo-text-muted);
+}
+
+.demo-listing-detail__address {
+  font-size: 0.875rem;
+  color: var(--demo-text-muted);
+  margin: 0;
+}
+
+/* ---- Real Estate: Agent Bio --------------------------------------------- */
+.demo-agent {
+  display: flex;
+  gap: 1.5rem;
+  background: #fff;
+  border: 1px solid var(--demo-border);
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+
+@media (max-width: 600px) {
+  .demo-agent {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.demo-agent__photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--demo-accent), #2a2a2a);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  position: relative;
+  overflow: hidden;
+}
+
+.demo-agent__photo::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1), transparent 60%);
+}
+
+.demo-agent__name {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--demo-text);
+  margin: 0 0 0.25rem;
+}
+
+.demo-agent__title {
+  font-size: 0.8125rem;
+  color: var(--demo-accent);
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+}
+
+.demo-agent__bio {
+  font-size: 0.875rem;
+  color: var(--demo-text-muted);
+  line-height: 1.55;
+  margin: 0 0 0.5rem;
+}
+
+.demo-agent__stats {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.8125rem;
+}
+
+.demo-agent__stat {
+  color: var(--demo-text);
+}
+
+.demo-agent__stat strong {
+  color: var(--demo-accent);
+  font-weight: 800;
+}
+
+/* ---- Real Estate: Neighborhood Guide ------------------------------------ */
+.demo-neighborhoods {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.demo-neighborhood {
+  border: 1px solid var(--demo-border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.demo-neighborhood:hover {
+  border-color: var(--demo-accent);
+  transform: translateY(-2px);
+}
+
+.demo-neighborhood__image {
+  height: 140px;
+  background: linear-gradient(135deg, var(--demo-accent), #2a2a2a);
+  position: relative;
+  overflow: hidden;
+}
+
+.demo-neighborhood__image::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at 40% 50%, rgba(255,255,255,0.06), transparent 50%);
+}
+
+.demo-neighborhood__body {
+  padding: 1.25rem;
+}
+
+.demo-neighborhood__name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--demo-text);
+  margin: 0 0 0.375rem;
+}
+
+.demo-neighborhood__desc {
+  font-size: 0.8125rem;
+  color: var(--demo-text-muted);
+  line-height: 1.55;
+  margin: 0 0 0.625rem;
+}
+
+.demo-neighborhood__stat {
+  font-size: 0.8125rem;
+  color: var(--demo-text);
+}
+
+.demo-neighborhood__stat strong {
+  color: var(--demo-accent);
+  font-weight: 800;
+}
+
+/* ---- Beauty Salon: Service Categories ----------------------------------- */
+.demo-salon-categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.demo-salon-category__title {
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: var(--demo-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--demo-accent);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.demo-salon-category__title svg {
+  width: 20px;
+  height: 20px;
+}
+
+.demo-salon-category__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0.625rem 0;
+  border-bottom: 1px solid var(--demo-border);
+}
+
+.demo-salon-category__item:last-child {
+  border-bottom: none;
+}
+
+.demo-salon-category__item-name {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--demo-text);
+  margin: 0;
+}
+
+.demo-salon-category__item-time {
+  font-size: 0.75rem;
+  color: var(--demo-text-muted);
+  margin: 0;
+}
+
+.demo-salon-category__item-price {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--demo-accent);
+  white-space: nowrap;
+}
+
+/* ---- Beauty Salon: Stylist Specialty ------------------------------------ */
+.demo-stylist {
+  text-align: center;
+}
+
+.demo-stylist__photo {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--demo-accent), #2a2a2a);
+  margin: 0 auto 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 700;
+  position: relative;
+  overflow: hidden;
+}
+
+.demo-stylist__photo::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1), transparent 60%);
+}
+
+.demo-stylist__name {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--demo-text);
+  margin: 0 0 0.25rem;
+}
+
+.demo-stylist__role {
+  font-size: 0.8125rem;
+  color: var(--demo-accent);
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+}
+
+.demo-stylist__specialties {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.375rem;
+}
+
+.demo-stylist__specialty {
+  font-size: 0.6875rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 9999px;
+  background: var(--demo-surface);
+  color: var(--demo-text-muted);
+  font-weight: 600;
+}
+
+/* ---- Beauty Salon: Product Brands --------------------------------------- */
+.demo-product-brands {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.demo-product-brand {
+  background: #fff;
+  border: 1px solid var(--demo-border);
+  border-radius: 8px;
+  padding: 0.625rem 1.125rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--demo-text-muted);
+}
+
+/* ---- Beauty Salon: Gift Card -------------------------------------------- */
+.demo-gift-card {
+  background: linear-gradient(135deg, var(--demo-accent), #2a2a2a);
+  border-radius: 12px;
+  padding: 2.5rem;
+  text-align: center;
+  color: #fff;
+  max-width: 480px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.demo-gift-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.06), transparent 70%);
+}
+
+.demo-gift-card__title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin: 0 0 0.5rem;
+  position: relative;
+}
+
+.demo-gift-card__desc {
+  font-size: 0.9375rem;
+  opacity: 0.9;
+  margin: 0 0 1.25rem;
+  position: relative;
+}
+
+.demo-gift-card__amounts {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.demo-gift-card__amount {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* ---- Section: Two-Column Layout ----------------------------------------- */
+.demo-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .demo-two-col {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Section: Split CTA (two side-by-side CTAs) ------------------------ */
+.demo-split-cta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  .demo-split-cta {
+    grid-template-columns: 1fr;
+  }
+}
+
+.demo-split-cta__card {
+  background: #fff;
+  border: 1px solid var(--demo-border);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.demo-split-cta__title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--demo-text);
+  margin: 0 0 0.5rem;
+}
+
+.demo-split-cta__desc {
+  font-size: 0.9375rem;
+  color: var(--demo-text-muted);
+  margin: 0 0 1rem;
+  line-height: 1.55;
+}
+
+.demo-split-cta__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  text-decoration: none;
+  background: var(--demo-accent);
+  color: #fff;
+  transition: opacity 0.15s ease;
+}
+
+.demo-split-cta__btn:hover {
+  opacity: 0.9;
+}

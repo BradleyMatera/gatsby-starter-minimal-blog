@@ -3,20 +3,58 @@ import type { HeadFC } from "gatsby";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
 import DemoLayout from "../../features/demos/DemoLayout";
-import { StarIcon, MapPinIcon, PhoneIcon, OilDropIcon, TireIcon, WrenchIcon, BoltIcon, GearIcon, SnowflakeIcon, ShieldIcon, CheckIcon } from "../../site/icons";
+import { StarIcon, MapPinIcon, PhoneIcon, OilDropIcon, TireIcon, WrenchIcon, BoltIcon, GearIcon, SnowflakeIcon, ShieldIcon, CheckIcon, ClockIcon } from "../../site/icons";
 
 const pathname = "/demos/auto-repair/";
 const pageTitle = "Northside Auto Repair — Rockford Mechanic | Demo Website";
 const pageDescription =
   "Demo auto repair shop website with service menu, online booking, tire lookup, and ASE-certified mechanic credentials.";
 
-const services = [
-  { Icon: OilDropIcon, name: "Oil Change & Fluid Service", desc: "Conventional, synthetic blend, and full synthetic oil changes with 21-point inspection. Most services done in 30 minutes.", price: "from $39" },
-  { Icon: TireIcon, name: "Tire Sales & Installation", desc: "All major brands. Mount, balance, rotate, and alignment. Free tire pressure checks and flat repairs.", price: "from $120" },
-  { Icon: WrenchIcon, name: "Brake Service", desc: "Brake pads, rotors, calipers, and fluid flush. Free brake inspection. Same-day service on most vehicles.", price: "from $179" },
-  { Icon: BoltIcon, name: "Engine Diagnostics", desc: "Check engine light on? Our OBD-II scanners and 25 years of experience find the real problem, fast.", price: "from $89" },
-  { Icon: GearIcon, name: "Transmission Service", desc: "Fluid flush, filter replacement, and minor repairs. We service automatic and manual transmissions.", price: "from $149" },
-  { Icon: SnowflakeIcon, name: "AC & Heating Repair", desc: "Recharge, leak detection, compressor replacement, and heater core service. Stay comfortable year-round.", price: "from $99" },
+const serviceCategories = [
+  {
+    title: "Routine Maintenance",
+    items: [
+      { name: "Oil Change (Conventional)", desc: "Up to 5 qts, new filter, 21-point inspection", price: "$39", time: "30 min" },
+      { name: "Oil Change (Full Synthetic)", desc: "Up to 5 qts, premium filter, 21-point inspection", price: "$69", time: "30 min" },
+      { name: "Tire Rotation", desc: "Includes pressure check and tread depth measurement", price: "$25", time: "20 min" },
+      { name: "Multipoint Inspection", desc: "50-point visual inspection with written report", price: "Free", time: "30 min" },
+    ],
+  },
+  {
+    title: "Brakes",
+    items: [
+      { name: "Brake Pad Replacement", desc: "Front or rear pads, includes resurfacing rotors", price: "from $179", time: "1-2 hrs" },
+      { name: "Brake Fluid Flush", desc: "Remove old fluid, replace with DOT 4, bleed system", price: "$99", time: "45 min" },
+      { name: "Rotor Replacement", desc: "Front or rear rotors, includes pads", price: "from $279", time: "1-2 hrs" },
+      { name: "Caliper Replacement", desc: "Single caliper, includes brake fluid", price: "from $189", time: "1 hr" },
+    ],
+  },
+  {
+    title: "Diagnostics & Engine",
+    items: [
+      { name: "Check Engine Light", desc: "OBD-II scan, diagnose code, written estimate", price: "$89", time: "45 min" },
+      { name: "Engine Diagnostics", desc: "Advanced diagnostics beyond code reading", price: "from $129", time: "1-2 hrs" },
+      { name: "Transmission Service", desc: "Fluid flush, filter replacement, gasket", price: "from $149", time: "2 hrs" },
+      { name: "Timing Belt", desc: "Includes tensioner and water pump inspection", price: "from $499", time: "4-6 hrs" },
+    ],
+  },
+  {
+    title: "Climate & Electrical",
+    items: [
+      { name: "AC Recharge", desc: "Recharge with R-134a, leak check, performance test", price: "$99", time: "45 min" },
+      { name: "AC Compressor", desc: "New compressor, receiver drier, system flush", price: "from $599", time: "3-4 hrs" },
+      { name: "Battery Replacement", desc: "New battery, old core recycling, terminal cleaning", price: "from $129", time: "20 min" },
+      { name: "Alternator Replacement", desc: "New alternator, belt inspection, test charging", price: "from $289", time: "1-2 hrs" },
+    ],
+  },
+];
+
+const makes = ["Toyota", "Honda", "Ford", "Chevy", "Nissan", "Subaru", "Hyundai", "Kia", "Jeep", "Dodge", "Ram", "GMC", "Buick", "Mazda", "Volkswagen", "BMW", "Audi", "Mercedes", "Lexus", "Acura"];
+
+const coupons = [
+  { label: "Oil Change Special", offer: "$29.99", desc: "Conventional oil change with 21-point inspection. Most vehicles.", code: "OIL29" },
+  { label: "Brake Special", offer: "$50 OFF", desc: "Front or rear brake pad replacement. Includes rotor resurfacing.", code: "BRAKES50" },
+  { label: "AC Season", offer: "$25 OFF", desc: "AC recharge and performance check. Before the summer heat hits.", code: "AC25" },
 ];
 
 const testimonials = [
@@ -25,19 +63,11 @@ const testimonials = [
   { text: "Quick oil change, fair price, and they found a leaking coolant hose I didn't even know about. Fixed it same day. Great shop.", author: "Kevin R.", location: "Machesney Park, IL" },
 ];
 
-const faqs = [
-  { q: "Do you work on all vehicle makes and models?", a: "Yes. We service domestic (Ford, Chevy, Dodge), imports (Toyota, Honda, Nissan, Subaru), and European (BMW, VW, Audi) vehicles. Our technicians stay current on all major platforms." },
-  { q: "Do you offer a warranty on repairs?", a: "All repairs come with a 12-month/12,000-mile warranty on parts and labor. If something we fixed breaks again within that period, we fix it free." },
-  { q: "Can I book an appointment online?", a: "Yes! Use our online booking form or call (815) 555-0321. We'll confirm your appointment by text or email within 1 business hour." },
-  { q: "Do you provide free estimates?", a: "Yes, estimates are always free. Drop by or call with your vehicle's year, make, model, and a description of the issue. We'll give you a written estimate before any work begins." },
-];
-
 const trustBadges = [
   { Icon: ShieldIcon, label: "ASE Certified" },
   { Icon: ShieldIcon, label: "BBB A+ Rated" },
-  { Icon: CheckIcon, label: "12-Month Warranty" },
+  { Icon: CheckIcon, label: "12-Month / 12K Mile Warranty" },
   { Icon: CheckIcon, label: "Free Estimates" },
-  { Icon: CheckIcon, label: "All Makes & Models" },
 ];
 
 const StarRating: React.FC = () => (
@@ -54,8 +84,8 @@ const AutoRepairDemo: React.FC = () => (
         <span className="demo-hero__tagline">ASE Certified · Serving Rockford Since 2008</span>
         <h1 className="demo-hero__title">Northside Auto Repair</h1>
         <p className="demo-hero__subtitle">
-          Honest, reliable auto repair for all makes and models. Oil changes, brakes, tires,
-          diagnostics, and major repairs — all backed by a 12-month warranty.
+          Honest, reliable auto repair for all makes and models. 12-month warranty on everything we do.
+          Free estimates, no pressure, no games.
         </p>
         <div className="demo-hero__actions">
           <a href="#book" className="demo-btn demo-btn--primary">Book Appointment</a>
@@ -66,7 +96,7 @@ const AutoRepairDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Trust Badges */}
+    {/* Trust Badges — auto repair customers need to see credentials */}
     <div className="demo-trust-bar">
       <div className="demo-trust-bar__inner">
         {trustBadges.map((b) => {
@@ -92,50 +122,62 @@ const AutoRepairDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Services */}
+    {/* Service Menu — categorized like a real auto shop price sheet */}
     <section className="demo-section demo-section--alt" id="services">
       <div className="demo-section__inner">
-        <h2 className="demo-section__title">Our Services</h2>
-        <p className="demo-section__subtitle">Full-service auto repair for domestic, import, and European vehicles.</p>
-        <div className="demo-services">
-          {services.map((s) => {
-            const { Icon } = s;
-            return (
-              <div key={s.name} className="demo-service">
-                <div className="demo-service__icon"><Icon size={28} /></div>
-                <h3 className="demo-service__name">{s.name}</h3>
-                <p className="demo-service__desc">{s.desc}</p>
-                <div className="demo-service__price">{s.price}</div>
-              </div>
-            );
-          })}
+        <h2 className="demo-section__title">Service Menu</h2>
+        <p className="demo-section__subtitle">Transparent pricing on the most common services. All work backed by a 12-month warranty.</p>
+        <div className="demo-menu-categories">
+          {serviceCategories.map((cat) => (
+            <div key={cat.title}>
+              <h3 className="demo-menu-category__title">{cat.title}</h3>
+              {cat.items.map((item) => (
+                <div key={item.name} className="demo-menu-category__item">
+                  <div className="demo-menu-category__item-info">
+                    <h4 className="demo-menu-category__item-name">{item.name}</h4>
+                    <p className="demo-menu-category__item-desc">{item.desc}</p>
+                    <p className="demo-menu-category__item-desc" style={{ marginTop: "0.2rem", fontWeight: 600, color: "var(--demo-accent)" }}>Est. time: {item.time}</p>
+                  </div>
+                  <div className="demo-menu-category__item-price">{item.price}</div>
+                </div>
+              ))}
+            </div>
+          ))}
         </div>
       </div>
     </section>
 
-    {/* About */}
+    {/* Makes We Service — auto repair customers want to know if you can fix their car */}
     <section className="demo-section">
       <div className="demo-section__inner">
-        <div className="demo-about">
-          <div className="demo-about__image" style={{ background: "linear-gradient(135deg, #b35414, #4a2208)" }} />
-          <div>
-            <h2 className="demo-about__title">The Shop That Tells You the Truth</h2>
-            <p className="demo-about__text">
-              Northside Auto Repair opened in 2008 with a simple promise: diagnose honestly, fix it
-              right, and charge a fair price. No mystery fees, no unnecessary repairs, no pressure.
-            </p>
-            <p className="demo-about__text">
-              Our technicians are ASE certified and we invest in the latest diagnostic equipment. But
-              the most important tool in our shop is honesty. We'll show you the worn part, explain
-              why it failed, and tell you whether it needs fixing now or can wait. You decide.
-            </p>
-          </div>
+        <h2 className="demo-section__title">Makes We Service</h2>
+        <p className="demo-section__subtitle">Domestic, import, and European. If your make isn't listed, call us — we probably work on it.</p>
+        <div className="demo-makes">
+          {makes.map((m) => <div key={m} className="demo-make">{m}</div>)}
+        </div>
+      </div>
+    </section>
+
+    {/* Coupons — auto shops always run specials */}
+    <section className="demo-section demo-section--alt">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Current Specials</h2>
+        <p className="demo-section__subtitle">Mention the code when you book. Cannot be combined with other offers.</p>
+        <div className="demo-coupons">
+          {coupons.map((c) => (
+            <div key={c.code} className="demo-coupon">
+              <div className="demo-coupon__label">{c.label}</div>
+              <div className="demo-coupon__offer">{c.offer}</div>
+              <p className="demo-coupon__desc">{c.desc}</p>
+              <div className="demo-coupon__code">Code: {c.code}</div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
 
     {/* Reviews */}
-    <section className="demo-section demo-section--alt">
+    <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">What Our Customers Say</h2>
         <div className="demo-testimonials">
@@ -151,28 +193,69 @@ const AutoRepairDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* FAQ */}
-    <section className="demo-section">
+    {/* Booking Form — auto shops need online booking */}
+    <section className="demo-section demo-section--alt" id="book">
       <div className="demo-section__inner">
-        <h2 className="demo-section__title">Frequently Asked Questions</h2>
-        <div className="demo-faq">
-          {faqs.map((f) => (
-            <div key={f.q} className="demo-faq__item">
-              <h3 className="demo-faq__question">{f.q}</h3>
-              <p className="demo-faq__answer">{f.a}</p>
+        <h2 className="demo-section__title">Book an Appointment</h2>
+        <p className="demo-section__subtitle">Fill out the form and we'll confirm by text or email within 1 business hour.</p>
+        <div className="demo-booking-form">
+          <div className="demo-form__row">
+            <div className="demo-form__field">
+              <label className="demo-form__label" htmlFor="make">Vehicle Make</label>
+              <input className="demo-form__input" id="make" type="text" placeholder="e.g. Toyota" />
             </div>
-          ))}
+            <div className="demo-form__field">
+              <label className="demo-form__label" htmlFor="model">Vehicle Model</label>
+              <input className="demo-form__input" id="model" type="text" placeholder="e.g. Camry" />
+            </div>
+          </div>
+          <div className="demo-form__row">
+            <div className="demo-form__field">
+              <label className="demo-form__label" htmlFor="year">Year</label>
+              <input className="demo-form__input" id="year" type="text" placeholder="e.g. 2019" />
+            </div>
+            <div className="demo-form__field">
+              <label className="demo-form__label" htmlFor="service">Service Needed</label>
+              <select className="demo-form__select" id="service">
+                <option>Oil Change</option>
+                <option>Brake Service</option>
+                <option>Check Engine Light</option>
+                <option>AC / Heating</option>
+                <option>Tire Service</option>
+                <option>Other (describe below)</option>
+              </select>
+            </div>
+          </div>
+          <div className="demo-form__field">
+            <label className="demo-form__label" htmlFor="name">Your Name</label>
+            <input className="demo-form__input" id="name" type="text" placeholder="First and last name" />
+          </div>
+          <div className="demo-form__row">
+            <div className="demo-form__field">
+              <label className="demo-form__label" htmlFor="phone">Phone</label>
+              <input className="demo-form__input" id="phone" type="tel" placeholder="(815) 555-0000" />
+            </div>
+            <div className="demo-form__field">
+              <label className="demo-form__label" htmlFor="email">Email</label>
+              <input className="demo-form__input" id="email" type="email" placeholder="you@example.com" />
+            </div>
+          </div>
+          <div className="demo-form__field">
+            <label className="demo-form__label" htmlFor="desc">Describe the Problem</label>
+            <input className="demo-form__input" id="desc" type="text" placeholder="e.g. Brakes squeaking when stopping" />
+          </div>
+          <button type="button" className="demo-form__submit">Request Appointment</button>
         </div>
       </div>
     </section>
 
-    {/* Booking CTA */}
-    <section className="demo-contact" id="book" style={{ background: "#b35414" }}>
+    {/* CTA */}
+    <section className="demo-contact" style={{ background: "#b35414" }}>
       <div className="demo-contact__inner">
-        <h2 className="demo-contact__title">Book Your Appointment</h2>
+        <h2 className="demo-contact__title">Have Questions?</h2>
         <p className="demo-contact__text">
-          Call (815) 555-0321 or use our online booking form. Same-day service available for most
-          repairs. Free estimates on all work.
+          Call (815) 555-0321 and talk to a real mechanic. Free estimates on all work, no appointment
+          needed for estimates.
         </p>
         <a href="tel:8155550321" className="demo-btn demo-btn--primary">
           <PhoneIcon size={20} /> Call (815) 555-0321
@@ -184,6 +267,7 @@ const AutoRepairDemo: React.FC = () => (
             <span>456 North Ave, Rockford, IL</span>
           </div>
           <div className="demo-contact__info-item">
+            <ClockIcon size={20} />
             <span className="demo-contact__info-label">Hours</span>
             <span>Mon–Fri 7AM–6PM, Sat 8AM–2PM</span>
           </div>

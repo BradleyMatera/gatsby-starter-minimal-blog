@@ -3,20 +3,32 @@ import type { HeadFC } from "gatsby";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
 import DemoLayout from "../../features/demos/DemoLayout";
-import { StarIcon, MapPinIcon, PhoneIcon, LeafIcon, TreeIcon, SnowflakeIcon, DropletIcon, FlameIcon } from "../../site/icons";
+import { StarIcon, MapPinIcon, PhoneIcon, LeafIcon, TreeIcon, SnowflakeIcon, DropletIcon, FlameIcon, CheckIcon } from "../../site/icons";
 
 const pathname = "/demos/landscaping/";
 const pageTitle = "GreenScape Pro — Professional Landscaping in Rockford, IL | Demo Website";
 const pageDescription =
   "Demo landscaping company website with service packages, gallery, seasonal tips, and free quote form.";
 
-const services = [
-  { Icon: LeafIcon, name: "Lawn Care & Mowing", desc: "Weekly mowing, edging, fertilization, and weed control to keep your lawn healthy and green all season.", price: "from $45/visit" },
-  { Icon: TreeIcon, name: "Tree & Shrub Care", desc: "Pruning, trimming, tree removal, and stump grinding by certified arborists.", price: "from $120" },
-  { Icon: FlameIcon, name: "Hardscaping", desc: "Patios, retaining walls, walkways, and fire pits built with natural stone and pavers.", price: "from $2,500" },
-  { Icon: DropletIcon, name: "Irrigation Systems", desc: "Installation, repair, and winterization of sprinkler systems for efficient watering.", price: "from $1,800" },
-  { Icon: LeafIcon, name: "Garden Design", desc: "Custom flower beds, perennial gardens, and seasonal color rotation designed for your space.", price: "from $650" },
-  { Icon: SnowflakeIcon, name: "Snow Removal", desc: "Driveway and sidewalk plowing, salting, and ice management for residential and commercial.", price: "from $35/visit" },
+const beforeAfter = [
+  { title: "Backyard Patio Transformation", desc: "Removed overgrown shrubs, installed paver patio, fire pit, and landscape lighting" },
+  { title: "Front Yard Curb Appeal", desc: "New sod, edging, perennial beds, and mulch refresh for a Rockford ranch home" },
+  { title: "Hillside Retaining Wall", desc: "Built natural stone retaining wall to fix erosion and create level garden space" },
+  { title: "Full Lawn Renovation", desc: "Aerated, overseeded, and fertilized — dead lawn to thick green turf in 6 weeks" },
+];
+
+const process = [
+  { title: "Free Consultation", desc: "I visit your property, listen to what you want, and take measurements. No pressure, no cost." },
+  { title: "Design & Estimate", desc: "Within 5 days you get a detailed plan, material list, and fixed-price quote. No surprises." },
+  { title: "Installation", desc: "My crew shows up on the scheduled date and completes the work on time. Clean job site daily." },
+  { title: "Ongoing Care", desc: "Optional maintenance plans keep your investment looking great. Month-to-month, cancel anytime." },
+];
+
+const seasonal = [
+  { Icon: FlameIcon, season: "Spring", title: "Cleanup & Prep", list: ["Debris removal", "Bed edging", "Pre-emergent", "Aeration"] },
+  { Icon: LeafIcon, season: "Summer", title: "Maintenance", list: ["Weekly mowing", "Fertilizing", "Weed control", "Pruning"] },
+  { Icon: TreeIcon, season: "Fall", title: "Winter Prep", list: ["Leaf removal", "Aeration", "Overseeding", "Winterizer"] },
+  { Icon: SnowflakeIcon, season: "Winter", title: "Snow & Ice", list: ["Driveway plowing", "Sidewalk clearing", "Salting", "Ice management"] },
 ];
 
 const testimonials = [
@@ -24,6 +36,8 @@ const testimonials = [
   { text: "Reliable, professional, and reasonably priced. They show up when they say they will and the lawn has never looked better.", author: "Dave T.", location: "Rockford, IL" },
   { text: "After the big snowstorm last winter, they were out at 5 AM clearing our driveway. Best snow removal service in the area.", author: "Patricia L.", location: "Machesney Park, IL" },
 ];
+
+const serviceAreas = ["Rockford", "Loves Park", "Machesney Park", "Byron", "Roscoe", "Rockton", "South Beloit", "Pecatonica", "Winnebago", "Freeport"];
 
 const StarRating: React.FC = () => (
   <div className="demo-testimonial__stars" aria-label="5 out of 5 stars">
@@ -39,12 +53,12 @@ const LandscapingDemo: React.FC = () => (
         <span className="demo-hero__tagline">Serving Rockford & Northwest Illinois Since 2015</span>
         <h1 className="demo-hero__title">GreenScape Pro</h1>
         <p className="demo-hero__subtitle">
-          Professional landscaping, lawn care, hardscaping, and snow removal for homes and businesses
-          across the Rockford area. Free estimates, satisfaction guaranteed.
+          Professional landscaping, lawn care, hardscaping, and snow removal. Free estimates,
+          satisfaction guaranteed, and the same crew every visit.
         </p>
         <div className="demo-hero__actions">
           <a href="#quote" className="demo-btn demo-btn--primary">Get a Free Quote</a>
-          <a href="#services" className="demo-btn demo-btn--ghost">View Services</a>
+          <a href="#gallery" className="demo-btn demo-btn--ghost">View Our Work</a>
         </div>
       </div>
     </section>
@@ -61,20 +75,65 @@ const LandscapingDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Services */}
-    <section className="demo-section demo-section--alt" id="services">
+    {/* Before/After Gallery — the #1 thing landscaping customers want to see */}
+    <section className="demo-section demo-section--alt" id="gallery">
       <div className="demo-section__inner">
-        <h2 className="demo-section__title">Our Services</h2>
-        <p className="demo-section__subtitle">Full-service landscaping for residential and commercial properties. Year-round care.</p>
-        <div className="demo-services">
-          {services.map((s) => {
+        <h2 className="demo-section__title">Before &amp; After</h2>
+        <p className="demo-section__subtitle">Real projects we've completed for homeowners across the Rockford area.</p>
+        <div className="demo-before-after">
+          {beforeAfter.map((p) => (
+            <div key={p.title} className="demo-before-after__item">
+              <div className="demo-before-after__images">
+                <div className="demo-before-after__before">
+                  <span className="demo-before-after__label">Before</span>
+                </div>
+                <div className="demo-before-after__after">
+                  <span className="demo-before-after__label">After</span>
+                </div>
+              </div>
+              <div className="demo-before-after__body">
+                <h3 className="demo-before-after__title">{p.title}</h3>
+                <p className="demo-before-after__desc">{p.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* Process — landscaping customers want to know how it works */}
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">How It Works</h2>
+        <p className="demo-section__subtitle">From first call to finished project — here's exactly what to expect.</p>
+        <div className="demo-process">
+          {process.map((step, i) => (
+            <div key={step.title} className="demo-process__step">
+              <div className="demo-process__number">{i + 1}</div>
+              <h3 className="demo-process__title">{step.title}</h3>
+              <p className="demo-process__desc">{step.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* Seasonal Services — landscaping is seasonal, this is industry-specific */}
+    <section className="demo-section demo-section--alt">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Year-Round Service</h2>
+        <p className="demo-section__subtitle">What we do changes with the seasons. Here's what's included each quarter.</p>
+        <div className="demo-seasonal">
+          {seasonal.map((s) => {
             const { Icon } = s;
             return (
-              <div key={s.name} className="demo-service">
-                <div className="demo-service__icon"><Icon size={28} /></div>
-                <h3 className="demo-service__name">{s.name}</h3>
-                <p className="demo-service__desc">{s.desc}</p>
-                <div className="demo-service__price">{s.price}</div>
+              <div key={s.season} className="demo-seasonal__card">
+                <div className="demo-seasonal__icon"><Icon size={24} /></div>
+                <div className="demo-seasonal__season">{s.season}</div>
+                <h3 className="demo-seasonal__title">{s.title}</h3>
+                <ul className="demo-seasonal__list">
+                  {s.list.map((item) => <li key={item}>{item}</li>)}
+                </ul>
               </div>
             );
           })}
@@ -82,56 +141,54 @@ const LandscapingDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* About */}
+    {/* Service Packages with pricing — landscaping customers want packages */}
     <section className="demo-section">
       <div className="demo-section__inner">
-        <div className="demo-about">
-          <div className="demo-about__image" style={{ background: "linear-gradient(135deg, #1a6b3a, #0d3318)" }} />
-          <div>
-            <h2 className="demo-about__title">Locally Owned. Locally Trusted.</h2>
-            <p className="demo-about__text">
-              GreenScape Pro was founded in 2015 by a Rockford native who grew up mowing lawns in
-              Winnebago County. What started as a summer job is now a full-service landscaping
-              company serving over 500 properties across Northwest Illinois.
-            </p>
-            <p className="demo-about__text">
-              We're not a franchise or a faceless corporation. When you call, you talk to the owner.
-              When we show up, it's the same crew every time. And when we say we'll be there, we're
-              there — rain, shine, or snow.
-            </p>
+        <h2 className="demo-section__title">Service Packages</h2>
+        <p className="demo-section__subtitle">Bundle services and save. All packages are month-to-month — no contracts.</p>
+        <div className="demo-plans">
+          <div className="demo-plan">
+            <h3 className="demo-plan__name">Basic Lawn</h3>
+            <div className="demo-plan__price">$45<span className="demo-plan__price-period">/visit</span></div>
+            <ul className="demo-plan__features">
+              <li><CheckIcon size={16} /> Weekly mowing</li>
+              <li><CheckIcon size={16} /> Edging along walks</li>
+              <li><CheckIcon size={16} /> Blowing of hard surfaces</li>
+              <li style={{ color: "var(--demo-text-muted)", opacity: 0.5 }}><CheckIcon size={16} /> Fertilization</li>
+              <li style={{ color: "var(--demo-text-muted)", opacity: 0.5 }}><CheckIcon size={16} /> Weed control</li>
+              <li style={{ color: "var(--demo-text-muted)", opacity: 0.5 }}><CheckIcon size={16} /> Aeration</li>
+            </ul>
           </div>
-        </div>
-      </div>
-    </section>
-
-    {/* Seasonal Tips */}
-    <section className="demo-section demo-section--alt">
-      <div className="demo-section__inner">
-        <h2 className="demo-section__title">Seasonal Lawn Tips</h2>
-        <p className="demo-section__subtitle">Free advice from our team to keep your yard looking great year-round.</p>
-        <div className="demo-faq">
-          <div className="demo-faq__item">
-            <h3 className="demo-faq__question">Spring (March–May)</h3>
-            <p className="demo-faq__answer">Aerate your lawn, apply pre-emergent crabgrass control, and seed bare spots. Clean up winter debris and trim back perennials before new growth starts.</p>
+          <div className="demo-plan demo-plan--featured">
+            <h3 className="demo-plan__name">Complete Care</h3>
+            <div className="demo-plan__price">$89<span className="demo-plan__price-period">/visit</span></div>
+            <ul className="demo-plan__features">
+              <li><CheckIcon size={16} /> Weekly mowing &amp; edging</li>
+              <li><CheckIcon size={16} /> 5-step fertilization program</li>
+              <li><CheckIcon size={16} /> Weed &amp; grub control</li>
+              <li><CheckIcon size={16} /> Spring &amp; fall cleanup</li>
+              <li><CheckIcon size={16} /> Aeration &amp; overseeding</li>
+              <li><CheckIcon size={16} /> Priority scheduling</li>
+            </ul>
           </div>
-          <div className="demo-faq__item">
-            <h3 className="demo-faq__question">Summer (June–August)</h3>
-            <p className="demo-faq__answer">Water deeply 2-3 times per week rather than daily shallow watering. Mow at 3.5 inches to shade roots and retain moisture. Watch for grub damage in late July.</p>
-          </div>
-          <div className="demo-faq__item">
-            <h3 className="demo-faq__question">Fall (September–November)</h3>
-            <p className="demo-faq__answer">Fall fertilization is the most important feeding of the year. Aerate again, overseed thin areas, and don't let leaves smother the grass — mulch or remove them.</p>
-          </div>
-          <div className="demo-faq__item">
-            <h3 className="demo-faq__question">Winter (December–February)</h3>
-            <p className="demo-faq__answer">Stay off frozen grass to prevent damage. Mark driveway edges with stakes before snow falls. Book snow removal service early — we fill up by October.</p>
+          <div className="demo-plan">
+            <h3 className="demo-plan__name">Full Service</h3>
+            <div className="demo-plan__price">$149<span className="demo-plan__price-period">/visit</span></div>
+            <ul className="demo-plan__features">
+              <li><CheckIcon size={16} /> Everything in Complete Care</li>
+              <li><CheckIcon size={16} /> Garden bed maintenance</li>
+              <li><CheckIcon size={16} /> Pruning &amp; trimming</li>
+              <li><CheckIcon size={16} /> Mulching (2x/year)</li>
+              <li><CheckIcon size={16} /> Snow removal (winter)</li>
+              <li><CheckIcon size={16} /> Dedicated account manager</li>
+            </ul>
           </div>
         </div>
       </div>
     </section>
 
     {/* Reviews */}
-    <section className="demo-section">
+    <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">What Our Customers Say</h2>
         <div className="demo-testimonials">
@@ -147,13 +204,26 @@ const LandscapingDemo: React.FC = () => (
       </div>
     </section>
 
+    {/* Service Area — landscaping companies need to show where they work */}
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Areas We Serve</h2>
+        <p className="demo-section__subtitle">Based in Rockford, serving all of Northwest Illinois and Southern Wisconsin.</p>
+        <div className="demo-brands">
+          {serviceAreas.map((area) => (
+            <div key={area} className="demo-brand">{area}</div>
+          ))}
+        </div>
+      </div>
+    </section>
+
     {/* Quote CTA */}
     <section className="demo-contact" id="quote" style={{ background: "#1a6b3a" }}>
       <div className="demo-contact__inner">
         <h2 className="demo-contact__title">Get a Free Quote</h2>
         <p className="demo-contact__text">
-          Call us at (815) 555-0456 for a free, no-obligation estimate. We serve Rockford, Loves Park,
-          Machesney Park, Byron, Roscoe, and the surrounding Northwest Illinois area.
+          Call us at (815) 555-0456 for a free, no-obligation estimate. We'll come to your property,
+          take measurements, and send you a detailed quote within 5 days.
         </p>
         <a href="tel:8155550456" className="demo-btn demo-btn--primary">
           <PhoneIcon size={20} /> Call (815) 555-0456

@@ -3,40 +3,75 @@ import type { HeadFC } from "gatsby";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
 import DemoLayout from "../../features/demos/DemoLayout";
-import { StarIcon, MapPinIcon, PhoneIcon, FlameIcon, SnowflakeIcon, WindIcon, ClipboardIcon, AlertIcon, GearIcon, ShieldIcon } from "../../site/icons";
+import { StarIcon, MapPinIcon, PhoneIcon, FlameIcon, SnowflakeIcon, WindIcon, AlertIcon, ShieldIcon, CheckIcon, XIcon, ClockIcon } from "../../site/icons";
 
 const pathname = "/demos/hvac/";
 const pageTitle = "ComfortAir Heating & Cooling — Rockford HVAC | Demo Website";
 const pageDescription =
   "Demo HVAC company website with emergency service, maintenance plans, financing, and technician bios.";
 
-const services = [
-  { Icon: FlameIcon, name: "Furnace Repair & Installation", desc: "Fast, reliable furnace repair for all brands. New high-efficiency furnace installation with free estimates.", price: "Repair from $89" },
-  { Icon: SnowflakeIcon, name: "AC Repair & Installation", desc: "Central air repair, replacement, and new installation. We service all major brands and offer financing.", price: "Repair from $89" },
-  { Icon: WindIcon, name: "Indoor Air Quality", desc: "Air purifiers, humidifiers, UV lights, and duct cleaning to keep your home's air clean and healthy.", price: "from $299" },
-  { Icon: ClipboardIcon, name: "Maintenance Plans", desc: "Annual tune-ups, priority service, 15% repair discount, and no overtime fees. Peace of mind for one low price.", price: "$14.99/month" },
-  { Icon: WindIcon, name: "Ductless Mini-Splits", desc: "Zoned heating and cooling without ductwork. Perfect for additions, garages, and older homes.", price: "from $3,200" },
-  { Icon: AlertIcon, name: "24/7 Emergency Service", desc: "Heat out in January? AC down in July? We're available 24/7 for emergency repairs across the Rockford area.", price: "Available now" },
+const plans = [
+  {
+    name: "Basic",
+    price: "$9.99",
+    period: "/month",
+    features: [
+      { text: "1 annual tune-up", included: true },
+      { text: "10% repair discount", included: true },
+      { text: "Priority scheduling", included: true },
+      { text: "No overtime fees", included: false },
+      { text: "Free diagnostic with repair", included: false },
+      { text: "Transferable warranty", included: false },
+    ],
+  },
+  {
+    name: "Comfort",
+    price: "$14.99",
+    period: "/month",
+    featured: true,
+    features: [
+      { text: "2 annual tune-ups (heat + AC)", included: true },
+      { text: "15% repair discount", included: true },
+      { text: "Priority same-day service", included: true },
+      { text: "No overtime fees", included: true },
+      { text: "Free diagnostic with repair", included: true },
+      { text: "Transferable warranty", included: false },
+    ],
+  },
+  {
+    name: "Total Comfort",
+    price: "$24.99",
+    period: "/month",
+    features: [
+      { text: "2 annual tune-ups + plumbing check", included: true },
+      { text: "20% repair discount", included: true },
+      { text: "Guaranteed 2-hour response", included: true },
+      { text: "No overtime fees ever", included: true },
+      { text: "Free diagnostic, even if no repair", included: true },
+      { text: "Transferable to new owner", included: true },
+    ],
+  },
 ];
 
-const team = [
-  { initials: "JM", name: "John Martinez", role: "Owner & Master HVAC Tech (20 yrs)" },
-  { initials: "KS", name: "Karen Schultz", role: "Service Manager (12 yrs)" },
-  { initials: "TB", name: "Tom Brown", role: "Lead Installer (15 yrs)" },
-  { initials: "AL", name: "Alex Lee", role: "Service Technician (8 yrs)" },
+const brands = ["Carrier", "Trane", "Lennox", "Goodman", "Rheem", "York", "American Standard", "Amana", "Bryant", "Ruud", "Heil", "Tempstar"];
+
+const coupons = [
+  { label: "New Customer Special", offer: "$59 Tune-Up", desc: "Full heating or AC tune-up. 21-point inspection. New customers only.", code: "TUNE59" },
+  { label: "Furnace Season", offer: "$200 OFF", desc: "New high-efficiency furnace installation. Includes free thermostat.", code: "FURNACE200" },
+  { label: "AC Season", offer: "FREE Diagnostic", desc: "We waive the $89 diagnostic fee if you approve the repair.", code: "FREEDIAG" },
+];
+
+const faqs = [
+  { q: "How much does a new furnace cost?", a: "A new high-efficiency furnace typically runs $3,500–$6,500 installed, depending on size and efficiency rating. We offer free in-home estimates and financing options with payments as low as $59/month." },
+  { q: "Do you offer financing?", a: "Yes. We partner with Synchrony Financial to offer 0% APR for 12 months on qualified purchases, and longer terms with low monthly payments. Apply online or in person — most decisions are instant." },
+  { q: "What does the maintenance plan include?", a: "Two annual tune-ups (heating and cooling), priority same-day service, 15% discount on all repairs, no overtime fees, and a written record of all service for warranty purposes." },
+  { q: "What areas do you serve?", a: "Rockford, Loves Park, Machesney Park, Byron, Roscoe, Rockton, South Beloit, Pecatonica, Winnebago, and Freeport. If you're in Northwest Illinois, we can help." },
 ];
 
 const testimonials = [
   { text: "Our furnace died on the coldest night of the year and John was at our house within an hour. Fixed it in 30 minutes. Lifesavers.", author: "Robert D.", location: "Rockford, IL" },
   { text: "The maintenance plan is worth every penny. They caught a cracked heat exchanger during a tune-up that could have been dangerous.", author: "Maria G.", location: "Loves Park, IL" },
   { text: "Fair pricing, honest advice, and no upselling. They told me my AC just needed a capacitor, not a whole new unit like another company said.", author: "Steve W.", location: "Byron, IL" },
-];
-
-const faqs = [
-  { q: "How much does a new furnace cost?", a: "A new high-efficiency furnace typically runs $3,500–$6,500 installed, depending on size and efficiency rating. We offer free in-home estimates and financing options with payments as low as $59/month." },
-  { q: "Do you offer financing?", a: "Yes. We partner with Synchrony Financial to offer 0% APR for 12 months on qualified purchases, and longer terms with low monthly payments. Apply online or in person." },
-  { q: "What does the maintenance plan include?", a: "Two annual tune-ups (heating and cooling), priority same-day service, 15% discount on all repairs, no overtime fees, and a written record of all service for warranty purposes." },
-  { q: "What areas do you serve?", a: "Rockford, Loves Park, Machesney Park, Byron, Roscoe, Rockton, South Beloit, Pecatonica, Winnebago, and Freeport. If you're in Northwest Illinois, we can help." },
 ];
 
 const StarRating: React.FC = () => (
@@ -47,31 +82,31 @@ const StarRating: React.FC = () => (
 
 const HvacDemo: React.FC = () => (
   <DemoLayout demoName="ComfortAir Heating & Cooling" industry="HVAC / Home Services" themeColor="#2980b9">
-    {/* Hero */}
+    {/* Hero — emergency service is THE priority for HVAC */}
     <section className="demo-hero" style={{ background: "linear-gradient(135deg, #1a5276, #0d2b3a)" }}>
       <div className="demo-hero__inner">
-        <span className="demo-hero__tagline">24/7 Emergency Service · Rockford's Trusted HVAC Since 2010</span>
+        <span className="demo-hero__tagline">24/7 Emergency Service · Licensed & Insured</span>
         <h1 className="demo-hero__title">ComfortAir Heating &amp; Cooling</h1>
         <p className="demo-hero__subtitle">
-          Furnace repair, AC installation, maintenance plans, and indoor air quality for homes and
-          businesses across Northwest Illinois. Licensed, bonded, and insured.
+          Furnace out in January? AC down in July? We're available 24/7. Same-day service across
+          Rockford and Northwest Illinois since 2010.
         </p>
         <div className="demo-hero__actions">
           <a href="tel:8155550789" className="demo-btn demo-btn--primary">
-            <PhoneIcon size={20} /> (815) 555-0789
+            <PhoneIcon size={20} /> Call (815) 555-0789
           </a>
           <a href="#services" className="demo-btn demo-btn--ghost">View Services</a>
         </div>
       </div>
     </section>
 
-    {/* Emergency Banner */}
+    {/* Emergency Banner — HVAC sites always have this */}
     <div className="demo-emergency-banner">
       <AlertIcon size={20} />
       Heating or AC emergency? We're available 24/7 · Call (815) 555-0789 now
     </div>
 
-    {/* Stats */}
+    {/* Service icons row — quick visual of what they do */}
     <section className="demo-section">
       <div className="demo-section__inner">
         <div className="demo-stats">
@@ -83,68 +118,95 @@ const HvacDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Services */}
+    {/* Services — HVAC services are simpler, 4 main categories */}
     <section className="demo-section demo-section--alt" id="services">
       <div className="demo-section__inner">
-        <h2 className="demo-section__title">Our Services</h2>
-        <p className="demo-section__subtitle">Complete heating and cooling services for residential and commercial properties.</p>
+        <h2 className="demo-section__title">What We Do</h2>
+        <p className="demo-section__subtitle">Complete heating, cooling, and indoor air quality services for residential and commercial.</p>
         <div className="demo-services">
-          {services.map((s) => {
-            const { Icon } = s;
-            return (
-              <div key={s.name} className="demo-service">
-                <div className="demo-service__icon"><Icon size={28} /></div>
-                <h3 className="demo-service__name">{s.name}</h3>
-                <p className="demo-service__desc">{s.desc}</p>
-                <div className="demo-service__price">{s.price}</div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-
-    {/* About */}
-    <section className="demo-section">
-      <div className="demo-section__inner">
-        <div className="demo-about">
-          <div className="demo-about__image" style={{ background: "linear-gradient(135deg, #1a5276, #0d2b3a)" }} />
-          <div>
-            <h2 className="demo-about__title">Honest HVAC Service. No Games.</h2>
-            <p className="demo-about__text">
-              ComfortAir was founded in 2010 by John Martinez, a master HVAC technician with 20 years
-              of experience. The company was built on one principle: tell the truth, do the job right,
-              and charge a fair price.
-            </p>
-            <p className="demo-about__text">
-              We don't push unnecessary replacements. We don't add hidden fees. We diagnose the
-              problem, explain your options in plain English, and let you decide. That's why over
-              8,000 families in the Rockford area trust us with their heating and cooling.
-            </p>
+          <div className="demo-service">
+            <div className="demo-service__icon"><FlameIcon size={28} /></div>
+            <h3 className="demo-service__name">Heating</h3>
+            <p className="demo-service__desc">Furnace repair, installation, and maintenance for all brands. Heat pumps and boilers too.</p>
+            <div className="demo-service__price">Repair from $89</div>
+          </div>
+          <div className="demo-service">
+            <div className="demo-service__icon"><SnowflakeIcon size={28} /></div>
+            <h3 className="demo-service__name">Cooling</h3>
+            <p className="demo-service__desc">Central AC repair, replacement, and new installation. Ductless mini-splits for additions.</p>
+            <div className="demo-service__price">Repair from $89</div>
+          </div>
+          <div className="demo-service">
+            <div className="demo-service__icon"><WindIcon size={28} /></div>
+            <h3 className="demo-service__name">Indoor Air Quality</h3>
+            <p className="demo-service__desc">Air purifiers, humidifiers, UV lights, and duct cleaning for healthier home air.</p>
+            <div className="demo-service__price">from $299</div>
+          </div>
+          <div className="demo-service">
+            <div className="demo-service__icon"><AlertIcon size={28} /></div>
+            <h3 className="demo-service__name">24/7 Emergency</h3>
+            <p className="demo-service__desc">Available nights, weekends, and holidays. No answering service — you talk to a real tech.</p>
+            <div className="demo-service__price">Call anytime</div>
           </div>
         </div>
       </div>
     </section>
 
-    {/* Team */}
-    <section className="demo-section demo-section--alt">
+    {/* Maintenance Plans — HVAC companies live on maintenance plans */}
+    <section className="demo-section">
       <div className="demo-section__inner">
-        <h2 className="demo-section__title">Meet the Team</h2>
-        <p className="demo-section__subtitle">Licensed, experienced, and background-checked technicians.</p>
-        <div className="demo-team">
-          {team.map((m) => (
-            <div key={m.name}>
-              <div className="demo-team-member__avatar">{m.initials}</div>
-              <div className="demo-team-member__name">{m.name}</div>
-              <div className="demo-team-member__role">{m.role}</div>
+        <h2 className="demo-section__title">Maintenance Plans</h2>
+        <p className="demo-section__subtitle">Protect your equipment, skip the overtime fees, and get priority service. Cancel anytime.</p>
+        <div className="demo-plans">
+          {plans.map((plan) => (
+            <div key={plan.name} className={`demo-plan ${plan.featured ? "demo-plan--featured" : ""}`}>
+              <h3 className="demo-plan__name">{plan.name}</h3>
+              <div className="demo-plan__price">{plan.price}<span className="demo-plan__price-period">{plan.period}</span></div>
+              <ul className="demo-plan__features">
+                {plan.features.map((f) => (
+                  <li key={f.text} style={f.included ? {} : { color: "var(--demo-text-muted)", opacity: 0.5 }}>
+                    {f.included ? <CheckIcon size={16} /> : <XIcon size={16} />}
+                    {f.text}
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
       </div>
     </section>
 
-    {/* Reviews */}
+    {/* Coupons — HVAC companies always run seasonal specials */}
+    <section className="demo-section demo-section--alt">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Current Specials</h2>
+        <p className="demo-section__subtitle">Mention these codes when you call. Limited time offers.</p>
+        <div className="demo-coupons">
+          {coupons.map((c) => (
+            <div key={c.code} className="demo-coupon">
+              <div className="demo-coupon__label">{c.label}</div>
+              <div className="demo-coupon__offer">{c.offer}</div>
+              <p className="demo-coupon__desc">{c.desc}</p>
+              <div className="demo-coupon__code">Code: {c.code}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* Brands We Service — HVAC customers want to know if you can fix their unit */}
     <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Brands We Service</h2>
+        <p className="demo-section__subtitle">We repair and install all major brands. If yours isn't listed, call us — we can probably help.</p>
+        <div className="demo-brands">
+          {brands.map((b) => <div key={b} className="demo-brand">{b}</div>)}
+        </div>
+      </div>
+    </section>
+
+    {/* Reviews */}
+    <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">What Our Customers Say</h2>
         <div className="demo-testimonials">
@@ -161,7 +223,7 @@ const HvacDemo: React.FC = () => (
     </section>
 
     {/* FAQ */}
-    <section className="demo-section demo-section--alt">
+    <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Frequently Asked Questions</h2>
         <div className="demo-faq">
@@ -180,8 +242,8 @@ const HvacDemo: React.FC = () => (
       <div className="demo-contact__inner">
         <h2 className="demo-contact__title">Need Service Today?</h2>
         <p className="demo-contact__text">
-          Call (815) 555-0789 for same-day service or 24/7 emergency repairs. We serve Rockford,
-          Loves Park, Machesney Park, Byron, Roscoe, and all of Northwest Illinois.
+          Call (815) 555-0789 for same-day service or 24/7 emergency repairs. No answering service —
+          you talk to a real technician.
         </p>
         <a href="tel:8155550789" className="demo-btn demo-btn--primary">
           <PhoneIcon size={20} /> Call (815) 555-0789
@@ -193,6 +255,7 @@ const HvacDemo: React.FC = () => (
             <span>IL #058-204993</span>
           </div>
           <div className="demo-contact__info-item">
+            <ClockIcon size={20} />
             <span className="demo-contact__info-label">Hours</span>
             <span>24/7 Emergency</span>
           </div>

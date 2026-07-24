@@ -3,20 +3,71 @@ import type { HeadFC } from "gatsby";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
 import DemoLayout from "../../features/demos/DemoLayout";
-import { StarIcon, MapPinIcon, PhoneIcon, UtensilsIcon, FlameIcon, ClockIcon } from "../../site/icons";
+import { StarIcon, MapPinIcon, PhoneIcon, UtensilsIcon, ClockIcon, RingIcon, ClipboardIcon } from "../../site/icons";
 
 const pathname = "/demos/restaurant/";
 const pageTitle = "Riverside Grill — Rockford's Finest Dining | Demo Website";
 const pageDescription =
   "Demo restaurant website for Riverside Grill in Rockford, Illinois. Menu, reservations, hours, reviews, and photo gallery.";
 
-const menuItems = [
-  { name: "Wood-Grilled Ribeye", desc: "12oz USDA Choice ribeye with rosemary butter and roasted vegetables", price: "$34" },
-  { name: "Seared Salmon", desc: "Atlantic salmon with lemon-dill sauce, wild rice, and asparagus", price: "$26" },
-  { name: "Truffle Pasta", desc: "Hand-cut fettuccine with black truffle, parmesan, and cream sauce", price: "$22" },
-  { name: "Riverside Burger", desc: "Half-pound Angus beef, aged cheddar, caramelized onions, brioche bun", price: "$16" },
-  { name: "Walleye Special", desc: "Fresh Wisconsin walleye, beer-battered, with coleslaw and fries", price: "$24" },
-  { name: "Chocolate Lava Cake", desc: "Warm chocolate cake with vanilla bean ice cream and raspberry coulis", price: "$9" },
+const menuCategories = [
+  {
+    title: "Starters",
+    items: [
+      { name: "Seared Scallops", desc: "Pan-seared sea scallops, cauliflower puree, brown butter", price: "$16" },
+      { name: "Charcuterie Board", desc: "Cured meats, artisan cheeses, olives, house jam, crostini", price: "$22" },
+      { name: "French Onion Soup", desc: "Slow-simmered beef broth, caramelized onions, gruyere crouton", price: "$11" },
+    ],
+  },
+  {
+    title: "From the Grill",
+    items: [
+      { name: "Wood-Grilled Ribeye", desc: "12oz USDA Choice ribeye, rosemary butter, roasted vegetables", price: "$34" },
+      { name: "Filet Mignon", desc: "8oz tenderloin, red wine reduction, truffle mashed potatoes", price: "$42" },
+      { name: "Pork Chop", desc: "Bone-in chop, apple chutney, Brussels sprouts, bacon jam", price: "$28" },
+    ],
+  },
+  {
+    title: "From the Lake",
+    items: [
+      { name: "Seared Salmon", desc: "Atlantic salmon, lemon-dill sauce, wild rice, asparagus", price: "$26" },
+      { name: "Walleye Special", desc: "Fresh Wisconsin walleye, beer-battered, coleslaw, fries", price: "$24" },
+      { name: "Trout Almondine", desc: "Rainbow trout, brown butter almonds, capers, parsley", price: "$27" },
+    ],
+  },
+  {
+    title: "Pasta",
+    items: [
+      { name: "Truffle Fettuccine", desc: "Hand-cut fettuccine, black truffle, parmesan, cream sauce", price: "$22" },
+      { name: "Lobster Ravioli", desc: "House-made ravioli, lobster, vodka cream, fresh basil", price: "$29" },
+      { name: "Wild Mushroom Linguine", desc: "Mixed wild mushrooms, garlic, white wine, parmesan", price: "$19" },
+    ],
+  },
+  {
+    title: "Desserts",
+    items: [
+      { name: "Chocolate Lava Cake", desc: "Warm chocolate cake, vanilla bean ice cream, raspberry coulis", price: "$9" },
+      { name: "Crème Brûlée", desc: "Classic vanilla custard, caramelized sugar crust", price: "$8" },
+      { name: "Seasonal Tart", desc: "Ask your server for today's selection", price: "$10" },
+    ],
+  },
+  {
+    title: "Burgers & Sandwiches",
+    items: [
+      { name: "Riverside Burger", desc: "Half-pound Angus beef, aged cheddar, caramelized onions, brioche", price: "$16" },
+      { name: "Walleye Sandwich", desc: "Beer-battered walleye, tartar sauce, lettuce, tomato", price: "$15" },
+      { name: "French Dip", desc: "Shaved prime rib, provolone, au jus, horseradish cream", price: "$17" },
+    ],
+  },
+];
+
+const wineSelection = [
+  { name: "Cabernet Sauvignon", origin: "Napa Valley, CA", price: "$12 / $48" },
+  { name: "Pinot Noir", origin: "Willamette Valley, OR", price: "$11 / $44" },
+  { name: "Chardonnay", origin: "Sonoma Coast, CA", price: "$10 / $40" },
+  { name: "Sauvignon Blanc", origin: "Marlborough, NZ", price: "$9 / $36" },
+  { name: "Malbec", origin: "Mendoza, AR", price: "$10 / $38" },
+  { name: "Prosecco", origin: "Veneto, IT", price: "$8 / $32" },
 ];
 
 const testimonials = [
@@ -40,16 +91,26 @@ const RestaurantDemo: React.FC = () => (
         <h1 className="demo-hero__title">Riverside Grill</h1>
         <p className="demo-hero__subtitle">
           Wood-fired steaks, fresh Great Lakes fish, and hand-crafted pasta in the heart of downtown Rockford.
-          Join us for dinner Wednesday through Sunday.
         </p>
         <div className="demo-hero__actions">
           <a href="#menu" className="demo-btn demo-btn--primary">
             <UtensilsIcon size={20} /> View Menu
           </a>
-          <a href="#reserve" className="demo-btn demo-btn--ghost">Make a Reservation</a>
+          <a href="#reserve" className="demo-btn demo-btn--ghost">Reserve a Table</a>
         </div>
       </div>
     </section>
+
+    {/* Hours strip — restaurants need hours front and center */}
+    <div className="demo-trust-bar">
+      <div className="demo-trust-bar__inner">
+        <span className="demo-trust-badge"><ClockIcon size={18} /> Wed–Thu 4–10 PM</span>
+        <span className="demo-trust-badge"><ClockIcon size={18} /> Fri 4–11 PM</span>
+        <span className="demo-trust-badge"><ClockIcon size={18} /> Sat 3–11 PM</span>
+        <span className="demo-trust-badge"><ClockIcon size={18} /> Sun 3–9 PM</span>
+        <span className="demo-trust-badge"><MapPinIcon size={18} /> 123 Main St, Rockford</span>
+      </div>
+    </div>
 
     {/* Stats */}
     <section className="demo-section">
@@ -63,43 +124,96 @@ const RestaurantDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Menu */}
+    {/* Menu — categorized like a real restaurant menu, not a generic grid */}
     <section className="demo-section demo-section--alt" id="menu">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Our Menu</h2>
-        <p className="demo-section__subtitle">A selection of our most popular dishes. Full menu available in the restaurant.</p>
-        <div className="demo-menu">
-          {menuItems.map((item) => (
-            <div key={item.name} className="demo-menu-item">
-              <div className="demo-menu-item__image" />
-              <div>
-                <h3 className="demo-menu-item__name">{item.name}</h3>
-                <p className="demo-menu-item__desc">{item.desc}</p>
-                <div className="demo-menu-item__price">{item.price}</div>
-              </div>
+        <p className="demo-section__subtitle">Everything is made from scratch in our kitchen. No freezers, no shortcuts.</p>
+        <div className="demo-menu-categories">
+          {menuCategories.map((cat) => (
+            <div key={cat.title}>
+              <h3 className="demo-menu-category__title">{cat.title}</h3>
+              {cat.items.map((item) => (
+                <div key={item.name} className="demo-menu-category__item">
+                  <div className="demo-menu-category__item-info">
+                    <h4 className="demo-menu-category__item-name">{item.name}</h4>
+                    <p className="demo-menu-category__item-desc">{item.desc}</p>
+                  </div>
+                  <div className="demo-menu-category__item-price">{item.price}</div>
+                </div>
+              ))}
             </div>
           ))}
         </div>
       </div>
     </section>
 
-    {/* About */}
+    {/* Chef Spotlight — restaurants have chefs, not "teams" */}
     <section className="demo-section">
       <div className="demo-section__inner">
-        <div className="demo-about">
-          <div className="demo-about__image" />
+        <div className="demo-chef">
+          <div className="demo-chef__photo" />
           <div>
-            <h2 className="demo-about__title">A Rockford Original</h2>
-            <p className="demo-about__text">
-              Riverside Grill opened in 2008 with a simple idea: serve great food made with local
-              ingredients in a warm, welcoming atmosphere. Fifteen years later, we're still doing
-              exactly that.
+            <h2 className="demo-chef__name">Marcus Lindqvist</h2>
+            <p className="demo-chef__title">Executive Chef &amp; Owner</p>
+            <p className="demo-chef__bio">
+              Marcus grew up in Rockford and trained at the Culinary Institute of America in Hyde Park.
+              After a decade cooking in Chicago restaurants — including two Michelin-starred kitchens —
+              he came home to open Riverside Grill in 2008.
             </p>
-            <p className="demo-about__text">
-              Our chef sources produce from Illinois farms, fish from the Great Lakes, and beef from
-              Midwest ranches. Everything is made from scratch in our kitchen — no freezers, no
-              shortcuts, no compromises.
+            <p className="demo-chef__bio">
+              His philosophy is simple: source locally, cook from scratch, and let the ingredients speak.
+              He works directly with Illinois farmers, Great Lakes fisheries, and Midwest ranches to bring
+              the best possible food to your table.
             </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Wine Selection — restaurants have wine lists, not "service grids" */}
+    <section className="demo-section demo-section--alt">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">From the Cellar</h2>
+        <p className="demo-section__subtitle">A curated selection of wines by the glass and bottle. Ask your server for the full list.</p>
+        <div className="demo-wine-list">
+          <h3 className="demo-wine-list__title">By the Glass / Bottle</h3>
+          {wineSelection.map((w) => (
+            <div key={w.name} className="demo-wine-list__item">
+              <div>
+                <div className="demo-wine-list__item-name">{w.name}</div>
+                <div className="demo-wine-list__item-origin">{w.origin}</div>
+              </div>
+              <div className="demo-wine-list__item-price">{w.price}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* Private Events — restaurants host events */}
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Private Events</h2>
+        <p className="demo-section__subtitle">Host your next celebration with us. Private dining and semi-private spaces available.</p>
+        <div className="demo-events">
+          <div className="demo-event-card">
+            <div className="demo-event-card__icon"><RingIcon size={24} /></div>
+            <h3 className="demo-event-card__title">Rehearsal Dinners</h3>
+            <p className="demo-event-card__desc">Custom prefix or full menu. Private dining room with dedicated server.</p>
+            <div className="demo-event-card__capacity">Up to 30 guests</div>
+          </div>
+          <div className="demo-event-card">
+            <div className="demo-event-card__icon"><UtensilsIcon size={24} /></div>
+            <h3 className="demo-event-card__title">Corporate Dinners</h3>
+            <p className="demo-event-card__desc">Impress clients or celebrate team milestones. Set menus or a la carte.</p>
+            <div className="demo-event-card__capacity">Up to 50 guests</div>
+          </div>
+          <div className="demo-event-card">
+            <div className="demo-event-card__icon"><ClipboardIcon size={24} /></div>
+            <h3 className="demo-event-card__title">Holiday Parties</h3>
+            <p className="demo-event-card__desc">Book early for November and December. Full venue buyout available.</p>
+            <div className="demo-event-card__capacity">Up to 120 guests</div>
           </div>
         </div>
       </div>
@@ -119,34 +233,6 @@ const RestaurantDemo: React.FC = () => (
               <div className="demo-testimonial__location">{t.location}</div>
             </div>
           ))}
-        </div>
-      </div>
-    </section>
-
-    {/* Hours & Location */}
-    <section className="demo-section">
-      <div className="demo-section__inner">
-        <div className="demo-about">
-          <div>
-            <h2 className="demo-about__title">Hours &amp; Location</h2>
-            <table className="demo-hours">
-              <tbody>
-                <tr><th>Monday</th><td>Closed</td></tr>
-                <tr><th>Tuesday</th><td>Closed</td></tr>
-                <tr><th>Wednesday</th><td>4:00 PM – 10:00 PM</td></tr>
-                <tr><th>Thursday</th><td>4:00 PM – 10:00 PM</td></tr>
-                <tr><th>Friday</th><td>4:00 PM – 11:00 PM</td></tr>
-                <tr><th>Saturday</th><td>3:00 PM – 11:00 PM</td></tr>
-                <tr><th>Sunday</th><td>3:00 PM – 9:00 PM</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div>
-            <div className="demo-map">
-              <MapPinIcon size={32} />
-              123 Main Street, Rockford, IL 61101
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -174,7 +260,6 @@ const RestaurantDemo: React.FC = () => (
             <span>(815) 555-0123</span>
           </div>
           <div className="demo-contact__info-item">
-            <ClockIcon size={20} />
             <span className="demo-contact__info-label">Email</span>
             <span>info@riversidegrill.com</span>
           </div>

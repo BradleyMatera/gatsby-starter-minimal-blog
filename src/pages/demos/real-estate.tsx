@@ -3,7 +3,7 @@ import type { HeadFC } from "gatsby";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
 import DemoLayout from "../../features/demos/DemoLayout";
-import { StarIcon, MapPinIcon, PhoneIcon, HouseIcon } from "../../site/icons";
+import { StarIcon, MapPinIcon, PhoneIcon, HouseIcon, SearchIcon } from "../../site/icons";
 
 const pathname = "/demos/real-estate/";
 const pageTitle = "Rockford Heritage Realty — Real Estate | Demo Website";
@@ -11,19 +11,28 @@ const pageDescription =
   "Demo real estate office website with featured listings, agent profiles, market reports, and neighborhood guides.";
 
 const listings = [
-  { price: "$285,000", title: "4 Bed, 2.5 Bath Colonial in East Rockford", details: ["4 BD", "2.5 BA", "2,100 sqft", "0.3 acres"] },
-  { price: "$189,000", title: "3 Bed Ranch in Loves Park — Updated Kitchen", details: ["3 BD", "2 BA", "1,450 sqft", "0.2 acres"] },
-  { price: "$425,000", title: "5 Bed Luxury Home — Roscoe, IL", details: ["5 BD", "3 BA", "3,200 sqft", "1.1 acres"] },
-  { price: "$145,000", title: "2 Bed Condo — Downtown Rockford", details: ["2 BD", "1 BA", "980 sqft", "Condo"] },
-  { price: "$365,000", title: "4 Bed New Build — Rockton, IL", details: ["4 BD", "2.5 BA", "2,400 sqft", "0.4 acres"] },
-  { price: "$225,000", title: "3 Bed Split Level — Byron, IL", details: ["3 BD", "2 BA", "1,680 sqft", "0.3 acres"] },
+  { price: "$285,000", title: "4 Bed Colonial in East Rockford", address: "1427 Eastwood Dr, Rockford, IL", beds: 4, baths: 2.5, sqft: "2,100", badge: "New" },
+  { price: "$189,000", title: "3 Bed Ranch — Updated Kitchen", address: "882 Maple Ln, Loves Park, IL", beds: 3, baths: 2, sqft: "1,450", badge: "Price Reduced" },
+  { price: "$425,000", title: "5 Bed Luxury Home on 1.1 Acres", address: "3401 River Rd, Roscoe, IL", beds: 5, baths: 3, sqft: "3,200", badge: "Open Sat" },
+  { price: "$145,000", title: "2 Bed Condo — Downtown Rockford", address: "211 N Main St #4B, Rockford, IL", beds: 2, baths: 1, sqft: "980", badge: null },
+  { price: "$365,000", title: "4 Bed New Build — Rockton", address: "55 Stonebridge Ct, Rockton, IL", beds: 4, baths: 2.5, sqft: "2,400", badge: "New Construction" },
+  { price: "$225,000", title: "3 Bed Split Level — Byron", address: "718 Oak St, Byron, IL", beds: 3, baths: 2, sqft: "1,680", badge: null },
 ];
 
 const agents = [
-  { initials: "SH", name: "Sarah Henderson", role: "Broker/Owner · 18 years experience" },
-  { initials: "MK", name: "Mike Kowalski", role: "Realtor · 12 years experience" },
-  { initials: "JD", name: "Jessica Davis", role: "Realtor · 7 years experience" },
-  { initials: "RB", name: "Robert Brown", role: "Realtor · 10 years experience" },
+  { initials: "SH", name: "Sarah Henderson", title: "Broker/Owner", bio: "18 years selling homes in Rockford. Specializes in historic homes and first-time buyers.", sales: "340+ sold", rating: "4.9" },
+  { initials: "MK", name: "Mike Kowalski", title: "Realtor", bio: "12 years experience. Rockford native. Expert in investment properties and multi-family.", sales: "210+ sold", rating: "4.8" },
+  { initials: "JD", name: "Jessica Davis", title: "Realtor", bio: "7 years. Roscoe and Rockton specialist. Works with relocating families and new construction.", sales: "130+ sold", rating: "5.0" },
+  { initials: "RB", name: "Robert Brown", title: "Realtor", bio: "10 years. Commercial and residential. Byron and Freeport market expert.", sales: "180+ sold", rating: "4.9" },
+];
+
+const neighborhoods = [
+  { name: "East Rockford", desc: "Established neighborhoods with mature trees, larger lots, and great schools.", stat: "Median: $245K" },
+  { name: "Loves Park", desc: "Family-friendly with parks, affordable homes, and easy highway access.", stat: "Median: $175K" },
+  { name: "Roscoe", desc: "Growing community with new construction, top-rated schools, and rural feel.", stat: "Median: $310K" },
+  { name: "Byron", desc: "Small-town charm with a strong community and great value per square foot.", stat: "Median: $198K" },
+  { name: "Rockton", desc: "Historic village on the Rock River. Quaint downtown and excellent schools.", stat: "Median: $265K" },
+  { name: "Downtown Rockford", desc: "Lofts, condos, and walkable living near restaurants, bars, and the river.", stat: "Median: $155K" },
 ];
 
 const testimonials = [
@@ -41,50 +50,86 @@ const StarRating: React.FC = () => (
 const RealEstateDemo: React.FC = () => (
   <DemoLayout demoName="Rockford Heritage Realty" industry="Real Estate" themeColor="#8e44ad">
     {/* Hero */}
-    <section className="demo-hero" style={{ background: "linear-gradient(135deg, #6c3483, #2c1140)" }}>
+    <section className="demo-hero" style={{ background: "linear-gradient(135deg, #6c3483, #2c1140)", paddingBottom: "5rem" }}>
       <div className="demo-hero__inner">
         <span className="demo-hero__tagline">Rockford's Trusted Real Estate Team Since 2006</span>
-        <h1 className="demo-hero__title">Rockford Heritage Realty</h1>
+        <h1 className="demo-hero__title">Find Your Next Home</h1>
         <p className="demo-hero__subtitle">
-          Buying or selling a home in Rockford, Loves Park, Roscoe, Byron, or anywhere in Northwest
-          Illinois? Our experienced agents know the market inside and out.
+          1,200+ homes sold across Rockford, Loves Park, Roscoe, Byron, and Rockton.
+          Local agents who know the market that Zillow can't tell you.
         </p>
-        <div className="demo-hero__actions">
-          <a href="#listings" className="demo-btn demo-btn--primary">View Listings</a>
-          <a href="#contact" className="demo-btn demo-btn--ghost">Contact an Agent</a>
-        </div>
       </div>
     </section>
 
-    {/* Stats */}
-    <section className="demo-section">
-      <div className="demo-section__inner">
-        <div className="demo-stats">
-          <div><div className="demo-stat__number">$450M+</div><div className="demo-stat__label">Total Sales</div></div>
-          <div><div className="demo-stat__number">1,200+</div><div className="demo-stat__label">Homes Sold</div></div>
-          <div><div className="demo-stat__number">18</div><div className="demo-stat__label">Years in Rockford</div></div>
-          <div><div className="demo-stat__number">4.9</div><div className="demo-stat__label">Client Rating</div></div>
+    {/* Property Search Bar — real estate sites have search bars */}
+    <div className="demo-section__inner" style={{ padding: "0 1.5rem" }}>
+      <div className="demo-search-bar">
+        <div className="demo-form__field" style={{ margin: 0 }}>
+          <label className="demo-form__label">Location</label>
+          <select className="demo-form__select">
+            <option>Any Area</option>
+            <option>Rockford</option>
+            <option>Loves Park</option>
+            <option>Roscoe</option>
+            <option>Byron</option>
+            <option>Rockton</option>
+          </select>
         </div>
+        <div className="demo-form__field" style={{ margin: 0 }}>
+          <label className="demo-form__label">Price Range</label>
+          <select className="demo-form__select">
+            <option>Any Price</option>
+            <option>Under $150K</option>
+            <option>$150K - $250K</option>
+            <option>$250K - $400K</option>
+            <option>$400K+</option>
+          </select>
+        </div>
+        <div className="demo-form__field" style={{ margin: 0 }}>
+          <label className="demo-form__label">Bedrooms</label>
+          <select className="demo-form__select">
+            <option>Any</option>
+            <option>2+</option>
+            <option>3+</option>
+            <option>4+</option>
+            <option>5+</option>
+          </select>
+        </div>
+        <button type="button" className="demo-form__submit" style={{ width: "auto", padding: "0.75rem 1.5rem", margin: 0, display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <SearchIcon size={18} /> Search
+        </button>
       </div>
-    </section>
+    </div>
 
-    {/* Featured Listings */}
-    <section className="demo-section demo-section--alt" id="listings">
+    {/* Featured Listings — THE main content of a real estate site */}
+    <section className="demo-section" id="listings">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Featured Listings</h2>
-        <p className="demo-section__subtitle">Current homes for sale across the Rockford area. Updated daily.</p>
+        <p className="demo-section__subtitle">Current homes for sale across the Rockford area. Updated daily from the MLS.</p>
         <div className="demo-listings">
           {listings.map((l) => (
-            <div key={l.title} className="demo-listing">
-              <div className="demo-listing__image">
-                <HouseIcon size={40} />
+            <div key={l.title} className="demo-listing-detail">
+              <div className="demo-listing-detail__image">
+                {l.badge && <div className="demo-listing-detail__badge">{l.badge}</div>}
               </div>
-              <div className="demo-listing__body">
-                <div className="demo-listing__price">{l.price}</div>
-                <h3 className="demo-listing__title">{l.title}</h3>
-                <div className="demo-listing__details">
-                  {l.details.map((d) => <span key={d}>{d}</span>)}
+              <div className="demo-listing-detail__body">
+                <div className="demo-listing-detail__price">{l.price}</div>
+                <h3 className="demo-listing-detail__title">{l.title}</h3>
+                <div className="demo-listing-detail__specs">
+                  <div className="demo-listing-detail__spec">
+                    <div className="demo-listing-detail__spec-number">{l.beds}</div>
+                    <div className="demo-listing-detail__spec-label">Beds</div>
+                  </div>
+                  <div className="demo-listing-detail__spec">
+                    <div className="demo-listing-detail__spec-number">{l.baths}</div>
+                    <div className="demo-listing-detail__spec-label">Baths</div>
+                  </div>
+                  <div className="demo-listing-detail__spec">
+                    <div className="demo-listing-detail__spec-number">{l.sqft}</div>
+                    <div className="demo-listing-detail__spec-label">Sq Ft</div>
+                  </div>
                 </div>
+                <p className="demo-listing-detail__address">{l.address}</p>
               </div>
             </div>
           ))}
@@ -92,38 +137,58 @@ const RealEstateDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* About */}
-    <section className="demo-section">
+    {/* Market Dashboard — real estate is data-driven */}
+    <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
-        <div className="demo-about">
-          <div className="demo-about__image" style={{ background: "linear-gradient(135deg, #6c3483, #2c1140)" }} />
-          <div>
-            <h2 className="demo-about__title">Local Experts. Proven Results.</h2>
-            <p className="demo-about__text">
-              Rockford Heritage Realty has been helping families buy and sell homes across Northwest
-              Illinois since 2006. We're not a national chain — we're your neighbors.
-            </p>
-            <p className="demo-about__text">
-              Our agents live in the communities they serve. We know which neighborhoods have the best
-              schools, which areas are growing, and where to find the best value. When you work with
-              us, you get local knowledge that Zillow can't tell you.
-            </p>
-          </div>
+        <h2 className="demo-section__title">Rockford Market Report</h2>
+        <p className="demo-section__subtitle">Live data from the Rockford MLS — updated monthly.</p>
+        <div className="demo-stats">
+          <div><div className="demo-stat__number">$195K</div><div className="demo-stat__label">Median Home Price</div></div>
+          <div><div className="demo-stat__number">23 days</div><div className="demo-stat__label">Avg. Days on Market</div></div>
+          <div><div className="demo-stat__number">98%</div><div className="demo-stat__label">Sale-to-List Ratio</div></div>
+          <div><div className="demo-stat__number">+4.2%</div><div className="demo-stat__label">Price Change (YoY)</div></div>
         </div>
       </div>
     </section>
 
-    {/* Agents */}
+    {/* Neighborhood Guides — buyers research neighborhoods */}
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Neighborhood Guides</h2>
+        <p className="demo-section__subtitle">Local knowledge that Zillow can't tell you. We live in these communities.</p>
+        <div className="demo-neighborhoods">
+          {neighborhoods.map((n) => (
+            <div key={n.name} className="demo-neighborhood">
+              <div className="demo-neighborhood__image" />
+              <div className="demo-neighborhood__body">
+                <h3 className="demo-neighborhood__name">{n.name}</h3>
+                <p className="demo-neighborhood__desc">{n.desc}</p>
+                <div className="demo-neighborhood__stat"><strong>{n.stat}</strong></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* Agent Bios — real estate is relationship-based, agents need full bios */}
     <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Meet Our Agents</h2>
         <p className="demo-section__subtitle">Experienced, licensed, and dedicated to finding your perfect home.</p>
-        <div className="demo-team">
+        <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
           {agents.map((a) => (
-            <div key={a.name}>
-              <div className="demo-team-member__avatar">{a.initials}</div>
-              <div className="demo-team-member__name">{a.name}</div>
-              <div className="demo-team-member__role">{a.role}</div>
+            <div key={a.name} className="demo-agent">
+              <div className="demo-agent__photo">{a.initials}</div>
+              <div>
+                <h3 className="demo-agent__name">{a.name}</h3>
+                <p className="demo-agent__title">{a.title}</p>
+                <p className="demo-agent__bio">{a.bio}</p>
+                <div className="demo-agent__stats">
+                  <span className="demo-agent__stat"><strong>{a.sales}</strong></span>
+                  <span className="demo-agent__stat"><strong>{a.rating}</strong> rating</span>
+                </div>
+              </div>
             </div>
           ))}
         </div>
@@ -147,27 +212,34 @@ const RealEstateDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Market Report */}
+    {/* Split CTA — buyers and sellers get different CTAs */}
     <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
-        <h2 className="demo-section__title">Rockford Area Market Report</h2>
-        <p className="demo-section__subtitle">Current market data for the Rockford metro area — updated monthly.</p>
-        <div className="demo-stats">
-          <div><div className="demo-stat__number">$195K</div><div className="demo-stat__label">Median Home Price</div></div>
-          <div><div className="demo-stat__number">23 days</div><div className="demo-stat__label">Avg. Days on Market</div></div>
-          <div><div className="demo-stat__number">98%</div><div className="demo-stat__label">Sale-to-List Ratio</div></div>
-          <div><div className="demo-stat__number">+4.2%</div><div className="demo-stat__label">Price Change (YoY)</div></div>
+        <div className="demo-split-cta">
+          <div className="demo-split-cta__card">
+            <h3 className="demo-split-cta__title">Thinking of Selling?</h3>
+            <p className="demo-split-cta__desc">Get a free home valuation in 24 hours. See what your home is worth in today's market.</p>
+            <a href="tel:8155550567" className="demo-split-cta__btn">
+              <HouseIcon size={18} /> Get My Home Value
+            </a>
+          </div>
+          <div className="demo-split-cta__card">
+            <h3 className="demo-split-cta__title">Ready to Buy?</h3>
+            <p className="demo-split-cta__desc">Free buyer consultation. We'll help you find the right home and negotiate the best price.</p>
+            <a href="tel:8155550567" className="demo-split-cta__btn">
+              <PhoneIcon size={18} /> Talk to an Agent
+            </a>
+          </div>
         </div>
       </div>
     </section>
 
-    {/* CTA */}
-    <section className="demo-contact" id="contact" style={{ background: "#6c3483" }}>
+    {/* Contact */}
+    <section className="demo-contact" style={{ background: "#6c3483" }}>
       <div className="demo-contact__inner">
-        <h2 className="demo-contact__title">Ready to Buy or Sell?</h2>
+        <h2 className="demo-contact__title">Let's Find Your Next Home</h2>
         <p className="demo-contact__text">
-          Call (815) 555-0567 to speak with an agent today. Free home valuations for sellers, and
-          buyer consultations at no cost.
+          Call (815) 555-0567 to speak with an agent today. Free consultations for buyers and sellers.
         </p>
         <a href="tel:8155550567" className="demo-btn demo-btn--primary">
           <PhoneIcon size={20} /> Call (815) 555-0567

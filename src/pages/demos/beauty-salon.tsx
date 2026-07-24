@@ -3,28 +3,85 @@ import type { HeadFC } from "gatsby";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
 import DemoLayout from "../../features/demos/DemoLayout";
-import { StarIcon, MapPinIcon, PhoneIcon, ScissorsIcon, BrushIcon, SpaIcon, HandIcon, RingIcon } from "../../site/icons";
+import { StarIcon, MapPinIcon, PhoneIcon, ScissorsIcon, BrushIcon, SpaIcon, HandIcon, RingIcon, ClockIcon } from "../../site/icons";
 
 const pathname = "/demos/beauty-salon/";
 const pageTitle = "Bella Vista Salon — Hair & Beauty in Rockford, IL | Demo Website";
 const pageDescription =
   "Demo beauty salon website with service menu, stylist team, online booking, and before/after gallery.";
 
-const services = [
-  { Icon: ScissorsIcon, name: "Haircut & Style", desc: "Women's, men's, and children's cuts. Includes wash, cut, and style. Consultation included.", price: "from $35" },
-  { Icon: BrushIcon, name: "Color & Highlights", desc: "Full color, partial highlights, balayage, and color correction. Free patch test for new clients.", price: "from $85" },
-  { Icon: HandIcon, name: "Manicure & Pedicure", desc: "Classic, gel, and dip powder nails. Luxury spa pedicure with massage and paraffin treatment.", price: "from $30" },
-  { Icon: SpaIcon, name: "Facials & Skincare", desc: "Customized facials, chemical peels, and microdermabrasion. Free skin consultation.", price: "from $65" },
-  { Icon: BrushIcon, name: "Makeup & Special Events", desc: "Wedding makeup, prom, photo shoots, and special occasions. Trial run included for weddings.", price: "from $75" },
-  { Icon: RingIcon, name: "Bridal Packages", desc: "Hair, makeup, and nails for the bride and bridal party. On-site service available.", price: "from $250" },
+const serviceCategories = [
+  {
+    Icon: ScissorsIcon,
+    title: "Hair",
+    items: [
+      { name: "Women's Cut & Style", time: "60 min", price: "$45" },
+      { name: "Men's Cut", time: "30 min", price: "$28" },
+      { name: "Children's Cut (under 12)", time: "20 min", price: "$20" },
+      { name: "Blowout & Style", time: "45 min", price: "$35" },
+      { name: "Full Color", time: "2 hrs", price: "$85+" },
+      { name: "Partial Highlights", time: "2 hrs", price: "$95+" },
+      { name: "Balayage", time: "3 hrs", price: "$150+" },
+      { name: "Color Correction", time: "Consult", price: "$200+" },
+    ],
+  },
+  {
+    Icon: HandIcon,
+    title: "Nails",
+    items: [
+      { name: "Classic Manicure", time: "30 min", price: "$25" },
+      { name: "Gel Manicure", time: "45 min", price: "$35" },
+      { name: "Dip Powder", time: "45 min", price: "$45" },
+      { name: "Classic Pedicure", time: "45 min", price: "$35" },
+      { name: "Spa Pedicure", time: "60 min", price: "$50" },
+      { name: "Luxury Pedicure + Paraffin", time: "75 min", price: "$65" },
+      { name: "Nail Art (per nail)", time: "10 min", price: "$5+" },
+      { name: "Nail Repair (single)", time: "10 min", price: "$8" },
+    ],
+  },
+  {
+    Icon: SpaIcon,
+    title: "Skincare",
+    items: [
+      { name: "Custom Facial", time: "60 min", price: "$65" },
+      { name: "Deep Cleansing Facial", time: "75 min", price: "$85" },
+      { name: "Anti-Aging Facial", time: "90 min", price: "$95" },
+      { name: "Microdermabrasion", time: "45 min", price: "$75" },
+      { name: "Chemical Peel", time: "60 min", price: "$120+" },
+      { name: "LED Light Therapy", time: "30 min", price: "$45" },
+      { name: "Brow Wax & Shape", time: "20 min", price: "$20" },
+      { name: "Lash Tint", time: "30 min", price: "$25" },
+    ],
+  },
+  {
+    Icon: BrushIcon,
+    title: "Makeup & Events",
+    items: [
+      { name: "Everyday Makeup", time: "45 min", price: "$50" },
+      { name: "Special Event Makeup", time: "60 min", price: "$75" },
+      { name: "Bridal Makeup (incl. trial)", time: "2 hrs", price: "$150" },
+      { name: "Bridal Party (per person)", time: "45 min", price: "$65" },
+      { name: "Lash Application", time: "30 min", price: "$30" },
+      { name: "Makeup Lesson", time: "90 min", price: "$100" },
+    ],
+  },
 ];
 
 const stylists = [
-  { initials: "AR", name: "Angela Rossi", role: "Owner & Master Stylist (15 yrs)" },
-  { initials: "LC", name: "Lisa Chen", role: "Senior Colorist (10 yrs)" },
-  { initials: "MK", name: "Maya Kim", role: "Esthetician (6 yrs)" },
-  { initials: "TS", name: "Tina Santos", role: "Nail Technician (8 yrs)" },
+  { initials: "AR", name: "Angela Rossi", role: "Owner & Master Stylist", specialties: ["Balayage", "Color Correction", "Bridal"] },
+  { initials: "LC", name: "Lisa Chen", role: "Senior Colorist", specialties: ["Vivid Color", "Highlights", "Blonde Specialist"] },
+  { initials: "MK", name: "Maya Kim", role: "Esthetician", specialties: ["Facials", "Peels", "Brow Artistry"] },
+  { initials: "TS", name: "Tina Santos", role: "Nail Technician", specialties: ["Nail Art", "Gel", "Spa Pedicures"] },
 ];
+
+const beforeAfter = [
+  { title: "Balayage Transformation", desc: "Dark roots to sun-kissed blonde — seamless grow-out" },
+  { title: "Color Correction", desc: "Fixed box-dye disaster, restored natural-looking blonde" },
+  { title: "Bridal Updo", desc: "Romantic half-up style for a Rockford wedding" },
+  { title: "Nail Art Design", desc: "Custom floral design for a special occasion" },
+];
+
+const productBrands = ["Olaplex", "Redken", "OPI", "Dermalogica", "Gelish", "Wella", "Moroccanoil", "It's a 10", "Kevin Murphy"];
 
 const testimonials = [
   { text: "Angela is a color genius. She fixed a box-dye disaster and my hair has never looked better. I won't go anywhere else.", author: "Rachel B.", location: "Rockford, IL" },
@@ -46,8 +103,8 @@ const BeautySalonDemo: React.FC = () => (
         <span className="demo-hero__tagline">Rockford's Premier Hair & Beauty Salon Since 2014</span>
         <h1 className="demo-hero__title">Bella Vista Salon</h1>
         <p className="demo-hero__subtitle">
-          Haircuts, color, nails, facials, and makeup in a relaxing, modern salon in the heart of
-          Rockford. Book your appointment online today.
+          Hair, color, nails, facials, and makeup in a relaxing, modern salon. New clients get 20%
+          off their first service.
         </p>
         <div className="demo-hero__actions">
           <a href="#book" className="demo-btn demo-btn--primary">Book Online</a>
@@ -55,6 +112,16 @@ const BeautySalonDemo: React.FC = () => (
         </div>
       </div>
     </section>
+
+    {/* New client special banner — salons always have promotions */}
+    <div className="demo-trust-bar">
+      <div className="demo-trust-bar__inner">
+        <span className="demo-trust-badge"><ScissorsIcon size={18} /> New Clients: 20% Off</span>
+        <span className="demo-trust-badge"><ClockIcon size={18} /> Walk-Ins Welcome</span>
+        <span className="demo-trust-badge"><RingIcon size={18} /> Bridal Packages</span>
+        <span className="demo-trust-badge"><PhoneIcon size={18} /> (815) 555-0987</span>
+      </div>
+    </div>
 
     {/* Stats */}
     <section className="demo-section">
@@ -68,20 +135,26 @@ const BeautySalonDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Services */}
+    {/* Service Menu — categorized by type (hair, nails, skincare, makeup) with times */}
     <section className="demo-section demo-section--alt" id="services">
       <div className="demo-section__inner">
-        <h2 className="demo-section__title">Our Services</h2>
-        <p className="demo-section__subtitle">Full-service hair, beauty, and nail care in a relaxing environment.</p>
-        <div className="demo-services">
-          {services.map((s) => {
-            const { Icon } = s;
+        <h2 className="demo-section__title">Services &amp; Pricing</h2>
+        <p className="demo-section__subtitle">Full menu of services. Prices vary by hair length and stylist level — call for a custom quote.</p>
+        <div className="demo-salon-categories">
+          {serviceCategories.map((cat) => {
+            const { Icon } = cat;
             return (
-              <div key={s.name} className="demo-service">
-                <div className="demo-service__icon"><Icon size={28} /></div>
-                <h3 className="demo-service__name">{s.name}</h3>
-                <p className="demo-service__desc">{s.desc}</p>
-                <div className="demo-service__price">{s.price}</div>
+              <div key={cat.title}>
+                <h3 className="demo-salon-category__title"><Icon size={20} /> {cat.title}</h3>
+                {cat.items.map((item) => (
+                  <div key={item.name} className="demo-salon-category__item">
+                    <div>
+                      <p className="demo-salon-category__item-name">{item.name}</p>
+                      <p className="demo-salon-category__item-time">{item.time}</p>
+                    </div>
+                    <div className="demo-salon-category__item-price">{item.price}</div>
+                  </div>
+                ))}
               </div>
             );
           })}
@@ -89,47 +162,65 @@ const BeautySalonDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* About */}
+    {/* Before & After Gallery — salon clients want to see results */}
     <section className="demo-section">
       <div className="demo-section__inner">
-        <div className="demo-about">
-          <div className="demo-about__image" style={{ background: "linear-gradient(135deg, #a02463, #4a1230)" }} />
-          <div>
-            <h2 className="demo-about__title">Where Beauty Meets Expertise</h2>
-            <p className="demo-about__text">
-              Bella Vista Salon was founded in 2014 by Angela Rossi, a master stylist with a passion
-              for making every client feel beautiful and confident. Our team brings over 40 years of
-              combined experience to every appointment.
-            </p>
-            <p className="demo-about__text">
-              We use premium products — Olaplex, Redken, OPI, and Dermalogica — and our salon is
-              designed for relaxation. Come in for a transformation, leave feeling like the best
-              version of yourself.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    {/* Stylists */}
-    <section className="demo-section demo-section--alt">
-      <div className="demo-section__inner">
-        <h2 className="demo-section__title">Meet Our Stylists</h2>
-        <p className="demo-section__subtitle">Experienced, licensed, and passionate about what they do.</p>
-        <div className="demo-team">
-          {stylists.map((s) => (
-            <div key={s.name}>
-              <div className="demo-team-member__avatar">{s.initials}</div>
-              <div className="demo-team-member__name">{s.name}</div>
-              <div className="demo-team-member__role">{s.role}</div>
+        <h2 className="demo-section__title">Our Work</h2>
+        <p className="demo-section__subtitle">Real transformations from our clients. Follow us on Instagram for more.</p>
+        <div className="demo-before-after">
+          {beforeAfter.map((p) => (
+            <div key={p.title} className="demo-before-after__item">
+              <div className="demo-before-after__images">
+                <div className="demo-before-after__before">
+                  <span className="demo-before-after__label">Before</span>
+                </div>
+                <div className="demo-before-after__after" style={{ background: "linear-gradient(135deg, #a02463, #4a1230)" }}>
+                  <span className="demo-before-after__label">After</span>
+                </div>
+              </div>
+              <div className="demo-before-after__body">
+                <h3 className="demo-before-after__title">{p.title}</h3>
+                <p className="demo-before-after__desc">{p.desc}</p>
+              </div>
             </div>
           ))}
         </div>
       </div>
     </section>
 
-    {/* Reviews */}
+    {/* Stylists with specialties — salon clients choose by stylist */}
+    <section className="demo-section demo-section--alt">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Meet Our Stylists</h2>
+        <p className="demo-section__subtitle">Request your stylist by name when booking. Each has their own specialty.</p>
+        <div className="demo-team">
+          {stylists.map((s) => (
+            <div key={s.name} className="demo-stylist">
+              <div className="demo-stylist__photo">{s.initials}</div>
+              <div className="demo-stylist__name">{s.name}</div>
+              <div className="demo-stylist__role">{s.role}</div>
+              <div className="demo-stylist__specialties">
+                {s.specialties.map((sp) => <span key={sp} className="demo-stylist__specialty">{sp}</span>)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* Product Brands — salons sell products and clients want to know what you use */}
     <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Products We Use</h2>
+        <p className="demo-section__subtitle">Premium professional products available in-salon and for purchase.</p>
+        <div className="demo-product-brands">
+          {productBrands.map((b) => <div key={b} className="demo-product-brand">{b}</div>)}
+        </div>
+      </div>
+    </section>
+
+    {/* Reviews */}
+    <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">What Our Clients Say</h2>
         <div className="demo-testimonials">
@@ -145,11 +236,29 @@ const BeautySalonDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Hours */}
-    <section className="demo-section demo-section--alt">
+    {/* Gift Cards — salons sell gift cards heavily */}
+    <section className="demo-section">
       <div className="demo-section__inner">
-        <h2 className="demo-section__title">Hours &amp; Location</h2>
-        <div className="demo-about">
+        <div className="demo-gift-card">
+          <h2 className="demo-gift-card__title">Gift Cards</h2>
+          <p className="demo-gift-card__desc">The perfect gift for any occasion. Available in any amount, never expires.</p>
+          <div className="demo-gift-card__amounts">
+            <span className="demo-gift-card__amount">$25</span>
+            <span className="demo-gift-card__amount">$50</span>
+            <span className="demo-gift-card__amount">$100</span>
+            <span className="demo-gift-card__amount">$150</span>
+            <span className="demo-gift-card__amount">Custom</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Hours & Booking */}
+    <section className="demo-section demo-section--alt" id="book">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Book Your Appointment</h2>
+        <p className="demo-section__subtitle">Call us or book online. Walk-ins welcome based on availability.</p>
+        <div className="demo-two-col">
           <div>
             <table className="demo-hours">
               <tbody>
@@ -164,39 +273,44 @@ const BeautySalonDemo: React.FC = () => (
             </table>
           </div>
           <div>
-            <div className="demo-map">
-              <MapPinIcon size={32} />
-              321 N Main Street, Rockford, IL 61103
+            <div className="demo-booking-form">
+              <div className="demo-form__field">
+                <label className="demo-form__label">Your Name</label>
+                <input className="demo-form__input" type="text" placeholder="First and last name" />
+              </div>
+              <div className="demo-form__field">
+                <label className="demo-form__label">Phone</label>
+                <input className="demo-form__input" type="tel" placeholder="(815) 555-0000" />
+              </div>
+              <div className="demo-form__row">
+                <div className="demo-form__field">
+                  <label className="demo-form__label">Service</label>
+                  <select className="demo-form__select">
+                    <option>Haircut & Style</option>
+                    <option>Color / Highlights</option>
+                    <option>Manicure / Pedicure</option>
+                    <option>Facial</option>
+                    <option>Makeup</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div className="demo-form__field">
+                  <label className="demo-form__label">Stylist</label>
+                  <select className="demo-form__select">
+                    <option>No preference</option>
+                    <option>Angela Rossi</option>
+                    <option>Lisa Chen</option>
+                    <option>Maya Kim</option>
+                    <option>Tina Santos</option>
+                  </select>
+                </div>
+              </div>
+              <div className="demo-form__field">
+                <label className="demo-form__label">Preferred Date</label>
+                <input className="demo-form__input" type="text" placeholder="MM/DD/YYYY" />
+              </div>
+              <button type="button" className="demo-form__submit">Request Appointment</button>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    {/* Booking CTA */}
-    <section className="demo-contact" id="book" style={{ background: "#a02463" }}>
-      <div className="demo-contact__inner">
-        <h2 className="demo-contact__title">Book Your Appointment</h2>
-        <p className="demo-contact__text">
-          Call (815) 555-0987 or book online. New clients get 20% off their first service. Walk-ins
-          welcome based on availability.
-        </p>
-        <a href="tel:8155550987" className="demo-btn demo-btn--primary">
-          <PhoneIcon size={20} /> Call (815) 555-0987
-        </a>
-        <div className="demo-contact__info">
-          <div className="demo-contact__info-item">
-            <MapPinIcon size={20} />
-            <span className="demo-contact__info-label">Address</span>
-            <span>321 N Main Street, Rockford, IL</span>
-          </div>
-          <div className="demo-contact__info-item">
-            <span className="demo-contact__info-label">New Client Special</span>
-            <span>20% off first service</span>
-          </div>
-          <div className="demo-contact__info-item">
-            <span className="demo-contact__info-label">Email</span>
-            <span>hello@bellavistasalon.com</span>
           </div>
         </div>
       </div>
