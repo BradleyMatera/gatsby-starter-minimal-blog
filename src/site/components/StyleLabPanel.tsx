@@ -296,7 +296,7 @@ const StyleLabPanel: React.FC<StyleLabPanelProps> = ({ isOpen, onClose }) => {
                 <path d="m21 3-7 7" />
               </svg>
             </span>
-            <h2 id="style-lab-title" className="style-lab__title">Web Designer Lab</h2>
+            <h2 id="style-lab-title" className="style-lab__title">Customize This Website!</h2>
           </div>
           <button type="button" className="style-lab__close" onClick={onClose} aria-label="Close style lab">
             <CloseIcon size={22} />

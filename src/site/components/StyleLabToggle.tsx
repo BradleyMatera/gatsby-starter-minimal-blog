@@ -10,7 +10,7 @@ const StyleLabToggle: React.FC = () => {
         type="button"
         className="style-lab-toggle"
         onClick={() => setOpen(true)}
-        aria-label="For Web Designers — Open Style Lab"
+        aria-label="Customize This Website! — Open Style Lab"
         aria-haspopup="dialog"
       >
         <span className="style-lab-toggle__icon" aria-hidden="true">
@@ -22,7 +22,7 @@ const StyleLabToggle: React.FC = () => {
             <path d="m21 3-7 7" />
           </svg>
         </span>
-        <span className="style-lab-toggle__label">For Web Designers</span>
+        <span className="style-lab-toggle__label">Customize This Website!</span>
       </button>
       <StyleLabPanel isOpen={open} onClose={() => setOpen(false)} />
     </>

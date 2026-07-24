@@ -93,7 +93,7 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [mobileDrawerOpen]);
 
-  // Filter to core links only: About Brad, Blog, For Recruiter
+  // Filter to core links only: Home, Blog, For Recruiter
   const coreLinks = nav.filter(item =>
     ["/", "/posts", "/recruiter"].includes(item.slug)
   );
@@ -136,7 +136,7 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
             </Link>
             <ul className="vertical-nav__list cyber-nav__list">
               {coreLinks.map((item) => {
-                const label = item.slug === "/" ? "About Brad" : item.title;
+                const label = item.title;
                 const icon = getNavIcon(item.slug);
                 const isActive = activeLink === item.slug || activeLink.startsWith(item.slug + '/');
 
@@ -206,7 +206,7 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
             <StyleLabToggle />
             <ul className="vertical-nav__list cyber-drawer__list">
               {coreLinks.map((item) => {
-                const label = item.slug === "/" ? "About Brad" : item.title;
+                const label = item.title;
                 const icon = getNavIcon(item.slug);
                 const isActive = activeLink === item.slug || activeLink.startsWith(item.slug + '/');
 

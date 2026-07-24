@@ -1,5 +1,5 @@
 export const navigation = [
-  { title: `About Brad`, slug: `/` },
+  { title: `Home`, slug: `/` },
   { title: `Blog`, slug: `/blog` },
   { title: `For Recruiter`, slug: `/recruiter` },
   { title: `Contact`, slug: `/contact` },
