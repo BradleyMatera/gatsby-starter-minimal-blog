@@ -26,6 +26,7 @@ type DemoEntry = {
   description: string;
   Icon: React.FC<{ size?: number; className?: string }>;
   color: string;
+  heroImage: string;
   features: string[];
 };
 
@@ -36,7 +37,8 @@ const DEMOS: DemoEntry[] = [
     industry: "Restaurant",
     description: "Full restaurant website with menu, reservations, hours, photo gallery, and customer reviews.",
     Icon: UtensilsIcon,
-    color: "#c0392b",
+    color: "#c9a227",
+    heroImage: "/images/demos/restaurant/hero.jpg",
     features: ["Menu", "Reservations", "Reviews", "Hours"],
   },
   {
@@ -45,7 +47,8 @@ const DEMOS: DemoEntry[] = [
     industry: "Landscaping",
     description: "Landscaping company site with service packages, before/after gallery, seasonal tips, and free quote form.",
     Icon: LeafIcon,
-    color: "#27ae60",
+    color: "#4a7c3a",
+    heroImage: "/images/demos/landscaping/hero.jpg",
     features: ["Service Packages", "Gallery", "Free Quote", "Seasonal Tips"],
   },
   {
@@ -54,7 +57,8 @@ const DEMOS: DemoEntry[] = [
     industry: "HVAC / Home Services",
     description: "HVAC company with emergency service callout, maintenance plans, technician bios, and financing info.",
     Icon: GearIcon,
-    color: "#2980b9",
+    color: "#e85d04",
+    heroImage: "/images/demos/hvac/hero.jpg",
     features: ["Emergency Service", "Maintenance Plans", "Financing", "Team Bios"],
   },
   {
@@ -63,8 +67,9 @@ const DEMOS: DemoEntry[] = [
     industry: "Auto Repair",
     description: "Auto shop website with service menu, online appointment booking, tire size lookup, and mechanic credentials.",
     Icon: CarIcon,
-    color: "#e67e22",
-    features: ["Online Booking", "Service Menu", "Tire Lookup", "ASE Certified"],
+    color: "#ff6b1a",
+    heroImage: "/images/demos/auto-repair/hero.jpg",
+    features: ["Online Booking", "Service Menu", "VIN Lookup", "ASE Certified"],
   },
   {
     slug: "real-estate",
@@ -72,7 +77,8 @@ const DEMOS: DemoEntry[] = [
     industry: "Real Estate",
     description: "Real estate office with featured listings, agent profiles, market reports, and neighborhood guides.",
     Icon: HouseIcon,
-    color: "#8e44ad",
+    color: "#b8943f",
+    heroImage: "/images/demos/real-estate/hero.jpg",
     features: ["Featured Listings", "Agent Profiles", "Market Reports", "Neighborhood Guides"],
   },
   {
@@ -82,6 +88,7 @@ const DEMOS: DemoEntry[] = [
     description: "Hair and beauty salon with service menu, stylist team, online booking, and before/after gallery.",
     Icon: ScissorsIcon,
     color: "#d63384",
+    heroImage: "/images/demos/beauty-salon/hero.jpg",
     features: ["Service Menu", "Stylist Team", "Online Booking", "Gallery"],
   },
 ];
@@ -111,9 +118,11 @@ const DemosIndex: React.FC = () => (
             >
               <div
                 className="demo-card__preview"
-                style={{ background: `linear-gradient(135deg, ${demo.color}, ${demo.color}cc)` }}
+                style={{ backgroundImage: `url(${demo.heroImage})` }}
               >
-                <Icon size={48} />
+                <div className="demo-card__preview-overlay" style={{ background: `linear-gradient(135deg, ${demo.color}aa, ${demo.color}55)` }}>
+                  <Icon size={48} />
+                </div>
               </div>
               <div className="demo-card__body">
                 <div className="demo-card__industry">{demo.industry}</div>

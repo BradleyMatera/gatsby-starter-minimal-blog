@@ -11,8 +11,7 @@ import { StarIcon, MapPinIcon, PhoneIcon, UtensilsIcon, ClockIcon, RingIcon, Cli
 
 const pathname = "/demos/restaurant/";
 const pageTitle = "Riverside Grill — Rockford's Finest Dining | Demo Website";
-const pageDescription =
-  "Demo restaurant website for Riverside Grill in Rockford, Illinois. Menu, reservations, hours, reviews, and photo gallery.";
+const pageDescription = "Demo restaurant website for Riverside Grill in Rockford, Illinois. Menu, reservations, hours, reviews, and photo gallery.";
 
 const socialLinks: SocialLink[] = [
   { platform: "facebook", url: "https://facebook.com" },
@@ -22,121 +21,47 @@ const socialLinks: SocialLink[] = [
 ];
 
 const integrations: Integration[] = [
-  {
-    name: "OpenTable Reservation Widget",
-    category: "Reservations",
-    description: "Real-time table availability and booking. Customers reserve online without calling. Syncs with your POS and table management system.",
-    freeTier: "$1 per cover (diner seated). No monthly fee.",
-    url: "https://opentable.com/restaurant",
-    status: "mocked",
-  },
-  {
-    name: "Google Maps Embed",
-    category: "Maps & Location",
-    description: "Interactive map showing your restaurant location with directions. Customers tap to navigate.",
-    freeTier: "28,000 embed loads/month (free). $7/1k loads after.",
-    url: "https://developers.google.com/maps/documentation/embed/start",
-    status: "live",
-  },
-  {
-    name: "Google Business Profile API",
-    category: "Reviews & Ratings",
-    description: "Pulls live Google reviews and star rating directly onto your site. Auto-updates when new reviews come in.",
-    freeTier: "$200/month API credit (≈28k requests). Pay-as-you-go after.",
-    url: "https://developers.google.com/my-business",
-    status: "mocked",
-  },
-  {
-    name: "Yelp Fusion API",
-    category: "Reviews & Ratings",
-    description: "Displays Yelp reviews and rating on your site. Links to your Yelp profile for more reviews.",
-    freeTier: "500 API calls/day (free). No credit card required.",
-    url: "https://docs.developer.yelp.com/",
-    status: "mocked",
-  },
-  {
-    name: "DoorDash / Grubhub / Uber Eats",
-    category: "Online Ordering",
-    description: "Direct ordering links to delivery platforms. Customers order takeout or delivery without leaving the platform they already use.",
-    freeTier: "Free to list. 15-30% commission per order.",
-    url: "https://doordash.com/merchants",
-    status: "live",
-  },
-  {
-    name: "Instagram Graph API",
-    category: "Social Media",
-    description: "Auto-displays your latest Instagram posts as a photo gallery on your site. Perfect for food photos.",
-    freeTier: "200 requests/hour (free). Requires Facebook Business account.",
-    url: "https://developers.facebook.com/docs/instagram-api",
-    status: "mocked",
-  },
-  {
-    name: "Square POS Integration",
-    category: "Point of Sale",
-    description: "Syncs online orders and gift card sales with your in-restaurant POS. Unified reporting and inventory.",
-    freeTier: "2.6% + 10¢ per transaction. No monthly fee.",
-    url: "https://square.com/pos",
-    status: "available",
-  },
-  {
-    name: "Toast Restaurant POS",
-    category: "Point of Sale",
-    description: "Restaurant-specific POS with online ordering, loyalty program, and gift cards built in. Integrates with your website.",
-    freeTier: "From $69/month hardware + 2.49% + 15¢ per transaction.",
-    url: "https://pos.toasttab.com",
-    status: "available",
-  },
+  { name: "OpenTable Reservation Widget", category: "Reservations", description: "Real-time table availability and booking. Customers reserve online without calling. Syncs with your POS and table management system.", freeTier: "$1 per cover (diner seated). No monthly fee.", url: "https://opentable.com/restaurant", status: "mocked" },
+  { name: "Google Maps Embed", category: "Maps & Location", description: "Interactive map showing your restaurant location with directions. Customers tap to navigate.", freeTier: "28,000 embed loads/month (free). $7/1k loads after.", url: "https://developers.google.com/maps/documentation/embed/start", status: "live" },
+  { name: "Google Business Profile API", category: "Reviews & Ratings", description: "Pulls live Google reviews and star rating directly onto your site. Auto-updates when new reviews come in.", freeTier: "$200/month API credit (≈28k requests). Pay-as-you-go after.", url: "https://developers.google.com/my-business", status: "mocked" },
+  { name: "Yelp Fusion API", category: "Reviews & Ratings", description: "Displays Yelp reviews and rating on your site. Links to your Yelp profile for more reviews.", freeTier: "500 API calls/day (free). No credit card required.", url: "https://docs.developer.yelp.com/", status: "mocked" },
+  { name: "DoorDash / Grubhub / Uber Eats", category: "Online Ordering", description: "Direct ordering links to delivery platforms. Customers order takeout or delivery without leaving the platform they already use.", freeTier: "Free to list. 15-30% commission per order.", url: "https://doordash.com/merchants", status: "live" },
+  { name: "Instagram Graph API", category: "Social Media", description: "Auto-displays your latest Instagram posts as a photo gallery on your site. Perfect for food photos.", freeTier: "200 requests/hour (free). Requires Facebook Business account.", url: "https://developers.facebook.com/docs/instagram-api", status: "mocked" },
+  { name: "Square POS Integration", category: "Point of Sale", description: "Syncs online orders and gift card sales with your in-restaurant POS. Unified reporting and inventory.", freeTier: "2.6% + 10¢ per transaction. No monthly fee.", url: "https://square.com/pos", status: "available" },
+  { name: "Toast Restaurant POS", category: "Point of Sale", description: "Restaurant-specific POS with online ordering, loyalty program, and gift cards built in. Integrates with your website.", freeTier: "From $69/month hardware + 2.49% + 15¢ per transaction.", url: "https://pos.toasttab.com", status: "available" },
 ];
 
 const menuCategories = [
-  {
-    title: "Starters",
-    items: [
-      { name: "Seared Scallops", desc: "Pan-seared sea scallops, cauliflower puree, brown butter", price: "$16" },
-      { name: "Charcuterie Board", desc: "Cured meats, artisan cheeses, olives, house jam, crostini", price: "$22" },
-      { name: "French Onion Soup", desc: "Slow-simmered beef broth, caramelized onions, gruyere crouton", price: "$11" },
-    ],
-  },
-  {
-    title: "From the Grill",
-    items: [
-      { name: "Wood-Grilled Ribeye", desc: "12oz USDA Choice ribeye, rosemary butter, roasted vegetables", price: "$34" },
-      { name: "Filet Mignon", desc: "8oz tenderloin, red wine reduction, truffle mashed potatoes", price: "$42" },
-      { name: "Pork Chop", desc: "Bone-in chop, apple chutney, Brussels sprouts, bacon jam", price: "$28" },
-    ],
-  },
-  {
-    title: "From the Lake",
-    items: [
-      { name: "Seared Salmon", desc: "Atlantic salmon, lemon-dill sauce, wild rice, asparagus", price: "$26" },
-      { name: "Walleye Special", desc: "Fresh Wisconsin walleye, beer-battered, coleslaw, fries", price: "$24" },
-      { name: "Trout Almondine", desc: "Rainbow trout, brown butter almonds, capers, parsley", price: "$27" },
-    ],
-  },
-  {
-    title: "Pasta",
-    items: [
-      { name: "Truffle Fettuccine", desc: "Hand-cut fettuccine, black truffle, parmesan, cream sauce", price: "$22" },
-      { name: "Lobster Ravioli", desc: "House-made ravioli, lobster, vodka cream, fresh basil", price: "$29" },
-      { name: "Wild Mushroom Linguine", desc: "Mixed wild mushrooms, garlic, white wine, parmesan", price: "$19" },
-    ],
-  },
-  {
-    title: "Desserts",
-    items: [
-      { name: "Chocolate Lava Cake", desc: "Warm chocolate cake, vanilla bean ice cream, raspberry coulis", price: "$9" },
-      { name: "Crème Brûlée", desc: "Classic vanilla custard, caramelized sugar crust", price: "$8" },
-      { name: "Seasonal Tart", desc: "Ask your server for today's selection", price: "$10" },
-    ],
-  },
-  {
-    title: "Burgers & Sandwiches",
-    items: [
-      { name: "Riverside Burger", desc: "Half-pound Angus beef, aged cheddar, caramelized onions, brioche", price: "$16" },
-      { name: "Walleye Sandwich", desc: "Beer-battered walleye, tartar sauce, lettuce, tomato", price: "$15" },
-      { name: "French Dip", desc: "Shaved prime rib, provolone, au jus, horseradish cream", price: "$17" },
-    ],
-  },
+  { title: "Starters", items: [
+    { name: "Seared Scallops", desc: "Pan-seared sea scallops, cauliflower puree, brown butter", price: "$16" },
+    { name: "Charcuterie Board", desc: "Cured meats, artisan cheeses, olives, house jam, crostini", price: "$22" },
+    { name: "French Onion Soup", desc: "Slow-simmered beef broth, caramelized onions, gruyere crouton", price: "$11" },
+  ]},
+  { title: "From the Grill", items: [
+    { name: "Wood-Grilled Ribeye", desc: "12oz USDA Choice ribeye, rosemary butter, roasted vegetables", price: "$34" },
+    { name: "Filet Mignon", desc: "8oz tenderloin, red wine reduction, truffle mashed potatoes", price: "$42" },
+    { name: "Pork Chop", desc: "Bone-in chop, apple chutney, Brussels sprouts, bacon jam", price: "$28" },
+  ]},
+  { title: "From the Lake", items: [
+    { name: "Seared Salmon", desc: "Atlantic salmon, lemon-dill sauce, wild rice, asparagus", price: "$26" },
+    { name: "Walleye Special", desc: "Fresh Wisconsin walleye, beer-battered, coleslaw, fries", price: "$24" },
+    { name: "Trout Almondine", desc: "Rainbow trout, brown butter almonds, capers, parsley", price: "$27" },
+  ]},
+  { title: "Pasta", items: [
+    { name: "Truffle Fettuccine", desc: "Hand-cut fettuccine, black truffle, parmesan, cream sauce", price: "$22" },
+    { name: "Lobster Ravioli", desc: "House-made ravioli, lobster, vodka cream, fresh basil", price: "$29" },
+    { name: "Wild Mushroom Linguine", desc: "Mixed wild mushrooms, garlic, white wine, parmesan", price: "$19" },
+  ]},
+  { title: "Desserts", items: [
+    { name: "Chocolate Lava Cake", desc: "Warm chocolate cake, vanilla bean ice cream, raspberry coulis", price: "$9" },
+    { name: "Crème Brûlée", desc: "Classic vanilla custard, caramelized sugar crust", price: "$8" },
+    { name: "Seasonal Tart", desc: "Ask your server for today's selection", price: "$10" },
+  ]},
+  { title: "Burgers & Sandwiches", items: [
+    { name: "Riverside Burger", desc: "Half-pound Angus beef, aged cheddar, caramelized onions, brioche", price: "$16" },
+    { name: "Walleye Sandwich", desc: "Beer-battered walleye, tartar sauce, lettuce, tomato", price: "$15" },
+    { name: "French Dip", desc: "Shaved prime rib, provolone, au jus, horseradish cream", price: "$17" },
+  ]},
 ];
 
 const wineSelection = [
@@ -156,24 +81,20 @@ const testimonials = [
 
 const StarRating: React.FC = () => (
   <div className="demo-testimonial__stars" aria-label="5 out of 5 stars">
-    {[0, 1, 2, 3, 4].map((i) => <StarIcon key={i} size={18} />)}
+    {[0,1,2,3,4].map((i) => <StarIcon key={i} size={18} />)}
   </div>
 );
 
 const RestaurantDemo: React.FC = () => (
-  <DemoLayout demoName="Riverside Grill" industry="Restaurant" themeColor="#c0392b">
-    {/* Hero */}
-    <section className="demo-hero" style={{ background: "linear-gradient(135deg, #8b1a12, #2a0a08)" }}>
+  <DemoLayout demoName="Riverside Grill" industry="Restaurant" themeColor="#c9a227" designSystem="elegant">
+    {/* Hero with real restaurant interior photo */}
+    <section className="demo-hero" style={{ backgroundImage: "url(/images/demos/restaurant/hero.jpg)" }}>
       <div className="demo-hero__inner">
         <span className="demo-hero__tagline">Rockford's Finest Dining Since 2008</span>
         <h1 className="demo-hero__title">Riverside Grill</h1>
-        <p className="demo-hero__subtitle">
-          Wood-fired steaks, fresh Great Lakes fish, and hand-crafted pasta in the heart of downtown Rockford.
-        </p>
+        <p className="demo-hero__subtitle">Wood-fired steaks, fresh Great Lakes fish, and hand-crafted pasta in the heart of downtown Rockford.</p>
         <div className="demo-hero__actions">
-          <a href="#menu" className="demo-btn demo-btn--primary">
-            <UtensilsIcon size={20} /> View Menu
-          </a>
+          <a href="#menu" className="demo-btn demo-btn--primary"><UtensilsIcon size={20} /> View Menu</a>
           <a href="#reserve" className="demo-btn demo-btn--ghost">Reserve a Table</a>
         </div>
       </div>
@@ -200,18 +121,27 @@ const RestaurantDemo: React.FC = () => (
           <div><div className="demo-stat__number">6</div><div className="demo-stat__label">Days a Week</div></div>
         </div>
         <div style={{ marginTop: "2rem" }}>
-          <ReviewBadges
-            googleRating={4.8}
-            googleReviewCount={247}
-            yelpRating={4.5}
-            yelpReviewCount={89}
-          />
+          <ReviewBadges googleRating={4.8} googleReviewCount={247} yelpRating={4.5} yelpReviewCount={89} />
+        </div>
+      </div>
+    </section>
+
+    {/* Split image + text: Chef spotlight with real photo */}
+    <section className="demo-section demo-section--alt">
+      <div className="demo-section__inner">
+        <div className="demo-split-image-text">
+          <div className="demo-split-image-text__image" style={{ backgroundImage: "url(/images/demos/restaurant/chef.jpg)" }} />
+          <div className="demo-split-image-text__content">
+            <h2 className="demo-split-image-text__title">Meet Chef Marcus Lindqvist</h2>
+            <p className="demo-split-image-text__text">Marcus grew up in Rockford and trained at the Culinary Institute of America in Hyde Park. After a decade cooking in Chicago restaurants — including two Michelin-starred kitchens — he came home to open Riverside Grill in 2008.</p>
+            <p className="demo-split-image-text__text">His philosophy is simple: source locally, cook from scratch, and let the ingredients speak. He works directly with Illinois farmers, Great Lakes fisheries, and Midwest ranches to bring the best possible food to your table.</p>
+          </div>
         </div>
       </div>
     </section>
 
     {/* Menu */}
-    <section className="demo-section demo-section--alt" id="menu">
+    <section className="demo-section" id="menu">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Our Menu</h2>
         <p className="demo-section__subtitle">Everything is made from scratch in our kitchen. No freezers, no shortcuts.</p>
@@ -234,28 +164,13 @@ const RestaurantDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Chef Spotlight */}
-    <section className="demo-section">
-      <div className="demo-section__inner">
-        <div className="demo-chef">
-          <div className="demo-chef__photo" />
-          <div>
-            <h2 className="demo-chef__name">Marcus Lindqvist</h2>
-            <p className="demo-chef__title">Executive Chef &amp; Owner</p>
-            <p className="demo-chef__bio">
-              Marcus grew up in Rockford and trained at the Culinary Institute of America in Hyde Park.
-              After a decade cooking in Chicago restaurants — including two Michelin-starred kitchens —
-              he came home to open Riverside Grill in 2008.
-            </p>
-            <p className="demo-chef__bio">
-              His philosophy is simple: source locally, cook from scratch, and let the ingredients speak.
-              He works directly with Illinois farmers, Great Lakes fisheries, and Midwest ranches to bring
-              the best possible food to your table.
-            </p>
-          </div>
-        </div>
+    {/* Feature image: steak */}
+    <div className="demo-feature-image" style={{ backgroundImage: "url(/images/demos/restaurant/steak.jpg)" }}>
+      <div className="demo-feature-image__content">
+        <h2 className="demo-feature-image__title">Wood-Fired. Always.</h2>
+        <p className="demo-feature-image__text">Every steak is grilled over real hardwood — never gas. It's the difference you can taste.</p>
       </div>
-    </section>
+    </div>
 
     {/* Wine Selection */}
     <section className="demo-section demo-section--alt">
@@ -305,40 +220,35 @@ const RestaurantDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Online Ordering — DoorDash, Grubhub, Uber Eats */}
+    {/* Online Ordering */}
     <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Order Online</h2>
         <p className="demo-section__subtitle">Prefer to eat at home? Order delivery or takeout through your favorite platform.</p>
         <div className="demo-ordering-links">
-          <a href="https://doordash.com" target="_blank" rel="noopener noreferrer" className="demo-ordering-link demo-ordering-link--doordash">
-            DoorDash
-          </a>
-          <a href="https://grubhub.com" target="_blank" rel="noopener noreferrer" className="demo-ordering-link demo-ordering-link--grubhub">
-            Grubhub
-          </a>
-          <a href="https://ubereats.com" target="_blank" rel="noopener noreferrer" className="demo-ordering-link demo-ordering-link--ubereats">
-            Uber Eats
-          </a>
+          <a href="https://doordash.com" target="_blank" rel="noopener noreferrer" className="demo-ordering-link demo-ordering-link--doordash">DoorDash</a>
+          <a href="https://grubhub.com" target="_blank" rel="noopener noreferrer" className="demo-ordering-link demo-ordering-link--grubhub">Grubhub</a>
+          <a href="https://ubereats.com" target="_blank" rel="noopener noreferrer" className="demo-ordering-link demo-ordering-link--ubereats">Uber Eats</a>
         </div>
       </div>
     </section>
 
-    {/* Instagram Feed Mock */}
+    {/* Instagram Feed with real food photos */}
     <section className="demo-section">
       <div className="demo-section__inner">
-        <h2 className="demo-section__title">
-          <InstagramIcon size={24} /> Follow @riversidegrill
-        </h2>
+        <h2 className="demo-section__title"><InstagramIcon size={24} /> Follow @riversidegrill</h2>
         <p className="demo-section__subtitle">See what's coming out of our kitchen. New specials posted daily.</p>
         <div className="demo-instagram-feed">
-          {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
-            <div key={i} className="demo-instagram-feed__item" />
-          ))}
+          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/restaurant/steak.jpg)" }} />
+          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/restaurant/pasta.jpg)" }} />
+          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/restaurant/food-1.jpg)" }} />
+          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/restaurant/food-2.jpg)" }} />
+          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/restaurant/interior.jpg)" }} />
+          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/restaurant/chef.jpg)" }} />
+          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/restaurant/hero.jpg)" }} />
+          <div className="demo-instagram-feed__item" style={{ backgroundImage: "url(/images/demos/restaurant/food-1.jpg)" }} />
         </div>
-        <div className="demo-instagram-feed__note">
-          Mock Instagram feed. Production sites use the Instagram Graph API to auto-display latest posts.
-        </div>
+        <div className="demo-instagram-feed__note">Mock Instagram feed. Production sites use the Instagram Graph API to auto-display latest posts.</div>
       </div>
     </section>
 
@@ -378,37 +288,21 @@ const RestaurantDemo: React.FC = () => (
             <div className="demo-form__field" style={{ margin: 0 }}>
               <label className="demo-form__label">Time</label>
               <select className="demo-form__select">
-                <option>4:00 PM</option>
-                <option>4:30 PM</option>
-                <option>5:00 PM</option>
-                <option>5:30 PM</option>
-                <option>6:00 PM</option>
-                <option>6:30 PM</option>
-                <option>7:00 PM</option>
-                <option>7:30 PM</option>
-                <option>8:00 PM</option>
-                <option>8:30 PM</option>
-                <option>9:00 PM</option>
+                <option>4:00 PM</option><option>5:00 PM</option><option>6:00 PM</option>
+                <option>7:00 PM</option><option>8:00 PM</option><option>9:00 PM</option>
               </select>
             </div>
           </div>
           <div className="demo-form__field" style={{ margin: 0 }}>
             <label className="demo-form__label">Party Size</label>
             <select className="demo-form__select">
-              <option>1 person</option>
-              <option>2 people</option>
-              <option>3 people</option>
-              <option>4 people</option>
-              <option>5 people</option>
-              <option>6 people</option>
+              <option>1 person</option><option>2 people</option><option>3 people</option>
+              <option>4 people</option><option>5 people</option><option>6 people</option>
               <option>7+ people (call us)</option>
             </select>
           </div>
           <button type="button" className="demo-booking-widget__find">Find a Table</button>
-          <div className="demo-booking-widget__note">
-            Mock OpenTable widget. Production sites embed the real OpenTable widget for live
-            availability and booking. $1 per diner seated, no monthly fee.
-          </div>
+          <div className="demo-booking-widget__note">Mock OpenTable widget. Production sites embed the real OpenTable widget for live availability and booking. $1 per diner seated, no monthly fee.</div>
         </div>
       </div>
     </section>
@@ -422,54 +316,29 @@ const RestaurantDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Integrations Section */}
     <IntegrationsSection industry="restaurant" integrations={integrations} />
 
-    {/* Contact + Social */}
-    <section className="demo-contact" style={{ background: "#8b1a12" }}>
+    {/* Contact */}
+    <section className="demo-contact" style={{ background: "#1a1410" }}>
       <div className="demo-contact__inner">
         <h2 className="demo-contact__title">Get in Touch</h2>
-        <p className="demo-contact__text">
-          Call us at (815) 555-0123 or follow us on social media for daily specials and updates.
-        </p>
-        <a href="tel:8155550123" className="demo-btn demo-btn--primary">
-          <PhoneIcon size={20} /> Call (815) 555-0123
-        </a>
-        <div style={{ marginTop: "1.5rem" }}>
-          <SocialLinks links={socialLinks} />
-        </div>
+        <p className="demo-contact__text">Call us at (815) 555-0123 or follow us on social media for daily specials and updates.</p>
+        <a href="tel:8155550123" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0123</a>
+        <div style={{ marginTop: "1.5rem" }}><SocialLinks links={socialLinks} /></div>
         <div className="demo-contact__info">
-          <div className="demo-contact__info-item">
-            <MapPinIcon size={20} />
-            <span className="demo-contact__info-label">Address</span>
-            <span>123 Main Street, Rockford, IL</span>
-          </div>
-          <div className="demo-contact__info-item">
-            <PhoneIcon size={20} />
-            <span className="demo-contact__info-label">Phone</span>
-            <span>(815) 555-0123</span>
-          </div>
-          <div className="demo-contact__info-item">
-            <span className="demo-contact__info-label">Email</span>
-            <span>info@riversidegrill.com</span>
-          </div>
+          <div className="demo-contact__info-item"><MapPinIcon size={20} /><span className="demo-contact__info-label">Address</span><span>123 Main Street, Rockford, IL</span></div>
+          <div className="demo-contact__info-item"><PhoneIcon size={20} /><span className="demo-contact__info-label">Phone</span><span>(815) 555-0123</span></div>
+          <div className="demo-contact__info-item"><span className="demo-contact__info-label">Email</span><span>info@riversidegrill.com</span></div>
         </div>
       </div>
     </section>
 
-    {/* Footer */}
     <footer className="demo-footer">
       <div className="demo-footer__inner">
         <div className="demo-footer__name">Riverside Grill</div>
         <div>123 Main Street, Rockford, IL 61101 · (815) 555-0123</div>
-        <div style={{ marginTop: "1rem" }}>
-          <SocialLinks links={socialLinks} />
-        </div>
-        <div className="demo-footer__demo-note">
-          This is a demo website built by <a href="https://bradleymatera.dev">Bradley Matera</a>.
-          <br />
-          <a href="/demos/">← Back to all demos</a> · <a href="/contact/">Get a site like this →</a>
-        </div>
+        <div style={{ marginTop: "1rem" }}><SocialLinks links={socialLinks} /></div>
+        <div className="demo-footer__demo-note">This is a demo website built by <a href="https://bradleymatera.dev">Bradley Matera</a>.<br /><a href="/demos/">← Back to all demos</a> · <a href="/contact/">Get a site like this →</a></div>
       </div>
     </footer>
   </DemoLayout>
@@ -480,17 +349,5 @@ export default RestaurantDemo;
 export const Head: HeadFC = () => {
   const site = useSiteMetadata();
   const pageUrl = `${site.siteUrl}${pathname}`;
-  return (
-    <Seo
-      title={pageTitle}
-      description={pageDescription}
-      pathname={pathname}
-      canonicalUrl={pageUrl}
-      robots="noindex,nofollow"
-      breadcrumbs={[
-        { name: "Demos", path: "/demos/" },
-        { name: "Restaurant Demo", path: pathname },
-      ]}
-    />
-  );
+  return <Seo title={pageTitle} description={pageDescription} pathname={pathname} canonicalUrl={pageUrl} robots="noindex,nofollow" breadcrumbs={[{ name: "Demos", path: "/demos/" }, { name: "Restaurant Demo", path: pathname }]} />;
 };

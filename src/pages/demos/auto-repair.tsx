@@ -7,12 +7,11 @@ import GoogleMapsEmbed from "../../features/demos/GoogleMapsEmbed";
 import SocialLinks, { SocialLink } from "../../features/demos/SocialLinks";
 import ReviewBadges from "../../features/demos/ReviewBadges";
 import IntegrationsSection, { Integration } from "../../features/demos/IntegrationsSection";
-import { StarIcon, MapPinIcon, PhoneIcon, OilDropIcon, TireIcon, WrenchIcon, BoltIcon, GearIcon, SnowflakeIcon, ShieldIcon, CheckIcon, ClockIcon, CarIcon } from "../../site/icons";
+import { StarIcon, MapPinIcon, PhoneIcon, ShieldIcon, CheckIcon, ClockIcon, CarIcon } from "../../site/icons";
 
 const pathname = "/demos/auto-repair/";
 const pageTitle = "Northside Auto Repair — Rockford Mechanic | Demo Website";
-const pageDescription =
-  "Demo auto repair shop website with service menu, online booking, tire lookup, and ASE-certified mechanic credentials.";
+const pageDescription = "Demo auto repair shop website with service menu, online booking, tire lookup, and ASE-certified mechanic credentials.";
 
 const socialLinks: SocialLink[] = [
   { platform: "facebook", url: "https://facebook.com" },
@@ -22,109 +21,41 @@ const socialLinks: SocialLink[] = [
 ];
 
 const integrations: Integration[] = [
-  {
-    name: "NHTSA VIN Decoder API",
-    category: "Vehicle Identification",
-    description: "Customer enters their VIN, site auto-fills year, make, model, and engine. Eliminates wrong-part orders and speeds up booking. Free government API.",
-    freeTier: "Completely free. No API key required. Unlimited calls.",
-    url: "https://vpic.nhtsa.dot.gov/api/",
-    status: "mocked",
-  },
-  {
-    name: "Google Maps Embed",
-    category: "Maps & Location",
-    description: "Interactive map showing shop location with directions. Customers tap to navigate.",
-    freeTier: "28,000 embed loads/month (free). $7/1k loads after.",
-    url: "https://developers.google.com/maps/documentation/embed/start",
-    status: "live",
-  },
-  {
-    name: "Google Business Profile API",
-    category: "Reviews & Ratings",
-    description: "Live Google reviews on your site. Auto-updates when customers leave new reviews.",
-    freeTier: "$200/month API credit (≈28k requests).",
-    url: "https://developers.google.com/my-business",
-    status: "mocked",
-  },
-  {
-    name: "RepairPal Price Estimator",
-    category: "Price Transparency",
-    description: "Embeddable widget that shows fair price ranges for common repairs based on your location and vehicle. Builds trust with price transparency.",
-    freeTier: "Free to embed. RepairPal Certified Shop program from $199/month.",
-    url: "https://repairpal.com/shops",
-    status: "mocked",
-  },
-  {
-    name: "CARFAX Service Shop Program",
-    category: "Service History",
-    description: "Every repair you do is logged to CARFAX. Customers see their service history online. Builds loyalty and increases resale value of cars you service.",
-    freeTier: "Free for repair shops. CARFAX pays you for service records.",
-    url: "https://carfax.com/service-shop",
-    status: "available",
-  },
-  {
-    name: "Tekmetric / Shop-Ware",
-    category: "Shop Management Software",
-    description: "Digital vehicle inspections with photos. Customer approves repairs via text link with photos of worn parts. Increases approval rates by 40%.",
-    freeTier: "Tekmetric from $129/month. Shop-Ware from $249/month.",
-    url: "https://tekmetric.com",
-    status: "available",
-  },
-  {
-    name: "Worldpac / AutoZone ProAccess",
-    category: "Parts Ordering",
-    description: "Real-time parts inventory and pricing. Customer sees if parts are in stock before booking. Auto-orders parts for scheduled appointments.",
-    freeTier: "Free for registered shops. Wholesale pricing on parts.",
-    url: "https://worldpac.com",
-    status: "available",
-  },
-  {
-    name: "Stripe Payment Links",
-    category: "Online Payments",
-    description: "Text a payment link after service. Customer pays with card or ACH. No more 'I forgot my checkbook'.",
-    freeTier: "2.9% + 30¢ per transaction. No monthly fee.",
-    url: "https://stripe.com/payments",
-    status: "available",
-  },
+  { name: "NHTSA VIN Decoder API", category: "Vehicle Identification", description: "Customer enters their VIN, site auto-fills year, make, model, and engine. Eliminates wrong-part orders and speeds up booking. Free government API.", freeTier: "Completely free. No API key required. Unlimited calls.", url: "https://vpic.nhtsa.dot.gov/api/", status: "mocked" },
+  { name: "Google Maps Embed", category: "Maps & Location", description: "Interactive map showing shop location with directions. Customers tap to navigate.", freeTier: "28,000 embed loads/month (free). $7/1k loads after.", url: "https://developers.google.com/maps/documentation/embed/start", status: "live" },
+  { name: "Google Business Profile API", category: "Reviews & Ratings", description: "Live Google reviews on your site. Auto-updates when customers leave new reviews.", freeTier: "$200/month API credit (≈28k requests).", url: "https://developers.google.com/my-business", status: "mocked" },
+  { name: "RepairPal Price Estimator", category: "Price Transparency", description: "Embeddable widget that shows fair price ranges for common repairs based on your location and vehicle. Builds trust with price transparency.", freeTier: "Free to embed. RepairPal Certified Shop program from $199/month.", url: "https://repairpal.com/shops", status: "mocked" },
+  { name: "CARFAX Service Shop Program", category: "Service History", description: "Every repair you do is logged to CARFAX. Customers see their service history online. Builds loyalty and increases resale value of cars you service.", freeTier: "Free for repair shops. CARFAX pays you for service records.", url: "https://carfax.com/service-shop", status: "available" },
+  { name: "Tekmetric / Shop-Ware", category: "Shop Management Software", description: "Digital vehicle inspections with photos. Customer approves repairs via text link with photos of worn parts. Increases approval rates by 40%.", freeTier: "Tekmetric from $129/month. Shop-Ware from $249/month.", url: "https://tekmetric.com", status: "available" },
+  { name: "Worldpac / AutoZone ProAccess", category: "Parts Ordering", description: "Real-time parts inventory and pricing. Customer sees if parts are in stock before booking. Auto-orders parts for scheduled appointments.", freeTier: "Free for registered shops. Wholesale pricing on parts.", url: "https://worldpac.com", status: "available" },
+  { name: "Stripe Payment Links", category: "Online Payments", description: "Text a payment link after service. Customer pays with card or ACH. No more 'I forgot my checkbook'.", freeTier: "2.9% + 30¢ per transaction. No monthly fee.", url: "https://stripe.com/payments", status: "available" },
 ];
 
 const serviceCategories = [
-  {
-    title: "Routine Maintenance",
-    items: [
-      { name: "Oil Change (Conventional)", desc: "Up to 5 qts, new filter, 21-point inspection", price: "$39", time: "30 min" },
-      { name: "Oil Change (Full Synthetic)", desc: "Up to 5 qts, premium filter, 21-point inspection", price: "$69", time: "30 min" },
-      { name: "Tire Rotation", desc: "Includes pressure check and tread depth measurement", price: "$25", time: "20 min" },
-      { name: "Multipoint Inspection", desc: "50-point visual inspection with written report", price: "Free", time: "30 min" },
-    ],
-  },
-  {
-    title: "Brakes",
-    items: [
-      { name: "Brake Pad Replacement", desc: "Front or rear pads, includes resurfacing rotors", price: "from $179", time: "1-2 hrs" },
-      { name: "Brake Fluid Flush", desc: "Remove old fluid, replace with DOT 4, bleed system", price: "$99", time: "45 min" },
-      { name: "Rotor Replacement", desc: "Front or rear rotors, includes pads", price: "from $279", time: "1-2 hrs" },
-      { name: "Caliper Replacement", desc: "Single caliper, includes brake fluid", price: "from $189", time: "1 hr" },
-    ],
-  },
-  {
-    title: "Diagnostics & Engine",
-    items: [
-      { name: "Check Engine Light", desc: "OBD-II scan, diagnose code, written estimate", price: "$89", time: "45 min" },
-      { name: "Engine Diagnostics", desc: "Advanced diagnostics beyond code reading", price: "from $129", time: "1-2 hrs" },
-      { name: "Transmission Service", desc: "Fluid flush, filter replacement, gasket", price: "from $149", time: "2 hrs" },
-      { name: "Timing Belt", desc: "Includes tensioner and water pump inspection", price: "from $499", time: "4-6 hrs" },
-    ],
-  },
-  {
-    title: "Climate & Electrical",
-    items: [
-      { name: "AC Recharge", desc: "Recharge with R-134a, leak check, performance test", price: "$99", time: "45 min" },
-      { name: "AC Compressor", desc: "New compressor, receiver drier, system flush", price: "from $599", time: "3-4 hrs" },
-      { name: "Battery Replacement", desc: "New battery, old core recycling, terminal cleaning", price: "from $129", time: "20 min" },
-      { name: "Alternator Replacement", desc: "New alternator, belt inspection, test charging", price: "from $289", time: "1-2 hrs" },
-    ],
-  },
+  { title: "Routine Maintenance", items: [
+    { name: "Oil Change (Conventional)", desc: "Up to 5 qts, new filter, 21-point inspection", price: "$39", time: "30 min" },
+    { name: "Oil Change (Full Synthetic)", desc: "Up to 5 qts, premium filter, 21-point inspection", price: "$69", time: "30 min" },
+    { name: "Tire Rotation", desc: "Includes pressure check and tread depth measurement", price: "$25", time: "20 min" },
+    { name: "Multipoint Inspection", desc: "50-point visual inspection with written report", price: "Free", time: "30 min" },
+  ]},
+  { title: "Brakes", items: [
+    { name: "Brake Pad Replacement", desc: "Front or rear pads, includes resurfacing rotors", price: "from $179", time: "1-2 hrs" },
+    { name: "Brake Fluid Flush", desc: "Remove old fluid, replace with DOT 4, bleed system", price: "$99", time: "45 min" },
+    { name: "Rotor Replacement", desc: "Front or rear rotors, includes pads", price: "from $279", time: "1-2 hrs" },
+    { name: "Caliper Replacement", desc: "Single caliper, includes brake fluid", price: "from $189", time: "1 hr" },
+  ]},
+  { title: "Diagnostics & Engine", items: [
+    { name: "Check Engine Light", desc: "OBD-II scan, diagnose code, written estimate", price: "$89", time: "45 min" },
+    { name: "Engine Diagnostics", desc: "Advanced diagnostics beyond code reading", price: "from $129", time: "1-2 hrs" },
+    { name: "Transmission Service", desc: "Fluid flush, filter replacement, gasket", price: "from $149", time: "2 hrs" },
+    { name: "Timing Belt", desc: "Includes tensioner and water pump inspection", price: "from $499", time: "4-6 hrs" },
+  ]},
+  { title: "Climate & Electrical", items: [
+    { name: "AC Recharge", desc: "Recharge with R-134a, leak check, performance test", price: "$99", time: "45 min" },
+    { name: "AC Compressor", desc: "New compressor, receiver drier, system flush", price: "from $599", time: "3-4 hrs" },
+    { name: "Battery Replacement", desc: "New battery, old core recycling, terminal cleaning", price: "from $129", time: "20 min" },
+    { name: "Alternator Replacement", desc: "New alternator, belt inspection, test charging", price: "from $289", time: "1-2 hrs" },
+  ]},
 ];
 
 const makes = ["Toyota", "Honda", "Ford", "Chevy", "Nissan", "Subaru", "Hyundai", "Kia", "Jeep", "Dodge", "Ram", "GMC", "Buick", "Mazda", "Volkswagen", "BMW", "Audi", "Mercedes", "Lexus", "Acura"];
@@ -149,67 +80,41 @@ const trustBadges = [
 ];
 
 const StarRating: React.FC = () => (
-  <div className="demo-testimonial__stars" aria-label="5 out of 5 stars">
-    {[0, 1, 2, 3, 4].map((i) => <StarIcon key={i} size={18} />)}
-  </div>
+  <div className="demo-testimonial__stars" aria-label="5 out of 5 stars">{[0,1,2,3,4].map((i) => <StarIcon key={i} size={18} />)}</div>
 );
 
 const VinLookup: React.FC = () => {
   const [vin, setVin] = React.useState("");
   const [result, setResult] = React.useState<null | { year: string; make: string; model: string }>(null);
-
   const handleLookup = () => {
-    if (vin.length >= 17) {
-      setResult({ year: "2019", make: "Toyota", model: "Camry SE" });
-    } else if (vin.length > 0) {
-      setResult({ year: "—", make: "VIN must be 17 characters", model: "" });
-    }
+    if (vin.length >= 17) setResult({ year: "2019", make: "Toyota", model: "Camry SE" });
+    else if (vin.length > 0) setResult({ year: "—", make: "VIN must be 17 characters", model: "" });
   };
-
   return (
     <div className="demo-vin-lookup">
       <h3 className="demo-vin-lookup__title">VIN Lookup</h3>
       <p className="demo-vin-lookup__desc">Enter your 17-character VIN and we'll auto-fill your vehicle info for faster booking.</p>
       <div className="demo-vin-lookup__row">
-        <input
-          className="demo-vin-lookup__input"
-          type="text"
-          placeholder="1HGCM82633A123456"
-          maxLength={17}
-          value={vin}
-          onChange={(e) => setVin(e.target.value.toUpperCase())}
-        />
+        <input className="demo-vin-lookup__input" type="text" placeholder="1HGCM82633A123456" maxLength={17} value={vin} onChange={(e) => setVin(e.target.value.toUpperCase())} />
         <button type="button" className="demo-vin-lookup__btn" onClick={handleLookup}>Look Up</button>
       </div>
-      {result && (
-        <div style={{ marginTop: "1rem", padding: "0.75rem", background: "var(--demo-surface)", borderRadius: "6px" }}>
-          <strong>Vehicle:</strong> {result.year} {result.make} {result.model}
-        </div>
-      )}
-      <div className="demo-vin-lookup__note">
-        Mock VIN lookup. Production sites use the free NHTSA VIN Decoder API (no API key required,
-        unlimited calls) to auto-fill year, make, model, and engine info.
-      </div>
+      {result && <div style={{ marginTop: "1rem", padding: "0.75rem", background: "var(--demo-bg)", borderRadius: "var(--demo-radius)" }}><strong>Vehicle:</strong> {result.year} {result.make} {result.model}</div>}
+      <div className="demo-vin-lookup__note">Mock VIN lookup. Production sites use the free NHTSA VIN Decoder API (no API key required, unlimited calls) to auto-fill year, make, model, and engine info.</div>
     </div>
   );
 };
 
 const AutoRepairDemo: React.FC = () => (
-  <DemoLayout demoName="Northside Auto Repair" industry="Auto Repair" themeColor="#e67e22">
-    {/* Hero */}
-    <section className="demo-hero" style={{ background: "linear-gradient(135deg, #b35414, #4a2208)" }}>
+  <DemoLayout demoName="Northside Auto Repair" industry="Auto Repair" themeColor="#ff6b1a" designSystem="garage">
+    {/* Hero with real mechanic photo */}
+    <section className="demo-hero" style={{ backgroundImage: "url(/images/demos/auto-repair/hero.jpg)" }}>
       <div className="demo-hero__inner">
         <span className="demo-hero__tagline">ASE Certified · Serving Rockford Since 2008</span>
         <h1 className="demo-hero__title">Northside Auto Repair</h1>
-        <p className="demo-hero__subtitle">
-          Honest, reliable auto repair for all makes and models. 12-month warranty on everything we do.
-          Free estimates, no pressure, no games.
-        </p>
+        <p className="demo-hero__subtitle">Honest, reliable auto repair for all makes and models. 12-month warranty on everything we do. Free estimates, no pressure, no games.</p>
         <div className="demo-hero__actions">
           <a href="#book" className="demo-btn demo-btn--primary">Book Appointment</a>
-          <a href="tel:8155550321" className="demo-btn demo-btn--ghost">
-            <PhoneIcon size={20} /> (815) 555-0321
-          </a>
+          <a href="tel:8155550321" className="demo-btn demo-btn--ghost"><PhoneIcon size={20} /> (815) 555-0321</a>
         </div>
       </div>
     </section>
@@ -217,14 +122,7 @@ const AutoRepairDemo: React.FC = () => (
     {/* Trust Badges */}
     <div className="demo-trust-bar">
       <div className="demo-trust-bar__inner">
-        {trustBadges.map((b) => {
-          const { Icon } = b;
-          return (
-            <span key={b.label} className="demo-trust-badge">
-              <Icon size={18} /> {b.label}
-            </span>
-          );
-        })}
+        {trustBadges.map((b) => { const { Icon } = b; return <span key={b.label} className="demo-trust-badge"><Icon size={18} /> {b.label}</span>; })}
       </div>
     </div>
 
@@ -238,25 +136,16 @@ const AutoRepairDemo: React.FC = () => (
           <div><div className="demo-stat__number">12mo</div><div className="demo-stat__label">Warranty on Repairs</div></div>
         </div>
         <div style={{ marginTop: "2rem" }}>
-          <ReviewBadges
-            googleRating={4.8}
-            googleReviewCount={198}
-            yelpRating={4.5}
-            yelpReviewCount={54}
-          />
+          <ReviewBadges googleRating={4.8} googleReviewCount={198} yelpRating={4.5} yelpReviewCount={54} />
         </div>
         <div style={{ marginTop: "1rem", display: "flex", justifyContent: "center", gap: "0.75rem", flexWrap: "wrap" }}>
-          <span className="demo-trust-logo">
-            <CarIcon size={20} /> CARFAX Service Partner
-          </span>
-          <span className="demo-trust-logo">
-            <ShieldIcon size={20} /> BBB <span className="demo-trust-logo__rating">A+</span> Accredited
-          </span>
+          <span className="demo-trust-logo"><CarIcon size={20} /> CARFAX Service Partner</span>
+          <span className="demo-trust-logo"><ShieldIcon size={20} /> BBB <span className="demo-trust-logo__rating">A+</span> Accredited</span>
         </div>
       </div>
     </section>
 
-    {/* VIN Lookup — auto repair specific */}
+    {/* VIN Lookup */}
     <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Quick Vehicle Lookup</h2>
@@ -290,19 +179,31 @@ const AutoRepairDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Makes We Service */}
+    {/* Split image + text: garage */}
     <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
-        <h2 className="demo-section__title">Makes We Service</h2>
-        <p className="demo-section__subtitle">Domestic, import, and European. If your make isn't listed, call us — we probably work on it.</p>
-        <div className="demo-makes">
-          {makes.map((m) => <div key={m} className="demo-make">{m}</div>)}
+        <div className="demo-split-image-text">
+          <div className="demo-split-image-text__image" style={{ backgroundImage: "url(/images/demos/auto-repair/garage.jpg)" }} />
+          <div className="demo-split-image-text__content">
+            <h2 className="demo-split-image-text__title">A Shop You Can Trust</h2>
+            <p className="demo-split-image-text__text">Our ASE-certified mechanics have decades of combined experience. We work on domestic, import, and European vehicles. No job is too big or too small.</p>
+            <p className="demo-split-image-text__text">Every repair comes with a 12-month / 12,000-mile warranty. If something we fixed breaks again within that time, we fix it for free. No questions asked.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    {/* Coupons */}
+    {/* Makes We Service */}
     <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Makes We Service</h2>
+        <p className="demo-section__subtitle">Domestic, import, and European. If your make isn't listed, call us — we probably work on it.</p>
+        <div className="demo-makes">{makes.map((m) => <div key={m} className="demo-make">{m}</div>)}</div>
+      </div>
+    </section>
+
+    {/* Coupons */}
+    <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Current Specials</h2>
         <p className="demo-section__subtitle">Mention the code when you book. Cannot be combined with other offers.</p>
@@ -319,8 +220,16 @@ const AutoRepairDemo: React.FC = () => (
       </div>
     </section>
 
+    {/* Feature image: brakes */}
+    <div className="demo-feature-image" style={{ backgroundImage: "url(/images/demos/auto-repair/brakes.jpg)" }}>
+      <div className="demo-feature-image__content">
+        <h2 className="demo-feature-image__title">Brakes Done Right</h2>
+        <p className="demo-feature-image__text">Ceramic, semi-metallic, or performance — we use the right pads for your driving style.</p>
+      </div>
+    </div>
+
     {/* Reviews */}
-    <section className="demo-section demo-section--alt">
+    <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">What Our Customers Say</h2>
         <div className="demo-testimonials">
@@ -337,63 +246,32 @@ const AutoRepairDemo: React.FC = () => (
     </section>
 
     {/* Booking Form */}
-    <section className="demo-section" id="book">
+    <section className="demo-section demo-section--alt" id="book">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Book an Appointment</h2>
         <p className="demo-section__subtitle">Fill out the form and we'll confirm by text or email within 1 business hour.</p>
         <div className="demo-booking-form">
           <div className="demo-form__row">
-            <div className="demo-form__field">
-              <label className="demo-form__label" htmlFor="make">Vehicle Make</label>
-              <input className="demo-form__input" id="make" type="text" placeholder="e.g. Toyota" />
-            </div>
-            <div className="demo-form__field">
-              <label className="demo-form__label" htmlFor="model">Vehicle Model</label>
-              <input className="demo-form__input" id="model" type="text" placeholder="e.g. Camry" />
-            </div>
+            <div className="demo-form__field"><label className="demo-form__label">Vehicle Make</label><input className="demo-form__input" type="text" placeholder="e.g. Toyota" /></div>
+            <div className="demo-form__field"><label className="demo-form__label">Vehicle Model</label><input className="demo-form__input" type="text" placeholder="e.g. Camry" /></div>
           </div>
           <div className="demo-form__row">
-            <div className="demo-form__field">
-              <label className="demo-form__label" htmlFor="year">Year</label>
-              <input className="demo-form__input" id="year" type="text" placeholder="e.g. 2019" />
-            </div>
-            <div className="demo-form__field">
-              <label className="demo-form__label" htmlFor="service">Service Needed</label>
-              <select className="demo-form__select" id="service">
-                <option>Oil Change</option>
-                <option>Brake Service</option>
-                <option>Check Engine Light</option>
-                <option>AC / Heating</option>
-                <option>Tire Service</option>
-                <option>Other (describe below)</option>
-              </select>
-            </div>
+            <div className="demo-form__field"><label className="demo-form__label">Year</label><input className="demo-form__input" type="text" placeholder="e.g. 2019" /></div>
+            <div className="demo-form__field"><label className="demo-form__label">Service Needed</label><select className="demo-form__select"><option>Oil Change</option><option>Brake Service</option><option>Check Engine Light</option><option>AC / Heating</option><option>Tire Service</option><option>Other (describe below)</option></select></div>
           </div>
-          <div className="demo-form__field">
-            <label className="demo-form__label" htmlFor="name">Your Name</label>
-            <input className="demo-form__input" id="name" type="text" placeholder="First and last name" />
-          </div>
+          <div className="demo-form__field"><label className="demo-form__label">Your Name</label><input className="demo-form__input" type="text" placeholder="First and last name" /></div>
           <div className="demo-form__row">
-            <div className="demo-form__field">
-              <label className="demo-form__label" htmlFor="phone">Phone</label>
-              <input className="demo-form__input" id="phone" type="tel" placeholder="(815) 555-0000" />
-            </div>
-            <div className="demo-form__field">
-              <label className="demo-form__label" htmlFor="email">Email</label>
-              <input className="demo-form__input" id="email" type="email" placeholder="you@example.com" />
-            </div>
+            <div className="demo-form__field"><label className="demo-form__label">Phone</label><input className="demo-form__input" type="tel" placeholder="(815) 555-0000" /></div>
+            <div className="demo-form__field"><label className="demo-form__label">Email</label><input className="demo-form__input" type="email" placeholder="you@example.com" /></div>
           </div>
-          <div className="demo-form__field">
-            <label className="demo-form__label" htmlFor="desc">Describe the Problem</label>
-            <input className="demo-form__input" id="desc" type="text" placeholder="e.g. Brakes squeaking when stopping" />
-          </div>
+          <div className="demo-form__field"><label className="demo-form__label">Describe the Problem</label><input className="demo-form__input" type="text" placeholder="e.g. Brakes squeaking when stopping" /></div>
           <button type="button" className="demo-form__submit">Request Appointment</button>
         </div>
       </div>
     </section>
 
     {/* Google Maps */}
-    <section className="demo-section demo-section--alt">
+    <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Find Us</h2>
         <p className="demo-section__subtitle">456 North Ave, Rockford, IL 61101 — corner of North Ave and Main.</p>
@@ -401,55 +279,29 @@ const AutoRepairDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Integrations */}
     <IntegrationsSection industry="auto repair" integrations={integrations} />
 
-    {/* CTA + Social */}
-    <section className="demo-contact" style={{ background: "#b35414" }}>
+    {/* CTA */}
+    <section className="demo-contact" style={{ background: "#1c1c1e" }}>
       <div className="demo-contact__inner">
         <h2 className="demo-contact__title">Have Questions?</h2>
-        <p className="demo-contact__text">
-          Call (815) 555-0321 and talk to a real mechanic. Free estimates on all work, no appointment
-          needed for estimates.
-        </p>
-        <a href="tel:8155550321" className="demo-btn demo-btn--primary">
-          <PhoneIcon size={20} /> Call (815) 555-0321
-        </a>
-        <div style={{ marginTop: "1.5rem" }}>
-          <SocialLinks links={socialLinks} />
-        </div>
+        <p className="demo-contact__text">Call (815) 555-0321 and talk to a real mechanic. Free estimates on all work, no appointment needed for estimates.</p>
+        <a href="tel:8155550321" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0321</a>
+        <div style={{ marginTop: "1.5rem" }}><SocialLinks links={socialLinks} /></div>
         <div className="demo-contact__info">
-          <div className="demo-contact__info-item">
-            <MapPinIcon size={20} />
-            <span className="demo-contact__info-label">Address</span>
-            <span>456 North Ave, Rockford, IL</span>
-          </div>
-          <div className="demo-contact__info-item">
-            <ClockIcon size={20} />
-            <span className="demo-contact__info-label">Hours</span>
-            <span>Mon–Fri 7AM–6PM, Sat 8AM–2PM</span>
-          </div>
-          <div className="demo-contact__info-item">
-            <span className="demo-contact__info-label">Email</span>
-            <span>service@northsideauto.com</span>
-          </div>
+          <div className="demo-contact__info-item"><MapPinIcon size={20} /><span className="demo-contact__info-label">Address</span><span>456 North Ave, Rockford, IL</span></div>
+          <div className="demo-contact__info-item"><ClockIcon size={20} /><span className="demo-contact__info-label">Hours</span><span>Mon–Fri 7AM–6PM, Sat 8AM–2PM</span></div>
+          <div className="demo-contact__info-item"><span className="demo-contact__info-label">Email</span><span>service@northsideauto.com</span></div>
         </div>
       </div>
     </section>
 
-    {/* Footer */}
     <footer className="demo-footer">
       <div className="demo-footer__inner">
         <div className="demo-footer__name">Northside Auto Repair</div>
         <div>456 North Ave, Rockford, IL 61101 · (815) 555-0321</div>
-        <div style={{ marginTop: "1rem" }}>
-          <SocialLinks links={socialLinks} />
-        </div>
-        <div className="demo-footer__demo-note">
-          This is a demo website built by <a href="https://bradleymatera.dev">Bradley Matera</a>.
-          <br />
-          <a href="/demos/">← Back to all demos</a> · <a href="/contact/">Get a site like this →</a>
-        </div>
+        <div style={{ marginTop: "1rem" }}><SocialLinks links={socialLinks} /></div>
+        <div className="demo-footer__demo-note">This is a demo website built by <a href="https://bradleymatera.dev">Bradley Matera</a>.<br /><a href="/demos/">← Back to all demos</a> · <a href="/contact/">Get a site like this →</a></div>
       </div>
     </footer>
   </DemoLayout>
@@ -460,17 +312,5 @@ export default AutoRepairDemo;
 export const Head: HeadFC = () => {
   const site = useSiteMetadata();
   const pageUrl = `${site.siteUrl}${pathname}`;
-  return (
-    <Seo
-      title={pageTitle}
-      description={pageDescription}
-      pathname={pathname}
-      canonicalUrl={pageUrl}
-      robots="noindex,nofollow"
-      breadcrumbs={[
-        { name: "Demos", path: "/demos/" },
-        { name: "Auto Repair Demo", path: pathname },
-      ]}
-    />
-  );
+  return <Seo title={pageTitle} description={pageDescription} pathname={pathname} canonicalUrl={pageUrl} robots="noindex,nofollow" breadcrumbs={[{ name: "Demos", path: "/demos/" }, { name: "Auto Repair Demo", path: pathname }]} />;
 };

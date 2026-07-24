@@ -2,6 +2,8 @@ import * as React from "react";
 import { Global } from "@emotion/react";
 import DemoBanner from "./DemoBanner";
 
+type DesignSystem = "elegant" | "organic" | "industrial" | "garage" | "luxury" | "soft";
+
 type DemoLayoutProps = {
   children: React.ReactNode;
   demoName: string;
@@ -10,12 +12,14 @@ type DemoLayoutProps = {
   backLabel?: string;
   /** CSS theme override — each demo can have its own color scheme */
   themeColor?: string;
+  /** Design system name — controls fonts, colors, border-radius, spacing */
+  designSystem?: DesignSystem;
 };
 
 /**
  * Minimal layout for demo pages.
  * Does NOT include the main site header, footer, or cyberpunk effects.
- * Each demo looks like a standalone business website.
+ * Each demo looks like a standalone business website with its own design system.
  */
 const DemoLayout: React.FC<DemoLayoutProps> = ({
   children,
@@ -24,6 +28,7 @@ const DemoLayout: React.FC<DemoLayoutProps> = ({
   backHref,
   backLabel,
   themeColor,
+  designSystem = "elegant",
 }) => {
   return (
     <>
@@ -42,7 +47,7 @@ const DemoLayout: React.FC<DemoLayoutProps> = ({
         backLabel={backLabel}
       />
       <div
-        className="demo-page"
+        className={`demo-page demo-theme--${designSystem}`}
         style={themeColor ? ({ ["--demo-accent" as string]: themeColor } as React.CSSProperties) : undefined}
       >
         {children}
