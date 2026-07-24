@@ -116,6 +116,56 @@ const BeautySalonDemo: React.FC = () => (
       </div>
     </section>
 
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Features at a glance</h2>
+        <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Bella Vista Salon features at a glance">
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+            <thead>
+              <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Service menu</td>
+                <td style={{ padding: "0.75rem" }}>Categorized services for hair, nails, skincare, and makeup with pricing and estimated duration.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Stylist bios</td>
+                <td style={{ padding: "0.75rem" }}>Stylist profiles with specialties, certifications, experience, and professional photos.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Photo gallery</td>
+                <td style={{ padding: "0.75rem" }}>Salon interior gallery and before-and-after transformation photos showcasing stylist work.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Online booking</td>
+                <td style={{ padding: "0.75rem" }}>Online booking widget with stylist availability, service selection, date, and time. Text reminders included.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Price list</td>
+                <td style={{ padding: "0.75rem" }}>Transparent pricing for all services with clear time estimates and starting prices for complex treatments.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Mobile-responsive</td>
+                <td style={{ padding: "0.75rem" }}>Fully responsive layout optimized for phones, tablets, and desktops.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>SEO setup</td>
+                <td style={{ padding: "0.75rem" }}>HairSalon schema markup, service pages with unique content, Google Business Profile, and sitemap.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Reviews</td>
+                <td style={{ padding: "0.75rem" }}>Google and Yelp review badges with star ratings and customer testimonials.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
     {/* New client special banner */}
     <div className="demo-trust-bar">
       <div className="demo-trust-bar__inner">

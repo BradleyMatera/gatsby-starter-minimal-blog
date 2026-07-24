@@ -116,6 +116,37 @@ const FAQPage = () => (
       </div>
     </Section>
 
+    <Section
+      eyebrow="Quick reference"
+      title="Pricing, timelines, and ownership at a glance"
+      description={<p>A summary of the most common questions answered in a single table.</p>}
+    >
+      <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Pricing and timeline comparison table">
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.9rem" }}>
+          <thead>
+            <tr>
+              <th style={{ textAlign: "left", padding: "0.75rem", borderBottom: "2px solid var(--color-border)" }}>Package</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", borderBottom: "2px solid var(--color-border)" }}>Build price</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", borderBottom: "2px solid var(--color-border)" }}>Monthly</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", borderBottom: "2px solid var(--color-border)" }}>Timeline</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", borderBottom: "2px solid var(--color-border)" }}>Best for</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Starter Presence</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>$447</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>$37/mo</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>1-2 weeks</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>New businesses, solo operators</td></tr>
+            <tr><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Local Growth</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>$797</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>$67/mo</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>2-3 weeks</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Established service businesses</td></tr>
+            <tr><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Lead Engine</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>$1,497</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>$97/mo</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>3-4 weeks</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Full local market presence</td></tr>
+            <tr><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Site Refresh</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>$597</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>—</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>1-2 weeks</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Updating existing sites</td></tr>
+            <tr><td style={{ padding: "0.75rem" }}>Hourly</td><td style={{ padding: "0.75rem" }}>$65/hr</td><td style={{ padding: "0.75rem" }}>—</td><td style={{ padding: "0.75rem" }}>24-48hr</td><td style={{ padding: "0.75rem" }}>Small fixes, maintenance</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div className="card-actions" style={{ marginTop: "1.5rem" }}>
+        <Link data-variant="primary" to="/pricing/">See full pricing</Link>
+        <Link data-variant="ghost" to="/contact/">Get a free website plan</Link>
+      </div>
+    </Section>
+
     <FAQAccordion
       eyebrow="Questions"
       title="Common questions from local business owners"

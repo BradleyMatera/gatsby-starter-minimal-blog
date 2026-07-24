@@ -79,6 +79,54 @@ const RefundPolicyPage = () => (
       </div>
     </Section>
 
+    <Section eyebrow="Quick reference" title="Refund eligibility">
+      <Card variant="outline">
+        <table className="data-table">
+          <caption>Refund eligibility by scenario</caption>
+          <thead>
+            <tr>
+              <th scope="col">Scenario</th>
+              <th scope="col">Refund available?</th>
+              <th scope="col">Timeline</th>
+              <th scope="col">Conditions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Scenario">Deposit before work starts</td>
+              <td data-label="Refund available?">Yes &mdash; full refund</td>
+              <td data-label="Timeline">Until the first revision round is delivered</td>
+              <td data-label="Conditions">Request before any revision round is sent to you.</td>
+            </tr>
+            <tr>
+              <td data-label="Scenario">Work in progress</td>
+              <td data-label="Refund available?">Partial &mdash; deposit applied to completed work</td>
+              <td data-label="Timeline">After first revision round, before launch</td>
+              <td data-label="Conditions">You receive all completed work to date and are billed for work beyond the deposit at the hourly rate.</td>
+            </tr>
+            <tr>
+              <td data-label="Scenario">After delivery</td>
+              <td data-label="Refund available?">No &mdash; final balance paid</td>
+              <td data-label="Timeline">Post-launch</td>
+              <td data-label="Conditions">30-day warranty covers bugs caused by the build.</td>
+            </tr>
+            <tr>
+              <td data-label="Scenario">Digital products</td>
+              <td data-label="Refund available?">Yes, if defective or inaccessible</td>
+              <td data-label="Timeline">Within 7 days of purchase</td>
+              <td data-label="Conditions">Contact support with order number. Not refundable if successfully downloaded and used unless materially defective.</td>
+            </tr>
+            <tr>
+              <td data-label="Scenario">Monthly hosting</td>
+              <td data-label="Refund available?">No refund &mdash; cancel before next billing period</td>
+              <td data-label="Timeline">Cancellation takes effect at end of current paid period</td>
+              <td data-label="Conditions">No penalties, no notice required. You keep access through the paid period.</td>
+            </tr>
+          </tbody>
+        </table>
+      </Card>
+    </Section>
+
     <Section eyebrow="Custom services" title="Custom service deposits">
       <Card variant="outline">
         <p className="feature-card__body">

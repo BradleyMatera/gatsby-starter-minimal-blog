@@ -119,6 +119,56 @@ const RestaurantDemo: React.FC = () => (
       </div>
     </section>
 
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Features at a glance</h2>
+        <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Riverside Grill features at a glance">
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+            <thead>
+              <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Menu display</td>
+                <td style={{ padding: "0.75rem" }}>Full menu organized by category with item photos, descriptions, and prices. Mobile-readable, no PDF.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Reservation system</td>
+                <td style={{ padding: "0.75rem" }}>Online reservation widget with real-time table availability. Syncs with POS and table management.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Photo gallery</td>
+                <td style={{ padding: "0.75rem" }}>Food and interior photo galleries showcasing dishes, ambiance, and the dining space.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Hours &amp; location</td>
+                <td style={{ padding: "0.75rem" }}>Hours strip and Google Maps embed showing the restaurant location with directions.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Contact form</td>
+                <td style={{ padding: "0.75rem" }}>Contact form for private events, catering inquiries, and general questions.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Mobile-responsive</td>
+                <td style={{ padding: "0.75rem" }}>Fully responsive layout optimized for phones, tablets, and desktops.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>SEO setup</td>
+                <td style={{ padding: "0.75rem" }}>Restaurant schema markup, meta descriptions, Open Graph tags, and sitemap included.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Social links</td>
+                <td style={{ padding: "0.75rem" }}>Links to Facebook, Instagram, Yelp, and Google Business Profile.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
     {/* Hours strip */}
     <div className="demo-trust-bar">
       <div className="demo-trust-bar__inner">

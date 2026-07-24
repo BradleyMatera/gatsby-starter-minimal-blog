@@ -79,6 +79,54 @@ const PrivacyPage = () => (
       </div>
     </Section>
 
+    <Section eyebrow="Quick reference" title="What data we collect">
+      <Card variant="outline">
+        <table className="data-table">
+          <caption>What data we collect, how we use it, and how long we keep it</caption>
+          <thead>
+            <tr>
+              <th scope="col">Data type</th>
+              <th scope="col">What it is</th>
+              <th scope="col">How we use it</th>
+              <th scope="col">How long we keep it</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Data type">Contact form submissions</td>
+              <td data-label="What it is">Name, email, phone, business name, project details you provide.</td>
+              <td data-label="How we use it">Respond to inquiries and provide quotes.</td>
+              <td data-label="How long we keep it">As long as needed to respond, then deleted unless a project begins.</td>
+            </tr>
+            <tr>
+              <td data-label="Data type">Analytics data</td>
+              <td data-label="What it is">Aggregated or pseudonymous page visits, device types, general regions.</td>
+              <td data-label="How we use it">Understand site usage and improve content.</td>
+              <td data-label="How long we keep it">Retained by the analytics provider per its own policy.</td>
+            </tr>
+            <tr>
+              <td data-label="Data type">Cookies</td>
+              <td data-label="What it is">Analytics cookies set by providers (no advertising cookies).</td>
+              <td data-label="How we use it">Track aggregate usage statistics only.</td>
+              <td data-label="How long we keep it">Persist on your device until you clear them via browser settings.</td>
+            </tr>
+            <tr>
+              <td data-label="Data type">Payment data</td>
+              <td data-label="What it is">Order ID, customer email, product ID, amount, transaction ID. Card details never touch this site.</td>
+              <td data-label="How we use it">Process payments, deliver products, issue receipts.</td>
+              <td data-label="How long we keep it">Retained for tax compliance and legal recordkeeping as required by law.</td>
+            </tr>
+            <tr>
+              <td data-label="Data type">Server logs</td>
+              <td data-label="What it is">Hosting provider (Netlify) logs of requests, IPs, timestamps.</td>
+              <td data-label="How we use it">Operate the site, prevent fraud, and diagnose issues.</td>
+              <td data-label="How long we keep it">Managed by the hosting provider per its retention policy.</td>
+            </tr>
+          </tbody>
+        </table>
+      </Card>
+    </Section>
+
     <Section eyebrow="Data collected" title="What information we collect">
       <Card variant="outline">
         <h3 className="feature-card__title">Contact-form data</h3>

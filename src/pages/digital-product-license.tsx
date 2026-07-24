@@ -79,6 +79,42 @@ const DigitalProductLicensePage = () => (
       </div>
     </Section>
 
+    <Section eyebrow="Quick reference" title="License comparison">
+      <Card variant="outline">
+        <table className="data-table">
+          <caption>License comparison by use type</caption>
+          <thead>
+            <tr>
+              <th scope="col">License type</th>
+              <th scope="col">What you can do</th>
+              <th scope="col">What you cannot do</th>
+              <th scope="col">Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="License type">Personal use</td>
+              <td data-label="What you can do">Use the product for your own personal projects; modify for your own use.</td>
+              <td data-label="What you cannot do">Resell, redistribute, sublicense, or publicly repost the product.</td>
+              <td data-label="Price">Per product listing in the store</td>
+            </tr>
+            <tr>
+              <td data-label="License type">Commercial use</td>
+              <td data-label="What you can do">Use the product within your own business as described per product.</td>
+              <td data-label="What you cannot do">Resell, redistribute, sublicense, or use in a way that competes with the original offering.</td>
+              <td data-label="Price">Per product listing in the store</td>
+            </tr>
+            <tr>
+              <td data-label="License type">Resale</td>
+              <td data-label="What you can do">Not permitted unless the product explicitly allows it in writing.</td>
+              <td data-label="What you cannot do">Resell, sub-license, redistribute, or publicly repost the product.</td>
+              <td data-label="Price">Not offered</td>
+            </tr>
+          </tbody>
+        </table>
+      </Card>
+    </Section>
+
     <Section eyebrow="License grant" title="License grant">
       <Card variant="outline">
         <p className="feature-card__body">

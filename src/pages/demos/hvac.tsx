@@ -127,6 +127,56 @@ const HvacDemo: React.FC = () => (
       </div>
     </section>
 
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Features at a glance</h2>
+        <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="ComfortAir Heating and Cooling features at a glance">
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+            <thead>
+              <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Service pages</td>
+                <td style={{ padding: "0.75rem" }}>Detailed pages for heating, cooling, indoor air quality, maintenance, smart thermostats, and duct cleaning.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Financing calculator</td>
+                <td style={{ padding: "0.75rem" }}>Interactive monthly payment calculator for furnace and AC installations based on system cost and term length.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Seasonal promotions</td>
+                <td style={{ padding: "0.75rem" }}>Coupon pages for furnace season, AC season, and new customer specials with promo codes.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Service areas</td>
+                <td style={{ padding: "0.75rem" }}>Coverage across 10 communities in Northwest Illinois with a Google Maps service area embed.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Booking form</td>
+                <td style={{ padding: "0.75rem" }}>Service request form with emergency priority option, phone click-to-call, and business hours.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Emergency contact</td>
+                <td style={{ padding: "0.75rem" }}>24/7 emergency service banner with prominent click-to-call phone number visible on every page.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Mobile-responsive</td>
+                <td style={{ padding: "0.75rem" }}>Fully responsive layout optimized for phones, tablets, and desktops.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>SEO setup</td>
+                <td style={{ padding: "0.75rem" }}>LocalBusiness schema, service area pages with unique content, Google Business Profile, and Bing Places setup.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
     {/* Emergency Banner */}
     <div className="demo-emergency-banner"><AlertIcon size={20} /> Heating or AC emergency? We're available 24/7 · Call (815) 555-0789 now</div>
 

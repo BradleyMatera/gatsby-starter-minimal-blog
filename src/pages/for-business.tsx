@@ -105,6 +105,60 @@ const ForBusinessPage = () => (
       </div>
     </Section>
 
+    <Section eyebrow="Quick reference" title="Services at a glance">
+      <Card variant="outline">
+        <table className="data-table">
+          <caption>Services at a glance</caption>
+          <thead>
+            <tr>
+              <th scope="col">Service</th>
+              <th scope="col">Starting price</th>
+              <th scope="col">Timeline</th>
+              <th scope="col">Best for</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Service">New website</td>
+              <td data-label="Starting price">$447</td>
+              <td data-label="Timeline">14 days</td>
+              <td data-label="Best for">New businesses and solo operators needing a first site</td>
+            </tr>
+            <tr>
+              <td data-label="Service">Redesign</td>
+              <td data-label="Starting price">$597</td>
+              <td data-label="Timeline">2-3 weeks</td>
+              <td data-label="Best for">Existing sites that look dated or perform poorly</td>
+            </tr>
+            <tr>
+              <td data-label="Service">Repair</td>
+              <td data-label="Starting price">$65/hour</td>
+              <td data-label="Timeline">Varies by issue</td>
+              <td data-label="Best for">Broken features, bugs, or small fixes on an existing site</td>
+            </tr>
+            <tr>
+              <td data-label="Service">Local SEO</td>
+              <td data-label="Starting price">Included in builds; ongoing from $37/month</td>
+              <td data-label="Timeline">Ongoing</td>
+              <td data-label="Best for">Businesses wanting to rank in their service area</td>
+            </tr>
+            <tr>
+              <td data-label="Service">Accessibility</td>
+              <td data-label="Starting price">$65/hour</td>
+              <td data-label="Timeline">Varies by audit scope</td>
+              <td data-label="Best for">Sites needing WCAG compliance or audit fixes</td>
+            </tr>
+            <tr>
+              <td data-label="Service">Speed optimization</td>
+              <td data-label="Starting price">$65/hour</td>
+              <td data-label="Timeline">Varies by site</td>
+              <td data-label="Best for">Slow sites that need faster load times and better Core Web Vitals</td>
+            </tr>
+          </tbody>
+        </table>
+      </Card>
+    </Section>
+
     <Section
       eyebrow="Website examples"
       title="See what your website could look like"

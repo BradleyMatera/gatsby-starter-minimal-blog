@@ -129,6 +129,56 @@ const AutoRepairDemo: React.FC = () => (
       </div>
     </section>
 
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Features at a glance</h2>
+        <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Northside Auto Repair features at a glance">
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+            <thead>
+              <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Service menu</td>
+                <td style={{ padding: "0.75rem" }}>Categorized service list with pricing and estimated time for routine maintenance, brakes, diagnostics, and climate services.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>VIN lookup</td>
+                <td style={{ padding: "0.75rem" }}>Interactive VIN lookup tool that auto-fills vehicle year, make, and model for faster booking.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Customer reviews</td>
+                <td style={{ padding: "0.75rem" }}>Google and Yelp review badges with star ratings and customer testimonials.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Appointment scheduling</td>
+                <td style={{ padding: "0.75rem" }}>Online booking form with vehicle details, service type, and preferred date and time.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Hours &amp; location</td>
+                <td style={{ padding: "0.75rem" }}>Trust bar with hours and a Google Maps embed showing the shop location with directions.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Mobile-responsive</td>
+                <td style={{ padding: "0.75rem" }}>Fully responsive layout optimized for phones, tablets, and desktops.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>SEO setup</td>
+                <td style={{ padding: "0.75rem" }}>AutoRepair schema markup, service pages with unique content, Google Business Profile, and sitemap.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Special offers</td>
+                <td style={{ padding: "0.75rem" }}>Coupon section with oil change, brake, and AC service promotions and promo codes.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
     {/* Trust Badges */}
     <div className="demo-trust-bar">
       <div className="demo-trust-bar__inner">

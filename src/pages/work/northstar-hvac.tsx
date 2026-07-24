@@ -62,6 +62,49 @@ const ExamplePage = () => (
       </div>
     </Section>
 
+    <Section eyebrow="Project specs" title="Project specifications at a glance">
+      <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="NorthStar HVAC project specs table">
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+          <thead>
+            <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Aspect</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Industry</td>
+              <td style={{ padding: "0.75rem" }}>HVAC installation and repair</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Pages</td>
+              <td style={{ padding: "0.75rem" }}>7 pages — Home, Services, Service Areas, Financing, Seasonal Promotions, About, Contact</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Build time</td>
+              <td style={{ padding: "0.75rem" }}>Around 4 weeks, ideally launching before peak heating or cooling season</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Stack</td>
+              <td style={{ padding: "0.75rem" }}>Gatsby 5 static site, React 18, TypeScript, Netlify hosting</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Key features</td>
+              <td style={{ padding: "0.75rem" }}>Financing calculator, seasonal promotion pages, service area pages, emergency contact system, maintenance plans</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>SEO features</td>
+              <td style={{ padding: "0.75rem" }}>LocalBusiness schema on every page, service area pages with unique content, Google Business Profile, Bing Places, NAP consistency</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Accessibility</td>
+              <td style={{ padding: "0.75rem" }}>WCAG 2.2 AA compliant, keyboard-accessible calculator with ARIA live regions, proper form labels and error handling</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </Section>
+
     <Section eyebrow="The problem" title="Common HVAC website problems">
       <Card variant="outline">
         <p className="feature-card__body">

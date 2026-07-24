@@ -60,6 +60,49 @@ const ExamplePage = () => (
       </div>
     </Section>
 
+    <Section eyebrow="Project specs" title="Project specifications at a glance">
+      <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Rock River Diner project specs table">
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+          <thead>
+            <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Aspect</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Industry</td>
+              <td style={{ padding: "0.75rem" }}>Restaurant and diner</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Pages</td>
+              <td style={{ padding: "0.75rem" }}>4 pages — Home, Menu, About, Reservations</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Build time</td>
+              <td style={{ padding: "0.75rem" }}>Typically 1-2 weeks for a small restaurant site</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Stack</td>
+              <td style={{ padding: "0.75rem" }}>Gatsby 5 static site, React 18, TypeScript, Netlify hosting</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Key features</td>
+              <td style={{ padding: "0.75rem" }}>Mobile-first text menu, working reservation form, photo gallery, hours and location visible above the fold</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>SEO features</td>
+              <td style={{ padding: "0.75rem" }}>Restaurant schema markup with menu, hours, price range, and location, Google Business Profile update, sitemap submission</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Accessibility</td>
+              <td style={{ padding: "0.75rem" }}>WCAG 2.2 AA compliant, semantic HTML menu (no PDF), proper form labels, keyboard navigation, alt text on all photos, skip-to-content link</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </Section>
+
     <Section eyebrow="The problem" title="Common restaurant website problems">
       <Card variant="outline">
         <p className="feature-card__body">

@@ -88,6 +88,56 @@ const RealEstateDemo: React.FC = () => (
       </div>
     </section>
 
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Features at a glance</h2>
+        <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Rockford Heritage Realty features at a glance">
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+            <thead>
+              <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Property listings</td>
+                <td style={{ padding: "0.75rem" }}>Featured listings with exterior and interior photos, price, beds, baths, square footage, and Walk Score.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Agent profiles</td>
+                <td style={{ padding: "0.75rem" }}>Agent bios with specialties, sales history, ratings, and contact information for each team member.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Search filters</td>
+                <td style={{ padding: "0.75rem" }}>Property search bar with filters for location, price range, and bedroom count.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Contact form</td>
+                <td style={{ padding: "0.75rem" }}>Contact form for buyer and seller inquiries with agent routing.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Market reports</td>
+                <td style={{ padding: "0.75rem" }}>Neighborhood guides with median home prices and area descriptions for six Rockford-area communities.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Neighborhood guides</td>
+                <td style={{ padding: "0.75rem" }}>Detailed neighborhood profiles with photos, descriptions, and median home prices for each community.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Mobile-responsive</td>
+                <td style={{ padding: "0.75rem" }}>Fully responsive layout optimized for phones, tablets, and desktops.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>SEO setup</td>
+                <td style={{ padding: "0.75rem" }}>RealEstateAgent schema markup, neighborhood pages with unique content, MLS integration, and sitemap.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
     {/* Property Search Bar */}
     <div className="demo-section__inner" style={{ padding: "0 1.5rem" }}>
       <div className="demo-search-bar">

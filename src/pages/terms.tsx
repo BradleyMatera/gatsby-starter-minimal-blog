@@ -83,6 +83,46 @@ const TermsPage = () => (
       </div>
     </Section>
 
+    <Section eyebrow="Quick reference" title="Key terms at a glance">
+      <Card variant="outline">
+        <table className="data-table">
+          <caption>Quick reference: key terms</caption>
+          <thead>
+            <tr>
+              <th scope="col">Term</th>
+              <th scope="col">Summary</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Term">Agreement acceptance</td>
+              <td data-label="Summary">Using this site or signing a project agreement means you accept these Terms. Signed project agreements control if they conflict with these Terms.</td>
+            </tr>
+            <tr>
+              <td data-label="Term">Payment terms</td>
+              <td data-label="Summary">50% deposit to start, remaining balance due before launch. Monthly care plans billed in advance. Hourly work at $65/hr with a 1-hour minimum.</td>
+            </tr>
+            <tr>
+              <td data-label="Term">Refund window</td>
+              <td data-label="Summary">Deposit refundable until the first revision round is delivered. Monthly plans cancel before the next billing period. Digital products reviewed for defects within 7 days.</td>
+            </tr>
+            <tr>
+              <td data-label="Term">Intellectual property ownership</td>
+              <td data-label="Summary">{IP_WORDING.ownership} Digital products sold in the store are licensed, not ownership-transferred.</td>
+            </tr>
+            <tr>
+              <td data-label="Term">Limitation of liability</td>
+              <td data-label="Summary">Liability for services is limited to the amount paid for the specific project. No liability for indirect, incidental, or consequential damages.</td>
+            </tr>
+            <tr>
+              <td data-label="Term">Governing law</td>
+              <td data-label="Summary">Illinois law governs these Terms and any disputes. Bradley F. Matera operates as an Illinois sole proprietor.</td>
+            </tr>
+          </tbody>
+        </table>
+      </Card>
+    </Section>
+
     <Section eyebrow="Seller identity" title="Who provides these services">
       <Card variant="outline">
         <p className="feature-card__body">

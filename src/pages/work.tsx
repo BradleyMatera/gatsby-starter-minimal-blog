@@ -124,6 +124,42 @@ const WorkPage = () => (
         </p>
       }
     >
+      <div style={{ overflowX: "auto", marginBottom: "2rem" }} tabIndex={0} role="region" aria-label="Work examples comparison table">
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+          <thead>
+            <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Project</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Industry</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Pages</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Key features</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Build approach</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>GreenScape Pro Landscaping</td>
+              <td style={{ padding: "0.75rem" }}>Landscaping &amp; lawn care</td>
+              <td style={{ padding: "0.75rem" }}>5 pages</td>
+              <td style={{ padding: "0.75rem" }}>Quote form, project gallery, service packages, weather widget, seasonal tips</td>
+              <td style={{ padding: "0.75rem" }}>Gatsby static site, local SEO foundations, WCAG 2.2 AA</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Rock River Diner</td>
+              <td style={{ padding: "0.75rem" }}>Restaurant &amp; diner</td>
+              <td style={{ padding: "0.75rem" }}>4 pages</td>
+              <td style={{ padding: "0.75rem" }}>Mobile menu, reservation form, photo gallery, hours &amp; location</td>
+              <td style={{ padding: "0.75rem" }}>WordPress-to-Gatsby rebuild, Restaurant schema, no PDF menu</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>NorthStar HVAC</td>
+              <td style={{ padding: "0.75rem" }}>HVAC installation &amp; repair</td>
+              <td style={{ padding: "0.75rem" }}>7 pages</td>
+              <td style={{ padding: "0.75rem" }}>Financing calculator, seasonal promotions, service area pages, emergency contact</td>
+              <td style={{ padding: "0.75rem" }}>Gatsby static site, service area architecture, LocalBusiness schema</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <div className="grid-three">
         <Card variant="outline">
           <h3 className="feature-card__title">Landscaping website example</h3>

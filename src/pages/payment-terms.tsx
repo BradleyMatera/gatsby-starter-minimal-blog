@@ -81,6 +81,54 @@ const PaymentTermsPage = () => (
       </div>
     </Section>
 
+    <Section eyebrow="Quick reference" title="Payment schedule">
+      <Card variant="outline">
+        <table className="data-table">
+          <caption>Payment schedule by milestone</caption>
+          <thead>
+            <tr>
+              <th scope="col">Milestone</th>
+              <th scope="col">When</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Method</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Milestone">Deposit</td>
+              <td data-label="When">Before work begins</td>
+              <td data-label="Amount">50% of project total</td>
+              <td data-label="Method">Stripe, PayPal, or Zelle (approved clients)</td>
+            </tr>
+            <tr>
+              <td data-label="Milestone">Mid-project</td>
+              <td data-label="When">After first revision round (if agreed in project scope)</td>
+              <td data-label="Amount">Per signed project agreement</td>
+              <td data-label="Method">Stripe, PayPal, or Zelle (approved clients)</td>
+            </tr>
+            <tr>
+              <td data-label="Milestone">Launch</td>
+              <td data-label="When">Before site goes live</td>
+              <td data-label="Amount">Remaining 50% balance</td>
+              <td data-label="Method">Stripe, PayPal, or Zelle (approved clients)</td>
+            </tr>
+            <tr>
+              <td data-label="Milestone">Monthly hosting</td>
+              <td data-label="When">Billed in advance, each month</td>
+              <td data-label="Amount">Starting at $37/month per care plan tier</td>
+              <td data-label="Method">Stripe or PayPal (recurring)</td>
+            </tr>
+            <tr>
+              <td data-label="Milestone">Hourly work</td>
+              <td data-label="When">Invoiced after work is completed</td>
+              <td data-label="Amount">$65/hour, 1-hour minimum</td>
+              <td data-label="Method">Stripe, PayPal, or Zelle (approved clients)</td>
+            </tr>
+          </tbody>
+        </table>
+      </Card>
+    </Section>
+
     <Section eyebrow="Payment methods" title="Accepted payment methods">
       <Card variant="outline">
         <h3 className="feature-card__title">Stripe (credit and debit cards)</h3>

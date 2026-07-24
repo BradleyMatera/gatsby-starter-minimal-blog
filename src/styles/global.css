@@ -440,6 +440,79 @@ img {
   }
 }
 
+/* Reusable data tables for legal/policy pages */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: var(--text-sm);
+  display: block;
+  overflow-x: auto;
+}
+
+.data-table thead {
+  display: table-header-group;
+}
+
+.data-table th,
+.data-table td {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.data-table th {
+  background: var(--color-surface-alt);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.data-table tbody tr:nth-child(odd) {
+  background: var(--color-surface);
+}
+
+.data-table caption {
+  caption-side: top;
+  text-align: left;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 0.75rem;
+  font-size: var(--text-base);
+}
+
+@media (max-width: 639px) {
+  .data-table thead {
+    display: none;
+  }
+
+  .data-table tr {
+    display: block;
+    margin-bottom: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .data-table td {
+    display: block;
+    border: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .data-table td:last-child {
+    border-bottom: none;
+  }
+
+  .data-table td::before {
+    content: attr(data-label);
+    display: block;
+    font-weight: 600;
+    color: var(--color-text-subtle);
+    margin-bottom: 0.25rem;
+  }
+}
+
 /* Post images and figures */
 .post-content img,
 .post-content figure,

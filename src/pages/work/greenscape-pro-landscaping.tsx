@@ -60,6 +60,49 @@ const CaseStudyPage = () => (
       </div>
     </Section>
 
+    <Section eyebrow="Project specs" title="Project specifications at a glance">
+      <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="GreenScape Pro project specs table">
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+          <thead>
+            <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Aspect</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Industry</td>
+              <td style={{ padding: "0.75rem" }}>Landscaping and lawn care services</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Pages</td>
+              <td style={{ padding: "0.75rem" }}>5 pages — Home, Services, Project Gallery, About, Contact</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Build time</td>
+              <td style={{ padding: "0.75rem" }}>Approximately 3 weeks from start to launch</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Stack</td>
+              <td style={{ padding: "0.75rem" }}>Gatsby 5 static site, React 18, TypeScript, Netlify hosting</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Key features</td>
+              <td style={{ padding: "0.75rem" }}>Free quote form, before-and-after gallery, service package pricing, weather widget with seasonal recommendations</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>SEO features</td>
+              <td style={{ padding: "0.75rem" }}>LocalBusiness schema, Google Business Profile setup, NAP consistency, service area pages</td>
+            </tr>
+            <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+              <td style={{ padding: "0.75rem" }}>Accessibility</td>
+              <td style={{ padding: "0.75rem" }}>WCAG 2.2 AA compliant, keyboard-navigable, alt text on all photos, 4.5:1 contrast ratio</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </Section>
+
     <Section eyebrow="The problem" title="The common problem for landscaping businesses">
       <Card variant="outline">
         <p className="feature-card__body">

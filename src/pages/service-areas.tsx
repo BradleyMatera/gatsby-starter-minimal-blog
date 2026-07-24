@@ -89,6 +89,45 @@ const ServiceAreasPage = () => (
     </Section>
 
     <Section
+      eyebrow="Service areas at a glance"
+      title="Cities served, distance, and county"
+      description={
+        <p>
+          All service areas are within a 55-minute drive of Durand, Illinois. Most work is done remotely with in-person meetings available when needed.
+        </p>
+      }
+    >
+      <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Service areas comparison table">
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.9rem" }}>
+          <thead>
+            <tr>
+              <th style={{ textAlign: "left", padding: "0.75rem", borderBottom: "2px solid var(--color-border)" }}>City</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", borderBottom: "2px solid var(--color-border)" }}>State</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", borderBottom: "2px solid var(--color-border)" }}>County</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", borderBottom: "2px solid var(--color-border)" }}>Drive from Durand</th>
+              <th style={{ textAlign: "left", padding: "0.75rem", borderBottom: "2px solid var(--color-border)" }}>Page</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Durand & Davis</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>IL</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Winnebago</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Home base</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}><Link to="/web-developer-durand-davis-illinois/">View</Link></td></tr>
+            <tr><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Rockford</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>IL</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Winnebago</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>25 min</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}><Link to="/web-developer-rockford-illinois/">View</Link></td></tr>
+            <tr><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Freeport</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>IL</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Stephenson</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>30 min</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}><Link to="/web-developer-freeport-illinois/">View</Link></td></tr>
+            <tr><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Pecatonica</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>IL</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Winnebago</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>15 min</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}><Link to="/web-developer-pecatonica-illinois/">View</Link></td></tr>
+            <tr><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Winnebago</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>IL</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Winnebago</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>10 min</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}><Link to="/web-developer-winnebago-illinois/">View</Link></td></tr>
+            <tr><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Loves Park</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>IL</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Winnebago</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>20 min</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}><Link to="/web-developer-loves-park-illinois/">View</Link></td></tr>
+            <tr><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Machesney Park</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>IL</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Winnebago</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>22 min</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}><Link to="/web-developer-machesney-park-illinois/">View</Link></td></tr>
+            <tr><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Byron</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>IL</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Ogle</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>15 min</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}><Link to="/web-developer-byron-illinois/">View</Link></td></tr>
+            <tr><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Rockton</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>IL</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Winnebago</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>35 min</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}><Link to="/web-developer-rockton-illinois/">View</Link></td></tr>
+            <tr><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Roscoe</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>IL</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Winnebago</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>30 min</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}><Link to="/web-developer-roscoe-illinois/">View</Link></td></tr>
+            <tr><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>South Beloit</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>IL</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Winnebago</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>35 min</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}><Link to="/web-developer-south-beloit-illinois/">View</Link></td></tr>
+            <tr><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Beloit</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>WI</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Rock</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>40 min</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}><Link to="/web-developer-beloit-wisconsin/">View</Link></td></tr>
+            <tr><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Janesville</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>WI</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Rock</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>55 min</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}><Link to="/web-developer-janesville-wisconsin/">View</Link></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </Section>
+
+    <Section
       eyebrow="Service radius"
       title="How Bradley works with local businesses"
       description={

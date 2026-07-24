@@ -102,6 +102,56 @@ const LandscapingDemo: React.FC = () => (
       </div>
     </section>
 
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Features at a glance</h2>
+        <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="GreenScape Pro features at a glance">
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+            <thead>
+              <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Service packages</td>
+                <td style={{ padding: "0.75rem" }}>Tiered service plans (Basic, Complete Care, Full Service) with transparent pricing for lawn care and maintenance.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Project gallery</td>
+                <td style={{ padding: "0.75rem" }}>Before-and-after photo gallery showcasing completed landscaping, hardscaping, and lawn restoration projects.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Seasonal tips</td>
+                <td style={{ padding: "0.75rem" }}>Seasonal service recommendations with a weather widget that suggests relevant services based on current conditions.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Free quote form</td>
+                <td style={{ padding: "0.75rem" }}>Online quote request form with service type, property size, and preferred contact method.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Service areas</td>
+                <td style={{ padding: "0.75rem" }}>List of 10 served communities across Northwest Illinois with a Google Maps service area embed.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Mobile-responsive</td>
+                <td style={{ padding: "0.75rem" }}>Fully responsive layout optimized for phones, tablets, and desktops.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>SEO setup</td>
+                <td style={{ padding: "0.75rem" }}>LocalBusiness schema markup, service area pages, Google Business Profile integration, and NAP consistency.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Testimonials</td>
+                <td style={{ padding: "0.75rem" }}>Customer reviews with star ratings and locations to build trust with prospective clients.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
     {/* Stats + Weather Widget */}
     <section className="demo-section">
       <div className="demo-section__inner">
