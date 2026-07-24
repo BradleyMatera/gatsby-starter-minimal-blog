@@ -64,8 +64,8 @@ const LocalWebDeveloperPage = () => (
           <Link data-variant="primary" to="/contact/">
             Free consultation
           </Link>
-          <Link data-variant="ghost" to="/projects/">
-            Review proof
+          <Link data-variant="ghost" to="/demos/">
+            See website examples
           </Link>
         </>
       }
@@ -95,6 +95,80 @@ const LocalWebDeveloperPage = () => (
             Every site I build loads in under 2 seconds on mobile — faster than most sites in Durand and Davis. I test with Google PageSpeed Insights before launch.
           </p>
         </Card>
+      </div>
+    </Section>
+
+    <Section
+      eyebrow="Website samples"
+      title="What your Durand or Davis business website could look like"
+      description={
+        <p>
+          These are sample websites built for different industries — not templates, but full
+          clickable sites. Click any one to see what a real business site looks like when I build it.
+        </p>
+      }
+    >
+      <div className="grid-three">
+        <Card variant="outline">
+          <h3 className="feature-card__title">Restaurant Website</h3>
+          <p className="feature-card__body">
+            Menu, reservations, photo gallery, and location info for a restaurant.
+          </p>
+          <div className="card-actions">
+            <Link data-variant="primary" to="/demos/restaurant/">See restaurant sample</Link>
+          </div>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">Landscaping Website</h3>
+          <p className="feature-card__body">
+            Service packages, project gallery, seasonal tips, and free quote form.
+          </p>
+          <div className="card-actions">
+            <Link data-variant="primary" to="/demos/landscaping/">See landscaping sample</Link>
+          </div>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">HVAC Website</h3>
+          <p className="feature-card__body">
+            Financing calculator, service areas, seasonal promotions, and booking form.
+          </p>
+          <div className="card-actions">
+            <Link data-variant="primary" to="/demos/hvac/">See HVAC sample</Link>
+          </div>
+        </Card>
+      </div>
+      <div className="grid-three" style={{ marginTop: "1.5rem" }}>
+        <Card variant="outline">
+          <h3 className="feature-card__title">Auto Repair Website</h3>
+          <p className="feature-card__body">
+            VIN lookup, service menu, customer reviews, and appointment scheduling.
+          </p>
+          <div className="card-actions">
+            <Link data-variant="primary" to="/demos/auto-repair/">See auto repair sample</Link>
+          </div>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">Real Estate Website</h3>
+          <p className="feature-card__body">
+            Property listings, agent profiles, search filters, and contact form.
+          </p>
+          <div className="card-actions">
+            <Link data-variant="primary" to="/demos/real-estate/">See real estate sample</Link>
+          </div>
+        </Card>
+        <Card variant="outline">
+          <h3 className="feature-card__title">Salon Website</h3>
+          <p className="feature-card__body">
+            Service menu, stylist bios, photo gallery, and online booking.
+          </p>
+          <div className="card-actions">
+            <Link data-variant="primary" to="/demos/beauty-salon/">See salon sample</Link>
+          </div>
+        </Card>
+      </div>
+      <div className="card-actions" style={{ marginTop: "1.5rem" }}>
+        <Link data-variant="primary" to="/contact/">Get a free consultation</Link>
+        <Link data-variant="ghost" to="/pricing/">See pricing</Link>
       </div>
     </Section>
 
@@ -319,11 +393,11 @@ const LocalWebDeveloperPage = () => (
     </Section>
 
     <Section
-      eyebrow="Evidence & proof"
-      title="Work samples and case studies"
+      eyebrow="For developers and recruiters"
+      title="Project case studies and technical proof"
       description={
         <p>
-          Don't take my word for it — here's the actual work behind the claims above.
+          If you are a recruiter or developer evaluating my work, here are the case studies, code, and documentation.
         </p>
       }
     >
