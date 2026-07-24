@@ -1,5 +1,5 @@
 [build]
-  command = "rm -rf .cache public && npm run build && node scripts/ping-indexnow.js"
+  command = "rm -rf .cache public .netlify/build-cache && npm run build && node scripts/ping-indexnow.js"
   publish = "public"
   functions = "netlify/functions"
 
