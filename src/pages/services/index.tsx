@@ -15,36 +15,43 @@ const serviceCards = [
     title: "Small Business Web Design",
     desc: "New websites built from scratch. Up to 5 pages, mobile-ready, SEO-ready, contact form. Starting at $447.",
     href: "/services/small-business-web-design/",
+    image: "web-design.png",
   },
   {
     title: "Website Redesign",
     desc: "Update your outdated site with a modern, fast, mobile-ready design. Keep your content and domain. Starting at $597.",
     href: "/services/website-redesign/",
+    image: "website-redesign.jpg",
   },
   {
     title: "Local SEO",
     desc: "Google Business Profile setup, local search optimization, schema markup, and review management. Starting at $67/month.",
     href: "/services/local-seo/",
+    image: "local-seo.jpg",
   },
   {
     title: "Website Repair",
     desc: "Fix broken pages, forms, layouts, and errors. $65/hour or a full $597 refresh for outdated sites.",
     href: "/services/website-repair/",
+    image: "website-repair.jpg",
   },
   {
     title: "Website Accessibility",
     desc: "WCAG 2.2 AA compliance audits and fixes. Keyboard navigation, screen reader support, color contrast, and ARIA labels.",
     href: "/services/website-accessibility/",
+    image: "website-accessibility.jpg",
   },
   {
     title: "Website Speed Optimization",
     desc: "Improve Core Web Vitals (LCP, INP, CLS). Faster load times, better search rankings, more conversions. $65/hour or flat-rate.",
     href: "/services/website-speed-optimization/",
+    image: "website-speed.jpg",
   },
   {
     title: "Website Care Plans",
     desc: "Ongoing maintenance, updates, backups, and monitoring. Three tiers from $37 to $97 per month. Written agreements included.",
     href: "/services/website-care-plans/",
+    image: "website-care.jpg",
   },
 ];
 
@@ -89,15 +96,13 @@ const ServicesPage = () => (
     >
       <div className="grid-three">
         {serviceCards.map((service) => (
-          <Card key={service.href} variant="outline">
-            <h2 className="feature-card__title">{service.title}</h2>
-            <p className="feature-card__body">{service.desc}</p>
-            <div className="card-actions">
-              <Link data-variant="primary" to={service.href}>
-                View {service.title} details
-              </Link>
+          <Link key={service.href} to={service.href} className="service-card" style={{ backgroundImage: `url(/service-images/${service.image})` }}>
+            <div className="service-card__overlay">
+              <h2 className="service-card__title">{service.title}</h2>
+              <p className="service-card__desc">{service.desc}</p>
+              <span className="service-card__link">View details →</span>
             </div>
-          </Card>
+          </Link>
         ))}
       </div>
     </Section>
