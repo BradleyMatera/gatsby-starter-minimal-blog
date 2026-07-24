@@ -20,36 +20,6 @@ const serviceBullets = [
   "Ongoing hosting and maintenance — month-to-month support with 24-hour response times, no long-term contracts.",
 ];
 
-const proofCards = [
-  {
-    title: "Projects you can review",
-    body:
-      "Instead of vague portfolio claims, the work is public. Interactive apps, content systems, and front-end builds are all on the projects page with notes on what each one does and how it was built.",
-    links: [
-      { label: "Browse projects", href: "/projects/" },
-      { label: "About my background", href: "/about/" },
-    ],
-  },
-  {
-    title: "Roles and capabilities",
-    body:
-      "The roles page breaks down what I actually do day to day — front-end development, content restructuring, deployment, SEO-focused work — so you can match it against what your Rockford business needs.",
-    links: [
-      { label: "Roles and capabilities", href: "/roles/" },
-      { label: "Projects index", href: "/projects/" },
-    ],
-  },
-  {
-    title: "Built in public",
-    body:
-      "This site is the proof. I rewrite, restructure, and document it continuously so the process is visible. That is the opposite of how most Rockford web agencies operate, and it is the point.",
-    links: [
-      { label: "About page", href: "/about/" },
-      { label: "Get a free consultation", href: "/contact/" },
-    ],
-  },
-];
-
 const LocalWebDeveloperPage = () => (
   <Layout>
     <nav className="breadcrumbs" aria-label="Breadcrumb">
@@ -226,34 +196,6 @@ const LocalWebDeveloperPage = () => (
     </Section>
 
     <Section
-      eyebrow="Proof"
-      title="Projects you can actually review"
-      description={
-        <p>
-          The point is not to claim I do everything. The point is to show current, public proof that
-          matches what Rockford businesses actually need: shipped sites, clean front-end work,
-          deployment follow-through, and honest notes about what each project does and does not do.
-        </p>
-      }
-    >
-      <div className="grid-three">
-        {proofCards.map((card) => (
-          <Card key={card.title} variant="outline">
-            <h3 className="feature-card__title">{card.title}</h3>
-            <p className="feature-card__body">{card.body}</p>
-            <div className="card-actions">
-              {card.links.map((link) => (
-                <Link key={`${card.title}-${link.href}`} data-variant="primary" to={link.href}>
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </Card>
-        ))}
-      </div>
-    </Section>
-
-    <Section
       eyebrow="Comparison"
       title="How this compares to a Rockford web agency"
       description={
@@ -354,11 +296,11 @@ const LocalWebDeveloperPage = () => (
     </Section>
 
     <Section
-      eyebrow="See examples"
-      title="Live demo websites for Rockford businesses"
+      eyebrow="Website samples"
+      title="What your Rockford business website could look like"
       description={
         <p>
-          Don't just take my word for it — see full, working demo websites built for different
+          Don't just take my word for it — see full, working website samples built for different
           industries. Each one shows what your Rockford business site could look like, complete with
           services, reviews, contact forms, and mobile-responsive design.
         </p>
@@ -367,68 +309,71 @@ const LocalWebDeveloperPage = () => (
       <div className="grid-three">
         <Card variant="outline">
           <div className="feature-card__icon"><UtensilsIcon size={24} /></div>
-          <h3 className="feature-card__title">Restaurant Demo</h3>
+          <h3 className="feature-card__title">Restaurant Website</h3>
           <p className="feature-card__body">
             Full restaurant website with menu, reservations, hours, photo gallery, and customer reviews.
           </p>
           <div className="card-actions">
-            <Link data-variant="primary" to="/demos/restaurant/">View restaurant demo</Link>
+            <Link data-variant="primary" to="/demos/restaurant/">See restaurant sample</Link>
           </div>
         </Card>
         <Card variant="outline">
           <div className="feature-card__icon"><LeafIcon size={24} /></div>
-          <h3 className="feature-card__title">Landscaping Demo</h3>
+          <h3 className="feature-card__title">Landscaping Website</h3>
           <p className="feature-card__body">
             Landscaping company site with service packages, seasonal tips, gallery, and free quote form.
           </p>
           <div className="card-actions">
-            <Link data-variant="primary" to="/demos/landscaping/">View landscaping demo</Link>
+            <Link data-variant="primary" to="/demos/landscaping/">See landscaping sample</Link>
           </div>
         </Card>
         <Card variant="outline">
           <div className="feature-card__icon"><GearIcon size={24} /></div>
-          <h3 className="feature-card__title">HVAC Demo</h3>
+          <h3 className="feature-card__title">HVAC Website</h3>
           <p className="feature-card__body">
             HVAC company with emergency service, maintenance plans, team bios, and financing info.
           </p>
           <div className="card-actions">
-            <Link data-variant="primary" to="/demos/hvac/">View HVAC demo</Link>
+            <Link data-variant="primary" to="/demos/hvac/">See HVAC sample</Link>
           </div>
         </Card>
         <Card variant="outline">
           <div className="feature-card__icon"><CarIcon size={24} /></div>
-          <h3 className="feature-card__title">Auto Repair Demo</h3>
+          <h3 className="feature-card__title">Auto Repair Website</h3>
           <p className="feature-card__body">
             Auto shop with service menu, online booking, tire lookup, and mechanic credentials.
           </p>
           <div className="card-actions">
-            <Link data-variant="primary" to="/demos/auto-repair/">View auto repair demo</Link>
+            <Link data-variant="primary" to="/demos/auto-repair/">See auto repair sample</Link>
           </div>
         </Card>
         <Card variant="outline">
           <div className="feature-card__icon"><HouseIcon size={24} /></div>
-          <h3 className="feature-card__title">Real Estate Demo</h3>
+          <h3 className="feature-card__title">Real Estate Website</h3>
           <p className="feature-card__body">
             Real estate office with featured listings, agent profiles, market reports, and neighborhood guides.
           </p>
           <div className="card-actions">
-            <Link data-variant="primary" to="/demos/real-estate/">View real estate demo</Link>
+            <Link data-variant="primary" to="/demos/real-estate/">See real estate sample</Link>
           </div>
         </Card>
         <Card variant="outline">
           <div className="feature-card__icon"><ScissorsIcon size={24} /></div>
-          <h3 className="feature-card__title">Beauty Salon Demo</h3>
+          <h3 className="feature-card__title">Beauty Salon Website</h3>
           <p className="feature-card__body">
             Hair and beauty salon with service menu, stylist team, online booking, and gallery.
           </p>
           <div className="card-actions">
-            <Link data-variant="primary" to="/demos/beauty-salon/">View salon demo</Link>
+            <Link data-variant="primary" to="/demos/beauty-salon/">See salon sample</Link>
           </div>
         </Card>
       </div>
       <div className="card-actions" style={{ marginTop: "1.5rem" }}>
-        <Link data-variant="primary" to="/demos/">
-          View all demos
+        <Link data-variant="primary" to="/contact/">
+          Get a free consultation
+        </Link>
+        <Link data-variant="ghost" to="/pricing/">
+          See pricing
         </Link>
       </div>
     </Section>

@@ -21,36 +21,6 @@ const serviceBullets = [
   "Ongoing hosting and maintenance — month-to-month support with 24-hour response times, no long-term contracts.",
 ];
 
-const proofCards = [
-  {
-    title: "Portfolio and content systems",
-    body:
-      "This site itself is part of the proof. I keep rewriting, restructuring, and documenting it in public so the work is easy to review instead of hidden behind vague claims.",
-    links: [
-      { label: "About my background", href: "/about/" },
-      { label: "Browse projects", href: "/projects/" },
-    ],
-  },
-  {
-    title: "Front-end and UX work",
-    body:
-      "Projects like the Interactive Pokédex and AnimalSounds show the kind of UI work I do well right now: responsive layouts, filtering, static deployments, cleanup, and making the experience easier to use.",
-    links: [
-      { label: "Interactive Pokédex", href: "/projects/interactive-pokedex/" },
-      { label: "Projects index", href: "/projects/" },
-    ],
-  },
-  {
-    title: "Full-stack and backend reps",
-    body:
-      "Car-Match, cloud write-ups, and backend experiments are where I practice auth, data flow, deployment, and the kind of debugging that happens once a project has to keep working outside localhost.",
-    links: [
-      { label: "Car-Match case study", href: "/projects/car-match/" },
-      { label: "Roles and capabilities", href: "/roles/" },
-    ],
-  },
-];
-
 const LocalWebDeveloperPage = () => (
   <Layout>
     <nav className="breadcrumbs" aria-label="Breadcrumb">
@@ -166,34 +136,6 @@ const LocalWebDeveloperPage = () => (
             transparent case-study style delivery process.
           </p>
         </Card>
-      </div>
-    </Section>
-
-    <Section
-      eyebrow="Proof"
-      title="Projects you can actually review"
-      description={
-        <p>
-          The point is not to say I do everything. The point is to show current proof that matches the
-          kind of web work local clients usually care about: shipped pages, clearer UX, deployment
-          follow-through, and honest notes about limits.
-        </p>
-      }
-    >
-      <div className="grid-three">
-        {proofCards.map((card) => (
-          <Card key={card.title} variant="outline">
-            <h3 className="feature-card__title">{card.title}</h3>
-            <p className="feature-card__body">{card.body}</p>
-            <div className="card-actions">
-              {card.links.map((link) => (
-                <Link key={`${card.title}-${link.href}`} data-variant="primary" to={link.href}>
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </Card>
-        ))}
       </div>
     </Section>
 

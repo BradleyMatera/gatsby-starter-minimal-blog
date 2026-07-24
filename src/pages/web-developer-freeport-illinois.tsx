@@ -19,36 +19,6 @@ const serviceBullets = [
   "Ongoing hosting and maintenance — month-to-month support with 24-hour response times, no long-term contracts.",
 ];
 
-const proofCards = [
-  {
-    title: "Projects you can review",
-    body:
-      "Instead of vague portfolio claims, the work lives in public. Interactive tools, case studies, and documented rebuilds show exactly what kind of website and front-end work I deliver right now.",
-    links: [
-      { label: "Browse projects", href: "/projects/" },
-      { label: "About my background", href: "/about/" },
-    ],
-  },
-  {
-    title: "Roles and capabilities",
-    body:
-      "The roles page breaks down what I actually do day to day — front-end development, content restructuring, SEO-focused cleanup, and small full-stack features — so you can match it against what your Freeport business needs.",
-    links: [
-      { label: "Roles and capabilities", href: "/roles/" },
-      { label: "Projects index", href: "/projects/" },
-    ],
-  },
-  {
-    title: "How I document the work",
-    body:
-      "Every project gets written up so the decisions are visible, not buried. That matters for a Freeport small business owner who wants to understand why the site was built a certain way and what it will take to change later.",
-    links: [
-      { label: "About page", href: "/about/" },
-      { label: "Get a free consultation", href: "/contact/" },
-    ],
-  },
-];
-
 const LocalWebDeveloperPage = () => (
   <Layout>
     <nav className="breadcrumbs" aria-label="Breadcrumb">
@@ -221,34 +191,6 @@ const LocalWebDeveloperPage = () => (
             local landing pages has a better handle on that than a national agency running a template.
           </p>
         </Card>
-      </div>
-    </Section>
-
-    <Section
-      eyebrow="Proof"
-      title="Projects you can actually review"
-      description={
-        <p>
-          The point is not to claim I do everything. The point is to show current, reviewable proof
-          that matches what a Freeport small business actually cares about — shipped pages, clearer
-          UX, working local SEO, and honest notes about what I can and cannot do.
-        </p>
-      }
-    >
-      <div className="grid-three">
-        {proofCards.map((card) => (
-          <Card key={card.title} variant="outline">
-            <h3 className="feature-card__title">{card.title}</h3>
-            <p className="feature-card__body">{card.body}</p>
-            <div className="card-actions">
-              {card.links.map((link) => (
-                <Link key={`${card.title}-${link.href}`} data-variant="primary" to={link.href}>
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </Card>
-        ))}
       </div>
     </Section>
 

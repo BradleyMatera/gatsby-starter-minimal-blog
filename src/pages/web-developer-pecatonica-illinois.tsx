@@ -19,36 +19,6 @@ const serviceBullets = [
   "Ongoing hosting and maintenance — month-to-month support with 24-hour response times, no long-term contracts.",
 ];
 
-const proofCards = [
-  {
-    title: "Projects you can review",
-    body:
-      "Instead of vague claims, the work is public. Browse shipped projects, case studies, and documented builds that show how I approach website design and front-end development for real use cases.",
-    links: [
-      { label: "Browse projects", href: "/projects/" },
-      { label: "About my background", href: "/about/" },
-    ],
-  },
-  {
-    title: "How I actually work",
-    body:
-      "I build in public, iterate on real projects, and document what changed. That means the website you get is understandable, not just delivered and abandoned. Clear scope and visible proof come first.",
-    links: [
-      { label: "Roles and capabilities", href: "/roles/" },
-      { label: "Projects index", href: "/projects/" },
-    ],
-  },
-  {
-    title: "Full-stack and front-end reps",
-    body:
-      "From React and Gatsby builds to API-backed features and deployment cleanup, the projects I ship cover the kinds of problems Pecatonica small businesses run into once a site has to keep working.",
-    links: [
-      { label: "Roles and capabilities", href: "/roles/" },
-      { label: "About page", href: "/about/" },
-    ],
-  },
-];
-
 const PecatonicaWebDeveloperPage = () => (
   <Layout>
     <nav className="breadcrumbs" aria-label="Breadcrumb">
@@ -193,34 +163,6 @@ const PecatonicaWebDeveloperPage = () => (
             honesty are the same everywhere.
           </p>
         </Card>
-      </div>
-    </Section>
-
-    <Section
-      eyebrow="Proof"
-      title="Projects you can actually review"
-      description={
-        <p>
-          The point is not to claim I do everything. The point is to show current proof that matches
-          what Pecatonica businesses care about: shipped pages, clearer UX, deployment follow-through,
-          and honest notes about what is and is not a good fit.
-        </p>
-      }
-    >
-      <div className="grid-three">
-        {proofCards.map((card) => (
-          <Card key={card.title} variant="outline">
-            <h3 className="feature-card__title">{card.title}</h3>
-            <p className="feature-card__body">{card.body}</p>
-            <div className="card-actions">
-              {card.links.map((link) => (
-                <Link key={`${card.title}-${link.href}`} data-variant="primary" to={link.href}>
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </Card>
-        ))}
       </div>
     </Section>
 
