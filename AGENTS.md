@@ -12,6 +12,7 @@ Guide for AI agents (Devin, Claude, Copilot, etc.) working on this codebase.
 - **Phone:** (608) 313-5373 (Google Voice — records calls, emails transcripts)
 - **Email:** bradmatera@gmail.com
 - **Hosting:** Netlify (auto-deploys on push to `master`)
+- **Netlify site ID:** `c9b7aa36-b206-40ff-bde8-7c2bf2937d0c` (site name: `bradleysgatsbyblog`). The `.netlify/state.json` must point to this ID for CLI deploys to go to the correct site.
 
 ---
 
@@ -57,6 +58,12 @@ The site has a Web Designer Style Lab with multiple visual themes (brutalism, re
 
 ### 5. CSS Inlining
 Gatsby inlines all CSS into the HTML (~194KB). This is expected behavior for SSG. Do not try to externalize it unless you're prepared to test all themes and page layouts.
+
+### 6. Demo Page CSS Overrides
+Demo pages (`/demos/*`) use their own CSS variables (`--demo-text`, `--demo-heading`, `--demo-bg`, etc.) defined in `src/styles/demos.css`. The global CSS has `strong { color: var(--color-text) }` which overrides demo colors in dark mode. The fix is `.demo-page strong { color: var(--demo-heading) }` in demos.css. If you add new demo elements with `<strong>` or `<b>` tags, they will inherit the demo heading color automatically.
+
+### 7. Netlify CLI Deploys
+When deploying via `npx netlify deploy --prod`, the CLI reads `.netlify/state.json` for the site ID. If this file points to the wrong site, deploys will silently go to the wrong Netlify project. Always verify the site ID is `c9b7aa36-b206-40ff-bde8-7c2bf2937d0c`. Use `--dir public` to deploy a pre-built `public/` directory without triggering a rebuild (avoids Gatsby adapter cache issues).
 
 ---
 
