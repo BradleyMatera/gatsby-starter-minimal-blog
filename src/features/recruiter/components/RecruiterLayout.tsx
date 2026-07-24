@@ -162,7 +162,7 @@ const RecruiterLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
             ← Back to Portfolio
           </Link>
         </div>
-        <div style={{ color: "var(--r-text-muted)" }}>
+        <div style={{ color: "var(--r-text-muted)" }} suppressHydrationWarning>
           © {new Date().getFullYear()} Bradley Matera · Recruiter Portal
         </div>
       </footer>

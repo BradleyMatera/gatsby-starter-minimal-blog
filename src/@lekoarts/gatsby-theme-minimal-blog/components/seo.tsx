@@ -118,7 +118,7 @@ const Seo = ({
     : structuredData
       ? [structuredData]
       : [];
-  const buildDate = new Date().toISOString();
+  const buildDate = process.env.BUILD_DATE || "2026-07-24T00:00:00.000Z";
   const webpageStructuredData: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -202,7 +202,7 @@ const Seo = ({
       <link rel="alternate" type="application/rss+xml" title={`${siteTitle} RSS Feed`} href={withPrefix(`/rss.xml`)} />
       <link rel="canonical" href={canonical} />
       {structuredDataNodes.map((node, index) => (
-        <script key={`jsonld-${index}`} type="application/ld+json">
+        <script key={`jsonld-${index}`} type="application/ld+json" suppressHydrationWarning>
           {JSON.stringify(node)}
         </script>
       ))}

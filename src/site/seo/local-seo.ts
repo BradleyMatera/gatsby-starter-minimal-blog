@@ -143,7 +143,7 @@ export const buildProfessionalServiceSchema = ({
       description,
       telephone: "+16083135373",
       email: "bradmatera@gmail.com",
-      dateModified: new Date().toISOString().split("T")[0],
+      dateModified: "2026-07-24",
     },
   ],
 });

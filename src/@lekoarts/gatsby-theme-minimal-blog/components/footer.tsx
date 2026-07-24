@@ -15,7 +15,7 @@ import {
 const Footer = () => {
   const { siteTitle, siteDescription, siteHeadline } = useSiteMetadata();
   const { navigation: nav, externalLinks, basePath } = useMinimalBlogConfig();
-  const currentYear = new Date().getFullYear();
+  const [currentYear] = React.useState(() => new Date().getFullYear());
   const description = siteHeadline || siteDescription;
   const quickStats = [
     "AWS Cloud Support Engineer Intern — Amazon",
@@ -135,7 +135,7 @@ const Footer = () => {
 
       {/* Bottom bar */}
       <div className="footer-bottom">
-        <span>&copy; {currentYear} {siteTitle} — {SELLER_IDENTITY_LINE}</span>
+        <span suppressHydrationWarning>&copy; {currentYear} {siteTitle} — {SELLER_IDENTITY_LINE}</span>
         <span className="footer-legal-links">
           {POLICY_LINKS.map((link, i) => (
             <React.Fragment key={link.path}>
