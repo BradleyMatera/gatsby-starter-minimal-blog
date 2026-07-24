@@ -26,7 +26,7 @@
   for = "/*"
   [headers.values]
     X-Robots-Tag = "index, follow"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://js.stripe.com https://bradleymatera.github.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.openweathermap.org https://api.stripe.com https://api.github.com https://projecthub-chat.bradleymatera.dev; media-src 'self'; object-src 'none'; frame-src https://js.stripe.com https://hooks.stripe.com; base-uri 'self'; form-action 'self' https://formspree.io https://checkout.stripe.com; frame-ancestors 'none';"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://js.stripe.com https://bradleymatera.github.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.openweathermap.org https://api.stripe.com https://api.github.com https://projecthub-chat.bradleymatera.dev; media-src 'self'; object-src 'none'; frame-src https://js.stripe.com https://hooks.stripe.com https://maps.google.com; base-uri 'self'; form-action 'self' https://formspree.io https://checkout.stripe.com; frame-ancestors 'none';"
     Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()"
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "DENY"
