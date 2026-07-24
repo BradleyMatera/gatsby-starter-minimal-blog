@@ -7,11 +7,20 @@ description: "How I translated combat medic and field work experience into engin
 theme: "Career"
 ---
 
-Before I wrote my first line of production code, I was an Army combat medic. After that I worked in court case management, construction, logistics, animal care, and facilities maintenance. None of those jobs had "software" in the title, but they all had the same shape: show up, diagnose the problem, fix it under pressure, and document what happened so the next person is not starting from zero.
+Before I wrote my first line of production code, I was an Army combat medic ([U.S. Army Medical Department overview](https://medlineplus.gov/ency/article/001988.htm)). After that I worked in court case management, construction, logistics, animal care, and facilities maintenance. None of those jobs had "software" in the title, but they all had the same shape: show up, diagnose the problem, fix it under pressure, and document what happened so the next person is not starting from zero.
 
 That is the same shape as engineering work. The only question was whether I could prove it in a language that hiring managers actually trust.
 
 This post is not a motivational story about following your dreams. It is a map. I want to show how a non-traditional background connects to real engineering behavior, as long as you can point to work that exists right now: repos, deployments, logs, and write-ups.
+
+The core operational loop that carried over from field work into engineering:
+
+1. **Assess** — identify the problem and its scope before acting
+2. **Stabilize** — apply the minimum viable fix to stop the bleeding
+3. **Hand off** — communicate the state clearly to the next person or team
+4. **Document** — write down what happened, what was tried, and what worked
+
+That loop applies whether the "patient" is a human being, a failing server, or a broken deployment pipeline.
 
 {/* visual-break:from-medic-to-engineer:1 */}
 ![Career progression checkpoint illustration for this section.](/assets/visuals/blog/from-medic-to-engineer-break-1.png)
@@ -23,20 +32,46 @@ My first real bridge into engineering was an AWS Cloud Support Engineering inter
 During those months I:
 
 - Ran guided support rotations in simulated customer environments
-- Troubleshot Juniper and Junos networking labs through Jupyter notebooks
-- Built a serverless metadata extraction pipeline with Lambda, DynamoDB, and S3
-- Deployed an accessible frontend for that pipeline on AWS Amplify
-- Modeled the storage, transfer, and compute costs transparently
+- Troubleshot Juniper and Junos networking labs through Jupyter notebooks ([Juniper Networks documentation](https://www.juniper.net/documentation/))
+- Built a serverless metadata extraction pipeline with [Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html), [DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html), and [S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html)
+- Deployed an accessible frontend for that pipeline on [AWS Amplify](https://docs.aws.amazon.com/amplify/latest/userguide/welcome.html)
+- Modeled the storage, transfer, and compute costs transparently ([AWS pricing calculator](https://calculator.aws/))
 
-The capstone was a deployed workflow plus a documented cost breakdown. That is the moment cloud stopped being a buzzword for me. I had to read logs, understand failure modes, wire IAM permissions, validate data flow, and produce a working output someone else could inspect.
+The specific services used in the capstone pipeline and what each one did:
+
+| Service | Role in the pipeline | Why it was chosen |
+|---------|---------------------|-------------------|
+| AWS Lambda | Compute — ran metadata extraction code on file upload events | Serverless, pay-per-invocation, no idle cost ([Source](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)) |
+| Amazon S3 | Storage — held uploaded files and extracted metadata | Durable object storage with event notifications ([Source](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html)) |
+| Amazon DynamoDB | Database — stored structured metadata records | Single-digit-millisecond latency at any scale ([Source](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html)) |
+| AWS Amplify | Frontend hosting — served the accessible web UI | Managed CI/CD and hosting for React apps ([Source](https://docs.aws.amazon.com/amplify/latest/userguide/welcome.html)) |
+| AWS IAM | Access control — scoped permissions between services | Least-privilege security model ([Source](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html)) |
+
+The capstone was a deployed workflow plus a documented cost breakdown. That is the moment cloud stopped being a buzzword for me. I had to read logs, understand failure modes, wire [IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) permissions, validate data flow, and produce a working output someone else could inspect.
 
 That operational rhythm felt familiar. In a medic role, you assess, stabilize, hand off, and chart. In cloud support, you assess, reproduce, mitigate, and document. The context is different; the behavior is not.
 
+| Combat medic workflow | Cloud support workflow | Shared behavior |
+|----------------------|----------------------|-----------------|
+| Assess the patient | Assess the ticket / alert | Triage by severity |
+| Stabilize the immediate threat | Reproduce and mitigate the issue | Stop the bleeding first |
+| Hand off to higher care | Escalate or document for next shift | Clear communication of state |
+| Chart the intervention | Document the resolution | Written record for the next person |
+
 ## Open-source work in an existing codebase
 
-While I was interning, I also contributed to CIRIS Ethical AI as a junior frontend developer ([GitHub](https://github.com/BradleyMatera)). The work was small by design: onboarding docs, environment setup notes, JWT guidance, logging around token verification, lint fixes, and clearer error messages.
+While I was interning, I also contributed to CIRIS Ethical AI as a junior frontend developer ([GitHub](https://github.com/BradleyMatera)). The work was small by design: onboarding docs, environment setup notes, [JWT](https://datatracker.ietf.org/doc/html/rfc7519) guidance, logging around token verification, lint fixes, and clearer error messages.
 
 What mattered was the workflow. I had to clone a codebase I did not write, get it running locally, find friction points, improve them, submit pull requests, and track bigger changes as GitHub issues. That is the same rhythm as joining any existing engineering team. You are not inventing a product from scratch. You are making a system that already exists a little more understandable.
+
+The open-source contribution cycle I followed:
+
+1. **Clone and run** — get the project building locally using the onboarding docs
+2. **Identify friction** — find unclear docs, missing setup steps, or confusing error messages
+3. **Make a small improvement** — fix one thing at a time, keep the diff reviewable
+4. **Submit a pull request** — describe what changed and why ([GitHub PR guide](https://docs.github.com/en/pull-requests))
+5. **Track larger changes** — open issues for work that is too big for a single PR
+6. **Respond to review feedback** — iterate based on maintainer comments
 
 ## The personal projects that forced real problems
 
@@ -47,11 +82,27 @@ Alongside formal roles, I built and shipped my own projects. Static sites, full-
 - Debug the runtime and configuration issues
 - Write down what broke and how I fixed it
 
-Shipping forces you to touch DNS, build pipelines, environment variables, caching, IAM, and service configuration. Those are not tutorial problems. They are operational engineering tasks, and they do not care where you went to school.
+Shipping forces you to touch [DNS](https://developer.mozilla.org/en-US/docs/Glossary/DNS), build pipelines, environment variables, caching, [IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html), and service configuration. Those are not tutorial problems. They are operational engineering tasks, and they do not care where you went to school.
+
+Examples of real problems I hit while shipping personal projects:
+
+- **DNS misconfiguration** — pointing a custom domain at the wrong CNAME, causing hours of "why is my site blank" before the record propagated
+- **Environment variable leaks** — accidentally committing a `.env` file and having to rotate API keys ([GitHub secret scanning](https://docs.github.com/en/code-security/secret-scanning))
+- **Build pipeline failures** — a dependency version mismatch that built locally but failed in CI because the Node version differed
+- **Caching stale data** — a CDN serving an old HTML file after a deploy because the cache invalidation was misconfigured
+- **IAM permission errors** — a Lambda function silently failing because its execution role lacked `s3:GetObject` on the target bucket
 
 ## My current role is not software, and that is fine
 
 I currently work as a maintenance technician. It is not a coding job, but it is still operations: handle requests, diagnose issues, coordinate fixes, document what was done, and manage competing priorities. That mindset maps directly into support engineering, site reliability, and infrastructure roles where the job is keeping systems functional and responding when they are not.
+
+The day-to-day operational behaviors that transfer directly:
+
+- **Ticket triage** — prioritizing work orders by urgency and impact, same as incident triage
+- **Root cause diagnosis** — tracing a facility issue back to its source rather than just patching the symptom
+- **Coordinated handoffs** — communicating with vendors and other technicians so no context is lost
+- **Preventive maintenance scheduling** — analogous to scheduled patching and health checks in SRE work
+- **Documentation** — logging every action taken so the next technician (or on-call engineer) has context
 
 ## What this adds up to
 
@@ -80,6 +131,21 @@ If you are making a similar transition, do not try to sound impressive. Try to b
 - [LinkedIn profile — AWS Cloud Support internship and work history](https://www.linkedin.com/in/bradmatera)
 - [AWS Certified AI Practitioner — Credly badge](https://www.credly.com/badges/fcbb3120-f086-4784-9cb5-80daca9fb61a/linked_in_profile)
 - [AWS Certified Solutions Architect Associate — Credly badge](https://www.credly.com/badges/fe12a8a4-dacf-43cb-bfe1-c8c75e20585f/linked_in_profile)
+
+## References
+
+- [AWS Lambda documentation](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)
+- [Amazon DynamoDB documentation](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html)
+- [Amazon S3 documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html)
+- [AWS Amplify documentation](https://docs.aws.amazon.com/amplify/latest/userguide/welcome.html)
+- [AWS IAM documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html)
+- [AWS pricing calculator](https://calculator.aws/)
+- [Juniper Networks documentation](https://www.juniper.net/documentation/)
+- [JWT (RFC 7519) specification](https://datatracker.ietf.org/doc/html/rfc7519)
+- [GitHub pull request documentation](https://docs.github.com/en/pull-requests)
+- [GitHub secret scanning](https://docs.github.com/en/code-security/secret-scanning)
+- [DNS — MDN Web Docs](https://developer.mozilla.org/en-US/docs/Glossary/DNS)
+- [U.S. Army Medical Department](https://medlineplus.gov/ency/article/001988.htm)
 
 {/**/}
 

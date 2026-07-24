@@ -15,9 +15,36 @@ Before I had any AWS certifications, cloud felt abstract. I could read articles 
 
 During my AWS Cloud Support internship, I finished two certifications in a twelve-week window: AWS Certified AI Practitioner ([Credly badge](https://www.credly.com/badges/fcbb3120-f086-4784-9cb5-80daca9fb61a/linked_in_profile)) and AWS Certified Solutions Architect Associate ([Credly badge](https://www.credly.com/badges/fe12a8a4-dacf-43cb-bfe1-c8c75e20585f/linked_in_profile)). Both were done by week seven.
 
-That did not make me an expert. It did mean I was spending every day inside AWS. I was exposed to EC2, S3, RDS, IAM, Lambda, DynamoDB, CloudWatch, networking, permissions, logs, and runbooks. The exams were layered on top of the work I was already doing.
+Here is a quick comparison of the two certifications:
 
-Outside work hours, I used Stephen Maarek’s Udemy courses to structure prep. I ran practice exams, looked up explanations for missed questions, and found YouTube breakdowns when I needed a different voice. The question pools change, so I made sure I was looking at updated material. The loop was simple: test, find gaps, review, test again.
+| Certification | Level | Focus | Exam format | Prep time |
+|---------------|-------|-------|-------------|-----------|
+| AWS Certified AI Practitioner | Foundational | AI/ML services, responsible AI | 65 min, 50 questions, multiple choice | ~3 weeks |
+| AWS Certified Solutions Architect Associate | Associate | Architecture, services, best practices | 130 min, 65 questions, multiple choice | ~5 weeks |
+
+[Source: AWS Certification overview](https://aws.amazon.com/certification/)
+
+That did not make me an expert. It did mean I was spending every day inside AWS. I was exposed to EC2, S3, RDS, IAM, Lambda, DynamoDB, CloudWatch, networking, permissions, logs, and runbooks ([Source](https://aws.amazon.com/products/)). The exams were layered on top of the work I was already doing.
+
+Here are the core AWS services I worked with daily during the internship:
+
+- **EC2** — virtual machines for compute workloads ([Source](https://aws.amazon.com/ec2/))
+- **S3** — object storage for files, backups, and static sites ([Source](https://aws.amazon.com/s3/))
+- **RDS** — managed relational databases ([Source](https://aws.amazon.com/rds/))
+- **IAM** — identity and access management for permissions ([Source](https://aws.amazon.com/iam/))
+- **Lambda** — serverless functions that run without provisioning servers ([Source](https://aws.amazon.com/lambda/))
+- **DynamoDB** — managed NoSQL database for key-value workloads ([Source](https://aws.amazon.com/dynamodb/))
+- **CloudWatch** — monitoring, logs, and alarms for AWS resources ([Source](https://aws.amazon.com/cloudwatch/))
+
+Outside work hours, I used Stephen Maarek’s Udemy courses to structure prep ([Source](https://www.udemy.com/user/stephane-maarek/)). I ran practice exams, looked up explanations for missed questions, and found YouTube breakdowns when I needed a different voice. The question pools change, so I made sure I was looking at updated material. The loop was simple: test, find gaps, review, test again.
+
+Here is the study loop I followed each week:
+
+1. **Take a practice exam** — simulate real conditions, no notes
+2. **Review every missed question** — look up the AWS docs for the service in question
+3. **Fill the gap** — read the official AWS documentation or watch a targeted YouTube explanation
+4. **Re-test** — run another practice exam to confirm the gap is closed
+5. **Repeat** — until consistently scoring 90–100%
 
 I will be direct: I memorized the practice exams. I ran the test banks until I was scoring consistently in the 90–100% range. By the time I sat the real exams, the format felt familiar.
 
@@ -28,15 +55,32 @@ The certifications came from daily AWS exposure during the internship, structure
 
 ## What the process gave me
 
-The exam was just the checkpoint. The real value was spending weeks moving between AWS consoles, docs, guided labs, Udemy quizzes, YouTube explanations, and my own notes.
+The exam was just the checkpoint. The real value was spending weeks moving between AWS consoles, docs, guided labs, Udemy quizzes, YouTube explanations, and my own notes ([Source](https://aws.amazon.com/certification/certified-solutions-architect-associate/)).
 
 I was not just looking at architecture diagrams. I was wiring services together in lab environments, watching them fail, fixing them, and reinforcing the same concepts through practice questions. That cycle built familiarity and confidence inside AWS.
 
 It also changed how I approach problems in general. When something does not work, I go to logs, permissions, configurations, and data flow instead of guessing. That habit came from living inside AWS daily and reinforcing it through exam prep.
 
+Here is the debugging approach I developed:
+
+1. **Check CloudWatch logs** — look for the first real error, not the last line ([Source](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html))
+2. **Check IAM permissions** — verify the role or user has the required actions ([Source](https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html))
+3. **Check configurations** — security groups, VPC settings, resource policies
+4. **Trace data flow** — follow the request from origin to failure point
+
 ## What certifications did not do
 
 They did not make me a senior engineer. They did not give me production ownership experience. They did not replace real project work. They did not teach deep algorithms or low-level systems design.
+
+Here is a clear breakdown of what certifications did and did not provide:
+
+| What certifications gave me | What certifications did not give me |
+|----------------------------|--------------------------------------|
+| Comfort navigating the AWS console | Senior-level engineering judgment |
+| Familiarity with core AWS services | Production ownership experience |
+| Ability to trace basic failures | Deep algorithms or systems design |
+| Confidence with IAM and permissions | Real project delivery experience |
+| A structured study framework | Hands-on debugging under pressure |
 
 What they did give me was comfort navigating AWS. I can open a new AWS account, find services without hunting through menus, understand where permissions live, and trace basic failures. That is the real outcome I walked away with.
 
@@ -54,3 +98,20 @@ The badges are proof I went through the process. The real value was the experien
 - [AWS Certified AI Practitioner — Credly badge](https://www.credly.com/badges/fcbb3120-f086-4784-9cb5-80daca9fb61a/linked_in_profile)
 - [AWS Certified Solutions Architect Associate — Credly badge](https://www.credly.com/badges/fe12a8a4-dacf-43cb-bfe1-c8c75e20585f/linked_in_profile)
 - [LinkedIn profile](https://www.linkedin.com/in/bradmatera)
+
+## References
+
+- [AWS Certification — Official overview](https://aws.amazon.com/certification/)
+- [AWS Certified Solutions Architect Associate — Exam guide](https://aws.amazon.com/certification/certified-solutions-architect-associate/)
+- [AWS Certified AI Practitioner — Exam guide](https://aws.amazon.com/certification/certified-ai-practitioner/)
+- [AWS — Products overview](https://aws.amazon.com/products/)
+- [Amazon EC2 — Official docs](https://aws.amazon.com/ec2/)
+- [Amazon S3 — Official docs](https://aws.amazon.com/s3/)
+- [Amazon RDS — Official docs](https://aws.amazon.com/rds/)
+- [AWS IAM — Official docs](https://aws.amazon.com/iam/)
+- [AWS Lambda — Official docs](https://aws.amazon.com/lambda/)
+- [Amazon DynamoDB — Official docs](https://aws.amazon.com/dynamodb/)
+- [Amazon CloudWatch — Official docs](https://aws.amazon.com/cloudwatch/)
+- [CloudWatch Logs — AWS documentation](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html)
+- [IAM User Guide — Access control](https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html)
+- [Stephane Maarek — Udemy instructor profile](https://www.udemy.com/user/stephane-maarek/)

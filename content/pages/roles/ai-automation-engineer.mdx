@@ -135,3 +135,81 @@ import { Section, Card } from "../../../src/ui";
   </ul>
   <p>If you mentor junior engineers on applied AI or automation, I am open to pairing sessions.</p>
 </Section>
+
+## Core Responsibilities
+
+An AI & Automation Engineer is responsible for building, integrating, and maintaining automated workflows and AI-powered features. Key responsibilities include:
+
+- **LLM integration:** Connecting applications to large language model APIs ([OpenAI](https://platform.openai.com/docs), [Anthropic](https://docs.anthropic.com/)) for chat, summarization, and extraction tasks.
+- **Agent workflow design:** Orchestrating multi-step AI agent pipelines using frameworks like [LangChain](https://python.langchain.com/docs/get_started/introduction) for tool use, retrieval, and reasoning chains.
+- **Local model hosting:** Running open-weight models locally with [Ollama](https://ollama.com/) for development and prototyping without external API costs.
+- **Backend service development:** Building REST APIs with [FastAPI](https://fastapi.tiangolo.com/) to serve AI endpoints with typed validation and automatic OpenAPI docs.
+- **Prompt engineering and documentation:** Treating prompts as versioned engineering artifacts with documented inputs, expected outputs, and manual review checkpoints.
+- **Evaluation and safety:** Designing evaluation workflows to detect hallucinations, measure output quality, and enforce safety guardrails before features reach users.
+- **Automation scripting:** Writing Python and Node.js scripts to automate content pipelines, data processing, and repetitive development tasks.
+
+## Key Skills
+
+- **Programming languages:** Python ([Source](https://www.python.org/about/)), JavaScript/TypeScript ([Source](https://developer.mozilla.org/en-US/docs/Web/JavaScript))
+- **Web frameworks:** FastAPI ([Source](https://fastapi.tiangolo.com/features/)), Express.js ([Source](https://expressjs.com/))
+- **AI/ML frameworks:** LangChain ([Source](https://python.langchain.com/docs/get_started/introduction)), Ollama ([Source](https://github.com/ollama/ollama))
+- **LLM APIs:** OpenAI API ([Source](https://platform.openai.com/docs/overview)), Anthropic API ([Source](https://docs.anthropic.com/))
+- **Vector stores:** Supabase pgvector ([Source](https://supabase.com/docs/guides/ai/vector-columns)), Chroma ([Source](https://docs.trychroma.com/))
+- **CI/CD:** GitHub Actions ([Source](https://docs.github.com/en/actions))
+- **Evaluation:** RAGAS for RAG evaluation ([Source](https://docs.ragas.io/)), manual review workflows
+
+## Tools and Technologies
+
+| Tool | Category | My Maturity Level | Official Docs |
+|------|----------|-------------------|---------------|
+| Python + FastAPI | Backend framework | Learning | [FastAPI](https://fastapi.tiangolo.com/) |
+| Node.js / Express | Backend framework | Prototypes | [Express](https://expressjs.com/) |
+| LangChain | LLM orchestration | Exploring | [LangChain](https://python.langchain.com/) |
+| Ollama | Local LLM hosting | Local only | [Ollama](https://ollama.com/) |
+| OpenAI API | LLM API | Experiments | [OpenAI](https://platform.openai.com/docs) |
+| Anthropic API | LLM API | Experiments | [Anthropic](https://docs.anthropic.com/) |
+| Supabase | Vector store / BaaS | Exploring | [Supabase](https://supabase.com/docs) |
+| GitHub Actions | CI/CD | Small deploys | [GitHub Actions](https://docs.github.com/en/actions) |
+
+## Role Comparison: AI Automation Engineer vs. Adjacent Roles
+
+| Dimension | AI Automation Engineer | ML Engineer | Backend Engineer | Data Engineer |
+|-----------|----------------------|-------------|-----------------|---------------|
+| **Primary focus** | LLM integrations, agent workflows, automation | Model training, fine-tuning, ML pipelines | APIs, databases, server logic | Data pipelines, ETL, warehousing |
+| **Core languages** | Python, JavaScript | Python, R | Python, JavaScript, Go | Python, SQL, Scala |
+| **Key frameworks** | LangChain, FastAPI, Ollama | PyTorch, TensorFlow, scikit-learn | Express, FastAPI, Django | Airflow, dbt, Spark |
+| **AI involvement** | High — API integration and orchestration | High — model building and training | Low — may consume AI APIs | Low — data prep for ML teams |
+| **Infrastructure** | Local models, API calls, vector stores | GPU clusters, training pipelines | Servers, databases, caches | Data warehouses, lakes |
+| **Typical deliverable** | Working AI feature or automation script | Trained model with metrics | Deployed API service | Data pipeline or warehouse |
+| **My current level** | Local experiments, documented prompts | Not pursuing | Small deployed APIs | Not pursuing |
+
+## Expanded Process Notes
+
+### How I approach an AI automation project
+
+1. **Define the problem in plain language** — Write down what the automation or AI feature should accomplish and what a successful output looks like.
+2. **Choose local vs. API** — For prototyping, I use [Ollama](https://ollama.com/) to run models locally for zero-cost iteration. For quality-critical outputs, I test against [OpenAI](https://platform.openai.com/docs) or [Anthropic](https://docs.anthropic.com/) APIs.
+3. **Build the backend scaffold** — I use [FastAPI](https://fastapi.tiangolo.com/) because it provides automatic request validation, typed responses, and generated OpenAPI documentation ([Source](https://fastapi.tiangolo.com/features/)).
+4. **Document prompts as artifacts** — Each prompt is stored with its version, inputs, expected output, and manual review notes in the repository README.
+5. **Add evaluation checkpoints** — Before shipping, I run manual evaluation passes to check for hallucinations, off-topic responses, and format violations.
+6. **Disclose AI assistance** — Any code drafted by AI tools is labeled in the README with the prompt used and the edits I made manually.
+
+### Common pitfalls I have encountered
+
+- **Hallucinated API calls:** LLMs sometimes generate plausible-looking but non-existent library functions. Manual review of generated code is mandatory ([Source](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview)).
+- **Cold start latency:** Free-tier hosting (e.g., Render) can take several minutes to wake up, which breaks chat workflows. Documenting this in the README sets correct expectations.
+- **Token cost surprises:** Without explicit token limits, long conversations can exceed free-tier API quotas. Setting `max_tokens` and truncating context is essential ([Source](https://platform.openai.com/docs/api-reference/chat)).
+
+## References
+
+- [FastAPI Documentation](https://fastapi.tiangolo.com/)
+- [Ollama — Get Started](https://ollama.com/)
+- [LangChain Documentation](https://python.langchain.com/docs/get_started/introduction)
+- [OpenAI API Reference](https://platform.openai.com/docs)
+- [Anthropic API Documentation](https://docs.anthropic.com/)
+- [Supabase Vector Columns Guide](https://supabase.com/docs/guides/ai/vector-columns)
+- [GitHub Actions Documentation](https://docs.github.com/en/actions)
+- [Express.js Documentation](https://expressjs.com/)
+- [RAGAS — RAG Evaluation Framework](https://docs.ragas.io/)
+- [Python.org](https://www.python.org/about/)
+- [MDN — JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)

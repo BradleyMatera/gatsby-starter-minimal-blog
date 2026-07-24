@@ -139,3 +139,88 @@ import { Section, Card } from "../../../src/ui";
   </ul>
   <p>If you are hiring for junior DevOps or platform roles and provide coaching in these areas, I am open to discussing opportunities.</p>
 </Section>
+
+## Core Responsibilities
+
+A DevOps Engineer is responsible for automating build, test, and deployment workflows, and bridging the gap between development and operations. Key responsibilities include:
+
+- **CI/CD pipeline design:** Building automated pipelines with [GitHub Actions](https://docs.github.com/en/actions) that run linting, type-checking, testing, and build validation before deploys ([Source](https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions)).
+- **Containerization:** Creating repeatable local development environments with [Docker](https://docs.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) so onboarding and environment parity are easier ([Source](https://docs.docker.com/get-started/overview/)).
+- **Deployment automation:** Configuring automated deploys to [Netlify](https://docs.netlify.com/), [GitHub Pages](https://docs.github.com/en/pages), or [Render](https://render.com/docs) with build-failure gates that block broken releases.
+- **Infrastructure as Code (IaC):** Provisioning cloud resources with [Terraform](https://developer.hashicorp.com/terraform/docs) instead of manual console changes ([Source](https://developer.hashicorp.com/terraform/intro)).
+- **Monitoring and observability:** Setting up logging, alerting, and dashboards to detect issues before users report them. Tools like [Prometheus](https://prometheus.io/docs/introduction/overview/) and [Grafana](https://grafana.com/docs/) are industry standards.
+- **Secrets management:** Storing API keys and credentials securely using environment variables, [GitHub Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets), or vault tools — not hardcoded in source.
+- **Rollback and recovery:** Designing deployment strategies that support rollback when a release introduces regressions.
+
+## Key Skills
+
+- **CI/CD:** GitHub Actions ([Source](https://docs.github.com/en/actions)), Netlify CLI ([Source](https://docs.netlify.com/cli/get-started/))
+- **Containers:** Docker ([Source](https://docs.docker.com/)), Docker Compose ([Source](https://docs.docker.com/compose/))
+- **Infrastructure as Code:** Terraform ([Source](https://developer.hashicorp.com/terraform/docs))
+- **Scripting:** Bash ([Source](https://www.gnu.org/software/bash/manual/)), Python ([Source](https://www.python.org/about/))
+- **Cloud CLI:** AWS CLI ([Source](https://docs.aws.amazon.com/cli/latest/userguide/))
+- **Monitoring:** Prometheus ([Source](https://prometheus.io/docs/introduction/overview/)), Grafana ([Source](https://grafana.com/docs/)), Lighthouse CLI ([Source](https://developer.chrome.com/docs/lighthouse/cli/))
+- **Load testing:** k6 ([Source](https://k6.io/docs/))
+- **Deployment platforms:** Netlify ([Source](https://docs.netlify.com/)), GitHub Pages ([Source](https://docs.github.com/en/pages)), Render ([Source](https://render.com/docs))
+
+## Tools and Technologies
+
+| Tool | Category | My Maturity Level | Official Docs |
+|------|----------|-------------------|---------------|
+| GitHub Actions | CI/CD | Personal CI basics | [GitHub Actions](https://docs.github.com/en/actions) |
+| Netlify CLI | Deployment | Personal deploys | [Netlify CLI](https://docs.netlify.com/cli/) |
+| Docker / Docker Compose | Containerization | Local dev labs | [Docker](https://docs.docker.com/) |
+| AWS CLI | Cloud CLI | Lab only | [AWS CLI](https://docs.aws.amazon.com/cli/) |
+| Bash | Scripting | Local automation | [Bash Manual](https://www.gnu.org/software/bash/manual/) |
+| Terraform | Infrastructure as Code | Tutorial stage | [Terraform](https://developer.hashicorp.com/terraform/) |
+| k6 | Load testing | Local only | [k6](https://k6.io/docs/) |
+| Lighthouse CLI | Performance auditing | Personal projects | [Lighthouse](https://developer.chrome.com/docs/lighthouse/cli/) |
+
+## Role Comparison: DevOps Engineer vs. Adjacent Roles
+
+| Dimension | DevOps Engineer | Cloud Engineer | Backend Engineer | Platform Engineer |
+|-----------|----------------|---------------|-----------------|-------------------|
+| **Primary focus** | CI/CD, deployments, automation | Cloud infra design, IaC, cost | Server logic, APIs, databases | Internal developer platforms |
+| **Core tools** | GitHub Actions, Docker, Bash | Terraform, AWS CLI, IAM | Express, FastAPI, MongoDB | Kubernetes, Backstage, Crossplane |
+| **Pipeline work** | High — core responsibility | Medium — uses pipelines | Low — consumes pipelines | High — builds platform pipelines |
+| **Container expertise** | High — builds images and compose | Medium — uses containers | Low | High — manages K8s clusters |
+| **Cloud provisioning** | Medium — deploys to cloud | High — core responsibility | Low | High — provisions platform infra |
+| **On-call** | Sometimes | Sometimes | Rarely | Sometimes |
+| **Typical deliverable** | Working CI/CD pipeline | Provisioned cloud resources | Deployed API service | Self-service developer platform |
+| **My current level** | Personal CI scripts | AWS internship | Small deployed APIs | Not pursuing |
+
+## Expanded Process Notes
+
+### How I approach setting up a CI/CD pipeline
+
+1. **Define the build stages** — Identify what needs to pass before a deploy: linting, type-checking, unit tests, and build validation. GitHub Actions uses YAML workflow files to define these stages ([Source](https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions)).
+2. **Add build-failure gates** — The pipeline should block deploys when any check fails. This prevents broken code from reaching production.
+3. **Containerize the environment** — Use [Docker Compose](https://docs.docker.com/compose/) to define a repeatable environment with consistent Node, Python, or other runtime versions. This eliminates "works on my machine" issues ([Source](https://docs.docker.com/get-started/overview/)).
+4. **Store secrets securely** — API keys and tokens are stored in [GitHub Encrypted Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets), never committed to the repository.
+5. **Add smoke tests** — After deploy, run basic checks (e.g., [k6](https://k6.io/docs/) load tests or Lighthouse audits) to verify the deployment is healthy.
+6. **Document gaps** — README documentation lists missing health checks, rollback procedures, and manual steps so the limitations are transparent.
+
+### Common pitfalls I have encountered
+
+- **No rollback plan:** Without a rollback strategy, a bad deploy can take a site offline. Documenting a manual rollback process is a minimum first step.
+- **Hardcoded secrets:** Storing API keys in `.env` files that get committed is a common mistake. Using [GitHub Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets) for CI pipelines is the safe approach.
+- **Missing health checks:** Without health check endpoints, deployment platforms cannot detect if a service is actually running. Adding a `/health` endpoint is a simple best practice ([Source](https://docs.docker.com/compose/startup-order/)).
+
+## References
+
+- [GitHub Actions Documentation](https://docs.github.com/en/actions)
+- [Docker Documentation](https://docs.docker.com/)
+- [Docker Compose Documentation](https://docs.docker.com/compose/)
+- [Terraform Documentation](https://developer.hashicorp.com/terraform/docs)
+- [Netlify Documentation](https://docs.netlify.com/)
+- [Netlify CLI](https://docs.netlify.com/cli/get-started/)
+- [GitHub Pages Documentation](https://docs.github.com/en/pages)
+- [Render Documentation](https://render.com/docs)
+- [AWS CLI User Guide](https://docs.aws.amazon.com/cli/latest/userguide/)
+- [Prometheus Documentation](https://prometheus.io/docs/introduction/overview/)
+- [Grafana Documentation](https://grafana.com/docs/)
+- [k6 Documentation](https://k6.io/docs/)
+- [Lighthouse CLI](https://developer.chrome.com/docs/lighthouse/cli/)
+- [GitHub Encrypted Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets)
+- [Bash Manual](https://www.gnu.org/software/bash/manual/)
+- [Python.org](https://www.python.org/about/)

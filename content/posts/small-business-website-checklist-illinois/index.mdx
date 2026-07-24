@@ -9,19 +9,50 @@ theme: "Local"
 
 Most small-business websites I look at are not broken because they lack a fancy feature. They are broken because a visitor cannot figure out three basic things: what the business does, who it helps, and how to contact it.
 
+Research backs this up: Google's research on mobile user experience found that users form judgments about a company's credibility in as little as 50 milliseconds, and 57% of users say they will not recommend a business with a poorly designed mobile site ([Google mobile experience research](https://www.thinkwithgoogle.com/consumer-insights/consumer-trends/mobile-experience-statistics/)).
+
 I made this checklist for a concrete siding company in Durand a while back. It applies to almost any local service business in Northwest Illinois.
 
 ## What should a small business website include?
 
-A small business website should answer three questions within seconds: what the business does, who it helps, and what the next step is. It needs a clear service area, one obvious contact method, mobile-friendly layout, one job per page, real photos instead of broad claims, and clean technical basics like page titles and meta descriptions. Clarity beats fancy features every time.
+A small business website should answer three questions within seconds: what the business does, who it helps, and what the next step is. It needs a clear service area, one obvious contact method, mobile-friendly layout, one job per page, real photos instead of broad claims, and clean technical basics like [page titles](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/title) and [meta descriptions](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta). Clarity beats fancy features every time.
+
+The essential elements every small business website needs:
+
+- **Clear value proposition** — what you do, stated in plain language above the fold
+- **Defined service area** — the towns, counties, or regions you actually serve
+- **One obvious contact method** — a phone number, email, or form that is easy to find
+- **Mobile-friendly layout** — readable text, tappable buttons, no horizontal scrolling ([Google mobile-friendly test criteria](https://developers.google.com/search/docs/crawling-indexing/mobile-friendly))
+- **One job per page** — each page focuses on a single service or topic
+- **Real photos** — actual photos of work, team, or location, not stock images
+- **Clean technical basics** — descriptive page titles, meta descriptions, crawlable pages, and internal links ([Google Search Central SEO guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide))
 
 ## How do I improve my local business website for customers?
 
-Start by fixing mobile layout, since most local traffic comes from phones. Make sure text is not cramped and buttons are easy to tap. State your service area plainly so visitors know you are local. Give every page one job so it does not feel cluttered. Use real photos and honest service descriptions instead of inflated copy. Make contact obvious with one form or email.
+Start by fixing mobile layout, since most local traffic comes from phones — over 60% of web traffic is mobile ([Statista mobile traffic share](https://www.statista.com/statistics/277125/share-of-website-traffic-coming-from-mobile-devices/)). Make sure text is not cramped and buttons are easy to tap. State your service area plainly so visitors know you are local. Give every page one job so it does not feel cluttered. Use real photos and honest service descriptions instead of inflated copy. Make contact obvious with one form or email.
+
+Steps to improve a local business website for customers:
+
+1. **Audit mobile layout first** — open the site on a phone and try to read every page ([Google mobile-friendly test](https://search.google.com/test/mobile-friendly))
+2. **Fix cramped text and tiny buttons** — use at least 16px font size and 44px tap targets ([WCAG touch target guidelines](https://www.w3.org/WAI/WCAG21/Understanding/target-size.html))
+3. **State your service area plainly** — list the towns and counties you serve on the homepage
+4. **Assign one job per page** — homepage introduces, service pages describe, contact page collects
+5. **Replace stock photos with real ones** — show actual work, vehicles, team members, or location
+6. **Write honest service descriptions** — describe what you actually do, not what sounds impressive
+7. **Make contact obvious** — one form or email, visible in the header or footer of every page
 
 ## Why is my small business website not getting leads?
 
 Most small business websites lose leads because visitors cannot quickly find what the business does, who it serves, or how to contact it. If the homepage is all slogans with no service description, people leave. If the contact method is hard to find, the site leaks leads. Fix clarity first: better structure, plain service area language, and one obvious call to action.
+
+Common reasons small business websites lose leads:
+
+- **Unclear service offering** — the homepage says "quality you can trust" but never says what the business actually does
+- **Hidden contact information** — the phone number or form is buried at the bottom of the page or on a separate tab
+- **No service area stated** — visitors cannot tell if the business serves their town
+- **Slow mobile experience** — pages take too long to load or are hard to read on a phone ([Google PageSpeed Insights](https://pagespeed.web.dev/))
+- **No call to action** — the visitor reaches the end of a page and does not know what to do next
+- **Cluttered pages** — too many services, too many offers, too many links competing for attention
 
 ## 1. Answer three questions fast
 
@@ -53,6 +84,16 @@ A lot of local traffic comes from phones. If the text is cramped, buttons are ha
 
 Mobile cleanup is usually the highest-value fix on an older site.
 
+Quick mobile audit checklist:
+
+- **Open every page on an actual phone** (not just a desktop browser resized small)
+- **Check that text is at least 16px** and readable without zooming
+- **Verify all buttons and links have at least 44x44px tap targets** ([WCAG 2.1](https://www.w3.org/TR/WCAG21/))
+- **Confirm there is no horizontal scrolling** on any page
+- **Test that the contact form works** on mobile
+- **Run the site through [Google PageSpeed Insights](https://pagespeed.web.dev/)** and address critical issues
+- **Check that images are not so large** they push content off-screen
+
 ## 5. Give every page one job
 
 The homepage has one job. The service page has one job. The contact page has one job.
@@ -82,6 +123,18 @@ Even a small site should have:
 
 This will not replace reputation, reviews, or local referrals, but it gives the site a solid foundation.
 
+A comparison of the technical basics and what each one does:
+
+| Technical element | What it does | How to check it |
+|------------------|-------------|----------------|
+| Page titles | Tell browsers and search engines what each page is about | View the browser tab text; check `<title>` in source ([MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/title)) |
+| Meta descriptions | Provide a summary that appears in search results | Search for the page on Google; check `<meta name="description">` ([MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta)) |
+| Crawlable pages | Allow search engines to find and index your content | Use [Google Search Console](https://search.google.com/search-console) URL inspection |
+| Internal links | Help visitors and search engines navigate between pages | Click through the site; every page should link to at least one other |
+| Clean URL structure | Make URLs readable and descriptive | URLs should contain words, not long query strings |
+| XML sitemap | List all pages for search engines to discover | Submit at [Google Search Console](https://search.google.com/search-console) ([Sitemaps protocol](https://www.sitemaps.org/protocol.html)) |
+| robots.txt | Tell search engines what to crawl and what to skip | Check `yoursite.com/robots.txt` ([Google robots.txt guide](https://developers.google.com/search/docs/crawling-indexing/robots/intro)) |
+
 ## Closing
 
 If a small-business site in Northwest Illinois feels confusing, it usually does not need hype. It needs clarity: better structure, better writing, cleaner contact flow, and a layout that makes trust easier.
@@ -91,3 +144,17 @@ If you want to see how I apply this in practice:
 - [Web developer in Durand, Davis, and Northwest Illinois](/web-developer-durand-davis-illinois/)
 - [Website help in Northwest Illinois](/website-help-northwest-illinois/)
 - [Contact](/contact/)
+
+## References
+
+- [Google Search Central SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
+- [Google mobile-friendly test](https://search.google.com/test/mobile-friendly)
+- [Google PageSpeed Insights](https://pagespeed.web.dev/)
+- [Google Search Console](https://search.google.com/search-console)
+- [Google robots.txt guide](https://developers.google.com/search/docs/crawling-indexing/robots/intro)
+- [HTML `<title>` element — MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/title)
+- [HTML `<meta>` element — MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta)
+- [WCAG 2.1 touch target guidelines](https://www.w3.org/TR/WCAG21/)
+- [Sitemaps protocol](https://www.sitemaps.org/protocol.html)
+- [Statista — mobile website traffic share](https://www.statista.com/statistics/277125/share-of-website-traffic-coming-from-mobile-devices/)
+- [Google mobile experience research](https://www.thinkwithgoogle.com/consumer-insights/consumer-trends/mobile-experience-statistics/)

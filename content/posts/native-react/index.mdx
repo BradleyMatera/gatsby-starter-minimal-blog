@@ -17,7 +17,7 @@ This post is a small React Native prototype you can verify. The goal is not to b
 
 You are building the smallest possible React Native app that prints a single line of text in a safe area. That sounds boring, but it is the right baseline because it proves the entire chain works: Node can run the CLI, the native project exists, the bundler can serve JavaScript, the native shell can load it, and the screen can render.
 
-React Native is just React code running inside a native shell. The “native” part is real. iOS builds use Xcode. Android builds use Gradle and the Android toolchain. The JavaScript is still yours, but the last mile is a real native app.
+React Native is just React code running inside a native shell ([Source](https://reactnative.dev/docs/getting-started)). The “native” part is real. iOS builds use Xcode ([Source](https://developer.apple.com/xcode/)). Android builds use Gradle and the Android toolchain ([Source](https://developer.android.com/studio)). The JavaScript is still yours, but the last mile is a real native app.
 
 {/* visual-break:native-react:1 */}
 ![AI workflow checkpoint illustration for this section.](/assets/visuals/blog/native-react-break-1.png)
@@ -26,13 +26,48 @@ React Native is just React code running inside a native shell. The “native” 
 
 React Native is one of those setups where missing one piece can waste a whole night. So here is what matters and why.
 
-You need Node because the React Native CLI is a Node tool. You need Xcode if you plan to run iOS because iOS builds are Xcode projects under the hood. You need Android Studio if you plan to run Android because it provides the SDK, emulator, and build tools that Gradle expects.
+You need Node because the React Native CLI is a Node tool ([Source](https://nodejs.org/en/about)). You need Xcode if you plan to run iOS because iOS builds are Xcode projects under the hood ([Source](https://reactnative.dev/docs/environment-setup)). You need Android Studio if you plan to run Android because it provides the SDK, emulator, and build tools that Gradle expects ([Source](https://developer.android.com/studio)).
+
+Here is a quick summary of what each prerequisite gives you:
+
+- **Node.js** — runs the React Native CLI and Metro bundler; required for every platform ([Source](https://nodejs.org/))
+- **Xcode** (macOS only) — provides the iOS SDK, Simulator, and build system for `run-ios` ([Source](https://developer.apple.com/xcode/))
+- **Android Studio** — provides the Android SDK, emulator images, and Gradle build tools for `run-android` ([Source](https://developer.android.com/studio))
+- **CocoaPods** (iOS only) — manages iOS native dependencies during the pod install step ([Source](https://cocoapods.org/))
+- **JDK 17+** — required by Gradle for Android builds; bundled with recent Android Studio versions ([Source](https://developer.android.com/studio/releases/jdk-branded))
 
 If you only want one platform right now, pick one. iOS on macOS is usually the smoother path because Xcode + Simulator are tightly integrated. Android is totally fine too, but your setup surface area is bigger because the SDK, emulator image, and Java requirements have more moving parts.
+
+### iOS vs Android setup comparison
+
+| Aspect | iOS (macOS) | Android (any OS) |
+|--------|-------------|-------------------|
+| Primary tool | Xcode + Simulator | Android Studio + Emulator |
+| Build system | Xcode projects / CocoaPods | Gradle + Android SDK |
+| Setup surface | Smaller — tightly integrated | Larger — SDK, emulator image, JDK |
+| Common failure | Xcode license not accepted | SDK path or Java version mismatch |
+| First-run speed | Usually faster on macOS | More configuration steps |
+
+### Expo vs React Native CLI
+
+This post uses the React Native CLI path. Here is how it compares to Expo:
+
+| Aspect | React Native CLI | Expo |
+|--------|-------------------|------|
+| Native folders | `ios/` and `android/` generated | Hidden / managed by Expo |
+| Native code access | Full control | Limited unless you eject |
+| Setup complexity | Higher — you manage the toolchain | Lower — Expo handles native parts |
+| Best for | Learning the native toolchain | Fast prototyping without native code |
+
+[Source: React Native Environment Setup](https://reactnative.dev/docs/environment-setup)
 
 ## Quick environment sanity checks
 
 Before you scaffold anything, do these checks. They are not “optional best practices.” They are just the fastest way to confirm you are not walking into a setup trap.
+
+1. **Check Node** — confirm Node is installed and not an ancient version ([Source](https://nodejs.org/en/download))
+2. **Check Xcode** (iOS only) — confirm command line tools are installed and the license is accepted ([Source](https://developer.apple.com/xcode/))
+3. **Check Android Studio** (Android only) — confirm the SDK is installed and at least one emulator image exists ([Source](https://developer.android.com/studio/intro/studio-config))
 
 First, confirm Node exists and is not ancient.
 
@@ -65,7 +100,7 @@ npx react-native@latest init NativeLab
 cd NativeLab
 ```
 
-What that command actually does matters. It generates a project folder, installs the JavaScript dependencies, and creates the native folders (`ios/` and `android/`) that Xcode and Gradle will build. If those folders do not exist, you do not have a real React Native project.
+What that command actually does matters. It generates a project folder, installs the JavaScript dependencies, and creates the native folders (`ios/` and `android/`) that Xcode and Gradle will build ([Source](https://reactnative.dev/docs/getting-started)). If those folders do not exist, you do not have a real React Native project.
 
 **Verify it worked:**
 
@@ -92,7 +127,7 @@ export default function App() {
 }
 ```
 
-Here is what that code is doing in plain terms. `SafeAreaView` prevents your content from sitting under the notch or the status bar on iOS. The inline `padding: 24` makes it obvious the layout is yours, not the default template. The `Text` component is the simplest visible output you can render on every platform.
+Here is what that code is doing in plain terms. `SafeAreaView` prevents your content from sitting under the notch or the status bar on iOS ([Source](https://reactnative.dev/docs/safeareaview)). The inline `padding: 24` makes it obvious the layout is yours, not the default template. The `Text` component is the simplest visible output you can render on every platform ([Source](https://reactnative.dev/docs/text)).
 
 **Verify it worked:**
 
@@ -106,7 +141,7 @@ If you are on macOS and you installed Xcode, this is the most direct proof.
 npx react-native run-ios
 ```
 
-What is happening during this step is important. The CLI kicks off a native build in the background, launches Simulator, starts Metro (the JavaScript bundler), then the app connects to Metro to load your JavaScript bundle.
+What is happening during this step is important. The CLI kicks off a native build in the background, launches Simulator, starts Metro (the JavaScript bundler) ([Source](https://metrobundler.dev/)), then the app connects to Metro to load your JavaScript bundle ([Source](https://reactnative.dev/docs/fast-refresh)).
 
 **Verify it worked:**
 
@@ -116,13 +151,20 @@ If it fails, the most common causes are: Xcode not installed, Xcode license not 
 
 ### Step 4: Run it on Android
 
-Android requires an emulator or device connected through ADB. Start the emulator first, then run:
+Android requires an emulator or device connected through ADB ([Source](https://developer.android.com/tools/adb)). Start the emulator first, then run:
 
 ```bash
 npx react-native run-android
 ```
 
-Android failures are often not “React Native problems.” They are toolchain problems. Wrong SDK path, no emulator running, Gradle failing, Java version mismatch. The good news is that once you get one project to run, the next ones are much easier because the machine is configured.
+Android failures are often not “React Native problems.” They are toolchain problems. Wrong SDK path, no emulator running, Gradle failing, Java version mismatch ([Source](https://reactnative.dev/docs/troubleshooting)). The good news is that once you get one project to run, the next ones are much easier because the machine is configured.
+
+Here are the most common Android failure categories:
+
+- **Wrong SDK path** — `ANDROID_HOME` is not set or points to the wrong folder
+- **No emulator running** — `run-android` has nothing to target
+- **Gradle failure** — usually a Java version mismatch or missing dependency
+- **Java version mismatch** — Gradle requires a specific JDK version ([Source](https://docs.gradle.org/current/userguide/compatibility.html))
 
 **Verify it worked:**
 
@@ -139,6 +181,15 @@ So after you see the screen once, change the text to something else, save, and c
 ## Common failures that look like React Native but are not
 
 React Native errors are usually symptoms, not causes. Here are the ones that show up the most.
+
+### Quick failure reference table
+
+| Symptom | Likely cause | Fix |
+|---------|-------------|-----|
+| Blank screen / bundle loading | Metro not running | `npx react-native start` |
+| iOS build fails immediately | Xcode missing or license not accepted | `xcode-select -p` + `sudo xcodebuild -license accept` |
+| Android cannot find device | No emulator running or ADB not connected | Start emulator, run `adb devices` |
+| Gradle errors | SDK path, Java version, or dependency issue | Read first error line, check `ANDROID_HOME` and JDK |
 
 ### Metro is not running
 
@@ -240,3 +291,20 @@ If you can do these three things, you have a real starting point: create the pro
 - [Sell Your Skills With One Small Project](/sell-your-skills-with-a-small-project/)
 - [Portfolio Case Studies: A Simple, Verifiable Template](/portfolio-case-studies/)
 - [Interactive Pokedex: Static Build With Search](/interactive-pokedex/)
+
+## References
+
+- [React Native — Getting Started](https://reactnative.dev/docs/getting-started)
+- [React Native — Environment Setup](https://reactnative.dev/docs/environment-setup)
+- [React Native — SafeAreaView docs](https://reactnative.dev/docs/safeareaview)
+- [React Native — Text component docs](https://reactnative.dev/docs/text)
+- [React Native — Fast Refresh docs](https://reactnative.dev/docs/fast-refresh)
+- [React Native — Troubleshooting](https://reactnative.dev/docs/troubleshooting)
+- [Metro Bundler — Official site](https://metrobundler.dev/)
+- [Node.js — Official site](https://nodejs.org/)
+- [Xcode — Apple Developer](https://developer.apple.com/xcode/)
+- [Android Studio — Android Developers](https://developer.android.com/studio)
+- [Android Studio — SDK configuration](https://developer.android.com/studio/intro/studio-config)
+- [ADB — Android Debug Bridge](https://developer.android.com/tools/adb)
+- [Gradle — Java Compatibility](https://docs.gradle.org/current/userguide/compatibility.html)
+- [CocoaPods — Official site](https://cocoapods.org/)

@@ -140,3 +140,84 @@ import { Section, Card } from "../../../src/ui";
   </ul>
   <p>If you mentor junior backend engineers in these topics, I am open to discussing opportunities.</p>
 </Section>
+
+## Core Responsibilities
+
+A Backend Engineer is responsible for designing, building, and maintaining server-side logic, APIs, and data layers. Key responsibilities include:
+
+- **API design and development:** Building RESTful endpoints with [Express.js](https://expressjs.com/) or [FastAPI](https://fastapi.tiangolo.com/) that handle CRUD operations, authentication, and business logic.
+- **Database management:** Designing schemas, writing queries, and managing data with [MongoDB](https://www.mongodb.com/docs/) (document store) or [PostgreSQL](https://www.postgresql.org/docs/) (relational).
+- **Authentication and authorization:** Implementing JWT-based auth flows ([Source](https://jwt.io/introduction)), refresh tokens, and role-based access control.
+- **Deployment and hosting:** Deploying services to platforms like [Render](https://render.com/docs) with environment variable management and health check endpoints.
+- **Testing:** Writing unit and integration tests with [Jest](https://jestjs.io/docs/getting-started) and [Supertest](https://github.com/ladjs/supertest) to validate API behavior.
+- **Observability:** Adding structured logging, error tracking, and request tracing to diagnose issues in deployed services.
+- **Documentation:** Maintaining READMEs, Postman collections, and API documentation so other developers can integrate quickly.
+
+## Key Skills
+
+- **Programming languages:** JavaScript/TypeScript ([Source](https://developer.mozilla.org/en-US/docs/Web/JavaScript)), Python ([Source](https://www.python.org/about/))
+- **Web frameworks:** Express.js ([Source](https://expressjs.com/)), FastAPI ([Source](https://fastapi.tiangolo.com/))
+- **Databases:** MongoDB / Mongoose ([Source](https://mongoosejs.com/docs/)), PostgreSQL ([Source](https://www.postgresql.org/docs/))
+- **Authentication:** JWT ([Source](https://jwt.io/)), OAuth 2.0 ([Source](https://oauth.net/2/))
+- **Testing:** Jest ([Source](https://jestjs.io/docs/getting-started)), Supertest ([Source](https://github.com/ladjs/supertest))
+- **API documentation:** Postman ([Source](https://learning.postman.com/)), OpenAPI / Swagger ([Source](https://swagger.io/docs/specification/about/))
+- **Deployment:** Render ([Source](https://render.com/docs)), Docker ([Source](https://docs.docker.com/))
+
+## Tools and Technologies
+
+| Tool | Category | My Maturity Level | Official Docs |
+|------|----------|-------------------|---------------|
+| Node.js + Express | Runtime + framework | Comfortable for prototypes | [Express](https://expressjs.com/) |
+| TypeScript | Language | Learning | [TypeScript](https://www.typescriptlang.org/docs/) |
+| MongoDB / Mongoose | Document database | Learning | [Mongoose](https://mongoosejs.com/) |
+| PostgreSQL | Relational database | Exploring | [PostgreSQL](https://www.postgresql.org/docs/) |
+| FastAPI | Python web framework | Exploring | [FastAPI](https://fastapi.tiangolo.com/) |
+| Jest + Supertest | Testing | Learning | [Jest](https://jestjs.io/) |
+| Postman | API testing | Comfortable | [Postman](https://learning.postman.com/) |
+| Render | Deployment | Comfortable | [Render](https://render.com/docs) |
+
+## Role Comparison: Backend Engineer vs. Adjacent Roles
+
+| Dimension | Backend Engineer | Full-Stack Engineer | DevOps Engineer | Cloud Engineer |
+|-----------|-----------------|---------------------|-----------------|----------------|
+| **Primary focus** | Server logic, APIs, databases | Frontend + backend together | CI/CD, deployment pipelines | Cloud infrastructure, IaC |
+| **Core languages** | JavaScript, Python, Go | JavaScript, TypeScript | Bash, YAML, Python | Python, Bash, HCL |
+| **Key frameworks** | Express, FastAPI, Django | React, Express, Next.js | GitHub Actions, Docker | Terraform, AWS CLI |
+| **Database work** | High — schema design, queries | Medium — consumes APIs | Low — manages DB infra | Medium — manages DB services |
+| **Frontend work** | None | High — builds UI | None | None |
+| **Infrastructure** | Low — deploys to hosts | Low — deploys full apps | High — builds pipelines | High — designs cloud arch |
+| **Typical deliverable** | Deployed API service | Deployed full-stack app | Working CI/CD pipeline | Provisioned cloud resources |
+| **My current level** | Small deployed APIs | Car-Match, this site | Personal CI scripts | AWS internship |
+
+## Expanded Process Notes
+
+### How I approach building a backend API
+
+1. **Define the data model** — Start with the entities the API needs (users, posts, messages) and their relationships. For MongoDB, this means designing document shapes; for PostgreSQL, this means designing normalized tables ([Source](https://www.postgresql.org/docs/current/ddl.html)).
+2. **Choose the framework** — For JavaScript projects, I reach for [Express](https://expressjs.com/) because it is minimal and well-documented. For Python projects, I use [FastAPI](https://fastapi.tiangolo.com/) for its automatic validation and OpenAPI generation.
+3. **Implement auth early** — JWT-based authentication is added before business logic so every route can be protected. The JWT standard is defined in [RFC 7519](https://datatracker.ietf.org/doc/html/rfc7519) ([Source](https://jwt.io/introduction)).
+4. **Write CRUD routes** — Each resource gets create, read, update, and delete endpoints with input validation and error handling.
+5. **Deploy and document limitations** — I deploy to [Render](https://render.com/docs) and document cold start behavior, missing rate limiting, and other known gaps in the README.
+6. **Test with Postman and Jest** — I maintain Postman collections for manual testing and write Jest + Supertest integration tests for automated validation ([Source](https://jestjs.io/docs/getting-started)).
+
+### Common pitfalls I have encountered
+
+- **Free-tier cold starts:** Render's free tier can take several minutes to wake a sleeping service. This is documented in every project README so reviewers are not surprised.
+- **No rate limiting:** Without rate limiting, a deployed API is vulnerable to abuse. This is a known gap I am working to address with middleware like [express-rate-limit](https://github.com/express-rate-limit/express-rate-limit).
+- **Unstructured logging:** Console.log without structured formatting makes debugging harder in production. Moving to structured JSON logging is a next step ([Source](https://expressjs.com/en/resources/middleware/morgan.html)).
+
+## References
+
+- [Express.js Documentation](https://expressjs.com/)
+- [FastAPI Documentation](https://fastapi.tiangolo.com/)
+- [MongoDB Documentation](https://www.mongodb.com/docs/)
+- [Mongoose Documentation](https://mongoosejs.com/docs/)
+- [PostgreSQL Documentation](https://www.postgresql.org/docs/)
+- [JWT Introduction](https://jwt.io/introduction)
+- [Jest Documentation](https://jestjs.io/docs/getting-started)
+- [Supertest](https://github.com/ladjs/supertest)
+- [Postman Learning Center](https://learning.postman.com/)
+- [Render Documentation](https://render.com/docs)
+- [TypeScript Documentation](https://www.typescriptlang.org/docs/)
+- [OpenAPI Specification](https://swagger.io/docs/specification/about/)
+- [RFC 7519 — JSON Web Token](https://datatracker.ietf.org/doc/html/rfc7519)

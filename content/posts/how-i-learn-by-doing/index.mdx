@@ -15,6 +15,12 @@ The point of this loop is not productivity theater. The point is to force contac
 
 A usable learning loop has three visible artifacts. There is a local project that runs. There is a public link that proves it runs outside your machine. There is a short written note that captures what actually went wrong and what you fixed. If any of those are missing, the loop is not complete and the learning stays fuzzy.
 
+Here are the three artifacts that make the loop complete:
+
+- **Local project that runs** — a file or repo you can execute on your own machine
+- **Public link that proves it runs** — a deployed URL anyone can visit ([Source](https://docs.github.com/en/pages))
+- **Short written note** — a `lesson.md` capturing what broke and what you fixed
+
 ![Building a small demo](https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif)
 
 This post walks through a concrete example using a single static HTML page. The example is intentionally simple because the mechanics of building, verifying, and deploying are the part that matters. The same loop applies to larger stacks later.
@@ -24,7 +30,7 @@ This post walks through a concrete example using a single static HTML page. The 
 
 ## A real starting point: one tiny demo
 
-Start with an empty folder and create the smallest possible project. No frameworks, no scaffolding tools, no generators. Just a file that does one thing and can be opened in a browser.
+Start with an empty folder and create the smallest possible project. No frameworks, no scaffolding tools, no generators. Just a file that does one thing and can be opened in a browser ([Source](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web)).
 
 ```bash
 mkdir mini-demo
@@ -57,9 +63,19 @@ EOF
 
 Open `index.html` in a browser and click the square. If the timestamp appears, the demo is real. This is the first important point: the project exists outside your head and outside a tutorial. It runs.
 
+The demo uses a standard `click` event listener on a DOM element ([Source](https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event)) and updates text content via `textContent` ([Source](https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent)).
+
 ## Local verification before anything else
 
 Before thinking about deployment, confirm the demo behaves correctly in a clean browser session. Reload the page. Click again. Confirm the timestamp updates every time. If this fails locally, deploying it only publishes a broken artifact. Fix local behavior first, always.
+
+Here is a quick local verification checklist:
+
+1. **Open `index.html`** in a fresh browser tab (not a cached session)
+2. **Click the square** and confirm the timestamp appears
+3. **Reload the page** (hard refresh: Cmd+Shift+R or Ctrl+Shift+R) and click again
+4. **Confirm the timestamp updates** on every click — if it stays stale, your event listener may not be re-attaching
+5. **Test in a second browser** if possible — this catches browser-specific quirks early ([Source](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Cross_browser_testing/))
 
 This step sounds obvious, but it is where most abandoned projects die. Local verification is the first filter that separates "I thought about building" from "I built something that executes."
 
@@ -67,7 +83,7 @@ This step sounds obvious, but it is where most abandoned projects die. Local ver
 
 ## Putting the demo under version control
 
-Now make the demo something you can actually share. Initialize a git repository and commit the file.
+Now make the demo something you can actually share. Initialize a git repository and commit the file ([Source](https://git-scm.com/docs/git-init)).
 
 ```bash
 git init
@@ -80,7 +96,7 @@ At this point you have a reproducible artifact. Anyone can clone the repo and op
 
 ## Deploying the demo to a real URL
 
-A demo that only runs on your machine is still half-finished. The moment you put it on a public URL, you force yourself to confront file paths, hosting behavior, and browser caching. This example uses GitHub Pages through GitHub Actions because it removes manual steps and produces a visible deployment log.
+A demo that only runs on your machine is still half-finished. The moment you put it on a public URL, you force yourself to confront file paths, hosting behavior, and browser caching. This example uses GitHub Pages through GitHub Actions because it removes manual steps and produces a visible deployment log ([Source](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)).
 
 Create the workflow file:
 
@@ -127,7 +143,14 @@ jobs:
         uses: actions/deploy-pages@v4
 ```
 
-This workflow is mechanical. It checks out your repository, tells GitHub this job is a Pages deployment, uploads the current folder as the site artifact, and publishes it. There is no build step because this demo is plain HTML. For larger projects, the only change is adding a build command before the upload.
+This workflow is mechanical. It checks out your repository, tells GitHub this job is a Pages deployment, uploads the current folder as the site artifact, and publishes it ([Source](https://docs.github.com/en/pages/deploying-with-github-actions)). There is no build step because this demo is plain HTML. For larger projects, the only change is adding a build command before the upload.
+
+Here is what each workflow step does:
+
+- **Checkout** — clones your repo onto the runner using `actions/checkout@v4` ([Source](https://github.com/actions/checkout))
+- **Setup Pages** — configures the GitHub Pages environment using `actions/configure-pages@v5` ([Source](https://github.com/actions/configure-pages))
+- **Upload artifact** — packages the current folder as a Pages artifact using `actions/upload-pages-artifact@v3` ([Source](https://github.com/actions/upload-pages-artifact))
+- **Deploy** — publishes the artifact to the Pages URL using `actions/deploy-pages@v4` ([Source](https://github.com/actions/deploy-pages))
 
 Push the repository to GitHub:
 
@@ -136,13 +159,13 @@ git remote add origin https://github.com/<yourname>/mini-demo.git
 git push -u origin main
 ```
 
-When the push completes, open the Actions tab in your repo. You will see the workflow run. When it finishes, GitHub shows the live Pages URL. Open that URL and click the square. If the timestamp updates, your demo is now running on infrastructure you do not control. That is the second important point: your code survived a clean environment and a real host.
+When the push completes, open the Actions tab in your repo. You will see the workflow run. When it finishes, GitHub shows the live Pages URL ([Source](https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/viewing-workflow-run-history)). Open that URL and click the square. If the timestamp updates, your demo is now running on infrastructure you do not control. That is the second important point: your code survived a clean environment and a real host.
 
 ![Deploying through GitHub Actions](https://media.giphy.com/media/3o7aCTfyhYawdOXcFW/giphy.gif)
 
 ## Proving the deploy actually updated
 
-To avoid fooling yourself with cached pages, reload the URL with a hard refresh. Click the square again. The time should change. If the page does not update, check the Actions run logs. They will show whether a new deployment actually happened. This is where you learn to trust logs over assumptions.
+To avoid fooling yourself with cached pages, reload the URL with a hard refresh ([Source](https://developer.mozilla.org/en-US/docs/Glossary/Cache)). Click the square again. The time should change. If the page does not update, check the Actions run logs. They will show whether a new deployment actually happened. This is where you learn to trust logs over assumptions.
 
 ## Writing down the lesson
 
@@ -162,6 +185,16 @@ This is not documentation for others. This is a memory aid for you. When you rep
 
 This process forces three real interactions: writing code that runs, deploying to a host you do not control, and reading logs when something fails. Those interactions are where understanding forms. Reading articles or watching videos can introduce concepts, but shipping even a tiny demo is what makes them stick.
 
+### The learning loop at a glance
+
+| Stage | What you do | Artifact produced | What it proves |
+|-------|------------|-------------------|----------------|
+| 1. Build | Create the smallest possible project | Local files (e.g. `index.html`) | Code runs in a browser |
+| 2. Verify | Reload, click, confirm behavior | A passing local test | The demo is real, not imagined |
+| 3. Version control | `git init`, commit, push | A GitHub repo | The demo is reproducible |
+| 4. Deploy | GitHub Actions workflow runs | A public Pages URL | Code survives a clean host |
+| 5. Record | Write `lesson.md` | A short note | You captured what broke and why |
+
 Over time the demos get larger, the stacks change, and the deployment targets evolve. The loop stays the same: build something small, verify locally, deploy publicly, record what actually broke. That repetition is the real curriculum.
 
 {/* visual-break:how-i-learn-by-doing:2 */}
@@ -176,3 +209,20 @@ If you have a local demo that runs, a public URL that proves it, and a short not
 - [Recent Projects and Lessons: A Short, Verifiable Format](/recent-projects-and-lessons/)
 - [What I Learned From Three Small Projects](/what-i-learned-three-simple-projects/)
 - [Certifications and Continuous Learning: A Simple Track](/certifications-continuous-learning/)
+
+## References
+
+- [MDN — Getting started with the web](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web)
+- [MDN — Element: click event](https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event)
+- [MDN — Node.textContent](https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent)
+- [MDN — HTTP Cache](https://developer.mozilla.org/en-US/docs/Glossary/Cache)
+- [MDN — Cross browser testing](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Cross_browser_testing/)
+- [Git — git-init docs](https://git-scm.com/docs/git-init)
+- [GitHub Pages — Using custom workflows](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)
+- [GitHub Pages — Deploying with GitHub Actions](https://docs.github.com/en/pages/deploying-with-github-actions)
+- [GitHub Actions — Viewing workflow run history](https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/viewing-workflow-run-history)
+- [GitHub Actions — actions/checkout](https://github.com/actions/checkout)
+- [GitHub Actions — actions/configure-pages](https://github.com/actions/configure-pages)
+- [GitHub Actions — actions/upload-pages-artifact](https://github.com/actions/upload-pages-artifact)
+- [GitHub Actions — actions/deploy-pages](https://github.com/actions/deploy-pages)
+- [GitHub Pages — Official docs](https://docs.github.com/en/pages)

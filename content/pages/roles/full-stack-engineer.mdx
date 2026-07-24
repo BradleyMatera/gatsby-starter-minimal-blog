@@ -140,3 +140,98 @@ import { Section, Card } from "../../../src/ui";
   </ul>
   <p>If your team provides mentorship and pair-programming support in these areas, I am open to discussing opportunities.</p>
 </Section>
+
+## Core Responsibilities
+
+A Full-Stack Engineer is responsible for building and maintaining both the frontend user interface and the backend services that power it. Key responsibilities include:
+
+- **Frontend development:** Building responsive, accessible UIs with [React](https://react.dev/learn) and [Gatsby](https://www.gatsbyjs.com/docs/) for static site generation, or [Next.js](https://nextjs.org/docs) for server-rendered applications ([Source](https://react.dev/learn/start-a-new-react-project)).
+- **Backend API development:** Building RESTful endpoints with [Express.js](https://expressjs.com/) or [FastAPI](https://fastapi.tiangolo.com/) that serve data to the frontend.
+- **Database integration:** Connecting the frontend to databases like [MongoDB](https://www.mongodb.com/docs/) via backend APIs, managing data flow from UI to persistence layer.
+- **Authentication flows:** Implementing end-to-end auth — login, registration, session management, and protected routes — using [JWT](https://jwt.io/introduction) tokens.
+- **Deployment:** Deploying both frontend and backend to platforms like [Netlify](https://docs.netlify.com/), [GitHub Pages](https://docs.github.com/en/pages), or [Render](https://render.com/docs) with CI checks that validate builds.
+- **Testing:** Writing unit, integration, and end-to-end tests with [Vitest](https://vitest.dev/) and [Playwright](https://playwright.dev/docs/intro) to validate behavior across the stack.
+- **Accessibility:** Ensuring UIs meet [WCAG](https://www.w3.org/WAI/standards-guidelines/wcag/) accessibility standards with semantic HTML, ARIA labels, and keyboard navigation.
+
+## Key Skills
+
+- **Frontend frameworks:** React ([Source](https://react.dev/learn)), Gatsby ([Source](https://www.gatsbyjs.com/docs/)), Next.js ([Source](https://nextjs.org/docs))
+- **Languages:** JavaScript, TypeScript ([Source](https://www.typescriptlang.org/docs/)), HTML/CSS ([Source](https://developer.mozilla.org/en-US/docs/Web/HTML))
+- **Backend frameworks:** Express.js ([Source](https://expressjs.com/)), FastAPI ([Source](https://fastapi.tiangolo.com/))
+- **Databases:** MongoDB / Mongoose ([Source](https://mongoosejs.com/docs/))
+- **Authentication:** JWT ([Source](https://jwt.io/)), session management
+- **Testing:** Vitest ([Source](https://vitest.dev/)), Playwright ([Source](https://playwright.dev/docs/intro))
+- **Deployment:** Netlify ([Source](https://docs.netlify.com/)), GitHub Pages ([Source](https://docs.github.com/en/pages)), Render ([Source](https://render.com/docs))
+- **Containers:** Docker Compose ([Source](https://docs.docker.com/compose/)) for dev environment parity
+- **Accessibility:** WCAG 2.1 ([Source](https://www.w3.org/WAI/standards-guidelines/wcag/)), Lighthouse audits ([Source](https://developer.chrome.com/docs/lighthouse/overview/))
+
+## Tools and Technologies
+
+| Tool | Category | My Maturity Level | Official Docs |
+|------|----------|-------------------|---------------|
+| React | Frontend library | Comfortable | [React](https://react.dev/) |
+| Gatsby | Static site generator | Comfortable | [Gatsby](https://www.gatsbyjs.com/docs/) |
+| Next.js | React framework | Learning | [Next.js](https://nextjs.org/docs) |
+| Vanilla JS + HTML/CSS | Core web | Comfortable | [MDN](https://developer.mozilla.org/) |
+| Node.js + Express | Backend framework | Learning | [Express](https://expressjs.com/) |
+| FastAPI | Python backend | Exploring | [FastAPI](https://fastapi.tiangolo.com/) |
+| MongoDB / Mongoose | Database | Learning | [Mongoose](https://mongoosejs.com/) |
+| Netlify | Frontend deployment | Comfortable | [Netlify](https://docs.netlify.com/) |
+| GitHub Pages | Static hosting | Comfortable | [GitHub Pages](https://docs.github.com/en/pages) |
+| Docker Compose | Dev environment parity | Learning | [Docker Compose](https://docs.docker.com/compose/) |
+| Vitest | Unit testing | Exploring | [Vitest](https://vitest.dev/) |
+| Playwright | E2E testing | Exploring | [Playwright](https://playwright.dev/) |
+
+## Role Comparison: Full-Stack Engineer vs. Adjacent Roles
+
+| Dimension | Full-Stack Engineer | Backend Engineer | Frontend Engineer | DevOps Engineer |
+|-----------|--------------------|-----------------|-------------------|-----------------|
+| **Primary focus** | Frontend + backend together | Server logic, APIs, databases | UI, UX, client-side logic | CI/CD, deployment pipelines |
+| **Core languages** | JavaScript, TypeScript | JavaScript, Python, Go | JavaScript, TypeScript | Bash, YAML, Python |
+| **Frontend depth** | High — builds UI | None | Very high — specializes | None |
+| **Backend depth** | Medium — builds APIs | Very high — specializes | None | Low |
+| **Database work** | Medium — connects UI to DB | High — schema design | Low | Low |
+| **Deployment** | Medium — deploys full apps | Low — deploys APIs | Medium — deploys UIs | High — builds pipelines |
+| **Typical deliverable** | Deployed full-stack app | Deployed API service | Deployed frontend app | Working CI/CD pipeline |
+| **My current level** | Car-Match, this site | Small deployed APIs | Pokédex, AnimalSounds | Personal CI scripts |
+
+## Expanded Process Notes
+
+### How I approach building a full-stack application
+
+1. **Design the data flow** — Map out how data moves from the database through the backend API to the frontend UI. For Car-Match, this meant MongoDB documents → Express routes → React components.
+2. **Build the backend API first** — I start with [Express](https://expressjs.com/) endpoints for CRUD operations and auth, so the frontend has something to call. JWT-based auth is implemented early using the [JWT standard](https://jwt.io/introduction).
+3. **Build the frontend** — I use [React](https://react.dev/learn) for component-based UIs. For content-heavy sites, [Gatsby](https://www.gatsbyjs.com/docs/) provides static site generation with excellent performance. For app-like experiences, [Next.js](https://nextjs.org/docs) offers server-side rendering and API routes.
+4. **Wire them together** — Connect the React frontend to the Express backend with fetch calls or API clients. Handle loading states, error states, and empty states in the UI.
+5. **Add CI checks** — [GitHub Actions](https://docs.github.com/en/actions) runs linting, type-checking, and build validation before any deploy. Build failures block the deployment.
+6. **Deploy and document** — Frontend goes to [Netlify](https://docs.netlify.com/) or [GitHub Pages](https://docs.github.com/en/pages); backend goes to [Render](https://render.com/docs). Known limitations (cold starts, missing tests, incomplete features) are documented in the README.
+
+### Common pitfalls I have encountered
+
+- **CORS issues:** When frontend and backend are on different domains, Cross-Origin Resource Sharing must be configured. The [cors middleware](https://github.com/expressjs/cors) for Express handles this, but it is easy to misconfigure.
+- **Free-tier cold starts:** Render's free tier can take several minutes to wake the backend, which makes the full-stack app appear broken. Documenting this in the README sets correct expectations.
+- **Inconsistent state management:** Without a clear state strategy, React components can get out of sync with the backend. Using React Query or a context-based approach helps ([Source](https://react.dev/learn/managing-state)).
+- **Accessibility gaps:** Full-stack apps often neglect accessibility. Running [Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/) audits and testing with keyboard navigation catches common issues.
+
+## References
+
+- [React Documentation](https://react.dev/learn)
+- [Gatsby Documentation](https://www.gatsbyjs.com/docs/)
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Express.js Documentation](https://expressjs.com/)
+- [FastAPI Documentation](https://fastapi.tiangolo.com/)
+- [MongoDB Documentation](https://www.mongodb.com/docs/)
+- [Mongoose Documentation](https://mongoosejs.com/docs/)
+- [JWT Introduction](https://jwt.io/introduction)
+- [Netlify Documentation](https://docs.netlify.com/)
+- [GitHub Pages Documentation](https://docs.github.com/en/pages)
+- [Render Documentation](https://render.com/docs)
+- [Docker Compose Documentation](https://docs.docker.com/compose/)
+- [Vitest Documentation](https://vitest.dev/)
+- [Playwright Documentation](https://playwright.dev/docs/intro)
+- [TypeScript Documentation](https://www.typescriptlang.org/docs/)
+- [MDN Web Docs — HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
+- [WCAG 2.1 Guidelines](https://www.w3.org/WAI/standards-guidelines/wcag/)
+- [Lighthouse Documentation](https://developer.chrome.com/docs/lighthouse/overview/)
+- [GitHub Actions Documentation](https://docs.github.com/en/actions)
+- [CORS Middleware for Express](https://github.com/expressjs/cors)

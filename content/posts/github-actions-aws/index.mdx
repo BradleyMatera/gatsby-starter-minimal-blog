@@ -13,9 +13,16 @@ This post is the workflow file I use as a baseline.
 
 ## Why I set this up first
 
-Without CI, I am the only person verifying the build. The moment another OS, another Node version, or another contributor enters the picture, assumptions break. CI gives me feedback in a clean environment every time I push.
+Without CI, I am the only person verifying the build. The moment another OS, another Node version, or another contributor enters the picture, assumptions break. CI gives me feedback in a clean environment every time I push ([Source](https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions)).
 
-GitHub Actions is just the platform. It spins up a temporary machine, checks out my code, runs the commands I tell it to run, and reports pass or fail. Nothing more mysterious than that.
+GitHub Actions is just the platform. It spins up a temporary machine, checks out my code, runs the commands I tell it to run, and reports pass or fail ([Source](https://docs.github.com/en/actions/about-github-actions/understanding-github-actions)). Nothing more mysterious than that.
+
+Here is what GitHub Actions gives you out of the box:
+
+- **Temporary runners** — clean VMs that are destroyed after each job ([Source](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners))
+- **Event triggers** — workflows run on push, pull request, schedule, or manual dispatch ([Source](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows))
+- **Pass/fail reporting** — a green check or red X visible on every commit
+- **Job logs** — full stdout/stderr for every step, viewable in the Actions tab
 
 {/* visual-break:github-actions-aws:1 */}
 ![Cloud architecture checkpoint illustration for this section.](/assets/visuals/blog/github-actions-aws-break-1.png)
@@ -46,17 +53,44 @@ jobs:
       - run: npm run build
 ```
 
-That is it. `actions/checkout` pulls the repo. `actions/setup-node` installs Node. The three `run` lines execute the same commands I run locally. If any exit non-zero, the workflow fails.
+That is it. `actions/checkout` pulls the repo ([Source](https://github.com/actions/checkout)). `actions/setup-node` installs Node ([Source](https://github.com/actions/setup-node)). The three `run` lines execute the same commands I run locally. If any exit non-zero, the workflow fails ([Source](https://docs.github.com/en/actions/using-jobs/using-jobs-in-a-workflow)).
+
+Here is what each step in the workflow does:
+
+- **`actions/checkout@v4`** — clones your repository onto the runner so subsequent steps can access your files
+- **`actions/setup-node@v4`** — installs the specified Node.js version (20 in this case) and caches npm dependencies
+- **`npm install`** — installs all dependencies from `package.json`
+- **`npm run lint`** — runs your linter (e.g. ESLint) to catch style and syntax errors
+- **`npm run build`** — runs your production build to verify the project compiles cleanly
 
 ## How I verify it works
 
-I commit the file, push to GitHub, then open the Actions tab. If the run is green, CI is working. If it fails, the log tells me exactly which command failed. I fix it locally, commit again, and CI re-runs.
+I commit the file, push to GitHub, then open the Actions tab ([Source](https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/viewing-workflow-run-history)). If the run is green, CI is working. If it fails, the log tells me exactly which command failed. I fix it locally, commit again, and CI re-runs.
+
+Here is the verification loop:
+
+1. **Commit the workflow file** — `git add .github/workflows/ci.yml && git commit -m "Add CI"`
+2. **Push to GitHub** — `git push origin main`
+3. **Open the Actions tab** — navigate to your repo on GitHub and click the "Actions" tab
+4. **Check the run status** — green check means all steps passed; red X means a step failed
+5. **Read the failing step's log** — expand the failed step to see the exact error output
+6. **Fix locally, commit, push again** — CI automatically re-runs on the new commit
 
 ## Common failures I have hit
 
 - **Workflow never runs:** the default branch is not named `main`.
 - **Install fails:** `package-lock.json` is missing or out of sync.
 - **Passes locally, fails in CI:** local environment hides an assumption, like a different Node version or a missing env var.
+
+### Common failures and fixes
+
+| Symptom | Likely cause | Fix |
+|---------|-------------|-----|
+| Workflow never runs | Default branch is not `main` | Update the `branches` filter or rename your branch ([Source](https://docs.github.com/en/repositories/configuring-a-repository/managing-branches-in-your-repository)) |
+| `npm install` fails | `package-lock.json` missing or out of sync | Run `npm install` locally and commit the lock file ([Source](https://docs.npmjs.com/cli/v10/configuring-npm/package-lock-json)) |
+| Passes locally, fails in CI | Different Node version or missing env var | Pin `node-version` in `setup-node` and add required secrets ([Source](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsenv)) |
+| Lint passes locally, fails in CI | Different ESLint config or plugin version | Ensure `.eslintrc` and all plugins are committed to the repo |
+| Build fails with "command not found" | `package.json` script is missing | Verify `lint` and `build` scripts exist in `package.json` ([Source](https://docs.npmjs.com/cli/v10/using-npm/scripts)) |
 
 The fix is always to make local and CI more similar, not to weaken the checks.
 
@@ -66,3 +100,17 @@ The fix is always to make local and CI more similar, not to weaken the checks.
 ## Closing
 
 A CI setup is not measured by complexity. It is measured by whether it runs my real build in a clean environment and tells me when something breaks. If I have a workflow file, a visible run, and a green check, CI is doing its job.
+
+## References
+
+- [GitHub Actions — Understanding GitHub Actions](https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions)
+- [GitHub Actions — About GitHub-hosted runners](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners)
+- [GitHub Actions — Events that trigger workflows](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows)
+- [GitHub Actions — Using jobs in a workflow](https://docs.github.com/en/actions/using-jobs/using-jobs-in-a-workflow)
+- [GitHub Actions — Viewing workflow run history](https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/viewing-workflow-run-history)
+- [GitHub Actions — Workflow syntax (env)](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsenv)
+- [GitHub Actions — actions/checkout](https://github.com/actions/checkout)
+- [GitHub Actions — actions/setup-node](https://github.com/actions/setup-node)
+- [GitHub — Managing branches in your repository](https://docs.github.com/en/repositories/configuring-a-repository/managing-branches-in-your-repository)
+- [npm — package-lock.json docs](https://docs.npmjs.com/cli/v10/configuring-npm/package-lock-json)
+- [npm — Using npm scripts](https://docs.npmjs.com/cli/v10/using-npm/scripts)

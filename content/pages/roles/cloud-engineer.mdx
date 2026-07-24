@@ -144,3 +144,90 @@ import { Section, Card } from "../../../src/ui";
   </ul>
   <p>If you are hiring for junior cloud roles and provide coaching in these areas, I am open to discussing opportunities.</p>
 </Section>
+
+## Core Responsibilities
+
+A Cloud Engineer is responsible for designing, deploying, and maintaining cloud infrastructure and services. Key responsibilities include:
+
+- **Cloud architecture:** Designing scalable, cost-effective infrastructure on [AWS](https://docs.aws.amazon.com/) using services like Lambda, S3, DynamoDB, and API Gateway ([Source](https://docs.aws.amazon.com/whitepapers/latest/aws-overview/introduction.html)).
+- **Infrastructure as Code (IaC):** Provisioning resources with [Terraform](https://developer.hashicorp.com/terraform/docs) or AWS CloudFormation instead of manual console clicks ([Source](https://developer.hashicorp.com/terraform/intro)).
+- **Cost management:** Monitoring cloud spend, setting budgets and billing alerts with [AWS Budgets](https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html), and optimizing free-tier usage.
+- **Security and IAM:** Designing least-privilege [IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html), using [IAM Access Analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html) to find unintended access, and reviewing security groups.
+- **Monitoring and alerting:** Setting up [CloudWatch](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html) dashboards, log groups, and [SNS](https://docs.aws.amazon.com/sns/latest/dg/welcome.html) alerts for operational visibility.
+- **Serverless development:** Building event-driven workflows with [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html) triggered by S3 events, API Gateway, or EventBridge.
+- **Deployment and CI/CD:** Using [GitHub Actions](https://docs.github.com/en/actions) for build validation and deploying static sites to [GitHub Pages](https://docs.github.com/en/pages) or services to [Render](https://render.com/docs).
+
+## Key Skills
+
+- **Cloud platform:** AWS — Lambda ([Source](https://docs.aws.amazon.com/lambda/latest/dg/)), S3 ([Source](https://docs.aws.amazon.com/AmazonS3/latest/userguide/)), DynamoDB ([Source](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/)), IAM ([Source](https://docs.aws.amazon.com/IAM/latest/UserGuide/))
+- **Infrastructure as Code:** Terraform ([Source](https://developer.hashicorp.com/terraform/docs)), AWS CloudFormation ([Source](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/))
+- **Monitoring:** CloudWatch ([Source](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/)), SNS ([Source](https://docs.aws.amazon.com/sns/latest/dg/))
+- **Serverless:** AWS Lambda, API Gateway ([Source](https://docs.aws.amazon.com/apigateway/latest/developerguide/)), Amplify ([Source](https://docs.amplify.aws/))
+- **CI/CD:** GitHub Actions ([Source](https://docs.github.com/en/actions))
+- **Containerization:** Docker Compose ([Source](https://docs.docker.com/compose/))
+- **CLI tools:** AWS CLI ([Source](https://docs.aws.amazon.com/cli/latest/userguide/))
+
+## Tools and Technologies
+
+| Tool | Category | My Maturity Level | Official Docs |
+|------|----------|-------------------|---------------|
+| AWS Lambda | Serverless compute | Capstone + lab | [Lambda](https://docs.aws.amazon.com/lambda/) |
+| Amazon S3 | Object storage | Capstone + lab | [S3](https://docs.aws.amazon.com/s3/) |
+| Amazon DynamoDB | NoSQL database | Capstone + lab | [DynamoDB](https://docs.aws.amazon.com/dynamodb/) |
+| AWS IAM | Access management | Lab only | [IAM](https://docs.aws.amazon.com/iam/) |
+| CloudWatch | Monitoring | Lab + personal | [CloudWatch](https://docs.aws.amazon.com/cloudwatch/) |
+| AWS Amplify | Full-stack platform | Capstone | [Amplify](https://docs.amplify.aws/) |
+| Terraform | Infrastructure as Code | Tutorial stage | [Terraform](https://developer.hashicorp.com/terraform/) |
+| GitHub Actions | CI/CD | Personal CI basics | [GitHub Actions](https://docs.github.com/en/actions) |
+| Docker Compose | Local containers | Local dev only | [Docker Compose](https://docs.docker.com/compose/) |
+| Render | App deployment | Personal deploys | [Render](https://render.com/docs) |
+
+## Role Comparison: Cloud Engineer vs. Adjacent Roles
+
+| Dimension | Cloud Engineer | DevOps Engineer | Backend Engineer | Site Reliability Engineer |
+|-----------|---------------|-----------------|-----------------|--------------------------|
+| **Primary focus** | Cloud infra design, IaC, cost | CI/CD pipelines, deployments | Server logic, APIs, databases | Uptime, reliability, incidents |
+| **Core tools** | Terraform, AWS CLI, IAM | GitHub Actions, Docker, Bash | Express, FastAPI, MongoDB | Prometheus, Grafana, PagerDuty |
+| **Cloud involvement** | High — designs and provisions | Medium — deploys to cloud | Low — deploys apps to cloud | High — operates cloud infra |
+| **IaC experience** | High — core skill | Medium — uses IaC for pipelines | Low | Medium — uses IaC for fixes |
+| **On-call** | Sometimes | Sometimes | Rarely | Always — primary role |
+| **Cost optimization** | High — core responsibility | Low | Low | Low |
+| **Typical deliverable** | Provisioned cloud resources | Working deployment pipeline | Deployed API service | Improved SLOs and runbooks |
+| **My current level** | AWS internship, small deploys | Personal CI scripts | Small deployed APIs | Not pursuing |
+
+## Expanded Process Notes
+
+### How I approach a cloud deployment
+
+1. **Map the architecture** — Draw out which AWS services are needed (e.g., S3 for storage, Lambda for compute, DynamoDB for state) and how data flows between them. The [AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html) provides the design principles I reference.
+2. **Estimate costs upfront** — Before building, I document expected costs per request using AWS pricing pages ([Lambda pricing](https://aws.amazon.com/lambda/pricing/), [S3 pricing](https://aws.amazon.com/s3/pricing/)). This was a core part of my internship capstone.
+3. **Set up IAM with least privilege** — Each service gets its own role with only the permissions it needs. [IAM Access Analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html) helps identify over-permissive policies.
+4. **Build serverless workflows** — For event-driven tasks, I use Lambda functions triggered by S3 events ([Source](https://docs.aws.amazon.com/lambda/latest/dg/with-s3.html)). My capstone project used this pattern for metadata extraction.
+5. **Add monitoring from day one** — CloudWatch dashboards and SNS alerts are configured before the workflow goes live so failures are visible immediately ([Source](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html)).
+6. **Document everything** — Every deployment includes README notes about limitations, free-tier caveats, and what would need to change for production scale.
+
+### Common pitfalls I have encountered
+
+- **Free-tier cold starts:** Render's free tier and AWS Lambda cold starts can introduce latency. This is documented in every project README.
+- **Accidental charges:** Without billing alerts, it is easy to incur unexpected costs. I always set up [AWS Budgets](https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html) before deploying anything.
+- **Over-permissive IAM:** Default policies that use `*` actions or resources are a security risk. The principle of least privilege is documented in the [IAM best practices guide](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html).
+
+## References
+
+- [AWS Documentation — Overview](https://docs.aws.amazon.com/whitepapers/latest/aws-overview/introduction.html)
+- [AWS Lambda Developer Guide](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)
+- [Amazon S3 User Guide](https://docs.aws.amazon.com/AmazonS3/latest/userguide/)
+- [Amazon DynamoDB Developer Guide](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/)
+- [AWS IAM User Guide](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html)
+- [IAM Access Analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html)
+- [Amazon CloudWatch User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html)
+- [Amazon SNS Developer Guide](https://docs.aws.amazon.com/sns/latest/dg/welcome.html)
+- [AWS Amplify Documentation](https://docs.amplify.aws/)
+- [Terraform Documentation](https://developer.hashicorp.com/terraform/docs)
+- [GitHub Actions Documentation](https://docs.github.com/en/actions)
+- [Docker Compose Documentation](https://docs.docker.com/compose/)
+- [Render Documentation](https://render.com/docs)
+- [AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html)
+- [AWS Budgets](https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html)
+- [AWS Lambda Pricing](https://aws.amazon.com/lambda/pricing/)
+- [AWS CLI User Guide](https://docs.aws.amazon.com/cli/latest/userguide/)
