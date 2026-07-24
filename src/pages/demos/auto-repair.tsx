@@ -102,10 +102,10 @@ const VinLookup: React.FC = () => {
   };
   return (
     <div className="demo-vin-lookup">
-      <h3 className="demo-vin-lookup__title">VIN Lookup</h3>
+      <label htmlFor="vin-input"><h3 className="demo-vin-lookup__title">VIN Lookup</h3></label>
       <p className="demo-vin-lookup__desc">Enter your 17-character VIN and we'll auto-fill your vehicle info for faster booking.</p>
       <div className="demo-vin-lookup__row">
-        <input className="demo-vin-lookup__input" type="text" placeholder="1HGCM82633A123456" maxLength={17} aria-label="VIN Lookup — enter your 17-character VIN" value={vin} onChange={(e) => setVin(e.target.value.toUpperCase())} />
+        <input id="vin-input" className="demo-vin-lookup__input" type="text" placeholder="1HGCM82633A123456" maxLength={17} value={vin} onChange={(e) => setVin(e.target.value.toUpperCase())} />
         <button type="button" className="demo-vin-lookup__btn" onClick={handleLookup}>Look Up</button>
       </div>
       {result && <div style={{ marginTop: "1rem", padding: "0.75rem", background: "var(--demo-bg)", borderRadius: "var(--demo-radius)" }}><strong>Vehicle:</strong> {result.year} {result.make} {result.model}</div>}
