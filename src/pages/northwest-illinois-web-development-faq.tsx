@@ -65,14 +65,13 @@ const LocalFaqPage = () => (
       titleAs="h1"
       description={
         <>
+          <p className="direct-answer">
+            <strong>What web development services are available in Northwest Illinois?</strong> Bradley Matera offers website builds, site refreshes, SEO optimization, and front-end cleanup for small businesses in Durand, Davis, Rockford, Freeport, and surrounding Northwest Illinois communities. Pricing starts at $447 for a Starter site, with most projects completed in 14-28 days. Remote work is welcome.
+          </p>
           <p>
             This page exists to answer the practical questions behind searches like web developer
             Durand Illinois, web developer Davis Illinois, and related Northwest Illinois website help
             searches.
-          </p>
-          <p>
-            The goal is not to sound like an agency brochure. The goal is to explain fit, scope, and
-            process clearly before anyone emails.
           </p>
         </>
       }
@@ -84,6 +83,34 @@ const LocalFaqPage = () => (
             <p className="feature-card__body">{faq.answer}</p>
           </Card>
         ))}
+      </div>
+    </Section>
+
+    <Section
+      eyebrow="Pricing at a glance"
+      title="Compare website tiers side by side"
+    >
+      <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.9rem" }}>
+        <thead>
+          <tr>
+            <th style={{ textAlign: "left", padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Feature</th>
+            <th style={{ padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Starter ($447)</th>
+            <th style={{ padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Growth ($797)</th>
+            <th style={{ padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Premium ($1,497)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Pages</td><td style={{ textAlign: "center" }}>Up to 5</td><td style={{ textAlign: "center" }}>Up to 10</td><td style={{ textAlign: "center" }}>Unlimited</td></tr>
+          <tr><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Monthly support</td><td style={{ textAlign: "center" }}>$37/mo</td><td style={{ textAlign: "center" }}>$67/mo</td><td style={{ textAlign: "center" }}>$97/mo</td></tr>
+          <tr><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>SEO-ready</td><td style={{ textAlign: "center" }}>Yes</td><td style={{ textAlign: "center" }}>Yes</td><td style={{ textAlign: "center" }}>Yes</td></tr>
+          <tr><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Google Business Profile</td><td style={{ textAlign: "center" }}>No</td><td style={{ textAlign: "center" }}>Yes</td><td style={{ textAlign: "center" }}>Yes</td></tr>
+          <tr><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Build time</td><td style={{ textAlign: "center" }}>14 days</td><td style={{ textAlign: "center" }}>3-4 weeks</td><td style={{ textAlign: "center" }}>Scoped</td></tr>
+          <tr><td style={{ padding: "0.5rem" }}>E-commerce</td><td style={{ textAlign: "center" }}>No</td><td style={{ textAlign: "center" }}>No</td><td style={{ textAlign: "center" }}>Yes</td></tr>
+        </tbody>
+      </table>
+      <div className="card-actions" style={{ marginTop: "1rem" }}>
+        <Link data-variant="primary" to="/pricing/">See full pricing</Link>
+        <Link data-variant="ghost" to="/contact/">Get a free consultation</Link>
       </div>
     </Section>
 

@@ -7,7 +7,7 @@ description: "A lightweight system design document template that lives inside yo
 theme: "Systems"
 ---
 
-In my experience, systems that fail to ship usually do so not because they were too hard, but because the design never became a real artifact. The idea stayed in someone’s head or in a long document that did not connect to actual files or testable outcomes.
+In my experience, systems that fail to ship usually do so not because they were too hard, but because the design never became a real artifact. The idea stayed in someone’s head or in a long document that did not connect to actual files or testable outcomes. This aligns with [Google's Design Docs guide](https://www.industrialempathy.com/posts/design-docs-at-google/), which argues that a written design document is what forces vague ideas to become concrete decisions.
 
 I use a short system design document that lives inside the repo. It is not architecture theory. It is a few headings that keep the project from drifting.
 
@@ -20,7 +20,17 @@ I keep it short. It answers four questions:
 - What outputs leave the system?
 - Where does each piece live in the codebase?
 
-When this exists as `docs/system-design.md`, the design stops being an idea and becomes an executable plan.
+When this exists as `docs/system-design.md`, the design stops being an idea and becomes an executable plan. Keeping design docs inside the repository (rather than in a separate wiki) is a practice recommended by the [GitHub Docs-as-code approach](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/setting-up-guidelines-for-repository-contributors) and [Write the Docs principles](https://www.writethedocs.org/guide/docs-as-code/).
+
+### With a design doc vs. without one
+
+| Aspect | No design doc | With `docs/system-design.md` in the repo |
+|---|---|---|
+| Scope drift | Features added without boundaries | Scope is explicit and bounded |
+| File ownership | Files grow with no clear owner | File map assigns each layer to a path |
+| Testing clarity | Unclear what "done" means | "Done when" bullets are testable |
+| Onboarding | New contributors guess the architecture | Design is readable in one sitting |
+| Deployment risk | High — no verification before shipping | Low — design gates before code |
 
 {/* visual-break:designing-systems-that-actually-ship:1 */}
 ![Execution process checkpoint illustration for this section.](/assets/visuals/blog/designing-systems-that-actually-ship-break-1.png)
@@ -72,11 +82,16 @@ Outside the system:
 - One end-to-end flow is verified
 ```
 
-I fill each section in one or two sentences. If a section needs long paragraphs, the system scope is too large and should be split.
+I fill each section in one or two sentences. If a section needs long paragraphs, the system scope is too large and should be split. The benefits of keeping each section short:
+
+- **Forces clarity** — if you cannot describe the goal in two sentences, you do not understand it yet.
+- **Prevents scope creep** — long paragraphs usually mean the system is doing too much.
+- **Stays maintainable** — a short doc gets updated; a long doc gets ignored.
+- **Speeds review** — teammates can read and critique the design in under five minutes.
 
 ## Why this helps
 
-Without a concrete design artifact, projects drift. Features get added without boundaries. Files grow without ownership. Testing becomes unclear. Deployment becomes risky.
+Without a concrete design artifact, projects drift. Features get added without boundaries. Files grow without ownership. Testing becomes unclear. Deployment becomes risky. The [12-Factor App methodology](https://12factor.net/) makes a similar argument: explicit configuration and clear boundaries are what keep a system deployable.
 
 A short document does not replace code. It guides code. It is small enough to maintain and strong enough to stop uncontrolled growth.
 
@@ -102,6 +117,25 @@ This template is not theoretical. I use a version of it in real repos:
 - [This site's repo](https://github.com/BradleyMatera/gatsby-starter-minimal-blog) includes `AGENTS.md` and structured docs that map to real files
 - [Car-Match](https://github.com/BradleyMatera/car-match) includes `docs/` with DEPLOYMENT.md, API.md, and TROUBLESHOOTING.md that connect to actual code paths
 
+### How the template maps to real repos
+
+| Template section | This site (gatsby-starter-minimal-blog) | Car-Match |
+|---|---|---|
+| Goal | Portfolio, blog, and local SEO service site | Location-based matching app |
+| File map | `src/@lekoarts/`, `src/features/`, `src/pages/` | `src/api/`, `src/ui/`, `src/data/` |
+| External dependencies | Gatsby 5, Netlify, React 18 | Node.js, MongoDB, Google Maps API |
+| Done when | Lighthouse passes, build is clean, NAP is consistent | API returns matches, UI renders flow, data persists |
+| Design artifact | `AGENTS.md` | `docs/DEPLOYMENT.md`, `docs/API.md`, `docs/TROUBLESHOOTING.md` |
+
 ## Closing
 
 A system design document does not need to be long. It needs to be connected to the codebase. If the design does not point to real files and real verification steps, it is not ready to drive implementation.
+
+## References
+
+- [Google — Design Docs at Google](https://www.industrialempathy.com/posts/design-docs-at-google/)
+- [Write the Docs — Docs as Code](https://www.writethedocs.org/guide/docs-as-code/)
+- [GitHub — Setting up guidelines for repository contributors](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/setting-up-guidelines-for-repository-contributors)
+- [The Twelve-Factor App methodology](https://12factor.net/)
+- [This site's repo (gatsby-starter-minimal-blog)](https://github.com/BradleyMatera/gatsby-starter-minimal-blog)
+- [Car-Match repo](https://github.com/BradleyMatera/car-match)

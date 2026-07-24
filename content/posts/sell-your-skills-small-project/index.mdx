@@ -11,13 +11,28 @@ A resume lists claims. A deployed demo is evidence. When I want to show that I c
 
 This post is the pattern I use to do that.
 
+The benefits of this approach over a traditional resume:
+
+- **Verifiable proof:** a live URL lets a reviewer confirm the skill works, not just read a claim.
+- **Scope discipline:** one skill per demo prevents feature bloat and keeps the project finishable in hours, not weeks.
+- **Decision transparency:** a README that explains trade-offs shows judgment, which is harder to fake than a bullet point.
+- **Searchability:** public repos and deployed demos are indexed and shareable, increasing the chance a recruiter finds your work.
+
 ## The idea: one skill, one demo
 
 The biggest mistake I see in portfolio projects is scope creep. A "simple search demo" turns into a full app with auth, dashboards, and a database before anything ships. The skill gets buried under features.
 
 I avoid that by picking one skill and one constraint. For this example, the skill is **client-side filtering** and the constraint is **no external libraries**.
 
-That means no React, no Lodash, no build tools. Just an HTML file, some data, and a search box.
+That means no [React](https://react.dev), no [Lodash](https://lodash.com), no build tools. Just an HTML file, some data, and a search box.
+
+Here is how I pick the skill and constraint for a demo:
+
+1. **Identify one specific skill** you want to prove (e.g., client-side filtering, debounce handling, accessibility).
+2. **Choose a constraint** that forces the skill to be visible (e.g., no libraries, no framework, single file).
+3. **Define a clear success criterion** — a measurable behavior like "filter 500 rows in under 16ms per keystroke."
+4. **Time-box the build** to a single sitting so scope creep is physically impossible.
+5. **Write the README before you ship** so the decisions are fresh.
 
 {/* visual-break:sell-your-skills-small-project:1 */}
 ![Career progression checkpoint illustration for this section.](/assets/visuals/blog/sell-your-skills-small-project-break-1.png)
@@ -78,11 +93,35 @@ That is the whole thing. It demonstrates data generation, DOM updates, and event
 
 ## How I deploy it
 
-I push the file to GitHub, then deploy it to a static host like Vercel or Netlify. The exact host does not matter much. What matters is that the code is running somewhere I do not control.
+I push the file to [GitHub](https://github.com), then deploy it to a static host like [Vercel](https://vercel.com) or [Netlify](https://netlify.com). The exact host does not matter much. What matters is that the code is running somewhere I do not control.
 
 Code on my hard drive is invisible. A live URL proves it works outside my machine.
 
+My deployment steps:
+
+1. Initialize a git repo and push the project to a public GitHub repository.
+2. Connect the repository to a static hosting provider (Vercel, Netlify, or GitHub Pages).
+3. Confirm the build settings — for a single HTML file, no build command is needed.
+4. Deploy and copy the live URL into the README.
+5. Open the URL in an incognito window to confirm it loads without local dependencies.
+
+### Static host comparison
+
+| Host | Free Tier | Build Command Needed | Custom Domain on Free Plan | Best For |
+|------|-----------|---------------------|---------------------------|----------|
+| [Vercel](https://vercel.com/docs) | Yes | No (auto-detected) | Yes | Frontend demos, instant deploys |
+| [Netlify](https://docs.netlify.com) | Yes | Optional | Yes | Static sites, form handling |
+| [GitHub Pages](https://docs.github.com/en/pages) | Yes | No | Yes (via CNAME) | Repos already on GitHub |
+
 ## How I document it
+
+A good README is what turns a demo into evidence. Every README I write includes these sections:
+
+- **Live demo link** so a reviewer can click and see it run immediately.
+- **Source code link** so the implementation is auditable.
+- **Goal** stating the single skill being proven.
+- **Constraint** listing what was deliberately excluded.
+- **What I learned** capturing trade-offs and surprises discovered during the build.
 
 My READMEs follow this shape:
 
@@ -106,3 +145,12 @@ No external libraries.
 ## Closing
 
 If you want to prove a skill, build the smallest possible demo that exercises it, ship it, and write down what you learned. One skill. One URL. One note. That is more useful than a feature list no one reads.
+
+## References
+
+- [React — official documentation](https://react.dev)
+- [Lodash — utility library](https://lodash.com)
+- [GitHub](https://github.com)
+- [Vercel documentation](https://vercel.com/docs)
+- [Netlify documentation](https://docs.netlify.com)
+- [GitHub Pages documentation](https://docs.github.com/en/pages)

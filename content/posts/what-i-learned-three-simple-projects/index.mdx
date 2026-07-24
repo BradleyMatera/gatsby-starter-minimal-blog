@@ -7,9 +7,17 @@ description: "Three small demo projects, the real failures behind each one, and 
 theme: "Process"
 ---
 
-In 2025 I focused on building small, focused projects to sharpen specific skills. Large applications often hide the root cause of a problem behind layers of abstraction. By isolating issues in smaller codebases, I could confront and fix the actual misunderstanding instead of patching around it.
+In 2025 I focused on building small, focused projects to sharpen specific skills. Large applications often hide the root cause of a problem behind layers of abstraction. By isolating issues in smaller codebases, I could confront and fix the actual misunderstanding instead of patching around it. This approach is consistent with the [Next.js App Router documentation](https://nextjs.org/docs/app), which recommends isolating features to reduce build and routing complexity.
 
 This post walks through three of those projects: AnimalSounds, CheeseMath, and EthicsFrontEndDemo. For each one I will explain the real failure, what I changed, and why the lesson stuck.
+
+Here is a quick comparison of the three projects and the core lesson from each:
+
+| Project | Stack | Core failure | Resolution | Lesson |
+|---|---|---|---|---|
+| AnimalSounds | Next.js, HTML5 Audio | iOS Safari AudioContext lock + GitHub Pages subpath 404s | Lazy audio init + `basePath` config | Static hosts need path config that differs from local dev |
+| CheeseMath (Jest tests) | Jest, ES6+ JavaScript | `SyntaxError: Cannot use import statement outside a module` | Babel bridge (`@babel/preset-env`) targeting Node `current` | Test runners need a dedicated transpilation pipeline |
+| EthicsFrontEndDemo | Vanilla CSS, CSS Grid | Flexbox layout thrashing on mobile viewport | Switched macro layout to CSS Grid with `auto-fit` + `minmax` | Pick the layout engine that matches the dimensionality of the problem |
 
 ## Project 1: AnimalSounds
 
@@ -18,27 +26,35 @@ This post walks through three of those projects: AnimalSounds, CheeseMath, and E
 
 ### The challenge: browser autoplay policies and static subpaths
 
-The initial scope was simple: a DOM manipulation exercise that triggers HTML5 `<audio>` elements via JavaScript event listeners. I used a standard Next.js App Router structure.
+The initial scope was simple: a DOM manipulation exercise that triggers HTML5 `<audio>` elements via JavaScript event listeners ([MDN: HTML5 audio element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio)). I used a standard Next.js App Router structure ([Next.js App Router docs](https://nextjs.org/docs/app)).
 
 ### Failure point 1: the iOS audio context lock
 
 After deployment, the app worked on desktop Chrome but failed silently on iOS Safari. It tried to instantiate the `AudioContext` and preload assets on `window.onload`.
 
-Mobile browsers enforce strict autoplay policies. (See [Apple's WebKit autoplay policy documentation](https://webkit.org/blog/6784/new-video-policies-for-ios/) and [Chrome's autoplay policy](https://developer.chrome.com/blog/autoplay/).) The `AudioContext` starts in a `suspended` state on WebKit browsers. It cannot transition to `running` until a distinct user interaction event, usually `touchend` or `click`, occurs. My code was trying to play audio before that handshake happened, so the browser rejected the request.
+Mobile browsers enforce strict autoplay policies. (See [Apple's WebKit autoplay policy documentation](https://webkit.org/blog/6784/new-video-policies-for-ios/) and [Chrome's autoplay policy](https://developer.chrome.com/blog/autoplay/).) The `AudioContext` starts in a `suspended` state on WebKit browsers ([MDN: AudioContext — suspended state](https://developer.mozilla.org/en-US/docs/Web/API/AudioContext#suspended_state)). It cannot transition to `running` until a distinct user interaction event, usually `touchend` or `click`, occurs. My code was trying to play audio before that handshake happened, so the browser rejected the request.
 
 ### Resolution
 
-I refactored the audio engine to use a lazy-load pattern. I removed the automatic initialization and replaced it with a singleton that checks the context state. The first user interaction on the page now triggers a zero-volume buffer playback, which effectively unlocks the audio subsystem for the rest of the session.
+I refactored the audio engine to use a lazy-load pattern. I removed the automatic initialization and replaced it with a singleton that checks the context state. The first user interaction on the page now triggers a zero-volume buffer playback, which effectively unlocks the audio subsystem for the rest of the session. The steps I followed were:
+
+1. Remove the `window.onload` audio initialization.
+2. Create a singleton `AudioContext` that starts in `suspended` state.
+3. Attach a one-time `touchend` / `click` listener that calls `context.resume()`.
+4. Play a zero-volume buffer to unlock the audio subsystem.
+5. Set a flag so subsequent interactions skip the unlock step.
+
+This pattern is documented in [Google's Web Audio API best practices](https://developer.chrome.com/blog/web-audio-autoplay/).
 
 ### Failure point 2: GitHub Pages subpath routing
 
 The second failure was asset resolution. Locally, at `localhost:3000`, an image reference to `/images/cow.png` resolves to `localhost:3000/images/cow.png`.
 
-GitHub Pages hosts project repositories on a subpath: `username.github.io/repo-name/`. When deployed, the app kept requesting assets from the domain root, so every static media file 404ed.
+GitHub Pages hosts project repositories on a subpath: `username.github.io/repo-name/` ([GitHub Pages documentation](https://docs.github.com/en/pages)). When deployed, the app kept requesting assets from the domain root, so every static media file 404ed.
 
 ### Resolution
 
-Hardcoding relative paths (`./`) proved brittle. The robust fix was Next.js environment configuration. I added a `basePath` in `next.config.js` that applies the repository name only during production builds.
+Hardcoding relative paths (`./`) proved brittle. The robust fix was Next.js environment configuration. I added a `basePath` in `next.config.js` that applies the repository name only during production builds ([Next.js basePath documentation](https://nextjs.org/docs/app/api-reference/next-config-js/basePath)).
 
 ```javascript
 // next.config.mjs
@@ -69,11 +85,11 @@ This keeps asset routing logic identical across environments while the build pip
 
 ### The challenge: ESM vs. CommonJS in test environments
 
-The goal was a robust unit testing suite using Jest. The app logic involved geometric calculations written in modern ES6+ JavaScript.
+The goal was a robust unit testing suite using Jest ([Jest documentation](https://jestjs.io/docs/getting-started)). The app logic involved geometric calculations written in modern ES6+ JavaScript.
 
 ### Failure point: the “Cannot use import statement” error
 
-The project used ES modules (`import`/`export`) to stay compatible with modern bundlers. But Jest runs in a Node.js environment, which historically defaults to CommonJS (`require`) ([Node.js modules documentation](https://nodejs.org/api/modules.html)).
+The project used ES modules (`import`/`export`) to stay compatible with modern bundlers ([MDN: JavaScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)). But Jest runs in a Node.js environment, which historically defaults to CommonJS (`require`) ([Node.js modules documentation](https://nodejs.org/api/modules.html)).
 
 Running the test suite crashed immediately with `SyntaxError: Cannot use import statement outside a module`. Node.js was executing the source files directly without transpilation, so it did not recognize `import` in `.js` files unless `package.json` specified `"type": "module"` or the file used `.mjs`.
 
@@ -81,7 +97,7 @@ Simply changing the package type broke other tooling. I discovered the testing e
 
 ### Resolution
 
-I integrated Babel as a bridge between source code and the test runner. That required installing `babel-jest`, `@babel/core`, and `@babel/preset-env`.
+I integrated Babel as a bridge between source code and the test runner ([Babel documentation](https://babeljs.io/docs/)). That required installing `babel-jest`, `@babel/core`, and `@babel/preset-env` ([Jest — using Babel](https://jestjs.io/docs/getting-started#using-babel)).
 
 I configured `babel.config.js` to target the current Node version used by Jest, rather than the browser targets used for the build.
 
@@ -114,13 +130,23 @@ This project built a responsive corporate landing page without CSS frameworks. T
 
 ### Failure point: the Flexbox trap
 
-I initially laid out the entire page using Flexbox. Flexbox is great for one-dimensional alignment — distributing items in a single row or column — but it struggles when elements must align on both the X and Y axes at the same time.
+I initially laid out the entire page using Flexbox. Flexbox is great for one-dimensional alignment — distributing items in a single row or column ([MDN: Flexbox](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout)) — but it struggles when elements must align on both the X and Y axes at the same time.
 
 To force a grid with Flexbox, I had to use negative margins, complex `calc()` width percentages like `width: calc(33.33% - 20px)`, and extra container wrappers to handle wrapping. The result was layout thrashing on mobile, where content overflowed the viewport horizontally because the padding calculations did not account for the scrollbar width.
 
 ### Resolution: CSS Grid
 
-I scrapped the Flexbox approach for the main container and implemented CSS Grid. The difference in code complexity was substantial. (See the actual [CheeseMath repo](https://github.com/BradleyMatera/CheeseMath-Jest-Tests) for the real code.)
+I scrapped the Flexbox approach for the main container and implemented CSS Grid ([MDN: CSS Grid Layout](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout)). The difference in code complexity was substantial. (See the actual [CheeseMath repo](https://github.com/BradleyMatera/CheeseMath-Jest-Tests) for the real code.)
+
+### Flexbox vs. CSS Grid for two-dimensional layouts
+
+| Criterion | Flexbox | CSS Grid |
+|---|---|---|
+| Dimensionality | One-dimensional (row or column) | Two-dimensional (rows and columns) |
+| Alignment control | Main axis + cross axis | Both axes simultaneously |
+| Wrapping behavior | `flex-wrap` requires manual margin/`calc()` hacks | `auto-fit` + `minmax` handles wrapping natively |
+| Media queries needed | Multiple breakpoints for percentage resizing | Often none — browser distributes space |
+| Best for | Nav bars, toolbars, single-row components | Page-level macro layouts, card grids, dashboards |
 
 **The failed Flexbox approach:**
 
@@ -147,7 +173,7 @@ I scrapped the Flexbox approach for the main container and implemented CSS Grid.
 }
 ```
 
-Using `grid-template-columns` with `auto-fit` and `minmax` lets the browser handle space distribution. It automatically decides how many columns fit and wraps to the next row when the minimum width is violated. That eliminated multiple media queries and manual margin calculations, proving Grid is the better engine for macro layouts.
+Using `grid-template-columns` with `auto-fit` and `minmax` lets the browser handle space distribution ([MDN: grid-template-columns](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns)). It automatically decides how many columns fit and wraps to the next row when the minimum width is violated. That eliminated multiple media queries and manual margin calculations, proving Grid is the better engine for macro layouts.
 
 {/* visual-break:what-i-learned-three-simple-projects:2 */}
 ![Delivery workflow checkpoint illustration for this section.](/assets/visuals/blog/what-i-learned-three-simple-projects-break-2.png)
@@ -169,3 +195,25 @@ Small projects are not practice dummies. They are the fastest way to find the re
 - [Recent Projects and Lessons: A Short, Verifiable Format](/recent-projects-and-lessons/)
 - [How I Learn by Doing: A Repeatable Mini Project Loop](/how-i-learn-by-doing/)
 - [Designing Systems That Actually Ship: A Small Template](/designing-systems-that-actually-ship/)
+
+## References
+
+- [Next.js App Router documentation](https://nextjs.org/docs/app)
+- [Next.js basePath configuration](https://nextjs.org/docs/app/api-reference/next-config-js/basePath)
+- [MDN — HTML5 audio element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio)
+- [MDN — AudioContext suspended state](https://developer.mozilla.org/en-US/docs/Web/API/AudioContext#suspended_state)
+- [Apple WebKit autoplay policy documentation](https://webkit.org/blog/6784/new-video-policies-for-ios/)
+- [Chrome autoplay policy](https://developer.chrome.com/blog/autoplay/)
+- [Google Web Audio API best practices](https://developer.chrome.com/blog/web-audio-autoplay/)
+- [GitHub Pages documentation](https://docs.github.com/en/pages)
+- [Jest documentation — getting started](https://jestjs.io/docs/getting-started)
+- [Jest — using Babel](https://jestjs.io/docs/getting-started#using-babel)
+- [Node.js modules documentation](https://nodejs.org/api/modules.html)
+- [MDN — JavaScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
+- [Babel documentation](https://babeljs.io/docs/)
+- [MDN — Flexbox](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout)
+- [MDN — CSS Grid Layout](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout)
+- [MDN — grid-template-columns](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns)
+- [AnimalSounds repo](https://github.com/bradleymatera/AnimalSounds)
+- [CheeseMath-Jest-Tests repo](https://github.com/bradleymatera/CheeseMath-Jest-Tests)
+- [EthicsFrontEndDemo repo](https://github.com/bradleymatera/EthicsFrontEndDemo)

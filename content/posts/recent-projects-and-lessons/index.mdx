@@ -9,15 +9,22 @@ theme: "Process"
 
 I used to write project summaries that listed every feature and called them wins. That felt empty. Now I force myself to write down one concrete thing that broke and how I fixed it. Here are two recent demos and the single lesson each one left me.
 
+### Project overview
+
+| Project | Stack | Lesson | Live demo |
+|---|---|---|---|
+| AnimalSounds | Vanilla JS, Vite, GitHub Actions | Deployment is part of the feature — base paths matter on GitHub Pages | [Live demo](https://bradleymatera.github.io/AnimalSounds/) |
+| TriangleDemo | TypeScript, WebGPU API, WGSL | The pipeline is the program — configure the machine, not the pixels | [Live demo](https://bradleymatera.github.io/TriangleDemo/) |
+
 ## AnimalSounds: the base path bug
 
 - Live demo: [https://bradleymatera.github.io/AnimalSounds/](https://bradleymatera.github.io/AnimalSounds/)
 - Source: [https://github.com/bradleymatera/AnimalSounds](https://github.com/bradleymatera/AnimalSounds)
 - Stack: vanilla JavaScript, Vite, GitHub Actions
 
-I built a simple soundboard. The code worked locally. Then I deployed it to GitHub Pages and every asset 404'd.
+I built a simple soundboard. The code worked locally. Then I deployed it to GitHub Pages ([GitHub Pages documentation](https://docs.github.com/en/pages)) and every asset 404'd.
 
-The browser was asking for `https://bradleymatera.github.io/assets/sound.mp3`, but GitHub Pages had hosted it at `https://bradleymatera.github.io/AnimalSounds/assets/sound.mp3`. I knew about base paths in theory, but I had never had to think about it because Vercel and Netlify usually hide that from you.
+The browser was asking for `https://bradleymatera.github.io/assets/sound.mp3`, but GitHub Pages had hosted it at `https://bradleymatera.github.io/AnimalSounds/assets/sound.mp3`. I knew about base paths in theory, but I had never had to think about it because Vercel and Netlify usually hide that from you. Vite's `base` option controls the public path prefix for all assets ([Vite documentation: `base` option](https://vitejs.dev/guide/build.html#public-base-path)).
 
 The fix was in `vite.config.js`:
 
@@ -30,7 +37,16 @@ export default defineConfig(({ mode }) => ({
 }))
 ```
 
-That is the whole thing. I also made sure the GitHub Actions workflow set `NODE_ENV=production` so the build picked up the right branch.
+That is the whole thing. I also made sure the GitHub Actions workflow set `NODE_ENV=production` so the build picked up the right branch. GitHub Actions ([GitHub Actions documentation](https://docs.github.com/en/actions)) runs CI/CD pipelines in isolated runners and can set environment variables per job.
+
+Here is the debugging process I followed for this bug:
+
+1. **Deployed to GitHub Pages** — Code worked locally, but every asset returned 404.
+2. **Compared URLs** — Checked the browser's requested URL vs the actual hosted URL on GitHub Pages.
+3. **Identified the base path mismatch** — GitHub Pages serves project repos under `/repo-name/`, not `/`.
+4. **Set `base` in `vite.config.js`** — Conditionally set the base path for production builds only.
+5. **Set `NODE_ENV=production` in GitHub Actions** — Ensured the build picked up the correct branch of the config.
+6. **Redeployed and verified** — Assets loaded correctly on the live URL.
 
 The lesson I kept: deployment is part of the feature. A demo that only runs locally is not finished.
 
@@ -43,7 +59,19 @@ The lesson I kept: deployment is part of the feature. A demo that only runs loca
 - Source: [https://github.com/bradleymatera/TriangleDemo](https://github.com/bradleymatera/TriangleDemo)
 - Stack: TypeScript, WebGPU API, WGSL
 
-Drawing a triangle in the 2D canvas API is three lines of code. In WebGPU it took me about 150 lines of boilerplate just to get a red triangle on screen. That is not a complaint. It is the point.
+Drawing a triangle in the 2D canvas API is three lines of code. In WebGPU it took me about 150 lines of boilerplate just to get a red triangle on screen. That is not a complaint. It is the point. WebGPU is a modern graphics API that exposes GPU compute and rendering to the web ([WebGPU specification](https://www.w3.org/TR/webgpu/), [MDN: WebGPU API](https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API)).
+
+### 2D Canvas vs WebGPU comparison
+
+| Aspect | 2D Canvas API | WebGPU API |
+|---|---|---|
+| Lines of code for a triangle | ~3 | ~150 |
+| Abstraction level | High-level drawing commands | Low-level GPU pipeline configuration |
+| Shader language | None (built-in drawing) | WGSL ([WGSL specification](https://www.w3.org/TR/WGSL/)) |
+| State management | Implicit (canvas handles it) | Explicit (you configure every stage) |
+| Performance | Fine for simple 2D | Designed for high-performance rendering and compute |
+| Learning curve | Low | High — must understand GPU pipeline model |
+| Browser support | Universal | Modern browsers only ([Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API#browser_compatibility)) |
 
 WebGPU makes you configure the pipeline explicitly:
 
@@ -53,7 +81,7 @@ WebGPU makes you configure the pipeline explicitly:
 4. Create a render pipeline with vertex and fragment shaders.
 5. Encode a command to draw.
 
-The shader language, WGSL, is stricter than GLSL. One wrong type and the GPU validation layer throws an error that looks like a crash. I spent an hour debugging a `vec2` passed where a `vec4` was expected. It was a single line.
+The shader language, WGSL, is stricter than GLSL. One wrong type and the GPU validation layer throws an error that looks like a crash. I spent an hour debugging a `vec2` passed where a `vec4` was expected. It was a single line. WGSL is WebGPU's shader language, designed to be safer and more explicit than GLSL ([WGSL specification](https://www.w3.org/TR/WGSL/)).
 
 The lesson I kept: in modern graphics programming, you are not drawing shapes. You are configuring a machine that draws shapes. The mental model is pipeline first, pixels second.
 
@@ -65,3 +93,13 @@ The lesson I kept: in modern graphics programming, you are not drawing shapes. Y
 Each project now gets one sentence: what it taught me. AnimalSounds is my reference for Vite base paths on GitHub Pages. TriangleDemo is my reference for WebGPU device initialization. When I hit the same problem again, I do not start from zero. I start from the note.
 
 If you are building a portfolio, you do not need more features. You need more notes about what broke.
+
+## References
+
+- [Vite documentation: `base` option](https://vitejs.dev/guide/build.html#public-base-path) — How to set the public base path for asset URLs in Vite builds.
+- [GitHub Pages documentation](https://docs.github.com/en/pages) — Official guide to hosting static sites on GitHub Pages, including project-page URL structure.
+- [GitHub Actions documentation](https://docs.github.com/en/actions) — CI/CD pipeline documentation for GitHub repositories.
+- [WebGPU specification (W3C)](https://www.w3.org/TR/webgpu/) — The official WebGPU API specification.
+- [MDN: WebGPU API](https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API) — Mozilla Developer Network reference for the WebGPU API.
+- [WGSL specification (W3C)](https://www.w3.org/TR/WGSL/) — The WebGPU Shading Language specification.
+- [MDN: WebGPU browser compatibility](https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API#browser_compatibility) — Current browser support table for WebGPU.

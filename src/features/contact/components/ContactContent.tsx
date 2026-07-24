@@ -12,14 +12,12 @@ const ContactContent = () => (
       }
       description={
         <>
-          <p>
-            The fastest way to reach Bradley Matera is through the contact form on this page or by emailing bradmatera@gmail.com. Typical response time is within 24-48 hours for project inquiries.
+          <h2 style={{ fontSize: "1.25rem", margin: "0 0 0.5rem" }}>How do I contact Bradley Matera?</h2>
+          <p className="direct-answer">
+            The fastest way to reach Bradley Matera is through the contact form on this page or by emailing bradmatera@gmail.com. Typical response time is within 24-48 hours for project inquiries. You can also call (608) 313-5373. Bradley is open to remote work and local projects in Durand, Davis, Rockford, Freeport, and nearby Northwest Illinois communities.
           </p>
           <p>
             <strong>Send the essentials up front</strong> - the problem, desired outcomes, and any constraints - and I will reply within one business day with the next steps.
-          </p>
-          <p>
-            I am open to remote work and to projects in Durand, Davis, Rockford, Freeport, and nearby Northwest Illinois communities.
           </p>
           <p>
             <strong>Phone:</strong> <a href="tel:+16083135373">(608) 313-5373</a><br />
@@ -62,6 +60,27 @@ const ContactContent = () => (
           </p>
         </div>
       </Card>
+    </Section>
+
+    <Section
+      eyebrow="Contact methods"
+      title="Which contact method is right for you?"
+    >
+      <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.9rem" }}>
+        <thead>
+          <tr>
+            <th style={{ textAlign: "left", padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Method</th>
+            <th style={{ textAlign: "left", padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Best for</th>
+            <th style={{ textAlign: "left", padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Response time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Email</td><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Project inquiries, detailed scope</td><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Within 24 hours</td></tr>
+          <tr><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Phone</td><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Quick questions, urgent issues</td><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Same day (leave message)</td></tr>
+          <tr><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>LinkedIn</td><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Professional networking, referrals</td><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>1-2 days</td></tr>
+          <tr><td style={{ padding: "0.5rem" }}>GitHub</td><td style={{ padding: "0.5rem" }}>Code review, open-source collaboration</td><td style={{ padding: "0.5rem" }}>1-3 days</td></tr>
+        </tbody>
+      </table>
     </Section>
 
     <Section

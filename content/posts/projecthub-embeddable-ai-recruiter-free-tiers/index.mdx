@@ -13,7 +13,7 @@ I built a chat widget for my portfolio. One script tag, drop it on a page, and r
 <script src="https://bradleymatera.github.io/ProjectHub/ProjectHub.js"></script>
 ```
 
-That's the whole pitch from the outside. What it took to get there is a lot messier than one script tag suggests. The current version has a vanilla JS frontend, a Node backend on a Google Cloud e2-micro VM, a knowledge base pulled from GitHub, a network of free LLM providers, a response cache, per-tab memory, safety checks, a self-improvement loop, and an analytics dashboard. It also has six test suites and more documentation than I expected.
+That's the whole pitch from the outside. What it took to get there is a lot messier than one script tag suggests. The current version has a vanilla JS frontend, a Node backend on a Google Cloud e2-micro VM ([GCP Always Free tier](https://cloud.google.com/free)), a knowledge base pulled from GitHub, a network of free LLM providers, a response cache, per-tab memory, safety checks, a self-improvement loop, and an analytics dashboard. It also has six test suites and more documentation than I expected.
 
 The one rule I kept coming back to: it had to stay useful without me paying for AI traffic.
 
@@ -39,11 +39,22 @@ flowchart TD
     C --> G[GitHub knowledge sync and Think Mode]
 ```
 
-Frontend is GitHub Pages. Backend is a tiny GCP VM. Knowledge is a JSON file in the repo. The important part is that if every AI provider fails, Scout still has a real answer from the knowledge base. The fallback isn't a sorry message. It actually works.
+Frontend is GitHub Pages ([GitHub Pages documentation](https://docs.github.com/en/pages)). Backend is a tiny GCP VM. Knowledge is a JSON file in the repo. The important part is that if every AI provider fails, Scout still has a real answer from the knowledge base. The fallback isn't a sorry message. It actually works.
+
+### Architecture layer comparison
+
+| Layer | Technology | Cost | Why this choice |
+|---|---|---|---|
+| Frontend hosting | GitHub Pages | Free | Serves static JS widget with no build step |
+| Backend hosting | GCP e2-micro VM | Free (Always Free tier) | Runs Node.js API with persistent process |
+| Knowledge base | JSON file in GitHub repo | Free | Versioned, no database to maintain |
+| AI providers | Groq, Cloudflare, GitHub Models, Gemini, Grok | Free tiers | Failover network; no single paid dependency |
+| HTTPS | Caddy + Let's Encrypt | Free | Automatic TLS certificate renewal |
+| Analytics | Vite + Carbon Charts | Free | Built assets committed to GitHub Pages |
 
 ## Why vanilla JavaScript
 
-I didn't want to force anyone to install a React component or deal with npm just to embed a chat widget. Some portfolio sites are just static HTML. Some are WordPress. Some are whatever the person already has. If the widget needs a build step, most people won't use it.
+I didn't want to force anyone to install a React component or deal with npm just to embed a chat widget. Some portfolio sites are just static HTML. Some are WordPress. Some are whatever the person already has. If the widget needs a build step, most people won't use it. Vanilla JavaScript runs in every browser without a bundler ([MDN: JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)).
 
 So the whole widget is vanilla JS. I split it into `data.js`, `utils.js`, `logic.js`, and `ui.js` for my own sanity, then concatenate them into one `ProjectHub.js` file for deployment:
 
@@ -65,7 +76,7 @@ On desktop the suggestion chips sit in a horizontal row that scrolls. On mobile 
 
 ## The backend
 
-The production server is in a file called `server-gemini.js`. The name is misleading. It is a leftover from when the backend only used Gemini. Now it supports Groq, Cloudflare Workers AI, GitHub Models, Google Gemini, xAI Grok, and an optional OpenAI-compatible endpoint. The main endpoints are `/`, `/health`, `/api/knowledge-health`, `/api/chat`, and `/api/think`.
+The production server is in a file called `server-gemini.js`. The name is misleading. It is a leftover from when the backend only used Gemini. Now it supports Groq ([Groq API](https://console.groq.com/docs)), Cloudflare Workers AI ([Cloudflare Workers AI docs](https://developers.cloudflare.com/workers-ai/)), GitHub Models ([GitHub Models docs](https://docs.github.com/en/github-models)), Google Gemini ([Gemini API](https://ai.google.dev/gemini-api/docs)), xAI Grok ([xAI API](https://docs.x.ai/)), and an optional OpenAI-compatible endpoint. The main endpoints are `/`, `/health`, `/api/knowledge-health`, `/api/chat`, and `/api/think`.
 
 A chat request looks like this:
 
@@ -116,13 +127,25 @@ The rule is simple: if a fact isn't in there, Scout doesn't present it as a fact
 
 ## Why I didn't just pipe every question to an LLM
 
-Because LLMs hallucinate resume facts. They will confidently say you have production experience you don't have. They will smooth over gaps. They will make you sound more senior than you are. For a recruiter assistant, that is dangerous.
+Because LLMs hallucinate resume facts. They will confidently say you have production experience you don't have. They will smooth over gaps. They will make you sound more senior than you are. For a recruiter assistant, that is dangerous. Research on LLM hallucinations shows that models can fabricate plausible-sounding but incorrect details with high confidence ([Google Research: Hallucinations in LLMs](https://research.google/blog/reducing-hallucinations-in-large-language-models/)).
 
 So the system computes a deterministic answer first. Only open-ended questions that don't need exact facts go to the provider network. Many important questions never touch an LLM at all. That grounded-first approach is what keeps Scout honest.
 
 ## The pipeline
 
-Every message walks through a sequence of checks. Cache first. Then load knowledge. Then safety. Then false-claim checks. Then learned answers. Then a grounded answer. Then the `mustStayGrounded` decision. Then, if it makes sense, the LLM network. Then validation, shaping, follow-ups, and a weak-answer check for Think Mode.
+Every message walks through a sequence of checks. Here is the full pipeline in order:
+
+1. **Cache check** — Return immediately if the same question was recently answered.
+2. **Load knowledge** — Pull the knowledge base JSON into memory.
+3. **Safety checks** — Block prompt injection, secret extraction, XSS, and social engineering.
+4. **False-claim checks** — Reject requests that try to inflate titles or experience.
+5. **Learned answers** — Check if Think Mode already produced a verified answer for this question.
+6. **Grounded answer** — Run through 40+ deterministic handlers for factual questions.
+7. **`mustStayGrounded` decision** — Determine whether the question is safe for LLM generation.
+8. **LLM provider network** — If open-ended, route to free providers with failover.
+9. **Validation** — Clean, check length, strip filler, reject unsupported facts.
+10. **Shaping and follow-ups** — Format the response and generate suggested next questions.
+11. **Weak-answer check** — If the answer was weak, stash it for Think Mode.
 
 Safety checks run before any LLM call. They catch prompt injection attempts, secret extraction, XSS, social engineering, data exfiltration, and requests to reveal internal instructions. There is no reason to burn provider quota deciding whether someone should get my API key.
 
@@ -140,17 +163,35 @@ PROVIDER_ORDER=groq,cloudflare,github,gemini,grok
 
 The router tries each provider until one returns a valid answer. Free APIs are unreliable. They rate-limit, cap daily usage, run out of credits, change models, or just go down. The router tracks each provider independently and skips one if its quota is gone, it's in cooldown, it's disabled, credentials are missing, or a circuit breaker opened because of repeated failures.
 
+### Free LLM provider comparison
+
+| Provider | Free tier limits | Strengths | Weaknesses |
+|---|---|---|---|
+| Groq | Rate-limited requests/day | Extremely fast inference | Strict rate limits; can hit caps quickly |
+| Cloudflare Workers AI | Neurons/day quota | Global edge network | Limited model selection |
+| GitHub Models | Requests/day per model | Easy token auth with GitHub | Rate limits per model; models rotate |
+| Google Gemini | Requests/min and/day | Strong reasoning quality | Free tier quotas can shift |
+| xAI Grok | Limited free credits | Good for open-ended questions | Newest provider; least stable |
+
 Different errors get different cooldowns. A rate limit might mean 60 seconds. A credit or spending-limit error might mean 24 hours. Each provider call has a bounded timeout. The whole chat request has a 15-second budget, so one slow provider can't freeze the pipeline.
 
 ## RAG without a vector database
 
-I didn't add a vector database because the knowledge base is small enough to just include the relevant context directly in the prompt. For each generative request, the server builds a prompt with verified facts, behavior rules, the grounded answer, recent session context, the current question, and strict instructions not to use outside facts or exaggerate.
+I didn't add a vector database because the knowledge base is small enough to just include the relevant context directly in the prompt. For each generative request, the server builds a prompt with verified facts, behavior rules, the grounded answer, recent session context, the current question, and strict instructions not to use outside facts or exaggerate. This is a lightweight form of Retrieval-Augmented Generation (RAG) that skips vector embeddings entirely ([Retrieval-Augmented Generation — original paper](https://arxiv.org/abs/2005.11401)).
 
 The LLM isn't doing research. It's phrasing an answer from supplied information. A vector database would add hosting, indexing, and synchronization overhead that this project does not need.
 
 ## Validating every generated response
 
-A 200 status doesn't mean the answer is good. Every generated response gets cleaned and validated. Preambles come off. Corporate filler gets stripped. Minimum length is checked. Out-of-scope responses get rejected. Unsupported numbers get flagged. False claims get caught. Answers that introduce facts not in the supplied context get rejected.
+A 200 status doesn't mean the answer is good. Every generated response gets cleaned and validated. Here is what the validation layer checks:
+
+- **Preamble removal**: Strip introductory filler like "Sure!" or "Great question."
+- **Corporate filler stripping**: Remove phrases like "leverages cutting-edge technologies."
+- **Minimum length check**: Reject answers that are too short to be useful.
+- **Out-of-scope rejection**: Block responses that wander into topics Scout shouldn't cover.
+- **Unsupported number flagging**: Catch statistics or figures not present in the knowledge base.
+- **False claim detection**: Block any response that inflates titles or experience.
+- **Context-bound fact checking**: Reject answers that introduce facts not in the supplied context.
 
 I have a cleanup function called `removeSlop()` because I got tired of Scout saying things like "Absolutely!" or "Bradley is a dynamic and passionate professional who leverages cutting-edge technologies." That is not how I talk. It also doesn't help a recruiter make a decision. If a provider fails validation, the router tries the next one. If all of them fail, the grounded answer is already waiting.
 
@@ -212,7 +253,7 @@ This means the knowledge base only grows when there is genuine evidence that a n
 
 ## CORS and deployment
 
-The backend uses Express with the `cors` package and validates the `Origin` header manually. Allowed origins come from the `.env` file. I don't add CORS headers in Caddy because duplicating them can cause browsers to reject the response. For rejected origins, the server returns the response without CORS permission, so the browser blocks it.
+The backend uses Express ([Express.js documentation](https://expressjs.com/)) with the `cors` package and validates the `Origin` header manually. Allowed origins come from the `.env` file. I don't add CORS headers in Caddy ([Caddy documentation](https://caddyserver.com/docs/)) because duplicating them can cause browsers to reject the response. For rejected origins, the server returns the response without CORS permission, so the browser blocks it ([MDN: CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)).
 
 Frontend deployment is just pushing to GitHub. The widget gets rebuilt with `cat data.js utils.js logic.js ui.js > ProjectHub.js`, committed, and pushed to master. GitHub Pages handles the rest. For cache testing I add a query string like `?v=2`.
 
@@ -249,7 +290,7 @@ npm run judge-poc
 
 ## The analytics dashboard
 
-The analytics section is the only part of the project that uses a build step. It runs on Vite with Carbon Charts, Carbon Web Components, and Carbon Styles. Source files are `analytics/main.js` and `analytics/style.css`, and the production bundle lives in `analytics/dist/`. Those built assets are committed so GitHub Pages can serve them. I keep the build toolchain up to date; a recent dependency upgrade moved Vite to 8.1.4 and cleared the active `npm audit` advisories.
+The analytics section is the only part of the project that uses a build step. It runs on Vite ([Vite documentation](https://vitejs.dev/guide/)) with Carbon Charts ([Carbon Charts](https://carbondesignsystem.com/data-visualization/charts/)), Carbon Web Components, and Carbon Styles. Source files are `analytics/main.js` and `analytics/style.css`, and the production bundle lives in `analytics/dist/`. Those built assets are committed so GitHub Pages can serve them. I keep the build toolchain up to date; a recent dependency upgrade moved Vite to 8.1.4 and cleared the active `npm audit` advisories.
 
 The dashboard pulls from Scout's `/health` endpoint, the GitHub repository API, and the GitHub contributors API. It shows API status, uptime, total requests, grounded versus generated replies, cache usage, learned-answer usage, provider success rates, provider latency, cooldown states, daily quota usage, recent pipelines, referrers, topic breakdowns, requests by hour, knowledge gaps, recent sessions, Think Mode status, and repo stats.
 
@@ -275,7 +316,17 @@ This matters because AI agents make bad assumptions. One might see `server-gemin
 
 ## What keeps it free
 
-GitHub Pages hosts the frontend. The backend runs on an Always Free eligible GCP VM. Caddy and Let's Encrypt handle HTTPS. The knowledge base is in GitHub. Runtime stats are small local JSON files. The AI layer uses free provider tiers. There is no hosted database, no paid serverless functions, and no permanent OpenAI or Anthropic dependency.
+GitHub Pages hosts the frontend. The backend runs on an Always Free eligible GCP VM ([GCP Always Free tier](https://cloud.google.com/free)). Caddy ([Caddy](https://caddyserver.com/)) and Let's Encrypt ([Let's Encrypt](https://letsencrypt.org/)) handle HTTPS. The knowledge base is in GitHub. Runtime stats are small local JSON files. The AI layer uses free provider tiers. There is no hosted database, no paid serverless functions, and no permanent OpenAI or Anthropic dependency.
+
+Here is the full cost breakdown:
+
+- **Frontend hosting**: GitHub Pages — $0
+- **Backend VM**: GCP e2-micro (Always Free tier) — $0
+- **HTTPS certificates**: Let's Encrypt via Caddy — $0
+- **Knowledge base storage**: GitHub repository — $0
+- **AI inference**: Free tiers of Groq, Cloudflare, GitHub Models, Gemini, Grok — $0
+- **Analytics**: Vite + Carbon Charts, built assets on GitHub Pages — $0
+- **Total monthly cost**: $0
 
 The grounded answer system doesn't need an LLM call at all. That means Scout still answers factual recruiter questions even when every external provider is exhausted. I still use budget alerts because free tiers change, and cloud resources should never be assumed free forever.
 
@@ -311,3 +362,22 @@ You can see it live at [ProjectHub and Scout](https://bradleymatera.github.io/Pr
 - [LinkedIn profile — AWS internship and work history](https://www.linkedin.com/in/bradmatera)
 - [AWS Certified AI Practitioner — Credly badge](https://www.credly.com/badges/fcbb3120-f086-4784-9cb5-80daca9fb61a/linked_in_profile)
 - [AWS Certified Solutions Architect Associate — Credly badge](https://www.credly.com/badges/fe12a8a4-dacf-43cb-bfe1-c8c75e20585f/linked_in_profile)
+
+## References
+
+- [GCP Always Free tier](https://cloud.google.com/free) — Google Cloud Platform free tier documentation including e2-micro VM eligibility.
+- [GitHub Pages documentation](https://docs.github.com/en/pages) — Official guide to hosting static sites on GitHub Pages.
+- [GitHub Models documentation](https://docs.github.com/en/github-models) — Free LLM inference through GitHub Models.
+- [Groq API documentation](https://console.groq.com/docs) — Groq cloud API for fast LLM inference.
+- [Cloudflare Workers AI](https://developers.cloudflare.com/workers-ai/) — Cloudflare's edge AI inference platform.
+- [Google Gemini API](https://ai.google.dev/gemini-api/docs) — Official Gemini API documentation.
+- [xAI API documentation](https://docs.x.ai/) — Grok LLM API documentation.
+- [Express.js documentation](https://expressjs.com/) — Node.js web framework used for the backend.
+- [Caddy documentation](https://caddyserver.com/docs/) — Caddy web server with automatic HTTPS.
+- [Let's Encrypt](https://letsencrypt.org/) — Free TLS certificate authority.
+- [MDN: CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) — Cross-Origin Resource Sharing specification.
+- [MDN: JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) — JavaScript language reference.
+- [Vite documentation](https://vitejs.dev/guide/) — Frontend build tool used for the analytics dashboard.
+- [Carbon Charts](https://carbondesignsystem.com/data-visualization/charts/) — IBM Carbon Design System data visualization components.
+- [Retrieval-Augmented Generation paper (Lewis et al., 2020)](https://arxiv.org/abs/2005.11401) — Original RAG research paper.
+- [Google Research: Reducing Hallucinations in LLMs](https://research.google/blog/reducing-hallucinations-in-large-language-models/) — Research on LLM hallucination mitigation.

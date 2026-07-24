@@ -146,13 +146,32 @@ import { TinyDotClusterAccent, TinyTriangleAccent, BlogAccent } from "../../../s
   </div>
 </Section>
 
-<figure className="section-divider" aria-hidden="true">
-  <picture>
-    <source type="image/avif" srcSet="/graphic-section-divider.avif" />
-    <source type="image/webp" srcSet="/graphic-section-divider.webp" />
-    <img src="/graphic-section-divider.png" className="media-img" alt="Decorative section divider graphic" width="1536" height="1024" loading="lazy" decoding="async" />
-  </picture>
-</figure>
+<Section
+  className="section-surface home-snap"
+  eyebrow="At a glance"
+  title="Services and pricing comparison"
+>
+  <div className="section-lead">
+    A quick comparison of what I offer, who it is for, and what it costs. See the <Link to="/pricing/">full pricing page</Link> for details.
+  </div>
+  <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.9rem" }}>
+    <thead>
+      <tr>
+        <th style={{ textAlign: "left", padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Service</th>
+        <th style={{ textAlign: "left", padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Best for</th>
+        <th style={{ textAlign: "left", padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Starting price</th>
+        <th style={{ textAlign: "left", padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Timeline</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Starter website</td><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>New businesses, solo operators</td><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>$447 + $37/mo</td><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>14 days</td></tr>
+      <tr><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Growth website</td><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Established service businesses</td><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>$797 + $67/mo</td><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>3-4 weeks</td></tr>
+      <tr><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Premium website</td><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Full local market domination</td><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>$1,497 + $97/mo</td><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Scoped per project</td></tr>
+      <tr><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Site refresh</td><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>Updating an existing site</td><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>$597</td><td style={{ padding: "0.5rem", borderBottom: "1px solid rgba(128,128,128,0.2)" }}>1-2 weeks</td></tr>
+      <tr><td style={{ padding: "0.5rem" }}>Hourly work</td><td style={{ padding: "0.5rem" }}>Small fixes, maintenance</td><td style={{ padding: "0.5rem" }}>$65/hour</td><td style={{ padding: "0.5rem" }}>As needed</td></tr>
+    </tbody>
+  </table>
+</Section>
 <section className="home-section home-section--featured home-snap reveal-section">
   <header className="section-strip" aria-hidden="true">
     <picture>

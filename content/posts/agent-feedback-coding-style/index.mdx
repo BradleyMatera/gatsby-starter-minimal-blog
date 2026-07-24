@@ -16,6 +16,18 @@ The process only started working when I split the work into two loops:
 
 That separation measurably improved output quality. The builder optimized for implementation speed. The outside reviewer optimized for user-facing quality and clarity. The result was less guesswork and fewer “looks fine on my machine” mistakes.
 
+### Two-agent loop vs. single-agent session
+
+| Aspect | Single-agent session | Two-agent loop (build + review) |
+|---|---|---|
+| Perspective | One viewpoint, anchored to author assumptions | Builder + independent reviewer |
+| Feedback source | Source-level reading | Rendered, page-level observation |
+| Blind spots | Layout and narrative issues often missed | Caught by outside reviewer |
+| Fix specificity | Vague (“improve the page”) | Scoped (“fix overlap in breakpoint X”) |
+| Regression risk | Higher — no external gate | Lower — quality gate before close |
+
+This mirrors the separation of concerns recommended in [Gatsby's testing and build workflow documentation](https://www.gatsbyjs.com/docs/how-to/testing/) and the role-split pattern described in [OpenAI's GPT best practices guide](https://platform.openai.com/docs/guides/prompt-engineering).
+
 ## Why this style works
 
 Most solo development workflows collapse design, implementation, testing, and critique into one person and one perspective. That creates blind spots.
@@ -47,7 +59,7 @@ Outside reviewer agent opens real pages
 GPT coding agent applies fixes + verifies build
 ```
 
-The key is that the reviewer is not reading source first. It reviews rendered output like a user would.
+The key is that the reviewer is not reading source first. It reviews rendered output like a user would. This is the same principle behind [browser-based end-to-end testing](https://www.cypress.io/) tools like Cypress and Playwright, which assert against the rendered DOM rather than source files.
 
 ## The build loop inside the repo
 
@@ -106,7 +118,7 @@ I now require these checks before closing a task:
 - related-post and internal links are present where relevant,
 - dev-only agent tooling stays ignored in git.
 
-This is not enterprise bureaucracy. It is a lightweight release checklist that prevents repeat regressions.
+This is not enterprise bureaucracy. It is a lightweight release checklist that prevents repeat regressions. The practice of gating releases behind a checklist is recommended in [Google's testing documentation](https://testing.googleblog.com/) and aligns with the [Web.dev quality checklist](https://web.dev/learn/forms/validation/).
 
 ## What changed in my output quality
 
@@ -143,10 +155,21 @@ This site is the proof. The workflow described above is exactly how this portfol
 
 - [This site's GitHub repo](https://github.com/BradleyMatera/gatsby-starter-minimal-blog) — 100+ commits, visible build history
 - [Automated test suite](https://github.com/BradleyMatera/gatsby-starter-minimal-blog/blob/master/scripts/verify-site.js) — 234 assertions covering SEO, accessibility, and content
-- [Lighthouse scores](https://bradleymatera.dev) — SEO 100, Accessibility 98, Best Practices 92 (verified on every Netlify deploy)
+- [Lighthouse scores](https://bradleymatera.dev) — SEO 100, Accessibility 98, Best Practices 92 (verified on every Netlify deploy). Lighthouse is Google's open-source auditing tool for web page quality ([Lighthouse documentation](https://developer.chrome.com/docs/lighthouse/overview)).
 
 ## Keep reading
 
 - [How I Learn by Doing: A Repeatable Mini Project Loop](/how-i-learn-by-doing/)
 - [What I Learned From Three Small Projects](/what-i-learned-three-simple-projects/)
 - [Designing Systems That Actually Ship: A Small Template](/designing-systems-that-actually-ship/)
+
+## References
+
+- [Gatsby testing and build workflow documentation](https://www.gatsbyjs.com/docs/how-to/testing/)
+- [OpenAI GPT best practices and prompt engineering guide](https://platform.openai.com/docs/guides/prompt-engineering)
+- [Cypress — browser-based end-to-end testing](https://www.cypress.io/)
+- [Google Testing Blog — release quality practices](https://testing.googleblog.com/)
+- [web.dev — quality and validation checklist](https://web.dev/learn/forms/validation/)
+- [Google Lighthouse documentation](https://developer.chrome.com/docs/lighthouse/overview)
+- [Netlify deployment and continuous integration docs](https://docs.netlify.com/)
+- [This site's GitHub repo](https://github.com/BradleyMatera/gatsby-starter-minimal-blog)

@@ -9,6 +9,13 @@ theme: "Graphics"
 
 A demo is only as honest as its write up. WebGPU is especially easy to oversell (See the [WebGPU specification](https://www.w3.org/TR/webgpu/) and [Chrome's WebGPU documentation](https://developer.chrome.com/docs/web-platform/webgpu/).) because most people reading a post cannot tell what is "one triangle" versus "real engine-ish work" unless you show them exactly where it lives in code. If you want the post to be credible, every claim needs a file path you can point at and a proof link that still works when someone clicks it six months later.
 
+### What this audit fixes
+
+- **Unverifiable claims** — sentences that describe behavior not present in the repo get cut or rewritten.
+- **Broken proof links** — every URL in the post is opened and confirmed to resolve.
+- **Future work disguised as features** — plans are moved into a clearly labeled "Next experiments" section.
+- **Missing file references** — each feature sentence gets a deep link to the implementing file.
+
 This post is the audit process I use to make the write up match the repo. It is not about polishing the prose. It is about deleting anything that is not visible in code, labeling future work like future work, and fixing links so a reader can verify everything without guessing.
 
 ![Reality check](https://media.giphy.com/media/gZfHAM1ucPQ2c/giphy.gif)
@@ -34,7 +41,7 @@ The audit has only three objects:
 
 You need the demo repo open somewhere you can search it, and you need this blog file open in your editor. If you can, open the demo running locally too, because “it compiles” and “it renders” are not the same thing in WebGPU.
 
-If you are auditing a repo on GitHub (For example, [my TriangleDemo repo](https://github.com/BradleyMatera/TriangleDemo) — a WebGPU lab with 16 lessons that I audited using this exact process.), the fastest proof links are deep links to a file and (when possible) a specific line range. If you are auditing locally, the fastest proof is a search command that lands you on the exact implementation.
+If you are auditing a repo on GitHub (For example, [my TriangleDemo repo](https://github.com/BradleyMatera/TriangleDemo) — a WebGPU lab with 16 lessons that I audited using this exact process.), the fastest proof links are deep links to a file and (when possible) a specific line range ([GitHub docs — creating a permanent link to a file](https://docs.github.com/en/repositories/working-with-files/using-files/getting-permanent-links-to-files)). If you are auditing locally, the fastest proof is a search command that lands you on the exact implementation.
 
 ![Digging through code](https://media.giphy.com/media/3o7aD9hC6GgT3KfX2k/giphy.gif)
 
@@ -44,7 +51,18 @@ If you are auditing a repo on GitHub (For example, [my TriangleDemo repo](https:
 
 Do not start by reading the blog post. Start by grounding yourself in the actual code. If you start from the blog, you will subconsciously try to justify it. If you start from the repo, you will naturally write smaller, more accurate claims.
 
-Open the README and the actual entry file that boots WebGPU. For a tiny demo, that is usually `index.html` and one JavaScript or TypeScript file, or a `main.ts` that sets up the device, pipeline, and render loop. Your goal is not to describe how WebGPU works. Your goal is to list what exists in this repo right now.
+Open the README and the actual entry file that boots WebGPU. For a tiny demo, that is usually `index.html` and one JavaScript or TypeScript file, or a `main.ts` that sets up the device, pipeline, and render loop ([WebGPU API — MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API)). Your goal is not to describe how WebGPU works. Your goal is to list what exists in this repo right now.
+
+The core WebGPU boot sequence you are looking for in code:
+
+1. `navigator.gpu.requestAdapter()` — request a physical GPU adapter.
+2. `adapter.requestDevice()` — get a logical device from the adapter.
+3. `context.configure()` — configure the canvas context with the device.
+4. `device.createRenderPipeline()` — define the vertex + fragment pipeline.
+5. `device.createShaderModule()` — supply WGSL shader source.
+6. `requestAnimationFrame()` — drive the render loop and submit command buffers.
+
+If any of these are missing, the demo is not a complete render loop and the write up should not claim it is.
 
 Create a scratch list in plain text. Keep it short. Each item must correspond to something you can point at.
 
@@ -82,6 +100,15 @@ The verification for this step is simple. For every bullet in your scratch list,
 Now switch to the blog post and treat it like a checklist of statements that need receipts. Every sentence that implies behavior is a claim, even if it is phrased casually. “This demo supports…” is a claim. “This project includes…” is a claim. “I wired up…” is a claim.
 
 Instead of rewriting immediately, copy the claims into a separate scratch section so you can compare them cleanly. If you want to do this fast, search your post for verbs like “renders,” “supports,” “handles,” “implements,” “adds,” and “includes.” Those words are almost always where mismatches hide.
+
+Common claim verbs to search for:
+
+- "renders" — implies a visible draw call
+- "supports" — implies a feature is implemented and working
+- "handles" — implies an event or edge case is managed
+- "implements" — implies code exists for a specific behavior
+- "includes" — implies a file, module, or asset is present
+- "optimizes" — implies a measurable performance improvement
 
 ### Step 3: Map each claim to a proof link, or kill it
 
@@ -150,7 +177,16 @@ The most common mistake is writing about a thing you did once on your machine an
 
 The second most common mistake is mixing future work into present tense. If you want to talk about what you plan to build, do it, but quarantine it. The reader should never have to guess what exists.
 
-The third mistake is claiming performance wins without proof. If you want to talk performance, you need a repeatable measurement, even if it is rough. Without that, it is just vibes and nobody should trust it.
+The third mistake is claiming performance wins without proof. If you want to talk performance, you need a repeatable measurement, even if it is rough. Without that, it is just vibes and nobody should trust it. The [Chrome DevTools Performance panel](https://developer.chrome.com/docs/devtools/performance/) and the [`performance` API](https://developer.mozilla.org/en-US/docs/Web/API/Performance) are the simplest ways to capture frame timings for a WebGPU demo.
+
+### Common WebGPU write-up mistakes
+
+| Mistake | Why it looks fake | How to fix it |
+|---|---|---|
+| Claiming uncommitted local hacks as features | The code is not in the repo, so no one can verify | Commit the code or cut the claim |
+| Mixing future work into present tense | Reader cannot tell what exists vs. what is planned | Move plans to a labeled "Next experiments" section |
+| Performance claims without measurement | No benchmark, log, or report to back up the number | Add a repeatable timing script or remove the claim |
+| Vague feature descriptions ("real engine") | No file path or function to point at | Rewrite as the smallest true sentence with a proof link |
 
 {/* visual-break:making-triangle-webgpu-demo-match-reality:2 */}
 ![Graphics systems checkpoint illustration for this section.](/assets/visuals/blog/making-triangle-webgpu-demo-match-reality-break-2.png)
@@ -166,3 +202,13 @@ If you follow that rule, your WebGPU post becomes something you can stand behind
 - [WebGPU Triangle Demo: Start, Fix, and Keep It Honest](/webgpu-getting-started/)
 - [Rebuilding a WebGPU Triangle Demo: A Clean Fix Pass](/rebuilt-webgpu-triangle-demo/)
 - [Service Worker Held My Site Hostage: How I Removed It](/service-worker-held-site-hostage/)
+
+## References
+
+- [WebGPU specification (W3C)](https://www.w3.org/TR/webgpu/)
+- [Chrome WebGPU documentation](https://developer.chrome.com/docs/web-platform/webgpu/)
+- [MDN — WebGPU API](https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API)
+- [GitHub docs — creating a permanent link to a file](https://docs.github.com/en/repositories/working-with-files/using-files/getting-permanent-links-to-files)
+- [Chrome DevTools Performance panel](https://developer.chrome.com/docs/devtools/performance/)
+- [MDN — Performance API](https://developer.mozilla.org/en-US/docs/Web/API/Performance)
+- [TriangleDemo repo (WebGPU lab, 16 lessons)](https://github.com/BradleyMatera/TriangleDemo)

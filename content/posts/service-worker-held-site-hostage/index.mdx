@@ -7,13 +7,13 @@ description: "Exact steps to find a stuck service worker that refuses to let you
 theme: "Debugging"
 ---
 
-How a single cached file made my entire GitHub Pages site refuse to update, why it happened, and exactly how to fix it if it ever happens to you.
+How a single cached file made my entire GitHub Pages site refuse to update, why it happened, and exactly how to fix it if it ever happens to you. Service workers are a browser API designed for offline-first web apps ([MDN: Service Worker API](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)), but when left unmanaged they can serve stale content indefinitely.
 
 ## What actually happened
 
-My GitHub Pages frontend absolutely refused to update after a full rebuild. I deleted the old code, pushed a new Next.js build, cleaned every folder, checked the deploy logs, and refreshed the live site a hundred times. The same old UI kept loading. Same filters button. Same old DOM. It looked like my deploy did not even run.
+My GitHub Pages frontend absolutely refused to update after a full rebuild. I deleted the old code, pushed a new Next.js build, cleaned every folder, checked the deploy logs, and refreshed the live site a hundred times. The same old UI kept loading. Same filters button. Same old DOM. It looked like my deploy did not even run. GitHub Pages serves static content directly from a repository branch ([GitHub Pages documentation](https://docs.github.com/en/pages)), so a clean deploy should mean a clean site.
 
-GitHub Actions passed every time. The artifact had the correct static export. My repo was clean. My build folder was clean. I even ran `grep` across the entire project looking for any leftover UI code and found nothing.
+GitHub Actions passed every time. The artifact had the correct static export. My repo was clean. My build folder was clean. I even ran `grep` across the entire project looking for any leftover UI code and found nothing. GitHub Actions workflows run in isolated runners and produce artifacts you can inspect ([GitHub Actions documentation](https://docs.github.com/en/actions)), so I could confirm the build output was correct.
 
 Then I hit the live URL with `curl` and it returned the correct new markup. But the browser still showed the old one. So at that point the server and the browser disagreed. When that happens, something in the middle is lying to you.
 
@@ -24,9 +24,11 @@ And that something was a service worker I did not even know existed.
 
 ## What the actual root problem was
 
-A stale service worker was still registered in the browser from an earlier version of the site. I did not write the service worker myself. AI generated it once, and I never questioned it. I did not know what “sw.js” even meant at the time.
+A stale service worker was still registered in the browser from an earlier version of the site. I did not write the service worker myself. AI generated it once, and I never questioned it. I did not know what "sw.js" even meant at the time.
 
-A service worker sits between the browser and the network. It can intercept requests and decide what to return. My service worker had cached the old version of the site and never let go of it. So even though the server was sending the new version, the browser ignored it.
+A service worker sits between the browser and the network. It can intercept requests and decide what to return ([MDN: Using Service Workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers)). My service worker had cached the old version of the site and never let go of it. So even though the server was sending the new version, the browser ignored it.
+
+Service workers have a lifecycle with distinct phases — registration, installation, activation, and termination ([MDN: Service Worker Lifecycle](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Life_cycle)). The key problem is that an activated service worker persists across browser sessions and continues intercepting requests even after you navigate away and come back. Unless you explicitly unregister it or the service worker code itself calls `self.skipWaiting()` combined with a cache-busting strategy, the old cached content wins every time.
 
 The browser trusted the service worker more than the server.
 
@@ -40,7 +42,7 @@ This is the exact kind of bug that does not feel logical until you understand ho
 Here is the fix that instantly solved it:
 
 1. Open your site in Chrome.
-2. Open DevTools with `Ctrl + Shift + I` or `Cmd + Option + I`.
+2. Open DevTools with `Ctrl + Shift + I` or `Cmd + Option + I` ([Chrome DevTools documentation](https://developer.chrome.com/docs/devtools)).
 3. Go to the **Application** tab.
 4. Click **Service Workers** on the left.
 5. You will see one or more registered service workers. Look for anything like `sw.js` or `service-worker.js`, or anything showing “activated.”
@@ -48,6 +50,16 @@ Here is the fix that instantly solved it:
 7. Refresh the page.
 
 If the service worker was the problem, the new version of the site will load instantly. No delay. No waiting. It is one of the most dramatic “instant fix” moments you can have in web development.
+
+### Comparison of debugging methods
+
+When your site refuses to update, there are three fast ways to narrow down the cause. Here is how they compare:
+
+| Method | What it checks | Speed | What a positive result means |
+|---|---|---|---|
+| `curl` the live URL | Server-side HTML output | Seconds | If curl shows new HTML but the browser does not, the problem is client-side caching |
+| Open in Incognito | Fresh browser session with no service workers | Seconds | If Incognito shows the new version, a service worker or cache is the culprit |
+| DevTools Application tab | Registered service workers and cache storage | Seconds | Directly confirms whether a stale service worker is registered and active |
 
 This is the exact moment it hit me that the entire issue was not my code or GitHub Pages. It was a cached worker from a build that did not exist anymore.
 
@@ -63,7 +75,7 @@ Run this in your terminal:
 curl -sL https://your-site.github.io | head
 ```
 
-If the HTML here is newer than what your browser is showing, your browser is being lied to.
+`curl` fetches the raw HTML from the server without any browser caching or service worker interference ([curl documentation](https://curl.se/docs/manpage.html)). If the HTML here is newer than what your browser is showing, your browser is being lied to.
 
 ### 2. Open your site in Incognito
 
@@ -75,9 +87,9 @@ Look for an active service worker. If you see one and you did not explicitly wri
 
 ## Why this problem happens to many developers
 
-Service workers are extremely powerful. They allow offline support, caching, background syncing, and more. But the downside is that they aggressively hold onto cached files. This is on purpose. They are designed to keep apps working even if the network dies.
+Service workers are extremely powerful. They allow offline support, caching, background syncing, and more ([MDN: Service Worker API](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)). But the downside is that they aggressively hold onto cached files. This is on purpose. They are designed to keep apps working even if the network dies.
 
-The problem is that GitHub Pages does not know anything about your service worker. So even after a fresh deploy, the browser can still keep serving old files because the worker is literally intercepting every request.
+The problem is that GitHub Pages does not know anything about your service worker. So even after a fresh deploy, the browser can still keep serving old files because the worker is literally intercepting every request. GitHub Pages is a static hosting service ([GitHub Pages documentation](https://docs.github.com/en/pages)) and has no way to invalidate browser-side service worker caches.
 
 This is why so many people complain that their GitHub Pages site does not update after a deploy. The deploy is fine. The browser is not.
 
@@ -91,11 +103,13 @@ Service workers can hold a website hostage if you are not careful.
 
 Since hitting this issue, here is what I changed in my workflow:
 
-- I never generate a service worker unless I know why I need it.
+- I never generate a service worker unless I know why I need it. Service workers should be added deliberately, not auto-generated ([MDN: Service Worker Lifecycle](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Life_cycle)).
 - I always check DevTools when a deploy looks stuck.
 - I test live sites in Incognito to avoid cache issues.
 - I keep build processes simple until I fully understand what is happening.
 - I clean out all AI-generated files before deploying anything.
+- I add a cache-busting version query string (e.g. `?v=2`) to script tags when testing updates.
+- I verify deploys with `curl` before trusting the browser view.
 
 Caching bugs like this are sneaky and they waste time, but once you see how they work, they are easy to avoid.
 
@@ -110,3 +124,13 @@ This bug taught me more about how the browser actually works than almost anythin
 - [Gatsby Nav Bar Haunted: Fixing a Stuck Dropdown](/gatsby-nav-bar-haunted/)
 - [Interactive Portfolio Basics: Keep It Fun and Still Clear](/interactive-portfolios-recruiter-expectations/)
 - [GitHub Pages Deployments That Stop Being Confusing](/github-pages-deployments-confusing/)
+
+## References
+
+- [MDN: Service Worker API](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) — Official documentation on the Service Worker API.
+- [MDN: Using Service Workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers) — Guide to registering and using service workers.
+- [MDN: Service Worker Lifecycle](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Life_cycle) — The registration, installation, activation, and termination lifecycle.
+- [Chrome DevTools documentation](https://developer.chrome.com/docs/devtools) — Official guide to Chrome DevTools including the Application tab.
+- [GitHub Pages documentation](https://docs.github.com/en/pages) — Official GitHub Pages hosting guide.
+- [GitHub Actions documentation](https://docs.github.com/en/actions) — Official documentation for CI/CD workflows on GitHub.
+- [curl documentation](https://curl.se/docs/manpage.html) — Manual for the curl command-line tool.

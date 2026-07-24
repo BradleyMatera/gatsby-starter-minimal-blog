@@ -7,40 +7,72 @@ description: "A minimal AWS Cognito and React authentication setup without pre-b
 theme: "Cloud"
 ---
 
-Authentication is not magic. It is configuration, tokens, and clear verification checks. This is the minimal Cognito plus React setup I run when I need to understand the flow.
+Authentication is not magic. It is configuration, tokens, and clear verification checks. This is the minimal [AWS Cognito](https://docs.aws.amazon.com/cognito/) plus [React](https://react.dev) setup I run when I need to understand the flow.
 
-It avoids pre-built Amplify UI components so I can see exactly what is happening.
+It avoids pre-built [Amplify UI](https://ui.docs.amplify.aws/) components so I can see exactly what is happening.
+
+The key pieces this setup covers:
+
+- **User pool configuration** with email sign-in and no client secret.
+- **App client creation** so your React frontend can authenticate against the pool.
+- **Amplify wiring** to connect the React app to Cognito using your User Pool ID and Client ID.
+- **Token verification** to confirm the ID token (a [JWT](https://jwt.io/introduction)) is returned correctly after sign-in.
 
 ## How do I set up AWS Cognito authentication with React?
 
-To set up Cognito authentication with React, create a user pool in the AWS Console with email sign-in and no client secret, create a test user and app client, then install aws-amplify in your React app. Configure Amplify with your User Pool ID and Client ID in an aws-exports file, and wire it into your main entry point. Verify the config before adding UI.
+To set up Cognito authentication with React, create a user pool in the [AWS Console](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html) with email sign-in and no client secret, create a test user and app client, then install [aws-amplify](https://docs.amplify.aws/) in your React app. Configure Amplify with your User Pool ID and Client ID in an aws-exports file, and wire it into your main entry point. Verify the config before adding UI.
+
+Here is the end-to-end flow at a glance:
+
+1. Create a Cognito user pool with email sign-in and no client secret.
+2. Create a test user and copy the App Client ID.
+3. Scaffold a React app with Vite and install `aws-amplify`.
+4. Configure Amplify with your User Pool ID and Client ID.
+5. Verify the config loads without console errors.
+6. Add a sign-in form that calls `Amplify.signIn` and inspect the returned ID token.
 
 ## Do I need a client secret for Cognito with a browser app?
 
-No, you should uncheck the client secret option when creating a Cognito app client for a browser-based React app. Browser apps cannot keep secrets because everything in client-side JavaScript is visible to users. If you accidentally generate a client secret, create a new app client without one. This is one of the most common mistakes when configuring Cognito for frontend apps.
+No, you should uncheck the client secret option when creating a Cognito app client for a browser-based React app. Browser apps cannot keep secrets because everything in client-side JavaScript is visible to users. If you accidentally generate a client secret, create a new app client without one. This is one of the most common mistakes when configuring Cognito for frontend apps. See the [Cognito app client documentation](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-client-apps.html) for details on client secret behavior.
 
 ## What are the common mistakes when configuring Cognito with React?
 
 The most common Cognito mistakes are forgetting to uncheck the client secret, using the wrong region in the User Pool ID, and skipping the test user to build sign-up first. Always create a user manually, verify that login works end to end, then add registration. Also confirm your Amplify config loads without console errors before building any sign-in UI on top of it.
 
+A quick checklist to avoid these mistakes:
+
+- [ ] Client secret is **unchecked** when creating the app client.
+- [ ] Region in the User Pool ID matches the region in your Amplify config.
+- [ ] A test user is created and login is verified before building sign-up.
+- [ ] `Amplify.configure` runs with no console errors before adding UI.
+
 ## The moving parts
 
-- **User pool:** the directory of users.
-- **App client:** the public interface that lets your frontend talk to the pool.
-- **ID token:** a JWT containing claims about the authenticated user.
-- **Amplify Auth:** the client library that manages sign-in and token storage.
+- **User pool:** the directory of users. ([Cognito user pools docs](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html))
+- **App client:** the public interface that lets your frontend talk to the pool. ([App client docs](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-client-apps.html))
+- **ID token:** a [JWT](https://jwt.io/introduction) containing claims about the authenticated user. ([ID token docs](https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-the-id-token.html))
+- **Amplify Auth:** the client library that manages sign-in and token storage. ([Amplify Auth docs](https://docs.amplify.aws/lib/auth/getting-started/))
+
+### Cognito component comparison
+
+| Component | Purpose | Where it lives | Who manages it |
+|-----------|---------|---------------|----------------|
+| User pool | Stores user accounts and credentials | AWS region | You (via AWS Console or IaC) |
+| App client | Identifies your frontend app to the pool | Inside the user pool | You |
+| ID token | Carries user identity claims to your app | Returned to the browser after sign-in | Cognito issues it; your app consumes it |
+| Amplify Auth | Handles sign-in calls and token storage | Client-side (npm package) | You (via npm) |
 
 {/* visual-break:secure-authentication-cognito-react:1 */}
 ![Cloud architecture checkpoint illustration for this section.](/assets/visuals/blog/secure-authentication-cognito-react-break-1.png)
 
 ## Step 1: create the user pool
 
-In the AWS Console, go to Amazon Cognito and create a user pool:
+In the [AWS Console](https://console.aws.amazon.com/cognito/), go to Amazon Cognito and create a user pool:
 
 1. Select **Email** as the sign-in option.
-2. Set **No MFA** for the lab. Enable MFA later for real apps.
+2. Set **No MFA** for the lab. Enable MFA later for real apps. ([MFA docs](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-mfa.html))
 3. Leave sign-up defaults.
-4. Select **Send email with Cognito** for message delivery.
+4. Select **Send email with Cognito** for message delivery. ([Email docs](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-message-verification.html))
 5. Name the pool, for example `react-demo-pool`.
 6. **Uncheck** "Generate a client secret." Browser apps cannot keep secrets.
 7. Create the pool.
@@ -57,6 +89,8 @@ Inside the pool:
 You now have a User Pool ID, a Client ID, and a test user.
 
 ## Step 3: create the React app
+
+I use [Vite](https://vitejs.dev/guide/) to scaffold the project because it is fast and requires zero configuration:
 
 ```bash
 npm create vite@latest cognito-demo -- --template react
@@ -90,17 +124,39 @@ import { awsConfig } from './aws-exports';
 Amplify.configure(awsConfig);
 ```
 
-At this point, the app can talk to Cognito. The next step is a sign-in form that calls `Amplify.signIn`. I usually verify the config first by checking the console for errors before adding UI.
+At this point, the app can talk to Cognito. The next step is a sign-in form that calls `Amplify.signIn` ([Amplify signIn docs](https://docs.amplify.aws/lib/auth/signin/)). I usually verify the config first by checking the console for errors before adding UI.
+
+To verify the config is correct:
+
+- Open the browser console after `Amplify.configure` runs.
+- Confirm there are no errors about missing region or invalid User Pool ID.
+- Check that the Amplify version installed matches the v6 config shape shown above. ([Amplify v6 migration guide](https://docs.amplify.aws/react/prev/upgrade-guide/))
 
 {/* visual-break:secure-authentication-cognito-react:2 */}
 ![Cloud operations checkpoint illustration for this section.](/assets/visuals/blog/secure-authentication-cognito-react-break-2.png)
 
 ## Common mistakes I have made
 
-- Forgetting to uncheck the client secret. Browser apps cannot use secrets.
+- Forgetting to uncheck the client secret. Browser apps cannot use secrets. ([Client secret docs](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-client-apps.html))
 - Using the wrong region in the User Pool ID.
 - Skipping the test user and trying to build sign-up first. Create a user manually, verify login works, then add registration.
 
 ## Closing
 
 Cognito is not complicated once you separate the pieces: the pool holds users, the client identifies your app, and Amplify handles the token exchange. Verify each piece before adding the next.
+
+## References
+
+- [AWS Cognito — developer guide](https://docs.aws.amazon.com/cognito/latest/developerguide/what-amazon-cognito.html)
+- [Cognito user pools](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html)
+- [Cognito app clients](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-client-apps.html)
+- [Cognito MFA settings](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-mfa.html)
+- [Cognito email verification](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-message-verification.html)
+- [Cognito ID tokens](https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-the-id-token.html)
+- [AWS Amplify — documentation](https://docs.amplify.aws/)
+- [Amplify Auth signIn](https://docs.amplify.aws/lib/auth/signin/)
+- [Amplify v6 upgrade guide](https://docs.amplify.aws/react/prev/upgrade-guide/)
+- [Amplify UI components](https://ui.docs.amplify.aws/)
+- [React — official documentation](https://react.dev)
+- [Vite — getting started](https://vitejs.dev/guide/)
+- [JWT introduction](https://jwt.io/introduction)

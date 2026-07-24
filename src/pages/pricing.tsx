@@ -60,7 +60,7 @@ const faqs = [
   {
     question: "Why are you cheaper than other agencies?",
     answer:
-      "I'm a one-person operation with no office, no sales team, no overhead. You pay for the actual work, not for a fancy address. Industry surveys (e.g., Clutch's 2024 web design cost survey) report typical agency small-business websites run $3,000–$8,000+. I don't have that payroll.",
+      "I'm a one-person operation with no office, no sales team, no overhead. You pay for the actual work, not for a fancy address. Industry surveys (e.g., Clutch's 2024 web design cost survey — https://clutch.co/web-design/pricing) report typical agency small-business websites run $3,000–$8,000+. I don't have that payroll.",
   },
   {
     question: "Is there a contract?",
