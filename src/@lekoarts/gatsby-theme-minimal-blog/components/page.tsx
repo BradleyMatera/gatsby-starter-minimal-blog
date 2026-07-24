@@ -67,15 +67,15 @@ export const Head: HeadFC<MBPageProps> = ({ data: { page } }) => {
       }),
     },
     "/projects/": {
-      seoTitle: "Web Development Projects and Case Studies in Northwest Illinois",
+      seoTitle: "Web Development Projects and Examples in Northwest Illinois",
       seoDescription:
-        "Case studies, shipped projects, and proof of work from Bradley Matera, a web developer serving Durand, Davis, and nearby Northwest Illinois communities.",
+        "Project write-ups, shipped demos, and proof of work from Bradley Matera, a web developer serving Durand, Davis, and nearby Northwest Illinois communities.",
       breadcrumbs: [{ name: "Home", path: "/" }, { name: "Projects", path: "/projects/" }],
       structuredData: buildProfessionalServiceSchema({
         path: "/projects/",
-        serviceName: "Web development case studies and project examples",
+        serviceName: "Web development project examples and write-ups",
         description:
-          "Project case studies, shipped demos, and proof of work from Bradley Matera for Durand, Davis, and nearby Northwest Illinois communities.",
+          "Project write-ups, shipped demos, and proof of work from Bradley Matera for Durand, Davis, and nearby Northwest Illinois communities.",
       }),
     },
     "/contact/": {
@@ -105,7 +105,7 @@ export const Head: HeadFC<MBPageProps> = ({ data: { page } }) => {
     "/roles/": {
       seoTitle: "Engineering Role Practice: Cloud, DevOps, Backend, Full-Stack, AI",
       seoDescription:
-        "Engineering role practice pages covering cloud, DevOps, backend, full-stack, and AI automation — each with case studies, verified skills, and honest scope notes.",
+        "Engineering role practice pages covering cloud, DevOps, backend, full-stack, and AI automation — each with project examples, verified skills, and honest scope notes.",
       breadcrumbs: [{ name: "Home", path: "/" }, { name: "Roles", path: "/roles/" }],
     },
     "/roles/ai-automation-engineer/": {
@@ -135,7 +135,7 @@ export const Head: HeadFC<MBPageProps> = ({ data: { page } }) => {
     "/roles/full-stack-engineer/": {
       seoTitle: "Full-Stack Engineer | Bradley Matera — Portfolio",
       seoDescription:
-        "Full-stack engineering practice with React front ends, Express APIs, MongoDB, deployment pipelines, and real case studies showing the full stack from UI to database.",
+        "Full-stack engineering practice with React front ends, Express APIs, MongoDB, deployment pipelines, and real project examples showing the full stack from UI to database.",
       breadcrumbs: [{ name: "Home", path: "/" }, { name: "Roles", path: "/roles/" }, { name: "Full-Stack Engineer", path: "/roles/full-stack-engineer/" }],
     },
     "/contributions/": {
@@ -145,9 +145,9 @@ export const Head: HeadFC<MBPageProps> = ({ data: { page } }) => {
       breadcrumbs: [{ name: "Home", path: "/" }, { name: "Contributions", path: "/contributions/" }],
     },
     "/open-source-contributions/": {
-      seoTitle: "Open-Source Contribution Case Studies",
+      seoTitle: "Open-Source Contribution Examples",
       seoDescription:
-        "Case studies and contribution notes covering public GitHub work, pull requests, and collaboration examples from Bradley Matera.",
+        "Contribution notes covering public GitHub work, pull requests, and collaboration examples from Bradley Matera.",
       breadcrumbs: [{ name: "Home", path: "/" }, { name: "Open-Source Contributions", path: "/open-source-contributions/" }],
     },
   }

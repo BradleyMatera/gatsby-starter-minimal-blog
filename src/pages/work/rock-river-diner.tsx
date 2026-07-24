@@ -6,28 +6,34 @@ import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use
 import { Card, Link, Section } from "../../ui";
 
 const pathname = "/work/rock-river-diner/";
-const pageTitle = "Case Study: Rock River Diner Website Rebuild | Bradley Matera";
+const pageTitle = "Example: Restaurant Website Rebuild | Bradley Matera";
 const pageDescription =
-  "How Bradley Matera rebuilt a slow WordPress restaurant website into a fast Gatsby static site. Load time from 8 seconds to 1.5 seconds, 25% increase in online reservations. Mobile-first menu, working reservation form.";
+  "An illustrative example showing the structure and approach for rebuilding a slow WordPress restaurant website into a fast Gatsby static site. Covers mobile-first menus, working reservation forms, and accessibility improvements.";
 
-const CaseStudyPage = () => (
+const ExamplePage = () => (
   <Layout>
     <nav className="breadcrumbs" aria-label="Breadcrumb">
       <ol className="breadcrumbs__list">
         <li className="breadcrumbs__item"><Link to="/">Home</Link></li>
         <li className="breadcrumbs__item"><Link to="/work/">Work</Link></li>
-        <li className="breadcrumbs__item" aria-current="page">Rock River Diner</li>
+        <li className="breadcrumbs__item" aria-current="page">Restaurant example</li>
       </ol>
     </nav>
 
+    <div className="surface-card surface-card--outline" style={{ marginTop: "1.5rem", marginBottom: "1.5rem", borderColor: "var(--color-accent)" }}>
+      <p className="feature-card__body" style={{ margin: 0 }}>
+        <strong>Disclaimer:</strong> This is an illustrative example showing the structure and approach for a restaurant website rebuild. It is not a real client project.
+      </p>
+    </div>
+
     <Section
-      eyebrow="Case study"
+      eyebrow="Example project"
       titleAs="h1"
-      title={<><strong>Rock River Diner</strong> Website Rebuild</>}
+      title={<><strong>Rock River Diner</strong> (illustrative example)</>}
       description={
         <>
           <p className="direct-answer">
-            <strong>What did Bradley do for Rock River Diner?</strong> Rebuilt a slow, broken WordPress restaurant website into a fast Gatsby static site. Load time dropped from 8 seconds to 1.5 seconds. The broken reservation form was replaced with a working one. Online reservations increased 25% in the first 2 months after launch.
+            <strong>What does this example show?</strong> This is an illustrative example of how a slow, broken WordPress restaurant website could be rebuilt into a fast Gatsby static site. It demonstrates the structure, technical approach, and typical improvements involved in a WordPress-to-Gatsby migration for a restaurant, including a mobile-first menu, a working reservation form, and accessibility upgrades.
           </p>
         </>
       }
@@ -45,66 +51,66 @@ const CaseStudyPage = () => (
         </Card>
         <Card variant="outline">
           <h2 className="feature-card__title">Location</h2>
-          <p className="feature-card__body">Rockford, Illinois</p>
+          <p className="feature-card__body">Small city, Midwest US (illustrative)</p>
         </Card>
         <Card variant="outline">
-          <h2 className="feature-card__title">Launch date</h2>
-          <p className="feature-card__body">January 2025</p>
+          <h2 className="feature-card__title">Example type: Restaurant website</h2>
+          <p className="feature-card__body">WordPress-to-Gatsby rebuild</p>
         </Card>
       </div>
     </Section>
 
-    <Section eyebrow="The problem" title="Where Rock River Diner started">
+    <Section eyebrow="The problem" title="Common restaurant website problems">
       <Card variant="outline">
         <p className="feature-card__body">
-          Rock River Diner had a WordPress website built in 2018 that was causing real problems. The site took 8 seconds to load on mobile, the menu was a PDF that did not display properly on phones, and the reservation form had been broken for 6 months without the owner knowing. The site had 23 WordPress plugins, many of which were outdated and conflicting with each other.
+          Many independent restaurants have WordPress websites that were built years ago and have become slow and difficult to maintain. Common issues include long mobile load times, menus published as PDFs that do not display well on phones, and reservation or contact forms that silently fail without the owner knowing. Over time, accumulated plugins can conflict with each other and create security and performance problems.
         </p>
         <p className="feature-card__body">
-          The owner, Carol, was getting complaints from customers who could not view the menu on their phones. She was also losing reservations because the form silently failed, sending customers to a blank page instead of confirming their booking.
+          Restaurant owners often hear about these problems from customers who cannot view the menu on their phones or who never received a confirmation after submitting a reservation request. By the time the issues are noticed, the site may have been losing bookings for weeks or months.
         </p>
       </Card>
     </Section>
 
-    <Section eyebrow="Baseline" title="What we measured before starting">
+    <Section eyebrow="Common starting point" title="What a typical restaurant site looks like before a rebuild">
       <div className="grid-three">
         <Card variant="outline">
           <h3 className="feature-card__title">Page load time</h3>
-          <p className="feature-card__body">8.2 seconds on mobile (throttled 4G). 4.1 seconds on desktop. LCP: 6.8s. CLS: 0.25. INP: 420ms.</p>
+          <p className="feature-card__body">Typically 6-10 seconds on mobile (throttled 4G). LCP often above 5 seconds. CLS and INP frequently in the poor range due to unoptimized images and plugin overhead.</p>
         </Card>
         <Card variant="outline">
           <h3 className="feature-card__title">Reservations</h3>
-          <p className="feature-card__body">Online reservation form broken for 6 months. Average 8 reservations per week through the website (before it broke).</p>
+          <p className="feature-card__body">Reservation forms are often broken or unreliable. Owners may not realize the form is failing until a customer mentions it.</p>
         </Card>
         <Card variant="outline">
           <h3 className="feature-card__title">Mobile menu</h3>
-          <p className="feature-card__body">PDF menu required pinching and zooming. 60% of visitors were on mobile. Bounce rate on mobile: 78%.</p>
+          <p className="feature-card__body">PDF menus are common and require pinching and zooming on phones. The majority of restaurant visitors are on mobile, and a poor mobile menu experience drives high bounce rates.</p>
         </Card>
       </div>
     </Section>
 
-    <Section eyebrow="Constraints" title="What we had to work with">
+    <Section eyebrow="Typical constraints" title="What a project like this usually involves">
       <Card variant="outline">
         <ul className="feature-list">
-          <li><strong>Budget:</strong> $597 (Site Refresh package)</li>
-          <li><strong>Timeline:</strong> 2 weeks</li>
-          <li><strong>Content:</strong> Carol provided the current menu text and interior photos. I restructured the menu for web display.</li>
-          <li><strong>Branding:</strong> Existing logo and color scheme. I kept the brand but modernized the layout.</li>
-          <li><strong>Domain:</strong> rockriverdiner.com already registered and hosted on Bluehost. I migrated DNS to Netlify.</li>
+          <li><strong>Budget:</strong> Site Refresh tier ($597) is a common fit for this scope.</li>
+          <li><strong>Timeline:</strong> Typically 1-2 weeks for a small restaurant site.</li>
+          <li><strong>Content:</strong> The owner provides the current menu text and interior photos. The menu is restructured for web display.</li>
+          <li><strong>Branding:</strong> Existing logo and color scheme are kept, with the layout modernized.</li>
+          <li><strong>Domain:</strong> The existing domain is retained and DNS is migrated to Netlify.</li>
           <li><strong>Must-haves:</strong> Working reservation form, mobile-readable menu, hours and location visible without scrolling</li>
         </ul>
       </Card>
     </Section>
 
-    <Section eyebrow="What changed" title="What Bradley rebuilt">
+    <Section eyebrow="What changed" title="What a rebuild looks like">
       <Card variant="outline">
         <p className="feature-card__body">
-          I rebuilt the site as a 4-page Gatsby static site, replacing the WordPress installation entirely. The new site included a mobile-first menu, a working reservation form, a photo gallery, and hours/location information visible above the fold on every page.
+          The site is rebuilt as a 4-page Gatsby static site, replacing the WordPress installation entirely. The new site includes a mobile-first menu, a working reservation form, a photo gallery, and hours/location information visible above the fold on every page.
         </p>
         <ul className="feature-list">
           <li><strong>Home page:</strong> Hero with hours and location, menu highlights, photo gallery, reservation CTA</li>
           <li><strong>Menu page:</strong> Full menu organized by category (appetizers, mains, desserts, drinks) with prices. No PDF. Text-based, searchable, and mobile-readable.</li>
-          <li><strong>About page:</strong> Carol's story, the diner's history since 1992, interior photos, and customer reviews</li>
-          <li><strong>Reservations:</strong> Working form with date, time, party size, and contact info. Submissions sent to Carol's email and stored in a simple dashboard.</li>
+          <li><strong>About page:</strong> The restaurant's story and history, interior photos, and customer reviews</li>
+          <li><strong>Reservations:</strong> Working form with date, time, party size, and contact info. Submissions sent to the owner's email and stored in a simple dashboard.</li>
         </ul>
       </Card>
     </Section>
@@ -114,7 +120,7 @@ const CaseStudyPage = () => (
         <Card variant="outline">
           <h3 className="feature-card__title">Performance</h3>
           <p className="feature-card__body">
-            LCP: 1.5 seconds (down from 6.8s). CLS: 0.01 (down from 0.25). INP: 95ms (down from 420ms). 23 WordPress plugins eliminated. No JavaScript framework overhead.
+            Target LCP under 2.5 seconds. Target CLS under 0.1. Target INP under 200ms. WordPress plugins are eliminated entirely. No JavaScript framework overhead.
           </p>
         </Card>
         <Card variant="outline">
@@ -126,47 +132,14 @@ const CaseStudyPage = () => (
         <Card variant="outline">
           <h3 className="feature-card__title">SEO</h3>
           <p className="feature-card__body">
-            Restaurant schema markup with menu, hours, price range, and location. Google Business Profile updated with new website URL. Sitemap submitted to Google Search Console. Indexed in 3 days.
+            Restaurant schema markup with menu, hours, price range, and location. Google Business Profile updated with new website URL. Sitemap submitted to Google Search Console.
           </p>
         </Card>
       </div>
     </Section>
 
-    <Section eyebrow="Results" title="What happened after launch">
-      <div className="grid-three">
-        <Card variant="outline">
-          <h3 className="feature-card__title">25% more reservations</h3>
-          <p className="feature-card__body">Online reservations went from 0 (broken form) to 10-12 per week within 2 months. A 25% increase over the pre-breakage baseline of 8/week.</p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Mobile bounce rate down 52%</h3>
-          <p className="feature-card__body">Mobile bounce rate dropped from 78% to 37%. The readable menu and fast load time kept visitors on the site.</p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Load time 5x faster</h3>
-          <p className="feature-card__body">From 8.2 seconds to 1.5 seconds on mobile. Google Search Console showed improved mobile usability scores.</p>
-        </Card>
-      </div>
-      <Card variant="outline" style={{ marginTop: "1.5rem" }}>
-        <p className="feature-card__body">
-          <strong>Note on results:</strong> Reservation counts are tracked through the form submission log. Bounce rate and load time are from Google Analytics and Lighthouse lab tests, not field data from the Chrome UX Report. The 25% increase is calculated against the pre-breakage baseline of 8 reservations/week, not against the broken period. These are measured results from the first 60 days post-launch. Individual results will vary.
-        </p>
-      </Card>
-    </Section>
-
-    <Section eyebrow="Testimonial" title="What Carol said">
-      <Card>
-        <blockquote style={{ fontSize: "1.125rem", lineHeight: 1.6, margin: 0, borderLeft: "4px solid var(--color-accent)", paddingLeft: "1.5rem" }}>
-          "My old website was embarrassing. It took forever to load and the reservation form was broken for months without me knowing. Bradley rebuilt the whole thing in 2 weeks for $597. Now the menu actually shows up on phones, the reservation form works, and I am getting more bookings than ever. He also showed me how to update the menu myself. I wish I had called him a year ago."
-        </blockquote>
-        <p style={{ marginTop: "1rem", fontWeight: 600 }}>
-          — Carol D., Owner, Rock River Diner, Rockford, IL
-        </p>
-      </Card>
-    </Section>
-
     <Section
-      eyebrow="Want results like this?"
+      eyebrow="Want a site like this?"
       title="Get a free website plan"
       description={
         <p>
@@ -183,7 +156,7 @@ const CaseStudyPage = () => (
   </Layout>
 );
 
-export default CaseStudyPage;
+export default ExamplePage;
 
 export const Head: HeadFC = () => {
   const site = useSiteMetadata();
@@ -206,7 +179,7 @@ export const Head: HeadFC = () => {
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Home", item: site.siteUrl },
         { "@type": "ListItem", position: 2, name: "Work", item: `${site.siteUrl}/work/` },
-        { "@type": "ListItem", position: 3, name: "Rock River Diner", item: pageUrl },
+        { "@type": "ListItem", position: 3, name: "Restaurant example", item: pageUrl },
       ],
     },
   ];

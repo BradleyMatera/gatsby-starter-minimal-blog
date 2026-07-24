@@ -6,7 +6,7 @@ import useSiteMetadata from "../@lekoarts/gatsby-theme-minimal-blog/hooks/use-si
 import { Card, Link, Section } from "../ui";
 
 const pathname = "/work/";
-const pageTitle = "Website Work and Case Studies | Bradley Matera";
+const pageTitle = "Website Work and Examples | Bradley Matera";
 const pageDescription =
   "Website work and case studies by Bradley Matera. See live demo websites for restaurants, landscaping, HVAC, auto repair, real estate, and salons, plus project write-ups and open-source contributions.";
 
@@ -116,40 +116,40 @@ const WorkPage = () => (
     </Section>
 
     <Section
-      eyebrow="Case studies"
-      title="Client case studies with measured results"
+      eyebrow="Example projects"
+      title="Illustrative website examples by industry"
       description={
         <p>
-          Real client projects with baseline metrics, constraints, what changed, and measured results after launch. No vanity metrics, no Lighthouse scores presented as business outcomes.
+          Sample project walkthroughs showing the structure, features, and technical approach for different industries. These are illustrative examples, not real client projects. For real project write-ups with code and GitHub links, see the technical projects section below.
         </p>
       }
     >
       <div className="grid-three">
         <Card variant="outline">
-          <h3 className="feature-card__title">GreenScape Pro Landscaping</h3>
+          <h3 className="feature-card__title">Landscaping website example</h3>
           <p className="feature-card__body">
-            5-page Gatsby site for a Rockford, IL landscaping company. From no web presence to 40+ online quote requests in 3 months. LCP 1.2s.
+            A 5-page Gatsby site structure for a landscaping company — service pages, project gallery, quote form, local SEO foundations, and weather-based service recommendations.
           </p>
           <div className="card-actions">
-            <Link data-variant="primary" to="/work/greenscape-pro-landscaping/">Read case study</Link>
+            <Link data-variant="primary" to="/work/greenscape-pro-landscaping/">View example</Link>
           </div>
         </Card>
         <Card variant="outline">
-          <h3 className="feature-card__title">Rock River Diner</h3>
+          <h3 className="feature-card__title">Restaurant website example</h3>
           <p className="feature-card__body">
-            WordPress-to-Gatsby rebuild for a Rockford restaurant. Load time from 8s to 1.5s. Broken reservation form fixed. 25% more online reservations.
+            A WordPress-to-Gatsby rebuild structure for a restaurant — menu, reservations, gallery, hours, and reviews. Shows the migration approach and performance targets.
           </p>
           <div className="card-actions">
-            <Link data-variant="primary" to="/work/rock-river-diner/">Read case study</Link>
+            <Link data-variant="primary" to="/work/rock-river-diner/">View example</Link>
           </div>
         </Card>
         <Card variant="outline">
-          <h3 className="feature-card__title">NorthStar HVAC</h3>
+          <h3 className="feature-card__title">HVAC website example</h3>
           <p className="feature-card__body">
-            7-page service area website for a Beloit, WI HVAC company. From no web presence to 60+ service calls in 4 months. Financing calculator, seasonal promotions.
+            A 7-page service area website structure for an HVAC company — service pages, financing calculator, seasonal promotions, and service area architecture.
           </p>
           <div className="card-actions">
-            <Link data-variant="primary" to="/work/northstar-hvac/">Read case study</Link>
+            <Link data-variant="primary" to="/work/northstar-hvac/">View example</Link>
           </div>
         </Card>
       </div>

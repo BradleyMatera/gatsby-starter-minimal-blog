@@ -6,28 +6,36 @@ import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use
 import { Card, Link, Section } from "../../ui";
 
 const pathname = "/work/northstar-hvac/";
-const pageTitle = "Case Study: NorthStar HVAC Service Area Website | Bradley Matera";
+const pageTitle = "Example: HVAC Service Area Website | Bradley Matera";
 const pageDescription =
-  "How Bradley Matera built a 7-page service area website for an HVAC company in Beloit, WI. From no web presence to 60+ service calls from the website in 4 months. Financing calculator, seasonal promotions, local SEO.";
+  "An illustrative example of an HVAC service area website built with Gatsby. Shows the structure, features, and approach for a typical HVAC company website, including a financing calculator, seasonal promotions, and local SEO.";
 
-const CaseStudyPage = () => (
+const ExamplePage = () => (
   <Layout>
     <nav className="breadcrumbs" aria-label="Breadcrumb">
       <ol className="breadcrumbs__list">
         <li className="breadcrumbs__item"><Link to="/">Home</Link></li>
         <li className="breadcrumbs__item"><Link to="/work/">Work</Link></li>
-        <li className="breadcrumbs__item" aria-current="page">NorthStar HVAC</li>
+        <li className="breadcrumbs__item" aria-current="page">HVAC example</li>
       </ol>
     </nav>
 
+    <div style={{ marginBottom: "2rem" }}>
+      <Card variant="outline" className="disclaimer-box">
+        <p className="feature-card__body" style={{ margin: 0 }}>
+          <strong>Disclaimer:</strong> This is an illustrative example showing the structure and approach for an HVAC service area website. It is not a real client project.
+        </p>
+      </Card>
+    </div>
+
     <Section
-      eyebrow="Case study"
+      eyebrow="Example project"
       titleAs="h1"
-      title={<><strong>NorthStar HVAC</strong> Service Area Website</>}
+      title={<><strong>NorthStar HVAC</strong> (illustrative example)</>}
       description={
         <>
           <p className="direct-answer">
-            <strong>What did Bradley build for NorthStar HVAC?</strong> A 7-page Gatsby website for an HVAC company in Beloit, Wisconsin. The owner had no website and relied on phone book ads and word of mouth. After launch, the site generated 60+ service calls in 4 months, with a financing calculator and seasonal promotion pages driving winter and summer demand.
+            <strong>What does this example show?</strong> This is an illustrative example of a 7-page Gatsby website for a hypothetical HVAC company. It demonstrates the structure, features, and approach I would use when building a service area website for an HVAC business, including a financing calculator, seasonal promotion pages, and local SEO setup.
           </p>
         </>
       }
@@ -48,65 +56,65 @@ const CaseStudyPage = () => (
           <p className="feature-card__body">Beloit, Wisconsin (Rock County)</p>
         </Card>
         <Card variant="outline">
-          <h2 className="feature-card__title">Launch date</h2>
-          <p className="feature-card__body">November 2024</p>
+          <h2 className="feature-card__title">Example type: HVAC website</h2>
+          <p className="feature-card__body">Service area website</p>
         </Card>
       </div>
     </Section>
 
-    <Section eyebrow="The problem" title="Where NorthStar HVAC started">
+    <Section eyebrow="The problem" title="Common HVAC website problems">
       <Card variant="outline">
         <p className="feature-card__body">
-          NorthStar HVAC had been operating for 12 years with no website. The owner, Dave, advertised in the local phone book (which fewer and fewer people used) and relied on word of mouth and repeat customers. He was losing jobs to competitors who appeared in Google searches for "HVAC repair Beloit WI" and "furnace installation Janesville."
+          Many established HVAC businesses operate for years without a website, relying on phone book ads, word of mouth, and repeat customers. As fewer people use the phone book, these businesses lose jobs to competitors who appear in Google searches for terms like "HVAC repair near me" and "furnace installation [city]."
         </p>
         <p className="feature-card__body">
-          Dave had a Google Business Profile but it was unclaimed and had outdated hours. He did not understand how people searched for HVAC services online and was skeptical that a website would help. He agreed to try after a competitor ran a Google Ads campaign that dominated local search results for 3 months.
+          A common starting point is an unclaimed or outdated Google Business Profile, no online lead capture, and no way for customers to schedule service outside business hours. Owners are often skeptical that a website will help, until they see competitors dominating local search results.
         </p>
       </Card>
     </Section>
 
-    <Section eyebrow="Baseline" title="What we measured before starting">
+    <Section eyebrow="Common starting point" title="What a typical HVAC business looks like before getting a website">
       <div className="grid-three">
         <Card variant="outline">
           <h3 className="feature-card__title">Web presence</h3>
-          <p className="feature-card__body">No website. Unclaimed Google Business Profile with outdated hours. Not indexed for any service keyword.</p>
+          <p className="feature-card__body">No website. Unclaimed or outdated Google Business Profile. Not indexed for any service keyword.</p>
         </Card>
         <Card variant="outline">
           <h3 className="feature-card__title">Lead sources</h3>
-          <p className="feature-card__body">Phone book ad ($480/year), word of mouth, repeat customers. No online lead capture. No way to schedule service outside business hours.</p>
+          <p className="feature-card__body">Phone book ads, word of mouth, repeat customers. No online lead capture. No way to schedule service outside business hours.</p>
         </Card>
         <Card variant="outline">
           <h3 className="feature-card__title">Service area</h3>
-          <p className="feature-card__body">Beloit, Janesville, and surrounding Rock County. Dave also served Winnebago County, IL but had no way to communicate this.</p>
+          <p className="feature-card__body">Serving multiple cities and counties, but with no way to communicate this online or capture searches for each location.</p>
         </Card>
       </div>
     </Section>
 
-    <Section eyebrow="Constraints" title="What we had to work with">
+    <Section eyebrow="Typical constraints" title="What an HVAC website project usually involves">
       <Card variant="outline">
         <ul className="feature-list">
-          <li><strong>Budget:</strong> $1,497 (Lead Engine package)</li>
-          <li><strong>Timeline:</strong> 4 weeks (launched before winter heating season)</li>
-          <li><strong>Content:</strong> Dave provided service descriptions and pricing. I wrote original copy for service area pages.</li>
-          <li><strong>Branding:</strong> Existing logo (red and blue). I matched the color scheme and designed a clean, professional layout.</li>
-          <li><strong>Photos:</strong> Dave had photos of installations and equipment. I edited and compressed them.</li>
+          <li><strong>Budget:</strong> Varies by package tier; a service area site of this scope typically falls in the mid-range.</li>
+          <li><strong>Timeline:</strong> Around 4 weeks, ideally launching before the peak heating or cooling season.</li>
+          <li><strong>Content:</strong> The business owner provides service descriptions and pricing; I write original copy for service area pages.</li>
+          <li><strong>Branding:</strong> Match the existing logo and color scheme with a clean, professional layout.</li>
+          <li><strong>Photos:</strong> The business provides photos of installations and equipment; I edit and compress them for the web.</li>
           <li><strong>Must-haves:</strong> Financing calculator, seasonal promotions, service area pages, emergency contact prominence</li>
         </ul>
       </Card>
     </Section>
 
-    <Section eyebrow="What changed" title="What Bradley built">
+    <Section eyebrow="What changed" title="What this example includes">
       <Card variant="outline">
         <p className="feature-card__body">
-          I built a 7-page Gatsby static site with service area pages, a financing calculator, seasonal promotion pages, and an emergency contact system. The site was designed to capture both winter heating and summer cooling demand.
+          A 7-page Gatsby static site with service area pages, a financing calculator, seasonal promotion pages, and an emergency contact system. The site is designed to capture both winter heating and summer cooling demand.
         </p>
         <ul className="feature-list">
           <li><strong>Home page:</strong> Hero with emergency service CTA, service highlights, financing calculator, service area, reviews</li>
           <li><strong>Services page:</strong> Furnace installation, AC installation, repair, maintenance plans with pricing ranges</li>
-          <li><strong>Service areas:</strong> Dedicated pages for Beloit WI, Janesville WI, and Rockford IL with local context and unique FAQs</li>
+          <li><strong>Service areas:</strong> Dedicated pages for each city served with local context and unique FAQs</li>
           <li><strong>Financing calculator:</strong> Interactive monthly payment calculator for furnace and AC installations based on system cost and term length</li>
           <li><strong>Seasonal promotions:</strong> Winter heating check-up and summer AC tune-up pages with limited-time offers</li>
-          <li><strong>About:</strong> Dave's 12-year history, certifications, and service area map</li>
+          <li><strong>About:</strong> Company history, certifications, and service area map</li>
           <li><strong>Contact:</strong> Service request form with emergency priority option, phone click-to-call, and business hours</li>
         </ul>
       </Card>
@@ -117,7 +125,7 @@ const CaseStudyPage = () => (
         <Card variant="outline">
           <h3 className="feature-card__title">Performance</h3>
           <p className="feature-card__body">
-            LCP: 1.4 seconds. CLS: 0.01. INP: 90ms. Financing calculator uses minimal JavaScript. All images served in WebP with proper dimensions.
+            Target LCP under 2 seconds. CLS near 0. INP under 200ms. Financing calculator uses minimal JavaScript. All images served in WebP with proper dimensions.
           </p>
         </Card>
         <Card variant="outline">
@@ -135,41 +143,33 @@ const CaseStudyPage = () => (
       </div>
     </Section>
 
-    <Section eyebrow="Results" title="What happened after launch">
-      <div className="grid-three">
+    <Section eyebrow="Q&A" title="Common questions about HVAC websites">
+      <Card variant="outline">
+        <h3 className="feature-card__title">Why does an HVAC business need service area pages?</h3>
+        <p className="feature-card__body">
+          Customers search for HVAC services by city, not by company name. Dedicated service area pages with unique, locally relevant content help the site rank for searches like "furnace repair Beloit WI" and "AC installation Janesville."
+        </p>
+      </Card>
+      <div style={{ marginTop: "1.5rem" }}>
         <Card variant="outline">
-          <h3 className="feature-card__title">60+ service calls</h3>
-          <p className="feature-card__body">In the first 4 months (Nov-Feb, peak heating season), the website generated 60+ service calls through the form and click-to-call. Dave had never received online leads before.</p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Page 1 for "HVAC Beloit WI"</h3>
-          <p className="feature-card__body">Ranked on page 1 of Google for "HVAC repair Beloit WI" within 8 weeks. Service area page for Janesville ranked page 2 within 12 weeks.</p>
-        </Card>
-        <Card variant="outline">
-          <h3 className="feature-card__title">Phone book ad cancelled</h3>
-          <p className="feature-card__body">Dave cancelled his $480/year phone book ad after 3 months because the website was generating more leads at lower cost. Net savings: $480/year plus new revenue.</p>
+          <h3 className="feature-card__title">What is a financing calculator and why include one?</h3>
+          <p className="feature-card__body">
+            HVAC installations are a significant expense. A financing calculator lets visitors estimate monthly payments based on system cost and term length, which helps them move from browsing to requesting a quote.
+          </p>
         </Card>
       </div>
-      <Card variant="outline" style={{ marginTop: "1.5rem" }}>
-        <p className="feature-card__body">
-          <strong>Note on results:</strong> The 60+ service calls are tracked through form submissions and click-to-call events. Search ranking positions are based on manual checks from a Beloit IP address, not a rank tracker. The results reflect the peak heating season (November-February), which is the highest-demand period for HVAC. Summer cooling season results may differ. These are measured results, not projections. Individual results will vary based on competition, season, and market.
-        </p>
-      </Card>
-    </Section>
-
-    <Section eyebrow="Testimonial" title="What Dave said">
-      <Card>
-        <blockquote style={{ fontSize: "1.125rem", lineHeight: 1.6, margin: 0, borderLeft: "4px solid var(--color-accent)", paddingLeft: "1.5rem" }}>
-          "I was skeptical about getting a website. I have been running my HVAC business for 12 years on word of mouth and the phone book. Bradley showed me how many people were searching for HVAC services online in my area and I decided to try it. Best decision I made. The site paid for itself in the first month. I cancelled the phone book ad and I am getting more calls than ever, especially from Janesville where I had no presence before. The financing calculator is a game changer, people love it."
-        </blockquote>
-        <p style={{ marginTop: "1rem", fontWeight: 600 }}>
-          — Dave K., Owner, NorthStar HVAC, Beloit, WI
-        </p>
-      </Card>
+      <div style={{ marginTop: "1.5rem" }}>
+        <Card variant="outline">
+          <h3 className="feature-card__title">Why seasonal promotion pages?</h3>
+          <p className="feature-card__body">
+            HVAC demand is seasonal. Winter heating check-up and summer AC tune-up pages with limited-time offers capture demand at the right moment and give the business a reason to promote the site throughout the year.
+          </p>
+        </Card>
+      </div>
     </Section>
 
     <Section
-      eyebrow="Want results like this?"
+      eyebrow="Want a site like this?"
       title="Get a free website plan"
       description={
         <p>
@@ -186,7 +186,7 @@ const CaseStudyPage = () => (
   </Layout>
 );
 
-export default CaseStudyPage;
+export default ExamplePage;
 
 export const Head: HeadFC = () => {
   const site = useSiteMetadata();
@@ -209,7 +209,7 @@ export const Head: HeadFC = () => {
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Home", item: site.siteUrl },
         { "@type": "ListItem", position: 2, name: "Work", item: `${site.siteUrl}/work/` },
-        { "@type": "ListItem", position: 3, name: "NorthStar HVAC", item: pageUrl },
+        { "@type": "ListItem", position: 3, name: "HVAC example", item: pageUrl },
       ],
     },
   ];
