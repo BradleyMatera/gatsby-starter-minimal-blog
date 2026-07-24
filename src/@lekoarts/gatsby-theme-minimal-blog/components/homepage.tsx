@@ -37,6 +37,56 @@ const Homepage = ({ posts }: MBHomepageProps) => {
       <section className="u-home-hero">
         <Hero />
       </section>
+      <section className="u-home-summary-table" aria-labelledby="services-summary-heading">
+        <h2 id="services-summary-heading">Services at a glance</h2>
+        <p className="section-lead">
+          A quick comparison of the main ways we can work together. See the{" "}
+          <Link to="/pricing/">full pricing page</Link> for what each option includes.
+        </p>
+        <table className="data-table">
+          <caption>Comparison of main service offerings: starting price, timeline, and best fit</caption>
+          <thead>
+            <tr>
+              <th scope="col">Service</th>
+              <th scope="col">Starting price</th>
+              <th scope="col">Timeline</th>
+              <th scope="col">Best for</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row" data-label="Service">New website</th>
+              <td data-label="Starting price">$447</td>
+              <td data-label="Timeline">~14 days</td>
+              <td data-label="Best for">New businesses and solo operators needing a first site</td>
+            </tr>
+            <tr>
+              <th scope="row" data-label="Service">Redesign</th>
+              <td data-label="Starting price">$597</td>
+              <td data-label="Timeline">2-3 weeks</td>
+              <td data-label="Best for">Existing sites that look dated or perform poorly</td>
+            </tr>
+            <tr>
+              <th scope="row" data-label="Service">Repair</th>
+              <td data-label="Starting price">$65/hour</td>
+              <td data-label="Timeline">Varies by issue</td>
+              <td data-label="Best for">Broken features, bugs, or small fixes on an existing site</td>
+            </tr>
+            <tr>
+              <th scope="row" data-label="Service">Local SEO</th>
+              <td data-label="Starting price">Included in builds; ongoing from $37/month</td>
+              <td data-label="Timeline">Ongoing</td>
+              <td data-label="Best for">Businesses wanting to rank in their service area</td>
+            </tr>
+            <tr>
+              <th scope="row" data-label="Service">Care plans</th>
+              <td data-label="Starting price">$37/month</td>
+              <td data-label="Timeline">Ongoing (month-to-month)</td>
+              <td data-label="Best for">Keeping an existing site fast, secure, and visible</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
       <div className="homepage-title-row">
         <TinyTriangleAccent />
         <Title text="Latest writing">

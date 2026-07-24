@@ -111,6 +111,7 @@ const PricingPage = () => (
       }
       description={
         <>
+          <p style={{ fontSize: "0.85rem", color: "var(--color-text-subtle)", marginBottom: "1rem" }}>Last updated: July 2026 · By Bradley Matera</p>
           <p>
             Most agencies hide their prices until you're already committed. I don't do that. Here's
             exactly what you pay, what you get, and what costs extra.
@@ -119,7 +120,7 @@ const PricingPage = () => (
             <strong>How much does a website cost?</strong> Website builds start at ${starterPkg.buildPrice} for a Starter
             site (up to 5 pages, SEO-ready), ${growthPkg.buildPrice} for a Growth site (up to 10 pages, Google Business Profile alignment),
             and ${leadEnginePkg.buildPrice.toLocaleString()} for a Lead Engine site (page count and timeline defined in the written scope). Monthly
-            support ranges from ${starterPkg.monthlyPrice} to ${leadEnginePkg.monthlyPrice}. {NO_CONTRACTS_REPLACEMENT}
+            support ranges from ${starterPkg.monthlyPrice} to ${leadEnginePkg.monthlyPrice}. {NO_CONTRACTS_REPLACEMENT} See <Link to="/work/">work examples</Link> for evidence of delivered projects.
           </p>
         </>
       }
@@ -136,7 +137,7 @@ const PricingPage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/starter-presence.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/starter-presence.svg" alt="Starter Presence package illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">{starterPkg.name} — ${starterPkg.buildPrice} build + ${starterPkg.monthlyPrice}/month</h2>
             <p className="pkg-card__desc">For: New businesses or solo operators who need a clean website</p>
@@ -151,7 +152,7 @@ const PricingPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/local-growth.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/local-growth.svg" alt="Local Growth package illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">{growthPkg.name} — ${growthPkg.buildPrice} build + ${growthPkg.monthlyPrice}/month</h2>
             <p className="pkg-card__desc">For: Established service businesses ready to compete online</p>
@@ -167,7 +168,7 @@ const PricingPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/lead-engine.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/lead-engine.svg" alt="Lead Engine package illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">{leadEnginePkg.name} — from ${leadEnginePkg.buildPrice.toLocaleString()} build + ${leadEnginePkg.monthlyPrice}/month</h2>
             <p className="pkg-card__desc">For: Businesses ready to dominate their local market</p>
@@ -218,7 +219,7 @@ const PricingPage = () => (
     >
       <div className="grid-two">
         <div className="pkg-card">
-          <img src="/package-images/addon-refresh.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/addon-refresh.svg" alt="Site Refresh package illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">Site Refresh — ${SITE_REFRESH_PRICE}</h2>
             <p className="pkg-card__desc">
@@ -232,7 +233,7 @@ const PricingPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/addon-hourly.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/addon-hourly.svg" alt="Hourly Work package illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">Hourly Work — ${HOURLY_RATE}/hour</h2>
             <p className="pkg-card__desc">
@@ -259,7 +260,7 @@ const PricingPage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/essential-care.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/essential-care.svg" alt="Essential Care plan illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">Essential Care — ${starterPkg.monthlyPrice}/month</h2>
             <ul className="feature-list">
@@ -275,7 +276,7 @@ const PricingPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/growth-care.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/growth-care.svg" alt="Growth Care plan illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">Growth Care — ${growthPkg.monthlyPrice}/month</h2>
             <p className="pkg-card__desc"><strong>Essential Care plus:</strong></p>
@@ -292,7 +293,7 @@ const PricingPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/search-care.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/search-care.svg" alt="Search Care plan illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">Search Care — ${leadEnginePkg.monthlyPrice}/month</h2>
             <p className="pkg-card__desc"><strong>Growth Care plus:</strong></p>
@@ -341,7 +342,7 @@ const PricingPage = () => (
     >
       <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
         <div className="pkg-card">
-          <img src="/package-images/why-fixed.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/why-fixed.svg" alt="Why prices are fixed, not hourly illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Why prices are fixed, not hourly</h3>
             <p className="pkg-card__desc">
@@ -353,7 +354,7 @@ const PricingPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/whats-included.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/whats-included.svg" alt="What's included in every package illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">What's included in every package</h3>
             <p className="pkg-card__desc">
@@ -372,7 +373,7 @@ const PricingPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/monthly-fee.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/monthly-fee.svg" alt="What the monthly fee covers illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">What the monthly fee covers</h3>
             <p className="pkg-card__desc">
@@ -384,7 +385,7 @@ const PricingPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/written-agreement-card.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/written-agreement-card.svg" alt="Written agreement on every project illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Written agreement on every project</h3>
             <p className="pkg-card__desc">

@@ -152,7 +152,7 @@ const DemosIndex: React.FC = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/demo-click.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/demo-click.svg" alt="Can I click through the demos? illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Can I click through the demos?</h3>
             <p className="pkg-card__desc">
@@ -162,7 +162,7 @@ const DemosIndex: React.FC = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/demo-back.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/demo-back.svg" alt="How do I get back to this page? illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">How do I get back to this page?</h3>
             <p className="pkg-card__desc">
@@ -172,7 +172,7 @@ const DemosIndex: React.FC = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/demo-customize.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/demo-customize.svg" alt="Can these demos be customized for my business? illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Can these demos be customized for my business?</h3>
             <p className="pkg-card__desc">

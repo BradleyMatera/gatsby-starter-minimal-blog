@@ -46,21 +46,21 @@ const ExamplePage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="Industry illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">Industry</h2>
             <p className="pkg-card__desc">Restaurant and diner</p>
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="Location illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">Location</h2>
             <p className="pkg-card__desc">Small city, Midwest US (illustrative)</p>
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="Example type: Restaurant website illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">Example type: Restaurant website</h2>
             <p className="pkg-card__desc">WordPress-to-Gatsby rebuild</p>
@@ -126,21 +126,21 @@ const ExamplePage = () => (
     <Section eyebrow="Common starting point" title="What a typical restaurant site looks like before a rebuild">
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="Page load time illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Page load time</h3>
             <p className="pkg-card__desc">Typically 6-10 seconds on mobile (throttled 4G). LCP often above 5 seconds. CLS and INP frequently in the poor range due to unoptimized images and plugin overhead.</p>
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="Reservations illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Reservations</h3>
             <p className="pkg-card__desc">Reservation forms are often broken or unreliable. Owners may not realize the form is failing until a customer mentions it.</p>
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="Mobile menu illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Mobile menu</h3>
             <p className="pkg-card__desc">PDF menus are common and require pinching and zooming on phones. The majority of restaurant visitors are on mobile, and a poor mobile menu experience drives high bounce rates.</p>
@@ -179,7 +179,7 @@ const ExamplePage = () => (
     <Section eyebrow="Technical work" title="Accessibility, performance, and SEO">
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="Performance illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Performance</h3>
             <p className="pkg-card__desc">
@@ -188,7 +188,7 @@ const ExamplePage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="Accessibility illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Accessibility</h3>
             <p className="pkg-card__desc">
@@ -197,7 +197,7 @@ const ExamplePage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="SEO illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">SEO</h3>
             <p className="pkg-card__desc">

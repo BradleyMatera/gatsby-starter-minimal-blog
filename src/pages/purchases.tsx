@@ -283,6 +283,7 @@ const PurchasesPage = () => {
           <p className="direct-answer store-subtitle-body">
             Sign in to manage your purchases from Bradley Matera&apos;s store. View order history, re-download digital products, and resend receipt emails. Affiliate products are sold by third-party merchants — direct digital downloads are sold by Bradley Matera.
           </p>
+          <h2 className="store-subtitle">Who sells the products in the store?</h2>
           <p className="store-legal">
             Affiliate products are sold by third-party merchants. Bradley Matera is not the seller or creator of affiliate products.
             Direct digital downloads are sold by Bradley Matera.
@@ -346,6 +347,39 @@ const PurchasesPage = () => {
 
         {orders.length > 0 && (
           <div className="store-orders">
+            <h2 className="store-section-title">Your order history</h2>
+            <p className="store-section-description">
+              A summary of every order linked to your account. Expand an order below to re-download files or resend a receipt.
+            </p>
+            <table className="data-table">
+              <caption>Order summary</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Order</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {orders.map((order) => {
+                  const totalCents = order.items.reduce(
+                    (sum, item) => sum + item.unit_price_cents * item.quantity,
+                    0
+                  );
+                  return (
+                    <tr key={order.id}>
+                      <td data-label="Order">{order.id}</td>
+                      <td data-label="Date">{new Date(order.created_at).toLocaleDateString()}</td>
+                      <td data-label="Status">{order.status}</td>
+                      <td data-label="Total">{formatMoney(totalCents)}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+
+            <h3 className="store-section-title">Order details and downloads</h3>
             {orders.map((order) => {
               const totalCents = order.items.reduce(
                 (sum, item) => sum + item.unit_price_cents * item.quantity,

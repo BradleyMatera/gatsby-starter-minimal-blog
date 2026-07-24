@@ -46,7 +46,7 @@ const WebsiteHelpPage = () => (
     >
       <div className="grid-two">
         <div className="pkg-card">
-          <img src="/package-images/help-diagnose.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/help-diagnose.svg" alt="Typical starting problems illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">Typical starting problems</h2>
             <ul className="feature-list">
@@ -59,7 +59,7 @@ const WebsiteHelpPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/help-fix.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/help-fix.svg" alt="What I usually do first illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">What I usually do first</h2>
             <ul className="feature-list">
@@ -101,7 +101,7 @@ const WebsiteHelpPage = () => (
     >
       <div className="grid-two">
         <div className="pkg-card">
-          <img src="/package-images/help-launch.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/help-launch.svg" alt="Project case studies illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Project case studies</h3>
             <p className="pkg-card__desc">
@@ -110,7 +110,7 @@ const WebsiteHelpPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/help-diagnose.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/help-diagnose.svg" alt="Web development FAQ illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Web development FAQ</h3>
             <p className="pkg-card__desc">
@@ -119,7 +119,7 @@ const WebsiteHelpPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/help-fix.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/help-fix.svg" alt="Pricing breakdown illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Pricing breakdown</h3>
             <p className="pkg-card__desc">
@@ -128,7 +128,7 @@ const WebsiteHelpPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/help-launch.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/help-launch.svg" alt="About Bradley Matera illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">About Bradley Matera</h3>
             <p className="pkg-card__desc">

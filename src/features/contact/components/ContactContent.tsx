@@ -200,21 +200,21 @@ const ContactContent = () => {
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/contact-phone.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/contact-phone.svg" alt="No obligation illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">No obligation</h3>
             <p className="pkg-card__desc">The free website plan is exactly that — free. You are not committing to anything by asking for one.</p>
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/contact-email.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/contact-email.svg" alt="Honest assessment illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Honest assessment</h3>
             <p className="pkg-card__desc">If I am not the right fit for your project, I will tell you and suggest alternatives. No upselling, no pressure.</p>
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/contact-form.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/contact-form.svg" alt="Direct contact illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Direct contact</h3>
             <p className="pkg-card__desc">You talk to the person who will actually build your site. No account managers, no handoffs.</p>
@@ -249,7 +249,7 @@ const ContactContent = () => {
     >
       <div className="grid-two">
         <div className="pkg-card">
-          <img src="/package-images/contact-phone.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/contact-phone.svg" alt="Pricing illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Pricing</h3>
             <p className="pkg-card__desc">See all package options, care plans, and what is included.</p>
@@ -257,7 +257,7 @@ const ContactContent = () => {
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/contact-email.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/contact-email.svg" alt="Services illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Services</h3>
             <p className="pkg-card__desc">Web design, redesign, local SEO, repair, accessibility, and care plans.</p>
@@ -265,7 +265,7 @@ const ContactContent = () => {
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/contact-form.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/contact-form.svg" alt="Website examples illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Website examples</h3>
             <p className="pkg-card__desc">Full clickable sample websites built for real industries.</p>
@@ -273,7 +273,7 @@ const ContactContent = () => {
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/contact-phone.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/contact-phone.svg" alt="Process illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Process</h3>
             <p className="pkg-card__desc">How a website project works from first call to launch.</p>

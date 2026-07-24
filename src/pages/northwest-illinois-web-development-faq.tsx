@@ -125,7 +125,7 @@ const LocalFaqPage = () => (
     >
       <div className="grid-two">
         <div className="pkg-card">
-          <img src="/package-images/faq-evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/faq-evidence-projects.svg" alt="Project case studies illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Project case studies</h3>
             <p className="pkg-card__desc">
@@ -134,7 +134,7 @@ const LocalFaqPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/faq-evidence-pricing.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/faq-evidence-pricing.svg" alt="Pricing breakdown illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Pricing breakdown</h3>
             <p className="pkg-card__desc">
@@ -143,7 +143,7 @@ const LocalFaqPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/faq-evidence-about.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/faq-evidence-about.svg" alt="About Bradley Matera illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">About Bradley Matera</h3>
             <p className="pkg-card__desc">
@@ -152,7 +152,7 @@ const LocalFaqPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/faq-evidence-checklist.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/faq-evidence-checklist.svg" alt="Small business checklist illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Small business checklist</h3>
             <p className="pkg-card__desc">

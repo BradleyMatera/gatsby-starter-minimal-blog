@@ -45,6 +45,7 @@ const ForBusinessPage = () => (
       }
       description={
         <>
+          <p style={{ fontSize: "0.85rem", color: "var(--color-text-subtle)", marginBottom: "1rem" }}>Last updated: July 2026 · By Bradley Matera</p>
           <p className="direct-answer">
             <strong>What does Bradley Matera offer small businesses?</strong> Website design, development, and local SEO for small businesses in Northwest Illinois and Southern Wisconsin. Starter sites from $447, builds in 14 days, written agreements included. See live website examples below, then request a free consultation.
           </p>
@@ -63,7 +64,7 @@ const ForBusinessPage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/starting-price.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/starting-price.svg" alt="$447 starting price illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">$447 starting price</h2>
             <p className="pkg-card__desc">No hidden fees. 50% deposit to start, 50% on launch. Month-to-month support starting at $37/month.</p>
@@ -73,7 +74,7 @@ const ForBusinessPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/fast-builds.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/fast-builds.svg" alt="14-day builds illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">14-day builds</h2>
             <p className="pkg-card__desc">Starter sites in 14 days. Growth sites in 3-4 weeks. You see real progress, not radio silence.</p>
@@ -83,7 +84,7 @@ const ForBusinessPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/written-agreements.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/written-agreements.svg" alt="Written agreements illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">Written agreements</h2>
             <p className="pkg-card__desc">You own your site, code, content, and domain. Cancel support anytime. I help you migrate if you leave.</p>

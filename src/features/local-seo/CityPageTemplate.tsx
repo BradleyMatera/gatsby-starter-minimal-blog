@@ -95,7 +95,7 @@ export const createCityPage = (config: CityPageConfig) => {
       >
         <div className="grid-two">
           <div className="pkg-card">
-            <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/evidence-projects.svg" alt="What I can help with right now illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h2 className="pkg-card__title">What I can help with right now</h2>
               <ul className="feature-list">
@@ -106,7 +106,7 @@ export const createCityPage = (config: CityPageConfig) => {
             </div>
           </div>
           <div className="pkg-card">
-            <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/evidence-projects.svg" alt="How I work illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h2 className="pkg-card__title">How I work</h2>
               <p className="pkg-card__desc">
@@ -134,7 +134,7 @@ export const createCityPage = (config: CityPageConfig) => {
       >
         <div className="grid-two">
           <div className="pkg-card">
-            <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/evidence-projects.svg" alt="Website design illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">Website design</h3>
               <p className="pkg-card__desc">
@@ -143,7 +143,7 @@ export const createCityPage = (config: CityPageConfig) => {
             </div>
           </div>
           <div className="pkg-card">
-            <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/evidence-projects.svg" alt="Website help and repair illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">Website help and repair</h3>
               <p className="pkg-card__desc">
@@ -152,7 +152,7 @@ export const createCityPage = (config: CityPageConfig) => {
             </div>
           </div>
           <div className="pkg-card">
-            <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/evidence-projects.svg" alt="SEO services illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">SEO services</h3>
               <p className="pkg-card__desc">
@@ -161,7 +161,7 @@ export const createCityPage = (config: CityPageConfig) => {
             </div>
           </div>
           <div className="pkg-card">
-            <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/evidence-projects.svg" alt="Small business websites illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">Small business websites</h3>
               <p className="pkg-card__desc">
@@ -183,7 +183,7 @@ export const createCityPage = (config: CityPageConfig) => {
       >
         <div className="grid-three">
           <div className="pkg-card">
-            <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/evidence-projects.svg" alt={`Knows the ${city} market illustration`} className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">Knows the {city} market</h3>
               <p className="pkg-card__desc">
@@ -192,7 +192,7 @@ export const createCityPage = (config: CityPageConfig) => {
             </div>
           </div>
           <div className="pkg-card">
-            <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/evidence-projects.svg" alt="Available in person illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">Available in person</h3>
               <p className="pkg-card__desc">
@@ -201,7 +201,7 @@ export const createCityPage = (config: CityPageConfig) => {
             </div>
           </div>
           <div className="pkg-card">
-            <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/evidence-projects.svg" alt="Accountable to the region illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">Accountable to the region</h3>
               <p className="pkg-card__desc">
@@ -222,7 +222,7 @@ export const createCityPage = (config: CityPageConfig) => {
         }
       >
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt={`${city} businesses I typically work with illustration`} className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">{city} businesses I typically work with</h3>
             <p className="pkg-card__desc">
@@ -243,7 +243,7 @@ export const createCityPage = (config: CityPageConfig) => {
       >
         <div className="grid-two">
           <div className="pkg-card">
-            <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/evidence-projects.svg" alt="Smaller and more personal illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">Smaller and more personal</h3>
               <p className="pkg-card__desc">
@@ -252,7 +252,7 @@ export const createCityPage = (config: CityPageConfig) => {
             </div>
           </div>
           <div className="pkg-card">
-            <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/evidence-projects.svg" alt="More transparent on cost illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">More transparent on cost</h3>
               <p className="pkg-card__desc">
@@ -261,7 +261,7 @@ export const createCityPage = (config: CityPageConfig) => {
             </div>
           </div>
           <div className="pkg-card">
-            <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/evidence-projects.svg" alt="No sales pipeline illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">No sales pipeline</h3>
               <p className="pkg-card__desc">
@@ -270,7 +270,7 @@ export const createCityPage = (config: CityPageConfig) => {
             </div>
           </div>
           <div className="pkg-card">
-            <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/evidence-projects.svg" alt="When an agency is the right call illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">When an agency is the right call</h3>
               <p className="pkg-card__desc">
@@ -287,7 +287,7 @@ export const createCityPage = (config: CityPageConfig) => {
       >
         <div className="grid-three">
           <div className="pkg-card">
-            <img src="/package-images/city-step-call.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/city-step-call.svg" alt="Free consultation illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">Free consultation</h3>
               <p className="pkg-card__desc">
@@ -296,7 +296,7 @@ export const createCityPage = (config: CityPageConfig) => {
             </div>
           </div>
           <div className="pkg-card">
-            <img src="/package-images/city-step-build.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/city-step-build.svg" alt="Design and build illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">Design and build</h3>
               <p className="pkg-card__desc">
@@ -305,7 +305,7 @@ export const createCityPage = (config: CityPageConfig) => {
             </div>
           </div>
           <div className="pkg-card">
-            <img src="/package-images/city-step-launch.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/city-step-launch.svg" alt="Launch and support illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">Launch and support</h3>
               <p className="pkg-card__desc">
@@ -357,7 +357,7 @@ export const createCityPage = (config: CityPageConfig) => {
       >
         <div className="grid-three">
           <div className="pkg-card">
-            <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/evidence-projects.svg" alt="Restaurant Website illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">Restaurant Website</h3>
               <p className="pkg-card__desc">
@@ -369,7 +369,7 @@ export const createCityPage = (config: CityPageConfig) => {
             </div>
           </div>
           <div className="pkg-card">
-            <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/evidence-projects.svg" alt="Landscaping Website illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">Landscaping Website</h3>
               <p className="pkg-card__desc">
@@ -381,7 +381,7 @@ export const createCityPage = (config: CityPageConfig) => {
             </div>
           </div>
           <div className="pkg-card">
-            <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/evidence-projects.svg" alt="HVAC Website illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">HVAC Website</h3>
               <p className="pkg-card__desc">
@@ -393,7 +393,7 @@ export const createCityPage = (config: CityPageConfig) => {
             </div>
           </div>
           <div className="pkg-card">
-            <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/evidence-projects.svg" alt="Auto Repair Website illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">Auto Repair Website</h3>
               <p className="pkg-card__desc">
@@ -405,7 +405,7 @@ export const createCityPage = (config: CityPageConfig) => {
             </div>
           </div>
           <div className="pkg-card">
-            <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/evidence-projects.svg" alt="Real Estate Website illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">Real Estate Website</h3>
               <p className="pkg-card__desc">
@@ -417,7 +417,7 @@ export const createCityPage = (config: CityPageConfig) => {
             </div>
           </div>
           <div className="pkg-card">
-            <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/evidence-projects.svg" alt="Beauty Salon Website illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">Beauty Salon Website</h3>
               <p className="pkg-card__desc">
@@ -445,21 +445,21 @@ export const createCityPage = (config: CityPageConfig) => {
       >
         <div className="grid-three">
           <div className="pkg-card">
-            <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/evidence-projects.svg" alt="75% of consumers judge your business by its website alone illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">75% of consumers judge your business by its website alone</h3>
               <p className="pkg-card__desc">Source: Stanford Web Credibility Study</p>
             </div>
           </div>
           <div className="pkg-card">
-            <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/evidence-projects.svg" alt="53% of visitors leave a site that takes over 3 seconds to load illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">53% of visitors leave a site that takes over 3 seconds to load</h3>
               <p className="pkg-card__desc">Source: Google PageSpeed research</p>
             </div>
           </div>
           <div className="pkg-card">
-            <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/evidence-projects.svg" alt="46% of Google searches are looking for a local business illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">46% of Google searches are looking for a local business</h3>
               <p className="pkg-card__desc">Source: Google local search data</p>
@@ -475,7 +475,7 @@ export const createCityPage = (config: CityPageConfig) => {
       >
         <div className="grid-two">
           <div className="pkg-card">
-            <img src="/package-images/city-evidence-work.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/city-evidence-work.svg" alt="Project case studies illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">Project case studies</h3>
               <p className="pkg-card__desc">
@@ -484,7 +484,7 @@ export const createCityPage = (config: CityPageConfig) => {
             </div>
           </div>
           <div className="pkg-card">
-            <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/evidence-projects.svg" alt="Web development FAQ illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">Web development FAQ</h3>
               <p className="pkg-card__desc">
@@ -493,7 +493,7 @@ export const createCityPage = (config: CityPageConfig) => {
             </div>
           </div>
           <div className="pkg-card">
-            <img src="/package-images/city-evidence-pricing.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/city-evidence-pricing.svg" alt="Pricing breakdown illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">Pricing breakdown</h3>
               <p className="pkg-card__desc">
@@ -502,7 +502,7 @@ export const createCityPage = (config: CityPageConfig) => {
             </div>
           </div>
           <div className="pkg-card">
-            <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/evidence-projects.svg" alt="Small business checklist illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">Small business checklist</h3>
               <p className="pkg-card__desc">
@@ -514,12 +514,82 @@ export const createCityPage = (config: CityPageConfig) => {
       </Section>
 
       <Section
+        eyebrow="Pricing comparison"
+        title={`Website package comparison for ${city} businesses`}
+        description={
+          <p>
+            Three fixed-price tiers so you can see exactly what each includes before we talk. No hidden fees, no scope creep — pick the tier that fits your {city} business and we go from there.
+          </p>
+        }
+      >
+        <Card variant="outline">
+          <table className="data-table">
+            <caption>Website package tiers compared — Starter, Growth, and Premium</caption>
+            <thead>
+              <tr>
+                <th scope="col">Feature</th>
+                <th scope="col">Starter — $447</th>
+                <th scope="col">Growth — $797</th>
+                <th scope="col">Premium — $1,497</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" data-label="Feature">Pages</th>
+                <td data-label="Starter — $447">Up to 5</td>
+                <td data-label="Growth — $797">Up to 10</td>
+                <td data-label="Premium — $1,497">Up to 20</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Feature">Design</th>
+                <td data-label="Starter — $447">Template-based, mobile-responsive</td>
+                <td data-label="Growth — $797">Custom layout, two revision rounds</td>
+                <td data-label="Premium — $1,497">Full custom design, unlimited revisions</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Feature">Local SEO</th>
+                <td data-label="Starter — $447">Basic on-page metadata</td>
+                <td data-label="Growth — $797">On-page + Google Business Profile setup</td>
+                <td data-label="Premium — $1,497">Full local SEO, schema markup, content structure</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Feature">Care Plan</th>
+                <td data-label="Starter — $447">$37/month hosting and updates</td>
+                <td data-label="Growth — $797">$67/month hosting, updates, and edits</td>
+                <td data-label="Premium — $1,497">$97/month full support and priority edits</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Feature">Support</th>
+                <td data-label="Starter — $447">24-hour response, 30-day warranty</td>
+                <td data-label="Growth — $797">24-hour response, 60-day warranty</td>
+                <td data-label="Premium — $1,497">Priority response, 90-day warranty</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Feature">Timeline</th>
+                <td data-label="Starter — $447">14 days</td>
+                <td data-label="Growth — $797">3 weeks</td>
+                <td data-label="Premium — $1,497">4 weeks</td>
+              </tr>
+            </tbody>
+          </table>
+        </Card>
+        <div className="card-actions" style={{ marginTop: "1.5rem" }}>
+          <Link data-variant="primary" to="/contact/">
+            Get a free consultation
+          </Link>
+          <Link data-variant="ghost" to="/pricing/">
+            See full pricing
+          </Link>
+        </div>
+      </Section>
+
+      <Section
         eyebrow="FAQ"
         title={`Common questions about web development in ${city}`}
       >
         <div className="grid-two">
           <div className="pkg-card">
-            <img src="/package-images/why-fixed.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/why-fixed.svg" alt="How much does a website cost? illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">How much does a website cost?</h3>
               <p className="pkg-card__desc">
@@ -528,7 +598,7 @@ export const createCityPage = (config: CityPageConfig) => {
             </div>
           </div>
           <div className="pkg-card">
-            <img src="/package-images/why-fixed.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/why-fixed.svg" alt="How long does it take? illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">How long does it take?</h3>
               <p className="pkg-card__desc">
@@ -537,7 +607,7 @@ export const createCityPage = (config: CityPageConfig) => {
             </div>
           </div>
           <div className="pkg-card">
-            <img src="/package-images/why-fixed.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/why-fixed.svg" alt="Do you offer a guarantee? illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">Do you offer a guarantee?</h3>
               <p className="pkg-card__desc">
@@ -546,7 +616,7 @@ export const createCityPage = (config: CityPageConfig) => {
             </div>
           </div>
           <div className="pkg-card">
-            <img src="/package-images/why-fixed.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/why-fixed.svg" alt="Do I own my website? illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">Do I own my website?</h3>
               <p className="pkg-card__desc">
@@ -555,7 +625,7 @@ export const createCityPage = (config: CityPageConfig) => {
             </div>
           </div>
           <div className="pkg-card">
-            <img src="/package-images/why-fixed.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/why-fixed.svg" alt="Can you fix my existing website? illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">Can you fix my existing website?</h3>
               <p className="pkg-card__desc">
@@ -564,7 +634,7 @@ export const createCityPage = (config: CityPageConfig) => {
             </div>
           </div>
           <div className="pkg-card">
-            <img src="/package-images/why-fixed.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/why-fixed.svg" alt={`Do you work with businesses in ${county}? illustration`} className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">Do you work with businesses in {county}?</h3>
               <p className="pkg-card__desc">
@@ -601,7 +671,7 @@ export const createCityPage = (config: CityPageConfig) => {
       >
         <div className="grid-two">
           <div className="pkg-card">
-            <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/evidence-projects.svg" alt="Common questions illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">Common questions</h3>
               <p className="pkg-card__desc">
@@ -615,7 +685,7 @@ export const createCityPage = (config: CityPageConfig) => {
             </div>
           </div>
           <div className="pkg-card">
-            <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/evidence-projects.svg" alt="Website help and repair illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">Website help and repair</h3>
               <p className="pkg-card__desc">
@@ -631,7 +701,7 @@ export const createCityPage = (config: CityPageConfig) => {
         </div>
         <div className="grid-two">
           <div className="pkg-card">
-            <img src="/package-images/city-evidence-pricing.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/city-evidence-pricing.svg" alt="Pricing illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">Pricing</h3>
               <p className="pkg-card__desc">
@@ -645,7 +715,7 @@ export const createCityPage = (config: CityPageConfig) => {
             </div>
           </div>
           <div className="pkg-card">
-            <img src="/package-images/city-evidence-contact.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/city-evidence-contact.svg" alt="Get in touch illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">Get in touch</h3>
               <p className="pkg-card__desc">

@@ -8,6 +8,7 @@ import {
   collectionOrder,
   ComparisonSection,
   FeaturedSection,
+  formatPrice,
   Product,
   ProductGrid,
   StoreProductRoute,
@@ -285,6 +286,32 @@ const StoreIndex: React.FC<RouteComponentProps> = () => {
                 <div className="store-empty">
                   No direct downloads yet. New digital releases are coming soon.
                 </div>
+              )}
+
+              {directProducts.length > 0 && (
+                <table className="data-table">
+                  <caption>Digital product comparison — price, format, and license</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Product</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">Format</th>
+                      <th scope="col">License</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {directProducts.map((product) => (
+                      <tr key={product.id}>
+                        <td data-label="Product">
+                          <Link to={`/store/${product.slug}`}>{product.name}</Link>
+                        </td>
+                        <td data-label="Price">{formatPrice(product)}</td>
+                        <td data-label="Format">Digital download</td>
+                        <td data-label="License">Personal use</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               )}
           </section>
 

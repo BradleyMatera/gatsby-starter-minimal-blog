@@ -114,6 +114,7 @@ const WebsiteCarePlansPage = () => (
       }
       description={
         <>
+          <p style={{ fontSize: "0.85rem", color: "var(--color-text-subtle)", marginBottom: "1rem" }}>Last updated: July 2026 · By Bradley Matera</p>
           <p className="direct-answer">
             <strong>What are website care plans?</strong> Ongoing maintenance, security updates, backups, and support for your website. Three tiers from $37 to $97 per month. No long-term commitment. Website care plans are month-to-month. Every website project still uses a written service agreement and scope of work. Your site stays secure, backed up, and online.
           </p>
@@ -133,7 +134,7 @@ const WebsiteCarePlansPage = () => (
       <div className="grid-three">
         {careTiers.map((tier) => (
           <div key={tier.name} className="pkg-card">
-            <img src={tier.image} alt="" className="pkg-card__bg" loading="lazy" />
+            <img src={tier.image} alt={`${tier.name} care plan illustration`} className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h2 className="pkg-card__title">{tier.name}</h2>
               <p className="pkg-card__desc">
@@ -192,7 +193,7 @@ const WebsiteCarePlansPage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/care-security.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/care-security.svg" alt="Security updates illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Security updates</h3>
             <p className="pkg-card__desc">
@@ -201,7 +202,7 @@ const WebsiteCarePlansPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/care-backups.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/care-backups.svg" alt="Backups illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Backups</h3>
             <p className="pkg-card__desc">
@@ -210,7 +211,7 @@ const WebsiteCarePlansPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/care-uptime.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/care-uptime.svg" alt="Uptime monitoring illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Uptime monitoring</h3>
             <p className="pkg-card__desc">
@@ -219,7 +220,7 @@ const WebsiteCarePlansPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/care-content.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/care-content.svg" alt="Content updates illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Content updates</h3>
             <p className="pkg-card__desc">
@@ -228,7 +229,7 @@ const WebsiteCarePlansPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/care-localseo.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/care-localseo.svg" alt="Local SEO illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Local SEO</h3>
             <p className="pkg-card__desc">
@@ -237,7 +238,7 @@ const WebsiteCarePlansPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/care-support.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/care-support.svg" alt="Support illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Support</h3>
             <p className="pkg-card__desc">
@@ -334,7 +335,7 @@ const WebsiteCarePlansPage = () => (
       <div className="grid-three">
         {faqs.map((faq) => (
           <div key={faq.q} className="pkg-card">
-            <img src="/package-images/why-fixed.svg" alt="" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/why-fixed.svg" alt={`${faq.q} illustration`} className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">{faq.q}</h3>
               <p className="pkg-card__desc">{faq.a}</p>

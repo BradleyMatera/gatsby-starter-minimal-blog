@@ -73,7 +73,7 @@ const PecatonicaWebDeveloperPage = () => (
     >
       <div className="grid-two">
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="What I can help with right now illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">What I can help with right now</h2>
             <ul className="feature-list">
@@ -84,7 +84,7 @@ const PecatonicaWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="Why a local developer makes sense here illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">Why a local developer makes sense here</h2>
             <p className="pkg-card__desc">
@@ -117,7 +117,7 @@ const PecatonicaWebDeveloperPage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="Website design illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Website design</h3>
             <p className="pkg-card__desc">
@@ -128,7 +128,7 @@ const PecatonicaWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="Website help & repair illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Website help & repair</h3>
             <p className="pkg-card__desc">
@@ -139,7 +139,7 @@ const PecatonicaWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="SEO services illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">SEO services</h3>
             <p className="pkg-card__desc">
@@ -152,7 +152,7 @@ const PecatonicaWebDeveloperPage = () => (
       </div>
       <div className="grid-two">
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="Small business websites illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Small business websites</h3>
             <p className="pkg-card__desc">
@@ -164,7 +164,7 @@ const PecatonicaWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="Nearby communities I also serve illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Nearby communities I also serve</h3>
             <p className="pkg-card__desc">
@@ -195,7 +195,7 @@ const PecatonicaWebDeveloperPage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="Knows the Pecatonica market illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Knows the Pecatonica market</h3>
             <p className="pkg-card__desc">
@@ -207,7 +207,7 @@ const PecatonicaWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="Available in person illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Available in person</h3>
             <p className="pkg-card__desc">
@@ -217,7 +217,7 @@ const PecatonicaWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="Accountable to the region illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Accountable to the region</h3>
             <p className="pkg-card__desc">
@@ -251,7 +251,7 @@ const PecatonicaWebDeveloperPage = () => (
     >
       <div className="grid-two">
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="Smaller and more personal illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Smaller and more personal</h3>
             <p className="pkg-card__desc">
@@ -260,7 +260,7 @@ const PecatonicaWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="More transparent on cost illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">More transparent on cost</h3>
             <p className="pkg-card__desc">
@@ -270,7 +270,7 @@ const PecatonicaWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="No sales pipeline illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">No sales pipeline</h3>
             <p className="pkg-card__desc">
@@ -280,7 +280,7 @@ const PecatonicaWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="When an agency is the right call illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">When an agency is the right call</h3>
             <p className="pkg-card__desc">
@@ -298,7 +298,7 @@ const PecatonicaWebDeveloperPage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/city-step-call.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-step-call.svg" alt="Free consultation illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Free consultation</h3>
             <p className="pkg-card__desc">
@@ -307,7 +307,7 @@ const PecatonicaWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/city-step-build.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-step-build.svg" alt="Design and build illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Design and build</h3>
             <p className="pkg-card__desc">
@@ -316,7 +316,7 @@ const PecatonicaWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/city-step-launch.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-step-launch.svg" alt="Launch and support illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Launch and support</h3>
             <p className="pkg-card__desc">
@@ -358,7 +358,7 @@ const PecatonicaWebDeveloperPage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="75% of consumers judge your business by its website alone illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">75% of consumers judge your business by its website alone</h3>
             <p className="pkg-card__desc">
@@ -367,7 +367,7 @@ const PecatonicaWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="53% of visitors leave a site that takes over 3 seconds to load illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">53% of visitors leave a site that takes over 3 seconds to load</h3>
             <p className="pkg-card__desc">
@@ -376,7 +376,7 @@ const PecatonicaWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="46% of Google searches are looking for a local business illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">46% of Google searches are looking for a local business</h3>
             <p className="pkg-card__desc">
@@ -398,7 +398,7 @@ const PecatonicaWebDeveloperPage = () => (
     >
       <div className="grid-two">
         <div className="pkg-card">
-          <img src="/package-images/city-evidence-work.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-evidence-work.svg" alt="Project case studies illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Project case studies</h3>
             <p className="pkg-card__desc">
@@ -407,7 +407,7 @@ const PecatonicaWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="Web development FAQ illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Web development FAQ</h3>
             <p className="pkg-card__desc">
@@ -416,7 +416,7 @@ const PecatonicaWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/city-evidence-pricing.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-evidence-pricing.svg" alt="Pricing breakdown illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Pricing breakdown</h3>
             <p className="pkg-card__desc">
@@ -425,7 +425,7 @@ const PecatonicaWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="Small business checklist illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Small business checklist</h3>
             <p className="pkg-card__desc">
@@ -442,7 +442,7 @@ const PecatonicaWebDeveloperPage = () => (
     >
       <div className="grid-two">
         <div className="pkg-card">
-          <img src="/package-images/why-fixed.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/why-fixed.svg" alt="How much does a website cost? illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">How much does a website cost?</h3>
             <p className="pkg-card__desc">
@@ -451,7 +451,7 @@ const PecatonicaWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/why-fixed.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/why-fixed.svg" alt="How long does it take? illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">How long does it take?</h3>
             <p className="pkg-card__desc">
@@ -460,7 +460,7 @@ const PecatonicaWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/why-fixed.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/why-fixed.svg" alt="Do you offer a guarantee? illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Do you offer a guarantee?</h3>
             <p className="pkg-card__desc">
@@ -469,7 +469,7 @@ const PecatonicaWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/why-fixed.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/why-fixed.svg" alt="Do I own my website? illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Do I own my website?</h3>
             <p className="pkg-card__desc">
@@ -478,7 +478,7 @@ const PecatonicaWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/why-fixed.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/why-fixed.svg" alt="Can you fix my existing website? illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Can you fix my existing website?</h3>
             <p className="pkg-card__desc">
@@ -509,7 +509,7 @@ const PecatonicaWebDeveloperPage = () => (
     >
       <div className="grid-two">
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="Common questions illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Common questions</h3>
             <p className="pkg-card__desc">
@@ -524,7 +524,7 @@ const PecatonicaWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="Other local pages illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Other local pages</h3>
             <p className="pkg-card__desc">
@@ -544,7 +544,7 @@ const PecatonicaWebDeveloperPage = () => (
       </div>
       <div className="grid-two">
         <div className="pkg-card">
-          <img src="/package-images/city-evidence-pricing.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-evidence-pricing.svg" alt="Pricing illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Pricing</h3>
             <p className="pkg-card__desc">
@@ -558,7 +558,7 @@ const PecatonicaWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/city-evidence-contact.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-evidence-contact.svg" alt="Get in touch illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Get in touch</h3>
             <p className="pkg-card__desc">

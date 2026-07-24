@@ -70,6 +70,7 @@ const WebsiteRedesignPage = () => (
       }
       description={
         <>
+          <p style={{ fontSize: "0.85rem", color: "var(--color-text-subtle)", marginBottom: "1rem" }}>Last updated: July 2026 · By Bradley Matera</p>
           <p className="direct-answer">
             <strong>What is a website redesign?</strong> A full refresh of your existing outdated website with a modern, fast, mobile-ready design. You keep your content, domain, and search rankings. Starting at $597, builds in 3-4 weeks, written agreements included.
           </p>
@@ -88,7 +89,7 @@ const WebsiteRedesignPage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/redesign-price.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/redesign-price.svg" alt="Starting at $597 illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">Starting at $597</h2>
             <p className="pkg-card__desc">
@@ -100,7 +101,7 @@ const WebsiteRedesignPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/redesign-timeline.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/redesign-timeline.svg" alt="3-4 week builds illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">3-4 week builds</h2>
             <p className="pkg-card__desc">
@@ -112,7 +113,7 @@ const WebsiteRedesignPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/redesign-rankings.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/redesign-rankings.svg" alt="Keep your rankings illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">Keep your rankings</h2>
             <p className="pkg-card__desc">
@@ -150,7 +151,7 @@ const WebsiteRedesignPage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/step-1-diagnose.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/step-1-diagnose.svg" alt="1. Audit and plan illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">1. Audit and plan</h3>
             <p className="pkg-card__desc">
@@ -159,7 +160,7 @@ const WebsiteRedesignPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/step-2-build.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/step-2-build.svg" alt="2. Redesign and migrate illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">2. Redesign and migrate</h3>
             <p className="pkg-card__desc">
@@ -168,7 +169,7 @@ const WebsiteRedesignPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/step-3-launch.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/step-3-launch.svg" alt="3. Launch with redirects illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">3. Launch with redirects</h3>
             <p className="pkg-card__desc">

@@ -78,6 +78,7 @@ const WebsiteAccessibilityPage = () => (
       }
       description={
         <>
+          <p style={{ fontSize: "0.85rem", color: "var(--color-text-subtle)", marginBottom: "1rem" }}>Last updated: July 2026 · By Bradley Matera</p>
           <p className="direct-answer">
             <strong>What are website accessibility services?</strong> Audits and fixes to bring your website up to WCAG 2.2 AA compliance — keyboard navigation, screen reader support, color contrast, ARIA labels, and form accessibility. Audits from $197, remediation at $65/hour.
           </p>
@@ -96,7 +97,7 @@ const WebsiteAccessibilityPage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/a11y-wcag.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/a11y-wcag.svg" alt="WCAG 2.2 AA illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">WCAG 2.2 AA</h2>
             <p className="pkg-card__desc">
@@ -108,7 +109,7 @@ const WebsiteAccessibilityPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/a11y-audit.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/a11y-audit.svg" alt="Audits from $197 illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">Audits from $197</h2>
             <p className="pkg-card__desc">
@@ -120,7 +121,7 @@ const WebsiteAccessibilityPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/a11y-remediation.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/a11y-remediation.svg" alt="Remediation at $65/hr illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">Remediation at $65/hr</h2>
             <p className="pkg-card__desc">
@@ -158,7 +159,7 @@ const WebsiteAccessibilityPage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/step-1-diagnose.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/step-1-diagnose.svg" alt="1. Audit illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">1. Audit</h3>
             <p className="pkg-card__desc">
@@ -167,7 +168,7 @@ const WebsiteAccessibilityPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/step-2-build.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/step-2-build.svg" alt="2. Report illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">2. Report</h3>
             <p className="pkg-card__desc">
@@ -176,7 +177,7 @@ const WebsiteAccessibilityPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/step-3-launch.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/step-3-launch.svg" alt="3. Remediate illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">3. Remediate</h3>
             <p className="pkg-card__desc">

@@ -41,6 +41,7 @@ const ServiceScopePage = () => (
       }
       description={
         <>
+          <p style={{ fontSize: "0.85rem", color: "var(--color-text-subtle)", marginBottom: "1rem" }}>Last updated: July 2026 · By Bradley Matera</p>
           <p className="direct-answer">
             <strong>What's included in a Bradley Matera website build?</strong> Every build includes mobile-responsive design, basic SEO, a contact form, hosting setup, analytics, and a 30-day warranty. Custom photography, logo design, paid advertising, and content writing beyond package scope are not included. Last updated July 2026.
           </p>
@@ -59,7 +60,7 @@ const ServiceScopePage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/scope-included.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/scope-included.svg" alt="Mobile responsive illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">Mobile responsive</h2>
             <p className="pkg-card__desc">
@@ -68,7 +69,7 @@ const ServiceScopePage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/scope-included.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/scope-included.svg" alt="30-day warranty illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">30-day warranty</h2>
             <p className="pkg-card__desc">
@@ -77,7 +78,7 @@ const ServiceScopePage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/scope-included.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/scope-included.svg" alt="No hidden scope illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">No hidden scope</h2>
             <p className="pkg-card__desc">
@@ -93,7 +94,7 @@ const ServiceScopePage = () => (
       title="What's included in every build"
     >
       <div className="pkg-card">
-        <img src="/package-images/scope-included.svg" alt="" className="pkg-card__bg" loading="lazy" />
+        <img src="/package-images/scope-included.svg" alt="What's included in every build illustration" className="pkg-card__bg" loading="lazy" />
         <div className="pkg-card__body">
           <p className="pkg-card__desc">
             Regardless of which package you choose, every website build includes:
@@ -140,7 +141,7 @@ const ServiceScopePage = () => (
       title="What's NOT included"
     >
       <div className="pkg-card">
-        <img src="/package-images/scope-excluded.svg" alt="" className="pkg-card__bg" loading="lazy" />
+        <img src="/package-images/scope-excluded.svg" alt="What's not included illustration" className="pkg-card__bg" loading="lazy" />
         <div className="pkg-card__body">
           <p className="pkg-card__desc">
             The following are not included in standard builds and can be quoted separately if needed:
@@ -170,7 +171,7 @@ const ServiceScopePage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/scope-included.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/scope-included.svg" alt="Starter Presence package illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Starter Presence</h3>
             <p className="pkg-card__desc">
@@ -179,7 +180,7 @@ const ServiceScopePage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/scope-included.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/scope-included.svg" alt="Local Growth package illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Local Growth</h3>
             <p className="pkg-card__desc">
@@ -188,7 +189,7 @@ const ServiceScopePage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/scope-included.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/scope-included.svg" alt="Lead Engine package illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Lead Engine</h3>
             <p className="pkg-card__desc">
@@ -204,6 +205,140 @@ const ServiceScopePage = () => (
     </Section>
 
     <Section
+      eyebrow="Comparison"
+      title="Package comparison: what's included vs. not included"
+      description={
+        <p>
+          A side-by-side comparison of the three build packages. Items marked <strong>Yes</strong> are included in the standard build scope; items marked <strong>No</strong> are excluded and can be quoted separately.
+        </p>
+      }
+    >
+      <Card variant="outline">
+        <table className="data-table">
+          <caption>What's included vs. not included across Starter Presence, Local Growth, and Lead Engine</caption>
+          <thead>
+            <tr>
+              <th scope="col">Feature</th>
+              <th scope="col">Starter Presence</th>
+              <th scope="col">Local Growth</th>
+              <th scope="col">Lead Engine</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Max pages</th>
+              <td data-label="Starter Presence">Up to 5</td>
+              <td data-label="Local Growth">Up to 10</td>
+              <td data-label="Lead Engine">Defined in written scope</td>
+            </tr>
+            <tr>
+              <th scope="row">Mobile-responsive design</th>
+              <td data-label="Starter Presence">Yes</td>
+              <td data-label="Local Growth">Yes</td>
+              <td data-label="Lead Engine">Yes</td>
+            </tr>
+            <tr>
+              <th scope="row">Basic SEO &amp; local business schema</th>
+              <td data-label="Starter Presence">Yes</td>
+              <td data-label="Local Growth">Yes</td>
+              <td data-label="Lead Engine">Yes</td>
+            </tr>
+            <tr>
+              <th scope="row">Contact form with spam protection</th>
+              <td data-label="Starter Presence">Yes</td>
+              <td data-label="Local Growth">Yes</td>
+              <td data-label="Lead Engine">Yes</td>
+            </tr>
+            <tr>
+              <th scope="row">Hosting &amp; analytics setup</th>
+              <td data-label="Starter Presence">Yes</td>
+              <td data-label="Local Growth">Yes</td>
+              <td data-label="Lead Engine">Yes</td>
+            </tr>
+            <tr>
+              <th scope="row">30-day post-launch warranty</th>
+              <td data-label="Starter Presence">Yes</td>
+              <td data-label="Local Growth">Yes</td>
+              <td data-label="Lead Engine">Yes</td>
+            </tr>
+            <tr>
+              <th scope="row">Revision rounds</th>
+              <td data-label="Starter Presence">1</td>
+              <td data-label="Local Growth">2</td>
+              <td data-label="Lead Engine">3</td>
+            </tr>
+            <tr>
+              <th scope="row">Google Business Profile alignment</th>
+              <td data-label="Starter Presence">No</td>
+              <td data-label="Local Growth">Yes</td>
+              <td data-label="Lead Engine">Yes</td>
+            </tr>
+            <tr>
+              <th scope="row">Advanced schema markup (Service + FAQ)</th>
+              <td data-label="Starter Presence">No</td>
+              <td data-label="Local Growth">Yes</td>
+              <td data-label="Lead Engine">Yes</td>
+            </tr>
+            <tr>
+              <th scope="row">Local SEO foundations</th>
+              <td data-label="Starter Presence">No</td>
+              <td data-label="Local Growth">Yes</td>
+              <td data-label="Lead Engine">Yes</td>
+            </tr>
+            <tr>
+              <th scope="row">Custom conversion planning</th>
+              <td data-label="Starter Presence">No</td>
+              <td data-label="Local Growth">No</td>
+              <td data-label="Lead Engine">Yes</td>
+            </tr>
+            <tr>
+              <th scope="row">Service-area architecture</th>
+              <td data-label="Starter Presence">No</td>
+              <td data-label="Local Growth">No</td>
+              <td data-label="Lead Engine">Yes</td>
+            </tr>
+            <tr>
+              <th scope="row">Technical SEO &amp; post-launch measurement review</th>
+              <td data-label="Starter Presence">No</td>
+              <td data-label="Local Growth">No</td>
+              <td data-label="Lead Engine">Yes</td>
+            </tr>
+            <tr>
+              <th scope="row">E-commerce functionality</th>
+              <td data-label="Starter Presence">No</td>
+              <td data-label="Local Growth">No</td>
+              <td data-label="Lead Engine">Custom quoted</td>
+            </tr>
+            <tr>
+              <th scope="row">Advanced / AI integrations</th>
+              <td data-label="Starter Presence">No</td>
+              <td data-label="Local Growth">No</td>
+              <td data-label="Lead Engine">Custom quoted</td>
+            </tr>
+            <tr>
+              <th scope="row">Advertising management</th>
+              <td data-label="Starter Presence">No</td>
+              <td data-label="Local Growth">No</td>
+              <td data-label="Lead Engine">No</td>
+            </tr>
+            <tr>
+              <th scope="row">Custom photography / logo design</th>
+              <td data-label="Starter Presence">No</td>
+              <td data-label="Local Growth">No</td>
+              <td data-label="Lead Engine">No</td>
+            </tr>
+            <tr>
+              <th scope="row">Build time</th>
+              <td data-label="Starter Presence">~14 days</td>
+              <td data-label="Local Growth">3&ndash;4 weeks</td>
+              <td data-label="Lead Engine">Defined in scope</td>
+            </tr>
+          </tbody>
+        </table>
+      </Card>
+    </Section>
+
+    <Section
       eyebrow="Care plans"
       title="Care plan scope"
       description={
@@ -214,7 +349,7 @@ const ServiceScopePage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/scope-process.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/scope-process.svg" alt="Essential care plan illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Essential — $37/month</h3>
             <p className="pkg-card__desc">
@@ -223,7 +358,7 @@ const ServiceScopePage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/scope-process.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/scope-process.svg" alt="Growth care plan illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Growth — $67/month</h3>
             <p className="pkg-card__desc">
@@ -232,7 +367,7 @@ const ServiceScopePage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/scope-process.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/scope-process.svg" alt="Search care plan illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Search — $97/month</h3>
             <p className="pkg-card__desc">
@@ -262,7 +397,7 @@ const ServiceScopePage = () => (
       title="Travel policy"
     >
       <div className="pkg-card">
-        <img src="/package-images/scope-process.svg" alt="" className="pkg-card__bg" loading="lazy" />
+        <img src="/package-images/scope-process.svg" alt="Travel policy illustration" className="pkg-card__bg" loading="lazy" />
         <div className="pkg-card__body">
           <p className="pkg-card__desc">
             Work is remote-first. Phone, video, and email handle the vast majority of projects efficiently.
@@ -280,7 +415,7 @@ const ServiceScopePage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/scope-process.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/scope-process.svg" alt="Essential plan response time illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Essential plan</h3>
             <p className="pkg-card__desc">
@@ -289,7 +424,7 @@ const ServiceScopePage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/scope-process.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/scope-process.svg" alt="Growth plan response time illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Growth plan</h3>
             <p className="pkg-card__desc">
@@ -298,7 +433,7 @@ const ServiceScopePage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/scope-process.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/scope-process.svg" alt="Search plan response time illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Search plan</h3>
             <p className="pkg-card__desc">

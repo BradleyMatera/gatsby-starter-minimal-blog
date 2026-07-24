@@ -68,6 +68,7 @@ const WebsiteRepairPage = () => (
       }
       description={
         <>
+          <p style={{ fontSize: "0.85rem", color: "var(--color-text-subtle)", marginBottom: "1rem" }}>Last updated: July 2026 · By Bradley Matera</p>
           <p className="direct-answer">
             <strong>What is website repair?</strong> Fixing broken pages, forms, layouts, errors, and performance issues on your existing website. $65/hour for individual fixes, or a full $597 refresh for outdated sites. Fast turnaround, written agreements included.
           </p>
@@ -86,7 +87,7 @@ const WebsiteRepairPage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/repair-hourly.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/repair-hourly.svg" alt="$65/hour illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">$65/hour</h2>
             <p className="pkg-card__desc">
@@ -98,7 +99,7 @@ const WebsiteRepairPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/repair-refresh.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/repair-refresh.svg" alt="$597 full refresh illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">$597 full refresh</h2>
             <p className="pkg-card__desc">
@@ -110,7 +111,7 @@ const WebsiteRepairPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/repair-turnaround.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/repair-turnaround.svg" alt="24-48 hour turnaround illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">24-48 hour turnaround</h2>
             <p className="pkg-card__desc">
@@ -148,7 +149,7 @@ const WebsiteRepairPage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/step-1-diagnose.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/step-1-diagnose.svg" alt="1. Diagnose illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">1. Diagnose</h3>
             <p className="pkg-card__desc">
@@ -157,7 +158,7 @@ const WebsiteRepairPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/step-2-build.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/step-2-build.svg" alt="2. Fix illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">2. Fix</h3>
             <p className="pkg-card__desc">
@@ -166,7 +167,7 @@ const WebsiteRepairPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/step-3-launch.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/step-3-launch.svg" alt="3. Document illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">3. Document</h3>
             <p className="pkg-card__desc">
@@ -188,7 +189,7 @@ const WebsiteRepairPage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/repair-hourly-compare.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/repair-hourly-compare.svg" alt="Hourly repair — $65/hr illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Hourly repair — $65/hr</h3>
             <p className="pkg-card__desc">
@@ -197,7 +198,7 @@ const WebsiteRepairPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/repair-refresh-compare.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/repair-refresh-compare.svg" alt="Full refresh — $597 illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Full refresh — $597</h3>
             <p className="pkg-card__desc">
@@ -209,7 +210,7 @@ const WebsiteRepairPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/repair-newbuild-compare.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/repair-newbuild-compare.svg" alt="New build — from $447 illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">New build — from $447</h3>
             <p className="pkg-card__desc">

@@ -75,6 +75,7 @@ const LocalSeoPage = () => (
       }
       description={
         <>
+          <p style={{ fontSize: "0.85rem", color: "var(--color-text-subtle)", marginBottom: "1rem" }}>Last updated: July 2026 · By Bradley Matera</p>
           <p className="direct-answer">
             <strong>What are local SEO services?</strong> Optimization of your <a href="https://www.google.com/business/">Google Business Profile</a>, local search rankings, and website schema markup so customers in your area find you when they search. Starting at $67/month, written agreements included, monthly reporting included.
           </p>
@@ -93,7 +94,7 @@ const LocalSeoPage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/seo-price.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/seo-price.svg" alt="Starting at $67/month illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">Starting at $67/month</h2>
             <p className="pkg-card__desc">
@@ -105,7 +106,7 @@ const LocalSeoPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/seo-gbp.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/seo-gbp.svg" alt="Google Business Profile illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">Google Business Profile</h2>
             <p className="pkg-card__desc">
@@ -117,7 +118,7 @@ const LocalSeoPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/seo-reports.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/seo-reports.svg" alt="Monthly reports illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">Monthly reports</h2>
             <p className="pkg-card__desc">
@@ -155,7 +156,7 @@ const LocalSeoPage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/step-1-diagnose.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/step-1-diagnose.svg" alt="1. Audit and research illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">1. Audit and research</h3>
             <p className="pkg-card__desc">
@@ -164,7 +165,7 @@ const LocalSeoPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/step-2-build.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/step-2-build.svg" alt="2. Optimize and submit illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">2. Optimize and submit</h3>
             <p className="pkg-card__desc">
@@ -173,7 +174,7 @@ const LocalSeoPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/step-3-launch.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/step-3-launch.svg" alt="3. Track and adjust illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">3. Track and adjust</h3>
             <p className="pkg-card__desc">

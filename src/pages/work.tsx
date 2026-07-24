@@ -60,7 +60,7 @@ const WorkPage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="Live demo websites illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">Live demo websites</h2>
             <p className="pkg-card__desc">
@@ -72,7 +72,7 @@ const WorkPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="Project case studies illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">Project case studies</h2>
             <p className="pkg-card__desc">
@@ -84,7 +84,7 @@ const WorkPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/evidence-projects.svg" alt="Open-source contributions illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">Open-source contributions</h2>
             <p className="pkg-card__desc">
@@ -110,7 +110,7 @@ const WorkPage = () => (
       <div className="grid-three">
         {demoCards.map((demo) => (
           <div key={demo.title} className="pkg-card">
-            <img src={demo.img} alt="" className="pkg-card__bg" loading="lazy" />
+            <img src={demo.img} alt={`${demo.title} website example illustration`} className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">{demo.title} Website</h3>
               <p className="pkg-card__desc">{demo.desc}</p>
@@ -174,7 +174,7 @@ const WorkPage = () => (
       </div>
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/work-landscaping.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/work-landscaping.svg" alt="Landscaping website example illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Landscaping website example</h3>
             <p className="pkg-card__desc">
@@ -186,7 +186,7 @@ const WorkPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/work-restaurant.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/work-restaurant.svg" alt="Restaurant website example illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Restaurant website example</h3>
             <p className="pkg-card__desc">
@@ -198,7 +198,7 @@ const WorkPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/work-hvac.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/work-hvac.svg" alt="HVAC website example illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">HVAC website example</h3>
             <p className="pkg-card__desc">

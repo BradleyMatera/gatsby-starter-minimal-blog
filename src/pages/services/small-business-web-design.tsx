@@ -70,6 +70,7 @@ const SmallBusinessWebDesignPage = () => (
       }
       description={
         <>
+          <p style={{ fontSize: "0.85rem", color: "var(--color-text-subtle)", marginBottom: "1rem" }}>Last updated: July 2026 · By Bradley Matera</p>
           <p className="direct-answer">
             <strong>What is small business web design?</strong> A custom website built from scratch for your small business — up to 5 pages, mobile-ready, SEO-ready, with a contact form and schema markup. Built in 14 days, starting at $447. Written agreements included, you own everything.
           </p>
@@ -88,7 +89,7 @@ const SmallBusinessWebDesignPage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/web-design-price.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/web-design-price.svg" alt="Starting at $447 illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">Starting at $447</h2>
             <p className="pkg-card__desc">
@@ -100,7 +101,7 @@ const SmallBusinessWebDesignPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/web-design-14day.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/web-design-14day.svg" alt="14-day builds illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">14-day builds</h2>
             <p className="pkg-card__desc">
@@ -112,7 +113,7 @@ const SmallBusinessWebDesignPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/web-design-own.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/web-design-own.svg" alt="You own everything illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">You own everything</h2>
             <p className="pkg-card__desc">
@@ -150,7 +151,7 @@ const SmallBusinessWebDesignPage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/step-1-diagnose.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/step-1-diagnose.svg" alt="1. Free consultation illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">1. Free consultation</h3>
             <p className="pkg-card__desc">
@@ -159,7 +160,7 @@ const SmallBusinessWebDesignPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/step-2-build.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/step-2-build.svg" alt="2. Design and build illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">2. Design and build</h3>
             <p className="pkg-card__desc">
@@ -168,7 +169,7 @@ const SmallBusinessWebDesignPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/step-3-launch.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/step-3-launch.svg" alt="3. Launch and support illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">3. Launch and support</h3>
             <p className="pkg-card__desc">

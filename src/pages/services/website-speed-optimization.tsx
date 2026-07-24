@@ -78,6 +78,7 @@ const WebsiteSpeedPage = () => (
       }
       description={
         <>
+          <p style={{ fontSize: "0.85rem", color: "var(--color-text-subtle)", marginBottom: "1rem" }}>Last updated: July 2026 · By Bradley Matera</p>
           <p className="direct-answer">
             <strong>What is website speed optimization?</strong> Making your website load faster and respond more quickly to user interactions. I improve Core Web Vitals (LCP, INP, CLS), optimize images, reduce JavaScript, and eliminate render-blocking resources. $65/hour or flat-rate project pricing. Faster sites rank better and convert more visitors.
           </p>
@@ -96,7 +97,7 @@ const WebsiteSpeedPage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/speed-lcp.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/speed-lcp.svg" alt="LCP under 2.5s illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">LCP under 2.5s</h2>
             <p className="pkg-card__desc">
@@ -105,7 +106,7 @@ const WebsiteSpeedPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/speed-inp.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/speed-inp.svg" alt="INP under 200ms illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">INP under 200ms</h2>
             <p className="pkg-card__desc">
@@ -114,7 +115,7 @@ const WebsiteSpeedPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/speed-cls.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/speed-cls.svg" alt="CLS under 0.1 illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">CLS under 0.1</h2>
             <p className="pkg-card__desc">
@@ -149,7 +150,7 @@ const WebsiteSpeedPage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/step-1-diagnose.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/step-1-diagnose.svg" alt="1. Audit illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">1. Audit</h3>
             <p className="pkg-card__desc">
@@ -158,7 +159,7 @@ const WebsiteSpeedPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/step-2-build.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/step-2-build.svg" alt="2. Optimize illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">2. Optimize</h3>
             <p className="pkg-card__desc">
@@ -167,7 +168,7 @@ const WebsiteSpeedPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/step-3-launch.svg" alt="" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/step-3-launch.svg" alt="3. Verify illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">3. Verify</h3>
             <p className="pkg-card__desc">
