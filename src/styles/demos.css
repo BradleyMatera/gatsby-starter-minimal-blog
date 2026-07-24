@@ -117,7 +117,7 @@
   --demo-radius: 2px;
   --demo-radius-lg: 4px;
   --demo-shadow: 0 8px 32px rgba(0,0,0,0.5);
-  --demo-hero-overlay: rgba(26,20,16,0.65);
+  --demo-hero-overlay: rgba(26,20,16,0.75);
 }
 
 /* 2. ORGANIC — Landscaping: fresh, rounded, green + earth */
@@ -174,7 +174,7 @@
   --demo-radius: 0px;
   --demo-radius-lg: 0px;
   --demo-shadow: 0 4px 20px rgba(0,0,0,0.5);
-  --demo-hero-overlay: rgba(28,28,30,0.6);
+  --demo-hero-overlay: rgba(28,28,30,0.75);
 }
 
 /* 5. LUXURY — Real Estate: elegant, serif, navy + gold */
@@ -213,7 +213,7 @@
   --demo-radius: 16px;
   --demo-radius-lg: 28px;
   --demo-shadow: 0 6px 24px rgba(214,51,132,0.1);
-  --demo-hero-overlay: rgba(50,25,40,0.65);
+  --demo-hero-overlay: rgba(50,25,40,0.78);
 }
 
 /* ==========================================================================
@@ -249,6 +249,7 @@
 .demo-page p { margin: 0; color: var(--demo-text); }
 .demo-page a { color: var(--demo-accent); text-decoration: none; }
 .demo-page img { max-width: 100%; height: auto; display: block; }
+.demo-page strong, .demo-page b { color: var(--demo-heading); }
 
 /* ==========================================================================
    HERO SECTION — with real background images
@@ -2037,6 +2038,9 @@
   font-size: 0.8125rem;
   color: var(--demo-accent);
 }
+.demo-neighborhood__stat strong {
+  color: var(--demo-accent);
+}
 
 /* ==========================================================================
    AGENT BIOS
@@ -2085,6 +2089,9 @@
 .demo-agent__stat {
   font-size: 0.875rem;
   color: var(--demo-text);
+}
+.demo-agent__stat strong {
+  color: var(--demo-heading);
 }
 
 /* ==========================================================================
