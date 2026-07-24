@@ -34,6 +34,8 @@ const LocalWebDeveloperPage = () => (
       </ol>
     </nav>
 
+    <img src="/city-images/durand-davis.jpg" alt="Durand and Davis, Illinois" className="city-hero-image" />
+
     <Section
       eyebrow="Local web development"
       titleAs="h1"

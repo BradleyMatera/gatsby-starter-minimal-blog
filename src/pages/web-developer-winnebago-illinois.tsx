@@ -32,6 +32,8 @@ const WinnebagoWebDeveloperPage = () => (
       </ol>
     </nav>
 
+    <img src="/city-images/winnebago.jpg" alt="Winnebago, Illinois" className="city-hero-image" />
+
     <Section
       eyebrow="Local web development"
       titleAs="h1"

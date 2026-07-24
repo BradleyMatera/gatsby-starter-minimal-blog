@@ -28,6 +28,8 @@ export type CityPageConfig = {
   allCitySlugs: Array<{ slug: string; label: string }>;
   /** County name */
   county: string;
+  /** City image filename in /static/city-images/ */
+  cityImage: string;
 };
 
 const serviceBullets = (city: string) => [
@@ -40,7 +42,7 @@ const serviceBullets = (city: string) => [
 ];
 
 export const createCityPage = (config: CityPageConfig) => {
-  const { city, state, stateAbbrev, slug, pageTitle, pageDescription, distance, direction, cityContext, marketContext, localDetails, allCitySlugs, county } = config;
+  const { city, state, stateAbbrev, slug, pageTitle, pageDescription, distance, direction, cityContext, marketContext, localDetails, allCitySlugs, county, cityImage } = config;
   const pathname = `/${slug}/`;
   const otherCities = allCitySlugs.filter((c) => c.slug !== slug);
 
@@ -56,6 +58,8 @@ export const createCityPage = (config: CityPageConfig) => {
           </li>
         </ol>
       </nav>
+
+      <img src={`/city-images/${cityImage}`} alt={`${city}, ${state}`} className="city-hero-image" />
 
       <Section
         eyebrow="Local web development"

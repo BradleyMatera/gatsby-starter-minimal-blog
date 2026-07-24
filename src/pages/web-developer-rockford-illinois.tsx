@@ -33,6 +33,8 @@ const LocalWebDeveloperPage = () => (
       </ol>
     </nav>
 
+    <img src="/city-images/rockford.jpg" alt="Rockford, Illinois" className="city-hero-image" />
+
     <Section
       eyebrow="Local web development"
       titleAs="h1"

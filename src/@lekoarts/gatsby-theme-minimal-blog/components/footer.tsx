@@ -143,6 +143,8 @@ const Footer = () => {
               <Link to={link.path} style={{ color: "inherit", textDecoration: "underline" }}>{link.label}</Link>
             </React.Fragment>
           ))}
+          {" · "}
+          <Link to="/image-credits/" style={{ color: "inherit", textDecoration: "underline" }}>Image credits</Link>
         </span>
         <span>
           <Link to="/recruiter/" style={{ color: "inherit", textDecoration: "underline" }}>

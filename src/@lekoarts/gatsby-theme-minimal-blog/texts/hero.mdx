@@ -235,32 +235,44 @@ import { HeroBanner } from "../../../site/components";
   actions={<Link data-variant="ghost" to="/service-areas/">See all service areas</Link>}
 >
   <div className="grid-three">
-    <div className="feature-card">
-      <h3 className="feature-card__title">Rockford, IL</h3>
-      <div className="card-actions"><Link data-variant="ghost" to="/web-developer-rockford-illinois/">Rockford web developer</Link></div>
-    </div>
-    <div className="feature-card">
-      <h3 className="feature-card__title">Freeport, IL</h3>
-      <div className="card-actions"><Link data-variant="ghost" to="/web-developer-freeport-illinois/">Freeport web developer</Link></div>
-    </div>
-    <div className="feature-card">
-      <h3 className="feature-card__title">Durand & Davis, IL</h3>
-      <div className="card-actions"><Link data-variant="ghost" to="/web-developer-durand-davis-illinois/">Durand/Davis web developer</Link></div>
-    </div>
+    <Link to="/web-developer-rockford-illinois/" className="city-card" style={{ backgroundImage: "url(/city-images/rockford.jpg)" }}>
+      <div className="city-card__overlay">
+        <h3 className="city-card__title">Rockford, IL</h3>
+        <span className="city-card__link">Rockford web developer →</span>
+      </div>
+    </Link>
+    <Link to="/web-developer-freeport-illinois/" className="city-card" style={{ backgroundImage: "url(/city-images/freeport.jpg)" }}>
+      <div className="city-card__overlay">
+        <h3 className="city-card__title">Freeport, IL</h3>
+        <span className="city-card__link">Freeport web developer →</span>
+      </div>
+    </Link>
+    <Link to="/web-developer-durand-davis-illinois/" className="city-card" style={{ backgroundImage: "url(/city-images/durand-davis.jpg)" }}>
+      <div className="city-card__overlay">
+        <h3 className="city-card__title">Durand & Davis, IL</h3>
+        <span className="city-card__link">Durand/Davis web developer →</span>
+      </div>
+    </Link>
   </div>
   <div className="grid-three" style={{ marginTop: "1.5rem" }}>
-    <div className="feature-card">
-      <h3 className="feature-card__title">Loves Park, IL</h3>
-      <div className="card-actions"><Link data-variant="ghost" to="/web-developer-loves-park-illinois/">Loves Park web developer</Link></div>
-    </div>
-    <div className="feature-card">
-      <h3 className="feature-card__title">Beloit, WI</h3>
-      <div className="card-actions"><Link data-variant="ghost" to="/web-developer-beloit-wisconsin/">Beloit web developer</Link></div>
-    </div>
-    <div className="feature-card">
-      <h3 className="feature-card__title">Janesville, WI</h3>
-      <div className="card-actions"><Link data-variant="ghost" to="/web-developer-janesville-wisconsin/">Janesville web developer</Link></div>
-    </div>
+    <Link to="/web-developer-loves-park-illinois/" className="city-card" style={{ backgroundImage: "url(/city-images/loves-park.jpg)" }}>
+      <div className="city-card__overlay">
+        <h3 className="city-card__title">Loves Park, IL</h3>
+        <span className="city-card__link">Loves Park web developer →</span>
+      </div>
+    </Link>
+    <Link to="/web-developer-beloit-wisconsin/" className="city-card" style={{ backgroundImage: "url(/city-images/beloit-wi.jpg)" }}>
+      <div className="city-card__overlay">
+        <h3 className="city-card__title">Beloit, WI</h3>
+        <span className="city-card__link">Beloit web developer →</span>
+      </div>
+    </Link>
+    <Link to="/web-developer-janesville-wisconsin/" className="city-card" style={{ backgroundImage: "url(/city-images/janesville-wi.jpg)" }}>
+      <div className="city-card__overlay">
+        <h3 className="city-card__title">Janesville, WI</h3>
+        <span className="city-card__link">Janesville web developer →</span>
+      </div>
+    </Link>
   </div>
 </Section>
 

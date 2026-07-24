@@ -28,6 +28,14 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     distance: "20 minutes",
     direction: "west",
     county: "Winnebago County",
+    cityImage: "janesville-wi.jpg",
+    cityImage: "beloit-wi.jpg",
+    cityImage: "south-beloit.jpg",
+    cityImage: "rockton.jpg",
+    cityImage: "roscoe.jpg",
+    cityImage: "byron.jpg",
+    cityImage: "machesney-park.jpg",
+    cityImage: "loves-park.jpg",
     cityContext:
       "Loves Park is a growing community just north of Rockford, with a strong mix of small businesses, manufacturing, and retail along East Riverside Boulevard and North Second Street. Businesses here need websites that compete with Rockford agencies without paying Rockford agency prices.",
     marketContext:

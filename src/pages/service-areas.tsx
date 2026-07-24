@@ -11,19 +11,19 @@ const pageDescription =
   "Web development service areas in Northwest Illinois and Southern Wisconsin. Durand, Rockford, Freeport, Beloit WI, Janesville WI. Remote and in-person.";
 
 const cityCards = [
-  { title: "Durand & Davis", href: "/web-developer-durand-davis-illinois/" },
-  { title: "Rockford", href: "/web-developer-rockford-illinois/" },
-  { title: "Freeport", href: "/web-developer-freeport-illinois/" },
-  { title: "Pecatonica", href: "/web-developer-pecatonica-illinois/" },
-  { title: "Winnebago", href: "/web-developer-winnebago-illinois/" },
-  { title: "Loves Park", href: "/web-developer-loves-park-illinois/" },
-  { title: "Machesney Park", href: "/web-developer-machesney-park-illinois/" },
-  { title: "Byron", href: "/web-developer-byron-illinois/" },
-  { title: "Rockton", href: "/web-developer-rockton-illinois/" },
-  { title: "Roscoe", href: "/web-developer-roscoe-illinois/" },
-  { title: "South Beloit", href: "/web-developer-south-beloit-illinois/" },
-  { title: "Beloit, WI", href: "/web-developer-beloit-wisconsin/" },
-  { title: "Janesville, WI", href: "/web-developer-janesville-wisconsin/" },
+  { title: "Durand & Davis", href: "/web-developer-durand-davis-illinois/", image: "durand-davis.jpg" },
+  { title: "Rockford", href: "/web-developer-rockford-illinois/", image: "rockford.jpg" },
+  { title: "Freeport", href: "/web-developer-freeport-illinois/", image: "freeport.jpg" },
+  { title: "Pecatonica", href: "/web-developer-pecatonica-illinois/", image: "pecatonica.jpg" },
+  { title: "Winnebago", href: "/web-developer-winnebago-illinois/", image: "winnebago.jpg" },
+  { title: "Loves Park", href: "/web-developer-loves-park-illinois/", image: "loves-park.jpg" },
+  { title: "Machesney Park", href: "/web-developer-machesney-park-illinois/", image: "machesney-park.jpg" },
+  { title: "Byron", href: "/web-developer-byron-illinois/", image: "byron.jpg" },
+  { title: "Rockton", href: "/web-developer-rockton-illinois/", image: "rockton.jpg" },
+  { title: "Roscoe", href: "/web-developer-roscoe-illinois/", image: "roscoe.jpg" },
+  { title: "South Beloit", href: "/web-developer-south-beloit-illinois/", image: "south-beloit.jpg" },
+  { title: "Beloit, WI", href: "/web-developer-beloit-wisconsin/", image: "beloit-wi.jpg" },
+  { title: "Janesville, WI", href: "/web-developer-janesville-wisconsin/", image: "janesville-wi.jpg" },
 ];
 
 const industries = [
@@ -78,12 +78,12 @@ const ServiceAreasPage = () => (
     >
       <div className="grid-three">
         {cityCards.map((city) => (
-          <Card key={city.href} variant="outline">
-            <h2 className="feature-card__title">{city.title}</h2>
-            <div className="card-actions">
-              <Link data-variant="ghost" to={city.href}>{city.title} web developer</Link>
+          <Link key={city.href} to={city.href} className="city-card" style={{ backgroundImage: `url(/city-images/${city.image})` }}>
+            <div className="city-card__overlay">
+              <h2 className="city-card__title">{city.title}</h2>
+              <span className="city-card__link">{city.title} web developer →</span>
             </div>
-          </Card>
+          </Link>
         ))}
       </div>
     </Section>

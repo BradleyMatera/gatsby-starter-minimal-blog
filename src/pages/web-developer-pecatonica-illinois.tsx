@@ -32,6 +32,8 @@ const PecatonicaWebDeveloperPage = () => (
       </ol>
     </nav>
 
+    <img src="/city-images/pecatonica.jpg" alt="Pecatonica, Illinois" className="city-hero-image" />
+
     <Section
       eyebrow="Local web development"
       titleAs="h1"

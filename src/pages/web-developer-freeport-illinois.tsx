@@ -32,6 +32,8 @@ const LocalWebDeveloperPage = () => (
       </ol>
     </nav>
 
+    <img src="/city-images/freeport.jpg" alt="Freeport, Illinois" className="city-hero-image" />
+
     <Section
       eyebrow="Local web development"
       titleAs="h1"
