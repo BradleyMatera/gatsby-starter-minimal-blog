@@ -97,10 +97,10 @@ const Tag = ({ data, pageContext }: { data: TagData; pageContext: TagPageContext
         {/* Content depth: key takeaways for GEO/AEO */}
         <h2 sx={{ fontSize: `1.5rem`, marginTop: `3rem`, marginBottom: `1rem` }}>Key takeaways from these {posts.length} {posts.length === 1 ? "article" : "articles"}</h2>
         <ul sx={{ marginBottom: `2rem`, lineHeight: 1.7, paddingLeft: `1.5rem` }}>
-          <li>Each {tagName} article is written from direct experience — building, debugging, or researching real projects.</li>
-          <li>Code examples are tested and verified before publishing, with links to source where available.</li>
+          <li>Each {tagName} article is written from direct experience — building, debugging, or researching real projects. Source code is linked where available.</li>
+          <li>Code examples are tested and verified before publishing. Where claims reference external documentation (e.g., Google Search guidelines, MDN), source links are included inline.</li>
           <li>Articles are dated and updated when tools or best practices change — check the article date for context.</li>
-          <li>Questions or corrections? <Link to="/contact/" sx={{ color: `primary` }}>Contact Bradley</Link> — I respond to reader questions.</li>
+          <li>Author: <Link to="/about/" sx={{ color: `primary` }}>Bradley Matera</Link>, a web developer in Durand, Illinois. Questions or corrections? <Link to="/contact/" sx={{ color: `primary` }}>Contact me</Link> — I respond to reader questions.</li>
         </ul>
 
         {/* Question heading for related tags */}

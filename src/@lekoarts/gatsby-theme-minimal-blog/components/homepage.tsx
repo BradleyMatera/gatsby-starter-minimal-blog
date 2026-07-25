@@ -86,6 +86,9 @@ const Homepage = ({ posts }: MBHomepageProps) => {
             </tr>
           </tbody>
         </table>
+        <p style={{ fontSize: "0.85rem", marginTop: "0.5rem", opacity: 0.7 }}>
+          Prices and timelines current as of July 2026. See the <Link to="/pricing/">full pricing page</Link> for what each package includes. Written by <Link to="/about/">Bradley Matera</Link>, a web developer in Durand, Illinois.
+        </p>
       </section>
       <section className="u-home-local-guides">
         <h2>Local web design guides</h2>

@@ -469,7 +469,8 @@ const DentalDemo: React.FC = () => (
         <h2 className="demo-section__title">Typical Treatment Costs</h2>
         <p className="demo-section__subtitle">See typical cost ranges for common procedures. Your actual cost depends on your treatment plan and insurance benefits.</p>
         <TypicalCostExplainer />
-        <div style={{ marginTop: "2rem", overflowX: "auto" }}>
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
+        <div style={{ marginTop: "2rem", overflowX: "auto" }} tabIndex={0} role="region" aria-label="Treatment cost comparison">
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
             <thead>
               <tr style={{ borderBottom: "2px solid var(--demo-border)" }}>

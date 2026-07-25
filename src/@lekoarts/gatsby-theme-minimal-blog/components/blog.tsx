@@ -423,7 +423,8 @@ const Blog = ({ posts }: MBBlogProps) => {
           </p>
         </div>
 
-        <div style={{ marginTop: "2rem", overflowX: "auto" }}>
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
+        <div style={{ marginTop: "2rem", overflowX: "auto" }} tabIndex={0} role="region" aria-label="Blog category comparison">
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
             <thead>
               <tr style={{ borderBottom: "2px solid var(--color-border, #e1e4e8)" }}>
