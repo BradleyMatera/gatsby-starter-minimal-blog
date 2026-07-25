@@ -46,21 +46,21 @@ const CaseStudyPage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="Industry illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/work-industry.svg" alt="Industry illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">Industry</h2>
             <p className="pkg-card__desc">Landscaping and lawn care services</p>
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="Location illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-location-pin.svg" alt="Location illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">Location</h2>
             <p className="pkg-card__desc">Rockford, Illinois (Winnebago County)</p>
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="Example type illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/work-landscaping.svg" alt="Example type illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">Example type</h2>
             <p className="pkg-card__desc">Landscaping website</p>
@@ -126,21 +126,21 @@ const CaseStudyPage = () => (
     <Section eyebrow="Baseline" title="Common starting point">
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="Web presence illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/starter-presence.svg" alt="Web presence illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Web presence</h3>
             <p className="pkg-card__desc">Facebook page only. No website. Not indexed by Google for any service keyword.</p>
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="Lead sources illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/lead-engine.svg" alt="Lead sources illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Lead sources</h3>
             <p className="pkg-card__desc">Phone calls and word of mouth. No online quote requests. No way to capture leads outside business hours.</p>
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="Google Business Profile illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/seo-gbp.svg" alt="Google Business Profile illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Google Business Profile</h3>
             <p className="pkg-card__desc">Claimed but incomplete. No photos, no service list, no website link.</p>
@@ -180,7 +180,7 @@ const CaseStudyPage = () => (
     <Section eyebrow="Technical work" title="Accessibility, performance, and SEO">
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="Performance illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/speed-lcp.svg" alt="Performance illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Performance</h3>
             <p className="pkg-card__desc">
@@ -189,7 +189,7 @@ const CaseStudyPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="Accessibility illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/a11y-audit.svg" alt="Accessibility illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Accessibility</h3>
             <p className="pkg-card__desc">
@@ -198,7 +198,7 @@ const CaseStudyPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="Local SEO illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-seo-services.svg" alt="Local SEO illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Local SEO</h3>
             <p className="pkg-card__desc">

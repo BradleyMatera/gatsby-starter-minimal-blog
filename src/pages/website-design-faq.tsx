@@ -109,7 +109,7 @@ const FAQPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="You own everything illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-faq-ownership.svg" alt="You own everything illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">You own everything</h2>
             <p className="pkg-card__desc">Code, content, domain, and hosting are all yours.</p>

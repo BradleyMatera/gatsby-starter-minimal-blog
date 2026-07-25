@@ -14,9 +14,9 @@ const demoCards = [
   { title: "Restaurant", desc: "Menu, reservations, gallery, and location.", href: "/demos/restaurant/", img: "/package-images/work-restaurant.svg" },
   { title: "Landscaping", desc: "Service packages, project gallery, free quote form.", href: "/demos/landscaping/", img: "/package-images/work-landscaping.svg" },
   { title: "HVAC", desc: "Financing calculator, service areas, booking form.", href: "/demos/hvac/", img: "/package-images/work-hvac.svg" },
-  { title: "Auto Repair", desc: "VIN lookup, service menu, reviews, appointments.", href: "/demos/auto-repair/", img: "/package-images/evidence-projects.svg" },
-  { title: "Real Estate", desc: "Property listings, agent profiles, search filters.", href: "/demos/real-estate/", img: "/package-images/evidence-projects.svg" },
-  { title: "Salon", desc: "Service menu, stylist bios, gallery, online booking.", href: "/demos/beauty-salon/", img: "/package-images/evidence-projects.svg" },
+  { title: "Auto Repair", desc: "VIN lookup, service menu, reviews, appointments.", href: "/demos/auto-repair/", img: "/package-images/city-demo-auto.svg" },
+  { title: "Real Estate", desc: "Property listings, agent profiles, search filters.", href: "/demos/real-estate/", img: "/package-images/city-demo-realestate.svg" },
+  { title: "Salon", desc: "Service menu, stylist bios, gallery, online booking.", href: "/demos/beauty-salon/", img: "/package-images/city-demo-salon.svg" },
 ];
 
 const WorkPage = () => (
@@ -60,7 +60,7 @@ const WorkPage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="Live demo websites illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/work-demos.svg" alt="Live demo websites illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">Live demo websites</h2>
             <p className="pkg-card__desc">
@@ -72,7 +72,7 @@ const WorkPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="Project case studies illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/work-case-studies.svg" alt="Project case studies illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">Project case studies</h2>
             <p className="pkg-card__desc">
@@ -84,7 +84,7 @@ const WorkPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="Open-source contributions illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/work-opensource.svg" alt="Open-source contributions illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">Open-source contributions</h2>
             <p className="pkg-card__desc">

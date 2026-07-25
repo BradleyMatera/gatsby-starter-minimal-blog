@@ -74,7 +74,7 @@ const LocalWebDeveloperPage = () => (
     >
       <div className="grid-two">
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="What I can help with right now illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-help-now.svg" alt="What I can help with right now illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">What I can help with right now</h2>
             <ul className="feature-list">
@@ -85,7 +85,7 @@ const LocalWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="How I work illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-how-i-work.svg" alt="How I work illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">How I work</h2>
             <p className="pkg-card__desc">
@@ -118,7 +118,7 @@ const LocalWebDeveloperPage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="Restaurant Website illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-demo-restaurant.svg" alt="Restaurant Website illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Restaurant Website</h3>
             <p className="pkg-card__desc">
@@ -130,7 +130,7 @@ const LocalWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="Landscaping Website illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-demo-landscaping.svg" alt="Landscaping Website illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Landscaping Website</h3>
             <p className="pkg-card__desc">
@@ -142,7 +142,7 @@ const LocalWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="HVAC Website illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-demo-hvac.svg" alt="HVAC Website illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">HVAC Website</h3>
             <p className="pkg-card__desc">
@@ -156,7 +156,7 @@ const LocalWebDeveloperPage = () => (
       </div>
       <div className="grid-three" style={{ marginTop: "1.5rem" }}>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="Auto Repair Website illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-demo-auto.svg" alt="Auto Repair Website illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Auto Repair Website</h3>
             <p className="pkg-card__desc">
@@ -168,7 +168,7 @@ const LocalWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="Real Estate Website illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-demo-realestate.svg" alt="Real Estate Website illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Real Estate Website</h3>
             <p className="pkg-card__desc">
@@ -180,7 +180,7 @@ const LocalWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="Salon Website illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-demo-salon.svg" alt="Salon Website illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Salon Website</h3>
             <p className="pkg-card__desc">
@@ -213,7 +213,7 @@ const LocalWebDeveloperPage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="Durand, Illinois illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-location-pin.svg" alt="Durand, Illinois illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Durand, Illinois</h3>
             <p className="pkg-card__desc">
@@ -224,7 +224,7 @@ const LocalWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="Davis, Illinois illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-area-served.svg" alt="Davis, Illinois illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Davis, Illinois</h3>
             <p className="pkg-card__desc">
@@ -235,7 +235,7 @@ const LocalWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="Nearby Northwest Illinois illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-map-region.svg" alt="Nearby Northwest Illinois illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Nearby Northwest Illinois</h3>
             <p className="pkg-card__desc">
@@ -261,7 +261,7 @@ const LocalWebDeveloperPage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="Rockford, Illinois illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-typically-work-with.svg" alt="Rockford, Illinois illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Rockford, Illinois</h3>
             <p className="pkg-card__desc">
@@ -276,7 +276,7 @@ const LocalWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="Freeport, Illinois illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-small-business.svg" alt="Freeport, Illinois illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Freeport, Illinois</h3>
             <p className="pkg-card__desc">
@@ -290,7 +290,7 @@ const LocalWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="Pecatonica &amp; Winnebago illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-service-area.svg" alt="Pecatonica &amp; Winnebago illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Pecatonica &amp; Winnebago</h3>
             <p className="pkg-card__desc">
@@ -309,7 +309,7 @@ const LocalWebDeveloperPage = () => (
       </div>
       <div className="grid-three" style={{ marginTop: "1.5rem" }}>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="Loves Park &amp; Machesney Park illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-crossroads.svg" alt="Loves Park &amp; Machesney Park illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Loves Park &amp; Machesney Park</h3>
             <p className="pkg-card__desc">
@@ -326,7 +326,7 @@ const LocalWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="Byron, Roscoe &amp; Rockton illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-nearby-towns.svg" alt="Byron, Roscoe &amp; Rockton illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Byron, Roscoe &amp; Rockton</h3>
             <p className="pkg-card__desc">
@@ -346,7 +346,7 @@ const LocalWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="South Beloit, Beloit &amp; Janesville illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-faq-county.svg" alt="South Beloit, Beloit &amp; Janesville illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">South Beloit, Beloit &amp; Janesville</h3>
             <p className="pkg-card__desc">
@@ -380,7 +380,7 @@ const LocalWebDeveloperPage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="I live here illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-available-in-person.svg" alt="I live here illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">I live here</h3>
             <p className="pkg-card__desc">
@@ -391,7 +391,7 @@ const LocalWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="Knows the community illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-knows-market.svg" alt="Knows the community illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Knows the community</h3>
             <p className="pkg-card__desc">
@@ -402,7 +402,7 @@ const LocalWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="Invested in the area illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-accountable.svg" alt="Invested in the area illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Invested in the area</h3>
             <p className="pkg-card__desc">
@@ -426,7 +426,7 @@ const LocalWebDeveloperPage = () => (
     >
       <div className="grid-two">
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="No commute overhead illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-smaller-personal.svg" alt="No commute overhead illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">No commute overhead</h3>
             <p className="pkg-card__desc">
@@ -435,7 +435,7 @@ const LocalWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="More transparent on cost illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-transparent-cost.svg" alt="More transparent on cost illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">More transparent on cost</h3>
             <p className="pkg-card__desc">
@@ -445,7 +445,7 @@ const LocalWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="No sales pipeline illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-no-sales-pipeline.svg" alt="No sales pipeline illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">No sales pipeline</h3>
             <p className="pkg-card__desc">
@@ -455,7 +455,7 @@ const LocalWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="When a bigger shop is the right call illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-agency-right-call.svg" alt="When a bigger shop is the right call illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">When a bigger shop is the right call</h3>
             <p className="pkg-card__desc">
@@ -533,7 +533,7 @@ const LocalWebDeveloperPage = () => (
     >
       <div className="grid-three">
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="75% of consumers judge your business by its website alone illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-stat-75.svg" alt="75% of consumers judge your business by its website alone illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">75% of consumers judge your business by its website alone</h3>
             <p className="pkg-card__desc">
@@ -542,7 +542,7 @@ const LocalWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="53% of visitors leave a site that takes over 3 seconds to load illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-stat-53.svg" alt="53% of visitors leave a site that takes over 3 seconds to load illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">53% of visitors leave a site that takes over 3 seconds to load</h3>
             <p className="pkg-card__desc">
@@ -551,7 +551,7 @@ const LocalWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="46% of Google searches are looking for a local business illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-stat-46.svg" alt="46% of Google searches are looking for a local business illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">46% of Google searches are looking for a local business</h3>
             <p className="pkg-card__desc">
@@ -582,7 +582,7 @@ const LocalWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="Web development FAQ illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-faq-webdev.svg" alt="Web development FAQ illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Web development FAQ</h3>
             <p className="pkg-card__desc">
@@ -600,7 +600,7 @@ const LocalWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="Small business checklist illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-checklist.svg" alt="Small business checklist illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Small business checklist</h3>
             <p className="pkg-card__desc">
@@ -684,7 +684,7 @@ const LocalWebDeveloperPage = () => (
     >
       <div className="grid-two">
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="Common questions illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-common-questions.svg" alt="Common questions illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Common questions</h3>
             <p className="pkg-card__desc">
@@ -699,7 +699,7 @@ const LocalWebDeveloperPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/evidence-projects.svg" alt="How I usually help illustration" className="pkg-card__bg" loading="lazy" />
+          <img src="/package-images/city-website-repair.svg" alt="How I usually help illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">How I usually help</h3>
             <p className="pkg-card__desc">
