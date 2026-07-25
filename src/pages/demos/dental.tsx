@@ -33,13 +33,29 @@ const integrations: Integration[] = [
 ];
 
 const services = [
-  { name: "Cleanings & Exams", desc: "Comprehensive exams, digital X-rays, and professional cleanings. Recommended every 6 months. Most insurance covers 100%.", icon: CheckIcon },
-  { name: "Fillings", desc: "Tooth-colored composite fillings for cavities and minor tooth damage. Same-day appointments for most cases. Mercury-free.", icon: CheckIcon },
-  { name: "Crowns & Bridges", desc: "Porcelain and zirconia crowns to restore damaged teeth. Bridges to replace missing teeth. CEREC same-day crowns available.", icon: ShieldIcon },
-  { name: "Teeth Whitening", desc: "Professional in-office whitening and custom take-home trays. Brighten your smile by up to 8 shades in a single visit.", icon: SpaIcon },
-  { name: "Invisalign", desc: "Clear aligner orthodontics for adults and teens. Free consultation includes 3D digital scan and treatment preview. Diamond Plus provider.", icon: SpaIcon },
-  { name: "Emergency Dental", desc: "Same-day emergency appointments for severe pain, broken teeth, lost fillings, and dental trauma. Call before noon for same-day care.", icon: AlertIcon },
-  { name: "Pediatric Dentistry", desc: "Gentle, kid-friendly dental care starting at age 1. Sealants, fluoride treatments, and a positive first experience that builds lifelong habits.", icon: SpaIcon },
+  { name: "Cleanings & Exams", desc: "Comprehensive exams, digital X-rays, and professional cleanings. Recommended every 6 months. Most insurance covers 100%.", icon: CheckIcon, img: "cleaning" },
+  { name: "Fillings", desc: "Tooth-colored composite fillings for cavities and minor tooth damage. Same-day appointments for most cases. Mercury-free.", icon: CheckIcon, img: "fillings" },
+  { name: "Crowns & Bridges", desc: "Porcelain and zirconia crowns to restore damaged teeth. Bridges to replace missing teeth. CEREC same-day crowns available.", icon: ShieldIcon, img: "crowns" },
+  { name: "Teeth Whitening", desc: "Professional in-office whitening and custom take-home trays. Brighten your smile by up to 8 shades in a single visit.", icon: SpaIcon, img: "whitening" },
+  { name: "Invisalign", desc: "Clear aligner orthodontics for adults and teens. Free consultation includes 3D digital scan and treatment preview. Diamond Plus provider.", icon: SpaIcon, img: "invisalign" },
+  { name: "Emergency Dental", desc: "Same-day emergency appointments for severe pain, broken teeth, lost fillings, and dental trauma. Call before noon for same-day care.", icon: AlertIcon, img: "emergency" },
+  { name: "Pediatric Dentistry", desc: "Gentle, kid-friendly dental care starting at age 1. Sealants, fluoride treatments, and a positive first experience that builds lifelong habits.", icon: SpaIcon, img: "cleaning" },
+];
+
+const officeTour = [
+  { label: "Reception Area", img: "reception" },
+  { label: "Treatment Room", img: "treatment-room" },
+  { label: "Digital X-Ray", img: "x-ray-room" },
+  { label: "Kids' Corner", img: "pediatric-area" },
+];
+
+const team = [
+  { name: "Dr. Sarah Anderson", role: "Founder & Lead Dentist", bio: "DDS from University of Iowa College of Dentistry. 15 years in practice. Invisalign Diamond Plus provider with 400+ cases. Grew up in Dixon and came home to serve the community.", img: "owner" },
+  { name: "Dr. James Patel", role: "Associate Dentist", bio: "DMD from University of Illinois Chicago. 8 years in practice. Specializes in CEREC same-day crowns and restorative dentistry. Fluent in Hindi and Gujarati.", img: "dentist-1" },
+  { name: "Dr. Emily Ross", role: "Associate Dentist", bio: "DDS from Marquette University School of Dentistry. 5 years in practice. Pediatric specialist — great with anxious kids. Ceiling TV in her operatory makes cleanings fun.", img: "dentist-2" },
+  { name: "Maria Gonzalez", role: "Lead Dental Hygienist", bio: "RDH from Carl Sandburg College. 12 years experience. Gentle touch that anxious patients love. Bilingual English/Spanish.", img: "hygienist-1" },
+  { name: "Katie Mueller", role: "Dental Hygienist", bio: "RDH from Illinois Central College. 7 years experience. Specializes in periodontal therapy and patient education.", img: "hygienist-2" },
+  { name: "Lisa Chen", role: "Office Manager", bio: "12 years managing dental practices. Handles insurance verification, financing, and scheduling. If you have a billing question, Lisa has the answer.", img: "dentist-3" },
 ];
 
 const insuranceProviders = [
@@ -245,7 +261,21 @@ const DentalDemo: React.FC = () => (
       </div>
     </section>
 
+    {/* Split image + text: A Welcoming Office */}
     <section className="demo-section">
+      <div className="demo-section__inner">
+        <div className="demo-split-image-text">
+          <div className="demo-split-image-text__image" style={{ backgroundImage: "url(/images/demos/dental/reception.jpg)" }} />
+          <div className="demo-split-image-text__content">
+            <h2 className="demo-split-image-text__title">A Welcoming Office</h2>
+            <p className="demo-split-image-text__text">Our reception area feels more like a living room than a waiting room. Comfortable seating, complimentary beverages, and a kids' corner with toys and books. We respect your time — 92% of patients are seated within 5 minutes of their appointment.</p>
+            <p className="demo-split-image-text__text">Located on North Galena Avenue near KSB Hospital, with free parking right out front. Wheelchair accessible.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Our Services</h2>
         <p className="demo-section__subtitle">Comprehensive family dental care under one roof. From your child's first checkup to Invisalign and emergency care.</p>
@@ -254,12 +284,80 @@ const DentalDemo: React.FC = () => (
             const Icon = s.icon;
             return (
               <div key={s.name} className="demo-service-card">
-                <div className="demo-service-card__icon"><Icon size={32} /></div>
-                <h3 className="demo-service-card__title">{s.name}</h3>
-                <p className="demo-service-card__desc">{s.desc}</p>
+                <div className="demo-service-card__image" style={{ backgroundImage: `url(/images/demos/dental/${s.img}.jpg)` }} />
+                <div className="demo-service-card__body">
+                  <div className="demo-service-card__icon"><Icon size={28} /></div>
+                  <h3 className="demo-service-card__name">{s.name}</h3>
+                  <p className="demo-service-card__desc">{s.desc}</p>
+                </div>
               </div>
             );
           })}
+        </div>
+      </div>
+    </section>
+
+    {/* Feature image: Modern Treatment Rooms */}
+    <div className="demo-feature-image" style={{ backgroundImage: "url(/images/demos/dental/treatment-room.jpg)" }}>
+      <div className="demo-feature-image__content">
+        <h2 className="demo-feature-image__title">Modern Treatment Rooms</h2>
+        <p className="demo-feature-image__text">Digital X-rays, intraoral cameras, CEREC same-day crowns, and ceiling TVs above every chair. Technology that makes your visit faster and more comfortable.</p>
+      </div>
+    </div>
+
+    {/* Split image + text: Kids Welcome Here */}
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <div className="demo-split-image-text">
+          <div className="demo-split-image-text__content">
+            <h2 className="demo-split-image-text__title">Kids Welcome Here</h2>
+            <p className="demo-split-image-text__text">We see children starting at age 1 for their first 'happy visit' — a gentle, no-pressure introduction to the dental office. By age 3, we recommend regular cleanings every 6 months.</p>
+            <p className="demo-split-image-text__text">Our pediatric area has a kids' corner with toys, a ceiling TV with cartoons above the chair, and a prize chest at the end. We make dental visits something kids look forward to.</p>
+          </div>
+          <div className="demo-split-image-text__image" style={{ backgroundImage: "url(/images/demos/dental/pediatric-area.jpg)" }} />
+        </div>
+      </div>
+    </section>
+
+    {/* Office Tour Gallery */}
+    <section className="demo-section demo-section--alt">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Office Tour</h2>
+        <p className="demo-section__subtitle">Take a look around. Our office was designed for your comfort.</p>
+        <div className="demo-food-gallery">
+          {officeTour.map((o) => (
+            <div key={o.label} className="demo-food-gallery__item" style={{ backgroundImage: `url(/images/demos/dental/${o.img}.jpg)` }}>
+              <span className="demo-food-gallery__label">{o.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* Feature image: Healthy Smiles */}
+    <div className="demo-feature-image" style={{ backgroundImage: "url(/images/demos/dental/happy-patient-1.jpg)" }}>
+      <div className="demo-feature-image__content">
+        <h2 className="demo-feature-image__title">Healthy Smiles Start Here</h2>
+        <p className="demo-feature-image__text">From your first cleaning to your child's first visit to your Invisalign journey — we're with you every step of the way.</p>
+      </div>
+    </div>
+
+    {/* Team grid with headshots */}
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Meet the Team</h2>
+        <p className="demo-section__subtitle">Experienced, gentle, and genuinely caring. The people who make your visit comfortable.</p>
+        <div className="demo-team-grid">
+          {team.map((member) => (
+            <div key={member.name} className="demo-team-card">
+              <div className="demo-team-card__photo" style={{ backgroundImage: `url(/images/demos/dental/${member.img}.jpg)` }} />
+              <div className="demo-team-card__body">
+                <h3 className="demo-team-card__name">{member.name}</h3>
+                <p className="demo-team-card__role">{member.role}</p>
+                <p className="demo-team-card__bio">{member.bio}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -365,6 +463,15 @@ const DentalDemo: React.FC = () => (
         </div>
       </div>
     </section>
+
+    <footer className="demo-footer">
+      <div className="demo-footer__inner">
+        <div className="demo-footer__name">Rock River Family Dental</div>
+        <div>740 N Galena Ave, Dixon, IL 61021 · (815) 555-0387</div>
+        <div style={{ marginTop: "1rem" }}><SocialLinks links={socialLinks} /></div>
+        <div className="demo-footer__demo-note">This is a demo website built by <a href="https://bradleymatera.dev">Bradley Matera</a>.<br /><a href="/demos/">← Back to all demos</a> · <a href="/contact/">Get a site like this →</a></div>
+      </div>
+    </footer>
   </DemoLayout>
 );
 

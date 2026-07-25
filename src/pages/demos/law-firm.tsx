@@ -32,12 +32,12 @@ const integrations: Integration[] = [
 ];
 
 const practiceAreas = [
-  { name: "Family Law", desc: "Divorce, child custody, child support, adoption, and prenuptial agreements. We handle the emotional and legal complexities with compassion and clarity.", icon: ShieldIcon },
-  { name: "Estate Planning", desc: "Wills, trusts, powers of attorney, and healthcare directives. Protect your assets and provide for your family. Flat-fee packages available.", icon: DocumentIcon },
-  { name: "Real Estate Law", desc: "Residential and commercial closings, title issues, boundary disputes, and landlord-tenant matters. We're your closing attorney in Lee, Ogle, and Whiteside counties.", icon: ScrollIcon },
-  { name: "Business Formation", desc: "LLC, S-corp, and partnership formation. Operating agreements, contracts, and ongoing counsel for small businesses across the Rock River Valley.", icon: ScrollIcon },
-  { name: "Personal Injury", desc: "Auto accidents, slip and fall, and workplace injuries. We deal with the insurance companies so you can focus on recovery. Contingency fee — no recovery, no fee.", icon: ShieldIcon },
-  { name: "Criminal Defense", desc: "DUI, traffic violations, misdemeanors, and felony defense. Former Lee County prosecutor on our team — we know how the other side thinks.", icon: ShieldIcon },
+  { name: "Family Law", desc: "Divorce, child custody, child support, adoption, and prenuptial agreements. We handle the emotional and legal complexities with compassion and clarity.", icon: ShieldIcon, img: "family-law" },
+  { name: "Estate Planning", desc: "Wills, trusts, powers of attorney, and healthcare directives. Protect your assets and provide for your family. Flat-fee packages available.", icon: DocumentIcon, img: "estate-planning" },
+  { name: "Real Estate Law", desc: "Residential and commercial closings, title issues, boundary disputes, and landlord-tenant matters. We're your closing attorney in Lee, Ogle, and Whiteside counties.", icon: ScrollIcon, img: "real-estate-law" },
+  { name: "Business Formation", desc: "LLC, S-corp, and partnership formation. Operating agreements, contracts, and ongoing counsel for small businesses across the Rock River Valley.", icon: ScrollIcon, img: "business-law" },
+  { name: "Personal Injury", desc: "Auto accidents, slip and fall, and workplace injuries. We deal with the insurance companies so you can focus on recovery. Contingency fee — no recovery, no fee.", icon: ShieldIcon, img: "personal-injury" },
+  { name: "Criminal Defense", desc: "DUI, traffic violations, misdemeanors, and felony defense. Former Lee County prosecutor on our team — we know how the other side thinks.", icon: ShieldIcon, img: "criminal-defense" },
 ];
 
 const attorneys = [
@@ -249,7 +249,21 @@ const LawFirmDemo: React.FC = () => (
       </div>
     </section>
 
+    {/* Split image + text: Welcome */}
     <section className="demo-section">
+      <div className="demo-section__inner">
+        <div className="demo-split-image-text">
+          <div className="demo-split-image-text__image" style={{ backgroundImage: "url(/images/demos/law-firm/reception.jpg)" }} />
+          <div className="demo-split-image-text__content">
+            <h2 className="demo-split-image-text__title">Welcome to Rock River Legal Group</h2>
+            <p className="demo-split-image-text__text">Our office is on First Street in downtown Dixon — one block from the Lee County Courthouse. When you walk in, you'll be greeted by name. We're not a big-city firm where you're a case number.</p>
+            <p className="demo-split-image-text__text">Three attorneys, two paralegals, and a support staff that knows the local courts. We've been here since 2005, and we're not going anywhere.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Practice Areas</h2>
         <p className="demo-section__subtitle">Six core practice areas serving individuals, families, and businesses across the Rock River Valley.</p>
@@ -258,12 +272,37 @@ const LawFirmDemo: React.FC = () => (
             const Icon = p.icon;
             return (
               <div key={p.name} className="demo-service-card">
-                <div className="demo-service-card__icon"><Icon size={32} /></div>
-                <h3 className="demo-service-card__title">{p.name}</h3>
-                <p className="demo-service-card__desc">{p.desc}</p>
+                <div className="demo-service-card__image" style={{ backgroundImage: `url(/images/demos/law-firm/${p.img}.jpg)` }} />
+                <div className="demo-service-card__body">
+                  <div className="demo-service-card__icon"><Icon size={28} /></div>
+                  <h3 className="demo-service-card__name">{p.name}</h3>
+                  <p className="demo-service-card__desc">{p.desc}</p>
+                </div>
               </div>
             );
           })}
+        </div>
+      </div>
+    </section>
+
+    {/* Feature image: Your Case Deserves Attention */}
+    <div className="demo-feature-image" style={{ backgroundImage: "url(/images/demos/law-firm/conference-room.jpg)" }}>
+      <div className="demo-feature-image__content">
+        <h2 className="demo-feature-image__title">Your Case Deserves Attention</h2>
+        <p className="demo-feature-image__text">The same attorney handles your case from start to finish. No handoffs, no junior associates learning on your dime.</p>
+      </div>
+    </div>
+
+    {/* Split image + text: Deep Legal Knowledge */}
+    <section className="demo-section demo-section--alt">
+      <div className="demo-section__inner">
+        <div className="demo-split-image-text">
+          <div className="demo-split-image-text__content">
+            <h2 className="demo-split-image-text__title">Deep Legal Knowledge</h2>
+            <p className="demo-split-image-text__text">Our attorneys trained at the University of Illinois, Northwestern Pritzker, and the University of Iowa — then came home to the Rock River Valley. Big-firm experience, small-town values.</p>
+            <p className="demo-split-image-text__text">We keep our library current with Illinois case law updates, practice guides, and continuing legal education. But we explain things in plain English, not legalese.</p>
+          </div>
+          <div className="demo-split-image-text__image" style={{ backgroundImage: "url(/images/demos/law-firm/law-library.jpg)" }} />
         </div>
       </div>
     </section>
@@ -292,7 +331,29 @@ const LawFirmDemo: React.FC = () => (
       </div>
     </section>
 
-    <section className="demo-section" id="consultation">
+    {/* Feature image: We Know the Local Courts */}
+    <div className="demo-feature-image" style={{ backgroundImage: "url(/images/demos/law-firm/courthouse.jpg)" }}>
+      <div className="demo-feature-image__content">
+        <h2 className="demo-feature-image__title">We Know the Local Courts</h2>
+        <p className="demo-feature-image__text">Lee, Ogle, Whiteside, and Winnebago counties — we practice here every day. One block from the Lee County Courthouse.</p>
+      </div>
+    </div>
+
+    {/* Split image + text: Your First Consultation */}
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <div className="demo-split-image-text">
+          <div className="demo-split-image-text__image" style={{ backgroundImage: "url(/images/demos/law-firm/consultation.jpg)" }} />
+          <div className="demo-split-image-text__content">
+            <h2 className="demo-split-image-text__title">Your First Consultation</h2>
+            <p className="demo-split-image-text__text">Bring your documents, your questions, and your timeline. We'll listen, assess your situation, and give you honest options — including whether you even need a lawyer.</p>
+            <p className="demo-split-image-text__text">Consultations are $150 for 45 minutes (credited to your case if you retain us). Estate planning consultations are free. Personal injury consultations are free — we work on contingency.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section className="demo-section demo-section--alt" id="consultation">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Book a Consultation</h2>
         <p className="demo-section__subtitle">Tell us about your situation and we'll match you with the right attorney. Consultations are $150 (credited to your case) or free for estate planning and personal injury.</p>
@@ -360,6 +421,15 @@ const LawFirmDemo: React.FC = () => (
         </div>
       </div>
     </section>
+
+    <footer className="demo-footer">
+      <div className="demo-footer__inner">
+        <div className="demo-footer__name">Rock River Legal Group</div>
+        <div>208 W First Street, Dixon, IL 61021 · (815) 555-0915</div>
+        <div style={{ marginTop: "1rem" }}><SocialLinks links={socialLinks} /></div>
+        <div className="demo-footer__demo-note">This is a demo website built by <a href="https://bradleymatera.dev">Bradley Matera</a>.<br /><a href="/demos/">← Back to all demos</a> · <a href="/contact/">Get a site like this →</a></div>
+      </div>
+    </footer>
   </DemoLayout>
 );
 

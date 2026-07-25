@@ -32,13 +32,13 @@ const integrations: Integration[] = [
   { name: "Stripe Payment Links", category: "Online Payments", description: "Email payment links with invoices. Customers pay by card or ACH for deposits and final payments. Funds in your account in 2 days.", freeTier: "2.9% + 30¢ per card transaction. 0.8% capped at $5 for ACH.", url: "https://stripe.com/payments", status: "available" },
 ];
 
-const services = [
-  { name: "CNC Machining", desc: "3-axis and 4-axis milling, turning, and boring. Tolerances to ±0.0005\". Prototype to production runs.", icon: GearIcon },
-  { name: "Laser Cutting", desc: "Fiber laser cutting up to 3/4\" mild steel, 1/2\" stainless, 1/4\" aluminum. Nesting software optimizes material yield.", icon: BoltIcon },
-  { name: "Welding (MIG/TIG/Stick)", desc: "AWS D1.1 certified welders. MIG, TIG, and stick welding on steel, stainless, and aluminum. Code welding available.", icon: ToolsIcon },
-  { name: "Sheet Metal Forming", desc: "Press brake forming up to 10' length. Rolling, shearing, punching, and notching. Gauge to 10ga steel.", icon: ToolsIcon },
-  { name: "Powder Coating", desc: "In-house powder coating booth. Standard and custom RAL colors. Media blasting prep. 48-hour typical turnaround.", icon: ShieldIcon },
-  { name: "Assembly", desc: "Mechanical and sub-assembly. Torque-controlled fastening, leak testing, and final QC inspection before shipping.", icon: CheckIcon },
+const capabilities = [
+  { name: "CNC Machining", desc: "3-axis and 4-axis milling, turning, and boring. Tolerances to ±0.0005\". Prototype to production runs.", img: "cnc-machining" },
+  { name: "Laser Cutting", desc: "Fiber laser cutting up to 3/4\" mild steel, 1/2\" stainless, 1/4\" aluminum. Nesting software optimizes material yield.", img: "laser-cutting" },
+  { name: "Welding (MIG/TIG/Stick)", desc: "AWS D1.1 certified welders. MIG, TIG, and stick welding on steel, stainless, and aluminum. Code welding available.", img: "welding" },
+  { name: "Sheet Metal Forming", desc: "Press brake forming up to 10' length. Rolling, shearing, punching, and notching. Gauge to 10ga steel.", img: "sheet-metal" },
+  { name: "Powder Coating", desc: "In-house powder coating booth. Standard and custom RAL colors. Media blasting prep. 48-hour typical turnaround.", img: "powder-coating" },
+  { name: "Assembly", desc: "Mechanical and sub-assembly. Torque-controlled fastening, leak testing, and final QC inspection before shipping.", img: "assembly" },
 ];
 
 const equipment = [
@@ -50,6 +50,22 @@ const equipment = [
   { machine: "Lincoln Power MIG 360MP", type: "MIG Welder", capacity: "300A, industrial wire feed", qty: 2 },
   { machine: "Cincinnati CLA 408", type: "Hydraulic Shear", capacity: "10' x 1/4\" capacity", qty: 1 },
   { machine: "Gertebauer Powder Coat Booth", type: "Powder Coating", capacity: "8' x 8' x 20' booth, 4-stage wash", qty: 1 },
+];
+
+const projects = [
+  { title: "Agricultural Bracket Run", desc: "2,000-piece production run of mounting brackets for a combine manufacturer.", img: "project-1" },
+  { title: "Stainless Food-Grade Frame", desc: "TIG-welded 304 stainless frame for a washdown conveyor system.", img: "project-2" },
+  { title: "Structural Steel Assembly", desc: "AWS D1.1 certified structural weldment for a commercial building.", img: "project-3" },
+  { title: "CNC Machined Housing", desc: "Precision-machined aluminum housing with ±0.001\" tolerances.", img: "project-4" },
+  { title: "Powder Coated Enclosures", desc: "Custom RAL 7016 powder-coated electrical enclosures for outdoor use.", img: "project-5" },
+  { title: "Laser-Cut Panel Array", desc: "Nested laser-cut decorative panels for an architectural installation.", img: "project-6" },
+];
+
+const team = [
+  { name: "Frank Sterling", role: "Founder & Master Fabricator", bio: "Started Sterling Metalworks in 1998. 35 years in metal fabrication. AWS D1.1 Certified Welding Inspector. Still runs the shop floor every day.", img: "owner" },
+  { name: "Carlos Mendez", role: "Lead Welder / CWI", bio: "AWS D1.1 certified welder and welding inspector. 18 years experience in structural and stainless welding. Oversees all code welding jobs.", img: "welder-1" },
+  { name: "Dale Hutchins", role: "CNC Machinist", bio: "Haas-certified machinist with 14 years experience. Programs and runs all CNC mills and lathes. Tolerance specialist — hits ±0.0005\" consistently.", img: "welder-2" },
+  { name: "Marcus Webb", role: "Fabricator / Laser Operator", bio: "10 years in the trade. Runs the Trumpf laser and Amada press brake. Expert at nesting for maximum material yield and minimum waste.", img: "welder-3" },
 ];
 
 const industries = [
@@ -175,6 +191,7 @@ const QuoteForm: React.FC = () => {
 
 const ManufacturingDemo: React.FC = () => (
   <DemoLayout demoName="Sterling Metalworks" industry="Manufacturing / Metal Fabrication" themeColor="#4a6fa5" designSystem="industrial">
+    {/* Hero with real shop floor photo */}
     <section className="demo-hero" style={{ backgroundImage: "url(/images/demos/manufacturing/hero.jpg)" }}>
       <div className="demo-hero__inner">
         <span className="demo-hero__tagline">ISO 9001:2015 Certified · AWS D1.1 Welding · Since 1998</span>
@@ -187,6 +204,7 @@ const ManufacturingDemo: React.FC = () => (
       </div>
     </section>
 
+    {/* Features table */}
     <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Features at a glance</h2>
@@ -209,7 +227,7 @@ const ManufacturingDemo: React.FC = () => (
               </tr>
               <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
                 <td style={{ padding: "0.75rem" }}>Quote request form</td>
-                <td style={{ padding: "0.75rem" }}>Structured RFQ form with material, thickness, quantity, tolerance, and finish selectors. Feeds into E2 Shop System.</td>
+                <td style={{ padding: "0.75rem" }}>Structured RFQ form with material, thickness, quantity, tolerance, and finish selectors. Feeds into E2 shop system.</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
                 <td style={{ padding: "0.75rem" }}>Certifications display</td>
@@ -237,6 +255,7 @@ const ManufacturingDemo: React.FC = () => (
       </div>
     </section>
 
+    {/* Stats + Review Badges + Certifications */}
     <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <div className="demo-stats" style={{ gridTemplateColumns: "repeat(4, 1fr)" }}>
@@ -256,25 +275,48 @@ const ManufacturingDemo: React.FC = () => (
       </div>
     </section>
 
+    {/* Split image + text: Inside Our Shop */}
     <section className="demo-section">
       <div className="demo-section__inner">
-        <h2 className="demo-section__title">Our Capabilities</h2>
-        <p className="demo-section__subtitle">Six core processes under one roof. No outsourcing means tighter quality control and faster turnaround.</p>
-        <div className="demo-services-grid">
-          {services.map((s) => {
-            const Icon = s.icon;
-            return (
-              <div key={s.name} className="demo-service-card">
-                <div className="demo-service-card__icon"><Icon size={32} /></div>
-                <h3 className="demo-service-card__title">{s.name}</h3>
-                <p className="demo-service-card__desc">{s.desc}</p>
-              </div>
-            );
-          })}
+        <div className="demo-split-image-text">
+          <div className="demo-split-image-text__image" style={{ backgroundImage: "url(/images/demos/manufacturing/shop-floor.jpg)" }} />
+          <div className="demo-split-image-text__content">
+            <h2 className="demo-split-image-text__title">Inside Our Shop</h2>
+            <p className="demo-split-image-text__text">Our 18,000-square-foot facility houses eight major machines under one roof — from Haas CNC mills to a Trumpf fiber laser. That means no outsourcing, no subcontractor delays, and full quality control from raw material to finished part.</p>
+            <p className="demo-split-image-text__text">We run two shifts during peak season and maintain a 3-day safety stock of common materials — A36 steel, 304 stainless, and 6061 aluminum — so we can start cutting the day we receive your drawings.</p>
+          </div>
         </div>
       </div>
     </section>
 
+    {/* Capabilities grid with background images */}
+    <section className="demo-section demo-section--alt">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Our Capabilities</h2>
+        <p className="demo-section__subtitle">Six core processes under one roof. No outsourcing means tighter quality control and faster turnaround.</p>
+        <div className="demo-services-grid">
+          {capabilities.map((c) => (
+            <div key={c.name} className="demo-service-card">
+              <div className="demo-service-card__image" style={{ backgroundImage: `url(/images/demos/manufacturing/${c.img}.jpg)` }} />
+              <div className="demo-service-card__body">
+                <h3 className="demo-service-card__name">{c.name}</h3>
+                <p className="demo-service-card__desc">{c.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* Feature image: Precision Welding */}
+    <div className="demo-feature-image" style={{ backgroundImage: "url(/images/demos/manufacturing/welding.jpg)" }}>
+      <div className="demo-feature-image__content">
+        <h2 className="demo-feature-image__title">Precision Welding</h2>
+        <p className="demo-feature-image__text">AWS D1.1 certified welders. MIG, TIG, and stick on steel, stainless, and aluminum. Every weld inspected by our on-staff CWI.</p>
+      </div>
+    </div>
+
+    {/* Equipment List */}
     <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Equipment List</h2>
@@ -304,38 +346,106 @@ const ManufacturingDemo: React.FC = () => (
       </div>
     </section>
 
+    {/* Project Showcase Gallery */}
     <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Project Showcase</h2>
+        <p className="demo-section__subtitle">A selection of recent work — from prototype parts to production runs across four industries.</p>
+        <div className="demo-food-gallery">
+          {projects.map((p) => (
+            <div key={p.title} className="demo-food-gallery__item" style={{ backgroundImage: `url(/images/demos/manufacturing/${p.img}.jpg)` }}>
+              <span className="demo-food-gallery__label">{p.title}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* Split image + text: Quality Assurance */}
+    <section className="demo-section demo-section--alt">
+      <div className="demo-section__inner">
+        <div className="demo-split-image-text">
+          <div className="demo-split-image-text__content">
+            <h2 className="demo-split-image-text__title">Quality Assurance</h2>
+            <p className="demo-split-image-text__text">Every job gets a first-article inspection before production begins. In-process checks during machining and welding catch issues early. Final QC inspection — dimensional, visual, and weld — happens before anything leaves the shop.</p>
+            <p className="demo-split-image-text__text">Our CMM and gauge calibration is tracked and audited annually as part of our ISO 9001:2015 certification. Material certs and inspection reports ship with every order, every time.</p>
+          </div>
+          <div className="demo-split-image-text__image" style={{ backgroundImage: "url(/images/demos/manufacturing/quality-control.jpg)" }} />
+        </div>
+      </div>
+    </section>
+
+    {/* Feature image: From Raw Steel to Finished Parts */}
+    <div className="demo-feature-image" style={{ backgroundImage: "url(/images/demos/manufacturing/steel-parts.jpg)" }}>
+      <div className="demo-feature-image__content">
+        <h2 className="demo-feature-image__title">From Raw Steel to Finished Parts</h2>
+        <p className="demo-feature-image__text">Material sourcing, cutting, forming, welding, machining, coating, and assembly — all in one facility. One PO, one accountable partner.</p>
+      </div>
+    </div>
+
+    {/* Team grid with headshots */}
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Meet the Crew</h2>
+        <p className="demo-section__subtitle">The people who make your parts. Experienced, certified, and accountable.</p>
+        <div className="demo-team-grid">
+          {team.map((member) => (
+            <div key={member.name} className="demo-team-card">
+              <div className="demo-team-card__photo" style={{ backgroundImage: `url(/images/demos/manufacturing/${member.img}.jpg)` }} />
+              <div className="demo-team-card__body">
+                <h3 className="demo-team-card__name">{member.name}</h3>
+                <p className="demo-team-card__role">{member.role}</p>
+                <p className="demo-team-card__bio">{member.bio}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* Industries Served */}
+    <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Industries We Serve</h2>
         <p className="demo-section__subtitle">We understand the demands of each industry we work with. That's why customers keep coming back.</p>
         <div className="demo-services-grid">
           {industries.map((ind) => (
             <div key={ind.name} className="demo-service-card">
-              <h3 className="demo-service-card__title">{ind.name}</h3>
-              <p className="demo-service-card__desc">{ind.desc}</p>
+              <div className="demo-service-card__body">
+                <h3 className="demo-service-card__name">{ind.name}</h3>
+                <p className="demo-service-card__desc">{ind.desc}</p>
+              </div>
             </div>
           ))}
         </div>
       </div>
     </section>
 
-    <section className="demo-section demo-section--alt">
+    {/* Certifications with image */}
+    <section className="demo-section">
       <div className="demo-section__inner">
-        <h2 className="demo-section__title">Certifications & Quality</h2>
-        <p className="demo-section__subtitle">Our quality management system is audited annually. Material certs and inspection reports ship with every order.</p>
-        <div className="demo-services-grid">
-          {certifications.map((c) => (
-            <div key={c.name} className="demo-service-card">
-              <div className="demo-service-card__icon"><ShieldIcon size={32} /></div>
-              <h3 className="demo-service-card__title">{c.name}</h3>
-              <p className="demo-service-card__desc">{c.desc}</p>
+        <div className="demo-two-col">
+          <div>
+            <h2 className="demo-section__title" style={{ textAlign: "left" }}>Certifications & Quality</h2>
+            <p className="demo-section__subtitle" style={{ textAlign: "left" }}>Our quality management system is audited annually. Material certs and inspection reports ship with every order.</p>
+            <div className="demo-services-grid" style={{ marginTop: "1.5rem" }}>
+              {certifications.map((c) => (
+                <div key={c.name} className="demo-service-card">
+                  <div className="demo-service-card__body">
+                    <h3 className="demo-service-card__name">{c.name}</h3>
+                    <p className="demo-service-card__desc">{c.desc}</p>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+          <div className="demo-split-image-text__image" style={{ backgroundImage: "url(/images/demos/manufacturing/certification.jpg)", minHeight: "400px", borderRadius: "var(--demo-radius)" }} />
         </div>
       </div>
     </section>
 
-    <section className="demo-section" id="quote">
+    {/* Quote Form */}
+    <section className="demo-section demo-section--alt" id="quote">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Request a Quote</h2>
         <p className="demo-section__subtitle">Fill out the form below with your part specifications. We'll email a detailed quote within 24 business hours.</p>
@@ -343,7 +453,8 @@ const ManufacturingDemo: React.FC = () => (
       </div>
     </section>
 
-    <section className="demo-section demo-section--alt">
+    {/* Testimonials */}
+    <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">What Our Customers Say</h2>
         <div className="demo-testimonials">
@@ -361,6 +472,7 @@ const ManufacturingDemo: React.FC = () => (
 
     <FAQSection faqs={faqs} />
 
+    {/* Google Maps */}
     <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Find Us</h2>
@@ -376,6 +488,7 @@ const ManufacturingDemo: React.FC = () => (
 
     <IntegrationsSection industry="manufacturing & metal fabrication" integrations={integrations} />
 
+    {/* Contact */}
     <section className="demo-contact" style={{ background: "#1a2744" }}>
       <div className="demo-contact__inner">
         <h2 className="demo-contact__title">Have a Part to Quote?</h2>
@@ -384,8 +497,22 @@ const ManufacturingDemo: React.FC = () => (
         <div style={{ marginTop: "1.5rem" }}>
           <SocialLinks links={socialLinks} />
         </div>
+        <div className="demo-contact__info">
+          <div className="demo-contact__info-item"><MapPinIcon size={20} /><span className="demo-contact__info-label">Address</span><span>1240 Industrial Park Dr, Sterling, IL</span></div>
+          <div className="demo-contact__info-item"><PhoneIcon size={20} /><span className="demo-contact__info-label">Phone</span><span>(815) 555-0420</span></div>
+          <div className="demo-contact__info-item"><ClockIcon size={20} /><span className="demo-contact__info-label">Hours</span><span>Mon–Fri 6:00 AM – 4:30 PM</span></div>
+        </div>
       </div>
     </section>
+
+    <footer className="demo-footer">
+      <div className="demo-footer__inner">
+        <div className="demo-footer__name">Sterling Metalworks</div>
+        <div>1240 Industrial Park Dr, Sterling, IL 61081 · (815) 555-0420</div>
+        <div style={{ marginTop: "1rem" }}><SocialLinks links={socialLinks} /></div>
+        <div className="demo-footer__demo-note">This is a demo website built by <a href="https://bradleymatera.dev">Bradley Matera</a>.<br /><a href="/demos/">← Back to all demos</a> · <a href="/contact/">Get a site like this →</a></div>
+      </div>
+    </footer>
   </DemoLayout>
 );
 

@@ -33,11 +33,32 @@ const integrations: Integration[] = [
 ];
 
 const services = [
-  { name: "Equipment Sales", desc: "New and used tractors, implements, and combines. John Deere and Case IH dealer. Financing available through John Deere Financial.", icon: GearIcon },
-  { name: "Equipment Repair", desc: "On-farm and in-shop repair. Tractors, combines, planters, and balers. Factory-trained technicians. Mobile service truck covers the valley.", icon: ToolsIcon },
-  { name: "Seed & Fertilizer Ordering", desc: "Corn, soybean, and alfalfa seed from Dekalb, Asgrow, and Pioneer. Custom fertilizer blends. Bulk delivery to your farm.", icon: LeafIcon },
-  { name: "Soil Testing", desc: "Pull samples, send to lab, and deliver recommendations. GPS-grid sampling available. Fall and spring sampling seasons.", icon: CheckIcon },
-  { name: "Crop Planning Consultation", desc: "Sit down with our agronomist to plan your season — variety selection, planting rates, fertility programs, and rotation strategy.", icon: SunIcon },
+  { name: "Equipment Sales", desc: "New and used tractors, implements, and combines. John Deere and Case IH dealer. Financing available through John Deere Financial.", icon: GearIcon, img: "equipment-sales" },
+  { name: "Equipment Repair", desc: "On-farm and in-shop repair. Tractors, combines, planters, and balers. Factory-trained technicians. Mobile service truck covers the valley.", icon: ToolsIcon, img: "equipment-repair" },
+  { name: "Seed & Fertilizer Ordering", desc: "Corn, soybean, and alfalfa seed from Dekalb, Asgrow, and Pioneer. Custom fertilizer blends. Bulk delivery to your farm.", icon: LeafIcon, img: "seed-display" },
+  { name: "Soil Testing", desc: "Pull samples, send to lab, and deliver recommendations. GPS-grid sampling available. Fall and spring sampling seasons.", icon: CheckIcon, img: "soil-testing" },
+  { name: "Crop Planning Consultation", desc: "Sit down with our agronomist to plan your season — variety selection, planting rates, fertility programs, and rotation strategy.", icon: SunIcon, img: "fertilizer" },
+];
+
+const products = [
+  { title: "Row Crop Tractors", desc: "130–400 HP John Deere and Case IH", img: "tractor-1" },
+  { title: "Plows & Planters", desc: "Great Plains and Sunflower implements", img: "implement-1" },
+  { title: "Combine Harvesters", desc: "Used and new — ready for fall", img: "harvester" },
+  { title: "Seed Planters", desc: "Precision planting with row command", img: "planter" },
+];
+
+const seasonalImages = [
+  { label: "Spring Planting", img: "spring-planting" },
+  { label: "Fall Harvest", img: "fall-harvest" },
+  { label: "Corn Country", img: "corn-field" },
+  { label: "Soybean Fields", img: "soybean-field" },
+];
+
+const team = [
+  { name: "Walt Kishwaukee", role: "Founder & Owner", bio: "Third-generation farmer and dealer. Started the business in 1972 after his father's dairy operation transitioned to equipment sales. Knows every farm family in the valley.", img: "owner" },
+  { name: "Rachel Anderson", role: "Lead Agronomist", bio: "MS in Agronomy from University of Illinois. 12 years helping farmers plan fertility programs and select seed varieties. GPS-grid sampling specialist.", img: "farmer-1" },
+  { name: "Tom Bruckner", role: "Service Manager", bio: "John Deere Master Certified technician. 20 years turning wrenches on everything from compact tractors to 400-HP row crop machines. Runs the mobile service truck during harvest.", img: "farmer-2" },
+  { name: "Jenny Oleson", role: "Parts & Inventory Manager", bio: "If it exists, Jenny can find it. Manages parts inventory for 6 equipment lines and 1,200+ active accounts. Most special orders arrive in 2–3 days.", img: "farmer-3" },
 ];
 
 const productCategories = [
@@ -171,7 +192,21 @@ const AgricultureDemo: React.FC = () => (
       </div>
     </section>
 
-    <section className="demo-section" id="services">
+    {/* Split image + text: Our Shop */}
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <div className="demo-split-image-text">
+          <div className="demo-split-image-text__image" style={{ backgroundImage: "url(/images/demos/agriculture/farm-shop.jpg)" }} />
+          <div className="demo-split-image-text__content">
+            <h2 className="demo-split-image-text__title">Our Shop on Route 64</h2>
+            <p className="demo-split-image-text__text">Our 12,000-square-foot dealership sits on IL Route 64 in Oregon, IL — 20 miles south of Rockford, 15 miles north of Dixon. The showroom has the latest John Deere and Case IH models, the parts counter is stocked with 8,000+ SKUs, and the service bay has four lifts and a drive-through wash bay.</p>
+            <p className="demo-split-image-text__text">Outside, the equipment lot showcases used and new inventory — tractors, combines, planters, and implements ready for demo or delivery. Come kick the tires.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section className="demo-section demo-section--alt" id="services">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Our Services</h2>
         <p className="demo-section__subtitle">Everything your farm needs, under one roof. From the field to the shop, we've got you covered.</p>
@@ -180,15 +215,26 @@ const AgricultureDemo: React.FC = () => (
             const Icon = s.icon;
             return (
               <div key={s.name} className="demo-service-card">
-                <div className="demo-service-card__icon"><Icon size={32} /></div>
-                <h3 className="demo-service-card__title">{s.name}</h3>
-                <p className="demo-service-card__desc">{s.desc}</p>
+                <div className="demo-service-card__image" style={{ backgroundImage: `url(/images/demos/agriculture/${s.img}.jpg)` }} />
+                <div className="demo-service-card__body">
+                  <div className="demo-service-card__icon"><Icon size={28} /></div>
+                  <h3 className="demo-service-card__name">{s.name}</h3>
+                  <p className="demo-service-card__desc">{s.desc}</p>
+                </div>
               </div>
             );
           })}
         </div>
       </div>
     </section>
+
+    {/* Feature image: Serving the Kishwaukee Valley */}
+    <div className="demo-feature-image" style={{ backgroundImage: "url(/images/demos/agriculture/corn-field.jpg)" }}>
+      <div className="demo-feature-image__content">
+        <h2 className="demo-feature-image__title">Serving the Kishwaukee Valley Since 1972</h2>
+        <p className="demo-feature-image__text">From the Rock River bottomlands to the rolling hills of Ogle County — we know this ground because we farm it too.</p>
+      </div>
+    </div>
 
     <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
@@ -217,6 +263,36 @@ const AgricultureDemo: React.FC = () => (
       </div>
     </section>
 
+    {/* Product Showcase Gallery */}
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Equipment Showcase</h2>
+        <p className="demo-section__subtitle">A look at what's on the lot right now. New and used inventory changes weekly — call for current pricing and availability.</p>
+        <div className="demo-food-gallery">
+          {products.map((p) => (
+            <div key={p.title} className="demo-food-gallery__item" style={{ backgroundImage: `url(/images/demos/agriculture/${p.img}.jpg)` }}>
+              <span className="demo-food-gallery__label">{p.title}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* Split image + text: Equipment Repair */}
+    <section className="demo-section demo-section--alt">
+      <div className="demo-section__inner">
+        <div className="demo-split-image-text">
+          <div className="demo-split-image-text__content">
+            <h2 className="demo-split-image-text__title">Fast Equipment Repair When You Need It</h2>
+            <p className="demo-split-image-text__text">During planting and harvest, downtime costs you money. Our mobile service truck is stocked with common hydraulic hoses, bearings, and electrical parts — we can get most machines running in the field.</p>
+            <p className="demo-split-image-text__text">Factory-trained technicians. John Deere Master Certified. We work on everything from 25-HP compacts to 400-HP row crop tractors, combines, planters, and balers.</p>
+          </div>
+          <div className="demo-split-image-text__image" style={{ backgroundImage: "url(/images/demos/agriculture/equipment-repair.jpg)" }} />
+        </div>
+      </div>
+    </section>
+
+    {/* Seasonal Resources with images */}
     <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Seasonal Resources</h2>
@@ -234,6 +310,49 @@ const AgricultureDemo: React.FC = () => (
               </div>
             );
           })}
+        </div>
+      </div>
+    </section>
+
+    {/* Seasonal image gallery */}
+    <section className="demo-section demo-section--alt">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Through the Seasons</h2>
+        <p className="demo-section__subtitle">The Kishwaukee Valley changes with the seasons — and so do we. Here's what the valley looks like throughout the year.</p>
+        <div className="demo-food-gallery">
+          {seasonalImages.map((s) => (
+            <div key={s.label} className="demo-food-gallery__item" style={{ backgroundImage: `url(/images/demos/agriculture/${s.img}.jpg)` }}>
+              <span className="demo-food-gallery__label">{s.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* Feature image: Harvest Season */}
+    <div className="demo-feature-image" style={{ backgroundImage: "url(/images/demos/agriculture/fall-harvest.jpg)" }}>
+      <div className="demo-feature-image__content">
+        <h2 className="demo-feature-image__title">Harvest Season is Coming</h2>
+        <p className="demo-feature-image__text">Book your combine inspection and yield monitor calibration by August 15. We'll make sure you're ready when the corn hits 25% moisture.</p>
+      </div>
+    </div>
+
+    {/* Team grid with headshots */}
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Meet the Team</h2>
+        <p className="demo-section__subtitle">The people who keep your farm running. Experienced, certified, and local.</p>
+        <div className="demo-team-grid">
+          {team.map((member) => (
+            <div key={member.name} className="demo-team-card">
+              <div className="demo-team-card__photo" style={{ backgroundImage: `url(/images/demos/agriculture/${member.img}.jpg)` }} />
+              <div className="demo-team-card__body">
+                <h3 className="demo-team-card__name">{member.name}</h3>
+                <p className="demo-team-card__role">{member.role}</p>
+                <p className="demo-team-card__bio">{member.bio}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -281,6 +400,15 @@ const AgricultureDemo: React.FC = () => (
         </div>
       </div>
     </section>
+
+    <footer className="demo-footer">
+      <div className="demo-footer__inner">
+        <div className="demo-footer__name">Kishwaukee Valley Farm Services</div>
+        <div>485 IL Route 64, Oregon, IL 61061 · (815) 555-0630</div>
+        <div style={{ marginTop: "1rem" }}><SocialLinks links={socialLinks} /></div>
+        <div className="demo-footer__demo-note">This is a demo website built by <a href="https://bradleymatera.dev">Bradley Matera</a>.<br /><a href="/demos/">← Back to all demos</a> · <a href="/contact/">Get a site like this →</a></div>
+      </div>
+    </footer>
   </DemoLayout>
 );
 
