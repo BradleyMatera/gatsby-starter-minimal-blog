@@ -596,7 +596,7 @@
 .demo-review-badge__stars {
   display: flex;
   gap: 1px;
-  color: #f5a623;
+  color: #8a6300;
 }
 .demo-review-badge__rating {
   font-size: 1.125rem;
@@ -1003,7 +1003,7 @@
 .demo-testimonial__stars {
   display: flex;
   gap: 2px;
-  color: #f5a623;
+  color: #8a6300;
   margin-bottom: 1rem;
 }
 .demo-testimonial__text {
@@ -1245,15 +1245,15 @@
 }
 .demo-integration__status--live {
   background: rgba(34,197,94,0.15);
-  color: #16a34a;
+  color: #166534;
 }
 .demo-integration__status--mocked {
   background: rgba(245,158,11,0.15);
-  color: #d97706;
+  color: #92400e;
 }
 .demo-integration__status--available {
   background: rgba(59,130,246,0.15);
-  color: #2563eb;
+  color: #1e40af;
 }
 .demo-integration__category {
   font-size: 0.75rem;
@@ -2635,7 +2635,7 @@
 }
 .demo-card__desc {
   font-size: 0.875rem;
-  color: #666;
+  color: #555;
   margin-bottom: 1rem;
   line-height: 1.5;
 }
@@ -2650,7 +2650,7 @@
   padding: 0.25rem 0.625rem;
   background: rgba(0,0,0,0.05);
   border-radius: 999px;
-  color: #555;
+  color: #444;
 }
 
 /* ==========================================================================
