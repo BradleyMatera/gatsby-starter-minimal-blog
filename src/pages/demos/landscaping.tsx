@@ -9,11 +9,11 @@ import ReviewBadges from "../../features/demos/ReviewBadges";
 import WeatherWidget from "../../features/demos/WeatherWidget";
 import IntegrationsSection, { Integration } from "../../features/demos/IntegrationsSection";
 import FAQSection, { FAQItem } from "../../features/demos/FAQSection";
-import { StarIcon, MapPinIcon, PhoneIcon, LeafIcon, TreeIcon, SnowflakeIcon, FlameIcon, CheckIcon, InstagramIcon } from "../../site/icons";
+import { StarIcon, MapPinIcon, PhoneIcon, LeafIcon, TreeIcon, SnowflakeIcon, FlameIcon, CheckIcon, InstagramIcon, AlertIcon } from "../../site/icons";
 
 const pathname = "/demos/landscaping/";
-const pageTitle = "GreenScape Pro — Professional Landscaping in Rockford, IL | Demo Website";
-const pageDescription = "Demo landscaping company website for GreenScape Pro — service packages, before/after project gallery, seasonal tips, and free quote form. Built by Bradley Matera.";
+const pageTitle = "GreenScape Pro — Landscaping Design-Build-Maintain Demo";
+const pageDescription = "Demo landscaping website for a fictional design-build-maintain company serving established Northern Illinois homes. Includes service packages, sample project gallery, and an illustrative quote form. Built by Bradley Matera.";
 
 const socialLinks: SocialLink[] = [
   { platform: "facebook", url: "https://facebook.com" },
@@ -23,8 +23,8 @@ const socialLinks: SocialLink[] = [
 
 const integrations: Integration[] = [
   { name: "Google Maps Embed", category: "Maps & Service Area", description: "Interactive map showing your service area boundary. Customers can see if you cover their neighborhood.", freeTier: "28,000 embed loads/month (free). $7/1k loads after.", url: "https://developers.google.com/maps/documentation/embed/start", status: "live" },
-  { name: "OpenWeatherMap API", category: "Weather Data", description: "Live weather conditions displayed on your site. Shows customers when it's time for snow removal, watering, or lawn care. Auto-recommends seasonal services based on weather.", freeTier: "1,000 API calls/day (free). $0.09/1k calls after.", url: "https://openweathermap.org/api", status: "mocked" },
-  { name: "Google Business Profile API", category: "Reviews & Ratings", description: "Live Google reviews and star rating on your site. Auto-updates when customers leave new reviews.", freeTier: "$200/month API credit (≈28k requests).", url: "https://developers.google.com/my-business", status: "mocked" },
+  { name: "OpenWeatherMap API", category: "Weather Data", description: "Sample weather conditions displayed on your site. Shows how seasonal service recommendations could be presented based on weather context.", freeTier: "1,000 API calls/day (free). $0.09/1k calls after.", url: "https://openweathermap.org/api", status: "mocked" },
+  { name: "Google Business Profile API", category: "Reviews & Ratings", description: "Sample Google review display for demo purposes. Production sites can pull live reviews and ratings.", freeTier: "$200/month API credit (≈28k requests).", url: "https://developers.google.com/my-business", status: "mocked" },
   { name: "Houzz Pro Integration", category: "Project Portfolio", description: "Sync your Houzz project portfolio with your website. Customers browse before/after photos without leaving your site.", freeTier: "Free Houzz profile. Houzz Pro from $99/month.", url: "https://houzz.com/pro", status: "available" },
   { name: "Instagram Graph API", category: "Social Media", description: "Auto-display your latest landscaping project photos from Instagram. Perfect for showing daily work.", freeTier: "200 requests/hour (free). Facebook Business account required.", url: "https://developers.facebook.com/docs/instagram-api", status: "available" },
   { name: "Jobber / ServiceTitan", category: "Field Service Management", description: "Online booking, dispatching, invoicing, and customer CRM. Customers book online, crew gets the job on their phone.", freeTier: "Jobber from $69/month. ServiceTitan from $300/month.", url: "https://getjobber.com", status: "available" },
@@ -70,15 +70,15 @@ const faqs: FAQItem[] = [
   { q: "What areas do you serve?", a: "GreenScape Pro serves Rockford, Loves Park, Roscoe, Byron, Rockton, Pecatonica, and surrounding communities in Northwest Illinois. If you are unsure whether we cover your area, call (815) 555-0456 for a free consultation." },
   { q: "Do you offer free estimates?", a: "Yes. Every project starts with a free on-site consultation and written estimate. We measure your property, discuss your goals, and provide a detailed quote with no obligation. Most estimates are completed within 48 hours." },
   { q: "How much does landscaping cost?", a: "Pricing depends on project scope. Weekly lawn care starts at $35 per visit. Full landscape design and installation typically ranges from $2,000 to $15,000 depending on property size and materials. We offer three service plans — Basic, Complete Care, and Full Service — to fit different budgets." },
-  { q: "Are you licensed and insured?", a: "Yes. GreenScape Pro is fully licensed in Illinois and carries $1 million in general liability insurance. Our team is trained in safe equipment operation and follows OSHA guidelines on every job site." },
-  { q: "Do you work year-round?", a: "Yes. We provide lawn mowing and maintenance from April through October, leaf removal in fall, snow removal in winter, and spring cleanup and planting in March and April. We also install hardscaping projects like patios and retaining walls year-round when weather permits." },
-  { q: "What is your guarantee?", a: "All plant installations come with a 1-year survival guarantee. If any plant we install dies within the first year, we replace it free of charge. Hardscaping work carries a 3-year warranty against structural defects." },
+  { q: "Are you licensed and insured?", a: "This demo represents a fully licensed and insured landscaping contractor. Always verify a contractor's license, general liability, and workers' compensation coverage with the appropriate state or local authority before work begins." },
+  { q: "Do you work year-round?", a: "Yes. We provide lawn mowing and maintenance from April through October, leaf removal in fall, snow removal in winter, and spring cleanup and planting in March and April. Hardscaping installations are scheduled when weather and ground conditions allow." },
+  { q: "What is your guarantee?", a: "Warranties and guarantees vary by project and scope. Typical industry practice includes a limited plant-installation guarantee and a structural warranty on hardscaping. Ask for the specific terms in writing with your proposal." },
 ];
 
 const testimonials = [
-  { text: "GreenScape transformed our backyard. The patio and garden design exceeded our expectations. Worth every penny.", author: "Jennifer M.", location: "Byron, IL" },
-  { text: "Reliable, professional, and reasonably priced. They show up when they say they will and the lawn has never looked better.", author: "Dave T.", location: "Rockford, IL" },
-  { text: "After the big snowstorm last winter, they were out at 5 AM clearing our driveway. Best snow removal service in the area.", author: "Patricia L.", location: "Machesney Park, IL" },
+  { text: "GreenScape transformed our backyard. The patio and garden design exceeded our expectations. Worth every penny.", author: "Jennifer M.", location: "Illustrative review, Byron, IL" },
+  { text: "Reliable, professional, and reasonably priced. They show up when they say they will and the lawn has never looked better.", author: "Dave T.", location: "Illustrative review, Rockford, IL" },
+  { text: "After the big snowstorm last winter, they were out at 5 AM clearing our driveway. Best snow removal service in the area.", author: "Patricia L.", location: "Illustrative review, Machesney Park, IL" },
 ];
 
 const serviceAreas = ["Rockford", "Loves Park", "Machesney Park", "Byron", "Roscoe", "Rockton", "South Beloit", "Pecatonica", "Winnebago", "Freeport"];
@@ -92,9 +92,9 @@ const LandscapingDemo: React.FC = () => (
     {/* Hero with real garden photo */}
     <section className="demo-hero" style={{ backgroundImage: "url(/images/demos/landscaping/hero.jpg)" }}>
       <div className="demo-hero__inner">
-        <span className="demo-hero__tagline">Serving Rockford & Northwest Illinois Since 2015</span>
+        <span className="demo-hero__tagline">Design · Build · Maintain · Northern Illinois</span>
         <h1 className="demo-hero__title">GreenScape Pro</h1>
-        <p className="demo-hero__subtitle">Professional landscaping, lawn care, hardscaping, and snow removal. Free estimates, satisfaction guaranteed, and the same crew every visit.</p>
+        <p className="demo-hero__subtitle">A fictional design-build-maintain landscaping company for established Northern Illinois homes. Hardscapes, gardens, seasonal care, and snow removal — planned, installed, and maintained by the same team.</p>
         <div className="demo-hero__actions">
           <a href="#quote" className="demo-btn demo-btn--primary">Get a Free Quote</a>
           <a href="#gallery" className="demo-btn demo-btn--ghost">View Our Work</a>
@@ -102,55 +102,9 @@ const LandscapingDemo: React.FC = () => (
       </div>
     </section>
 
-    <section className="demo-section">
-      <div className="demo-section__inner">
-        <h2 className="demo-section__title">Features at a glance</h2>
-        <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="GreenScape Pro features at a glance">
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
-            <thead>
-              <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
-                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
-                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Details</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Service packages</td>
-                <td style={{ padding: "0.75rem" }}>Tiered service plans (Basic, Complete Care, Full Service) with transparent pricing for lawn care and maintenance.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Project gallery</td>
-                <td style={{ padding: "0.75rem" }}>Before-and-after photo gallery showcasing completed landscaping, hardscaping, and lawn restoration projects.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Seasonal tips</td>
-                <td style={{ padding: "0.75rem" }}>Seasonal service recommendations with a weather widget that suggests relevant services based on current conditions.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Free quote form</td>
-                <td style={{ padding: "0.75rem" }}>Online quote request form with service type, property size, and preferred contact method.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Service areas</td>
-                <td style={{ padding: "0.75rem" }}>List of 10 served communities across Northwest Illinois with a Google Maps service area embed.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Mobile-responsive</td>
-                <td style={{ padding: "0.75rem" }}>Fully responsive layout optimized for phones, tablets, and desktops.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>SEO setup</td>
-                <td style={{ padding: "0.75rem" }}>LocalBusiness schema markup, service area pages, Google Business Profile integration, and NAP consistency.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Testimonials</td>
-                <td style={{ padding: "0.75rem" }}>Customer reviews with star ratings and locations to build trust with prospective clients.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
+    <div className="demo-emergency-banner" style={{ background: "#2d3a28", color: "#f5f5f5", borderBottom: "1px solid var(--demo-border)" }}>
+      <AlertIcon size={18} /> <strong>Demo website:</strong> GreenScape Pro is a fictional business concept created by Bradley Matera. Team, reviews, images, and interactive features are illustrative.
+    </div>
 
     {/* Stats + Weather Widget */}
     <section className="demo-section">
@@ -191,11 +145,11 @@ const LandscapingDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Before/After Gallery with real different photos - 3 pairs */}
+    {/* Before/After Gallery - illustrative examples */}
     <section className="demo-section" id="gallery">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Before & After</h2>
-        <p className="demo-section__subtitle">Real projects we've completed for homeowners across the Rockford area.</p>
+        <p className="demo-section__subtitle">Illustrative project transformations. Photos are selected to show representative work and may not depict the same property before and after.</p>
         <div className="demo-before-after">
           <div className="demo-before-after__item">
             <div className="demo-before-after__images">
@@ -462,7 +416,7 @@ const LandscapingDemo: React.FC = () => (
         <div className="demo-footer__name">GreenScape Pro</div>
         <div>Serving Rockford & Northwest Illinois · (815) 555-0456</div>
         <div style={{ marginTop: "1rem" }}><SocialLinks links={socialLinks} /></div>
-        <div className="demo-footer__demo-note">This is a demo website built by <a href="https://bradleymatera.dev">Bradley Matera</a>.<br /><a href="/demos/">← Back to all demos</a> · <a href="/contact/">Get a site like this →</a></div>
+        <div className="demo-footer__demo-note">Fictional business concept created by <a href="https://bradleymatera.dev">Bradley Matera</a>. Team, reviews, images, and interactive features are illustrative.<br /><a href="/demos/">← Back to all demos</a> · <a href="/contact/">Get a site like this →</a></div>
       </div>
     </footer>
   </DemoLayout>

@@ -8,11 +8,11 @@ import SocialLinks, { SocialLink } from "../../features/demos/SocialLinks";
 import ReviewBadges from "../../features/demos/ReviewBadges";
 import IntegrationsSection, { Integration } from "../../features/demos/IntegrationsSection";
 import FAQSection, { FAQItem } from "../../features/demos/FAQSection";
-import { StarIcon, MapPinIcon, PhoneIcon, ShieldIcon, CheckIcon, ClockIcon, CarIcon } from "../../site/icons";
+import { StarIcon, MapPinIcon, PhoneIcon, ShieldIcon, CheckIcon, ClockIcon, CarIcon, AlertIcon } from "../../site/icons";
 
 const pathname = "/demos/auto-repair/";
-const pageTitle = "Northside Auto Repair — Rockford Mechanic | Demo Website";
-const pageDescription = "Demo auto repair shop website with service menu, online booking, tire lookup, and ASE-certified mechanic credentials.";
+const pageTitle = "Northside Auto Repair — Auto Repair Shop Demo";
+const pageDescription = "Demo auto repair website for a fictional independent shop. Includes service menu, illustrative VIN lookup, sample mechanic bios, and transparent estimates. Built by Bradley Matera.";
 
 const socialLinks: SocialLink[] = [
   { platform: "facebook", url: "https://facebook.com" },
@@ -22,14 +22,14 @@ const socialLinks: SocialLink[] = [
 ];
 
 const integrations: Integration[] = [
-  { name: "NHTSA VIN Decoder API", category: "Vehicle Identification", description: "Customer enters their VIN, site auto-fills year, make, model, and engine. Eliminates wrong-part orders and speeds up booking. Free government API.", freeTier: "Completely free. No API key required. Unlimited calls.", url: "https://vpic.nhtsa.dot.gov/api/", status: "mocked" },
+  { name: "NHTSA VIN Decoder API", category: "Vehicle Identification", description: "Illustrative VIN lookup. In production, a customer could enter a VIN and the site would auto-fill year, make, model, and engine using the free NHTSA API.", freeTier: "Completely free. No API key required. Unlimited calls.", url: "https://vpic.nhtsa.dot.gov/api/", status: "mocked" },
   { name: "Google Maps Embed", category: "Maps & Location", description: "Interactive map showing shop location with directions. Customers tap to navigate.", freeTier: "28,000 embed loads/month (free). $7/1k loads after.", url: "https://developers.google.com/maps/documentation/embed/start", status: "live" },
-  { name: "Google Business Profile API", category: "Reviews & Ratings", description: "Live Google reviews on your site. Auto-updates when customers leave new reviews.", freeTier: "$200/month API credit (≈28k requests).", url: "https://developers.google.com/my-business", status: "mocked" },
-  { name: "RepairPal Price Estimator", category: "Price Transparency", description: "Embeddable widget that shows fair price ranges for common repairs based on your location and vehicle. Builds trust with price transparency.", freeTier: "Free to embed. RepairPal Certified Shop program from $199/month.", url: "https://repairpal.com/shops", status: "mocked" },
-  { name: "CARFAX Service Shop Program", category: "Service History", description: "Every repair you do is logged to CARFAX. Customers see their service history online. Builds loyalty and increases resale value of cars you service.", freeTier: "Free for repair shops. CARFAX pays you for service records.", url: "https://carfax.com/service-shop", status: "available" },
-  { name: "Tekmetric / Shop-Ware", category: "Shop Management Software", description: "Digital vehicle inspections with photos. Customer approves repairs via text link with photos of worn parts. Increases approval rates by 40%.", freeTier: "Tekmetric from $129/month. Shop-Ware from $249/month.", url: "https://tekmetric.com", status: "available" },
-  { name: "Worldpac / AutoZone ProAccess", category: "Parts Ordering", description: "Real-time parts inventory and pricing. Customer sees if parts are in stock before booking. Auto-orders parts for scheduled appointments.", freeTier: "Free for registered shops. Wholesale pricing on parts.", url: "https://worldpac.com", status: "available" },
-  { name: "Stripe Payment Links", category: "Online Payments", description: "Text a payment link after service. Customer pays with card or ACH. No more 'I forgot my checkbook'.", freeTier: "2.9% + 30¢ per transaction. No monthly fee.", url: "https://stripe.com/payments", status: "available" },
+  { name: "Google Business Profile API", category: "Reviews & Ratings", description: "Sample Google review display. Production sites can pull live reviews and ratings.", freeTier: "$200/month API credit (≈28k requests).", url: "https://developers.google.com/my-business", status: "mocked" },
+  { name: "RepairPal Price Estimator", category: "Price Transparency", description: "Embeddable price-range widget example. Shows how repair cost estimates could be presented based on location and vehicle.", freeTier: "Free to embed. RepairPal Certified Shop program from $199/month.", url: "https://repairpal.com/shops", status: "mocked" },
+  { name: "CARFAX Service Shop Program", category: "Service History", description: "Service history integration example. With a real CARFAX partnership, repairs could be logged to the vehicle's service record.", freeTier: "Free for repair shops. CARFAX pays you for service records.", url: "https://carfax.com/service-shop", status: "available" },
+  { name: "Tekmetric / Shop-Ware", category: "Shop Management Software", description: "Digital vehicle inspection example. Technicians could share photo-based inspections with customers for approval.", freeTier: "Tekmetric from $129/month. Shop-Ware from $249/month.", url: "https://tekmetric.com", status: "available" },
+  { name: "Worldpac / AutoZone ProAccess", category: "Parts Ordering", description: "Real-time parts inventory and pricing integration example. In production, parts availability could be checked during booking.", freeTier: "Free for registered shops. Wholesale pricing on parts.", url: "https://worldpac.com", status: "available" },
+  { name: "Stripe Payment Links", category: "Online Payments", description: "Text a payment link after service. Customer pays with card or ACH.", freeTier: "2.9% + 30¢ per transaction. No monthly fee.", url: "https://stripe.com/payments", status: "available" },
 ];
 
 const serviceCategories = [
@@ -68,25 +68,25 @@ const coupons = [
 ];
 
 const faqs: FAQItem[] = [
-  { q: "How much does an oil change cost?", a: "A conventional oil change at Northside Auto Repair costs $39.95, and a full synthetic oil change costs $59.95. Both include a 21-point inspection, fluid top-off, and tire pressure check. Most oil changes are completed in under 30 minutes." },
-  { q: "Do you work on all car makes and models?", a: "Yes. Our ASE-certified mechanics service all major domestic, Asian, and European brands including Toyota, Honda, Ford, Chevy, Subaru, BMW, Audi, and Mercedes. We have the diagnostic tools and parts supply to handle most vehicles on the road." },
-  { q: "Do you offer a warranty on repairs?", a: "Yes. All repairs come with a 12-month, 12,000-mile warranty on parts and labor. If a repaired component fails within that period, we fix it free of charge. Warranty work must be done at our shop." },
-  { q: "How long does a brake job take?", a: "A standard brake pad replacement takes 45 to 60 minutes per axle. If rotors need resurfacing or replacement, add 30 minutes per axle. We stock common brake parts for most vehicles, so same-day service is usually available." },
-  { q: "Can you diagnose a check engine light?", a: "Yes. Our OBD-II diagnostic scan costs $89.95 and includes a full computer diagnostic, printed report of all trouble codes, and a written estimate for any needed repairs. The diagnostic fee is waived if you proceed with the repair." },
-  { q: "Do you offer financing?", a: "Yes. We offer 0% APR financing for 12 months on repairs over $500 through Synchrony Financial, subject to credit approval. You can apply in person or online and get a decision in minutes." },
+  { q: "How much does an oil change cost?", a: "Oil change pricing depends on oil type, filter, and vehicle. A conventional oil change typically starts around $39.95 and a full synthetic oil change around $59.95. Contact us for current pricing for your vehicle." },
+  { q: "Do you work on all car makes and models?", a: "Independent shops like this demo service most domestic, Asian, and European brands. Always confirm the shop has the diagnostic tools, equipment, and training for your specific make and model." },
+  { q: "Do you offer a warranty on repairs?", a: "Warranty terms vary by repair and part. Ask for the written warranty terms before approving work. A 12-month / 12,000-mile parts-and-labor warranty is common in the industry but not guaranteed for every component." },
+  { q: "How long does a brake job take?", a: "A standard brake pad replacement often takes 45 to 60 minutes per axle. If rotors need resurfacing or replacement, add time. Actual timing depends on the vehicle and parts availability." },
+  { q: "Can you diagnose a check engine light?", a: "Yes. An OBD-II diagnostic scan identifies trouble codes and informs a written estimate for recommended repairs. Diagnostic fees and whether they are waived with repair vary by shop — ask when you book." },
+  { q: "Do you offer financing?", a: "We partner with financing providers to offer promotional payment plans on qualifying repairs, subject to credit approval. Terms, minimums, and rates vary; ask for current options." },
 ];
 
 const testimonials = [
-  { text: "Honest mechanics who don't upsell. They showed me the worn brake pads and explained exactly what needed fixing. No pressure, no games.", author: "Chris P.", location: "Rockford, IL" },
-  { text: "Took my Honda here after the dealer quoted $1,200 for a repair. Northside did it for $450 and it's been perfect for 20,000 miles.", author: "Amanda J.", location: "Loves Park, IL" },
-  { text: "Quick oil change, fair price, and they found a leaking coolant hose I didn't even know about. Fixed it same day. Great shop.", author: "Kevin R.", location: "Machesney Park, IL" },
+  { text: "Honest mechanics who don't upsell. They showed me the worn brake pads and explained exactly what needed fixing. No pressure, no games.", author: "Chris P.", location: "Illustrative review, Rockford, IL" },
+  { text: "Took my Honda here after the dealer quoted $1,200 for a repair. Northside did it for $450 and it's been perfect for 20,000 miles.", author: "Amanda J.", location: "Illustrative review, Loves Park, IL" },
+  { text: "Quick oil change, fair price, and they found a leaking coolant hose I didn't even know about. Fixed it same day. Great shop.", author: "Kevin R.", location: "Illustrative review, Machesney Park, IL" },
 ];
 
 const trustBadges = [
-  { Icon: ShieldIcon, label: "ASE Certified" },
-  { Icon: ShieldIcon, label: "BBB A+ Rated" },
-  { Icon: CheckIcon, label: "12-Month / 12K Mile Warranty" },
-  { Icon: CheckIcon, label: "Free Estimates" },
+  { Icon: ShieldIcon, label: "ASE-Certified Technicians" },
+  { Icon: ShieldIcon, label: "BBB Accredited (Verify)" },
+  { Icon: CheckIcon, label: "Written Warranty on Repairs" },
+  { Icon: CheckIcon, label: "Written Estimates" },
 ];
 
 const StarRating: React.FC = () => (
@@ -103,13 +103,13 @@ const VinLookup: React.FC = () => {
   return (
     <div className="demo-vin-lookup">
       <label htmlFor="vin-input"><h3 className="demo-vin-lookup__title">VIN Lookup</h3></label>
-      <p className="demo-vin-lookup__desc">Enter your 17-character VIN and we'll auto-fill your vehicle info for faster booking.</p>
+      <p className="demo-vin-lookup__desc">Enter any 17-character VIN to see an illustrative vehicle lookup. A production site would call the free NHTSA VIN Decoder API for real data.</p>
       <div className="demo-vin-lookup__row">
         <input id="vin-input" className="demo-vin-lookup__input" type="text" placeholder="1HGCM82633A123456" maxLength={17} value={vin} onChange={(e) => setVin(e.target.value.toUpperCase())} />
         <button type="button" className="demo-vin-lookup__btn" onClick={handleLookup}>Look Up</button>
       </div>
-      {result && <div style={{ marginTop: "1rem", padding: "0.75rem", background: "var(--demo-bg)", borderRadius: "var(--demo-radius)" }}><strong>Vehicle:</strong> {result.year} {result.make} {result.model}</div>}
-      <div className="demo-vin-lookup__note">Mock VIN lookup. Production sites use the free NHTSA VIN Decoder API (no API key required, unlimited calls) to auto-fill year, make, model, and engine info.</div>
+      {result && <div style={{ marginTop: "1rem", padding: "0.75rem", background: "var(--demo-bg)", borderRadius: "var(--demo-radius)" }}><strong>Vehicle (illustrative):</strong> {result.year} {result.make} {result.model}</div>}
+      <div className="demo-vin-lookup__note">This is a mock VIN lookup for demonstration. Results are fictional. Production sites use the free NHTSA VIN Decoder API to auto-fill year, make, model, and engine info.</div>
     </div>
   );
 };
@@ -119,9 +119,9 @@ const AutoRepairDemo: React.FC = () => (
     {/* Hero with real mechanic photo */}
     <section className="demo-hero" style={{ backgroundImage: "url(/images/demos/auto-repair/hero.jpg)" }}>
       <div className="demo-hero__inner">
-        <span className="demo-hero__tagline">ASE Certified · Serving Rockford Since 2008</span>
+        <span className="demo-hero__tagline">Independent Auto Repair · Rockford Since 2008</span>
         <h1 className="demo-hero__title">Northside Auto Repair</h1>
-        <p className="demo-hero__subtitle">Honest, reliable auto repair for all makes and models. 12-month warranty on everything we do. Free estimates, no pressure, no games.</p>
+        <p className="demo-hero__subtitle">Fictional demo of a neighborhood auto repair shop. Transparent estimates, written warranties, and ASE-certified technicians — for cars, trucks, and SUVs.</p>
         <div className="demo-hero__actions">
           <a href="#book" className="demo-btn demo-btn--primary">Book Appointment</a>
           <a href="tel:8155550321" className="demo-btn demo-btn--ghost"><PhoneIcon size={20} /> (815) 555-0321</a>
@@ -129,55 +129,9 @@ const AutoRepairDemo: React.FC = () => (
       </div>
     </section>
 
-    <section className="demo-section">
-      <div className="demo-section__inner">
-        <h2 className="demo-section__title">Features at a glance</h2>
-        <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Northside Auto Repair features at a glance">
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
-            <thead>
-              <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
-                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
-                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Details</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Service menu</td>
-                <td style={{ padding: "0.75rem" }}>Categorized service list with pricing and estimated time for routine maintenance, brakes, diagnostics, and climate services.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>VIN lookup</td>
-                <td style={{ padding: "0.75rem" }}>Interactive VIN lookup tool that auto-fills vehicle year, make, and model for faster booking.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Customer reviews</td>
-                <td style={{ padding: "0.75rem" }}>Google and Yelp review badges with star ratings and customer testimonials.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Appointment scheduling</td>
-                <td style={{ padding: "0.75rem" }}>Online booking form with vehicle details, service type, and preferred date and time.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Hours &amp; location</td>
-                <td style={{ padding: "0.75rem" }}>Trust bar with hours and a Google Maps embed showing the shop location with directions.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Mobile-responsive</td>
-                <td style={{ padding: "0.75rem" }}>Fully responsive layout optimized for phones, tablets, and desktops.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>SEO setup</td>
-                <td style={{ padding: "0.75rem" }}>AutoRepair schema markup, service pages with unique content, Google Business Profile, and sitemap.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Special offers</td>
-                <td style={{ padding: "0.75rem" }}>Coupon section with oil change, brake, and AC service promotions and promo codes.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
+    <div className="demo-emergency-banner" style={{ background: "#2c2c30", color: "#f5f5f5", borderBottom: "1px solid var(--demo-border)" }}>
+      <AlertIcon size={18} /> <strong>Demo website:</strong> Northside Auto Repair is a fictional business concept created by Bradley Matera. Team, reviews, images, and interactive features are illustrative.
+    </div>
 
     {/* Trust Badges */}
     <div className="demo-trust-bar">
@@ -454,7 +408,7 @@ const AutoRepairDemo: React.FC = () => (
         <div className="demo-footer__name">Northside Auto Repair</div>
         <div>456 North Ave, Rockford, IL 61101 · (815) 555-0321</div>
         <div style={{ marginTop: "1rem" }}><SocialLinks links={socialLinks} /></div>
-        <div className="demo-footer__demo-note">This is a demo website built by <a href="https://bradleymatera.dev">Bradley Matera</a>.<br /><a href="/demos/">← Back to all demos</a> · <a href="/contact/">Get a site like this →</a></div>
+        <div className="demo-footer__demo-note">Fictional business concept created by <a href="https://bradleymatera.dev">Bradley Matera</a>. Team, reviews, images, and interactive features are illustrative.<br /><a href="/demos/">← Back to all demos</a> · <a href="/contact/">Get a site like this →</a></div>
       </div>
     </footer>
   </DemoLayout>

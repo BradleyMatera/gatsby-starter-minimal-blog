@@ -9,11 +9,11 @@ import ReviewBadges from "../../features/demos/ReviewBadges";
 import MortgageCalculator from "../../features/demos/MortgageCalculator";
 import IntegrationsSection, { Integration } from "../../features/demos/IntegrationsSection";
 import FAQSection, { FAQItem } from "../../features/demos/FAQSection";
-import { StarIcon, MapPinIcon, PhoneIcon, HouseIcon, SearchIcon, ShieldIcon } from "../../site/icons";
+import { StarIcon, MapPinIcon, PhoneIcon, HouseIcon, SearchIcon, ShieldIcon, AlertIcon } from "../../site/icons";
 
 const pathname = "/demos/real-estate/";
-const pageTitle = "Rockford Heritage Realty — Real Estate | Demo Website";
-const pageDescription = "Demo real estate office website with featured listings, agent profiles, market reports, and neighborhood guides.";
+const pageTitle = "Rockford Heritage Realty — Real Estate Office Demo";
+const pageDescription = "Demo real estate website for a fictional local brokerage. Includes sample listings, agent profiles, illustrative market data, and a mortgage estimator. Built by Bradley Matera.";
 
 const socialLinks: SocialLink[] = [
   { platform: "facebook", url: "https://facebook.com" },
@@ -23,14 +23,14 @@ const socialLinks: SocialLink[] = [
 ];
 
 const integrations: Integration[] = [
-  { name: "MLS IDX/RETS Feed", category: "Property Listings", description: "Live MLS listings on your site. Every property your board has, auto-synced. Required for real estate sites — buyers expect to search all listings, not just yours.", freeTier: "IDX subscription from $39-99/month via your MLS board. RESO Web API standard.", url: "https://www.reso.org/", status: "mocked" },
+  { name: "MLS IDX/RETS Feed", category: "Property Listings", description: "Sample listing display. Production real estate sites connect to an MLS IDX or RESO feed to show live, board-compliant property data.", freeTier: "IDX subscription from $39-99/month via your MLS board. RESO Web API standard.", url: "https://www.reso.org/", status: "mocked" },
   { name: "Google Maps Embed", category: "Maps & Location", description: "Interactive map on every listing page showing property location, nearby schools, and amenities.", freeTier: "28,000 embed loads/month (free). $7/1k loads after.", url: "https://developers.google.com/maps/documentation/embed/start", status: "live" },
-  { name: "Walk Score API", category: "Neighborhood Data", description: "Shows walkability, transit, and bike scores for any property address. Buyers use this to evaluate neighborhoods without visiting.", freeTier: "Free for up to 5,000 calls/day with attribution. $0.04/call after.", url: "https://walkscore.com/professional/api.php", status: "mocked" },
-  { name: "GreatSchools API", category: "School Ratings", description: "School ratings and reviews for any address. Parents search for homes by school district — this data is essential for family buyers.", freeTier: "Free API for up to 2,000 calls/day. Attribution required.", url: "https://greatschools.org/api/", status: "mocked" },
-  { name: "Freddie Mac PMMS API", category: "Mortgage Rates", description: "Live mortgage rate data for your calculator. Updated weekly. Shows buyers current rates so they can estimate payments accurately.", freeTier: "Completely free. Public API, no key required.", url: "https://freddiemac.com/pmms", status: "available" },
-  { name: "Zillow Trulia Network", category: "Syndication", description: "Your listings auto-post to Zillow, Trulia, and 30+ other sites. Maximum exposure with zero extra work. Leads route back to you.", freeTier: "Free via MLS syndication. Premier Agent from $200/month for lead routing.", url: "https://zillow.com/professionals", status: "available" },
-  { name: "Follow Up Boss / LionDesk", category: "CRM & Lead Management", description: "Every website lead auto-enters your CRM with property interest, budget, and timeline. Automated follow-up sequences. Never lose a lead again.", freeTier: "Follow Up Boss from $69/month. LionDesk from $39/month.", url: "https://followupboss.com", status: "available" },
-  { name: "DocuSign for Real Estate", category: "Digital Signatures", description: "Send offers, counter-offers, and contracts for e-signature directly from your site. Closes deals faster — no printing, no faxing.", freeTier: "Real Estate edition from $45/month per agent.", url: "https://docusign.com/real-estate", status: "available" },
+  { name: "Walk Score API", category: "Neighborhood Data", description: "Sample walkability display. A production site could integrate Walk Score or similar data with proper attribution.", freeTier: "Free for up to 5,000 calls/day with attribution. $0.04/call after.", url: "https://walkscore.com/professional/api.php", status: "mocked" },
+  { name: "GreatSchools API", category: "School Ratings", description: "Sample school rating display. Production sites can source ratings and reviews from GreatSchools or the local district.", freeTier: "Free API for up to 2,000 calls/day. Attribution required.", url: "https://greatschools.org/api/", status: "mocked" },
+  { name: "Freddie Mac PMMS API", category: "Mortgage Rates", description: "Sample mortgage rate data. A production calculator could source weekly rate data from Freddie Mac or a lender API.", freeTier: "Completely free. Public API, no key required.", url: "https://freddiemac.com/pmms", status: "available" },
+  { name: "Zillow Trulia Network", category: "Syndication", description: "Example listing syndication. A real brokerage can syndicate listings to Zillow, Trulia, and other networks through MLS feeds or direct feeds.", freeTier: "Free via MLS syndication. Premier Agent from $200/month for lead routing.", url: "https://zillow.com/professionals", status: "available" },
+  { name: "Follow Up Boss / LionDesk", category: "CRM & Lead Management", description: "CRM integration example. Website leads can be routed into a CRM with property interest, budget, and timeline for follow-up.", freeTier: "Follow Up Boss from $69/month. LionDesk from $39/month.", url: "https://followupboss.com", status: "available" },
+  { name: "DocuSign for Real Estate", category: "Digital Signatures", description: "E-signature integration example. Offers, counter-offers, and contracts can be sent for digital signature through a real DocuSign integration.", freeTier: "Real Estate edition from $45/month per agent.", url: "https://docusign.com/real-estate", status: "available" },
 ];
 
 const listings = [
@@ -43,34 +43,34 @@ const listings = [
 ];
 
 const agents = [
-  { name: "Sarah Henderson", title: "Broker/Owner", bio: "18 years selling homes in Rockford. Specializes in historic homes and first-time buyers.", sales: "340+ sold", rating: "4.9", img: "agent-1" },
-  { name: "Mike Kowalski", title: "Realtor", bio: "12 years experience. Rockford native. Expert in investment properties and multi-family.", sales: "210+ sold", rating: "4.8", img: "agent-2" },
-  { name: "Jessica Davis", title: "Realtor", bio: "7 years. Roscoe and Rockton specialist. Works with relocating families and new construction.", sales: "130+ sold", rating: "5.0", img: "agent-3" },
-  { name: "Robert Brown", title: "Realtor", bio: "10 years. Commercial and residential. Byron and Freeport market expert.", sales: "180+ sold", rating: "4.9", img: "agent-4" },
+  { name: "Sarah Henderson", title: "Broker/Owner", bio: "Fictional profile for demo purposes. 18 years selling homes in Rockford. Specializes in historic homes and first-time buyers.", sales: "Illustrative", rating: "4.9", img: "agent-1" },
+  { name: "Mike Kowalski", title: "Realtor", bio: "Fictional profile for demo purposes. Rockford native. Expert in investment properties and multi-family.", sales: "Illustrative", rating: "4.8", img: "agent-2" },
+  { name: "Jessica Davis", title: "Realtor", bio: "Fictional profile for demo purposes. Roscoe and Rockton specialist. Works with relocating families and new construction.", sales: "Illustrative", rating: "5.0", img: "agent-3" },
+  { name: "Robert Brown", title: "Realtor", bio: "Fictional profile for demo purposes. Commercial and residential. Byron and Freeport market expert.", sales: "Illustrative", rating: "4.9", img: "agent-4" },
 ];
 
 const neighborhoods = [
-  { name: "East Rockford", desc: "Established neighborhoods with mature trees, larger lots, and great schools.", stat: "Median: $245K", img: "neighborhood-1" },
-  { name: "Loves Park", desc: "Family-friendly with parks, affordable homes, and easy highway access.", stat: "Median: $175K", img: "neighborhood-2" },
-  { name: "Roscoe", desc: "Growing community with new construction, top-rated schools, and rural feel.", stat: "Median: $310K", img: "neighborhood-3" },
-  { name: "Byron", desc: "Small-town charm with a strong community and great value per square foot.", stat: "Median: $198K", img: "neighborhood-4" },
-  { name: "Rockton", desc: "Historic village on the Rock River. Quaint downtown and excellent schools.", stat: "Median: $265K", img: "neighborhood-5" },
-  { name: "Downtown Rockford", desc: "Lofts, condos, and walkable living near restaurants, bars, and the river.", stat: "Median: $155K", img: "neighborhood-6" },
+  { name: "East Rockford", desc: "Established neighborhoods with mature trees, larger lots, and great schools.", stat: "Illustrative median", img: "neighborhood-1" },
+  { name: "Loves Park", desc: "Family-friendly with parks, affordable homes, and easy highway access.", stat: "Illustrative median", img: "neighborhood-2" },
+  { name: "Roscoe", desc: "Growing community with new construction, top-rated schools, and rural feel.", stat: "Illustrative median", img: "neighborhood-3" },
+  { name: "Byron", desc: "Small-town charm with a strong community and great value per square foot.", stat: "Illustrative median", img: "neighborhood-4" },
+  { name: "Rockton", desc: "Historic village on the Rock River. Quaint downtown and excellent schools.", stat: "Illustrative median", img: "neighborhood-5" },
+  { name: "Downtown Rockford", desc: "Lofts, condos, and walkable living near restaurants, bars, and the river.", stat: "Illustrative median", img: "neighborhood-6" },
 ];
 
 const faqs: FAQItem[] = [
-  { q: "How much are closing costs when buying a home?", a: "Closing costs in Illinois typically range from 2% to 5% of the purchase price. For a $200,000 home, expect $4,000 to $10,000 in closing costs, which include lender fees, title insurance, appraisal, and prepaid property taxes. Your lender will provide a detailed estimate within 3 days of applying." },
-  { q: "How long does it take to buy a house?", a: "From offer acceptance to closing, the typical timeline is 30 to 45 days for a conventional loan and 45 to 60 days for FHA or VA loans. Cash purchases can close in as little as 7 to 14 days. The process includes inspection, appraisal, loan underwriting, and final walkthrough." },
-  { q: "What credit score do I need to buy a home?", a: "Most conventional loans require a minimum credit score of 620. FHA loans accept scores as low as 580 with a 3.5% down payment. VA and USDA loans have no minimum score requirement but most lenders look for 580 or higher. Higher scores qualify you for better interest rates." },
-  { q: "How do I get pre-approved for a mortgage?", a: "To get pre-approved, you need to provide your lender with W-2s, pay stubs from the last 30 days, two months of bank statements, and tax returns from the past two years. The lender pulls your credit and issues a pre-approval letter stating how much you can borrow. The process takes 1 to 3 business days." },
-  { q: "What is the difference between a buyer's agent and a listing agent?", a: "A buyer's agent represents you, the buyer, and negotiates the best price and terms on your behalf. A listing agent represents the seller and works to get the highest price. At Rockford Heritage Realty, our agents exclusively represent buyers or sellers on each transaction — never both sides." },
-  { q: "How much is the commission to sell my home?", a: "The standard real estate commission in the Rockford area is 5% to 6% of the sale price, typically split between the buyer's agent and listing agent. For a $250,000 home at 6%, the total commission is $15,000. We offer reduced commission rates for sellers who also buy through us." },
+  { q: "How much are closing costs when buying a home?", a: "Closing costs in Illinois typically range from 2% to 5% of the purchase price. For a $200,000 home, that could be $4,000 to $10,000, including lender fees, title insurance, appraisal, and prepaid property taxes. Your lender will provide a Loan Estimate within three business days of applying." },
+  { q: "How long does it take to buy a house?", a: "From offer acceptance to closing, the typical timeline is 30 to 45 days for a conventional loan and 45 to 60 days for FHA or VA loans. Cash purchases can close more quickly. Timelines depend on financing, inspections, appraisal, and underwriting." },
+  { q: "What credit score do I need to buy a home?", a: "Most conventional loans require a minimum credit score around 620. FHA loans may accept lower scores with a larger down payment. VA and USDA loans have flexible requirements. Higher scores generally qualify for better interest rates. Contact a lender for current requirements." },
+  { q: "How do I get pre-approved for a mortgage?", a: "Pre-approval typically requires proof of income, assets, employment, and authorization to pull credit. Your lender issues a pre-approval letter showing how much you may be able to borrow. The process usually takes 1 to 3 business days." },
+  { q: "What is the difference between a buyer's agent and a listing agent?", a: "A buyer's agent represents the buyer and negotiates price and terms on their behalf. A listing agent represents the seller and works to market the property and secure the best offer. In this demo, agents are fictional." },
+  { q: "How much is the commission to sell my home?", a: "Real estate commissions are negotiable and vary by market and broker. Typical total commissions range from 5% to 6%, often split between the buyer's and listing agents. Ask any brokerage for their specific fee structure." },
 ];
 
 const testimonials = [
-  { text: "Sarah sold our house in 11 days for above asking. Her market knowledge and negotiation skills are unmatched in Rockford.", author: "The Peterson Family", location: "Rockford, IL" },
-  { text: "As first-time homebuyers, we were nervous. Mike walked us through every step and found us a home we love in our budget.", author: "Jake & Emily", location: "Loves Park, IL" },
-  { text: "Professional, responsive, and genuinely cares about her clients. Jessica found us the perfect home in Roscoe in two weeks.", author: "Diana M.", location: "Roscoe, IL" },
+  { text: "Sarah sold our house in 11 days for above asking. Her market knowledge and negotiation skills are unmatched in Rockford.", author: "The Peterson Family", location: "Illustrative review, Rockford, IL" },
+  { text: "As first-time homebuyers, we were nervous. Mike walked us through every step and found us a home we love in our budget.", author: "Jake & Emily", location: "Illustrative review, Loves Park, IL" },
+  { text: "Professional, responsive, and genuinely cares about her clients. Jessica found us the perfect home in Roscoe in two weeks.", author: "Diana M.", location: "Illustrative review, Roscoe, IL" },
 ];
 
 const StarRating: React.FC = () => (
@@ -82,61 +82,15 @@ const RealEstateDemo: React.FC = () => (
     {/* Hero with real home photo */}
     <section className="demo-hero" style={{ backgroundImage: "url(/images/demos/real-estate/hero.jpg)", paddingBottom: "5rem" }}>
       <div className="demo-hero__inner">
-        <span className="demo-hero__tagline">Rockford's Trusted Real Estate Team Since 2006</span>
+        <span className="demo-hero__tagline">Local Rockford Real Estate · Demo Website</span>
         <h1 className="demo-hero__title">Find Your Next Home</h1>
-        <p className="demo-hero__subtitle">1,200+ homes sold across Rockford, Loves Park, Roscoe, Byron, and Rockton. Local agents who know the market that Zillow can't tell you.</p>
+        <p className="demo-hero__subtitle">Fictional demo of a Rockford-area real estate brokerage. Sample listings, agent profiles, and neighborhood snapshots are illustrative. A production site connects to a live MLS feed.</p>
       </div>
     </section>
 
-    <section className="demo-section">
-      <div className="demo-section__inner">
-        <h2 className="demo-section__title">Features at a glance</h2>
-        <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Rockford Heritage Realty features at a glance">
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
-            <thead>
-              <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
-                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
-                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Details</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Property listings</td>
-                <td style={{ padding: "0.75rem" }}>Featured listings with exterior and interior photos, price, beds, baths, square footage, and Walk Score.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Agent profiles</td>
-                <td style={{ padding: "0.75rem" }}>Agent bios with specialties, sales history, ratings, and contact information for each team member.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Search filters</td>
-                <td style={{ padding: "0.75rem" }}>Property search bar with filters for location, price range, and bedroom count.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Contact form</td>
-                <td style={{ padding: "0.75rem" }}>Contact form for buyer and seller inquiries with agent routing.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Market reports</td>
-                <td style={{ padding: "0.75rem" }}>Neighborhood guides with median home prices and area descriptions for six Rockford-area communities.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Neighborhood guides</td>
-                <td style={{ padding: "0.75rem" }}>Detailed neighborhood profiles with photos, descriptions, and median home prices for each community.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Mobile-responsive</td>
-                <td style={{ padding: "0.75rem" }}>Fully responsive layout optimized for phones, tablets, and desktops.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>SEO setup</td>
-                <td style={{ padding: "0.75rem" }}>RealEstateAgent schema markup, neighborhood pages with unique content, MLS integration, and sitemap.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
+    <div className="demo-emergency-banner" style={{ background: "#2a2a2e", color: "#f5f5f5", borderBottom: "1px solid var(--demo-border)" }}>
+      <AlertIcon size={18} /> <strong>Demo website:</strong> Rockford Heritage Realty is a fictional business concept created by Bradley Matera. Agents, listings, market data, and reviews are illustrative.
+    </div>
 
     {/* Property Search Bar */}
     <div className="demo-section__inner" style={{ padding: "0 1.5rem" }}>
@@ -157,11 +111,11 @@ const RealEstateDemo: React.FC = () => (
       </div>
     </div>
 
-    {/* Featured Listings with real photos + Walk Score + School Rating */}
+    {/* Featured Listings - illustrative sample data */}
     <section className="demo-section" id="listings">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Featured Listings</h2>
-        <p className="demo-section__subtitle">Current homes for sale across the Rockford area. Updated daily from the MLS.</p>
+        <p className="demo-section__subtitle">Illustrative sample listings, prices, addresses, and scores. A production site would display live MLS data through a board-approved IDX feed.</p>
         <div className="demo-listings">
           {listings.map((l) => (
             <div key={l.title} className="demo-listing-detail">
@@ -195,8 +149,8 @@ const RealEstateDemo: React.FC = () => (
           ))}
         </div>
         <div style={{ marginTop: "1.5rem", display: "flex", justifyContent: "center", gap: "0.75rem", flexWrap: "wrap" }}>
-          <span className="demo-trust-logo"><ShieldIcon size={20} /> MLS Listed</span>
-          <span className="demo-trust-logo"><HouseIcon size={20} /> Zillow Premier Agent</span>
+          <span className="demo-trust-logo"><ShieldIcon size={20} /> MLS IDX Ready</span>
+          <span className="demo-trust-logo"><HouseIcon size={20} /> Listing Syndication Example</span>
         </div>
       </div>
     </section>
@@ -204,8 +158,8 @@ const RealEstateDemo: React.FC = () => (
     {/* Mortgage Calculator */}
     <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
-        <h2 className="demo-section__title">Mortgage Calculator</h2>
-        <p className="demo-section__subtitle">Estimate your monthly payment. Adjust the numbers to see what fits your budget.</p>
+        <h2 className="demo-section__title">Mortgage Estimator</h2>
+        <p className="demo-section__subtitle">Illustrative monthly payment estimate. Rates, taxes, insurance, and fees vary by lender and property.</p>
         <MortgageCalculator />
       </div>
     </section>
@@ -214,7 +168,7 @@ const RealEstateDemo: React.FC = () => (
     <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Rockford Market Report</h2>
-        <p className="demo-section__subtitle">Live data from the Rockford MLS — updated monthly.</p>
+        <p className="demo-section__subtitle">Illustrative market snapshot for demo layout. Real data would come from the local MLS or a board-approved data provider.</p>
         <div className="demo-stats">
           <div><div className="demo-stat__number">$195K</div><div className="demo-stat__label">Median Home Price</div></div>
           <div><div className="demo-stat__number">23 days</div><div className="demo-stat__label">Avg. Days on Market</div></div>
@@ -231,8 +185,8 @@ const RealEstateDemo: React.FC = () => (
           <div className="demo-split-image-text__image" style={{ backgroundImage: "url(/images/demos/real-estate/living-room.jpg)" }} />
           <div className="demo-split-image-text__content">
             <h2 className="demo-split-image-text__title">Local Knowledge That Matters</h2>
-            <p className="demo-split-image-text__text">We've been selling homes in Rockford for 18 years. We know which neighborhoods are appreciating, which schools are the best, and which streets to avoid. That's knowledge Zillow can't give you.</p>
-            <p className="demo-split-image-text__text">When you work with Heritage Realty, you get a dedicated agent who answers their phone and fights for your interests — not a call center reading from a script.</p>
+            <p className="demo-split-image-text__text">This demo represents an agent team with deep local knowledge. A real buyer or seller should interview agents, verify credentials, and confirm recent sales experience in the target neighborhood.</p>
+            <p className="demo-split-image-text__text">When you choose a brokerage, ask how they communicate, how they market listings, and how they handle multiple-offer scenarios.</p>
           </div>
         </div>
       </div>
@@ -242,7 +196,7 @@ const RealEstateDemo: React.FC = () => (
     <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Neighborhood Guides</h2>
-        <p className="demo-section__subtitle">Local knowledge that Zillow can't tell you. We live in these communities.</p>
+        <p className="demo-section__subtitle">Illustrative neighborhood snapshots for demo layout. Median prices and ratings are placeholders, not current market data.</p>
         <div className="demo-neighborhoods">
           {neighborhoods.map((n) => (
             <div key={n.name} className="demo-neighborhood">
@@ -353,7 +307,7 @@ const RealEstateDemo: React.FC = () => (
         <div className="demo-footer__name">Rockford Heritage Realty</div>
         <div>789 E State St, Rockford, IL 61104 · (815) 555-0567</div>
         <div style={{ marginTop: "1rem" }}><SocialLinks links={socialLinks} /></div>
-        <div className="demo-footer__demo-note">This is a demo website built by <a href="https://bradleymatera.dev">Bradley Matera</a>.<br /><a href="/demos/">← Back to all demos</a> · <a href="/contact/">Get a site like this →</a></div>
+        <div className="demo-footer__demo-note">Fictional business concept created by <a href="https://bradleymatera.dev">Bradley Matera</a>. Team, reviews, images, and interactive features are illustrative.<br /><a href="/demos/">← Back to all demos</a> · <a href="/contact/">Get a site like this →</a></div>
       </div>
     </footer>
   </DemoLayout>

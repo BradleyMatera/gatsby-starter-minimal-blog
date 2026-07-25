@@ -12,8 +12,8 @@ import FAQSection, { FAQItem } from "../../features/demos/FAQSection";
 import { StarIcon, MapPinIcon, PhoneIcon, LeafIcon, SunIcon, ClockIcon, CheckIcon, GearIcon, ToolsIcon, ShieldIcon, BoltIcon, AlertIcon, CalendarIcon } from "../../site/icons";
 
 const pathname = "/demos/agriculture/";
-const pageTitle = "Kishwaukee Valley Farm Services — Agricultural Equipment & Supplies | Demo Website";
-const pageDescription = "Demo agriculture website for a farm supply company — equipment sales, repair services, live grain prices, financing calculator, and crop planning resources. Built by Bradley Matera.";
+const pageTitle = "Kishwaukee Valley Farm Services — Farm Equipment & Supplies Demo";
+const pageDescription = "Demo agriculture website for a fictional farm equipment, parts, and service dealership. Includes illustrative inventory, sample grain prices, and a financing estimator. Built by Bradley Matera.";
 
 const socialLinks: SocialLink[] = [
   { platform: "facebook", url: "https://facebook.com" },
@@ -23,18 +23,18 @@ const socialLinks: SocialLink[] = [
 ];
 
 const integrations: Integration[] = [
-  { name: "John Deere Operations Center API", category: "Equipment Telemetry", description: "Live equipment data streamed to your site. Customers log in and see their tractor hours, fuel levels, and maintenance alerts. Service department gets auto-notified when a machine needs an oil change.", freeTier: "Free for John Deere equipment owners. API access included with JDLink subscription.", url: "https://deere.com/en/technology-products/precision-ag-technology/operations-center", status: "mocked" },
-  { name: "Climate FieldView", category: "Crop Data & Agronomy", description: "Integrate field-level crop data, planting maps, and yield history. Customers can view their FieldView data alongside your seed and fertilizer recommendations.", freeTier: "Basic free. Plus from $999/year per farm.", url: "https://climate.com", status: "mocked" },
-  { name: "Climate FieldView Plus", category: "Yield & Prescription Planting", description: "Advanced yield data analysis and prescription planting maps. Generate variable-rate seeding and fertilizer prescriptions directly from yield history, then send them to the planter or spreader.", freeTier: "Plus from $999/year. Premium prescription tools from $1,499/year.", url: "https://climate.com/fieldview-plus", status: "mocked" },
+  { name: "John Deere Operations Center API", category: "Equipment Telemetry", description: "Sample equipment data display. In a production site, customers could log in and see tractor hours, fuel levels, and maintenance alerts.", freeTier: "Free for John Deere equipment owners. API access included with JDLink subscription.", url: "https://deere.com/en/technology-products/precision-ag-technology/operations-center", status: "mocked" },
+  { name: "Climate FieldView", category: "Crop Data & Agronomy", description: "Field-level crop data integration example. Shows how a dealer site could display planting maps and yield history alongside recommendations.", freeTier: "Basic free. Plus from $999/year per farm.", url: "https://climate.com", status: "mocked" },
+  { name: "Climate FieldView Plus", category: "Yield & Prescription Planting", description: "Variable-rate seeding and fertilizer prescription example. Demonstrates how dealer recommendations could flow to a planter or spreader.", freeTier: "Plus from $999/year. Premium prescription tools from $1,499/year.", url: "https://climate.com/fieldview-plus", status: "mocked" },
   { name: "QuickBooks Online", category: "Accounting & Invoicing", description: "Sync equipment sales, repair invoices, and parts orders. Farm credit accounts bill automatically with 30-day terms. Seasonal payment plans for seed and fertilizer purchases.", freeTier: "From $35/month. 50% off for first 3 months.", url: "https://quickbooks.intuit.com", status: "available" },
   { name: "Shopify Parts Catalog", category: "E-Commerce / Parts Catalog", description: "Online parts catalog with year-make-model lookup. Customers order filters, belts, and wear parts with free in-store pickup or delivery to their farm.", freeTier: "From $39/month. 3-day free trial.", url: "https://shopify.com", status: "available" },
   { name: "Google Maps Embed", category: "Maps & Service Area", description: "Interactive map showing your service area and delivery routes. Farmers can see if you deliver to their area and estimate delivery days.", freeTier: "28,000 embed loads/month (free). $7/1k loads after.", url: "https://developers.google.com/maps/documentation/embed/start", status: "live" },
-  { name: "USDA FSA Feed", category: "Government Resources", description: "Live feed of USDA FSA announcements — program deadlines, disaster assistance, and market reports. Auto-displayed on your resources page so farmers always see current info.", freeTier: "Free public API. No authentication required.", url: "https://fsa.usda.gov", status: "mocked" },
-  { name: "DTN Markets API", category: "Commodity Prices", description: "Live grain prices (corn, soybeans, wheat) displayed on your homepage. Farmers see current local elevator bids without leaving your site. Powers the commodity ticker widget.", freeTier: "From $89/month for DTN Professional. Market data add-on available.", url: "https://dtn.com", status: "available" },
-  { name: "John Deere Financial API", category: "Equipment Financing", description: "Embeddable financing pre-approval form. Customers apply for equipment loans and leases directly on your site. Real-time rate quotes based on credit, equipment type, and term. Powers the financing calculator.", freeTier: "No cost to dealer. Commission on funded loans.", url: "https://deere.com/en/finance", status: "mocked" },
-  { name: "Agrian Crop Protection Registry", category: "Regulatory Compliance", description: "Restricted-use pesticide compliance tracking. Verify applicator licenses, record applications, and generate EPA-required reports. Customers see their application history and re-entry intervals on your site.", freeTier: "From $75/month per location. Compliance reporting add-on available.", url: "https://agrian.com", status: "mocked" },
-  { name: "Granular Ag CRM", category: "Farm Management Software", description: "Two-way sync with Granular farm management platform. Customers' field boundaries, crop plans, and input orders flow into your CRM. Sales reps see what each farm needs before they call.", freeTier: "From $15/acre/year. Minimum 500 acres.", url: "https://granular.ag", status: "mocked" },
-  { name: "Farmers Business Network (FBN)", category: "Input Pricing Transparency", description: "Pull FBN anonymized input pricing data alongside your seed and fertilizer quotes. Farmers see how your prices compare to the regional average. Builds trust and closes sales.", freeTier: "FBN membership from $700/year per farm. API access for dealers from $200/month.", url: "https://fbn.com", status: "mocked" },
+  { name: "USDA FSA Feed", category: "Government Resources", description: "Sample USDA FSA announcements feed. Production sites can display program deadlines, disaster assistance, and market reports.", freeTier: "Free public API. No authentication required.", url: "https://fsa.usda.gov", status: "mocked" },
+  { name: "DTN Markets API", category: "Commodity Prices", description: "Sample grain price ticker for demonstration. Shows how local elevator bids could be displayed with source, timestamp, and disclaimer.", freeTier: "From $89/month for DTN Professional. Market data add-on available.", url: "https://dtn.com", status: "available" },
+  { name: "John Deere Financial API", category: "Equipment Financing", description: "Illustrative financing pre-approval form. In production, rate quotes would be based on credit, equipment type, and term and require a real integration.", freeTier: "No cost to dealer. Commission on funded loans.", url: "https://deere.com/en/finance", status: "mocked" },
+  { name: "Agrian Crop Protection Registry", category: "Regulatory Compliance", description: "Restricted-use pesticide compliance tracking example. Verify applicator licenses, record applications, and generate EPA-required reports.", freeTier: "From $75/month per location. Compliance reporting add-on available.", url: "https://agrian.com", status: "mocked" },
+  { name: "Granular Ag CRM", category: "Farm Management Software", description: "Two-way sync example with Granular farm management platform. Field boundaries, crop plans, and input orders could flow into your CRM.", freeTier: "From $15/acre/year. Minimum 500 acres.", url: "https://granular.ag", status: "mocked" },
+  { name: "Farmers Business Network (FBN)", category: "Input Pricing Transparency", description: "Sample input pricing comparison display. FBN anonymized data could be shown alongside your seed and fertilizer quotes.", freeTier: "FBN membership from $700/year per farm. API access for dealers from $200/month.", url: "https://fbn.com", status: "mocked" },
   { name: "Stripe Payment Links", category: "Online Payments", description: "Email payment links for equipment deposits, repair invoices, and parts orders. Accept cards and ACH. Farm credit accounts sync with QuickBooks terms.", freeTier: "2.9% + 30¢ per card transaction. 0.8% capped at $5 for ACH.", url: "https://stripe.com/payments", status: "available" },
 ];
 
@@ -61,10 +61,10 @@ const seasonalImages = [
 ];
 
 const team = [
-  { name: "Walt Kishwaukee", role: "Founder & Owner", bio: "Third-generation farmer and dealer. Started the business in 1972 after his father's dairy operation transitioned to equipment sales. Knows every farm family in the valley.", img: "owner" },
-  { name: "Rachel Anderson", role: "Lead Agronomist", bio: "MS in Agronomy from University of Illinois. 12 years helping farmers plan fertility programs and select seed varieties. GPS-grid sampling specialist.", img: "farmer-1" },
-  { name: "Tom Bruckner", role: "Service Manager", bio: "John Deere Master Certified technician. 20 years turning wrenches on everything from compact tractors to 400-HP row crop machines. Runs the mobile service truck during harvest.", img: "farmer-2" },
-  { name: "Jenny Oleson", role: "Parts & Inventory Manager", bio: "If it exists, Jenny can find it. Manages parts inventory for 6 equipment lines and 1,200+ active accounts. Most special orders arrive in 2–3 days.", img: "farmer-3" },
+  { name: "Walt Kishwaukee", role: "Founder & Owner", bio: "Fictional profile for demo purposes. Third-generation farmer and dealer. Started the business in 1972 after his father's dairy operation transitioned to equipment sales.", img: "owner" },
+  { name: "Rachel Anderson", role: "Lead Agronomist", bio: "Fictional profile for demo purposes. MS in Agronomy. Helps farmers plan fertility programs and select seed varieties.", img: "farmer-1" },
+  { name: "Tom Bruckner", role: "Service Manager", bio: "Fictional profile for demo purposes. John Deere Master Certified technician. Runs the mobile service truck during harvest.", img: "farmer-2" },
+  { name: "Jenny Oleson", role: "Parts & Inventory Manager", bio: "Fictional profile for demo purposes. Manages parts inventory for multiple equipment lines and active accounts.", img: "farmer-3" },
 ];
 
 const productCategories = [
@@ -119,13 +119,13 @@ const faqs: FAQItem[] = [
   { q: "Do you offer bulk seed pricing?", a: "Yes. Bulk seed pricing applies to orders of 50+ units (80,000 kernel bags for corn, 140,000 seed units for soybeans). Early-book discounts of 8–12% are available from October through December for the following spring. We also offer volume rebates that are applied to your account at season end." },
   { q: "What areas do you serve?", a: "Our shop is in Oregon, IL, and our mobile service truck covers Forreston, Polo, Ashton, Amboy, Byron, Stillman Valley, Mount Morris, and Dixon in Illinois, plus Brodhead, Clinton, and Edgerton in Wisconsin. Equipment delivery extends 60 miles in any direction. Call us if you're outside that radius — we may still be able to help." },
   { q: "Do you offer emergency breakdown service?", a: "Yes. During planting (April–May) and harvest (September–October), we have a technician on call 7 days a week, 6:00 AM to 8:00 PM. Call (815) 555-0630 and press 1. Our mobile service truck is stocked with common hydraulic hoses, bearings, and electrical parts. We can get most machines running in the field." },
-  { q: "Can I see current equipment inventory online?", a: "Yes. Our equipment inventory table on this page shows current stock with availability status and pricing. Inventory changes weekly — call (815) 555-0630 for the most up-to-date availability and to schedule a demo or test drive. Used equipment is sold first-come, first-served." },
+  { q: "Can I see current equipment inventory online?", a: "This demo shows an illustrative sample inventory table with model, status, and price examples. A production site would connect to a dealer management system for real-time availability. Call (815) 555-0630 for current inventory and to schedule a demo or test drive." },
 ];
 
 const testimonials = [
-  { text: "When my planter lost a hydraulic line in the middle of planting season, Kishwaukee Valley had a tech at my farm in 90 minutes. He had the hose in the truck and I was back planting before lunch. That's why I've been a customer for 15 years.", author: "Jim K.", location: "Corn & Soybean Farmer, Forreston, IL" },
-  { text: "Their agronomist sat down with me in February and planned my whole fertility program based on soil tests. My soybean yield was up 8 bushels per acre this year. The seed delivery scheduling alone saved me two days of running back and forth.", author: "Sarah B.", location: "Dairy Operation, Brodhead, WI" },
-  { text: "I bought my John Deere 6120M from them three years ago and the service has been outstanding. They pick it up for maintenance, bring it back, and the financing through John Deere Financial was painless. They understand livestock operations — not just row crop.", author: "Mike D.", location: "Livestock Rancher, Polo, IL" },
+  { text: "When my planter lost a hydraulic line in the middle of planting season, Kishwaukee Valley had a tech at my farm in 90 minutes. He had the hose in the truck and I was back planting before lunch. That's why I've been a customer for 15 years.", author: "Jim K.", location: "Illustrative review, Forreston, IL" },
+  { text: "Their agronomist sat down with me in February and planned my whole fertility program based on soil tests. My soybean yield was up 8 bushels per acre this year. The seed delivery scheduling alone saved me two days of running back and forth.", author: "Sarah B.", location: "Illustrative review, Brodhead, WI" },
+  { text: "I bought my John Deere 6120M from them three years ago and the service has been outstanding. They pick it up for maintenance, bring it back, and the financing through John Deere Financial was painless. They understand livestock operations — not just row crop.", author: "Mike D.", location: "Illustrative review, Polo, IL" },
 ];
 
 const StarRating: React.FC = () => (
@@ -137,9 +137,9 @@ const CommodityPriceTicker: React.FC = () => {
   return (
     <div className="demo-financing-calc" style={{ maxWidth: "none", padding: "1.5rem 2rem" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem", flexWrap: "wrap", gap: "0.5rem" }}>
-        <h3 style={{ fontSize: "1.25rem", margin: 0, fontFamily: "var(--demo-font-heading)" }}>Live Grain Prices</h3>
+        <h3 style={{ fontSize: "1.25rem", margin: 0, fontFamily: "var(--demo-font-heading)" }}>Sample Grain Prices</h3>
         <span style={{ fontSize: "0.75rem", color: "var(--demo-text-muted)", display: "flex", alignItems: "center", gap: "0.4rem" }}>
-          <BoltIcon size={14} /> Updated every 15 min
+          <BoltIcon size={14} /> For demonstration only
         </span>
       </div>
       <div style={{ overflow: "hidden", position: "relative", background: "var(--demo-bg)", borderRadius: "var(--demo-radius)", padding: "0.75rem 0", border: "1px solid var(--demo-border)" }}>
@@ -155,7 +155,7 @@ const CommodityPriceTicker: React.FC = () => {
         </div>
       </div>
       <p style={{ fontSize: "0.75rem", color: "var(--demo-text-muted)", marginTop: "0.75rem", textAlign: "center" }}>
-        <strong>Powered by DTN Markets API</strong> — live grain prices updated every 15 minutes. Local elevator bids for Oregon, IL 61061.
+        <strong>Illustrative sample data.</strong> These are placeholder prices for demo layout only. A production site would source live market data with contract, location, commodity, delay, and timestamp from a provider like DTN.
       </p>
       <style>{`
         @keyframes tickerScroll {
@@ -179,8 +179,8 @@ const EquipmentFinancingCalculator: React.FC = () => {
   const fmt = (n: number) => n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
   return (
     <div className="demo-financing-calc">
-      <h3 className="demo-financing-calc__title">Equipment Financing Calculator</h3>
-      <p className="demo-financing-calc__subtitle">Estimate your monthly payment. Rates from 0% APR on qualifying new John Deere models.</p>
+      <h3 className="demo-financing-calc__title">Equipment Financing Estimator</h3>
+      <p className="demo-financing-calc__subtitle">Illustrative monthly-payment estimate. Real rates depend on credit, equipment, term, and lender.</p>
       <div className="demo-financing-calc__slider-row">
         <label className="demo-financing-calc__slider-label" htmlFor="equip-price"><span>Equipment Price</span><span className="demo-financing-calc__slider-value">{fmt(price)}</span></label>
         <input id="equip-price" className="demo-financing-calc__slider" type="range" min="20000" max="200000" step="5000" value={price} onChange={(e) => setPrice(Number(e.target.value))} />
@@ -201,7 +201,7 @@ const EquipmentFinancingCalculator: React.FC = () => {
         <div className="demo-financing-calc__result-label">Estimated Monthly Payment</div>
         <div className="demo-financing-calc__result-value">{fmt(monthly)}<span className="demo-financing-calc__result-period">/mo</span></div>
       </div>
-      <div className="demo-financing-calc__note">Rates shown are estimates. John Deere Financial offers 0% APR for 36 months on qualifying new models. Used equipment financed through AgChoice Farm Credit. Subject to credit approval. Call (815) 555-0630 for a custom quote.</div>
+      <div className="demo-financing-calc__note">This is a demo calculator. The 4.9% APR and monthly payment are illustrative only. Real financing requires an application, credit review, and a formal quote from John Deere Financial, AgChoice, or another lender. Call (815) 555-0630 for current programs.</div>
     </div>
   );
 };
@@ -298,9 +298,9 @@ const AgricultureDemo: React.FC = () => (
   <DemoLayout demoName="Kishwaukee Valley Farm Services" industry="Agriculture / Farm Supply" themeColor="#4a7c3a" designSystem="organic">
     <section className="demo-hero" style={{ backgroundImage: "url(/images/demos/agriculture/hero.jpg)" }}>
       <div className="demo-hero__inner">
-        <span className="demo-hero__tagline">John Deere & Case IH Dealer · Serving the Kishwaukee Valley Since 1972</span>
+        <span className="demo-hero__tagline">Independent Equipment Service, Parts & Used Equipment · Kishwaukee Valley</span>
         <h1 className="demo-hero__title">Kishwaukee Valley Farm Services</h1>
-        <p className="demo-hero__subtitle">Equipment sales, repair, seed, fertilizer, and agronomy services for farms across Ogle County and Southern Wisconsin. Located on IL Route 64 in Oregon, IL — 20 miles south of Rockford, 15 miles north of Dixon.</p>
+        <p className="demo-hero__subtitle">Fictional demo of a farm-equipment dealer serving the Kishwaukee Valley. On-site repair, parts counter, and used-equipment inventory — with transparent service status and seasonal checklists.</p>
         <div className="demo-hero__actions">
           <a href="tel:8155550630" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0630</a>
           <a href="#services" className="demo-btn demo-btn--ghost">View Services</a>
@@ -308,55 +308,9 @@ const AgricultureDemo: React.FC = () => (
       </div>
     </section>
 
-    <section className="demo-section">
-      <div className="demo-section__inner">
-        <h2 className="demo-section__title">Features at a glance</h2>
-        <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Kishwaukee Valley Farm Services features at a glance">
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
-            <thead>
-              <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
-                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
-                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Details</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Equipment inventory with live availability</td>
-                <td style={{ padding: "0.75rem" }}>Real-time stock table showing model, HP, status (In Stock / On Order / Used), and pricing. Updated from dealer management system.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Live commodity price ticker</td>
-                <td style={{ padding: "0.75rem" }}>Scrolling grain prices (corn, soybeans, wheat, ethanol) via DTN Markets API. Updated every 15 minutes with local elevator bids.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Equipment financing calculator</td>
-                <td style={{ padding: "0.75rem" }}>Interactive monthly payment calculator with price, down payment, and term sliders. John Deere Financial rate integration.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Service request form</td>
-                <td style={{ padding: "0.75rem" }}>Equipment-specific repair booking with type, make/model/year, issue description, urgency level, and preferred date.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Weather widget for planting decisions</td>
-                <td style={{ padding: "0.75rem" }}>Current conditions with soil temperature context. Farmers see if it's safe to plant or spray without leaving your site.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Equipment telemetry</td>
-                <td style={{ padding: "0.75rem" }}>John Deere Operations Center integration — customers see tractor hours and maintenance alerts on your site.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Seasonal resource guides</td>
-                <td style={{ padding: "0.75rem" }}>Spring planting, fall harvest, and winter maintenance checklists with tips and service specials.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>SEO setup</td>
-                <td style={{ padding: "0.75rem" }}>LocalBusiness schema, service area pages for each town, Google Business Profile, and seasonal content landing pages.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
+    <div className="demo-emergency-banner" style={{ background: "#3d2618", color: "#f5f5f5", borderBottom: "1px solid var(--demo-border)" }}>
+      <AlertIcon size={18} /> <strong>Demo website:</strong> Kishwaukee Valley Farm Services is a fictional business concept created by Bradley Matera. Team, reviews, images, inventory, and interactive features are illustrative.
+    </div>
 
     <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
@@ -440,8 +394,9 @@ const AgricultureDemo: React.FC = () => (
     <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Equipment Inventory</h2>
-        <p className="demo-section__subtitle">What's on the lot right now. Inventory changes weekly — call (815) 555-0630 for current availability and to schedule a demo.</p>
-        <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Current equipment inventory">
+        <p className="demo-section__subtitle">Illustrative sample inventory below. A production site would pull live stock from a dealer management system. Call (815) 555-0630 for current availability and to schedule a demo.</p>
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
+        <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Sample equipment inventory">
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
             <thead>
               <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
@@ -481,7 +436,7 @@ const AgricultureDemo: React.FC = () => (
           </table>
         </div>
         <p style={{ fontSize: "0.8rem", color: "var(--demo-text-muted)", marginTop: "1rem", textAlign: "center" }}>
-          Prices subject to change. Used equipment sold first-come, first-served. Trade-ins welcome — call for an appraisal.
+          Prices, status, and availability are illustrative for this demo. Real inventory changes daily. Call (815) 555-0630 for current stock, pricing, and trade-in appraisal.
         </p>
       </div>
     </section>
@@ -489,7 +444,7 @@ const AgricultureDemo: React.FC = () => (
     <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Equipment Showcase</h2>
-        <p className="demo-section__subtitle">A look at what's on the lot right now. New and used inventory changes weekly — call for current pricing and availability.</p>
+        <p className="demo-section__subtitle">Illustrative example categories. These photos represent the type of equipment a dealer would carry — not live listings.</p>
         <div className="demo-food-gallery">
           {products.map((p) => (
             <div key={p.title} className="demo-food-gallery__item" style={{ backgroundImage: `url(/images/demos/agriculture/${p.img}.jpg)` }}>
@@ -525,6 +480,7 @@ const AgricultureDemo: React.FC = () => (
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Product Categories</h2>
         <p className="demo-section__subtitle">We stock the brands you trust and the parts you need. Special orders welcome — most arrive in 2–3 days.</p>
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
         <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Product categories">
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
             <thead>
@@ -666,7 +622,7 @@ const AgricultureDemo: React.FC = () => (
         <div className="demo-footer__name">Kishwaukee Valley Farm Services</div>
         <div>485 IL Route 64, Oregon, IL 61061 · (815) 555-0630</div>
         <div style={{ marginTop: "1rem" }}><SocialLinks links={socialLinks} /></div>
-        <div className="demo-footer__demo-note">This is a demo website built by <a href="https://bradleymatera.dev">Bradley Matera</a>.<br /><a href="/demos/">← Back to all demos</a> · <a href="/contact/">Get a site like this →</a></div>
+        <div className="demo-footer__demo-note">Fictional business concept created by <a href="https://bradleymatera.dev">Bradley Matera</a>. Team, reviews, images, and interactive features are illustrative.<br /><a href="/demos/">← Back to all demos</a> · <a href="/contact/">Get a site like this →</a></div>
       </div>
     </footer>
   </DemoLayout>

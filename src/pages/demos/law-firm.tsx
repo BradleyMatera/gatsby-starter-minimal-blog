@@ -8,7 +8,7 @@ import SocialLinks, { SocialLink } from "../../features/demos/SocialLinks";
 import ReviewBadges from "../../features/demos/ReviewBadges";
 import IntegrationsSection, { Integration } from "../../features/demos/IntegrationsSection";
 import FAQSection, { FAQItem } from "../../features/demos/FAQSection";
-import { StarIcon, MapPinIcon, PhoneIcon, ShieldIcon, CheckIcon, ClockIcon, DocumentIcon, ScrollIcon, QuoteIcon, CalendarIcon, AlertIcon } from "../../site/icons";
+import { StarIcon, MapPinIcon, PhoneIcon, CheckIcon, ClockIcon, DocumentIcon, ScrollIcon, QuoteIcon, AlertIcon } from "../../site/icons";
 
 const pathname = "/demos/law-firm/";
 const pageTitle = "Rock River Legal Group — Business, Estate & Real Estate Counsel | Demo Website";
@@ -112,13 +112,12 @@ const deadlineGuide = [
 
 const DeadlineExplainer: React.FC = () => {
   const [selected, setSelected] = React.useState<string | null>(null);
-  const item = deadlineGuide.find((d) => d.topic === selected);
 
   return (
     <div style={{ maxWidth: "720px", margin: "0 auto" }}>
       <div className="demo-faq" style={{ marginBottom: "1.5rem" }}>
         {deadlineGuide.map((d) => (
-          <div key={d.topic} className="demo-faq__item" style={{ cursor: "pointer" }} onClick={() => setSelected(selected === d.topic ? null : d.topic)}>
+          <div key={d.topic} className="demo-faq__item" role="button" tabIndex={0} style={{ cursor: "pointer" }} onClick={() => setSelected(selected === d.topic ? null : d.topic)} onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") setSelected(selected === d.topic ? null : d.topic); }}>
             <h3 className="demo-faq__question" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               {d.topic}
               <span style={{ fontSize: "0.8rem", color: "var(--demo-text-muted)" }}>{selected === d.topic ? "−" : "+"}</span>

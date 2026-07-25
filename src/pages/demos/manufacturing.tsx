@@ -8,11 +8,11 @@ import SocialLinks, { SocialLink } from "../../features/demos/SocialLinks";
 import ReviewBadges from "../../features/demos/ReviewBadges";
 import IntegrationsSection, { Integration } from "../../features/demos/IntegrationsSection";
 import FAQSection, { FAQItem } from "../../features/demos/FAQSection";
-import { StarIcon, MapPinIcon, PhoneIcon, GearIcon, ShieldIcon, CheckIcon, ClockIcon, ToolsIcon, BoltIcon, DocumentIcon, ClipboardIcon, DownloadIcon } from "../../site/icons";
+import { StarIcon, MapPinIcon, PhoneIcon, GearIcon, ShieldIcon, CheckIcon, ClockIcon, BoltIcon, DownloadIcon, AlertIcon } from "../../site/icons";
 
 const pathname = "/demos/manufacturing/";
-const pageTitle = "Sterling Metalworks — Custom Metal Fabrication | Demo Website";
-const pageDescription = "Demo manufacturing website for a metal fabrication shop — capabilities, equipment list, material specs, RFQ form, ISO certifications, and project gallery. Built by Bradley Matera.";
+const pageTitle = "Sterling Metalworks — Metal Fabrication Shop Demo";
+const pageDescription = "Demo manufacturing website for a fictional custom metal fabrication shop. Includes sample capabilities, illustrative equipment and certifications, and an RFQ form example. Built by Bradley Matera.";
 
 const socialLinks: SocialLink[] = [
   { platform: "linkedin", url: "https://linkedin.com" },
@@ -22,39 +22,39 @@ const socialLinks: SocialLink[] = [
 ];
 
 const integrations: Integration[] = [
-  { name: "E2 Shop System", category: "ERP / Shop Management", description: "Full shop floor control — quoting, job scheduling, material tracking, shipping, and invoicing. Your website quote form feeds directly into E2 for instant job setup.", freeTier: "From $7,995 one-time + annual support. Cloud version from $199/month.", url: "https://e2shopsystem.com", status: "mocked" },
-  { name: "QuickBooks Online", category: "Accounting & Invoicing", description: "Sync invoices, purchase orders, and vendor payments between your shop system and QuickBooks. No double entry — jobs bill straight through to accounting.", freeTier: "From $35/month. 50% off for first 3 months.", url: "https://quickbooks.intuit.com", status: "available" },
-  { name: "Salesforce CRM", category: "Customer Relationship Management", description: "Track leads, quotes, and customer history. When a prospect submits the quote form, Salesforce creates a lead and assigns it to your sales rep based on industry segment.", freeTier: "Starter from $25/user/month. 30-day free trial.", url: "https://salesforce.com", status: "mocked" },
-  { name: "Shopify B2B Portal", category: "E-Commerce / B2B Portal", description: "Customer self-service portal for reordering parts, checking order status, and downloading invoices. Tiered pricing per customer account.", freeTier: "From $39/month. 3-day free trial.", url: "https://shopify.com", status: "available" },
-  { name: "Autodesk Fusion 360 Viewer", category: "CAD / Design Collaboration", description: "Embeddable 3D model viewer. Customers upload STEP or DWG files and see them rendered in-browser. You review and quote directly from the model.", freeTier: "Free for personal use. Commercial from $545/year.", url: "https://autodesk.com/fusion-360", status: "mocked" },
+  { name: "E2 Shop System", category: "ERP / Shop Management", description: "Example ERP integration. A production quote form could feed directly into job scheduling, material tracking, and invoicing.", freeTier: "From $7,995 one-time + annual support. Cloud version from $199/month.", url: "https://e2shopsystem.com", status: "mocked" },
+  { name: "QuickBooks Online", category: "Accounting & Invoicing", description: "Sync invoices, purchase orders, and vendor payments between your shop system and QuickBooks.", freeTier: "From $35/month. 50% off for first 3 months.", url: "https://quickbooks.intuit.com", status: "available" },
+  { name: "Salesforce CRM", category: "Customer Relationship Management", description: "CRM integration example. Quote-form submissions could create leads and assign them by industry segment.", freeTier: "Starter from $25/user/month. 30-day free trial.", url: "https://salesforce.com", status: "mocked" },
+  { name: "Shopify B2B Portal", category: "E-Commerce / B2B Portal", description: "Customer self-service portal example for reordering parts, checking order status, and downloading invoices.", freeTier: "From $39/month. 3-day free trial.", url: "https://shopify.com", status: "available" },
+  { name: "Autodesk Fusion 360 Viewer", category: "CAD / Design Collaboration", description: "Example 3D model viewer. Customers could upload STEP or DWG files and see them rendered in-browser for quoting.", freeTier: "Free for personal use. Commercial from $545/year.", url: "https://autodesk.com/fusion-360", status: "mocked" },
   { name: "Google Maps Embed", category: "Maps & Service Area", description: "Interactive map showing your shop location and delivery radius. Customers see if you're within trucking distance before requesting a quote.", freeTier: "28,000 embed loads/month (free). $7/1k loads after.", url: "https://developers.google.com/maps/documentation/embed/start", status: "live" },
-  { name: "ISO 9001 Certification Badge", category: "Trust & Verification", description: "Live certification badge linking to your ISO registrar's verification page. Shows customers your quality management system is audited and certified.", freeTier: "ISO 9001 certification from $3,000–$10,000 (registrar fees).", url: "https://iso.org/standard/62085.html", status: "mocked" },
-  { name: "Stripe Payment Links", category: "Online Payments", description: "Email payment links with invoices. Customers pay by card or ACH for deposits and final payments. Funds in your account in 2 days.", freeTier: "2.9% + 30¢ per card transaction. 0.8% capped at $5 for ACH.", url: "https://stripe.com/payments", status: "available" },
-  { name: "Xometry / Protolabs Quote Comparison API", category: "Overflow Quoting", description: "When capacity is full, automatically compare quotes from Xometry and Protolabs so you can route overflow work without turning customers away. Instant pricing for CNC, sheet metal, and 3D printing.", freeTier: "API access free. Xometry takes 10–20% margin on routed jobs.", url: "https://xometry.com", status: "mocked" },
-  { name: "Thomasnet Supplier Profile", category: "B2B Buyer Discovery", description: "Verified supplier profile on Thomasnet.com — the platform where 1.4M+ industrial buyers source suppliers. RFQs from Thomasnet feed directly into your Salesforce pipeline.", freeTier: "Basic listing free. Premium from $4,200/year.", url: "https://thomasnet.com", status: "available" },
-  { name: "Made in USA Certified", category: "Domestic Manufacturing Verification", description: "Third-party verification that your parts are manufactured in the USA. Critical for defense (ITAR), government contracts, and reshoring initiatives. Badge links to verification registry.", freeTier: "Certification from $895/year. Includes FTC compliance review.", url: "https://madeinusa.com", status: "mocked" },
-  { name: "FedEx Freight Quote API", category: "Shipping & Logistics", description: "Real-time LTL freight quotes for heavy parts and large assemblies. Quote form auto-calculates shipping based on part weight, dimensions, and destination ZIP. Customers see landed cost upfront.", freeTier: "API free with FedEx account. Discounted freight rates up to 70% off.", url: "https://fedex.com/freight", status: "available" },
-  { name: "Dropbox / Google Drive File Sharing", category: "CAD File Transfer Portal", description: "Secure portal for customers to upload STEP, DWG, IGES, and PDF drawings. Files auto-organize by customer and job number. No more 50MB email attachments.", freeTier: "Dropbox Business from $15/user/month. Google Drive 15GB free.", url: "https://dropbox.com/business", status: "available" },
+  { name: "ISO 9001 Certification Badge", category: "Trust & Verification", description: "Example certification badge. Real ISO 9001 certification would link to the registrar's verification page.", freeTier: "ISO 9001 certification from $3,000–$10,000 (registrar fees).", url: "https://iso.org/standard/62085.html", status: "mocked" },
+  { name: "Stripe Payment Links", category: "Online Payments", description: "Email payment links with invoices. Customers pay by card or ACH for deposits and final payments.", freeTier: "2.9% + 30¢ per card transaction. 0.8% capped at $5 for ACH.", url: "https://stripe.com/payments", status: "available" },
+  { name: "Xometry / Protolabs Quote Comparison API", category: "Overflow Quoting", description: "Example overflow quoting integration. In production, quotes could be compared from Xometry or Protolabs when capacity is full.", freeTier: "API access free. Xometry takes 10–20% margin on routed jobs.", url: "https://xometry.com", status: "mocked" },
+  { name: "Thomasnet Supplier Profile", category: "B2B Buyer Discovery", description: "Example Thomasnet supplier profile. A real listing would be verified and could feed RFQs into your CRM.", freeTier: "Basic listing free. Premium from $4,200/year.", url: "https://thomasnet.com", status: "available" },
+  { name: "Made in USA Certified", category: "Domestic Manufacturing Verification", description: "Example domestic-manufacturing badge. Real certifications require third-party verification and FTC-compliant claims.", freeTier: "Certification from $895/year. Includes FTC compliance review.", url: "https://madeinusa.com", status: "mocked" },
+  { name: "FedEx Freight Quote API", category: "Shipping & Logistics", description: "Example LTL freight-quote integration. A production site could calculate shipping based on weight, dimensions, and ZIP for landed-cost estimates.", freeTier: "API free with FedEx account. Discounted freight rates up to 70% off.", url: "https://fedex.com/freight", status: "available" },
+  { name: "Dropbox / Google Drive File Sharing", category: "CAD File Transfer Portal", description: "Example secure CAD file portal for customers to upload STEP, DWG, IGES, and PDF drawings.", freeTier: "Dropbox Business from $15/user/month. Google Drive 15GB free.", url: "https://dropbox.com/business", status: "available" },
 ];
 
 const capabilities = [
-  { name: "CNC Machining", desc: "3-axis and 4-axis milling, turning, and boring. Tolerances to ±0.0005\". Prototype to production runs.", img: "cnc-machining" },
-  { name: "Laser Cutting", desc: "Fiber laser cutting up to 3/4\" mild steel, 1/2\" stainless, 1/4\" aluminum. Nesting software optimizes material yield.", img: "laser-cutting" },
-  { name: "Welding (MIG/TIG/Stick)", desc: "AWS D1.1 certified welders. MIG, TIG, and stick welding on steel, stainless, and aluminum. Code welding available.", img: "welding" },
-  { name: "Sheet Metal Forming", desc: "Press brake forming up to 10' length. Rolling, shearing, punching, and notching. Gauge to 10ga steel.", img: "sheet-metal" },
-  { name: "Powder Coating", desc: "In-house powder coating booth. Standard and custom RAL colors. Media blasting prep. 48-hour typical turnaround.", img: "powder-coating" },
-  { name: "Assembly", desc: "Mechanical and sub-assembly. Torque-controlled fastening, leak testing, and final QC inspection before shipping.", img: "assembly" },
+  { name: "CNC Machining", desc: "Illustrative 3-axis and 4-axis milling, turning, and boring. Tolerances and capacity depend on machine, setup, and inspection method.", img: "cnc-machining" },
+  { name: "Laser Cutting", desc: "Illustrative fiber laser cutting for mild steel, stainless, and aluminum. Actual thickness limits and material yield depend on the machine and job.", img: "laser-cutting" },
+  { name: "Welding (MIG/TIG/Stick)", desc: "Illustrative welding capabilities. Code welding requires qualified welders, a Certified Welding Inspector as needed, and proper procedures.", img: "welding" },
+  { name: "Sheet Metal Forming", desc: "Illustrative press brake, rolling, shearing, and punching. Capacity depends on equipment tonnage and material.", img: "sheet-metal" },
+  { name: "Powder Coating", desc: "Illustrative powder coating and prep. Turnaround, color availability, and finish durability depend on the vendor and part.", img: "powder-coating" },
+  { name: "Assembly", desc: "Illustrative mechanical and sub-assembly. Processes and QC should be documented and agreed upon per job.", img: "assembly" },
 ];
 
 const equipment = [
-  { machine: "Haas VF-2 VMC", type: "CNC Mill", capacity: "30\" x 16\" x 20\" travels, 8,100 RPM", qty: 2 },
-  { machine: "Haas ST-20 Lathe", type: "CNC Turning", capacity: "20\" x 40\" turning, 12-station turret", qty: 1 },
-  { machine: "Trumpf TruLaser 3030", type: "Fiber Laser", capacity: "5' x 10' sheet, up to 3/4\" mild steel", qty: 1 },
-  { machine: "Amada HG-1003 Press Brake", type: "Press Brake", capacity: "10' length, 110-ton, 4-axis back gauge", qty: 1 },
-  { machine: "Miller Multimatic 220", type: "MIG/TIG/Stick Welder", capacity: "Multi-process, 210A output", qty: 4 },
-  { machine: "Lincoln Power MIG 360MP", type: "MIG Welder", capacity: "300A, industrial wire feed", qty: 2 },
-  { machine: "Cincinnati CLA 408", type: "Hydraulic Shear", capacity: "10' x 1/4\" capacity", qty: 1 },
-  { machine: "Gertebauer Powder Coat Booth", type: "Powder Coating", capacity: "8' x 8' x 20' booth, 4-stage wash", qty: 1 },
+  { machine: "Haas VF-2 VMC (example)", type: "CNC Mill", capacity: "Illustrative capacity — verify with real machine specs", qty: 2 },
+  { machine: "Haas ST-20 Lathe (example)", type: "CNC Turning", capacity: "Illustrative capacity — verify with real machine specs", qty: 1 },
+  { machine: "Trumpf TruLaser 3030 (example)", type: "Fiber Laser", capacity: "Illustrative capacity — verify with real machine specs", qty: 1 },
+  { machine: "Amada HG-1003 Press Brake (example)", type: "Press Brake", capacity: "Illustrative capacity — verify with real machine specs", qty: 1 },
+  { machine: "Miller Multimatic 220 (example)", type: "MIG/TIG/Stick Welder", capacity: "Illustrative capacity — verify with real machine specs", qty: 4 },
+  { machine: "Lincoln Power MIG 360MP (example)", type: "MIG Welder", capacity: "Illustrative capacity — verify with real machine specs", qty: 2 },
+  { machine: "Cincinnati CLA 408 (example)", type: "Hydraulic Shear", capacity: "Illustrative capacity — verify with real machine specs", qty: 1 },
+  { machine: "Powder Coat Booth (example)", type: "Powder Coating", capacity: "Illustrative capacity — verify with real equipment specs", qty: 1 },
 ];
 
 const materials = [
@@ -66,70 +66,70 @@ const materials = [
 ];
 
 const capacityStats = [
-  { number: "18,000", label: "Sq Ft Facility" },
-  { number: "8", label: "Major Machines" },
-  { number: "2", label: "Shifts During Peak" },
-  { number: "3-Day", label: "Material Safety Stock" },
-  { number: "2–3 Wk", label: "Standard Lead Time" },
-  { number: "48 Hr", label: "Rush Service Available" },
+  { number: "18,000", label: "Illustrative Sq Ft" },
+  { number: "8", label: "Illustrative Machines" },
+  { number: "2", label: "Illustrative Shifts" },
+  { number: "3-Day", label: "Illustrative Stock" },
+  { number: "2–3 Wk", label: "Illustrative Lead Time" },
+  { number: "48 Hr", label: "Rush Varies" },
 ];
 
 const qcSteps = [
-  { step: "1", title: "First Article Inspection", desc: "Dimensional verification on the first part off every machine. CMM, calipers, and micrometers. No production run starts until first article is signed off." },
-  { step: "2", title: "In-Process Inspection", desc: "Checks during machining and welding at set intervals — typically every 25 pieces or every 2 hours. Catches drift before it becomes scrap." },
-  { step: "3", title: "Final QC Inspection", desc: "Dimensional, visual, and weld inspection before shipping. Every part checked against print. Non-conforming parts are quarantined and reviewed." },
-  { step: "4", title: "Documentation", desc: "Material certs and inspection reports ship with every order. Full traceability from raw material heat number to finished part. ISO 9001:2015 compliant." },
+  { step: "1", title: "First Article Inspection", desc: "Illustrative first-article process. Real jobs require dimensional verification and sign-off before production release." },
+  { step: "2", title: "In-Process Inspection", desc: "Illustrative in-process checks. Frequency and method depend on the part, tolerance, and production plan." },
+  { step: "3", title: "Final QC Inspection", desc: "Illustrative final inspection. Every production job should define acceptance criteria and non-conformance handling with the customer." },
+  { step: "4", title: "Documentation", desc: "Illustrative documentation. Material certs, inspection reports, and traceability should be agreed upon in the purchase order." },
 ];
 
 const projects = [
-  { title: "Agricultural Bracket Run", desc: "2,000-piece production run of mounting brackets for a combine manufacturer.", img: "project-1" },
-  { title: "Stainless Food-Grade Frame", desc: "TIG-welded 304 stainless frame for a washdown conveyor system.", img: "project-2" },
-  { title: "Structural Steel Assembly", desc: "AWS D1.1 certified structural weldment for a commercial building.", img: "project-3" },
-  { title: "CNC Machined Housing", desc: "Precision-machined aluminum housing with ±0.001\" tolerances.", img: "project-4" },
-  { title: "Powder Coated Enclosures", desc: "Custom RAL 7016 powder-coated electrical enclosures for outdoor use.", img: "project-5" },
-  { title: "Laser-Cut Panel Array", desc: "Nested laser-cut decorative panels for an architectural installation.", img: "project-6" },
+  { title: "Agricultural Bracket Run", desc: "Illustrative 2,000-piece production run of mounting brackets.", img: "project-1" },
+  { title: "Stainless Food-Grade Frame", desc: "Illustrative TIG-welded stainless frame for a washdown environment.", img: "project-2" },
+  { title: "Structural Steel Assembly", desc: "Illustrative structural weldment for a commercial building.", img: "project-3" },
+  { title: "CNC Machined Housing", desc: "Illustrative precision-machined aluminum housing.", img: "project-4" },
+  { title: "Powder Coated Enclosures", desc: "Illustrative powder-coated electrical enclosures.", img: "project-5" },
+  { title: "Laser-Cut Panel Array", desc: "Illustrative nested laser-cut decorative panels.", img: "project-6" },
 ];
 
 const team = [
-  { name: "Frank Sterling", role: "Founder & Master Fabricator", bio: "Started Sterling Metalworks in 1998. 35 years in metal fabrication. AWS D1.1 Certified Welding Inspector. Still runs the shop floor every day.", img: "owner" },
-  { name: "Carlos Mendez", role: "Lead Welder / CWI", bio: "AWS D1.1 certified welder and welding inspector. 18 years experience in structural and stainless welding. Oversees all code welding jobs.", img: "welder-1" },
-  { name: "Dale Hutchins", role: "CNC Machinist", bio: "Haas-certified machinist with 14 years experience. Programs and runs all CNC mills and lathes. Tolerance specialist — hits ±0.0005\" consistently.", img: "welder-2" },
-  { name: "Marcus Webb", role: "Fabricator / Laser Operator", bio: "10 years in the trade. Runs the Trumpf laser and Amada press brake. Expert at nesting for maximum material yield and minimum waste.", img: "welder-3" },
+  { name: "Frank Sterling", role: "Founder & Master Fabricator", bio: "Fictional profile for demo purposes. 35 years in metal fabrication. Represents the type of leadership a custom shop would have.", img: "owner" },
+  { name: "Carlos Mendez", role: "Lead Welder", bio: "Fictional profile for demo purposes. Experienced in structural and stainless welding. Code welding requires current certifications and QC records.", img: "welder-1" },
+  { name: "Dale Hutchins", role: "CNC Machinist", bio: "Fictional profile for demo purposes. CNC machinist example. Actual capability depends on equipment, setup, and inspection.", img: "welder-2" },
+  { name: "Marcus Webb", role: "Fabricator / Laser Operator", bio: "Fictional profile for demo purposes. Laser and press-brake operator example. Real nesting and yield depend on the job and material.", img: "welder-3" },
 ];
 
 const industries = [
-  { name: "Agricultural Equipment", desc: "Brackets, guards, frames, and wear parts for planters, combines, and tillage implements. We understand harvest season deadlines." },
-  { name: "Automotive Parts", desc: "Aftermarket and OEM-spec components. PPAP documentation available. JIT delivery scheduling for assembly-line customers." },
-  { name: "Food Processing Equipment", desc: "Stainless steel fabrication for washdown environments. FDA-compliant finishes, sanitary welds, and food-grade materials." },
-  { name: "Construction Materials", desc: "Structural brackets, stair stringers, railings, and custom architectural metalwork. AWS D1.1 certified structural welding." },
+  { name: "Agricultural Equipment", desc: "Illustrative parts: brackets, guards, frames, and wear parts for agricultural machinery. Actual capabilities depend on equipment and certifications." },
+  { name: "Automotive Parts", desc: "Illustrative aftermarket and OEM-style components. Documentation and quality requirements vary by customer and industry." },
+  { name: "Food Processing Equipment", desc: "Illustrative stainless steel fabrication for washdown environments. Food-grade finishes and sanitary welds require proper procedures and verification." },
+  { name: "Construction Materials", desc: "Illustrative structural and architectural metalwork. Code welding requires qualified welders and inspection as specified." },
 ];
 
 const certifications = [
-  { name: "ISO 9001:2015", desc: "Quality Management System certified by NSF-ISR. Annual surveillance audits. Certificate #A4287.", logo: "ISO 9001:2015" },
-  { name: "AWS D1.1", desc: "Structural Welding Code — Steel. All welders certified. CWI on staff for in-house inspection.", logo: "AWS D1.1" },
-  { name: "ITAR Registered", desc: "Registered with DDTC for defense-related manufacturing. Export compliance program in place.", logo: "ITAR" },
+  { name: "ISO 9001:2015", desc: "Illustrative certification. Real ISO 9001 registration would be issued by an accredited registrar and verifiable on their website.", logo: "ISO 9001:2015" },
+  { name: "AWS D1.1", desc: "Illustrative welding-code reference. Actual AWS D1.1 certification requires welder qualification records and a Certified Welding Inspector as applicable.", logo: "AWS D1.1" },
+  { name: "ITAR Registered", desc: "Illustrative defense-manufacturing reference. ITAR registration and compliance must be verified through DDTC before handling defense articles.", logo: "ITAR" },
 ];
 
 const trustBadges = [
-  { label: "ISO 9001:2015", sub: "Certified QMS" },
-  { label: "AWS D1.1", sub: "Certified Welders" },
-  { label: "ITAR Registered", sub: "DDTC Compliant" },
-  { label: "Made in USA", sub: "Domestic Mfg" },
+  { label: "ISO 9001:2015", sub: "Illustrative" },
+  { label: "AWS D1.1", sub: "Illustrative" },
+  { label: "ITAR Registered", sub: "Illustrative" },
+  { label: "Made in USA", sub: "Illustrative" },
 ];
 
 const faqs: FAQItem[] = [
-  { q: "What is your minimum order quantity?", a: "We have no minimum order quantity. Whether you need one prototype part or 10,000 production units, we can help. Prototype jobs are quoted at shop rate with no setup fee for first-time customers." },
-  { q: "What are your typical lead times?", a: "Standard lead time is 2–3 weeks for production runs. Prototypes typically ship in 5–7 business days. Rush service is available — we can often turn emergency parts in 48 hours for agricultural and construction customers during peak season." },
-  { q: "Can you source materials for us?", a: "Yes. We maintain accounts with Steel Dynamics, Ryerson, and Alro Steel. We can source mild steel, stainless, aluminum, brass, and copper in sheet, plate, bar, and tube. Material certs are provided with every order." },
-  { q: "How do you ensure quality?", a: "We are ISO 9001:2015 certified with documented quality procedures for every process. First-article inspection on all new jobs, in-process inspection during machining, and final QC before shipping. CMM and gauge calibration is tracked and audited annually." },
-  { q: "What is your delivery radius?", a: "We deliver free within 75 miles of Sterling, IL — covering Rock Falls, Dixon, Rockford, Belvidere, Rochelle, and the I-88 corridor. Beyond that, we ship via common carrier (Old Dominion, Estes) or customer pickup. White-glove delivery available for oversize items." },
-  { q: "What file formats do you accept for quotes?", a: "We accept STEP, IGES, DWG, DXF, and PDF drawings. Upload them through our RFQ form or email to quotes@sterlingmetalworks-demo.com. For 3D models, we use Autodesk Fusion 360 to review and quote directly from the geometry." },
+  { q: "What is your minimum order quantity?", a: "Minimum order quantities, setup fees, and prototype pricing vary by shop and job complexity. Contact us for a quote tailored to your part and volume." },
+  { q: "What are your typical lead times?", a: "Lead times depend on job complexity, material availability, shop load, and finishing requirements. Standard production can range from 2–3 weeks, with rush service sometimes available. Confirm timing with your quote." },
+  { q: "Can you source materials for us?", a: "Most fabrication shops can source common materials such as mild steel, stainless, aluminum, brass, and copper. Material certifications should be requested and verified with your purchase order." },
+  { q: "How do you ensure quality?", a: "Quality systems vary by shop. A robust shop will have documented inspection procedures, first-article inspection, in-process checks, final QC, and calibrated measuring equipment. Ask for the specific quality plan and certifications for your job." },
+  { q: "What is your delivery radius?", a: "Delivery and shipping options vary. Local delivery may be available within a set radius, and common carriers or customer pickup can handle larger distances. Ask about landed-cost shipping in your quote." },
+  { q: "What file formats do you accept for quotes?", a: "Common formats include STEP, IGES, DWG, DXF, and PDF. For this demo, the RFQ form does not upload or transmit files. A production site would use a secure file-transfer integration." },
 ];
 
 const testimonials = [
-  { text: "Sterling Metalworks has been our go-to fab shop for 8 years. They understand agricultural equipment — when we need a replacement bracket during harvest, they turn it around in 24 hours. No one else in the region does that.", author: "Tom R.", location: "Agricultural Equipment Manufacturer, Rock Falls, IL" },
-  { text: "We switched from a Chicago shop to Sterling Metalworks and cut our lead times in half. The quality is better, the pricing is competitive, and they actually pick up the phone. The ISO certification gave our customers confidence too.", author: "Karen M.", location: "Construction Company, Dixon, IL" },
-  { text: "Their stainless work for our food processing line is impeccable. Sanitary welds, perfect fit-up, and they understand washdown requirements. The powder coating on our enclosures has held up for 3 years with zero issues.", author: "Dave L.", location: "Food Processing Plant, Rochelle, IL" },
+  { text: "Sterling Metalworks has been our go-to fab shop for 8 years. They understand agricultural equipment — when we need a replacement bracket during harvest, they turn it around in 24 hours. No one else in the region does that.", author: "Tom R.", location: "Illustrative review, Rock Falls, IL" },
+  { text: "We switched from a Chicago shop to Sterling Metalworks and cut our lead times in half. The quality is better, the pricing is competitive, and they actually pick up the phone. The ISO certification gave our customers confidence too.", author: "Karen M.", location: "Illustrative review, Dixon, IL" },
+  { text: "Their stainless work for our food processing line is impeccable. Sanitary welds, perfect fit-up, and they understand washdown requirements. The powder coating on our enclosures has held up for 3 years with zero issues.", author: "Dave L.", location: "Illustrative review, Rochelle, IL" },
 ];
 
 const StarRating: React.FC = () => (
@@ -156,8 +156,8 @@ const QuoteForm: React.FC = () => {
     return (
       <div className="demo-quote-form__success">
         <CheckIcon size={48} />
-        <h3>Quote Request Received</h3>
-        <p>Thank you. Our quoting team will review your specifications and email a detailed quote within 24 business hours. For rush quotes, call (815) 555-0420.</p>
+        <h3>Quote Request Received (Illustrative)</h3>
+        <p>This is a demo form — nothing was submitted. In a production site, the form would send RFQ details to a CRM or email queue for review and follow-up.</p>
         <p><strong>Material:</strong> {material}<br /><strong>Thickness:</strong> {thickness}"<br /><strong>Quantity:</strong> {quantity} pcs<br /><strong>Tolerance:</strong> {tolerance}"<br /><strong>Finish:</strong> {finish}<br /><strong>Industry:</strong> {industry}<br /><strong>Annual Volume:</strong> {volume}<br /><strong>CAD File:</strong> {fileName || "None uploaded"}</p>
         <button className="demo-btn demo-btn--ghost" onClick={() => setSubmitted(false)}>Submit another quote</button>
       </div>
@@ -253,7 +253,7 @@ const QuoteForm: React.FC = () => {
         <textarea id="notes" className="demo-form-textarea" rows={3} placeholder="Brief description of the part, or reference a drawing file you'll email separately." />
       </div>
       <button type="submit" className="demo-btn demo-btn--primary">Request Quote</button>
-      <p className="demo-form-note">Quotes returned within 24 business hours. Upload STEP, DWG, or PDF drawings directly or email to quotes@sterlingmetalworks-demo.com.</p>
+      <p className="demo-form-note">This is a demo RFQ form. It does not submit, store data, or upload files. A production site would connect to a CRM, email service, or secure file portal.</p>
     </form>
   );
 };
@@ -263,9 +263,9 @@ const ManufacturingDemo: React.FC = () => (
     {/* Hero */}
     <section className="demo-hero" style={{ backgroundImage: "url(/images/demos/manufacturing/hero.jpg)" }}>
       <div className="demo-hero__inner">
-        <span className="demo-hero__tagline">ISO 9001:2015 Certified · AWS D1.1 Welding · ITAR Registered · Since 1998</span>
+        <span className="demo-hero__tagline">Custom Metal Fabrication · Sterling & Rock River Valley · Demo</span>
         <h1 className="demo-hero__title">Sterling Metalworks</h1>
-        <p className="demo-hero__subtitle">Custom metal fabrication shop serving Sterling, Rock Falls, and the Rock River Valley. CNC machining, laser cutting, welding, and powder coating — from prototype to production. Located on IL Route 40, 2 miles south of US 30.</p>
+        <p className="demo-hero__subtitle">Fictional demo of a custom metal fabrication shop. CNC machining, laser cutting, welding, and finishing — from prototype to production. Certifications, equipment, and project examples are illustrative.</p>
         <div className="demo-hero__actions">
           <a href="tel:8155550420" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0420</a>
           <a href="#quote" className="demo-btn demo-btn--ghost">Request a Quote</a>
@@ -273,56 +273,9 @@ const ManufacturingDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Features table */}
-    <section className="demo-section">
-      <div className="demo-section__inner">
-        <h2 className="demo-section__title">Features at a glance</h2>
-        <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Sterling Metalworks features at a glance">
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
-            <thead>
-              <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
-                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
-                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Details</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Capabilities pages</td>
-                <td style={{ padding: "0.75rem" }}>Detailed pages for CNC machining, laser cutting, welding, forming, powder coating, and assembly.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Equipment list</td>
-                <td style={{ padding: "0.75rem" }}>Full machine list with specifications — Haas mills, Trumpf laser, Amada press brake, Miller welders.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Material specifications</td>
-                <td style={{ padding: "0.75rem" }}>Detailed table of all materials worked with — grades, max thickness, and typical applications.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Production capacity dashboard</td>
-                <td style={{ padding: "0.75rem" }}>Facility size, machine count, shift schedule, material stock, and lead times — all at a glance.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>RFQ form with CAD upload</td>
-                <td style={{ padding: "0.75rem" }}>Structured quote form with material, thickness, quantity, tolerance, finish, industry, annual volume, and CAD file upload. Feeds into E2 shop system.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Quality control process</td>
-                <td style={{ padding: "0.75rem" }}>4-step QC timeline — first article, in-process, final inspection, and documentation with material certs.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Certifications display</td>
-                <td style={{ padding: "0.75rem" }}>ISO 9001:2015, AWS D1.1, ITAR Registered, and Made in USA badges with links to verification pages.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>B2B portal</td>
-                <td style={{ padding: "0.75rem" }}>Customer login for reordering parts, checking order status, and downloading invoices and certs.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
+    <div className="demo-emergency-banner" style={{ background: "#2a2a2e", color: "#f5f5f5", borderBottom: "1px solid var(--demo-border)" }}>
+      <AlertIcon size={18} /> <strong>Demo website:</strong> Sterling Metalworks is a fictional business concept created by Bradley Matera. Team, reviews, images, certifications, and interactive features are illustrative.
+    </div>
 
     {/* Stats + Review Badges + Trust Badges */}
     <section className="demo-section demo-section--alt">
@@ -389,7 +342,8 @@ const ManufacturingDemo: React.FC = () => (
     <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Equipment List</h2>
-        <p className="demo-section__subtitle">Our shop floor is equipped for everything from one-off prototypes to production runs of 10,000+ pieces.</p>
+        <p className="demo-section__subtitle">Illustrative sample equipment list. Real capacity depends on the actual machines in the shop.</p>
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
         <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Equipment list">
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
             <thead>
@@ -419,7 +373,8 @@ const ManufacturingDemo: React.FC = () => (
     <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Material Specifications</h2>
-        <p className="demo-section__subtitle">We stock and source these materials regularly. Don't see what you need? Call us — we source specialty alloys weekly.</p>
+        <p className="demo-section__subtitle">Illustrative material guide. Real availability, grades, and thickness limits depend on supplier and shop capability.</p>
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
         <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Material specifications">
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
             <thead>
@@ -644,7 +599,7 @@ const ManufacturingDemo: React.FC = () => (
         <div className="demo-footer__name">Sterling Metalworks</div>
         <div>1420 IL Route 40, Sterling, IL 61081 · (815) 555-0420</div>
         <div style={{ marginTop: "1rem" }}><SocialLinks links={socialLinks} /></div>
-        <div className="demo-footer__demo-note">This is a demo website built by <a href="https://bradleymatera.dev">Bradley Matera</a>.<br /><a href="/demos/">← Back to all demos</a> · <a href="/contact/">Get a site like this →</a></div>
+        <div className="demo-footer__demo-note">Fictional business concept created by <a href="https://bradleymatera.dev">Bradley Matera</a>. Team, reviews, images, and interactive features are illustrative.<br /><a href="/demos/">← Back to all demos</a> · <a href="/contact/">Get a site like this →</a></div>
       </div>
     </footer>
   </DemoLayout>

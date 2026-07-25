@@ -4,7 +4,7 @@ import Layout from "../@lekoarts/gatsby-theme-minimal-blog/components/layout";
 import Seo from "../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
 import { Card, Link, Section } from "../ui";
-import { UtensilsIcon, LeafIcon, GearIcon, CarIcon, HouseIcon, ScissorsIcon } from "../site/icons";
+import { UtensilsIcon, LeafIcon, GearIcon, CarIcon, ScissorsIcon } from "../site/icons";
 
 const pathname = "/web-developer-rockford-illinois/";
 const pageTitle = "Website Design in Rockford, Illinois | Web Developer Bradley Matera";

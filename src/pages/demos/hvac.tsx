@@ -9,11 +9,11 @@ import ReviewBadges from "../../features/demos/ReviewBadges";
 import WeatherWidget from "../../features/demos/WeatherWidget";
 import IntegrationsSection, { Integration } from "../../features/demos/IntegrationsSection";
 import FAQSection, { FAQItem } from "../../features/demos/FAQSection";
-import { StarIcon, MapPinIcon, PhoneIcon, FlameIcon, SnowflakeIcon, WindIcon, AlertIcon, ShieldIcon, CheckIcon, XIcon, ClockIcon } from "../../site/icons";
+import { StarIcon, PhoneIcon, AlertIcon, ShieldIcon, CheckIcon, XIcon, ClockIcon } from "../../site/icons";
 
 const pathname = "/demos/hvac/";
-const pageTitle = "ComfortAir Heating & Cooling — Rockford HVAC | Demo Website";
-const pageDescription = "Demo HVAC website for ComfortAir Heating & Cooling — emergency service, maintenance plans, financing calculator, and technician bios. Built by Bradley Matera.";
+const pageTitle = "ComfortAir Heating & Cooling — HVAC Service Demo";
+const pageDescription = "Demo HVAC website for a fictional heating and cooling contractor. Includes emergency service info, maintenance plans, an illustrative financing estimator, and sample technician bios. Built by Bradley Matera.";
 
 const socialLinks: SocialLink[] = [
   { platform: "facebook", url: "https://facebook.com" },
@@ -23,13 +23,13 @@ const socialLinks: SocialLink[] = [
 ];
 
 const integrations: Integration[] = [
-  { name: "OpenWeatherMap API", category: "Weather Data", description: "Live weather feed that triggers smart alerts on your site. When temps drop below 32°F, the site auto-shows a 'Is your furnace ready?' banner. When it hits 90°F+, it switches to AC messaging.", freeTier: "1,000 API calls/day (free). $0.09/1k calls after.", url: "https://openweathermap.org/api", status: "mocked" },
+  { name: "OpenWeatherMap API", category: "Weather Data", description: "Sample weather feed that could trigger smart alerts. When temps drop below 32°F or hit 90°F+, the site could show furnace or AC messaging.", freeTier: "1,000 API calls/day (free). $0.09/1k calls after.", url: "https://openweathermap.org/api", status: "mocked" },
   { name: "Google Maps Embed", category: "Maps & Service Area", description: "Interactive map showing your service area. Customers can see if you cover their location before calling.", freeTier: "28,000 embed loads/month (free). $7/1k loads after.", url: "https://developers.google.com/maps/documentation/embed/start", status: "live" },
-  { name: "Google Business Profile API", category: "Reviews & Ratings", description: "Live Google reviews on your site. Auto-updates. Links to your Google profile for new reviews.", freeTier: "$200/month API credit (≈28k requests).", url: "https://developers.google.com/my-business", status: "mocked" },
-  { name: "ServiceTitan / Housecall Pro", category: "Field Service Management", description: "Online booking, dispatch, technician tracking, invoicing, and CRM. Customer sees real-time tech ETA like Uber.", freeTier: "Housecall Pro from $49/month. ServiceTitan from $300/month.", url: "https://housecallpro.com", status: "available" },
-  { name: "Synchrony Financing Widget", category: "Financing", description: "Embeddable financing application. Customers apply for 0% APR financing directly on your site. Instant decisions.", freeTier: "No monthly fee. Merchant discount rate per transaction.", url: "https://synchrony.com/business", status: "mocked" },
-  { name: "Twilio SMS Dispatch", category: "Customer Communication", description: "Automated SMS: 'Your technician John is 15 minutes away' with live GPS tracking link. Reduces 'where are you?' calls by 80%.", freeTier: "Free trial. $0.0079 per SMS after.", url: "https://twilio.com/sms", status: "available" },
-  { name: "BBB Accredited Business Badge", category: "Trust & Verification", description: "Live BBB rating badge that links to your BBB profile. Shows customers you're accredited and trustworthy.", freeTier: "BBB accreditation from $500/year (varies by region).", url: "https://bbb.org", status: "mocked" },
+  { name: "Google Business Profile API", category: "Reviews & Ratings", description: "Sample Google review display. Production sites can pull live reviews and ratings.", freeTier: "$200/month API credit (≈28k requests).", url: "https://developers.google.com/my-business", status: "mocked" },
+  { name: "ServiceTitan / Housecall Pro", category: "Field Service Management", description: "Online booking, dispatch, technician tracking, invoicing, and CRM. Customer could see technician ETA in production.", freeTier: "Housecall Pro from $49/month. ServiceTitan from $300/month.", url: "https://housecallpro.com", status: "available" },
+  { name: "Synchrony Financing Widget", category: "Financing", description: "Embeddable financing application example. Customers could apply for promotional financing through a real lender integration.", freeTier: "No monthly fee. Merchant discount rate per transaction.", url: "https://synchrony.com/business", status: "mocked" },
+  { name: "Twilio SMS Dispatch", category: "Customer Communication", description: "Automated SMS example. 'Your technician is 15 minutes away' with a tracking link. Reduces 'where are you?' calls.", freeTier: "Free trial. $0.0079 per SMS after.", url: "https://twilio.com/sms", status: "available" },
+  { name: "BBB Accredited Business Badge", category: "Trust & Verification", description: "BBB badge example. Links to the company's BBB profile once accreditation is verified.", freeTier: "BBB accreditation from $500/year (varies by region).", url: "https://bbb.org", status: "mocked" },
   { name: "Stripe Payment Links", category: "Online Payments", description: "Text or email a payment link after service. Customer pays with card or ACH. Funds in your account in 2 days.", freeTier: "2.9% + 30¢ per transaction. No monthly fee.", url: "https://stripe.com/payments", status: "available" },
 ];
 
@@ -69,16 +69,16 @@ const coupons = [
 ];
 
 const faqs: FAQItem[] = [
-  { q: "How much does a new furnace cost?", a: "A new high-efficiency furnace typically runs $3,500–$6,500 installed, depending on size and efficiency rating. We offer free in-home estimates and financing options with payments as low as $59/month." },
-  { q: "Do you offer financing?", a: "Yes. We partner with Synchrony Financial to offer 0% APR for 12 months on qualified purchases, and longer terms with low monthly payments. Apply online or in person — most decisions are instant." },
-  { q: "What does the maintenance plan include?", a: "Two annual tune-ups (heating and cooling), priority same-day service, 15% discount on all repairs, no overtime fees, and a written record of all service for warranty purposes." },
-  { q: "What areas do you serve?", a: "Rockford, Loves Park, Machesney Park, Byron, Roscoe, Rockton, South Beloit, Pecatonica, Winnebago, and Freeport. If you're in Northwest Illinois, we can help." },
+  { q: "How much does a new furnace cost?", a: "A new high-efficiency furnace in this region typically ranges from $3,500–$6,500 installed, depending on size, efficiency rating, and installation requirements. We provide free in-home estimates and can discuss financing options." },
+  { q: "Do you offer financing?", a: "Yes. We partner with financing providers to offer promotional APR plans on qualified purchases, with longer terms and low monthly payments available. Approval and rates depend on creditworthiness. The calculator on this page is illustrative." },
+  { q: "What does the maintenance plan include?", a: "Plans typically include seasonal tune-ups, priority scheduling, repair discounts, and written service records. Specific benefits and terms are listed in your membership agreement." },
+  { q: "What areas do you serve?", a: "Rockford, Loves Park, Machesney Park, Byron, Roscoe, Rockton, South Beloit, Pecatonica, Winnebago, and Freeport. If you're in Northwest Illinois, call to confirm service availability." },
 ];
 
 const testimonials = [
-  { text: "Our furnace died on the coldest night of the year and John was at our house within an hour. Fixed it in 30 minutes. Lifesavers.", author: "Robert D.", location: "Rockford, IL" },
-  { text: "The maintenance plan is worth every penny. They caught a cracked heat exchanger during a tune-up that could have been dangerous.", author: "Maria G.", location: "Loves Park, IL" },
-  { text: "Fair pricing, honest advice, and no upselling. They told me my AC just needed a capacitor, not a whole new unit like another company said.", author: "Steve W.", location: "Byron, IL" },
+  { text: "Our furnace died on the coldest night of the year and John was at our house within an hour. Fixed it in 30 minutes. Lifesavers.", author: "Robert D.", location: "Illustrative review, Rockford, IL" },
+  { text: "The maintenance plan is worth every penny. They caught a cracked heat exchanger during a tune-up that could have been dangerous.", author: "Maria G.", location: "Illustrative review, Loves Park, IL" },
+  { text: "Fair pricing, honest advice, and no upselling. They told me my AC just needed a capacitor, not a whole new unit like another company said.", author: "Steve W.", location: "Illustrative review, Byron, IL" },
 ];
 
 const StarRating: React.FC = () => (
@@ -93,8 +93,8 @@ const FinancingCalculator: React.FC = () => {
   const fmt = (n: number) => n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
   return (
     <div className="demo-financing-calc">
-      <h3 className="demo-financing-calc__title">Financing Calculator</h3>
-      <p className="demo-financing-calc__subtitle">0% APR for 12 months. Estimate your monthly payment.</p>
+      <h3 className="demo-financing-calc__title">Financing Estimator</h3>
+      <p className="demo-financing-calc__subtitle">Illustrative monthly payment estimate. Real rates and approval depend on credit and lender terms.</p>
       <div className="demo-financing-calc__slider-row">
         <label className="demo-financing-calc__slider-label" htmlFor="financing-amount"><span>Project Amount</span><span className="demo-financing-calc__slider-value">{fmt(amount)}</span></label>
         <input id="financing-amount" className="demo-financing-calc__slider" type="range" min="500" max="10000" step="100" value={amount} onChange={(e) => setAmount(Number(e.target.value))} />
@@ -107,7 +107,7 @@ const FinancingCalculator: React.FC = () => {
         <div className="demo-financing-calc__result-label">Estimated Monthly Payment</div>
         <div className="demo-financing-calc__result-value">{fmt(monthly)}<span className="demo-financing-calc__result-period">/mo</span></div>
       </div>
-      <div className="demo-financing-calc__note">0% APR for 12 months on approved credit. After promo period, standard APR applies. Powered by Synchrony Financial.</div>
+      <div className="demo-financing-calc__note">This is a demo estimator. The 0% APR example is for illustration only. Actual financing requires an application, credit approval, and a formal quote from the lender. Terms vary.</div>
     </div>
   );
 };
@@ -117,9 +117,9 @@ const HvacDemo: React.FC = () => (
     {/* Hero with real HVAC technician photo */}
     <section className="demo-hero" style={{ backgroundImage: "url(/images/demos/hvac/hero.jpg)" }}>
       <div className="demo-hero__inner">
-        <span className="demo-hero__tagline">24/7 Emergency Service · Licensed & Insured</span>
+        <span className="demo-hero__tagline">24/7 Emergency Service · Rockford & Northwest Illinois</span>
         <h1 className="demo-hero__title">ComfortAir Heating & Cooling</h1>
-        <p className="demo-hero__subtitle">Furnace out in January? AC down in July? We're available 24/7. Same-day service across Rockford and Northwest Illinois since 2010.</p>
+        <p className="demo-hero__subtitle">Fictional demo of a full-service heating and cooling contractor. Emergency repairs, maintenance plans, system replacement, and indoor air quality — with clear dispatch and honest recommendations.</p>
         <div className="demo-hero__actions">
           <a href="tel:8155550789" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0789</a>
           <a href="#services" className="demo-btn demo-btn--ghost">View Services</a>
@@ -127,55 +127,9 @@ const HvacDemo: React.FC = () => (
       </div>
     </section>
 
-    <section className="demo-section">
-      <div className="demo-section__inner">
-        <h2 className="demo-section__title">Features at a glance</h2>
-        <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="ComfortAir Heating and Cooling features at a glance">
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
-            <thead>
-              <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
-                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
-                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Details</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Service pages</td>
-                <td style={{ padding: "0.75rem" }}>Detailed pages for heating, cooling, indoor air quality, maintenance, smart thermostats, and duct cleaning.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Financing calculator</td>
-                <td style={{ padding: "0.75rem" }}>Interactive monthly payment calculator for furnace and AC installations based on system cost and term length.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Seasonal promotions</td>
-                <td style={{ padding: "0.75rem" }}>Coupon pages for furnace season, AC season, and new customer specials with promo codes.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Service areas</td>
-                <td style={{ padding: "0.75rem" }}>Coverage across 10 communities in Northwest Illinois with a Google Maps service area embed.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Booking form</td>
-                <td style={{ padding: "0.75rem" }}>Service request form with emergency priority option, phone click-to-call, and business hours.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Emergency contact</td>
-                <td style={{ padding: "0.75rem" }}>24/7 emergency service banner with prominent click-to-call phone number visible on every page.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Mobile-responsive</td>
-                <td style={{ padding: "0.75rem" }}>Fully responsive layout optimized for phones, tablets, and desktops.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>SEO setup</td>
-                <td style={{ padding: "0.75rem" }}>LocalBusiness schema, service area pages with unique content, Google Business Profile, and Bing Places setup.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
+    <div className="demo-emergency-banner" style={{ background: "#1a3a5c", color: "#f5f5f5", borderBottom: "1px solid var(--demo-border)" }}>
+      <AlertIcon size={18} /> <strong>Demo website:</strong> ComfortAir Heating & Cooling is a fictional business concept created by Bradley Matera. Team, reviews, images, and interactive features are illustrative.
+    </div>
 
     {/* Emergency Banner */}
     <div className="demo-emergency-banner"><AlertIcon size={20} /> Heating or AC emergency? We're available 24/7 · Call (815) 555-0789 now</div>
@@ -426,7 +380,7 @@ const HvacDemo: React.FC = () => (
         <div className="demo-footer__name">ComfortAir Heating & Cooling</div>
         <div>Rockford, IL · (815) 555-0789 · IL License #058-204993</div>
         <div style={{ marginTop: "1rem" }}><SocialLinks links={socialLinks} /></div>
-        <div className="demo-footer__demo-note">This is a demo website built by <a href="https://bradleymatera.dev">Bradley Matera</a>.<br /><a href="/demos/">← Back to all demos</a> · <a href="/contact/">Get a site like this →</a></div>
+        <div className="demo-footer__demo-note">Fictional business concept created by <a href="https://bradleymatera.dev">Bradley Matera</a>. Team, reviews, images, and interactive features are illustrative.<br /><a href="/demos/">← Back to all demos</a> · <a href="/contact/">Get a site like this →</a></div>
       </div>
     </footer>
   </DemoLayout>

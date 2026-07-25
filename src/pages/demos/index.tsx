@@ -4,7 +4,7 @@ import { Link } from "gatsby";
 import Layout from "../../@lekoarts/gatsby-theme-minimal-blog/components/layout";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
-import { Card, Section } from "../../ui";
+import { Section } from "../../ui";
 import {
   UtensilsIcon,
   LeafIcon,

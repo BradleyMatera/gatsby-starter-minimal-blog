@@ -11,8 +11,8 @@ import FAQSection, { FAQItem } from "../../features/demos/FAQSection";
 import { StarIcon, MapPinIcon, PhoneIcon, UtensilsIcon, ClockIcon, RingIcon, ClipboardIcon, InstagramIcon } from "../../site/icons";
 
 const pathname = "/demos/restaurant/";
-const pageTitle = "Riverside Grill — Rockford's Finest Dining | Demo Website";
-const pageDescription = "Demo restaurant website for Riverside Grill in Rockford, Illinois. Menu, reservations, hours, reviews, and photo gallery.";
+const pageTitle = "Riverside Grill — Modern Midwestern Live-Fire Dining | Demo Website";
+const pageDescription = "Demo restaurant website for a fictional modern Midwestern live-fire restaurant overlooking the Rock River. Seasonal menu, chef story, and reservations. Built by Bradley Matera.";
 
 const socialLinks: SocialLink[] = [
   { platform: "facebook", url: "https://facebook.com" },
@@ -38,14 +38,14 @@ const menuCategories = [
     { name: "Charcuterie Board", desc: "Cured meats, artisan cheeses, olives, house jam, crostini", price: "$22", img: "salad" },
     { name: "French Onion Soup", desc: "Slow-simmered beef broth, caramelized onions, gruyere crouton", price: "$11", img: "soup" },
   ]},
-  { title: "From the Grill", items: [
+  { title: "From the Fire", items: [
     { name: "Wood-Grilled Ribeye", desc: "12oz USDA Choice ribeye, rosemary butter, roasted vegetables", price: "$34", img: "steak" },
     { name: "Filet Mignon", desc: "8oz tenderloin, red wine reduction, truffle mashed potatoes", price: "$42", img: "food-4" },
-    { name: "Pork Chop", desc: "Bone-in chop, apple chutney, Brussels sprouts, bacon jam", price: "$28", img: "food-5" },
+    { name: "Bone-In Pork Chop", desc: "Bone-in chop, apple chutney, Brussels sprouts, bacon jam", price: "$28", img: "food-5" },
   ]},
   { title: "From the Lake", items: [
-    { name: "Seared Salmon", desc: "Atlantic salmon, lemon-dill sauce, wild rice, asparagus", price: "$26", img: "food-6" },
-    { name: "Walleye Special", desc: "Fresh Wisconsin walleye, beer-battered, coleslaw, fries", price: "$24", img: "food-2" },
+    { name: "Seared Salmon", desc: "Great Lakes coho salmon, lemon-dill sauce, wild rice, asparagus", price: "$26", img: "food-6" },
+    { name: "Wisconsin Walleye", desc: "Fresh walleye, beer batter, coleslaw, house-cut fries", price: "$24", img: "food-2" },
     { name: "Trout Almondine", desc: "Rainbow trout, brown butter almonds, capers, parsley", price: "$27", img: "food-3" },
   ]},
   { title: "Pasta", items: [
@@ -57,11 +57,6 @@ const menuCategories = [
     { name: "Chocolate Lava Cake", desc: "Warm chocolate cake, vanilla bean ice cream, raspberry coulis", price: "$9", img: "dessert" },
     { name: "Crème Brûlée", desc: "Classic vanilla custard, caramelized sugar crust", price: "$8", img: "dessert" },
     { name: "Seasonal Tart", desc: "Ask your server for today's selection", price: "$10", img: "dessert" },
-  ]},
-  { title: "Burgers & Sandwiches", items: [
-    { name: "Riverside Burger", desc: "Half-pound Angus beef, aged cheddar, caramelized onions, brioche", price: "$16", img: "burger" },
-    { name: "Walleye Sandwich", desc: "Beer-battered walleye, tartar sauce, lettuce, tomato", price: "$15", img: "food-2" },
-    { name: "French Dip", desc: "Shaved prime rib, provolone, au jus, horseradish cream", price: "$17", img: "food-5" },
   ]},
 ];
 
@@ -75,27 +70,27 @@ const wineSelection = [
 ];
 
 const team = [
-  { name: "Marcus Lindqvist", role: "Owner & Executive Chef", bio: "CIA graduate, 15+ years in Michelin-starred kitchens. Born and raised in Rockford.", img: "owner" },
-  { name: "Sofia Antonelli", role: "Head Chef", bio: "Trained in Bologna, Italy. Specializes in house-made pasta and regional Italian cuisine.", img: "head-chef" },
-  { name: "James O'Brien", role: "Sous Chef", bio: "5 years at Riverside Grill. Manages daily specials and the grill station.", img: "sous-chef" },
-  { name: "Rachel Chen", role: "General Manager", bio: "Wine specialist with sommelier certification. Oversees front-of-house and private events.", img: "manager" },
-  { name: "Diego Ramirez", role: "Bar Manager", bio: "Craft cocktail expert. Curates our seasonal drink menu and local beer selection.", img: "bartender" },
-  { name: "Aisha Williams", role: "Lead Server", bio: "10 years in fine dining. Known for remembering every regular's favorite order.", img: "server" },
+  { name: "Marcus Lindqvist", role: "Owner & Executive Chef", bio: "Fictional profile for demo purposes. CIA graduate, 15+ years in live-fire and Michelin-starred kitchens. Born and raised in Rockford.", img: "owner" },
+  { name: "Sofia Antonelli", role: "Head Chef", bio: "Fictional profile for demo purposes. Trained in Bologna. Specializes in house-made pasta and regional Italian cuisine.", img: "head-chef" },
+  { name: "James O'Brien", role: "Sous Chef", bio: "Fictional profile for demo purposes. Manages daily specials and the wood-fired grill station.", img: "sous-chef" },
+  { name: "Rachel Chen", role: "General Manager", bio: "Fictional profile for demo purposes. Wine specialist with sommelier certification. Oversees front-of-house and private events.", img: "manager" },
+  { name: "Diego Ramirez", role: "Bar Manager", bio: "Fictional profile for demo purposes. Craft cocktail expert. Curates seasonal drink menus and local beer selection.", img: "bartender" },
+  { name: "Aisha Williams", role: "Lead Server", bio: "Fictional profile for demo purposes. 10 years in fine dining. Known for remembering regulars' favorite orders.", img: "server" },
 ];
 
 const faqs: FAQItem[] = [
-  { q: "Do I need a reservation?", a: "Reservations are recommended for dinner, especially on weekends. You can book online through our reservation widget or call (815) 555-0123. Walk-ins are welcome at the bar and patio, subject to availability." },
+  { q: "Do I need a reservation?", a: "Reservations are recommended for dinner, especially on weekends. You can use the illustrative reservation widget below or call (815) 555-0123. Walk-ins are welcome at the bar and patio, subject to availability." },
   { q: "What are your hours?", a: "Riverside Grill is open Tuesday through Thursday from 4:00 PM to 10:00 PM, Friday from 4:00 PM to 11:00 PM, Saturday from 12:00 PM to 11:00 PM, and Sunday from 12:00 PM to 9:00 PM. We are closed on Mondays." },
-  { q: "Do you offer vegetarian and vegan options?", a: "Yes. Our menu includes three vegetarian entrees and one vegan option — the roasted vegetable pasta with olive oil and herbs. Our chef can also modify most dishes to accommodate dietary restrictions. Just ask your server." },
+  { q: "Do you offer vegetarian and vegan options?", a: "Yes. Our menu includes vegetarian and vegan options, and our chef can modify many dishes to accommodate dietary restrictions. Just ask your server." },
   { q: "Is parking available?", a: "Free parking is available in the lot behind the restaurant and along Main Street. Valet parking is offered on Friday and Saturday evenings starting at 5:00 PM for $5." },
-  { q: "Do you do private events or large parties?", a: "Yes. We host private events for groups of 8 to 50 in our private dining room. Custom menus are available. Contact us at (815) 555-0123 or email events@riversidegrill.example to book." },
-  { q: "Can I order takeout or delivery?", a: "Yes. Takeout is available by calling ahead. We also deliver through DoorDash, Grubhub, and Uber Eats. Links to all three are on our ordering page." },
+  { q: "Do you do private events or large parties?", a: "Yes. We host private events for groups of 8 to 50 in our private dining room. Custom menus are available. Contact us at (815) 555-0123 to discuss your event." },
+  { q: "Can I order takeout or delivery?", a: "Takeout is available by calling ahead. We also partner with third-party delivery services. Links are available on our ordering page." },
 ];
 
 const testimonials = [
-  { text: "Best steak in Rockford, hands down. The ribeye was cooked perfectly and the service was outstanding.", author: "Mike R.", location: "Rockford, IL" },
-  { text: "We celebrated our anniversary here and it was perfect. The truffle pasta is to die for.", author: "Sarah K.", location: "Loves Park, IL" },
-  { text: "Great atmosphere, excellent food, reasonable prices for the quality. Our go-to date night spot.", author: "Tom & Lisa", location: "Roscoe, IL" },
+  { text: "Best steak in Rockford, hands down. The ribeye was cooked perfectly and the service was outstanding.", author: "Mike R.", location: "Illustrative review, Rockford, IL" },
+  { text: "We celebrated our anniversary here and it was perfect. The truffle pasta is to die for.", author: "Sarah K.", location: "Illustrative review, Loves Park, IL" },
+  { text: "Great atmosphere, excellent food, reasonable prices for the quality. Our go-to date night spot.", author: "Tom & Lisa", location: "Illustrative review, Roscoe, IL" },
 ];
 
 const StarRating: React.FC = () => (
@@ -109,9 +104,9 @@ const RestaurantDemo: React.FC = () => (
     {/* Hero with real restaurant interior photo */}
     <section className="demo-hero" style={{ backgroundImage: "url(/images/demos/restaurant/hero.jpg)" }}>
       <div className="demo-hero__inner">
-        <span className="demo-hero__tagline">Rockford's Finest Dining Since 2008</span>
+        <span className="demo-hero__tagline">Live-fire Midwestern cooking on the Rock River</span>
         <h1 className="demo-hero__title">Riverside Grill</h1>
-        <p className="demo-hero__subtitle">Wood-fired steaks, fresh Great Lakes fish, and hand-crafted pasta in the heart of downtown Rockford.</p>
+        <p className="demo-hero__subtitle">A modern Midwestern restaurant where hardwood fire, Great Lakes fish, and local farms meet. Dinner, drinks, and private events in downtown Rockford.</p>
         <div className="demo-hero__actions">
           <a href="#menu" className="demo-btn demo-btn--primary"><UtensilsIcon size={20} /> View Menu</a>
           <a href="#reserve" className="demo-btn demo-btn--ghost">Reserve a Table</a>
@@ -119,55 +114,9 @@ const RestaurantDemo: React.FC = () => (
       </div>
     </section>
 
-    <section className="demo-section">
-      <div className="demo-section__inner">
-        <h2 className="demo-section__title">Features at a glance</h2>
-        <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Riverside Grill features at a glance">
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
-            <thead>
-              <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
-                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
-                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Details</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Menu display</td>
-                <td style={{ padding: "0.75rem" }}>Full menu organized by category with item photos, descriptions, and prices. Mobile-readable, no PDF.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Reservation system</td>
-                <td style={{ padding: "0.75rem" }}>Online reservation widget with real-time table availability. Syncs with POS and table management.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Photo gallery</td>
-                <td style={{ padding: "0.75rem" }}>Food and interior photo galleries showcasing dishes, ambiance, and the dining space.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Hours &amp; location</td>
-                <td style={{ padding: "0.75rem" }}>Hours strip and Google Maps embed showing the restaurant location with directions.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Contact form</td>
-                <td style={{ padding: "0.75rem" }}>Contact form for private events, catering inquiries, and general questions.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Mobile-responsive</td>
-                <td style={{ padding: "0.75rem" }}>Fully responsive layout optimized for phones, tablets, and desktops.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>SEO setup</td>
-                <td style={{ padding: "0.75rem" }}>Restaurant schema markup, meta descriptions, Open Graph tags, and sitemap included.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Social links</td>
-                <td style={{ padding: "0.75rem" }}>Links to Facebook, Instagram, Yelp, and Google Business Profile.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
+    <div className="demo-emergency-banner" style={{ background: "#5c3a21", color: "#f5efe4", borderBottom: "1px solid var(--demo-border)" }}>
+      <UtensilsIcon size={18} /> <strong>Demo website:</strong> Riverside Grill is a fictional restaurant concept created by Bradley Matera. Menu, team, reviews, and reservation widget are illustrative.
+    </div>
 
     {/* Hours strip */}
     <div className="demo-trust-bar">
@@ -389,7 +338,7 @@ const RestaurantDemo: React.FC = () => (
     <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">What Our Guests Say</h2>
-        <p className="demo-section__subtitle">Real reviews from real diners across the Rockford area.</p>
+        <p className="demo-section__subtitle">Illustrative guest reviews for demonstration purposes.</p>
         <div className="demo-testimonials">
           {testimonials.map((t) => (
             <div key={t.author} className="demo-testimonial">
@@ -479,7 +428,7 @@ const RestaurantDemo: React.FC = () => (
         <div className="demo-footer__name">Riverside Grill</div>
         <div>123 Main Street, Rockford, IL 61101 · (815) 555-0123</div>
         <div style={{ marginTop: "1rem" }}><SocialLinks links={socialLinks} /></div>
-        <div className="demo-footer__demo-note">This is a demo website built by <a href="https://bradleymatera.dev">Bradley Matera</a>.<br /><a href="/demos/">← Back to all demos</a> · <a href="/contact/">Get a site like this →</a></div>
+        <div className="demo-footer__demo-note">Fictional restaurant concept created by <a href="https://bradleymatera.dev">Bradley Matera</a>. Menu, team, reviews, and reservation widget are illustrative.<br /><a href="/demos/">← Back to all demos</a> · <a href="/contact/">Get a site like this →</a></div>
       </div>
     </footer>
   </DemoLayout>

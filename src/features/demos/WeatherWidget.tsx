@@ -34,7 +34,7 @@ const WeatherWidget: React.FC<WeatherWidgetProps> = ({
   return (
     <div className="demo-weather">
       <div className="demo-weather__header">
-        <span className="demo-weather__label">Current Weather</span>
+        <span className="demo-weather__label">Sample Weather</span>
         <span className="demo-weather__city">{city}, IL</span>
       </div>
       <div className="demo-weather__body">
@@ -51,8 +51,8 @@ const WeatherWidget: React.FC<WeatherWidgetProps> = ({
         {contextMessage}
       </div>
       <div className="demo-weather__api-note">
-        <strong>Powered by OpenWeatherMap API</strong> (free tier: 1,000 calls/day). Production
-        sites auto-fetch live conditions and display weather-based service recommendations.
+        <strong>Illustrative weather widget.</strong> Production sites can connect to OpenWeatherMap
+        or a similar service to display live conditions and weather-based service recommendations.
       </div>
     </div>
   );

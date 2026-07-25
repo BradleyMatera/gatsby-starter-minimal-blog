@@ -8,11 +8,11 @@ import SocialLinks, { SocialLink } from "../../features/demos/SocialLinks";
 import ReviewBadges from "../../features/demos/ReviewBadges";
 import IntegrationsSection, { Integration } from "../../features/demos/IntegrationsSection";
 import FAQSection, { FAQItem } from "../../features/demos/FAQSection";
-import { StarIcon, MapPinIcon, PhoneIcon, ScissorsIcon, BrushIcon, SpaIcon, HandIcon, RingIcon, ClockIcon, InstagramIcon } from "../../site/icons";
+import { StarIcon, MapPinIcon, PhoneIcon, ScissorsIcon, BrushIcon, SpaIcon, HandIcon, RingIcon, ClockIcon, InstagramIcon, AlertIcon } from "../../site/icons";
 
 const pathname = "/demos/beauty-salon/";
-const pageTitle = "Bella Vista Salon — Hair & Beauty in Rockford, IL | Demo Website";
-const pageDescription = "Demo beauty salon website for Bella Vista Salon — service menu, stylist team bios, online booking widget, before/after gallery, and gift cards. Built by Bradley Matera.";
+const pageTitle = "Bella Vista Salon — Hair & Beauty Salon Demo";
+const pageDescription = "Demo beauty salon website for a fictional full-service salon. Includes sample service menu, illustrative stylist bios, and a booking widget example. Built by Bradley Matera.";
 
 const socialLinks: SocialLink[] = [
   { platform: "facebook", url: "https://facebook.com" },
@@ -22,14 +22,14 @@ const socialLinks: SocialLink[] = [
 ];
 
 const integrations: Integration[] = [
-  { name: "Vagaro Booking Widget", category: "Online Booking", description: "Real-time booking with stylist availability. Customer picks service, stylist, date, and time. Syncs with your calendar automatically. Sends text reminders to reduce no-shows.", freeTier: "Vagaro from $25/month. 2.19% + $0.59 per booking fee.", url: "https://vagaro.com", status: "mocked" },
-  { name: "Square Appointments", category: "Online Booking + POS", description: "Free online booking with built-in payment processing. Customer books and pays deposit online. Syncs with Square POS for retail product sales.", freeTier: "Free booking software. 2.6% + 10¢ per transaction.", url: "https://square.com/appointments", status: "available" },
+  { name: "Vagaro Booking Widget", category: "Online Booking", description: "Sample booking widget. Customers could pick service, stylist, date, and time and sync with a salon calendar with text reminders.", freeTier: "Vagaro from $25/month. 2.19% + $0.59 per booking fee.", url: "https://vagaro.com", status: "mocked" },
+  { name: "Square Appointments", category: "Online Booking + POS", description: "Online booking with built-in payment processing. Customer books and pays deposit online. Syncs with Square POS for retail product sales.", freeTier: "Free booking software. 2.6% + 10¢ per transaction.", url: "https://square.com/appointments", status: "available" },
   { name: "Google Maps Embed", category: "Maps & Location", description: "Interactive map showing salon location with directions. Customers tap to navigate.", freeTier: "28,000 embed loads/month (free). $7/1k loads after.", url: "https://developers.google.com/maps/documentation/embed/start", status: "live" },
-  { name: "Google Business Profile API", category: "Reviews & Ratings", description: "Live Google reviews on your site. Auto-updates. Links to your Google profile for new reviews.", freeTier: "$200/month API credit (≈28k requests).", url: "https://developers.google.com/my-business", status: "mocked" },
-  { name: "Instagram Graph API", category: "Social Media Gallery", description: "Auto-displays your latest Instagram posts as a photo gallery. Perfect for showing hair transformations, nail art, and makeup work.", freeTier: "200 requests/hour (free). Facebook Business account required.", url: "https://developers.facebook.com/docs/instagram-api", status: "mocked" },
-  { name: "Yelp Fusion API", category: "Reviews & Ratings", description: "Displays Yelp reviews and rating on your site. Links to your Yelp profile for more reviews.", freeTier: "500 API calls/day (free). No credit card required.", url: "https://docs.developer.yelp.com/", status: "mocked" },
-  { name: "Giftfly / Square Gift Cards", category: "Gift Cards", description: "Sell digital gift cards online. Customer purchases, recipient gets email with code. Redeemable in-salon or online. Perfect for holidays.", freeTier: "Square gift cards: 2.6% + 10¢ per transaction. Cards from $2 each.", url: "https://square.com/gift-cards", status: "available" },
-  { name: "KlientBoost / Zenoti", category: "Salon Management Software", description: "Full salon management: booking, POS, inventory, loyalty program, marketing campaigns, and client history. All-in-one platform.", freeTier: "Zenoti from $199/month. 14-day free trial.", url: "https://zenoti.com", status: "available" },
+  { name: "Google Business Profile API", category: "Reviews & Ratings", description: "Sample Google review display. Production sites can pull live reviews and ratings.", freeTier: "$200/month API credit (≈28k requests).", url: "https://developers.google.com/my-business", status: "mocked" },
+  { name: "Instagram Graph API", category: "Social Media Gallery", description: "Sample Instagram photo gallery. A production site could display recent posts for social proof and inspiration.", freeTier: "200 requests/hour (free). Facebook Business account required.", url: "https://developers.facebook.com/docs/instagram-api", status: "mocked" },
+  { name: "Yelp Fusion API", category: "Reviews & Ratings", description: "Sample Yelp review display. Links to a real Yelp profile once the business is listed.", freeTier: "500 API calls/day (free). No credit card required.", url: "https://docs.developer.yelp.com/", status: "mocked" },
+  { name: "Giftfly / Square Gift Cards", category: "Gift Cards", description: "Digital gift card example. Customers purchase online, recipient gets an email code redeemable in-salon.", freeTier: "Square gift cards: 2.6% + 10¢ per transaction. Cards from $2 each.", url: "https://square.com/gift-cards", status: "available" },
+  { name: "KlientBoost / Zenoti", category: "Salon Management Software", description: "Full salon management example: booking, POS, inventory, loyalty, marketing, and client history.", freeTier: "Zenoti from $199/month. 14-day free trial.", url: "https://zenoti.com", status: "available" },
 ];
 
 const serviceCategories = [
@@ -74,27 +74,27 @@ const serviceCategories = [
 ];
 
 const stylists = [
-  { name: "Angela Rossi", role: "Owner & Master Stylist", specialties: ["Balayage", "Color Correction", "Bridal"], bio: "20 years experience. Trained at Vidal Sassoon. Specializes in balayage and bridal styling.", img: "stylist-1" },
-  { name: "Lisa Chen", role: "Senior Colorist", specialties: ["Vivid Color", "Highlights", "Blonde Specialist"], bio: "12 years experience. Redken certified. Known for her stunning vivid color transformations.", img: "stylist-2" },
-  { name: "Maya Kim", role: "Esthetician", specialties: ["Facials", "Peels", "Brow Artistry"], bio: "8 years experience. Dermalogica certified. Specializes in anti-aging treatments and brow artistry.", img: "stylist-3" },
-  { name: "Tina Santos", role: "Nail Technician", specialties: ["Nail Art", "Gel", "Spa Pedicures"], bio: "10 years experience. OPI certified. Creates intricate nail art designs that go viral on Instagram.", img: "stylist-4" },
+  { name: "Angela Rossi", role: "Owner & Master Stylist", specialties: ["Balayage", "Color Correction", "Bridal"], bio: "Fictional profile for demo purposes. 20 years experience. Trained at Vidal Sassoon. Specializes in balayage and bridal styling.", img: "stylist-1" },
+  { name: "Lisa Chen", role: "Senior Colorist", specialties: ["Vivid Color", "Highlights", "Blonde Specialist"], bio: "Fictional profile for demo purposes. 12 years experience. Redken certified. Known for vivid color transformations.", img: "stylist-2" },
+  { name: "Maya Kim", role: "Esthetician", specialties: ["Facials", "Peels", "Brow Artistry"], bio: "Fictional profile for demo purposes. 8 years experience. Dermalogica certified. Specializes in anti-aging treatments and brow artistry.", img: "stylist-3" },
+  { name: "Tina Santos", role: "Nail Technician", specialties: ["Nail Art", "Gel", "Spa Pedicures"], bio: "Fictional profile for demo purposes. 10 years experience. OPI certified. Creates intricate nail art designs.", img: "stylist-4" },
 ];
 
 const productBrands = ["Olaplex", "Redken", "OPI", "Dermalogica", "Gelish", "Wella", "Moroccanoil", "It's a 10", "Kevin Murphy"];
 
 const faqs: FAQItem[] = [
-  { q: "How much does a haircut cost?", a: "Adult haircuts at Bella Vista Salon start at $45 for a basic cut and style. Senior cuts (65+) are $35, and children's cuts (under 12) are $25. Prices vary by stylist level — master stylists charge $55 to $65. All haircuts include a consultation, wash, cut, and style." },
-  { q: "Do I need an appointment or can I walk in?", a: "We recommend booking an appointment to guarantee your preferred stylist and time. Walk-ins are accepted when stylists are available, but wait times can be 30 to 60 minutes during peak hours. Book online through our website or call (815) 555-0987." },
-  { q: "How long does hair color last?", a: "Permanent hair color typically lasts 4 to 6 weeks before noticeable fading. Semi-permanent color lasts 2 to 4 weeks. Balayage and highlights can last 3 to 4 months before needing a touch-up. Using color-safe shampoo and avoiding hot water extends color life." },
-  { q: "Do you do bridal and event styling?", a: "Yes. We offer bridal hair and makeup packages starting at $150 for the bride and $75 per bridesmaid. Trial runs are $75 and are credited toward your final booking. We also do prom, homecoming, and special event styling. Book bridal services at least 3 months in advance." },
-  { q: "What products do you use?", a: "We use professional-grade products from Olaplex, Redken, OPI, Dermalogica, and Moroccanoil. All products are available for purchase at the salon. Our stylists can recommend the best products for your hair type and styling routine." },
-  { q: "What is your cancellation policy?", a: "We require 24 hours notice for cancellations or rescheduling. Appointments cancelled with less than 24 hours notice are charged 50% of the service price. No-shows are charged the full service price. We send text and email reminders 48 hours before your appointment." },
+  { q: "How much does a haircut cost?", a: "Haircut pricing depends on the stylist level, service, and salon location. Contact Bella Vista Salon or check the menu for current pricing. A typical range for a women's cut and style is $45–$65." },
+  { q: "Do I need an appointment or can I walk in?", a: "Appointments are recommended to secure your preferred stylist and time. Walk-ins are accepted when availability allows. Call (815) 555-0987 or use the online booking example on this page." },
+  { q: "How long does hair color last?", a: "Color longevity varies by type, hair condition, and aftercare. Permanent color typically lasts several weeks, while balayage and highlights can last months before a touch-up. Use color-safe products and follow your stylist's care instructions." },
+  { q: "Do you do bridal and event styling?", a: "Yes. Bridal and event packages are available. Pricing and availability depend on the date, party size, and services selected. Book event styling well in advance, especially during wedding season." },
+  { q: "What products do you use?", a: "We use professional-grade salon products. Specific brands and recommendations vary by stylist and hair type. Products are available for purchase at the salon." },
+  { q: "What is your cancellation policy?", a: "Cancellation and no-show policies vary by salon. We recommend confirming the policy when you book. Most salons require 24 hours' notice for cancellations to avoid a fee." },
 ];
 
 const testimonials = [
-  { text: "Angela is a color genius. She fixed a box-dye disaster and my hair has never looked better. I won't go anywhere else.", author: "Rachel B.", location: "Rockford, IL" },
-  { text: "Got my wedding hair and makeup done here and it was perfect. The whole bridal party looked amazing. Worth every penny.", author: "Brittany K.", location: "Roscoe, IL" },
-  { text: "Best pedicure in Rockford. The spa treatment is so relaxing and Tina does the most beautiful nail art.", author: "Sandra W.", location: "Loves Park, IL" },
+  { text: "Angela is a color genius. She fixed a box-dye disaster and my hair has never looked better. I won't go anywhere else.", author: "Rachel B.", location: "Illustrative review, Rockford, IL" },
+  { text: "Got my wedding hair and makeup done here and it was perfect. The whole bridal party looked amazing. Worth every penny.", author: "Brittany K.", location: "Illustrative review, Roscoe, IL" },
+  { text: "Best pedicure in Rockford. The spa treatment is so relaxing and Tina does the most beautiful nail art.", author: "Sandra W.", location: "Illustrative review, Loves Park, IL" },
 ];
 
 const StarRating: React.FC = () => (
@@ -106,9 +106,9 @@ const BeautySalonDemo: React.FC = () => (
     {/* Hero with real salon photo */}
     <section className="demo-hero" style={{ backgroundImage: "url(/images/demos/beauty-salon/hero.jpg)" }}>
       <div className="demo-hero__inner">
-        <span className="demo-hero__tagline">Rockford's Premier Hair & Beauty Salon Since 2014</span>
+        <span className="demo-hero__tagline">Hair · Color · Nails · Skin · Rockford</span>
         <h1 className="demo-hero__title">Bella Vista Salon</h1>
-        <p className="demo-hero__subtitle">Hair, color, nails, facials, and makeup in a relaxing, modern salon. New clients get 20% off their first service.</p>
+        <p className="demo-hero__subtitle">Fictional demo of a full-service salon. Haircuts, color, nails, facials, and bridal styling — with a transparent menu and easy online booking.</p>
         <div className="demo-hero__actions">
           <a href="#book" className="demo-btn demo-btn--primary">Book Online</a>
           <a href="#services" className="demo-btn demo-btn--ghost">View Services</a>
@@ -116,55 +116,9 @@ const BeautySalonDemo: React.FC = () => (
       </div>
     </section>
 
-    <section className="demo-section">
-      <div className="demo-section__inner">
-        <h2 className="demo-section__title">Features at a glance</h2>
-        <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Bella Vista Salon features at a glance">
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
-            <thead>
-              <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
-                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
-                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Details</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Service menu</td>
-                <td style={{ padding: "0.75rem" }}>Categorized services for hair, nails, skincare, and makeup with pricing and estimated duration.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Stylist bios</td>
-                <td style={{ padding: "0.75rem" }}>Stylist profiles with specialties, certifications, experience, and professional photos.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Photo gallery</td>
-                <td style={{ padding: "0.75rem" }}>Salon interior gallery and before-and-after transformation photos showcasing stylist work.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Online booking</td>
-                <td style={{ padding: "0.75rem" }}>Online booking widget with stylist availability, service selection, date, and time. Text reminders included.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Price list</td>
-                <td style={{ padding: "0.75rem" }}>Transparent pricing for all services with clear time estimates and starting prices for complex treatments.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Mobile-responsive</td>
-                <td style={{ padding: "0.75rem" }}>Fully responsive layout optimized for phones, tablets, and desktops.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>SEO setup</td>
-                <td style={{ padding: "0.75rem" }}>HairSalon schema markup, service pages with unique content, Google Business Profile, and sitemap.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Reviews</td>
-                <td style={{ padding: "0.75rem" }}>Google and Yelp review badges with star ratings and customer testimonials.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
+    <div className="demo-emergency-banner" style={{ background: "#3d1f2b", color: "#f5f5f5", borderBottom: "1px solid var(--demo-border)" }}>
+      <AlertIcon size={18} /> <strong>Demo website:</strong> Bella Vista Salon is a fictional business concept created by Bradley Matera. Team, reviews, images, and interactive features are illustrative.
+    </div>
 
     {/* New client special banner */}
     <div className="demo-trust-bar">
@@ -209,7 +163,7 @@ const BeautySalonDemo: React.FC = () => (
     <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Inside Bella Vista</h2>
-        <p className="demo-section__subtitle">A modern, welcoming space designed for your comfort.</p>
+        <p className="demo-section__subtitle">A representative look at a modern salon space. Photos are for demo layout only.</p>
         <div className="demo-food-gallery">
           <div className="demo-food-gallery__item" style={{ backgroundImage: "url(/images/demos/beauty-salon/salon-chairs.jpg)" }}><span className="demo-food-gallery__label">Styling Stations</span></div>
           <div className="demo-food-gallery__item" style={{ backgroundImage: "url(/images/demos/beauty-salon/salon-reception.jpg)" }}><span className="demo-food-gallery__label">Reception Area</span></div>
@@ -390,12 +344,12 @@ const BeautySalonDemo: React.FC = () => (
     <section className="demo-section demo-section--alt" id="book">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Book Your Appointment</h2>
-        <p className="demo-section__subtitle">Book online in seconds. Choose your stylist, service, and time.</p>
+        <p className="demo-section__subtitle">Mock booking widget. A production site would embed your real scheduling system for live availability.</p>
         <ol style={{ maxWidth: "600px", margin: "0 auto 2rem", paddingLeft: "1.5rem", color: "var(--demo-text-muted)", fontSize: "0.9375rem", lineHeight: 1.8 }}>
           <li>Choose your service — haircut, color, nails, skincare, or makeup.</li>
           <li>Select your preferred stylist from our team of four professionals.</li>
-          <li>Pick a date and time that works for you — real-time availability shown instantly.</li>
-          <li>Enter your name and phone number to confirm — you will receive a text reminder 48 hours before your appointment.</li>
+          <li>Pick a date and time that works for you — availability shown is illustrative.</li>
+          <li>Enter your name and phone number to confirm — in a live system, text reminders would be sent before your appointment.</li>
         </ol>
         <div className="demo-two-col">
           <div>
@@ -423,7 +377,7 @@ const BeautySalonDemo: React.FC = () => (
                 </div>
               </div>
               <button type="button" className="demo-booking-widget__find">Book Appointment</button>
-              <div className="demo-booking-widget__note">Mock Vagaro widget. Production sites embed the real Vagaro booking widget for live availability. $25/month + 2.19% per booking. Sends automatic text reminders.</div>
+              <div className="demo-booking-widget__note">Mock Vagaro widget. This form does not submit or check real availability. Production sites embed the real Vagaro, Square Appointments, or similar booking widget for live scheduling and text reminders.</div>
             </div>
           </div>
           <div>
@@ -474,7 +428,7 @@ const BeautySalonDemo: React.FC = () => (
         <div className="demo-footer__name">Bella Vista Salon</div>
         <div>321 N Main Street, Rockford, IL 61103 · (815) 555-0987</div>
         <div style={{ marginTop: "1rem" }}><SocialLinks links={socialLinks} /></div>
-        <div className="demo-footer__demo-note">This is a demo website built by <a href="https://bradleymatera.dev">Bradley Matera</a>.<br /><a href="/demos/">← Back to all demos</a> · <a href="/contact/">Get a site like this →</a></div>
+        <div className="demo-footer__demo-note">Fictional business concept created by <a href="https://bradleymatera.dev">Bradley Matera</a>. Team, reviews, images, and interactive features are illustrative.<br /><a href="/demos/">← Back to all demos</a> · <a href="/contact/">Get a site like this →</a></div>
       </div>
     </footer>
   </DemoLayout>
