@@ -12,7 +12,7 @@ import { StarIcon, MapPinIcon, PhoneIcon, ScissorsIcon, BrushIcon, SpaIcon, Hand
 
 const pathname = "/demos/beauty-salon/";
 const pageTitle = "Bella Vista Salon — Hair & Beauty Salon Demo";
-const pageDescription = "Demo beauty salon website for a fictional full-service salon. Includes sample service menu, illustrative stylist bios, and a booking widget example. Built by Bradley Matera.";
+const pageDescription = "Demo beauty salon website with service menu, stylist bios, booking widget, and product showcase. Built by Bradley Matera.";
 
 const socialLinks: SocialLink[] = [
   { platform: "facebook", url: "https://facebook.com" },

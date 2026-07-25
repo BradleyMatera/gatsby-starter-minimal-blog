@@ -13,7 +13,7 @@ import { StarIcon, MapPinIcon, PhoneIcon, HouseIcon, SearchIcon, ShieldIcon, Ale
 
 const pathname = "/demos/real-estate/";
 const pageTitle = "Rockford Heritage Realty — Real Estate Office Demo";
-const pageDescription = "Demo real estate website for a fictional local brokerage. Includes sample listings, agent profiles, illustrative market data, and a mortgage estimator. Built by Bradley Matera.";
+const pageDescription = "Demo real estate brokerage website with sample listings, agent profiles, market data, and mortgage estimator. Built by Bradley Matera.";
 
 const socialLinks: SocialLink[] = [
   { platform: "facebook", url: "https://facebook.com" },
@@ -152,6 +152,33 @@ const RealEstateDemo: React.FC = () => (
           <span className="demo-trust-logo"><ShieldIcon size={20} /> MLS IDX Ready (illustrative)</span>
           <span className="demo-trust-logo"><HouseIcon size={20} /> Listing Syndication Example</span>
         </div>
+        <div style={{ marginTop: "2rem", overflowX: "auto" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+            <thead>
+              <tr style={{ borderBottom: "2px solid var(--demo-border)" }}>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Listing</th>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Price</th>
+                <th style={{ textAlign: "center", padding: "0.75rem", fontWeight: 600 }}>Beds</th>
+                <th style={{ textAlign: "center", padding: "0.75rem", fontWeight: 600 }}>Baths</th>
+                <th style={{ textAlign: "center", padding: "0.75rem", fontWeight: 600 }}>Sq Ft</th>
+                <th style={{ textAlign: "center", padding: "0.75rem", fontWeight: 600 }}>Walk Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              {listings.map((l) => (
+                <tr key={l.title} style={{ borderBottom: "1px solid var(--demo-border)" }}>
+                  <td style={{ padding: "0.75rem" }}>{l.title}</td>
+                  <td style={{ padding: "0.75rem" }}>{l.price}</td>
+                  <td style={{ padding: "0.75rem", textAlign: "center" }}>{l.beds}</td>
+                  <td style={{ padding: "0.75rem", textAlign: "center" }}>{l.baths}</td>
+                  <td style={{ padding: "0.75rem", textAlign: "center" }}>{l.sqft}</td>
+                  <td style={{ padding: "0.75rem", textAlign: "center" }}>{l.walkScore}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p style={{ textAlign: "center", marginTop: "0.75rem", fontSize: "0.85rem", color: "var(--demo-text-muted)" }}>Illustrative sample listings for demo purposes. A production site would show live MLS data.</p>
       </div>
     </section>
 

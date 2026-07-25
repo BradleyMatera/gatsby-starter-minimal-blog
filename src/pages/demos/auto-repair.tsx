@@ -12,7 +12,7 @@ import { StarIcon, MapPinIcon, PhoneIcon, ShieldIcon, CheckIcon, ClockIcon, CarI
 
 const pathname = "/demos/auto-repair/";
 const pageTitle = "Northside Auto Repair — Auto Repair Shop Demo";
-const pageDescription = "Demo auto repair website for a fictional independent shop. Includes service menu, illustrative VIN lookup, sample mechanic bios, and transparent estimates. Built by Bradley Matera.";
+const pageDescription = "Demo auto repair shop website with service menu, illustrative VIN lookup, mechanic bios, and transparent estimates. Built by Bradley Matera.";
 
 const socialLinks: SocialLink[] = [
   { platform: "facebook", url: "https://facebook.com" },
@@ -216,6 +216,26 @@ const AutoRepairDemo: React.FC = () => (
             </div>
           ))}
         </div>
+        <div style={{ marginTop: "2rem", overflowX: "auto" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+            <thead>
+              <tr style={{ borderBottom: "2px solid var(--demo-border)" }}>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Service</th>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Price Range</th>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Est. Time</th>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Warranty</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: "1px solid var(--demo-border)" }}><td style={{ padding: "0.75rem" }}>Oil Change</td><td style={{ padding: "0.75rem" }}>$39–$69</td><td style={{ padding: "0.75rem" }}>30 min</td><td style={{ padding: "0.75rem" }}>12 mo / 12k mi</td></tr>
+              <tr style={{ borderBottom: "1px solid var(--demo-border)" }}><td style={{ padding: "0.75rem" }}>Brake Pads (front)</td><td style={{ padding: "0.75rem" }}>$179–$299</td><td style={{ padding: "0.75rem" }}>2 hrs</td><td style={{ padding: "0.75rem" }}>12 mo / 12k mi</td></tr>
+              <tr style={{ borderBottom: "1px solid var(--demo-border)" }}><td style={{ padding: "0.75rem" }}>Diagnostic</td><td style={{ padding: "0.75rem" }}>$89</td><td style={{ padding: "0.75rem" }}>1 hr</td><td style={{ padding: "0.75rem" }}>N/A</td></tr>
+              <tr style={{ borderBottom: "1px solid var(--demo-border)" }}><td style={{ padding: "0.75rem" }}>Transmission Service</td><td style={{ padding: "0.75rem" }}>$149–$249</td><td style={{ padding: "0.75rem" }}>3 hrs</td><td style={{ padding: "0.75rem" }}>12 mo / 12k mi</td></tr>
+              <tr><td style={{ padding: "0.75rem" }}>AC Recharge</td><td style={{ padding: "0.75rem" }}>$89–$139</td><td style={{ padding: "0.75rem" }}>1 hr</td><td style={{ padding: "0.75rem" }}>90 days</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style={{ textAlign: "center", marginTop: "0.75rem", fontSize: "0.85rem", color: "var(--demo-text-muted)" }}>Illustrative pricing for demo purposes. Actual costs vary by vehicle and condition.</p>
       </div>
     </section>
 

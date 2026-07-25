@@ -294,6 +294,24 @@ const LawFirmDemo: React.FC = () => (
             );
           })}
         </div>
+        <div style={{ marginTop: "2rem", overflowX: "auto" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+            <thead>
+              <tr style={{ borderBottom: "2px solid var(--demo-border)" }}>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Practice Area</th>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Typical Matters</th>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Consultation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: "1px solid var(--demo-border)" }}><td style={{ padding: "0.75rem" }}>Business Counsel</td><td style={{ padding: "0.75rem" }}>Contracts, entity formation, employment</td><td style={{ padding: "0.75rem" }}>Free 30-min</td></tr>
+              <tr style={{ borderBottom: "1px solid var(--demo-border)" }}><td style={{ padding: "0.75rem" }}>Estate Planning</td><td style={{ padding: "0.75rem" }}>Wills, trusts, powers of attorney, probate</td><td style={{ padding: "0.75rem" }}>Free 30-min</td></tr>
+              <tr style={{ borderBottom: "1px solid var(--demo-border)" }}><td style={{ padding: "0.75rem" }}>Real Estate Closings</td><td style={{ padding: "0.75rem" }}>Purchase, sale, title, commercial lease</td><td style={{ padding: "0.75rem" }}>Flat fee</td></tr>
+              <tr><td style={{ padding: "0.75rem" }}>Business Succession</td><td style={{ padding: "0.75rem" }}>Ownership transition, buy-sell agreements</td><td style={{ padding: "0.75rem" }}>Free 30-min</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style={{ textAlign: "center", marginTop: "0.75rem", fontSize: "0.85rem", color: "var(--demo-text-muted)" }}>Illustrative practice areas for demo purposes. This is a fictional law firm.</p>
       </div>
     </section>
 

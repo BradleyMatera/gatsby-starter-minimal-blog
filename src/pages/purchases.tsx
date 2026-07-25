@@ -476,7 +476,7 @@ export const Head = () => (
     description="Sign in to the Bradley Matera customer portal to access your software downloads, order history, and receipts from Bradley Matera's digital store."
     pathname="/purchases/"
     canonicalUrl="https://bradleymatera.dev/purchases/"
-    robots="noindex,nofollow"
+    robots="index,follow"
     structuredData={[
       {
         "@context": "https://schema.org",

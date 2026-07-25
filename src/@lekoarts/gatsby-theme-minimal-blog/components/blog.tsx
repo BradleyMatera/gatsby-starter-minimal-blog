@@ -399,6 +399,49 @@ const Blog = ({ posts }: MBBlogProps) => {
           </p>
         </noscript>
       </Section>
+
+      <Section
+        id="blog-faq"
+        eyebrow="About the Blog"
+        title="Common questions about this blog"
+        disableReveal
+      >
+        <div className="blog-faq">
+          <h2 className="blog-faq__question">What topics does this blog cover?</h2>
+          <p className="blog-faq__answer">
+            This blog covers AWS cloud engineering, React and frontend development, Docker and CI/CD workflows, WebGPU experiments, and career notes from a junior software engineer. Each post is a short breakdown of a fix, experiment, or lesson learned — not a comprehensive tutorial.
+          </p>
+
+          <h2 className="blog-faq__question">How often are new posts published?</h2>
+          <p className="blog-faq__answer">
+            Posts are published irregularly, typically every few weeks, whenever a fix, experiment, or project retrospective is worth writing up. There is no fixed schedule. Subscribe to the RSS feed or check back periodically.
+          </p>
+
+          <h2 className="blog-faq__question">Are these posts AI-generated?</h2>
+          <p className="blog-faq__answer">
+            Most entries begin as AI-assisted drafts that I edit, annotate, and fact-check before publishing. The code, experiments, and results are real — the AI helps with structure and phrasing, not with fabricating technical content.
+          </p>
+        </div>
+
+        <div style={{ marginTop: "2rem", overflowX: "auto" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+            <thead>
+              <tr style={{ borderBottom: "2px solid var(--color-border, #e1e4e8)" }}>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Category</th>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Topics</th>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Typical Post Length</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: "1px solid var(--color-border, #e1e4e8)" }}><td style={{ padding: "0.75rem" }}>Cloud &amp; AWS</td><td style={{ padding: "0.75rem" }}>Lambda, DynamoDB, S3, CloudFront</td><td style={{ padding: "0.75rem" }}>5–10 min read</td></tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border, #e1e4e8)" }}><td style={{ padding: "0.75rem" }}>Frontend &amp; React</td><td style={{ padding: "0.75rem" }}>React, Gatsby, TypeScript, CSS</td><td style={{ padding: "0.75rem" }}>3–8 min read</td></tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border, #e1e4e8)" }}><td style={{ padding: "0.75rem" }}>WebGPU &amp; Graphics</td><td style={{ padding: "0.75rem" }}>Shaders, WebGPU, WebGL</td><td style={{ padding: "0.75rem" }}>5–15 min read</td></tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border, #e1e4e8)" }}><td style={{ padding: "0.75rem" }}>Career &amp; Learning</td><td style={{ padding: "0.75rem" }}>Job hunting, education, certifications</td><td style={{ padding: "0.75rem" }}>3–7 min read</td></tr>
+              <tr><td style={{ padding: "0.75rem" }}>Projects &amp; Builds</td><td style={{ padding: "0.75rem" }}>Portfolio, CodePen, case studies</td><td style={{ padding: "0.75rem" }}>5–12 min read</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </Section>
     </Layout>
   );
 };

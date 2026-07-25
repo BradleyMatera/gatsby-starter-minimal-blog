@@ -469,6 +469,25 @@ const DentalDemo: React.FC = () => (
         <h2 className="demo-section__title">Typical Treatment Costs</h2>
         <p className="demo-section__subtitle">See typical cost ranges for common procedures. Your actual cost depends on your treatment plan and insurance benefits.</p>
         <TypicalCostExplainer />
+        <div style={{ marginTop: "2rem", overflowX: "auto" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+            <thead>
+              <tr style={{ borderBottom: "2px solid var(--demo-border)" }}>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Procedure</th>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Typical Cost</th>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Insurance Usually Covers</th>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: "1px solid var(--demo-border)" }}><td style={{ padding: "0.75rem" }}>Cleaning & exam</td><td style={{ padding: "0.75rem" }}>$89–$150</td><td style={{ padding: "0.75rem" }}>100% (preventive)</td><td style={{ padding: "0.75rem" }}>45 min</td></tr>
+              <tr style={{ borderBottom: "1px solid var(--demo-border)" }}><td style={{ padding: "0.75rem" }}>Filling (composite)</td><td style={{ padding: "0.75rem" }}>$150–$300</td><td style={{ padding: "0.75rem" }}>80% after deductible</td><td style={{ padding: "0.75rem" }}>60 min</td></tr>
+              <tr style={{ borderBottom: "1px solid var(--demo-border)" }}><td style={{ padding: "0.75rem" }}>Crown</td><td style={{ padding: "0.75rem" }}>$900–$1,400</td><td style={{ padding: "0.75rem" }}>50% after deductible</td><td style={{ padding: "0.75rem" }}>2 visits</td></tr>
+              <tr><td style={{ padding: "0.75rem" }}>Implant</td><td style={{ padding: "0.75rem" }}>$3,000–$5,000</td><td style={{ padding: "0.75rem" }}>Varies by plan</td><td style={{ padding: "0.75rem" }}>3–6 months</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style={{ textAlign: "center", marginTop: "0.75rem", fontSize: "0.85rem", color: "var(--demo-text-muted)" }}>Illustrative cost ranges for demo purposes. Actual costs depend on your treatment plan and insurance.</p>
       </div>
     </section>
 

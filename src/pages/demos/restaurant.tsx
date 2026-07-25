@@ -12,7 +12,7 @@ import { StarIcon, MapPinIcon, PhoneIcon, UtensilsIcon, ClockIcon, RingIcon, Cli
 
 const pathname = "/demos/restaurant/";
 const pageTitle = "Riverside Grill — Modern Midwestern Live-Fire Dining | Demo Website";
-const pageDescription = "Demo restaurant website for a fictional modern Midwestern live-fire restaurant overlooking the Rock River. Seasonal menu, chef story, and reservations. Built by Bradley Matera.";
+const pageDescription = "Demo restaurant website with seasonal menu, chef story, reservation form, and photo gallery. Built by Bradley Matera.";
 
 const socialLinks: SocialLink[] = [
   { platform: "facebook", url: "https://facebook.com" },
@@ -194,6 +194,27 @@ const RestaurantDemo: React.FC = () => (
             </div>
           ))}
         </div>
+        <div style={{ marginTop: "2rem", overflowX: "auto" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+            <thead>
+              <tr style={{ borderBottom: "2px solid var(--demo-border)" }}>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Course</th>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Item</th>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              {menuCategories.map((cat) => cat.items.map((item) => (
+                <tr key={item.name} style={{ borderBottom: "1px solid var(--demo-border)" }}>
+                  <td style={{ padding: "0.75rem" }}>{cat.title}</td>
+                  <td style={{ padding: "0.75rem" }}>{item.name}</td>
+                  <td style={{ padding: "0.75rem" }}>{item.price}</td>
+                </tr>
+              )))}
+            </tbody>
+          </table>
+        </div>
+        <p style={{ textAlign: "center", marginTop: "0.75rem", fontSize: "0.85rem", color: "var(--demo-text-muted)" }}>Illustrative menu for demo purposes. Prices and items are fictional.</p>
       </div>
     </section>
 

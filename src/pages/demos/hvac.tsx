@@ -13,7 +13,7 @@ import { StarIcon, PhoneIcon, AlertIcon, ShieldIcon, CheckIcon, XIcon, ClockIcon
 
 const pathname = "/demos/hvac/";
 const pageTitle = "ComfortAir Heating & Cooling — HVAC Service Demo";
-const pageDescription = "Demo HVAC website for a fictional heating and cooling contractor. Includes emergency service info, maintenance plans, an illustrative financing estimator, and sample technician bios. Built by Bradley Matera.";
+const pageDescription = "Demo HVAC contractor website with emergency service info, maintenance plans, financing estimator, and technician bios. Built by Bradley Matera.";
 
 const socialLinks: SocialLink[] = [
   { platform: "facebook", url: "https://facebook.com" },
@@ -255,6 +255,26 @@ const HvacDemo: React.FC = () => (
             </div>
           ))}
         </div>
+        <div style={{ marginTop: "2rem", overflowX: "auto" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+            <thead>
+              <tr style={{ borderBottom: "2px solid var(--demo-border)" }}>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
+                <th style={{ textAlign: "center", padding: "0.75rem", fontWeight: 600 }}>Silver ($12/mo)</th>
+                <th style={{ textAlign: "center", padding: "0.75rem", fontWeight: 600 }}>Gold ($20/mo)</th>
+                <th style={{ textAlign: "center", padding: "0.75rem", fontWeight: 600 }}>Platinum ($35/mo)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: "1px solid var(--demo-border)" }}><td style={{ padding: "0.75rem" }}>Seasonal tune-up</td><td style={{ padding: "0.75rem", textAlign: "center" }}>1</td><td style={{ padding: "0.75rem", textAlign: "center" }}>2</td><td style={{ padding: "0.75rem", textAlign: "center" }}>2</td></tr>
+              <tr style={{ borderBottom: "1px solid var(--demo-border)" }}><td style={{ padding: "0.75rem" }}>Priority scheduling</td><td style={{ padding: "0.75rem", textAlign: "center" }}>—</td><td style={{ padding: "0.75rem", textAlign: "center" }}>Yes</td><td style={{ padding: "0.75rem", textAlign: "center" }}>Yes</td></tr>
+              <tr style={{ borderBottom: "1px solid var(--demo-border)" }}><td style={{ padding: "0.75rem" }}>Repair discount</td><td style={{ padding: "0.75rem", textAlign: "center" }}>10%</td><td style={{ padding: "0.75rem", textAlign: "center" }}>15%</td><td style={{ padding: "0.75rem", textAlign: "center" }}>20%</td></tr>
+              <tr style={{ borderBottom: "1px solid var(--demo-border)" }}><td style={{ padding: "0.75rem" }}>No overtime fees</td><td style={{ padding: "0.75rem", textAlign: "center" }}>—</td><td style={{ padding: "0.75rem", textAlign: "center" }}>—</td><td style={{ padding: "0.75rem", textAlign: "center" }}>Yes</td></tr>
+              <tr><td style={{ padding: "0.75rem" }}>Free filter delivery</td><td style={{ padding: "0.75rem", textAlign: "center" }}>—</td><td style={{ padding: "0.75rem", textAlign: "center" }}>1x/yr</td><td style={{ padding: "0.75rem", textAlign: "center" }}>2x/yr</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style={{ textAlign: "center", marginTop: "0.75rem", fontSize: "0.85rem", color: "var(--demo-text-muted)" }}>Illustrative pricing for demo purposes. Cancel anytime.</p>
       </div>
     </section>
 

@@ -12,7 +12,7 @@ import { StarIcon, MapPinIcon, PhoneIcon, GearIcon, ShieldIcon, CheckIcon, Clock
 
 const pathname = "/demos/manufacturing/";
 const pageTitle = "Sterling Metalworks — Metal Fabrication Shop Demo";
-const pageDescription = "Demo manufacturing website for a fictional custom metal fabrication shop. Includes sample capabilities, illustrative equipment and certifications, and an RFQ form example. Built by Bradley Matera.";
+const pageDescription = "Demo metal fabrication shop website with capabilities, equipment list, certifications, and RFQ form example. Built by Bradley Matera.";
 
 const socialLinks: SocialLink[] = [
   { platform: "linkedin", url: "https://linkedin.com" },

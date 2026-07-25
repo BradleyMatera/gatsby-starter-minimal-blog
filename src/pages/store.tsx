@@ -337,6 +337,32 @@ const StoreIndex: React.FC<RouteComponentProps> = () => {
                 onChange={setActiveAmazonTab}
               />
               <ProductGrid items={filteredAmazonProducts} getGoUrl={getGoUrl} />
+
+              {filteredAmazonProducts.length > 0 && (
+                <table className="data-table" style={{ marginTop: "2rem" }}>
+                  <caption>Amazon product comparison — price, category, and rating</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Product</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">Category</th>
+                      <th scope="col">Featured</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredAmazonProducts.map((product) => (
+                      <tr key={product.id}>
+                        <td data-label="Product">
+                          <Link to={`/store/${product.slug}`}>{product.name}</Link>
+                        </td>
+                        <td data-label="Price">{formatPrice(product)}</td>
+                        <td data-label="Category">{product.collection || "General"}</td>
+                        <td data-label="Featured">{product.featured_rank !== null && product.featured_rank !== undefined ? "Yes" : "—"}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              )}
             </section>
           )}
           <ComparisonSection

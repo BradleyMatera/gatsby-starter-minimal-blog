@@ -13,7 +13,7 @@ import { StarIcon, MapPinIcon, PhoneIcon, LeafIcon, TreeIcon, SnowflakeIcon, Fla
 
 const pathname = "/demos/landscaping/";
 const pageTitle = "GreenScape Pro — Landscaping Design-Build-Maintain Demo";
-const pageDescription = "Demo landscaping website for a fictional design-build-maintain company serving established Northern Illinois homes. Includes service packages, sample project gallery, and an illustrative quote form. Built by Bradley Matera.";
+const pageDescription = "Demo landscaping company website with service packages, project gallery, seasonal care tips, and quote form. Built by Bradley Matera.";
 
 const socialLinks: SocialLink[] = [
   { platform: "facebook", url: "https://facebook.com" },
@@ -338,6 +338,28 @@ const LandscapingDemo: React.FC = () => (
             </ul>
           </div>
         </div>
+        <div style={{ marginTop: "2rem", overflowX: "auto" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+            <thead>
+              <tr style={{ borderBottom: "2px solid var(--demo-border)" }}>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
+                <th style={{ textAlign: "center", padding: "0.75rem", fontWeight: 600 }}>Basic Lawn ($45)</th>
+                <th style={{ textAlign: "center", padding: "0.75rem", fontWeight: 600 }}>Complete Care ($89)</th>
+                <th style={{ textAlign: "center", padding: "0.75rem", fontWeight: 600 }}>Full Service ($149)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: "1px solid var(--demo-border)" }}><td style={{ padding: "0.75rem" }}>Weekly mowing</td><td style={{ padding: "0.75rem", textAlign: "center" }}>Yes</td><td style={{ padding: "0.75rem", textAlign: "center" }}>Yes</td><td style={{ padding: "0.75rem", textAlign: "center" }}>Yes</td></tr>
+              <tr style={{ borderBottom: "1px solid var(--demo-border)" }}><td style={{ padding: "0.75rem" }}>Fertilization</td><td style={{ padding: "0.75rem", textAlign: "center" }}>—</td><td style={{ padding: "0.75rem", textAlign: "center" }}>Yes</td><td style={{ padding: "0.75rem", textAlign: "center" }}>Yes</td></tr>
+              <tr style={{ borderBottom: "1px solid var(--demo-border)" }}><td style={{ padding: "0.75rem" }}>Weed & grub control</td><td style={{ padding: "0.75rem", textAlign: "center" }}>—</td><td style={{ padding: "0.75rem", textAlign: "center" }}>Yes</td><td style={{ padding: "0.75rem", textAlign: "center" }}>Yes</td></tr>
+              <tr style={{ borderBottom: "1px solid var(--demo-border)" }}><td style={{ padding: "0.75rem" }}>Aeration & overseeding</td><td style={{ padding: "0.75rem", textAlign: "center" }}>—</td><td style={{ padding: "0.75rem", textAlign: "center" }}>Yes</td><td style={{ padding: "0.75rem", textAlign: "center" }}>Yes</td></tr>
+              <tr style={{ borderBottom: "1px solid var(--demo-border)" }}><td style={{ padding: "0.75rem" }}>Garden bed maintenance</td><td style={{ padding: "0.75rem", textAlign: "center" }}>—</td><td style={{ padding: "0.75rem", textAlign: "center" }}>—</td><td style={{ padding: "0.75rem", textAlign: "center" }}>Yes</td></tr>
+              <tr style={{ borderBottom: "1px solid var(--demo-border)" }}><td style={{ padding: "0.75rem" }}>Snow removal</td><td style={{ padding: "0.75rem", textAlign: "center" }}>—</td><td style={{ padding: "0.75rem", textAlign: "center" }}>—</td><td style={{ padding: "0.75rem", textAlign: "center" }}>Yes</td></tr>
+              <tr><td style={{ padding: "0.75rem" }}>Dedicated account mgr</td><td style={{ padding: "0.75rem", textAlign: "center" }}>—</td><td style={{ padding: "0.75rem", textAlign: "center" }}>—</td><td style={{ padding: "0.75rem", textAlign: "center" }}>Yes</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style={{ textAlign: "center", marginTop: "0.75rem", fontSize: "0.85rem", color: "var(--demo-text-muted)" }}>Illustrative pricing for demo purposes. All packages are month-to-month — no contracts.</p>
       </div>
     </section>
 

@@ -13,7 +13,7 @@ import { StarIcon, MapPinIcon, PhoneIcon, LeafIcon, SunIcon, ClockIcon, CheckIco
 
 const pathname = "/demos/agriculture/";
 const pageTitle = "Kishwaukee Valley Farm Services — Farm Equipment & Supplies Demo";
-const pageDescription = "Demo agriculture website for a fictional farm equipment, parts, and service dealership. Includes illustrative inventory, sample grain prices, and a financing estimator. Built by Bradley Matera.";
+const pageDescription = "Demo farm equipment dealership website with illustrative inventory, grain prices, and financing calculator. Built by Bradley Matera.";
 
 const socialLinks: SocialLink[] = [
   { platform: "facebook", url: "https://facebook.com" },
@@ -149,7 +149,7 @@ const CommodityPriceTicker: React.FC = () => {
               <span style={{ color: "var(--demo-heading)" }}>{item.commodity}</span>
               <span style={{ color: "var(--demo-accent)", fontWeight: 700 }}>{item.price}<span style={{ fontSize: "0.8rem", color: "var(--demo-text-muted)" }}>{item.unit}</span></span>
               <span style={{ fontSize: "0.75rem", color: item.change.startsWith("+") ? "#2d7a2d" : "#c0392b" }}>{item.change}</span>
-              <span style={{ color: "var(--demo-border)", margin: "0 0.5rem" }}>|</span>
+              <span style={{ color: "var(--demo-text-muted)", margin: "0 0.5rem" }}>|</span>
             </span>
           ))}
         </div>
