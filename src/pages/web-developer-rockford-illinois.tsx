@@ -7,9 +7,9 @@ import { Card, Link, Section } from "../ui";
 import { UtensilsIcon, LeafIcon, GearIcon, CarIcon, HouseIcon, ScissorsIcon } from "../site/icons";
 
 const pathname = "/web-developer-rockford-illinois/";
-const pageTitle = "Web Developer & Website Design in Rockford, Illinois";
+const pageTitle = "Website Design in Rockford, Illinois | Web Developer Bradley Matera";
 const pageDescription =
-  "Website design and web developer for Rockford, Illinois small businesses — SEO services, site repair, and custom builds from a developer 25 minutes away in Durand.";
+  "Rockford website design and development — transparent pricing from $447, WCAG-compliant builds, local SEO, and site repair. Based 25 minutes away in Durand, IL.";
 
 const serviceBullets = [
   "Website design for Rockford small businesses that need a real online presence, not a template dump.",

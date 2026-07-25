@@ -282,6 +282,71 @@ export const createCityPage = (config: CityPageConfig) => {
       </Section>
 
       <Section
+        eyebrow="The honest difference"
+        title={`Solo developer vs. agency: what changes for your ${city} business`}
+        description={
+          <p>
+            {city} has established web design companies that have been around for decades. Some do good work. But the experience of hiring a solo developer is fundamentally different from hiring an agency — and the difference shows up in your invoice, your timeline, and your ability to get changes made after launch.
+          </p>
+        }
+      >
+        <Card variant="outline">
+          <table className="data-table">
+            <caption>Solo developer vs. agency comparison for {city} businesses</caption>
+            <thead>
+              <tr>
+                <th scope="col">Factor</th>
+                <th scope="col">Solo developer (me)</th>
+                <th scope="col">Typical agency</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" data-label="Factor">Pricing transparency</th>
+                <td data-label="Solo developer (me)">Fixed prices posted online — $447 to $1,497</td>
+                <td data-label="Typical agency">Quote-based, often requires a sales call</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Factor">Who does the work</th>
+                <td data-label="Solo developer (me)">The person you talked to</td>
+                <td data-label="Typical agency">Whoever is assigned — may change mid-project</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Factor">Accessibility</th>
+                <td data-label="Solo developer (me)">WCAG 2.2 AA compliant by default</td>
+                <td data-label="Typical agency">Often not compliant — check their own site</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Factor">Ongoing costs</th>
+                <td data-label="Solo developer (me)">$37-$97/month, month-to-month, cancel anytime</td>
+                <td data-label="Typical agency">Bundled retainer, often $200-$500/month</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Factor">Response time</th>
+                <td data-label="Solo developer (me)">24-hour guarantee, you text or call one person</td>
+                <td data-label="Typical agency">Ticket queue, account manager, 2-5 business days</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Factor">Site ownership</th>
+                <td data-label="Solo developer (me)">You own everything — code, content, domain</td>
+                <td data-label="Typical agency">Often tied to their CMS or hosting — hard to leave</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Factor">Build speed</th>
+                <td data-label="Solo developer (me)">14 days for a starter site, 3-4 weeks for larger</td>
+                <td data-label="Typical agency">6-12 weeks typical, depends on their pipeline</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Factor">After launch</th>
+                <td data-label="Solo developer (me)">30-90 day warranty included, then month-to-month</td>
+                <td data-label="Typical agency">Bug fixes often billed separately after 14-30 days</td>
+              </tr>
+            </tbody>
+          </table>
+        </Card>
+      </Section>
+
+      <Section
         eyebrow="Process"
         title="How it works — from first call to live site"
       >

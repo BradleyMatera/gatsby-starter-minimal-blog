@@ -22,19 +22,19 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     state: "Illinois",
     stateAbbrev: "IL",
     slug: "web-developer-loves-park-illinois",
-    pageTitle: "Web Developer & Website Design in Loves Park, Illinois",
+    pageTitle: "Website Design & Web Developer in Loves Park, Illinois | Bradley Matera",
     pageDescription:
-      "Website design and web developer for Loves Park, Illinois small businesses — SEO services, site repair, and custom builds from a developer 20 minutes away in Durand.",
+      "Loves Park website design and web developer — transparent pricing from $447, WCAG-compliant builds, local SEO, and site repair. 20 minutes from Durand.",
     distance: "20 minutes",
     direction: "west",
     county: "Winnebago County",
     cityImage: "loves-park.jpg",
     cityContext:
-      "Loves Park is a growing community just north of Rockford, with a strong mix of small businesses, manufacturing, and retail along East Riverside Boulevard and North Second Street. Businesses here need websites that compete with Rockford agencies without paying Rockford agency prices.",
+      "Loves Park is a growing community just north of Rockford, with a strong mix of small businesses, manufacturing, and retail along East Riverside Boulevard and North Second Street. The competitive landscape here includes established agencies that have operated in Loves Park since the late 1990s, offering website design, custom programming, hosting, and SEO. Businesses here need websites that compete with both those local agencies and Rockford firms — without paying Rockford agency prices or settling for thin, generic content and hidden pricing.",
     marketContext:
-      "Loves Park businesses along Riverside Boulevard and North Second Street range from long-standing family restaurants to new service companies moving into the corridor. The competitive pressure from Rockford means a website that loads fast and ranks for Loves Park searches can be the difference between getting the call or losing it to a competitor with a better site.",
+      "Loves Park businesses along Riverside Boulevard and North Second Street range from long-standing family restaurants to new service companies moving into the corridor. The Windsor Lake Parkway business corridor is home to established web design and marketing firms that have served the area since 1997, giving local businesses incumbent options — but many of those incumbents publish thin, generic content, hide their pricing, and ship sites that fail WCAG accessibility checks and score poorly on answer-engine and generative-engine optimization. A website that loads fast, ranks for Loves Park searches, meets accessibility standards, and answers real customer questions can be the difference between getting the call or losing it to a competitor with a better site.",
     localDetails:
-      "Loves Park sits along the Rock River with business clusters around East Riverside Boulevard, North Second Street, and the Riverside Boulevard corridor. The city hosts the annual North End Summer Market, and many businesses here serve both Loves Park residents and the north Rockford metro. Local search competition is increasing as more businesses move into the area, making Google Business Profile optimization and local landing pages more important than ever.",
+      "Loves Park sits along the Rock River with business clusters around East Riverside Boulevard, North Second Street, and the Windsor Lake Parkway corridor near Windsor Lake. Loves Park City Hall anchors the civic center of the community, and the city hosts the annual North End Summer Market. Many businesses here serve both Loves Park residents and the north Rockford metro. The Windsor Lake Parkway corridor has attracted established professional service firms — including web design companies that have been physically located there since the late 1990s — making local search competition especially intense. As more businesses move into the area, Google Business Profile optimization, WCAG-compliant builds, and local landing pages that answer real customer questions become the deciding factors in who gets the call.",
     allCitySlugs: ALL_CITY_SLUGS,
   },
   {
@@ -175,6 +175,26 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
       "Janesville has a robust business community — from the Milton Avenue retail corridor to industrial parks, healthcare providers like Mercyhealth, and downtown shops along Main Street. As the largest city in Rock County, businesses here face more competition than smaller towns, making website quality and local SEO more impactful for standing out.",
     localDetails:
       "Janesville is the economic hub of Southern Wisconsin, located on I-90 between Madison and the Illinois border. The city has a strong manufacturing base (including the former General Motors plant site, now redeveloped), a growing healthcare sector with Mercyhealth Hospital, and a revitalized downtown along the Rock River. Major business corridors include Milton Avenue, Center Avenue, and Court Street. Janesville is large enough that local SEO needs to target specific neighborhoods and corridors, not just the city name. Businesses here compete with Madison agencies for web design, so having a site that loads fast and ranks well locally is essential for capturing the Janesville market.",
+    allCitySlugs: ALL_CITY_SLUGS,
+  },
+  {
+    city: "Rockford",
+    state: "Illinois",
+    stateAbbrev: "IL",
+    slug: "web-developer-rockford-illinois",
+    pageTitle: "Website Design in Rockford, Illinois | Web Developer Bradley Matera",
+    pageDescription:
+      "Rockford website design and development — transparent pricing from $447, WCAG-compliant builds, local SEO, and site repair. Based 25 minutes away in Durand, IL.",
+    distance: "25 minutes",
+    direction: "east",
+    county: "Winnebago County",
+    cityImage: "rockford.jpg",
+    cityContext:
+      "Rockford is the largest city in northwest Illinois and the fifth-largest in the state, with a population of over 145,000 and a diverse economy spanning manufacturing, healthcare, logistics, and small business. As the economic hub of the Rock River Valley, Rockford has a competitive web design market — but many of the firms ranking for 'Rockford website design' publish thin, generic marketing copy with no pricing transparency, no accessibility compliance, and no fresh content. Some top-ranking competitors are not even located in Rockford proper, and their pages haven't been substantively updated in years. Businesses here deserve websites that load fast, meet WCAG standards, and answer real customer questions — not stale boilerplate that fails a basic audit.",
+    marketContext:
+      "Rockford's business corridors run along East State Street, North Main Street, Charles Street, and the downtown Rockford corridor, with a mix of long-standing family businesses, professional services, healthcare providers, and new companies moving into renovated downtown spaces. The competitive web design market here is surprisingly thin on substance — the top-ranking firm for 'Rockford website design' is actually based in Loves Park, not Rockford, and ships pages with no pricing tables, no accessibility checks, and content that hasn't been updated in years despite claiming 'over 20 years' of experience. A Rockford business that publishes transparent pricing, WCAG-compliant builds, and current content can outrank incumbents who have rested on legacy rankings and a 54/100 audit score.",
+    localDetails:
+      "Rockford sits along the Rock River in Winnebago County, with business clusters around East State Street, North Main Street, Charles Street, and the downtown corridor near Rockford City Hall. The Coronado Theatre anchors the downtown cultural district, drawing visitors and supporting nearby restaurants and retail. SwedishAmerican Hospital is a major employer and healthcare hub on the city's east side, and Rockford University contributes to the academic and cultural fabric of the community. The East State Street business corridor is the city's primary commercial strip, running from downtown through the east side and connecting to the I-90 corridor. For web design, this means local SEO should target specific Rockford corridors and landmarks — not just the city name — and content should reference real places that Rockford residents recognize.",
     allCitySlugs: ALL_CITY_SLUGS,
   },
 ];

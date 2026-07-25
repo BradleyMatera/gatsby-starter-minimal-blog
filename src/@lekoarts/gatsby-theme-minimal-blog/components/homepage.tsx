@@ -87,6 +87,17 @@ const Homepage = ({ posts }: MBHomepageProps) => {
           </tbody>
         </table>
       </section>
+      <section className="u-home-local-guides">
+        <h2>Local web design guides</h2>
+        <p>Honest guides for businesses in the Rockford metro area — real prices, real timelines, and how to evaluate a web designer before you hire one.</p>
+        <ul className="feature-list">
+          <li><Link to="/website-design-rockford-il-what-it-actually-costs-and-how-to-choose/">Website Design Rockford IL: What It Actually Costs</Link></li>
+          <li><Link to="/seo-rockford-il-a-local-business-guide-to-actually-ranking/">SEO Rockford IL: A Local Business Guide</Link></li>
+          <li><Link to="/website-design-in-loves-park-illinois-a-small-business-guide/">Website Design in Loves Park, Illinois</Link></li>
+          <li><Link to="/web-developer-rockford-illinois/">Web Developer in Rockford, Illinois</Link></li>
+          <li><Link to="/web-developer-loves-park-illinois/">Web Developer in Loves Park, Illinois</Link></li>
+        </ul>
+      </section>
       <div className="homepage-title-row">
         <TinyTriangleAccent />
         <Title text="Latest writing">

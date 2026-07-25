@@ -143,6 +143,7 @@ export const buildProfessionalServiceSchema = ({
       description,
       telephone: "+16083135373",
       email: "bradmatera@gmail.com",
+      datePublished: "2024-01-15",
       dateModified: "2026-07-24",
     },
   ],
