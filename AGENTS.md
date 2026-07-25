@@ -67,6 +67,28 @@ Demo pages (`/demos/*`) use their own CSS variables (`--demo-text`, `--demo-head
 ### 7. Netlify CLI Deploys
 When deploying via `npx netlify deploy --prod`, the CLI reads `.netlify/state.json` for the site ID. If this file points to the wrong site, deploys will silently go to the wrong Netlify project. Always verify the site ID is `c9b7aa36-b206-40ff-bde8-7c2bf2937d0c`. Use `--dir public` to deploy a pre-built `public/` directory without triggering a rebuild (avoids Gatsby adapter cache issues).
 
+### 8. WCAG Contrast Compliance (CRITICAL — Read Before Editing Demo Colors)
+
+The site must pass **WCAG AA** (4.5:1 normal text, 3:1 large/bold text) and **WCAG AAA** (7:1 normal text, 4.5:1 large/bold text) contrast on all pages. The audit tool (ApexSolutions) checks contrast by reading computed styles from a headless browser. As of Jul 25, 2026, all 267 pages pass AA and AAA.
+
+**Rules for any color changes in demos:**
+
+1. **NEVER use `rgba()` for backgrounds behind text.** The audit tool does NOT blend `rgba()` with the parent background — it treats the semi-transparent color as the actual background, causing false contrast failures. Always use solid opaque hex colors. For example, instead of `rgba(45,122,45,0.12)` on a white parent, use the blended equivalent `#e5efe5`.
+
+2. **All `--demo-accent-soft` variables must be solid hex colors**, not `rgba()`. These are used for weather alerts, financing calc results, mortgage calc results, agent photo backgrounds, and integration category badges. See `src/styles/demos.css` for the current solid values per theme.
+
+3. **Integration status badges** (`.demo-integration__status--live`, `--mocked`, `--available`) use solid backgrounds: `#ddf6e6`, `#fdf0da`, `#e1ecfd` respectively. Text colors: `#166534`, `#92400e`, `#1e40af`.
+
+4. **Inline-styled status badges** in `agriculture.tsx` use solid backgrounds: in-stock `#e5efe5` with text `#1a5a1a`, on-order `#f8f2e0` with text `#4a3500`, used `#ececec` with text `var(--demo-text-muted)`.
+
+5. **Social links in dark contact sections** (`.demo-contact .demo-social__link`) must use `color: #fff` — the default `var(--demo-text)` is dark and invisible on the dark contact background.
+
+6. **Review/testimonial stars** use `#8a6300` (not `#f5a623`) for AA compliance on light backgrounds.
+
+7. **To verify contrast after changes**, run: `node scripts/contrast-check.js` (checks the live site) or `node scripts/contrast-check.js --local` (checks `localhost:9000` after `npm run build && npm run serve`). The script uses Playwright to check computed styles on all demo pages.
+
+8. **When adding new demo elements**, calculate contrast ratios using the WCAG formula: `(max(L1, L2) + 0.05) / (min(L1, L2) + 0.05)` where L is relative luminance. Use a contrast checker tool or the script at `scripts/contrast-check.js`.
+
 ---
 
 ## Demo Websites (10 total)

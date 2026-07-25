@@ -363,7 +363,7 @@ const ScheduleForm: React.FC = () => {
 };
 
 const DentalDemo: React.FC = () => (
-  <DemoLayout demoName="Rock River Family Dental" industry="Dental / Healthcare" themeColor="#e07a5f" designSystem="dental">
+  <DemoLayout demoName="Rock River Family Dental" industry="Dental / Healthcare" themeColor="#b04e35" designSystem="dental">
     <section className="demo-hero" style={{ backgroundImage: "url(/images/demos/dental/hero.jpg)" }}>
       <div className="demo-hero__inner">
         <span className="demo-hero__tagline">Gentle family dentistry · Transparent first visits · Dixon, IL</span>

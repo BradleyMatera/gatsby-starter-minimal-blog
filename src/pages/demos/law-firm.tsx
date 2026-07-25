@@ -126,9 +126,9 @@ const DeadlineExplainer: React.FC = () => {
           </div>
         ))}
       </div>
-      <div className="demo-quote-form__success" style={{ borderColor: "#c0392b" }}>
+      <div className="demo-quote-form__success" style={{ borderColor: "#ff6b6b" }}>
         <AlertIcon size={32} />
-        <h3 style={{ color: "#c0392b" }}>Deadlines are specific to your situation</h3>
+        <h3 style={{ color: "#ff6b6b" }}>Deadlines are specific to your situation</h3>
         <p>The information above is general. Your actual deadline depends on the facts, the county, the court, and the documents involved. Do not rely on this page to calculate your deadline. If you think you may have a legal deadline, contact an attorney immediately.</p>
         <p style={{ fontSize: "0.8rem", marginTop: "0.75rem", opacity: 0.8 }}>This is an educational demo. It does not provide legal advice and does not create an attorney-client relationship.</p>
       </div>

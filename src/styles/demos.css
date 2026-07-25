@@ -167,7 +167,7 @@
   --demo-surface: #2a2a2d;
   --demo-surface-alt: #333336;
   --demo-text: #d0d0d4;
-  --demo-text-muted: #888892;
+  --demo-text-muted: #a0a0aa;
   --demo-heading: #f0f0f2;
   --demo-accent: #ff6b1a;
   --demo-accent-soft: #43312a;
@@ -207,7 +207,7 @@
   --demo-surface: #ffffff;
   --demo-surface-alt: #fce8f0;
   --demo-text: #4a2a35;
-  --demo-text-muted: #8a6a75;
+  --demo-text-muted: #7a5560;
   --demo-heading: #8b2956;
   --demo-accent: #d63384;
   --demo-accent-soft: #faeaf2;
@@ -248,10 +248,10 @@
   --demo-surface: #ffffff;
   --demo-surface-alt: #f0f2eb;
   --demo-text: #1f2933;
-  --demo-text-muted: #6b7c6d;
+  --demo-text-muted: #5a6b5c;
   --demo-heading: #2c5e5e;
-  --demo-accent: #e07a5f;
-  --demo-accent-soft: #fbf1ef;
+  --demo-accent: #b04e35;
+  --demo-accent-soft: #f7edea;
   --demo-border: #e5e0d6;
   --demo-card-bg: #ffffff;
   --demo-font-heading: 'Poppins', sans-serif;
