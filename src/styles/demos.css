@@ -1305,6 +1305,10 @@
   color: rgba(255,255,255,0.85);
   margin-bottom: 2rem;
 }
+.demo-contact .demo-social__link {
+  color: #fff;
+  border-color: rgba(255,255,255,0.3);
+}
 .demo-contact__info {
   display: flex;
   flex-direction: column;
