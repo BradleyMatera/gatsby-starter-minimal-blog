@@ -92,11 +92,13 @@ npm run products:seed:direct  # seed direct products
 │   │           └── index.ts    # theme-ui color modes (light/dark)
 │   ├── pages/              # Route pages (see Page Routes below)
 │   ├── site/               # Site-specific components, hooks, icons, accents
-│   │   ├── icons/          # Custom SVG icon library (40+ icons)
+│   │   ├── icons/          # Custom SVG icon library (111 icons)
 │   │   └── seo/            # Local SEO schema builders
 │   ├── features/           # Feature modules
 │   │   ├── contact/        # Contact form and content
+│   │   ├── demos/          # Shared demo components (DemoLayout, WeatherWidget, etc.)
 │   │   ├── home/           # Homepage components (hero, actions)
+│   │   ├── local-seo/      # CityPageTemplate (shared template for 28 city pages)
 │   │   ├── recruiter/      # Recruiter hub sections (15+ components)
 │   │   └── store/          # Store and product features
 │   ├── styles/             # Global CSS (tokens, chrome, utilities, media, nav)
@@ -135,6 +137,8 @@ npm run products:seed:direct  # seed direct products
 | `/roles/full-stack-engineer/` | `content/pages/roles/full-stack-engineer.mdx` |
 
 ### Local SEO Landing Pages (TSX)
+33 city landing pages targeting "web developer [city] Illinois/Wisconsin" keywords. 28 use the shared `src/features/local-seo/CityPageTemplate.tsx` template; 5 are custom (durand-davis, freeport, pecatonica, rockford, winnebago).
+
 | Route | File | Target Keywords |
 |-------|------|-----------------|
 | `/web-developer-durand-davis-illinois/` | `src/pages/web-developer-durand-davis-illinois.tsx` | web developer Durand/Davis IL |
@@ -142,9 +146,29 @@ npm run products:seed:direct  # seed direct products
 | `/web-developer-freeport-illinois/` | `src/pages/web-developer-freeport-illinois.tsx` | web developer Freeport IL |
 | `/web-developer-pecatonica-illinois/` | `src/pages/web-developer-pecatonica-illinois.tsx` | web developer Pecatonica IL |
 | `/web-developer-winnebago-illinois/` | `src/pages/web-developer-winnebago-illinois.tsx` | web developer Winnebago IL |
+| `/web-developer-[city]-illinois/` | `src/pages/web-developer-[city]-illinois.tsx` | 23 more IL cities (template-based) |
+| `/web-developer-[city]-wisconsin/` | `src/pages/web-developer-[city]-wisconsin.tsx` | 5 WI cities (template-based) |
 | `/pricing/` | `src/pages/pricing.tsx` | website pricing Northwest Illinois |
 | `/website-help-northwest-illinois/` | `src/pages/website-help-northwest-illinois.tsx` | website help Northwest Illinois |
 | `/northwest-illinois-web-development-faq/` | `src/pages/northwest-illinois-web-development-faq.tsx` | web development FAQ IL |
+
+### Demo Websites (TSX)
+10 full demo business websites at `/demos/` serving as sales tools for potential clients.
+
+| Route | Business | Industry |
+|-------|----------|----------|
+| `/demos/restaurant/` | Riverside Grill | Restaurant |
+| `/demos/landscaping/` | GreenScape Pro | Landscaping |
+| `/demos/hvac/` | ComfortAir Heating & Cooling | HVAC |
+| `/demos/auto-repair/` | Northside Auto Repair | Auto Repair |
+| `/demos/real-estate/` | Rockford Heritage Realty | Real Estate |
+| `/demos/beauty-salon/` | Bella Vista Salon | Beauty Salon |
+| `/demos/manufacturing/` | Sterling Metalworks | Manufacturing |
+| `/demos/agriculture/` | Kishwaukee Valley Farm Services | Agriculture |
+| `/demos/law-firm/` | Rock River Legal Group | Law Firm |
+| `/demos/dental/` | Rock River Family Dental | Dental |
+
+Each demo includes: hero, services grid with images, team bios, testimonials, FAQ, integrations section, contact form, and industry-specific interactive features (calculators, triage tools, eligibility checkers, etc.). See `AGENTS.md` for full details on demo features and shared components.
 
 ### App Pages (TSX)
 | Route | File | Description |
@@ -169,12 +193,13 @@ npm run products:seed:direct  # seed direct products
 ## Key Features
 
 ### Local SEO Service
-- **5 city landing pages** targeting Northwest Illinois (Durand/Davis, Rockford, Freeport, Pecatonica, Winnebago)
+- **33 city landing pages** targeting Northwest Illinois and Southern Wisconsin (28 use shared `CityPageTemplate.tsx`, 5 are custom)
+- **10 demo websites** at `/demos/` showing potential clients what their site could look like (restaurant, landscaping, HVAC, auto repair, real estate, beauty salon, manufacturing, agriculture, law firm, dental)
 - **Pricing page** with transparent tiered pricing ($447–$1,497)
 - **Service schema markup** (Service + ProfessionalService) on every city page
 - **LocalBusiness schema** with NAP consistency (Name, Address, Phone)
 - **Google Business Profile** integration (phone: (608) 313-5373)
-- Each city page includes: 3-step process, industries served, social proof stats, FAQ, pricing link
+- Each city page includes: 10 demo card illustrations, 3-step process, industries served, social proof stats, FAQ, pricing link
 - See `PRICING_MODEL.md` for full pricing rationale and tax breakdowns
 - See `GOOGLE_VOICE_SETUP.md` for business phone setup
 
