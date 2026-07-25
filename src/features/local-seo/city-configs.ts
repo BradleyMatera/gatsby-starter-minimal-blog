@@ -228,7 +228,7 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     distance: "25 minutes",
     direction: "east",
     county: "Boone County",
-    cityImage: "rockford.jpg",
+    cityImage: "belvidere.jpg",
     cityContext:
       "Belvidere is the Boone County seat with a population of about 25,000, sitting 25 minutes east of Durand along the Business 20 corridor. The city has a strong manufacturing and agricultural base, with retail concentrated along Business 20 and a classic county-seat downtown around Belvidere City Hall. Businesses here need websites that compete with Rockford agencies while reflecting Belvidere's distinct community identity.",
     marketContext:
@@ -248,7 +248,7 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     distance: "30 minutes",
     direction: "east",
     county: "Winnebago County",
-    cityImage: "rockford.jpg",
+    cityImage: "cherry-valley.jpg",
     cityContext:
       "Cherry Valley is a small Rockford suburb of about 3,000 residents in Winnebago County, located 30 minutes east of Durand. The village is best known for CherryVale Mall, the region's largest shopping center, which makes retail and restaurants the dominant local economy. Businesses here need websites that capture both Cherry Valley residents and the broader Rockford metro shoppers drawn to the mall.",
     marketContext:
@@ -268,7 +268,7 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     distance: "15 minutes",
     direction: "south",
     county: "Ogle County",
-    cityImage: "rockford.jpg",
+    cityImage: "oregon.jpg",
     cityContext:
       "Oregon is the Ogle County seat with a population of about 4,000, located just 15 minutes south of Durand along the Rock River. The city's economy centers on county government, tourism driven by the Rock River and nearby state parks, and small downtown businesses. Oregon businesses need websites that capture both the local resident base and the tourist traffic that flows through the corridor.",
     marketContext:
@@ -288,7 +288,7 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     distance: "18 minutes",
     direction: "south",
     county: "Ogle County",
-    cityImage: "rockford.jpg",
+    cityImage: "mount-morris.jpg",
     cityContext:
       "Mount Morris is a small Ogle County village of about 3,000 residents, located 18 minutes south of Durand. The local economy is rooted in agriculture and small-town retail, with the annual Mount Morris Days festival bringing regional visitors each summer. Businesses here need websites that reflect the community's rural character while reaching customers across the Ogle County area.",
     marketContext:
@@ -308,7 +308,7 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     distance: "30 minutes",
     direction: "south",
     county: "Ogle County",
-    cityImage: "rockford.jpg",
+    cityImage: "rochelle.jpg",
     cityContext:
       "Rochelle is a growing Ogle County city of about 9,000 residents, located 30 minutes south of Durand at the crossroads of I-39 and IL Route 251. Known as the 'Hub City' for its railroad heritage, Rochelle has a diverse economy spanning manufacturing, logistics, and agriculture. Businesses here need websites that compete in a broader regional market drawing from I-39 through-traffic.",
     marketContext:
@@ -328,7 +328,7 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     distance: "20 minutes",
     direction: "south",
     county: "Ogle County",
-    cityImage: "rockford.jpg",
+    cityImage: "polo.jpg",
     cityContext:
       "Polo is a small Ogle County community of about 2,400 residents, located 20 minutes south of Durand. The village is known for its well-preserved historic downtown district and strong agricultural base. Businesses here need websites that reflect Polo's small-town historic character while reaching customers across the broader Ogle County region.",
     marketContext:
@@ -348,7 +348,7 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     distance: "25 minutes",
     direction: "south",
     county: "Ogle County",
-    cityImage: "rockford.jpg",
+    cityImage: "forreston.jpg",
     cityContext:
       "Forreston is a small rural Ogle County community of about 1,400 residents, located 25 minutes south of Durand. The village's economy is rooted in agriculture and small rural businesses, with a tight-knit community centered around Forreston City Hall and the local fire protection district. Businesses here need websites that reach across the rural Ogle County area.",
     marketContext:
@@ -368,7 +368,7 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     distance: "50 minutes",
     direction: "east",
     county: "DeKalb County",
-    cityImage: "rockford.jpg",
+    cityImage: "dekalb.jpg",
     cityContext:
       "DeKalb is a city of about 40,000 in DeKalb County, located 50 minutes east of Durand and home to Northern Illinois University. The university dominates the local economy, driving retail, restaurants, and service businesses that serve the student population. Businesses here need websites that compete in a larger, more competitive market while targeting both the student and permanent resident populations.",
     marketContext:
@@ -388,7 +388,7 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     distance: "45 minutes",
     direction: "east",
     county: "DeKalb County",
-    cityImage: "rockford.jpg",
+    cityImage: "sycamore.jpg",
     cityContext:
       "Sycamore is the DeKalb County seat with a population of about 18,000, located 45 minutes east of Durand and directly adjacent to DeKalb. The city has a strong county government presence, a well-preserved historic downtown district, and retail businesses that serve both Sycamore residents and the broader DeKalb County area. Businesses here need websites that reflect the city's historic character while reaching the adjacent NIU market.",
     marketContext:
@@ -408,7 +408,7 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     distance: "50 minutes",
     direction: "south",
     county: "Whiteside County",
-    cityImage: "rockford.jpg",
+    cityImage: "sterling.jpg",
     cityContext:
       "Sterling is a Whiteside County city of about 15,000, located 50 minutes south of Durand along the Rock River. The city has a strong manufacturing and metalworking heritage, with a downtown that benefits from Rock River tourism. Businesses here need websites that compete in the Sauk Valley regional market while highlighting Sterling's industrial and river-town character.",
     marketContext:
@@ -428,7 +428,7 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     distance: "50 minutes",
     direction: "south",
     county: "Whiteside County",
-    cityImage: "rockford.jpg",
+    cityImage: "rock-falls.jpg",
     cityContext:
       "Rock Falls is a Whiteside County city of about 9,000, located 50 minutes south of Durand and directly across the Rock River from Sterling. The two cities form a twin-city market, with Rock Falls having a strong manufacturing and retail base. Businesses here need websites that target both Rock Falls and the shared Sterling-Rock Falls market.",
     marketContext:
@@ -448,7 +448,7 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     distance: "40 minutes",
     direction: "south",
     county: "Lee County",
-    cityImage: "rockford.jpg",
+    cityImage: "dixon.jpg",
     cityContext:
       "Dixon is the Lee County seat with a population of about 15,000, located 40 minutes south of Durand along the Rock River. The city is famous as the boyhood home of Ronald Reagan and serves as a regional hub for county government, healthcare, and retail. Businesses here need websites that capture both the local market and the heritage tourism traffic drawn by the Reagan connection.",
     marketContext:
@@ -468,7 +468,7 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     distance: "30 minutes",
     direction: "south",
     county: "Lee County",
-    cityImage: "rockford.jpg",
+    cityImage: "amboy.jpg",
     cityContext:
       "Amboy is a small Lee County community of about 2,500 residents, located 30 minutes south of Durand. The village has a strong agricultural base with small-town businesses serving the surrounding farming community. The Amboy Depot Museum is a notable local landmark that highlights the city's railroad heritage. Businesses here need websites that reach across the rural Lee County area.",
     marketContext:
@@ -488,7 +488,7 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     distance: "25 minutes",
     direction: "south",
     county: "Lee County",
-    cityImage: "rockford.jpg",
+    cityImage: "ashton.jpg",
     cityContext:
       "Ashton is a small rural Lee County community of about 1,000 residents, located 25 minutes south of Durand. The village's economy is rooted in agriculture and small rural businesses serving the surrounding farming community. Businesses here need websites that reach across the rural Lee County area and connect with the scattered agricultural customer base.",
     marketContext:
@@ -508,7 +508,7 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     distance: "60 minutes",
     direction: "northeast",
     county: "Green County",
-    cityImage: "beloit.jpg",
+    cityImage: "monroe-wi.jpg",
     cityContext:
       "Monroe is the Green County seat with a population of about 11,000, located 60 minutes northeast of Durand. The city is famous for its Swiss heritage and cheese production, with a strong agricultural and dairy economy. Businesses here need websites that reflect Monroe's unique cultural identity while reaching customers across Green County and the broader Southern Wisconsin region.",
     marketContext:
@@ -528,7 +528,7 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     distance: "50 minutes",
     direction: "northeast",
     county: "Green County",
-    cityImage: "beloit.jpg",
+    cityImage: "brodhead-wi.jpg",
     cityContext:
       "Brodhead is a small Green County community of about 3,000 residents, located 50 minutes northeast of Durand. The village has a strong agricultural base with small-town retail serving the surrounding farming community. Businesses here need websites that reach across the rural Green County area and connect with both local residents and the agricultural customer base.",
     marketContext:
@@ -548,7 +548,7 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     distance: "55 minutes",
     direction: "northeast",
     county: "Rock County",
-    cityImage: "beloit.jpg",
+    cityImage: "evansville-wi.jpg",
     cityContext:
       "Evansville is a Rock County community of about 6,000 residents, located 55 minutes northeast of Durand. The city has a well-preserved historic downtown and a strong agricultural base, with Lake Leota providing a community recreation anchor. Businesses here need websites that reflect the city's historic small-town character while reaching customers across the Rock County area.",
     marketContext:
@@ -568,7 +568,7 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     distance: "50 minutes",
     direction: "northeast",
     county: "Rock County",
-    cityImage: "beloit.jpg",
+    cityImage: "edgerton-wi.jpg",
     cityContext:
       "Edgerton is a Rock County community of about 6,000 residents, located 50 minutes northeast of Durand. The city is known for its tobacco farming heritage, with a strong agricultural base and small businesses serving the surrounding farming community. Businesses here need websites that reflect Edgerton's agricultural history while reaching customers across the Rock County region.",
     marketContext:
@@ -588,7 +588,7 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     distance: "45 minutes",
     direction: "northeast",
     county: "Rock County",
-    cityImage: "beloit.jpg",
+    cityImage: "milton-wi.jpg",
     cityContext:
       "Milton is a Rock County community of about 5,000 residents, located 45 minutes northeast of Durand and directly adjacent to Janesville. The city has a strong agricultural base with small businesses serving both local residents and commuters to the larger Janesville market. Businesses here need websites that capture both Milton-specific searches and the overflow from the Janesville market.",
     marketContext:
@@ -608,7 +608,7 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     distance: "40 minutes",
     direction: "northeast",
     county: "Rock County",
-    cityImage: "beloit.jpg",
+    cityImage: "clinton-wi.jpg",
     cityContext:
       "Clinton is a small Rock County village of about 1,200 residents, located 40 minutes northeast of Durand and in close proximity to Beloit. The community has a strong agricultural base with small rural businesses and a commuter residential character. Businesses here need websites that reach across the rural Rock County area and capture the Beloit-adjacent market.",
     marketContext:
