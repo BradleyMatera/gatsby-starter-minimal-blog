@@ -524,7 +524,7 @@ export const createCityPage = (config: CityPageConfig) => {
             </div>
           </div>
           <div className="pkg-card">
-            <img src="/package-images/city-demo-lawfirm.svg" alt="Law Firm Website illustration" className="pkg-card__bg" loading="lazy" />
+            <img src="/package-images/city-demo-law-firm.svg" alt="Law Firm Website illustration" className="pkg-card__bg" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">Law Firm Website</h3>
               <p className="pkg-card__desc">
