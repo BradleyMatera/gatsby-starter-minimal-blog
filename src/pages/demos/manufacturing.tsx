@@ -8,11 +8,11 @@ import SocialLinks, { SocialLink } from "../../features/demos/SocialLinks";
 import ReviewBadges from "../../features/demos/ReviewBadges";
 import IntegrationsSection, { Integration } from "../../features/demos/IntegrationsSection";
 import FAQSection, { FAQItem } from "../../features/demos/FAQSection";
-import { StarIcon, MapPinIcon, PhoneIcon, GearIcon, ShieldIcon, CheckIcon, ClockIcon, ToolsIcon, BoltIcon } from "../../site/icons";
+import { StarIcon, MapPinIcon, PhoneIcon, GearIcon, ShieldIcon, CheckIcon, ClockIcon, ToolsIcon, BoltIcon, DocumentIcon, ClipboardIcon, DownloadIcon } from "../../site/icons";
 
 const pathname = "/demos/manufacturing/";
 const pageTitle = "Sterling Metalworks — Custom Metal Fabrication | Demo Website";
-const pageDescription = "Demo manufacturing website for a metal fabrication shop — capabilities, equipment list, quote form, ISO certifications, and project gallery. Built by Bradley Matera.";
+const pageDescription = "Demo manufacturing website for a metal fabrication shop — capabilities, equipment list, material specs, RFQ form, ISO certifications, and project gallery. Built by Bradley Matera.";
 
 const socialLinks: SocialLink[] = [
   { platform: "linkedin", url: "https://linkedin.com" },
@@ -25,11 +25,16 @@ const integrations: Integration[] = [
   { name: "E2 Shop System", category: "ERP / Shop Management", description: "Full shop floor control — quoting, job scheduling, material tracking, shipping, and invoicing. Your website quote form feeds directly into E2 for instant job setup.", freeTier: "From $7,995 one-time + annual support. Cloud version from $199/month.", url: "https://e2shopsystem.com", status: "mocked" },
   { name: "QuickBooks Online", category: "Accounting & Invoicing", description: "Sync invoices, purchase orders, and vendor payments between your shop system and QuickBooks. No double entry — jobs bill straight through to accounting.", freeTier: "From $35/month. 50% off for first 3 months.", url: "https://quickbooks.intuit.com", status: "available" },
   { name: "Salesforce CRM", category: "Customer Relationship Management", description: "Track leads, quotes, and customer history. When a prospect submits the quote form, Salesforce creates a lead and assigns it to your sales rep based on industry segment.", freeTier: "Starter from $25/user/month. 30-day free trial.", url: "https://salesforce.com", status: "mocked" },
-  { name: "Shopify B2B Portal", description: "Customer self-service portal for reordering parts, checking order status, and downloading invoices. Tiered pricing per customer account.", category: "E-Commerce / B2B Portal", freeTier: "From $39/month. 3-day free trial.", url: "https://shopify.com", status: "available" },
+  { name: "Shopify B2B Portal", category: "E-Commerce / B2B Portal", description: "Customer self-service portal for reordering parts, checking order status, and downloading invoices. Tiered pricing per customer account.", freeTier: "From $39/month. 3-day free trial.", url: "https://shopify.com", status: "available" },
   { name: "Autodesk Fusion 360 Viewer", category: "CAD / Design Collaboration", description: "Embeddable 3D model viewer. Customers upload STEP or DWG files and see them rendered in-browser. You review and quote directly from the model.", freeTier: "Free for personal use. Commercial from $545/year.", url: "https://autodesk.com/fusion-360", status: "mocked" },
   { name: "Google Maps Embed", category: "Maps & Service Area", description: "Interactive map showing your shop location and delivery radius. Customers see if you're within trucking distance before requesting a quote.", freeTier: "28,000 embed loads/month (free). $7/1k loads after.", url: "https://developers.google.com/maps/documentation/embed/start", status: "live" },
-  { name: "ISO 9001:2015 Certification Badge", category: "Trust & Verification", description: "Live certification badge linking to your ISO registrar's verification page. Shows customers your quality management system is audited and certified.", freeTier: "ISO 9001 certification from $3,000–$10,000 (registrar fees).", url: "https://iso.org/standard/62085.html", status: "mocked" },
+  { name: "ISO 9001 Certification Badge", category: "Trust & Verification", description: "Live certification badge linking to your ISO registrar's verification page. Shows customers your quality management system is audited and certified.", freeTier: "ISO 9001 certification from $3,000–$10,000 (registrar fees).", url: "https://iso.org/standard/62085.html", status: "mocked" },
   { name: "Stripe Payment Links", category: "Online Payments", description: "Email payment links with invoices. Customers pay by card or ACH for deposits and final payments. Funds in your account in 2 days.", freeTier: "2.9% + 30¢ per card transaction. 0.8% capped at $5 for ACH.", url: "https://stripe.com/payments", status: "available" },
+  { name: "Xometry / Protolabs Quote Comparison API", category: "Overflow Quoting", description: "When capacity is full, automatically compare quotes from Xometry and Protolabs so you can route overflow work without turning customers away. Instant pricing for CNC, sheet metal, and 3D printing.", freeTier: "API access free. Xometry takes 10–20% margin on routed jobs.", url: "https://xometry.com", status: "mocked" },
+  { name: "Thomasnet Supplier Profile", category: "B2B Buyer Discovery", description: "Verified supplier profile on Thomasnet.com — the platform where 1.4M+ industrial buyers source suppliers. RFQs from Thomasnet feed directly into your Salesforce pipeline.", freeTier: "Basic listing free. Premium from $4,200/year.", url: "https://thomasnet.com", status: "available" },
+  { name: "Made in USA Certified", category: "Domestic Manufacturing Verification", description: "Third-party verification that your parts are manufactured in the USA. Critical for defense (ITAR), government contracts, and reshoring initiatives. Badge links to verification registry.", freeTier: "Certification from $895/year. Includes FTC compliance review.", url: "https://madeinusa.com", status: "mocked" },
+  { name: "FedEx Freight Quote API", category: "Shipping & Logistics", description: "Real-time LTL freight quotes for heavy parts and large assemblies. Quote form auto-calculates shipping based on part weight, dimensions, and destination ZIP. Customers see landed cost upfront.", freeTier: "API free with FedEx account. Discounted freight rates up to 70% off.", url: "https://fedex.com/freight", status: "available" },
+  { name: "Dropbox / Google Drive File Sharing", category: "CAD File Transfer Portal", description: "Secure portal for customers to upload STEP, DWG, IGES, and PDF drawings. Files auto-organize by customer and job number. No more 50MB email attachments.", freeTier: "Dropbox Business from $15/user/month. Google Drive 15GB free.", url: "https://dropbox.com/business", status: "available" },
 ];
 
 const capabilities = [
@@ -50,6 +55,30 @@ const equipment = [
   { machine: "Lincoln Power MIG 360MP", type: "MIG Welder", capacity: "300A, industrial wire feed", qty: 2 },
   { machine: "Cincinnati CLA 408", type: "Hydraulic Shear", capacity: "10' x 1/4\" capacity", qty: 1 },
   { machine: "Gertebauer Powder Coat Booth", type: "Powder Coating", capacity: "8' x 8' x 20' booth, 4-stage wash", qty: 1 },
+];
+
+const materials = [
+  { material: "Mild Steel", grade: "A36, A1018, 1008", maxThickness: '3/4"', applications: "Structural brackets, frames, machine bases, agricultural wear parts" },
+  { material: "Stainless Steel", grade: "304, 316, 17-4 PH", maxThickness: '1/2"', applications: "Food-grade frames, washdown equipment, corrosion-resistant enclosures" },
+  { material: "Aluminum", grade: "6061, 5052, 7075", maxThickness: '1/4"', applications: "Lightweight housings, aerospace components, heat sinks, panels" },
+  { material: "Brass", grade: "C360 (free-machining)", maxThickness: '1/4"', applications: "Fittings, decorative trim, electrical contacts, valve bodies" },
+  { material: "Copper", grade: "C110 (electrolytic)", maxThickness: '1/4"', applications: "Bus bars, heat exchangers, electrical components, roofing trim" },
+];
+
+const capacityStats = [
+  { number: "18,000", label: "Sq Ft Facility" },
+  { number: "8", label: "Major Machines" },
+  { number: "2", label: "Shifts During Peak" },
+  { number: "3-Day", label: "Material Safety Stock" },
+  { number: "2–3 Wk", label: "Standard Lead Time" },
+  { number: "48 Hr", label: "Rush Service Available" },
+];
+
+const qcSteps = [
+  { step: "1", title: "First Article Inspection", desc: "Dimensional verification on the first part off every machine. CMM, calipers, and micrometers. No production run starts until first article is signed off." },
+  { step: "2", title: "In-Process Inspection", desc: "Checks during machining and welding at set intervals — typically every 25 pieces or every 2 hours. Catches drift before it becomes scrap." },
+  { step: "3", title: "Final QC Inspection", desc: "Dimensional, visual, and weld inspection before shipping. Every part checked against print. Non-conforming parts are quarantined and reviewed." },
+  { step: "4", title: "Documentation", desc: "Material certs and inspection reports ship with every order. Full traceability from raw material heat number to finished part. ISO 9001:2015 compliant." },
 ];
 
 const projects = [
@@ -81,12 +110,20 @@ const certifications = [
   { name: "ITAR Registered", desc: "Registered with DDTC for defense-related manufacturing. Export compliance program in place.", logo: "ITAR" },
 ];
 
+const trustBadges = [
+  { label: "ISO 9001:2015", sub: "Certified QMS" },
+  { label: "AWS D1.1", sub: "Certified Welders" },
+  { label: "ITAR Registered", sub: "DDTC Compliant" },
+  { label: "Made in USA", sub: "Domestic Mfg" },
+];
+
 const faqs: FAQItem[] = [
   { q: "What is your minimum order quantity?", a: "We have no minimum order quantity. Whether you need one prototype part or 10,000 production units, we can help. Prototype jobs are quoted at shop rate with no setup fee for first-time customers." },
   { q: "What are your typical lead times?", a: "Standard lead time is 2–3 weeks for production runs. Prototypes typically ship in 5–7 business days. Rush service is available — we can often turn emergency parts in 48 hours for agricultural and construction customers during peak season." },
   { q: "Can you source materials for us?", a: "Yes. We maintain accounts with Steel Dynamics, Ryerson, and Alro Steel. We can source mild steel, stainless, aluminum, brass, and copper in sheet, plate, bar, and tube. Material certs are provided with every order." },
   { q: "How do you ensure quality?", a: "We are ISO 9001:2015 certified with documented quality procedures for every process. First-article inspection on all new jobs, in-process inspection during machining, and final QC before shipping. CMM and gauge calibration is tracked and audited annually." },
   { q: "What is your delivery radius?", a: "We deliver free within 75 miles of Sterling, IL — covering Rock Falls, Dixon, Rockford, Belvidere, Rochelle, and the I-88 corridor. Beyond that, we ship via common carrier (Old Dominion, Estes) or customer pickup. White-glove delivery available for oversize items." },
+  { q: "What file formats do you accept for quotes?", a: "We accept STEP, IGES, DWG, DXF, and PDF drawings. Upload them through our RFQ form or email to quotes@sterlingmetalworks-demo.com. For 3D models, we use Autodesk Fusion 360 to review and quote directly from the geometry." },
 ];
 
 const testimonials = [
@@ -105,6 +142,9 @@ const QuoteForm: React.FC = () => {
   const [quantity, setQuantity] = React.useState("100");
   const [tolerance, setTolerance] = React.useState("±0.005");
   const [finish, setFinish] = React.useState("Powder Coat");
+  const [industry, setIndustry] = React.useState("Agricultural");
+  const [volume, setVolume] = React.useState("One-time");
+  const [fileName, setFileName] = React.useState("");
   const [submitted, setSubmitted] = React.useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -118,7 +158,7 @@ const QuoteForm: React.FC = () => {
         <CheckIcon size={48} />
         <h3>Quote Request Received</h3>
         <p>Thank you. Our quoting team will review your specifications and email a detailed quote within 24 business hours. For rush quotes, call (815) 555-0420.</p>
-        <p><strong>Material:</strong> {material}<br /><strong>Thickness:</strong> {thickness}"<br /><strong>Quantity:</strong> {quantity} pcs<br /><strong>Tolerance:</strong> {tolerance}"<br /><strong>Finish:</strong> {finish}</p>
+        <p><strong>Material:</strong> {material}<br /><strong>Thickness:</strong> {thickness}"<br /><strong>Quantity:</strong> {quantity} pcs<br /><strong>Tolerance:</strong> {tolerance}"<br /><strong>Finish:</strong> {finish}<br /><strong>Industry:</strong> {industry}<br /><strong>Annual Volume:</strong> {volume}<br /><strong>CAD File:</strong> {fileName || "None uploaded"}</p>
         <button className="demo-btn demo-btn--ghost" onClick={() => setSubmitted(false)}>Submit another quote</button>
       </div>
     );
@@ -130,14 +170,16 @@ const QuoteForm: React.FC = () => {
         <label className="demo-form-label" htmlFor="material">Material Type</label>
         <select id="material" className="demo-form-select" value={material} onChange={(e) => setMaterial(e.target.value)}>
           <option>Mild Steel (A36)</option>
+          <option>Mild Steel (A1018)</option>
+          <option>Cold Rolled Steel (1008)</option>
           <option>Stainless Steel (304)</option>
           <option>Stainless Steel (316)</option>
+          <option>Stainless Steel (17-4 PH)</option>
           <option>Aluminum (6061)</option>
           <option>Aluminum (5052)</option>
-          <option>Hot Rolled Steel (A1018)</option>
-          <option>Cold Rolled Steel (1008)</option>
-          <option>Brass</option>
-          <option>Copper</option>
+          <option>Aluminum (7075)</option>
+          <option>Brass (C360)</option>
+          <option>Copper (C110)</option>
         </select>
       </div>
       <div className="demo-form-row">
@@ -172,6 +214,33 @@ const QuoteForm: React.FC = () => {
         </select>
       </div>
       <div className="demo-form-row">
+        <label className="demo-form-label" htmlFor="industry">Industry</label>
+        <select id="industry" className="demo-form-select" value={industry} onChange={(e) => setIndustry(e.target.value)}>
+          <option>Agricultural</option>
+          <option>Automotive</option>
+          <option>Food Processing</option>
+          <option>Construction</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div className="demo-form-row">
+        <label className="demo-form-label" htmlFor="volume">Annual Volume</label>
+        <select id="volume" className="demo-form-select" value={volume} onChange={(e) => setVolume(e.target.value)}>
+          <option>One-time</option>
+          <option>100–1,000 / year</option>
+          <option>1,000–10,000 / year</option>
+          <option>10,000+ / year</option>
+        </select>
+      </div>
+      <div className="demo-form-row">
+        <label className="demo-form-label" htmlFor="cadfile">Upload CAD File (STEP, DWG, PDF)</label>
+        <div className="demo-form-file-upload">
+          <DownloadIcon size={20} />
+          <input id="cadfile" className="demo-form-input" type="file" accept=".step,.stp,.iges,.igs,.dwg,.dxf,.pdf" onChange={(e) => setFileName(e.target.files?.[0]?.name ?? "")} />
+          <span className="demo-form-file-name">{fileName || "No file selected — or email to quotes@sterlingmetalworks-demo.com"}</span>
+        </div>
+      </div>
+      <div className="demo-form-row">
         <label className="demo-form-label" htmlFor="email">Email Address</label>
         <input id="email" className="demo-form-input" type="email" required placeholder="you@company.com" />
       </div>
@@ -184,19 +253,19 @@ const QuoteForm: React.FC = () => {
         <textarea id="notes" className="demo-form-textarea" rows={3} placeholder="Brief description of the part, or reference a drawing file you'll email separately." />
       </div>
       <button type="submit" className="demo-btn demo-btn--primary">Request Quote</button>
-      <p className="demo-form-note">Quotes returned within 24 business hours. Upload STEP, DWG, or PDF drawings to quotes@sterlingmetalworks-demo.com.</p>
+      <p className="demo-form-note">Quotes returned within 24 business hours. Upload STEP, DWG, or PDF drawings directly or email to quotes@sterlingmetalworks-demo.com.</p>
     </form>
   );
 };
 
 const ManufacturingDemo: React.FC = () => (
   <DemoLayout demoName="Sterling Metalworks" industry="Manufacturing / Metal Fabrication" themeColor="#4a6fa5" designSystem="industrial">
-    {/* Hero with real shop floor photo */}
+    {/* Hero */}
     <section className="demo-hero" style={{ backgroundImage: "url(/images/demos/manufacturing/hero.jpg)" }}>
       <div className="demo-hero__inner">
-        <span className="demo-hero__tagline">ISO 9001:2015 Certified · AWS D1.1 Welding · Since 1998</span>
+        <span className="demo-hero__tagline">ISO 9001:2015 Certified · AWS D1.1 Welding · ITAR Registered · Since 1998</span>
         <h1 className="demo-hero__title">Sterling Metalworks</h1>
-        <p className="demo-hero__subtitle">Custom metal fabrication shop serving Sterling, Rock Falls, and the Rock River Valley. CNC machining, laser cutting, welding, and powder coating — from prototype to production. Located off IL Route 40, 2 miles south of US 30.</p>
+        <p className="demo-hero__subtitle">Custom metal fabrication shop serving Sterling, Rock Falls, and the Rock River Valley. CNC machining, laser cutting, welding, and powder coating — from prototype to production. Located on IL Route 40, 2 miles south of US 30.</p>
         <div className="demo-hero__actions">
           <a href="tel:8155550420" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0420</a>
           <a href="#quote" className="demo-btn demo-btn--ghost">Request a Quote</a>
@@ -226,28 +295,28 @@ const ManufacturingDemo: React.FC = () => (
                 <td style={{ padding: "0.75rem" }}>Full machine list with specifications — Haas mills, Trumpf laser, Amada press brake, Miller welders.</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Quote request form</td>
-                <td style={{ padding: "0.75rem" }}>Structured RFQ form with material, thickness, quantity, tolerance, and finish selectors. Feeds into E2 shop system.</td>
+                <td style={{ padding: "0.75rem" }}>Material specifications</td>
+                <td style={{ padding: "0.75rem" }}>Detailed table of all materials worked with — grades, max thickness, and typical applications.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Production capacity dashboard</td>
+                <td style={{ padding: "0.75rem" }}>Facility size, machine count, shift schedule, material stock, and lead times — all at a glance.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>RFQ form with CAD upload</td>
+                <td style={{ padding: "0.75rem" }}>Structured quote form with material, thickness, quantity, tolerance, finish, industry, annual volume, and CAD file upload. Feeds into E2 shop system.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Quality control process</td>
+                <td style={{ padding: "0.75rem" }}>4-step QC timeline — first article, in-process, final inspection, and documentation with material certs.</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
                 <td style={{ padding: "0.75rem" }}>Certifications display</td>
-                <td style={{ padding: "0.75rem" }}>ISO 9001:2015, AWS D1.1, and ITAR registration badges with links to verification pages.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Industries served</td>
-                <td style={{ padding: "0.75rem" }}>Targeted content for agricultural, automotive, food processing, and construction customers.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Project gallery</td>
-                <td style={{ padding: "0.75rem" }}>Photo gallery of completed work organized by industry and process type.</td>
+                <td style={{ padding: "0.75rem" }}>ISO 9001:2015, AWS D1.1, ITAR Registered, and Made in USA badges with links to verification pages.</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
                 <td style={{ padding: "0.75rem" }}>B2B portal</td>
                 <td style={{ padding: "0.75rem" }}>Customer login for reordering parts, checking order status, and downloading invoices and certs.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>SEO setup</td>
-                <td style={{ padding: "0.75rem" }}>LocalBusiness schema, service pages with unique content, Google Business Profile, and industry-specific landing pages.</td>
               </tr>
             </tbody>
           </table>
@@ -255,7 +324,7 @@ const ManufacturingDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Stats + Review Badges + Certifications */}
+    {/* Stats + Review Badges + Trust Badges */}
     <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <div className="demo-stats" style={{ gridTemplateColumns: "repeat(4, 1fr)" }}>
@@ -268,8 +337,8 @@ const ManufacturingDemo: React.FC = () => (
           <ReviewBadges googleRating={4.8} googleReviewCount={47} yelpRating={4.5} yelpReviewCount={12} />
         </div>
         <div style={{ marginTop: "1rem", display: "flex", justifyContent: "center", gap: "0.75rem", flexWrap: "wrap" }}>
-          {certifications.map((c) => (
-            <span key={c.name} className="demo-trust-logo"><ShieldIcon size={20} /> {c.logo}</span>
+          {trustBadges.map((b) => (
+            <span key={b.label} className="demo-trust-logo"><ShieldIcon size={20} /> {b.label} <span className="demo-trust-logo__rating">{b.sub}</span></span>
           ))}
         </div>
       </div>
@@ -346,6 +415,54 @@ const ManufacturingDemo: React.FC = () => (
       </div>
     </section>
 
+    {/* Material Specifications Table */}
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Material Specifications</h2>
+        <p className="demo-section__subtitle">We stock and source these materials regularly. Don't see what you need? Call us — we source specialty alloys weekly.</p>
+        <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Material specifications">
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+            <thead>
+              <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Material</th>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Grade</th>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Max Thickness</th>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Typical Applications</th>
+              </tr>
+            </thead>
+            <tbody>
+              {materials.map((m) => (
+                <tr key={m.material} style={{ borderBottom: "1px solid var(--color-border)" }}>
+                  <td style={{ padding: "0.75rem", fontWeight: 600 }}>{m.material}</td>
+                  <td style={{ padding: "0.75rem" }}>{m.grade}</td>
+                  <td style={{ padding: "0.75rem" }}>{m.maxThickness}</td>
+                  <td style={{ padding: "0.75rem" }}>{m.applications}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    {/* Production Capacity Dashboard */}
+    <section className="demo-section demo-section--alt">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Production Capacity</h2>
+        <p className="demo-section__subtitle">Real-time visibility into our shop's capabilities. This is what we can do, right now, without outsourcing.</p>
+        <div className="demo-stats" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))" }}>
+          {capacityStats.map((s) => (
+            <div key={s.label}><div className="demo-stat__number">{s.number}</div><div className="demo-stat__label">{s.label}</div></div>
+          ))}
+        </div>
+        <div style={{ marginTop: "1.5rem", display: "flex", justifyContent: "center", gap: "1rem", flexWrap: "wrap" }}>
+          <span className="demo-trust-logo"><GearIcon size={20} /> 8 Machines Running</span>
+          <span className="demo-trust-logo"><ClockIcon size={20} /> 2 Shifts / Peak</span>
+          <span className="demo-trust-logo"><BoltIcon size={20} /> 48-Hr Rush Available</span>
+        </div>
+      </div>
+    </section>
+
     {/* Project Showcase Gallery */}
     <section className="demo-section">
       <div className="demo-section__inner">
@@ -371,6 +488,23 @@ const ManufacturingDemo: React.FC = () => (
             <p className="demo-split-image-text__text">Our CMM and gauge calibration is tracked and audited annually as part of our ISO 9001:2015 certification. Material certs and inspection reports ship with every order, every time.</p>
           </div>
           <div className="demo-split-image-text__image" style={{ backgroundImage: "url(/images/demos/manufacturing/quality-control.jpg)" }} />
+        </div>
+      </div>
+    </section>
+
+    {/* Quality Control Process Timeline */}
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Quality Control Process</h2>
+        <p className="demo-section__subtitle">Every part follows the same 4-step inspection process. No exceptions, no shortcuts.</p>
+        <div className="demo-process">
+          {qcSteps.map((s) => (
+            <div key={s.step} className="demo-process__step">
+              <div className="demo-process__number">{s.step}</div>
+              <h3 className="demo-process__title">{s.title}</h3>
+              <p className="demo-process__desc">{s.desc}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -444,11 +578,11 @@ const ManufacturingDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Quote Form */}
+    {/* RFQ Form */}
     <section className="demo-section demo-section--alt" id="quote">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Request a Quote</h2>
-        <p className="demo-section__subtitle">Fill out the form below with your part specifications. We'll email a detailed quote within 24 business hours.</p>
+        <p className="demo-section__subtitle">Fill out the form below with your part specifications. Upload your CAD file and we'll email a detailed quote within 24 business hours.</p>
         <QuoteForm />
       </div>
     </section>
@@ -472,14 +606,14 @@ const ManufacturingDemo: React.FC = () => (
 
     <FAQSection faqs={faqs} />
 
-    {/* Google Maps */}
+    {/* Service Area Map */}
     <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Find Us</h2>
-        <p className="demo-section__subtitle">Located off IL Route 40, 2 miles south of US 30 in Sterling, IL. Serving the Rock River Valley and I-88 corridor.</p>
-        <GoogleMapsEmbed address="Sterling, IL" height={300} title="Sterling Metalworks location" />
+        <p className="demo-section__subtitle">Located on IL Route 40, 2 miles south of US 30 in Sterling, IL. Serving the Rock River Valley and I-88 corridor.</p>
+        <GoogleMapsEmbed address="1420 IL Route 40, Sterling, IL 61081" height={300} title="Sterling Metalworks location" />
         <div style={{ marginTop: "1rem", display: "flex", justifyContent: "center", gap: "1.5rem", flexWrap: "wrap", fontSize: "0.95rem" }}>
-          <span><MapPinIcon size={18} /> 1240 Industrial Park Dr, Sterling, IL 61081</span>
+          <span><MapPinIcon size={18} /> 1420 IL Route 40, Sterling, IL 61081</span>
           <span><PhoneIcon size={18} /> (815) 555-0420</span>
           <span><ClockIcon size={18} /> Mon–Fri 6:00 AM – 4:30 PM</span>
         </div>
@@ -498,7 +632,7 @@ const ManufacturingDemo: React.FC = () => (
           <SocialLinks links={socialLinks} />
         </div>
         <div className="demo-contact__info">
-          <div className="demo-contact__info-item"><MapPinIcon size={20} /><span className="demo-contact__info-label">Address</span><span>1240 Industrial Park Dr, Sterling, IL</span></div>
+          <div className="demo-contact__info-item"><MapPinIcon size={20} /><span className="demo-contact__info-label">Address</span><span>1420 IL Route 40, Sterling, IL 61081</span></div>
           <div className="demo-contact__info-item"><PhoneIcon size={20} /><span className="demo-contact__info-label">Phone</span><span>(815) 555-0420</span></div>
           <div className="demo-contact__info-item"><ClockIcon size={20} /><span className="demo-contact__info-label">Hours</span><span>Mon–Fri 6:00 AM – 4:30 PM</span></div>
         </div>
@@ -508,7 +642,7 @@ const ManufacturingDemo: React.FC = () => (
     <footer className="demo-footer">
       <div className="demo-footer__inner">
         <div className="demo-footer__name">Sterling Metalworks</div>
-        <div>1240 Industrial Park Dr, Sterling, IL 61081 · (815) 555-0420</div>
+        <div>1420 IL Route 40, Sterling, IL 61081 · (815) 555-0420</div>
         <div style={{ marginTop: "1rem" }}><SocialLinks links={socialLinks} /></div>
         <div className="demo-footer__demo-note">This is a demo website built by <a href="https://bradleymatera.dev">Bradley Matera</a>.<br /><a href="/demos/">← Back to all demos</a> · <a href="/contact/">Get a site like this →</a></div>
       </div>

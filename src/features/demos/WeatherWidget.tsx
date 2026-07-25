@@ -8,7 +8,7 @@ interface WeatherWidgetProps {
   // For the demo, we show a static mock with the real API explanation
   temp?: number;
   condition?: "sunny" | "cloudy" | "snow" | "rain";
-  context: "hvac" | "landscaping";
+  context: "hvac" | "landscaping" | "agriculture";
 }
 
 const WeatherWidget: React.FC<WeatherWidgetProps> = ({
@@ -27,6 +27,8 @@ const WeatherWidget: React.FC<WeatherWidgetProps> = ({
   const contextMessage =
     context === "hvac"
       ? "When temps drop below 32°F, furnace repair calls spike 400%. Is your heating system ready?"
+      : context === "agriculture"
+      ? "Soil temps are above 50°F — prime conditions for spring planting. Book your planter tune-up now."
       : "Snow in the forecast? Book snow removal service before the storm hits.";
 
   return (

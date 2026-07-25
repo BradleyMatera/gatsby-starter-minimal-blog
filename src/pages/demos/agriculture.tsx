@@ -6,13 +6,14 @@ import DemoLayout from "../../features/demos/DemoLayout";
 import GoogleMapsEmbed from "../../features/demos/GoogleMapsEmbed";
 import SocialLinks, { SocialLink } from "../../features/demos/SocialLinks";
 import ReviewBadges from "../../features/demos/ReviewBadges";
+import WeatherWidget from "../../features/demos/WeatherWidget";
 import IntegrationsSection, { Integration } from "../../features/demos/IntegrationsSection";
 import FAQSection, { FAQItem } from "../../features/demos/FAQSection";
-import { StarIcon, MapPinIcon, PhoneIcon, LeafIcon, SunIcon, ClockIcon, CheckIcon, GearIcon, ToolsIcon, ShieldIcon } from "../../site/icons";
+import { StarIcon, MapPinIcon, PhoneIcon, LeafIcon, SunIcon, ClockIcon, CheckIcon, GearIcon, ToolsIcon, ShieldIcon, BoltIcon, AlertIcon, CalendarIcon } from "../../site/icons";
 
 const pathname = "/demos/agriculture/";
 const pageTitle = "Kishwaukee Valley Farm Services — Agricultural Equipment & Supplies | Demo Website";
-const pageDescription = "Demo agriculture website for a farm supply company — equipment sales, repair services, seed/fertilizer ordering, and crop planning resources. Built by Bradley Matera.";
+const pageDescription = "Demo agriculture website for a farm supply company — equipment sales, repair services, live grain prices, financing calculator, and crop planning resources. Built by Bradley Matera.";
 
 const socialLinks: SocialLink[] = [
   { platform: "facebook", url: "https://facebook.com" },
@@ -24,11 +25,16 @@ const socialLinks: SocialLink[] = [
 const integrations: Integration[] = [
   { name: "John Deere Operations Center API", category: "Equipment Telemetry", description: "Live equipment data streamed to your site. Customers log in and see their tractor hours, fuel levels, and maintenance alerts. Service department gets auto-notified when a machine needs an oil change.", freeTier: "Free for John Deere equipment owners. API access included with JDLink subscription.", url: "https://deere.com/en/technology-products/precision-ag-technology/operations-center", status: "mocked" },
   { name: "Climate FieldView", category: "Crop Data & Agronomy", description: "Integrate field-level crop data, planting maps, and yield history. Customers can view their FieldView data alongside your seed and fertilizer recommendations.", freeTier: "Basic free. Plus from $999/year per farm.", url: "https://climate.com", status: "mocked" },
+  { name: "Climate FieldView Plus", category: "Yield & Prescription Planting", description: "Advanced yield data analysis and prescription planting maps. Generate variable-rate seeding and fertilizer prescriptions directly from yield history, then send them to the planter or spreader.", freeTier: "Plus from $999/year. Premium prescription tools from $1,499/year.", url: "https://climate.com/fieldview-plus", status: "mocked" },
   { name: "QuickBooks Online", category: "Accounting & Invoicing", description: "Sync equipment sales, repair invoices, and parts orders. Farm credit accounts bill automatically with 30-day terms. Seasonal payment plans for seed and fertilizer purchases.", freeTier: "From $35/month. 50% off for first 3 months.", url: "https://quickbooks.intuit.com", status: "available" },
-  { name: "Shopify (Parts Ordering)", category: "E-Commerce / Parts Catalog", description: "Online parts catalog with year-make-model lookup. Customers order filters, belts, and wear parts with free in-store pickup or delivery to their farm.", freeTier: "From $39/month. 3-day free trial.", url: "https://shopify.com", status: "available" },
+  { name: "Shopify Parts Catalog", category: "E-Commerce / Parts Catalog", description: "Online parts catalog with year-make-model lookup. Customers order filters, belts, and wear parts with free in-store pickup or delivery to their farm.", freeTier: "From $39/month. 3-day free trial.", url: "https://shopify.com", status: "available" },
   { name: "Google Maps Embed", category: "Maps & Service Area", description: "Interactive map showing your service area and delivery routes. Farmers can see if you deliver to their area and estimate delivery days.", freeTier: "28,000 embed loads/month (free). $7/1k loads after.", url: "https://developers.google.com/maps/documentation/embed/start", status: "live" },
-  { name: "USDA Farm Service Agency Feed", category: "Government Resources", description: "Live feed of USDA FSA announcements — program deadlines, disaster assistance, and market reports. Auto-displayed on your resources page so farmers always see current info.", freeTier: "Free public API. No authentication required.", url: "https://fsa.usda.gov", status: "mocked" },
-  { name: "DTN Markets API", category: "Commodity Prices", description: "Live grain prices (corn, soybeans, wheat) displayed on your homepage. Farmers see current local elevator bids without leaving your site.", freeTier: "From $89/month for DTN Professional. Market data add-on available.", url: "https://dtn.com", status: "available" },
+  { name: "USDA FSA Feed", category: "Government Resources", description: "Live feed of USDA FSA announcements — program deadlines, disaster assistance, and market reports. Auto-displayed on your resources page so farmers always see current info.", freeTier: "Free public API. No authentication required.", url: "https://fsa.usda.gov", status: "mocked" },
+  { name: "DTN Markets API", category: "Commodity Prices", description: "Live grain prices (corn, soybeans, wheat) displayed on your homepage. Farmers see current local elevator bids without leaving your site. Powers the commodity ticker widget.", freeTier: "From $89/month for DTN Professional. Market data add-on available.", url: "https://dtn.com", status: "available" },
+  { name: "John Deere Financial API", category: "Equipment Financing", description: "Embeddable financing pre-approval form. Customers apply for equipment loans and leases directly on your site. Real-time rate quotes based on credit, equipment type, and term. Powers the financing calculator.", freeTier: "No cost to dealer. Commission on funded loans.", url: "https://deere.com/en/finance", status: "mocked" },
+  { name: "Agrian Crop Protection Registry", category: "Regulatory Compliance", description: "Restricted-use pesticide compliance tracking. Verify applicator licenses, record applications, and generate EPA-required reports. Customers see their application history and re-entry intervals on your site.", freeTier: "From $75/month per location. Compliance reporting add-on available.", url: "https://agrian.com", status: "mocked" },
+  { name: "Granular Ag CRM", category: "Farm Management Software", description: "Two-way sync with Granular farm management platform. Customers' field boundaries, crop plans, and input orders flow into your CRM. Sales reps see what each farm needs before they call.", freeTier: "From $15/acre/year. Minimum 500 acres.", url: "https://granular.ag", status: "mocked" },
+  { name: "Farmers Business Network (FBN)", category: "Input Pricing Transparency", description: "Pull FBN anonymized input pricing data alongside your seed and fertilizer quotes. Farmers see how your prices compare to the regional average. Builds trust and closes sales.", freeTier: "FBN membership from $700/year per farm. API access for dealers from $200/month.", url: "https://fbn.com", status: "mocked" },
   { name: "Stripe Payment Links", category: "Online Payments", description: "Email payment links for equipment deposits, repair invoices, and parts orders. Accept cards and ACH. Farm credit accounts sync with QuickBooks terms.", freeTier: "2.9% + 30¢ per card transaction. 0.8% capped at $5 for ACH.", url: "https://stripe.com/payments", status: "available" },
 ];
 
@@ -91,12 +97,29 @@ const seasonalFeatures = [
   ]},
 ];
 
+const equipmentInventory = [
+  { model: "John Deere 6120M", hp: "120 HP", status: "In Stock", statusType: "in-stock", price: "$89,500" },
+  { model: "Case IH Farmall 120A", hp: "120 HP", status: "In Stock", statusType: "in-stock", price: "$72,000" },
+  { model: "John Deere 8R 410", hp: "410 HP", status: "2 on Order", statusType: "on-order", price: "Call for Price" },
+  { model: "Kubota M7060", hp: "70 HP", status: "In Stock", statusType: "in-stock", price: "$48,500" },
+  { model: "New Holland TD5.120", hp: "117 HP", status: "Used", statusType: "used", price: "$42,000" },
+  { model: "John Deere 6155M", hp: "155 HP", status: "Used", statusType: "used", price: "$67,500" },
+];
+
+const commodityPrices = [
+  { commodity: "Corn", price: "$4.82", unit: "/bu", change: "+$0.03" },
+  { commodity: "Soybeans", price: "$11.45", unit: "/bu", change: "-$0.08" },
+  { commodity: "Wheat", price: "$5.91", unit: "/bu", change: "+$0.01" },
+  { commodity: "Ethanol", price: "$1.89", unit: "/gal", change: "+$0.02" },
+];
+
 const faqs: FAQItem[] = [
-  { q: "Do you offer equipment financing?", a: "Yes. We partner with John Deere Financial and Case IH Financial for new equipment, offering rates as low as 0% for 36 months on qualifying models. For used equipment, we work with AgChoice Farm Credit and local banks. We can also arrange lease-to-own and seasonal payment plans that align with your harvest income." },
+  { q: "Do you offer equipment financing?", a: "Yes. We partner with John Deere Financial and Case IH Financial for new equipment, offering rates as low as 0% for 36 months on qualifying models. For used equipment, we work with AgChoice Farm Credit and local banks. We can also arrange lease-to-own and seasonal payment plans that align with your harvest income. Use the financing calculator on this page to estimate your monthly payment." },
   { q: "What is your repair turnaround time?", a: "In-shop repairs typically take 3–5 business days during peak season (April–May and September–October). Off-season repairs are usually 1–3 days. For emergency breakdowns during planting or harvest, we dispatch our mobile service truck same-day within 40 miles of Oregon, IL. Call (815) 555-0630 and press 1 for the service department." },
   { q: "Do you offer bulk seed pricing?", a: "Yes. Bulk seed pricing applies to orders of 50+ units (80,000 kernel bags for corn, 140,000 seed units for soybeans). Early-book discounts of 8–12% are available from October through December for the following spring. We also offer volume rebates that are applied to your account at season end." },
   { q: "What areas do you serve?", a: "Our shop is in Oregon, IL, and our mobile service truck covers Forreston, Polo, Ashton, Amboy, Byron, Stillman Valley, Mount Morris, and Dixon in Illinois, plus Brodhead, Clinton, and Edgerton in Wisconsin. Equipment delivery extends 60 miles in any direction. Call us if you're outside that radius — we may still be able to help." },
   { q: "Do you offer emergency breakdown service?", a: "Yes. During planting (April–May) and harvest (September–October), we have a technician on call 7 days a week, 6:00 AM to 8:00 PM. Call (815) 555-0630 and press 1. Our mobile service truck is stocked with common hydraulic hoses, bearings, and electrical parts. We can get most machines running in the field." },
+  { q: "Can I see current equipment inventory online?", a: "Yes. Our equipment inventory table on this page shows current stock with availability status and pricing. Inventory changes weekly — call (815) 555-0630 for the most up-to-date availability and to schedule a demo or test drive. Used equipment is sold first-come, first-served." },
 ];
 
 const testimonials = [
@@ -108,6 +131,168 @@ const testimonials = [
 const StarRating: React.FC = () => (
   <div className="demo-testimonial__stars" aria-label="5 out of 5 stars">{[0,1,2,3,4].map((i) => <StarIcon key={i} size={18} />)}</div>
 );
+
+const CommodityPriceTicker: React.FC = () => {
+  const tickerItems = [...commodityPrices, ...commodityPrices, ...commodityPrices];
+  return (
+    <div className="demo-financing-calc" style={{ maxWidth: "none", padding: "1.5rem 2rem" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem", flexWrap: "wrap", gap: "0.5rem" }}>
+        <h3 style={{ fontSize: "1.25rem", margin: 0, fontFamily: "var(--demo-font-heading)" }}>Live Grain Prices</h3>
+        <span style={{ fontSize: "0.75rem", color: "var(--demo-text-muted)", display: "flex", alignItems: "center", gap: "0.4rem" }}>
+          <BoltIcon size={14} /> Updated every 15 min
+        </span>
+      </div>
+      <div style={{ overflow: "hidden", position: "relative", background: "var(--demo-bg)", borderRadius: "var(--demo-radius)", padding: "0.75rem 0", border: "1px solid var(--demo-border)" }}>
+        <div style={{ display: "flex", gap: "2.5rem", whiteSpace: "nowrap", animation: "tickerScroll 30s linear infinite", paddingLeft: "100%" }}>
+          {tickerItems.map((item, i) => (
+            <span key={i} style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", fontSize: "1rem", fontWeight: 600 }}>
+              <span style={{ color: "var(--demo-heading)" }}>{item.commodity}</span>
+              <span style={{ color: "var(--demo-accent)", fontWeight: 700 }}>{item.price}<span style={{ fontSize: "0.8rem", color: "var(--demo-text-muted)" }}>{item.unit}</span></span>
+              <span style={{ fontSize: "0.75rem", color: item.change.startsWith("+") ? "#2d7a2d" : "#c0392b" }}>{item.change}</span>
+              <span style={{ color: "var(--demo-border)", margin: "0 0.5rem" }}>|</span>
+            </span>
+          ))}
+        </div>
+      </div>
+      <p style={{ fontSize: "0.75rem", color: "var(--demo-text-muted)", marginTop: "0.75rem", textAlign: "center" }}>
+        <strong>Powered by DTN Markets API</strong> — live grain prices updated every 15 minutes. Local elevator bids for Oregon, IL 61061.
+      </p>
+      <style>{`
+        @keyframes tickerScroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-33.33%); }
+        }
+      `}</style>
+    </div>
+  );
+};
+
+const EquipmentFinancingCalculator: React.FC = () => {
+  const [price, setPrice] = React.useState(89500);
+  const [downPct, setDownPct] = React.useState(10);
+  const [term, setTerm] = React.useState(60);
+  const apr = 4.9;
+  const downPayment = price * (downPct / 100);
+  const financed = price - downPayment;
+  const monthlyRate = apr / 100 / 12;
+  const monthly = financed > 0 ? (financed * monthlyRate * Math.pow(1 + monthlyRate, term)) / (Math.pow(1 + monthlyRate, term) - 1) : 0;
+  const fmt = (n: number) => n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+  return (
+    <div className="demo-financing-calc">
+      <h3 className="demo-financing-calc__title">Equipment Financing Calculator</h3>
+      <p className="demo-financing-calc__subtitle">Estimate your monthly payment. Rates from 0% APR on qualifying new John Deere models.</p>
+      <div className="demo-financing-calc__slider-row">
+        <label className="demo-financing-calc__slider-label" htmlFor="equip-price"><span>Equipment Price</span><span className="demo-financing-calc__slider-value">{fmt(price)}</span></label>
+        <input id="equip-price" className="demo-financing-calc__slider" type="range" min="20000" max="200000" step="5000" value={price} onChange={(e) => setPrice(Number(e.target.value))} />
+      </div>
+      <div className="demo-financing-calc__slider-row">
+        <label className="demo-financing-calc__slider-label" htmlFor="equip-down"><span>Down Payment ({downPct}%)</span><span className="demo-financing-calc__slider-value">{fmt(downPayment)}</span></label>
+        <input id="equip-down" className="demo-financing-calc__slider" type="range" min="0" max="50" step="5" value={downPct} onChange={(e) => setDownPct(Number(e.target.value))} />
+      </div>
+      <div className="demo-financing-calc__slider-row">
+        <label className="demo-financing-calc__slider-label" htmlFor="equip-term"><span>Term</span><span className="demo-financing-calc__slider-value">{term} months</span></label>
+        <input id="equip-term" className="demo-financing-calc__slider" type="range" min="24" max="72" step="12" value={term} onChange={(e) => setTerm(Number(e.target.value))} />
+      </div>
+      <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.85rem", color: "var(--demo-text-muted)", marginBottom: "0.5rem" }}>
+        <span>Amount Financed: <strong style={{ color: "var(--demo-heading)" }}>{fmt(financed)}</strong></span>
+        <span>APR: <strong style={{ color: "var(--demo-heading)" }}>{apr}%</strong></span>
+      </div>
+      <div className="demo-financing-calc__result">
+        <div className="demo-financing-calc__result-label">Estimated Monthly Payment</div>
+        <div className="demo-financing-calc__result-value">{fmt(monthly)}<span className="demo-financing-calc__result-period">/mo</span></div>
+      </div>
+      <div className="demo-financing-calc__note">Rates shown are estimates. John Deere Financial offers 0% APR for 36 months on qualifying new models. Used equipment financed through AgChoice Farm Credit. Subject to credit approval. Call (815) 555-0630 for a custom quote.</div>
+    </div>
+  );
+};
+
+const ServiceRequestForm: React.FC = () => {
+  const [equipmentType, setEquipmentType] = React.useState("");
+  const [urgency, setUrgency] = React.useState("");
+  const [submitted, setSubmitted] = React.useState(false);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+  if (submitted) {
+    return (
+      <div className="demo-financing-calc" style={{ maxWidth: "600px" }}>
+        <div style={{ textAlign: "center", padding: "2rem 0" }}>
+          <CheckIcon size={48} />
+          <h3 style={{ marginTop: "1rem", fontFamily: "var(--demo-font-heading)" }}>Service Request Received</h3>
+          <p style={{ color: "var(--demo-text-muted)", marginTop: "0.5rem" }}>Our service department will call you within 2 hours during business hours. For emergency breakdowns during planting or harvest, call (815) 555-0630 and press 1.</p>
+          <button className="demo-form__submit" style={{ maxWidth: "250px", margin: "1.5rem auto 0" }} onClick={() => setSubmitted(false)}>Submit Another Request</button>
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className="demo-financing-calc" style={{ maxWidth: "600px" }}>
+      <h3 className="demo-financing-calc__title">Service Request Form</h3>
+      <p className="demo-financing-calc__subtitle">Tell us about your equipment and what's going on. We'll get back to you fast.</p>
+      <form onSubmit={handleSubmit}>
+        <div className="demo-form__row">
+          <div className="demo-form__field">
+            <label className="demo-form__label" htmlFor="svc-equipment-type">Equipment Type *</label>
+            <select id="svc-equipment-type" className="demo-form__select" value={equipmentType} onChange={(e) => setEquipmentType(e.target.value)} required>
+              <option value="">Select type...</option>
+              <option value="Tractor">Tractor</option>
+              <option value="Combine">Combine</option>
+              <option value="Planter">Planter</option>
+              <option value="Baler">Baler</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div className="demo-form__field">
+            <label className="demo-form__label" htmlFor="svc-urgency">Urgency Level *</label>
+            <select id="svc-urgency" className="demo-form__select" value={urgency} onChange={(e) => setUrgency(e.target.value)} required>
+              <option value="">Select urgency...</option>
+              <option value="Emergency">Emergency breakdown</option>
+              <option value="Scheduled">Scheduled service</option>
+              <option value="Routine">Routine maintenance</option>
+            </select>
+          </div>
+        </div>
+        <div className="demo-form__row">
+          <div className="demo-form__field">
+            <label className="demo-form__label" htmlFor="svc-make">Make</label>
+            <input id="svc-make" className="demo-form__input" type="text" placeholder="John Deere, Case IH, Kubota..." />
+          </div>
+          <div className="demo-form__field">
+            <label className="demo-form__label" htmlFor="svc-model">Model</label>
+            <input id="svc-model" className="demo-form__input" type="text" placeholder="6120M, Farmall 120A..." />
+          </div>
+        </div>
+        <div className="demo-form__field">
+          <label className="demo-form__label" htmlFor="svc-year">Year</label>
+          <input id="svc-year" className="demo-form__input" type="text" placeholder="2019" />
+        </div>
+        <div className="demo-form__field">
+          <label className="demo-form__label" htmlFor="svc-issue">Issue Description *</label>
+          <textarea id="svc-issue" className="demo-form__textarea" rows={3} placeholder="Describe what's happening — won't start, hydraulic leak, PTO won't engage..." required />
+        </div>
+        <div className="demo-form__row">
+          <div className="demo-form__field">
+            <label className="demo-form__label" htmlFor="svc-name">Your Name *</label>
+            <input id="svc-name" className="demo-form__input" type="text" required />
+          </div>
+          <div className="demo-form__field">
+            <label className="demo-form__label" htmlFor="svc-phone">Phone *</label>
+            <input id="svc-phone" className="demo-form__input" type="tel" placeholder="(815) 555-0000" required />
+          </div>
+        </div>
+        <div className="demo-form__field">
+          <label className="demo-form__label" htmlFor="svc-date"><CalendarIcon size={14} /> Preferred Service Date</label>
+          <input id="svc-date" className="demo-form__input" type="date" />
+        </div>
+        <button type="submit" className="demo-form__submit">Submit Service Request</button>
+        <p style={{ fontSize: "0.75rem", color: "var(--demo-text-muted)", textAlign: "center", marginTop: "0.75rem" }}>
+          <AlertIcon size={12} /> Emergency breakdown? Don't wait — call <a href="tel:8155550630" style={{ color: "var(--demo-accent)", fontWeight: 700 }}>(815) 555-0630</a> and press 1 for immediate dispatch.
+        </p>
+      </form>
+    </div>
+  );
+};
 
 const AgricultureDemo: React.FC = () => (
   <DemoLayout demoName="Kishwaukee Valley Farm Services" industry="Agriculture / Farm Supply" themeColor="#4a7c3a" designSystem="organic">
@@ -136,32 +321,32 @@ const AgricultureDemo: React.FC = () => (
             </thead>
             <tbody>
               <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Equipment sales pages</td>
-                <td style={{ padding: "0.75rem" }}>New and used inventory with specs, photos, and financing options. John Deere and Case IH dealer.</td>
+                <td style={{ padding: "0.75rem" }}>Equipment inventory with live availability</td>
+                <td style={{ padding: "0.75rem" }}>Real-time stock table showing model, HP, status (In Stock / On Order / Used), and pricing. Updated from dealer management system.</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Repair service booking</td>
-                <td style={{ padding: "0.75rem" }}>Online repair scheduling with equipment type, issue description, and preferred date. Mobile service truck dispatch.</td>
+                <td style={{ padding: "0.75rem" }}>Live commodity price ticker</td>
+                <td style={{ padding: "0.75rem" }}>Scrolling grain prices (corn, soybeans, wheat, ethanol) via DTN Markets API. Updated every 15 minutes with local elevator bids.</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Seed & fertilizer ordering</td>
-                <td style={{ padding: "0.75rem" }}>Online ordering with bulk pricing, delivery scheduling, and early-book discounts. Prescription blend mixing.</td>
+                <td style={{ padding: "0.75rem" }}>Equipment financing calculator</td>
+                <td style={{ padding: "0.75rem" }}>Interactive monthly payment calculator with price, down payment, and term sliders. John Deere Financial rate integration.</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Seasonal resource guides</td>
-                <td style={{ padding: "0.75rem" }}>Spring planting, fall harvest, and winter maintenance checklists with tips and service specials.</td>
+                <td style={{ padding: "0.75rem" }}>Service request form</td>
+                <td style={{ padding: "0.75rem" }}>Equipment-specific repair booking with type, make/model/year, issue description, urgency level, and preferred date.</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
+                <td style={{ padding: "0.75rem" }}>Weather widget for planting decisions</td>
+                <td style={{ padding: "0.75rem" }}>Current conditions with soil temperature context. Farmers see if it's safe to plant or spray without leaving your site.</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
                 <td style={{ padding: "0.75rem" }}>Equipment telemetry</td>
                 <td style={{ padding: "0.75rem" }}>John Deere Operations Center integration — customers see tractor hours and maintenance alerts on your site.</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Commodity prices feed</td>
-                <td style={{ padding: "0.75rem" }}>Live local grain prices (corn, soybeans, wheat) displayed on the homepage via DTN Markets API.</td>
-              </tr>
-              <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
-                <td style={{ padding: "0.75rem" }}>Emergency breakdown line</td>
-                <td style={{ padding: "0.75rem" }}>Dedicated service line during planting and harvest with mobile dispatch and field repair capability.</td>
+                <td style={{ padding: "0.75rem" }}>Seasonal resource guides</td>
+                <td style={{ padding: "0.75rem" }}>Spring planting, fall harvest, and winter maintenance checklists with tips and service specials.</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--color-border)" }}>
                 <td style={{ padding: "0.75rem" }}>SEO setup</td>
@@ -192,7 +377,24 @@ const AgricultureDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Split image + text: Our Shop */}
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Current Conditions</h2>
+        <p className="demo-section__subtitle">Soil temperatures and weather conditions drive every farming decision. Here's what it looks like in the valley right now.</p>
+        <div style={{ maxWidth: "450px", margin: "0 auto" }}>
+          <WeatherWidget city="Oregon" temp={58} condition="sunny" context="agriculture" />
+        </div>
+      </div>
+    </section>
+
+    <section className="demo-section demo-section--alt">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Today's Grain Prices</h2>
+        <p className="demo-section__subtitle">Know what your crop is worth before you sell. Live local elevator bids powered by DTN Markets.</p>
+        <CommodityPriceTicker />
+      </div>
+    </section>
+
     <section className="demo-section">
       <div className="demo-section__inner">
         <div className="demo-split-image-text">
@@ -228,7 +430,6 @@ const AgricultureDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Feature image: Serving the Kishwaukee Valley */}
     <div className="demo-feature-image" style={{ backgroundImage: "url(/images/demos/agriculture/corn-field.jpg)" }}>
       <div className="demo-feature-image__content">
         <h2 className="demo-feature-image__title">Serving the Kishwaukee Valley Since 1972</h2>
@@ -236,7 +437,91 @@ const AgricultureDemo: React.FC = () => (
       </div>
     </div>
 
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Equipment Inventory</h2>
+        <p className="demo-section__subtitle">What's on the lot right now. Inventory changes weekly — call (815) 555-0630 for current availability and to schedule a demo.</p>
+        <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Current equipment inventory">
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+            <thead>
+              <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Model</th>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Horsepower</th>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Availability</th>
+                <th style={{ textAlign: "right", padding: "0.75rem", fontWeight: 600 }}>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              {equipmentInventory.map((item) => (
+                <tr key={item.model} style={{ borderBottom: "1px solid var(--color-border)" }}>
+                  <td style={{ padding: "0.75rem", fontWeight: 600 }}>{item.model}</td>
+                  <td style={{ padding: "0.75rem" }}>{item.hp}</td>
+                  <td style={{ padding: "0.75rem" }}>
+                    <span style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "0.35rem",
+                      fontSize: "0.8rem",
+                      fontWeight: 700,
+                      padding: "0.25rem 0.6rem",
+                      borderRadius: "999px",
+                      background: item.statusType === "in-stock" ? "rgba(45, 122, 45, 0.12)" : item.statusType === "on-order" ? "rgba(200, 150, 0, 0.12)" : "rgba(100, 100, 100, 0.12)",
+                      color: item.statusType === "in-stock" ? "#2d7a2d" : item.statusType === "on-order" ? "#b8860b" : "var(--demo-text-muted)",
+                    }}>
+                      {item.statusType === "in-stock" && <CheckIcon size={14} />}
+                      {item.statusType === "on-order" && <ClockIcon size={14} />}
+                      {item.statusType === "used" && <GearIcon size={14} />}
+                      {item.status}
+                    </span>
+                  </td>
+                  <td style={{ padding: "0.75rem", textAlign: "right", fontWeight: 700, color: "var(--demo-accent)" }}>{item.price}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p style={{ fontSize: "0.8rem", color: "var(--demo-text-muted)", marginTop: "1rem", textAlign: "center" }}>
+          Prices subject to change. Used equipment sold first-come, first-served. Trade-ins welcome — call for an appraisal.
+        </p>
+      </div>
+    </section>
+
     <section className="demo-section demo-section--alt">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Equipment Showcase</h2>
+        <p className="demo-section__subtitle">A look at what's on the lot right now. New and used inventory changes weekly — call for current pricing and availability.</p>
+        <div className="demo-food-gallery">
+          {products.map((p) => (
+            <div key={p.title} className="demo-food-gallery__item" style={{ backgroundImage: `url(/images/demos/agriculture/${p.img}.jpg)` }}>
+              <span className="demo-food-gallery__label">{p.title}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <div className="demo-split-image-text">
+          <div className="demo-split-image-text__content">
+            <h2 className="demo-split-image-text__title">Fast Equipment Repair When You Need It</h2>
+            <p className="demo-split-image-text__text">During planting and harvest, downtime costs you money. Our mobile service truck is stocked with common hydraulic hoses, bearings, and electrical parts — we can get most machines running in the field.</p>
+            <p className="demo-split-image-text__text">Factory-trained technicians. John Deere Master Certified. We work on everything from 25-HP compacts to 400-HP row crop tractors, combines, planters, and balers.</p>
+          </div>
+          <div className="demo-split-image-text__image" style={{ backgroundImage: "url(/images/demos/agriculture/equipment-repair.jpg)" }} />
+        </div>
+      </div>
+    </section>
+
+    <section className="demo-section demo-section--alt">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Equipment Financing</h2>
+        <p className="demo-section__subtitle">Don't let cash flow keep you from the equipment you need. Estimate your monthly payment and apply through John Deere Financial.</p>
+        <EquipmentFinancingCalculator />
+      </div>
+    </section>
+
+    <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Product Categories</h2>
         <p className="demo-section__subtitle">We stock the brands you trust and the parts you need. Special orders welcome — most arrive in 2–3 days.</p>
@@ -263,37 +548,7 @@ const AgricultureDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Product Showcase Gallery */}
-    <section className="demo-section">
-      <div className="demo-section__inner">
-        <h2 className="demo-section__title">Equipment Showcase</h2>
-        <p className="demo-section__subtitle">A look at what's on the lot right now. New and used inventory changes weekly — call for current pricing and availability.</p>
-        <div className="demo-food-gallery">
-          {products.map((p) => (
-            <div key={p.title} className="demo-food-gallery__item" style={{ backgroundImage: `url(/images/demos/agriculture/${p.img}.jpg)` }}>
-              <span className="demo-food-gallery__label">{p.title}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    {/* Split image + text: Equipment Repair */}
     <section className="demo-section demo-section--alt">
-      <div className="demo-section__inner">
-        <div className="demo-split-image-text">
-          <div className="demo-split-image-text__content">
-            <h2 className="demo-split-image-text__title">Fast Equipment Repair When You Need It</h2>
-            <p className="demo-split-image-text__text">During planting and harvest, downtime costs you money. Our mobile service truck is stocked with common hydraulic hoses, bearings, and electrical parts — we can get most machines running in the field.</p>
-            <p className="demo-split-image-text__text">Factory-trained technicians. John Deere Master Certified. We work on everything from 25-HP compacts to 400-HP row crop tractors, combines, planters, and balers.</p>
-          </div>
-          <div className="demo-split-image-text__image" style={{ backgroundImage: "url(/images/demos/agriculture/equipment-repair.jpg)" }} />
-        </div>
-      </div>
-    </section>
-
-    {/* Seasonal Resources with images */}
-    <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Seasonal Resources</h2>
         <p className="demo-section__subtitle">Timely tips and service reminders for each season. Bookmark this page — we update it monthly.</p>
@@ -303,7 +558,7 @@ const AgricultureDemo: React.FC = () => (
             return (
               <div key={s.season} className="demo-service-card">
                 <div className="demo-service-card__icon"><Icon size={32} /></div>
-                <h3 className="demo-service-card__title">{s.season}</h3>
+                <h3 className="demo-service-card__name">{s.season}</h3>
                 <ul style={{ paddingLeft: "1.25rem", fontSize: "0.9rem", lineHeight: 1.7, margin: "0.5rem 0" }}>
                   {s.tips.map((tip, i) => <li key={i}>{tip}</li>)}
                 </ul>
@@ -314,8 +569,7 @@ const AgricultureDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Seasonal image gallery */}
-    <section className="demo-section demo-section--alt">
+    <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Through the Seasons</h2>
         <p className="demo-section__subtitle">The Kishwaukee Valley changes with the seasons — and so do we. Here's what the valley looks like throughout the year.</p>
@@ -329,7 +583,6 @@ const AgricultureDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Feature image: Harvest Season */}
     <div className="demo-feature-image" style={{ backgroundImage: "url(/images/demos/agriculture/fall-harvest.jpg)" }}>
       <div className="demo-feature-image__content">
         <h2 className="demo-feature-image__title">Harvest Season is Coming</h2>
@@ -337,8 +590,15 @@ const AgricultureDemo: React.FC = () => (
       </div>
     </div>
 
-    {/* Team grid with headshots */}
-    <section className="demo-section">
+    <section className="demo-section" id="service-request">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Request Service</h2>
+        <p className="demo-section__subtitle">Tractor won't start? Combine making a noise? Tell us about it and we'll get you back in the field.</p>
+        <ServiceRequestForm />
+      </div>
+    </section>
+
+    <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Meet the Team</h2>
         <p className="demo-section__subtitle">The people who keep your farm running. Experienced, certified, and local.</p>
@@ -357,7 +617,7 @@ const AgricultureDemo: React.FC = () => (
       </div>
     </section>
 
-    <section className="demo-section demo-section--alt">
+    <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">What Our Customers Say</h2>
         <div className="demo-testimonials">

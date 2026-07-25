@@ -8,7 +8,7 @@ import SocialLinks, { SocialLink } from "../../features/demos/SocialLinks";
 import ReviewBadges from "../../features/demos/ReviewBadges";
 import IntegrationsSection, { Integration } from "../../features/demos/IntegrationsSection";
 import FAQSection, { FAQItem } from "../../features/demos/FAQSection";
-import { StarIcon, MapPinIcon, PhoneIcon, ShieldIcon, CheckIcon, ClockIcon, SpaIcon, AlertIcon } from "../../site/icons";
+import { StarIcon, MapPinIcon, PhoneIcon, ShieldIcon, CheckIcon, ClockIcon, SpaIcon, AlertIcon, DocumentIcon, DownloadIcon } from "../../site/icons";
 
 const pathname = "/demos/dental/";
 const pageTitle = "Rock River Family Dental — Dixon, IL Dentist | Demo Website";
@@ -30,6 +30,10 @@ const integrations: Integration[] = [
   { name: "Google Business Profile Reviews", category: "Reviews & Ratings", description: "Live Google reviews displayed on your website. Auto-updates when new reviews are posted. Links to your Google profile so happy patients can leave their own review.", freeTier: "$200/month API credit (≈28k requests).", url: "https://developers.google.com/my-business", status: "mocked" },
   { name: "Stripe Payment Links", category: "Online Payments", description: "Email or text payment links for co-pays, deductibles, and outstanding balances. Patients pay by card or ACH. Posts directly to Dentrix patient ledger.", freeTier: "2.9% + 30¢ per card transaction. 0.8% capped at $5 for ACH.", url: "https://stripe.com/payments", status: "available" },
   { name: "Twilio SMS Reminders", category: "Patient Communication", description: "Automated SMS appointment reminders 48 hours and 2 hours before visits. Patients confirm or reschedule by text. Reduces no-shows by 35% and fills cancelled slots automatically.", freeTier: "Free trial. $0.0079 per SMS after.", url: "https://twilio.com/sms", status: "available" },
+  { name: "Dental Intelligence Analytics", category: "Practice Analytics", description: "Real-time dashboard showing production, case acceptance rates, hygiene reactivation, and new patient flow. Tracks the metrics that drive practice growth.", freeTier: "From $299/month. 14-day free trial.", url: "https://dentalintel.com", status: "mocked" },
+  { name: "Weave Patient Communication", category: "Unified Communications", description: "Unified phone, text, and email platform with smart routing. Patient calls auto-populate their chart. Automated reactivation campaigns and review requests.", freeTier: "From $449/month. Custom pricing for multi-provider practices.", url: "https://getweave.com", status: "mocked" },
+  { name: "Henry Schein Dental Supply", category: "Supply Ordering", description: "Automated supply ordering based on inventory levels. Never run out of gloves, composite, or anesthetic again. Integration with Dentrix inventory module.", freeTier: "Free account. Pay for supplies ordered.", url: "https://henryschein.com", status: "mocked" },
+  { name: "Vyne Trellis", category: "Insurance Claims", description: "Dental insurance claim management and electronic attachment platform. Auto-attach X-rays and narratives to claims. Track claim status from submission to payment.", freeTier: "From $99/month per practice. Per-claim pricing available.", url: "https://vyne.com", status: "mocked" },
 ];
 
 const services = [
@@ -98,6 +102,150 @@ const testimonials = [
 const StarRating: React.FC = () => (
   <div className="demo-testimonial__stars" aria-label="5 out of 5 stars">{[0,1,2,3,4].map((i) => <StarIcon key={i} size={18} />)}</div>
 );
+
+const procedureCosts = [
+  { name: "Cleaning & Exam", low: 89, high: 150, coverage: "Insurance covers 100%" },
+  { name: "Filling (composite)", low: 185, high: 275, coverage: "Insurance covers 80%" },
+  { name: "Crown (CEREC)", low: 1100, high: 1400, coverage: "Insurance covers 50%" },
+  { name: "Root Canal", low: 700, high: 1100, coverage: "Insurance covers 50%" },
+  { name: "Extraction", low: 185, high: 350, coverage: "Insurance covers 80%" },
+  { name: "Invisalign Consultation", low: 0, high: 0, coverage: "Free consultation" },
+  { name: "Teeth Whitening", low: 350, high: 500, coverage: "Not covered by insurance" },
+  { name: "Emergency Exam", low: 95, high: 185, coverage: "Varies by insurance" },
+];
+
+const insuranceDetails = [
+  { name: "Delta Dental", network: "Premier & PPO", coverage: "Preventive: 100% · Basic: 80% · Major: 50%" },
+  { name: "Cigna", network: "DPPO", coverage: "Preventive: 100% · Basic: 80% · Major: 50%" },
+  { name: "MetLife", network: "PPO", coverage: "Preventive: 100% · Basic: 80% · Major: 50%" },
+  { name: "Aetna", network: "PPO", coverage: "Preventive: 100% · Basic: 80% · Major: 50%" },
+  { name: "Guardian", network: "PPO", coverage: "Preventive: 100% · Basic: 70% · Major: 50%" },
+  { name: "United Concordia", network: "PPO", coverage: "Preventive: 100% · Basic: 80% · Major: 50%" },
+  { name: "Humana", network: "PPO", coverage: "Preventive: 100% · Basic: 80% · Major: 50%" },
+  { name: "BlueCross BlueShield", network: "Dental Blue", coverage: "Preventive: 100% · Basic: 80% · Major: 50%" },
+];
+
+const emergencyTriage = [
+  { issue: "Knocked-out tooth", urgency: "URGENT", instruction: "Call (815) 555-0387 NOW. Keep tooth in milk or saliva. Re-implant possible within 30 minutes. Do not scrub the root." },
+  { issue: "Severe toothache", urgency: "Same-day", instruction: "Call before noon for same-day appointment. Rinse with warm salt water. Take ibuprofen for pain. Apply cold compress to cheek." },
+  { issue: "Broken or chipped tooth", urgency: "Same-day", instruction: "Same-day or next-day appointment. Save the piece if possible. Avoid chewing on that side. Rinse with warm water." },
+  { issue: "Lost filling or crown", urgency: "Same-day", instruction: "Same-day or next-day. Temporary cement available at pharmacy. Keep area clean. Avoid hot/cold/sweet on that side." },
+  { issue: "Swelling or abscess", urgency: "URGENT", instruction: "Call (815) 555-0387 NOW. Infection can spread quickly. Do NOT apply heat. Rinse with warm salt water. Seek immediate care." },
+  { issue: "Uncontrolled bleeding", urgency: "911 / ER", instruction: "If bleeding is uncontrolled, call 911 or go to the nearest ER. If minor, apply gauze with firm pressure for 20 minutes." },
+];
+
+const smileGallery = [
+  { title: "Invisalign: 14-Month Transformation", desc: "Crowded to straight in 14 months. Free 3D scan showed the patient their future smile before starting.", img: "happy-patient-1", label: "After" },
+  { title: "Professional Whitening", desc: "Three shades brighter in a single 90-minute visit. Custom take-home trays for maintenance.", img: "whitening", label: "After" },
+  { title: "CEREC Same-Day Crown", desc: "Chipped front tooth restored with a same-day porcelain crown. No temporary, no second visit.", img: "crowns", label: "After" },
+  { title: "Porcelain Veneers", desc: "Six porcelain veneers closed a gap and created a symmetrical smile. Completed in two visits.", img: "happy-patient-2", label: "After" },
+];
+
+const patientForms = [
+  { title: "Patient Information Form", desc: "Basic contact, insurance, and emergency contact information. Required for all new patients.", type: "PDF Download" },
+  { title: "Medical History Form", desc: "Complete medical history including medications, allergies, and conditions that may affect dental treatment.", type: "PDF Download" },
+  { title: "HIPAA Privacy Acknowledgment", desc: "Acknowledgment of our Notice of Privacy Practices as required by federal law.", type: "PDF Download" },
+  { title: "Financial Responsibility Agreement", desc: "Acknowledgment of financial policies, payment expectations, and insurance assignment.", type: "PDF Download" },
+];
+
+const CostEstimator: React.FC = () => {
+  const [procedure, setProcedure] = React.useState("Cleaning & Exam");
+  const cost = procedureCosts.find((p) => p.name === procedure);
+
+  return (
+    <div className="demo-quote-form" style={{ maxWidth: "600px", margin: "0 auto" }}>
+      <div className="demo-form-row">
+        <label className="demo-form-label" htmlFor="procedure">Select a Procedure</label>
+        <select id="procedure" className="demo-form-select" value={procedure} onChange={(e) => setProcedure(e.target.value)}>
+          {procedureCosts.map((p) => <option key={p.name}>{p.name}</option>)}
+        </select>
+      </div>
+      {cost && (
+        <div className="demo-quote-form__success" style={{ marginTop: "1rem" }}>
+          <CheckIcon size={36} />
+          <h3>{cost.low === 0 ? "Free Consultation" : `$${cost.low} – $${cost.high}`}</h3>
+          <p><strong>Insurance:</strong> {cost.coverage}</p>
+          <p style={{ fontSize: "0.8rem", marginTop: "1rem", opacity: 0.7 }}>Estimates only. Final cost depends on your specific case and insurance plan. We'll provide a written estimate before any treatment begins.</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const InsuranceChecker: React.FC = () => {
+  const [provider, setProvider] = React.useState("Delta Dental");
+  const detail = insuranceDetails.find((p) => p.name === provider);
+  const isOther = provider === "Other / Not listed";
+
+  return (
+    <div className="demo-quote-form" style={{ maxWidth: "600px", margin: "0 auto" }}>
+      <div className="demo-form-row">
+        <label className="demo-form-label" htmlFor="ins-provider">Select Your Insurance Provider</label>
+        <select id="ins-provider" className="demo-form-select" value={provider} onChange={(e) => setProvider(e.target.value)}>
+          {insuranceDetails.map((p) => <option key={p.name}>{p.name}</option>)}
+          <option>Other / Not listed</option>
+        </select>
+      </div>
+      {!isOther && detail && (
+        <div className="demo-quote-form__success" style={{ marginTop: "1rem" }}>
+          <CheckIcon size={36} />
+          <h3>{detail.name} — {detail.network}</h3>
+          <p><strong>Coverage:</strong> {detail.coverage}</p>
+          <p style={{ marginTop: "0.5rem" }}>We file claims electronically — you pay only your share at the visit. We'll verify your benefits before your appointment.</p>
+        </div>
+      )}
+      {isOther && (
+        <div className="demo-quote-form__success" style={{ marginTop: "1rem" }}>
+          <AlertIcon size={36} />
+          <h3>Let Us Check for You</h3>
+          <p>Call <a href="tel:8155550387">(815) 555-0387</a> with your insurance card — we accept many other plans and can verify your coverage in minutes.</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const EmergencyTriage: React.FC = () => {
+  const [selected, setSelected] = React.useState<string | null>(null);
+  const triage = emergencyTriage.find((t) => t.issue === selected);
+
+  return (
+    <div style={{ maxWidth: "700px", margin: "0 auto" }}>
+      <p style={{ textAlign: "center", marginBottom: "1.5rem" }}>Select your emergency to see what to do right now:</p>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem", justifyContent: "center", marginBottom: "1.5rem" }}>
+        {emergencyTriage.map((t) => (
+          <button
+            key={t.issue}
+            type="button"
+            className="demo-btn"
+            style={{
+              background: selected === t.issue ? "var(--demo-accent)" : "transparent",
+              color: selected === t.issue ? "#fff" : "var(--demo-text)",
+              border: "1px solid var(--demo-accent)",
+              padding: "0.5rem 1rem",
+              fontSize: "0.9rem"
+            }}
+            onClick={() => setSelected(t.issue)}
+          >
+            {t.issue}
+          </button>
+        ))}
+      </div>
+      {triage && (
+        <div className="demo-quote-form__success" style={{
+          borderColor: triage.urgency === "URGENT" || triage.urgency === "911 / ER" ? "#c0392b" : "var(--demo-accent)"
+        }}>
+          <AlertIcon size={36} />
+          <h3 style={{ color: triage.urgency === "URGENT" || triage.urgency === "911 / ER" ? "#c0392b" : "var(--demo-accent)" }}>{triage.urgency}</h3>
+          <p>{triage.instruction}</p>
+          {(triage.urgency === "URGENT" || triage.urgency === "Same-day") && (
+            <a href="tel:8155550387" className="demo-btn demo-btn--primary" style={{ marginTop: "1rem" }}><PhoneIcon size={18} /> Call (815) 555-0387</a>
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
 
 const ScheduleForm: React.FC = () => {
   const [service, setService] = React.useState("New Patient Exam & Cleaning");
@@ -305,6 +453,24 @@ const DentalDemo: React.FC = () => (
       </div>
     </div>
 
+    {/* Treatment Cost Estimator */}
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Treatment Cost Estimator</h2>
+        <p className="demo-section__subtitle">See typical cost ranges and insurance coverage for common procedures. No surprises — we provide written estimates before any treatment.</p>
+        <CostEstimator />
+      </div>
+    </section>
+
+    {/* Insurance Eligibility Checker */}
+    <section className="demo-section demo-section--alt">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Insurance Eligibility Checker</h2>
+        <p className="demo-section__subtitle">Select your insurance provider to see your coverage summary. We verify benefits before your first visit.</p>
+        <InsuranceChecker />
+      </div>
+    </section>
+
     {/* Split image + text: Kids Welcome Here */}
     <section className="demo-section">
       <div className="demo-section__inner">
@@ -334,6 +500,15 @@ const DentalDemo: React.FC = () => (
       </div>
     </section>
 
+    {/* Dental Emergency Triage Tool */}
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Dental Emergency? Start Here</h2>
+        <p className="demo-section__subtitle">Tell us what's wrong and we'll tell you what to do right now. Same-day appointments available — call before noon.</p>
+        <EmergencyTriage />
+      </div>
+    </section>
+
     {/* Feature image: Healthy Smiles */}
     <div className="demo-feature-image" style={{ backgroundImage: "url(/images/demos/dental/happy-patient-1.jpg)" }}>
       <div className="demo-feature-image__content">
@@ -341,6 +516,26 @@ const DentalDemo: React.FC = () => (
         <p className="demo-feature-image__text">From your first cleaning to your child's first visit to your Invisalign journey — we're with you every step of the way.</p>
       </div>
     </div>
+
+    {/* Before/After Smile Gallery */}
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Before &amp; After Smile Gallery</h2>
+        <p className="demo-section__subtitle">Real results from our patients. Cosmetic dentistry that changes lives — and smiles.</p>
+        <div className="demo-services-grid">
+          {smileGallery.map((s) => (
+            <div key={s.title} className="demo-service-card">
+              <div className="demo-service-card__image" style={{ backgroundImage: `url(/images/demos/dental/${s.img}.jpg)` }} />
+              <div className="demo-service-card__body">
+                <span className="demo-service-card__tag" style={{ marginBottom: "0.5rem", display: "inline-block" }}>{s.label}</span>
+                <h3 className="demo-service-card__name">{s.title}</h3>
+                <p className="demo-service-card__desc">{s.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
 
     {/* Team grid with headshots */}
     <section className="demo-section">
@@ -406,6 +601,24 @@ const DentalDemo: React.FC = () => (
               <div className="demo-service-card__icon" style={{ fontSize: "1.5rem", fontWeight: 700 }}>{s.step}</div>
               <h3 className="demo-service-card__title">{s.title}</h3>
               <p className="demo-service-card__desc">{s.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* New Patient Forms Download */}
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">New Patient Forms</h2>
+        <p className="demo-section__subtitle">Save time — fill out your forms at home and bring them to your first appointment. No email required to download.</p>
+        <div className="demo-services-grid">
+          {patientForms.map((f) => (
+            <div key={f.title} className="demo-service-card">
+              <div className="demo-service-card__icon"><DocumentIcon size={32} /></div>
+              <h3 className="demo-service-card__title">{f.title}</h3>
+              <p className="demo-service-card__desc">{f.desc}</p>
+              <span className="demo-service-card__tag"><DownloadIcon size={14} /> {f.type}</span>
             </div>
           ))}
         </div>

@@ -8,7 +8,7 @@ import SocialLinks, { SocialLink } from "../../features/demos/SocialLinks";
 import ReviewBadges from "../../features/demos/ReviewBadges";
 import IntegrationsSection, { Integration } from "../../features/demos/IntegrationsSection";
 import FAQSection, { FAQItem } from "../../features/demos/FAQSection";
-import { StarIcon, MapPinIcon, PhoneIcon, ShieldIcon, CheckIcon, ClockIcon, DocumentIcon, ScrollIcon, QuoteIcon } from "../../site/icons";
+import { StarIcon, MapPinIcon, PhoneIcon, ShieldIcon, CheckIcon, ClockIcon, DocumentIcon, ScrollIcon, QuoteIcon, CalendarIcon, AlertIcon } from "../../site/icons";
 
 const pathname = "/demos/law-firm/";
 const pageTitle = "Rock River Legal Group — Dixon, IL Attorney | Demo Website";
@@ -29,6 +29,11 @@ const integrations: Integration[] = [
   { name: "Avvo Rating Badge", category: "Reviews & Ratings", description: "Live Avvo rating badge linking to your attorney profiles. Shows clients and prospects your peer endorsements and client reviews on a trusted legal platform.", freeTier: "Free attorney profile. Sponsored listings from $50/month.", url: "https://avvo.com", status: "mocked" },
   { name: "Stripe Payment Links", category: "Online Payments", description: "Email payment links for consultation fees and document prep. Accepts cards and ACH. Syncs with LawPay for trust account compliance.", freeTier: "2.9% + 30¢ per card transaction. 0.8% capped at $5 for ACH.", url: "https://stripe.com/payments", status: "available" },
   { name: "Zapier Automation", category: "Workflow Integration", description: "Connect your website forms to 5,000+ apps. Consultation requests route to Clio, Calendly, and your email — all automatically. No manual data entry.", freeTier: "Free for 100 tasks/month. Starter from $19.99/month.", url: "https://zapier.com", status: "available" },
+  { name: "Fastcase Legal Research", category: "Legal Research", description: "Cloud-based case law database with AI-powered search. Attorneys research precedent and statutes directly from the matter file. Includes Illinois-specific case law.", freeTier: "Included with Illinois State Bar Association membership. Standalone from $95/user/month.", url: "https://fastcase.com", status: "mocked" },
+  { name: "Illinois Courts e-Filing System", category: "Court Filing", description: "Direct electronic filing to Illinois circuit courts. File pleadings from your website dashboard without leaving the matter. Automatic docket updates.", freeTier: "Free for all Illinois-licensed attorneys. Mandated by Illinois Supreme Court Rule 9.", url: "https://efile.illinoiscourts.gov", status: "mocked" },
+  { name: "Martindale-Hubbell AV Preeminent", category: "Peer Review Rating", description: "Live peer review rating badge. The AV Preeminent rating is the highest possible from Martindale-Hubbell — recognized by clients and attorneys nationwide.", freeTier: "Free attorney profile. Premium listings from $75/month.", url: "https://martindale.com", status: "mocked" },
+  { name: "Smokeball Document Automation", category: "Document Automation", description: "Automated legal document generation. Estate plans, divorce petitions, and LLC formations generated from matter data in seconds. 500+ Illinois-specific templates.", freeTier: "From $99/user/month. 14-day free trial.", url: "https://smokeball.com", status: "mocked" },
+  { name: "LexisNexis Public Records", category: "Background & Asset Search", description: "Background checks, asset searches, and public records lookups for litigation support. Find defendants, locate assets, verify witness backgrounds.", freeTier: "Pay-per-search from $7. Subscription from $89/month.", url: "https://lexisnexis.com", status: "available" },
 ];
 
 const practiceAreas = [
@@ -95,10 +100,104 @@ const StarRating: React.FC = () => (
   <div className="demo-testimonial__stars" aria-label="5 out of 5 stars">{[0,1,2,3,4].map((i) => <StarIcon key={i} size={18} />)}</div>
 );
 
+const caseResults = [
+  { area: "Personal Injury", result: "$1.2M Settlement", desc: "Semi-truck collision on IL Route 2. Client suffered broken femur and required two surgeries. Negotiated policy limits plus umbrella coverage.", attorney: "Marcus Chen", year: "2023" },
+  { area: "Family Law", result: "Primary Custody Awarded", desc: "Father granted primary residential custody in contested divorce. Demonstrated stability, school involvement, and primary caretaker status.", attorney: "Patricia Holloway", year: "2023" },
+  { area: "Business Law", result: "$340K Contract Dispute Won", desc: "Supplier breach of delivery agreement. Recovered damages plus attorney fees for manufacturing client in Sterling.", attorney: "Jennifer Torres", year: "2022" },
+  { area: "Estate Planning", result: "$2.8M Farm Protected", desc: "Family farm protected from Medicaid recovery through irrevocable trust. Three generations of assets preserved.", attorney: "Patricia Holloway", year: "2022" },
+  { area: "Criminal Defense", result: "DUI Reduced to Reckless Driving", desc: "Second-offense DUI reduced to reckless driving. No license suspension, no ignition interlock. Challenged field sobriety test administration.", attorney: "Marcus Chen", year: "2023" },
+  { area: "Real Estate", result: "Title Defect Cleared", desc: "$450K commercial closing saved. Discovered 40-year-old chain of title defect and quieted title in 30 days.", attorney: "Jennifer Torres", year: "2023" },
+];
+
+const statuteLimitations = [
+  { caseType: "Personal Injury", years: 2, desc: "2 years from date of injury (735 ILCS 5/13-202)" },
+  { caseType: "Breach of Contract (oral)", years: 5, desc: "5 years from breach (735 ILCS 5/13-205)" },
+  { caseType: "Breach of Contract (written)", years: 10, desc: "10 years from breach (735 ILCS 5/13-206)" },
+  { caseType: "Property Damage", years: 5, desc: "5 years from damage (735 ILCS 5/13-205)" },
+  { caseType: "Wrongful Death", years: 2, desc: "2 years from date of death (740 ILCS 180/2)" },
+  { caseType: "Fraud", years: 5, desc: "5 years from discovery (735 ILCS 5/13-205)" },
+];
+
+const consultationFees = [
+  { area: "Estate Planning", fee: "Free", reason: "We offer flat-fee packages — the consultation is complimentary." },
+  { area: "Personal Injury", fee: "Free", reason: "We work on contingency — you pay nothing unless we recover for you." },
+  { area: "Family Law", fee: "$150 / 45 min", reason: "Credited to your case if you retain us. Payment plans available." },
+  { area: "Criminal Defense", fee: "$150 / 45 min", reason: "Credited to your case if you retain us." },
+  { area: "Real Estate Law", fee: "$150 / 30 min", reason: "Credited to closing costs if we handle your closing." },
+  { area: "Business Formation", fee: "Free 15-min screening", reason: "Phone screening to assess your needs. Flat-fee formation packages available." },
+];
+
+const StatuteCalculator: React.FC = () => {
+  const [caseType, setCaseType] = React.useState("Personal Injury");
+  const [incidentDate, setIncidentDate] = React.useState("");
+  const [result, setResult] = React.useState<{ deadline: string; years: number } | null>(null);
+
+  const calculate = () => {
+    if (!incidentDate) return;
+    const statute = statuteLimitations.find((s) => s.caseType === caseType);
+    if (!statute) return;
+    const date = new Date(incidentDate);
+    date.setFullYear(date.getFullYear() + statute.years);
+    setResult({ deadline: date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }), years: statute.years });
+  };
+
+  return (
+    <div className="demo-quote-form" style={{ maxWidth: "600px", margin: "0 auto" }}>
+      <div className="demo-form-row">
+        <label className="demo-form-label" htmlFor="statute-case">Case Type</label>
+        <select id="statute-case" className="demo-form-select" value={caseType} onChange={(e) => { setCaseType(e.target.value); setResult(null); }}>
+          {statuteLimitations.map((s) => <option key={s.caseType}>{s.caseType}</option>)}
+        </select>
+        <p style={{ fontSize: "0.8rem", color: "var(--demo-text-muted)", marginTop: "0.5rem" }}>{statuteLimitations.find((s) => s.caseType === caseType)?.desc}</p>
+      </div>
+      <div className="demo-form-row">
+        <label className="demo-form-label" htmlFor="statute-date">Date of Incident</label>
+        <input id="statute-date" className="demo-form-input" type="date" value={incidentDate} onChange={(e) => setIncidentDate(e.target.value)} />
+      </div>
+      <button type="button" className="demo-btn demo-btn--primary" onClick={calculate} disabled={!incidentDate}>Calculate Filing Deadline</button>
+      {result && (
+        <div className="demo-quote-form__success" style={{ marginTop: "1.5rem" }}>
+          <AlertIcon size={36} />
+          <h3>Your Filing Deadline: {result.deadline}</h3>
+          <p>You have <strong>{result.years} years</strong> from the date of incident to file. Do not wait — evidence disappears, witnesses move, and memories fade. Call <a href="tel:8155550915">(815) 555-0915</a> today.</p>
+          <p style={{ fontSize: "0.8rem", marginTop: "1rem", opacity: 0.7 }}>This tool provides general information based on Illinois statutes and does not constitute legal advice. Consult an attorney about your specific situation.</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const ConsultationChecker: React.FC = () => {
+  const [area, setArea] = React.useState("Estate Planning");
+  const fee = consultationFees.find((f) => f.area === area);
+
+  return (
+    <div className="demo-quote-form" style={{ maxWidth: "600px", margin: "0 auto" }}>
+      <div className="demo-form-row">
+        <label className="demo-form-label" htmlFor="check-area">Select Your Practice Area</label>
+        <select id="check-area" className="demo-form-select" value={area} onChange={(e) => setArea(e.target.value)}>
+          {consultationFees.map((f) => <option key={f.area}>{f.area}</option>)}
+        </select>
+      </div>
+      {fee && (
+        <div className="demo-quote-form__success" style={{ marginTop: "1rem" }}>
+          <CheckIcon size={36} />
+          <h3 style={{ fontSize: fee.fee === "Free" ? "1.5rem" : "1.25rem" }}>{fee.fee === "Free" ? "Free Consultation" : `Consultation: ${fee.fee}`}</h3>
+          <p>{fee.reason}</p>
+          <a href="#consultation" className="demo-btn demo-btn--primary" style={{ marginTop: "1rem" }}>Book Now</a>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const ConsultationForm: React.FC = () => {
   const [practiceArea, setPracticeArea] = React.useState("Family Law");
   const [attorney, setAttorney] = React.useState("No preference");
   const [date, setDate] = React.useState("");
+  const [consultType, setConsultType] = React.useState("In-person");
+  const [clientStatus, setClientStatus] = React.useState("New client");
+  const [referral, setReferral] = React.useState("Google search");
   const [submitted, setSubmitted] = React.useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -112,7 +211,7 @@ const ConsultationForm: React.FC = () => {
         <CheckIcon size={48} />
         <h3>Consultation Request Received</h3>
         <p>Thank you. We'll call you within one business day to confirm your appointment. If you need immediate assistance, call (815) 555-0915.</p>
-        <p><strong>Practice Area:</strong> {practiceArea}<br /><strong>Preferred Attorney:</strong> {attorney}<br /><strong>Preferred Date:</strong> {date || "To be scheduled"}</p>
+        <p><strong>Practice Area:</strong> {practiceArea}<br /><strong>Preferred Attorney:</strong> {attorney}<br /><strong>Preferred Date:</strong> {date || "To be scheduled"}<br /><strong>Consultation Type:</strong> {consultType}<br /><strong>Client Status:</strong> {clientStatus}</p>
         <button className="demo-btn demo-btn--ghost" onClick={() => setSubmitted(false)}>Submit another request</button>
       </div>
     );
@@ -138,6 +237,33 @@ const ConsultationForm: React.FC = () => {
           <option>Patricia Holloway, J.D.</option>
           <option>Marcus Chen, J.D.</option>
           <option>Jennifer Torres, J.D.</option>
+        </select>
+      </div>
+      <div className="demo-form-row">
+        <label className="demo-form-label" htmlFor="consult-type">Preferred Consultation Type</label>
+        <select id="consult-type" className="demo-form-select" value={consultType} onChange={(e) => setConsultType(e.target.value)}>
+          <option>In-person</option>
+          <option>Zoom video call</option>
+          <option>Phone call</option>
+        </select>
+      </div>
+      <div className="demo-form-row">
+        <label className="demo-form-label" htmlFor="client-status">Are You a New or Existing Client?</label>
+        <select id="client-status" className="demo-form-select" value={clientStatus} onChange={(e) => setClientStatus(e.target.value)}>
+          <option>New client</option>
+          <option>Existing client</option>
+        </select>
+      </div>
+      <div className="demo-form-row">
+        <label className="demo-form-label" htmlFor="referral">How Did You Hear About Us?</label>
+        <select id="referral" className="demo-form-select" value={referral} onChange={(e) => setReferral(e.target.value)}>
+          <option>Google search</option>
+          <option>Referral from friend/family</option>
+          <option>Avvo or Martindale</option>
+          <option>Facebook</option>
+          <option>Walked by the office</option>
+          <option>Other attorney referral</option>
+          <option>Other</option>
         </select>
       </div>
       <div className="demo-form-row">
@@ -293,6 +419,27 @@ const LawFirmDemo: React.FC = () => (
       </div>
     </div>
 
+    {/* Case Results / Settlements */}
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Case Results &amp; Settlements</h2>
+        <p className="demo-section__subtitle">Real outcomes for real clients across the Rock River Valley. Past results do not guarantee future outcomes — every case is unique.</p>
+        <div className="demo-services-grid">
+          {caseResults.map((c, i) => (
+            <div key={i} className="demo-service-card">
+              <div className="demo-service-card__body">
+                <span className="demo-service-card__tag" style={{ marginBottom: "0.5rem", display: "inline-block" }}>{c.area}</span>
+                <h3 className="demo-service-card__name" style={{ fontSize: "1.5rem", color: "var(--demo-accent)" }}>{c.result}</h3>
+                <p className="demo-service-card__desc">{c.desc}</p>
+                <p style={{ fontSize: "0.85rem", marginTop: "0.75rem", opacity: 0.7 }}>Attorney: {c.attorney} · {c.year}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <p style={{ textAlign: "center", marginTop: "1.5rem", fontSize: "0.85rem", opacity: 0.7, fontStyle: "italic" }}>Past results do not guarantee future outcomes. Every case is unique and depends on its specific facts.</p>
+      </div>
+    </section>
+
     {/* Split image + text: Deep Legal Knowledge */}
     <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
@@ -304,6 +451,24 @@ const LawFirmDemo: React.FC = () => (
           </div>
           <div className="demo-split-image-text__image" style={{ backgroundImage: "url(/images/demos/law-firm/law-library.jpg)" }} />
         </div>
+      </div>
+    </section>
+
+    {/* Statute of Limitations Calculator */}
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Statute of Limitations Calculator</h2>
+        <p className="demo-section__subtitle">Don't let your deadline pass. Illinois law sets strict time limits for filing lawsuits. Check yours now.</p>
+        <StatuteCalculator />
+      </div>
+    </section>
+
+    {/* Free Consultation Eligibility Checker */}
+    <section className="demo-section demo-section--alt">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Consultation Fee Checker</h2>
+        <p className="demo-section__subtitle">Your first consultation may be free. Check your practice area below.</p>
+        <ConsultationChecker />
       </div>
     </section>
 
