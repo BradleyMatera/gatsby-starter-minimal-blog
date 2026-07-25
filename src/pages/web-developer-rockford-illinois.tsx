@@ -450,6 +450,82 @@ const LocalWebDeveloperPage = () => (
           </div>
         </div>
       </div>
+      <div className="grid-three" style={{ marginTop: "1.5rem" }}>
+        <div className="pkg-card">
+          <img src="/package-images/city-demo-manufacturing.svg" alt="Manufacturing Website illustration" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Manufacturing Website</h3>
+            <p className="pkg-card__desc">
+              Capabilities list, RFQ form, equipment specs, quality certifications, and project gallery.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="primary" to="/demos/manufacturing/">See manufacturing sample</Link>
+            </div>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/city-demo-agriculture.svg" alt="Agriculture Website illustration" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Agriculture Website</h3>
+            <p className="pkg-card__desc">
+              Equipment inventory, commodity prices, financing calculator, weather widget, and service requests.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="primary" to="/demos/agriculture/">See agriculture sample</Link>
+            </div>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/city-demo-law-firm.svg" alt="Law Firm Website illustration" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Law Firm Website</h3>
+            <p className="pkg-card__desc">
+              Practice areas, case results, attorney bios, statute calculator, and consultation booking.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="primary" to="/demos/law-firm/">See law firm sample</Link>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="grid-three" style={{ marginTop: "1.5rem" }}>
+        <div className="pkg-card">
+          <img src="/package-images/city-demo-dental.svg" alt="Dental Practice Website illustration" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Dental Practice Website</h3>
+            <p className="pkg-card__desc">
+              Services, cost estimator, insurance checker, emergency triage, before/after gallery, and online scheduling.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="primary" to="/demos/dental/">See dental sample</Link>
+            </div>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/city-see-all-demos.svg" alt="See all demo websites illustration" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">See All 10 Demos</h3>
+            <p className="pkg-card__desc">
+              View the complete gallery of sample websites for every industry I serve.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="primary" to="/demos/">Browse all demos</Link>
+            </div>
+          </div>
+        </div>
+        <div className="pkg-card">
+          <img src="/package-images/city-custom-design.svg" alt="Custom website design illustration" className="pkg-card__bg" loading="lazy" />
+          <div className="pkg-card__body">
+            <h3 className="pkg-card__title">Don't See Your Industry?</h3>
+            <p className="pkg-card__desc">
+              These are just samples. I build custom websites for any business type — tailored to your brand and needs.
+            </p>
+            <div className="card-actions">
+              <Link data-variant="primary" to="/contact/">Ask about your industry</Link>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="card-actions" style={{ marginTop: "1.5rem" }}>
         <Link data-variant="primary" to="/contact/">
           Get a free consultation
