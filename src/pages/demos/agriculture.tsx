@@ -443,7 +443,7 @@ const AgricultureDemo: React.FC = () => (
                       fontWeight: 700,
                       padding: "0.25rem 0.6rem",
                       borderRadius: "999px",
-                      background: item.statusType === "in-stock" ? "rgba(45, 122, 45, 0.12)" : item.statusType === "on-order" ? "rgba(200, 150, 0, 0.12)" : "rgba(100, 100, 100, 0.12)",
+                      background: item.statusType === "in-stock" ? "#e5efe5" : item.statusType === "on-order" ? "#f8f2e0" : "#ececec",
                       color: item.statusType === "in-stock" ? "#1a5a1a" : item.statusType === "on-order" ? "#4a3500" : "var(--demo-text-muted)",
                     }}>
                       {item.statusType === "in-stock" && <CheckIcon size={14} />}

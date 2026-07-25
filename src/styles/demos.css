@@ -110,7 +110,7 @@
   --demo-text-muted: #a89a86;
   --demo-heading: #f5efe4;
   --demo-accent: #c9a227;
-  --demo-accent-soft: rgba(201,162,39,0.15);
+  --demo-accent-soft: #f6f1de;
   --demo-border: #3a2e22;
   --demo-card-bg: #221a14;
   --demo-font-heading: 'Playfair Display', Georgia, serif;
@@ -130,7 +130,7 @@
   --demo-text-muted: #47513f;
   --demo-heading: #1a2e15;
   --demo-accent: #2f5a20;
-  --demo-accent-soft: rgba(47,90,32,0.12);
+  --demo-accent-soft: #e6ebe4;
   --demo-border: #d4dcc8;
   --demo-card-bg: #ffffff;
   --demo-font-heading: 'Nunito', sans-serif;
@@ -150,7 +150,7 @@
   --demo-text-muted: #5a6b7a;
   --demo-heading: #0d1b2a;
   --demo-accent: #e85d04;
-  --demo-accent-soft: rgba(232,93,4,0.1);
+  --demo-accent-soft: #fceee5;
   --demo-border: #c5cdd6;
   --demo-card-bg: #ffffff;
   --demo-font-heading: 'Oswald', sans-serif;
@@ -170,7 +170,7 @@
   --demo-text-muted: #888892;
   --demo-heading: #f0f0f2;
   --demo-accent: #ff6b1a;
-  --demo-accent-soft: rgba(255,107,26,0.12);
+  --demo-accent-soft: #43312a;
   --demo-border: #3a3a3e;
   --demo-card-bg: #2a2a2d;
   --demo-font-heading: 'Roboto Mono', monospace;
@@ -190,7 +190,7 @@
   --demo-text-muted: #6a6a72;
   --demo-heading: #1a2845;
   --demo-accent: #b8943f;
-  --demo-accent-soft: rgba(184,148,63,0.1);
+  --demo-accent-soft: #f7f4eb;
   --demo-border: #ddd8ce;
   --demo-card-bg: #ffffff;
   --demo-font-heading: 'Cormorant Garamond', Georgia, serif;
@@ -210,7 +210,7 @@
   --demo-text-muted: #8a6a75;
   --demo-heading: #8b2956;
   --demo-accent: #d63384;
-  --demo-accent-soft: rgba(214,51,132,0.1);
+  --demo-accent-soft: #faeaf2;
   --demo-border: #f0d4e0;
   --demo-card-bg: #ffffff;
   --demo-font-heading: 'Poppins', sans-serif;
@@ -231,7 +231,7 @@
   --demo-text-muted: #a8aeb8;
   --demo-heading: #f5efe4;
   --demo-accent: #c9a227;
-  --demo-accent-soft: rgba(201,162,39,0.12);
+  --demo-accent-soft: #2b3640;
   --demo-border: #2a4563;
   --demo-card-bg: #162844;
   --demo-font-heading: 'Cormorant Garamond', Georgia, serif;
@@ -251,7 +251,7 @@
   --demo-text-muted: #6b7c6d;
   --demo-heading: #2c5e5e;
   --demo-accent: #e07a5f;
-  --demo-accent-soft: rgba(224,122,95,0.1);
+  --demo-accent-soft: #fbf1ef;
   --demo-border: #e5e0d6;
   --demo-card-bg: #ffffff;
   --demo-font-heading: 'Poppins', sans-serif;
@@ -1244,15 +1244,15 @@
   white-space: nowrap;
 }
 .demo-integration__status--live {
-  background: rgba(34,197,94,0.15);
+  background: #ddf6e6;
   color: #166534;
 }
 .demo-integration__status--mocked {
-  background: rgba(245,158,11,0.15);
+  background: #fdf0da;
   color: #92400e;
 }
 .demo-integration__status--available {
-  background: rgba(59,130,246,0.15);
+  background: #e1ecfd;
   color: #1e40af;
 }
 .demo-integration__category {
