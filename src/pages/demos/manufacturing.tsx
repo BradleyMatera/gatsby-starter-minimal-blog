@@ -37,15 +37,6 @@ const integrations: Integration[] = [
   { name: "Dropbox / Google Drive File Sharing", category: "CAD File Transfer Portal", description: "Example secure CAD file portal for customers to upload STEP, DWG, IGES, and PDF drawings.", freeTier: "Dropbox Business from $15/user/month. Google Drive 15GB free.", url: "https://dropbox.com/business", status: "available" },
 ];
 
-const capabilities = [
-  { name: "CNC Machining", desc: "Illustrative 3-axis and 4-axis milling, turning, and boring. Tolerances and capacity depend on machine, setup, and inspection method.", img: "cnc-machining" },
-  { name: "Laser Cutting", desc: "Illustrative fiber laser cutting for mild steel, stainless, and aluminum. Actual thickness limits and material yield depend on the machine and job.", img: "laser-cutting" },
-  { name: "Welding (MIG/TIG/Stick)", desc: "Illustrative welding capabilities. Code welding requires qualified welders, a Certified Welding Inspector as needed, and proper procedures.", img: "welding" },
-  { name: "Sheet Metal Forming", desc: "Illustrative press brake, rolling, shearing, and punching. Capacity depends on equipment tonnage and material.", img: "sheet-metal" },
-  { name: "Powder Coating", desc: "Illustrative powder coating and prep. Turnaround, color availability, and finish durability depend on the vendor and part.", img: "powder-coating" },
-  { name: "Assembly", desc: "Illustrative mechanical and sub-assembly. Processes and QC should be documented and agreed upon per job.", img: "assembly" },
-];
-
 const equipment = [
   { machine: "Haas VF-2 VMC (example)", type: "CNC Mill", capacity: "Illustrative capacity — verify with real machine specs", qty: 2 },
   { machine: "Haas ST-20 Lathe (example)", type: "CNC Turning", capacity: "Illustrative capacity — verify with real machine specs", qty: 1 },
@@ -81,13 +72,55 @@ const qcSteps = [
   { step: "4", title: "Documentation", desc: "Illustrative documentation. Material certs, inspection reports, and traceability should be agreed upon in the purchase order." },
 ];
 
-const projects = [
-  { title: "Agricultural Bracket Run", desc: "Illustrative 2,000-piece production run of mounting brackets.", img: "project-1" },
-  { title: "Stainless Food-Grade Frame", desc: "Illustrative TIG-welded stainless frame for a washdown environment.", img: "project-2" },
-  { title: "Structural Steel Assembly", desc: "Illustrative structural weldment for a commercial building.", img: "project-3" },
-  { title: "CNC Machined Housing", desc: "Illustrative precision-machined aluminum housing.", img: "project-4" },
-  { title: "Powder Coated Enclosures", desc: "Illustrative powder-coated electrical enclosures.", img: "project-5" },
-  { title: "Laser-Cut Panel Array", desc: "Illustrative nested laser-cut decorative panels.", img: "project-6" },
+const capabilityMatrix = [
+  { process: "CNC Milling", materials: "Aluminum, steel, stainless", envelope: "20\" × 16\" × 12\"", tolerance: "±0.005\" typical", inspection: "CMM, calipers, bore gauges" },
+  { process: "CNC Turning", materials: "Aluminum, steel, brass", envelope: "Ø 8\" × 20\" L", tolerance: "±0.003\" typical", inspection: "Micrometers, optical comparator" },
+  { process: "Fiber Laser", materials: "Mild steel, stainless, aluminum", envelope: "5' × 10' sheet", tolerance: "±0.010\"", inspection: "Laser measuring, first-article" },
+  { process: "Press Brake", materials: "Steel, stainless, aluminum", envelope: "10' length, 175 ton", tolerance: "±0.015\"", inspection: "Angle gauges, fixtures" },
+  { process: "Welding", materials: "Steel, stainless, aluminum", envelope: "MIG/TIG/Stick, up to 3/8\"", tolerance: "Per AWS D1.1 fit-up", inspection: "Visual, dye-penetrant as needed" },
+  { process: "Powder Coat", materials: "Steel, aluminum", envelope: "6' × 4' × 4' booth", tolerance: "Cosmetic finish", inspection: "Mil thickness, adhesion" },
+];
+
+const caseStudies = [
+  {
+    title: "Agricultural Bracket Run",
+    problem: "Customer needed 2,000 identical mounting brackets for a new planter attachment, delivered before spring planting.",
+    drawing: "STEP and DWG supplied; nesting optimized for material yield.",
+    material: "A36 mild steel, 3/16\" plate",
+    process: "Laser cut, deburr, press brake, powder coat",
+    tolerance: "±0.030\"",
+    quantity: "2,000 pcs",
+    inspection: "First-article layout, in-process spot checks, final sample inspection",
+    leadTime: "3 weeks",
+    application: "Planter row-unit mounting brackets",
+    img: "project-1",
+  },
+  {
+    title: "Stainless Food-Grade Frame",
+    problem: "Food processor needed a washdown-compatible frame for a conveyor line with tight sanitary requirements.",
+    drawing: "PDF and hand sketch; weld callouts reviewed before quote.",
+    material: "304 stainless steel, 11 ga",
+    process: "Laser cut, TIG weld, passivation",
+    tolerance: "±0.062\"",
+    quantity: "12 frames",
+    inspection: "Visual weld inspection, pit gauge, dimensional check",
+    leadTime: "4 weeks",
+    application: "Conveyor support frame in washdown packaging line",
+    img: "project-2",
+  },
+  {
+    title: "CNC Machined Aluminum Housing",
+    problem: "OEM required a prototype aluminum housing with internal bores and threaded inserts in two weeks.",
+    drawing: "STEP file with GD&T; material and finish specified.",
+    material: "6061-T6 aluminum",
+    process: "3-axis CNC mill, tapped holes, deburr, anodize Type II",
+    tolerance: "±0.005\"",
+    quantity: "25 pcs",
+    inspection: "CMM report, thread gauges, surface finish check",
+    leadTime: "2 weeks",
+    application: "Electronic control enclosure prototype",
+    img: "project-4",
+  },
 ];
 
 const team = [
@@ -263,12 +296,12 @@ const ManufacturingDemo: React.FC = () => (
     {/* Hero */}
     <section className="demo-hero" style={{ backgroundImage: "url(/images/demos/manufacturing/hero.jpg)" }}>
       <div className="demo-hero__inner">
-        <span className="demo-hero__tagline">Custom Metal Fabrication · Sterling & Rock River Valley · Demo</span>
+        <span className="demo-hero__tagline">Short-Run Precision Fabrication · Sterling & Rock River Valley · Demo</span>
         <h1 className="demo-hero__title">Sterling Metalworks</h1>
-        <p className="demo-hero__subtitle">Fictional demo of a custom metal fabrication shop. CNC machining, laser cutting, welding, and finishing — from prototype to production. Certifications, equipment, and project examples are illustrative.</p>
+        <p className="demo-hero__subtitle">Fictional demo of a custom metal fabrication shop serving OEM and industrial maintenance teams. CNC machining, laser cutting, welding, and finishing — from prototype to production.</p>
         <div className="demo-hero__actions">
           <a href="tel:8155550420" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0420</a>
-          <a href="#quote" className="demo-btn demo-btn--ghost">Request a Quote</a>
+          <a href="#quote" className="demo-btn demo-btn--ghost">Upload a Drawing for Quote</a>
         </div>
       </div>
     </section>
@@ -281,10 +314,10 @@ const ManufacturingDemo: React.FC = () => (
     <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <div className="demo-stats" style={{ gridTemplateColumns: "repeat(4, 1fr)" }}>
-          <div><div className="demo-stat__number">26</div><div className="demo-stat__label">Years in Business</div></div>
-          <div><div className="demo-stat__number">40,000+</div><div className="demo-stat__label">Parts Shipped Yearly</div></div>
-          <div><div className="demo-stat__number">8</div><div className="demo-stat__label">Major Machines</div></div>
-          <div><div className="demo-stat__number">±0.0005"</div><div className="demo-stat__label">Tightest Tolerance</div></div>
+          <div><div className="demo-stat__number">26</div><div className="demo-stat__label">Illustrative Years</div></div>
+          <div><div className="demo-stat__number">18K</div><div className="demo-stat__label">Illustrative Sq Ft</div></div>
+          <div><div className="demo-stat__number">8</div><div className="demo-stat__label">Illustrative Machines</div></div>
+          <div><div className="demo-stat__number">±0.005"</div><div className="demo-stat__label">Illustrative Tolerance</div></div>
         </div>
         <div style={{ marginTop: "1.5rem" }}>
           <ReviewBadges googleRating={4.8} googleReviewCount={47} yelpRating={4.5} yelpReviewCount={12} />
@@ -311,21 +344,35 @@ const ManufacturingDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Capabilities grid with background images */}
+    {/* Capability matrix */}
     <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
-        <h2 className="demo-section__title">Our Capabilities</h2>
-        <p className="demo-section__subtitle">Six core processes under one roof. No outsourcing means tighter quality control and faster turnaround.</p>
-        <div className="demo-services-grid">
-          {capabilities.map((c) => (
-            <div key={c.name} className="demo-service-card">
-              <div className="demo-service-card__image" style={{ backgroundImage: `url(/images/demos/manufacturing/${c.img}.jpg)` }} />
-              <div className="demo-service-card__body">
-                <h3 className="demo-service-card__name">{c.name}</h3>
-                <p className="demo-service-card__desc">{c.desc}</p>
-              </div>
-            </div>
-          ))}
+        <h2 className="demo-section__title">Capability Matrix</h2>
+        <p className="demo-section__subtitle">Process, materials, envelope, tolerance, and inspection method. Real capability depends on the specific machine, setup, and job.</p>
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
+        <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Capability matrix">
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+            <thead>
+              <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Process</th>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Materials</th>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Part Envelope</th>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Typical Tolerance</th>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Inspection</th>
+              </tr>
+            </thead>
+            <tbody>
+              {capabilityMatrix.map((c) => (
+                <tr key={c.process} style={{ borderBottom: "1px solid var(--color-border)" }}>
+                  <td style={{ padding: "0.75rem", fontWeight: 600 }}>{c.process}</td>
+                  <td style={{ padding: "0.75rem" }}>{c.materials}</td>
+                  <td style={{ padding: "0.75rem" }}>{c.envelope}</td>
+                  <td style={{ padding: "0.75rem" }}>{c.tolerance}</td>
+                  <td style={{ padding: "0.75rem" }}>{c.inspection}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
@@ -418,15 +465,29 @@ const ManufacturingDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Project Showcase Gallery */}
+    {/* Case Studies */}
     <section className="demo-section">
       <div className="demo-section__inner">
-        <h2 className="demo-section__title">Project Showcase</h2>
-        <p className="demo-section__subtitle">A selection of recent work — from prototype parts to production runs across four industries.</p>
-        <div className="demo-food-gallery">
-          {projects.map((p) => (
-            <div key={p.title} className="demo-food-gallery__item" style={{ backgroundImage: `url(/images/demos/manufacturing/${p.img}.jpg)` }}>
-              <span className="demo-food-gallery__label">{p.title}</span>
+        <h2 className="demo-section__title">Illustrative Case Studies</h2>
+        <p className="demo-section__subtitle">Sample projects showing the inputs, process, and result a buyer would see. These are fictional examples.</p>
+        <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
+          {caseStudies.map((c) => (
+            <div key={c.title} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.5rem", border: "1px solid var(--demo-border)", padding: "1.5rem" }}>
+              <div style={{ backgroundImage: `url(/images/demos/manufacturing/${c.img}.jpg)`, backgroundSize: "cover", backgroundPosition: "center", minHeight: "220px" }} />
+              <div>
+                <h3 style={{ fontSize: "1.3rem", marginBottom: "0.75rem" }}>{c.title}</h3>
+                <dl style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.5rem 1rem", fontSize: "0.9rem" }}>
+                  <div><dt style={{ fontWeight: 700, color: "var(--demo-heading)" }}>Problem</dt><dd style={{ margin: 0, color: "var(--demo-text-muted)" }}>{c.problem}</dd></div>
+                  <div><dt style={{ fontWeight: 700, color: "var(--demo-heading)" }}>Drawing</dt><dd style={{ margin: 0, color: "var(--demo-text-muted)" }}>{c.drawing}</dd></div>
+                  <div><dt style={{ fontWeight: 700, color: "var(--demo-heading)" }}>Material</dt><dd style={{ margin: 0, color: "var(--demo-text-muted)" }}>{c.material}</dd></div>
+                  <div><dt style={{ fontWeight: 700, color: "var(--demo-heading)" }}>Process</dt><dd style={{ margin: 0, color: "var(--demo-text-muted)" }}>{c.process}</dd></div>
+                  <div><dt style={{ fontWeight: 700, color: "var(--demo-heading)" }}>Tolerance</dt><dd style={{ margin: 0, color: "var(--demo-text-muted)" }}>{c.tolerance}</dd></div>
+                  <div><dt style={{ fontWeight: 700, color: "var(--demo-heading)" }}>Quantity</dt><dd style={{ margin: 0, color: "var(--demo-text-muted)" }}>{c.quantity}</dd></div>
+                  <div><dt style={{ fontWeight: 700, color: "var(--demo-heading)" }}>Inspection</dt><dd style={{ margin: 0, color: "var(--demo-text-muted)" }}>{c.inspection}</dd></div>
+                  <div><dt style={{ fontWeight: 700, color: "var(--demo-heading)" }}>Lead Time</dt><dd style={{ margin: 0, color: "var(--demo-text-muted)" }}>{c.leadTime}</dd></div>
+                </dl>
+                <p style={{ marginTop: "0.75rem", fontSize: "0.95rem" }}><strong>Finished application:</strong> {c.application}</p>
+              </div>
             </div>
           ))}
         </div>
@@ -496,14 +557,12 @@ const ManufacturingDemo: React.FC = () => (
     <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Industries We Serve</h2>
-        <p className="demo-section__subtitle">We understand the demands of each industry we work with. That's why customers keep coming back.</p>
-        <div className="demo-services-grid">
+        <p className="demo-section__subtitle">Examples of markets where short-run fabrication and precision machining are commonly applied.</p>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "1rem" }}>
           {industries.map((ind) => (
-            <div key={ind.name} className="demo-service-card">
-              <div className="demo-service-card__body">
-                <h3 className="demo-service-card__name">{ind.name}</h3>
-                <p className="demo-service-card__desc">{ind.desc}</p>
-              </div>
+            <div key={ind.name} style={{ borderLeft: "3px solid var(--demo-accent)", paddingLeft: "1rem" }}>
+              <h3 style={{ fontSize: "1.1rem", marginBottom: "0.25rem" }}>{ind.name}</h3>
+              <p style={{ fontSize: "0.95rem", color: "var(--demo-text-muted)", margin: 0 }}>{ind.desc}</p>
             </div>
           ))}
         </div>

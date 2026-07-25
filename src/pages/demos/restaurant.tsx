@@ -133,10 +133,10 @@ const RestaurantDemo: React.FC = () => (
     <section className="demo-section">
       <div className="demo-section__inner">
         <div className="demo-stats">
-          <div><div className="demo-stat__number">15+</div><div className="demo-stat__label">Years Serving Rockford</div></div>
-          <div><div className="demo-stat__number">4.8</div><div className="demo-stat__label">Google Rating</div></div>
-          <div><div className="demo-stat__number">200+</div><div className="demo-stat__label">5-Star Reviews</div></div>
-          <div><div className="demo-stat__number">6</div><div className="demo-stat__label">Days a Week</div></div>
+          <div><div className="demo-stat__number">15+</div><div className="demo-stat__label">Illustrative Years</div></div>
+          <div><div className="demo-stat__number">4.8</div><div className="demo-stat__label">Illustrative Rating</div></div>
+          <div><div className="demo-stat__number">200+</div><div className="demo-stat__label">Illustrative Reviews</div></div>
+          <div><div className="demo-stat__number">6</div><div className="demo-stat__label">Days Open (Illustrative)</div></div>
         </div>
         <div style={{ marginTop: "2rem" }}>
           <ReviewBadges googleRating={4.8} googleReviewCount={247} yelpRating={4.5} yelpReviewCount={89} />
@@ -150,9 +150,9 @@ const RestaurantDemo: React.FC = () => (
         <div className="demo-split-image-text">
           <div className="demo-split-image-text__image" style={{ backgroundImage: "url(/images/demos/restaurant/chef.jpg)" }} />
           <div className="demo-split-image-text__content">
-            <h2 className="demo-split-image-text__title">Meet Chef Marcus Lindqvist</h2>
-            <p className="demo-split-image-text__text">Marcus grew up in Rockford and trained at the Culinary Institute of America in Hyde Park. After a decade cooking in Chicago restaurants — including two Michelin-starred kitchens — he came home to open Riverside Grill in 2008.</p>
-            <p className="demo-split-image-text__text">His philosophy is simple: source locally, cook from scratch, and let the ingredients speak. He works directly with Illinois farmers, Great Lakes fisheries, and Midwest ranches to bring the best possible food to your table.</p>
+            <h2 className="demo-split-image-text__title">Meet Chef Marcus Lindqvist (Illustrative)</h2>
+            <p className="demo-split-image-text__text">This is a fictional chef profile for demo purposes. A real restaurant site would feature its actual executive chef, owner, or culinary team's story, training, and philosophy.</p>
+            <p className="demo-split-image-text__text">The menu, ingredients, and sourcing claims below are illustrative examples for layout and copy style — not an actual restaurant's offerings.</p>
           </div>
         </div>
       </div>
@@ -258,9 +258,9 @@ const RestaurantDemo: React.FC = () => (
     <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Meet the Team</h2>
-        <p className="demo-section__subtitle">The people who make Riverside Grill what it is.</p>
+        <p className="demo-section__subtitle">Fictional team profiles for this demo. A real site would feature its actual staff.</p>
         <div className="demo-team-grid">
-          {team.map((member) => (
+          {team.slice(0, 4).map((member) => (
             <div key={member.name} className="demo-team-card">
               <div className="demo-team-card__photo" style={{ backgroundImage: `url(/images/demos/restaurant/${member.img}.jpg)` }} />
               <div className="demo-team-card__body">

@@ -8,7 +8,7 @@ import SocialLinks, { SocialLink } from "../../features/demos/SocialLinks";
 import ReviewBadges from "../../features/demos/ReviewBadges";
 import IntegrationsSection, { Integration } from "../../features/demos/IntegrationsSection";
 import FAQSection, { FAQItem } from "../../features/demos/FAQSection";
-import { StarIcon, MapPinIcon, PhoneIcon, ShieldIcon, CheckIcon, ClockIcon, SpaIcon, AlertIcon, DocumentIcon, DownloadIcon } from "../../site/icons";
+import { StarIcon, MapPinIcon, PhoneIcon, ShieldIcon, CheckIcon, ClockIcon, AlertIcon, DocumentIcon, DownloadIcon } from "../../site/icons";
 
 const pathname = "/demos/dental/";
 const pageTitle = "Rock River Family Dental — Transparent Family Dentistry | Demo Website";
@@ -36,14 +36,34 @@ const integrations: Integration[] = [
   { name: "Vyne Trellis", category: "Insurance Claims", description: "Dental insurance claim management and electronic attachment platform. Auto-attach X-rays and narratives to claims. Track claim status from submission to payment.", freeTier: "From $99/month per practice. Per-claim pricing available.", url: "https://vyne.com", status: "mocked" },
 ];
 
-const services = [
-  { name: "Cleanings & Exams", desc: "Comprehensive exams, digital X-rays, and professional cleanings. Recommended every 6 months for most patients.", icon: CheckIcon, img: "cleaning" },
-  { name: "Fillings", desc: "Tooth-colored composite fillings for cavities and minor tooth damage. Same-day appointments available for most cases.", icon: CheckIcon, img: "fillings" },
-  { name: "Crowns & Bridges", desc: "Porcelain and zirconia crowns to restore damaged teeth. Bridges to replace missing teeth. CEREC same-day crowns available.", icon: ShieldIcon, img: "crowns" },
-  { name: "Teeth Whitening", desc: "Professional in-office whitening and custom take-home trays. Results vary by patient and staining type.", icon: SpaIcon, img: "whitening" },
-  { name: "Invisalign", desc: "Clear aligner orthodontics for adults and teens. Complimentary consultation includes a 3D digital scan and treatment preview.", icon: SpaIcon, img: "invisalign" },
-  { name: "Urgent Dental Care", desc: "Same-day urgent care appointments for pain, broken teeth, lost fillings, and swelling when available. Call before noon for best availability.", icon: AlertIcon, img: "emergency" },
-  { name: "Pediatric Dentistry", desc: "Gentle, kid-friendly dental care starting at age 1. Sealants, fluoride treatments, and a positive first experience that builds lifelong habits.", icon: SpaIcon, img: "cleaning" },
+const serviceCategories = [
+  {
+    category: "Preventive",
+    items: [
+      { name: "Cleanings & Exams", desc: "Comprehensive exams, digital X-rays, and professional cleanings." },
+      { name: "Pediatric Dentistry", desc: "Gentle first visits starting at age 1, sealants, and fluoride." },
+    ],
+  },
+  {
+    category: "Restorative",
+    items: [
+      { name: "Fillings", desc: "Tooth-colored composite fillings for cavities and minor damage." },
+      { name: "Crowns & Bridges", desc: "Porcelain and zirconia crowns; CEREC same-day crowns when appropriate." },
+    ],
+  },
+  {
+    category: "Cosmetic",
+    items: [
+      { name: "Teeth Whitening", desc: "In-office and take-home options. Results vary by patient." },
+      { name: "Clear Aligners", desc: "Adult and teen aligner consultations with a 3D scan preview." },
+    ],
+  },
+  {
+    category: "Urgent",
+    items: [
+      { name: "Urgent Dental Care", desc: "Same-day slots when available for pain, breaks, lost fillings, and swelling." },
+    ],
+  },
 ];
 
 const officeTour = [
@@ -248,7 +268,10 @@ const UrgentCareGuide: React.FC = () => {
 };
 
 const ScheduleForm: React.FC = () => {
-  const [service, setService] = React.useState("New Patient Exam & Cleaning");
+  const [patientType, setPatientType] = React.useState("new");
+  const [reason, setReason] = React.useState("exam");
+  const [anxiety, setAnxiety] = React.useState("none");
+  const [insurance, setInsurance] = React.useState("");
   const [date, setDate] = React.useState("");
   const [submitted, setSubmitted] = React.useState(false);
 
@@ -261,9 +284,9 @@ const ScheduleForm: React.FC = () => {
     return (
       <div className="demo-quote-form__success">
         <CheckIcon size={48} />
-        <h3>Appointment Request Received</h3>
-        <p>Thank you. In a live practice, the front desk would call to confirm. For urgent dental concerns, call (815) 555-0387.</p>
-        <p><strong>Service:</strong> {service}<br /><strong>Preferred Date:</strong> {date || "To be scheduled"}</p>
+        <h3>Appointment Request Received (Illustrative)</h3>
+        <p>In a live practice, the front desk would call to confirm within one business day and verify insurance. For urgent dental concerns, call (815) 555-0387.</p>
+        <p><strong>Patient type:</strong> {patientType}<br /><strong>Reason:</strong> {reason}<br /><strong>Anxiety needs:</strong> {anxiety}<br /><strong>Insurance:</strong> {insurance || "To be verified"}<br /><strong>Preferred Date:</strong> {date || "To be scheduled"}</p>
         <p style={{ fontSize: "0.8rem", marginTop: "1rem", opacity: 0.8 }}>This is a demo form. It does not submit to a real dental practice.</p>
         <button className="demo-btn demo-btn--ghost" onClick={() => setSubmitted(false)}>Request another appointment</button>
       </div>
@@ -273,15 +296,33 @@ const ScheduleForm: React.FC = () => {
   return (
     <form className="demo-quote-form" onSubmit={handleSubmit}>
       <div className="demo-form-row">
-        <label className="demo-form-label" htmlFor="service">Reason for Visit</label>
-        <select id="service" className="demo-form-select" value={service} onChange={(e) => setService(e.target.value)}>
-          <option>New Patient Exam &amp; Cleaning</option>
-          <option>Urgent Care / Tooth Pain</option>
-          <option>Clear Aligner Consultation (Complimentary)</option>
-          <option>Teeth Whitening</option>
-          <option>Crown or Bridge</option>
-          <option>Pediatric Appointment</option>
-          <option>Regular Cleaning (existing patient)</option>
+        <label className="demo-form-label" htmlFor="patient-type">Patient Type</label>
+        <select id="patient-type" className="demo-form-select" value={patientType} onChange={(e) => setPatientType(e.target.value)}>
+          <option value="new">New patient — first visit</option>
+          <option value="existing">Existing patient — routine care</option>
+          <option value="child">Child under 12</option>
+          <option value="emergency">Urgent / emergency</option>
+          <option value="cosmetic">Cosmetic consultation</option>
+        </select>
+      </div>
+      <div className="demo-form-row">
+        <label className="demo-form-label" htmlFor="reason">Reason for Visit</label>
+        <select id="reason" className="demo-form-select" value={reason} onChange={(e) => setReason(e.target.value)}>
+          <option value="exam">Exam & cleaning</option>
+          <option value="pain">Tooth pain / urgent</option>
+          <option value="cosmetic">Whitening or aligners</option>
+          <option value="crown">Crown / bridge / filling</option>
+          <option value="child">Child checkup</option>
+        </select>
+      </div>
+      <div className="demo-form-row">
+        <label className="demo-form-label" htmlFor="anxiety">Dental Anxiety or Accessibility Needs</label>
+        <select id="anxiety" className="demo-form-select" value={anxiety} onChange={(e) => setAnxiety(e.target.value)}>
+          <option value="none">None</option>
+          <option value="mild">Mild — explain steps as we go</option>
+          <option value="moderate">Moderate — extra time and breaks</option>
+          <option value="high">High — discuss comfort options first</option>
+          <option value="mobility">Mobility / wheelchair access</option>
         </select>
       </div>
       <div className="demo-form-row">
@@ -297,13 +338,9 @@ const ScheduleForm: React.FC = () => {
         <input id="patient-email" className="demo-form-input" type="email" required placeholder="you@email.com" />
       </div>
       <div className="demo-form-row">
-        <label className="demo-form-label" htmlFor="preferred-date">Preferred Date &amp; Time</label>
-        <input id="preferred-date" className="demo-form-input" type="text" value={date} onChange={(e) => setDate(e.target.value)} placeholder="e.g. Wednesday morning, March 20" />
-      </div>
-      <div className="demo-form-row">
         <label className="demo-form-label" htmlFor="insurance">Insurance Provider (optional)</label>
-        <select id="insurance" className="demo-form-select">
-          <option>Select if applicable</option>
+        <select id="insurance" className="demo-form-select" value={insurance} onChange={(e) => setInsurance(e.target.value)}>
+          <option value="">Select if applicable</option>
           <option>Delta Dental</option>
           <option>Cigna</option>
           <option>MetLife</option>
@@ -316,11 +353,11 @@ const ScheduleForm: React.FC = () => {
         </select>
       </div>
       <div className="demo-form-row">
-        <label className="demo-form-label" htmlFor="notes">Notes (optional)</label>
-        <textarea id="notes" className="demo-form-textarea" rows={3} placeholder="Any specific concerns, dental anxiety, or accommodation needs?" />
+        <label className="demo-form-label" htmlFor="preferred-date">Preferred Date &amp; Time</label>
+        <input id="preferred-date" className="demo-form-input" type="text" value={date} onChange={(e) => setDate(e.target.value)} placeholder="e.g. Wednesday morning, March 20" />
       </div>
       <button type="submit" className="demo-btn demo-btn--primary">Request Appointment</button>
-      <p className="demo-form-note">This is a demo form. For urgent dental issues, call (815) 555-0387 directly.</p>
+      <p className="demo-form-note">This is a demo form. It does not submit to a real practice. For urgent dental issues, call (815) 555-0387.</p>
     </form>
   );
 };
@@ -348,16 +385,16 @@ const DentalDemo: React.FC = () => (
     <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <div className="demo-stats" style={{ gridTemplateColumns: "repeat(4, 1fr)" }}>
-          <div><div className="demo-stat__number">15</div><div className="demo-stat__label">Years in Practice</div></div>
-          <div><div className="demo-stat__number">6</div><div className="demo-stat__label">Dentists & Hygienists</div></div>
-          <div><div className="demo-stat__number">4</div><div className="demo-stat__label">Counties Served</div></div>
-          <div><div className="demo-stat__number">4.9</div><div className="demo-stat__label">Google Rating</div></div>
+          <div><div className="demo-stat__number">15</div><div className="demo-stat__label">Illustrative Years</div></div>
+          <div><div className="demo-stat__number">6</div><div className="demo-stat__label">Illustrative Staff</div></div>
+          <div><div className="demo-stat__number">4</div><div className="demo-stat__label">Illustrative Counties</div></div>
+          <div><div className="demo-stat__number">$89</div><div className="demo-stat__label">Illustrative New-Patient Exam</div></div>
         </div>
         <div style={{ marginTop: "1.5rem" }}>
           <ReviewBadges googleRating={4.9} googleReviewCount={187} yelpRating={4.5} yelpReviewCount={34} />
         </div>
         <div style={{ marginTop: "1rem", display: "flex", justifyContent: "center", gap: "0.75rem", flexWrap: "wrap" }}>
-          <span className="demo-trust-logo"><CheckIcon size={20} /> ADA Member</span>
+          <span className="demo-trust-logo"><CheckIcon size={20} /> ADA Member (illustrative)</span>
           <span className="demo-trust-logo"><CheckIcon size={20} /> CEREC Same-Day Crowns</span>
           <span className="demo-trust-logo"><ShieldIcon size={20} /> Clear Aligner Provider</span>
         </div>
@@ -382,12 +419,14 @@ const DentalDemo: React.FC = () => (
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Your first visit, explained</h2>
         <p className="demo-section__subtitle">No surprises. We tell you what will happen, how long it takes, and what it costs before treatment begins.</p>
-        <div className="demo-services-grid">
+        <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem", maxWidth: "720px", margin: "0 auto" }}>
           {newPatientSteps.map((s) => (
-            <div key={s.step} className="demo-service-card">
-              <div className="demo-service-card__icon" style={{ fontSize: "1.5rem", fontWeight: 700 }}>{s.step}</div>
-              <h3 className="demo-service-card__title">{s.title}</h3>
-              <p className="demo-service-card__desc">{s.desc}</p>
+            <div key={s.step} style={{ display: "flex", gap: "1rem", alignItems: "flex-start", borderLeft: "3px solid var(--demo-accent)", paddingLeft: "1.25rem" }}>
+              <div style={{ fontSize: "1.25rem", fontWeight: 700, color: "var(--demo-accent)", minWidth: "1.5rem" }}>{s.step}</div>
+              <div>
+                <h3 style={{ fontSize: "1.1rem", marginBottom: "0.25rem" }}>{s.title}</h3>
+                <p style={{ fontSize: "0.95rem", color: "var(--demo-text-muted)" }}>{s.desc}</p>
+              </div>
             </div>
           ))}
         </div>
@@ -396,22 +435,22 @@ const DentalDemo: React.FC = () => (
 
     <section className="demo-section">
       <div className="demo-section__inner">
-        <h2 className="demo-section__title">Our Services</h2>
-        <p className="demo-section__subtitle">Comprehensive family dental care under one roof. From your child's first checkup to clear aligners and urgent care.</p>
-        <div className="demo-services-grid">
-          {services.map((s) => {
-            const Icon = s.icon;
-            return (
-              <div key={s.name} className="demo-service-card">
-                <div className="demo-service-card__image" style={{ backgroundImage: `url(/images/demos/dental/${s.img}.jpg)` }} />
-                <div className="demo-service-card__body">
-                  <div className="demo-service-card__icon"><Icon size={28} /></div>
-                  <h3 className="demo-service-card__name">{s.name}</h3>
-                  <p className="demo-service-card__desc">{s.desc}</p>
-                </div>
-              </div>
-            );
-          })}
+        <h2 className="demo-section__title">Services by Need</h2>
+        <p className="demo-section__subtitle">Comprehensive family dental care organized by what you're looking for.</p>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "1.5rem" }}>
+          {serviceCategories.map((cat) => (
+            <div key={cat.category} style={{ borderTop: "3px solid var(--demo-accent)", paddingTop: "1rem" }}>
+              <h3 style={{ fontSize: "1.1rem", marginBottom: "0.75rem", textTransform: "uppercase", letterSpacing: "0.05em" }}>{cat.category}</h3>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+                {cat.items.map((item) => (
+                  <li key={item.name}>
+                    <strong style={{ color: "var(--demo-heading)", fontSize: "0.95rem" }}>{item.name}</strong>
+                    <p style={{ fontSize: "0.9rem", color: "var(--demo-text-muted)", margin: "0.2rem 0 0" }}>{item.desc}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -542,12 +581,12 @@ const DentalDemo: React.FC = () => (
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Financing &amp; Payment Options</h2>
         <p className="demo-section__subtitle">Options that make quality dental care affordable for every family. We'll explain your out-of-pocket cost before any treatment.</p>
-        <div className="demo-services-grid">
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.5rem" }}>
           {financingOptions.map((f) => (
-            <div key={f.name} className="demo-service-card">
-              <h3 className="demo-service-card__title">{f.name}</h3>
-              <p className="demo-service-card__desc">{f.desc}</p>
-              <p style={{ fontSize: "0.85rem", opacity: 0.7, marginTop: "0.5rem" }}>{f.details}</p>
+            <div key={f.name} style={{ borderTop: "3px solid var(--demo-accent)", paddingTop: "1rem" }}>
+              <h3 style={{ fontSize: "1.15rem", marginBottom: "0.5rem" }}>{f.name}</h3>
+              <p style={{ fontSize: "0.95rem", color: "var(--demo-text-muted)", marginBottom: "0.5rem" }}>{f.desc}</p>
+              <p style={{ fontSize: "0.85rem", opacity: 0.8 }}>{f.details}</p>
             </div>
           ))}
         </div>
@@ -559,13 +598,15 @@ const DentalDemo: React.FC = () => (
       <div className="demo-section__inner">
         <h2 className="demo-section__title">New Patient Forms</h2>
         <p className="demo-section__subtitle">Save time — fill out your forms at home and bring them to your first appointment. No email required to download.</p>
-        <div className="demo-services-grid">
+        <div style={{ display: "flex", flexDirection: "column", gap: "1rem", maxWidth: "720px", margin: "0 auto" }}>
           {patientForms.map((f) => (
-            <div key={f.title} className="demo-service-card">
-              <div className="demo-service-card__icon"><DocumentIcon size={32} /></div>
-              <h3 className="demo-service-card__title">{f.title}</h3>
-              <p className="demo-service-card__desc">{f.desc}</p>
-              <span className="demo-service-card__tag"><DownloadIcon size={14} /> {f.type}</span>
+            <div key={f.title} style={{ display: "flex", alignItems: "flex-start", gap: "1rem", padding: "1rem", border: "1px solid var(--demo-border)" }}>
+              <div style={{ color: "var(--demo-accent)", flexShrink: 0 }}><DocumentIcon size={32} /></div>
+              <div>
+                <h3 style={{ fontSize: "1.1rem", marginBottom: "0.25rem" }}>{f.title}</h3>
+                <p style={{ fontSize: "0.95rem", color: "var(--demo-text-muted)", marginBottom: "0.5rem" }}>{f.desc}</p>
+                <span className="demo-service-card__tag"><DownloadIcon size={14} /> {f.type}</span>
+              </div>
             </div>
           ))}
         </div>

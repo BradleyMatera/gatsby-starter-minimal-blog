@@ -315,18 +315,18 @@ const AgricultureDemo: React.FC = () => (
     <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <div className="demo-stats" style={{ gridTemplateColumns: "repeat(4, 1fr)" }}>
-          <div><div className="demo-stat__number">52</div><div className="demo-stat__label">Years Serving Farmers</div></div>
-          <div><div className="demo-stat__number">1,200+</div><div className="demo-stat__label">Farms Served</div></div>
-          <div><div className="demo-stat__number">7</div><div className="demo-stat__label">Service Technicians</div></div>
-          <div><div className="demo-stat__number">4.8</div><div className="demo-stat__label">Google Rating</div></div>
+          <div><div className="demo-stat__number">52</div><div className="demo-stat__label">Illustrative Years</div></div>
+          <div><div className="demo-stat__number">1,200+</div><div className="demo-stat__label">Illustrative Farms</div></div>
+          <div><div className="demo-stat__number">7</div><div className="demo-stat__label">Illustrative Technicians</div></div>
+          <div><div className="demo-stat__number">4.8</div><div className="demo-stat__label">Illustrative Rating</div></div>
         </div>
         <div style={{ marginTop: "1.5rem" }}>
           <ReviewBadges googleRating={4.8} googleReviewCount={89} yelpRating={4.5} yelpReviewCount={23} />
         </div>
         <div style={{ marginTop: "1rem", display: "flex", justifyContent: "center", gap: "0.75rem", flexWrap: "wrap" }}>
-          <span className="demo-trust-logo"><CheckIcon size={20} /> John Deere Dealer</span>
-          <span className="demo-trust-logo"><CheckIcon size={20} /> Case IH Dealer</span>
-          <span className="demo-trust-logo"><ShieldIcon size={20} /> Licensed Pesticide Applicator</span>
+          <span className="demo-trust-logo"><CheckIcon size={20} /> John Deere (illustrative)</span>
+          <span className="demo-trust-logo"><CheckIcon size={20} /> Case IH (illustrative)</span>
+          <span className="demo-trust-logo"><ShieldIcon size={20} /> Applicator License (illustrative)</span>
         </div>
       </div>
     </section>
@@ -342,9 +342,33 @@ const AgricultureDemo: React.FC = () => (
     </section>
 
     <section className="demo-section demo-section--alt">
+      <div className="demo-section__inner" style={{ textAlign: "center" }}>
+        <h2 className="demo-section__title">Service · Parts · Used Equipment</h2>
+        <p className="demo-section__subtitle">Three ways we keep your farm moving. Pick a path and we'll get you pointed in the right direction.</p>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "1rem", maxWidth: "800px", margin: "0 auto" }}>
+          <a href="#service-request" style={{ display: "block", padding: "1.5rem", border: "2px solid var(--demo-accent)", textDecoration: "none", color: "var(--demo-heading)" }}>
+            <span style={{ display: "block", marginBottom: "0.5rem" }}><ToolsIcon size={32} /></span>
+            <h3 style={{ fontSize: "1.1rem", marginBottom: "0.25rem" }}>Equipment Service</h3>
+            <p style={{ fontSize: "0.9rem", color: "var(--demo-text-muted)", margin: 0 }}>In-shop and mobile repair. Breakdowns during planting and harvest.</p>
+          </a>
+          <a href="#product-categories" style={{ display: "block", padding: "1.5rem", border: "2px solid var(--demo-accent)", textDecoration: "none", color: "var(--demo-heading)" }}>
+            <span style={{ display: "block", marginBottom: "0.5rem" }}><GearIcon size={32} /></span>
+            <h3 style={{ fontSize: "1.1rem", marginBottom: "0.25rem" }}>Parts Counter</h3>
+            <p style={{ fontSize: "0.9rem", color: "var(--demo-text-muted)", margin: 0 }}>Filters, belts, bearings, hydraulic hoses, and wear parts.</p>
+          </a>
+          <a href="#inventory" style={{ display: "block", padding: "1.5rem", border: "2px solid var(--demo-accent)", textDecoration: "none", color: "var(--demo-heading)" }}>
+            <span style={{ display: "block", marginBottom: "0.5rem" }}><BoltIcon size={32} /></span>
+            <h3 style={{ fontSize: "1.1rem", marginBottom: "0.25rem" }}>Used Inventory</h3>
+            <p style={{ fontSize: "0.9rem", color: "var(--demo-text-muted)", margin: 0 }}>Tractors, combines, planters, and implements ready to demo.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section className="demo-section">
       <div className="demo-section__inner">
-        <h2 className="demo-section__title">Today's Grain Prices</h2>
-        <p className="demo-section__subtitle">Know what your crop is worth before you sell. Live local elevator bids powered by DTN Markets.</p>
+        <h2 className="demo-section__title">Sample Grain Prices</h2>
+        <p className="demo-section__subtitle">Placeholder prices for demo layout only. A production site would source live market data with contract, location, commodity, delay, and timestamp.</p>
         <CommodityPriceTicker />
       </div>
     </section>
@@ -365,17 +389,16 @@ const AgricultureDemo: React.FC = () => (
     <section className="demo-section demo-section--alt" id="services">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Our Services</h2>
-        <p className="demo-section__subtitle">Everything your farm needs, under one roof. From the field to the shop, we've got you covered.</p>
-        <div className="demo-services-grid">
+        <p className="demo-section__subtitle">Service, parts, and used equipment for the Kishwaukee Valley.</p>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "1rem" }}>
           {services.map((s) => {
             const Icon = s.icon;
             return (
-              <div key={s.name} className="demo-service-card">
-                <div className="demo-service-card__image" style={{ backgroundImage: `url(/images/demos/agriculture/${s.img}.jpg)` }} />
-                <div className="demo-service-card__body">
-                  <div className="demo-service-card__icon"><Icon size={28} /></div>
-                  <h3 className="demo-service-card__name">{s.name}</h3>
-                  <p className="demo-service-card__desc">{s.desc}</p>
+              <div key={s.name} style={{ display: "flex", gap: "1rem", alignItems: "flex-start", borderLeft: "3px solid var(--demo-accent)", paddingLeft: "1rem" }}>
+                <div style={{ color: "var(--demo-accent)", flexShrink: 0 }}><Icon size={28} /></div>
+                <div>
+                  <h3 style={{ fontSize: "1.1rem", marginBottom: "0.25rem" }}>{s.name}</h3>
+                  <p style={{ fontSize: "0.95rem", color: "var(--demo-text-muted)", margin: 0 }}>{s.desc}</p>
                 </div>
               </div>
             );
@@ -476,7 +499,7 @@ const AgricultureDemo: React.FC = () => (
       </div>
     </section>
 
-    <section className="demo-section">
+    <section className="demo-section" id="product-categories">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Product Categories</h2>
         <p className="demo-section__subtitle">We stock the brands you trust and the parts you need. Special orders welcome — most arrive in 2–3 days.</p>
@@ -507,17 +530,19 @@ const AgricultureDemo: React.FC = () => (
     <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Seasonal Resources</h2>
-        <p className="demo-section__subtitle">Timely tips and service reminders for each season. Bookmark this page — we update it monthly.</p>
-        <div className="demo-services-grid">
+        <p className="demo-section__subtitle">Timely reminders for the Kishwaukee Valley growing season.</p>
+        <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
           {seasonalFeatures.map((s) => {
             const Icon = s.icon;
             return (
-              <div key={s.season} className="demo-service-card">
-                <div className="demo-service-card__icon"><Icon size={32} /></div>
-                <h3 className="demo-service-card__name">{s.season}</h3>
-                <ul style={{ paddingLeft: "1.25rem", fontSize: "0.9rem", lineHeight: 1.7, margin: "0.5rem 0" }}>
-                  {s.tips.map((tip, i) => <li key={i}>{tip}</li>)}
-                </ul>
+              <div key={s.season} style={{ display: "flex", gap: "1rem", alignItems: "flex-start", borderLeft: "3px solid var(--demo-accent)", paddingLeft: "1.25rem" }}>
+                <div style={{ color: "var(--demo-accent)", flexShrink: 0 }}><Icon size={28} /></div>
+                <div>
+                  <h3 style={{ fontSize: "1.1rem", marginBottom: "0.5rem" }}>{s.season}</h3>
+                  <ul style={{ paddingLeft: "1.25rem", fontSize: "0.9rem", lineHeight: 1.7, margin: 0 }}>
+                    {s.tips.map((tip, i) => <li key={i}>{tip}</li>)}
+                  </ul>
+                </div>
               </div>
             );
           })}

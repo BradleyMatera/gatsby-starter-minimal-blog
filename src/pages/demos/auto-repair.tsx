@@ -59,7 +59,7 @@ const serviceCategories = [
   ]},
 ];
 
-const makes = ["Toyota", "Honda", "Ford", "Chevy", "Nissan", "Subaru", "Hyundai", "Kia", "Jeep", "Dodge", "Ram", "GMC", "Buick", "Mazda", "Volkswagen", "BMW", "Audi", "Mercedes", "Lexus", "Acura"];
+const makes = ["Toyota", "Honda", "Ford", "Chevy", "Nissan", "Subaru", "Hyundai", "Kia", "Jeep", "Dodge", "Ram", "GMC"];
 
 const coupons = [
   { label: "Oil Change Special", offer: "$29.99", desc: "Conventional oil change with 21-point inspection. Most vehicles.", code: "OIL29" },
@@ -83,9 +83,9 @@ const testimonials = [
 ];
 
 const trustBadges = [
-  { Icon: ShieldIcon, label: "ASE-Certified Technicians" },
-  { Icon: ShieldIcon, label: "BBB Accredited (Verify)" },
-  { Icon: CheckIcon, label: "Written Warranty on Repairs" },
+  { Icon: ShieldIcon, label: "ASE-Certified Technicians (illustrative)" },
+  { Icon: ShieldIcon, label: "BBB Accredited (illustrative)" },
+  { Icon: CheckIcon, label: "Written Warranty (illustrative)" },
   { Icon: CheckIcon, label: "Written Estimates" },
 ];
 
@@ -144,17 +144,17 @@ const AutoRepairDemo: React.FC = () => (
     <section className="demo-section">
       <div className="demo-section__inner">
         <div className="demo-stats">
-          <div><div className="demo-stat__number">16</div><div className="demo-stat__label">Years in Rockford</div></div>
-          <div><div className="demo-stat__number">15K+</div><div className="demo-stat__label">Cars Repaired</div></div>
-          <div><div className="demo-stat__number">4.8</div><div className="demo-stat__label">Google Rating</div></div>
-          <div><div className="demo-stat__number">12mo</div><div className="demo-stat__label">Warranty on Repairs</div></div>
+          <div><div className="demo-stat__number">16</div><div className="demo-stat__label">Illustrative Years</div></div>
+          <div><div className="demo-stat__number">15K+</div><div className="demo-stat__label">Illustrative Cars</div></div>
+          <div><div className="demo-stat__number">4.8</div><div className="demo-stat__label">Illustrative Rating</div></div>
+          <div><div className="demo-stat__number">12mo</div><div className="demo-stat__label">Illustrative Warranty</div></div>
         </div>
         <div style={{ marginTop: "2rem" }}>
           <ReviewBadges googleRating={4.8} googleReviewCount={198} yelpRating={4.5} yelpReviewCount={54} />
         </div>
         <div style={{ marginTop: "1rem", display: "flex", justifyContent: "center", gap: "0.75rem", flexWrap: "wrap" }}>
-          <span className="demo-trust-logo"><CarIcon size={20} /> CARFAX Service Partner</span>
-          <span className="demo-trust-logo"><ShieldIcon size={20} /> BBB <span className="demo-trust-logo__rating">A+</span> Accredited</span>
+          <span className="demo-trust-logo"><CarIcon size={20} /> CARFAX (illustrative)</span>
+          <span className="demo-trust-logo"><ShieldIcon size={20} /> BBB A+ (illustrative)</span>
         </div>
       </div>
     </section>
@@ -172,39 +172,23 @@ const AutoRepairDemo: React.FC = () => (
     <section className="demo-section" id="services">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Our Services</h2>
-        <p className="demo-section__subtitle">From oil changes to engine rebuilds. Transparent pricing, 12-month warranty on everything.</p>
-        <div className="demo-services-grid">
+        <p className="demo-section__subtitle">From routine maintenance to diagnostics. See the detailed menu below for pricing and time estimates.</p>
+        <div className="demo-services-grid" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }}>
           <div className="demo-service-card">
             <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/auto-repair/oil-change.jpg)" }} />
-            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Oil Change</h3><p className="demo-service-card__desc">Conventional, synthetic blend, and full synthetic. 21-point inspection included.</p></div>
+            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Maintenance</h3><p className="demo-service-card__desc">Oil changes, tire rotation, multipoint inspections, and factory-scheduled services.</p></div>
           </div>
           <div className="demo-service-card">
             <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/auto-repair/brakes.jpg)" }} />
-            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Brake Service</h3><p className="demo-service-card__desc">Pad replacement, rotor resurfacing, caliper service, and brake fluid flush.</p></div>
+            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Brakes</h3><p className="demo-service-card__desc">Pads, rotors, calipers, and brake fluid service.</p></div>
           </div>
           <div className="demo-service-card">
             <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/auto-repair/engine.jpg)" }} />
-            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Engine Diagnostics</h3><p className="demo-service-card__desc">Check engine light, OBD-II scan, and advanced diagnostics. Written estimate provided.</p></div>
-          </div>
-          <div className="demo-service-card">
-            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/auto-repair/tire-service.jpg)" }} />
-            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Tire Service</h3><p className="demo-service-card__desc">Rotation, balancing, mounting, and flat repair. All major tire brands available.</p></div>
-          </div>
-          <div className="demo-service-card">
-            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/auto-repair/battery.jpg)" }} />
-            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Battery & Electrical</h3><p className="demo-service-card__desc">Battery testing and replacement, alternator, starter, and electrical diagnostics.</p></div>
-          </div>
-          <div className="demo-service-card">
-            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/auto-repair/diagnostics.jpg)" }} />
-            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Computer Diagnostics</h3><p className="demo-service-card__desc">Advanced computer diagnostics for complex electrical and engine management issues.</p></div>
-          </div>
-          <div className="demo-service-card">
-            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/auto-repair/transmission.jpg)" }} />
-            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Transmission</h3><p className="demo-service-card__desc">Fluid flush, filter replacement, and transmission repair for all makes.</p></div>
+            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Diagnostics</h3><p className="demo-service-card__desc">Check engine light, OBD-II scan, and advanced drivability diagnostics.</p></div>
           </div>
           <div className="demo-service-card">
             <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/auto-repair/ac-service.jpg)" }} />
-            <div className="demo-service-card__body"><h3 className="demo-service-card__name">AC & Heating</h3><p className="demo-service-card__desc">AC recharge, compressor replacement, and heating system repair.</p></div>
+            <div className="demo-service-card__body"><h3 className="demo-service-card__name">AC & Electrical</h3><p className="demo-service-card__desc">AC recharge, compressor, battery, alternator, and starter.</p></div>
           </div>
         </div>
       </div>
@@ -253,8 +237,9 @@ const AutoRepairDemo: React.FC = () => (
     <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Makes We Service</h2>
-        <p className="demo-section__subtitle">Domestic, import, and European. If your make isn't listed, call us — we probably work on it.</p>
+        <p className="demo-section__subtitle">Domestic and import cars, trucks, and SUVs. If your make isn't listed, call — we likely work on it.</p>
         <div className="demo-makes">{makes.map((m) => <div key={m} className="demo-make">{m}</div>)}</div>
+        <p style={{ textAlign: "center", marginTop: "1rem", fontSize: "0.85rem", opacity: 0.7 }}>Brand names are trademarks of their respective owners. Mention does not imply endorsement, certification, or dealer affiliation.</p>
       </div>
     </section>
 

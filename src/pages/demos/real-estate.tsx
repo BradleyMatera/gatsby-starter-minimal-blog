@@ -149,7 +149,7 @@ const RealEstateDemo: React.FC = () => (
           ))}
         </div>
         <div style={{ marginTop: "1.5rem", display: "flex", justifyContent: "center", gap: "0.75rem", flexWrap: "wrap" }}>
-          <span className="demo-trust-logo"><ShieldIcon size={20} /> MLS IDX Ready</span>
+          <span className="demo-trust-logo"><ShieldIcon size={20} /> MLS IDX Ready (illustrative)</span>
           <span className="demo-trust-logo"><HouseIcon size={20} /> Listing Syndication Example</span>
         </div>
       </div>
@@ -170,10 +170,10 @@ const RealEstateDemo: React.FC = () => (
         <h2 className="demo-section__title">Rockford Market Report</h2>
         <p className="demo-section__subtitle">Illustrative market snapshot for demo layout. Real data would come from the local MLS or a board-approved data provider.</p>
         <div className="demo-stats">
-          <div><div className="demo-stat__number">$195K</div><div className="demo-stat__label">Median Home Price</div></div>
-          <div><div className="demo-stat__number">23 days</div><div className="demo-stat__label">Avg. Days on Market</div></div>
-          <div><div className="demo-stat__number">98%</div><div className="demo-stat__label">Sale-to-List Ratio</div></div>
-          <div><div className="demo-stat__number">+4.2%</div><div className="demo-stat__label">Price Change (YoY)</div></div>
+          <div><div className="demo-stat__number">$195K</div><div className="demo-stat__label">Illustrative Median</div></div>
+          <div><div className="demo-stat__number">23 days</div><div className="demo-stat__label">Illustrative DOM</div></div>
+          <div><div className="demo-stat__number">98%</div><div className="demo-stat__label">Illustrative Sale/List</div></div>
+          <div><div className="demo-stat__number">+4.2%</div><div className="demo-stat__label">Illustrative YoY</div></div>
         </div>
       </div>
     </section>
@@ -198,7 +198,7 @@ const RealEstateDemo: React.FC = () => (
         <h2 className="demo-section__title">Neighborhood Guides</h2>
         <p className="demo-section__subtitle">Illustrative neighborhood snapshots for demo layout. Median prices and ratings are placeholders, not current market data.</p>
         <div className="demo-neighborhoods">
-          {neighborhoods.map((n) => (
+          {neighborhoods.slice(0, 4).map((n) => (
             <div key={n.name} className="demo-neighborhood">
               <div className="demo-neighborhood__image" style={{ backgroundImage: `url(/images/demos/real-estate/${n.img}.jpg)` }} />
               <div className="demo-neighborhood__body">

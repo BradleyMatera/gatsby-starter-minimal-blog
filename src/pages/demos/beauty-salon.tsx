@@ -134,10 +134,10 @@ const BeautySalonDemo: React.FC = () => (
     <section className="demo-section">
       <div className="demo-section__inner">
         <div className="demo-stats">
-          <div><div className="demo-stat__number">10</div><div className="demo-stat__label">Years in Business</div></div>
-          <div><div className="demo-stat__number">5,000+</div><div className="demo-stat__label">Happy Clients</div></div>
-          <div><div className="demo-stat__number">4.9</div><div className="demo-stat__label">Google Rating</div></div>
-          <div><div className="demo-stat__number">4</div><div className="demo-stat__label">Expert Stylists</div></div>
+          <div><div className="demo-stat__number">10</div><div className="demo-stat__label">Illustrative Years</div></div>
+          <div><div className="demo-stat__number">5,000+</div><div className="demo-stat__label">Illustrative Clients</div></div>
+          <div><div className="demo-stat__number">4.9</div><div className="demo-stat__label">Illustrative Rating</div></div>
+          <div><div className="demo-stat__number">4</div><div className="demo-stat__label">Illustrative Stylists</div></div>
         </div>
         <div style={{ marginTop: "2rem" }}>
           <ReviewBadges googleRating={4.9} googleReviewCount={143} yelpRating={4.5} yelpReviewCount={38} />
@@ -177,39 +177,23 @@ const BeautySalonDemo: React.FC = () => (
     <section className="demo-section" id="services">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Our Services</h2>
-        <p className="demo-section__subtitle">Hair, nails, skincare, and makeup — all under one roof.</p>
-        <div className="demo-services-grid">
+        <p className="demo-section__subtitle">Hair, nails, skincare, and makeup — all under one roof. Full menu with prices below.</p>
+        <div className="demo-services-grid" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }}>
           <div className="demo-service-card">
             <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/beauty-salon/hair-styling.jpg)" }} />
-            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Hair Styling</h3><p className="demo-service-card__desc">Cuts, styling, blowouts, and treatments for all hair types.</p></div>
-          </div>
-          <div className="demo-service-card">
-            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/beauty-salon/hair-color.jpg)" }} />
-            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Hair Color</h3><p className="demo-service-card__desc">Full color, highlights, balayage, and vivid color transformations.</p></div>
+            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Hair</h3><p className="demo-service-card__desc">Cuts, styling, blowouts, color, highlights, balayage, and treatments.</p></div>
           </div>
           <div className="demo-service-card">
             <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/beauty-salon/manicure.jpg)" }} />
-            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Manicures</h3><p className="demo-service-card__desc">Classic, gel, dip powder, and custom nail art designs.</p></div>
-          </div>
-          <div className="demo-service-card">
-            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/beauty-salon/pedicure.jpg)" }} />
-            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Pedicures</h3><p className="demo-service-card__desc">Classic, spa, and luxury pedicures with paraffin treatment.</p></div>
+            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Nails</h3><p className="demo-service-card__desc">Manicures, pedicures, gel, dip powder, and nail art.</p></div>
           </div>
           <div className="demo-service-card">
             <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/beauty-salon/facial.jpg)" }} />
-            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Facials</h3><p className="demo-service-card__desc">Custom, deep cleansing, anti-aging, and microdermabrasion.</p></div>
+            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Skin</h3><p className="demo-service-card__desc">Custom facials, peels, microdermabrasion, and LED therapy.</p></div>
           </div>
           <div className="demo-service-card">
             <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/beauty-salon/makeup.jpg)" }} />
-            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Makeup</h3><p className="demo-service-card__desc">Everyday, special event, bridal, and makeup lessons.</p></div>
-          </div>
-          <div className="demo-service-card">
-            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/beauty-salon/lash-extensions.jpg)" }} />
-            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Lash Extensions</h3><p className="demo-service-card__desc">Classic, volume, and hybrid lash extensions. Lash tinting too.</p></div>
-          </div>
-          <div className="demo-service-card">
-            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/beauty-salon/products.jpg)" }} />
-            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Products</h3><p className="demo-service-card__desc">Olaplex, Redken, OPI, Dermalogica, and more. Available in-salon.</p></div>
+            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Events</h3><p className="demo-service-card__desc">Bridal and special-event makeup, lash application, and lessons.</p></div>
           </div>
         </div>
       </div>
@@ -296,7 +280,7 @@ const BeautySalonDemo: React.FC = () => (
     <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Products We Use</h2>
-        <p className="demo-section__subtitle">Premium professional products available in-salon and for purchase online.</p>
+        <p className="demo-section__subtitle">Premium professional products available in-salon and for purchase. Brand names are trademarks of their respective owners.</p>
         <div className="demo-product-brands">
           {productBrands.map((b) => <div key={b} className="demo-product-brand">{b}</div>)}
         </div>

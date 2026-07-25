@@ -140,17 +140,17 @@ const HvacDemo: React.FC = () => (
         <div className="demo-two-col">
           <div>
             <div className="demo-stats" style={{ gridTemplateColumns: "1fr 1fr" }}>
-              <div><div className="demo-stat__number">14</div><div className="demo-stat__label">Years in Business</div></div>
-              <div><div className="demo-stat__number">8,000+</div><div className="demo-stat__label">Service Calls</div></div>
-              <div><div className="demo-stat__number">4.9</div><div className="demo-stat__label">Google Rating</div></div>
-              <div><div className="demo-stat__number">24/7</div><div className="demo-stat__label">Emergency Service</div></div>
+              <div><div className="demo-stat__number">14</div><div className="demo-stat__label">Illustrative Years</div></div>
+              <div><div className="demo-stat__number">24/7</div><div className="demo-stat__label">Emergency Dispatch (Illustrative)</div></div>
+              <div><div className="demo-stat__number">4.9</div><div className="demo-stat__label">Illustrative Rating</div></div>
+              <div><div className="demo-stat__number">Rockford</div><div className="demo-stat__label">NW Illinois Service Base</div></div>
             </div>
             <div style={{ marginTop: "1.5rem" }}>
               <ReviewBadges googleRating={4.9} googleReviewCount={312} yelpRating={4.5} yelpReviewCount={67} />
             </div>
             <div style={{ marginTop: "1rem", display: "flex", justifyContent: "center", gap: "0.75rem", flexWrap: "wrap" }}>
-              <span className="demo-trust-logo"><ShieldIcon size={20} /> BBB <span className="demo-trust-logo__rating">A+</span> Accredited</span>
-              <span className="demo-trust-logo"><ShieldIcon size={20} /> IL Licensed <span className="demo-trust-logo__rating">#058-204993</span></span>
+              <span className="demo-trust-logo"><ShieldIcon size={20} /> BBB A+ (illustrative)</span>
+              <span className="demo-trust-logo"><ShieldIcon size={20} /> IL License (illustrative)</span>
             </div>
           </div>
           <WeatherWidget city="Rockford" temp={28} condition="snow" context="hvac" />
@@ -162,33 +162,48 @@ const HvacDemo: React.FC = () => (
     <section className="demo-section demo-section--alt" id="services">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">What We Do</h2>
-        <p className="demo-section__subtitle">Complete heating, cooling, and indoor air quality services for residential and commercial.</p>
-        <div className="demo-services-grid">
-          <div className="demo-service-card">
-            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/hvac/heating.jpg)" }} />
-            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Heating</h3><p className="demo-service-card__desc">Furnace repair, installation, and maintenance for all brands. Heat pumps and boilers too.</p><div className="demo-service__price" style={{ marginTop: "0.5rem", fontWeight: 700, color: "var(--demo-accent)" }}>Repair from $89</div></div>
+        <p className="demo-section__subtitle">Heating, cooling, and indoor air quality for residential and commercial customers.</p>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "1rem" }}>
+          <div style={{ borderLeft: "3px solid var(--demo-accent)", paddingLeft: "1rem" }}>
+            <h3 style={{ fontSize: "1.1rem", marginBottom: "0.25rem" }}>Heating</h3>
+            <p style={{ fontSize: "0.95rem", color: "var(--demo-text-muted)", margin: 0 }}>Furnace repair and replacement, heat pumps, and boilers. Common service call: no heat, short cycling, or odd noises.</p>
           </div>
-          <div className="demo-service-card">
-            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/hvac/ac-unit.jpg)" }} />
-            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Cooling</h3><p className="demo-service-card__desc">Central AC repair, replacement, and new installation. Ductless mini-splits for additions.</p><div className="demo-service__price" style={{ marginTop: "0.5rem", fontWeight: 700, color: "var(--demo-accent)" }}>Repair from $89</div></div>
+          <div style={{ borderLeft: "3px solid var(--demo-accent)", paddingLeft: "1rem" }}>
+            <h3 style={{ fontSize: "1.1rem", marginBottom: "0.25rem" }}>Cooling</h3>
+            <p style={{ fontSize: "0.95rem", color: "var(--demo-text-muted)", margin: 0 }}>Central AC repair and install, ductless mini-splits. Manual J load calculations for proper system sizing.</p>
           </div>
-          <div className="demo-service-card">
-            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/hvac/indoor-air-quality.jpg)" }} />
-            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Indoor Air Quality</h3><p className="demo-service-card__desc">Air purifiers, humidifiers, UV lights, and duct cleaning for healthier home air.</p><div className="demo-service__price" style={{ marginTop: "0.5rem", fontWeight: 700, color: "var(--demo-accent)" }}>from $299</div></div>
+          <div style={{ borderLeft: "3px solid var(--demo-accent)", paddingLeft: "1rem" }}>
+            <h3 style={{ fontSize: "1.1rem", marginBottom: "0.25rem" }}>Indoor Air Quality</h3>
+            <p style={{ fontSize: "0.95rem", color: "var(--demo-text-muted)", margin: 0 }}>Air purifiers, humidifiers, UV lights, and duct cleaning. Recommended based on home and health needs.</p>
           </div>
-          <div className="demo-service-card">
-            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/hvac/maintenance.jpg)" }} />
-            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Maintenance</h3><p className="demo-service-card__desc">Tune-ups, inspections, and preventative maintenance. Keep your system running efficiently.</p><div className="demo-service__price" style={{ marginTop: "0.5rem", fontWeight: 700, color: "var(--demo-accent)" }}>from $89</div></div>
-          </div>
-          <div className="demo-service-card">
-            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/hvac/thermostat.jpg)" }} />
-            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Smart Thermostats</h3><p className="demo-service-card__desc">Nest, Ecobee, and Honeywell installation. Save 10-15% on energy bills with smart controls.</p><div className="demo-service__price" style={{ marginTop: "0.5rem", fontWeight: 700, color: "var(--demo-accent)" }}>from $199</div></div>
-          </div>
-          <div className="demo-service-card">
-            <div className="demo-service-card__image" style={{ backgroundImage: "url(/images/demos/hvac/duct-cleaning.jpg)" }} />
-            <div className="demo-service-card__body"><h3 className="demo-service-card__name">Duct Cleaning</h3><p className="demo-service-card__desc">Remove dust, allergens, and debris from your ductwork. Breathe cleaner air.</p><div className="demo-service__price" style={{ marginTop: "0.5rem", fontWeight: 700, color: "var(--demo-accent)" }}>from $399</div></div>
+          <div style={{ borderLeft: "3px solid var(--demo-accent)", paddingLeft: "1rem" }}>
+            <h3 style={{ fontSize: "1.1rem", marginBottom: "0.25rem" }}>Maintenance Plans</h3>
+            <p style={{ fontSize: "0.95rem", color: "var(--demo-text-muted)", margin: 0 }}>Seasonal tune-ups, priority scheduling, and repair discounts. See plan comparison below.</p>
           </div>
         </div>
+      </div>
+    </section>
+
+    {/* Emergency Triage */}
+    <section className="demo-section">
+      <div className="demo-section__inner">
+        <h2 className="demo-section__title">Is This an Emergency?</h2>
+        <p className="demo-section__subtitle">Common winter and summer HVAC problems and what to do right now.</p>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "1rem" }}>
+          <div style={{ border: "1px solid var(--demo-border)", padding: "1rem" }}>
+            <h3 style={{ fontSize: "1rem", marginBottom: "0.5rem" }}>No Heat</h3>
+            <p style={{ fontSize: "0.9rem", color: "var(--demo-text-muted)", margin: 0 }}>Check thermostat, breaker, and filter. If the furnace still won't run, call for service.</p>
+          </div>
+          <div style={{ border: "1px solid var(--demo-border)", padding: "1rem" }}>
+            <h3 style={{ fontSize: "1rem", marginBottom: "0.5rem" }}>No AC</h3>
+            <p style={{ fontSize: "0.9rem", color: "var(--demo-text-muted)", margin: 0 }}>Check thermostat setting, breaker, and outdoor unit power. Clear debris around the condenser.</p>
+          </div>
+          <div style={{ border: "1px solid var(--demo-border)", padding: "1rem" }}>
+            <h3 style={{ fontSize: "1rem", marginBottom: "0.5rem" }}>Carbon Monoxide Alarm</h3>
+            <p style={{ fontSize: "0.9rem", color: "var(--demo-text-muted)", margin: 0 }}>Leave the house and call 911 or the fire department. Do not re-enter until cleared.</p>
+          </div>
+        </div>
+        <p style={{ textAlign: "center", marginTop: "1rem", fontSize: "0.85rem", opacity: 0.7 }}>For gas leaks or suspected CO, evacuate and call emergency services first. This is general guidance, not a substitute for professional diagnosis.</p>
       </div>
     </section>
 
@@ -274,8 +289,9 @@ const HvacDemo: React.FC = () => (
     <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Brands We Service</h2>
-        <p className="demo-section__subtitle">We repair and install all major brands. If yours isn't listed, call us — we can probably help.</p>
-        <div className="demo-brands">{brands.map((b) => <div key={b} className="demo-brand">{b}</div>)}</div>
+        <p className="demo-section__subtitle">We work on most residential HVAC brands. If yours isn't listed, call — we likely service it.</p>
+        <div className="demo-brands">{brands.slice(0, 8).map((b) => <div key={b} className="demo-brand">{b}</div>)}</div>
+        <p style={{ textAlign: "center", marginTop: "1rem", fontSize: "0.85rem", opacity: 0.7 }}>Brand names are trademarks of their respective owners. Mention does not imply endorsement or certification.</p>
       </div>
     </section>
 

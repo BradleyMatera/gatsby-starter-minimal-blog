@@ -227,11 +227,11 @@ const ConsultationForm: React.FC = () => {
 
 const LawFirmDemo: React.FC = () => (
   <DemoLayout demoName="Rock River Legal Group" industry="Law Firm / Legal Services" themeColor="#c9a227" designSystem="legal">
-    <section className="demo-hero" style={{ backgroundImage: "url(/images/demos/law-firm/hero.jpg)" }}>
+    <section className="demo-hero" style={{ backgroundImage: "url(/images/demos/law-firm/office-exterior.jpg)" }}>
       <div className="demo-hero__inner">
-        <span className="demo-hero__tagline">Business · Estate · Real Estate · Northern Illinois</span>
-        <h1 className="demo-hero__title">Counsel for the work you build and the legacy you leave</h1>
-        <p className="demo-hero__subtitle">Rock River Legal Group advises business owners, families, and property buyers across Lee, Ogle, Whiteside, and Winnebago counties. Operating agreements, estate plans, real estate closings, and business succession — explained in plain English.</p>
+        <span className="demo-hero__tagline">Business · Estate · Real Estate · Dixon, IL</span>
+        <h1 className="demo-hero__title">Outside counsel for Northern Illinois businesses and families</h1>
+        <p className="demo-hero__subtitle">Rock River Legal Group handles operating agreements, estate plans, real estate closings, and business succession — explained in plain English, with flat-fee options where possible.</p>
         <div className="demo-hero__actions">
           <a href="tel:8155550915" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0915</a>
           <a href="#consultation" className="demo-btn demo-btn--ghost">Book a Consultation</a>
@@ -240,24 +240,24 @@ const LawFirmDemo: React.FC = () => (
     </section>
 
     <div className="demo-emergency-banner" style={{ background: "#2b1810", color: "#e8e0d4", borderBottom: "1px solid var(--demo-border)" }}>
-      <DocumentIcon size={18} /> <strong>Demo website:</strong> Rock River Legal Group is a fictional business concept created by Bradley Matera. All attorneys, cases, and testimonials are illustrative. No attorney-client relationship is created by this page.
+      <DocumentIcon size={18} /> <strong>Demo website:</strong> Rock River Legal Group is a fictional concept. Attorneys, cases, testimonials, and credentials are illustrative. No attorney-client relationship is created.
     </div>
 
     <section className="demo-section">
       <div className="demo-section__inner">
         <div className="demo-stats" style={{ gridTemplateColumns: "repeat(4, 1fr)" }}>
-          <div><div className="demo-stat__number">20</div><div className="demo-stat__label">Years Serving the Valley</div></div>
-          <div><div className="demo-stat__number">3</div><div className="demo-stat__label">Attorneys</div></div>
-          <div><div className="demo-stat__number">4</div><div className="demo-stat__label">Counties Served</div></div>
-          <div><div className="demo-stat__number">4.9</div><div className="demo-stat__label">Google Rating</div></div>
+          <div><div className="demo-stat__number">20</div><div className="demo-stat__label">Illustrative Years</div></div>
+          <div><div className="demo-stat__number">3</div><div className="demo-stat__label">Illustrative Attorneys</div></div>
+          <div><div className="demo-stat__number">4</div><div className="demo-stat__label">Illustrative Counties</div></div>
+          <div><div className="demo-stat__number">$150</div><div className="demo-stat__label">Illustrative Consult Fee</div></div>
         </div>
         <div style={{ marginTop: "1.5rem" }}>
           <ReviewBadges googleRating={4.9} googleReviewCount={56} yelpRating={5.0} yelpReviewCount={8} />
         </div>
         <div style={{ marginTop: "1rem", display: "flex", justifyContent: "center", gap: "0.75rem", flexWrap: "wrap" }}>
-          <span className="demo-trust-logo"><CheckIcon size={20} /> Illinois State Bar</span>
-          <span className="demo-trust-logo"><CheckIcon size={20} /> Lee County Bar Association</span>
-          <span className="demo-trust-logo"><QuoteIcon size={20} /> BBB <span className="demo-trust-logo__rating">A+</span> Accredited</span>
+          <span className="demo-trust-logo"><CheckIcon size={20} /> Illinois State Bar (illustrative)</span>
+          <span className="demo-trust-logo"><CheckIcon size={20} /> Lee County Bar (illustrative)</span>
+          <span className="demo-trust-logo"><QuoteIcon size={20} /> BBB <span className="demo-trust-logo__rating">A+</span> (illustrative)</span>
         </div>
       </div>
     </section>
@@ -280,16 +280,15 @@ const LawFirmDemo: React.FC = () => (
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Practice Areas</h2>
         <p className="demo-section__subtitle">Focused counsel for business, estate, and real estate matters across the Rock River Valley.</p>
-        <div className="demo-services-grid">
+        <div className="demo-two-col" style={{ gap: "1.5rem" }}>
           {practiceAreas.map((p) => {
             const Icon = p.icon;
             return (
-              <div key={p.name} className="demo-service-card">
-                <div className="demo-service-card__image" style={{ backgroundImage: `url(/images/demos/law-firm/${p.img}.jpg)` }} />
-                <div className="demo-service-card__body">
-                  <div className="demo-service-card__icon"><Icon size={28} /></div>
-                  <h3 className="demo-service-card__name">{p.name}</h3>
-                  <p className="demo-service-card__desc">{p.desc}</p>
+              <div key={p.name} className="demo-split-image-text" style={{ alignItems: "flex-start", gap: "1rem" }}>
+                <div className="demo-split-image-text__image" style={{ backgroundImage: `url(/images/demos/law-firm/${p.img}.jpg)`, height: "140px", minWidth: "200px", flex: "0 0 200px" }} />
+                <div className="demo-split-image-text__content" style={{ padding: 0 }}>
+                  <h3 className="demo-split-image-text__title" style={{ fontSize: "1.15rem", marginBottom: "0.5rem" }}><span style={{ marginRight: "0.5rem", verticalAlign: "middle" }}><Icon size={22} /></span>{p.name}</h3>
+                  <p className="demo-split-image-text__text" style={{ fontSize: "0.95rem" }}>{p.desc}</p>
                 </div>
               </div>
             );
@@ -310,16 +309,14 @@ const LawFirmDemo: React.FC = () => (
     <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Representative Experience</h2>
-        <p className="demo-section__subtitle">Illustrative sample matters showing the types of business, estate, and real estate work we handle. These are fictional summaries for demonstration purposes.</p>
-        <div className="demo-services-grid">
+        <p className="demo-section__subtitle">Illustrative sample matters. These fictional summaries show the types of business, estate, and real estate work the firm could handle.</p>
+        <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
           {representativeExperience.map((c, i) => (
-            <div key={i} className="demo-service-card">
-              <div className="demo-service-card__body">
-                <span className="demo-service-card__tag" style={{ marginBottom: "0.5rem", display: "inline-block" }}>{c.area}</span>
-                <h3 className="demo-service-card__name" style={{ fontSize: "1.25rem" }}>{c.matter}</h3>
-                <p className="demo-service-card__desc">{c.desc}</p>
-                <p style={{ fontSize: "0.85rem", marginTop: "0.75rem", opacity: 0.7 }}>Attorney: {c.attorney} · {c.note}</p>
-              </div>
+            <div key={i} style={{ borderLeft: "3px solid var(--demo-accent)", paddingLeft: "1.25rem" }}>
+              <span className="demo-service-card__tag">{c.area}</span>
+              <h3 style={{ fontSize: "1.2rem", margin: "0.35rem 0 0.5rem" }}>{c.matter}</h3>
+              <p style={{ fontSize: "0.95rem", color: "var(--demo-text-muted)", lineHeight: 1.6 }}>{c.desc}</p>
+              <p style={{ fontSize: "0.85rem", marginTop: "0.5rem", opacity: 0.7 }}>Attorney: {c.attorney} · {c.note}</p>
             </div>
           ))}
         </div>
@@ -332,27 +329,18 @@ const LawFirmDemo: React.FC = () => (
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Who we serve</h2>
         <p className="demo-section__subtitle">Local businesses and families whose legal needs cross business, estate, and property.</p>
-        <div className="demo-services-grid" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }}>
-          <div className="demo-service-card">
-            <div className="demo-service-card__body">
-              <div className="demo-service-card__icon"><ScrollIcon size={28} /></div>
-              <h3 className="demo-service-card__name">Small Businesses</h3>
-              <p className="demo-service-card__desc">LLC formation, operating agreements, contract review, vendor disputes, and ongoing counsel.</p>
-            </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "1rem" }}>
+          <div style={{ borderLeft: "3px solid var(--demo-accent)", paddingLeft: "1rem" }}>
+            <h3 style={{ fontSize: "1.1rem", marginBottom: "0.5rem" }}>Small Businesses</h3>
+            <p style={{ fontSize: "0.95rem", color: "var(--demo-text-muted)" }}>LLC formation, operating agreements, contract review, vendor disputes, and ongoing counsel.</p>
           </div>
-          <div className="demo-service-card">
-            <div className="demo-service-card__body">
-              <div className="demo-service-card__icon"><DocumentIcon size={28} /></div>
-              <h3 className="demo-service-card__name">Families & Estates</h3>
-              <p className="demo-service-card__desc">Wills, trusts, powers of attorney, probate administration, and farm/business succession.</p>
-            </div>
+          <div style={{ borderLeft: "3px solid var(--demo-accent)", paddingLeft: "1rem" }}>
+            <h3 style={{ fontSize: "1.1rem", marginBottom: "0.5rem" }}>Families & Estates</h3>
+            <p style={{ fontSize: "0.95rem", color: "var(--demo-text-muted)" }}>Wills, trusts, powers of attorney, probate administration, and farm/business succession.</p>
           </div>
-          <div className="demo-service-card">
-            <div className="demo-service-card__body">
-              <div className="demo-service-card__icon"><MapPinIcon size={28} /></div>
-              <h3 className="demo-service-card__name">Property Buyers & Sellers</h3>
-              <p className="demo-service-card__desc">Residential and commercial closings, title review, deed preparation, and boundary matters.</p>
-            </div>
+          <div style={{ borderLeft: "3px solid var(--demo-accent)", paddingLeft: "1rem" }}>
+            <h3 style={{ fontSize: "1.1rem", marginBottom: "0.5rem" }}>Property Buyers & Sellers</h3>
+            <p style={{ fontSize: "0.95rem", color: "var(--demo-text-muted)" }}>Residential and commercial closings, title review, deed preparation, and boundary matters.</p>
           </div>
         </div>
       </div>
@@ -364,10 +352,10 @@ const LawFirmDemo: React.FC = () => (
         <div className="demo-split-image-text">
           <div className="demo-split-image-text__content">
             <h2 className="demo-split-image-text__title">Clear counsel, not legalese</h2>
-            <p className="demo-split-image-text__text">Our attorneys trained at the University of Illinois, Northwestern Pritzker, and the University of Iowa — then came home to the Rock River Valley. Big-firm training, small-town accessibility.</p>
-            <p className="demo-split-image-text__text">We keep current with Illinois business law, estate planning rules, and local real estate practice. But we explain options in plain English and only recommend work that moves your matter forward.</p>
+            <p className="demo-split-image-text__text">Attorneys at Rock River Legal Group combine training at Illinois, Northwestern Pritzker, and Iowa law schools with local practice in the Rock River Valley. Big-firm training, small-town accessibility.</p>
+            <p className="demo-split-image-text__text">We explain options in plain English, recommend only work that moves your matter forward, and keep current with Illinois business law, estate planning rules, and local real estate practice.</p>
           </div>
-          <div className="demo-split-image-text__image" style={{ backgroundImage: "url(/images/demos/law-firm/law-library.jpg)" }} />
+          <div className="demo-split-image-text__image" style={{ backgroundImage: "url(/images/demos/law-firm/attorney-office.jpg)" }} />
         </div>
       </div>
     </section>
@@ -452,14 +440,16 @@ const LawFirmDemo: React.FC = () => (
     <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Client Resources</h2>
-        <p className="demo-section__subtitle">Free downloadable guides to help you prepare before you call. No email required.</p>
-        <div className="demo-services-grid">
+        <p className="demo-section__subtitle">Downloadable guides to help you prepare before you call. These are illustrative samples.</p>
+        <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
           {resources.map((r) => (
-            <div key={r.title} className="demo-service-card">
-              <div className="demo-service-card__icon"><DocumentIcon size={32} /></div>
-              <h3 className="demo-service-card__title">{r.title}</h3>
-              <p className="demo-service-card__desc">{r.desc}</p>
-              <span className="demo-service-card__tag">{r.type}</span>
+            <div key={r.title} style={{ display: "flex", alignItems: "flex-start", gap: "1rem", padding: "1rem", border: "1px solid var(--demo-border)" }}>
+              <div style={{ color: "var(--demo-accent)", flexShrink: 0 }}><DocumentIcon size={32} /></div>
+              <div>
+                <h3 style={{ fontSize: "1.1rem", marginBottom: "0.25rem" }}>{r.title}</h3>
+                <p style={{ fontSize: "0.95rem", color: "var(--demo-text-muted)", marginBottom: "0.5rem" }}>{r.desc}</p>
+                <span className="demo-service-card__tag">{r.type}</span>
+              </div>
             </div>
           ))}
         </div>

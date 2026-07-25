@@ -46,15 +46,42 @@ const seasonal = [
   { Icon: SnowflakeIcon, season: "Winter", title: "Snow & Ice", list: ["Driveway plowing", "Sidewalk clearing", "Salting", "Ice management"] },
 ];
 
-const services = [
-  { name: "Lawn Care", desc: "Weekly mowing, edging, fertilizing, and weed control.", img: "lawn-care" },
-  { name: "Hardscaping", desc: "Patios, walkways, retaining walls, and fire pits.", img: "patio" },
-  { name: "Garden Design", desc: "Flower beds, shrubs, trees, and seasonal color.", img: "garden-design" },
-  { name: "Planting", desc: "Tree and shrub installation, flower bed prep.", img: "planting" },
-  { name: "Tree Work", desc: "Pruning, trimming, and safe tree removal.", img: "tree-removal" },
-  { name: "Irrigation", desc: "Sprinkler installation, repair, and winterization.", img: "sprinkler" },
-  { name: "Snow Removal", desc: "Driveway plowing, sidewalk clearing, salting.", img: "snow-removal" },
-  { name: "Retaining Walls", desc: "Stone and timber walls for erosion control.", img: "hardscaping" },
+const serviceCategories = [
+  {
+    category: "Lawn & Turf",
+    items: [
+      { name: "Weekly Mowing", desc: "Mowing, edging, and blowing of hard surfaces." },
+      { name: "Fertilization", desc: "5-step program customized to Northern Illinois soil." },
+      { name: "Weed & Grub Control", desc: "Targeted applications for common lawn pests." },
+      { name: "Aeration & Overseeding", desc: "Fall core aeration and slit-seeding for thick turf." },
+    ],
+  },
+  {
+    category: "Gardens & Trees",
+    items: [
+      { name: "Garden Design", desc: "Perennial beds, shrubs, and seasonal color plans." },
+      { name: "Planting", desc: "Tree, shrub, and perennial bed installation." },
+      { name: "Pruning & Trimming", desc: "Ornamental pruning and deadwood removal." },
+      { name: "Mulching", desc: "Spring and fall mulch refresh for beds." },
+    ],
+  },
+  {
+    category: "Hardscapes & Extras",
+    items: [
+      { name: "Patios & Walkways", desc: "Paver and natural-stone patios and paths." },
+      { name: "Retaining Walls", desc: "Stone and timber walls for grade changes." },
+      { name: "Fire Pits & Seating", desc: "Built-in fire pits, seating walls, and lighting." },
+      { name: "Irrigation", desc: "Sprinkler install, repair, and fall blowouts." },
+    ],
+  },
+  {
+    category: "Winter Services",
+    items: [
+      { name: "Snow Plowing", desc: "Driveway and parking-lot clearing." },
+      { name: "Sidewalk Shoveling", desc: "Walks and entry steps cleared and salted." },
+      { name: "Ice Management", desc: "Salt and ice-melt application." },
+    ],
+  },
 ];
 
 const projects = [
@@ -112,10 +139,10 @@ const LandscapingDemo: React.FC = () => (
         <div className="demo-two-col">
           <div>
             <div className="demo-stats" style={{ gridTemplateColumns: "1fr 1fr" }}>
-              <div><div className="demo-stat__number">500+</div><div className="demo-stat__label">Properties Served</div></div>
-              <div><div className="demo-stat__number">8</div><div className="demo-stat__label">Years in Business</div></div>
-              <div><div className="demo-stat__number">4.9</div><div className="demo-stat__label">Google Rating</div></div>
-              <div><div className="demo-stat__number">100%</div><div className="demo-stat__label">Satisfaction Guaranteed</div></div>
+              <div><div className="demo-stat__number">500+</div><div className="demo-stat__label">Illustrative Properties</div></div>
+              <div><div className="demo-stat__number">8</div><div className="demo-stat__label">Illustrative Years</div></div>
+              <div><div className="demo-stat__number">4.9</div><div className="demo-stat__label">Illustrative Rating</div></div>
+              <div><div className="demo-stat__number">Year-Round</div><div className="demo-stat__label">Seasonal Service</div></div>
             </div>
             <div style={{ marginTop: "1.5rem" }}>
               <ReviewBadges googleRating={4.9} googleReviewCount={156} yelpRating={4.5} yelpReviewCount={42} />
@@ -126,19 +153,23 @@ const LandscapingDemo: React.FC = () => (
       </div>
     </section>
 
-    {/* Services Grid with images */}
+    {/* Services by category */}
     <section className="demo-section demo-section--alt">
       <div className="demo-section__inner">
-        <h2 className="demo-section__title">Our Services</h2>
-        <p className="demo-section__subtitle">Full-service landscaping from weekly mowing to complete outdoor transformations.</p>
-        <div className="demo-services-grid">
-          {services.map((s) => (
-            <div key={s.name} className="demo-service-card">
-              <div className="demo-service-card__image" style={{ backgroundImage: `url(/images/demos/landscaping/${s.img}.jpg)` }} />
-              <div className="demo-service-card__body">
-                <h3 className="demo-service-card__name">{s.name}</h3>
-                <p className="demo-service-card__desc">{s.desc}</p>
-              </div>
+        <h2 className="demo-section__title">Services</h2>
+        <p className="demo-section__subtitle">Full-service landscaping, organized by what you need.</p>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "1.5rem" }}>
+          {serviceCategories.map((cat) => (
+            <div key={cat.category} style={{ borderTop: "3px solid var(--demo-accent)", paddingTop: "1rem" }}>
+              <h3 style={{ fontSize: "1.1rem", marginBottom: "0.75rem", textTransform: "uppercase", letterSpacing: "0.05em" }}>{cat.category}</h3>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+                {cat.items.map((item) => (
+                  <li key={item.name}>
+                    <strong style={{ color: "var(--demo-heading)", fontSize: "0.95rem" }}>{item.name}</strong>
+                    <p style={{ fontSize: "0.9rem", color: "var(--demo-text-muted)", margin: "0.15rem 0 0" }}>{item.desc}</p>
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
@@ -247,16 +278,16 @@ const LandscapingDemo: React.FC = () => (
     <section className="demo-section">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Year-Round Service</h2>
-        <p className="demo-section__subtitle">What we do changes with the seasons. Here's what's included each quarter.</p>
-        <div className="demo-seasonal">
+        <p className="demo-section__subtitle">What we do changes with the seasons. Tap a season to see the focus.</p>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "1rem" }}>
           {seasonal.map((s) => {
             const { Icon } = s;
             return (
-              <div key={s.season} className="demo-seasonal__card">
-                <div className="demo-seasonal__icon"><Icon size={24} /></div>
-                <div className="demo-seasonal__season">{s.season}</div>
-                <h3 className="demo-seasonal__title">{s.title}</h3>
-                <ul className="demo-seasonal__list">{s.list.map((item) => <li key={item}>{item}</li>)}</ul>
+              <div key={s.season} style={{ border: "1px solid var(--demo-border)", padding: "1rem" }}>
+                <div style={{ color: "var(--demo-accent)", marginBottom: "0.5rem" }}><Icon size={24} /></div>
+                <div style={{ fontSize: "0.85rem", textTransform: "uppercase", letterSpacing: "0.05em", color: "var(--demo-text-muted)" }}>{s.season}</div>
+                <h3 style={{ fontSize: "1.1rem", margin: "0.25rem 0 0.5rem" }}>{s.title}</h3>
+                <ul style={{ paddingLeft: "1.25rem", fontSize: "0.9rem", lineHeight: 1.6, margin: 0 }}>{s.list.map((item) => <li key={item}>{item}</li>)}</ul>
               </div>
             );
           })}
