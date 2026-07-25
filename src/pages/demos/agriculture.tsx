@@ -148,7 +148,7 @@ const CommodityPriceTicker: React.FC = () => {
             <span key={i} style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", fontSize: "1rem", fontWeight: 600 }}>
               <span style={{ color: "var(--demo-heading)" }}>{item.commodity}</span>
               <span style={{ color: "var(--demo-accent)", fontWeight: 700 }}>{item.price}<span style={{ fontSize: "0.8rem", color: "var(--demo-text-muted)" }}>{item.unit}</span></span>
-              <span style={{ fontSize: "0.75rem", color: item.change.startsWith("+") ? "#2d7a2d" : "#c0392b" }}>{item.change}</span>
+              <span style={{ fontSize: "0.75rem", color: item.change.startsWith("+") ? "#1a5a1a" : "#8b1a1a" }}>{item.change}</span>
               <span style={{ color: "var(--demo-text-muted)", margin: "0 0.5rem" }}>|</span>
             </span>
           ))}
@@ -444,7 +444,7 @@ const AgricultureDemo: React.FC = () => (
                       padding: "0.25rem 0.6rem",
                       borderRadius: "999px",
                       background: item.statusType === "in-stock" ? "rgba(45, 122, 45, 0.12)" : item.statusType === "on-order" ? "rgba(200, 150, 0, 0.12)" : "rgba(100, 100, 100, 0.12)",
-                      color: item.statusType === "in-stock" ? "#2d7a2d" : item.statusType === "on-order" ? "#6b4d00" : "var(--demo-text-muted)",
+                      color: item.statusType === "in-stock" ? "#1a5a1a" : item.statusType === "on-order" ? "#4a3500" : "var(--demo-text-muted)",
                     }}>
                       {item.statusType === "in-stock" && <CheckIcon size={14} />}
                       {item.statusType === "on-order" && <ClockIcon size={14} />}
