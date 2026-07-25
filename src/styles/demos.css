@@ -112,6 +112,7 @@
   --demo-accent: #c9a227;
   --demo-accent-soft: rgba(201,162,39,0.15);
   --demo-border: #3a2e22;
+  --demo-card-bg: #221a14;
   --demo-font-heading: 'Playfair Display', Georgia, serif;
   --demo-font-body: 'Lora', Georgia, serif;
   --demo-radius: 2px;
@@ -131,6 +132,7 @@
   --demo-accent: #4a7c3a;
   --demo-accent-soft: rgba(74,124,58,0.12);
   --demo-border: #d4dcc8;
+  --demo-card-bg: #ffffff;
   --demo-font-heading: 'Nunito', sans-serif;
   --demo-font-body: 'Nunito', sans-serif;
   --demo-radius: 12px;
@@ -150,6 +152,7 @@
   --demo-accent: #e85d04;
   --demo-accent-soft: rgba(232,93,4,0.1);
   --demo-border: #c5cdd6;
+  --demo-card-bg: #ffffff;
   --demo-font-heading: 'Oswald', sans-serif;
   --demo-font-body: 'Roboto', sans-serif;
   --demo-radius: 0px;
@@ -169,6 +172,7 @@
   --demo-accent: #ff6b1a;
   --demo-accent-soft: rgba(255,107,26,0.12);
   --demo-border: #3a3a3e;
+  --demo-card-bg: #2a2a2d;
   --demo-font-heading: 'Roboto Mono', monospace;
   --demo-font-body: 'Barlow', sans-serif;
   --demo-radius: 0px;
@@ -188,6 +192,7 @@
   --demo-accent: #b8943f;
   --demo-accent-soft: rgba(184,148,63,0.1);
   --demo-border: #ddd8ce;
+  --demo-card-bg: #ffffff;
   --demo-font-heading: 'Cormorant Garamond', Georgia, serif;
   --demo-font-body: 'Montserrat', sans-serif;
   --demo-radius: 2px;
@@ -207,6 +212,7 @@
   --demo-accent: #d63384;
   --demo-accent-soft: rgba(214,51,132,0.1);
   --demo-border: #f0d4e0;
+  --demo-card-bg: #ffffff;
   --demo-font-heading: 'Poppins', sans-serif;
   --demo-font-body: 'Poppins', sans-serif;
   --demo-font-script: 'Dancing Script', cursive;
@@ -2412,6 +2418,10 @@
 .demo-service-card__body {
   padding: 1.25rem;
 }
+.demo-service-card__icon {
+  color: var(--demo-accent);
+  margin-bottom: 0.75rem;
+}
 .demo-service-card__name {
   font-size: 1.125rem;
   font-weight: 700;
@@ -2461,10 +2471,12 @@
   font-size: clamp(1.5rem, 4vw, 2.5rem);
   color: #fff;
   margin-bottom: 1rem;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.7);
 }
 .demo-feature-image__text {
   font-size: 1.125rem;
-  color: rgba(255,255,255,0.9);
+  color: rgba(255,255,255,0.95);
+  text-shadow: 0 1px 6px rgba(0,0,0,0.7);
 }
 
 /* ==========================================================================
@@ -2512,10 +2524,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background: var(--demo-surface);
 }
 .demo-split-image-text__title {
   font-size: 1.75rem;
   margin-bottom: 1rem;
+  color: var(--demo-heading);
 }
 .demo-split-image-text__text {
   font-size: 1rem;
