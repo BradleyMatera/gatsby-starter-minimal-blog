@@ -115,7 +115,7 @@ const StarRating: React.FC = () => (
 );
 
 const LandscapingDemo: React.FC = () => (
-  <DemoLayout demoName="GreenScape Pro" industry="Landscaping" themeColor="#4a7c3a" designSystem="organic">
+  <DemoLayout demoName="GreenScape Pro" industry="Landscaping" themeColor="#2f5a20" designSystem="organic">
     {/* Hero with real garden photo */}
     <section className="demo-hero" style={{ backgroundImage: "url(/images/demos/landscaping/hero.jpg)" }}>
       <div className="demo-hero__inner">

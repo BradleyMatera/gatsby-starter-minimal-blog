@@ -295,7 +295,7 @@ const ServiceRequestForm: React.FC = () => {
 };
 
 const AgricultureDemo: React.FC = () => (
-  <DemoLayout demoName="Kishwaukee Valley Farm Services" industry="Agriculture / Farm Supply" themeColor="#4a7c3a" designSystem="organic">
+  <DemoLayout demoName="Kishwaukee Valley Farm Services" industry="Agriculture / Farm Supply" themeColor="#2f5a20" designSystem="organic">
     <section className="demo-hero" style={{ backgroundImage: "url(/images/demos/agriculture/hero.jpg)" }}>
       <div className="demo-hero__inner">
         <span className="demo-hero__tagline">Independent Equipment Service, Parts & Used Equipment · Kishwaukee Valley</span>
@@ -444,7 +444,7 @@ const AgricultureDemo: React.FC = () => (
                       padding: "0.25rem 0.6rem",
                       borderRadius: "999px",
                       background: item.statusType === "in-stock" ? "rgba(45, 122, 45, 0.12)" : item.statusType === "on-order" ? "rgba(200, 150, 0, 0.12)" : "rgba(100, 100, 100, 0.12)",
-                      color: item.statusType === "in-stock" ? "#2d7a2d" : item.statusType === "on-order" ? "#b8860b" : "var(--demo-text-muted)",
+                      color: item.statusType === "in-stock" ? "#2d7a2d" : item.statusType === "on-order" ? "#6b4d00" : "var(--demo-text-muted)",
                     }}>
                       {item.statusType === "in-stock" && <CheckIcon size={14} />}
                       {item.statusType === "on-order" && <ClockIcon size={14} />}
