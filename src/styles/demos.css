@@ -285,18 +285,17 @@
   --theme-ui-colors-surfaceAlt: var(--demo-surface-alt);
 }
 .demo-page * { box-sizing: border-box; }
-.demo-page h1, .demo-page h2, .demo-page h3, .demo-page h4 {
+:where(.demo-page) h1, :where(.demo-page) h2, :where(.demo-page) h3, :where(.demo-page) h4 {
   font-family: var(--demo-font-heading);
-  color: var(--demo-heading) !important;
+  color: var(--demo-heading);
   line-height: 1.2;
   margin: 0;
-  text-shadow: none !important;
 }
 .demo-hero__title {
   color: #fff !important;
   text-shadow: 0 2px 8px rgba(0,0,0,0.9), 0 0 30px rgba(0,0,0,0.5) !important;
 }
-.demo-page p { margin: 0; color: var(--demo-text); }
+:where(.demo-page) p { margin: 0; color: var(--demo-text); }
 .demo-hero__subtitle {
   color: #fff !important;
   text-shadow: 0 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.5) !important;
@@ -2394,6 +2393,7 @@
   justify-content: center;
   gap: 0.5rem;
 }
+.demo-emergency-banner strong { color: #fff; }
 
 /* ==========================================================================
    SERVICES GRID

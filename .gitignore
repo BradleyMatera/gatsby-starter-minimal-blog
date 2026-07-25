@@ -100,3 +100,6 @@ e2e/screenshots/
 e2e/ui-ux-bug-report.md
 e2e/audit-*.json
 e2e/test-*.html
+Bradley-Matera-Premium-Industry-Demo-Audit.md
+capture-demos.mjs
+capture-elements.mjs
