@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Demo Pages — 6 Distinct Design Systems
+   Demo Pages — 8 Distinct Design Systems
    Each demo has its own fonts, colors, border-radius, and layout style.
    Real stock photos replace colored boxes.
    ========================================================================== */
@@ -220,6 +220,46 @@
   --demo-radius-lg: 28px;
   --demo-shadow: 0 6px 24px rgba(214,51,132,0.1);
   --demo-hero-overlay: rgba(50,25,40,0.78);
+}
+
+/* 7. LEGAL — Law Firm: deep navy, warm ivory, restrained serif */
+.demo-theme--legal {
+  --demo-bg: #0f1e30;
+  --demo-surface: #162844;
+  --demo-surface-alt: #1e3450;
+  --demo-text: #f5f0e8;
+  --demo-text-muted: #a8aeb8;
+  --demo-heading: #f5efe4;
+  --demo-accent: #c9a227;
+  --demo-accent-soft: rgba(201,162,39,0.12);
+  --demo-border: #2a4563;
+  --demo-card-bg: #162844;
+  --demo-font-heading: 'Cormorant Garamond', Georgia, serif;
+  --demo-font-body: 'Lora', Georgia, serif;
+  --demo-radius: 2px;
+  --demo-radius-lg: 4px;
+  --demo-shadow: 0 8px 32px rgba(0,0,0,0.45);
+  --demo-hero-overlay: rgba(10,25,45,0.82);
+}
+
+/* 8. DENTAL — Family Dentistry: warm ivory, ink, sage, soft coral */
+.demo-theme--dental {
+  --demo-bg: #faf8f5;
+  --demo-surface: #ffffff;
+  --demo-surface-alt: #f0f2eb;
+  --demo-text: #1f2933;
+  --demo-text-muted: #6b7c6d;
+  --demo-heading: #2c5e5e;
+  --demo-accent: #e07a5f;
+  --demo-accent-soft: rgba(224,122,95,0.1);
+  --demo-border: #e5e0d6;
+  --demo-card-bg: #ffffff;
+  --demo-font-heading: 'Poppins', sans-serif;
+  --demo-font-body: 'Nunito', sans-serif;
+  --demo-radius: 12px;
+  --demo-radius-lg: 20px;
+  --demo-shadow: 0 6px 24px rgba(44,94,94,0.08);
+  --demo-hero-overlay: rgba(25,45,45,0.72);
 }
 
 /* ==========================================================================
@@ -2611,4 +2651,36 @@
   background: rgba(0,0,0,0.05);
   border-radius: 999px;
   color: #555;
+}
+
+/* ==========================================================================
+   LEGAL & DENTAL THEME OVERRIDES
+   ========================================================================== */
+.demo-theme--legal .demo-service-card { border-radius: 4px; }
+.demo-theme--legal .demo-team-card { border-radius: 4px; }
+.demo-theme--legal .demo-food-gallery__item { border-radius: 4px; }
+.demo-theme--legal .demo-testimonial {
+  border-left: 3px solid var(--demo-accent);
+  border-radius: 0;
+}
+.demo-theme--legal .demo-btn {
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.85rem;
+}
+
+.demo-theme--dental .demo-service-card { border-radius: 12px; }
+.demo-theme--dental .demo-team-card { border-radius: 12px; }
+.demo-theme--dental .demo-food-gallery__item { border-radius: 12px; }
+.demo-theme--dental .demo-testimonial {
+  border: none;
+  box-shadow: var(--demo-shadow);
+  border-radius: 12px;
+}
+.demo-theme--dental .demo-btn {
+  border-radius: 999px;
+}
+.demo-theme--dental .demo-section__title {
+  font-weight: 600;
 }

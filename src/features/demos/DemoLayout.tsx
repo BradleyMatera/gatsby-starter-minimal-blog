@@ -2,7 +2,7 @@ import * as React from "react";
 import { Global } from "@emotion/react";
 import DemoBanner from "./DemoBanner";
 
-type DesignSystem = "elegant" | "organic" | "industrial" | "garage" | "luxury" | "soft";
+type DesignSystem = "elegant" | "organic" | "industrial" | "garage" | "luxury" | "soft" | "legal" | "dental";
 
 type DemoLayoutProps = {
   children: React.ReactNode;
