@@ -24,6 +24,8 @@ export type CityPageConfig = {
   marketContext: string;
   /** City-specific details: landmarks, neighborhoods, local business types */
   localDetails: string;
+  /** City-specific industries for the industries section */
+  industries?: string[];
   /** All city slugs for cross-linking (including this one) */
   allCitySlugs: Array<{ slug: string; label: string }>;
   /** County name */
@@ -42,7 +44,7 @@ const serviceBullets = (city: string) => [
 ];
 
 export const createCityPage = (config: CityPageConfig) => {
-  const { city, state, stateAbbrev, slug, pageTitle, pageDescription, distance, direction, cityContext, marketContext, localDetails, allCitySlugs, county, cityImage } = config;
+  const { city, state, stateAbbrev, slug, pageTitle, pageDescription, distance, direction, cityContext, marketContext, localDetails, industries, allCitySlugs, county, cityImage } = config;
   const pathname = `/${slug}/`;
   const otherCities = allCitySlugs.filter((c) => c.slug !== slug);
 
@@ -383,27 +385,31 @@ export const createCityPage = (config: CityPageConfig) => {
 
       <Section
         eyebrow="Industries"
-        title="Industries I work with"
+        title={`Industries I work with in ${city}`}
         description={
           <p>
-            Small businesses across {city} and the surrounding region — if you need a website that works on mobile and shows up on Google, I can help.
+            Based on the real economy of {city} and the surrounding {county} region — if you need a website that works on mobile and shows up on Google, I can help.
           </p>
         }
       >
         <Card variant="outline">
           <ul className="feature-list">
-            <li>Automotive repair and dealerships</li>
-            <li>Landscaping and lawn care</li>
-            <li>Home services (HVAC, plumbing, roofing)</li>
-            <li>Restaurants and food trucks</li>
-            <li>Beauty and fitness</li>
-            <li>Real estate and property management</li>
-            <li>Consulting and professional services</li>
-            <li>Nonprofits and community organizations</li>
-            <li>Retail and e-commerce</li>
-            <li>Health and dental</li>
-            <li>Manufacturing and industrial services</li>
-            <li>Construction and contractors</li>
+            {(industries && industries.length > 0 ? industries : [
+              "Automotive repair and dealerships",
+              "Landscaping and lawn care",
+              "Home services (HVAC, plumbing, roofing)",
+              "Restaurants and food trucks",
+              "Beauty and fitness",
+              "Real estate and property management",
+              "Consulting and professional services",
+              "Nonprofits and community organizations",
+              "Retail and e-commerce",
+              "Health and dental",
+              "Manufacturing and industrial services",
+              "Construction and contractors",
+            ]).map((industry) => (
+              <li key={industry}>{industry}</li>
+            ))}
           </ul>
         </Card>
       </Section>
@@ -490,6 +496,54 @@ export const createCityPage = (config: CityPageConfig) => {
               </p>
               <div className="card-actions">
                 <Link data-variant="primary" to="/demos/beauty-salon/">See salon sample</Link>
+              </div>
+            </div>
+          </div>
+          <div className="pkg-card">
+            <img src="/package-images/city-demo-manufacturing.svg" alt="Manufacturing Website illustration" className="pkg-card__bg" loading="lazy" />
+            <div className="pkg-card__body">
+              <h3 className="pkg-card__title">Manufacturing Website</h3>
+              <p className="pkg-card__desc">
+                Metal fabrication shop with capabilities, equipment list, quote form, and ISO certifications.
+              </p>
+              <div className="card-actions">
+                <Link data-variant="primary" to="/demos/manufacturing/">See manufacturing sample</Link>
+              </div>
+            </div>
+          </div>
+          <div className="pkg-card">
+            <img src="/package-images/city-demo-agriculture.svg" alt="Agriculture Website illustration" className="pkg-card__bg" loading="lazy" />
+            <div className="pkg-card__body">
+              <h3 className="pkg-card__title">Agriculture Website</h3>
+              <p className="pkg-card__desc">
+                Farm supply company with equipment sales, repair services, seed ordering, and crop planning.
+              </p>
+              <div className="card-actions">
+                <Link data-variant="primary" to="/demos/agriculture/">See agriculture sample</Link>
+              </div>
+            </div>
+          </div>
+          <div className="pkg-card">
+            <img src="/package-images/city-demo-lawfirm.svg" alt="Law Firm Website illustration" className="pkg-card__bg" loading="lazy" />
+            <div className="pkg-card__body">
+              <h3 className="pkg-card__title">Law Firm Website</h3>
+              <p className="pkg-card__desc">
+                Law firm with practice areas, attorney bios, consultation booking, and client resources.
+              </p>
+              <div className="card-actions">
+                <Link data-variant="primary" to="/demos/law-firm/">See law firm sample</Link>
+              </div>
+            </div>
+          </div>
+          <div className="pkg-card">
+            <img src="/package-images/city-demo-dental.svg" alt="Dental Practice Website illustration" className="pkg-card__bg" loading="lazy" />
+            <div className="pkg-card__body">
+              <h3 className="pkg-card__title">Dental Practice Website</h3>
+              <p className="pkg-card__desc">
+                Dental practice with services, new patient forms, insurance info, and online scheduling.
+              </p>
+              <div className="card-actions">
+                <Link data-variant="primary" to="/demos/dental/">See dental sample</Link>
               </div>
             </div>
           </div>

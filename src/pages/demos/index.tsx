@@ -12,6 +12,9 @@ import {
   CarIcon,
   HouseIcon,
   ScissorsIcon,
+  ToolsIcon,
+  ScrollIcon,
+  SpaIcon,
 } from "../../site/icons";
 
 const pathname = "/demos/";
@@ -91,6 +94,46 @@ const DEMOS: DemoEntry[] = [
     heroImage: "/images/demos/beauty-salon/hero.jpg",
     features: ["Service Menu", "Stylist Team", "Online Booking", "Gallery"],
   },
+  {
+    slug: "manufacturing",
+    name: "Sterling Metalworks",
+    industry: "Manufacturing / Metal Fabrication",
+    description: "Metal fabrication shop with capabilities, equipment list, quote form, ISO certifications, and project gallery.",
+    Icon: ToolsIcon,
+    color: "#4a6fa5",
+    heroImage: "/images/demos/manufacturing/hero.jpg",
+    features: ["Capabilities", "Equipment List", "Quote Form", "ISO Certified"],
+  },
+  {
+    slug: "agriculture",
+    name: "Kishwaukee Valley Farm Services",
+    industry: "Agriculture / Farm Supply",
+    description: "Farm supply company with equipment sales, repair services, seed/fertilizer ordering, and crop planning resources.",
+    Icon: LeafIcon,
+    color: "#4a7c3a",
+    heroImage: "/images/demos/agriculture/hero.jpg",
+    features: ["Equipment Sales", "Repair Services", "Seed Ordering", "Crop Planning"],
+  },
+  {
+    slug: "law-firm",
+    name: "Rock River Legal Group",
+    industry: "Law Firm / Legal Services",
+    description: "Law firm with practice areas, attorney bios, consultation booking, client resources, and online payment options.",
+    Icon: ScrollIcon,
+    color: "#1a3a5c",
+    heroImage: "/images/demos/law-firm/hero.jpg",
+    features: ["Practice Areas", "Attorney Bios", "Consultation Booking", "Client Resources"],
+  },
+  {
+    slug: "dental",
+    name: "Rock River Family Dental",
+    industry: "Dental / Healthcare",
+    description: "Dental practice with services, new patient forms, insurance info, online scheduling, and patient reviews.",
+    Icon: SpaIcon,
+    color: "#2b8a8a",
+    heroImage: "/images/demos/dental/hero.jpg",
+    features: ["Services", "New Patient Forms", "Insurance Info", "Online Scheduling"],
+  },
 ];
 
 const DemosIndex: React.FC = () => (
@@ -110,7 +153,7 @@ const DemosIndex: React.FC = () => (
       {/* Direct answer for AEO — question heading + 40-70 word answer */}
       <h2 className="sr-only">What demo websites are available?</h2>
       <p className="direct-answer" style={{ fontSize: "1.125rem", opacity: 0.8, marginBottom: "2rem", lineHeight: 1.6 }}>
-        Six full demo websites are available: a restaurant with online ordering, a landscaping company with quote forms, an HVAC company with financing calculator, an auto repair shop with VIN lookup, a real estate office with mortgage calculator, and a beauty salon with online booking. Each demo starts at $447 and can be customized with your branding.
+        Ten full demo websites are available: a restaurant with online ordering, a landscaping company with quote forms, an HVAC company with financing calculator, an auto repair shop with VIN lookup, a real estate office with mortgage calculator, a beauty salon with online booking, a metal fabrication shop with quote forms, an agricultural services company with equipment sales, a law firm with consultation booking, and a dental practice with online scheduling. Each demo starts at $447 and can be customized with your branding.
       </p>
       <div className="demo-gallery__grid">
         {DEMOS.map((demo) => {

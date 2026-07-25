@@ -1,8 +1,8 @@
 import * as React from "react";
-import { FacebookIcon, InstagramIcon, YelpIcon, YouTubeIcon, GoogleIcon } from "../../site/icons";
+import { FacebookIcon, InstagramIcon, YelpIcon, YouTubeIcon, GoogleIcon, LinkedInIcon } from "../../site/icons";
 
 export interface SocialLink {
-  platform: "facebook" | "instagram" | "yelp" | "youtube" | "google";
+  platform: "facebook" | "instagram" | "yelp" | "youtube" | "google" | "linkedin";
   url: string;
   label?: string;
 }
@@ -17,6 +17,7 @@ const iconMap = {
   yelp: YelpIcon,
   youtube: YouTubeIcon,
   google: GoogleIcon,
+  linkedin: LinkedInIcon,
 };
 
 const labelMap = {
@@ -25,6 +26,7 @@ const labelMap = {
   yelp: "Yelp",
   youtube: "YouTube",
   google: "Google Business",
+  linkedin: "LinkedIn",
 };
 
 /**

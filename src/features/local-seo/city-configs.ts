@@ -230,11 +230,12 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     county: "Boone County",
     cityImage: "belvidere.jpg",
     cityContext:
-      "Belvidere is the Boone County seat with a population of about 25,000, sitting 25 minutes east of Durand along the Business 20 corridor. The city has a strong manufacturing and agricultural base, with retail concentrated along Business 20 and a classic county-seat downtown around Belvidere City Hall. Businesses here need websites that compete with Rockford agencies while reflecting Belvidere's distinct community identity.",
+      "Belvidere, the county seat of Boone County, is a manufacturing and logistics hub 25 minutes east of Durand. The Stellantis (formerly Chrysler) assembly plant is the region's largest employer, reopening in 2027 with 1,500 jobs. General Mills operates a manufacturing plant and a new $190M distribution center. Walmart's perishable distribution center represents a $1.2B investment with up to 700 jobs. The city calls itself 'Illinois' City of Murals' and sits along the Kishwaukee River.",
     marketContext:
-      "Belvidere's business corridors run along Business 20 (the main commercial strip) and through the downtown square near Belvidere City Hall. Manufacturing employers, ag-related businesses, and retail shops make up the local economy, and the Boone County Fairgrounds draws regional traffic each summer. Businesses here benefit from websites that capture both Belvidere-specific searches and the broader Boone County market.",
+      "Belvidere's economy is anchored by automotive manufacturing and food processing logistics. The Stellantis plant drives a network of parts suppliers and service businesses. State Street (both North and South State Street Historic Districts) is the main commercial corridor, with retail and professional services. The I-90 corridor provides logistics access that has attracted massive distribution centers. Businesses here need websites that can serve both local customers and a regional B2B supply chain.",
     localDetails:
-      "Belvidere sits along the Kishwaukee River in Boone County, with IL Route 76 running north-south through the city and Business 20 carrying the main east-west commercial traffic. Belvidere Park along the river is a community anchor, and the Boone County Fairgrounds hosts the annual county fair that draws visitors from across the region. Belvidere City Hall anchors the downtown civic district. For local SEO, targeting the Business 20 corridor and IL Route 76 intersections helps capture both resident and through-traffic searches.",
+      "Key landmarks include the Stellantis assembly plant, Doty Park along the Kishwaukee River, and the historic Boone County Courthouse. The city's mural program gives downtown a distinctive identity. Commercial activity concentrates along State Street and the Business 20 corridor. The I-90 interchange has become a major logistics node with General Mills and Walmart distribution centers.",
+    industries: ["Automotive manufacturing", "Food processing", "Logistics & distribution", "Healthcare", "Retail"],
     allCitySlugs: ALL_CITY_SLUGS,
   },
   {
@@ -250,11 +251,12 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     county: "Winnebago County",
     cityImage: "cherry-valley.jpg",
     cityContext:
-      "Cherry Valley is a small Rockford suburb of about 3,000 residents in Winnebago County, located 30 minutes east of Durand. The village is best known for CherryVale Mall, the region's largest shopping center, which makes retail and restaurants the dominant local economy. Businesses here need websites that capture both Cherry Valley residents and the broader Rockford metro shoppers drawn to the mall.",
+      "Cherry Valley is a village in Winnebago County, 30 minutes east of Durand, best known as the home of CherryVale Mall — the largest shopping mall in northern Illinois outside Chicago. With anchors like Macy's and JCPenney, the mall drives significant retail traffic from across the region. The village also has a distinctive downtown with brick-paved streets and 'The Bricks' adaptive reuse development.",
     marketContext:
-      "Cherry Valley's economy revolves around CherryVale Mall and the surrounding retail and restaurant corridor along IL Route 64. Commuter residential neighborhoods feed into the retail base, and many businesses here serve both local residents and shoppers traveling from across the Rockford metro. Websites that rank for CherryVale Mall-area searches and IL Route 64 commercial queries have a real advantage.",
+      "Cherry Valley's economy is retail-driven, centered on CherryVale Mall and the surrounding commercial corridor along East State Street and Harrison Avenue. The Bricks development has brought event venues and small businesses into the historic downtown. Healthcare and educational services are secondary employers. Businesses here range from national retail chains to independent shops in the downtown redevelopment zone.",
     localDetails:
-      "Cherry Valley sits along the Rock River in Winnebago County, with IL Route 64 (North Cherry Street) as the main commercial corridor and Bauman Park providing community recreation space. CherryVale Mall on the village's west side is the dominant commercial draw, anchoring a cluster of restaurants and big-box retail. The Rock River runs along the village's south side. For web design, targeting the CherryVale Mall area and IL Route 64 corridor helps businesses capture both local and regional shopping traffic.",
+      "Key landmarks include CherryVale Mall, Bauman Park, the Kishwaukee River, and The Bricks downtown development. The brick-paved streets of downtown give the village a unique character. Commercial activity centers on the mall area along Harrison Avenue and the historic downtown along East State Street.",
+    industries: ["Retail trade", "Healthcare", "Restaurants & hospitality", "Educational services", "Small manufacturing"],
     allCitySlugs: ALL_CITY_SLUGS,
   },
   {
@@ -270,11 +272,12 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     county: "Ogle County",
     cityImage: "oregon.jpg",
     cityContext:
-      "Oregon is the Ogle County seat with a population of about 4,000, located just 15 minutes south of Durand along the Rock River. The city's economy centers on county government, tourism driven by the Rock River and nearby state parks, and small downtown businesses. Oregon businesses need websites that capture both the local resident base and the tourist traffic that flows through the corridor.",
+      "Oregon, the county seat of Ogle County, sits along the Rock River 15 minutes south of Durand. Despite its small size (~4,000), it has an unusually strong manufacturing base: E.D. Etnyre & Company has built asphalt road equipment here for 126 years (375 employees), and Blount International/Woods Equipment makes commercial lawn equipment (390 employees). The city is also known for its art community, anchored by Lorado Taft's Black Hawk Statue at Lowden State Park.",
     marketContext:
-      "Oregon's business community clusters around the downtown square near the Ogle County Courthouse and along IL Route 64. Tourism is a significant economic driver — the Rock River, Lowden State Park, and the iconic Blackhawk Statue draw visitors year-round. Small downtown businesses, restaurants, and service companies benefit from websites that rank for both Oregon-specific searches and Rock River tourism queries.",
+      "Oregon's economy is driven by three home-grown manufacturers employing over 800 people combined — E.D. Etnyre (road equipment), Blount/Woods (lawn equipment), and CoilCraft (magnetic components). Ogle County government employs another 150. Washington Street is the historic downtown commercial district, listed on the National Register. The Rock River and Lowden State Park bring tourism. Local businesses need websites that can serve both the manufacturing supply chain and tourist visitors.",
     localDetails:
-      "Oregon sits along the Rock River in Ogle County, with IL Route 64 running through the city and the Ogle County Courthouse anchoring the downtown. Oregon Park East along the river is a community gathering space, and the Blackhawk Statue in nearby Lowden State Park is one of the most recognizable landmarks in the region, drawing tourists and photographers. The Rock River corridor connects Oregon to Byron and Rockford to the north. For local SEO, targeting the downtown square, IL Route 64, and Rock River tourism keywords helps businesses capture both residents and visitors.",
+      "Key landmarks include the Black Hawk Statue (Lorado Taft sculpture at Lowden State Park), the Ogle County Courthouse, the Soldiers' Monument, and the Rock River. Washington Street is the commercial historic district. E.D. Etnyre & Company has been manufacturing here since 1899. The Oregon Living and Rehabilitation Center is another major employer.",
+    industries: ["Manufacturing (road equipment)", "Manufacturing (lawn equipment)", "County government", "Healthcare", "Tourism & arts"],
     allCitySlugs: ALL_CITY_SLUGS,
   },
   {
@@ -290,11 +293,12 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     county: "Ogle County",
     cityImage: "mount-morris.jpg",
     cityContext:
-      "Mount Morris is a small Ogle County village of about 3,000 residents, located 18 minutes south of Durand. The local economy is rooted in agriculture and small-town retail, with the annual Mount Morris Days festival bringing regional visitors each summer. Businesses here need websites that reflect the community's rural character while reaching customers across the Ogle County area.",
+      "Mount Morris, 18 minutes south of Durand in Ogle County, was once the 'publishing mecca' of northern Illinois. Quebecor World employed 700+ in printing, Kable News distributed 400+ magazines, and Watt Publishing employed 70. All three closed or moved between 2008-2010, reshaping the local economy. Today the village is rebuilding around agriculture, small manufacturing, and its strong community identity.",
     marketContext:
-      "Mount Morris businesses cluster along IL Route 64 and the downtown area near Mount Morris City Hall. The agricultural base supports ag-related service businesses, and small-town retail serves both residents and the surrounding rural population. The Mount Morris Days festival is a key annual event that draws visitors from across the region, giving businesses a seasonal traffic spike worth targeting online.",
+      "Mount Morris's economy has transitioned from printing/publishing to agriculture and small manufacturing. The village hosts the annual Mount Morris Days festival and is home to the Illinois Freedom Bell. Wesley Avenue was the historical printing district. Today, small businesses along Wesley Avenue and Main Street serve the local agricultural community. The village is working to attract new businesses to fill the gap left by the printing industry's departure.",
     localDetails:
-      "Mount Morris sits in Ogle County along IL Route 64, about 18 minutes south of Durand and just west of Oregon. The village's downtown centers on Mount Morris City Hall and the IL Route 64 corridor, with the historic Oregon Trail connection adding to the area's heritage. The annual Mount Morris Days festival is the community's signature event, drawing crowds for parades, food vendors, and live entertainment. For web design, targeting Mount Morris-specific searches and the festival's seasonal traffic helps local businesses capture both everyday resident searches and event-driven visitor queries.",
+      "Key landmarks include the Illinois Freedom Bell, the historic Rock River Seminary buildings, and the Mount Morris Days festival grounds. Wesley Avenue and Main Street form the commercial center. The village's printing heritage is still visible in its historic architecture, though the major printing operations have closed. The community remains tight-knit with strong civic engagement.",
+    industries: ["Agriculture", "Small manufacturing", "Local retail & services", "Community organizations"],
     allCitySlugs: ALL_CITY_SLUGS,
   },
   {
@@ -310,11 +314,12 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     county: "Ogle County",
     cityImage: "rochelle.jpg",
     cityContext:
-      "Rochelle is a growing Ogle County city of about 9,000 residents, located 30 minutes south of Durand at the crossroads of I-39 and IL Route 251. Known as the 'Hub City' for its railroad heritage, Rochelle has a diverse economy spanning manufacturing, logistics, and agriculture. Businesses here need websites that compete in a broader regional market drawing from I-39 through-traffic.",
+      "Rochelle, known as 'The Hub City,' is a major rail and highway logistics center 30 minutes south of Durand. The Union Pacific Global III Intermodal Terminal handles 720,000 container lifts per year on a 1,200-acre facility. The city sits at the intersection of I-39 and I-88, giving it dual interstate access. Nippon Sharyo manufactures passenger rail cars for METRA here, and Del Monte operates a food processing plant.",
     marketContext:
-      "Rochelle's business community benefits from its position at the I-39 and IL Route 251 intersection, with manufacturing and logistics companies clustered near the interstate and downtown businesses along IL Route 251. The Rochelle Railroad Park — celebrating the city's heritage as a railroad hub — draws train enthusiasts and tourists. Businesses here serve both local residents and regional through-traffic, making local SEO along the I-39 corridor especially valuable.",
+      "Rochelle's economy is built on rail logistics and manufacturing. The UP Global III terminal, the City of Rochelle Industrial Railroad, and Nippon Sharyo form a rail-industrial cluster. The I-39/I-88 intersection makes it a strategic distribution point. Lincoln Highway (Route 38) is the main commercial corridor. Businesses here range from logistics operations to manufacturers serving the rail and food processing industries. The city actively recruits companies that need rail access.",
     localDetails:
-      "Rochelle sits at the junction of I-39 and IL Route 251 in Ogle County, with Rochelle City Hall anchoring the downtown civic district. The Rochelle Railroad Park is a unique attraction — an observation platform where visitors watch Union Pacific and BNSF trains pass on the main transcontinental line, earning the city its 'Hub City' nickname. The I-39 corridor brings logistics and manufacturing employers, while IL Route 251 carries local commercial traffic. For web design, targeting the I-39 corridor, railroad tourism, and Rochelle-specific manufacturing and logistics searches helps businesses capture a wider regional market.",
+      "Key landmarks include the Rochelle Railroad Park (a popular train-watching destination), the UP Global III Intermodal Terminal, and the Flagg Township Museum. Lincoln Highway and Route 251 are the main commercial arteries. The City of Rochelle Industrial Railroad provides switching services to both UP and BNSF railways. Rochelle's position at two interstate junctions makes it a regional logistics crossroads.",
+    industries: ["Rail logistics & intermodal", "Manufacturing (rail cars)", "Food processing", "Distribution & warehousing", "Transportation services"],
     allCitySlugs: ALL_CITY_SLUGS,
   },
   {
@@ -330,11 +335,12 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     county: "Ogle County",
     cityImage: "polo.jpg",
     cityContext:
-      "Polo is a small Ogle County community of about 2,400 residents, located 20 minutes south of Durand. The village is known for its well-preserved historic downtown district and strong agricultural base. Businesses here need websites that reflect Polo's small-town historic character while reaching customers across the broader Ogle County region.",
+      "Polo, 20 minutes south of Durand in Ogle County, is a small town (~2,400) with an unusually high number of buildings on the National Register of Historic Places. The downtown has an active Business Development District working on revitalization. Birkey's Farm Store sells agricultural equipment, CGH operates a medical center, and Bocker Grain serves the local farming community.",
     marketContext:
-      "Polo's business community centers on the Polo Historic District downtown, with small-town businesses, restaurants, and service companies serving both residents and the surrounding agricultural community. The Polo Public Library and historic downtown buildings give the village a distinctive character that businesses can leverage in their online presence. Ag-related businesses and small-town retail form the core of the local economy.",
+      "Polo's economy is agricultural and small-town retail. Birkey's Farm Store is a key business selling and servicing agricultural equipment. CGH Polo Medical Center provides healthcare. Division Avenue (IL-26) and Franklin Avenue form the downtown commercial district. The Polo Marketplace development has brought new retail. First State Bank Shannon-Polo provides financial services. The town is actively investing in downtown revitalization through its Business Development District.",
     localDetails:
-      "Polo sits in Ogle County along IL Route 26, about 20 minutes south of Durand. The Polo Historic District features well-preserved 19th-century commercial buildings that give the downtown a distinctive character, and the Polo Public Library serves as a community anchor. The agricultural surrounding area supports ag-related service businesses and grain elevators. For web design, targeting the historic downtown, IL Route 26 corridor, and Ogle County agricultural searches helps Polo businesses reach both local residents and the broader rural community.",
+      "Key landmarks include multiple National Register historic buildings, the Polo Marketplace development, and the new City Hall (2024). Division Avenue and Franklin Avenue are the main commercial streets. North End Auto & Tire and North End Powersports serve the local automotive and recreational market. The town's historic architecture gives it character uncommon for its size.",
+    industries: ["Agriculture & farm equipment", "Healthcare", "Local retail", "Automotive services", "Banking"],
     allCitySlugs: ALL_CITY_SLUGS,
   },
   {
@@ -350,11 +356,12 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     county: "Ogle County",
     cityImage: "forreston.jpg",
     cityContext:
-      "Forreston is a small rural Ogle County community of about 1,400 residents, located 25 minutes south of Durand. The village's economy is rooted in agriculture and small rural businesses, with a tight-knit community centered around Forreston City Hall and the local fire protection district. Businesses here need websites that reach across the rural Ogle County area.",
+      "Forreston is a small rural community (~1,400) in Ogle County, 25 minutes south of Durand. The local economy is driven by manufacturing (116 employees), healthcare and social assistance (111 employees), and educational services (64 employees). 12% of the male workforce works in agriculture, forestry, or fishing — well above the national average for a town this size.",
     marketContext:
-      "Forreston's business community is small but essential — ag-related service businesses, a local grocery, and small rural enterprises serving the surrounding farming community. The Forreston Fire Protection District is a key community institution, and Forreston City Hall anchors the civic center. Businesses here benefit from websites that capture Forreston-specific searches and the broader rural Ogle County market.",
+      "Forreston's economy is typical of small rural Illinois communities — a mix of manufacturing, healthcare, and agriculture. The town serves as a local service center for surrounding farms. Commercial activity is concentrated in a small downtown area. Businesses here need websites that can reach both local residents and the broader agricultural community in the surrounding area.",
     localDetails:
-      "Forreston sits in rural Ogle County along IL Route 72, about 25 minutes south of Durand. The village centers on Forreston City Hall and the Forreston Fire Protection District, which serves the surrounding agricultural area. IL Route 72 carries the main east-west traffic through the community. The agricultural base means many local businesses are tied to farming — grain handling, equipment, and supplies. For web design, targeting Forreston-specific searches and rural Ogle County agricultural queries helps small businesses reach their scattered customer base.",
+      "Forreston is a quiet agricultural community with a small downtown commercial area. The town's identity is tied to the surrounding farming community. Local landmarks include the Forreston City Hall and the Forreston Fire Protection District. The town is part of the broader Ogle County agricultural region.",
+    industries: ["Agriculture", "Small manufacturing", "Healthcare", "Educational services"],
     allCitySlugs: ALL_CITY_SLUGS,
   },
   {
@@ -370,11 +377,12 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     county: "DeKalb County",
     cityImage: "dekalb.jpg",
     cityContext:
-      "DeKalb is a city of about 40,000 in DeKalb County, located 50 minutes east of Durand and home to Northern Illinois University. The university dominates the local economy, driving retail, restaurants, and service businesses that serve the student population. Businesses here need websites that compete in a larger, more competitive market while targeting both the student and permanent resident populations.",
+      "DeKalb, home to Northern Illinois University (40,000 residents, 50 minutes east of Durand), is the economic center of DeKalb County. NIU employs 3,072 people with a $900M annual economic impact. The city is also known as 'Barb City' — the birthplace of barbed wire. Major recent investments include a Facebook data center ($800M+), a Target distribution center (1,600 employees), and Ferrara Candy Company's distribution center ($100M+).",
     marketContext:
-      "DeKalb's business corridors run along Lincoln Highway (IL Route 38) and Annie Glidden Road, with restaurants, retail, and service businesses heavily oriented toward NIU students. The university brings 20,000+ students and faculty to the area, creating a seasonal but high-volume customer base. Businesses here face more competition than smaller towns, making website quality and local SEO critical for standing out in DeKalb searches.",
+      "DeKalb's economy is driven by education (NIU), healthcare (Northwestern Medicine, 1,600 employees), and distribution/logistics. Lincoln Highway (Route 38) is the main commercial corridor, lined with retail, restaurants, and professional services. Annie Glidden Road serves the student population. The Egyptian Theatre is a downtown cultural anchor. Businesses here need websites that can serve both the university community and the growing logistics/manufacturing sector.",
     localDetails:
-      "DeKalb sits in DeKalb County along Lincoln Highway (IL Route 38), with Northern Illinois University as the dominant institution and economic driver. Annie Glidden Road is the primary north-south commercial corridor serving the student population, lined with restaurants, bars, and retail. DeKalb City Hall anchors the civic center away from the campus area. The university's presence means businesses need to target both student-oriented searches along Annie Glidden Road and permanent-resident searches along Lincoln Highway. For web design, this dual-market targeting is essential for capturing the full DeKalb customer base.",
+      "Key landmarks include Northern Illinois University, the Egyptian Theatre (historic movie palace), and the barbed wire heritage markers. Lincoln Highway (Route 38) is the primary commercial artery. The Facebook data center and Target distribution center represent major tech and logistics investments. Northwestern Medicine DeKalb County is the largest healthcare provider. Kishwaukee College provides additional educational services.",
+    industries: ["Education (NIU)", "Healthcare", "Distribution & logistics", "Manufacturing", "Retail & restaurants"],
     allCitySlugs: ALL_CITY_SLUGS,
   },
   {
@@ -390,11 +398,12 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     county: "DeKalb County",
     cityImage: "sycamore.jpg",
     cityContext:
-      "Sycamore is the DeKalb County seat with a population of about 18,000, located 45 minutes east of Durand and directly adjacent to DeKalb. The city has a strong county government presence, a well-preserved historic downtown district, and retail businesses that serve both Sycamore residents and the broader DeKalb County area. Businesses here need websites that reflect the city's historic character while reaching the adjacent NIU market.",
+      "Sycamore, the county seat of DeKalb County (18,000 residents, 45 minutes east of Durand), has a retail-driven economy unusual for its size. Major anchors including Menards, Meijer, Hy-Vee, Blaine's Farm & Fleet, and Kunes auto dealerships generate 20% of city revenue through sales tax. Ideal Industries, a privately-owned manufacturer, is a key employer. The city hosts the annual Sycamore Pumpkin Festival, which draws tens of thousands of visitors.",
     marketContext:
-      "Sycamore's business community centers on the Sycamore Historic District downtown, with retail shops, restaurants, and professional services along IL Route 64. The DeKalb County Courthouse anchors the civic center and brings government-related business traffic. Proximity to DeKalb and NIU means businesses here can capture both the county-seat market and overflow from the university crowd.",
+      "Sycamore's economy is centered on county government, retail, and manufacturing. Illinois Route 64 is the commercial district, lined with major retailers. The historic downtown square features the DeKalb County Courthouse and independent shops. The Sycamore Pumpkin Festival is a major annual event. Ideal Industries manufactures electrical and testing equipment. The city's sales tax dependence means it actively recruits retail businesses.",
     localDetails:
-      "Sycamore sits in DeKalb County along IL Route 64, directly west of and adjacent to DeKalb. The Sycamore Historic District features preserved 19th-century buildings housing downtown retail and restaurants, and the DeKalb County Courthouse anchors the civic square. Sycamore City Hall is located in the downtown area. The city's proximity to DeKalb and Northern Illinois University means businesses serve both the county-seat government market and the university-adjacent residential population. For web design, targeting the historic downtown, IL Route 64 corridor, and DeKalb County searches helps businesses capture the full market.",
+      "Key landmarks include the DeKalb County Courthouse, the historic downtown square, and the Sycamore Pumpkin Festival (October). Illinois Route 64 is the main commercial corridor. Major retailers include Menards, Meijer, Hy-Vee, Walgreens, Blaine's Farm & Fleet, and Kunes auto dealerships. The downtown historic district has independent shops and restaurants.",
+    industries: ["County government", "Retail (big-box & auto)", "Manufacturing (Ideal Industries)", "Healthcare", "Festival tourism"],
     allCitySlugs: ALL_CITY_SLUGS,
   },
   {
@@ -410,11 +419,12 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     county: "Whiteside County",
     cityImage: "sterling.jpg",
     cityContext:
-      "Sterling is a Whiteside County city of about 15,000, located 50 minutes south of Durand along the Rock River. The city has a strong manufacturing and metalworking heritage, with a downtown that benefits from Rock River tourism. Businesses here need websites that compete in the Sauk Valley regional market while highlighting Sterling's industrial and river-town character.",
+      "Sterling, 50 minutes south of Durand in Whiteside County, is historically the 'Heart of American Hardware.' Northwestern Steel & Wire once employed 4,678 people here — one of the largest steel mills in Illinois. Today, Sterling Steel Co. (270 employees, owned by Leggett & Platt) carries on the steel heritage. Wahl Clipper Corporation, maker of the world's most popular hair clippers, is headquartered here. OSF HealthCare is the largest healthcare provider.",
     marketContext:
-      "Sterling's business community includes manufacturing and metalworking companies, a downtown retail district along the Rock River, and tourism-related businesses benefiting from river recreation. The city is paired with Rock Falls across the river, creating a twin-city market. Businesses here serve both Sterling residents and the broader Sauk Valley region, making local SEO targeting across both cities valuable.",
+      "Sterling's economy has transitioned from massive steel production to specialized manufacturing. Sterling Steel Co., Wahl Clipper Corporation, and various industrial park manufacturers form the current base. The downtown along the Rock River has retail and professional services. The Paul W. Dillon Home is a historic landmark. Businesses here need websites that can serve both the manufacturing supply chain and local retail customers.",
     localDetails:
-      "Sterling sits along the Rock River in Whiteside County, with IL Route 2 running through the city as the main corridor. Sterling City Hall anchors the downtown civic district, and the Sterling downtown area along the river has retail shops and restaurants that benefit from Rock River tourism and recreation. The manufacturing and metalworking base employs a significant portion of the workforce. For web design, targeting the Rock River corridor, IL Route 2, and the twin-city Sterling-Rock Falls market helps businesses capture the full Sauk Valley customer base.",
+      "Key landmarks include the Rock River, the former Northwestern Steel & Wire site, the Paul W. Dillon Home (historic mansion), and Wahl Clipper Corporation headquarters. The downtown commercial district runs along the Rock River. Sterling Steel Co. operates as a successor to the historic steel mill. OSF HealthCare provides regional medical services.",
+    industries: ["Steel & metalworking", "Manufacturing (Wahl Clipper)", "Healthcare (OSF)", "Retail & professional services"],
     allCitySlugs: ALL_CITY_SLUGS,
   },
   {
@@ -430,11 +440,12 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     county: "Whiteside County",
     cityImage: "rock-falls.jpg",
     cityContext:
-      "Rock Falls is a Whiteside County city of about 9,000, located 50 minutes south of Durand and directly across the Rock River from Sterling. The two cities form a twin-city market, with Rock Falls having a strong manufacturing and retail base. Businesses here need websites that target both Rock Falls and the shared Sterling-Rock Falls market.",
+      "Rock Falls, Sterling's sister city across the Rock River (50 minutes south of Durand), shares much of its industrial heritage. Champion Chisel Works manufactures air tools, and Micro Industries does die casting. The city was heavily impacted by the closure of Northwestern Steel & Wire and the RB&W plant, but has focused on riverfront redevelopment through the RB&W (Run, Bike & Walk) District as an economic revitalization strategy.",
     marketContext:
-      "Rock Falls businesses cluster along IL Route 40 and the Coloma Road commercial corridor, with manufacturing, retail, and service companies serving both Rock Falls and Sterling residents. The sister-city relationship with Sterling means businesses on both sides of the river share a customer base. Websites that rank for both Rock Falls and Sterling searches have a clear advantage in this twin-city market.",
+      "Rock Falls' economy is manufacturing-focused, with Champion Chisel Works and Micro Industries as key employers. 2nd Street is the uptown/industrial area. The RB&W District riverfront development is transforming the former industrial waterfront into a recreational and commercial destination. Businesses here serve both the local manufacturing community and the growing tourism from riverfront redevelopment.",
     localDetails:
-      "Rock Falls sits along the Rock River in Whiteside County, directly across the water from Sterling. IL Route 40 runs through the city, and the Coloma Road corridor carries significant commercial traffic. Rock Falls City Hall anchors the civic center. The Rock River is the defining geographic feature, connecting Rock Falls to Sterling and supporting tourism and recreation businesses. For web design, targeting the IL Route 40 corridor, Coloma Road, and the twin-city Sterling-Rock Falls market helps businesses capture customers on both sides of the river.",
+      "Key landmarks include the Rock River, the RB&W District riverfront development, and the Hennepin Canal Parkway. 2nd Street is the main commercial corridor. The city's identity is closely tied to Sterling across the river. The former RB&W plant site is being redeveloped into the riverfront district. The Hennepin Canal provides recreational trails.",
+    industries: ["Manufacturing (air tools & die casting)", "Riverfront redevelopment", "Retail & services", "Construction"],
     allCitySlugs: ALL_CITY_SLUGS,
   },
   {
@@ -450,11 +461,12 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     county: "Lee County",
     cityImage: "dixon.jpg",
     cityContext:
-      "Dixon is the Lee County seat with a population of about 15,000, located 40 minutes south of Durand along the Rock River. The city is famous as the boyhood home of Ronald Reagan and serves as a regional hub for county government, healthcare, and retail. Businesses here need websites that capture both the local market and the heritage tourism traffic drawn by the Reagan connection.",
+      "Dixon, the county seat of Lee County (15,000 residents, 40 minutes south of Durand), is famous as Ronald Reagan's boyhood home. OSF HealthCare Saint Katharine Medical Center (formerly KSB Hospital) is the largest private employer in Lee County with 900 employees. The Dixon Correctional Center employs 600+. The city hosts the Dixon Petunia Festival and Blues Booze and Barbeque festival. Reagan's lifeguard station at Lowell Park is a local landmark.",
     marketContext:
-      "Dixon's business corridors run along Galena Avenue (the main commercial strip) and through the downtown area near the Lee County Courthouse. Healthcare is a major economic sector, and retail along Galena Avenue serves both Dixon residents and the broader Lee County area. The Ronald Reagan Boyhood Home draws heritage tourists, giving businesses a niche visitor market to target online.",
+      "Dixon's economy is driven by healthcare, government, and tourism. OSF Saint Katharine Medical Center is the regional healthcare hub. Lee County government and IDOT Region 2 headquarters provide stable government employment. The historic downtown along the Rock River features retail, dining, and professional services. Galena Avenue is the main commercial corridor. Reagan-related tourism brings visitors year-round.",
     localDetails:
-      "Dixon sits along the Rock River in Lee County, with Galena Avenue as the primary commercial corridor and the Lee County Courthouse anchoring the downtown civic district. The Ronald Reagan Boyhood Home on Hennepin Avenue is a National Historic Site and the city's most famous landmark, drawing visitors from across the country. Dixon City Hall is located in the downtown area. The Rock River runs through the city, supporting recreation and tourism. For web design, targeting Galena Avenue, the Reagan heritage tourism niche, and Lee County government-related searches helps businesses capture the full Dixon market.",
+      "Key landmarks include the Ronald Reagan Boyhood Home, Lowell Park (Reagan's lifeguard station), the Dixon Petunia Festival, and the Blues Booze and Barbeque festival. The Rock River runs through downtown. Galena Avenue is the primary commercial corridor. Fort Dixon has Lincoln-era historical significance. OSF Saint Katharine Medical Center is the regional healthcare hub.",
+    industries: ["Healthcare (OSF Saint Katharine)", "Government (county & state)", "Tourism (Reagan heritage)", "Retail & dining", "Corrections"],
     allCitySlugs: ALL_CITY_SLUGS,
   },
   {
@@ -470,11 +482,12 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     county: "Lee County",
     cityImage: "amboy.jpg",
     cityContext:
-      "Amboy is a small Lee County community of about 2,500 residents, located 30 minutes south of Durand. The village has a strong agricultural base with small-town businesses serving the surrounding farming community. The Amboy Depot Museum is a notable local landmark that highlights the city's railroad heritage. Businesses here need websites that reach across the rural Lee County area.",
+      "Amboy, 30 minutes south of Durand in Lee County (~2,500 residents), has deep railroad heritage. The Amboy Depot Museum, housed in the former Illinois Central Railroad division headquarters, is on the National Register of Historic Places. During WWII, the Green River Ordinance Plant employed 4,500 people manufacturing ammunition. Today the economy is primarily agricultural with small retail and retirement community services.",
     marketContext:
-      "Amboy's business community consists of small-town retail, ag-related service businesses, and local essential services along IL Route 30. The Amboy Depot Museum draws railroad history enthusiasts and visitors. The agricultural surrounding area supports grain elevators and farm supply businesses. Websites that rank for Amboy-specific searches and rural Lee County queries help small businesses reach their scattered customer base.",
+      "Amboy's economy is agricultural and small-town retail. The Amboy Depot Museum is a key tourist attraction, celebrating the city's railroad heritage. The Depot Days festival brings visitors annually. Commercial activity centers on the small downtown. The town serves surrounding farms and a retirement community. Businesses here need simple, effective websites that reach both local residents and visitors exploring the historic depot.",
     localDetails:
-      "Amboy sits in Lee County along IL Route 30, about 30 minutes south of Durand. Amboy City Hall anchors the civic center, and the Amboy Depot Museum preserves the city's railroad heritage as a local attraction. IL Route 30 carries the main traffic through the community. The agricultural base means many local businesses are tied to farming and rural services. For web design, targeting Amboy-specific searches, the IL Route 30 corridor, and Lee County agricultural queries helps businesses connect with both residents and the surrounding rural community.",
+      "Key landmarks include the Amboy Depot Museum (former Illinois Central Railroad division headquarters, National Register), the Depot Days celebration, and the Green River Ordinance Plant historical site. The downtown commercial district is small but active. The railroad heritage is central to the town's identity.",
+    industries: ["Agriculture", "Small retail & services", "Retirement community services", "Tourism (railroad heritage)"],
     allCitySlugs: ALL_CITY_SLUGS,
   },
   {
@@ -490,11 +503,12 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     county: "Lee County",
     cityImage: "ashton.jpg",
     cityContext:
-      "Ashton is a small rural Lee County community of about 1,000 residents, located 25 minutes south of Durand. The village's economy is rooted in agriculture and small rural businesses serving the surrounding farming community. Businesses here need websites that reach across the rural Lee County area and connect with the scattered agricultural customer base.",
+      "Ashton is a small village (~1,000) in Lee County, 25 minutes south of Durand. Despite its size, it has a higher manufacturing employment base than typical — 82 employees in manufacturing, 55 in healthcare, and 33 in transportation/warehousing. The village is part of the Lee-Ogle Enterprise Zone, which provides tax incentives for business development.",
     marketContext:
-      "Ashton's business community is small and essential — ag-related service businesses, a local grocery, and rural enterprises along IL Route 72. The agricultural surrounding area is the primary economic driver, with farm supply and grain handling businesses serving the region. Websites that rank for Ashton-specific searches and rural Lee County agricultural queries help these small businesses reach their widely distributed customers.",
+      "Ashton's economy is small but diversified across manufacturing, healthcare, and transportation. The Lee-Ogle Enterprise Zone designation provides tax incentives that attract businesses. The village serves the surrounding agricultural community. Commercial activity is concentrated in a small downtown area. Businesses here benefit from Enterprise Zone incentives and proximity to larger markets like Dixon and Rochelle.",
     localDetails:
-      "Ashton sits in rural Lee County along IL Route 72, about 25 minutes south of Durand. Ashton City Hall anchors the small civic center, and IL Route 72 carries the main east-west traffic through the community. The village is surrounded by farmland, and the local economy is tightly tied to the agricultural cycle. For web design, targeting Ashton-specific searches, the IL Route 72 corridor, and Lee County agricultural queries helps small rural businesses connect with their customer base across the surrounding area.",
+      "Ashton is a quiet rural village with a small downtown commercial area. The Lee-Ogle Enterprise Zone designation makes it attractive for new business development. The village is part of the broader Lee County agricultural region. Local services include healthcare and transportation/warehousing operations.",
+    industries: ["Manufacturing", "Healthcare", "Transportation & warehousing", "Agriculture", "Retail"],
     allCitySlugs: ALL_CITY_SLUGS,
   },
   {
@@ -510,11 +524,12 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     county: "Green County",
     cityImage: "monroe-wi.jpg",
     cityContext:
-      "Monroe is the Green County seat with a population of about 11,000, located 60 minutes northeast of Durand. The city is famous for its Swiss heritage and cheese production, with a strong agricultural and dairy economy. Businesses here need websites that reflect Monroe's unique cultural identity while reaching customers across Green County and the broader Southern Wisconsin region.",
+      "Monroe, the county seat of Green County, Wisconsin (11,000 residents, 60 minutes northeast of Durand), calls itself 'Swiss Cheese Capital of the USA.' The city's Swiss heritage is celebrated at Cheese Days, the National Historic Cheesemaking Center, and throughout the historic courthouse square downtown. Colony Brands (The Swiss Colony) employs 900+ in mail-order retail. Monroe Truck Equipment manufactures specialized truck bodies. Klondike Cheese Company and Minhas Craft Brewery round out a diverse manufacturing base.",
     marketContext:
-      "Monroe's business community centers on the historic Monroe Square downtown district, with retail shops, restaurants, and service businesses serving both residents and the agricultural community. The cheese factories and dairy processors around Monroe are major employers, and tourism tied to the Swiss heritage draws visitors for events like Cheese Days. Businesses here benefit from websites that highlight the local culture and capture both resident and tourist searches.",
+      "Monroe's economy is a unique blend of cheese/dairy manufacturing, mail-order retail, and specialized manufacturing. Colony Brands (The Swiss Colony) is the largest employer with 900+ jobs. Monroe Clinic & Hospital (SSM Health) is the regional healthcare provider. Monroe Truck Equipment builds custom truck bodies. The historic courthouse square downtown is the commercial center. Cheese Days festival brings thousands of visitors biennially.",
     localDetails:
-      "Monroe sits in Green County along the Wisconsin-Illinois border, with the Green County Courthouse and Monroe City Hall anchoring the civic center. The Monroe Square historic downtown is the commercial heart of the city, featuring Swiss-heritage architecture and local shops. The surrounding area is home to numerous cheese factories and dairy operations that define the local economy. Monroe City Hall serves as the civic anchor. For web design, targeting the Monroe Square district, Green County cheese and dairy industry searches, and Swiss heritage tourism keywords helps businesses capture both the local and visitor markets.",
+      "Key landmarks include the Green County Courthouse (historic square downtown), the National Historic Cheesemaking Center, Minhas Craft Brewery, and the Cheese Days festival. Klondike Cheese Company produces award-winning Feta and specialty cheeses. The Swiss heritage is visible in the architecture and cultural events. The courthouse square is the commercial and social center.",
+    industries: ["Cheese & dairy manufacturing", "Mail-order retail (Swiss Colony)", "Truck equipment manufacturing", "Healthcare (SSM Health)", "Brewing"],
     allCitySlugs: ALL_CITY_SLUGS,
   },
   {
@@ -530,11 +545,12 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     county: "Green County",
     cityImage: "brodhead-wi.jpg",
     cityContext:
-      "Brodhead is a small Green County community of about 3,000 residents, located 50 minutes northeast of Durand. The village has a strong agricultural base with small-town retail serving the surrounding farming community. Businesses here need websites that reach across the rural Green County area and connect with both local residents and the agricultural customer base.",
+      "Brodhead, in Green County, Wisconsin (3,000 residents, 50 minutes northeast of Durand), has an unusual concentration of global manufacturing for a town its size. Kuhn North America, a global agricultural machinery manufacturer, is headquartered here. Decatur Dairy produces world-class award-winning cheese. Stoughton Trailers, an industry leader in conventional and intermodal transportation equipment, is a major employer.",
     marketContext:
-      "Brodhead's business community clusters along WI Route 11 and Pearl Avenue, with small-town retail, ag-related service businesses, and local essential services. The agricultural surrounding area supports farm supply and grain handling businesses. Websites that rank for Brodhead-specific searches and rural Green County queries help small businesses reach their scattered customer base across the region.",
+      "Brodhead's economy is driven by agricultural equipment manufacturing, cheese production, and trailer manufacturing — an unusual combination for a small town. Kuhn North America's global headquarters brings international business connections. Highway 11 bisects the community and serves as the commercial corridor. The Sugar River State Trail trailhead attracts recreational tourism. Decatur Lake and Pearl Island provide outdoor amenities.",
     localDetails:
-      "Brodhead sits in Green County along WI Route 11, about 50 minutes northeast of Durand. Brodhead City Hall anchors the civic center, and Pearl Avenue is the main commercial street through the downtown area. WI Route 11 carries the primary east-west traffic through the community. The village is surrounded by farmland, and the local economy is closely tied to agriculture. For web design, targeting Brodhead-specific searches, the WI Route 11 corridor, and Green County agricultural queries helps businesses connect with both residents and the surrounding rural community.",
+      "Key landmarks include the Sugar River State Trail trailhead, Decatur Lake, and the Pearl Island Recreational Corridor (historic Mill Race). Highway 11 is the main commercial artery. Kuhn North America's headquarters is a major local presence. The historic mill race and dam created the recreational corridor that defines the town's waterfront.",
+    industries: ["Agricultural equipment manufacturing (Kuhn)", "Cheese manufacturing (Decatur Dairy)", "Trailer manufacturing (Stoughton Trailers)", "Agriculture", "Recreational tourism"],
     allCitySlugs: ALL_CITY_SLUGS,
   },
   {
@@ -550,11 +566,12 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     county: "Rock County",
     cityImage: "evansville-wi.jpg",
     cityContext:
-      "Evansville is a Rock County community of about 6,000 residents, located 55 minutes northeast of Durand. The city has a well-preserved historic downtown and a strong agricultural base, with Lake Leota providing a community recreation anchor. Businesses here need websites that reflect the city's historic small-town character while reaching customers across the Rock County area.",
+      "Evansville, in Rock County, Wisconsin (6,000 residents, 55 minutes northeast of Durand), has a strong manufacturing base and a highly-rated historic downtown. Lake Leota in Leonard-Leota Park is a community centerpiece. The downtown between First Street and Union Street has received streetscaping improvements. The city's proximity to the Madison-Janesville-Beloit corridor provides economic connectivity.",
     marketContext:
-      "Evansville's business community centers on the historic downtown district, with small businesses, restaurants, and service companies serving both residents and the surrounding agricultural community. The city's historic character is a selling point — businesses benefit from websites that reflect that charm rather than generic corporate templates. Proximity to Madison and Janesville brings some commuter traffic to local businesses.",
+      "Evansville's economy is led by manufacturing, healthcare, and retail trade. Main Street (historic downtown) is the commercial center, with streetscaping improvements that have enhanced its appeal. Lake Leota and the park system are highly rated by residents and attract visitors. The city benefits from proximity to the Madison-Janesville-Beloit combined statistical area. Multiple festivals bring tourism throughout the year.",
     localDetails:
-      "Evansville sits in Rock County along WI Route 213, about 55 minutes northeast of Durand. Evansville City Hall anchors the civic center, and Lake Leota on the city's west side is a community recreation anchor and gathering spot. The historic downtown features preserved 19th-century buildings housing local shops and restaurants. WI Route 213 connects Evansville to the broader Rock County region. For web design, targeting the historic downtown, Lake Leota area, and Rock County searches helps businesses capture both local residents and visitors drawn by the city's charm.",
+      "Key landmarks include Lake Leota (Leonard-Leota Park), the historic downtown district (First Street to Union Street), and multiple festival venues. Main Street is the commercial corridor. The streetscaping improvements have made downtown more walkable and attractive. The city's location near Madison, Janesville, and Beloit provides access to larger markets.",
+    industries: ["Manufacturing", "Healthcare & social assistance", "Retail trade", "Tourism & recreation"],
     allCitySlugs: ALL_CITY_SLUGS,
   },
   {
@@ -570,11 +587,12 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     county: "Rock County",
     cityImage: "edgerton-wi.jpg",
     cityContext:
-      "Edgerton is a Rock County community of about 6,000 residents, located 50 minutes northeast of Durand. The city is known for its tobacco farming heritage, with a strong agricultural base and small businesses serving the surrounding farming community. Businesses here need websites that reflect Edgerton's agricultural history while reaching customers across the Rock County region.",
+      "Edgerton, in Rock County, Wisconsin (6,000 residents, 50 minutes northeast of Durand), was historically 'Tobacco City U.S.A.' — at its peak, 52 tobacco warehouses lined the streets. The city celebrates this heritage with Tobacco Heritage Days. The historic tobacco warehouses, built with distinctive cream brick architecture, have been adaptively reused into housing and commercial space. Edgerton is the childhood home of Sterling North, author of 'Rascal.'",
     marketContext:
-      "Edgerton's business community includes small businesses, ag-related service companies, and local retail serving both residents and the surrounding agricultural area. The tobacco heritage is a defining cultural feature, and the city's position along WI Route 59 connects it to the broader Rock County market. Websites that rank for Edgerton-specific searches and Rock County agricultural queries help local businesses reach their customer base.",
+      "Edgerton's economy has transitioned from tobacco to diversified agriculture, manufacturing, and tourism. Washington Street (historic tobacco warehouse district) and Henry Street are the commercial corridors. The cream brick tobacco warehouses have been converted to housing and commercial space, creating a unique architectural identity. Lake Koshkonong provides recreational tourism. The Albion Museum preserves local history.",
     localDetails:
-      "Edgerton sits in Rock County along WI Route 59, about 50 minutes northeast of Durand. Edgerton City Hall anchors the civic center, and the city's tobacco heritage is a defining cultural feature — historically one of the largest tobacco markets in Wisconsin. WI Route 59 carries the main east-west traffic through the community. The agricultural base remains central to the local economy. For web design, targeting Edgerton-specific searches, the WI Route 59 corridor, and Rock County agricultural queries helps businesses connect with both residents and the surrounding farming community.",
+      "Key landmarks include the historic tobacco warehouses (cream brick architecture), the Tobacco Heritage Days festival, Lake Koshkonong, and the childhood home of Sterling North (author of 'Rascal'). Washington Street is the historic tobacco warehouse district. The Albion Museum preserves local history. The cream brick warehouse conversions give the town a distinctive character.",
+    industries: ["Agriculture (tobacco heritage, now diversified)", "Manufacturing", "Tourism (Tobacco Heritage Days)", "Adaptive reuse real estate"],
     allCitySlugs: ALL_CITY_SLUGS,
   },
   {
@@ -590,11 +608,12 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     county: "Rock County",
     cityImage: "milton-wi.jpg",
     cityContext:
-      "Milton is a Rock County community of about 5,000 residents, located 45 minutes northeast of Durand and directly adjacent to Janesville. The city has a strong agricultural base with small businesses serving both local residents and commuters to the larger Janesville market. Businesses here need websites that capture both Milton-specific searches and the overflow from the Janesville market.",
+      "Milton, in Rock County, Wisconsin (5,000 residents, 45 minutes northeast of Durand), is home to the Milton House Museum — Wisconsin's only certified Underground Railroad site open to tours. The hexagonal grout building and secret tunnel connecting to a neighboring cabin are National Historic Landmarks. The city has two distinct downtown areas: Parkview Drive (east side) and Merchants Row (old Milton Junction, west side), resulting from the historic merger of two separate communities.",
     marketContext:
-      "Milton's business community includes small businesses, ag-related service companies, and local retail along WI Route 26. The proximity to Janesville means many residents commute to the larger city, but local businesses still serve the Milton community's daily needs. Websites that rank for both Milton-specific and Janesville-adjacent searches help businesses capture the full local market.",
+      "Milton's economy is led by manufacturing (473 employees), healthcare (437 employees), and construction (321 employees). The two downtown areas — Parkview Drive and Merchants Row — serve different parts of the community. The Milton House Museum brings Underground Railroad heritage tourism. The city's proximity to Janesville provides access to larger markets. The merger of Milton and Milton Junction created a unique two-center community.",
     localDetails:
-      "Milton sits in Rock County along WI Route 26, about 45 minutes northeast of Durand and directly north of Janesville. Milton City Hall anchors the civic center, and the historic Milton College campus — though the college closed in 1982, its buildings remain a defining landmark — gives the city a distinctive cultural character. WI Route 26 connects Milton to Janesville and the broader Rock County region. For web design, targeting Milton-specific searches, the WI Route 26 corridor, and Janesville-adjacent queries helps businesses capture both local residents and commuters.",
+      "Key landmarks include the Milton House Museum (National Historic Landmark, Underground Railroad site with secret tunnel), the hexagonal grout building, and the two downtown areas. Parkview Drive (east) and Merchants Row (west, old Milton Junction) are the commercial centers. The Underground Railroad history is central to the city's identity. Storrs Lake provides outdoor recreation.",
+    industries: ["Manufacturing", "Healthcare & social assistance", "Construction", "Heritage tourism (Underground Railroad)"],
     allCitySlugs: ALL_CITY_SLUGS,
   },
   {
@@ -610,11 +629,12 @@ export const NEW_CITY_CONFIGS: CityPageConfig[] = [
     county: "Rock County",
     cityImage: "clinton-wi.jpg",
     cityContext:
-      "Clinton is a small Rock County village of about 1,200 residents, located 40 minutes northeast of Durand and in close proximity to Beloit. The community has a strong agricultural base with small rural businesses and a commuter residential character. Businesses here need websites that reach across the rural Rock County area and capture the Beloit-adjacent market.",
+      "Clinton, a village in Rock County, Wisconsin (1,200 residents, 40 minutes northeast of Durand), has a significant industrial park that punches above its weight. Scot Forge, a custom open-die forging manufacturer, operates in the Clinton Industrial Park. The DeLong Company, an agricultural commodity business, is also based here. 17.52% of employed males work in agriculture — well above average. The village's location near I-43 and I-39/90 provides strategic logistics access.",
     marketContext:
-      "Clinton's business community consists of small rural businesses, ag-related service companies, and local essential services along WI Route 140. The village's proximity to Beloit means many residents commute there for work and shopping, but local businesses still serve the community's daily needs. Websites that rank for Clinton-specific searches and Beloit-adjacent queries help small businesses reach their customer base.",
+      "Clinton's economy combines industrial park manufacturing with agriculture. Scot Forge (custom forging) and The DeLong Company (agricultural commodities) are the key employers in the industrial park. Cross Street is the village center. The industrial park has rail access potential. The village's proximity to I-43 and I-39/90 makes it attractive for distribution and manufacturing businesses. 17.52% of the male workforce is in agriculture.",
     localDetails:
-      "Clinton sits in Rock County along WI Route 140, about 40 minutes northeast of Durand and just north of Beloit. Clinton Village Hall anchors the civic center, and WI Route 140 is the main north-south corridor connecting the village to the broader Rock County region. The proximity to Beloit means Clinton functions partly as a commuter community, with residents accessing Beloit's larger retail and service offerings. For web design, targeting Clinton-specific searches, the WI Route 140 corridor, and Beloit-adjacent queries helps businesses connect with both local residents and the broader Rock County market.",
+      "Key landmarks include the Clinton Industrial Park (with Scot Forge and The DeLong Company), Cross Street (village center), and the strategic highway access at I-43 and I-39/90. The industrial park is a major economic driver for a village this size. The DeLong Company handles agricultural commodities including grain and exports. The village serves the surrounding farming community.",
+    industries: ["Manufacturing (Scot Forge)", "Agricultural commodities (DeLong Company)", "Retail trade", "Healthcare", "Logistics (I-43/I-39/90 access)"],
     allCitySlugs: ALL_CITY_SLUGS,
   },
 ];
