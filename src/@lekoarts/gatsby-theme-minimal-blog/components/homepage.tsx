@@ -89,14 +89,33 @@ const Homepage = ({ posts }: MBHomepageProps) => {
       </section>
       <section className="u-home-local-guides">
         <h2>Local web design guides</h2>
-        <p>Honest guides for businesses in the Rockford metro area — real prices, real timelines, and how to evaluate a web designer before you hire one.</p>
+        <p>Honest guides for businesses across Northwest Illinois and Southern Wisconsin — real prices, real timelines, and how to evaluate a web designer before you hire one.</p>
         <ul className="feature-list">
           <li><Link to="/website-design-rockford-il-what-it-actually-costs-and-how-to-choose/">Website Design Rockford IL: What It Actually Costs</Link></li>
           <li><Link to="/seo-rockford-il-a-local-business-guide-to-actually-ranking/">SEO Rockford IL: A Local Business Guide</Link></li>
           <li><Link to="/website-design-in-loves-park-illinois-a-small-business-guide/">Website Design in Loves Park, Illinois</Link></li>
-          <li><Link to="/web-developer-rockford-illinois/">Web Developer in Rockford, Illinois</Link></li>
-          <li><Link to="/web-developer-loves-park-illinois/">Web Developer in Loves Park, Illinois</Link></li>
+          <li><Link to="/website-design-in-belvidere-illinois-a-boone-county-business-guide/">Website Design in Belvidere, Illinois</Link></li>
+          <li><Link to="/website-design-in-de-kalb-illinois-what-niu-area-businesses-should-know/">Website Design in DeKalb, Illinois</Link></li>
+          <li><Link to="/website-design-in-sterling-illinois-a-whiteside-county-guide/">Website Design in Sterling, Illinois</Link></li>
+          <li><Link to="/website-design-in-dixon-illinois-a-lee-county-business-guide/">Website Design in Dixon, Illinois</Link></li>
+          <li><Link to="/website-design-in-sycamore-illinois-a-de-kalb-county-guide/">Website Design in Sycamore, Illinois</Link></li>
+          <li><Link to="/website-design-in-monroe-wisconsin-a-green-county-guide/">Website Design in Monroe, Wisconsin</Link></li>
         </ul>
+        <p style={{ marginTop: "1rem", fontSize: "0.9rem" }}>
+          Serving 33 cities across the region including{" "}
+          <Link to="/web-developer-rockford-illinois/">Rockford</Link>,{" "}
+          <Link to="/web-developer-loves-park-illinois/">Loves Park</Link>,{" "}
+          <Link to="/web-developer-belvidere-illinois/">Belvidere</Link>,{" "}
+          <Link to="/web-developer-dekalb-illinois/">DeKalb</Link>,{" "}
+          <Link to="/web-developer-freeport-illinois/">Freeport</Link>,{" "}
+          <Link to="/web-developer-dixon-illinois/">Dixon</Link>,{" "}
+          <Link to="/web-developer-sterling-illinois/">Sterling</Link>,{" "}
+          <Link to="/web-developer-rochelle-illinois/">Rochelle</Link>,{" "}
+          <Link to="/web-developer-monroe-wisconsin/">Monroe, WI</Link>,{" "}
+          <Link to="/web-developer-beloit-wisconsin/">Beloit, WI</Link>,{" "}
+          <Link to="/web-developer-janesville-wisconsin/">Janesville, WI</Link>, and more.{" "}
+          <Link to="/service-areas/">See all service areas</Link>.
+        </p>
       </section>
       <div className="homepage-title-row">
         <TinyTriangleAccent />

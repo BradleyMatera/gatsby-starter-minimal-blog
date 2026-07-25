@@ -1,8 +1,8 @@
 export const SITE_URL = "https://bradleymatera.dev";
 
-export const serviceAreaName = "Durand, Davis, Rockford, Freeport, Loves Park, Machesney Park, Byron, Roscoe, Rockton, South Beloit, Beloit, Janesville, and Northwest Illinois";
+export const serviceAreaName = "Durand, Davis, Rockford, Freeport, Loves Park, Machesney Park, Byron, Roscoe, Rockton, South Beloit, Belvidere, Cherry Valley, Oregon, Mount Morris, Rochelle, Polo, Forreston, DeKalb, Sycamore, Sterling, Rock Falls, Dixon, Amboy, Ashton, Beloit, Janesville, Monroe, Brodhead, Evansville, Edgerton, Milton, Clinton, and Northwest Illinois and Southern Wisconsin";
 export const serviceAreaDescription =
-  "Fast, accessible websites, local SEO, repairs, and website care for Northwest Illinois small businesses. Work directly with Bradley. Packages start at $447.";
+  "Fast, accessible websites, local SEO, repairs, and website care for Northwest Illinois and Southern Wisconsin small businesses. Work directly with Bradley. Packages start at $447.";
 
 export const serviceAreaPlaces = [
   "Durand, Illinois",
@@ -17,12 +17,37 @@ export const serviceAreaPlaces = [
   "Roscoe, Illinois",
   "Rockton, Illinois",
   "South Beloit, Illinois",
+  "Belvidere, Illinois",
+  "Cherry Valley, Illinois",
+  "Oregon, Illinois",
+  "Mount Morris, Illinois",
+  "Rochelle, Illinois",
+  "Polo, Illinois",
+  "Forreston, Illinois",
+  "DeKalb, Illinois",
+  "Sycamore, Illinois",
+  "Sterling, Illinois",
+  "Rock Falls, Illinois",
+  "Dixon, Illinois",
+  "Amboy, Illinois",
+  "Ashton, Illinois",
   "Beloit, Wisconsin",
   "Janesville, Wisconsin",
+  "Monroe, Wisconsin",
+  "Brodhead, Wisconsin",
+  "Evansville, Wisconsin",
+  "Edgerton, Wisconsin",
+  "Milton, Wisconsin",
+  "Clinton, Wisconsin",
   "Winnebago County, Illinois",
+  "Boone County, Illinois",
   "Stephenson County, Illinois",
   "Ogle County, Illinois",
+  "DeKalb County, Illinois",
+  "Lee County, Illinois",
+  "Whiteside County, Illinois",
   "Rock County, Wisconsin",
+  "Green County, Wisconsin",
   "Northwest Illinois",
   "Southern Wisconsin",
 ];
