@@ -1,0 +1,99 @@
+---
+title: "AnimalSounds"
+slug: "/projects/animal-sounds"
+---
+
+import { Section, Card, AnchorNav, Link } from "../../../src/ui";
+
+<Section
+  eyebrow="Project Write-up"
+  title="AnimalSounds · Static Next.js 14 soundboard for GitHub Pages"
+  description="A static Next.js 14 soundboard built with Bun, NextUI, and Tailwind CSS. Audio ships as offline-ready MP3s from public/audio, imagery from bundled assets with optional Pexels enrichment, and analytics/favorites persist locally in localStorage. Deployed to GitHub Pages."
+/>
+
+<AnchorNav
+  items={[
+    { id: "overview", label: "Problem" },
+    { id: "approach", label: "Solution" },
+    { id: "role", label: "My Role" },
+    { id: "impact", label: "What's in the Repo" },
+    { id: "artifacts", label: "Tech Stack" },
+  ]}
+/>
+
+<Section id="overview" eyebrow="Problem" title="User need">
+  <p>
+    I wanted a simple, offline-capable soundboard app to learn static export with Next.js 14 and Bun. The app needed to ship its own audio files so it works without a network, keep favorites and usage stats without a backend, and deploy cleanly to GitHub Pages with proper base path handling.
+  </p>
+</Section>
+
+<Section id="approach" eyebrow="Solution" title="What I built">
+  <p>
+    A static Next.js 14 soundboard deployed to GitHub Pages. Audio ships from <code>public/audio</code> as offline-ready MP3s, and imagery comes from bundled assets with optional Pexels enrichment. Analytics and favorites persist locally in <code>localStorage</code> — no server required. A GitHub Actions workflow handles the static export with <code>NEXT_PUBLIC_BASE_PATH</code> injection so asset paths resolve correctly under the GitHub Pages subdirectory.
+  </p>
+  <div className="grid-two">
+    <Card>
+      <h3 className="feature-card__title">User interface</h3>
+      <ul className="feature-list">
+        <li>Navbar with navigation and theme toggle</li>
+        <li>Hero section introducing the soundboard</li>
+        <li>Filters for browsing sounds by category</li>
+        <li>Favorites bar for quick access to saved sounds</li>
+        <li>Sound cards with playback controls</li>
+        <li>Stats overview showing usage analytics</li>
+        <li>NextUI components with Tailwind CSS styling</li>
+      </ul>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">Technical implementation</h3>
+      <ul className="feature-list">
+        <li>Next.js 14 static export for GitHub Pages</li>
+        <li><code>lib/base-path.js</code> for base path resolution in static hosting</li>
+        <li><code>lib/analytics.js</code> for local analytics load/save/summarize</li>
+        <li>localStorage persistence for favorites and usage stats</li>
+        <li>GitHub Actions workflow with <code>NEXT_PUBLIC_BASE_PATH</code> injection</li>
+        <li>Optional Pexels API for image enrichment (disabled during static export)</li>
+        <li>Offline-ready MP3s shipped from <code>public/audio</code></li>
+      </ul>
+    </Card>
+  </div>
+</Section>
+
+<Section id="role" eyebrow="My Role" title="What I did">
+  <ul className="feature-list">
+    <li>Solo developer — built the entire application (1 contributor)</li>
+    <li>Configured Next.js 14 static export with Bun for GitHub Pages deployment</li>
+    <li>Built soundboard components: navbar, hero, filters, favorites-bar, sound-card, stats-overview, theme-toggle, providers</li>
+    <li>Implemented base path resolution for correct asset paths under GitHub Pages</li>
+    <li>Built local analytics and favorites persistence with localStorage</li>
+    <li>Set up GitHub Actions workflow with NEXT_PUBLIC_BASE_PATH injection</li>
+    <li>Integrated optional Pexels image enrichment</li>
+  </ul>
+</Section>
+
+<Section id="impact" eyebrow="What's in the Repo" title="Real artifacts you can verify">
+  <ul className="feature-list">
+    <li><strong>GitHub repo:</strong> <Link to="https://github.com/BradleyMatera/AnimalSounds" external>github.com/BradleyMatera/AnimalSounds</Link></li>
+    <li><strong>Live demo:</strong> <Link to="https://bradleymatera.github.io/AnimalSounds/" external>bradleymatera.github.io/AnimalSounds</Link></li>
+    <li><strong>Created:</strong> October 26, 2024</li>
+    <li><strong>Commits:</strong> 23 commits, 1 contributor</li>
+    <li><strong>Languages:</strong> JavaScript (97.7%), CSS (2.3%)</li>
+    <li><strong>License:</strong> MIT</li>
+    <li><strong>Components:</strong> navbar, hero, filters, favorites-bar, sound-card, stats-overview, theme-toggle, providers</li>
+    <li><strong>Deployment:</strong> GitHub Actions workflow publishes static export to Pages</li>
+    <li><strong>Honest limitations:</strong> Analytics and favorites stay in localStorage (no server persistence). Pexels API disabled during static export. No backend — fully client-side.</li>
+  </ul>
+</Section>
+
+<Section id="artifacts" eyebrow="Tech Stack" title="Technologies used">
+  <div className="project-card__stack">
+    <span>Next.js 14</span>
+    <span>Bun</span>
+    <span>NextUI</span>
+    <span>Tailwind CSS</span>
+    <span>JavaScript</span>
+    <span>localStorage</span>
+    <span>GitHub Pages</span>
+    <span>GitHub Actions</span>
+  </div>
+</Section>

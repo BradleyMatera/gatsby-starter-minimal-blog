@@ -1,7 +1,7 @@
 ---
 title: Projects
 slug: "/projects"
-description: "Project write-ups by Bradley Matera — Car-Match, Interactive Pokédex, and CIRIS AI contributions. Full-stack web development, cloud engineering, and AI projects with real GitHub repos."
+description: "Project write-ups by Bradley Matera — Car-Match, ProjectHub, Interactive Pokédex, CIRIS AI, Convo-AI, Triangle Shader Lab, SecureLearn LMS, CheeseMath, AnimalSounds, and OBJ Parser. Full-stack web development, AI systems, graphics, and systems programming with real GitHub repos."
 ---
 
 import { Link } from "gatsby"
@@ -29,6 +29,19 @@ Each project below is a write-up of what I built, why, the tech stack, and what 
 />
 
 <ProjectCard
+  title="ProjectHub (Scout)"
+  meta="Embeddable AI chat widget — one script tag, free-tier LLM providers"
+  summary="An embeddable AI chat widget that recruiters can use to ask about my projects, skills, and background. Builds grounded answers from a synced GitHub knowledge base first, then routes open-ended questions through free LLM providers with automatic failover. 246 commits, 474+ tests, deployed on GitHub Pages."
+  stack={["JavaScript", "Python", "Node.js", "GitHub Pages", "Groq", "Cloudflare Workers AI", "Gemini"]}
+  metrics={["Commits: 246", "Tests: 474+", "Cost: Free tier"]}
+  links={[
+    { label: "ProjectHub write-up", href: "/projects/projecthub/", variant: "primary" },
+    { label: "GitHub", href: "https://github.com/BradleyMatera/ProjectHub", external: true },
+    { label: "Live demo", href: "https://bradleymatera.github.io/ProjectHub/", external: true }
+  ]}
+/>
+
+<ProjectCard
   title="Interactive Pokédex"
   meta="Static Next.js 16 app — 151 Pokémon with build-time data and client-side search"
   summary="A Next.js 16 static export that fetches PokéAPI data at build time and prerenders 151 detail pages. Client-side search and filtering with React context providers. Tailwind CSS v4 + NextUI. Deployed to GitHub Pages via GitHub Actions."
@@ -51,6 +64,83 @@ Each project below is a write-up of what I built, why, the tech stack, and what 
     { label: "CIRIS AI write-up", href: "/projects/ciris-ai/", variant: "primary" },
     { label: "My PRs", href: "https://github.com/CIRISAI/CIRISNode/pulls?q=is%3Apr+author%3ABradleyMatera", external: true },
     { label: "CIRISNode repo", href: "https://github.com/CIRISAI/CIRISNode", external: true }
+  ]}
+/>
+
+<ProjectCard
+  title="Convo-AI"
+  meta="Local-first voice AI — Whisper, Ollama, Coqui TTS, all on your machine"
+  summary="A local-first, voice-enabled conversational AI assistant. Listens with faster-whisper, thinks with a local Ollama LLM, remembers with RAG over SQLite, and speaks with Coqui TTS. No cloud API keys, no telemetry. FastAPI WebSocket server, Python CLI, React web UI, Docker support."
+  stack={["Python", "FastAPI", "Ollama", "faster-whisper", "Coqui TTS", "React", "SQLite", "Docker"]}
+  metrics={["Commits: 15", "Privacy: 100% Local", "License: MIT"]}
+  links={[
+    { label: "Convo-AI write-up", href: "/projects/convo-ai/", variant: "primary" },
+    { label: "GitHub", href: "https://github.com/BradleyMatera/Convo-Ai", external: true },
+    { label: "Live demo", href: "https://bradleymatera.github.io/Convo-Ai/", external: true }
+  ]}
+/>
+
+<ProjectCard
+  title="Triangle Shader Lab"
+  meta="WebGPU lab — hello triangle, textured cube, WGSL shaders, pipeline visualizer"
+  summary="A WebGPU learning lab built with Next.js, TypeScript, WGSL, and Bun. Two canonical demos (hello triangle and textured cube) with source-first exploration and code-to-render correlation. Originally forked from leaf-js but completely rewritten — no shared code with the original."
+  stack={["WebGPU", "WGSL", "Next.js", "TypeScript", "Bun"]}
+  metrics={["Commits: 63", "Demos: 2", "Status: Live"]}
+  links={[
+    { label: "Triangle Shader Lab write-up", href: "/projects/triangle-shader-lab/", variant: "primary" },
+    { label: "GitHub", href: "https://github.com/BradleyMatera/TriangleDemo", external: true },
+    { label: "Live demo", href: "https://bradleymatera.github.io/TriangleDemo/", external: true }
+  ]}
+/>
+
+<ProjectCard
+  title="SecureLearn LMS"
+  meta="Interactive LMS for teaching secrets management — courses, quizzes, labs, certificates"
+  summary="An interactive Learning Management System for teaching secrets management to developers. Structured curriculum with modules and lessons, hands-on terminal-based labs, quizzes after each lesson, verifiable certificates, and role-based dashboards (student, instructor, admin). Built with Next.js 16, HeroUI, TypeScript."
+  stack={["Next.js 16", "TypeScript", "HeroUI", "Tailwind", "Docker"]}
+  metrics={["Commits: 47", "Roles: 3", "Format: LMS"]}
+  links={[
+    { label: "SecureLearn LMS write-up", href: "/projects/securelearn-lms/", variant: "primary" },
+    { label: "GitHub", href: "https://github.com/BradleyMatera/EthicsFrontEndDemo", external: true },
+    { label: "Live demo", href: "https://bradleymatera.github.io/EthicsFrontEndDemo/", external: true }
+  ]}
+/>
+
+<ProjectCard
+  title="CheeseMath"
+  meta="Calculator suite — math, string manipulation, regex, card validation"
+  summary="An advanced calculator suite with two versions: the original React 18 app with Jest and Selenium tests, and a Next.js 16 rebuild with TypeScript, Bun, NextUI, Tailwind, and Framer Motion. Includes math tools, string manipulation, regex analysis, and credit card validation."
+  stack={["Next.js 16", "TypeScript", "Bun", "NextUI", "Tailwind", "Framer Motion", "Jest"]}
+  metrics={["Commits: 40", "Versions: 2", "License: MIT"]}
+  links={[
+    { label: "CheeseMath write-up", href: "/projects/cheesemath/", variant: "primary" },
+    { label: "GitHub", href: "https://github.com/BradleyMatera/CheeseMath-Jest-Tests", external: true },
+    { label: "Live demo", href: "https://bradleymatera.github.io/CheeseMath-Jest-Tests/", external: true }
+  ]}
+/>
+
+<ProjectCard
+  title="AnimalSounds"
+  meta="Offline-first soundboard — Next.js 14 + Bun, bundled MP3s, localStorage favorites"
+  summary="A static Next.js 14 soundboard built with Bun, NextUI, and Tailwind. Audio ships as bundled MP3s in public/audio so it works offline. Favorites and local analytics persist in localStorage. Optional Pexels photo enrichment for dev. Deployed to GitHub Pages."
+  stack={["Next.js 14", "Bun", "NextUI", "Tailwind", "localStorage", "GitHub Pages"]}
+  metrics={["Commits: 23", "Audio: Offline", "License: MIT"]}
+  links={[
+    { label: "AnimalSounds write-up", href: "/projects/animal-sounds/", variant: "primary" },
+    { label: "GitHub", href: "https://github.com/BradleyMatera/AnimalSounds", external: true },
+    { label: "Live demo", href: "https://bradleymatera.github.io/AnimalSounds/", external: true }
+  ]}
+/>
+
+<ProjectCard
+  title="OBJ Parser"
+  meta="Zig parsing lab — OBJ/MTL files to binary format, 2 commits"
+  summary="A small Zig project that reads Wavefront OBJ files, optionally reads MTL material files, and converts them to an optimized binary format with verification tools. Built to learn Zig's explicit memory management and binary-safe parsing. Honest note: this is a very small project — 2 commits, 21KB of Zig code, no GitHub Pages deployment."
+  stack={["Zig"]}
+  metrics={["Commits: 2", "Format: OBJ+MTL", "Size: 21KB"]}
+  links={[
+    { label: "OBJ Parser write-up", href: "/projects/obj-parser/", variant: "primary" },
+    { label: "GitHub", href: "https://github.com/BradleyMatera/obj-parser", external: true }
   ]}
 />
 

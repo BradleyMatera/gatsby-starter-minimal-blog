@@ -1,0 +1,98 @@
+---
+title: "CheeseMath"
+slug: "/projects/cheesemath"
+---
+
+import { Section, Card, AnchorNav, Link } from "../../../src/ui";
+
+<Section
+  eyebrow="Project Write-up"
+  title="CheeseMath · Advanced calculator suite with two versions"
+  description="An advanced calculator suite with two versions in one repo: an original React 18 app with AnimeJS, Jest unit tests, and Selenium E2E tests, and a modern rebuild in Next.js 16 with TypeScript, Bun, NextUI, Tailwind CSS, and Framer Motion. Features math tools, string manipulation, regex analyzer, and credit card validation."
+/>
+
+<AnchorNav
+  items={[
+    { id: "overview", label: "Problem" },
+    { id: "approach", label: "Solution" },
+    { id: "role", label: "My Role" },
+    { id: "impact", label: "What's in the Repo" },
+    { id: "artifacts", label: "Tech Stack" },
+  ]}
+/>
+
+<Section id="overview" eyebrow="Problem" title="Learning to write tests for my own code">
+  <p>
+    I wanted to learn Jest by writing unit tests for my own code — not a tutorial example, but something I built from scratch. An advanced calculator suite gave me enough complexity to exercise real test cases: math operations, string manipulation, regex analysis, and credit card validation. The project grew into two versions: the original React 18 app and a modern Next.js 16 rebuild.
+  </p>
+</Section>
+
+<Section id="approach" eyebrow="Solution" title="What I built">
+  <p>
+    CheeseMath is an advanced calculator suite with two versions in one repo. The original is a React 18 app with AnimeJS animations, Jest unit tests, Selenium E2E tests, and coverage reports. The rebuild is a modern Next.js 16 app with TypeScript, Bun, NextUI, Tailwind CSS, and Framer Motion. Both versions include math tools, string manipulation, a regex analyzer, and credit card validation.
+  </p>
+  <div className="grid-two">
+    <Card>
+      <h3 className="feature-card__title">Original (React 18)</h3>
+      <ul className="feature-list">
+        <li>React 18 application with AnimeJS animations</li>
+        <li>Jest unit tests in <code>/CheeseMath/tests/</code></li>
+        <li>Selenium E2E tests for full user flows</li>
+        <li>Coverage reports for test visibility</li>
+        <li>Math tools, string manipulation, regex analyzer, credit card validation</li>
+      </ul>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">Rebuild (Next.js 16)</h3>
+      <ul className="feature-list">
+        <li>Next.js 16 with TypeScript and Bun runtime</li>
+        <li>NextUI components with Tailwind CSS</li>
+        <li>Framer Motion for animations</li>
+        <li>Same feature set: math tools, string manipulation, regex analyzer, credit card validation</li>
+        <li>Planned Vitest/Playwright tests (not yet implemented)</li>
+      </ul>
+    </Card>
+  </div>
+</Section>
+
+<Section id="role" eyebrow="My Role" title="What I did">
+  <ul className="feature-list">
+    <li>Solo developer — built both versions of the application</li>
+    <li>Wrote unit tests for my own code for the first time using Jest</li>
+    <li>Set up Selenium E2E tests and coverage reports for the original</li>
+    <li>Rebuilt the app in Next.js 16 with TypeScript and modern tooling</li>
+    <li>Implemented math tools, string manipulation, regex analyzer, and credit card validation</li>
+    <li>Integrated Framer Motion animations in the Next.js version</li>
+    <li>Published to GitHub Pages with MIT license</li>
+  </ul>
+</Section>
+
+<Section id="impact" eyebrow="What's in the Repo" title="Real artifacts you can verify">
+  <ul className="feature-list">
+    <li><strong>GitHub repo:</strong> <Link to="https://github.com/BradleyMatera/CheeseMath-Jest-Tests" external>github.com/BradleyMatera/CheeseMath-Jest-Tests</Link></li>
+    <li><strong>Live demo:</strong> <Link to="https://bradleymatera.github.io/CheeseMath-Jest-Tests/" external>bradleymatera.github.io/CheeseMath-Jest-Tests</Link></li>
+    <li><strong>Commits:</strong> 40 commits on the main branch</li>
+    <li><strong>Created:</strong> August 11, 2024</li>
+    <li><strong>License:</strong> MIT</li>
+    <li><strong>Two versions:</strong> <code>/CheeseMath</code> (legacy React 18) and <code>/cheese-math-nextjs</code> (modern Next.js 16)</li>
+    <li><strong>Original tests:</strong> Jest unit tests in <code>/CheeseMath/tests/</code> and Selenium E2E tests</li>
+    <li><strong>Next.js tests:</strong> Vitest/Playwright planned but not yet implemented</li>
+    <li><strong>Honest limitations:</strong> CheeseMath looks goofy, but the whole point was learning Jest. This was the first time I wrote unit tests for my own code. The Next.js version has planned testing features not yet implemented. The name is silly — it was a learning project that grew.</li>
+  </ul>
+</Section>
+
+<Section id="artifacts" eyebrow="Tech Stack" title="Technologies used">
+  <div className="project-card__stack">
+    <span>React 18</span>
+    <span>Next.js 16</span>
+    <span>TypeScript</span>
+    <span>Bun</span>
+    <span>Jest</span>
+    <span>Selenium</span>
+    <span>NextUI</span>
+    <span>Tailwind CSS</span>
+    <span>Framer Motion</span>
+    <span>AnimeJS</span>
+    <span>GitHub Pages</span>
+  </div>
+</Section>

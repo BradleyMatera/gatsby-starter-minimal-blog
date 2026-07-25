@@ -1,0 +1,91 @@
+---
+title: "OBJ Parser"
+slug: "/projects/obj-parser"
+---
+
+import { Section, Card, AnchorNav, Link } from "../../../src/ui";
+
+<Section
+  eyebrow="Project Write-up"
+  title="OBJ Parser · Wavefront OBJ to binary converter in Zig"
+  description="A small Zig project that reads Wavefront OBJ files and optionally reads MTL material files, converting them to an optimized binary format with verification tools. Built to learn Zig's explicit memory management and binary-safe parsing. MIT licensed."
+/>
+
+<AnchorNav
+  items={[
+    { id: "overview", label: "Problem" },
+    { id: "approach", label: "Solution" },
+    { id: "role", label: "My Role" },
+    { id: "impact", label: "What's in the Repo" },
+    { id: "artifacts", label: "Tech Stack" },
+  ]}
+/>
+
+<Section id="overview" eyebrow="Problem" title="Learning Zig's memory model through real parsing">
+  <p>
+    I wanted to learn Zig's explicit memory management and binary-safe parsing by building something real — not a toy example. Parsing Wavefront OBJ files and converting them to an optimized binary format was a good fit: it requires reading text formats, handling materials, managing memory explicitly, and writing binary output that can be verified.
+  </p>
+</Section>
+
+<Section id="approach" eyebrow="Solution" title="What I built">
+  <p>
+    A small Zig project that reads Wavefront OBJ files, optionally reads MTL material files, and converts them to an optimized binary format with verification tools. The parser handles face vertex parsing and demonstrates core concepts including OBJ file format handling, binary format design, memory management, and parsing techniques.
+  </p>
+  <div className="grid-two">
+    <Card>
+      <h3 className="feature-card__title">Parsing & conversion</h3>
+      <ul className="feature-list">
+        <li>Reads Wavefront OBJ files and parses vertices and faces</li>
+        <li>Optionally reads MTL material files</li>
+        <li>Converts to optimized binary format</li>
+        <li>Verification tools to validate binary output</li>
+        <li>Face vertex parsing implementation</li>
+      </ul>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">Core concepts explored</h3>
+      <ul className="feature-list">
+        <li>OBJ file format structure and parsing</li>
+        <li>Binary format design for compact storage</li>
+        <li>Zig's explicit memory management</li>
+        <li>Binary-safe parsing techniques</li>
+        <li>Build system with <code>build.zig</code></li>
+      </ul>
+    </Card>
+  </div>
+</Section>
+
+<Section id="role" eyebrow="My Role" title="What I did">
+  <ul className="feature-list">
+    <li>Solo developer — built the entire project to learn Zig</li>
+    <li>Implemented OBJ file parser reading vertices and faces</li>
+    <li>Added optional MTL material file reading</li>
+    <li>Designed and implemented binary output format</li>
+    <li>Built verification tools to validate converted output</li>
+    <li>Learned Zig's explicit memory management and binary-safe parsing</li>
+    <li>Created example files (cube.obj, cube.mtl) for testing</li>
+  </ul>
+</Section>
+
+<Section id="impact" eyebrow="What's in the Repo" title="Real artifacts you can verify">
+  <ul className="feature-list">
+    <li><strong>GitHub repo:</strong> <Link to="https://github.com/BradleyMatera/obj-parser" external>github.com/BradleyMatera/obj-parser</Link></li>
+    <li><strong>Live demo:</strong> No live demo — no GitHub Pages deployment (it's a CLI tool)</li>
+    <li><strong>Commits:</strong> 2 commits</li>
+    <li><strong>Code size:</strong> 21KB of Zig code</li>
+    <li><strong>Created:</strong> January 18, 2025</li>
+    <li><strong>License:</strong> MIT</li>
+    <li><strong>Repo structure:</strong> <code>src/main.zig</code> (entry point), <code>src/root.zig</code> (parser logic), <code>examples/cube.obj</code>, <code>examples/cube.mtl</code>, <code>build.zig</code></li>
+    <li><strong>Honest limitations:</strong> This is a very small project — 2 commits, 21KB of Zig code, no GitHub Pages deployment. It's a learning exercise, not a production tool. Focuses on 2D models (not full 3D). It's small but it taught me Zig's memory model.</li>
+  </ul>
+</Section>
+
+<Section id="artifacts" eyebrow="Tech Stack" title="Technologies used">
+  <div className="project-card__stack">
+    <span>Zig</span>
+    <span>Wavefront OBJ</span>
+    <span>MTL</span>
+    <span>Binary format</span>
+    <span>build.zig</span>
+  </div>
+</Section>

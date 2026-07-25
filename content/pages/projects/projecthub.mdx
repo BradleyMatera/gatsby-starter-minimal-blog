@@ -1,0 +1,100 @@
+---
+title: "ProjectHub (Scout)"
+slug: "/projects/projecthub"
+---
+
+import { Section, Card, AnchorNav, Link } from "../../../src/ui";
+
+<Section
+  eyebrow="Project Write-up"
+  title="ProjectHub (Scout) · Embeddable AI chat widget for recruiters"
+  description="An embeddable AI chat widget powered by 'Scout', a free multi-provider recruiter assistant. Vanilla JS frontend on GitHub Pages, Node.js backend on a Google Cloud e2-micro VM, with a JSON knowledge base and automatic failover across five AI providers."
+/>
+
+<AnchorNav
+  items={[
+    { id: "overview", label: "Problem" },
+    { id: "approach", label: "Solution" },
+    { id: "role", label: "My Role" },
+    { id: "impact", label: "What's in the Repo" },
+    { id: "artifacts", label: "Tech Stack" },
+  ]}
+/>
+
+<Section id="overview" eyebrow="Problem" title="User need">
+  <p>
+    I wanted a way for recruiters visiting my portfolio to ask questions about my projects and experience without me being on the other end of a contact form. The widget needed to be embeddable with a single script tag, cost nothing to run, and keep working even if one AI provider went down or hit a rate limit.
+  </p>
+</Section>
+
+<Section id="approach" eyebrow="Solution" title="What I built">
+  <p>
+    ProjectHub is an embeddable AI chat widget powered by "Scout", a free multi-provider recruiter assistant. The frontend is vanilla JavaScript served from GitHub Pages, embedded with a single script tag. The backend is a Node.js server on a Google Cloud e2-micro VM, with Caddy and Let's Encrypt handling HTTPS. A JSON knowledge base lives in the GitHub repo with bidirectional sync, and Scout rotates across five AI providers — Groq, Cloudflare Workers AI, GitHub Models, Google Gemini, and xAI Grok — with automatic failover.
+  </p>
+  <div className="grid-two">
+    <Card>
+      <h3 className="feature-card__title">Widget & backend</h3>
+      <ul className="feature-list">
+        <li>One-script embed: <code>&lt;script src="https://bradleymatera.github.io/ProjectHub/ProjectHub.js"&gt;&lt;/script&gt;</code></li>
+        <li>Response cache with 5-minute in-memory cache</li>
+        <li>Per-tab memory so conversations stay contextual within a session</li>
+        <li>Safety checks and a self-improvement loop (Think mode)</li>
+        <li>Analytics dashboard for tracking widget usage</li>
+        <li>API endpoints: <code>/</code>, <code>/health</code>, <code>/api/knowledge-health</code>, <code>/api/chat</code>, <code>/api/think</code></li>
+      </ul>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">AI providers & infra</h3>
+      <ul className="feature-list">
+        <li>Multi-provider failover: Groq, Cloudflare Workers AI, GitHub Models, Google Gemini, xAI Grok</li>
+        <li>JSON knowledge base in GitHub repo with bidirectional sync</li>
+        <li>Fallback to knowledge base if all AI providers fail</li>
+        <li>Caddy + Let's Encrypt for automatic HTTPS</li>
+        <li>Build process: <code>cat data.js utils.js logic.js ui.js &gt; ProjectHub.js</code></li>
+        <li>6 comprehensive test suites — 474+ tests total</li>
+      </ul>
+    </Card>
+  </div>
+</Section>
+
+<Section id="role" eyebrow="My Role" title="What I did">
+  <ul className="feature-list">
+    <li>Solo developer — designed and built the widget, backend, and knowledge base</li>
+    <li>Built the vanilla JS frontend with a single-script-tag embed model</li>
+    <li>Implemented multi-provider failover across five AI services</li>
+    <li>Set up the Node.js backend on a Google Cloud e2-micro VM with Caddy and Let's Encrypt</li>
+    <li>Built the response cache, per-tab memory, and Think mode self-improvement loop</li>
+    <li>Wrote 6 test suites totaling 474+ tests</li>
+    <li>Built the analytics dashboard for tracking widget interactions</li>
+  </ul>
+</Section>
+
+<Section id="impact" eyebrow="What's in the Repo" title="Real artifacts you can verify">
+  <ul className="feature-list">
+    <li><strong>GitHub repo:</strong> <Link to="https://github.com/BradleyMatera/ProjectHub" external>github.com/BradleyMatera/ProjectHub</Link></li>
+    <li><strong>Live demo:</strong> <Link to="https://bradleymatera.github.io/ProjectHub/" external>bradleymatera.github.io/ProjectHub</Link></li>
+    <li><strong>Created:</strong> April 11, 2025</li>
+    <li><strong>Contributions:</strong> 246 contributions on the main branch</li>
+    <li><strong>Embed snippet:</strong> <code>&lt;script src="https://bradleymatera.github.io/ProjectHub/ProjectHub.js"&gt;&lt;/script&gt;</code></li>
+    <li><strong>API endpoints:</strong> <code>/</code>, <code>/health</code>, <code>/api/knowledge-health</code>, <code>/api/chat</code>, <code>/api/think</code></li>
+    <li><strong>Test coverage:</strong> 6 test suites, 474+ tests total</li>
+    <li><strong>Build process:</strong> <code>cat data.js utils.js logic.js ui.js &gt; ProjectHub.js</code></li>
+    <li><strong>Honest limitations:</strong> Runs entirely on free tiers (may have rate limits). Fallback to knowledge base if all AI providers fail. Not a production enterprise solution — designed for personal portfolio use.</li>
+  </ul>
+</Section>
+
+<Section id="artifacts" eyebrow="Tech Stack" title="Technologies used">
+  <div className="project-card__stack">
+    <span>Vanilla JavaScript</span>
+    <span>Node.js</span>
+    <span>Google Cloud Compute</span>
+    <span>Caddy</span>
+    <span>Let's Encrypt</span>
+    <span>Groq</span>
+    <span>Cloudflare Workers AI</span>
+    <span>GitHub Models</span>
+    <span>Google Gemini</span>
+    <span>xAI Grok</span>
+    <span>GitHub Pages</span>
+  </div>
+</Section>
