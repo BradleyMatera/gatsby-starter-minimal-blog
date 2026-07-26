@@ -246,20 +246,164 @@ All city hero images are in `static/city-images/[city-slug].jpg` (33 images). Im
 
 ---
 
-## SEO Checklist for New Pages
+## Compliance Standards (CRITICAL — Read Before Adding Any Page or Component)
+
+As of Jul 25, 2026, all 267 pages pass WCAG A, AA, AAA, and ADA. The site scores 95/100 overall (SEO 91, AEO 95, GEO 95). Every new page or component MUST maintain these standards. The rules below are derived from the ApexSolutions audit methodology and codify what makes the site pass.
+
+### Pre-Deployment Verification Commands
+
+```bash
+# 1. WCAG contrast check (all 10 demo pages)
+node scripts/contrast-check.js              # live site
+node scripts/contrast-check.js --local       # localhost:9000 (run build && serve first)
+
+# 2. Build check
+rm -rf .cache public && GATSBY_CPU_COUNT=1 npm run build
+
+# 3. Lint check
+npm run lint
+```
+
+If any of these fail, fix before deploying. Do not deploy broken contrast or build failures.
+
+### WCAG A — Baseline Access (must never break)
+
+These are the fundamentals. The audit checks every page for:
+
+1. **`<html lang>` attribute** — Set in `src/@lekoarts/gatsby-theme-minimal-blog/components/seo.tsx` via `<html lang={siteLanguage} />`. Site language is `en` (set in `config/gatsby/site-metadata.ts`). Every page inherits this. Do not override.
+
+2. **Page titles** — Every page MUST have a unique `<title>`. The `Seo` component handles this. Pass `title` prop to `<Seo>`. Format: `Page Name | Small Business Web Design in Northwest Illinois | Bradley Matera`.
+
+3. **Meta descriptions** — Every page MUST have a unique meta description (140–160 chars). Pass `description` prop to `<Seo>`. Never reuse the same description across pages.
+
+4. **Heading hierarchy** — Exactly one `<h1>` per page. Follow with `<h2>`, `<h3>` in order. Never skip levels (no `<h4>` without an `<h3>` parent). The audit checks for this.
+
+5. **Alt text on all images** — Every `<img>` MUST have `alt` attribute. Decorative images use `alt=""`. Background images (CSS `background-image`) don't need alt text but the element with the background should have an accessible name if it conveys information.
+
+6. **Form labels** — Every form input MUST have a `<label>` with `htmlFor` matching the input's `id`. Use the `.demo-form-label` + `.demo-form-input` pattern from demos. Never use placeholder-only labels.
+
+7. **Keyboard accessibility** — Interactive elements (buttons, links, form fields) must be keyboard-accessible. Custom interactive elements (FAQ accordions, calculators) must use `role="button"`, `tabIndex={0}`, and `onKeyDown` handlers. See the FAQ accordion pattern in demo pages.
+
+8. **Skip navigation** — The theme provides a skip link. Do not remove it.
+
+### WCAG AA — Practical Standard (must never break)
+
+1. **Color contrast** — See section 8 above. Normal text ≥ 4.5:1, large text (≥24px or ≥18.66px bold) ≥ 3:1. Run `node scripts/contrast-check.js` after any color change.
+
+2. **No color-only information** — Don't convey status with color alone. Status badges must have text labels (e.g., "In Stock" not just a green dot). The integration status badges use text + color + icons.
+
+3. **Reflow** — Content must reflow at 320px width without horizontal scroll. Use responsive CSS (flexbox, grid, `max-width: 100%`). Test with browser DevTools mobile view.
+
+4. **Focus visibility** — All interactive elements must have visible focus indicators. The theme provides default focus styles. Do not set `outline: none` without a replacement focus style.
+
+5. **Target size** — Clickable elements should be at least 44×44px. Buttons and links in demos use padding to meet this. Small icon links should have sufficient padding.
+
+6. **Error identification** — Form errors must be programmatically associated with their inputs. Use `aria-describedby` or inline error text with `role="alert"`.
+
+### WCAG AAA — Enhanced Access (must never break)
+
+1. **Enhanced contrast** — Normal text ≥ 7:1, large text ≥ 4.5:1. This is stricter than AA. All inline-styled text colors must be dark enough (or light enough on dark backgrounds) to meet 7:1.
+
+2. **No-exception keyboard access** — No keyboard traps. All functionality available via keyboard. Modal dialogs (if any) must trap focus and return it on close.
+
+3. **Reading support** — Line spacing at least 1.5x within blocks of text. Paragraph spacing at least 1.5x the line height. The theme's default styles handle this — don't override with tighter spacing on text-heavy pages.
+
+4. **Focus order** — Tab order must follow visual order. Use DOM order, not CSS order. `tabIndex` should only be 0 or -1, never positive values.
+
+### ADA Readiness
+
+The audit checks for A/AA risk factors. To maintain "Passes most factors":
+- All WCAG A and AA criteria must pass (see above)
+- Forms must have proper labels and error handling
+- Navigation must be keyboard-accessible
+- Page structure must use semantic HTML (`<nav>`, `<main>`, `<header>`, `<footer>`, `<section>`, `<article>`)
+
+### SEO — Search Engine Optimization (score: 91/100)
+
+1. **Canonical URLs** — Every page MUST have a self-referencing `<link rel="canonical">`. The `Seo` component handles this via `canonicalUrl` prop. For demo pages, pass `canonicalUrl={pageUrl}` where `pageUrl = \`${site.siteUrl}${pathname}\``.
+
+2. **Robots meta** — Default is `index,follow`. Only use `noindex` for pages that should NOT appear in search (e.g., `/purchases/` which is intentionally blocked). Never accidentally set `noindex` on pages you want indexed.
+
+3. **Sitemap** — Gatsby auto-generates `/sitemap.xml`. The `onPostBuild` hook in `config/gatsby/node.js` fixes tag page canonicals. Do not remove it. The sitemap redirect in `netlify.toml` must stay.
+
+4. **Schema markup** — Every page gets Person, WebSite, WebPage, and BreadcrumbList schema from the `Seo` component. Additional schema types:
+   - **Blog posts**: BlogPosting (auto-added by `Seo` when `ogType="article"`)
+   - **Service pages**: Service with offers and areaServed
+   - **FAQ sections**: FAQPage with Question/Answer pairs
+   - **Local business**: ProfessionalService with address, phone, areaServed (in `src/site/seo/local-seo.ts`)
+   - Pass custom schema via the `structuredData` prop on `<Seo>`.
+
+5. **URL structure** — Use kebab-case URLs with trailing slashes. Example: `/services/local-seo/`. The `Seo` component normalizes pathnames to add trailing slashes.
+
+6. **Meta description length** — 140–160 characters. Too short = missed opportunity. Too long = truncated in SERP.
+
+7. **Internal linking** — Every new page must have internal links from at least 2 other pages. Add links from relevant existing pages, homepage, footer, or related blog posts.
+
+8. **Mobile-responsive** — All pages must work on mobile. Use responsive CSS. Test at 320px, 768px, and 1024px widths.
+
+### AEO — Answer Engine Optimization (score: 95/100)
+
+AI answer systems (ChatGPT, Perplexity, Copilot) extract answers from pages. To maintain high AEO:
+
+1. **Use HTML lists and tables** — Process steps, comparisons, pricing, and requirements should use `<ul>`, `<ol>`, or `<table>` elements. Not prose paragraphs. The audit specifically checks for "extractable lists, steps, and comparisons."
+
+2. **Descriptive headings** — Use clear H2/H3 headings that match likely questions. "How much does a website cost?" not "Pricing Information." Answer systems extract sections by heading.
+
+3. **Direct answers first** — Put the direct answer in the first paragraph under a heading, then elaborate. Don't bury the answer in the third paragraph.
+
+4. **FAQ sections** — Use the `FAQSection` component or `FAQPage` schema. Questions should be phrased as natural questions users would ask.
+
+5. **Structured data** — FAQPage, HowTo, and Article schema help answer systems extract content accurately.
+
+### GEO — Generative Engine Optimization (score: 95/100)
+
+Generative AI engines look for evidence-backed claims. To maintain high GEO:
+
+1. **Support claims with evidence** — Numbers, dates, superlatives, and outcome promises should have nearby proof: source links, case studies, testimonials, or data references. The audit flags "claims need stronger evidence" on 89 pages — this is the main area for improvement.
+
+2. **Author/publisher attribution** — Pages with factual claims should have author details nearby. The `Seo` component adds Person schema automatically. For blog posts, the author info is in the post template.
+
+3. **Citations and source links** — When stating statistics or facts, link to the source. Example: "Core Web Vitals matter for SEO [link to Google's page]" not just "Core Web Vitals matter for SEO."
+
+4. **Dates on content** — Blog posts have `datePublished` and `dateModified` in schema. Service pages use the build date. Keep content fresh — outdated content signals lower trust.
+
+5. **Reviews and testimonials** — Include testimonials with attribution (name, location, business). The demo pages use `.demo-testimonial` components with named authors.
+
+### New Page Checklist
 
 Every new page MUST have:
-- [ ] Self-referencing canonical URL
-- [ ] Meta description (140-160 chars)
-- [ ] `<h1>` with target keyword
-- [ ] `robots` meta tag set to `index,follow`
-- [ ] Open Graph tags (og:title, og:description, og:url, og:image)
-- [ ] Twitter Card tags
-- [ ] Schema markup (Service, ProfessionalService, FAQPage, or BreadcrumbList as appropriate)
-- [ ] Breadcrumbs (both nav and schema)
-- [ ] Internal links from at least 2 other pages
-- [ ] Mobile-responsive layout
+
+- [ ] `<Seo>` component with `title`, `description`, `pathname`, `canonicalUrl`
+- [ ] Unique title following format: `Page Name | Small Business Web Design in Northwest Illinois | Bradley Matera`
+- [ ] Meta description (140–160 chars, unique)
+- [ ] `robots="index,follow"` (unless intentionally blocking)
+- [ ] Exactly one `<h1>` with target keyword
+- [ ] Proper heading hierarchy (h1 → h2 → h3, no skips)
 - [ ] Alt text on all images
+- [ ] Labels on all form inputs (`htmlFor` + `id`)
+- [ ] Keyboard-accessible interactive elements (`role`, `tabIndex`, `onKeyDown`)
+- [ ] Schema markup (at minimum: BreadcrumbList; add FAQPage for FAQ sections, Service for service pages)
+- [ ] Breadcrumbs (pass `breadcrumbs` prop to `<Seo>`)
+- [ ] Internal links from at least 2 other pages
+- [ ] Mobile-responsive layout (test at 320px)
+- [ ] All colors meet WCAG AAA contrast (7:1 normal, 4.5:1 large text)
+- [ ] No `rgba()` backgrounds behind text — use solid hex colors
+- [ ] Content uses HTML lists/tables for process steps, comparisons, pricing
+- [ ] Factual claims backed by evidence (links, data, testimonials)
+
+### New Component Checklist
+
+Every new component MUST:
+
+- [ ] Use semantic HTML elements (`<button>`, `<a>`, `<nav>`, `<section>`, etc.)
+- [ ] Have visible focus indicators (don't remove `outline` without replacement)
+- [ ] Meet contrast requirements (run `node scripts/contrast-check.js` if adding colors)
+- [ ] Use solid hex colors, never `rgba()` for backgrounds behind text
+- [ ] Be keyboard-accessible if interactive (test with Tab key)
+- [ ] Have `aria-label` or accessible text for icon-only buttons
+- [ ] Use `aria-hidden="true"` on decorative SVGs
+- [ ] Have `alt` text on all `<img>` tags
+- [ ] Not break reflow at 320px width
 
 ---
 
@@ -301,6 +445,13 @@ See `PRICING_MODEL.md` for full rationale and tax breakdowns.
 - Do NOT add comments to code unless asked (per project convention)
 - Do NOT modify git config or use interactive git flags
 - Do NOT use `city-demo-lawfirm.svg` (no hyphen) — the correct filename is `city-demo-law-firm.svg`
+- Do NOT use `rgba()` for backgrounds behind text — use solid hex colors (audit tool doesn't blend)
+- Do NOT set `outline: none` without a replacement focus style
+- Do NOT skip heading levels (no `<h4>` without `<h3>` parent)
+- Do NOT use placeholder text as form labels — always use `<label htmlFor>`
+- Do NOT use positive `tabIndex` values — only 0 or -1
+- Do NOT deploy without running `node scripts/contrast-check.js` if you changed any colors
+- Do NOT use color alone to convey information — pair with text labels or icons
 
 ---
 
