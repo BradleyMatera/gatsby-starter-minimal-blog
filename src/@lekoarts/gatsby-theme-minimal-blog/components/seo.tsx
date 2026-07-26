@@ -145,7 +145,7 @@ const Seo = ({
     <>
       <html lang={siteLanguage} />
       <title>{seo.title}</title>
-      <meta name="description" content={seo.description} />
+      <meta name="description" content={seo.description} />\n      <meta name="msvalidate.01" content="DC14A3BD196E2386E427F81F3BB390B3" />
       <meta name="image" content={seo.image} />
       <meta property="og:title" content={seo.title} />
       <meta property="og:url" content={seo.url} />
