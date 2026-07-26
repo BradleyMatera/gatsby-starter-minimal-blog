@@ -59,8 +59,8 @@ export const localBreadcrumb = {
 
 export const personSchema = {
   "@type": "Person",
-  "@id": `${SITE_URL}/#bradley`,
-  name: "Bradley F. Matera",
+  "@id": `${SITE_URL}/#person`,
+  name: "Bradley Matera",
   url: `${SITE_URL}/about/`,
   email: "bradmatera@gmail.com",
   telephone: "+16083135373",
@@ -83,7 +83,7 @@ export const websiteSchema = {
   "@id": `${SITE_URL}/#website`,
   url: SITE_URL,
   name: "Bradley Matera",
-  publisher: { "@id": `${SITE_URL}/#bradley` },
+  publisher: { "@id": `${SITE_URL}/#person` },
   inLanguage: "en",
 };
 
@@ -111,7 +111,7 @@ export const buildConnectedSchema = ({
       "@type": "Service",
       "@id": `${SITE_URL}${path}#service`,
       name: serviceName,
-      provider: { "@id": `${SITE_URL}/#bradley` },
+      provider: { "@id": `${SITE_URL}/#person` },
       areaServed: serviceAreaPlaces.map((name) => ({
         "@type": "Place",
         name,
@@ -150,7 +150,7 @@ export const buildProfessionalServiceSchema = ({
       "@type": "ProfessionalService",
       "@id": `${SITE_URL}${path}#service`,
       name: serviceName,
-      provider: { "@id": `${SITE_URL}/#bradley` },
+      provider: { "@id": `${SITE_URL}/#person` },
       url: `${SITE_URL}${path}`,
       areaServed: serviceAreaPlaces.map((name) => ({
         "@type": "Place",
@@ -168,8 +168,6 @@ export const buildProfessionalServiceSchema = ({
       description,
       telephone: "+16083135373",
       email: "bradmatera@gmail.com",
-      datePublished: "2024-01-15",
-      dateModified: "2026-07-24",
     },
   ],
 });

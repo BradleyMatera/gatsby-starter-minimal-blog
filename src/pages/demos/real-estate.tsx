@@ -12,8 +12,8 @@ import FAQSection, { FAQItem } from "../../features/demos/FAQSection";
 import { StarIcon, MapPinIcon, PhoneIcon, HouseIcon, SearchIcon, ShieldIcon, AlertIcon } from "../../site/icons";
 
 const pathname = "/demos/real-estate/";
-const pageTitle = "Rockford Heritage Realty — Real Estate Office Demo";
-const pageDescription = "Demo real estate brokerage website with sample listings, agent profiles, market data, and mortgage estimator. Built by Bradley Matera.";
+const pageTitle = "Rockford Heritage Realty — Real Estate Website Concept Demo (Fictional)";
+const pageDescription = "Concept demo of a fictional real estate brokerage website with sample listings, agent profiles, market data, and mortgage estimator. Built by Bradley Matera.";
 
 const socialLinks: SocialLink[] = [
   { platform: "facebook", url: "https://facebook.com" },

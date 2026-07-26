@@ -53,4 +53,3 @@ User-agent: CCBot
 Allow: /
 
 Sitemap: https://bradleymatera.dev/sitemap.xml
-Sitemap: https://bradleymatera.dev/sitemap.xml/sitemap-index.xml

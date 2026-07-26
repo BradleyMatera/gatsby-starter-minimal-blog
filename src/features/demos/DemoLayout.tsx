@@ -54,6 +54,9 @@ const DemoLayout: React.FC<DemoLayoutProps> = ({
         style={themeColor ? ({ ["--demo-accent" as string]: themeColor } as React.CSSProperties) : undefined}
       >
         {children}
+        <div className="demo-fictional-disclosure" role="note">
+          <p>Concept demo — fictional business. {demoName} is not a real company. Names, addresses, phone numbers, reviews, and people shown are illustrative only.</p>
+        </div>
       </main>
     </>
   );

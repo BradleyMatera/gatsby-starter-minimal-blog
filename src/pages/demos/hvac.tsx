@@ -12,8 +12,8 @@ import FAQSection, { FAQItem } from "../../features/demos/FAQSection";
 import { StarIcon, PhoneIcon, AlertIcon, ShieldIcon, CheckIcon, XIcon, ClockIcon } from "../../site/icons";
 
 const pathname = "/demos/hvac/";
-const pageTitle = "ComfortAir Heating & Cooling — HVAC Service Demo";
-const pageDescription = "Demo HVAC contractor website with emergency service info, maintenance plans, financing estimator, and technician bios. Built by Bradley Matera.";
+const pageTitle = "ComfortAir Heating & Cooling — HVAC Website Concept Demo (Fictional)";
+const pageDescription = "Concept demo of a fictional HVAC contractor website with emergency service info, maintenance plans, financing estimator, and technician bios. Built by Bradley Matera.";
 
 const socialLinks: SocialLink[] = [
   { platform: "facebook", url: "https://facebook.com" },

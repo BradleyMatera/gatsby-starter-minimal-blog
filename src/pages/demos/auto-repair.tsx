@@ -11,8 +11,8 @@ import FAQSection, { FAQItem } from "../../features/demos/FAQSection";
 import { StarIcon, MapPinIcon, PhoneIcon, ShieldIcon, CheckIcon, ClockIcon, CarIcon, AlertIcon } from "../../site/icons";
 
 const pathname = "/demos/auto-repair/";
-const pageTitle = "Northside Auto Repair — Auto Repair Shop Demo";
-const pageDescription = "Demo auto repair shop website with service menu, illustrative VIN lookup, mechanic bios, and transparent estimates. Built by Bradley Matera.";
+const pageTitle = "Northside Auto Repair — Auto Repair Website Concept Demo (Fictional)";
+const pageDescription = "Concept demo of a fictional auto repair shop website with service menu, illustrative VIN lookup, mechanic bios, and transparent estimates. Built by Bradley Matera.";
 
 const socialLinks: SocialLink[] = [
   { platform: "facebook", url: "https://facebook.com" },

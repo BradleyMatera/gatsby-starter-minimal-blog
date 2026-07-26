@@ -27,6 +27,9 @@ npm run serve                     # Serve built site on :9000
 npm run clean                     # Clear Gatsby cache
 npm run lint                      # ESLint
 npm run lint:fix                  # ESLint --fix
+npm run test:seo                  # SEO inventory check on public/
+npm run test:seo:live             # SEO inventory check on live site
+npm run test:e2e                  # Playwright E2E tests
 ```
 
 **Important:** The Netlify build command is `rm -rf .cache public && npm run build` — this clears the cache on every deploy to prevent stale build artifacts. Do NOT remove the `rm -rf` from `netlify.toml`.
@@ -88,6 +91,68 @@ The site must pass **WCAG AA** (4.5:1 normal text, 3:1 large/bold text) and **WC
 7. **To verify contrast after changes**, run: `node scripts/contrast-check.js` (checks the live site) or `node scripts/contrast-check.js --local` (checks `localhost:9000` after `npm run build && npm run serve`). The script uses Playwright to check computed styles on all demo pages.
 
 8. **When adding new demo elements**, calculate contrast ratios using the WCAG formula: `(max(L1, L2) + 0.05) / (min(L1, L2) + 0.05)` where L is relative luminance. Use a contrast checker tool or the script at `scripts/contrast-check.js`.
+
+### 9. No Synthetic Freshness Signals (CRITICAL — Read Before Adding Dates)
+
+The site must NOT emit build-date timestamps as `lastmod`, `dateModified`, or visible "Last updated" text unless a real content change occurred. The independent SEO audit (Jul 2026) flagged this as a P0 issue.
+
+**Rules:**
+1. **Sitemap `lastmod`**: `config/gatsby/plugins.ts` only sets `lastmod` when `page.sitemapLastmod` is available (real content date). Never set `lastmod` to `new Date()` or `BUILD_DATE`.
+2. **JSON-LD `dateModified`**: `src/@lekoarts/gatsby-theme-minimal-blog/components/seo.tsx` only sets `dateModified` on `BlogPosting` schema when `article.modifiedTime` or `article.publishedTime` is provided. Never set `dateModified` to the build date on `WebPage` or `ProfessionalService` schema.
+3. **No visible "Last updated" stamps**: The `onPostBuild` hook in `config/gatsby/node.js` must NOT inject visible "Last updated: YYYY-MM-DD" text into HTML. This was removed in Jul 2026.
+4. **`local-seo.ts`**: `buildProfessionalServiceSchema` must NOT include hard-coded `datePublished` or `dateModified` values.
+
+### 10. JSON-LD Consolidation (CRITICAL — Read Before Adding Structured Data)
+
+All JSON-LD must use stable `@id` references and consistent naming. The independent SEO audit (Jul 2026) flagged duplicate and disconnected schema as a P0 issue.
+
+**Rules:**
+1. **Stable `@id` values**: Person uses `https://bradleymatera.dev/#person`, WebSite uses `https://bradleymatera.dev/#website`, WebPage uses `{canonical}#webpage`. These are defined in `src/@lekoarts/gatsby-theme-minimal-blog/components/seo.tsx` and `src/site/seo/local-seo.ts`.
+2. **No duplicate Person/WebSite schema**: The homepage previously injected a duplicate `@graph` with Person and WebSite. This was removed in Jul 2026. The `Seo` component already emits these — do not add additional Person or WebSite JSON-LD on any page.
+3. **Consistent name**: Always use `"Bradley Matera"` (not `"Bradley F. Matera"`) in all schema.
+4. **Use `@id` references for connections**: Instead of embedding full Person objects in `author`/`publisher` fields, use `{ "@id": "https://bradleymatera.dev/#person" }`.
+5. **`local-seo.ts` uses `#person` ID**: `personSchema` and `websiteSchema` in `src/site/seo/local-seo.ts` use `@id` values matching the `Seo` component. `buildConnectedSchema` and `buildProfessionalServiceSchema` reference these by `@id`.
+
+### 11. Demo Fictional Disclosures (CRITICAL — Read Before Editing Demo Pages)
+
+All 10 demo pages must clearly disclose that they are concept demos with fictional businesses. The independent SEO audit (Jul 2026) flagged missing disclosures as a P0 issue.
+
+**Rules:**
+1. **DemoBanner text**: `src/features/demos/DemoBanner.tsx` displays "concept demo, fictional business" in the banner at the top of every demo page.
+2. **DemoLayout footer disclosure**: `src/features/demos/DemoLayout.tsx` injects a `demo-fictional-disclosure` div at the bottom of every demo page stating the business is fictional.
+3. **Page titles**: Every demo page `pageTitle` must include "Concept Demo" and "(Fictional)".
+4. **Page descriptions**: Every demo page `pageDescription` must start with "Concept demo of a fictional...".
+5. **Do not remove or weaken these disclosures** — they prevent search engines from indexing demo content as real business information.
+
+### 12. No Unsupported Performance or Ranking Claims
+
+City pages must not make specific performance or ranking claims that cannot be verified. The independent SEO audit (Jul 2026) flagged these as P0 issues.
+
+**Banned phrases on city pages:**
+- "under 2 seconds" (specific load time claim)
+- "faster than most" (comparative performance claim)
+- "ranks locally" (ranking guarantee)
+
+**Acceptable alternative**: "Every site I build is tested with Google PageSpeed Insights before launch to ensure fast load times on mobile. I optimize images, minimize JavaScript, and use modern web standards."
+
+**Warranty/refund wording must match the legal policy source:**
+- City pages and pricing must use the same wording as `src/pages/refund-policy.tsx` and `src/site/legal/business-identity.ts`.
+- Deposits are refundable **until** the first revision round is delivered (not "after").
+- The 30-day warranty "covers bugs caused by the build" (not a blanket satisfaction guarantee).
+- Never paraphrase legal terms in a way that changes their meaning.
+
+### 13. SEO Inventory Script
+
+Run `node scripts/seo-inventory.js` after building to verify:
+- Exactly one canonical per page
+- Stable `@id` references in JSON-LD
+- No build-date `dateModified` on non-article pages
+- Demo pages contain fictional disclosure text
+- `robots.txt` has exactly one sitemap declaration
+- No banned unsupported claims on city pages
+- Core content present in static HTML
+
+Use `node scripts/seo-inventory.js --live` to check the production site. Playwright E2E tests are in `e2e/seo-audit.spec.ts`.
 
 ---
 
@@ -452,6 +517,13 @@ See `PRICING_MODEL.md` for full rationale and tax breakdowns.
 - Do NOT use positive `tabIndex` values — only 0 or -1
 - Do NOT deploy without running `node scripts/contrast-check.js` if you changed any colors
 - Do NOT use color alone to convey information — pair with text labels or icons
+- Do NOT set `lastmod`, `dateModified`, or visible "Last updated" dates to the build date — only use real content dates
+- Do NOT add duplicate Person or WebSite JSON-LD on any page — the `Seo` component already emits these
+- Do NOT use "Bradley F. Matera" in schema — always use "Bradley Matera"
+- Do NOT remove or weaken demo fictional disclosures (banner text, footer disclosure, page titles/descriptions)
+- Do NOT use "under 2 seconds", "faster than most", or "ranks locally" on city pages — use the acceptable alternative in section 12
+- Do NOT paraphrase warranty/refund wording on city pages or pricing — use the exact legal terms from `src/pages/refund-policy.tsx`
+- Do NOT add a second sitemap declaration to `robots.txt` — exactly one is required
 
 ---
 

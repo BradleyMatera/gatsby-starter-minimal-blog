@@ -11,8 +11,8 @@ import FAQSection, { FAQItem } from "../../features/demos/FAQSection";
 import { StarIcon, MapPinIcon, PhoneIcon, GearIcon, ShieldIcon, CheckIcon, ClockIcon, BoltIcon, DownloadIcon, AlertIcon } from "../../site/icons";
 
 const pathname = "/demos/manufacturing/";
-const pageTitle = "Sterling Metalworks — Metal Fabrication Shop Demo";
-const pageDescription = "Demo metal fabrication shop website with capabilities, equipment list, certifications, and RFQ form example. Built by Bradley Matera.";
+const pageTitle = "Sterling Metalworks — Metal Fabrication Website Concept Demo (Fictional)";
+const pageDescription = "Concept demo of a fictional metal fabrication shop website with capabilities, equipment list, certifications, and RFQ form example. Built by Bradley Matera.";
 
 const socialLinks: SocialLink[] = [
   { platform: "linkedin", url: "https://linkedin.com" },

@@ -11,8 +11,8 @@ import FAQSection, { FAQItem } from "../../features/demos/FAQSection";
 import { StarIcon, MapPinIcon, PhoneIcon, ScissorsIcon, BrushIcon, SpaIcon, HandIcon, RingIcon, ClockIcon, InstagramIcon, AlertIcon } from "../../site/icons";
 
 const pathname = "/demos/beauty-salon/";
-const pageTitle = "Bella Vista Salon — Hair & Beauty Salon Demo";
-const pageDescription = "Demo beauty salon website with service menu, stylist bios, booking widget, and product showcase. Built by Bradley Matera.";
+const pageTitle = "Bella Vista Salon — Beauty Salon Website Concept Demo (Fictional)";
+const pageDescription = "Concept demo of a fictional beauty salon website with service menu, stylist bios, booking widget, and product showcase. Built by Bradley Matera.";
 
 const socialLinks: SocialLink[] = [
   { platform: "facebook", url: "https://facebook.com" },

@@ -11,8 +11,8 @@ import FAQSection, { FAQItem } from "../../features/demos/FAQSection";
 import { StarIcon, MapPinIcon, PhoneIcon, ShieldIcon, CheckIcon, ClockIcon, AlertIcon, DocumentIcon, DownloadIcon } from "../../site/icons";
 
 const pathname = "/demos/dental/";
-const pageTitle = "Rock River Family Dental — Transparent Family Dentistry | Demo Website";
-const pageDescription = "Demo dental website for Rock River Family Dental — transparent first visits, family dentistry, clear cost information, and online scheduling. Built by Bradley Matera.";
+const pageTitle = "Rock River Family Dental — Dental Website Concept Demo (Fictional)";
+const pageDescription = "Concept demo of a fictional dental website — transparent first visits, family dentistry, clear cost information, and online scheduling. Built by Bradley Matera.";
 
 const socialLinks: SocialLink[] = [
   { platform: "facebook", url: "https://facebook.com" },

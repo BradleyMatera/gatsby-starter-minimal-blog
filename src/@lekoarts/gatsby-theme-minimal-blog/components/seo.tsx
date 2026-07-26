@@ -64,14 +64,14 @@ const Seo = ({
   const personStructuredData: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": `${siteUrl}/#person`,
     name: "Bradley Matera",
-    url: siteUrl,
+    url: `${siteUrl}/about/`,
     sameAs: [
       "https://www.linkedin.com/in/bradmatera",
       "https://github.com/BradleyMatera",
       "https://www.youtube.com/@bradmatera",
     ],
-    description: seo.description,
   };
   const articleStructuredData: Record<string, unknown> | null =
     ogType === "article"
@@ -82,16 +82,8 @@ const Seo = ({
           description: seo.description,
           image: seo.image ? [seo.image] : undefined,
           mainEntityOfPage: canonical,
-          author: {
-            "@type": "Person",
-            name: "Bradley Matera",
-            url: siteUrl,
-          },
-          publisher: {
-            "@type": "Person",
-            name: "Bradley Matera",
-            url: siteUrl,
-          },
+          author: { "@id": `${siteUrl}/#person` },
+          publisher: { "@id": `${siteUrl}/#person` },
           ...(article?.publishedTime ? { datePublished: article.publishedTime } : {}),
           ...(article?.modifiedTime || article?.publishedTime
             ? { dateModified: article?.modifiedTime || article?.publishedTime }
@@ -103,45 +95,29 @@ const Seo = ({
   const websiteStructuredData: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: siteTitle,
+    "@id": `${siteUrl}/#website`,
+    name: "Bradley Matera",
     url: siteUrl,
     description: defaultDescription,
     inLanguage: siteLanguage,
-    publisher: {
-      "@type": "Person",
-      name: "Bradley Matera",
-      url: siteUrl,
-    },
+    publisher: { "@id": `${siteUrl}/#person` },
   };
   const customStructuredData = Array.isArray(structuredData)
     ? structuredData
     : structuredData
       ? [structuredData]
       : [];
-  const buildDate = process.env.BUILD_DATE || "2026-07-24T00:00:00.000Z";
   const webpageStructuredData: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "WebPage",
+    "@id": `${canonical}#webpage`,
     name: seo.title,
     url: canonical,
     description: seo.description,
     inLanguage: siteLanguage,
-    isPartOf: {
-      "@type": "WebSite",
-      name: siteTitle,
-      url: siteUrl,
-    },
-    author: {
-      "@type": "Person",
-      name: "Bradley Matera",
-      url: siteUrl,
-    },
-    publisher: {
-      "@type": "Person",
-      name: "Bradley Matera",
-      url: siteUrl,
-    },
-    dateModified: buildDate,
+    isPartOf: { "@id": `${siteUrl}/#website` },
+    author: { "@id": `${siteUrl}/#person` },
+    publisher: { "@id": `${siteUrl}/#person` },
   };
   const structuredDataNodes = [
     personStructuredData,

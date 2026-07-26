@@ -33,7 +33,7 @@ const DemoBanner: React.FC<DemoBannerProps> = ({
         <div className="demo-banner__info">
           <span className="demo-banner__badge">DEMO</span>
           <span className="demo-banner__text">
-            <strong>{demoName}</strong> — {industry} website demo by Bradley Matera
+            <strong>{demoName}</strong> — concept demo, fictional business. Built by Bradley Matera.
           </span>
         </div>
         <Link to="/contact/" className="demo-banner__cta">

@@ -12,8 +12,8 @@ import FAQSection, { FAQItem } from "../../features/demos/FAQSection";
 import { StarIcon, MapPinIcon, PhoneIcon, LeafIcon, SunIcon, ClockIcon, CheckIcon, GearIcon, ToolsIcon, ShieldIcon, BoltIcon, AlertIcon, CalendarIcon } from "../../site/icons";
 
 const pathname = "/demos/agriculture/";
-const pageTitle = "Kishwaukee Valley Farm Services — Farm Equipment & Supplies Demo";
-const pageDescription = "Demo farm equipment dealership website with illustrative inventory, grain prices, and financing calculator. Built by Bradley Matera.";
+const pageTitle = "Kishwaukee Valley Farm Services — Farm Equipment Website Concept Demo (Fictional)";
+const pageDescription = "Concept demo of a fictional farm equipment dealership website with illustrative inventory, grain prices, and financing calculator. Built by Bradley Matera.";
 
 const socialLinks: SocialLink[] = [
   { platform: "facebook", url: "https://facebook.com" },

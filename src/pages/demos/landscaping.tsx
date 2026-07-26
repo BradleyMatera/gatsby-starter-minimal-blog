@@ -12,8 +12,8 @@ import FAQSection, { FAQItem } from "../../features/demos/FAQSection";
 import { StarIcon, MapPinIcon, PhoneIcon, LeafIcon, TreeIcon, SnowflakeIcon, FlameIcon, CheckIcon, InstagramIcon, AlertIcon } from "../../site/icons";
 
 const pathname = "/demos/landscaping/";
-const pageTitle = "GreenScape Pro — Landscaping Design-Build-Maintain Demo";
-const pageDescription = "Demo landscaping company website with service packages, project gallery, seasonal care tips, and quote form. Built by Bradley Matera.";
+const pageTitle = "GreenScape Pro — Landscaping Website Concept Demo (Fictional)";
+const pageDescription = "Concept demo of a fictional landscaping company website with service packages, project gallery, seasonal care tips, and quote form. Built by Bradley Matera.";
 
 const socialLinks: SocialLink[] = [
   { platform: "facebook", url: "https://facebook.com" },

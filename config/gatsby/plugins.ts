@@ -18,8 +18,7 @@ export const plugins: Array<PluginRef> = [
     options: {
       output: `/sitemap.xml`,
       excludes: [`/404`, `/404.html`, `/cancel`, `/cancel/`, `/purchases`, `/purchases/`, `/success`, `/success/`, `/contact/success`, `/contact/success/`],
-      serialize: (page, { resolvePagePath }) => {
-        const now = new Date().toISOString();
+      serialize: (page: { path?: string; sitemapLastmod?: string }, { resolvePagePath }: { resolvePagePath: (page: unknown) => string }) => {
         let changefreq = `weekly`;
         let priority = 0.7;
 
@@ -45,12 +44,17 @@ export const plugins: Array<PluginRef> = [
           priority = 0.5;
         }
 
-        return {
+        const sitemapEntry: { url: string; changefreq: string; priority: number; lastmod?: string } = {
           url: resolvePagePath(page),
-          lastmod: now,
           changefreq,
           priority,
         };
+
+        if (page.sitemapLastmod) {
+          sitemapEntry.lastmod = page.sitemapLastmod;
+        }
+
+        return sitemapEntry;
       },
     },
   },

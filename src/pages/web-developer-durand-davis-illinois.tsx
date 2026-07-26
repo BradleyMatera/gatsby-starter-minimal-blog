@@ -99,7 +99,7 @@ const LocalWebDeveloperPage = () => (
               same: clear scope, visible proof, and a site people can actually use.
             </p>
             <p className="pkg-card__desc">
-              Every site I build loads in under 2 seconds on mobile — faster than most sites in Durand and Davis. I test with Google PageSpeed Insights before launch.
+              Every site I build is tested with Google PageSpeed Insights before launch to ensure fast load times on mobile. I optimize images, minimize JavaScript, and use modern web standards.
             </p>
           </div>
         </div>
@@ -715,7 +715,7 @@ const LocalWebDeveloperPage = () => (
           <div className="pkg-card__body">
             <h3 className="pkg-card__title">Do you offer a guarantee?</h3>
             <p className="pkg-card__desc">
-              Yes. Every build includes a 24-hour response time guarantee and a 30-day warranty after launch. If you're not happy after the first round of revisions, you get your deposit back.
+              Yes. Every build includes a 24-hour response time guarantee and a 30-day warranty after launch that covers bugs caused by the build. Project deposits are refundable until the first revision round is delivered.
             </p>
           </div>
         </div>

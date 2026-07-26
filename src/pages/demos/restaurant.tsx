@@ -11,8 +11,8 @@ import FAQSection, { FAQItem } from "../../features/demos/FAQSection";
 import { StarIcon, MapPinIcon, PhoneIcon, UtensilsIcon, ClockIcon, RingIcon, ClipboardIcon, InstagramIcon } from "../../site/icons";
 
 const pathname = "/demos/restaurant/";
-const pageTitle = "Riverside Grill — Modern Midwestern Live-Fire Dining | Demo Website";
-const pageDescription = "Demo restaurant website with seasonal menu, chef story, reservation form, and photo gallery. Built by Bradley Matera.";
+const pageTitle = "Riverside Grill — Restaurant Website Concept Demo (Fictional)";
+const pageDescription = "Concept demo of a fictional restaurant website with seasonal menu, chef story, reservation form, and photo gallery. Built by Bradley Matera.";
 
 const socialLinks: SocialLink[] = [
   { platform: "facebook", url: "https://facebook.com" },

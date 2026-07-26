@@ -146,41 +146,5 @@ export const Head: HeadFC = () => (
       serviceName: "Small Business Web Design",
       description: "Fast, accessible websites, local SEO, repairs, and website care for Northwest Illinois small businesses. Work directly with Bradley. Packages start at $447.",
     })}
-  >
-    <script type="application/ld+json">
-      {JSON.stringify({
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "Person",
-            "@id": "https://bradleymatera.dev/#bradley",
-            name: "Bradley Matera",
-            url: "https://bradleymatera.dev/about/",
-            email: "bradmatera@gmail.com",
-            telephone: "+16083135373",
-            jobTitle: "Web Developer",
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: "Durand",
-              addressRegion: "IL",
-              addressCountry: "US",
-            },
-            sameAs: [
-              "https://www.linkedin.com/in/bradmatera",
-              "https://github.com/BradleyMatera",
-              "https://dev.to/bradleymatera",
-            ],
-          },
-          {
-            "@type": "WebSite",
-            "@id": "https://bradleymatera.dev/#website",
-            url: "https://bradleymatera.dev",
-            name: "Bradley Matera",
-            publisher: { "@id": "https://bradleymatera.dev/#bradley" },
-            inLanguage: "en",
-          },
-        ],
-      })}
-    </script>
-  </Seo>
+  />
 );

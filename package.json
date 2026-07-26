@@ -33,6 +33,8 @@
     "test:site": "node scripts/verify-site.js",
     "test:full": "rm -rf .cache public && npm run build && npm run test:site",
     "test:e2e": "playwright test",
+    "test:seo": "node scripts/seo-inventory.js",
+    "test:seo:live": "node scripts/seo-inventory.js --live",
     "check": "npm run lint && npm run test",
     "postinstall": "if [ \"$NETLIFY\" = \"true\" ]; then npm rebuild sharp --platform=linux --arch=x64; fi"
   },

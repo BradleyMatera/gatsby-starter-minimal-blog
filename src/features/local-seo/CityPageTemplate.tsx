@@ -115,10 +115,10 @@ export const createCityPage = (config: CityPageConfig) => {
                 Most of my experience comes from building in public, shipping projects to GitHub, and documenting what changed and why. That makes me a good fit for {city} businesses that want a website they can understand and maintain, not a black-box deliverable that breaks the moment the original developer disappears.
               </p>
               <p className="pkg-card__desc">
-                {city} projects can be handled mostly remotely, with in-person meetings when the scope warrants it. The drive from Durand is short, and the work itself does not change based on where I sit — clear scope, visible proof, and a site that loads fast and ranks locally.
+                {city} projects can be handled mostly remotely, with in-person meetings when the scope warrants it. The drive from Durand is short, and the work itself does not change based on where I sit — clear scope, visible proof, and a site people can actually use.
               </p>
               <p className="pkg-card__desc">
-                Every site I build loads in under 2 seconds on mobile — faster than most sites in {city}. I test with Google PageSpeed Insights before launch.
+                Every site I build is tested with Google PageSpeed Insights before launch to ensure fast load times on mobile. I optimize images, minimize JavaScript, and use modern web standards.
               </p>
             </div>
           </div>
@@ -376,7 +376,7 @@ export const createCityPage = (config: CityPageConfig) => {
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">Launch and support</h3>
               <p className="pkg-card__desc">
-                I launch your site, set up hosting, and handle updates. You get 24-hour response times and a 30-day warranty after launch. Monthly support is month-to-month — no long-term commitment.
+                I launch your site, set up hosting, and handle updates. You get 24-hour response times and a 30-day warranty after launch that covers bugs caused by the build. Monthly support is month-to-month — no long-term commitment.
               </p>
             </div>
           </div>
@@ -730,7 +730,7 @@ export const createCityPage = (config: CityPageConfig) => {
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">Do you offer a guarantee?</h3>
               <p className="pkg-card__desc">
-                Yes. Every build includes a 24-hour response time guarantee and a 30-day warranty after launch. If you're not happy after the first round of revisions, you get your deposit back.
+                Yes. Every build includes a 24-hour response time guarantee and a 30-day warranty after launch that covers bugs caused by the build. Project deposits are refundable until the first revision round is delivered.
               </p>
             </div>
           </div>

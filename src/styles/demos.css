@@ -1367,6 +1367,23 @@
 .demo-footer__demo-note a { color: var(--demo-accent); font-weight: 600; }
 
 /* ==========================================================================
+   FICTIONAL DISCLOSURE
+   ========================================================================== */
+.demo-fictional-disclosure {
+  background: var(--demo-surface, #f5f5f5);
+  border-top: 1px solid var(--demo-border, #ddd);
+  padding: 1.5rem;
+  text-align: center;
+}
+.demo-fictional-disclosure p {
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--demo-text-muted, #666);
+}
+
+/* ==========================================================================
    BEFORE / AFTER GALLERY
    ========================================================================== */
 .demo-before-after {

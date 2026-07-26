@@ -11,8 +11,8 @@ import FAQSection, { FAQItem } from "../../features/demos/FAQSection";
 import { StarIcon, MapPinIcon, PhoneIcon, CheckIcon, ClockIcon, DocumentIcon, ScrollIcon, QuoteIcon, AlertIcon } from "../../site/icons";
 
 const pathname = "/demos/law-firm/";
-const pageTitle = "Rock River Legal Group — Business, Estate & Real Estate Counsel | Demo Website";
-const pageDescription = "Demo law firm website for Rock River Legal Group — business counsel, estate planning, and real estate closings for the Rock River Valley. Built by Bradley Matera.";
+const pageTitle = "Rock River Legal Group — Law Firm Website Concept Demo (Fictional)";
+const pageDescription = "Concept demo of a fictional law firm website — business counsel, estate planning, and real estate closings for the Rock River Valley. Built by Bradley Matera.";
 
 const socialLinks: SocialLink[] = [
   { platform: "linkedin", url: "https://linkedin.com" },
