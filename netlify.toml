@@ -97,3 +97,16 @@
   for = "/purchases/*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
+
+# Proxy Coder Cats storefront under bradleymatera.dev/codercatstore
+[[redirects]]
+  from = "/codercatstore"
+  to = "/codercatstore/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/codercatstore/*"
+  to = "https://coder-cats.pages.dev/:splat"
+  status = 200
+  force = true
