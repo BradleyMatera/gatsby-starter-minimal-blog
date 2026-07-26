@@ -101,8 +101,8 @@
 # Proxy Coder Cats storefront under bradleymatera.dev/codercatstore
 [[redirects]]
   from = "/codercatstore"
-  to = "/codercatstore/"
-  status = 301
+  to = "https://coder-cats.pages.dev/"
+  status = 200
   force = true
 
 [[redirects]]
