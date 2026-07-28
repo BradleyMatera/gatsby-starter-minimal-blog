@@ -1,180 +1,256 @@
-# Bradley Self-Hosted Voice Platform v2
+# Bradley Self-Hosted Voice Platform v3
 
 ## Decision
 
-Build the Vapi-equivalent platform ourselves. Vapi is only a product reference and optional temporary interoperability adapter.
+Build the Vapi-equivalent platform ourselves using free cloud resources and open-source models.
 
-## Compute we will use
+Vapi is only a product reference and optional interoperability adapter. Bradley's home PC, Mac, and RTX 4080 are not required production infrastructure. They may be used for development tests only.
 
-### Always-on control plane
+## Free-cloud compute architecture
 
-Use the existing Google Cloud free-tier e2-micro VM for lightweight services:
+### Oracle Cloud Always Free: primary application host
 
-- authentication gateway
-- dashboard API
-- agent and prompt configuration
-- call state and event ingestion
-- job queues
+Preferred primary host when Bradley can provision capacity:
+
+- OCI Ampere A1 Flex
+- up to 2 OCPUs and 12 GB RAM under the current Always Free allowance
+- Ubuntu ARM64
+
+Responsibilities:
+
+- private control-center backend
+- agent runtime coordinator
+- Asterisk or SIP/WebRTC services after ARM compatibility testing
+- PostgreSQL or lightweight application database
+- prompt and agent configuration
+- call state
+- queues
 - Calendly synchronization
-- health checks
-- audit records
-- routing requests to available inference nodes
+- audit logs
+- routing among free inference services
+- CPU-optimized VAD, STT, LLM, and TTS when benchmarks pass
 
-Do not run large speech or language models on the e2-micro.
+Do not assume Oracle capacity is always immediately available. Deployment must support another host through containers and configuration rather than hard-coded OCI services.
 
-### Primary inference node
+### Google Cloud free-tier e2-micro: independent gateway and watchdog
 
-Use Bradley's Windows RTX 4080 computer as the primary zero-marginal-cost inference server when it is online:
+Use the existing Google Cloud free-tier VM for lightweight services only:
 
-- local LLM through Ollama or another measured runtime
-- faster-whisper or whisper.cpp streaming STT
-- Piper, Kokoro, Coqui-compatible, or existing Tortoise TTS after latency benchmarks
-- embeddings and reranking
-- ProjectHub/Scout grounded answer generation
+- public webhook gateway
+- DNS health target
+- authentication edge or reverse proxy
+- uptime checks
+- emergency stop relay
+- provider status collection
+- failover coordination
+- static configuration backup
 
-Expose it only through a secure outbound tunnel or private overlay network. Never open Ollama, model servers, Windows file sharing, or raw inference ports directly to the public internet.
+Do not run normal speech inference or a full PBX workload on the e2-micro.
 
-### Hugging Face node
+### Hugging Face free services: model hub and burst compute
 
 Use Hugging Face for:
 
-- model and dataset storage
-- testing candidate STT, TTS, VAD, embedding, and small language models
-- free CPU Spaces where account eligibility permits
-- quota-limited ZeroGPU workloads
+- open-source model discovery and storage
+- free CPU Spaces for small stateless services
+- ZeroGPU for quota-limited testing, burst jobs, demos, and noncontinuous tasks
 - community GPU grant applications
-- optional burst inference and fallback experiments
+- model evaluation
+- optional fallback inference
 
-Do not architect production telephone calls around unlimited Hugging Face GPU availability. Free GPU access is quota-based and Spaces can sleep.
+Do not make a live telephone call depend on ZeroGPU always being available. Free-account GPU time is quota-limited and queued. The router must know the remaining quota and treat ZeroGPU as an opportunistic node.
 
-### Browser compute
+### Additional free serverless nodes
 
-Use client-side WebAssembly/WebGPU where practical for:
+Research and use only where their current free allocations fit:
 
-- noise suppression
-- echo cancellation
-- VAD
-- optional local transcription experiments
-- browser-to-agent WebRTC calls
+- Google Cloud Run or Functions for event-driven endpoints
+- AWS Lambda free requests for asynchronous jobs
+- Azure Functions or Container Apps free allocations
+- Cloudflare Workers for lightweight routing and signed webhook processing
+- GitHub Actions for builds, tests, scheduled checks, and deployments, not live call audio
 
-### Provider fallback pool
+Every service must be behind an internal adapter and replaceable. No critical business rule belongs only inside one provider-specific function.
 
-Reuse ProjectHub's failover approach for any free inference providers already configured. Every provider is an adapter behind one internal interface. Local inference remains the preferred path.
+## Model strategy: CPU-first, distributed, and task-specific
+
+Do not try to run one giant model for the entire call.
+
+Use small specialized components:
+
+- VAD: Silero VAD or WebRTC VAD
+- STT: benchmark whisper.cpp tiny/base quantized, faster-whisper CPU where compatible, Vosk, Moonshine, and other permissively licensed streaming CPU models
+- intent and routing: deterministic ProjectHub/Scout classifier first
+- retrieval: compact embeddings and keyword retrieval
+- conversational model: small quantized instruction model that can run on ARM CPU, plus ProjectHub's existing free-provider failover
+- TTS: benchmark Piper, Kokoro-compatible CPU implementations, Sherpa-ONNX voices, and other streaming CPU voices
+- summaries: delayed/asynchronous processing when real-time generation is unnecessary
+
+Tortoise TTS should be evaluated as an offline high-quality voice option, not assumed to be suitable for live calls.
 
 ## Open-source voice stack
 
 ### Media and call control
 
-Preferred initial stack:
+Benchmark these before final selection:
 
-- Asterisk for PBX, SIP, routing, DTMF, transfer, voicemail, and external media
-- LiveKit or a lightweight WebRTC gateway for browser calls
-- ARI/Stasis for call control
-- AudioSocket or external media WebSocket for bidirectional PCM streaming
+1. Asterisk with PJSIP, ARI/Stasis, and external media.
+2. LiveKit open-source server and Agents framework.
+3. A smaller SIP/WebRTC stack if Asterisk plus LiveKit exceeds the free ARM host's memory budget.
 
-Alternative to benchmark: LiveKit Agents as the real-time orchestration framework. It is open source and supports interchangeable STT, LLM, TTS, WebRTC, and telephony integrations.
+The chosen system must support:
 
-### Real-time agent runtime
+- browser WebRTC calls
+- SIP endpoints
+- inbound and outbound routing
+- DTMF
+- transfer
+- voicemail fallback
+- two-way PCM streaming
+- interruption and barge-in
+- live call events
+- emergency termination
 
-Create a new service named `bradley-voice-runtime` with:
+### Bradley Voice Runtime
+
+Create `bradley-voice-runtime` with:
 
 - bidirectional audio sessions
 - resampling and codec normalization
 - VAD
-- streaming STT
+- streaming or chunked STT
 - partial transcript events
 - end-of-turn detection
-- interruption/barge-in cancellation
-- agent state machine
+- interruption cancellation
+- deterministic intent classification
 - Scout knowledge retrieval
+- model-router calls
 - tool authorization
 - streaming TTS
-- live event publication to the dashboard
-- fallbacks and timeouts
+- live dashboard events
+- strict timeouts and fallback responses
 
-Suggested implementation: Python 3.12, FastAPI, asyncio, WebSockets, Pydantic, Redis-compatible queue only if necessary, and PostgreSQL for durable records.
+Suggested implementation:
 
-## Telephone network access
+- Python 3.12
+- FastAPI
+- asyncio
+- WebSockets
+- Pydantic
+- PostgreSQL
+- Redis-compatible queue only if measurements show it is needed
 
-The software, AI, dashboard, and internet calling can be self-hosted. Normal calls to and from the public telephone network still require a physical or carrier connection.
+All services must build for ARM64 and AMD64 using Docker.
 
-Build three interchangeable gateways:
+## Telephone network boundary
 
-1. Browser/WebRTC and SIP calls: entirely internet-based and self-hosted.
-2. Existing mobile-line gateway: dedicated phone/SIM connected to Asterisk when technically reliable and permitted by the mobile plan.
-3. Optional SIP trunk adapter: fallback only, not the product foundation.
+The AI platform, browser calling, SIP calling, dashboard, inference routing, and application logic can be self-hosted on free cloud resources.
 
-Do not falsely label the platform as dependent on paid per-minute AI vendors. The carrier gateway is an edge adapter, just like internet service is an edge dependency.
+Normal calls to and from arbitrary public telephone numbers still require a PSTN edge connection. Build this as a replaceable gateway rather than using Vapi as the platform:
 
-## Private dashboard
+1. Browser WebRTC and SIP calls: self-hosted internet calls.
+2. Existing-number or mobile/SIP gateway: research available lawful methods and account capabilities.
+3. Optional carrier adapter: used only when public telephone connectivity requires it.
 
-Build a real password-protected application at `ops.bradleymatera.dev`, separate from Gatsby's public static bundle.
+The architecture must not confuse a carrier connection with the voice-agent platform itself.
+
+## Private control center
+
+Build a real server-backed application at `ops.bradleymatera.dev`, separate from Gatsby's public static JavaScript.
 
 Required modules:
 
-- Overview and node health
+- Overview and free-resource health
 - Live calls
 - Call history, transcripts, summaries, and outcomes
 - Agents and versioned prompts
 - Voices and model routing
-- Phone/SIP/WebRTC gateways
-- Contacts, consent, and suppression state
-- Outbound campaigns with approval controls
+- SIP/WebRTC/telephone gateways
+- Contacts, consent, and suppression status
+- Outbound campaigns with explicit approval controls
 - Calendly scheduling
 - Scout knowledge and grounding tests
-- Compute nodes and failover order
-- Cost and quota tracking
+- Compute nodes, quotas, and failover order
 - Audit log
 - Emergency global stop
 
-Use server-side sessions in HTTP-only secure cookies, password hashing with Argon2id, rate limiting, CSRF protection, MFA/passkey-ready design, and reauthentication for outbound campaigns, key changes, exports, and deletion.
+Security requirements:
 
-## Availability-aware routing
+- server-side sessions
+- secure HTTP-only cookies
+- Argon2id password hashing
+- CSRF protection
+- login throttling
+- encrypted secrets
+- MFA/passkey-ready design
+- reauthentication for outbound campaigns, integration changes, exports, and deletion
 
-Each compute node publishes:
+## Free-resource-aware routing
+
+Each compute adapter reports:
 
 - online state
-- supported capabilities
-- loaded models
+- provider and region
+- supported capability
+- CPU architecture
+- available memory
 - queue depth
-- available VRAM/RAM
+- quota remaining
+- cold or warm state
 - median latency
 - error rate
 - last heartbeat
 
-Example routing priority:
+Example routing:
 
-- STT: RTX 4080 faster-whisper -> local CPU Whisper -> approved HF fallback
-- LLM: RTX 4080 Ollama -> ProjectHub free-provider failover -> small CPU model
-- TTS: fastest measured local streaming voice -> lightweight CPU voice -> approved HF fallback
+### STT
 
-Calls must degrade gracefully. When inference is unavailable, the PBX should take a message, offer Calendly, forward to Bradley, or send a callback request rather than hanging up.
+1. CPU model on OCI A1 if latency target passes.
+2. Free CPU Space endpoint if warm and healthy.
+3. Quota-available Hugging Face ZeroGPU endpoint.
+4. Message-taking fallback.
 
-## Local-project discovery required from Devin
+### LLM
 
-Before choosing final models or frameworks, Devin must inspect the Mac and accessible repositories for:
+1. Deterministic Scout response.
+2. Small CPU model on OCI A1.
+3. Existing ProjectHub free-provider failover.
+4. Constrained template response or human handoff.
 
-- ProjectHub and ProjectHub-dev API contracts
-- projecthub-proxy
-- Tortoise TTS app
-- Convo-Ai
-- empathic-voice-interface-starter
-- Ollama configuration and reachable RTX 4080 endpoint
-- existing Google Cloud VM deployment scripts and services
-- any Whisper, faster-whisper, WebSocket, WebRTC, FastAPI, Node, Docker, or tunnel code
+### TTS
 
-Devin must report exact paths, branches, startup commands, ports, environment-variable names without values, model names, licenses, measured latency, and reusable modules. It must not copy secrets into its report.
+1. Streaming CPU TTS on OCI A1.
+2. Warm free CPU Space.
+3. Quota-available GPU endpoint.
+4. Pre-generated phrase library for standard fallbacks.
+
+The runtime must be able to continue common calls using deterministic responses and pre-generated audio even when every generative provider is unavailable.
+
+## Required research from Devin
+
+Devin must research current official free allocations and account eligibility before deployment, including:
+
+- Oracle Cloud Always Free capacity and Bradley's available home region
+- Google Cloud free-tier region and current VM configuration
+- Hugging Face account type, CPU Spaces availability, ZeroGPU eligibility, daily quota, and grant options
+- Cloudflare, AWS, Azure, GitHub Actions, and other free services Bradley already owns
+- ARM64 compatibility of all candidate voice components
+- memory and latency measurements on a 2 OCPU / 12 GB ARM VM
+
+Devin must not assume the Windows PC is online, reachable, or part of production.
 
 ## First build milestone
 
-Create a local proof of concept that does not use Vapi:
+Create a cloud-portable proof of concept that does not use Vapi and does not require Bradley's PC:
 
-1. Browser microphone connects to a local WebRTC/WebSocket session.
-2. Runtime streams audio to local STT.
-3. Transcript goes to a Scout-compatible grounded agent.
-4. Response streams through local TTS.
-5. Caller can interrupt speech.
-6. Dashboard shows the live session, transcript, latency, selected compute nodes, and stop control.
-7. All components run through Docker Compose except the existing Windows GPU services when direct access is required.
+1. Browser microphone connects to the voice runtime through WebRTC or WebSocket.
+2. A free-cloud CPU service performs VAD and STT.
+3. Transcript goes to Scout's deterministic classifier and grounded knowledge layer.
+4. A small free-cloud model is used only when necessary.
+5. A CPU TTS service streams the response.
+6. Caller can interrupt speech.
+7. The dashboard shows the live session, transcript, latency, selected free resources, quota state, and stop control.
+8. Everything runs in ARM64/AMD64 containers.
+9. A documented degraded mode uses pre-generated audio and message-taking when inference quotas are unavailable.
 
-Only after this passes should we connect Asterisk and a real telephone gateway.
+Only after this passes should the system connect to a real public telephone gateway.
