@@ -65,6 +65,31 @@ exports.handler = async (event) => {
 
   try {
     const sent = await sendContactNotification(data);
+
+    // Also send to ops platform intake API (creates lead, task, contact, etc.)
+    try {
+      await fetch("https://ops.bradleymatera.dev/api/intake/intake", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          first_name: data.name?.split(" ")[0] || data.name,
+          last_name: data.name?.split(" ").slice(1).join(" ") || null,
+          email: data.contact?.includes("@") ? data.contact : null,
+          phone: data.contact?.includes("@") ? null : data.contact,
+          company: data.business,
+          subject: `Website inquiry: ${data.business}`,
+          message: [
+            data.goal && `Goal: ${data.goal}`,
+            data.range && `Budget: ${data.range}`,
+            data.launch && `Launch: ${data.launch}`,
+            data.website && `Website: ${data.website}`,
+          ].filter(Boolean).join("\n") || `New inquiry from ${data.name} at ${data.business}`,
+        }),
+      });
+    } catch (opsErr) {
+      console.error("ops intake failed (non-fatal):", opsErr);
+    }
+
     if (!sent) {
       return {
         statusCode: 500,
