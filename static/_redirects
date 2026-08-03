@@ -2,4 +2,10 @@
 /projects/* /recruiter/#project-explorer 301!
 /github-actions-aws-automation /github-actions-aws/ 301!
 /github-actions-aws-automation/ /github-actions-aws/ 301!
+/aws-metadata-workflow https://bradleymatera.github.io/Office/ 301!
+/aws-metadata-workflow/ https://bradleymatera.github.io/Office/ 301!
+/aws-metadata-workflow/* https://bradleymatera.github.io/Office/:splat 301!
+/aws-serverless-metadata-workflow https://bradleymatera.github.io/Office/ 301!
+/aws-serverless-metadata-workflow/ https://bradleymatera.github.io/Office/ 301!
+/aws-serverless-metadata-workflow/* https://bradleymatera.github.io/Office/:splat 301!
 /go/* /.netlify/functions/go/:splat 200
