@@ -1,17 +1,77 @@
 import { Section, Link } from "../../../ui";
-import { HeroBanner } from "../../../site/components";
+import { HeroBeforeAfter } from "../../../site/components";
 import { UtensilsIcon, LeafIcon, GearIcon } from "../../../site/icons";
 
 <>
 
 <div className="home-snap">
-  <HeroBanner
-    title="Small-business websites built to earn trust and generate leads"
-    subtitle="I design, build, repair, and improve websites for businesses in Rockford, Freeport, Durand, Davis, and nearby communities. You work directly with me, see the price before the project starts, and own the finished work."
+  <HeroBeforeAfter
+    label="Local small-business web design"
+    title="Turn your outdated website into something customers trust."
+    subtitle="Professional websites for local businesses, with clear pricing and direct access to the person building them."
     ctaText="Get a free website plan"
     ctaLink="/contact/"
-    secondaryCtaText="See pricing"
-    secondaryCtaLink="/pricing/"
+    secondaryCtaText="See website examples"
+    secondaryCtaLink="/demos/"
+    proofPoints={["Mobile-ready", "Clear pricing", "Built for leads"]}
+    rotateInterval={7000}
+    imageHeight={3600}
+    examples={[
+      {
+        id: "auto-repair",
+        label: "Auto Repair",
+        browserUrl: "northside-auto-repair.com",
+        beforeImage: "/assets/visuals/hero/before-after/before-auto-repair.png",
+        afterImage: "/assets/visuals/hero/before-after/after-auto-repair.png",
+        afterMobileImage: "/assets/visuals/hero/before-after/after-auto-repair-mobile.png",
+        demoLink: "/demos/auto-repair/",
+      },
+      {
+        id: "landscaping",
+        label: "Landscaping",
+        browserUrl: "greenscapepro.net",
+        beforeImage: "/assets/visuals/hero/before-after/before-landscaping.png",
+        afterImage: "/assets/visuals/hero/before-after/after-landscaping.png",
+        afterMobileImage: "/assets/visuals/hero/before-after/after-landscaping-mobile.png",
+        demoLink: "/demos/landscaping/",
+      },
+      {
+        id: "hvac",
+        label: "Heating & Cooling",
+        browserUrl: "comfortairhvac.net",
+        beforeImage: "/assets/visuals/hero/before-after/before-hvac.png",
+        afterImage: "/assets/visuals/hero/before-after/after-hvac.png",
+        afterMobileImage: "/assets/visuals/hero/before-after/after-hvac-mobile.png",
+        demoLink: "/demos/hvac/",
+      },
+      {
+        id: "restaurant",
+        label: "Restaurant",
+        browserUrl: "riversidegrillrestaurant.com",
+        beforeImage: "/assets/visuals/hero/before-after/before-restaurant.png",
+        afterImage: "/assets/visuals/hero/before-after/after-restaurant.png",
+        afterMobileImage: "/assets/visuals/hero/before-after/after-restaurant-mobile.png",
+        demoLink: "/demos/restaurant/",
+      },
+      {
+        id: "beauty-salon",
+        label: "Beauty Salon",
+        browserUrl: "bellavistasalon.com",
+        beforeImage: "/assets/visuals/hero/before-after/before-beauty-salon.png",
+        afterImage: "/assets/visuals/hero/before-after/after-beauty-salon.png",
+        afterMobileImage: "/assets/visuals/hero/before-after/after-beauty-salon-mobile.png",
+        demoLink: "/demos/beauty-salon/",
+      },
+      {
+        id: "real-estate",
+        label: "Real Estate",
+        browserUrl: "rockfordheritagerealty.com",
+        beforeImage: "/assets/visuals/hero/before-after/before-real-estate.png",
+        afterImage: "/assets/visuals/hero/before-after/after-real-estate.png",
+        afterMobileImage: "/assets/visuals/hero/before-after/after-real-estate-mobile.png",
+        demoLink: "/demos/real-estate/",
+      },
+    ]}
   />
 </div>
 

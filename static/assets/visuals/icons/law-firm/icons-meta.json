@@ -1,0 +1,203 @@
+{
+  "pack_src": "4ad69658-8841-454e-92e0-beedff320a67.png",
+  "demo": "Law firm / legal services demo (Rock River Legal Group)",
+  "slug": "law-firm",
+  "icons": [
+    {
+      "filename": "scales-of-justice.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/law-firm/scales-of-justice.png",
+      "title": "Scales Of Justice",
+      "row": 1,
+      "col": 1,
+      "crop": [
+        42,
+        256,
+        298,
+        512
+      ]
+    },
+    {
+      "filename": "gavel.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/law-firm/gavel.png",
+      "title": "Gavel",
+      "row": 1,
+      "col": 2,
+      "crop": [
+        383,
+        256,
+        639,
+        512
+      ]
+    },
+    {
+      "filename": "shield.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/law-firm/shield.png",
+      "title": "Shield",
+      "row": 1,
+      "col": 3,
+      "crop": [
+        724,
+        256,
+        980,
+        512
+      ]
+    },
+    {
+      "filename": "contract.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/law-firm/contract.png",
+      "title": "Contract",
+      "row": 2,
+      "col": 1,
+      "crop": [
+        42,
+        512,
+        298,
+        768
+      ]
+    },
+    {
+      "filename": "briefcase.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/law-firm/briefcase.png",
+      "title": "Briefcase",
+      "row": 2,
+      "col": 2,
+      "crop": [
+        383,
+        512,
+        639,
+        768
+      ]
+    },
+    {
+      "filename": "family-law.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/law-firm/family-law.png",
+      "title": "Family Law",
+      "row": 2,
+      "col": 3,
+      "crop": [
+        724,
+        512,
+        980,
+        768
+      ]
+    },
+    {
+      "filename": "courthouse.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/law-firm/courthouse.png",
+      "title": "Courthouse",
+      "row": 3,
+      "col": 1,
+      "crop": [
+        42,
+        768,
+        298,
+        1024
+      ]
+    },
+    {
+      "filename": "handshake.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/law-firm/handshake.png",
+      "title": "Handshake",
+      "row": 3,
+      "col": 2,
+      "crop": [
+        383,
+        768,
+        639,
+        1024
+      ]
+    },
+    {
+      "filename": "legal-team.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/law-firm/legal-team.png",
+      "title": "Legal Team",
+      "row": 3,
+      "col": 3,
+      "crop": [
+        724,
+        768,
+        980,
+        1024
+      ]
+    },
+    {
+      "filename": "office-building.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/law-firm/office-building.png",
+      "title": "Office Building",
+      "row": 4,
+      "col": 1,
+      "crop": [
+        42,
+        1024,
+        298,
+        1280
+      ]
+    },
+    {
+      "filename": "calendar-call.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/law-firm/calendar-call.png",
+      "title": "Calendar Call",
+      "row": 4,
+      "col": 2,
+      "crop": [
+        383,
+        1024,
+        639,
+        1280
+      ]
+    },
+    {
+      "filename": "location.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/law-firm/location.png",
+      "title": "Location",
+      "row": 4,
+      "col": 3,
+      "crop": [
+        724,
+        1024,
+        980,
+        1280
+      ]
+    },
+    {
+      "filename": "attorneys.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/law-firm/attorneys.png",
+      "title": "Attorneys",
+      "row": 5,
+      "col": 1,
+      "crop": [
+        42,
+        1280,
+        298,
+        1536
+      ]
+    },
+    {
+      "filename": "padlock.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/law-firm/padlock.png",
+      "title": "Padlock",
+      "row": 5,
+      "col": 2,
+      "crop": [
+        383,
+        1280,
+        639,
+        1536
+      ]
+    },
+    {
+      "filename": "star-review.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/law-firm/star-review.png",
+      "title": "Star Review",
+      "row": 5,
+      "col": 3,
+      "crop": [
+        724,
+        1280,
+        980,
+        1536
+      ]
+    }
+  ],
+  "pack_file": "law-firm-icon-pack.png"
+}

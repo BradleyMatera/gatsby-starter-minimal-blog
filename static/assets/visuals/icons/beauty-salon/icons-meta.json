@@ -1,0 +1,216 @@
+{
+  "pack_src": "beauty-salon-icon-pack.png",
+  "pack_file": "beauty-salon-icon-pack.png",
+  "demo": "Beauty salon / spa demo (Bella Vista Salon)",
+  "slug": "beauty-salon",
+  "icons": [
+    {
+      "filename": "scissors-comb.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/beauty-salon/scissors-comb.png",
+      "title": "Scissors Comb",
+      "row": 2,
+      "col": 1,
+      "crop": [
+        0,
+        256,
+        256,
+        512
+      ]
+    },
+    {
+      "filename": "hand-mirror.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/beauty-salon/hand-mirror.png",
+      "title": "Hand Mirror",
+      "row": 2,
+      "col": 2,
+      "crop": [
+        256,
+        256,
+        512,
+        512
+      ]
+    },
+    {
+      "filename": "makeup-brush.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/beauty-salon/makeup-brush.png",
+      "title": "Makeup Brush",
+      "row": 2,
+      "col": 3,
+      "crop": [
+        512,
+        256,
+        768,
+        512
+      ]
+    },
+    {
+      "filename": "nail-polish.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/beauty-salon/nail-polish.png",
+      "title": "Nail Polish",
+      "row": 2,
+      "col": 4,
+      "crop": [
+        768,
+        256,
+        1024,
+        512
+      ]
+    },
+    {
+      "filename": "eyelashes.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/beauty-salon/eyelashes.png",
+      "title": "Eyelashes",
+      "row": 3,
+      "col": 1,
+      "crop": [
+        0,
+        512,
+        256,
+        768
+      ]
+    },
+    {
+      "filename": "spray-bottle.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/beauty-salon/spray-bottle.png",
+      "title": "Spray Bottle",
+      "row": 3,
+      "col": 2,
+      "crop": [
+        256,
+        512,
+        512,
+        768
+      ]
+    },
+    {
+      "filename": "hair-dryer.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/beauty-salon/hair-dryer.png",
+      "title": "Hair Dryer",
+      "row": 3,
+      "col": 3,
+      "crop": [
+        512,
+        512,
+        768,
+        768
+      ]
+    },
+    {
+      "filename": "calendar.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/beauty-salon/calendar.png",
+      "title": "Calendar",
+      "row": 3,
+      "col": 4,
+      "crop": [
+        768,
+        512,
+        1024,
+        768
+      ]
+    },
+    {
+      "filename": "gift-card.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/beauty-salon/gift-card.png",
+      "title": "Gift Card",
+      "row": 4,
+      "col": 1,
+      "crop": [
+        0,
+        768,
+        256,
+        1024
+      ]
+    },
+    {
+      "filename": "location-pin.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/beauty-salon/location-pin.png",
+      "title": "Location Pin",
+      "row": 4,
+      "col": 2,
+      "crop": [
+        256,
+        768,
+        512,
+        1024
+      ]
+    },
+    {
+      "filename": "phone.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/beauty-salon/phone.png",
+      "title": "Phone",
+      "row": 4,
+      "col": 3,
+      "crop": [
+        512,
+        768,
+        768,
+        1024
+      ]
+    },
+    {
+      "filename": "sparkle.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/beauty-salon/sparkle.png",
+      "title": "Sparkle",
+      "row": 4,
+      "col": 4,
+      "crop": [
+        768,
+        768,
+        1024,
+        1024
+      ]
+    },
+    {
+      "filename": "skincare-products.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/beauty-salon/skincare-products.png",
+      "title": "Skincare Products",
+      "row": 5,
+      "col": 1,
+      "crop": [
+        0,
+        1024,
+        256,
+        1280
+      ]
+    },
+    {
+      "filename": "stylist.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/beauty-salon/stylist.png",
+      "title": "Stylist",
+      "row": 5,
+      "col": 2,
+      "crop": [
+        256,
+        1024,
+        512,
+        1280
+      ]
+    },
+    {
+      "filename": "salon-team.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/beauty-salon/salon-team.png",
+      "title": "Salon Team",
+      "row": 5,
+      "col": 3,
+      "crop": [
+        512,
+        1024,
+        768,
+        1280
+      ]
+    },
+    {
+      "filename": "checklist.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/beauty-salon/checklist.png",
+      "title": "Checklist",
+      "row": 5,
+      "col": 4,
+      "crop": [
+        768,
+        1024,
+        1024,
+        1280
+      ]
+    }
+  ]
+}

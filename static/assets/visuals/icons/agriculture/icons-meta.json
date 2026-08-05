@@ -1,0 +1,203 @@
+{
+  "pack_src": "0d302d3f-6667-4b77-9092-fdac683eb80c.png",
+  "demo": "Agriculture / farm supply services demo (Kishwaukee Valley Farm Services)",
+  "slug": "agriculture",
+  "icons": [
+    {
+      "filename": "barn.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/agriculture/barn.png",
+      "title": "Barn",
+      "row": 1,
+      "col": 1,
+      "crop": [
+        42,
+        256,
+        298,
+        512
+      ]
+    },
+    {
+      "filename": "tractor.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/agriculture/tractor.png",
+      "title": "Tractor",
+      "row": 1,
+      "col": 2,
+      "crop": [
+        383,
+        256,
+        639,
+        512
+      ]
+    },
+    {
+      "filename": "seedling.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/agriculture/seedling.png",
+      "title": "Seedling",
+      "row": 1,
+      "col": 3,
+      "crop": [
+        724,
+        256,
+        980,
+        512
+      ]
+    },
+    {
+      "filename": "shovel.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/agriculture/shovel.png",
+      "title": "Shovel",
+      "row": 2,
+      "col": 1,
+      "crop": [
+        42,
+        512,
+        298,
+        768
+      ]
+    },
+    {
+      "filename": "watering-can.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/agriculture/watering-can.png",
+      "title": "Watering Can",
+      "row": 2,
+      "col": 2,
+      "crop": [
+        383,
+        512,
+        639,
+        768
+      ]
+    },
+    {
+      "filename": "checklist.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/agriculture/checklist.png",
+      "title": "Checklist",
+      "row": 2,
+      "col": 3,
+      "crop": [
+        724,
+        512,
+        980,
+        768
+      ]
+    },
+    {
+      "filename": "crop-rows.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/agriculture/crop-rows.png",
+      "title": "Crop Rows",
+      "row": 3,
+      "col": 1,
+      "crop": [
+        42,
+        768,
+        298,
+        1024
+      ]
+    },
+    {
+      "filename": "flatbed-truck.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/agriculture/flatbed-truck.png",
+      "title": "Flatbed Truck",
+      "row": 3,
+      "col": 2,
+      "crop": [
+        383,
+        768,
+        639,
+        1024
+      ]
+    },
+    {
+      "filename": "handshake.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/agriculture/handshake.png",
+      "title": "Handshake",
+      "row": 3,
+      "col": 3,
+      "crop": [
+        724,
+        768,
+        980,
+        1024
+      ]
+    },
+    {
+      "filename": "farm-team.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/agriculture/farm-team.png",
+      "title": "Farm Team",
+      "row": 4,
+      "col": 1,
+      "crop": [
+        42,
+        1024,
+        298,
+        1280
+      ]
+    },
+    {
+      "filename": "field.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/agriculture/field.png",
+      "title": "Field",
+      "row": 4,
+      "col": 2,
+      "crop": [
+        383,
+        1024,
+        639,
+        1280
+      ]
+    },
+    {
+      "filename": "phone-checklist.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/agriculture/phone-checklist.png",
+      "title": "Phone Checklist",
+      "row": 4,
+      "col": 3,
+      "crop": [
+        724,
+        1024,
+        980,
+        1280
+      ]
+    },
+    {
+      "filename": "delivery-truck.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/agriculture/delivery-truck.png",
+      "title": "Delivery Truck",
+      "row": 5,
+      "col": 1,
+      "crop": [
+        42,
+        1280,
+        298,
+        1536
+      ]
+    },
+    {
+      "filename": "customer-support.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/agriculture/customer-support.png",
+      "title": "Customer Support",
+      "row": 5,
+      "col": 2,
+      "crop": [
+        383,
+        1280,
+        639,
+        1536
+      ]
+    },
+    {
+      "filename": "phone-mail.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/agriculture/phone-mail.png",
+      "title": "Phone Mail",
+      "row": 5,
+      "col": 3,
+      "crop": [
+        724,
+        1280,
+        980,
+        1536
+      ]
+    }
+  ],
+  "pack_file": "agriculture-icon-pack.png"
+}

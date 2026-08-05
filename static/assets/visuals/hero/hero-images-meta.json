@@ -1,0 +1,34 @@
+[
+  {
+    "filename": "bradley-matera-cafe-mainstreet-hero.png",
+    "title": "Bradley Matera at a local cafe, working on a laptop with a small-town Main Street view",
+    "description": "Friendly professional photo of Bradley Matera, web designer, at a local coffee shop in Northwest Illinois. Laptop, notebook, and coffee mug on a wooden table with historic brick buildings visible through the window. Ideal for homepage hero.",
+    "purpose": "Homepage hero image. Shows approachable, local, professional web designer at work in a small-town cafe setting.",
+    "keywords": "Bradley Matera, web designer, small business, Northwest Illinois, Rockford, Durand, Freeport, local, coffee shop, laptop, professional, hero image",
+    "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/hero/bradley-matera-cafe-mainstreet-hero.png"
+  },
+  {
+    "filename": "bradley-matera-cafe-plants-hero.png",
+    "title": "Bradley Matera smiling at a cafe with plants and small-town storefronts",
+    "description": "Friendly professional photo of Bradley Matera, web designer, at a local cafe. Laptop and coffee mug on a wooden table, green plants, historic brick storefronts visible through the window. Suitable for homepage hero or about page.",
+    "purpose": "Homepage hero or about page. Bright, plant-filled cafe background with small-town street view.",
+    "keywords": "Bradley Matera, web designer, small business, Northwest Illinois, Rockford, Durand, Freeport, local, coffee shop, plants, professional, hero image",
+    "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/hero/bradley-matera-cafe-plants-hero.png"
+  },
+  {
+    "filename": "bradley-matera-home-office-workspace.png",
+    "title": "Bradley Matera in a bright home office with web design screens",
+    "description": "Professional photo of Bradley Matera at his home office workspace. Two monitors and a laptop display website wireframes and design work, plants and warm natural light in the background. Ideal for about page or process page.",
+    "purpose": "About or process page. Shows the actual design work environment with screens and workspace.",
+    "keywords": "Bradley Matera, web designer, home office, workspace, website design, wireframes, professional, Northwest Illinois, about page",
+    "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/hero/bradley-matera-home-office-workspace.png"
+  },
+  {
+    "filename": "bradley-matera-cafe-working-candid.png",
+    "title": "Bradley Matera working on a laptop at a local cafe",
+    "description": "Candid professional photo of Bradley Matera, web designer, focused on his laptop at a local coffee shop. Black mug, notebook, and small-town Main Street visible through the window. Good for homepage hero or service pages.",
+    "purpose": "Homepage hero or service page. Candid working shot with strong local Main Street context.",
+    "keywords": "Bradley Matera, web designer, small business, Northwest Illinois, Rockford, Durand, Freeport, local, coffee shop, laptop, candid, hero image",
+    "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/hero/bradley-matera-cafe-working-candid.png"
+  }
+]

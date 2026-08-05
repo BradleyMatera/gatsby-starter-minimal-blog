@@ -1,0 +1,203 @@
+{
+  "pack_src": "dental-icon-pack.png",
+  "pack_file": "dental-icon-pack.png",
+  "demo": "Dental / healthcare demo (Rock River Family Dental)",
+  "slug": "dental",
+  "icons": [
+    {
+      "filename": "tooth.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/dental/tooth.png",
+      "title": "Tooth",
+      "row": 2,
+      "col": 1,
+      "crop": [
+        50,
+        264,
+        290,
+        504
+      ]
+    },
+    {
+      "filename": "smile.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/dental/smile.png",
+      "title": "Smile",
+      "row": 2,
+      "col": 2,
+      "crop": [
+        391,
+        264,
+        631,
+        504
+      ]
+    },
+    {
+      "filename": "braces.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/dental/braces.png",
+      "title": "Braces",
+      "row": 2,
+      "col": 3,
+      "crop": [
+        732,
+        264,
+        972,
+        504
+      ]
+    },
+    {
+      "filename": "implant.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/dental/implant.png",
+      "title": "Implant",
+      "row": 3,
+      "col": 1,
+      "crop": [
+        50,
+        520,
+        290,
+        760
+      ]
+    },
+    {
+      "filename": "healthy-tooth.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/dental/healthy-tooth.png",
+      "title": "Healthy Tooth",
+      "row": 3,
+      "col": 2,
+      "crop": [
+        391,
+        520,
+        631,
+        760
+      ]
+    },
+    {
+      "filename": "x-ray.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/dental/x-ray.png",
+      "title": "X Ray",
+      "row": 3,
+      "col": 3,
+      "crop": [
+        732,
+        520,
+        972,
+        760
+      ]
+    },
+    {
+      "filename": "medical-cross.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/dental/medical-cross.png",
+      "title": "Medical Cross",
+      "row": 4,
+      "col": 1,
+      "crop": [
+        50,
+        776,
+        290,
+        1016
+      ]
+    },
+    {
+      "filename": "family.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/dental/family.png",
+      "title": "Family",
+      "row": 4,
+      "col": 2,
+      "crop": [
+        391,
+        776,
+        631,
+        1016
+      ]
+    },
+    {
+      "filename": "shield.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/dental/shield.png",
+      "title": "Shield",
+      "row": 4,
+      "col": 3,
+      "crop": [
+        732,
+        776,
+        972,
+        1016
+      ]
+    },
+    {
+      "filename": "location.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/dental/location.png",
+      "title": "Location",
+      "row": 5,
+      "col": 1,
+      "crop": [
+        50,
+        1032,
+        290,
+        1272
+      ]
+    },
+    {
+      "filename": "phone-appointment.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/dental/phone-appointment.png",
+      "title": "Phone Appointment",
+      "row": 5,
+      "col": 2,
+      "crop": [
+        391,
+        1032,
+        631,
+        1272
+      ]
+    },
+    {
+      "filename": "payment.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/dental/payment.png",
+      "title": "Payment",
+      "row": 5,
+      "col": 3,
+      "crop": [
+        732,
+        1032,
+        972,
+        1272
+      ]
+    },
+    {
+      "filename": "location-2.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/dental/location-2.png",
+      "title": "Location 2",
+      "row": 6,
+      "col": 1,
+      "crop": [
+        50,
+        1288,
+        290,
+        1528
+      ]
+    },
+    {
+      "filename": "new-patient-forms.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/dental/new-patient-forms.png",
+      "title": "New Patient Forms",
+      "row": 6,
+      "col": 2,
+      "crop": [
+        391,
+        1288,
+        631,
+        1528
+      ]
+    },
+    {
+      "filename": "dental-team.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/dental/dental-team.png",
+      "title": "Dental Team",
+      "row": 6,
+      "col": 3,
+      "crop": [
+        732,
+        1288,
+        972,
+        1528
+      ]
+    }
+  ]
+}

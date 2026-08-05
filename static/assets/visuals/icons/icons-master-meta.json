@@ -1,0 +1,1030 @@
+[
+  {
+    "pack_src": "0d302d3f-6667-4b77-9092-fdac683eb80c.png",
+    "demo": "Agriculture / farm supply services demo (Kishwaukee Valley Farm Services)",
+    "slug": "agriculture",
+    "icons": [
+      {
+        "filename": "barn.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/agriculture/barn.png",
+        "title": "Barn",
+        "row": 1,
+        "col": 1,
+        "crop": [
+          42,
+          256,
+          298,
+          512
+        ]
+      },
+      {
+        "filename": "tractor.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/agriculture/tractor.png",
+        "title": "Tractor",
+        "row": 1,
+        "col": 2,
+        "crop": [
+          383,
+          256,
+          639,
+          512
+        ]
+      },
+      {
+        "filename": "seedling.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/agriculture/seedling.png",
+        "title": "Seedling",
+        "row": 1,
+        "col": 3,
+        "crop": [
+          724,
+          256,
+          980,
+          512
+        ]
+      },
+      {
+        "filename": "shovel.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/agriculture/shovel.png",
+        "title": "Shovel",
+        "row": 2,
+        "col": 1,
+        "crop": [
+          42,
+          512,
+          298,
+          768
+        ]
+      },
+      {
+        "filename": "watering-can.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/agriculture/watering-can.png",
+        "title": "Watering Can",
+        "row": 2,
+        "col": 2,
+        "crop": [
+          383,
+          512,
+          639,
+          768
+        ]
+      },
+      {
+        "filename": "checklist.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/agriculture/checklist.png",
+        "title": "Checklist",
+        "row": 2,
+        "col": 3,
+        "crop": [
+          724,
+          512,
+          980,
+          768
+        ]
+      },
+      {
+        "filename": "crop-rows.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/agriculture/crop-rows.png",
+        "title": "Crop Rows",
+        "row": 3,
+        "col": 1,
+        "crop": [
+          42,
+          768,
+          298,
+          1024
+        ]
+      },
+      {
+        "filename": "flatbed-truck.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/agriculture/flatbed-truck.png",
+        "title": "Flatbed Truck",
+        "row": 3,
+        "col": 2,
+        "crop": [
+          383,
+          768,
+          639,
+          1024
+        ]
+      },
+      {
+        "filename": "handshake.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/agriculture/handshake.png",
+        "title": "Handshake",
+        "row": 3,
+        "col": 3,
+        "crop": [
+          724,
+          768,
+          980,
+          1024
+        ]
+      },
+      {
+        "filename": "farm-team.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/agriculture/farm-team.png",
+        "title": "Farm Team",
+        "row": 4,
+        "col": 1,
+        "crop": [
+          42,
+          1024,
+          298,
+          1280
+        ]
+      },
+      {
+        "filename": "field.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/agriculture/field.png",
+        "title": "Field",
+        "row": 4,
+        "col": 2,
+        "crop": [
+          383,
+          1024,
+          639,
+          1280
+        ]
+      },
+      {
+        "filename": "phone-checklist.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/agriculture/phone-checklist.png",
+        "title": "Phone Checklist",
+        "row": 4,
+        "col": 3,
+        "crop": [
+          724,
+          1024,
+          980,
+          1280
+        ]
+      },
+      {
+        "filename": "delivery-truck.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/agriculture/delivery-truck.png",
+        "title": "Delivery Truck",
+        "row": 5,
+        "col": 1,
+        "crop": [
+          42,
+          1280,
+          298,
+          1536
+        ]
+      },
+      {
+        "filename": "customer-support.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/agriculture/customer-support.png",
+        "title": "Customer Support",
+        "row": 5,
+        "col": 2,
+        "crop": [
+          383,
+          1280,
+          639,
+          1536
+        ]
+      },
+      {
+        "filename": "phone-mail.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/agriculture/phone-mail.png",
+        "title": "Phone Mail",
+        "row": 5,
+        "col": 3,
+        "crop": [
+          724,
+          1280,
+          980,
+          1536
+        ]
+      }
+    ],
+    "pack_file": "agriculture-icon-pack.png"
+  },
+  {
+    "pack_src": "4ad69658-8841-454e-92e0-beedff320a67.png",
+    "demo": "Law firm / legal services demo (Rock River Legal Group)",
+    "slug": "law-firm",
+    "icons": [
+      {
+        "filename": "scales-of-justice.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/law-firm/scales-of-justice.png",
+        "title": "Scales Of Justice",
+        "row": 1,
+        "col": 1,
+        "crop": [
+          42,
+          256,
+          298,
+          512
+        ]
+      },
+      {
+        "filename": "gavel.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/law-firm/gavel.png",
+        "title": "Gavel",
+        "row": 1,
+        "col": 2,
+        "crop": [
+          383,
+          256,
+          639,
+          512
+        ]
+      },
+      {
+        "filename": "shield.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/law-firm/shield.png",
+        "title": "Shield",
+        "row": 1,
+        "col": 3,
+        "crop": [
+          724,
+          256,
+          980,
+          512
+        ]
+      },
+      {
+        "filename": "contract.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/law-firm/contract.png",
+        "title": "Contract",
+        "row": 2,
+        "col": 1,
+        "crop": [
+          42,
+          512,
+          298,
+          768
+        ]
+      },
+      {
+        "filename": "briefcase.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/law-firm/briefcase.png",
+        "title": "Briefcase",
+        "row": 2,
+        "col": 2,
+        "crop": [
+          383,
+          512,
+          639,
+          768
+        ]
+      },
+      {
+        "filename": "family-law.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/law-firm/family-law.png",
+        "title": "Family Law",
+        "row": 2,
+        "col": 3,
+        "crop": [
+          724,
+          512,
+          980,
+          768
+        ]
+      },
+      {
+        "filename": "courthouse.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/law-firm/courthouse.png",
+        "title": "Courthouse",
+        "row": 3,
+        "col": 1,
+        "crop": [
+          42,
+          768,
+          298,
+          1024
+        ]
+      },
+      {
+        "filename": "handshake.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/law-firm/handshake.png",
+        "title": "Handshake",
+        "row": 3,
+        "col": 2,
+        "crop": [
+          383,
+          768,
+          639,
+          1024
+        ]
+      },
+      {
+        "filename": "legal-team.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/law-firm/legal-team.png",
+        "title": "Legal Team",
+        "row": 3,
+        "col": 3,
+        "crop": [
+          724,
+          768,
+          980,
+          1024
+        ]
+      },
+      {
+        "filename": "office-building.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/law-firm/office-building.png",
+        "title": "Office Building",
+        "row": 4,
+        "col": 1,
+        "crop": [
+          42,
+          1024,
+          298,
+          1280
+        ]
+      },
+      {
+        "filename": "calendar-call.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/law-firm/calendar-call.png",
+        "title": "Calendar Call",
+        "row": 4,
+        "col": 2,
+        "crop": [
+          383,
+          1024,
+          639,
+          1280
+        ]
+      },
+      {
+        "filename": "location.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/law-firm/location.png",
+        "title": "Location",
+        "row": 4,
+        "col": 3,
+        "crop": [
+          724,
+          1024,
+          980,
+          1280
+        ]
+      },
+      {
+        "filename": "attorneys.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/law-firm/attorneys.png",
+        "title": "Attorneys",
+        "row": 5,
+        "col": 1,
+        "crop": [
+          42,
+          1280,
+          298,
+          1536
+        ]
+      },
+      {
+        "filename": "padlock.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/law-firm/padlock.png",
+        "title": "Padlock",
+        "row": 5,
+        "col": 2,
+        "crop": [
+          383,
+          1280,
+          639,
+          1536
+        ]
+      },
+      {
+        "filename": "star-review.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/law-firm/star-review.png",
+        "title": "Star Review",
+        "row": 5,
+        "col": 3,
+        "crop": [
+          724,
+          1280,
+          980,
+          1536
+        ]
+      }
+    ],
+    "pack_file": "law-firm-icon-pack.png"
+  },
+  {
+    "pack_src": "beauty-salon-icon-pack.png",
+    "pack_file": "beauty-salon-icon-pack.png",
+    "demo": "Beauty salon / spa demo (Bella Vista Salon)",
+    "slug": "beauty-salon",
+    "icons": [
+      {
+        "filename": "scissors-comb.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/beauty-salon/scissors-comb.png",
+        "title": "Scissors Comb",
+        "row": 2,
+        "col": 1,
+        "crop": [
+          0,
+          256,
+          256,
+          512
+        ]
+      },
+      {
+        "filename": "hand-mirror.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/beauty-salon/hand-mirror.png",
+        "title": "Hand Mirror",
+        "row": 2,
+        "col": 2,
+        "crop": [
+          256,
+          256,
+          512,
+          512
+        ]
+      },
+      {
+        "filename": "makeup-brush.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/beauty-salon/makeup-brush.png",
+        "title": "Makeup Brush",
+        "row": 2,
+        "col": 3,
+        "crop": [
+          512,
+          256,
+          768,
+          512
+        ]
+      },
+      {
+        "filename": "nail-polish.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/beauty-salon/nail-polish.png",
+        "title": "Nail Polish",
+        "row": 2,
+        "col": 4,
+        "crop": [
+          768,
+          256,
+          1024,
+          512
+        ]
+      },
+      {
+        "filename": "eyelashes.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/beauty-salon/eyelashes.png",
+        "title": "Eyelashes",
+        "row": 3,
+        "col": 1,
+        "crop": [
+          0,
+          512,
+          256,
+          768
+        ]
+      },
+      {
+        "filename": "spray-bottle.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/beauty-salon/spray-bottle.png",
+        "title": "Spray Bottle",
+        "row": 3,
+        "col": 2,
+        "crop": [
+          256,
+          512,
+          512,
+          768
+        ]
+      },
+      {
+        "filename": "hair-dryer.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/beauty-salon/hair-dryer.png",
+        "title": "Hair Dryer",
+        "row": 3,
+        "col": 3,
+        "crop": [
+          512,
+          512,
+          768,
+          768
+        ]
+      },
+      {
+        "filename": "calendar.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/beauty-salon/calendar.png",
+        "title": "Calendar",
+        "row": 3,
+        "col": 4,
+        "crop": [
+          768,
+          512,
+          1024,
+          768
+        ]
+      },
+      {
+        "filename": "gift-card.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/beauty-salon/gift-card.png",
+        "title": "Gift Card",
+        "row": 4,
+        "col": 1,
+        "crop": [
+          0,
+          768,
+          256,
+          1024
+        ]
+      },
+      {
+        "filename": "location-pin.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/beauty-salon/location-pin.png",
+        "title": "Location Pin",
+        "row": 4,
+        "col": 2,
+        "crop": [
+          256,
+          768,
+          512,
+          1024
+        ]
+      },
+      {
+        "filename": "phone.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/beauty-salon/phone.png",
+        "title": "Phone",
+        "row": 4,
+        "col": 3,
+        "crop": [
+          512,
+          768,
+          768,
+          1024
+        ]
+      },
+      {
+        "filename": "sparkle.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/beauty-salon/sparkle.png",
+        "title": "Sparkle",
+        "row": 4,
+        "col": 4,
+        "crop": [
+          768,
+          768,
+          1024,
+          1024
+        ]
+      },
+      {
+        "filename": "skincare-products.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/beauty-salon/skincare-products.png",
+        "title": "Skincare Products",
+        "row": 5,
+        "col": 1,
+        "crop": [
+          0,
+          1024,
+          256,
+          1280
+        ]
+      },
+      {
+        "filename": "stylist.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/beauty-salon/stylist.png",
+        "title": "Stylist",
+        "row": 5,
+        "col": 2,
+        "crop": [
+          256,
+          1024,
+          512,
+          1280
+        ]
+      },
+      {
+        "filename": "salon-team.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/beauty-salon/salon-team.png",
+        "title": "Salon Team",
+        "row": 5,
+        "col": 3,
+        "crop": [
+          512,
+          1024,
+          768,
+          1280
+        ]
+      },
+      {
+        "filename": "checklist.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/beauty-salon/checklist.png",
+        "title": "Checklist",
+        "row": 5,
+        "col": 4,
+        "crop": [
+          768,
+          1024,
+          1024,
+          1280
+        ]
+      }
+    ]
+  },
+  {
+    "pack_src": "dental-icon-pack.png",
+    "pack_file": "dental-icon-pack.png",
+    "demo": "Dental / healthcare demo (Rock River Family Dental)",
+    "slug": "dental",
+    "icons": [
+      {
+        "filename": "tooth.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/dental/tooth.png",
+        "title": "Tooth",
+        "row": 2,
+        "col": 1,
+        "crop": [
+          50,
+          264,
+          290,
+          504
+        ]
+      },
+      {
+        "filename": "smile.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/dental/smile.png",
+        "title": "Smile",
+        "row": 2,
+        "col": 2,
+        "crop": [
+          391,
+          264,
+          631,
+          504
+        ]
+      },
+      {
+        "filename": "braces.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/dental/braces.png",
+        "title": "Braces",
+        "row": 2,
+        "col": 3,
+        "crop": [
+          732,
+          264,
+          972,
+          504
+        ]
+      },
+      {
+        "filename": "implant.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/dental/implant.png",
+        "title": "Implant",
+        "row": 3,
+        "col": 1,
+        "crop": [
+          50,
+          520,
+          290,
+          760
+        ]
+      },
+      {
+        "filename": "healthy-tooth.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/dental/healthy-tooth.png",
+        "title": "Healthy Tooth",
+        "row": 3,
+        "col": 2,
+        "crop": [
+          391,
+          520,
+          631,
+          760
+        ]
+      },
+      {
+        "filename": "x-ray.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/dental/x-ray.png",
+        "title": "X Ray",
+        "row": 3,
+        "col": 3,
+        "crop": [
+          732,
+          520,
+          972,
+          760
+        ]
+      },
+      {
+        "filename": "medical-cross.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/dental/medical-cross.png",
+        "title": "Medical Cross",
+        "row": 4,
+        "col": 1,
+        "crop": [
+          50,
+          776,
+          290,
+          1016
+        ]
+      },
+      {
+        "filename": "family.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/dental/family.png",
+        "title": "Family",
+        "row": 4,
+        "col": 2,
+        "crop": [
+          391,
+          776,
+          631,
+          1016
+        ]
+      },
+      {
+        "filename": "shield.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/dental/shield.png",
+        "title": "Shield",
+        "row": 4,
+        "col": 3,
+        "crop": [
+          732,
+          776,
+          972,
+          1016
+        ]
+      },
+      {
+        "filename": "location.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/dental/location.png",
+        "title": "Location",
+        "row": 5,
+        "col": 1,
+        "crop": [
+          50,
+          1032,
+          290,
+          1272
+        ]
+      },
+      {
+        "filename": "phone-appointment.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/dental/phone-appointment.png",
+        "title": "Phone Appointment",
+        "row": 5,
+        "col": 2,
+        "crop": [
+          391,
+          1032,
+          631,
+          1272
+        ]
+      },
+      {
+        "filename": "payment.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/dental/payment.png",
+        "title": "Payment",
+        "row": 5,
+        "col": 3,
+        "crop": [
+          732,
+          1032,
+          972,
+          1272
+        ]
+      },
+      {
+        "filename": "location-2.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/dental/location-2.png",
+        "title": "Location 2",
+        "row": 6,
+        "col": 1,
+        "crop": [
+          50,
+          1288,
+          290,
+          1528
+        ]
+      },
+      {
+        "filename": "new-patient-forms.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/dental/new-patient-forms.png",
+        "title": "New Patient Forms",
+        "row": 6,
+        "col": 2,
+        "crop": [
+          391,
+          1288,
+          631,
+          1528
+        ]
+      },
+      {
+        "filename": "dental-team.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/dental/dental-team.png",
+        "title": "Dental Team",
+        "row": 6,
+        "col": 3,
+        "crop": [
+          732,
+          1288,
+          972,
+          1528
+        ]
+      }
+    ]
+  },
+  {
+    "pack_src": "auto-repair-icon-pack.png",
+    "pack_file": "auto-repair-icon-pack.png",
+    "demo": "Auto repair / garage demo (Northside Auto Repair)",
+    "slug": "auto-repair",
+    "icons": [
+      {
+        "filename": "wrench.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/auto-repair/wrench.png",
+        "title": "Wrench",
+        "row": 2,
+        "col": 1,
+        "crop": [
+          50,
+          264,
+          290,
+          504
+        ]
+      },
+      {
+        "filename": "tire-change.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/auto-repair/tire-change.png",
+        "title": "Tire Change",
+        "row": 2,
+        "col": 2,
+        "crop": [
+          391,
+          264,
+          631,
+          504
+        ]
+      },
+      {
+        "filename": "brakes.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/auto-repair/brakes.png",
+        "title": "Brakes",
+        "row": 2,
+        "col": 3,
+        "crop": [
+          732,
+          264,
+          972,
+          504
+        ]
+      },
+      {
+        "filename": "engine.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/auto-repair/engine.png",
+        "title": "Engine",
+        "row": 3,
+        "col": 1,
+        "crop": [
+          50,
+          520,
+          290,
+          760
+        ]
+      },
+      {
+        "filename": "battery.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/auto-repair/battery.png",
+        "title": "Battery",
+        "row": 3,
+        "col": 2,
+        "crop": [
+          391,
+          520,
+          631,
+          760
+        ]
+      },
+      {
+        "filename": "car-lift.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/auto-repair/car-lift.png",
+        "title": "Car Lift",
+        "row": 3,
+        "col": 3,
+        "crop": [
+          732,
+          520,
+          972,
+          760
+        ]
+      },
+      {
+        "filename": "calendar.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/auto-repair/calendar.png",
+        "title": "Calendar",
+        "row": 4,
+        "col": 1,
+        "crop": [
+          50,
+          776,
+          290,
+          1016
+        ]
+      },
+      {
+        "filename": "map-pin.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/auto-repair/map-pin.png",
+        "title": "Map Pin",
+        "row": 4,
+        "col": 2,
+        "crop": [
+          391,
+          776,
+          631,
+          1016
+        ]
+      },
+      {
+        "filename": "warranty-shield.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/auto-repair/warranty-shield.png",
+        "title": "Warranty Shield",
+        "row": 4,
+        "col": 3,
+        "crop": [
+          732,
+          776,
+          972,
+          1016
+        ]
+      },
+      {
+        "filename": "tow-truck.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/auto-repair/tow-truck.png",
+        "title": "Tow Truck",
+        "row": 5,
+        "col": 1,
+        "crop": [
+          50,
+          1032,
+          290,
+          1272
+        ]
+      },
+      {
+        "filename": "phone.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/auto-repair/phone.png",
+        "title": "Phone",
+        "row": 5,
+        "col": 2,
+        "crop": [
+          391,
+          1032,
+          631,
+          1272
+        ]
+      },
+      {
+        "filename": "speedometer.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/auto-repair/speedometer.png",
+        "title": "Speedometer",
+        "row": 5,
+        "col": 3,
+        "crop": [
+          732,
+          1032,
+          972,
+          1272
+        ]
+      },
+      {
+        "filename": "tow-truck-2.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/auto-repair/tow-truck-2.png",
+        "title": "Tow Truck 2",
+        "row": 6,
+        "col": 1,
+        "crop": [
+          50,
+          1288,
+          290,
+          1528
+        ]
+      },
+      {
+        "filename": "inspection-clipboard.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/auto-repair/inspection-clipboard.png",
+        "title": "Inspection Clipboard",
+        "row": 6,
+        "col": 2,
+        "crop": [
+          391,
+          1288,
+          631,
+          1528
+        ]
+      },
+      {
+        "filename": "reviews.png",
+        "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/auto-repair/reviews.png",
+        "title": "Reviews",
+        "row": 6,
+        "col": 3,
+        "crop": [
+          732,
+          1288,
+          972,
+          1528
+        ]
+      }
+    ]
+  }
+]

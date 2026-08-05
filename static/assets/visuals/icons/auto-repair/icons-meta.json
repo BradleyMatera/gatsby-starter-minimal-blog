@@ -1,0 +1,203 @@
+{
+  "pack_src": "auto-repair-icon-pack.png",
+  "pack_file": "auto-repair-icon-pack.png",
+  "demo": "Auto repair / garage demo (Northside Auto Repair)",
+  "slug": "auto-repair",
+  "icons": [
+    {
+      "filename": "wrench.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/auto-repair/wrench.png",
+      "title": "Wrench",
+      "row": 2,
+      "col": 1,
+      "crop": [
+        50,
+        264,
+        290,
+        504
+      ]
+    },
+    {
+      "filename": "tire-change.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/auto-repair/tire-change.png",
+      "title": "Tire Change",
+      "row": 2,
+      "col": 2,
+      "crop": [
+        391,
+        264,
+        631,
+        504
+      ]
+    },
+    {
+      "filename": "brakes.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/auto-repair/brakes.png",
+      "title": "Brakes",
+      "row": 2,
+      "col": 3,
+      "crop": [
+        732,
+        264,
+        972,
+        504
+      ]
+    },
+    {
+      "filename": "engine.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/auto-repair/engine.png",
+      "title": "Engine",
+      "row": 3,
+      "col": 1,
+      "crop": [
+        50,
+        520,
+        290,
+        760
+      ]
+    },
+    {
+      "filename": "battery.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/auto-repair/battery.png",
+      "title": "Battery",
+      "row": 3,
+      "col": 2,
+      "crop": [
+        391,
+        520,
+        631,
+        760
+      ]
+    },
+    {
+      "filename": "car-lift.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/auto-repair/car-lift.png",
+      "title": "Car Lift",
+      "row": 3,
+      "col": 3,
+      "crop": [
+        732,
+        520,
+        972,
+        760
+      ]
+    },
+    {
+      "filename": "calendar.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/auto-repair/calendar.png",
+      "title": "Calendar",
+      "row": 4,
+      "col": 1,
+      "crop": [
+        50,
+        776,
+        290,
+        1016
+      ]
+    },
+    {
+      "filename": "map-pin.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/auto-repair/map-pin.png",
+      "title": "Map Pin",
+      "row": 4,
+      "col": 2,
+      "crop": [
+        391,
+        776,
+        631,
+        1016
+      ]
+    },
+    {
+      "filename": "warranty-shield.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/auto-repair/warranty-shield.png",
+      "title": "Warranty Shield",
+      "row": 4,
+      "col": 3,
+      "crop": [
+        732,
+        776,
+        972,
+        1016
+      ]
+    },
+    {
+      "filename": "tow-truck.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/auto-repair/tow-truck.png",
+      "title": "Tow Truck",
+      "row": 5,
+      "col": 1,
+      "crop": [
+        50,
+        1032,
+        290,
+        1272
+      ]
+    },
+    {
+      "filename": "phone.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/auto-repair/phone.png",
+      "title": "Phone",
+      "row": 5,
+      "col": 2,
+      "crop": [
+        391,
+        1032,
+        631,
+        1272
+      ]
+    },
+    {
+      "filename": "speedometer.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/auto-repair/speedometer.png",
+      "title": "Speedometer",
+      "row": 5,
+      "col": 3,
+      "crop": [
+        732,
+        1032,
+        972,
+        1272
+      ]
+    },
+    {
+      "filename": "tow-truck-2.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/auto-repair/tow-truck-2.png",
+      "title": "Tow Truck 2",
+      "row": 6,
+      "col": 1,
+      "crop": [
+        50,
+        1288,
+        290,
+        1528
+      ]
+    },
+    {
+      "filename": "inspection-clipboard.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/auto-repair/inspection-clipboard.png",
+      "title": "Inspection Clipboard",
+      "row": 6,
+      "col": 2,
+      "crop": [
+        391,
+        1288,
+        631,
+        1528
+      ]
+    },
+    {
+      "filename": "reviews.png",
+      "path": "/Users/bradleymatera/Desktop/gatsby-starter-minimal-blog/static/assets/visuals/icons/auto-repair/reviews.png",
+      "title": "Reviews",
+      "row": 6,
+      "col": 3,
+      "crop": [
+        732,
+        1288,
+        972,
+        1528
+      ]
+    }
+  ]
+}
