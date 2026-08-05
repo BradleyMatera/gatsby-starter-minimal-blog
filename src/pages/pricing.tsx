@@ -17,7 +17,7 @@ import {
 } from "../site/legal/business-identity";
 
 const pathname = "/pricing/";
-const pageTitle = "Pricing — Website Design & Web Development | Bradley F. Matera";
+const pageTitle = "Pricing — Website Design & Web Development";
 const pageDescription =
   "Transparent website pricing for Northwest Illinois. Starter $447, Growth $797, Lead Engine from $1,497. Written agreements, no hidden fees.";
 
@@ -111,7 +111,7 @@ const PricingPage = () => (
       }
       description={
         <>
-          <p style={{ fontSize: "0.85rem", color: "var(--color-text-subtle)", marginBottom: "1rem" }}>Last updated: July 2026 · By Bradley Matera</p>
+
           <p>
             Most agencies hide their prices until you're already committed. I don't do that. Here's
             exactly what you pay, what you get, and what costs extra.

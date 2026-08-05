@@ -184,7 +184,7 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
                 <span className="vertical-nav__cta-icon" aria-hidden="true">
                   <EmailIcon size={18} />
                 </span>
-                <span>Contact</span>
+                <span>Get a free plan</span>
               </a>
             </div>
           </div>
@@ -254,7 +254,7 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
                 <span className="vertical-nav__cta-icon" aria-hidden="true">
                   <EmailIcon size={18} />
                 </span>
-                <span>Contact</span>
+                <span>Get a free plan</span>
               </a>
             </div>
           </div>

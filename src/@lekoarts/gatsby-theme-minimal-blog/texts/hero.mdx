@@ -25,205 +25,54 @@ import { HeroBanner } from "../../../site/components";
 </div>
 
 <Section
-  eyebrow="Packages"
-  title="Three simple options, transparent pricing"
-  description={<p className="section-lead">No hidden fees, no agency overhead. Pick the package that fits your business, see the price upfront, and own the finished site.</p>}
-  actions={<><Link data-variant="primary" to="/pricing/">See full pricing</Link><Link data-variant="ghost" to="/contact/">Get a free website plan</Link></>}
+  eyebrow="What you need"
+  title="Three ways to move forward"
+  description={<p className="section-lead">Pick the path that fits your business. The details are on the next page.</p>}
+  actions={<Link data-variant="primary" to="/contact/">Get a free website plan</Link>}
 >
   <div className="grid-three">
     <div className="feature-card">
-      <span className="feature-card__icon">$447</span>
-      <h3 className="feature-card__title">Starter Presence</h3>
-      <div className="feature-card__body">
-        <p>One conversion-focused page, mobile responsive, contact form, basic SEO and local business structured data, accessibility baseline, analytics setup, one revision round.</p>
-        <p><strong>$447 build + $37/month hosting and support</strong></p>
-      </div>
-      <div className="card-actions">
-        <Link data-variant="ghost" to="/pricing/">See what's included</Link>
-      </div>
+      <span className="feature-card__icon">1</span>
+      <h3 className="feature-card__title">A new small business website</h3>
+      <div className="feature-card__body"><p>Custom builds from $447. Mobile-ready, SEO-ready, and you own the finished work.</p></div>
+      <div className="card-actions"><Link data-variant="ghost" to="/services/small-business-web-design/">View web design</Link></div>
     </div>
     <div className="feature-card">
-      <span className="feature-card__icon">$797</span>
-      <h3 className="feature-card__title">Local Growth</h3>
-      <div className="feature-card__body">
-        <p>Up to five core pages, keyword and competitor mapping, local SEO foundations, conversion tracking, Google Business Profile alignment, two revision rounds, launch and indexation checks.</p>
-        <p><strong>$797 build + $67/month hosting and support</strong></p>
-      </div>
-      <div className="card-actions">
-        <Link data-variant="ghost" to="/pricing/">See what's included</Link>
-      </div>
+      <span className="feature-card__icon">2</span>
+      <h3 className="feature-card__title">See pricing upfront</h3>
+      <div className="feature-card__body"><p>Starter, Growth, and Lead Engine packages with no hidden fees or long-term contracts.</p></div>
+      <div className="card-actions"><Link data-variant="ghost" to="/pricing/">See full pricing</Link></div>
     </div>
     <div className="feature-card">
-      <span className="feature-card__icon">$1,497</span>
-      <h3 className="feature-card__title">Lead Engine</h3>
-      <div className="feature-card__body">
-        <p>Up to ten pages, custom conversion plan, service and service-area architecture, original copy collaboration, technical SEO and structured data, performance and accessibility QA, three revision rounds, 30-day post-launch review.</p>
-        <p><strong>$1,497 build + $97/month hosting and support</strong></p>
-      </div>
-      <div className="card-actions">
-        <Link data-variant="ghost" to="/pricing/">See what's included</Link>
-      </div>
+      <span className="feature-card__icon">3</span>
+      <h3 className="feature-card__title">Fix or improve an existing site</h3>
+      <div className="feature-card__body"><p>Repairs, redesigns, speed work, accessibility, and ongoing care plans.</p></div>
+      <div className="card-actions"><Link data-variant="ghost" to="/services/website-repair/">View repair options</Link></div>
     </div>
   </div>
 </Section>
 
 <Section
-  eyebrow="Website examples"
+  eyebrow="Examples"
   title="See what your website could look like"
-  description={<p className="section-lead">These are full clickable sample websites built for real industries — not templates. Click any one to look around.</p>}
-  actions={<><Link data-variant="primary" to="/demos/">See all website examples</Link><Link data-variant="ghost" to="/contact/">Get a free website plan</Link></>}
+  description={<p className="section-lead">Full, clickable demo sites for real industries. Click any to explore.</p>}
+  actions={<Link data-variant="primary" to="/demos/">Browse all demos</Link>}
 >
   <div className="grid-three">
     <div className="feature-card">
       <h3 className="feature-card__title">Restaurant</h3>
       <div className="feature-card__body"><p>Menu, reservations, photo gallery, and location info.</p></div>
-      <div className="card-actions"><Link data-variant="primary" to="/demos/restaurant/">See restaurant sample</Link></div>
+      <div className="card-actions"><Link data-variant="primary" to="/demos/restaurant/">See demo</Link></div>
     </div>
     <div className="feature-card">
       <h3 className="feature-card__title">Landscaping</h3>
       <div className="feature-card__body"><p>Service packages, project gallery, seasonal tips, and free quote form.</p></div>
-      <div className="card-actions"><Link data-variant="primary" to="/demos/landscaping/">See landscaping sample</Link></div>
+      <div className="card-actions"><Link data-variant="primary" to="/demos/landscaping/">See demo</Link></div>
     </div>
     <div className="feature-card">
       <h3 className="feature-card__title">HVAC</h3>
       <div className="feature-card__body"><p>Financing calculator, service areas, seasonal promotions, and booking form.</p></div>
-      <div className="card-actions"><Link data-variant="primary" to="/demos/hvac/">See HVAC sample</Link></div>
-    </div>
-  </div>
-  <div className="grid-three" style={{ marginTop: "1.5rem" }}>
-    <div className="feature-card">
-      <h3 className="feature-card__title">Auto Repair</h3>
-      <div className="feature-card__body"><p>VIN lookup, service menu, customer reviews, and appointment scheduling.</p></div>
-      <div className="card-actions"><Link data-variant="primary" to="/demos/auto-repair/">See auto repair sample</Link></div>
-    </div>
-    <div className="feature-card">
-      <h3 className="feature-card__title">Real Estate</h3>
-      <div className="feature-card__body"><p>Property listings, agent profiles, search filters, and contact form.</p></div>
-      <div className="card-actions"><Link data-variant="primary" to="/demos/real-estate/">See real estate sample</Link></div>
-    </div>
-    <div className="feature-card">
-      <h3 className="feature-card__title">Salon</h3>
-      <div className="feature-card__body"><p>Service menu, stylist bios, photo gallery, and online booking.</p></div>
-      <div className="card-actions"><Link data-variant="primary" to="/demos/beauty-salon/">See salon sample</Link></div>
-    </div>
-  </div>
-</Section>
-
-<Section
-  eyebrow="Example projects"
-  title="Illustrative website examples by industry"
-  description={<p className="section-lead">Sample project walkthroughs showing the structure, features, and technical approach for different industries. These are illustrative examples, not real client projects.</p>}
-  actions={<Link data-variant="ghost" to="/work/">See all examples</Link>}
->
-  <div className="grid-three">
-    <div className="feature-card">
-      <h3 className="feature-card__title">Landscaping website example</h3>
-      <div className="feature-card__body">
-        <p>A 5-page Gatsby site structure for a landscaping company — service pages, project gallery, quote form, local SEO foundations. <strong>Illustrative example, not a real client.</strong></p>
-      </div>
-      <div className="card-actions"><Link data-variant="primary" to="/work/greenscape-pro-landscaping/">View example</Link></div>
-    </div>
-    <div className="feature-card">
-      <h3 className="feature-card__title">Restaurant website example</h3>
-      <div className="feature-card__body">
-        <p>An illustrative example of a WordPress-to-Gatsby rebuild for a restaurant — mobile-first menu, working reservation form, and accessibility upgrades. <strong>Not a real client project.</strong></p>
-      </div>
-      <div className="card-actions"><Link data-variant="primary" to="/work/rock-river-diner/">View example</Link></div>
-    </div>
-    <div className="feature-card">
-      <h3 className="feature-card__title">HVAC website example</h3>
-      <div className="feature-card__body">
-        <p>A 7-page service area website structure for an HVAC company — service pages, financing calculator, seasonal promotions, and service area architecture. <strong>Illustrative example, not a real client.</strong></p>
-      </div>
-      <div className="card-actions"><Link data-variant="primary" to="/work/northstar-hvac/">View example</Link></div>
-    </div>
-  </div>
-</Section>
-
-<Section
-  eyebrow="Why direct-to-developer"
-  title="Work directly with the person building your site"
-  description={<p className="section-lead">No account managers, no handoffs, no agency overhead. You talk to me, I do the work, and you see real progress.</p>}
->
-  <div className="grid-three">
-    <div className="feature-card">
-      <h3 className="feature-card__title">No agency handoff</h3>
-      <div className="feature-card__body"><p>The person you talk to is the person who builds your site. No sales rep forwarding messages to a developer who never heard your goals.</p></div>
-    </div>
-    <div className="feature-card">
-      <h3 className="feature-card__title">Transparent pricing</h3>
-      <div className="feature-card__body"><p>You see the price before the project starts. No surprise invoices, no scope creep charges, no retainer traps. 50% deposit, 50% on launch.</p></div>
-    </div>
-    <div className="feature-card">
-      <h3 className="feature-card__title">You own everything</h3>
-      <div className="feature-card__body"><p>The code, content, domain, and hosting are all yours. If you ever want to leave, I help you migrate at no extra charge. No vendor lock-in.</p></div>
-    </div>
-  </div>
-</Section>
-
-<Section
-  eyebrow="Services"
-  title="What I can help with"
-  description={<p className="section-lead">From new builds to repairs to local SEO, I cover the full range of website work a small business needs.</p>}
-  actions={<Link data-variant="ghost" to="/services/">See all services</Link>}
->
-  <div className="grid-three">
-    <div className="feature-card">
-      <h3 className="feature-card__title">New website design</h3>
-      <div className="feature-card__body"><p>Conversion-focused websites built for your business, mobile-ready, SEO-ready, with contact forms and schema markup.</p></div>
-      <div className="card-actions"><Link data-variant="ghost" to="/services/small-business-web-design/">View web design service</Link></div>
-    </div>
-    <div className="feature-card">
-      <h3 className="feature-card__title">Website redesign</h3>
-      <div className="feature-card__body"><p>Update an outdated site with a modern, fast, accessible rebuild that keeps your content and improves your search visibility.</p></div>
-      <div className="card-actions"><Link data-variant="ghost" to="/services/website-redesign/">View redesign service</Link></div>
-    </div>
-    <div className="feature-card">
-      <h3 className="feature-card__title">Local SEO</h3>
-      <div className="feature-card__body"><p>Google Business Profile setup, local search optimization, schema markup, and content restructuring so people in your area can find you.</p></div>
-      <div className="card-actions"><Link data-variant="ghost" to="/services/local-seo/">View local SEO service</Link></div>
-    </div>
-  </div>
-  <div className="grid-three" style={{ marginTop: "1.5rem" }}>
-    <div className="feature-card">
-      <h3 className="feature-card__title">Website repair</h3>
-      <div className="feature-card__body"><p>Fix broken layouts, slow pages, outdated content, deployment issues, and broken forms on existing sites.</p></div>
-      <div className="card-actions"><Link data-variant="ghost" to="/services/website-repair/">View repair service</Link></div>
-    </div>
-    <div className="feature-card">
-      <h3 className="feature-card__title">Accessibility</h3>
-      <div className="feature-card__body"><p>WCAG 2.2 AA compliance checks, keyboard navigation, screen reader support, contrast fixes, and form label corrections.</p></div>
-      <div className="card-actions"><Link data-variant="ghost" to="/services/website-accessibility/">View accessibility service</Link></div>
-    </div>
-    <div className="feature-card">
-      <h3 className="feature-card__title">Website care plans</h3>
-      <div className="feature-card__body"><p>Ongoing updates, backups, uptime monitoring, security checks, and content changes. No long-term commitment. Website care plans are month-to-month. Every website project still uses a written service agreement and scope of work.</p></div>
-      <div className="card-actions"><Link data-variant="ghost" to="/services/website-care-plans/">View care plans</Link></div>
-    </div>
-  </div>
-</Section>
-
-<Section
-  eyebrow="Process"
-  title="From first call to live site"
-  description={<p className="section-lead">A clear, simple process with no surprises. You see progress at every step.</p>}
-  actions={<Link data-variant="ghost" to="/process/">See the full process</Link>}
->
-  <div className="grid-three">
-    <div className="feature-card">
-      <span className="feature-card__icon">1</span>
-      <h3 className="feature-card__title">Free consultation</h3>
-      <div className="feature-card__body"><p>We talk about your business, what the site needs to do, and what's currently broken. I tell you honestly whether I'm the right fit. No pressure, no sales pitch.</p></div>
-    </div>
-    <div className="feature-card">
-      <span className="feature-card__icon">2</span>
-      <h3 className="feature-card__title">Design and build</h3>
-      <div className="feature-card__body"><p>I build a fast, mobile-ready site for your business. You see real progress, not radio silence. Revision rounds included so the final site matches what you actually want.</p></div>
-    </div>
-    <div className="feature-card">
-      <span className="feature-card__icon">3</span>
-      <h3 className="feature-card__title">Launch and support</h3>
-      <div className="feature-card__body"><p>I launch your site, set up hosting, and handle updates. 24-hour response times, 30-day warranty after launch. Monthly support is month-to-month — no long-term commitment.</p></div>
+      <div className="card-actions"><Link data-variant="primary" to="/demos/hvac/">See demo</Link></div>
     </div>
   </div>
 </Section>
@@ -231,7 +80,7 @@ import { HeroBanner } from "../../../site/components";
 <Section
   eyebrow="Service area"
   title="Northwest Illinois and Southern Wisconsin"
-  description={<p className="section-lead">I serve small businesses across the region. Find your city below for local-specific information.</p>}
+  description={<p className="section-lead">Local web design and development for small businesses across the region.</p>}
   actions={<Link data-variant="ghost" to="/service-areas/">See all service areas</Link>}
 >
   <div className="grid-three">
@@ -254,103 +103,13 @@ import { HeroBanner } from "../../../site/components";
       </div>
     </Link>
   </div>
-  <div className="grid-three" style={{ marginTop: "1.5rem" }}>
-    <Link to="/web-developer-loves-park-illinois/" className="city-card" style={{ backgroundImage: "url(/city-images/loves-park.jpg)" }}>
-      <div className="city-card__overlay">
-        <h3 className="city-card__title">Loves Park, IL</h3>
-        <span className="city-card__link">Loves Park web developer →</span>
-      </div>
-    </Link>
-    <Link to="/web-developer-beloit-wisconsin/" className="city-card" style={{ backgroundImage: "url(/city-images/beloit-wi.jpg)" }}>
-      <div className="city-card__overlay">
-        <h3 className="city-card__title">Beloit, WI</h3>
-        <span className="city-card__link">Beloit web developer →</span>
-      </div>
-    </Link>
-    <Link to="/web-developer-janesville-wisconsin/" className="city-card" style={{ backgroundImage: "url(/city-images/janesville-wi.jpg)" }}>
-      <div className="city-card__overlay">
-        <h3 className="city-card__title">Janesville, WI</h3>
-        <span className="city-card__link">Janesville web developer →</span>
-      </div>
-    </Link>
-  </div>
 </Section>
 
 <Section
-  eyebrow="FAQ"
-  title="Common questions about websites"
-  description={<p className="section-lead">Straight answers to the questions small business owners ask most.</p>}
-  actions={<Link data-variant="ghost" to="/northwest-illinois-web-development-faq/">Read the full FAQ</Link>}
->
-  <div className="grid-two">
-    <div className="feature-card">
-      <h3 className="feature-card__title">How much does a website cost?</h3>
-      <div className="feature-card__body"><p>Starter sites begin at $447 for the build and $37/month for hosting and support. Growth sites start at $797. See the <Link to="/pricing/">full pricing breakdown</Link>.</p></div>
-    </div>
-    <div className="feature-card">
-      <h3 className="feature-card__title">How long does it take?</h3>
-      <div className="feature-card__body"><p>Starter sites typically take 14 days. Growth sites run 3-4 weeks. I give you a specific timeline during the free consultation.</p></div>
-    </div>
-    <div className="feature-card">
-      <h3 className="feature-card__title">Do I own my website?</h3>
-      <div className="feature-card__body"><p>Yes. The code, content, and domain are all yours. If you ever want to leave, I help you migrate at no extra charge.</p></div>
-    </div>
-    <div className="feature-card">
-      <h3 className="feature-card__title">Can you fix my existing website?</h3>
-      <div className="feature-card__body"><p>Yes. Site refreshes start at $597, or I can work hourly at $65/hour with a 1-hour minimum.</p></div>
-    </div>
-  </div>
-</Section>
-
-<Section
-  eyebrow="About the developer"
-  title="Who builds your website"
-  description={<p className="section-lead">I'm Bradley Matera — a web developer in Durand, Illinois. Here's what backs up the work.</p>}
-  actions={<Link data-variant="ghost" to="/about/">Read my full story</Link>}
->
-  <div className="grid-three">
-    <div className="feature-card">
-      <h3 className="feature-card__title">AWS Cloud Support Intern</h3>
-      <div className="feature-card__body"><p>Completed a 6-month internship at Amazon Web Services on the Cloud Support Engineer team. Hands-on experience troubleshooting real customer infrastructure issues across AWS services.</p></div>
-      <div className="card-actions"><Link data-variant="ghost" to="/aws-cloud-support-internship-mastering-troubleshooting-and-architecture/">Read the internship write-up</Link></div>
-    </div>
-    <div className="feature-card">
-      <h3 className="feature-card__title">Full Sail University student</h3>
-      <div className="feature-card__body"><p>Currently pursuing a degree in Web Development at Full Sail University. Coursework covers front-end, back-end, databases, and deployment — not just theory.</p></div>
-      <div className="card-actions"><Link data-variant="ghost" to="/full-sail-university-web-development/">Read about my program</Link></div>
-    </div>
-    <div className="feature-card">
-      <h3 className="feature-card__title">Real projects, not tutorials</h3>
-      <div className="feature-card__body"><p>I build real applications — an interactive Pokédex with 151 entries, a car-matching app, a JWT CTF lab, WebGPU demos. Every project has source code you can inspect.</p></div>
-      <div className="card-actions"><Link data-variant="ghost" to="/projects/">See project source code</Link></div>
-    </div>
-  </div>
-</Section>
-
-<Section
-  eyebrow="Next step"
+  eyebrow="Ready to start?"
   title="Get a free website plan"
-  description={<p className="section-lead">Call (608) 313-5373 or send a message through the contact page. I'll tell you honestly whether I'm the right fit for your project.</p>}
-  actions={
-    <>
-      <Link data-variant="primary" to="/contact/">Get a free website plan</Link>
-      <a href="tel:+16083135373" data-variant="ghost" className="link">(608) 313-5373</a>
-      <Link data-variant="ghost" to="/pricing/">See pricing</Link>
-    </>
-  }
->
-  <div className="grid-two">
-    <div className="feature-card">
-      <h3 className="feature-card__title">Free 5-point website review</h3>
-      <div className="feature-card__body"><p>One-page review covering clarity, mobile usability, speed, local search, and the most important next step. No obligation, no sales pressure.</p></div>
-      <div className="card-actions"><Link data-variant="primary" to="/contact/">Request your review</Link></div>
-    </div>
-    <div className="feature-card">
-      <h3 className="feature-card__title">For developers and recruiters</h3>
-      <div className="feature-card__body"><p>If you are a recruiter or developer evaluating my technical work, case studies, code, and verified credentials live on the <Link to="/recruiter/">recruiter hub</Link>.</p></div>
-      <div className="card-actions"><Link data-variant="ghost" to="/recruiter/">View technical portfolio</Link></div>
-    </div>
-  </div>
-</Section>
+  description={<p className="section-lead">Tell me about your business and I'll send a clear plan with price, timeline, and next steps.</p>}
+  actions={<Link data-variant="primary" to="/contact/">Get a free website plan</Link>}
+/>
 
 </>

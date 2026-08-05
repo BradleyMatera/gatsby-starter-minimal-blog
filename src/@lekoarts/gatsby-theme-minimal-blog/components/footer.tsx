@@ -13,29 +13,30 @@ import {
 } from "../../../site/legal/business-identity";
 
 const Footer = () => {
-  const { siteTitle, siteDescription, siteHeadline } = useSiteMetadata();
+  const { siteTitle, siteHeadline } = useSiteMetadata();
   const { navigation: nav, externalLinks, basePath } = useMinimalBlogConfig();
   const [currentYear] = React.useState(() => new Date().getFullYear());
-  const description = siteHeadline || siteDescription;
-  const quickStats = [
-    "AWS Cloud Support Engineer Intern — Amazon",
-    "Based in the Midwest — open to Seattle on-site or remote",
-    "Serving Durand, Davis, Rockford, Freeport, and Northwest Illinois",
-  ];
 
   return (
     <footer className="footer">
-      <div className="footer-inner">
+      <div className="footer-inner footer-inner--compact">
         <div className="footer__brand">
-          <p className="footer__title">{siteTitle}</p>
-          {description ? <p className="footer__description">{description}</p> : null}
-          <div className="footer-cta">
-            <Link to="/recruiter/#project-explorer">View Bradley's project portfolio</Link>
-            <Link to={replaceSlashes(`/${basePath}/blog`)}>Read Bradley's latest blog posts</Link>
+          <div>
+            <p className="footer__title">{siteTitle}</p>
+            {siteHeadline ? <p className="footer__description">{siteHeadline}</p> : null}
+            <p className="footer__description">
+              <a href={SELLER_PHONE_HREF} style={{ color: "inherit" }}>{SELLER_PHONE}</a>
+              <span aria-hidden="true"> · </span>
+              <a href={`mailto:${SELLER_EMAIL}`} style={{ color: "inherit" }}>{SELLER_EMAIL}</a>
+            </p>
+          </div>
+          <div className="footer-cta footer-cta--compact">
+            <Link to="/contact/">Get a free website plan</Link>
+            <Link to={replaceSlashes(`/${basePath}/blog`)}>Blog</Link>
           </div>
         </div>
 
-        <div className="footer-nav">
+        <div className="footer-nav footer-nav--compact">
           <div>
             <p className="footer-nav__title">Explore</p>
             <ul>
@@ -44,54 +45,8 @@ const Footer = () => {
                   <Link to={replaceSlashes(`/${basePath}/${item.slug}`)}>{item.title}</Link>
                 </li>
               ))}
-              <li>
-                <Link to="/about/">About</Link>
-              </li>
-              <li>
-                <Link to="/pricing/">Pricing</Link>
-              </li>
-              <li>
-                <Link to="/store/">Store</Link>
-              </li>
-              <li>
-                <Link to="/purchases/">Customer portal</Link>
-              </li>
-              <li>
-                <Link to="/demos/">Website demos</Link>
-              </li>
-              <li>
-                <Link to="/web-developer-durand-davis-illinois/">Northwest Illinois web development</Link>
-              </li>
-              <li>
-                <Link to="/web-developer-rockford-illinois/">Rockford web developer</Link>
-              </li>
-              <li>
-                <Link to="/web-developer-freeport-illinois/">Freeport web developer</Link>
-              </li>
-              <li>
-                <Link to="/web-developer-loves-park-illinois/">Loves Park web developer</Link>
-              </li>
-              <li>
-                <Link to="/web-developer-machesney-park-illinois/">Machesney Park web developer</Link>
-              </li>
-              <li>
-                <Link to="/web-developer-byron-illinois/">Byron web developer</Link>
-              </li>
-              <li>
-                <Link to="/web-developer-roscoe-illinois/">Roscoe web developer</Link>
-              </li>
-              <li>
-                <Link to="/web-developer-rockton-illinois/">Rockton web developer</Link>
-              </li>
-              <li>
-                <Link to="/web-developer-south-beloit-illinois/">South Beloit web developer</Link>
-              </li>
-              <li>
-                <Link to="/web-developer-beloit-wisconsin/">Beloit WI web developer</Link>
-              </li>
-              <li>
-                <Link to="/web-developer-janesville-wisconsin/">Janesville WI web developer</Link>
-              </li>
+              <li><Link to="/demos/">Website demos</Link></li>
+              <li><Link to="/service-areas/">Service areas</Link></li>
             </ul>
           </div>
           {externalLinks && externalLinks.length > 0 ? (
@@ -109,32 +64,9 @@ const Footer = () => {
             </div>
           ) : null}
         </div>
-
-        <div className="footer-stats">
-          <p className="footer-nav__title">Quick stats</p>
-          <ul>
-            {quickStats.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-          <p className="footer-nav__title" style={{ marginTop: "1rem" }}>Contact</p>
-          <ul>
-            <li>
-              <a href={SELLER_PHONE_HREF} style={{ color: "inherit", textDecoration: "underline" }}>
-                {SELLER_PHONE}
-              </a>
-            </li>
-            <li>
-              <a href={`mailto:${SELLER_EMAIL}`} aria-label={`Email Bradley Matera at ${SELLER_EMAIL}`} style={{ color: "inherit", textDecoration: "underline" }}>
-                {SELLER_EMAIL}
-              </a>
-            </li>
-          </ul>
-        </div>
       </div>
 
-      {/* Bottom bar */}
-      <div className="footer-bottom">
+      <div className="footer-bottom footer-bottom--compact">
         <span suppressHydrationWarning>&copy; {currentYear} {siteTitle} — {SELLER_IDENTITY_LINE}</span>
         <span className="footer-legal-links">
           {POLICY_LINKS.map((link, i) => (
@@ -146,13 +78,8 @@ const Footer = () => {
           {" · "}
           <Link to="/image-credits/" style={{ color: "inherit", textDecoration: "underline" }}>Image credits</Link>
         </span>
-        <span>
-          <Link to="/recruiter/" style={{ color: "inherit", textDecoration: "underline" }}>
-            Hiring? View the recruiter hub →
-          </Link>
-        </span>
       </div>
-      <div className="footer-disclosure" style={{ borderTop: "1px solid var(--color-border)", padding: "0.75rem 1rem", fontSize: "0.8rem", color: "var(--color-text-secondary)", textAlign: "center" }}>
+      <div className="footer-disclosure" style={{ borderTop: "1px solid var(--color-border)", padding: "0.5rem 1rem", fontSize: "0.75rem", color: "var(--color-text-secondary)", textAlign: "center" }}>
         {SELLER_DISCLOSURE_SHORT}
       </div>
     </footer>

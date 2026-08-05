@@ -7,7 +7,7 @@ import { Card, Link, Section } from "../../ui";
 import { SERVICE_AREA_CITIES, CITY_IMAGES } from "../../shared/city-data";
 
 const pathname = "/services/small-business-web-design/";
-const pageTitle = "Small Business Web Design in Northwest Illinois | Bradley Matera";
+const pageTitle = "Small Business Web Design in Northwest Illinois";
 const pageDescription =
   "Custom small business websites built from scratch. Up to 5 pages, mobile-ready, SEO-ready, contact form. Starting at $447 with 14-day builds.";
 
@@ -70,7 +70,7 @@ const SmallBusinessWebDesignPage = () => (
       }
       description={
         <>
-          <p style={{ fontSize: "0.85rem", color: "var(--color-text-subtle)", marginBottom: "1rem" }}>Last updated: July 2026 · By Bradley Matera</p>
+
           <p className="direct-answer">
             <strong>What is small business web design?</strong> A custom website built from scratch for your small business — up to 5 pages, mobile-ready, SEO-ready, with a contact form and schema markup. Built in 14 days, starting at $447. Written agreements included, you own everything.
           </p>

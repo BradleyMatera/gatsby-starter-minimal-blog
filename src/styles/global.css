@@ -1044,8 +1044,8 @@ button:focus-visible,
 
 .hero-banner__title {
   font-family: var(--font-heading);
-  font-size: clamp(2.25rem, 5vw, 4.5rem);
-  line-height: 1.05;
+  font-size: clamp(2rem, 4.25vw, 3.5rem);
+  line-height: 1.1;
   font-weight: 800;
   letter-spacing: -0.03em;
   color: var(--color-text);
@@ -1057,7 +1057,6 @@ button:focus-visible,
   opacity: 0;
   transform: translateY(18px);
   animation: heroWordReveal 0.55s var(--transition-smooth) forwards;
-  margin-right: 0.25em;
 }
 
 @keyframes heroWordReveal {
@@ -5563,4 +5562,74 @@ body {
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--color-accent, #6f6052);
+}
+
+/* Compact footer overrides */
+.footer {
+  padding: 0.75rem 0 0;
+}
+
+.footer-inner--compact {
+  gap: 0.75rem;
+  padding-bottom: 0.5rem;
+}
+
+.footer-cta--compact {
+  gap: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.footer-nav--compact {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+}
+
+.footer-nav--compact a {
+  min-height: 28px;
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+.footer-bottom--compact {
+  margin-top: 0.25rem;
+  padding: 0.35rem clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.footer-disclosure {
+  padding: 0.35rem 1rem !important;
+  font-size: 0.7rem !important;
+}
+
+/* Homepage compact overrides — reduce negative space */
+.u-home-hero .hero-banner {
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.u-home-hero .hero-banner__visual {
+  min-height: auto;
+}
+
+.u-home-hero .evidence-strip {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+}
+
+.u-home-hero .section-shell {
+  margin-block: clamp(1.5rem, 3vw, 2rem);
+  padding-block: clamp(1rem, 2vw, 1.5rem);
+}
+
+.u-home-hero .section-shell__header {
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+}
+
+.u-home-hero .grid-three .feature-card {
+  min-height: auto;
+  gap: 0.5rem;
+}
+
+.u-home-hero .grid-three {
+  gap: clamp(1rem, 2vw, 1.5rem);
 }

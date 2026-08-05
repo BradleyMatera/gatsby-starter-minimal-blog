@@ -21,13 +21,15 @@ const AnimatedTitle: React.FC<{ title: string }> = ({ title }) => {
   return (
     <>
       {words.map((word, index) => (
-        <span
-          key={`${word}-${index}`}
-          className="hero-banner__word"
-          style={{ animationDelay: `${0.1 + index * 0.06}s` }}
-        >
-          {word}
-        </span>
+        <React.Fragment key={`${word}-${index}`}>
+          <span
+            className="hero-banner__word"
+            style={{ animationDelay: `${0.1 + index * 0.06}s` }}
+          >
+            {word}
+          </span>
+          {index < words.length - 1 ? ' ' : null}
+        </React.Fragment>
       ))}
     </>
   );
@@ -39,7 +41,7 @@ const HeroBanner = ({ title, subtitle, ctaText, ctaLink, titleAs = "h1" }: HeroB
   <section className="hero-banner hero-banner--v2 section-surface" aria-label="Hero banner">
     <div className="hero-banner__mesh" aria-hidden="true" />
     <div className="hero-banner__text">
-      <p className="hero-banner__eyebrow" style={{ animationDelay: "0s" }}>Bradley Matera · Systems software</p>
+      <p className="hero-banner__eyebrow" style={{ animationDelay: "0s" }}>Bradley Matera · Small business web design in Northwest Illinois</p>
       <TitleTag className="hero-banner__title" style={{ animationDelay: "0.1s" }}>
         <AnimatedTitle title={title} />
       </TitleTag>

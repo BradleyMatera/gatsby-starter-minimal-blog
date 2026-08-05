@@ -1,7 +1,7 @@
 import type { SiteMetadataShape } from "./types";
 
 export const siteMetadata: SiteMetadataShape & Record<string, unknown> = {
-  siteTitle: `Small Business Web Design in Northwest Illinois | Bradley Matera`,
+  siteTitle: `Bradley Matera`,
   siteTitleAlt: `Bradley Matera — Web Developer in Northwest Illinois`,
   siteHeadline: `Bradley Matera — Web development for Northwest Illinois`,
   siteUrl: `https://bradleymatera.dev`,
