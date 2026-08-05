@@ -6033,6 +6033,22 @@ body {
   .home-mobile-cta .hero-banner__cta {
     width: 100%;
     justify-content: center;
+    background: #6f6052 !important;
+    color: #ffffff !important;
+    border: 1px solid #6f6052 !important;
+    font-weight: 700;
+  }
+  .home-mobile-cta .hero-banner__cta span,
+  .home-mobile-cta .hero-banner__cta {
+    color: #ffffff !important;
+  }
+  :root[data-theme="dark"] .home-mobile-cta .hero-banner__cta {
+    background: #b0a89e !important;
+    border: 1px solid #b0a89e !important;
+    color: #1a1a1a !important;
+  }
+  :root[data-theme="dark"] .home-mobile-cta .hero-banner__cta span {
+    color: #1a1a1a !important;
   }
 }
 
