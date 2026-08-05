@@ -1143,6 +1143,10 @@ button:focus-visible,
   align-items: center;
 }
 
+.hero-ba__inner > * {
+  min-width: 0;
+}
+
 @media (min-width: 960px) {
   .hero-ba__inner {
     grid-template-columns: 1fr 1.15fr;
@@ -1153,6 +1157,7 @@ button:focus-visible,
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
+  min-width: 0;
 }
 
 .hero-ba__label {
@@ -1280,6 +1285,7 @@ button:focus-visible,
   flex-direction: column;
   align-items: stretch;
   gap: 0.6rem;
+  min-width: 0;
 }
 
 .hero-ba__browser {
