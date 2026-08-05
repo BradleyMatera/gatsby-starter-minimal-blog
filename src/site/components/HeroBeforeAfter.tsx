@@ -195,23 +195,28 @@ const HeroBeforeAfter = ({
 
   // --- Interaction handlers ---
 
-  // Track whether pointer is down for dragging the divider
+  // Track interaction state
   const draggingRef = React.useRef(false);
-  // Track vertical drag for scrolling (touch)
   const lastTouchYRef = React.useRef(0);
   const touchScrollingRef = React.useRef(false);
+  // For touch direction detection
+  const touchStartXRef = React.useRef(0);
+  const touchStartYRef = React.useRef(0);
+  const touchModeRef = React.useRef<"none" | "horizontal" | "vertical">("none");
 
   // Click/touch = STOP everything permanently
   const onPointerDown = (e: React.PointerEvent) => {
     setStopped(true);
-    // Determine if this is a touch (for vertical scroll) or mouse (for divider drag)
     if (e.pointerType === "touch") {
-      // For touch: start tracking for vertical scroll
+      // For touch: record start position, decide direction on first move
+      touchStartXRef.current = e.clientX;
+      touchStartYRef.current = e.clientY;
       lastTouchYRef.current = e.clientY;
-      touchScrollingRef.current = true;
+      touchModeRef.current = "none";
+      touchScrollingRef.current = false;
       draggingRef.current = false;
     } else {
-      // For mouse: start dragging the divider
+      // For mouse: start dragging the divider immediately
       draggingRef.current = true;
       touchScrollingRef.current = false;
       const el = viewportRef.current;
@@ -223,16 +228,43 @@ const HeroBeforeAfter = ({
     }
   };
 
-  // Only move divider while pointer is DOWN (dragging), not on hover
+  // Only move while pointer is DOWN
   const onPointerMove = (e: React.PointerEvent) => {
-    if (touchScrollingRef.current) {
-      // Touch: scroll vertically
-      const dy = lastTouchYRef.current - e.clientY;
-      lastTouchYRef.current = e.clientY;
-      const ms = Math.max(0, imageHeight - (viewportRef.current?.clientHeight ?? viewportH));
-      let ns = scrollRef.current + dy;
-      ns = Math.max(0, Math.min(ms, ns));
-      setScrollY(ns); scrollRef.current = ns;
+    if (e.pointerType === "touch") {
+      // Determine direction on first significant movement
+      if (touchModeRef.current === "none") {
+        const dx = Math.abs(e.clientX - touchStartXRef.current);
+        const dy = Math.abs(e.clientY - touchStartYRef.current);
+        if (dx > 8 || dy > 8) {
+          if (dx > dy) {
+            // Horizontal swipe → drag divider
+            touchModeRef.current = "horizontal";
+            draggingRef.current = true;
+          } else {
+            // Vertical swipe → scroll
+            touchModeRef.current = "vertical";
+            touchScrollingRef.current = true;
+          }
+        }
+      }
+
+      if (touchModeRef.current === "horizontal") {
+        // Drag divider
+        const el = viewportRef.current;
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        const pct = ((e.clientX - rect.left) / rect.width) * 100;
+        const np = Math.max(0, Math.min(100, pct));
+        setPos(np); posRef.current = np;
+      } else if (touchModeRef.current === "vertical") {
+        // Scroll vertically
+        const dy = lastTouchYRef.current - e.clientY;
+        lastTouchYRef.current = e.clientY;
+        const ms = Math.max(0, imageHeight - (viewportRef.current?.clientHeight ?? viewportH));
+        let ns = scrollRef.current + dy;
+        ns = Math.max(0, Math.min(ms, ns));
+        setScrollY(ns); scrollRef.current = ns;
+      }
     } else if (draggingRef.current) {
       // Mouse: drag divider horizontally
       const el = viewportRef.current;
@@ -247,6 +279,7 @@ const HeroBeforeAfter = ({
   const onPointerUp = () => {
     draggingRef.current = false;
     touchScrollingRef.current = false;
+    touchModeRef.current = "none";
   };
 
   // Mouse wheel = scroll up/down after stopped
