@@ -2,7 +2,7 @@
 // Gatsby theme shadow file: keep this path for the theme override,
 // but treat src/features and src/site as the source of truth for real app code.
 import { jsx } from "theme-ui";
-import { HeadFC } from "gatsby";
+import { HeadFC, Link } from "gatsby";
 import Layout from "./layout";
 import Seo from "./seo";
 import { buildProfessionalServiceSchema } from "../../../site/seo/local-seo";
@@ -29,6 +29,9 @@ const Homepage = () => {
       <section className="u-home-hero">
         <Hero />
       </section>
+      <div className="home-mobile-cta">
+        <Link className="hero-banner__cta" to="/contact/">Get a free plan</Link>
+      </div>
     </Layout>
   );
 };

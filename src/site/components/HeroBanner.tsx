@@ -7,6 +7,8 @@ export type HeroBannerProps = {
   subtitle: string;
   ctaText: string;
   ctaLink: string;
+  secondaryCtaText?: string;
+  secondaryCtaLink?: string;
   titleAs?: "h1" | "h2";
 };
 
@@ -35,7 +37,7 @@ const AnimatedTitle: React.FC<{ title: string }> = ({ title }) => {
   );
 };
 
-const HeroBanner = ({ title, subtitle, ctaText, ctaLink, titleAs = "h1" }: HeroBannerProps) => {
+const HeroBanner = ({ title, subtitle, ctaText, ctaLink, secondaryCtaText, secondaryCtaLink, titleAs = "h1" }: HeroBannerProps) => {
   const TitleTag = titleAs as "h1";
   return (
   <section className="hero-banner hero-banner--v2 section-surface" aria-label="Hero banner">
@@ -46,12 +48,19 @@ const HeroBanner = ({ title, subtitle, ctaText, ctaLink, titleAs = "h1" }: HeroB
         <AnimatedTitle title={title} />
       </TitleTag>
       <p className="hero-banner__subtitle" style={{ animationDelay: "0.2s" }}>{subtitle}</p>
-      <Link className="hero-banner__cta" to={ctaLink} style={{ animationDelay: "0.3s" }}>
-        <span>{ctaText}</span>
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </Link>
+      <div className="hero-banner__actions">
+        <Link className="hero-banner__cta" to={ctaLink} style={{ animationDelay: "0.3s" }}>
+          <span>{ctaText}</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </Link>
+        {secondaryCtaText && secondaryCtaLink ? (
+          <Link className="hero-banner__cta hero-banner__cta--secondary" to={secondaryCtaLink} style={{ animationDelay: "0.35s" }}>
+            <span>{secondaryCtaText}</span>
+          </Link>
+        ) : null}
+      </div>
     </div>
     <div className="hero-banner__visual" role="presentation" style={{ animationDelay: "0.15s" }}>
       <picture>
