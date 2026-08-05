@@ -30,7 +30,27 @@ const Homepage = () => {
         <Hero />
       </section>
       <div className="home-mobile-cta">
-        <Link className="hero-banner__cta" to="/contact/">Get a free plan</Link>
+        <Link
+          to="/contact/"
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "100%",
+            minHeight: "48px",
+            padding: "0.875rem 1.5rem",
+            borderRadius: "999px",
+            fontSize: "1rem",
+            fontWeight: 700,
+            textDecoration: "none",
+            background: "#6f6052",
+            color: "#ffffff",
+            border: "1px solid #6f6052",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+          }}
+        >
+          Get a free plan
+        </Link>
       </div>
     </Layout>
   );
