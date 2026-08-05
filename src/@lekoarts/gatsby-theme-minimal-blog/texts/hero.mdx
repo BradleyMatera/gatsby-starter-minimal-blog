@@ -1,5 +1,6 @@
 import { Section, Link } from "../../../ui";
 import { HeroBanner } from "../../../site/components";
+import { UtensilsIcon, LeafIcon, GearIcon } from "../../../site/icons";
 
 <>
 
@@ -55,25 +56,64 @@ import { HeroBanner } from "../../../site/components";
 <Section
   eyebrow="Examples"
   title="See what your website could look like"
-  description={<p className="section-lead">Full, clickable demo sites for real industries. Click any to explore.</p>}
-  actions={<Link data-variant="primary" to="/demos/">Browse all demos</Link>}
+  description={<p className="section-lead">Real demo sites for local businesses. Click one to explore.</p>}
+  actions={<Link data-variant="ghost" to="/demos/">Browse all demos</Link>}
 >
-  <div className="grid-three">
-    <div className="feature-card">
-      <h3 className="feature-card__title">Restaurant</h3>
-      <div className="feature-card__body"><p>Menu, reservations, photo gallery, and location info.</p></div>
-      <div className="card-actions"><Link data-variant="primary" to="/demos/restaurant/">See demo</Link></div>
-    </div>
-    <div className="feature-card">
-      <h3 className="feature-card__title">Landscaping</h3>
-      <div className="feature-card__body"><p>Service packages, project gallery, seasonal tips, and free quote form.</p></div>
-      <div className="card-actions"><Link data-variant="primary" to="/demos/landscaping/">See demo</Link></div>
-    </div>
-    <div className="feature-card">
-      <h3 className="feature-card__title">HVAC</h3>
-      <div className="feature-card__body"><p>Financing calculator, service areas, seasonal promotions, and booking form.</p></div>
-      <div className="card-actions"><Link data-variant="primary" to="/demos/hvac/">See demo</Link></div>
-    </div>
+  <div className="grid-three home-demo-grid">
+    <Link to="/demos/restaurant/" className="home-demo-card" style={{ "--home-demo-accent": "#c9a227" }}>
+      <div className="home-demo-card__preview" style={{ backgroundImage: "url(/images/demos/restaurant/hero.jpg)" }}>
+        <div className="home-demo-card__overlay" style={{ background: "linear-gradient(135deg, #c9a227aa, #c9a22755)" }}>
+          <UtensilsIcon size={32} />
+        </div>
+      </div>
+      <div className="home-demo-card__body">
+        <div className="home-demo-card__industry">Restaurant</div>
+        <h3 className="home-demo-card__name">Riverside Grill</h3>
+        <p className="home-demo-card__desc">Full restaurant website with menu, reservations, hours, photo gallery, and customer reviews.</p>
+        <div className="home-demo-card__features">
+          <span className="home-demo-card__feature">Menu</span>
+          <span className="home-demo-card__feature">Reservations</span>
+          <span className="home-demo-card__feature">Reviews</span>
+          <span className="home-demo-card__feature">Hours</span>
+        </div>
+      </div>
+    </Link>
+    <Link to="/demos/landscaping/" className="home-demo-card" style={{ "--home-demo-accent": "#4a7c3a" }}>
+      <div className="home-demo-card__preview" style={{ backgroundImage: "url(/images/demos/landscaping/hero.jpg)" }}>
+        <div className="home-demo-card__overlay" style={{ background: "linear-gradient(135deg, #4a7c3aaa, #4a7c3a55)" }}>
+          <LeafIcon size={32} />
+        </div>
+      </div>
+      <div className="home-demo-card__body">
+        <div className="home-demo-card__industry">Landscaping</div>
+        <h3 className="home-demo-card__name">GreenScape Pro</h3>
+        <p className="home-demo-card__desc">Landscaping company site with service packages, before/after gallery, seasonal tips, and free quote form.</p>
+        <div className="home-demo-card__features">
+          <span className="home-demo-card__feature">Service Packages</span>
+          <span className="home-demo-card__feature">Gallery</span>
+          <span className="home-demo-card__feature">Free Quote</span>
+          <span className="home-demo-card__feature">Seasonal Tips</span>
+        </div>
+      </div>
+    </Link>
+    <Link to="/demos/hvac/" className="home-demo-card" style={{ "--home-demo-accent": "#e85d04" }}>
+      <div className="home-demo-card__preview" style={{ backgroundImage: "url(/images/demos/hvac/hero.jpg)" }}>
+        <div className="home-demo-card__overlay" style={{ background: "linear-gradient(135deg, #e85d04aa, #e85d0455)" }}>
+          <GearIcon size={32} />
+        </div>
+      </div>
+      <div className="home-demo-card__body">
+        <div className="home-demo-card__industry">Heating &amp; Cooling</div>
+        <h3 className="home-demo-card__name">ComfortAir</h3>
+        <p className="home-demo-card__desc">Heating and cooling site with 24/7 service calls, maintenance plans, team profiles, and financing info.</p>
+        <div className="home-demo-card__features">
+          <span className="home-demo-card__feature">Emergency Service</span>
+          <span className="home-demo-card__feature">Maintenance Plans</span>
+          <span className="home-demo-card__feature">Financing</span>
+          <span className="home-demo-card__feature">Our Team</span>
+        </div>
+      </div>
+    </Link>
   </div>
 </Section>
 
