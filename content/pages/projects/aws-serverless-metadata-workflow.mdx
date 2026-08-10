@@ -1,0 +1,121 @@
+---
+title: "AWS Serverless Metadata Workflow"
+slug: "/projects/aws-serverless-metadata-workflow"
+---
+
+import { Section, Card, AnchorNav, Link } from "../../../src/ui";
+
+<Section
+  eyebrow="Project Write-up"
+  title="AWS Serverless Metadata Workflow · Reliable metadata processing without servers"
+  description="An event-driven AWS pipeline that turns S3 uploads into normalized DynamoDB records through a Python Lambda, with deterministic identity, duplicate-safe writes, failure routing, monitoring, infrastructure as code, and automated tests."
+/>
+
+<AnchorNav
+  items={[
+    { id: "overview", label: "Problem" },
+    { id: "approach", label: "Architecture" },
+    { id: "reliability", label: "Reliability" },
+    { id: "role", label: "My Role" },
+    { id: "evidence", label: "Evidence" },
+    { id: "artifacts", label: "Tech Stack" },
+  ]}
+/>
+
+<Section id="overview" eyebrow="Problem" title="File uploads need a reliable metadata trail">
+  <p>An object landing in storage is only the start of a workflow. Downstream systems need a consistent record of where the object lives, its type, size, checksum, and upload time. The processor also has to handle URL-encoded object keys, repeated event delivery, retries, and failed invocations without silently producing duplicate or missing records.</p>
+  <p>The goal was to build that processing path with managed AWS services, keep the runtime small, and make the operational behavior inspectable through tests, alarms, and documented recovery procedures.</p>
+</Section>
+
+<Section id="approach" eyebrow="Architecture" title="S3 events become normalized DynamoDB records">
+  <p>An Amazon S3 object-created event invokes a Python 3.12 Lambda function. The handler validates the event, URL-decodes the object key, and calls <code>HeadObject</code> to retrieve metadata without downloading or parsing the file body. It then normalizes that information into a DynamoDB record containing the bucket, key, size, content type, ETag, timestamps, and source details.</p>
+  <div className="grid-two">
+    <Card>
+      <h3 className="feature-card__title">Event and data path</h3>
+      <ol className="feature-list">
+        <li>A file is uploaded to the configured S3 bucket.</li>
+        <li>S3 publishes an object-created event to Lambda.</li>
+        <li>Lambda validates the event and retrieves object headers.</li>
+        <li>A deterministic SHA-256 record ID is generated from stable object identity fields.</li>
+        <li>DynamoDB stores the normalized record using a conditional write.</li>
+      </ol>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">Why this design</h3>
+      <ul className="feature-list">
+        <li>No always-on application server to provision or maintain</li>
+        <li>No file-body download when metadata alone is required</li>
+        <li>Deterministic identity makes repeated event delivery predictable</li>
+        <li>AWS SAM keeps infrastructure reviewable and reproducible</li>
+        <li>Least-privilege IAM limits the function to the resources it needs</li>
+      </ul>
+    </Card>
+  </div>
+</Section>
+
+<Section id="reliability" eyebrow="Reliability" title="Duplicate delivery and failures are designed into the workflow">
+  <p>AWS event delivery is asynchronous, so retries and duplicates are normal operating conditions—not edge cases to ignore. The workflow creates a deterministic <code>RecordId</code> and uses DynamoDB's <code>attribute_not_exists(RecordId)</code> condition so a repeated event does not create a second metadata row.</p>
+  <div className="grid-two">
+    <Card>
+      <h3 className="feature-card__title">Failure handling</h3>
+      <ul className="feature-list">
+        <li>Two asynchronous retry attempts</li>
+        <li>One-hour maximum event age</li>
+        <li>Encrypted SQS destination for exhausted failures</li>
+        <li>Documented queue inspection and redrive procedure</li>
+      </ul>
+    </Card>
+    <Card>
+      <h3 className="feature-card__title">Operational visibility</h3>
+      <ul className="feature-list">
+        <li>CloudWatch alarms for Lambda errors and throttles</li>
+        <li>An alarm for messages visible in the failure queue</li>
+        <li>Optional SNS notifications for operators</li>
+        <li>Structured logs with request and object identifiers</li>
+      </ul>
+    </Card>
+  </div>
+</Section>
+
+<Section id="role" eyebrow="My Role" title="From internship architecture to a public, independently verifiable implementation">
+  <p>I originally built the workflow architecture during an AWS Support Engineering internship in isolated training and project environments. I later reconstructed and expanded it as this public repository so the design, code quality, tests, infrastructure, and operational decisions could be reviewed directly.</p>
+  <ul className="feature-list">
+    <li>Designed the event-driven S3, Lambda, and DynamoDB data path</li>
+    <li>Implemented the Python handler and deterministic idempotency strategy</li>
+    <li>Defined the AWS resources, permissions, encryption, and retention behavior in SAM</li>
+    <li>Added retry handling, the SQS failure destination, alarms, and optional notifications</li>
+    <li>Built unit tests for success, malformed events, duplicate delivery, and AWS failures</li>
+    <li>Created CI checks, architecture documentation, deployment guidance, and an operator runbook</li>
+  </ul>
+  <p>The public repository contains no confidential Amazon source code, customer data, production account information, or support-access material. Its GitHub Pages presentation is a separate documentation site; it does not claim that a live AWS stack is currently attached to the page.</p>
+</Section>
+
+<Section id="evidence" eyebrow="Evidence" title="Code, tests, infrastructure, and operations are open for review">
+  <p>The repository had 114 commits when this write-up was prepared. Its August 3, 2026 verification report records 11 passing tests with 100% statement and branch coverage. The continuous-integration workflow runs Python compilation, Ruff linting, branch-coverage tests, static-site validation, SAM validation, and a SAM build.</p>
+  <ul className="feature-list">
+    <li><strong>Live project:</strong> <Link to="https://bradleymatera.github.io/AWS-Serverless-Metadata-Workflow/" external>Explore the architecture, implementation, and verification evidence</Link></li>
+    <li><strong>GitHub repository:</strong> <Link to="https://github.com/BradleyMatera/AWS-Serverless-Metadata-Workflow" external>Review the source, SAM template, tests, workflows, diagrams, and documentation</Link></li>
+    <li><strong>Runtime:</strong> Python 3.12 on ARM64 with 256 MB memory and a 30-second timeout</li>
+    <li><strong>Data protection:</strong> S3 and DynamoDB encryption, S3 versioning and public-access blocking, plus DynamoDB point-in-time recovery</li>
+    <li><strong>Deployment model:</strong> AWS SAM and CloudFormation with retained stateful resources</li>
+    <li><strong>Honest limitation:</strong> The public implementation reconstructs and expands the original architecture; it is not a release of internal Amazon code or a currently connected production AWS account.</li>
+  </ul>
+</Section>
+
+<Section id="artifacts" eyebrow="Tech Stack" title="Technologies used">
+  <div className="project-card__stack">
+    <span>Amazon S3</span>
+    <span>AWS Lambda</span>
+    <span>Amazon DynamoDB</span>
+    <span>Amazon SQS</span>
+    <span>Amazon CloudWatch</span>
+    <span>Amazon SNS</span>
+    <span>AWS SAM</span>
+    <span>CloudFormation</span>
+    <span>Python 3.12</span>
+    <span>boto3</span>
+    <span>pytest</span>
+    <span>Ruff</span>
+    <span>GitHub Actions</span>
+  </div>
+</Section>

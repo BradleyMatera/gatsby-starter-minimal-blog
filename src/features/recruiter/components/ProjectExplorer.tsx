@@ -20,6 +20,23 @@ type Project = {
 
 const PROJECTS: Project[] = [
   {
+    id: "aws-metadata-workflow",
+    name: "AWS Serverless Metadata Workflow",
+    tagline: "Event-driven metadata pipeline — S3, Lambda, DynamoDB, retries, monitoring",
+    category: "Cloud",
+    description:
+      "A public reconstruction and expansion of an architecture I built during an AWS Support Engineering internship. S3 uploads invoke a Python Lambda that normalizes object metadata and writes it to DynamoDB with deterministic identity and duplicate-safe conditional logic. AWS SAM defines retries, an encrypted SQS failure destination, CloudWatch alarms, and least-privilege infrastructure.",
+    tech: ["AWS Lambda", "Amazon S3", "DynamoDB", "SQS", "CloudWatch", "AWS SAM", "Python", "GitHub Actions"],
+    metrics: [
+      { label: "Tests", value: "11" },
+      { label: "Coverage", value: "100%" },
+      { label: "Commits", value: "114" },
+    ],
+    github: "https://github.com/BradleyMatera/AWS-Serverless-Metadata-Workflow",
+    demo: "https://bradleymatera.github.io/AWS-Serverless-Metadata-Workflow/",
+    caseStudy: "/projects/aws-serverless-metadata-workflow/",
+  },
+  {
     id: "car-match",
     name: "Car-Match",
     tagline: "Full-stack community MVP — profiles, forums, events, messaging",
@@ -195,7 +212,7 @@ const PROJECTS: Project[] = [
   },
 ];
 
-const CATEGORIES = ["All", "Full-Stack", "Frontend", "AI Systems", "Open Source", "Graphics", "Education", "Tools", "Systems"];
+const CATEGORIES = ["All", "Cloud", "Full-Stack", "Frontend", "AI Systems", "Open Source", "Graphics", "Education", "Tools", "Systems"];
 
 const ProjectExplorer: React.FC = () => {
   const [activeProject, setActiveProject] = React.useState<string | null>(null);
@@ -440,7 +457,7 @@ const ProjectExplorer: React.FC = () => {
                     style={{ padding: "0.5rem 1rem", fontSize: "0.8125rem" }}
                     onClick={(e) => e.stopPropagation()}
                   >
-                    Build Post →
+                    Write-up →
                   </a>
                 )}
                 {project.demo && (

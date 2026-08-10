@@ -1,7 +1,7 @@
 ---
 title: Projects
 slug: "/projects"
-description: "Project write-ups by Bradley Matera — Car-Match, ProjectHub, Interactive Pokédex, CIRIS AI, Convo-AI, Triangle Shader Lab, SecureLearn LMS, CheeseMath, AnimalSounds, and OBJ Parser. Full-stack web development, AI systems, graphics, and systems programming with real GitHub repos."
+description: "Project write-ups by Bradley Matera covering AWS serverless architecture, full-stack web development, AI systems, graphics, education, and systems programming—with live demos and verifiable GitHub repositories."
 ---
 
 import { Link } from "gatsby"
@@ -14,6 +14,19 @@ import { ProjectCard } from "../../../src/features/projects/components"
 Each project below is a write-up of what I built, why, the tech stack, and what I learned. These aren't inflated case studies — they're honest notes on real applications with real GitHub repos you can verify. I include what worked, what didn't, and what I'd do differently.
 
 <div className="project-grid">
+
+<ProjectCard
+  title="AWS Serverless Metadata Workflow"
+  meta="Event-driven AWS pipeline — S3, Lambda, DynamoDB, retries, and monitoring"
+  summary="A public reconstruction and expansion of an architecture I built during an AWS Support Engineering internship. S3 uploads invoke a Python Lambda that reads object metadata, creates a deterministic record ID, and writes to DynamoDB with duplicate-safe conditional logic. The SAM stack adds retries, an encrypted SQS failure destination, CloudWatch alarms, and CI-backed tests."
+  stack={["AWS Lambda", "Amazon S3", "DynamoDB", "SQS", "CloudWatch", "AWS SAM", "Python", "GitHub Actions"]}
+  metrics={["Tests: 11", "Coverage: 100%", "Commits: 114"]}
+  links={[
+    { label: "AWS workflow write-up", href: "/projects/aws-serverless-metadata-workflow/", variant: "primary" },
+    { label: "GitHub", href: "https://github.com/BradleyMatera/AWS-Serverless-Metadata-Workflow", external: true },
+    { label: "Live project", href: "https://bradleymatera.github.io/AWS-Serverless-Metadata-Workflow/", external: true }
+  ]}
+/>
 
 <ProjectCard
   title="Car-Match"

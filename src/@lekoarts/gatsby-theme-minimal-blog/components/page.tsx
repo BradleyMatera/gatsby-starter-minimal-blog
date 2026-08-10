@@ -78,6 +78,16 @@ export const Head: HeadFC<MBPageProps> = ({ data: { page } }) => {
           "Project write-ups, shipped demos, and proof of work from Bradley Matera for Durand, Davis, and nearby Northwest Illinois communities.",
       }),
     },
+    "/projects/aws-serverless-metadata-workflow/": {
+      seoTitle: "AWS Serverless Metadata Workflow | Bradley Matera",
+      seoDescription:
+        "AWS serverless project write-up: S3 uploads trigger a tested Python Lambda that stores normalized metadata in DynamoDB with retries and monitoring.",
+      breadcrumbs: [
+        { name: "Home", path: "/" },
+        { name: "Projects", path: "/projects/" },
+        { name: "AWS Serverless Metadata Workflow", path: "/projects/aws-serverless-metadata-workflow/" },
+      ],
+    },
     "/contact/": {
       seoTitle: "Contact Bradley Matera, Web Developer in Durand and Northwest Illinois",
       seoDescription:
