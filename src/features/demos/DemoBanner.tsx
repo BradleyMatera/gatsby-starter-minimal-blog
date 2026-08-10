@@ -24,7 +24,7 @@ const DemoBanner: React.FC<DemoBannerProps> = ({
   backLabel = "All Demos",
 }) => {
   return (
-    <div className="demo-banner" role="banner" aria-label="Demo notification">
+    <div className="demo-banner" role="banner" aria-label={`${industry} demo notification`}>
       <div className="demo-banner__inner">
         <Link to={backHref} className="demo-banner__back">
           <ArrowLeftIcon size={16} />

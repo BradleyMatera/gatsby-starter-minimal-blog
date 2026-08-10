@@ -115,17 +115,34 @@ const VinLookup: React.FC = () => {
 };
 
 const AutoRepairDemo: React.FC = () => (
-  <DemoLayout demoName="Northside Auto Repair" industry="Auto Repair" themeColor="#ff6b1a" designSystem="garage">
-    {/* Hero with real mechanic photo */}
-    <section className="demo-hero" style={{ backgroundImage: "url(/images/demos/auto-repair/hero.jpg)" }}>
-      <div className="demo-hero__inner">
-        <span className="demo-hero__tagline">Independent Auto Repair · Rockford Since 2008</span>
-        <h1 className="demo-hero__title">Northside Auto Repair</h1>
-        <p className="demo-hero__subtitle">Fictional demo of a neighborhood auto repair shop. Transparent estimates, written warranties, and ASE-certified technicians — for cars, trucks, and SUVs.</p>
+  <DemoLayout demoName="Northside Auto Repair" industry="Auto Repair" themeColor="#ff5a2d" designSystem="garage" pageClassName="demo-flagship demo-flagship--auto">
+    <nav className="flagship-nav auto-nav" aria-label="Northside Auto Repair navigation">
+      <a className="flagship-nav__brand" href="#auto-top" aria-label="Northside Auto Repair home">
+        <span className="auto-mark" aria-hidden="true">N</span>
+        <span><strong>Northside</strong><small>Independent auto repair</small></span>
+      </a>
+      <div className="flagship-nav__links">
+        <a href="#services">Service menu</a>
+        <a href="#book">Appointments</a>
+        <a href="#book" className="demo-btn demo-btn--primary">Book service</a>
+      </div>
+    </nav>
+
+    <section className="auto-hero" id="auto-top">
+      <div className="auto-hero__copy">
+        <p className="flagship-eyebrow">Rockford · Independent since 2008 · Concept shop</p>
+        <h1>Know what is wrong.<br /><span>Know what it costs.</span></h1>
+        <p className="auto-hero__lede">Diagnostics explained in plain language, estimates in writing, and repairs documented before the keys come back to you.</p>
         <div className="demo-hero__actions">
-          <a href="#book" className="demo-btn demo-btn--primary">Book Appointment</a>
-          <a href="tel:8155550321" className="demo-btn demo-btn--ghost"><PhoneIcon size={20} /> (815) 555-0321</a>
+          <a href="#book" className="demo-btn demo-btn--primary">Book an inspection</a>
+          <a href="tel:8155550321" className="demo-btn demo-btn--ghost"><PhoneIcon size={19} /> (815) 555-0321</a>
         </div>
+        <ul className="auto-hero__proof"><li>Written estimate</li><li>Digital inspection</li><li>Warranty documented</li></ul>
+      </div>
+      <div className="auto-hero__visual">
+        <img src="/images/demos/auto-repair/hero.jpg" alt="Automotive technician inspecting a vehicle in a dark service bay" />
+        <div className="auto-hero__diag"><span>Bay 03 / diagnostic</span><strong>Check-engine intake</strong><small>Scan · test · explain · authorize</small></div>
+        <div className="auto-hero__line" aria-hidden="true" />
       </div>
     </section>
 
@@ -378,7 +395,7 @@ const AutoRepairDemo: React.FC = () => (
             <div className="demo-form__field"><label className="demo-form__label" htmlFor="appt-email">Email</label><input id="appt-email" className="demo-form__input" type="email" placeholder="you@example.com" /></div>
           </div>
           <div className="demo-form__field"><label className="demo-form__label" htmlFor="appt-problem">Describe the Problem</label><input id="appt-problem" className="demo-form__input" type="text" placeholder="e.g. Brakes squeaking when stopping" /></div>
-          <button type="button" className="demo-form__submit">Request Appointment</button>
+          <button type="button" className="demo-form__submit" aria-live="polite" onClick={(event) => { event.currentTarget.textContent = "Demo request ready — no data sent"; }}>Request Appointment</button>
         </div>
       </div>
     </section>

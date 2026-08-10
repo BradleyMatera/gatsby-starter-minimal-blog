@@ -102,17 +102,34 @@ const StarRating: React.FC = () => (
 );
 
 const BeautySalonDemo: React.FC = () => (
-  <DemoLayout demoName="Bella Vista Salon" industry="Beauty Salon" themeColor="#d63384" designSystem="soft">
-    {/* Hero with real salon photo */}
-    <section className="demo-hero" style={{ backgroundImage: "url(/images/demos/beauty-salon/hero.jpg)" }}>
-      <div className="demo-hero__inner">
-        <span className="demo-hero__tagline">Hair · Color · Nails · Skin · Rockford</span>
-        <h1 className="demo-hero__title">Bella Vista Salon</h1>
-        <p className="demo-hero__subtitle">Fictional demo of a full-service salon. Haircuts, color, nails, facials, and bridal styling — with a transparent menu and easy online booking.</p>
+  <DemoLayout demoName="Bella Vista Salon" industry="Beauty Salon" themeColor="#9b315d" designSystem="soft" pageClassName="demo-flagship demo-flagship--salon">
+    <nav className="flagship-nav salon-nav" aria-label="Bella Vista Salon navigation">
+      <a className="flagship-nav__brand" href="#salon-top" aria-label="Bella Vista Salon home">
+        <span className="salon-mark" aria-hidden="true">BV</span>
+        <span><strong>Bella Vista</strong><small>Hair · skin · nails</small></span>
+      </a>
+      <div className="flagship-nav__links">
+        <a href="#services">Services</a>
+        <a href="#book">Artists</a>
+        <a href="#book" className="demo-btn demo-btn--primary">Book a visit</a>
+      </div>
+    </nav>
+
+    <section className="salon-hero" id="salon-top">
+      <div className="salon-hero__copy">
+        <p className="flagship-eyebrow">Color · Cuts · Skin · Nails · Rockford</p>
+        <h1>Feel like<br /><em>yourself,</em><br />beautifully.</h1>
+        <p className="salon-hero__lede">Considered color, modern cuts, polished nails, and restorative skin services in a warm studio that never rushes the consultation.</p>
         <div className="demo-hero__actions">
-          <a href="#book" className="demo-btn demo-btn--primary">Book Online</a>
-          <a href="#services" className="demo-btn demo-btn--ghost">View Services</a>
+          <a href="#book" className="demo-btn demo-btn--primary">Book your visit</a>
+          <a href="#services" className="demo-btn demo-btn--ghost">Explore services</a>
         </div>
+        <div className="salon-hero__note"><span>New guest ritual</span><strong>Consultation included</strong><small>We plan the result before the service begins.</small></div>
+      </div>
+      <div className="salon-hero__visual">
+        <img className="salon-hero__main" src="/images/demos/beauty-salon/hero.jpg" alt="Stylist consulting with a client in a modern salon" />
+        <img className="salon-hero__detail" src="/images/demos/beauty-salon/hair-after.jpg" alt="Finished dimensional hair color and styling" />
+        <div className="salon-hero__seal" aria-hidden="true">B V<br />Studio</div>
       </div>
     </section>
 
@@ -360,7 +377,7 @@ const BeautySalonDemo: React.FC = () => (
                   <select id="salon-time" className="demo-form__select"><option>9:00 AM</option><option>10:00 AM</option><option>11:00 AM</option><option>1:00 PM</option><option>2:00 PM</option><option>3:00 PM</option><option>4:00 PM</option><option>5:00 PM</option><option>6:00 PM</option><option>7:00 PM</option></select>
                 </div>
               </div>
-              <button type="button" className="demo-booking-widget__find">Book Appointment</button>
+              <button type="button" className="demo-booking-widget__find" aria-live="polite" onClick={(event) => { event.currentTarget.textContent = "Demo appointment selected"; }}>Book Appointment</button>
               <div className="demo-booking-widget__note">Mock Vagaro widget. This form does not submit or check real availability. Production sites embed the real Vagaro, Square Appointments, or similar booking widget for live scheduling and text reminders.</div>
             </div>
           </div>

@@ -78,13 +78,30 @@ const StarRating: React.FC = () => (
 );
 
 const RealEstateDemo: React.FC = () => (
-  <DemoLayout demoName="Rockford Heritage Realty" industry="Real Estate" themeColor="#b8943f" designSystem="luxury">
-    {/* Hero with real home photo */}
-    <section className="demo-hero" style={{ backgroundImage: "url(/images/demos/real-estate/hero.jpg)", paddingBottom: "5rem" }}>
-      <div className="demo-hero__inner">
-        <span className="demo-hero__tagline">Local Rockford Real Estate · Demo Website</span>
-        <h1 className="demo-hero__title">Find Your Next Home</h1>
-        <p className="demo-hero__subtitle">Fictional demo of a Rockford-area real estate brokerage. Sample listings, agent profiles, and neighborhood snapshots are illustrative. A production site connects to a live MLS feed.</p>
+  <DemoLayout demoName="Rockford Heritage Realty" industry="Real Estate" themeColor="#ad7f3a" designSystem="luxury" pageClassName="demo-flagship demo-flagship--realty">
+    <nav className="flagship-nav realty-nav" aria-label="Rockford Heritage Realty navigation">
+      <a className="flagship-nav__brand" href="#realty-top" aria-label="Rockford Heritage Realty home">
+        <span className="realty-mark" aria-hidden="true">RH</span>
+        <span><strong>Rockford Heritage</strong><small>Realty · Northern Illinois</small></span>
+      </a>
+      <div className="flagship-nav__links">
+        <a href="#listings">Properties</a>
+        <a href="#listings">Neighborhoods</a>
+        <a href="#listings" className="demo-btn demo-btn--primary">Begin a search</a>
+      </div>
+    </nav>
+
+    <section className="realty-hero" id="realty-top">
+      <div className="realty-hero__image">
+        <img src="/images/demos/real-estate/hero.jpg" alt="Large Rockford-area home framed by mature landscaping" />
+        <span>Illustrative residence · Rockford, Illinois</span>
+      </div>
+      <div className="realty-hero__copy">
+        <p className="flagship-eyebrow">Local representation · Thoughtful search</p>
+        <h1>A home is not<br />a filter result.</h1>
+        <p>It is a street, a school run, a future renovation, and a monthly number that has to make sense. We bring local context to every showing and every offer.</p>
+        <a href="#listings" className="demo-btn demo-btn--primary"><SearchIcon size={18} /> Explore sample homes</a>
+        <div className="realty-hero__edition"><span>Market note / 01</span><strong>Start with how you want to live.</strong><small>Then let price, place, and timing shape the shortlist.</small></div>
       </div>
     </section>
 
@@ -107,7 +124,7 @@ const RealEstateDemo: React.FC = () => (
           <label className="demo-form__label" htmlFor="search-beds">Bedrooms</label>
           <select id="search-beds" className="demo-form__select"><option>Any</option><option>2+</option><option>3+</option><option>4+</option><option>5+</option></select>
         </div>
-        <button type="button" className="demo-form__submit" style={{ width: "auto", padding: "0.75rem 1.5rem", margin: 0, display: "flex", alignItems: "center", gap: "0.5rem" }}><SearchIcon size={18} /> Search</button>
+        <button type="button" className="demo-form__submit" aria-live="polite" onClick={(event) => { event.currentTarget.textContent = "6 sample homes found"; }} style={{ width: "auto", padding: "0.75rem 1.5rem", margin: 0, display: "flex", alignItems: "center", gap: "0.5rem" }}><SearchIcon size={18} /> Search</button>
       </div>
     </div>
 

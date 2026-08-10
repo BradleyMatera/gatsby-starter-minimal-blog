@@ -115,17 +115,34 @@ const StarRating: React.FC = () => (
 );
 
 const LandscapingDemo: React.FC = () => (
-  <DemoLayout demoName="GreenScape Pro" industry="Landscaping" themeColor="#2f5a20" designSystem="organic">
-    {/* Hero with real garden photo */}
-    <section className="demo-hero" style={{ backgroundImage: "url(/images/demos/landscaping/hero.jpg)" }}>
-      <div className="demo-hero__inner">
-        <span className="demo-hero__tagline">Design · Build · Maintain · Northern Illinois</span>
-        <h1 className="demo-hero__title">GreenScape Pro</h1>
-        <p className="demo-hero__subtitle">A fictional design-build-maintain landscaping company for established Northern Illinois homes. Hardscapes, gardens, seasonal care, and snow removal — planned, installed, and maintained by the same team.</p>
+  <DemoLayout demoName="GreenScape Pro" industry="Landscaping" themeColor="#cb5b2d" designSystem="organic" pageClassName="demo-flagship demo-flagship--landscape">
+    <nav className="flagship-nav landscape-nav" aria-label="GreenScape Pro navigation">
+      <a className="flagship-nav__brand" href="#landscape-top" aria-label="GreenScape Pro home">
+        <span className="landscape-mark" aria-hidden="true"><LeafIcon size={25} /></span>
+        <span><strong>GreenScape</strong><small>Design · build · maintain</small></span>
+      </a>
+      <div className="flagship-nav__links">
+        <a href="#gallery">Projects</a>
+        <a href="#quote">Process</a>
+        <a href="#quote" className="demo-btn demo-btn--primary">Plan my yard</a>
+      </div>
+    </nav>
+
+    <section className="landscape-hero" id="landscape-top">
+      <div className="landscape-hero__copy">
+        <p className="flagship-eyebrow">Outdoor rooms · Planting · Seasonal care</p>
+        <h1>Make the outside<br /><span>feel like home.</span></h1>
+        <p className="landscape-hero__lede">Thoughtful landscapes for Northern Illinois homes—from the first site walk to the final stone, planting bed, and seasonal visit.</p>
         <div className="demo-hero__actions">
-          <a href="#quote" className="demo-btn demo-btn--primary">Get a Free Quote</a>
-          <a href="#gallery" className="demo-btn demo-btn--ghost">View Our Work</a>
+          <a href="#quote" className="demo-btn demo-btn--primary">Start a project</a>
+          <a href="#gallery" className="demo-btn demo-btn--ghost">See transformations</a>
         </div>
+        <div className="landscape-hero__proof"><strong>One accountable crew.</strong><span>Design, installation, and care under one roof.</span></div>
+      </div>
+      <div className="landscape-hero__visual">
+        <img className="landscape-hero__main" src="/images/demos/landscaping/hero.jpg" alt="Designed residential garden with shaped hedges and layered planting" />
+        <img className="landscape-hero__detail" src="/images/demos/landscaping/patio.jpg" alt="Finished stone patio and outdoor living space" />
+        <div className="landscape-hero__note"><span>Project 014</span><strong>Garden / hardscape</strong><small>Concept portfolio · Northern Illinois</small></div>
       </div>
     </section>
 

@@ -295,21 +295,63 @@ const ServiceRequestForm: React.FC = () => {
 };
 
 const AgricultureDemo: React.FC = () => (
-  <DemoLayout demoName="Kishwaukee Valley Farm Services" industry="Agriculture / Farm Supply" themeColor="#2f5a20" designSystem="organic">
-    <section className="demo-hero" style={{ backgroundImage: "url(/images/demos/agriculture/hero.jpg)" }}>
-      <div className="demo-hero__inner">
-        <span className="demo-hero__tagline">Independent Equipment Service, Parts & Used Equipment · Kishwaukee Valley</span>
-        <h1 className="demo-hero__title">Kishwaukee Valley Farm Services</h1>
-        <p className="demo-hero__subtitle">Fictional demo of a farm-equipment dealer serving the Kishwaukee Valley. On-site repair, parts counter, and used-equipment inventory — with transparent service status and seasonal checklists.</p>
+  <DemoLayout
+    demoName="Kishwaukee Valley Farm Services"
+    industry="Agriculture / Farm Supply"
+    themeColor="#843717"
+    designSystem="organic"
+    pageClassName="demo-flagship demo-flagship--agriculture"
+  >
+    <nav className="flagship-nav ag-nav" aria-label="Kishwaukee Valley Farm Services navigation">
+      <a className="flagship-nav__brand" href="#field-top" aria-label="Kishwaukee Valley Farm Services home">
+        <span className="ag-mark" aria-hidden="true">KV</span>
+        <span><strong>Kishwaukee Valley</strong><small>Farm Services · Since 1972*</small></span>
+      </a>
+      <div className="flagship-nav__links">
+        <a href="#services">Service</a>
+        <a href="#inventory">Equipment</a>
+        <a href="#product-categories">Parts</a>
+        <a href="#service-request" className="demo-btn demo-btn--primary">Request service</a>
+      </div>
+    </nav>
+
+    <section className="ag-hero" id="field-top">
+      <div className="ag-hero__copy">
+        <p className="flagship-eyebrow">Independent equipment support / Kishwaukee Valley / Concept demo</p>
+        <h1>Keep the<br /><em>season</em> moving.</h1>
+        <p className="ag-hero__lede">Parts at the counter. A technician in the field. Used iron you can inspect before it works your acres. One practical place for the decisions that cannot wait.</p>
         <div className="demo-hero__actions">
-          <a href="tel:8155550630" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0630</a>
-          <a href="#services" className="demo-btn demo-btn--ghost">View Services</a>
+          <a href="#service-request" className="demo-btn demo-btn--primary">Request field service</a>
+          <a href="#inventory" className="demo-btn demo-btn--ghost">Browse equipment</a>
         </div>
+        <p className="ag-hero__phone"><span>Season support line</span><a href="tel:8155550630"><PhoneIcon size={17} /> (815) 555-0630</a></p>
+      </div>
+      <div className="ag-hero__collage">
+        <figure className="ag-hero__main-image">
+          <img src="/images/demos/agriculture/equipment-lot.jpg" alt="Farm equipment lined up at a rural Illinois dealership" />
+          <figcaption>Used equipment / illustrative inventory</figcaption>
+        </figure>
+        <figure className="ag-hero__inset">
+          <img src="/images/demos/agriculture/farmer-1.jpg" alt="Farmer reviewing field conditions beside a crop field" />
+        </figure>
+        <div className="ag-hero__field-note">
+          <span>Field note / 05:40</span>
+          <strong>Planting window</strong>
+          <p>Service dispatch shown as open for this fictional seasonal concept.</p>
+        </div>
+        <div className="ag-hero__sun" aria-hidden="true" />
       </div>
     </section>
 
-    <div className="demo-emergency-banner" style={{ background: "#3d2618", color: "#f5f5f5", borderBottom: "1px solid var(--demo-border)" }}>
-      <AlertIcon size={18} /> <strong>Demo website:</strong> Kishwaukee Valley Farm Services is a fictional business concept created by Bradley Matera. Team, reviews, images, inventory, and interactive features are illustrative.
+    <div className="ag-season-strip" aria-label="Illustrative seasonal service snapshot">
+      <p><span>Now in the valley</span><strong>Pre-season inspection</strong></p>
+      <p><span>Parts counter</span><strong>Mon–Sat / 6–6*</strong></p>
+      <p><span>Field dispatch</span><strong>Illustrative availability</strong></p>
+      <p><span>Inventory</span><strong>12 sample listings</strong></p>
+    </div>
+
+    <div className="demo-emergency-banner ag-disclosure">
+      <AlertIcon size={18} /> <strong>Concept demonstration:</strong> Kishwaukee Valley Farm Services is fictional. Team, reviews, dates, inventory, hours, and interactive features are illustrative.
     </div>
 
     <section className="demo-section demo-section--alt">
@@ -414,7 +456,7 @@ const AgricultureDemo: React.FC = () => (
       </div>
     </div>
 
-    <section className="demo-section">
+    <section className="demo-section" id="inventory">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Equipment Inventory</h2>
         <p className="demo-section__subtitle">Illustrative sample inventory below. A production site would pull live stock from a dealer management system. Call (815) 555-0630 for current availability and to schedule a demo.</p>

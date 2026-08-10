@@ -100,17 +100,39 @@ const StarRating: React.FC = () => (
 );
 
 const RestaurantDemo: React.FC = () => (
-  <DemoLayout demoName="Riverside Grill" industry="Restaurant" themeColor="#c9a227" designSystem="elegant">
-    {/* Hero with real restaurant interior photo */}
-    <section className="demo-hero" style={{ backgroundImage: "url(/images/demos/restaurant/hero.jpg)" }}>
-      <div className="demo-hero__inner">
-        <span className="demo-hero__tagline">Live-fire Midwestern cooking on the Rock River</span>
-        <h1 className="demo-hero__title">Riverside Grill</h1>
-        <p className="demo-hero__subtitle">A modern Midwestern restaurant where hardwood fire, Great Lakes fish, and local farms meet. Dinner, drinks, and private events in downtown Rockford.</p>
+  <DemoLayout demoName="Riverside Grill" industry="Restaurant" themeColor="#d79b42" designSystem="elegant" pageClassName="demo-flagship demo-flagship--restaurant">
+    <nav className="flagship-nav restaurant-nav" aria-label="Riverside Grill navigation">
+      <a className="flagship-nav__brand" href="#restaurant-top" aria-label="Riverside Grill home">
+        <span className="restaurant-mark" aria-hidden="true">RG</span>
+        <span><strong>Riverside</strong><small>Live fire · Rockford</small></span>
+      </a>
+      <div className="flagship-nav__links">
+        <a href="#menu">Menu</a>
+        <a href="#reserve">Reservations</a>
+        <a href="#reserve" className="demo-btn demo-btn--primary">Book a table</a>
+      </div>
+    </nav>
+
+    <section className="restaurant-hero" id="restaurant-top">
+      <div className="restaurant-hero__copy">
+        <p className="flagship-eyebrow">Rockford, Illinois · Dinner Wednesday–Sunday</p>
+        <h1>Fire, river,<br /><em>and the season.</em></h1>
+        <p className="restaurant-hero__lede">A modern Midwestern dining room built around hardwood flame, Great Lakes fish, nearby farms, and the pleasure of staying for one more glass.</p>
         <div className="demo-hero__actions">
-          <a href="#menu" className="demo-btn demo-btn--primary"><UtensilsIcon size={20} /> View Menu</a>
-          <a href="#reserve" className="demo-btn demo-btn--ghost">Reserve a Table</a>
+          <a href="#menu" className="demo-btn demo-btn--primary"><UtensilsIcon size={19} /> Explore dinner</a>
+          <a href="#reserve" className="demo-btn demo-btn--ghost">Reserve a table</a>
         </div>
+        <div className="restaurant-hero__service">
+          <span>Tonight</span><strong>Dinner from 4 PM</strong><small>Bar seating held for walk-ins</small>
+        </div>
+      </div>
+      <div className="restaurant-hero__visual">
+        <img className="restaurant-hero__main" src="/images/demos/restaurant/hero.jpg" alt="Warm, lively dining room at an open-kitchen restaurant" />
+        <figure>
+          <img src="/images/demos/restaurant/steak.jpg" alt="Live-fire steak plated with seasonal vegetables" />
+          <figcaption><span>From the hearth</span><strong>Wood-grilled ribeye</strong></figcaption>
+        </figure>
+        <div className="restaurant-hero__monogram" aria-hidden="true">R</div>
       </div>
     </section>
 
@@ -413,7 +435,7 @@ const RestaurantDemo: React.FC = () => (
               <option>7+ people (call us)</option>
             </select>
           </div>
-          <button type="button" className="demo-booking-widget__find">Find a Table</button>
+          <button type="button" className="demo-booking-widget__find" aria-live="polite" onClick={(event) => { event.currentTarget.textContent = "Sample times available — demo only"; }}>Find a Table</button>
           <div className="demo-booking-widget__note">Mock OpenTable widget. Production sites embed the real OpenTable widget for live availability and booking. $1 per diner seated, no monthly fee.</div>
         </div>
       </div>

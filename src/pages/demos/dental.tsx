@@ -363,23 +363,68 @@ const ScheduleForm: React.FC = () => {
 };
 
 const DentalDemo: React.FC = () => (
-  <DemoLayout demoName="Rock River Family Dental" industry="Dental / Healthcare" themeColor="#b04e35" designSystem="dental">
-    <section className="demo-hero" style={{ backgroundImage: "url(/images/demos/dental/hero.jpg)" }}>
-      <div className="demo-hero__inner">
-        <span className="demo-hero__tagline">Gentle family dentistry · Transparent first visits · Dixon, IL</span>
-        <h1 className="demo-hero__title">Know what your first visit will cost before you sit in the chair</h1>
-        <p className="demo-hero__subtitle">Rock River Family Dental is a privately owned, modern family dental practice in Dixon, Illinois. We explain your exam, X-rays, cleaning, and out-of-pocket cost upfront — so your first visit is calm, clear, and stress-free.</p>
+  <DemoLayout
+    demoName="Rock River Family Dental"
+    industry="Dental / Healthcare"
+    themeColor="#156b68"
+    designSystem="dental"
+    pageClassName="demo-flagship demo-flagship--dental"
+  >
+    <nav className="flagship-nav dental-nav" aria-label="Rock River Family Dental navigation">
+      <a className="flagship-nav__brand" href="#dental-top" aria-label="Rock River Family Dental home">
+        <span className="dental-mark" aria-hidden="true">rr</span>
+        <span><strong>Rock River</strong><small>Family Dental · Dixon</small></span>
+      </a>
+      <div className="flagship-nav__links">
+        <a href="#dental-services">Services</a>
+        <a href="#new-patient">New patients</a>
+        <a href="#dental-team">Our team</a>
+        <a href="#schedule" className="demo-btn demo-btn--primary">Book a visit</a>
+      </div>
+    </nav>
+
+    <section className="dental-hero" id="dental-top">
+      <div className="dental-hero__copy">
+        <p className="flagship-eyebrow">Gentle family dentistry / Clear first visits / Concept demo</p>
+        <h1>Dentistry you can<br /><em>feel good</em> about.</h1>
+        <p className="dental-hero__lede">A modern family practice designed around calm explanations and clear costs. Know what your first exam, X-rays, cleaning, and estimated out-of-pocket amount look like before you sit in the chair.</p>
         <div className="demo-hero__actions">
-          <a href="tel:8155550387" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0387</a>
-          <a href="#schedule" className="demo-btn demo-btn--ghost">Schedule Online</a>
+          <a href="#schedule" className="demo-btn demo-btn--primary">Schedule online</a>
+          <a href="tel:8155550387" className="demo-btn demo-btn--ghost"><PhoneIcon size={18} /> (815) 555-0387</a>
         </div>
+        <ul className="dental-comfort-list" aria-label="Patient experience highlights">
+          <li><CheckIcon size={18} /> Transparent estimates</li>
+          <li><CheckIcon size={18} /> Anxiety-aware care</li>
+          <li><CheckIcon size={18} /> Family appointments</li>
+        </ul>
+      </div>
+      <div className="dental-hero__visual">
+        <div className="dental-hero__shape" aria-hidden="true" />
+        <figure className="dental-hero__portrait">
+          <img src="/images/demos/dental/hero.jpg" alt="Modern dental treatment chair in a bright clinical room" />
+        </figure>
+        <figure className="dental-hero__smile">
+          <img src="/images/demos/dental/happy-patient-1.jpg" alt="Smiling dental patient after a comfortable visit" />
+        </figure>
+        <div className="dental-hero__price-card">
+          <span>Illustrative new-patient exam</span>
+          <strong>$89*</strong>
+          <small>Estimate shown before booking</small>
+        </div>
+        <div className="dental-hero__welcome-card"><span aria-hidden="true">✦</span> New patients welcome*</div>
       </div>
     </section>
 
-    <div className="demo-emergency-banner"><AlertIcon size={20} /> Urgent dental concern? We reserve same-day slots when available · Call (815) 555-0387 as early as possible</div>
+    <div className="dental-care-rail" aria-label="Illustrative practice experience">
+      <p><span>01</span><strong>Clear</strong> costs before care</p>
+      <p><span>02</span><strong>Calm</strong> visits at your pace</p>
+      <p><span>03</span><strong>Complete</strong> family dentistry</p>
+    </div>
 
-    <div className="demo-emergency-banner" style={{ background: "#3d1f1f", color: "#f8e8e8", borderBottom: "1px solid var(--demo-border)" }}>
-      <DocumentIcon size={18} /> <strong>Demo website:</strong> Rock River Family Dental is a fictional business concept created by Bradley Matera. All team members, testimonials, and smile photos are illustrative.
+    <div className="demo-emergency-banner dental-urgent"><AlertIcon size={20} /> Urgent dental concern? Illustrative same-day slots may be available · Call (815) 555-0387 early</div>
+
+    <div className="demo-emergency-banner dental-disclosure">
+      <DocumentIcon size={18} /> <strong>Concept demonstration:</strong> Rock River Family Dental is fictional. Team members, testimonials, prices, availability, insurance, and smile photos are illustrative.
     </div>
 
     <section className="demo-section demo-section--alt">
@@ -433,7 +478,7 @@ const DentalDemo: React.FC = () => (
       </div>
     </section>
 
-    <section className="demo-section">
+    <section className="demo-section" id="dental-services">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Services by Need</h2>
         <p className="demo-section__subtitle">Comprehensive family dental care organized by what you're looking for.</p>
@@ -560,7 +605,7 @@ const DentalDemo: React.FC = () => (
     </section>
 
     {/* Team grid with headshots */}
-    <section className="demo-section">
+    <section className="demo-section" id="dental-team">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Meet the Team</h2>
         <p className="demo-section__subtitle">Fictional team profiles for demonstration purposes.</p>

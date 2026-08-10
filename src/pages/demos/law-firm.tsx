@@ -126,9 +126,9 @@ const DeadlineExplainer: React.FC = () => {
           </div>
         ))}
       </div>
-      <div className="demo-quote-form__success" style={{ borderColor: "#ff6b6b" }}>
+      <div className="demo-quote-form__success" style={{ borderColor: "#8b1f1f" }}>
         <AlertIcon size={32} />
-        <h3 style={{ color: "#ff6b6b" }}>Deadlines are specific to your situation</h3>
+        <h3 style={{ color: "#8b1f1f" }}>Deadlines are specific to your situation</h3>
         <p>The information above is general. Your actual deadline depends on the facts, the county, the court, and the documents involved. Do not rely on this page to calculate your deadline. If you think you may have a legal deadline, contact an attorney immediately.</p>
         <p style={{ fontSize: "0.8rem", marginTop: "0.75rem", opacity: 0.8 }}>This is an educational demo. It does not provide legal advice and does not create an attorney-client relationship.</p>
       </div>
@@ -226,21 +226,59 @@ const ConsultationForm: React.FC = () => {
 };
 
 const LawFirmDemo: React.FC = () => (
-  <DemoLayout demoName="Rock River Legal Group" industry="Law Firm / Legal Services" themeColor="#c9a227" designSystem="legal">
-    <section className="demo-hero" style={{ backgroundImage: "url(/images/demos/law-firm/office-exterior.jpg)" }}>
-      <div className="demo-hero__inner">
-        <span className="demo-hero__tagline">Business · Estate · Real Estate · Dixon, IL</span>
-        <h1 className="demo-hero__title">Outside counsel for Northern Illinois businesses and families</h1>
-        <p className="demo-hero__subtitle">Rock River Legal Group handles operating agreements, estate plans, real estate closings, and business succession — explained in plain English, with flat-fee options where possible.</p>
+  <DemoLayout
+    demoName="Rock River Legal Group"
+    industry="Law Firm / Legal Services"
+    themeColor="#9d782f"
+    designSystem="legal"
+    pageClassName="demo-flagship demo-flagship--legal"
+  >
+    <nav className="flagship-nav legal-nav" aria-label="Rock River Legal Group navigation">
+      <a className="flagship-nav__brand" href="#legal-top" aria-label="Rock River Legal Group home">
+        <span className="legal-mark" aria-hidden="true">RR</span>
+        <span><strong>Rock River</strong><small>Legal Group · Dixon, Illinois</small></span>
+      </a>
+      <div className="flagship-nav__links">
+        <a href="#practice-areas">Practice</a>
+        <a href="#attorneys">Attorneys</a>
+        <a href="#consultation">Contact</a>
+        <a href="#consultation" className="demo-btn demo-btn--primary">Request counsel</a>
+      </div>
+    </nav>
+
+    <section className="legal-hero" id="legal-top">
+      <div className="legal-hero__copy">
+        <p className="flagship-eyebrow">Business / Estate / Real estate / Concept demo</p>
+        <h1>Clear counsel.<br />Consequential moments.</h1>
+        <p className="legal-hero__lede">Outside counsel for Northern Illinois businesses and families—operating agreements, estate plans, real estate closings, and succession explained with precision and plain language.</p>
         <div className="demo-hero__actions">
-          <a href="tel:8155550915" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0915</a>
-          <a href="#consultation" className="demo-btn demo-btn--ghost">Book a Consultation</a>
+          <a href="#consultation" className="demo-btn demo-btn--primary">Request a consultation</a>
+          <a href="tel:8155550915" className="demo-btn demo-btn--ghost"><PhoneIcon size={18} /> (815) 555-0915</a>
         </div>
+        <div className="legal-hero__note">
+          <span aria-hidden="true">§</span>
+          <p><strong>Start with the decision.</strong> We organize the documents, risks, and next steps around what needs to happen—not around legal jargon.</p>
+        </div>
+      </div>
+      <div className="legal-hero__visual">
+        <img src="/images/demos/law-firm/office-exterior.jpg" alt="Historic brick office building representing a downtown Illinois law practice" />
+        <figure>
+          <img src="/images/demos/law-firm/courthouse.jpg" alt="Courthouse columns in Northern Illinois" />
+          <figcaption>Serving the Rock River Valley*</figcaption>
+        </figure>
+        <div className="legal-hero__folio">RRL / 01</div>
       </div>
     </section>
 
-    <div className="demo-emergency-banner" style={{ background: "#2b1810", color: "#e8e0d4", borderBottom: "1px solid var(--demo-border)" }}>
-      <DocumentIcon size={18} /> <strong>Demo website:</strong> Rock River Legal Group is a fictional concept. Attorneys, cases, testimonials, and credentials are illustrative. No attorney-client relationship is created.
+    <div className="legal-matter-rail" aria-label="Illustrative practice focus">
+      <span>01 <strong>Business counsel</strong></span>
+      <span>02 <strong>Estate planning</strong></span>
+      <span>03 <strong>Real estate</strong></span>
+      <span>04 <strong>Succession</strong></span>
+    </div>
+
+    <div className="demo-emergency-banner legal-disclosure">
+      <DocumentIcon size={18} /> <strong>Concept demonstration:</strong> Rock River Legal Group is fictional. Attorneys, cases, testimonials, credentials, fees, and locations are illustrative. No attorney-client relationship is created.
     </div>
 
     <section className="demo-section">
@@ -276,7 +314,7 @@ const LawFirmDemo: React.FC = () => (
       </div>
     </section>
 
-    <section className="demo-section">
+    <section className="demo-section" id="practice-areas">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Practice Areas</h2>
         <p className="demo-section__subtitle">Focused counsel for business, estate, and real estate matters across the Rock River Valley.</p>
@@ -379,7 +417,7 @@ const LawFirmDemo: React.FC = () => (
       </div>
     </section>
 
-    <section className="demo-section">
+    <section className="demo-section" id="attorneys">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Meet Our Attorneys</h2>
         <p className="demo-section__subtitle">Fictional attorney profiles for demonstration. All biographical details, bar admissions, and credentials are illustrative.</p>

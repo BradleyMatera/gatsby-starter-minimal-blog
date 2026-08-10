@@ -292,22 +292,62 @@ const QuoteForm: React.FC = () => {
 };
 
 const ManufacturingDemo: React.FC = () => (
-  <DemoLayout demoName="Sterling Metalworks" industry="Manufacturing / Metal Fabrication" themeColor="#4a6fa5" designSystem="industrial">
-    {/* Hero */}
-    <section className="demo-hero" style={{ backgroundImage: "url(/images/demos/manufacturing/hero.jpg)" }}>
-      <div className="demo-hero__inner">
-        <span className="demo-hero__tagline">Short-Run Precision Fabrication · Sterling & Rock River Valley · Demo</span>
-        <h1 className="demo-hero__title">Sterling Metalworks</h1>
-        <p className="demo-hero__subtitle">Fictional demo of a custom metal fabrication shop serving OEM and industrial maintenance teams. CNC machining, laser cutting, welding, and finishing — from prototype to production.</p>
+  <DemoLayout
+    demoName="Sterling Metalworks"
+    industry="Manufacturing / Metal Fabrication"
+    themeColor="#ff5c35"
+    designSystem="industrial"
+    pageClassName="demo-flagship demo-flagship--manufacturing"
+  >
+    <nav className="flagship-nav mfg-nav" aria-label="Sterling Metalworks navigation">
+      <a className="flagship-nav__brand" href="#top" aria-label="Sterling Metalworks home">
+        <span className="mfg-mark" aria-hidden="true">SM</span>
+        <span><strong>Sterling</strong><small>Metalworks</small></span>
+      </a>
+      <div className="flagship-nav__links">
+        <a href="#capabilities">Capabilities</a>
+        <a href="#quality">Quality</a>
+        <a href="#quote" className="demo-btn demo-btn--primary">Start an RFQ</a>
+      </div>
+    </nav>
+
+    <section className="mfg-hero" id="top">
+      <div className="mfg-hero__copy">
+        <p className="flagship-eyebrow">Precision fabrication / Sterling, Illinois / Concept demo</p>
+        <h1>Built to the drawing.<br /><span>Ready for the line.</span></h1>
+        <p className="mfg-hero__lede">A high-clarity digital front door for an exacting fabrication partner. CNC machining, laser cutting, forming, welding, and finishing—from first article to repeat production.</p>
         <div className="demo-hero__actions">
-          <a href="tel:8155550420" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0420</a>
-          <a href="#quote" className="demo-btn demo-btn--ghost">Upload a Drawing for Quote</a>
+          <a href="#quote" className="demo-btn demo-btn--primary">Upload a drawing <span aria-hidden="true">↗</span></a>
+          <a href="tel:8155550420" className="demo-btn demo-btn--ghost"><PhoneIcon size={18} /> (815) 555-0420</a>
         </div>
+        <ul className="mfg-proof-list" aria-label="Example shop capabilities">
+          <li><span>01</span> Prototype to production</li>
+          <li><span>02</span> Documented inspection</li>
+          <li><span>03</span> Midwest delivery corridor</li>
+        </ul>
+      </div>
+      <div className="mfg-hero__visual">
+        <img src="/images/demos/manufacturing/hero.jpg" alt="Welder fabricating a steel assembly in a modern metal shop" />
+        <div className="mfg-hero__crosshair" aria-hidden="true" />
+        <div className="mfg-hero__status">
+          <span>RFQ intake</span>
+          <strong><i aria-hidden="true" /> Open</strong>
+          <small>CAD · STEP · DWG · PDF</small>
+        </div>
+        <div className="mfg-hero__coordinate" aria-hidden="true">41.7886° N / 89.6962° W</div>
       </div>
     </section>
 
-    <div className="demo-emergency-banner" style={{ background: "#2a2a2e", color: "#f5f5f5", borderBottom: "1px solid var(--demo-border)" }}>
-      <AlertIcon size={18} /> <strong>Demo website:</strong> Sterling Metalworks is a fictional business concept created by Bradley Matera. Team, reviews, images, certifications, and interactive features are illustrative.
+    <div className="mfg-spec-strip" aria-label="Illustrative shop summary">
+      <div><span>01 / Envelope</span><strong>5′ × 10′ sheet</strong></div>
+      <div><span>02 / Materials</span><strong>Steel · SS · Aluminum</strong></div>
+      <div><span>03 / Typical lead</span><strong>2–3 weeks*</strong></div>
+      <div><span>04 / Inspection</span><strong>First article + final</strong></div>
+      <small>*Illustrative concept data; real capacity and lead times vary by job.</small>
+    </div>
+
+    <div className="demo-emergency-banner mfg-disclosure">
+      <AlertIcon size={18} /> <strong>Concept demonstration:</strong> Sterling Metalworks is fictional. Team, reviews, images, certifications, shop data, and interactive features are illustrative.
     </div>
 
     {/* Stats + Review Badges + Trust Badges */}
@@ -345,7 +385,7 @@ const ManufacturingDemo: React.FC = () => (
     </section>
 
     {/* Capability matrix */}
-    <section className="demo-section demo-section--alt">
+    <section className="demo-section demo-section--alt" id="capabilities">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Capability Matrix</h2>
         <p className="demo-section__subtitle">Process, materials, envelope, tolerance, and inspection method. Real capability depends on the specific machine, setup, and job.</p>
@@ -495,7 +535,7 @@ const ManufacturingDemo: React.FC = () => (
     </section>
 
     {/* Split image + text: Quality Assurance */}
-    <section className="demo-section demo-section--alt">
+    <section className="demo-section demo-section--alt" id="quality">
       <div className="demo-section__inner">
         <div className="demo-split-image-text">
           <div className="demo-split-image-text__content">

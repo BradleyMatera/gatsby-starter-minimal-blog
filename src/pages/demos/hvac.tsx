@@ -113,17 +113,34 @@ const FinancingCalculator: React.FC = () => {
 };
 
 const HvacDemo: React.FC = () => (
-  <DemoLayout demoName="ComfortAir Heating & Cooling" industry="HVAC / Home Services" themeColor="#e85d04" designSystem="industrial">
-    {/* Hero with real HVAC technician photo */}
-    <section className="demo-hero" style={{ backgroundImage: "url(/images/demos/hvac/hero.jpg)" }}>
-      <div className="demo-hero__inner">
-        <span className="demo-hero__tagline">24/7 Emergency Service · Rockford & Northwest Illinois</span>
-        <h1 className="demo-hero__title">ComfortAir Heating & Cooling</h1>
-        <p className="demo-hero__subtitle">Fictional demo of a full-service heating and cooling contractor. Emergency repairs, maintenance plans, system replacement, and indoor air quality — with clear dispatch and honest recommendations.</p>
+  <DemoLayout demoName="ComfortAir Heating & Cooling" industry="HVAC / Home Services" themeColor="#ff5a1f" designSystem="industrial" pageClassName="demo-flagship demo-flagship--hvac">
+    <nav className="flagship-nav hvac-nav" aria-label="ComfortAir navigation">
+      <a className="flagship-nav__brand" href="#hvac-top" aria-label="ComfortAir home">
+        <span className="hvac-mark" aria-hidden="true">CA</span>
+        <span><strong>ComfortAir</strong><small>Heating + cooling</small></span>
+      </a>
+      <div className="flagship-nav__links">
+        <a href="#services">Services</a>
+        <a href="tel:8155550789">24/7 dispatch</a>
+        <a href="tel:8155550789" className="demo-btn demo-btn--primary"><PhoneIcon size={17} /> Call now</a>
+      </div>
+    </nav>
+
+    <section className="hvac-hero" id="hvac-top">
+      <div className="hvac-hero__copy">
+        <p className="flagship-eyebrow">Rockford + Northwest Illinois · 24/7 concept dispatch</p>
+        <h1>Comfort<br />without the<br /><span>guesswork.</span></h1>
+        <p className="hvac-hero__lede">Clear arrival windows, straight answers, and properly sized heating and cooling systems—whether it is a no-heat call tonight or a planned replacement.</p>
         <div className="demo-hero__actions">
-          <a href="tel:8155550789" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0789</a>
-          <a href="#services" className="demo-btn demo-btn--ghost">View Services</a>
+          <a href="tel:8155550789" className="demo-btn demo-btn--primary"><PhoneIcon size={19} /> (815) 555-0789</a>
+          <a href="#services" className="demo-btn demo-btn--ghost">Explore services</a>
         </div>
+        <div className="hvac-hero__status"><i aria-hidden="true" /><span><strong>Dispatch status</strong><small>Illustrative availability · crews on call</small></span></div>
+      </div>
+      <div className="hvac-hero__visual">
+        <img src="/images/demos/hvac/hero.jpg" alt="HVAC technician diagnosing heating equipment" />
+        <div className="hvac-hero__temperature"><span>Outside</span><strong>28°</strong><small>Heat check recommended</small></div>
+        <div className="hvac-hero__ticket"><span>Service intake</span><strong>No heat?</strong><small>Call → diagnose → options → repair</small></div>
       </div>
     </section>
 

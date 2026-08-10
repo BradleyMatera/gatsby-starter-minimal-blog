@@ -14,6 +14,8 @@ type DemoLayoutProps = {
   themeColor?: string;
   /** Design system name — controls fonts, colors, border-radius, spacing */
   designSystem?: DesignSystem;
+  /** Optional page-specific class for a demo's bespoke visual system. */
+  pageClassName?: string;
 };
 
 /**
@@ -29,6 +31,7 @@ const DemoLayout: React.FC<DemoLayoutProps> = ({
   backLabel,
   themeColor,
   designSystem = "elegant",
+  pageClassName,
 }) => {
   return (
     <>
@@ -50,7 +53,7 @@ const DemoLayout: React.FC<DemoLayoutProps> = ({
         backLabel={backLabel}
       />
       <main
-        className={`demo-page demo-theme--${designSystem}`}
+        className={`demo-page demo-theme--${designSystem}${pageClassName ? ` ${pageClassName}` : ""}`}
         style={themeColor ? ({ ["--demo-accent" as string]: themeColor } as React.CSSProperties) : undefined}
       >
         {children}
