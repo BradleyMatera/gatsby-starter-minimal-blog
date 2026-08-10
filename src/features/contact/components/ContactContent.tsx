@@ -3,6 +3,22 @@ import { Section, Card, Link } from "../../../ui";
 
 const ContactContent = () => {
   const [status, setStatus] = React.useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [attribution, setAttribution] = React.useState({
+    source: "",
+    sourceCity: "",
+    landingPage: "",
+    packageInterest: "",
+  });
+
+  React.useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    setAttribution({
+      source: params.get("source") || "",
+      sourceCity: params.get("city") || "",
+      landingPage: params.get("landing") || "",
+      packageInterest: params.get("package") || "",
+    });
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -116,6 +132,10 @@ const ContactContent = () => {
             style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
             data-analytics-form="website_plan"
           >
+            <input type="hidden" name="source" value={attribution.source} />
+            <input type="hidden" name="sourceCity" value={attribution.sourceCity} />
+            <input type="hidden" name="landingPage" value={attribution.landingPage} />
+            <input type="hidden" name="packageInterest" value={attribution.packageInterest} />
             <p style={{ display: "none" }}>
               <label>Don't fill this out: <input name="bot-field" /></label>
             </p>

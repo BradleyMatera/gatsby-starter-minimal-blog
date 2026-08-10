@@ -314,7 +314,7 @@ const sendRefundEmail = async ({ to, orderId, refundDate }) => {
   return true;
 };
 
-const buildContactNotificationEmail = ({ name, business, contact, website, goal, range, launch }) => {
+const buildContactNotificationEmail = ({ name, business, contact, website, goal, range, launch, source, sourceCity, landingPage, packageInterest }) => {
   const subject = `New website plan request — ${name || business || "Unknown"}`;
   const rangeLabels = {
     "under-500": "Under $500",
@@ -343,6 +343,10 @@ Existing website: ${websiteText}
 Main goal: ${goal || "Not specified"}
 Project range: ${rangeText}
 Launch window: ${launchText}
+Source: ${source || "Direct / not specified"}
+Source city: ${sourceCity || "Not specified"}
+Landing page: ${landingPage || "Not specified"}
+Package interest: ${packageInterest || "Not specified"}
 
 Reply directly to this email or call them back.`;
 
@@ -360,6 +364,10 @@ Reply directly to this email or call them back.`;
           <tr><td style="padding: 6px 0; font-weight: bold;">Website</td><td style="padding: 6px 0;">${websiteText}</td></tr>
           <tr><td style="padding: 6px 0; font-weight: bold;">Project range</td><td style="padding: 6px 0;">${rangeText}</td></tr>
           <tr><td style="padding: 6px 0; font-weight: bold;">Launch window</td><td style="padding: 6px 0;">${launchText}</td></tr>
+          <tr><td style="padding: 6px 0; font-weight: bold;">Source</td><td style="padding: 6px 0;">${source || "Direct / not specified"}</td></tr>
+          <tr><td style="padding: 6px 0; font-weight: bold;">Source city</td><td style="padding: 6px 0;">${sourceCity || "Not specified"}</td></tr>
+          <tr><td style="padding: 6px 0; font-weight: bold;">Landing page</td><td style="padding: 6px 0;">${landingPage || "Not specified"}</td></tr>
+          <tr><td style="padding: 6px 0; font-weight: bold;">Package interest</td><td style="padding: 6px 0;">${packageInterest || "Not specified"}</td></tr>
         </table>
         <h3 style="margin: 16px 0 6px;">Main goal</h3>
         <p style="margin: 0 0 16px;">${goal || "Not specified"}</p>

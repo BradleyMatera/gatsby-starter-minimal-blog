@@ -105,8 +105,6 @@ export const buildConnectedSchema = ({
 }) => ({
   "@context": "https://schema.org",
   "@graph": [
-    personSchema,
-    websiteSchema,
     {
       "@type": "Service",
       "@id": `${SITE_URL}${path}#service`,
@@ -144,8 +142,6 @@ export const buildProfessionalServiceSchema = ({
 }) => ({
   "@context": "https://schema.org",
   "@graph": [
-    personSchema,
-    websiteSchema,
     {
       "@type": "ProfessionalService",
       "@id": `${SITE_URL}${path}#service`,

@@ -36,6 +36,10 @@ exports.handler = async (event) => {
         goal: params.get("goal") || "",
         range: params.get("range") || "",
         launch: params.get("launch") || "",
+        source: params.get("source") || "",
+        sourceCity: params.get("sourceCity") || "",
+        landingPage: params.get("landingPage") || "",
+        packageInterest: params.get("packageInterest") || "",
         "bot-field": params.get("bot-field") || "",
       };
     }
@@ -83,6 +87,10 @@ exports.handler = async (event) => {
             data.range && `Budget: ${data.range}`,
             data.launch && `Launch: ${data.launch}`,
             data.website && `Website: ${data.website}`,
+            data.source && `Source: ${data.source}`,
+            data.sourceCity && `Source city: ${data.sourceCity}`,
+            data.landingPage && `Landing page: ${data.landingPage}`,
+            data.packageInterest && `Package interest: ${data.packageInterest}`,
           ].filter(Boolean).join("\n") || `New inquiry from ${data.name} at ${data.business}`,
         }),
       });

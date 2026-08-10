@@ -92,6 +92,12 @@ The site must pass **WCAG AA** (4.5:1 normal text, 3:1 large/bold text) and **WC
 
 8. **When adding new demo elements**, calculate contrast ratios using the WCAG formula: `(max(L1, L2) + 0.05) / (min(L1, L2) + 0.05)` where L is relative luminance. Use a contrast checker tool or the script at `scripts/contrast-check.js`.
 
+9. **Preserve verified theme color fixes.** The following demo theme color values have already been adjusted to pass contrast audits and should be reused rather than reverted when modifying related themes:
+   - `garage` text-muted: `#a0a0aa`
+   - `soft` text-muted: `#7a5560`
+   - `dental` text-muted: `#5a6b5c` and accent: `#b04e35`
+   - `law-firm` inline red: `#8b1f1f`
+
 ### 9. No Synthetic Freshness Signals (CRITICAL — Read Before Adding Dates)
 
 The site must NOT emit build-date timestamps as `lastmod`, `dateModified`, or visible "Last updated" text unless a real content change occurred. The independent SEO audit (Jul 2026) flagged this as a P0 issue.

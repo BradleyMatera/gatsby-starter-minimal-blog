@@ -7,7 +7,7 @@ import { Card, Link, Section } from "../../ui";
 import { SERVICE_AREA_CITIES, CITY_IMAGES } from "../../shared/city-data";
 
 const pathname = "/services/small-business-web-design/";
-const pageTitle = "Small Business Web Design in Northwest Illinois";
+const pageTitle = "Small Business Website Packages in Northwest Illinois";
 const pageDescription =
   "Custom small business websites built from scratch. Up to 5 pages, mobile-ready, SEO-ready, contact form. Starting at $447 with 14-day builds.";
 

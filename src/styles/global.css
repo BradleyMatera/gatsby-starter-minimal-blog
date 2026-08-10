@@ -3006,6 +3006,235 @@ body {
   }
 }
 
+/* Conversion-focused local city pages */
+.city-sales-page {
+  --city-panel: var(--color-surface);
+  --city-panel-alt: var(--color-surface-alt, var(--color-surface));
+  --city-line: var(--color-border);
+}
+
+.city-sales-page .section-shell {
+  scroll-margin-top: 6rem;
+  margin-block: clamp(1.25rem, 3vw, 2.5rem);
+  padding-block: clamp(0.75rem, 2vw, 1.5rem);
+}
+
+.city-sales-hero {
+  padding-top: clamp(1.25rem, 3vw, 2.5rem);
+}
+
+.city-sales-page .hero-actions a[data-variant] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0.75rem 1.15rem;
+  border: 2px solid #052a5d;
+  border-radius: 10px;
+  font-weight: 800;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.city-sales-page .hero-actions a[data-variant="primary"] {
+  color: #ffffff;
+  background: #052a5d;
+}
+
+.city-sales-page .hero-actions a[data-variant="ghost"] {
+  color: #052a5d;
+  background: #ffffff;
+}
+
+.city-sales-page .hero-actions a[data-variant]:hover,
+.city-sales-page .hero-actions a[data-variant]:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px var(--color-shadow);
+}
+
+:root[data-theme="dark"] .city-sales-page .hero-actions a[data-variant] {
+  border-color: #68dfe6;
+}
+
+:root[data-theme="dark"] .city-sales-page .hero-actions a[data-variant="primary"] {
+  color: #041326;
+  background: #68dfe6;
+}
+
+:root[data-theme="dark"] .city-sales-page .hero-actions a[data-variant="ghost"] {
+  color: #f6fbff;
+  background: #071a33;
+}
+
+.city-sales-hero__image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 6;
+  object-fit: cover;
+  border: 1px solid var(--city-line);
+  border-radius: 18px;
+  box-shadow: 0 12px 32px var(--color-shadow);
+}
+
+.city-trust-bar {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.city-trust-bar li {
+  display: flex;
+  align-items: center;
+  min-height: 64px;
+  padding: 0.8rem 1rem;
+  color: var(--color-text);
+  background: var(--city-panel-alt);
+  border: 1px solid var(--city-line);
+  border-radius: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.city-service-grid .pkg-card,
+.city-package-grid .pkg-card,
+.city-faq-grid .pkg-card {
+  height: 100%;
+}
+
+.city-demo-proof {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  overflow: hidden;
+  background: var(--city-panel);
+  border: 1px solid var(--city-line);
+  border-radius: 18px;
+  box-shadow: 0 12px 32px var(--color-shadow);
+}
+
+.city-demo-proof > img {
+  width: 100%;
+  height: 100%;
+  min-height: 360px;
+  object-fit: cover;
+}
+
+.city-demo-proof__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+}
+
+.city-demo-proof__body h3 {
+  margin: 0.5rem 0;
+}
+
+.city-demo-proof__label {
+  color: var(--color-accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.city-package-price {
+  margin: 0 0 0.35rem;
+  color: var(--color-accent);
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+  font-weight: 800;
+}
+
+.city-terms-note,
+.city-final-cta__note {
+  margin-top: 1rem;
+  padding: 1rem;
+  color: var(--color-text);
+  background: var(--city-panel-alt);
+  border: 1px solid var(--city-line);
+  border-radius: 12px;
+}
+
+.city-process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: city-process;
+}
+
+.city-process-grid li {
+  counter-increment: city-process;
+  padding: 1rem;
+  color: var(--color-text);
+  background: var(--city-panel);
+  border: 1px solid var(--city-line);
+  border-radius: 12px;
+  line-height: 1.55;
+}
+
+.city-process-grid li::before {
+  content: counter(city-process, decimal-leading-zero);
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--color-accent);
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.city-source-list {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.city-source-list li {
+  margin: 0.55rem 0;
+}
+
+.city-source-list a {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.city-final-cta {
+  margin-bottom: clamp(2rem, 5vw, 4rem);
+  padding: clamp(1.25rem, 4vw, 2.75rem);
+  background: var(--city-panel-alt);
+  border: 1px solid var(--city-line);
+  border-radius: 20px;
+}
+
+@media (max-width: 860px) {
+  .city-trust-bar,
+  .city-process-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .city-demo-proof {
+    grid-template-columns: 1fr;
+  }
+
+  .city-demo-proof > img {
+    min-height: 240px;
+    max-height: 380px;
+  }
+}
+
+@media (max-width: 560px) {
+  .city-sales-hero__image {
+    aspect-ratio: 4 / 3;
+  }
+
+  .city-trust-bar,
+  .city-process-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Matera Digital homepage — brand-forward conversion layout */
 .u-home-hero {
   --color-surface: #ffffff;
