@@ -101,6 +101,7 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
   const coreLinks = nav.filter(item =>
     ["/", "/services", "/work", "/pricing", "/service-areas", "/about", "/contact"].includes(item.slug)
   );
+  const desktopLinks = coreLinks.filter(item => item.slug !== "/");
 
   const openDrawer = () => setMobileDrawerOpen(true);
   const closeDrawer = () => setMobileDrawerOpen(false);
@@ -143,7 +144,7 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
               <span className="vertical-nav__brand-name">Matera Digital</span>
             </Link>
             <ul className="vertical-nav__list cyber-nav__list">
-              {coreLinks.map((item) => {
+              {desktopLinks.map((item) => {
                 const label = item.title;
                 const icon = getNavIcon(item.slug);
                 const isActive = activeLink === item.slug || activeLink.startsWith(item.slug + '/');
@@ -173,19 +174,13 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
               </li>
             </ul>
             <div className="vertical-nav__actions cyber-nav__actions">
-              <Link to="/for-business/" className="vertical-nav__cta vertical-nav__cta--inline cyber-cta vertical-nav__cta--business">
-                <span className="vertical-nav__cta-icon" aria-hidden="true">
-                  <BoltIcon size={18} />
-                </span>
-                <span>For Business</span>
-              </Link>
               <a href="tel:+16083135373" className="vertical-nav__cta vertical-nav__cta--inline cyber-cta vertical-nav__phone">
                 <span className="vertical-nav__cta-icon" aria-hidden="true">
                   <PhoneIcon size={18} />
                 </span>
                 <span>(608) 313-5373</span>
               </a>
-              <a href="/contact" className="vertical-nav__cta vertical-nav__cta--inline cyber-cta">
+              <a href="/contact" className="vertical-nav__cta vertical-nav__cta--inline vertical-nav__cta--primary cyber-cta">
                 <span className="vertical-nav__cta-icon" aria-hidden="true">
                   <EmailIcon size={18} />
                 </span>

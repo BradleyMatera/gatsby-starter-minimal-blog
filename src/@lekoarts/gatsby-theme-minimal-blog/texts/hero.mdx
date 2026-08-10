@@ -6,105 +6,77 @@ import { UtensilsIcon, LeafIcon, GearIcon } from "../../../site/icons";
 
 <div className="home-snap">
   <HeroBeforeAfter
-    label="Local small-business web design"
-    title="Turn your outdated website into something customers trust."
-    subtitle="Professional websites for local businesses, with clear pricing and direct access to the person building them."
-    ctaText="Get a free website plan"
+    label="Web design for Northwest Illinois & Southern Wisconsin"
+    title="A website your customers can trust—and act on."
+    subtitle="Matera Digital builds accessible small-business websites with local SEO, straightforward pricing, and direct access to Bradley."
+    ctaText="Get my free website plan"
     ctaLink="/contact/"
-    secondaryCtaText="See website examples"
-    secondaryCtaLink="/demos/"
-    proofPoints={["Mobile-ready", "Clear pricing", "Built for leads"]}
-    rotateInterval={7000}
-    imageHeight={3600}
+    secondaryCtaText="View the transformation"
+    secondaryCtaLink="/demos/auto-repair/"
+    proofPoints={["You own the finished site", "No long-term contract", "Mobile, SEO & accessibility included"]}
+    rotateInterval={0}
+    autoAnimate={false}
+    allowVerticalScroll={false}
+    imageHeight={900}
     examples={[
       {
         id: "auto-repair",
         label: "Auto Repair",
         browserUrl: "northside-auto-repair.com",
-        beforeImage: "/assets/visuals/hero/before-after/before-auto-repair.png",
-        afterImage: "/assets/visuals/hero/before-after/after-auto-repair.png",
-        afterMobileImage: "/assets/visuals/hero/before-after/after-auto-repair-mobile.png",
+        beforeImage: "/assets/visuals/hero/before-after/before-auto-repair-fold.webp",
+        afterImage: "/assets/visuals/hero/before-after/after-auto-repair-fold.webp",
         demoLink: "/demos/auto-repair/",
-      },
-      {
-        id: "landscaping",
-        label: "Landscaping",
-        browserUrl: "greenscapepro.net",
-        beforeImage: "/assets/visuals/hero/before-after/before-landscaping.png",
-        afterImage: "/assets/visuals/hero/before-after/after-landscaping.png",
-        afterMobileImage: "/assets/visuals/hero/before-after/after-landscaping-mobile.png",
-        demoLink: "/demos/landscaping/",
-      },
-      {
-        id: "hvac",
-        label: "Heating & Cooling",
-        browserUrl: "comfortairhvac.net",
-        beforeImage: "/assets/visuals/hero/before-after/before-hvac.png",
-        afterImage: "/assets/visuals/hero/before-after/after-hvac.png",
-        afterMobileImage: "/assets/visuals/hero/before-after/after-hvac-mobile.png",
-        demoLink: "/demos/hvac/",
-      },
-      {
-        id: "restaurant",
-        label: "Restaurant",
-        browserUrl: "riversidegrillrestaurant.com",
-        beforeImage: "/assets/visuals/hero/before-after/before-restaurant.png",
-        afterImage: "/assets/visuals/hero/before-after/after-restaurant.png",
-        afterMobileImage: "/assets/visuals/hero/before-after/after-restaurant-mobile.png",
-        demoLink: "/demos/restaurant/",
-      },
-      {
-        id: "beauty-salon",
-        label: "Beauty Salon",
-        browserUrl: "bellavistasalon.com",
-        beforeImage: "/assets/visuals/hero/before-after/before-beauty-salon.png",
-        afterImage: "/assets/visuals/hero/before-after/after-beauty-salon.png",
-        afterMobileImage: "/assets/visuals/hero/before-after/after-beauty-salon-mobile.png",
-        demoLink: "/demos/beauty-salon/",
-      },
-      {
-        id: "real-estate",
-        label: "Real Estate",
-        browserUrl: "rockfordheritagerealty.com",
-        beforeImage: "/assets/visuals/hero/before-after/before-real-estate.png",
-        afterImage: "/assets/visuals/hero/before-after/after-real-estate.png",
-        afterMobileImage: "/assets/visuals/hero/before-after/after-real-estate-mobile.png",
-        demoLink: "/demos/real-estate/",
       },
     ]}
   />
 </div>
 
-<div className="evidence-strip" style={{ maxWidth: "900px", margin: "0 auto 2rem", padding: "1rem" }}>
-  <ul style={{ listStyle: "none", padding: 0, display: "flex", flexWrap: "wrap", gap: "1.5rem", justifyContent: "center", fontSize: "0.95rem" }}>
-    <li><Link to="/pricing/"><strong>Packages from $447</strong></Link></li>
-    <li aria-hidden="true">·</li>
-    <li><Link to="/service-scope/"><strong>No long-term contract</strong></Link></li>
-    <li aria-hidden="true">·</li>
-    <li><Link to="/services/"><strong>Mobile, accessibility, and SEO included</strong></Link></li>
-    <li aria-hidden="true">·</li>
-    <li><Link to="/about/"><strong>Direct access to the developer</strong></Link></li>
+<section className="home-trust-strip" aria-labelledby="home-trust-title">
+  <h2 id="home-trust-title" className="sr-only">Why work with Matera Digital</h2>
+  <div className="home-trust-strip__person">
+    <img
+      src="/brand/bradley-matera-portrait.webp"
+      alt="Bradley Matera, owner and web developer at Matera Digital"
+      width="160"
+      height="160"
+      loading="eager"
+      decoding="async"
+    />
+    <div>
+      <strong>Built directly by Bradley Matera</strong>
+      <span>Owner and web developer in Durand, Illinois</span>
+    </div>
+  </div>
+  <ul>
+    <li>
+      <strong>Clear flat-rate packages</strong>
+      <Link to="/pricing/">See exactly what is included</Link>
+    </li>
+    <li>
+      <strong>No handoffs or hidden agency layers</strong>
+      <Link to="/about/">Work directly with the developer</Link>
+    </li>
   </ul>
-</div>
+</section>
 
 <Section
-  eyebrow="What you need"
-  title="Three ways to move forward"
-  description={<p className="section-lead">Pick the path that fits your business. The details are on the next page.</p>}
-  actions={<Link data-variant="primary" to="/contact/">Get a free website plan</Link>}
+  eyebrow="Services"
+  title="Choose what your business needs"
+  description={<p className="section-lead">Start fresh, improve local visibility, or repair the site you already have.</p>}
+  actions={<Link data-variant="primary" to="/services/">Explore all services</Link>}
 >
   <div className="grid-three">
     <div className="feature-card">
       <span className="feature-card__icon">1</span>
       <h3 className="feature-card__title">A new small business website</h3>
-      <div className="feature-card__body"><p>Custom builds from $447. Mobile-ready, SEO-ready, and you own the finished work.</p></div>
+      <div className="feature-card__body"><p>A clear, accessible website designed around your services, customers, and next step.</p></div>
       <div className="card-actions"><Link data-variant="ghost" to="/services/small-business-web-design/">View web design</Link></div>
     </div>
     <div className="feature-card">
       <span className="feature-card__icon">2</span>
-      <h3 className="feature-card__title">See pricing upfront</h3>
-      <div className="feature-card__body"><p>Starter, Growth, and Lead Engine packages with no hidden fees or long-term contracts.</p></div>
-      <div className="card-actions"><Link data-variant="ghost" to="/pricing/">See full pricing</Link></div>
+      <h3 className="feature-card__title">Help local customers find you</h3>
+      <div className="feature-card__body"><p>Local SEO foundations that make your services, location, and business details easier to understand.</p></div>
+      <div className="card-actions"><Link data-variant="ghost" to="/services/local-seo/">View local SEO</Link></div>
     </div>
     <div className="feature-card">
       <span className="feature-card__icon">3</span>
@@ -118,7 +90,7 @@ import { UtensilsIcon, LeafIcon, GearIcon } from "../../../site/icons";
 <Section
   eyebrow="Examples"
   title="See what your website could look like"
-  description={<p className="section-lead">Real demo sites for local businesses. Click one to explore.</p>}
+  description={<p className="section-lead">Interactive concept websites for fictional local businesses. Click one to explore the full experience.</p>}
   actions={<Link data-variant="ghost" to="/demos/">Browse all demos</Link>}
 >
   <div className="grid-three home-demo-grid">

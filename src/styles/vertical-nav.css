@@ -271,7 +271,7 @@
 .vertical-nav--top .vertical-nav__link:hover,
 .vertical-nav--top .vertical-nav__link--active {
   background: none;
-  color: #e05a5a;
+  color: var(--color-accent, #052a5d);
   border-radius: 0;
   padding: 0.5rem 0.7rem;
   line-height: 1;
@@ -335,6 +335,23 @@
 .vertical-nav__cta--inline .vertical-nav__cta-icon {
   font-size: 1rem;
   color: currentColor;
+}
+
+.vertical-nav__cta--primary {
+  padding: 0.55rem 0.85rem;
+  border-color: #052a5d !important;
+  border-radius: 8px;
+  background: #052a5d !important;
+  color: #ffffff !important;
+  box-shadow: 0 5px 16px rgba(5, 42, 93, 0.18);
+}
+
+.vertical-nav__cta--primary:hover,
+.vertical-nav__cta--primary:focus-visible {
+  border-color: #031d43 !important;
+  background: #031d43 !important;
+  color: #ffffff !important;
+  transform: translateY(-1px);
 }
 .vertical-nav__cta--business {
   background: var(--color-accent, #6f6052) !important;
@@ -458,10 +475,48 @@
   white-space: nowrap;
 }
 
-@media (max-width: 1519px) {
+:root[data-theme="dark"] .vertical-nav__brand-name {
+  color: #f6fbff;
+}
+
+@media (max-width: 1279px) {
   .vertical-nav__brand-name {
     display: none;
   }
+}
+
+.vertical-nav--top .vertical-nav__item--style-lab .style-lab-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-text-subtle);
+  cursor: pointer;
+}
+
+.vertical-nav--top .vertical-nav__item--style-lab .style-lab-toggle:hover,
+.vertical-nav--top .vertical-nav__item--style-lab .style-lab-toggle:focus-visible {
+  border-color: #8cb8c8;
+  background: #eaf5f8;
+  color: #052a5d;
+}
+
+.vertical-nav--top .vertical-nav__item--style-lab .style-lab-toggle__label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* Navigation List */

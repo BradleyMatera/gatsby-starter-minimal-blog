@@ -8,6 +8,7 @@ The Matera Digital artwork supplied for the Google Business Profile is the visua
 - `/static/brand/matera-digital-mark.png` — transparent MD monogram for navigation
 - `/static/brand/matera-digital-icon-1024.png` — square icon master on white for favicons and installed-app icons
 - `/static/brand/matera-digital-social-1200x630.jpg` — default Open Graph and social-link preview image
+- `/static/brand/bradley-matera-portrait.webp` — optimized owner portrait for compact trust placements
 
 ## Generated browser assets
 

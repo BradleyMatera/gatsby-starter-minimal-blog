@@ -26,6 +26,10 @@ export type HeroBeforeAfterProps = {
   examples: HeroExample[];
   /** Auto-rotate interval in ms. 0 = disabled. Default 7000. */
   rotateInterval?: number;
+  /** Animate the comparison automatically until interaction. Default true. */
+  autoAnimate?: boolean;
+  /** Allow the screenshots to scroll vertically inside the comparison. Default true. */
+  allowVerticalScroll?: boolean;
   /** Image height in px (both before & after must match). Default 3600. */
   imageHeight?: number;
 };
@@ -41,20 +45,22 @@ const HeroBeforeAfter = ({
   proofPoints = [],
   examples,
   rotateInterval = 7000,
+  autoAnimate = true,
+  allowVerticalScroll = true,
   imageHeight = 3600,
 }: HeroBeforeAfterProps) => {
   const reducedMotion = useReducedMotion();
   const viewportRef = React.useRef<HTMLDivElement | null>(null);
   const phoneScrollRef = React.useRef<HTMLDivElement | null>(null);
   const [activeIdx, setActiveIdx] = React.useState(0);
-  const [pos, setPos] = React.useState(88); // horizontal divider 0-100 — start with bad site visible
+  const [pos, setPos] = React.useState(autoAnimate ? 88 : 50); // horizontal divider 0-100
   const [scrollY, setScrollY] = React.useState(0); // vertical scroll in px
   const [phoneScrollY, setPhoneScrollY] = React.useState(0); // phone vertical scroll in px
-  const [stopped, setStopped] = React.useState(reducedMotion);
+  const [stopped, setStopped] = React.useState(reducedMotion || !autoAnimate);
   const [viewportH, setViewportH] = React.useState(0);
 
   // Refs for animation loop
-  const posRef = React.useRef(88);
+  const posRef = React.useRef(autoAnimate ? 88 : 50);
   const scrollRef = React.useRef(0);
   const phoneScrollRef2 = React.useRef(0);
   const sweepDirRef = React.useRef<1 | -1>(-1); // sweep left first — good site covers bad
@@ -68,12 +74,19 @@ const HeroBeforeAfter = ({
   React.useEffect(() => { posRef.current = pos; }, [pos]);
   React.useEffect(() => { scrollRef.current = scrollY; }, [scrollY]);
   React.useEffect(() => { phoneScrollRef2.current = phoneScrollY; }, [phoneScrollY]);
+  React.useEffect(() => {
+    if (!allowVerticalScroll) {
+      scrollRef.current = 0;
+      setScrollY(0);
+    }
+  }, [allowVerticalScroll]);
 
   const active = examples[activeIdx] ?? examples[0];
   const maxScroll = Math.max(0, imageHeight - viewportH);
 
   // Measure viewport height
   React.useEffect(() => {
+    if (!allowVerticalScroll) return;
     const el = viewportRef.current;
     if (!el) return;
     const update = () => setViewportH(el.clientHeight);
@@ -81,11 +94,11 @@ const HeroBeforeAfter = ({
     const ro = new ResizeObserver(update);
     ro.observe(el);
     return () => ro.disconnect();
-  }, []);
+  }, [allowVerticalScroll]);
 
   // Reset when example changes
   React.useEffect(() => {
-    if (reducedMotion) {
+    if (reducedMotion || !autoAnimate) {
       setPos(50); posRef.current = 50;
       setScrollY(0); scrollRef.current = 0;
       setPhoneScrollY(0); phoneScrollRef2.current = 0;
@@ -96,7 +109,7 @@ const HeroBeforeAfter = ({
     setPhoneScrollY(0); phoneScrollRef2.current = 0;
     sweepDirRef.current = -1; // good site sweeps left to cover the bad one
     scrollDirRef.current = 1;
-  }, [activeIdx, reducedMotion]);
+  }, [activeIdx, autoAnimate, reducedMotion]);
 
   // Native wheel listener for reliable scroll-after-stop
   React.useEffect(() => {
@@ -117,7 +130,7 @@ const HeroBeforeAfter = ({
     };
     el.addEventListener("wheel", handler, { passive: false });
     return () => el.removeEventListener("wheel", handler);
-  }, [imageHeight, activeIdx]);
+  }, [allowVerticalScroll, imageHeight, activeIdx]);
 
   // Main animation loop: horizontal sweep + vertical scroll
   React.useEffect(() => {
@@ -146,12 +159,14 @@ const HeroBeforeAfter = ({
       setPos(p);
 
       // Vertical scroll (main browser)
-      const ms = Math.max(0, imageHeight - viewportRef.current?.clientHeight ?? viewportH);
-      let s = scrollRef.current + scrollDirRef.current * SCROLL_SPEED * dt;
-      if (s >= ms) { s = ms; scrollDirRef.current = -1; }
-      if (s <= 0) { s = 0; scrollDirRef.current = 1; }
-      scrollRef.current = s;
-      setScrollY(s);
+      if (allowVerticalScroll) {
+        const ms = Math.max(0, imageHeight - (viewportRef.current?.clientHeight ?? viewportH));
+        let s = scrollRef.current + scrollDirRef.current * SCROLL_SPEED * dt;
+        if (s >= ms) { s = ms; scrollDirRef.current = -1; }
+        if (s <= 0) { s = 0; scrollDirRef.current = 1; }
+        scrollRef.current = s;
+        setScrollY(s);
+      }
 
       // Phone scroll (slow, always downward, loops back to top)
       const PHONE_SPEED = 40; // px/sec — slow gentle scroll
@@ -172,7 +187,7 @@ const HeroBeforeAfter = ({
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       rafRef.current = null;
     };
-  }, [reducedMotion, stopped, activeIdx, viewportH, imageHeight]);
+  }, [allowVerticalScroll, reducedMotion, stopped, activeIdx, viewportH, imageHeight]);
 
   // Auto-rotate between examples
   React.useEffect(() => {
@@ -256,7 +271,7 @@ const HeroBeforeAfter = ({
         const pct = ((e.clientX - rect.left) / rect.width) * 100;
         const np = Math.max(0, Math.min(100, pct));
         setPos(np); posRef.current = np;
-      } else if (touchModeRef.current === "vertical") {
+      } else if (touchModeRef.current === "vertical" && allowVerticalScroll) {
         // Scroll vertically
         const dy = lastTouchYRef.current - e.clientY;
         lastTouchYRef.current = e.clientY;
@@ -284,6 +299,7 @@ const HeroBeforeAfter = ({
 
   // Mouse wheel = scroll up/down after stopped
   const onWheel = (e: React.WheelEvent) => {
+    if (!allowVerticalScroll) return;
     if (!stopped) {
       setStopped(true);
       return;
@@ -301,10 +317,10 @@ const HeroBeforeAfter = ({
     if (e.key === "ArrowRight") { const np = Math.min(100, posRef.current + 4); setPos(np); posRef.current = np; e.preventDefault(); }
     if (e.key === "Home") { setPos(0); posRef.current = 0; e.preventDefault(); }
     if (e.key === "End") { setPos(100); posRef.current = 100; e.preventDefault(); }
-    if (e.key === "ArrowUp") { const ns = Math.max(0, scrollRef.current - 80); setScrollY(ns); scrollRef.current = ns; e.preventDefault(); }
-    if (e.key === "ArrowDown") { const ns = Math.min(maxScroll, scrollRef.current + 80); setScrollY(ns); scrollRef.current = ns; e.preventDefault(); }
-    if (e.key === "PageUp") { const ns = Math.max(0, scrollRef.current - 300); setScrollY(ns); scrollRef.current = ns; e.preventDefault(); }
-    if (e.key === "PageDown") { const ns = Math.min(maxScroll, scrollRef.current + 300); setScrollY(ns); scrollRef.current = ns; e.preventDefault(); }
+    if (allowVerticalScroll && e.key === "ArrowUp") { const ns = Math.max(0, scrollRef.current - 80); setScrollY(ns); scrollRef.current = ns; e.preventDefault(); }
+    if (allowVerticalScroll && e.key === "ArrowDown") { const ns = Math.min(maxScroll, scrollRef.current + 80); setScrollY(ns); scrollRef.current = ns; e.preventDefault(); }
+    if (allowVerticalScroll && e.key === "PageUp") { const ns = Math.max(0, scrollRef.current - 300); setScrollY(ns); scrollRef.current = ns; e.preventDefault(); }
+    if (allowVerticalScroll && e.key === "PageDown") { const ns = Math.min(maxScroll, scrollRef.current + 300); setScrollY(ns); scrollRef.current = ns; e.preventDefault(); }
   };
 
   const selectExample = (idx: number) => {
@@ -315,6 +331,7 @@ const HeroBeforeAfter = ({
   // After (good) image is clipped to show only from the divider rightward,
   // so as the divider sweeps right, the good site covers the bad one.
   const afterClipPath = `inset(0 0 0 ${pos}%)`;
+  const imageTranslateY = allowVerticalScroll ? -scrollY : 0;
 
   return (
     <section className="hero-ba section-surface" aria-label="Website before and after examples">
@@ -361,7 +378,7 @@ const HeroBeforeAfter = ({
               onPointerUp={onPointerUp}
               onPointerCancel={onPointerUp}
               onPointerLeave={onPointerUp}
-              onWheel={onWheel}
+              onWheel={allowVerticalScroll ? onWheel : undefined}
             >
               <img
                 className="hero-ba__img hero-ba__img--before"
@@ -370,7 +387,7 @@ const HeroBeforeAfter = ({
                 loading="eager"
                 decoding="async"
                 draggable={false}
-                style={{ transform: `translateY(${-scrollY}px)` }}
+                style={{ transform: `translateY(${imageTranslateY}px)` }}
               />
               <img
                 className="hero-ba__img hero-ba__img--after"
@@ -380,7 +397,7 @@ const HeroBeforeAfter = ({
                 decoding="async"
                 draggable={false}
                 style={{
-                  transform: `translateY(${-scrollY}px)`,
+                  transform: `translateY(${imageTranslateY}px)`,
                   clipPath: afterClipPath,
                   WebkitClipPath: afterClipPath,
                 }}
@@ -411,6 +428,7 @@ const HeroBeforeAfter = ({
             </div>
           </div>
 
+          {active.afterMobileImage || examples.length > 1 || active.demoLink ? (
           <div className="hero-ba__below">
             {active.afterMobileImage ? (
               <div className="hero-ba__phone" aria-hidden="true">
@@ -428,31 +446,38 @@ const HeroBeforeAfter = ({
               </div>
             ) : null}
 
-            {examples.length > 1 ? (
+            {examples.length > 1 || active.demoLink ? (
               <div className="hero-ba__tabs-wrap">
-                <div className="hero-ba__tabs-label">View another industry:</div>
-                <div className="hero-ba__tabs" role="tablist" aria-label="Choose an example">
-                  {examples.map((ex, i) => (
-                    <button
-                      key={ex.id}
-                      className={`hero-ba__tab${i === activeIdx ? " hero-ba__tab--active" : ""}`}
-                      role="tab"
-                      aria-selected={i === activeIdx}
-                      onClick={() => selectExample(i)}
-                      type="button"
-                    >
-                      {ex.label}
-                    </button>
-                  ))}
-                </div>
+                {examples.length > 1 ? (
+                  <>
+                    <div className="hero-ba__tabs-label">View another industry:</div>
+                    <div className="hero-ba__tabs" role="tablist" aria-label="Choose an example">
+                      {examples.map((ex, i) => (
+                        <button
+                          key={ex.id}
+                          className={`hero-ba__tab${i === activeIdx ? " hero-ba__tab--active" : ""}`}
+                          role="tab"
+                          aria-selected={i === activeIdx}
+                          onClick={() => selectExample(i)}
+                          type="button"
+                        >
+                          {ex.label}
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <div className="hero-ba__tabs-label">Featured transformation</div>
+                )}
                 {active.demoLink ? (
                   <Link className="hero-ba__demo-link" to={active.demoLink}>
-                    Explore the live demo →
+                    Explore the full concept demo →
                   </Link>
                 ) : null}
               </div>
             ) : null}
           </div>
+          ) : null}
         </div>
       </div>
     </section>

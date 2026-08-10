@@ -26,6 +26,7 @@ export type MBHomepageProps = {
 
 const Homepage = () => {
   const heroRef = React.useRef<HTMLElement | null>(null);
+  const [showMobileCta, setShowMobileCta] = React.useState(false);
 
   React.useEffect(() => {
     const root = heroRef.current;
@@ -64,34 +65,31 @@ const Homepage = () => {
     };
   }, []);
 
+  React.useEffect(() => {
+    const primaryActions = heroRef.current?.querySelector(".hero-ba__actions");
+    if (!primaryActions || typeof IntersectionObserver === "undefined") return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setShowMobileCta(!entry.isIntersecting),
+      { threshold: 0.15 }
+    );
+
+    observer.observe(primaryActions);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <Layout>
       <section className="u-home-hero" ref={heroRef}>
         <Hero />
       </section>
-      <div className="home-mobile-cta">
-        <Link
-          to="/contact/"
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "100%",
-            minHeight: "48px",
-            padding: "0.875rem 1.5rem",
-            borderRadius: "999px",
-            fontSize: "1rem",
-            fontWeight: 700,
-            textDecoration: "none",
-            background: "#6f6052",
-            color: "#ffffff",
-            border: "1px solid #6f6052",
-            boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-          }}
-        >
-          Get a free plan
-        </Link>
-      </div>
+      {showMobileCta ? (
+        <div className="home-mobile-cta">
+          <Link to="/contact/" className="home-mobile-cta__link">
+            Get my free website plan
+          </Link>
+        </div>
+      ) : null}
     </Layout>
   );
 };
