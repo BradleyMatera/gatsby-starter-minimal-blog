@@ -7,6 +7,7 @@ type SEOProps = {
   description?: string;
   pathname?: string;
   image?: string;
+  imageAlt?: string;
   children?: React.ReactNode;
   canonicalUrl?: string;
   ogType?: "website" | "article";
@@ -30,6 +31,7 @@ const Seo = ({
   description = ``,
   pathname = ``,
   image = ``,
+  imageAlt = ``,
   children = null,
   canonicalUrl = ``,
   ogType = "website",
@@ -51,6 +53,8 @@ const Seo = ({
   } = site;
 
   const resolvedImage = image ? (image.startsWith("http") ? image : `${siteUrl}${image}`) : `${siteUrl}${defaultImage}`;
+  const resolvedImageAlt = imageAlt || title || "Matera Digital — web design, SEO, and AI automation";
+  const usesDefaultShareImage = !image;
   // Normalize pathname: ensure trailing slash for non-root paths so canonical matches served URL
   const normalizedPathname = pathname && pathname !== "/" && !pathname.endsWith("/") ? `${pathname}/` : pathname || "";
   const seo = {
@@ -72,6 +76,24 @@ const Seo = ({
       "https://github.com/BradleyMatera",
       "https://www.youtube.com/@bradmatera",
     ],
+  };
+  const brandStructuredData: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${siteUrl}/#organization`,
+    name: "Matera Digital",
+    url: siteUrl,
+    founder: { "@id": `${siteUrl}/#person` },
+    logo: {
+      "@type": "ImageObject",
+      "@id": `${siteUrl}/#logo`,
+      url: `${siteUrl}/brand/matera-digital-logo.png`,
+      contentUrl: `${siteUrl}/brand/matera-digital-logo.png`,
+      width: 910,
+      height: 656,
+      caption: "Matera Digital",
+    },
+    image: `${siteUrl}/brand/matera-digital-social-1200x630.jpg`,
   };
   const articleStructuredData: Record<string, unknown> | null =
     ogType === "article"
@@ -101,6 +123,8 @@ const Seo = ({
     description: defaultDescription,
     inLanguage: siteLanguage,
     publisher: { "@id": `${siteUrl}/#person` },
+    alternateName: "Matera Digital",
+    about: { "@id": `${siteUrl}/#organization` },
   };
   const customStructuredData = Array.isArray(structuredData)
     ? structuredData
@@ -121,6 +145,7 @@ const Seo = ({
   };
   const structuredDataNodes = [
     personStructuredData,
+    brandStructuredData,
     websiteStructuredData,
     webpageStructuredData,
     ...(articleStructuredData ? [articleStructuredData] : []),
@@ -145,15 +170,19 @@ const Seo = ({
     <>
       <html lang={siteLanguage} />
       <title>{seo.title}</title>
-      <meta name="description" content={seo.description} />\n      <meta name="msvalidate.01" content="DC14A3BD196E2386E427F81F3BB390B3" />
+      <meta name="description" content={seo.description} />
+      <meta name="msvalidate.01" content="DC14A3BD196E2386E427F81F3BB390B3" />
       <meta name="image" content={seo.image} />
       <meta property="og:title" content={seo.title} />
       <meta property="og:url" content={seo.url} />
       <meta property="og:description" content={seo.description} />
       <meta property="og:image" content={seo.image} />
-      <meta property="og:image:alt" content={seo.description} />
+      <meta property="og:image:alt" content={resolvedImageAlt} />
+      {usesDefaultShareImage ? <meta property="og:image:width" content="1200" /> : null}
+      {usesDefaultShareImage ? <meta property="og:image:height" content="630" /> : null}
+      {usesDefaultShareImage ? <meta property="og:image:type" content="image/jpeg" /> : null}
       <meta property="og:type" content={ogType} />
-      <meta property="og:site_name" content={siteTitle} />
+      <meta property="og:site_name" content="Matera Digital" />
       {ogType === "article" && article?.publishedTime ? (
         <meta property="article:published_time" content={article.publishedTime} />
       ) : null}
@@ -171,7 +200,7 @@ const Seo = ({
       <meta name="twitter:url" content={seo.url} />
       <meta name="twitter:description" content={seo.description} />
       <meta name="twitter:image" content={seo.image} />
-      <meta name="twitter:image:alt" content={seo.description} />
+      <meta name="twitter:image:alt" content={resolvedImageAlt} />
       <meta name="twitter:creator" content={author} />
       <meta name="twitter:site" content={author} />
       <meta name="robots" content={robots} />

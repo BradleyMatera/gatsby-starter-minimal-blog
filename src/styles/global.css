@@ -4206,6 +4206,27 @@ body {
   line-height: var(--leading-tight);
 }
 
+.footer__logo-link {
+  display: inline-flex;
+  width: fit-content;
+  border-radius: 0.75rem;
+}
+
+.footer__logo-link:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.footer__logo {
+  width: 8.5rem;
+  max-height: 6.5rem;
+  object-fit: contain;
+  padding: 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  background-color: #fff !important;
+}
+
 .footer__description {
   font-size: var(--text-sm);
   line-height: var(--leading-relaxed);

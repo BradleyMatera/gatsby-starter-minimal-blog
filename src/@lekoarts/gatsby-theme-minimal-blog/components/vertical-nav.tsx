@@ -1,7 +1,7 @@
 // Gatsby theme shadow file for navigation chrome; shared site pieces live in src/site.
 import * as React from "react";
 import { Link } from "gatsby";
-import { StyleLabToggle, ThemeToggle } from "../../../site/components";
+import { BrandLogo, StyleLabToggle, ThemeToggle } from "../../../site/components";
 import {
   HomeIcon,
   BlogIcon,
@@ -107,6 +107,10 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
 
   return (
     <>
+      <Link to="/" className="vertical-nav__mobile-brand vertical-nav__mobile-only" aria-label="Matera Digital — Home">
+        <BrandLogo variant="mark" alt="" className="vertical-nav__mobile-brand-logo" />
+        <span>Matera Digital</span>
+      </Link>
       <button
         ref={mobileMenuRef}
         className="vertical-nav__toggle-icon cyber-toggle vertical-nav__mobile-only"
@@ -134,8 +138,9 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
         aria-label="Main Navigation"
       >
           <div className="vertical-nav__inner cyber-nav__inner">
-            <Link to="/" className="vertical-nav__brand cyber-brand" aria-label="BM — Home">
-              <span className="vertical-nav__brand-text cyber-brand__text">BM</span>
+            <Link to="/" className="vertical-nav__brand cyber-brand" aria-label="Matera Digital — Home">
+              <BrandLogo variant="mark" alt="" className="vertical-nav__brand-logo" />
+              <span className="vertical-nav__brand-name">Matera Digital</span>
             </Link>
             <ul className="vertical-nav__list cyber-nav__list">
               {coreLinks.map((item) => {
@@ -201,8 +206,8 @@ const VerticalNav = ({ nav }: VerticalNavProps) => {
           aria-label="Main Navigation"
         >
           <div className="vertical-nav__inner cyber-drawer__inner">
-            <Link to="/" className="vertical-nav__brand cyber-brand" aria-label="BM — Home">
-              <span className="vertical-nav__brand-text cyber-brand__text">BM</span>
+            <Link to="/" className="vertical-nav__brand cyber-brand" aria-label="Matera Digital — Home">
+              <BrandLogo variant="full" alt="" className="vertical-nav__brand-logo vertical-nav__brand-logo--drawer" />
             </Link>
             <button
               className="vertical-nav__close-btn cyber-close-btn"

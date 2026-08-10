@@ -39,26 +39,33 @@ const THEME_INIT_SCRIPT = `
 export const onRenderBody = ({ setHtmlAttributes, setHeadComponents, setPreBodyComponents }) => {
   setHtmlAttributes({ lang: "en", "data-theme": "light" });
   setHeadComponents([
+    <link key="favicon-ico" rel="icon" href={withPrefix(`/favicon.ico`)} sizes="any" />,
     <link
       key="favicon-32"
       rel="icon"
       type="image/png"
       sizes="32x32"
-      href={withPrefix(`/favicon-32x32-32x32.png`)}
+      href={withPrefix(`/favicon-32x32.png`)}
     />,
     <link
       key="favicon-16"
       rel="icon"
       type="image/png"
       sizes="16x16"
-      href={withPrefix(`/favicon-16x16-16x16.png`)}
+      href={withPrefix(`/favicon-16x16.png`)}
     />,
     <link
       key="apple-touch-icon"
       rel="apple-touch-icon"
       sizes="180x180"
-      href={withPrefix(`/apple-touch-icon-180x180.png`)}
+      href={withPrefix(`/apple-touch-icon.png`)}
     />,
+    <meta key="theme-color" name="theme-color" content="#052a5d" />,
+    <meta key="application-name" name="application-name" content="Matera Digital" />,
+    <meta key="apple-mobile-web-app-title" name="apple-mobile-web-app-title" content="Matera Digital" />,
+    <meta key="msapplication-tilecolor" name="msapplication-TileColor" content="#052a5d" />,
+    <meta key="msapplication-tileimage" name="msapplication-TileImage" content={withPrefix(`/mstile-150x150.png`)} />,
+    <meta key="msapplication-config" name="msapplication-config" content={withPrefix(`/browserconfig.xml`)} />,
   ]);
   setPreBodyComponents([
     <script

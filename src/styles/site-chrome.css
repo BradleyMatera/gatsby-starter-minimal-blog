@@ -68,6 +68,21 @@
   gap: 0.25rem;
 }
 
+.brand-logo {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.brand__logo {
+  width: 9rem;
+  max-height: 5rem;
+  padding: 0.35rem 0.5rem;
+  border-radius: 0.75rem;
+  background-color: #fff !important;
+}
+
 .brand__title {
   font-family: "Space Grotesk Variable", "Space Grotesk", "Inter", "Segoe UI", sans-serif;
   font-size: clamp(1.2rem, 0.5vw + 1.1rem, 1.6rem);

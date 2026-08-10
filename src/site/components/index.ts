@@ -1,5 +1,6 @@
 // Shared site-wide components used across pages and Gatsby shadow files.
 export { default as GlobalScrollEffects } from "./GlobalScrollEffects";
+export { default as BrandLogo } from "./BrandLogo";
 export { default as HeroBanner } from "./HeroBanner";
 export { default as HeroBeforeAfter } from "./HeroBeforeAfter";
 export { default as NavSystemBadge } from "./NavSystemBadge";

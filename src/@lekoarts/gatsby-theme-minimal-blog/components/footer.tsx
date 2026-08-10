@@ -3,6 +3,7 @@ import { Link } from "gatsby";
 import useSiteMetadata from "../hooks/use-site-metadata";
 import useMinimalBlogConfig from "../hooks/use-minimal-blog-config";
 import replaceSlashes from "../utils/replaceSlashes";
+import { BrandLogo } from "../../../site/components";
 import {
   SELLER_IDENTITY_LINE,
   SELLER_DISCLOSURE_SHORT,
@@ -13,7 +14,7 @@ import {
 } from "../../../site/legal/business-identity";
 
 const Footer = () => {
-  const { siteTitle, siteHeadline } = useSiteMetadata();
+  const { siteHeadline } = useSiteMetadata();
   const { navigation: nav, externalLinks, basePath } = useMinimalBlogConfig();
   const [currentYear] = React.useState(() => new Date().getFullYear());
 
@@ -22,7 +23,9 @@ const Footer = () => {
       <div className="footer-inner footer-inner--compact">
         <div className="footer__brand">
           <div>
-            <p className="footer__title">{siteTitle}</p>
+            <Link to="/" className="footer__logo-link" aria-label="Matera Digital — Home">
+              <BrandLogo variant="full" alt="Matera Digital" className="footer__logo" />
+            </Link>
             {siteHeadline ? <p className="footer__description">{siteHeadline}</p> : null}
             <p className="footer__description">
               <a href={SELLER_PHONE_HREF} style={{ color: "inherit" }}>{SELLER_PHONE}</a>
@@ -67,7 +70,7 @@ const Footer = () => {
       </div>
 
       <div className="footer-bottom footer-bottom--compact">
-        <span suppressHydrationWarning>&copy; {currentYear} {siteTitle} — {SELLER_IDENTITY_LINE}</span>
+        <span suppressHydrationWarning>&copy; {currentYear} Matera Digital — {SELLER_IDENTITY_LINE}</span>
         <span className="footer-legal-links">
           {POLICY_LINKS.map((link, i) => (
             <React.Fragment key={link.path}>

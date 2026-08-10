@@ -14,6 +14,35 @@
   display: none !important;
 }
 
+.vertical-nav__mobile-brand {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 199;
+  height: 44px;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.25rem 0.65rem 0.25rem 0.4rem;
+  border: 1px solid rgba(5, 42, 93, 0.16);
+  border-radius: 0.65rem;
+  background-color: #fff !important;
+  box-shadow: 0 4px 14px rgba(5, 42, 93, 0.1);
+  color: #052a5d !important;
+  font-family: "Space Grotesk Variable", "Space Grotesk", sans-serif;
+  font-size: 0.83rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.vertical-nav__mobile-brand-logo {
+  width: 2.5rem;
+  height: 2rem;
+  object-fit: contain;
+}
+
 .vertical-nav__desktop-only {
   display: flex;
 }
@@ -392,6 +421,47 @@
   font-family: "Space Grotesk Variable", "Space Grotesk", sans-serif;
   font-weight: 800;
   letter-spacing: -0.02em;
+}
+
+.vertical-nav__brand-logo {
+  width: 3.75rem;
+  height: 2.8rem;
+  object-fit: contain;
+  padding: 0.25rem 0.35rem;
+  border: 1px solid rgba(5, 42, 93, 0.12);
+  border-radius: 0.65rem;
+  background-color: #fff !important;
+  box-shadow: 0 4px 14px rgba(5, 42, 93, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vertical-nav__brand:hover .vertical-nav__brand-logo,
+.vertical-nav__brand:focus-visible .vertical-nav__brand-logo {
+  transform: translateY(-1px);
+  box-shadow: 0 7px 18px rgba(5, 42, 93, 0.15);
+}
+
+.vertical-nav__brand-logo--drawer {
+  width: min(12rem, 70vw);
+  height: auto;
+  max-height: 9rem;
+  padding: 0.65rem;
+}
+
+.vertical-nav__brand-name {
+  margin-left: 0.55rem;
+  color: #052a5d;
+  font-family: "Space Grotesk Variable", "Space Grotesk", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+@media (max-width: 1519px) {
+  .vertical-nav__brand-name {
+    display: none;
+  }
 }
 
 /* Navigation List */
