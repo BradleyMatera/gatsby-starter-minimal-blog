@@ -50,8 +50,8 @@ export default RecruiterPage;
 export const Head: HeadFC = () => {
   return (
     <Seo
-      title="Recruiter Hub | Bradley Matera — Junior Software Engineer"
-      description="Everything a recruiter needs. Resume, projects, certifications, experience timeline, and interview resources — all in one curated experience designed for hiring teams."
+      title="Recruiter Hub | Bradley Matera — Developer"
+      description="A recruiter-focused view of Bradley Matera's background, finished work, experiments, certifications, and interview resources, with clear context around AI-assisted development."
       pathname="/recruiter/"
     />
   );
