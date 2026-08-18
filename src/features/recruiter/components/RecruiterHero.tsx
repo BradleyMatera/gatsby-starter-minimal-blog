@@ -65,10 +65,10 @@ const RecruiterHero: React.FC = () => {
             marginTop: "3rem",
           }}
         >
+          <TrustBadge label="Developer" />
+          <TrustBadge label="B.S. Web Development" />
           <TrustBadge label="AWS Certified" />
-          <TrustBadge label="Junior Software Engineer" />
           <TrustBadge label="Cloud Support Trained" />
-          <TrustBadge label="Open Source Contributor" />
         </div>
       </div>
 
