@@ -10,7 +10,7 @@ import VoiceNavButton from "./VoiceNavButton";
    RecruiterLayout — Warm, editorial portal. No glass, no neon.
    -------------------------------------------------------------------------- */
 
-const PROJECTHUB_SCRIPT_URL = "https://bradleymatera.github.io/ProjectHub/ProjectHub.js";
+const PROJECTHUB_SCRIPT_URL = "https://bradleymatera.github.io/ProjectHub/ProjectHub.js?v=20260820-41fe0b6";
 
 declare global {
   interface Window {
