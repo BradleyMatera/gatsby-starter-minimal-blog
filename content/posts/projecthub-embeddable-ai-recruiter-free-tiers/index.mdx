@@ -10,7 +10,7 @@ theme: "AI"
 I built a chat widget for my portfolio. One script tag, drop it on a page, and recruiters can ask questions about my projects, my AWS internship, what I actually know, and what kind of roles I'm looking for. I named the assistant Scout.
 
 ```html
-<script src="https://bradleymatera.github.io/ProjectHub/ProjectHub.js"></script>
+<script src="https://bradleymatera.github.io/ProjectHub/ProjectHub.js?v=15"></script>
 ```
 
 That's the whole pitch from the outside. What it took to get there is a lot messier than one script tag suggests. The current version has a vanilla JS frontend, a Node backend on a Google Cloud e2-micro VM ([GCP Always Free tier](https://cloud.google.com/free)), a knowledge base pulled from GitHub, a network of free LLM providers, a response cache, per-tab memory, safety checks, a self-improvement loop, and an analytics dashboard. It also has six test suites and more documentation than I expected.
@@ -351,7 +351,7 @@ Scout is still a work in progress, but it's more than a chatbot now. It's fronte
 You can see it live at [ProjectHub and Scout](https://bradleymatera.github.io/ProjectHub/). The repo is at [ProjectHub on GitHub](https://github.com/BradleyMatera/ProjectHub). And if you want to drop it on a page, it's just:
 
 ```html
-<script src="https://bradleymatera.github.io/ProjectHub/ProjectHub.js"></script>
+<script src="https://bradleymatera.github.io/ProjectHub/ProjectHub.js?v=15"></script>
 ```
 
 ## Proof
