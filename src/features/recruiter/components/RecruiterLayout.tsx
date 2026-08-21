@@ -10,7 +10,7 @@ import VoiceNavButton from "./VoiceNavButton";
    RecruiterLayout — Warm, editorial portal. No glass, no neon.
    -------------------------------------------------------------------------- */
 
-const PROJECTHUB_SCRIPT_URL = "https://bradleymatera.github.io/ProjectHub/ProjectHub.js";
+const PROJECTHUB_SCRIPT_URL = "https://bradleymatera.github.io/ProjectHub/ProjectHub.js?v=15";
 
 declare global {
   interface Window {
@@ -18,7 +18,7 @@ declare global {
   }
 }
 
-// ProjectHub.js declares top-level `const`s in global scope, so it can only
+// ProjectHub.js?v=15 declares top-level `const`s in global scope, so it can only
 // be injected once per session. On subsequent recruiter visits we simply
 // unhide the existing widget; on unmount we hide it instead of removing it.
 const useProjectHubChat = () => {
