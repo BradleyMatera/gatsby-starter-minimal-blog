@@ -28,6 +28,8 @@ const files = [
   'scene.js',
   'site.js',
   'site.webmanifest',
+  'robots.txt',
+  'sitemap.xml',
 ];
 
 const assets = [
