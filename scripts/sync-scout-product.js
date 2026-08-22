@@ -4,7 +4,7 @@ const os = require('os');
 const { execFileSync } = require('child_process');
 
 // Scout is versioned in its own repository. Each Netlify build pulls the current
-// product-site source, including the full Docs, source-cited teaching guide,
+// product-site source, including the full Docs, source-cited teaching/math guide,
 // API reference, and Changelog surfaces.
 const REPO = 'https://github.com/BradleyMatera/Scout-product-page.git';
 const root = path.resolve(__dirname, '..');
