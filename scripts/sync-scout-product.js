@@ -4,7 +4,8 @@ const os = require('os');
 const { execFileSync } = require('child_process');
 
 // Scout is versioned in its own repository. Each Netlify build pulls the current
-// product-site source, including the full Docs, API reference, and Changelog surfaces.
+// product-site source, including the full Docs, teaching guide, API reference,
+// and Changelog surfaces.
 const REPO = 'https://github.com/BradleyMatera/Scout-product-page.git';
 const root = path.resolve(__dirname, '..');
 const publicDir = path.join(root, 'public');
@@ -16,6 +17,7 @@ const htmlFiles = [
   'index.html',
   'pricing.html',
   'docs.html',
+  'learn.html',
   'api.html',
   'changelog.html',
 ];
@@ -28,9 +30,11 @@ const files = [
   'launch.css',
   'pricing.css',
   'docs.css',
+  'learn.css',
   'scene.js',
   'site.js',
   'docs.js',
+  'learn.js',
   'site.webmanifest',
   'robots.txt',
   'sitemap.xml',
@@ -56,6 +60,7 @@ function rewriteHtml(filePath) {
   html = html
     .replaceAll('https://bradleymatera.github.io/Scout-product-page/pricing.html', 'https://bradleymatera.dev/scout/pricing.html')
     .replaceAll('https://bradleymatera.github.io/Scout-product-page/docs.html', 'https://bradleymatera.dev/scout/docs.html')
+    .replaceAll('https://bradleymatera.github.io/Scout-product-page/learn.html', 'https://bradleymatera.dev/scout/learn.html')
     .replaceAll('https://bradleymatera.github.io/Scout-product-page/api.html', 'https://bradleymatera.dev/scout/api.html')
     .replaceAll('https://bradleymatera.github.io/Scout-product-page/changelog.html', 'https://bradleymatera.dev/scout/changelog.html')
     .replaceAll('https://bradleymatera.github.io/Scout-product-page/', 'https://bradleymatera.dev/scout/');
