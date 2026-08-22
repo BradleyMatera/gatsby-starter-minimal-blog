@@ -15,6 +15,7 @@ const files = [
   'pricing.html',
   'styles.css',
   'enhancements.css',
+  'further-reading.css',
   'pricing.css',
   'scene.js',
   'site.js',
@@ -49,6 +50,10 @@ try {
     stdio: 'inherit',
   });
 
+  const sourceCommit = execFileSync('git', ['-C', checkout, 'rev-parse', 'HEAD'], {
+    encoding: 'utf8',
+  }).trim();
+
   fs.rmSync(scoutOut, { recursive: true, force: true });
   fs.mkdirSync(scoutOut, { recursive: true });
 
@@ -57,7 +62,12 @@ try {
   rewriteHtml(path.join(scoutOut, 'index.html'));
   rewriteHtml(path.join(scoutOut, 'pricing.html'));
 
-  console.log(`Scout product site synced to ${scoutOut}`);
+  fs.writeFileSync(
+    path.join(scoutOut, 'scout-source.json'),
+    `${JSON.stringify({ sourceRepo: 'BradleyMatera/Scout-product-page', sourceCommit }, null, 2)}\n`
+  );
+
+  console.log(`Scout product site synced to ${scoutOut} from ${sourceCommit}`);
 } finally {
   fs.rmSync(tempDir, { recursive: true, force: true });
 }
