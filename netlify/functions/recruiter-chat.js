@@ -213,12 +213,8 @@ exports.handler = async function handler(event) {
     const memoryStore = await writeSession(sessionId, updatedMemory);
 
     return json(200, {
+      ...data,
       reply: cleaned,
-      provider: data.provider || 'backend',
-      model: data.model || 'unknown',
-      fallback: data.fallback || false,
-      generative: !data.fallback,
-      source: data.fallback ? 'backend-fallback' : 'backend-llm',
       memoryStore
     }, headers);
 
