@@ -10,12 +10,20 @@ const scoutOut = path.join(publicDir, 'scout');
 const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'scout-product-'));
 const checkout = path.join(tempDir, 'repo');
 
-const files = [
+const htmlFiles = [
   'index.html',
   'pricing.html',
+  'docs.html',
+  'api.html',
+  'changelog.html',
+];
+
+const files = [
+  ...htmlFiles,
   'styles.css',
   'enhancements.css',
   'further-reading.css',
+  'launch.css',
   'pricing.css',
   'scene.js',
   'site.js',
@@ -41,6 +49,9 @@ function rewriteHtml(filePath) {
   let html = fs.readFileSync(filePath, 'utf8');
   html = html
     .replaceAll('https://bradleymatera.github.io/Scout-product-page/pricing.html', 'https://bradleymatera.dev/scout/pricing.html')
+    .replaceAll('https://bradleymatera.github.io/Scout-product-page/docs.html', 'https://bradleymatera.dev/scout/docs.html')
+    .replaceAll('https://bradleymatera.github.io/Scout-product-page/api.html', 'https://bradleymatera.dev/scout/api.html')
+    .replaceAll('https://bradleymatera.github.io/Scout-product-page/changelog.html', 'https://bradleymatera.dev/scout/changelog.html')
     .replaceAll('https://bradleymatera.github.io/Scout-product-page/', 'https://bradleymatera.dev/scout/');
   fs.writeFileSync(filePath, html);
 }
@@ -58,9 +69,7 @@ try {
   fs.mkdirSync(scoutOut, { recursive: true });
 
   [...files, ...assets].forEach(copyFile);
-
-  rewriteHtml(path.join(scoutOut, 'index.html'));
-  rewriteHtml(path.join(scoutOut, 'pricing.html'));
+  htmlFiles.forEach(file => rewriteHtml(path.join(scoutOut, file)));
 
   fs.writeFileSync(
     path.join(scoutOut, 'scout-source.json'),
