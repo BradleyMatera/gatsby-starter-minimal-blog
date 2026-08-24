@@ -5,8 +5,8 @@ const { execFileSync } = require('child_process');
 
 // Scout is versioned in its own repository. Each Netlify build pulls the current
 // product-site source, including the full Docs, source-cited teaching/math guide,
-// API reference, Changelog, and shared audited source-snapshot layer. The Scout
-// preparation step also controls script initialization order for documentation UI.
+// API reference, Changelog, shared audited source-snapshot layer, and documentation
+// diagrams. The Scout preparation step also controls documentation initialization.
 const REPO = 'https://github.com/BradleyMatera/Scout-product-page.git';
 const root = path.resolve(__dirname, '..');
 const publicDir = path.join(root, 'public');
@@ -35,6 +35,7 @@ const files = [
   'scene.js',
   'site.js',
   'docs.js',
+  'docs-graphics.js',
   'learn.js',
   'freshness.js',
   'site.webmanifest',
@@ -45,6 +46,12 @@ const files = [
 const assets = [
   'assets/scout-mark.svg',
   'assets/scout-og.svg',
+  'assets/docs/how-scout-works.svg',
+  'assets/docs/retrieval-knowledge-to-evidence.svg',
+  'assets/docs/response-contracts.svg',
+  'assets/docs/session-state-followups.svg',
+  'assets/docs/grounding-validation-repair.svg',
+  'assets/docs/source-truth-release-flow.svg',
 ];
 
 function copyFile(relativePath) {
