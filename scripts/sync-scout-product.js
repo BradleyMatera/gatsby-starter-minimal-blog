@@ -5,7 +5,7 @@ const { execFileSync } = require('child_process');
 
 // Scout is versioned in its own repository. Each Netlify build pulls the current
 // product-site source, including full Docs, Learn, API, Changelog, source snapshots,
-// diagrams, scholarly references, vetted learning resources, source-discrepancy notes,
+// diagrams, scholarly references, vetted learning resources, accounting corrections,
 // and the current reference library. The Scout preparation step controls documentation
 // initialization before the files are copied into /scout/.
 const REPO = 'https://github.com/BradleyMatera/Scout-product-page.git';
@@ -41,6 +41,7 @@ const files = [
   'learn.js',
   'learn-resources.js',
   'freshness.js',
+  'accounting-correction.js',
   'site.webmanifest',
   'robots.txt',
   'sitemap.xml',
