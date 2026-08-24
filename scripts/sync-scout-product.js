@@ -4,9 +4,9 @@ const os = require('os');
 const { execFileSync } = require('child_process');
 
 // Scout is versioned in its own repository. Each Netlify build pulls the current
-// product-site source, including the full Docs, source-cited teaching/math guide,
-// API reference, Changelog, shared audited source-snapshot layer, and documentation
-// diagrams. The Scout preparation step also controls documentation initialization.
+// product-site source, including full Docs, Learn, API, Changelog, source snapshots,
+// diagrams, scholarly references, and vetted learning resources. The Scout preparation
+// step controls documentation initialization before the files are copied into /scout/.
 const REPO = 'https://github.com/BradleyMatera/Scout-product-page.git';
 const root = path.resolve(__dirname, '..');
 const publicDir = path.join(root, 'public');
@@ -32,11 +32,13 @@ const files = [
   'pricing.css',
   'docs.css',
   'learn.css',
+  'learn-resources.css',
   'scene.js',
   'site.js',
   'docs.js',
   'docs-graphics.js',
   'learn.js',
+  'learn-resources.js',
   'freshness.js',
   'site.webmanifest',
   'robots.txt',
@@ -52,6 +54,11 @@ const assets = [
   'assets/docs/session-state-followups.svg',
   'assets/docs/grounding-validation-repair.svg',
   'assets/docs/source-truth-release-flow.svg',
+  'assets/learn/bm25-explained.svg',
+  'assets/learn/rrf-explained.svg',
+  'assets/learn/edit-distance-explained.svg',
+  'assets/learn/retrieval-evaluation.svg',
+  'assets/learn/retrieval-is-not-vector.svg',
 ];
 
 function copyFile(relativePath) {
@@ -85,8 +92,6 @@ try {
     encoding: 'utf8',
   }).trim();
 
-  // Apply build-time page preparation in the cloned Scout source so GitHub
-  // Pages and bradleymatera.dev/scout use the same script injection rules.
   execFileSync(process.execPath, [path.join(checkout, 'scripts', 'prepare-site.js')], {
     cwd: checkout,
     stdio: 'inherit',
