@@ -7,7 +7,8 @@ const { execFileSync } = require('child_process');
 // product-site source, including full Docs, Learn, API, Changelog, source snapshots,
 // diagrams, scholarly references, vetted learning resources, accounting corrections,
 // and the current reference library. The Scout preparation step controls documentation
-// initialization before the files are copied into /scout/.
+// initialization and rewrites known stale accounting template text before the files
+// are copied into /scout/.
 const REPO = 'https://github.com/BradleyMatera/Scout-product-page.git';
 const root = path.resolve(__dirname, '..');
 const publicDir = path.join(root, 'public');
