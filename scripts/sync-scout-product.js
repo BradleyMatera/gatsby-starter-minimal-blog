@@ -5,7 +5,7 @@ const { execFileSync } = require('child_process');
 
 // Scout is versioned in its own repository. Each Netlify build pulls the current
 // product-site source, including the full Docs, source-cited teaching/math guide,
-// API reference, and Changelog surfaces.
+// API reference, Changelog, and shared audited source-snapshot layer.
 const REPO = 'https://github.com/BradleyMatera/Scout-product-page.git';
 const root = path.resolve(__dirname, '..');
 const publicDir = path.join(root, 'public');
@@ -35,6 +35,7 @@ const files = [
   'site.js',
   'docs.js',
   'learn.js',
+  'freshness.js',
   'site.webmanifest',
   'robots.txt',
   'sitemap.xml',
@@ -75,6 +76,13 @@ try {
   const sourceCommit = execFileSync('git', ['-C', checkout, 'rev-parse', 'HEAD'], {
     encoding: 'utf8',
   }).trim();
+
+  // Apply build-time page preparation in the cloned Scout source so GitHub
+  // Pages and bradleymatera.dev/scout use the same script injection rules.
+  execFileSync(process.execPath, [path.join(checkout, 'scripts', 'prepare-site.js')], {
+    cwd: checkout,
+    stdio: 'inherit',
+  });
 
   fs.rmSync(scoutOut, { recursive: true, force: true });
   fs.mkdirSync(scoutOut, { recursive: true });
