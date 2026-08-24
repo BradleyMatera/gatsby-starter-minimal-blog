@@ -41,6 +41,7 @@ const files = [
   'learn.js',
   'learn-resources.js',
   'freshness.js',
+  'snapshot-refresh.js',
   'accounting-correction.js',
   'site.webmanifest',
   'robots.txt',
