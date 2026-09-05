@@ -10,6 +10,7 @@ const { execFileSync } = require('child_process');
 // initialization and rewrites known stale accounting template text before the files
 // are copied into /scout/.
 const REPO = 'https://github.com/BradleyMatera/Scout-product-page.git';
+const SOURCE_REF = process.env.SCOUT_PRODUCT_REF || 'main';
 const root = path.resolve(__dirname, '..');
 const publicDir = path.join(root, 'public');
 const scoutOut = path.join(publicDir, 'scout');
@@ -109,7 +110,7 @@ try {
 
   fs.writeFileSync(
     path.join(scoutOut, 'scout-source.json'),
-    `${JSON.stringify({ sourceRepo: 'BradleyMatera/Scout-product-page', sourceCommit }, null, 2)}\n`
+    `${JSON.stringify({ sourceRepo: 'BradleyMatera/Scout-product-page', sourceRef: SOURCE_REF, sourceCommit }, null, 2)}\n`
   );
 
   console.log(`Scout product site synced to ${scoutOut} from ${sourceCommit}`);
