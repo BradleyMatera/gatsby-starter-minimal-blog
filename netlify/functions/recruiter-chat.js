@@ -1,5 +1,8 @@
 const CHAT_BACKEND_URL = process.env.CHAT_BACKEND_URL || 'https://projecthub-chat.bradleymatera.dev/api/chat';
-const DEFAULT_TIMEOUT = 14000;
+// Scout's product deadline is 15000 ms. The outer proxy timeout must be greater
+// than that so Scout can fail closed with a typed TECHNICAL_ERROR. Netlify
+// synchronous functions allow up to 60 seconds, so 18 seconds is safe.
+const DEFAULT_TIMEOUT = 18000;
 const SESSION_TTL_MS = 1000 * 60 * 60 * 24 * 14;
 const SESSION_MEMORY_LIMIT = 240;
 
@@ -28,6 +31,28 @@ function json(statusCode, body, headers) {
 function safeSessionId(value) {
   const cleaned = String(value || '').replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 80);
   return cleaned || `anon-${Date.now().toString(36)}`;
+}
+
+function generateRequestId() {
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+    return crypto.randomUUID();
+  }
+  return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+}
+
+const UNAVAILABLE_REPLY = 'Scout is temporarily unavailable. Please try again in a moment.';
+
+function technicalErrorResponse(requestId, errorType, message, headers) {
+  console.error('Recruiter chat proxy error:', { requestId, errorType, message });
+  return json(200, {
+    reply: UNAVAILABLE_REPLY,
+    fallback: true,
+    proseSource: 'TECHNICAL_ERROR',
+    source: 'NETLIFY_PROXY_ERROR',
+    errorType,
+    error: message,
+    requestId
+  }, headers);
 }
 
 function trimMemory(memory) {
@@ -128,6 +153,28 @@ function sessionHint(memory) {
   return recentUserTurns.length ? `Recent session context: ${recentUserTurns.join(' | ')}` : '';
 }
 
+let knowledgeCache = null;
+let knowledgeCacheTime = 0;
+const CACHE_TTL_MS = 5 * 60 * 1000;
+
+async function fetchKnowledge() {
+  const now = Date.now();
+  if (knowledgeCache && (now - knowledgeCacheTime) < CACHE_TTL_MS) {
+    return knowledgeCache;
+  }
+  try {
+    const response = await fetch(KNOWLEDGE_URL, { signal: AbortSignal.timeout(8000) });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const data = await response.json();
+    knowledgeCache = data;
+    knowledgeCacheTime = now;
+    return data;
+  } catch (error) {
+    console.warn('Knowledge fetch failed:', error.message);
+    return knowledgeCache;
+  }
+}
+
 function memoryToHistory(memory) {
   return (Array.isArray(memory) ? memory : []).reduce((acc, turn) => {
     if (turn.role === 'user') {
@@ -140,6 +187,7 @@ function memoryToHistory(memory) {
 }
 
 exports.handler = async function handler(event) {
+  const requestId = generateRequestId();
   const origin = event.headers.origin || event.headers.Origin || '';
   const headers = corsHeaders(origin);
 
@@ -201,11 +249,8 @@ exports.handler = async function handler(event) {
     const cleaned = String(data.reply || '').trim().slice(0, 600);
 
     if (!cleaned) {
-      return json(200, {
-        reply: 'I do not have that detail verified. I can answer questions about Bradley\'s projects, AWS background, skills, education, or how to contact him.',
-        fallback: true,
-        source: 'backend-fallback'
-      }, headers);
+      console.warn('Backend returned empty reply:', { requestId, sessionId });
+      return technicalErrorResponse(requestId, 'BACKEND_EMPTY_REPLY', 'Backend returned an empty reply.', headers);
     }
 
     // Persist this turn to session memory
@@ -213,19 +258,28 @@ exports.handler = async function handler(event) {
     const memoryStore = await writeSession(sessionId, updatedMemory);
 
     return json(200, {
-      ...data,
       reply: cleaned,
+      provider: data.provider || 'backend',
+      model: data.model || 'unknown',
+      proseSource: data.proseSource || (data.fallback ? 'TECHNICAL_ERROR' : 'MODEL_GENERATION'),
+      fallback: data.fallback || false,
+      generative: !data.fallback,
+      source: data.fallback ? 'backend-fallback' : 'backend-llm',
+      requestId,
       memoryStore
     }, headers);
 
   } catch (error) {
-    console.error('Recruiter chat error:', error.message);
+    let errorType = 'BACKEND_CONNECTION_ERROR';
+    let errorMessage = error.message || String(error);
 
-    return json(200, {
-      reply: 'Scout is temporarily unavailable. Please try again in a moment.',
-      fallback: true,
-      source: 'backend-error',
-      error: error.message
-    }, headers);
+    if (error.name === 'AbortError' || errorMessage.includes('AbortError') || errorMessage.includes('The operation was aborted')) {
+      errorType = 'BACKEND_TIMEOUT';
+      errorMessage = `Backend did not respond within ${DEFAULT_TIMEOUT}ms`;
+    } else if (/^Backend HTTP \d+/.test(errorMessage)) {
+      errorType = 'BACKEND_HTTP_ERROR';
+    }
+
+    return technicalErrorResponse(requestId, errorType, errorMessage, headers);
   }
 };

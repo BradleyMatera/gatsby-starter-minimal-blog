@@ -2,19 +2,20 @@ import * as React from "react";
 import { Link } from "gatsby";
 import { GlobalScrollEffects } from "../../../site/components";
 import { RecruiterProgressProvider } from "../hooks/useRecruiterProgress";
-import ProgressRail from "./ProgressRail";
-import RecruiterCommandPalette from "./RecruiterCommandPalette";
-import VoiceNavButton from "./VoiceNavButton";
 
 /* --------------------------------------------------------------------------
    RecruiterLayout — Warm, editorial portal. No glass, no neon.
    -------------------------------------------------------------------------- */
 
-const PROJECTHUB_SCRIPT_URL = "https://bradleymatera.github.io/ProjectHub/ProjectHub.js?v=16";
+const PROJECTHUB_VERSION = process.env.GATSBY_PROJECTHUB_VERSION;
+const PROJECTHUB_SCRIPT_URL = `https://bradleymatera.github.io/ProjectHub/ProjectHub.js${
+  PROJECTHUB_VERSION ? `?v=${PROJECTHUB_VERSION}` : ""
+}`;
 
 declare global {
   interface Window {
     __projectHubLoaded?: boolean;
+    initProjectHub?: () => void;
   }
 }
 
@@ -35,9 +36,8 @@ const useProjectHubChat = () => {
       script.async = true;
       script.id = "projecthub-chat-script";
       script.onload = () => {
-        // The widget initializes on DOMContentLoaded, which has already
-        // fired by the time this dynamically injected script loads.
-        document.dispatchEvent(new Event("DOMContentLoaded"));
+        // The widget now initializes itself immediately when loaded after
+        // DOMContentLoaded, and exposes window.initProjectHub for explicit calls.
         // If the user navigated away while the script was downloading,
         // keep the freshly created widget hidden.
         if (!window.location.pathname.startsWith("/recruiter")) {
@@ -62,26 +62,10 @@ const useProjectHubChat = () => {
 
 const RecruiterLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   useProjectHubChat();
-  const [commandOpen, setCommandOpen] = React.useState(false);
-
-  React.useEffect(() => {
-    if (typeof window === "undefined") return undefined;
-    const onKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
-        e.preventDefault();
-        setCommandOpen((open) => !open);
-      }
-    };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, []);
 
   return (
     <RecruiterProgressProvider>
-      <div className="recruiter-page" style={{ minHeight: "100vh" }}>
-      {/* Command Palette */}
-      <RecruiterCommandPalette isOpen={commandOpen} onClose={() => setCommandOpen(false)} />
-
+    <div className="recruiter-page" style={{ minHeight: "100vh" }}>
       {/* Scroll Progress Bar */}
       <div className="scroll-progress" aria-hidden="true" />
 
@@ -139,14 +123,10 @@ const RecruiterLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
             >
               Resume
             </a>
-            <VoiceNavButton />
           </div>
         </div>
       </header>
 
-      <div className="recruiter-progress-rail__container">
-        <ProgressRail />
-      </div>
       <main>{children}</main>
 
       <footer className="recruiter-portal-footer">
@@ -162,7 +142,7 @@ const RecruiterLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
             ← Back to Portfolio
           </Link>
         </div>
-        <div style={{ color: "var(--r-text-muted)" }} suppressHydrationWarning>
+        <div style={{ color: "var(--r-text-muted)" }}>
           © {new Date().getFullYear()} Bradley Matera · Recruiter Portal
         </div>
       </footer>
