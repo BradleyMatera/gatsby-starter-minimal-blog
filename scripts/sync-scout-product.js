@@ -89,7 +89,7 @@ function rewriteHtml(filePath) {
 }
 
 try {
-  execFileSync('git', ['clone', '--depth', '1', '--single-branch', '--branch', 'main', REPO, checkout], {
+  execFileSync('git', ['clone', '--depth', '1', '--single-branch', '--branch', SOURCE_REF, REPO, checkout], {
     stdio: 'inherit',
   });
 
