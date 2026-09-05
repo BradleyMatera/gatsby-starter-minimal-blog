@@ -4,8 +4,8 @@ const os = require('os');
 const { execFileSync } = require('child_process');
 
 // Scout is versioned in its own repository. Each Netlify build pulls the current
-// product-site source from main, including the plain recruiter-answer hero copy, full Docs,
-// Learn, API,
+// product-site source from main, including the reusable-runtime hero copy, full Docs, Learn,
+// API,
 // Changelog, source snapshots,
 // diagrams, scholarly references, vetted learning resources, accounting corrections,
 // and the current reference library. The Scout preparation step controls documentation
