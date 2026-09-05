@@ -42,14 +42,33 @@ function generateRequestId() {
 
 const UNAVAILABLE_REPLY = 'Scout is temporarily unavailable. Please try again in a moment.';
 
-function technicalErrorResponse(requestId, errorType, message, headers) {
-  console.error('Recruiter chat proxy error:', { requestId, errorType, message });
+function safeDiagnostic(error) {
+  const names = ['Error', 'TypeError', 'SyntaxError', 'AbortError', 'TimeoutError'];
+  const codes = ['ECONNREFUSED', 'ECONNRESET', 'ENOTFOUND', 'EAI_AGAIN', 'ETIMEDOUT', 'UND_ERR_CONNECT_TIMEOUT', 'UND_ERR_HEADERS_TIMEOUT', 'UND_ERR_BODY_TIMEOUT', 'UND_ERR_SOCKET'];
+  const code = error?.code || error?.cause?.code;
+  return {
+    name: names.includes(error?.name) ? error.name : 'Error',
+    code: codes.includes(code) ? code : 'UNKNOWN'
+  };
+}
+
+function technicalErrorResponse(requestId, errorType, headers, diagnostic = {}) {
+  const messages = {
+    BACKEND_TIMEOUT: `Backend did not respond within ${DEFAULT_TIMEOUT}ms.`,
+    BACKEND_HTTP_ERROR: 'Backend returned an unsuccessful response.',
+    BACKEND_EMPTY_REPLY: 'Backend returned an empty reply.',
+    BACKEND_CONNECTION_ERROR: 'Unable to complete the backend request.'
+  };
+  const message = messages[errorType] || messages.BACKEND_CONNECTION_ERROR;
+  console.error('Recruiter chat proxy error:', { requestId, errorType, ...diagnostic });
   return json(200, {
     reply: UNAVAILABLE_REPLY,
     fallback: true,
+    generative: false,
     proseSource: 'TECHNICAL_ERROR',
     source: 'NETLIFY_PROXY_ERROR',
     errorType,
+    errorCode: errorType,
     error: message,
     requestId
   }, headers);
@@ -77,7 +96,7 @@ async function getNeonSql() {
     neonSqlPromise = import('@neondatabase/serverless')
       .then(({ neon }) => neon(connectionString))
       .catch(error => {
-        console.warn('Neon session memory disabled:', error.message);
+        console.warn('Neon session memory disabled:', safeDiagnostic(error));
         return null;
       });
   }
@@ -103,7 +122,7 @@ async function readSession(sessionId) {
       const rows = await sql`SELECT memory FROM projecthub_chat_sessions WHERE session_id = ${sessionId}`;
       return trimMemory(rows[0]?.memory || []);
     } catch (error) {
-      console.warn('Neon read failed:', error.message);
+      console.warn('Neon read failed:', safeDiagnostic(error));
     }
   }
   const cached = sessionMemory.get(sessionId);
@@ -125,7 +144,7 @@ async function writeSession(sessionId, memory) {
       `;
       return 'neon';
     } catch (error) {
-      console.warn('Neon write failed:', error.message);
+      console.warn('Neon write failed:', safeDiagnostic(error));
     }
   }
   sessionMemory.set(sessionId, { at: Date.now(), memory: trimmed });
@@ -142,7 +161,7 @@ async function clearSession(sessionId) {
       await ensureSessionTable(sql);
       await sql`DELETE FROM projecthub_chat_sessions WHERE session_id = ${sessionId}`;
     } catch (error) {
-      console.warn('Neon clear failed:', error.message);
+      console.warn('Neon clear failed:', safeDiagnostic(error));
     }
   }
   sessionMemory.delete(sessionId);
@@ -170,7 +189,7 @@ async function fetchKnowledge() {
     knowledgeCacheTime = now;
     return data;
   } catch (error) {
-    console.warn('Knowledge fetch failed:', error.message);
+    console.warn('Knowledge fetch failed:', safeDiagnostic(error));
     return knowledgeCache;
   }
 }
@@ -221,65 +240,93 @@ exports.handler = async function handler(event) {
     return json(200, { reply: 'Memory cleared.', cleared: true, source: 'system' }, headers);
   }
 
+  let stage = 'session-read';
+  let backendStatus;
+  let timedOut = false;
+  let httpError = false;
   try {
     const memory = await readSession(sessionId);
     const history = memoryToHistory(memory);
 
     const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), DEFAULT_TIMEOUT);
-
-    const response = await fetch(CHAT_BACKEND_URL, {
-      method: 'POST',
-      signal: controller.signal,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        message,
-        sessionId,
-        history
-      })
-    });
-
-    clearTimeout(timer);
-
-    if (!response.ok) {
-      throw new Error(`Backend HTTP ${response.status}`);
+    let timer;
+    let data;
+    stage = 'headers';
+    try {
+      const deadline = new Promise((_, reject) => {
+        timer = setTimeout(() => {
+          timedOut = true;
+          controller.abort();
+          reject(new Error('Backend deadline exceeded.'));
+        }, DEFAULT_TIMEOUT);
+      });
+      data = await Promise.race([
+        (async () => {
+          const response = await fetch(CHAT_BACKEND_URL, {
+            method: 'POST',
+            signal: controller.signal,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              message,
+              sessionId,
+              history
+            })
+          });
+          backendStatus = Number.isInteger(response.status) && response.status >= 100 && response.status <= 599
+            ? response.status : undefined;
+          if (!response.ok) {
+            httpError = true;
+            throw new Error('Backend HTTP error.');
+          }
+          stage = 'body';
+          return await response.json();
+        })(),
+        deadline
+      ]);
+    } finally {
+      clearTimeout(timer);
     }
-
-    const data = await response.json();
-    const cleaned = String(data.reply || '').trim().slice(0, 600);
+    const cleaned = String(data?.reply || '').trim().slice(0, 600);
 
     if (!cleaned) {
-      console.warn('Backend returned empty reply:', { requestId, sessionId });
-      return technicalErrorResponse(requestId, 'BACKEND_EMPTY_REPLY', 'Backend returned an empty reply.', headers);
+      return technicalErrorResponse(requestId, 'BACKEND_EMPTY_REPLY', headers, { stage, backendStatus });
+    }
+
+    if (data.proseSource === 'TECHNICAL_ERROR' || data.fallback) {
+      return json(200, {
+        ...data,
+        reply: cleaned,
+        proseSource: data.proseSource || 'TECHNICAL_ERROR',
+        fallback: true,
+        generative: false,
+        requestId
+      }, headers);
     }
 
     // Persist this turn to session memory
+    stage = 'session-write';
     const updatedMemory = [...memory, { role: 'user', content: message, at: Date.now() }, { role: 'assistant', content: cleaned, at: Date.now() }];
     const memoryStore = await writeSession(sessionId, updatedMemory);
 
     return json(200, {
+      ...data,
       reply: cleaned,
       provider: data.provider || 'backend',
       model: data.model || 'unknown',
-      proseSource: data.proseSource || (data.fallback ? 'TECHNICAL_ERROR' : 'MODEL_GENERATION'),
-      fallback: data.fallback || false,
-      generative: !data.fallback,
-      source: data.fallback ? 'backend-fallback' : 'backend-llm',
+      proseSource: data.proseSource || 'MODEL_GENERATION',
+      fallback: false,
+      generative: data.generative ?? true,
+      source: data.source || 'backend-llm',
       requestId,
       memoryStore
     }, headers);
 
   } catch (error) {
-    let errorType = 'BACKEND_CONNECTION_ERROR';
-    let errorMessage = error.message || String(error);
-
-    if (error.name === 'AbortError' || errorMessage.includes('AbortError') || errorMessage.includes('The operation was aborted')) {
-      errorType = 'BACKEND_TIMEOUT';
-      errorMessage = `Backend did not respond within ${DEFAULT_TIMEOUT}ms`;
-    } else if (/^Backend HTTP \d+/.test(errorMessage)) {
-      errorType = 'BACKEND_HTTP_ERROR';
-    }
-
-    return technicalErrorResponse(requestId, errorType, errorMessage, headers);
+    const errorType = timedOut || error?.name === 'AbortError' || error?.name === 'TimeoutError'
+      ? 'BACKEND_TIMEOUT'
+      : httpError ? 'BACKEND_HTTP_ERROR' : 'BACKEND_CONNECTION_ERROR';
+    return technicalErrorResponse(requestId, errorType, headers, {
+      stage, backendStatus, ...safeDiagnostic(error)
+    });
   }
 };
