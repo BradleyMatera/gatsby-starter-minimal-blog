@@ -283,40 +283,96 @@ test('recruiter layout retains progress, command palette, voice navigation and h
   assert.match(text, /isOpen=\{commandOpen\}/);
 });
 
-test('dynamic widget loader uses build identity, loads once, retries, hides on navigation and never fakes DOMContentLoaded', () => {
+test('ProjectHub host lifecycle: load, unhide, retry, reinit, failure and navigation', () => {
   const text = source(layoutFile);
   assert.match(text, /process.env.GATSBY_PROJECTHUB_VERSION/);
   assert.doesNotMatch(text, /dispatchEvent\(new Event\(["']DOMContentLoaded/);
+
   const scripts = [];
-  let chat;
   let cleanup;
-  const window = { location: { pathname: '/recruiter/' } };
+  let display = '';
+  const chatStyle = { setProperty: (k, v) => { display = v; }, removeProperty: () => { display = ''; } };
+
+  const window = {
+    location: { pathname: '/recruiter/' },
+    __projectHubLoaded: false,
+    initProjectHubCalls: 0,
+    initProjectHub() {
+      window.initProjectHubCalls++;
+      document.chat = { id: 'bradley-chat', style: chatStyle };
+    }
+  };
+
+  const document = {
+    chat: null,
+    getElementById: id => id === 'bradley-chat' ? document.chat : null,
+    createElement: () => ({ remove() { this.removed = true; } }),
+    body: { appendChild: script => scripts.push(script) }
+  };
+
   const context = vm.createContext({
     window, PROJECTHUB_SCRIPT_URL: `https://example.test/ProjectHub.js?v=${sha}`,
     React: { useEffect: callback => { cleanup = callback(); } },
-    document: {
-      getElementById: () => chat,
-      createElement: () => ({ remove() { this.removed = true; } }),
-      body: { appendChild: script => scripts.push(script) }
-    }
+    document
   });
-  vm.runInContext(`${text.slice(text.indexOf('const useProjectHubChat ='), text.indexOf('const RecruiterLayout:'))}\nuseProjectHubChat();`, context);
-  assert.equal(scripts.length, 1);
-  assert.match(scripts[0].src, new RegExp(sha));
-  vm.runInContext('useProjectHubChat();', context);
-  assert.equal(scripts.length, 1);
+
+  const defineSnippet = text.slice(text.indexOf('const useProjectHubChat ='), text.indexOf('const RecruiterLayout:'));
+  const callSnippet = 'useProjectHubChat();';
+
+  // A. First load: script injected once.
+  vm.runInContext(`${defineSnippet}\n${callSnippet}`, context);
+  assert.equal(scripts.length, 1, 'first load must inject one script');
+  assert.match(scripts[0].src, new RegExp(sha), 'script must carry build identity');
+  assert.equal(window.__projectHubLoaded, true);
+
+  // B. Widget already exists: unhidden, no script reinjected.
+  document.chat = { id: 'bradley-chat', style: chatStyle };
+  const beforeScriptCount = scripts.length;
+  vm.runInContext(callSnippet, context);
+  assert.equal(scripts.length, beforeScriptCount, 'existing widget must not trigger script injection');
+  assert.equal(display, '', 'existing widget must be unhidden');
+  document.chat = null;
+
+  // C. Script already loaded, widget absent, initProjectHub available → initializer called.
+  window.__projectHubLoaded = true;
+  const callsBefore = window.initProjectHubCalls;
+  vm.runInContext(callSnippet, context);
+  assert.equal(window.initProjectHubCalls, callsBefore + 1, 'initProjectHub must be called for re-init');
+
+  // D. Initializer creates widget → exactly one widget.
+  assert.ok(document.chat, 'initializer must create the widget');
+  assert.equal(document.chat.id, 'bradley-chat', 'created element must be the chat widget');
+
+  // E. Initializer throws → no duplicate script, future mount can retry.
+  const initialScriptCount = scripts.length;
+  window.initProjectHub = () => { window.initProjectHubCalls++; throw new Error('init failed'); };
+  document.chat = null;
+  vm.runInContext(callSnippet, context);
+  assert.equal(scripts.length, initialScriptCount, 'failed re-init must not inject another script');
+  assert.ok(window.__projectHubLoaded, 'flag remains true after failed re-init (retry via init only)');
+
+  // F. Script network failure → __projectHubLoaded reset, future visit can inject again.
+  // Re-inject and then simulate onerror.
+  document.chat = null;
+  window.__projectHubLoaded = false;
+  window.initProjectHub = null;
+  scripts.length = 0;
+  vm.runInContext(callSnippet, context);
+  assert.equal(scripts.length, 1, 'after reset a new script is injected');
   scripts[0].onerror();
-  assert.equal(window.__projectHubLoaded, false);
-  vm.runInContext('useProjectHubChat();', context);
-  assert.equal(scripts.length, 2);
-  let display = '';
-  chat = { style: { setProperty: (key, value) => { display = value; }, removeProperty: () => { display = ''; } } };
+  assert.equal(window.__projectHubLoaded, false, 'network failure must reset loaded flag');
+
+  // G. Navigation away while script downloading → newly created widget hidden.
+  document.chat = { id: 'bradley-chat', style: chatStyle };
   window.location.pathname = '/';
-  scripts[1].onload();
-  assert.equal(display, 'none');
+  scripts[0].onload();
+  assert.equal(display, 'none', 'widget must be hidden when not on recruiter page');
+
+  // H. No manually dispatched DOMContentLoaded.
+  assert.doesNotMatch(text, /dispatchEvent\(new Event\(["']DOMContentLoaded/);
+
+  // Cleanup hides widget.
   window.location.pathname = '/recruiter/';
-  vm.runInContext('useProjectHubChat();', context);
-  assert.equal(display, '');
   cleanup();
-  assert.equal(display, 'none');
+  assert.equal(display, 'none', 'cleanup must hide the widget');
 });
