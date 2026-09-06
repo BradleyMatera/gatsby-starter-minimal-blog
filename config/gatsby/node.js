@@ -31,7 +31,7 @@ async function resolveProjectHubVersion() {
     return await Promise.race([
       (async () => {
         const res = await fetch('https://api.github.com/repos/BradleyMatera/ProjectHub/commits/master', {
-          headers: { 'Accept': 'application/vnd.github.sha' },
+          headers: { 'Accept': 'application/vnd.github.sha', 'User-Agent': 'gatsby-starter-minimal-blog build' },
           signal: controller.signal
         });
         if (!res.ok) throw new Error('ProjectHub SHA request failed.');
