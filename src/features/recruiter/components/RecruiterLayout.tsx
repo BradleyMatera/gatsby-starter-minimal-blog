@@ -27,25 +27,47 @@ declare global {
 // unhide the existing widget; on unmount we hide it instead of removing it.
 const useProjectHubChat = () => {
   React.useEffect(() => {
-    if (typeof document === "undefined") return;
+    if (typeof document === "undefined" || typeof window === "undefined") return;
+
+    const unhideChat = () => {
+      const chat = document.getElementById("bradley-chat");
+      if (chat) chat.style.removeProperty("display");
+      return chat;
+    };
+
+    const hideChat = () => {
+      const chat = document.getElementById("bradley-chat");
+      if (chat) chat.style.setProperty("display", "none", "important");
+    };
 
     const existingChat = document.getElementById("bradley-chat");
     if (existingChat) {
-      existingChat.style.removeProperty("display");
+      // Widget already exists (e.g. prior visit in this session); just unhide it.
+      unhideChat();
+    } else if (window.__projectHubLoaded && typeof window.initProjectHub === "function") {
+      // Script already injected once and Core initializer is available, but the
+      // widget may have failed to render on an earlier visit. Retry by invoking
+      // the initializer, then unhide the widget if it was created.
+      try {
+        window.initProjectHub();
+      } catch (e) {
+        // Core re-init failed; a future mount can call initProjectHub again or
+        // the host can fall through to script injection next time. Do not crash.
+      }
+      unhideChat();
     } else if (!window.__projectHubLoaded) {
+      // First visit: inject ProjectHub.js once.
       window.__projectHubLoaded = true;
       const script = document.createElement("script");
       script.src = PROJECTHUB_SCRIPT_URL;
       script.async = true;
       script.id = "projecthub-chat-script";
       script.onload = () => {
-        // The widget now initializes itself immediately when loaded after
-        // DOMContentLoaded, and exposes window.initProjectHub for explicit calls.
-        // If the user navigated away while the script was downloading,
-        // keep the freshly created widget hidden.
+        // The widget auto-initializes; Core also exposes window.initProjectHub
+        // for re-init. If the user navigated away while the script was
+        // downloading, keep the freshly created widget hidden.
         if (!window.location.pathname.startsWith("/recruiter")) {
-          const chat = document.getElementById("bradley-chat");
-          if (chat) chat.style.setProperty("display", "none", "important");
+          hideChat();
         }
       };
       script.onerror = () => {
@@ -56,10 +78,7 @@ const useProjectHubChat = () => {
       document.body.appendChild(script);
     }
 
-    return () => {
-      const chat = document.getElementById("bradley-chat");
-      if (chat) chat.style.setProperty("display", "none", "important");
-    };
+    return () => hideChat();
   }, []);
 };
 
