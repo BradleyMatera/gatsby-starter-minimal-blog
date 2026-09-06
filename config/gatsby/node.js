@@ -1,6 +1,9 @@
 const ESLINT_PLUGIN_NAME = "ESLintWebpackPlugin";
 const fs = require("fs");
 const path = require("path");
+const webpack = require("webpack");
+
+let resolvedProjectHubVersion = null;
 
 // Build-time cache-busting for the ProjectHub widget. We want the recruiter
 // site to load the exact released ProjectHub.js, not a stale cached copy.
@@ -46,6 +49,7 @@ async function resolveProjectHubVersion() {
 exports.onPreInit = async () => {
   const version = await resolveProjectHubVersion();
   if (version) {
+    resolvedProjectHubVersion = version;
     process.env.GATSBY_PROJECTHUB_VERSION = version;
     console.log('ProjectHub widget cache version:', version);
   }
@@ -68,6 +72,26 @@ exports.onCreateWebpackConfig = ({ actions, getConfig, stage }) => {
   config.plugins = config.plugins.filter(
     (plugin) => plugin?.constructor?.name !== ESLINT_PLUGIN_NAME,
   );
+
+  // Inject the resolved ProjectHub version into the client bundle so the
+  // runtime script URL is pinned to the exact production widget SHA.
+  if (resolvedProjectHubVersion) {
+    const definePlugin = config.plugins.find(
+      (plugin) => plugin?.constructor?.name === "DefinePlugin"
+    );
+    if (definePlugin && definePlugin.definitions) {
+      definePlugin.definitions["process.env.GATSBY_PROJECTHUB_VERSION"] =
+        JSON.stringify(resolvedProjectHubVersion);
+    } else {
+      config.plugins.push(
+        new webpack.DefinePlugin({
+          "process.env.GATSBY_PROJECTHUB_VERSION": JSON.stringify(
+            resolvedProjectHubVersion
+          ),
+        })
+      );
+    }
+  }
 
   actions.replaceWebpackConfig(config);
 };
