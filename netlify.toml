@@ -6,6 +6,8 @@
   [build.environment]
     NODE_VERSION = "20"
     GATSBY_PROJECTHUB_VERSION = "7d01170830949a0ef85da58bab6a0a2b266b0e9c"
+    # Ref of BradleyMatera/Scout-product-page mirrored into /scout at build time
+    SCOUT_PRODUCT_REF = "main"
 
 [dev]
   command = "npm run develop"
