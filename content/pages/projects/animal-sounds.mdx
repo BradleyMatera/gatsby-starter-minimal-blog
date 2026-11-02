@@ -3,7 +3,9 @@ title: "AnimalSounds"
 slug: "/projects/animal-sounds"
 ---
 
-import { Section, Card, AnchorNav, Link } from "../../../src/ui";
+import { Section, Card, Link } from "../../../src/ui";
+
+import ProjectEvidence from "../../../src/features/projects/components/ProjectEvidence";
 
 <Section
   eyebrow="Project Write-up"
@@ -11,26 +13,15 @@ import { Section, Card, AnchorNav, Link } from "../../../src/ui";
   description="A static Next.js 14 soundboard built with Bun, NextUI, and Tailwind CSS. Audio ships as offline-ready MP3s from public/audio, imagery from bundled assets with optional Pexels enrichment, and analytics/favorites persist locally in localStorage. Deployed to GitHub Pages."
 />
 
-<AnchorNav
-  items={[
-    { id: "overview", label: "Problem" },
-    { id: "approach", label: "Solution" },
-    { id: "role", label: "My Role" },
-    { id: "impact", label: "What's in the Repo" },
-    { id: "artifacts", label: "Tech Stack" },
-  ]}
-/>
+<ProjectEvidence pathname="/projects/animal-sounds/" />
+
 
 <Section id="overview" eyebrow="Problem" title="User need">
-  <p>
-    I wanted a simple, offline-capable soundboard app to learn static export with Next.js 14 and Bun. The app needed to ship its own audio files so it works without a network, keep favorites and usage stats without a backend, and deploy cleanly to GitHub Pages with proper base path handling.
-  </p>
+  <p>I wanted a simple, offline-capable soundboard app to learn static export with Next.js 14 and Bun. The app needed to ship its own audio files so it works without a network, keep favorites and usage stats without a backend, and deploy cleanly to GitHub Pages with proper base path handling.</p>
 </Section>
 
 <Section id="approach" eyebrow="Solution" title="What I built">
-  <p>
-    A static Next.js 14 soundboard deployed to GitHub Pages. Audio ships from <code>public/audio</code> as offline-ready MP3s, and imagery comes from bundled assets with optional Pexels enrichment. Analytics and favorites persist locally in <code>localStorage</code> — no server required. A GitHub Actions workflow handles the static export with <code>NEXT_PUBLIC_BASE_PATH</code> injection so asset paths resolve correctly under the GitHub Pages subdirectory.
-  </p>
+  <p>A static Next.js 14 soundboard deployed to GitHub Pages. Audio ships from <code>public/audio</code> as offline-ready MP3s, and imagery comes from bundled assets with optional Pexels enrichment. Analytics and favorites persist locally in <code>localStorage</code> — no server required. A GitHub Actions workflow handles the static export with <code>NEXT_PUBLIC_BASE_PATH</code> injection so asset paths resolve correctly under the GitHub Pages subdirectory.</p>
   <div className="grid-two">
     <Card>
       <h3 className="feature-card__title">User interface</h3>

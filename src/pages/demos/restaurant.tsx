@@ -3,6 +3,8 @@ import type { HeadFC } from "gatsby";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
 import DemoLayout from "../../features/demos/DemoLayout";
+import DemoNavigation from "../../features/demos/DemoNavigation";
+import DemoJourney from "../../features/demos/DemoJourney";
 import GoogleMapsEmbed from "../../features/demos/GoogleMapsEmbed";
 import SocialLinks, { SocialLink } from "../../features/demos/SocialLinks";
 import ReviewBadges from "../../features/demos/ReviewBadges";
@@ -106,11 +108,11 @@ const RestaurantDemo: React.FC = () => (
         <span className="restaurant-mark" aria-hidden="true">RG</span>
         <span><strong>Riverside</strong><small>Live fire · Rockford</small></span>
       </a>
-      <div className="flagship-nav__links">
+      <DemoNavigation>
         <a href="#menu">Menu</a>
         <a href="#reserve">Reservations</a>
         <a href="#reserve" className="demo-btn demo-btn--primary">Book a table</a>
-      </div>
+      </DemoNavigation>
     </nav>
 
     <section className="restaurant-hero" id="restaurant-top">
@@ -402,42 +404,9 @@ const RestaurantDemo: React.FC = () => (
     <section className="demo-section demo-section--alt" id="reserve">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Make a Reservation</h2>
-        <p className="demo-section__subtitle">Book your table online in seconds. Powered by OpenTable.</p>
-        <ol style={{ maxWidth: "600px", margin: "0 auto 2rem", paddingLeft: "1.5rem", color: "var(--demo-text-muted)", fontSize: "0.9375rem", lineHeight: 1.8 }}>
-          <li>Select your preferred date, time, and party size in the form below.</li>
-          <li>Enter your name, phone number, and any special requests (dietary needs, seating preferences).</li>
-          <li>Click "Find a Table" to see available reservation times.</li>
-          <li>Confirm your selected time slot — you will receive a text and email confirmation instantly.</li>
-        </ol>
-        <div className="demo-booking-widget">
-          <div className="demo-booking-widget__header">
-            <h3 className="demo-booking-widget__title">Find a Table</h3>
-            <span className="demo-booking-widget__powered-by">Powered by OpenTable</span>
-          </div>
-          <div className="demo-booking-widget__row">
-            <div className="demo-form__field" style={{ margin: 0 }}>
-              <label className="demo-form__label" htmlFor="rsvp-date">Date</label>
-              <input id="rsvp-date" className="demo-form__input" type="date" />
-            </div>
-            <div className="demo-form__field" style={{ margin: 0 }}>
-              <label className="demo-form__label" htmlFor="rsvp-time">Time</label>
-              <select id="rsvp-time" className="demo-form__select">
-                <option>4:00 PM</option><option>5:00 PM</option><option>6:00 PM</option>
-                <option>7:00 PM</option><option>8:00 PM</option><option>9:00 PM</option>
-              </select>
-            </div>
-          </div>
-          <div className="demo-form__field" style={{ margin: 0 }}>
-            <label className="demo-form__label" htmlFor="rsvp-party">Party Size</label>
-            <select id="rsvp-party" className="demo-form__select">
-              <option>1 person</option><option>2 people</option><option>3 people</option>
-              <option>4 people</option><option>5 people</option><option>6 people</option>
-              <option>7+ people (call us)</option>
-            </select>
-          </div>
-          <button type="button" className="demo-booking-widget__find" aria-live="polite" onClick={(event) => { event.currentTarget.textContent = "Sample times available — demo only"; }}>Find a Table</button>
-          <div className="demo-booking-widget__note">Mock OpenTable widget. Production sites embed the real OpenTable widget for live availability and booking. $1 per diner seated, no monthly fee.</div>
-        </div>
+        <p className="demo-section__subtitle">Explore a sample reservation. No table is booked and no details are sent.</p>
+
+        <DemoJourney kind="restaurant" />
       </div>
     </section>
 
@@ -457,7 +426,7 @@ const RestaurantDemo: React.FC = () => (
       <div className="demo-contact__inner">
         <h2 className="demo-contact__title">Get in Touch</h2>
         <p className="demo-contact__text">Call us at (815) 555-0123 or follow us on social media for daily specials and updates.</p>
-        <a href="tel:8155550123" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0123</a>
+        <a href="#demo-disclosure" aria-label="Fictional demo phone; view disclosure" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0123</a>
         <div style={{ marginTop: "1.5rem" }}><SocialLinks links={socialLinks} /></div>
         <div className="demo-contact__info">
           <div className="demo-contact__info-item"><MapPinIcon size={20} /><span className="demo-contact__info-label">Address</span><span>123 Main Street, Rockford, IL</span></div>

@@ -7,6 +7,10 @@ description: "Exact steps to deploy a static site to GitHub Pages, fix base path
 theme: "Deployment"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/github-pages-deployments-confusing.json";
+
+
 GitHub Pages feels confusing for one reason: base paths. Once you understand that your site does not live at `/` but at `/your-repo/`, every broken deployment you have ever seen suddenly makes sense. This guide is start to finish. It uses real commands, real files, and real verification steps. No shortcuts. No magic. When you finish, you will have a live URL that works, refreshes correctly, and serves assets without 404s.
 
 This is not a theory post. It is a lab you can run in any static site project.
@@ -15,8 +19,7 @@ This is not a theory post. It is a lab you can run in any static site project.
 
 ![Deploying static site](https://media.giphy.com/media/xKDt6YcZy3qWfhwMdT/giphy.gif)
 
-{/* visual-break:github-pages-deployments-confusing:1 */}
-![Debugging process checkpoint illustration for this section.](/assets/visuals/blog/github-pages-deployments-confusing-break-1.png)
+
 
 At a high level, GitHub Pages is just a static file host wired directly into your repository. You push a folder of HTML, CSS, and JavaScript to a specific branch, and GitHub serves it at a predictable URL. No servers. No containers. No runtime. Just files on disk served over HTTP.
 
@@ -27,6 +30,8 @@ The only term that matters is the base path. Your site will live at:
 `https://yourname.github.io/your-repo/`
 
 If your app thinks it lives at `/`, every asset will point to the wrong place in production. That is the entire source of the confusion.
+
+<ArticleVisual spec={articleVisuals.figures[0]} />
 
 ## What you need before touching anything
 
@@ -294,6 +299,8 @@ Example shape:
 
 The rest of the workflow stays the same. The only strict rule is that the uploaded folder must contain an `index.html` at its root.
 
+<ArticleVisual spec={articleVisuals.figures[1]} />
+
 ## Common Actions-based Pages failures
 
 | Symptom | Likely cause | Fix |
@@ -306,8 +313,7 @@ The rest of the workflow stays the same. The only strict rule is that the upload
 
 ![Inspecting workflow logs](https://media.giphy.com/media/3o7aD9hC6GgT3KfX2k/giphy.gif)
 
-{/* visual-break:github-pages-deployments-confusing:2 */}
-![Verification and access checkpoint illustration for this section.](/assets/visuals/blog/github-pages-deployments-confusing-break-2.png)
+
 
 ## Closing
 

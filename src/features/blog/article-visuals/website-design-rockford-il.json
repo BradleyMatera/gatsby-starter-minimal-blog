@@ -1,0 +1,63 @@
+{
+  "slug": "website-design-rockford-il",
+  "title": "Website Design Rockford IL: What It Actually Costs and How to Choose",
+  "cover": {
+    "src": "/images/blog/website-design-rockford-il/cover.png",
+    "mobile": "/images/blog/website-design-rockford-il/cover-720.webp",
+    "alt": "Concept illustration of fictional service businesses, a website frame, and an ownership key for a Rockford buying guide; not a real Rockford street."
+  },
+  "figures": [
+    {
+      "id": "quote-comparison",
+      "kind": "layers",
+      "title": "Compare the whole quote, not just the build fee",
+      "summary": "The guide asks buyers to make the promised work and responsibilities explicit.",
+      "items": [
+        {
+          "label": "Build scope",
+          "detail": "List the pages, functions, and content included."
+        },
+        {
+          "label": "Monthly work",
+          "detail": "Ask for specific care deliverables and identify charges outside the plan."
+        },
+        {
+          "label": "Ownership",
+          "detail": "Confirm control of the domain, hosting, and site files."
+        },
+        {
+          "label": "Evidence and timeline",
+          "detail": "Review live examples and clarify what the schedule depends on."
+        }
+      ],
+      "caption": "A quote-review framework based on the article's questions. Current project terms belong in the written scope.",
+      "sourceLabel": "Current pricing",
+      "sourceHref": "/pricing/"
+    },
+    {
+      "id": "standard-versus-custom",
+      "kind": "comparison",
+      "title": "Which requirements need deeper custom work?",
+      "summary": "The article separates routine site components from more involved application behavior.",
+      "items": [
+        {
+          "label": "Standard site features",
+          "detail": "Contact forms, maps, photo galleries, and blogs commonly use established components."
+        },
+        {
+          "label": "Account-based workflows",
+          "detail": "Authenticated customer portals require additional application design."
+        },
+        {
+          "label": "Integrated business systems",
+          "detail": "Proprietary CRM or ERP connections need requirements beyond page layout."
+        },
+        {
+          "label": "Transactional behavior",
+          "detail": "Live booking availability or custom commerce flows should be scoped explicitly."
+        }
+      ],
+      "caption": "Examples drawn from the custom-programming section; the actual implementation effort depends on the requirements."
+    }
+  ]
+}

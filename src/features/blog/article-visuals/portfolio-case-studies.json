@@ -1,0 +1,61 @@
+{
+  "slug": "/portfolio-case-studies",
+  "title": "How I Write Portfolio Case Studies That Don't Sound Like Marketing",
+  "cover": {
+    "src": "/images/blog/portfolio-case-studies/cover.png",
+    "mobile": "/images/blog/portfolio-case-studies/cover-720.webp",
+    "alt": "Lab notebook beside a fractured and repaired component, representing evidence-based case studies"
+  },
+  "figures": [
+    {
+      "id": "case-study-evidence",
+      "kind": "layers",
+      "title": "Four parts of a verifiable case study",
+      "summary": "Connect decisions to the problem and its evidence.",
+      "items": [
+        {
+          "label": "Context",
+          "detail": "State the real problem and constraint."
+        },
+        {
+          "label": "Decision",
+          "detail": "Explain the tool choice and alternative."
+        },
+        {
+          "label": "Failure and fix",
+          "detail": "Describe one specific problem and response."
+        },
+        {
+          "label": "Proof",
+          "detail": "Link relevant code, commits or reproducible results."
+        }
+      ],
+      "caption": "The article's four-part format; illustrative performance numbers are not presented as measured results."
+    },
+    {
+      "id": "retrospective-review",
+      "kind": "checklist",
+      "title": "Review the story before publishing",
+      "summary": "Keep the case study useful under technical review.",
+      "items": [
+        {
+          "label": "Specific goal",
+          "detail": "The problem and constraint are clear."
+        },
+        {
+          "label": "Visible trade-off",
+          "detail": "Each major tool has a reason."
+        },
+        {
+          "label": "Inspectable proof",
+          "detail": "Claims point beyond a repository homepage."
+        },
+        {
+          "label": "Honest retrospective",
+          "detail": "Explain what you would change after learning."
+        }
+      ],
+      "caption": "Checks derived from the template and retrospective sections."
+    }
+  ]
+}

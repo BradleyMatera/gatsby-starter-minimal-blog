@@ -1,4 +1,6 @@
+import TableScroll from "../../features/demos/TableScroll";
 import * as React from "react";
+import "../../features/demos/work-gallery.css";
 import type { HeadFC } from "gatsby";
 import Layout from "../../@lekoarts/gatsby-theme-minimal-blog/components/layout";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
@@ -12,6 +14,7 @@ const pageDescription =
 
 const CaseStudyPage = () => (
   <Layout>
+    <div className="work-case-study">
     <nav className="breadcrumbs" aria-label="Breadcrumb">
       <ol className="breadcrumbs__list">
         <li className="breadcrumbs__item"><Link to="/">Home</Link></li>
@@ -44,6 +47,7 @@ const CaseStudyPage = () => (
         </>
       }
     >
+      <figure className="work-case-preview"><img src="/images/demos/previews/landscaping.webp" alt="Illustrative landscaping website concept" width={1440} height={1000} loading="eager" /><figcaption>Concept website · fictional business · <Link to="/demos/landscaping/">Explore the interactive demo</Link></figcaption></figure>
       <div className="grid-three">
         <div className="pkg-card">
           <img src="/package-images/work-industry.svg" alt="Industry illustration" className="pkg-card__bg" loading="lazy" />
@@ -69,8 +73,10 @@ const CaseStudyPage = () => (
       </div>
     </Section>
 
-    <Section eyebrow="Project specs" title="Project specifications at a glance">
-      <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="GreenScape Pro project specs table">
+    <nav className="work-story-nav" aria-label="Example walkthrough"><a href="#project-specs">Specifications</a><a href="#project-problem">The problem</a><a href="#project-build">The build</a><a href="#project-details">Technical details</a></nav>
+
+    <Section id="project-specs" eyebrow="Project specs" title="Project specifications at a glance">
+      <TableScroll label="GreenScape Pro project specs table">
         <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
           <thead>
             <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
@@ -109,10 +115,10 @@ const CaseStudyPage = () => (
             </tr>
           </tbody>
         </table>
-      </div>
+      </TableScroll>
     </Section>
 
-    <Section eyebrow="The problem" title="The common problem for landscaping businesses">
+    <Section id="project-problem" eyebrow="The problem" title="The common problem for landscaping businesses">
       <Card variant="outline">
         <p className="feature-card__body">
           Many landscaping and lawn care businesses operate for years with no website, relying on a Facebook page, word of mouth, and yard signs. They lose jobs to competitors who show up in Google searches for terms like "landscaping Rockford IL." When potential customers search for the business name, they find a Facebook page but no website, no service list, and no way to request a quote without calling during business hours.
@@ -162,7 +168,7 @@ const CaseStudyPage = () => (
       </Card>
     </Section>
 
-    <Section eyebrow="What changed" title="What the build includes">
+    <Section id="project-build" eyebrow="What changed" title="What the build includes">
       <Card variant="outline">
         <p className="feature-card__body">
           A 5-page Gatsby static site with the following pages: Home, Services, Project Gallery, About, and Contact. The site includes a free quote form, before-and-after project photos, service package pricing, and a weather widget that recommends seasonal services (snow removal in winter, lawn care in spring).
@@ -177,7 +183,7 @@ const CaseStudyPage = () => (
       </Card>
     </Section>
 
-    <Section eyebrow="Technical work" title="Accessibility, performance, and SEO">
+    <Section id="project-details" eyebrow="Technical work" title="Accessibility, performance, and SEO">
       <div className="grid-three">
         <div className="pkg-card">
           <img src="/package-images/speed-lcp.svg" alt="Performance illustration" className="pkg-card__bg" loading="lazy" />
@@ -265,6 +271,7 @@ const CaseStudyPage = () => (
         <Link data-variant="ghost" to="/services/small-business-web-design/">Web design services</Link>
       </div>
     </Section>
+    </div>
   </Layout>
 );
 

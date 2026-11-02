@@ -1,4 +1,6 @@
 import * as React from "react";
+import ReadingLayout from "../features/blog/components/ReadingLayout";
+import "../styles/editorial.css";
 import type { HeadFC } from "gatsby";
 import Layout from "../@lekoarts/gatsby-theme-minimal-blog/components/layout";
 import Seo from "../@lekoarts/gatsby-theme-minimal-blog/components/seo";
@@ -19,7 +21,7 @@ const pageDescription =
   "Refund and cancellation policy for Bradley F. Matera. Project deposits, milestone refunds, monthly plan cancellation, digital products, and nonwaivable consumer rights.";
 
 const RefundPolicyPage = () => (
-  <Layout>
+  <Layout className="editorial-page editorial-policy">
     <nav className="breadcrumbs" aria-label="Breadcrumb">
       <ol className="breadcrumbs__list">
         <li className="breadcrumbs__item">
@@ -78,6 +80,8 @@ const RefundPolicyPage = () => (
         </Card>
       </div>
     </Section>
+    <ReadingLayout pageKey={pathname}>
+
 
     <Section eyebrow="Quick reference" title="Refund eligibility">
       <Card variant="outline">
@@ -262,6 +266,7 @@ const RefundPolicyPage = () => (
         Effective date: {POLICY_LAST_UPDATED}. Last updated: {POLICY_LAST_UPDATED}.
       </p>
     </Section>
+    </ReadingLayout>
   </Layout>
 );
 

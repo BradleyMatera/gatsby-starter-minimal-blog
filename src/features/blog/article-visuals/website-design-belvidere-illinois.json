@@ -1,0 +1,65 @@
+{
+  "slug": "website-design-belvidere-illinois",
+  "title": "Website Design in Belvidere, Illinois: A Boone County Business Guide",
+  "cover": {
+    "src": "/images/blog/website-design-belvidere-illinois/cover.png",
+    "mobile": "/images/blog/website-design-belvidere-illinois/cover-720.webp",
+    "alt": "Concept illustration of a fictional auto-service corridor connected to a mobile business page; not a photograph or map of Belvidere."
+  },
+  "figures": [
+    {
+      "id": "cross-market-clarity",
+      "kind": "flow",
+      "title": "A clear path for customers across the service area",
+      "summary": "The guide describes Belvidere businesses serving customers beyond a single city boundary.",
+      "items": [
+        {
+          "label": "State the service",
+          "detail": "Make the business offering obvious on the phone screen."
+        },
+        {
+          "label": "Describe the actual area",
+          "detail": "Explain where the business works with useful, location-specific content."
+        },
+        {
+          "label": "Align public details",
+          "detail": "Keep the business name, address, and phone consistent across profiles."
+        },
+        {
+          "label": "Make contact easy",
+          "detail": "Give the visitor a direct call or inquiry path."
+        }
+      ],
+      "caption": "A website planning flow based on the guide's service-area discussion, not a map or ranking forecast."
+    },
+    {
+      "id": "designer-evaluation",
+      "kind": "checklist",
+      "title": "What to ask a Belvidere website provider",
+      "summary": "Turn the first conversation into a concrete comparison of scope and evidence.",
+      "items": [
+        {
+          "label": "Total scope and cost",
+          "detail": "Ask what the build and monthly fee cover, including extras."
+        },
+        {
+          "label": "Ownership and exit",
+          "detail": "Confirm who controls the domain and hosting and how a transfer works."
+        },
+        {
+          "label": "Live examples",
+          "detail": "Review working sites rather than relying only on sales screenshots."
+        },
+        {
+          "label": "Testing approach",
+          "detail": "Ask how mobile usability and keyboard accessibility are checked."
+        },
+        {
+          "label": "Content and schedule",
+          "detail": "Identify the materials needed and what could delay the project."
+        }
+      ],
+      "caption": "Selected questions from this article's hiring checklist. Confirm current terms in writing."
+    }
+  ]
+}

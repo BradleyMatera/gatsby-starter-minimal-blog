@@ -3,7 +3,9 @@ title: "CIRIS AI Backend Contributions"
 slug: "/projects/ciris-ai"
 ---
 
-import { Section, Card, AnchorNav, Link } from "../../../src/ui";
+import { Section, Card, Link } from "../../../src/ui";
+
+import ProjectEvidence from "../../../src/features/projects/components/ProjectEvidence";
 
 <Section
   eyebrow="Project Write-up"
@@ -11,26 +13,15 @@ import { Section, Card, AnchorNav, Link } from "../../../src/ui";
   description="Code contributions to the CIRIS Ethics Engine (CIRISNode) — a Python backend server for alignment and communications. My PRs added JWT authentication, benchmark and DID routes, a deferral system, and API route refactoring."
 />
 
-<AnchorNav
-  items={[
-    { id: "overview", label: "Problem" },
-    { id: "approach", label: "Solution" },
-    { id: "role", label: "My Role" },
-    { id: "impact", label: "What's in the Repo" },
-    { id: "artifacts", label: "Tech Stack" },
-  ]}
-/>
+<ProjectEvidence pathname="/projects/ciris-ai/" />
+
 
 <Section id="overview" eyebrow="Problem" title="Project need">
-  <p>
-    CIRISNode is the backend server for the CIRIS Ethics Engine — an open-source project exploring AI alignment and communications. When I joined, the API routes listed in the README were not yet implemented, JWT authentication was not set up, and the benchmark/DID/WA pipelines were stubs. The project needed someone to build out the actual backend functionality.
-  </p>
+  <p>CIRISNode is the backend server for the CIRIS Ethics Engine — an open-source project exploring AI alignment and communications. When I joined, the API routes listed in the README were not yet implemented, JWT authentication was not set up, and the benchmark/DID/WA pipelines were stubs. The project needed someone to build out the actual backend functionality.</p>
 </Section>
 
 <Section id="approach" eyebrow="Solution" title="What I contributed">
-  <p>
-    I submitted 10 pull requests to CIRISNode over May 2025. Seven were merged. The work was primarily Python backend code — not documentation. I implemented JWT authentication, built out API routes for benchmarks and DIDs (Decentralized Identifiers), created a deferral system, and refactored the API route structure.
-  </p>
+  <p>I submitted 10 pull requests to CIRISNode over May 2025. Seven were merged. The work was primarily Python backend code — not documentation. I implemented JWT authentication, built out API routes for benchmarks and DIDs (Decentralized Identifiers), created a deferral system, and refactored the API route structure.</p>
   <div className="grid-two">
     <Card>
       <h3 className="feature-card__title">Backend code</h3>
@@ -51,18 +42,6 @@ import { Section, Card, AnchorNav, Link } from "../../../src/ui";
         <li>Wrote test coverage for the new routes</li>
       </ul>
     </Card>
-  </div>
-  <div className="image-tug" aria-label="CIRIS AI contribution visuals">
-    <div className="image-tug__layer image-tug__layer--back">
-      <picture>
-        <source type="image/avif" srcSet="/project-diagrams.avif" />
-        <source type="image/webp" srcSet="/project-diagrams.webp" />
-        <img src="/project-diagrams.png" alt="" width="1536" height="1024" loading="lazy" decoding="async" />
-      </picture>
-    </div>
-    <div className="image-tug__layer image-tug__layer--front">
-      <img src="/assets/visuals/projects/ciris-ai.png" alt="CIRIS AI project visual" width="1536" height="1024" loading="lazy" decoding="async" />
-    </div>
   </div>
 </Section>
 

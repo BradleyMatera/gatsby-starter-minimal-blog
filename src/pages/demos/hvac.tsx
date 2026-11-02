@@ -3,6 +3,8 @@ import type { HeadFC } from "gatsby";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
 import DemoLayout from "../../features/demos/DemoLayout";
+import DemoNavigation from "../../features/demos/DemoNavigation";
+import DemoJourney from "../../features/demos/DemoJourney";
 import GoogleMapsEmbed from "../../features/demos/GoogleMapsEmbed";
 import SocialLinks, { SocialLink } from "../../features/demos/SocialLinks";
 import ReviewBadges from "../../features/demos/ReviewBadges";
@@ -103,7 +105,7 @@ const FinancingCalculator: React.FC = () => {
         <label className="demo-financing-calc__slider-label" htmlFor="financing-term"><span>Term</span><span className="demo-financing-calc__slider-value">{months} months</span></label>
         <input id="financing-term" className="demo-financing-calc__slider" type="range" min="12" max="72" step="12" value={months} onChange={(e) => setMonths(Number(e.target.value))} />
       </div>
-      <div className="demo-financing-calc__result">
+      <div className="demo-financing-calc__result" aria-live="polite">
         <div className="demo-financing-calc__result-label">Estimated Monthly Payment</div>
         <div className="demo-financing-calc__result-value">{fmt(monthly)}<span className="demo-financing-calc__result-period">/mo</span></div>
       </div>
@@ -113,17 +115,17 @@ const FinancingCalculator: React.FC = () => {
 };
 
 const HvacDemo: React.FC = () => (
-  <DemoLayout demoName="ComfortAir Heating & Cooling" industry="HVAC / Home Services" themeColor="#ff5a1f" designSystem="industrial" pageClassName="demo-flagship demo-flagship--hvac">
+  <DemoLayout demoName="ComfortAir Heating & Cooling" industry="HVAC / Home Services" themeColor="#9b2b08" designSystem="industrial" pageClassName="demo-flagship demo-flagship--hvac">
     <nav className="flagship-nav hvac-nav" aria-label="ComfortAir navigation">
       <a className="flagship-nav__brand" href="#hvac-top" aria-label="ComfortAir home">
         <span className="hvac-mark" aria-hidden="true">CA</span>
         <span><strong>ComfortAir</strong><small>Heating + cooling</small></span>
       </a>
-      <div className="flagship-nav__links">
+      <DemoNavigation>
         <a href="#services">Services</a>
-        <a href="tel:8155550789">24/7 dispatch</a>
-        <a href="tel:8155550789" className="demo-btn demo-btn--primary"><PhoneIcon size={17} /> Call now</a>
-      </div>
+        <a href="#demo-disclosure" aria-label="Fictional demo phone; view disclosure">24/7 dispatch</a>
+        <a href="#sample-request" className="demo-btn demo-btn--primary">Try a service request</a>
+      </DemoNavigation>
     </nav>
 
     <section className="hvac-hero" id="hvac-top">
@@ -132,7 +134,7 @@ const HvacDemo: React.FC = () => (
         <h1>Comfort<br />without the<br /><span>guesswork.</span></h1>
         <p className="hvac-hero__lede">Clear arrival windows, straight answers, and properly sized heating and cooling systems—whether it is a no-heat call tonight or a planned replacement.</p>
         <div className="demo-hero__actions">
-          <a href="tel:8155550789" className="demo-btn demo-btn--primary"><PhoneIcon size={19} /> (815) 555-0789</a>
+          <a href="#sample-request" className="demo-btn demo-btn--primary">Preview a service request</a>
           <a href="#services" className="demo-btn demo-btn--ghost">Explore services</a>
         </div>
         <div className="hvac-hero__status"><i aria-hidden="true" /><span><strong>Dispatch status</strong><small>Illustrative availability · crews on call</small></span></div>
@@ -401,6 +403,8 @@ const HvacDemo: React.FC = () => (
     </section>
 
     {/* FAQ */}
+    <section className="demo-section demo-section--alt" id="sample-request"><div className="demo-section__inner"><h2 className="demo-section__title">Try the sample experience</h2><DemoJourney kind="hvac" /></div></section>
+
     <FAQSection faqs={faqs} />
 
     {/* Google Maps */}
@@ -419,7 +423,7 @@ const HvacDemo: React.FC = () => (
       <div className="demo-contact__inner">
         <h2 className="demo-contact__title">Need Service Today?</h2>
         <p className="demo-contact__text">Call (815) 555-0789 for same-day service or 24/7 emergency repairs. No answering service — you talk to a real technician.</p>
-        <a href="tel:8155550789" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0789</a>
+        <a href="#demo-disclosure" aria-label="Fictional demo phone; view disclosure" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0789</a>
         <div style={{ marginTop: "1.5rem" }}><SocialLinks links={socialLinks} /></div>
         <div className="demo-contact__info">
           <div className="demo-contact__info-item"><ShieldIcon size={20} /><span className="demo-contact__info-label">License</span><span>IL #058-204993</span></div>

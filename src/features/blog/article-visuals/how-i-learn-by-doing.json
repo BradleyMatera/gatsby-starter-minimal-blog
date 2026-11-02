@@ -1,0 +1,61 @@
+{
+  "slug": "/how-i-learn-by-doing",
+  "title": "How I Learn by Doing: A Repeatable Mini Project Loop",
+  "cover": {
+    "src": "/images/blog/how-i-learn-by-doing/cover.png",
+    "mobile": "/images/blog/how-i-learn-by-doing/cover-720.webp",
+    "alt": "A fingertip tests a tiny page model connected across a repaired bridge to a public model and a blank lesson notebook."
+  },
+  "figures": [
+    {
+      "id": "learning-artifacts",
+      "kind": "layers",
+      "title": "Three artifacts make learning inspectable",
+      "summary": "The article treats a working result and a record of the process as complementary.",
+      "items": [
+        {
+          "label": "Local project",
+          "detail": "A small file or repository that can run on your own machine."
+        },
+        {
+          "label": "Public deployment",
+          "detail": "A URL where the intended behavior can be tried outside that machine."
+        },
+        {
+          "label": "Lesson note",
+          "detail": "A short record of what broke, the fix and the next check to remember."
+        }
+      ],
+      "caption": "The three outputs of the mini-project loop. Each contributes different evidence."
+    },
+    {
+      "id": "learning-loop",
+      "kind": "flow",
+      "title": "Finish one small loop",
+      "summary": "Move a deliberately small example through each real environment.",
+      "items": [
+        {
+          "label": "Build",
+          "detail": "Create the smallest demo that exercises the idea."
+        },
+        {
+          "label": "Verify locally",
+          "detail": "Reload and repeat the intended interaction."
+        },
+        {
+          "label": "Save the source",
+          "detail": "Put the working files under version control."
+        },
+        {
+          "label": "Deploy and check",
+          "detail": "Publish the artifact, inspect the run and try the live behavior."
+        },
+        {
+          "label": "Record",
+          "detail": "Write down the failure, the change and what to check next time."
+        }
+      ],
+      "caption": "The article's repeatable process. A runtime timestamp alone does not identify which source revision is deployed."
+    }
+  ]
+}

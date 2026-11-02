@@ -1,14 +1,17 @@
 // Gatsby theme shadow file for the blog index route.
 import * as React from "react";
 import { HeadFC, Link } from "gatsby";
-import { useLocation } from "@reach/router";
 import Layout from "./layout";
 import Listing from "./listing";
 import useMinimalBlogConfig from "../hooks/use-minimal-blog-config";
 import replaceSlashes from "../utils/replaceSlashes";
 import Seo from "./seo";
 import { Section } from "../../../ui";
-import { SearchIcon, TagIcon, ChevronLeftIcon, ChevronRightIcon, XIcon } from "../../../site/icons";
+import { SearchIcon, TagIcon, ChevronLeftIcon, ChevronRightIcon } from "../../../site/icons";
+
+import { useUrlState } from "../../../features/blog/useUrlState";
+import ResponsiveFilters from "../../../features/blog/components/ResponsiveFilters";
+import "../../../styles/editorial.css";
 
 declare global {
   interface Window {
@@ -61,11 +64,11 @@ const getCategoryForPost = (tags?: { name: string; slug: string }[]) => {
 const Blog = ({ posts }: MBBlogProps) => {
   const PAGE_SIZE = 9;
   const { tagsPath, basePath } = useMinimalBlogConfig();
-  const location = useLocation();
-  const [query, setQuery] = React.useState("");
-  const [activeTag, setActiveTag] = React.useState<string | null>(null);
-  const [activeCategory, setActiveCategory] = React.useState<string>("all");
-  const [page, setPage] = React.useState(1);
+  const [filters, setFilters, ready] = useUrlState({ q: "", tag: "", category: "all", page: "1" });
+  const query = filters.q;
+  const activeTag = filters.tag || null;
+  const activeCategory = CATEGORIES.some((category) => category.id === filters.category) ? filters.category : "all";
+  const page = Math.max(1, Number.parseInt(filters.page, 10) || 1);
 
   const visiblePosts = React.useMemo(
     () => posts.filter((post) => !hiddenPostSlugs.has(post.slug)),
@@ -98,52 +101,6 @@ const Blog = ({ posts }: MBBlogProps) => {
     if (!activeTag) return null;
     return tags.find((tag) => tag.slug === activeTag) ?? null;
   }, [activeTag, tags]);
-
-  React.useEffect(() => {
-    if (typeof window === "undefined") return;
-    const params = new URLSearchParams(window.location.search);
-    const initialQuery = params.get("q") ?? "";
-    const initialTag = params.get("tag");
-    const initialCategory = params.get("category") ?? "all";
-    const initialPage = params.get("page");
-    setQuery(initialQuery);
-    setActiveTag(initialTag || null);
-    setActiveCategory(CATEGORIES.some((c) => c.id === initialCategory) ? initialCategory : "all");
-    if (initialPage) {
-      const parsed = parseInt(initialPage, 10);
-      if (!Number.isNaN(parsed) && parsed > 0) {
-        setPage(parsed);
-      }
-    }
-  }, []);
-
-  React.useEffect(() => {
-    if (typeof window === "undefined") return;
-    const params = new URLSearchParams(window.location.search);
-    if (query) {
-      params.set("q", query);
-    } else {
-      params.delete("q");
-    }
-    if (activeTag) {
-      params.set("tag", activeTag);
-    } else {
-      params.delete("tag");
-    }
-    if (activeCategory && activeCategory !== "all") {
-      params.set("category", activeCategory);
-    } else {
-      params.delete("category");
-    }
-    if (page > 1) {
-      params.set("page", String(page));
-    } else {
-      params.delete("page");
-    }
-    const search = params.toString();
-    const url = search ? `${location.pathname}?${search}` : location.pathname;
-    window.history.replaceState({}, "", url);
-  }, [query, activeTag, activeCategory, location.pathname, page]);
 
   React.useEffect(() => {
     const term = query.trim();
@@ -181,9 +138,9 @@ const Blog = ({ posts }: MBBlogProps) => {
 
   React.useEffect(() => {
     if (page > totalPages) {
-      setPage(totalPages);
+      setFilters({ page: String(totalPages) }, true);
     }
-  }, [page, totalPages]);
+  }, [page, totalPages, setFilters]);
 
   const paginated = React.useMemo(() => {
     const start = (page - 1) * PAGE_SIZE;
@@ -212,15 +169,10 @@ const Blog = ({ posts }: MBBlogProps) => {
       : "No articles available yet."
     : `${`Showing ${Math.min(resultCount, (page - 1) * PAGE_SIZE + 1)}–${Math.min(resultCount, page * PAGE_SIZE)} of ${resultCount} ${resultLabel}`}${activeFilters.length ? ` ${activeFilters.join(" ")}` : ""}.`;
 
-  const clearFilters = () => {
-    setQuery("");
-    setActiveTag(null);
-    setActiveCategory("all");
-    setPage(1);
-  };
+  const clearFilters = () => setFilters({ q: "", tag: "", category: "all", page: "1" });
 
   return (
-    <Layout>
+    <Layout className="editorial-page editorial-library">
       <Section
         className="blog-intro"
         eyebrow="Blog"
@@ -235,118 +187,45 @@ const Blog = ({ posts }: MBBlogProps) => {
           </>
         }
       >
-        <div className="surface-card surface-card--muted blog-search-card">
-          <div className="blog-filter-controls">
-            <form
-              className="search-bar blog-filter-controls__search"
-              role="search"
-              onSubmit={(event) => {
-                event.preventDefault();
-                const formData = new FormData(event.currentTarget);
-                const value = formData.get("q");
-                if (typeof value === "string") {
-                  setQuery(value);
-                  setPage(1);
-                }
-              }}
-            >
+        <div className="editorial-library-controls">
+          <form className="editorial-search" role="search" onSubmit={(event) => event.preventDefault()}>
+            <label htmlFor="blog-search">Search blog posts</label>
+            <div className="editorial-search__field">
               <SearchIcon size={20} />
-              <label htmlFor="blog-search" className="sr-only">
-                Search blog posts
-              </label>
-              <input
-                id="blog-search"
-                name="q"
-                type="search"
+              <input id="blog-search" name="q" type="search" disabled={!ready}
                 placeholder="Search posts by topic, technology, or keyword"
                 value={query}
-                onChange={(event) => {
-                  setQuery(event.target.value);
-                  setPage(1);
-                }}
-              />
-              {query ? (
-                <button
-                  type="button"
-                  className="blog-filter-controls__clear"
-                  onClick={() => {
-                    setQuery("");
-                    setPage(1);
-                  }}
-                  aria-label="Clear search"
-                >
-                  <XIcon size={16} />
-                </button>
-              ) : null}
-            </form>
-
-            {tags.length > 0 ? (
-              <div className="blog-filter-controls__tags" role="group" aria-label="Filter by tag">
-                <div className="blog-filter-controls__tags-scroll">
-                  <button
-                    type="button"
-                    className={`tag-pill ${activeTag === null ? "tag-pill--active" : ""}`}
-                    onClick={() => {
-                      setActiveTag(null);
-                      setPage(1);
-                    }}
-                    aria-pressed={activeTag === null}
-                  >
-                    All topics
-                  </button>
-                  {tags.map((tag) => (
-                    <button
-                      key={tag.slug}
-                      type="button"
-                      className={`tag-pill ${activeTag === tag.slug ? "tag-pill--active" : ""}`}
-                      onClick={() => {
-                        setActiveTag(activeTag === tag.slug ? null : tag.slug);
-                        setPage(1);
-                      }}
-                      aria-pressed={activeTag === tag.slug}
-                    >
-                      #{tag.name} <span className="tag-pill__count">{tag.count}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            ) : null}
-
-            <Link
-              className="card-link blog-filter-more"
-              to={replaceSlashes(`/${basePath}/${tagsPath}`)}
-            >
-              <TagIcon size={16} />
-              <span>Browse all blog tags</span>
-              <span aria-hidden="true">→</span>
-            </Link>
-          </div>
-
-          {CATEGORIES.length > 1 ? (
-            <div className="blog-category-bar" role="group" aria-label="Filter by category">
-              {CATEGORIES.map((cat) => (
-                <button
-                  key={cat.id}
-                  type="button"
-                  className={`category-pill ${activeCategory === cat.id ? "category-pill--active" : ""}`}
-                  onClick={() => {
-                    setActiveCategory(cat.id);
-                    setPage(1);
-                  }}
-                  aria-pressed={activeCategory === cat.id}
-                >
-                  {cat.label}
-                </button>
-              ))}
+                onChange={(event) => setFilters({ q: event.target.value, page: "1" }, true)} />
             </div>
-          ) : null}
+          </form>
+          <ResponsiveFilters label={`Filters${activeTag || activeCategory !== "all" ? " · active" : ""}`}>
+            <div className="editorial-filter-fields">
+              <div>
+                <label htmlFor="blog-category">Category</label>
+                <select id="blog-category" disabled={!ready} value={activeCategory} onChange={(event) => setFilters({ category: event.target.value, page: "1" })}>
+                  {CATEGORIES.map((category) => <option key={category.id} value={category.id}>{category.label}</option>)}
+                </select>
+              </div>
+              <div>
+                <label htmlFor="blog-topic">Topic</label>
+                <select id="blog-topic" disabled={!ready} value={activeTag || ""} onChange={(event) => setFilters({ tag: event.target.value, page: "1" })}>
+                  <option value="">All topics</option>
+                  {tags.map((tag) => <option key={tag.slug} value={tag.slug}>{tag.name} ({tag.count})</option>)}
+                </select>
+              </div>
+            </div>
+          </ResponsiveFilters>
+          <div className="editorial-control-actions">
+            <button type="button" onClick={clearFilters} disabled={!ready || (!query && !activeTag && activeCategory === "all")}>Clear all filters</button>
+            <Link to={replaceSlashes(`/${basePath}/${tagsPath}`)}><TagIcon size={16} /> Browse all blog tags</Link>
+          </div>
         </div>
       </Section>
 
       <Section
         id="latest-articles"
         title={listingTitle}
-        description={<p className="section-lead">{listingDescription}</p>}
+        description={<p className="section-lead" role="status" aria-live="polite">{listingDescription}</p>}
         className="blog-listing-section"
         disableReveal
       >
@@ -355,7 +234,7 @@ const Blog = ({ posts }: MBBlogProps) => {
             <p className="section-lead">
               No posts match your filters yet. Try a different keyword, tag, or category.
             </p>
-            <button type="button" className="pagination-btn" onClick={clearFilters}>
+            <button type="button" className="pagination-btn" onClick={clearFilters} disabled={!ready}>
               Clear all filters
             </button>
           </div>
@@ -366,8 +245,8 @@ const Blog = ({ posts }: MBBlogProps) => {
               <nav className="blog-pagination" aria-label="Pagination">
                 <button
                   type="button"
-                  onClick={() => setPage((prev) => Math.max(1, prev - 1))}
-                  disabled={page === 1}
+                  onClick={() => setFilters({ page: String(Math.max(1, page - 1)) })}
+                  disabled={!ready || page === 1}
                   className="pagination-btn"
                 >
                   <ChevronLeftIcon size={16} />
@@ -378,8 +257,8 @@ const Blog = ({ posts }: MBBlogProps) => {
                 </span>
                 <button
                   type="button"
-                  onClick={() => setPage((prev) => Math.min(totalPages, prev + 1))}
-                  disabled={page === totalPages}
+                  onClick={() => setFilters({ page: String(Math.min(totalPages, page + 1)) })}
+                  disabled={!ready || page === totalPages}
                   className="pagination-btn"
                 >
                   <span>Next</span>

@@ -1,0 +1,73 @@
+{
+  "slug": "/aws-cloud-support-internship-mastering-troubleshooting-and-architecture",
+  "title": "AWS Cloud Support Internship: What I Actually Practiced",
+  "cover": {
+    "src": "/images/blog/aws-cloud-support-internship-mastering-troubleshooting-and-architecture/cover.png",
+    "mobile": "/images/blog/aws-cloud-support-internship-mastering-troubleshooting-and-architecture/cover-720.webp",
+    "alt": "Conceptual training-lab illustration tracing an upload through processing and stored records."
+  },
+  "figures": [
+    {
+      "id": "cloud-lab-troubleshooting",
+      "kind": "flow",
+      "title": "A repeatable cloud-lab troubleshooting loop",
+      "summary": "The internship’s practical method was to locate a failing boundary, test a fix, and record the result.",
+      "items": [
+        {
+          "label": "Reproduce",
+          "detail": "Run the same trigger and confirm the failure."
+        },
+        {
+          "label": "Read logs",
+          "detail": "Find the exact error and stack trace."
+        },
+        {
+          "label": "Isolate",
+          "detail": "Determine which service boundary failed."
+        },
+        {
+          "label": "Check access",
+          "detail": "Inspect roles, policies, and trust relationships."
+        },
+        {
+          "label": "Validate",
+          "detail": "Rerun the trigger after the change."
+        },
+        {
+          "label": "Document",
+          "detail": "Write down the cause and the fix."
+        }
+      ],
+      "caption": "This sequence describes guided training labs, not ownership of customer production incidents."
+    },
+    {
+      "id": "cloud-lab-capstone",
+      "kind": "flow",
+      "title": "What the capstone connected",
+      "summary": "A small event-driven chain made each connection visible and testable.",
+      "items": [
+        {
+          "label": "Upload",
+          "detail": "A user supplies a sample file."
+        },
+        {
+          "label": "S3 event",
+          "detail": "The bucket event starts the next step."
+        },
+        {
+          "label": "Lambda",
+          "detail": "The function extracts metadata from the object."
+        },
+        {
+          "label": "DynamoDB",
+          "detail": "A permitted write stores the metadata record."
+        },
+        {
+          "label": "Frontend",
+          "detail": "The Amplify-hosted interface reads and displays the records through its configured data path."
+        }
+      ],
+      "caption": "A schematic of the capstone described in the article, not a screenshot of a production deployment."
+    }
+  ]
+}

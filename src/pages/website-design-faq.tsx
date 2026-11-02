@@ -1,9 +1,10 @@
+import TableScroll from "../features/demos/TableScroll";
 import * as React from "react";
 import type { HeadFC } from "gatsby";
 import Layout from "../@lekoarts/gatsby-theme-minimal-blog/components/layout";
 import Seo from "../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
-import { Card, Link, Section, FAQAccordion } from "../ui";
+import { Link, Section, FAQAccordion } from "../ui";
 
 const pathname = "/website-design-faq/";
 const pageTitle = "Website Design FAQ — Cost, Timeline, Ownership | Bradley Matera";
@@ -62,7 +63,7 @@ const faqs = [
 ];
 
 const FAQPage = () => (
-  <Layout>
+  <Layout className="business-page website-design-faq-page">
     <nav className="breadcrumbs" aria-label="Breadcrumb">
       <ol className="breadcrumbs__list">
         <li className="breadcrumbs__item">
@@ -130,15 +131,15 @@ const FAQPage = () => (
       title="Pricing, timelines, and ownership at a glance"
       description={<p>A summary of the most common questions answered in a single table.</p>}
     >
-      <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Pricing and timeline comparison table">
-        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.9rem" }}>
+      <TableScroll label="Pricing and timeline comparison table">
+<table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.9rem" }}>
           <thead>
             <tr>
-              <th style={{ textAlign: "left", padding: "0.75rem", borderBottom: "2px solid var(--color-border)" }}>Package</th>
-              <th style={{ textAlign: "left", padding: "0.75rem", borderBottom: "2px solid var(--color-border)" }}>Build price</th>
-              <th style={{ textAlign: "left", padding: "0.75rem", borderBottom: "2px solid var(--color-border)" }}>Monthly</th>
-              <th style={{ textAlign: "left", padding: "0.75rem", borderBottom: "2px solid var(--color-border)" }}>Timeline</th>
-              <th style={{ textAlign: "left", padding: "0.75rem", borderBottom: "2px solid var(--color-border)" }}>Best for</th>
+              <th scope="col" style={{ textAlign: "left", padding: "0.75rem", borderBottom: "2px solid var(--color-border)" }}>Package</th>
+              <th scope="col" style={{ textAlign: "left", padding: "0.75rem", borderBottom: "2px solid var(--color-border)" }}>Build price</th>
+              <th scope="col" style={{ textAlign: "left", padding: "0.75rem", borderBottom: "2px solid var(--color-border)" }}>Monthly</th>
+              <th scope="col" style={{ textAlign: "left", padding: "0.75rem", borderBottom: "2px solid var(--color-border)" }}>Timeline</th>
+              <th scope="col" style={{ textAlign: "left", padding: "0.75rem", borderBottom: "2px solid var(--color-border)" }}>Best for</th>
             </tr>
           </thead>
           <tbody>
@@ -149,7 +150,7 @@ const FAQPage = () => (
             <tr><td style={{ padding: "0.75rem" }}>Hourly</td><td style={{ padding: "0.75rem" }}>$65/hr</td><td style={{ padding: "0.75rem" }}>—</td><td style={{ padding: "0.75rem" }}>24-48hr</td><td style={{ padding: "0.75rem" }}>Small fixes, maintenance</td></tr>
           </tbody>
         </table>
-      </div>
+</TableScroll>
       <div className="card-actions" style={{ marginTop: "1.5rem" }}>
         <Link data-variant="primary" to="/pricing/">See full pricing</Link>
         <Link data-variant="ghost" to="/contact/">Get a free website plan</Link>

@@ -3,13 +3,16 @@ import type { HeadFC } from "gatsby";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
 import DemoLayout from "../../features/demos/DemoLayout";
+import DemoNavigation from "../../features/demos/DemoNavigation";
+import DemoJourney from "../../features/demos/DemoJourney";
+import TableScroll from "../../features/demos/TableScroll";
 import GoogleMapsEmbed from "../../features/demos/GoogleMapsEmbed";
 import SocialLinks, { SocialLink } from "../../features/demos/SocialLinks";
 import ReviewBadges from "../../features/demos/ReviewBadges";
 import WeatherWidget from "../../features/demos/WeatherWidget";
 import IntegrationsSection, { Integration } from "../../features/demos/IntegrationsSection";
 import FAQSection, { FAQItem } from "../../features/demos/FAQSection";
-import { StarIcon, MapPinIcon, PhoneIcon, LeafIcon, SunIcon, ClockIcon, CheckIcon, GearIcon, ToolsIcon, ShieldIcon, BoltIcon, AlertIcon, CalendarIcon } from "../../site/icons";
+import { StarIcon, MapPinIcon, PhoneIcon, LeafIcon, SunIcon, ClockIcon, CheckIcon, GearIcon, ToolsIcon, ShieldIcon, BoltIcon, AlertIcon } from "../../site/icons";
 
 const pathname = "/demos/agriculture/";
 const pageTitle = "Kishwaukee Valley Farm Services — Farm Equipment Website Concept Demo (Fictional)";
@@ -133,7 +136,7 @@ const StarRating: React.FC = () => (
 );
 
 const CommodityPriceTicker: React.FC = () => {
-  const tickerItems = [...commodityPrices, ...commodityPrices, ...commodityPrices];
+  const tickerItems = commodityPrices;
   return (
     <div className="demo-financing-calc" style={{ maxWidth: "none", padding: "1.5rem 2rem" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem", flexWrap: "wrap", gap: "0.5rem" }}>
@@ -143,7 +146,7 @@ const CommodityPriceTicker: React.FC = () => {
         </span>
       </div>
       <div style={{ overflow: "hidden", position: "relative", background: "var(--demo-bg)", borderRadius: "var(--demo-radius)", padding: "0.75rem 0", border: "1px solid var(--demo-border)" }}>
-        <div style={{ display: "flex", gap: "2.5rem", whiteSpace: "nowrap", animation: "tickerScroll 30s linear infinite", paddingLeft: "100%" }}>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "1.5rem", padding: "0 1rem" }}>
           {tickerItems.map((item, i) => (
             <span key={i} style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", fontSize: "1rem", fontWeight: 600 }}>
               <span style={{ color: "var(--demo-heading)" }}>{item.commodity}</span>
@@ -197,7 +200,7 @@ const EquipmentFinancingCalculator: React.FC = () => {
         <span>Amount Financed: <strong style={{ color: "var(--demo-heading)" }}>{fmt(financed)}</strong></span>
         <span>APR: <strong style={{ color: "var(--demo-heading)" }}>{apr}%</strong></span>
       </div>
-      <div className="demo-financing-calc__result">
+      <div className="demo-financing-calc__result" aria-live="polite">
         <div className="demo-financing-calc__result-label">Estimated Monthly Payment</div>
         <div className="demo-financing-calc__result-value">{fmt(monthly)}<span className="demo-financing-calc__result-period">/mo</span></div>
       </div>
@@ -206,95 +209,14 @@ const EquipmentFinancingCalculator: React.FC = () => {
   );
 };
 
-const ServiceRequestForm: React.FC = () => {
-  const [equipmentType, setEquipmentType] = React.useState("");
-  const [urgency, setUrgency] = React.useState("");
-  const [submitted, setSubmitted] = React.useState(false);
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
-  if (submitted) {
-    return (
-      <div className="demo-financing-calc" style={{ maxWidth: "600px" }}>
-        <div style={{ textAlign: "center", padding: "2rem 0" }}>
-          <CheckIcon size={48} />
-          <h3 style={{ marginTop: "1rem", fontFamily: "var(--demo-font-heading)" }}>Service Request Received</h3>
-          <p style={{ color: "var(--demo-text-muted)", marginTop: "0.5rem" }}>Our service department will call you within 2 hours during business hours. For emergency breakdowns during planting or harvest, call (815) 555-0630 and press 1.</p>
-          <button className="demo-form__submit" style={{ maxWidth: "250px", margin: "1.5rem auto 0" }} onClick={() => setSubmitted(false)}>Submit Another Request</button>
-        </div>
-      </div>
-    );
-  }
-  return (
-    <div className="demo-financing-calc" style={{ maxWidth: "600px" }}>
-      <h3 className="demo-financing-calc__title">Service Request Form</h3>
-      <p className="demo-financing-calc__subtitle">Tell us about your equipment and what's going on. We'll get back to you fast.</p>
-      <form onSubmit={handleSubmit}>
-        <div className="demo-form__row">
-          <div className="demo-form__field">
-            <label className="demo-form__label" htmlFor="svc-equipment-type">Equipment Type *</label>
-            <select id="svc-equipment-type" className="demo-form__select" value={equipmentType} onChange={(e) => setEquipmentType(e.target.value)} required>
-              <option value="">Select type...</option>
-              <option value="Tractor">Tractor</option>
-              <option value="Combine">Combine</option>
-              <option value="Planter">Planter</option>
-              <option value="Baler">Baler</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-          <div className="demo-form__field">
-            <label className="demo-form__label" htmlFor="svc-urgency">Urgency Level *</label>
-            <select id="svc-urgency" className="demo-form__select" value={urgency} onChange={(e) => setUrgency(e.target.value)} required>
-              <option value="">Select urgency...</option>
-              <option value="Emergency">Emergency breakdown</option>
-              <option value="Scheduled">Scheduled service</option>
-              <option value="Routine">Routine maintenance</option>
-            </select>
-          </div>
-        </div>
-        <div className="demo-form__row">
-          <div className="demo-form__field">
-            <label className="demo-form__label" htmlFor="svc-make">Make</label>
-            <input id="svc-make" className="demo-form__input" type="text" placeholder="John Deere, Case IH, Kubota..." />
-          </div>
-          <div className="demo-form__field">
-            <label className="demo-form__label" htmlFor="svc-model">Model</label>
-            <input id="svc-model" className="demo-form__input" type="text" placeholder="6120M, Farmall 120A..." />
-          </div>
-        </div>
-        <div className="demo-form__field">
-          <label className="demo-form__label" htmlFor="svc-year">Year</label>
-          <input id="svc-year" className="demo-form__input" type="text" placeholder="2019" />
-        </div>
-        <div className="demo-form__field">
-          <label className="demo-form__label" htmlFor="svc-issue">Issue Description *</label>
-          <textarea id="svc-issue" className="demo-form__textarea" rows={3} placeholder="Describe what's happening — won't start, hydraulic leak, PTO won't engage..." required />
-        </div>
-        <div className="demo-form__row">
-          <div className="demo-form__field">
-            <label className="demo-form__label" htmlFor="svc-name">Your Name *</label>
-            <input id="svc-name" className="demo-form__input" type="text" required />
-          </div>
-          <div className="demo-form__field">
-            <label className="demo-form__label" htmlFor="svc-phone">Phone *</label>
-            <input id="svc-phone" className="demo-form__input" type="tel" placeholder="(815) 555-0000" required />
-          </div>
-        </div>
-        <div className="demo-form__field">
-          <label className="demo-form__label" htmlFor="svc-date"><CalendarIcon size={14} /> Preferred Service Date</label>
-          <input id="svc-date" className="demo-form__input" type="date" />
-        </div>
-        <button type="submit" className="demo-form__submit">Submit Service Request</button>
-        <p style={{ fontSize: "0.75rem", color: "var(--demo-text-muted)", textAlign: "center", marginTop: "0.75rem" }}>
-          <AlertIcon size={12} /> Emergency breakdown? Don't wait — call <a href="tel:8155550630" style={{ color: "var(--demo-accent)", fontWeight: 700 }}>(815) 555-0630</a> and press 1 for immediate dispatch.
-        </p>
-      </form>
-    </div>
-  );
-};
+const ServiceRequestForm: React.FC = () => <DemoJourney kind="agriculture" />;
 
-const AgricultureDemo: React.FC = () => (
+const AgricultureDemo: React.FC = () => {
+  const [inventoryQuery, setInventoryQuery] = React.useState("");
+  const [inventoryStatus, setInventoryStatus] = React.useState("all");
+  const filteredInventory = equipmentInventory.filter((item) => item.model.toLowerCase().includes(inventoryQuery.toLowerCase().trim()) && (inventoryStatus === "all" || item.statusType === inventoryStatus));
+  const resetInventory = () => { setInventoryQuery(""); setInventoryStatus("all"); };
+  return (
   <DemoLayout
     demoName="Kishwaukee Valley Farm Services"
     industry="Agriculture / Farm Supply"
@@ -307,12 +229,12 @@ const AgricultureDemo: React.FC = () => (
         <span className="ag-mark" aria-hidden="true">KV</span>
         <span><strong>Kishwaukee Valley</strong><small>Farm Services · Since 1972*</small></span>
       </a>
-      <div className="flagship-nav__links">
+      <DemoNavigation>
         <a href="#services">Service</a>
         <a href="#inventory">Equipment</a>
         <a href="#product-categories">Parts</a>
         <a href="#service-request" className="demo-btn demo-btn--primary">Request service</a>
-      </div>
+      </DemoNavigation>
     </nav>
 
     <section className="ag-hero" id="field-top">
@@ -324,7 +246,7 @@ const AgricultureDemo: React.FC = () => (
           <a href="#service-request" className="demo-btn demo-btn--primary">Request field service</a>
           <a href="#inventory" className="demo-btn demo-btn--ghost">Browse equipment</a>
         </div>
-        <p className="ag-hero__phone"><span>Season support line</span><a href="tel:8155550630"><PhoneIcon size={17} /> (815) 555-0630</a></p>
+        <p className="ag-hero__phone"><span>Season support line</span><a href="#demo-disclosure" aria-label="Fictional demo phone; view disclosure"><PhoneIcon size={17} /> (815) 555-0630</a></p>
       </div>
       <div className="ag-hero__collage">
         <figure className="ag-hero__main-image">
@@ -460,8 +382,10 @@ const AgricultureDemo: React.FC = () => (
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Equipment Inventory</h2>
         <p className="demo-section__subtitle">Illustrative sample inventory below. A production site would pull live stock from a dealer management system. Call (815) 555-0630 for current availability and to schedule a demo.</p>
-        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
-        <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Sample equipment inventory">
+        <div className="demo-inventory-filters"><div><label htmlFor="equipment-search">Find sample equipment</label><input id="equipment-search" className="demo-form__input" type="search" value={inventoryQuery} onChange={(event) => setInventoryQuery(event.target.value)} /></div><div><label htmlFor="equipment-status">Sample availability</label><select id="equipment-status" className="demo-form__select" value={inventoryStatus} onChange={(event) => setInventoryStatus(event.target.value)}><option value="all">All statuses</option><option value="in-stock">In stock</option><option value="on-order">On order</option><option value="used">Used</option></select></div><button type="button" className="demo-btn demo-btn--ghost" onClick={resetInventory}>Reset</button></div>
+        <p role="status">{filteredInventory.length} sample equipment records match.</p>
+        {filteredInventory.length === 0 && <p>No sample equipment matches. Try another model or reset the filters.</p>}
+        <TableScroll label="Sample equipment inventory">
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
             <thead>
               <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
@@ -472,7 +396,7 @@ const AgricultureDemo: React.FC = () => (
               </tr>
             </thead>
             <tbody>
-              {equipmentInventory.map((item) => (
+              {filteredInventory.map((item) => (
                 <tr key={item.model} style={{ borderBottom: "1px solid var(--color-border)" }}>
                   <td style={{ padding: "0.75rem", fontWeight: 600 }}>{item.model}</td>
                   <td style={{ padding: "0.75rem" }}>{item.hp}</td>
@@ -499,7 +423,7 @@ const AgricultureDemo: React.FC = () => (
               ))}
             </tbody>
           </table>
-        </div>
+        </TableScroll>
         <p style={{ fontSize: "0.8rem", color: "var(--demo-text-muted)", marginTop: "1rem", textAlign: "center" }}>
           Prices, status, and availability are illustrative for this demo. Real inventory changes daily. Call (815) 555-0630 for current stock, pricing, and trade-in appraisal.
         </p>
@@ -545,8 +469,7 @@ const AgricultureDemo: React.FC = () => (
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Product Categories</h2>
         <p className="demo-section__subtitle">We stock the brands you trust and the parts you need. Special orders welcome — most arrive in 2–3 days.</p>
-        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
-        <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Product categories">
+        <TableScroll label="Product categories">
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
             <thead>
               <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
@@ -565,7 +488,7 @@ const AgricultureDemo: React.FC = () => (
               ))}
             </tbody>
           </table>
-        </div>
+        </TableScroll>
       </div>
     </section>
 
@@ -677,7 +600,7 @@ const AgricultureDemo: React.FC = () => (
       <div className="demo-contact__inner">
         <h2 className="demo-contact__title">Need Parts, Service, or a New Tractor?</h2>
         <p className="demo-contact__text">Call (815) 555-0630 or stop by the shop on Route 64 in Oregon. During planting and harvest, our service line is open 7 days a week.</p>
-        <a href="tel:8155550630" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0630</a>
+        <a href="#demo-disclosure" aria-label="Fictional demo phone; view disclosure" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0630</a>
         <div style={{ marginTop: "1.5rem" }}>
           <SocialLinks links={socialLinks} />
         </div>
@@ -694,6 +617,7 @@ const AgricultureDemo: React.FC = () => (
     </footer>
   </DemoLayout>
 );
+};
 
 export default AgricultureDemo;
 

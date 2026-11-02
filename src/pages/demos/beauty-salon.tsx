@@ -3,6 +3,8 @@ import type { HeadFC } from "gatsby";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
 import DemoLayout from "../../features/demos/DemoLayout";
+import DemoNavigation from "../../features/demos/DemoNavigation";
+import DemoJourney from "../../features/demos/DemoJourney";
 import GoogleMapsEmbed from "../../features/demos/GoogleMapsEmbed";
 import SocialLinks, { SocialLink } from "../../features/demos/SocialLinks";
 import ReviewBadges from "../../features/demos/ReviewBadges";
@@ -102,17 +104,17 @@ const StarRating: React.FC = () => (
 );
 
 const BeautySalonDemo: React.FC = () => (
-  <DemoLayout demoName="Bella Vista Salon" industry="Beauty Salon" themeColor="#9b315d" designSystem="soft" pageClassName="demo-flagship demo-flagship--salon">
+  <DemoLayout demoName="Bella Vista Salon" industry="Beauty Salon" themeColor="#7d2047" designSystem="soft" pageClassName="demo-flagship demo-flagship--salon">
     <nav className="flagship-nav salon-nav" aria-label="Bella Vista Salon navigation">
       <a className="flagship-nav__brand" href="#salon-top" aria-label="Bella Vista Salon home">
         <span className="salon-mark" aria-hidden="true">BV</span>
         <span><strong>Bella Vista</strong><small>Hair · skin · nails</small></span>
       </a>
-      <div className="flagship-nav__links">
+      <DemoNavigation>
         <a href="#services">Services</a>
         <a href="#book">Artists</a>
         <a href="#book" className="demo-btn demo-btn--primary">Book a visit</a>
-      </div>
+      </DemoNavigation>
     </nav>
 
     <section className="salon-hero" id="salon-top">
@@ -346,40 +348,10 @@ const BeautySalonDemo: React.FC = () => (
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Book Your Appointment</h2>
         <p className="demo-section__subtitle">Mock booking widget. A production site would embed your real scheduling system for live availability.</p>
-        <ol style={{ maxWidth: "600px", margin: "0 auto 2rem", paddingLeft: "1.5rem", color: "var(--demo-text-muted)", fontSize: "0.9375rem", lineHeight: 1.8 }}>
-          <li>Choose your service — haircut, color, nails, skincare, or makeup.</li>
-          <li>Select your preferred stylist from our team of four professionals.</li>
-          <li>Pick a date and time that works for you — availability shown is illustrative.</li>
-          <li>Enter your name and phone number to confirm — in a live system, text reminders would be sent before your appointment.</li>
-        </ol>
+
         <div className="demo-two-col">
           <div>
-            <div className="demo-booking-widget">
-              <div className="demo-booking-widget__header">
-                <h3 className="demo-booking-widget__title">Book Now</h3>
-                <span className="demo-booking-widget__powered-by">Powered by Vagaro</span>
-              </div>
-              <div className="demo-form__field" style={{ margin: 0 }}>
-                <label className="demo-form__label" htmlFor="salon-service">Service</label>
-                <select id="salon-service" className="demo-form__select"><option>Haircut & Style</option><option>Color / Highlights</option><option>Balayage</option><option>Manicure / Pedicure</option><option>Facial</option><option>Makeup</option><option>Bridal Package</option></select>
-              </div>
-              <div className="demo-form__field" style={{ margin: "0.75rem 0 0" }}>
-                <label className="demo-form__label" htmlFor="salon-stylist">Stylist</label>
-                <select id="salon-stylist" className="demo-form__select"><option>No preference</option><option>Angela Rossi</option><option>Lisa Chen</option><option>Maya Kim</option><option>Tina Santos</option></select>
-              </div>
-              <div className="demo-booking-widget__row" style={{ marginTop: "0.75rem" }}>
-                <div className="demo-form__field" style={{ margin: 0 }}>
-                  <label className="demo-form__label" htmlFor="salon-date">Date</label>
-                  <input id="salon-date" className="demo-form__input" type="date" />
-                </div>
-                <div className="demo-form__field" style={{ margin: 0 }}>
-                  <label className="demo-form__label" htmlFor="salon-time">Time</label>
-                  <select id="salon-time" className="demo-form__select"><option>9:00 AM</option><option>10:00 AM</option><option>11:00 AM</option><option>1:00 PM</option><option>2:00 PM</option><option>3:00 PM</option><option>4:00 PM</option><option>5:00 PM</option><option>6:00 PM</option><option>7:00 PM</option></select>
-                </div>
-              </div>
-              <button type="button" className="demo-booking-widget__find" aria-live="polite" onClick={(event) => { event.currentTarget.textContent = "Demo appointment selected"; }}>Book Appointment</button>
-              <div className="demo-booking-widget__note">Mock Vagaro widget. This form does not submit or check real availability. Production sites embed the real Vagaro, Square Appointments, or similar booking widget for live scheduling and text reminders.</div>
-            </div>
+            <DemoJourney kind="beauty-salon" />
           </div>
           <div>
             <table className="demo-hours">
@@ -414,7 +386,7 @@ const BeautySalonDemo: React.FC = () => (
       <div className="demo-contact__inner">
         <h2 className="demo-contact__title">Get in Touch</h2>
         <p className="demo-contact__text">Call (815) 555-0987 or book online. New clients get 20% off their first service.</p>
-        <a href="tel:8155550987" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0987</a>
+        <a href="#demo-disclosure" aria-label="Fictional demo phone; view disclosure" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0987</a>
         <div style={{ marginTop: "1.5rem" }}><SocialLinks links={socialLinks} /></div>
         <div className="demo-contact__info">
           <div className="demo-contact__info-item"><MapPinIcon size={20} /><span className="demo-contact__info-label">Address</span><span>321 N Main Street, Rockford, IL</span></div>

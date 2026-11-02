@@ -1,0 +1,57 @@
+{
+  "slug": "website-design-dekalb-illinois",
+  "title": "Website Design in DeKalb, Illinois: What NIU-Area Businesses Should Know",
+  "cover": {
+    "src": "/images/blog/website-design-dekalb-illinois/cover.png",
+    "mobile": "/images/blog/website-design-dekalb-illinois/cover-720.webp",
+    "alt": "Concept illustration of a fictional college-town cafe connecting student and resident needs through one mobile website; not an actual DeKalb location."
+  },
+  "figures": [
+    {
+      "id": "two-audiences",
+      "kind": "comparison",
+      "title": "One website, two customer contexts",
+      "summary": "The guide distinguishes year-round local needs from campus-oriented searches.",
+      "items": [
+        {
+          "label": "Year-round residents",
+          "detail": "Look for established local services, contact details, and service-area relevance."
+        },
+        {
+          "label": "Students near campus",
+          "detail": "Use phones to find nearby food, appointments, and everyday businesses."
+        },
+        {
+          "label": "Shared requirements",
+          "detail": "Both need readable mobile pages, clear service information, and an obvious next action."
+        }
+      ],
+      "caption": "An audience-planning comparison from the article, without estimating the size or behavior of either group."
+    },
+    {
+      "id": "local-foundations",
+      "kind": "layers",
+      "title": "Connect the local information consistently",
+      "summary": "Each layer should describe the same real business and service area.",
+      "items": [
+        {
+          "label": "Business profile",
+          "detail": "Maintain accurate categories, contact information, and photos."
+        },
+        {
+          "label": "Useful service pages",
+          "detail": "Explain actual services and the areas served without city-name-only duplication."
+        },
+        {
+          "label": "Directory details",
+          "detail": "Keep name, address, and phone consistent across public listings."
+        },
+        {
+          "label": "Page metadata and schema",
+          "detail": "Use descriptive titles and appropriate structured information."
+        }
+      ],
+      "caption": "The local SEO foundations listed in this guide; they do not guarantee a search position."
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "slug": "/github-actions-aws",
+  "title": "GitHub Actions Basics: One CI Check You Can Trust",
+  "cover": {
+    "src": "/images/blog/github-actions-aws/cover.png",
+    "mobile": "/images/blog/github-actions-aws/cover-720.webp",
+    "alt": "A clean transparent CI chamber installs dependency tiles, inspects them and builds a browser tile with a status light."
+  },
+  "figures": [
+    {
+      "id": "ci-baseline",
+      "kind": "flow",
+      "title": "The baseline CI job",
+      "summary": "A clean runner executes the repository's checks in order.",
+      "items": [
+        {
+          "label": "Trigger",
+          "detail": "A matching push or pull request starts the workflow."
+        },
+        {
+          "label": "Checkout",
+          "detail": "Make the repository files available on the runner."
+        },
+        {
+          "label": "Set up Node",
+          "detail": "Use the runtime version specified by the workflow."
+        },
+        {
+          "label": "Install",
+          "detail": "Install project dependencies."
+        },
+        {
+          "label": "Lint",
+          "detail": "Run the repository's lint command."
+        },
+        {
+          "label": "Build",
+          "detail": "Run the production build and inspect the job result."
+        }
+      ],
+      "caption": "A diagram of the baseline YAML above. A passing job establishes only what its configured commands check."
+    },
+    {
+      "id": "deploy-boundaries",
+      "kind": "layers",
+      "title": "Deployment adds separate responsibilities",
+      "summary": "The optional AWS extension goes beyond the baseline CI check.",
+      "items": [
+        {
+          "label": "Identity",
+          "detail": "OIDC and the role's trust policy connect the workflow to temporary AWS credentials."
+        },
+        {
+          "label": "Artifact",
+          "detail": "The deployment job builds the static output that will be published."
+        },
+        {
+          "label": "Storage",
+          "detail": "The sync step writes the output to the intended S3 bucket."
+        },
+        {
+          "label": "Delivery",
+          "detail": "The CloudFront invalidation requests refresh of selected cached paths."
+        }
+      ],
+      "caption": "Roles of the deployment components described in the article, without current pricing or quota assumptions."
+    }
+  ]
+}

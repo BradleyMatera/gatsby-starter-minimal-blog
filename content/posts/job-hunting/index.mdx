@@ -7,6 +7,9 @@ description: "A practical job search workflow with a tracker file, resume versio
 theme: "Career"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/job-hunting.json";
+
 Job hunting is a pipeline, and pipelines get messy when you try to hold them in your head. The only way I have ever seen it become less chaotic is when you turn it into something you can point at: a tracker you actually update, a place where each resume version lives, and a weekly check that forces you to react to reality instead of vibes.
 
 This is a practical workflow you can run locally. It is not a productivity system and it is not a "brand building" post. It is the minimum set of files and habits that make a search measurable. If you do not want structure, stop here. If you do, this is start-to-finish.
@@ -19,8 +22,7 @@ By the end, you will have one tracker file that cannot get lost, one folder that
 
 The only standard I care about is this: if someone asked you right now "how many roles have you applied to in the last 30 days and what happened," you could answer in under a minute by opening a file.
 
-{/* visual-break:job-hunting:1 */}
-![Career progression checkpoint illustration for this section.](/assets/visuals/blog/job-hunting-break-1.png)
+<ArticleVisual spec={articleVisuals.figures[0]} />
 
 ## How I think about the job search
 
@@ -128,6 +130,8 @@ That is it. You are not chasing people every two days. You are just keeping your
 
 When you add a row to the tracker, set `follow_up_date` immediately. That is the whole move.
 
+<ArticleVisual spec={articleVisuals.figures[1]} />
+
 ## A tracker table that stays readable
 
 If you prefer spreadsheets over CSV editing, keep the CSV as the "source of truth" and open it in a spreadsheet app. The format is the same either way. What matters is consistency.
@@ -162,9 +166,6 @@ The tracker exists but never gets updated. That is solved by making "add row to 
 Resume versions exist but are scattered. That is solved once: move them into the folder and rename them. You only have to clean the mess once.
 
 The weekly note stays empty. That is solved by making the weekly note stupidly small. If you cannot write the full template, write one line: "One change next week: ____." Keeping the loop alive matters more than writing a nice note.
-
-{/* visual-break:job-hunting:2 */}
-![Professional growth checkpoint illustration for this section.](/assets/visuals/blog/job-hunting-break-2.png)
 
 ## Closing
 

@@ -1,4 +1,5 @@
 import * as React from "react";
+import BrandArtwork from "../site/components/BrandArtwork";
 import type { HeadFC } from "gatsby";
 import Layout from "../@lekoarts/gatsby-theme-minimal-blog/components/layout";
 import Seo from "../@lekoarts/gatsby-theme-minimal-blog/components/seo";
@@ -11,7 +12,7 @@ const pageDescription =
   "How Bradley Matera approaches website help for Durand, Davis, and nearby Northwest Illinois projects: scope, cleanup, structure, fixes, and delivery expectations.";
 
 const WebsiteHelpPage = () => (
-  <Layout>
+  <Layout className="business-page website-help-northwest-illinois-page">
     <nav className="breadcrumbs" aria-label="Breadcrumb">
       <ol className="breadcrumbs__list">
         <li className="breadcrumbs__item">
@@ -30,6 +31,7 @@ const WebsiteHelpPage = () => (
       eyebrow="Website help"
       title="How I approach website help in Northwest Illinois"
       titleAs="h1"
+      visual={<BrandArtwork variant="growth-systems" eager />}
       description={
         <>
           <p>

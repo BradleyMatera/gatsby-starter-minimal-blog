@@ -1,0 +1,61 @@
+{
+  "slug": "/interactive-pokedex",
+  "title": "Interactive Pokedex: Static Build With Search",
+  "cover": {
+    "src": "/images/blog/interactive-pokedex/cover.png",
+    "mobile": "/images/blog/interactive-pokedex/cover-720.webp",
+    "alt": "Conceptual specimen drawer with colorful folded-paper creatures and a magnifying lens representing catalog search"
+  },
+  "figures": [
+    {
+      "id": "browser-data-loop",
+      "kind": "flow",
+      "title": "A static page with live browser data",
+      "summary": "The files stay static while the browser loads and filters the collection.",
+      "items": [
+        {
+          "label": "Load files",
+          "detail": "The host serves HTML, CSS and JavaScript."
+        },
+        {
+          "label": "Fetch the list",
+          "detail": "PokéAPI returns names and detail URLs."
+        },
+        {
+          "label": "Add details",
+          "detail": "Limited concurrent requests add sprites and types."
+        },
+        {
+          "label": "Filter and render",
+          "detail": "A normalized search query filters local state and redraws cards."
+        }
+      ],
+      "caption": "The data path implemented by the list request, detail workers and applyFilter function."
+    },
+    {
+      "id": "browser-state-checks",
+      "kind": "checklist",
+      "title": "Verify every visible state",
+      "summary": "A successful first load is only one of the checks.",
+      "items": [
+        {
+          "label": "Loading",
+          "detail": "The status distinguishes the list request from detail loading."
+        },
+        {
+          "label": "Filtered",
+          "detail": "A search reduces the grid; clearing it restores the full list."
+        },
+        {
+          "label": "No matches",
+          "detail": "An empty result has an explicit message."
+        },
+        {
+          "label": "Request failure",
+          "detail": "A blocked network produces an error and a usable Reload action."
+        }
+      ],
+      "caption": "Checks from the article's verification walkthrough; these are behaviors to test, not measured results."
+    }
+  ]
+}

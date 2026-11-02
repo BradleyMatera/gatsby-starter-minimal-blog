@@ -1,0 +1,65 @@
+{
+  "slug": "/seo-rockford-il",
+  "title": "SEO Rockford IL: A Local Business Guide to Actually Ranking",
+  "cover": {
+    "src": "/images/blog/seo-rockford-il/cover.png",
+    "mobile": "/images/blog/seo-rockford-il/cover-720.webp",
+    "alt": "Conceptual Midwestern river-town relief model and brass compass representing local search work"
+  },
+  "figures": [
+    {
+      "id": "local-seo-workstreams",
+      "kind": "layers",
+      "title": "Local SEO is a set of visible workstreams",
+      "summary": "Each area produces changes that can be inspected.",
+      "items": [
+        {
+          "label": "Business profile",
+          "detail": "Maintain accurate categories, service details and business information."
+        },
+        {
+          "label": "On-page structure",
+          "detail": "Write useful headings, titles, descriptions and relevant structured data."
+        },
+        {
+          "label": "Technical foundation",
+          "detail": "Check mobile usability, crawlability and loading behavior."
+        },
+        {
+          "label": "Useful content",
+          "detail": "Answer the questions customers actually ask."
+        }
+      ],
+      "caption": "The four areas defined near the start of the article; no percentage contribution or ranking guarantee is encoded."
+    },
+    {
+      "id": "provider-report-evidence",
+      "kind": "checklist",
+      "title": "Ask for a report you can verify",
+      "summary": "A list of actions is more useful when it links to the work.",
+      "items": [
+        {
+          "label": "Specific tasks",
+          "detail": "Identify exactly what changed."
+        },
+        {
+          "label": "Published URLs",
+          "detail": "Link new or revised pages."
+        },
+        {
+          "label": "Citation records",
+          "detail": "List directories that were added or corrected."
+        },
+        {
+          "label": "Comparable baseline",
+          "detail": "Tie observations to the same pages, keywords and reporting periods."
+        },
+        {
+          "label": "Next steps and ownership",
+          "detail": "Explain planned work and what remains yours if the engagement ends."
+        }
+      ],
+      "caption": "Evidence requirements drawn from the article's retainer and provider-evaluation sections; outcomes are not promised."
+    }
+  ]
+}

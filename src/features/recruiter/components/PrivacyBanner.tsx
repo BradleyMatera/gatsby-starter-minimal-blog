@@ -19,9 +19,9 @@ const PrivacyBanner: React.FC = () => {
         display: "flex",
         alignItems: "flex-start",
         gap: "1rem",
-        border: "1px solid rgba(251,191,36,0.2)",
+        border: "1px solid var(--r-border)",
         background:
-          "linear-gradient(145deg, rgba(251,191,36,0.04) 0%, rgba(13,13,18,0.72) 60%)",
+          "var(--r-surface)",
       }}
     >
       <span className="privacy-banner__icon">
@@ -46,14 +46,13 @@ const PrivacyBanner: React.FC = () => {
             margin: 0,
           }}
         >
-          Phone and email addresses on this page are displayed with a visual blur
-          to prevent automated scraping by bots and data harvesters. Simply hover or
-          click to reveal the full value. This measure protects against unsolicited
-          calls and spam while keeping the information fully accessible to recruiters
-          and hiring managers reviewing this profile.
+          Phone and email addresses stay hidden until you choose Reveal contact details.
+          Once revealed, use the email or phone link to get in touch. You can hide them
+          again at any time.
         </p>
       </div>
       <button
+        type="button"
         onClick={() => setDismissed(true)}
         aria-label="Dismiss privacy notice"
         style={{
@@ -62,7 +61,9 @@ const PrivacyBanner: React.FC = () => {
           border: "none",
           color: "var(--recruiter-text-muted)",
           cursor: "pointer",
-          padding: "0.25rem",
+          padding: "0.5rem",
+          minWidth: 44,
+          minHeight: 44,
           lineHeight: 1,
           display: "flex",
           alignItems: "center",

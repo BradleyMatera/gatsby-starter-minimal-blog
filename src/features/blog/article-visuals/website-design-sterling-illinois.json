@@ -1,0 +1,61 @@
+{
+  "slug": "website-design-sterling-illinois",
+  "title": "Website Design in Sterling, Illinois: A Whiteside County Guide",
+  "cover": {
+    "src": "/images/blog/website-design-sterling-illinois/cover.png",
+    "mobile": "/images/blog/website-design-sterling-illinois/cover-720.webp",
+    "alt": "Concept illustration of a fictional manufacturing capability sheet, quote form, and precision metal part; not a photograph of a Sterling factory."
+  },
+  "figures": [
+    {
+      "id": "procurement-journey",
+      "kind": "flow",
+      "title": "Build the site around a procurement inquiry",
+      "summary": "The manufacturing section describes a different information path from a walk-in business.",
+      "items": [
+        {
+          "label": "Discover capabilities",
+          "detail": "Explain the manufacturing processes and work the company can take on."
+        },
+        {
+          "label": "Review specifications",
+          "detail": "Make relevant technical sheets easy to find."
+        },
+        {
+          "label": "Evaluate the fit",
+          "detail": "Use clear capability content to help a buyer decide whether to ask for a quote."
+        },
+        {
+          "label": "Request a quote",
+          "detail": "Provide an RFQ path suited to the information the business needs."
+        }
+      ],
+      "caption": "A conceptual B2B customer path from the article, not a claim about any specific Sterling manufacturer."
+    },
+    {
+      "id": "industrial-site-scope",
+      "kind": "checklist",
+      "title": "Check the industrial content before selecting a template",
+      "summary": "A manufacturing site should support the buyer's task, not copy a restaurant's structure.",
+      "items": [
+        {
+          "label": "Capability pages",
+          "detail": "Give each important capability enough space to be understood."
+        },
+        {
+          "label": "Specification access",
+          "detail": "Organize the documents a prospective buyer needs."
+        },
+        {
+          "label": "RFQ form",
+          "detail": "Make the request route clear and appropriate for technical inquiries."
+        },
+        {
+          "label": "Local business details",
+          "detail": "Keep location, service area, and public contact information consistent."
+        }
+      ],
+      "caption": "Website requirements explicitly discussed in the manufacturing and local SEO sections."
+    }
+  ]
+}

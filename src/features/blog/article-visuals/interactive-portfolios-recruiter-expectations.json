@@ -1,0 +1,61 @@
+{
+  "slug": "/interactive-portfolios-recruiter-expectations",
+  "title": "Interactive Portfolio Basics: Keep It Fun and Still Clear",
+  "cover": {
+    "src": "/images/blog/interactive-portfolios-recruiter-expectations/cover.png",
+    "mobile": "/images/blog/interactive-portfolios-recruiter-expectations/cover-720.webp",
+    "alt": "Conceptual open portfolio folio with clearly visible panels and a small optional side drawer"
+  },
+  "figures": [
+    {
+      "id": "visible-versus-optional",
+      "kind": "comparison",
+      "title": "Keep essentials visible; make detail optional",
+      "summary": "Interaction should add control without hiding the basic portfolio story.",
+      "items": [
+        {
+          "label": "Always visible",
+          "detail": "Name, role, project summaries and contact information."
+        },
+        {
+          "label": "Optional detail",
+          "detail": "A clearly labeled expand button can reveal extra focus areas."
+        },
+        {
+          "label": "Safe control",
+          "detail": "A theme toggle changes presentation without removing content."
+        },
+        {
+          "label": "Recoverable filter",
+          "detail": "An All view restores every project."
+        }
+      ],
+      "caption": "The article's safe-interaction boundary, expressed as content and control roles."
+    },
+    {
+      "id": "accessible-interaction-checks",
+      "kind": "checklist",
+      "title": "Test the same page three ways",
+      "summary": "The readable base must survive different ways of using the site.",
+      "items": [
+        {
+          "label": "Keyboard",
+          "detail": "Reach links and buttons with Tab and activate them without a mouse."
+        },
+        {
+          "label": "Reduced motion",
+          "detail": "Keep structure understandable when motion is reduced."
+        },
+        {
+          "label": "No JavaScript",
+          "detail": "Projects and contact remain present in the document."
+        },
+        {
+          "label": "Honest state",
+          "detail": "The toggle label and aria-expanded match the visible panel."
+        }
+      ],
+      "caption": "Accessibility checks described in the article, including the detail-panel state contract."
+    }
+  ]
+}

@@ -8,6 +8,7 @@ type CardProps = {
   variant?: CardVariant;
   className?: string;
   children: React.ReactNode;
+  style?: React.CSSProperties;
 };
 
 const variantClassMap: Record<CardVariant, string> = {
@@ -16,13 +17,12 @@ const variantClassMap: Record<CardVariant, string> = {
   outline: "surface-card surface-card--outline",
 };
 
-import TinyDotClusterAccent from "../site/accents/TinyDotClusterAccent";
 
-const Card = ({ as: Tag = "div", variant = "default", className, children }: CardProps) => {
+
+const Card = ({ as: Tag = "div", variant = "default", className, children, style }: CardProps) => {
   const variantClass = variantClassMap[variant] ?? variantClassMap.default;
   return (
-    <Tag className={joinClasses(variantClass, "u-relative", className)}>
-      <TinyDotClusterAccent />
+    <Tag className={joinClasses(variantClass, "u-relative", className)} style={style}>
       {children}
     </Tag>
   );

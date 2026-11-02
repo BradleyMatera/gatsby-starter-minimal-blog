@@ -1,9 +1,12 @@
+import TableScroll from "../../features/demos/TableScroll";
 import * as React from "react";
+import BrandArtwork from "../../site/components/BrandArtwork";
+import ServiceVisual from "../../features/services/ServiceVisual";
 import type { HeadFC } from "gatsby";
 import Layout from "../../@lekoarts/gatsby-theme-minimal-blog/components/layout";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
-import { Card, Link, Section } from "../../ui";
+import { Card, Link, Section, FAQAccordion, AnchorNav } from "../../ui";
 import { SERVICE_AREA_CITIES, CITY_IMAGES } from "../../shared/city-data";
 
 const pathname = "/services/small-business-web-design/";
@@ -45,7 +48,7 @@ const faqs = [
 ];
 
 const SmallBusinessWebDesignPage = () => (
-  <Layout>
+  <Layout className="business-page service-page">
     <nav className="breadcrumbs" aria-label="Breadcrumb">
       <ol className="breadcrumbs__list">
         <li className="breadcrumbs__item">
@@ -61,8 +64,10 @@ const SmallBusinessWebDesignPage = () => (
     </nav>
 
     <Section
+      id="section-web-design"
       eyebrow="Web Design"
       titleAs="h1"
+      visual={<BrandArtwork variant="web-design-studio" eager />}
       title={
         <>
           <strong>Small Business Web Design</strong> in Northwest Illinois
@@ -87,6 +92,8 @@ const SmallBusinessWebDesignPage = () => (
         </>
       }
     >
+    <AnchorNav className="business-section-nav" items={[{"id": "section-what-s-included", "label": "What's included"}, {"id": "section-how-it-works", "label": "How it works"}, {"id": "section-timeline", "label": "Timeline"}, {"id": "section-service-area", "label": "Service area"}, {"id": "section-compare", "label": "Compare"}, {"id": "section-faq", "label": "FAQ"}, {"id": "section-ready-to-start", "label": "Ready to start?"}]} />
+      <ServiceVisual kind="small-business-web-design" />
       <div className="grid-three">
         <div className="pkg-card">
           <img src="/package-images/web-design-price.svg" alt="Starting at $447 illustration" className="pkg-card__bg" loading="lazy" />
@@ -128,6 +135,7 @@ const SmallBusinessWebDesignPage = () => (
     </Section>
 
     <Section
+      id="section-what-s-included"
       eyebrow="What's included"
       title="Deliverables"
       description={
@@ -146,6 +154,7 @@ const SmallBusinessWebDesignPage = () => (
     </Section>
 
     <Section
+      id="section-how-it-works"
       eyebrow="How it works"
       title="From first call to live site"
     >
@@ -181,6 +190,7 @@ const SmallBusinessWebDesignPage = () => (
     </Section>
 
     <Section
+      id="section-timeline"
       eyebrow="Timeline"
       title="What to expect during the build"
     >
@@ -196,6 +206,7 @@ const SmallBusinessWebDesignPage = () => (
     </Section>
 
     <Section
+      id="section-service-area"
       eyebrow="Service area"
       title="Web design in your city"
       description={
@@ -217,6 +228,7 @@ const SmallBusinessWebDesignPage = () => (
     </Section>
 
     <Section
+      id="section-compare"
       eyebrow="Compare"
       title="Which option fits your business?"
       description={
@@ -225,14 +237,14 @@ const SmallBusinessWebDesignPage = () => (
         </p>
       }
     >
-      <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Small business web design comparison table">
-        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+      <TableScroll label="Small business web design comparison table">
+<table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
           <thead>
             <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
-              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
-              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Starter — $447</th>
-              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Growth — $797</th>
-              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Premium — $1,497</th>
+              <th scope="col" style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
+              <th scope="col" style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Starter — $447</th>
+              <th scope="col" style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Growth — $797</th>
+              <th scope="col" style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Premium — $1,497</th>
             </tr>
           </thead>
           <tbody>
@@ -298,24 +310,19 @@ const SmallBusinessWebDesignPage = () => (
             </tr>
           </tbody>
         </table>
-      </div>
+</TableScroll>
     </Section>
 
     <Section
+      id="section-faq"
       eyebrow="FAQ"
       title="Common questions about web design"
     >
-      <div className="grid-three">
-        {faqs.map((faq) => (
-          <Card key={faq.q} variant="outline">
-            <h3 className="feature-card__title">{faq.q}</h3>
-            <p className="feature-card__body">{faq.a}</p>
-          </Card>
-        ))}
-      </div>
+      <FAQAccordion items={faqs.map(faq => ({ question: faq.q, answer: faq.a }))} />
     </Section>
 
     <Section
+      id="section-ready-to-start"
       eyebrow="Ready to start?"
       title="Get a free consultation"
       description={

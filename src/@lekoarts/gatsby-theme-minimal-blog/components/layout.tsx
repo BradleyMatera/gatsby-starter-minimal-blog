@@ -11,7 +11,8 @@ import Footer from "./footer";
 import ConsentBanner from "../../../features/consent/ConsentBanner";
 import SkipNavLink from "./skip-nav";
 import CodeStyles from "../styles/code";
-import { GlobalScrollEffects } from "../../../site/components";
+import SiteShopPromotion, { ShopPromotionBanner } from "../../../site/components/SiteShopPromotion";
+
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -78,7 +79,7 @@ const Layout = ({ children, className = `` }: LayoutProps) => {
   }, []);
 
   const handleBackToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
   };
 
   return (
@@ -93,61 +94,22 @@ const Layout = ({ children, className = `` }: LayoutProps) => {
             color: "var(--color-text)",
           },
           "::selection": {
-            backgroundColor: "rgba(255, 255, 255, 0.25)",
+            backgroundColor: "var(--color-accent-soft)",
             color: "var(--color-text)",
           },
         }}
       />
-      <div className="layout-shell cyberpunk-layout">
-        {/* Scroll Progress Bar */}
-        <div className="scroll-progress" aria-hidden="true" />
-
-        {/* Cursor Spotlight */}
-        <div className="cursor-spotlight" id="cursor-spotlight" aria-hidden="true" />
-
-        {/* Cyberpunk Background Effects */}
-        <div className="cyber-grid-bg" aria-hidden="true" />
-        <div className="scroll-color-layer" aria-hidden="true" />
-        
-        {/* Animated SVG Curves */}
-        <svg
-          className="global-curves"
-          viewBox="0 0 1440 900"
-          preserveAspectRatio="xMidYMid slice"
-          aria-hidden="true"
-          focusable="false"
-        >
-          <defs>
-            <linearGradient id="curveGrayPrimary" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#E5E5E5" stopOpacity="0.62" />
-              <stop offset="100%" stopColor="#A3A3A3" stopOpacity="0.26" />
-            </linearGradient>
-            <linearGradient id="curveGraySecondary" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#D4D4D4" stopOpacity="0.48" />
-              <stop offset="100%" stopColor="#8A8A8A" stopOpacity="0.22" />
-            </linearGradient>
-          </defs>
-          <path
-            className="global-curves__path"
-            d="M-50,180 C220,80 420,260 690,180 C980,90 1170,260 1490,150"
-            stroke="url(#curveGrayPrimary)"
-          />
-          <path
-            className="global-curves__path global-curves__path--alt"
-            d="M-80,520 C180,420 460,600 740,520 C980,450 1180,620 1500,520"
-            stroke="url(#curveGraySecondary)"
-          />
-        </svg>
-        
-        <GlobalScrollEffects />
+      <div className="layout-shell matera-site">
         <SkipNavLink>Skip to content</SkipNavLink>
         
         {/* Header includes VerticalNav */}
         <Header />
+        <ShopPromotionBanner />
         
         <main id="site-main" className={`site-main ${className}`}>
           <div className="site-content" sx={{ ...CodeStyles }}>
             {children}
+            <SiteShopPromotion layoutClass={className} />
           </div>
         </main>
         

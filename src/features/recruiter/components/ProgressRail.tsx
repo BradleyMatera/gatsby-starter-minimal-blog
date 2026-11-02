@@ -1,49 +1,42 @@
 import * as React from "react";
-import { useRecruiterProgress, RECRUITER_SECTIONS } from "../hooks/useRecruiterProgress";
+
+const SECTIONS = [
+  { id: "recruiter-hero", label: "Overview" },
+  { id: "project-explorer", label: "Projects" },
+  { id: "experience-timeline", label: "Experience" },
+  { id: "resource-library", label: "Documents" },
+  { id: "certifications", label: "Credentials" },
+  { id: "contact-cta", label: "Contact" },
+];
 
 const ProgressRail: React.FC = () => {
-  const { viewed } = useRecruiterProgress();
-  const total = RECRUITER_SECTIONS.length;
-  const completed = viewed.size;
-  const percent = Math.round((completed / total) * 100);
-
-  const scrollTo = (id: string) => {
-    const el = document.querySelector(`[data-section-id="${id}"]`);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  };
-
+  const [active, setActive] = React.useState(SECTIONS[0].id);
+  React.useEffect(() => {
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const current = SECTIONS.filter(({ id }) => {
+        const node = document.getElementById(id);
+        return node && node.getBoundingClientRect().top <= 190;
+      }).pop();
+      setActive(current?.id || SECTIONS[0].id);
+    };
+    const onScroll = () => {
+      if (!frame) frame = window.requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.cancelAnimationFrame(frame);
+    };
+  }, []);
   return (
-    <div className="progress-rail" role="region" aria-label="Recruiter page progress">
-      <div className="progress-rail__summary">
-        <span className="progress-rail__label">Profile explored</span>
-        <span className="progress-rail__value">{percent}%</span>
-      </div>
-      <div className="progress-rail__bar" aria-hidden="true">
-        <div
-          className="progress-rail__fill"
-          style={{ width: `${percent}%` }}
-        />
-      </div>
-      <div className="progress-rail__dots">
-        {RECRUITER_SECTIONS.map(({ id, label }) => {
-          const isViewed = viewed.has(id);
-          return (
-            <button
-              key={id}
-              type="button"
-              className={`progress-rail__dot ${isViewed ? "progress-rail__dot--viewed" : ""}`}
-              onClick={() => scrollTo(id)}
-              title={label}
-              aria-label={`${label}${isViewed ? " viewed" : ""}`}
-            >
-              <span className="progress-rail__dot-label">{label}</span>
-            </button>
-          );
-        })}
-      </div>
-    </div>
+    <nav className="recruiter-section-nav" aria-label="Recruiter sections">
+      {SECTIONS.map(({ id, label }) => (
+        <a key={id} href={`#${id}`} aria-current={active === id ? "location" : undefined}>{label}</a>
+      ))}
+    </nav>
   );
 };
 

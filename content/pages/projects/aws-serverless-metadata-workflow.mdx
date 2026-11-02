@@ -3,7 +3,9 @@ title: "AWS Serverless Metadata Workflow"
 slug: "/projects/aws-serverless-metadata-workflow"
 ---
 
-import { Section, Card, AnchorNav, Link } from "../../../src/ui";
+import { Section, Card, Link } from "../../../src/ui";
+
+import ProjectEvidence from "../../../src/features/projects/components/ProjectEvidence";
 
 <Section
   eyebrow="Project Write-up"
@@ -11,16 +13,8 @@ import { Section, Card, AnchorNav, Link } from "../../../src/ui";
   description="An event-driven AWS pipeline that turns S3 uploads into normalized DynamoDB records through a Python Lambda, with deterministic identity, duplicate-safe writes, failure routing, monitoring, infrastructure as code, and automated tests."
 />
 
-<AnchorNav
-  items={[
-    { id: "overview", label: "Problem" },
-    { id: "approach", label: "Architecture" },
-    { id: "reliability", label: "Reliability" },
-    { id: "role", label: "My Role" },
-    { id: "evidence", label: "Evidence" },
-    { id: "artifacts", label: "Tech Stack" },
-  ]}
-/>
+<ProjectEvidence pathname="/projects/aws-serverless-metadata-workflow/" />
+
 
 <Section id="overview" eyebrow="Problem" title="File uploads need a reliable metadata trail">
   <p>An object landing in storage is only the start of a workflow. Downstream systems need a consistent record of where the object lives, its type, size, checksum, and upload time. The processor also has to handle URL-encoded object keys, repeated event delivery, retries, and failed invocations without silently producing duplicate or missing records.</p>

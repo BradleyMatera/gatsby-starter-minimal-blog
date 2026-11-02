@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useRecruiterFilter } from "../hooks/useRecruiterFilter";
 
 /* --------------------------------------------------------------------------
    Skills Explorer — Polished accordion-style skill cards.
@@ -113,352 +114,46 @@ const SKILLS: Skill[] = [
 
 const CATEGORIES = ["All", "Frontend", "Backend", "Cloud", "DevOps", "Soft Skills", "AI"];
 
-const ChevronIcon: React.FC<{ expanded: boolean }> = ({ expanded }) => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2.5"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    style={{
-      transform: expanded ? "rotate(180deg)" : "rotate(0deg)",
-      transition: "transform 0.3s cubic-bezier(.22,.9,.2,1)",
-      flexShrink: 0,
-    }}
-  >
-    <polyline points="6 9 12 15 18 9" />
-  </svg>
-);
+const EVIDENCE: Record<string, { label: string; href: string }> = {
+  "JavaScript": { label: "Portfolio source", href: "https://github.com/BradleyMatera/gatsby-starter-minimal-blog" },
+  "React": { label: "Car-Match case study", href: "/projects/car-match/" },
+  "TypeScript": { label: "Pokédex case study", href: "/projects/interactive-pokedex/" },
+  "Node.js": { label: "Car-Match case study", href: "/projects/car-match/" },
+  "HTML / CSS": { label: "Portfolio source", href: "https://github.com/BradleyMatera/gatsby-starter-minimal-blog" },
+  "SQL": { label: "Portfolio source", href: "https://github.com/BradleyMatera/gatsby-starter-minimal-blog" },
+  "AWS": { label: "Metadata workflow case study", href: "/projects/aws-serverless-metadata-workflow/" },
+  "Docker": { label: "Car-Match source", href: "https://github.com/BradleyMatera/car-match" },
+  "Git / GitHub": { label: "Contribution record", href: "/open-source/" },
+  "Documentation": { label: "Contribution record", href: "/open-source/" },
+  "Debugging": { label: "CIRIS contribution details", href: "/projects/ciris-ai/" },
+  "Troubleshooting": { label: "AWS experience", href: "#aws-section" },
+  "AI-Assisted Development": { label: "ProjectHub case study", href: "/projects/projecthub/" },
+};
 
 const SkillsExplorer: React.FC = () => {
-  const [activeCategory, setActiveCategory] = React.useState("All");
-  const [expandedSkill, setExpandedSkill] = React.useState<string | null>(null);
-  const [animateBars, setAnimateBars] = React.useState(false);
-
-  React.useEffect(() => {
-    // Trigger progress bar animation after mount
-    const timer = setTimeout(() => setAnimateBars(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const filtered = React.useMemo(
-    () =>
-      activeCategory === "All"
-        ? SKILLS
-        : SKILLS.filter((s) => s.category === activeCategory),
-    [activeCategory]
-  );
-
-  const categoryCounts = React.useMemo(() => {
-    const counts: Record<string, number> = { All: SKILLS.length };
-    SKILLS.forEach((s) => {
-      counts[s.category] = (counts[s.category] || 0) + 1;
-    });
-    return counts;
-  }, []);
-
-  const toggleSkill = (name: string) => {
-    setExpandedSkill((current) => (current === name ? null : name));
-  };
-
-  const handleCategoryChange = (cat: string) => {
-    setActiveCategory(cat);
-    setExpandedSkill(null);
-  };
-
+  const [category, setCategory] = useRecruiterFilter("skill-category");
+  const activeCategory = CATEGORIES.includes(category) ? category : "All";
+  const filtered = activeCategory === "All" ? SKILLS : SKILLS.filter((skill) => skill.category === activeCategory);
   return (
-    <section id="skills-explorer" className="recruiter-section recruiter-section--media reveal-section">
-      {/* Background media layer */}
-      <div className="recruiter-section__media" aria-hidden="true">
-        <img
-          className="recruiter-section__video recruiter-ken-burns"
-          src="/skills-icons.webp"
-          alt="Skills icons grid — background for the technical skills explorer section"
-          aria-hidden="true"
-        />
-        <div className="recruiter-section__media-overlay" />
+    <section id="skills-explorer" className="recruiter-section" aria-labelledby="recruiter-skills-heading">
+      <div className="recruiter-section__header">
+        <span className="recruiter-section__eyebrow">Technical Skills</span>
+        <h2 id="recruiter-skills-heading" className="recruiter-section__title">Skills <span className="recruiter-title-accent">Explorer</span></h2>
+        <p className="recruiter-section__subtitle">Explore the work behind each skill, with project context and direct evidence.</p>
       </div>
-
-      <div className="recruiter-section__content">
-        <div className="recruiter-section__header">
-          <span className="recruiter-section__eyebrow">Technical Skills</span>
-          <h2 className="recruiter-section__title">
-            Skills <span className="recruiter-title-accent">Explorer</span>
-          </h2>
-          <p className="recruiter-section__subtitle">
-            Click any skill to expand it. See real-world projects, proficiency, and how it fits the work.
-        </p>
+      <div className="recruiter-filter-bar">
+        <label htmlFor="recruiter-skill-category">Skill focus</label>
+        <select id="recruiter-skill-category" value={activeCategory} onChange={(event) => setCategory(event.target.value)}>{CATEGORIES.map((item) => <option key={item}>{item}</option>)}</select>
+        <p role="status" aria-live="polite">{filtered.length} of {SKILLS.length} skills</p>
+        {activeCategory !== "All" && <button type="button" onClick={() => setCategory("All")}>Reset filter</button>}
       </div>
-
-      {/* Category tabs */}
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "0.5rem",
-          justifyContent: "center",
-          marginBottom: "2.5rem",
-        }}
-      >
-        {CATEGORIES.map((cat) => {
-          const isActive = activeCategory === cat;
-          return (
-            <button
-              key={cat}
-              onClick={() => handleCategoryChange(cat)}
-              className="recruiter-btn magnetic-btn"
-              aria-pressed={isActive}
-              style={{
-                padding: "0.5rem 1rem",
-                fontSize: "0.8125rem",
-                fontWeight: 600,
-                borderRadius: 9999,
-                border: "1px solid",
-                borderColor: isActive
-                  ? "var(--r-accent)"
-                  : "var(--r-border)",
-                background: isActive
-                  ? "var(--r-accent-light)"
-                  : "var(--r-surface-raised)",
-                color: isActive
-                  ? "var(--r-accent)"
-                  : "var(--r-text-secondary)",
-                cursor: "pointer",
-                transition: "all 0.2s ease",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.375rem",
-              }}
-            >
-              {cat}
-              <span
-                style={{
-                  fontSize: "0.6875rem",
-                  fontWeight: 700,
-                  padding: "0.125rem 0.375rem",
-                  borderRadius: 9999,
-                  background: isActive
-                    ? "rgba(255,255,255,0.25)"
-                    : "var(--r-surface)",
-                  color: isActive ? "var(--r-accent)" : "var(--r-text-muted)",
-                }}
-              >
-                {categoryCounts[cat] || 0}
-              </span>
-            </button>
-          );
-        })}
+      <div className="recruiter-evidence-list">
+        {filtered.map((skill) => <article className="recruiter-evidence-row" key={skill.name}>
+          <div><span className="recruiter-section__eyebrow">{skill.category}</span><h3>{skill.name}</h3></div>
+          <div><p>{skill.description}</p><p className="recruiter-evidence-row__context">Used in: {skill.projects.join(" · ")}</p></div>
+          <a href={EVIDENCE[skill.name].href} className="recruiter-text-link">{EVIDENCE[skill.name].label} →</a>
+        </article>)}
       </div>
-
-      {/* Skills accordion */}
-      <div
-        style={{
-          maxWidth: 800,
-          margin: "0 auto",
-          display: "flex",
-          flexDirection: "column",
-          gap: "0.875rem",
-        }}
-      >
-        {filtered.map((skill) => {
-          const isActive = expandedSkill === skill.name;
-          return (
-            <article
-              key={skill.name}
-              className="recruiter-card"
-              style={{
-                padding: 0,
-                borderRadius: 12,
-                border: "1px solid",
-                borderColor: isActive
-                  ? "var(--r-accent)"
-                  : "var(--r-border)",
-                background: isActive
-                  ? "var(--r-surface-raised)"
-                  : "var(--r-surface)",
-                transition: "border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease",
-                boxShadow: isActive
-                  ? "0 8px 30px rgba(0,0,0,0.08)"
-                  : "0 2px 8px rgba(0,0,0,0.04)",
-                overflow: "hidden",
-              }}
-            >
-              <button
-                type="button"
-                onClick={() => toggleSkill(skill.name)}
-                aria-expanded={isActive}
-                style={{
-                  width: "100%",
-                  textAlign: "left",
-                  background: "transparent",
-                  border: "none",
-                  padding: "1.125rem 1.25rem",
-                  cursor: "pointer",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "0.75rem",
-                  color: "inherit",
-                  fontFamily: "inherit",
-                }}
-              >
-                {/* Top row: name / badge / level / chevron */}
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    gap: "0.75rem",
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "0.75rem",
-                      minWidth: 0,
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontSize: "0.9375rem",
-                        fontWeight: 700,
-                        color: "var(--r-text)",
-                        whiteSpace: "nowrap",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                      }}
-                    >
-                      {skill.name}
-                    </span>
-                    <span
-                      style={{
-                        fontSize: "0.6875rem",
-                        padding: "0.125rem 0.5rem",
-                        borderRadius: 9999,
-                        background: "var(--r-surface)",
-                        color: "var(--r-text-muted)",
-                        flexShrink: 0,
-                      }}
-                    >
-                      {skill.category}
-                    </span>
-                  </div>
-
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "0.75rem",
-                      flexShrink: 0,
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontSize: "0.875rem",
-                        fontWeight: 700,
-                        color: "var(--r-accent)",
-                      }}
-                    >
-                      {skill.level}%
-                    </span>
-                    <span style={{ color: "var(--r-text-muted)" }}>
-                      <ChevronIcon expanded={isActive} />
-                    </span>
-                  </div>
-                </div>
-
-                {/* Progress bar */}
-                <div
-                  style={{
-                    height: 6,
-                    borderRadius: 3,
-                    background: "var(--r-surface)",
-                    overflow: "hidden",
-                  }}
-                >
-                  <div
-                    style={{
-                      width: animateBars ? `${skill.level}%` : "0%",
-                      height: "100%",
-                      borderRadius: 3,
-                      background: "var(--r-accent)",
-                      transition: "width 0.8s cubic-bezier(.22,.9,.2,1)",
-                    }}
-                  />
-                </div>
-              </button>
-
-              {/* Expandable detail panel */}
-              <div
-                style={{
-                  maxHeight: isActive ? 500 : 0,
-                  opacity: isActive ? 1 : 0,
-                  overflow: "hidden",
-                  transition: "max-height 0.4s cubic-bezier(.22,.9,.2,1), opacity 0.3s ease",
-                }}
-              >
-                <div
-                  style={{
-                    padding: "0 1.25rem 1.25rem",
-                    borderTop: "1px solid var(--r-border)",
-                  }}
-                >
-                  <p
-                    style={{
-                      fontSize: "0.875rem",
-                      color: "var(--r-text-secondary)",
-                      lineHeight: 1.65,
-                      margin: "1rem 0",
-                    }}
-                  >
-                    {skill.description}
-                  </p>
-
-                  <div style={{ marginBottom: "0.75rem" }}>
-                    <div
-                      style={{
-                        fontSize: "0.75rem",
-                        textTransform: "uppercase",
-                        letterSpacing: "0.05em",
-                        color: "var(--r-text-muted)",
-                        marginBottom: "0.5rem",
-                      }}
-                    >
-                      Used in
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        flexWrap: "wrap",
-                        gap: "0.375rem",
-                      }}
-                    >
-                      {skill.projects.map((p) => (
-                        <span key={p} className="recruiter-tag">
-                          {p}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div
-                    style={{
-                      fontSize: "0.75rem",
-                      color: "var(--r-text-muted)",
-                    }}
-                  >
-                    Proficiency: {skill.level}/100
-                  </div>
-                </div>
-              </div>
-            </article>
-          );
-        })}
-      </div>
-    </div>
     </section>
   );
 };

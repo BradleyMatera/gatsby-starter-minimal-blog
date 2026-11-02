@@ -7,6 +7,9 @@ description: "A short breakdown of a soundboard deploy bug and a WebGPU triangle
 theme: "Process"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/recent-projects-and-lessons.json";
+
 I used to write project summaries that listed every feature and called them wins. That felt empty. Now I force myself to write down one concrete thing that broke and how I fixed it. Here are two recent demos and the single lesson each one left me.
 
 ## Project overview
@@ -50,8 +53,7 @@ Here is the debugging process I followed for this bug:
 
 The lesson I kept: deployment is part of the feature. A demo that only runs locally is not finished.
 
-{/* visual-break:recent-projects-and-lessons:1 */}
-![Execution process checkpoint illustration for this section.](/assets/visuals/blog/recent-projects-and-lessons-break-1.png)
+<ArticleVisual spec={articleVisuals.figures[0]} />
 
 ## WebGPU Triangle Demo: the pipeline is the program
 
@@ -85,8 +87,7 @@ The shader language, WGSL, is stricter than GLSL. One wrong type and the GPU val
 
 The lesson I kept: in modern graphics programming, you are not drawing shapes. You are configuring a machine that draws shapes. The mental model is pipeline first, pixels second.
 
-{/* visual-break:recent-projects-and-lessons:2 */}
-![Delivery workflow checkpoint illustration for this section.](/assets/visuals/blog/recent-projects-and-lessons-break-2.png)
+<ArticleVisual spec={articleVisuals.figures[1]} />
 
 ## More detail on what each project actually is
 

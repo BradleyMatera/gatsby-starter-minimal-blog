@@ -7,6 +7,9 @@ description: "A hands-on JWT security lab: generate real tokens, decode them, ve
 theme: "Security"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/jwt-ctf-lab.json";
+
 JWTs are not "magic auth." A JWT is just a string. (See [RFC 7519](https://datatracker.ietf.org/doc/html/rfc7519) for the official specification.) The only time it becomes useful is when you verify it correctly and treat its claims like untrusted input until that verification succeeds. Most JWT confusion comes from mixing up three different actions that sound similar but are not the same thing: creating a token, decoding a token, and verifying a token.
 
 This post is a lab. You will generate real tokens, inspect them in multiple ways, verify them, and then deliberately break them so you can see exactly what failure looks like. The goal is not to memorize vocabulary. The goal is to understand where trust is created, where it is not, and what lines of code actually matter.
@@ -27,8 +30,7 @@ If you only decode a token, you can see the header and payload. That is useful f
 
 If you verify a token, the library recomputes the signature using the secret/key you provide and checks that it matches the signature in the token. That is the moment the token becomes trustworthy.
 
-{/* visual-break:JWT's:1 */}
-![Execution process checkpoint illustration for this section.](/assets/visuals/blog/JWT's-break-1.png)
+<ArticleVisual spec={articleVisuals.figures[0]} />
 
 ## What this lab covers
 
@@ -44,9 +46,6 @@ By the end of this lab, you will have done all of these things on purpose and se
 8) See verification fail when the token is expired
 
 If you do not see those states happen, you did not actually learn JWT behavior yet. You only read about it.
-
-{/* visual-break:JWT's:2 */}
-![Delivery workflow checkpoint illustration for this section.](/assets/visuals/blog/JWT's-break-2.png)
 
 ## What you need before starting
 
@@ -276,6 +275,8 @@ Your token was created with `expiresIn: "15s"`. Wait 20 seconds and run the file
 **Explanation:**
 
 Expiration is enforced during verification, not during decode. An expired token can still be decoded, but it cannot be trusted.
+
+<ArticleVisual spec={articleVisuals.figures[1]} />
 
 ## What each part actually means
 

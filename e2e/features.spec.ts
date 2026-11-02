@@ -7,7 +7,7 @@ import { test, expect, type Page } from "@playwright/test";
    -------------------------------------------------------------------------- */
 
 const OCEAN_PAGE_BG = "#050e18";
-const DEFAULT_PAGE_BG = "#f3efe8";
+const DEFAULT_PAGE_BG = "#f6f5f1";
 
 const getRootVariable = (page: Page, name: string) =>
   page.evaluate((key) => document.documentElement.style.getPropertyValue(key).trim(), name);
@@ -16,7 +16,7 @@ const getDataTheme = (page: Page) =>
   page.evaluate(() => document.documentElement.getAttribute("data-theme"));
 
 const openStyleLab = async (page: Page) => {
-  await page.locator('button[aria-label="Open Web Designer Lab"]:visible').first().click();
+  await page.locator('button[aria-label="Open appearance settings"]:visible').first().click();
   await expect(page.locator(".style-lab")).toBeVisible();
 };
 
@@ -42,12 +42,13 @@ const collectHydrationErrors = (page: Page): string[] => {
 
 test.describe("Style Lab", () => {
   test.beforeEach(async ({ page }) => {
+    await page.addInitScript(() => localStorage.setItem("analytics-consent", "denied"));
     await page.goto("/");
   });
 
   test("toggle opens and closes the panel", async ({ page }) => {
     await openStyleLab(page);
-    await expect(page.locator("#style-lab-title")).toHaveText("Web Designer Lab");
+    await expect(page.locator("#style-lab-title")).toHaveText("Appearance");
     await page.locator('button[aria-label="Close style lab"]').click();
     await expect(page.locator(".style-lab")).toBeHidden();
   });
@@ -86,12 +87,12 @@ test.describe("Style Lab", () => {
     );
     await page.locator(".style-lab__done").click();
     expect(await getDataTheme(page)).toBe("dark");
-    expect(await getRootVariable(page, "--color-page-bg")).toBe("#000000");
+    expect(await getRootVariable(page, "--color-page-bg")).toBe("#101a2b");
   });
 });
 
-test.describe("Recruiter isolation", () => {
-  test("style lab overrides are cleared on /recruiter/ and restored on return", async ({ page }) => {
+test.describe("Recruiter theme preferences", () => {
+  test("saved appearance persists through recruiter navigation", async ({ page }) => {
     await page.goto("/");
     await applyPreset(page, "Ocean");
     expect(await getRootVariable(page, "--color-page-bg")).toBe(OCEAN_PAGE_BG);
@@ -100,7 +101,7 @@ test.describe("Recruiter isolation", () => {
     await page.locator('a[href*="/recruiter"]:visible').first().click();
     await page.waitForURL("**/recruiter/**");
     await page.waitForFunction(
-      () => document.documentElement.style.getPropertyValue("--color-page-bg").trim() === ""
+      () => document.documentElement.style.getPropertyValue("--color-page-bg").trim() === "#050e18"
     );
     expect(await getDataTheme(page)).toBe("dark");
 
@@ -112,12 +113,12 @@ test.describe("Recruiter isolation", () => {
     );
   });
 
-  test("hard load of /recruiter/ has no style lab overrides", async ({ page }) => {
+  test("hard load of /recruiter/ respects a saved appearance", async ({ page }) => {
     await page.goto("/");
     await applyPreset(page, "Ocean");
     await page.goto("/recruiter/");
     await page.waitForFunction(
-      () => document.documentElement.style.getPropertyValue("--color-page-bg").trim() === ""
+      () => document.documentElement.style.getPropertyValue("--color-page-bg").trim() === "#050e18"
     );
     expect(await getDataTheme(page)).toBe("dark");
   });
@@ -133,10 +134,8 @@ test.describe("Scout chat widget", () => {
 
   test("is not present on the homepage or blog", async ({ page }) => {
     await page.goto("/");
-    await page.waitForTimeout(3000);
     await expect(page.locator("#bradley-chat")).toHaveCount(0);
     await page.goto("/blog/");
-    await page.waitForTimeout(3000);
     await expect(page.locator("#bradley-chat")).toHaveCount(0);
   });
 

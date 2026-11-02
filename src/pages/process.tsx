@@ -1,9 +1,10 @@
 import * as React from "react";
+import BrandArtwork from "../site/components/BrandArtwork";
 import type { HeadFC } from "gatsby";
 import Layout from "../@lekoarts/gatsby-theme-minimal-blog/components/layout";
 import Seo from "../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
-import { Card, Link, Section } from "../ui";
+import { Link, Section, AnchorNav } from "../ui";
 
 const pathname = "/process/";
 const pageTitle = "How I Build Websites — From First Call to Launch | Bradley Matera";
@@ -28,7 +29,7 @@ const includedItems = [
 ];
 
 const ProcessPage = () => (
-  <Layout>
+  <Layout className="business-page process-page">
     <nav className="breadcrumbs" aria-label="Breadcrumb">
       <ol className="breadcrumbs__list">
         <li className="breadcrumbs__item">
@@ -41,8 +42,10 @@ const ProcessPage = () => (
     </nav>
 
     <Section
+      id="section-process"
       eyebrow="Process"
       titleAs="h1"
+      visual={<BrandArtwork variant="process-blueprint" eager />}
       title={
         <>
           <strong>How I build websites</strong> — from first call to launch.
@@ -67,7 +70,8 @@ const ProcessPage = () => (
         </>
       }
     >
-      <div className="grid-three">
+    <AnchorNav className="business-section-nav" items={[{"id": "section-timeline", "label": "Timeline"}, {"id": "section-every-build", "label": "Every build"}, {"id": "section-ready-to-start", "label": "Ready to start?"}]} />
+      <div className="process-timeline">
         <div className="pkg-card">
           <img src="/package-images/process-call.svg" alt="Step 1 — Free consultation illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
@@ -117,6 +121,7 @@ const ProcessPage = () => (
     </Section>
 
     <Section
+      id="section-timeline"
       eyebrow="Timeline"
       title="How long does it take?"
       description={
@@ -152,6 +157,7 @@ const ProcessPage = () => (
     </Section>
 
     <Section
+      id="section-every-build"
       eyebrow="Every build"
       title="What's included in every build"
       description={
@@ -168,6 +174,7 @@ const ProcessPage = () => (
     </Section>
 
     <Section
+      id="section-ready-to-start"
       eyebrow="Ready to start?"
       title="Get a free consultation"
       description={

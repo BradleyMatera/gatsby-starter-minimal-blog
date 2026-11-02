@@ -28,7 +28,7 @@ const sectionAliases: Record<RecruiterSectionId, string[]> = {
 const scrollTo = (id: RecruiterSectionId) => {
   const el = document.querySelector(`[data-section-id="${id}"]`);
   if (el) {
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
+    el.scrollIntoView({ behavior: "auto", block: "start" });
   }
 };
 

@@ -1,0 +1,61 @@
+{
+  "slug": "/recent-projects-and-lessons",
+  "title": "Two Recent Demos and What I Actually Learned From Them",
+  "cover": {
+    "src": "/images/blog/recent-projects-and-lessons/cover.png",
+    "mobile": "/images/blog/recent-projects-and-lessons/cover-720.webp",
+    "alt": "Paired acoustic and triangular engineering specimens representing two different project lessons"
+  },
+  "figures": [
+    {
+      "id": "asset-path-repair",
+      "kind": "flow",
+      "title": "Trace a deployed asset to its real location",
+      "summary": "Compare what the browser requests with where the host serves it.",
+      "items": [
+        {
+          "label": "Observe",
+          "detail": "The deployed soundboard's assets return 404."
+        },
+        {
+          "label": "Compare",
+          "detail": "The request misses the AnimalSounds project-path prefix."
+        },
+        {
+          "label": "Configure",
+          "detail": "Set the production base path in the Vite build."
+        },
+        {
+          "label": "Verify live",
+          "detail": "Redeploy and inspect the final public asset requests."
+        }
+      ],
+      "caption": "The AnimalSounds deployment incident described in this article."
+    },
+    {
+      "id": "gpu-setup-chain",
+      "kind": "layers",
+      "title": "Configure the machine before drawing",
+      "summary": "The graphics lesson is about explicit setup stages.",
+      "items": [
+        {
+          "label": "Adapter and device",
+          "detail": "Obtain the browser's GPU interface."
+        },
+        {
+          "label": "Canvas context",
+          "detail": "Choose and configure the rendering format."
+        },
+        {
+          "label": "Pipeline and shaders",
+          "detail": "Define how vertices and fragments are processed."
+        },
+        {
+          "label": "Commands",
+          "detail": "Encode and submit the draw operation."
+        }
+      ],
+      "caption": "The WebGPU setup sequence described in the project lesson, not a live rendering capture."
+    }
+  ]
+}

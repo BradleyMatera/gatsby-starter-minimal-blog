@@ -1,0 +1,65 @@
+{
+  "slug": "what-five-page-website-should-include",
+  "title": "What a Five-Page Business Website Should Include",
+  "cover": {
+    "src": "/images/blog/what-five-page-website-should-include/cover.png",
+    "mobile": "/images/blog/what-five-page-website-should-include/cover-720.webp",
+    "alt": "Concept illustration of five connected portfolio panels representing the core pages of a business website."
+  },
+  "figures": [
+    {
+      "id": "five-page-roles",
+      "kind": "layers",
+      "title": "One clear job for each page",
+      "summary": "A compact site works when every page answers a different need.",
+      "items": [
+        {
+          "label": "Home",
+          "detail": "Explain the offer and route visitors to useful detail."
+        },
+        {
+          "label": "About",
+          "detail": "Introduce the people, relevant experience, and service area."
+        },
+        {
+          "label": "Services",
+          "detail": "Describe specific work, inclusions, pricing context, and next steps."
+        },
+        {
+          "label": "Contact",
+          "detail": "Make reaching the business straightforward."
+        },
+        {
+          "label": "Proof",
+          "detail": "Show genuine testimonials or documented project examples."
+        }
+      ],
+      "caption": "The five-page structure described in the article; page count alone does not establish effectiveness."
+    },
+    {
+      "id": "five-page-connections",
+      "kind": "flow",
+      "title": "Connect information to a useful action",
+      "summary": "Page links should help someone move from interest to a conversation.",
+      "items": [
+        {
+          "label": "Find the relevant service",
+          "detail": "Link Home summaries to detailed service information."
+        },
+        {
+          "label": "Check the people and work",
+          "detail": "Connect About to genuine testimonials or case studies."
+        },
+        {
+          "label": "Resolve the practical questions",
+          "detail": "Make service scope, pricing context, and coverage easy to find."
+        },
+        {
+          "label": "Make contact",
+          "detail": "Give service and proof pages a clear route to the Contact page."
+        }
+      ],
+      "caption": "A suggested reading path from the article. Visitors can enter at any page, so each page needs context."
+    }
+  ]
+}

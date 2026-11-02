@@ -1,0 +1,41 @@
+.demo-showroom .section-shell { padding-block: clamp(2rem, 5vw, 4.5rem); }
+.demo-showroom .section-shell:first-child .section-shell__header { max-width: 850px; margin-inline: auto; text-align: center; }
+.demo-showroom .section-shell:first-child .section-title { font-size: clamp(2.4rem, 5vw, 4.6rem); line-height: 1.08; letter-spacing: -0.045em; text-wrap: balance; }
+.demo-showroom .section-shell:first-child .section-description { max-width: 65ch; margin-inline: auto; }
+.demo-showroom__filters { display: flex; align-items: end; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem; }
+.demo-showroom__filters label { display: block; margin-bottom: 0.5rem; font-size: 0.85rem; font-weight: 600; }
+.demo-showroom__filters select, .demo-showroom__filters button, .demo-showroom__empty button { min-height: 48px; border: 1px solid var(--color-border, #d7dbe3); padding: 0.65rem 1rem; border-radius: 5px; background: var(--color-surface, #fff); color: inherit; font: inherit; }
+.demo-showroom button { cursor: pointer; }
+.demo-showroom__count { font-size: 0.85rem; text-align: center; margin: 1.25rem 0 2rem; }
+.demo-showroom .demo-gallery__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3rem 2rem; }
+.demo-showroom .demo-card { display: flex; flex-direction: column; border: 0; border-radius: 0; background: transparent; box-shadow: none; color: inherit; text-decoration: none; transform: none; }
+.demo-showroom .demo-card:hover { transform: none; box-shadow: none; }
+.demo-showroom .demo-card__preview { height: auto; aspect-ratio: auto; border: 1px solid var(--color-border, #d7dbe3); border-radius: 8px; overflow: hidden; background: #f6f5f1; }
+.demo-card__browser { display: flex; justify-content: space-between; align-items: center; gap: 1rem; background: #e9e8e4; color: #15243a; padding: 0.55rem 0.9rem; font-size: 0.65rem; }
+.demo-showroom .demo-card__preview img { display: block; width: 100%; height: auto; aspect-ratio: 1440 / 1000; object-fit: cover; object-position: top; }
+.demo-showroom .demo-card__body { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.5rem 1rem; padding: 1.25rem 0 0; }
+.demo-showroom .demo-card__industry { grid-column: 1 / -1; font-size: 0.75rem; color: inherit; text-transform: none; }
+.demo-showroom .demo-card__name { font-size: 1.4rem; color: inherit; margin: 0; letter-spacing: -0.025em; }
+.demo-card__explore { font-size: 0.8rem; color: inherit; align-self: center; text-decoration: underline; text-underline-offset: 4px; }
+.demo-showroom .demo-card__desc { grid-column: 1 / -1; font-size: 0.95rem; line-height: 1.6; color: inherit; }
+.demo-showroom .demo-card__features { grid-column: 1 / -1; }
+.demo-showroom .demo-card__feature { color: inherit; background: transparent; border: 1px solid var(--color-border, #d7dbe3); font-size: 0.75rem; }
+.demo-showroom__details { border-block: 1px solid var(--color-border, #d7dbe3); padding: 1.5rem 0; margin-top: 3rem; }
+.demo-showroom__details summary { font-weight: 600; cursor: pointer; min-height: 44px; }
+.demo-showroom__details p { max-width: 75ch; }
+.demo-showroom__comparison { overflow-x: auto; }
+.demo-showroom :is(a, button, select, summary):focus-visible { outline: 3px solid currentColor; outline-offset: 5px; }
+.demo-showroom__empty { text-align: center; padding: 2rem; border: 1px solid var(--color-border, #d7dbe3); }
+@media (max-width: 700px) {
+  .demo-showroom .demo-gallery__grid { grid-template-columns: minmax(0, 1fr); }
+  .demo-showroom__filters { flex-direction: column; align-items: stretch; }
+  .demo-showroom__filters select { width: 100%; }
+  .demo-showroom .demo-card__body { grid-template-columns: minmax(0, 1fr); }
+  .demo-card__explore { grid-row: 4; min-height: 44px; display: flex; align-items: center; }
+}
+.demo-showroom > .section-shell:first-child { padding-top: 2rem; }
+.demo-showroom .section-shell:first-child .section-shell__header { max-width: 1000px; }
+.demo-showroom .section-shell:first-child .section-title { font-size: clamp(2.2rem, 3.6vw, 3.4rem); }
+.demo-showroom .section-shell:first-child .section-description { max-width: 78ch; }
+.demo-showroom .section-shell:first-child .section-shell__header p { font-size: 1rem; line-height: 1.6; }
+.demo-showroom .demo-showroom__count { text-align: center; }

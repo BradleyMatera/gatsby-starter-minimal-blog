@@ -7,6 +7,9 @@ description: "A case-study format for documenting portfolio projects with proof 
 theme: "Portfolio"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/portfolio-case-studies.json";
+
 I used to write portfolio entries like product landing pages. Big screenshots, feature lists, and phrases like "robust architecture." When I reread them a few months later, I could not tell what I had actually solved.
 
 A recruiter scanning keywords might have been fooled. A senior engineer reviewing my code would not have been. This post is the case-study template I use now.
@@ -24,9 +27,6 @@ Into this:
 > "Reduced query time from 500ms to 20ms by adding a composite index on `(user_id, status)` — see commit `8a4f2b`."
 
 The second one is longer, but it is the only one that survives an interview.
-
-{/* visual-break:portfolio-case-studies:1 */}
-![Project layout checkpoint illustration for this section.](/assets/visuals/blog/portfolio-case-studies-break-1.png)
 
 ## Four sections I stick to
 
@@ -72,6 +72,8 @@ I do not just link to the repo root. I link to the specific file and line. GitHu
 Specific links turn claims into evidence.
 
 ---
+
+<ArticleVisual spec={articleVisuals.figures[0]} />
 
 ## A template I copy each time
 
@@ -148,6 +150,8 @@ Here is what this format looks like applied to actual projects I have shipped. T
 
 **What I learned:** Layer caching is the single most impactful Docker optimization. Reordering `COPY` commands so dependencies install before source code is copied cut my rebuild time from 47 seconds to 8 seconds. I also learned that `.dockerignore` matters more than people say — without it, Docker sends your entire `node_modules` and `.git` directory to the daemon on every build.
 
+<ArticleVisual spec={articleVisuals.figures[1]} />
+
 ## How these projects demonstrate skills to employers
 
 Each case study maps to a specific skill that shows up in job descriptions:
@@ -157,9 +161,6 @@ Each case study maps to a specific skill that shows up in job descriptions:
 - **The Docker stack** demonstrates containerization, multi-service architecture, and DevOps fundamentals. The healthcheck solution shows I understand that "the container started" is not the same as "the service is ready."
 
 A recruiter scanning these sees keywords: Gatsby, TypeScript, Docker, Python, Node, Nginx, CI/CD, SEO. A senior engineer reading the case studies sees someone who hit real problems, debugged them, and can explain the trade-offs. That is the audience I am writing for.
-
-{/* visual-break:portfolio-case-studies:2 */}
-![Portfolio structure checkpoint illustration for this section.](/assets/visuals/blog/portfolio-case-studies-break-2.png)
 
 ## Closing
 

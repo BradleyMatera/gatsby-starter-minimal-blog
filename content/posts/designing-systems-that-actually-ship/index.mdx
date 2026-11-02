@@ -7,6 +7,10 @@ description: "A lightweight system design document template that lives inside yo
 theme: "Systems"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/designing-systems-that-actually-ship.json";
+
+
 In my experience, systems that fail to ship usually do so not because they were too hard, but because the design never became a real artifact. The idea stayed in someone’s head or in a long document that did not connect to actual files or testable outcomes. This aligns with [Google's Design Docs guide](https://www.industrialempathy.com/posts/design-docs-at-google/), which argues that a written design document is what forces vague ideas to become concrete decisions.
 
 I use a short system design document that lives inside the repo. It is not architecture theory. It is a few headings that keep the project from drifting.
@@ -32,8 +36,7 @@ When this exists as `docs/system-design.md`, the design stops being an idea and 
 | Onboarding | New contributors guess the architecture | Design is readable in one sitting |
 | Deployment risk | High — no verification before shipping | Low — design gates before code |
 
-{/* visual-break:designing-systems-that-actually-ship:1 */}
-![Execution process checkpoint illustration for this section.](/assets/visuals/blog/designing-systems-that-actually-ship-break-1.png)
+<ArticleVisual spec={articleVisuals.figures[0]} />
 
 ## The template I use
 
@@ -95,8 +98,7 @@ Without a concrete design artifact, projects drift. Features get added without b
 
 A short document does not replace code. It guides code. It is small enough to maintain and strong enough to stop uncontrolled growth.
 
-{/* visual-break:designing-systems-that-actually-ship:2 */}
-![Delivery workflow checkpoint illustration for this section.](/assets/visuals/blog/designing-systems-that-actually-ship-break-2.png)
+<ArticleVisual spec={articleVisuals.figures[1]} />
 
 ## How I verify it is useful
 

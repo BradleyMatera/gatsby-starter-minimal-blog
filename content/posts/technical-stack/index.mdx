@@ -7,6 +7,15 @@ description: "A scannable inventory of the tools I actually ship with in 2026: l
 theme: "Process"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/technical-stack-2026.json";
+
+
+
+
+
+
+
 I get asked about my stack a lot, and I used to answer with whatever sounded current. That made my answers unreliable. A few months ago I started keeping a single inventory of what I actually build with, not what I think about building with. This post is that inventory.
 
 It is not a prediction. It is what I use on this site and on the projects I ship in 2026.
@@ -82,8 +91,7 @@ Netlify is the simplest path from a Git push to a live site for my content proje
 
 MDX is what you are reading right now. I only add a real database when the project needs authentication, real-time updates, or relational data.
 
-{/* visual-break:technical-stack:1 */}
-![Execution process checkpoint illustration for this section.](/assets/visuals/blog/technical-stack-break-1.png)
+<ArticleVisual spec={articleVisuals.figures[0]} />
 
 ## Where I intentionally deviate
 
@@ -96,6 +104,8 @@ MDX is what you are reading right now. I only add a real database when the proje
 | Native mobile experiment | React Native | I am not great at it yet, but it is the fastest way to get a real app on a phone |
 
 The pattern is simple: I start with the default stack, then switch only when the project genuinely needs something else. Not when I am bored.
+
+<ArticleVisual spec={articleVisuals.figures[1]} />
 
 ## Tools I tried but did not keep
 
@@ -145,9 +155,6 @@ The core principles would not change: TypeScript, utility-first CSS, static gene
 The biggest mistake I make is switching tools before I understand the one I am using. I have abandoned perfectly good stacks because a new release got attention, then regretted it two weeks later.
 
 The rule I try to follow now: use the default for at least two projects before switching. That gives me enough real feedback to know whether a tool is actually better for my workflow, or just newer.
-
-{/* visual-break:technical-stack:2 */}
-![Delivery workflow checkpoint illustration for this section.](/assets/visuals/blog/technical-stack-break-2.png)
 
 ## Closing
 

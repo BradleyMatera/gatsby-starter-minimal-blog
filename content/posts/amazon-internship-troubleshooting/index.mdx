@@ -7,6 +7,10 @@ description: "A clear, bounded summary of my AWS Cloud Support internship: the t
 theme: "Cloud"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/aws-cloud-support-internship-mastering-troubleshooting-and-architecture.json";
+
+
 This post is about what I actually did during my AWS Cloud Support internship ([LinkedIn](https://www.linkedin.com/in/bradmatera)). Not what people imagine when they hear the words “cloud engineer,” and not a made-up story about owning production systems. Just the real work I was exposed to, the training I completed, and the kind of troubleshooting muscle it built.
 
 I want to be very clear up front. I did not own production customer environments. I did not run on-call rotations. I did not make high-risk changes to live enterprise systems. This was a guided internship with structured labs, internal tooling, and a capstone project designed to prove understanding in a controlled setting. That distinction matters, because pretending lab work is the same as production ownership helps nobody.
@@ -19,8 +23,7 @@ What you will get from this post:
 - The troubleshooting loop I repeated across labs.
 - A realistic boundary of what the internship did and did not cover.
 
-{/* visual-break:amazon-internship-troubleshooting:1 */}
-![Training workflow checkpoint illustration for this section.](/assets/visuals/blog/amazon-internship-troubleshooting-break-1.png)
+<ArticleVisual spec={articleVisuals.figures[0]} />
 
 ## What a cloud support intern does
 
@@ -144,8 +147,7 @@ aws cloudwatch get-metric-statistics \
 aws s3api list-objects-v2 --bucket <your-bucket-name> --prefix uploads/
 ```
 
-{/* visual-break:amazon-internship-troubleshooting:2 */}
-![Delivery workflow checkpoint illustration for this section.](/assets/visuals/blog/amazon-internship-troubleshooting-break-2.png)
+<ArticleVisual spec={articleVisuals.figures[1]} />
 
 ## Skill reality table
 

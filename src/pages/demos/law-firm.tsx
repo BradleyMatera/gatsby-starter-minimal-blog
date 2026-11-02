@@ -3,6 +3,8 @@ import type { HeadFC } from "gatsby";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
 import DemoLayout from "../../features/demos/DemoLayout";
+import DemoNavigation from "../../features/demos/DemoNavigation";
+import DemoJourney from "../../features/demos/DemoJourney";
 import GoogleMapsEmbed from "../../features/demos/GoogleMapsEmbed";
 import SocialLinks, { SocialLink } from "../../features/demos/SocialLinks";
 import ReviewBadges from "../../features/demos/ReviewBadges";
@@ -111,19 +113,11 @@ const deadlineGuide = [
 ];
 
 const DeadlineExplainer: React.FC = () => {
-  const [selected, setSelected] = React.useState<string | null>(null);
-
   return (
     <div style={{ maxWidth: "720px", margin: "0 auto" }}>
       <div className="demo-faq" style={{ marginBottom: "1.5rem" }}>
         {deadlineGuide.map((d) => (
-          <div key={d.topic} className="demo-faq__item" role="button" tabIndex={0} style={{ cursor: "pointer" }} onClick={() => setSelected(selected === d.topic ? null : d.topic)} onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") setSelected(selected === d.topic ? null : d.topic); }}>
-            <h3 className="demo-faq__question" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              {d.topic}
-              <span style={{ fontSize: "0.8rem", color: "var(--demo-text-muted)" }}>{selected === d.topic ? "−" : "+"}</span>
-            </h3>
-            {selected === d.topic && <p className="demo-faq__answer">{d.note}</p>}
-          </div>
+          <details key={d.topic} className="demo-faq__item demo-disclosure"><summary>{d.topic}</summary><p className="demo-faq__answer">{d.note}</p></details>
         ))}
       </div>
       <div className="demo-quote-form__success" style={{ borderColor: "#8b1f1f" }}>
@@ -136,94 +130,7 @@ const DeadlineExplainer: React.FC = () => {
   );
 };
 
-const ConsultationForm: React.FC = () => {
-  const [practiceArea, setPracticeArea] = React.useState("Business Counsel & Contracts");
-  const [attorney, setAttorney] = React.useState("No preference");
-  const [date, setDate] = React.useState("");
-  const [consultType, setConsultType] = React.useState("In-person");
-  const [urgency, setUrgency] = React.useState("No urgency — planning ahead");
-  const [submitted, setSubmitted] = React.useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
-
-  if (submitted) {
-    return (
-      <div className="demo-quote-form__success">
-        <CheckIcon size={48} />
-        <h3>Consultation Request Received</h3>
-        <p>Thank you. We'll call you within one business day to confirm your appointment. If you have an urgent deadline, call <a href="tel:8155550915">(815) 555-0915</a> now rather than waiting.</p>
-        <p><strong>Practice Area:</strong> {practiceArea}<br /><strong>Preferred Attorney:</strong> {attorney}<br /><strong>Preferred Date:</strong> {date || "To be scheduled"}<br /><strong>Consultation Type:</strong> {consultType}</p>
-        <p style={{ fontSize: "0.8rem", marginTop: "1rem", opacity: 0.8 }}>This is a demo form. It does not submit to a real law firm and does not create an attorney-client relationship.</p>
-        <button className="demo-btn demo-btn--ghost" onClick={() => setSubmitted(false)}>Submit another request</button>
-      </div>
-    );
-  }
-
-  return (
-    <form className="demo-quote-form" onSubmit={handleSubmit}>
-      <div className="demo-form-row">
-        <label className="demo-form-label" htmlFor="practice">Practice Area</label>
-        <select id="practice" className="demo-form-select" value={practiceArea} onChange={(e) => setPracticeArea(e.target.value)}>
-          <option>Business Counsel &amp; Contracts</option>
-          <option>Estate Planning &amp; Probate</option>
-          <option>Real Estate Closings &amp; Title</option>
-          <option>Business Succession</option>
-        </select>
-      </div>
-      <div className="demo-form-row">
-        <label className="demo-form-label" htmlFor="attorney">Preferred Attorney</label>
-        <select id="attorney" className="demo-form-select" value={attorney} onChange={(e) => setAttorney(e.target.value)}>
-          <option>No preference</option>
-          <option>Patricia Holloway, J.D.</option>
-          <option>Marcus Chen, J.D.</option>
-          <option>Jennifer Torres, J.D.</option>
-        </select>
-      </div>
-      <div className="demo-form-row">
-        <label className="demo-form-label" htmlFor="consult-type">Preferred Consultation Type</label>
-        <select id="consult-type" className="demo-form-select" value={consultType} onChange={(e) => setConsultType(e.target.value)}>
-          <option>In-person</option>
-          <option>Zoom video call</option>
-          <option>Phone call</option>
-        </select>
-      </div>
-      <div className="demo-form-row">
-        <label className="demo-form-label" htmlFor="urgency">Is this time-sensitive?</label>
-        <select id="urgency" className="demo-form-select" value={urgency} onChange={(e) => setUrgency(e.target.value)}>
-          <option>No urgency — planning ahead</option>
-          <option>Closing or deadline within 30 days</option>
-          <option>Urgent — deadline within 7 days</option>
-          <option>Emergency — need to speak today</option>
-        </select>
-      </div>
-      <div className="demo-form-row">
-        <label className="demo-form-label" htmlFor="date">Preferred Date &amp; Time</label>
-        <input id="date" className="demo-form-input" type="text" value={date} onChange={(e) => setDate(e.target.value)} placeholder="e.g. Tuesday, March 12 at 2:00 PM" />
-      </div>
-      <div className="demo-form-row">
-        <label className="demo-form-label" htmlFor="name">Full Name</label>
-        <input id="name" className="demo-form-input" type="text" required placeholder="Your name" />
-      </div>
-      <div className="demo-form-row">
-        <label className="demo-form-label" htmlFor="email">Email Address</label>
-        <input id="email" className="demo-form-input" type="email" required placeholder="you@email.com" />
-      </div>
-      <div className="demo-form-row">
-        <label className="demo-form-label" htmlFor="phone">Phone Number</label>
-        <input id="phone" className="demo-form-input" type="tel" placeholder="(815) 555-0000" />
-      </div>
-      <div className="demo-form-row">
-        <label className="demo-form-label" htmlFor="description">How can we help? (Keep it general — no confidential details)</label>
-        <textarea id="description" className="demo-form-textarea" rows={4} placeholder="Briefly describe the matter type (e.g., 'reviewing an operating agreement' or 'estate plan for family farm'). Do not share confidential details until a retainer agreement is signed." />
-      </div>
-      <button type="submit" className="demo-btn demo-btn--primary">Request Consultation</button>
-      <p className="demo-form-note">This is a demo form. No attorney-client relationship is created by submitting it. Confidential or time-sensitive information should not be sent through this form. If you have an urgent legal issue, call (815) 555-0915.</p>
-    </form>
-  );
-};
+const ConsultationForm: React.FC = () => <DemoJourney kind="law-firm" />;
 
 const LawFirmDemo: React.FC = () => (
   <DemoLayout
@@ -238,12 +145,12 @@ const LawFirmDemo: React.FC = () => (
         <span className="legal-mark" aria-hidden="true">RR</span>
         <span><strong>Rock River</strong><small>Legal Group · Dixon, Illinois</small></span>
       </a>
-      <div className="flagship-nav__links">
+      <DemoNavigation>
         <a href="#practice-areas">Practice</a>
         <a href="#attorneys">Attorneys</a>
         <a href="#consultation">Contact</a>
         <a href="#consultation" className="demo-btn demo-btn--primary">Request counsel</a>
-      </div>
+      </DemoNavigation>
     </nav>
 
     <section className="legal-hero" id="legal-top">
@@ -253,7 +160,7 @@ const LawFirmDemo: React.FC = () => (
         <p className="legal-hero__lede">Outside counsel for Northern Illinois businesses and families—operating agreements, estate plans, real estate closings, and succession explained with precision and plain language.</p>
         <div className="demo-hero__actions">
           <a href="#consultation" className="demo-btn demo-btn--primary">Request a consultation</a>
-          <a href="tel:8155550915" className="demo-btn demo-btn--ghost"><PhoneIcon size={18} /> (815) 555-0915</a>
+          <a href="#demo-disclosure" aria-label="Fictional demo phone; view disclosure" className="demo-btn demo-btn--ghost"><PhoneIcon size={18} /> (815) 555-0915</a>
         </div>
         <div className="legal-hero__note">
           <span aria-hidden="true">§</span>
@@ -551,7 +458,7 @@ const LawFirmDemo: React.FC = () => (
       <div className="demo-contact__inner">
         <h2 className="demo-contact__title">Need to talk through a business, estate, or real estate matter?</h2>
         <p className="demo-contact__text">Call (815) 555-0915 or request a consultation online. We serve Dixon, Sterling, Oregon, Rockford, and the surrounding counties.</p>
-        <a href="tel:8155550915" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0915</a>
+        <a href="#demo-disclosure" aria-label="Fictional demo phone; view disclosure" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0915</a>
         <div style={{ marginTop: "1.5rem" }}>
           <SocialLinks links={socialLinks} />
         </div>

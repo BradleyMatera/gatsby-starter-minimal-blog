@@ -1,0 +1,59 @@
+{
+  "slug": "what-i-learned-three-simple-projects",
+  "title": "What I Learned From Three Small Projects",
+  "cover": {
+    "src": "/images/blog/what-i-learned-three-simple-projects/cover.png",
+    "mobile": "/images/blog/what-i-learned-three-simple-projects/cover-720.webp",
+    "alt": "Concept illustration of three tactile software experiments: browser audio, a cheese calculation, and a responsive grid."
+  },
+  "figures": [
+    {
+      "id": "animal-sounds-boundaries",
+      "kind": "flow",
+      "title": "Check both browser and hosting boundaries",
+      "summary": "AnimalSounds exposed different assumptions between local development and deployment.",
+      "items": [
+        {
+          "label": "Observe the failure",
+          "detail": "Desktop playback succeeded while iOS audio remained suspended."
+        },
+        {
+          "label": "Wait for interaction",
+          "detail": "Move audio initialization and resume into the user's first interaction."
+        },
+        {
+          "label": "Check deployed paths",
+          "detail": "Compare root-relative asset requests with GitHub Pages' repository subpath."
+        },
+        {
+          "label": "Configure the environment",
+          "detail": "Apply the production base path and verify media on the deployed site."
+        }
+      ],
+      "caption": "A summary of the article's AnimalSounds investigation.",
+      "sourceLabel": "AnimalSounds repository",
+      "sourceHref": "https://github.com/bradleymatera/AnimalSounds"
+    },
+    {
+      "id": "three-project-lessons",
+      "kind": "comparison",
+      "title": "Three failures, three boundaries",
+      "summary": "Each small project made one environmental mismatch easier to see.",
+      "items": [
+        {
+          "label": "AnimalSounds",
+          "detail": "Browser interaction policy and static hosting paths required deployment-aware configuration."
+        },
+        {
+          "label": "CheeseMath",
+          "detail": "ES module source needed a Babel bridge for the project's Jest runtime."
+        },
+        {
+          "label": "EthicsFrontEndDemo",
+          "detail": "A two-dimensional page layout became simpler with CSS Grid."
+        }
+      ],
+      "caption": "These are the project's reported lessons, not universal prescriptions for every stack or layout."
+    }
+  ]
+}

@@ -4,7 +4,9 @@ slug: "/projects/car-match"
 
 ---
 
-import { Section, Card, AnchorNav, Link } from "../../../src/ui";
+import { Section, Card, Link } from "../../../src/ui";
+
+import ProjectEvidence from "../../../src/features/projects/components/ProjectEvidence";
 
 <Section
   eyebrow="Project Write-up"
@@ -12,26 +14,15 @@ import { Section, Card, AnchorNav, Link } from "../../../src/ui";
   description="React frontend hosted on GitHub Pages, Express backend deployed on Google Cloud Run (free tier), with optional MongoDB persistence for forums. Built as a Full Sail University course project and continued after."
 />
 
-<AnchorNav
-  items={[
-    { id: "overview", label: "Problem" },
-    { id: "approach", label: "Solution" },
-    { id: "role", label: "My Role" },
-    { id: "impact", label: "What's in the Repo" },
-    { id: "artifacts", label: "Tech Stack" },
-  ]}
-/>
+<ProjectEvidence pathname="/projects/car-match/" />
+
 
 <Section id="overview" eyebrow="Project context" title="Problem">
-  <p>
-    For a Full Sail University course project, I needed to build a full-stack application that demonstrated authentication, CRUD operations, and real user flows. I chose a car-enthusiast community platform because it gave me reasons to build profiles, events, forums, and messaging — each with different data models and permission levels.
-  </p>
+  <p>For a Full Sail University course project, I needed to build a full-stack application that demonstrated authentication, CRUD operations, and real user flows. I chose a car-enthusiast community platform because it gave me reasons to build profiles, events, forums, and messaging — each with different data models and permission levels.</p>
 </Section>
 
 <Section id="approach" eyebrow="Solution" title="What I built">
-  <p>
-    A React frontend with an Express API backend. The frontend runs on GitHub Pages; the backend runs on Google Cloud Run (free tier). Forums are mock-backed by default and persist when a MongoDB URI is configured. The repo includes a Dockerfile, setup scripts, and documentation for local development with HTTPS.
-  </p>
+  <p>A React frontend with an Express API backend. The frontend runs on GitHub Pages; the backend runs on Google Cloud Run (free tier). Forums are mock-backed by default and persist when a MongoDB URI is configured. The repo includes a Dockerfile, setup scripts, and documentation for local development with HTTPS.</p>
   <div className="grid-two">
     <Card>
       <h3 className="feature-card__title">Frontend</h3>
@@ -52,18 +43,6 @@ import { Section, Card, AnchorNav, Link } from "../../../src/ui";
         <li>Dockerfile for containerized deployment</li>
       </ul>
     </Card>
-  </div>
-  <div className="image-tug" aria-label="Car-Match visuals">
-    <div className="image-tug__layer image-tug__layer--back">
-      <picture>
-        <source type="image/avif" srcSet="/project-diagrams.avif" />
-        <source type="image/webp" srcSet="/project-diagrams.webp" />
-        <img src="/project-diagrams.png" alt="" width="1536" height="1024" loading="lazy" decoding="async" />
-      </picture>
-    </div>
-    <div className="image-tug__layer image-tug__layer--front">
-      <img src="/assets/visuals/projects/car-match.png" alt="Car-Match project visual" width="1536" height="1024" loading="lazy" decoding="async" />
-    </div>
   </div>
 </Section>
 

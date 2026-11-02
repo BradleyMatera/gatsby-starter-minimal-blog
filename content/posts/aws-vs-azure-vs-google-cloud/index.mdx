@@ -7,6 +7,10 @@ description: "A real-world comparison of AWS, Azure, and GCP free tiers from run
 theme: "Cloud"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/aws-vs-azure-vs-google-cloud.json";
+
+
 I have burned small amounts of money on all three major cloud providers. Not a lot, but enough to remember the mistakes. This post is the comparison I wish I had before opening those accounts: not a marketing table, but the practical differences I noticed while actually using AWS, Azure, and GCP for small projects.
 
 I am not going to declare a winner. Each one is free in a different way, and each one has a different way of surprising you with a bill. What matters is matching the provider to what you are actually trying to do.
@@ -17,8 +21,7 @@ After my AWS internship and a few side projects, I wanted to know whether the fr
 
 The honest answer: AWS has the most hiring-market value, GCP has the best long-term free compute option, and Azure sits in the middle with a few specific Microsoft ecosystem wins. None of them is magic. All of them require you to watch your resources.
 
-{/* visual-break:aws-vs-azure-vs-google-cloud:1 */}
-![Cloud architecture checkpoint illustration for this section.](/assets/visuals/blog/aws-vs-azure-vs-google-cloud-break-1.png)
+<ArticleVisual spec={articleVisuals.figures[0]} />
 
 ## Compute comparison
 
@@ -66,8 +69,7 @@ I deployed in the wrong region. That is the whole story. Region discipline matte
 
 The common thread is that the cloud provider will not stop you. You have to verify what is still running and where.
 
-{/* visual-break:aws-vs-azure-vs-google-cloud:2 */}
-![Cloud operations checkpoint illustration for this section.](/assets/visuals/blog/aws-vs-azure-vs-google-cloud-break-2.png)
+<ArticleVisual spec={articleVisuals.figures[1]} />
 
 ## Quick CLI checks I use before walking away
 

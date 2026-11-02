@@ -1,9 +1,12 @@
+import TableScroll from "../../features/demos/TableScroll";
 import * as React from "react";
+import BrandArtwork from "../../site/components/BrandArtwork";
+import { MonitorIcon, CodeIcon, SearchIcon, ToolsIcon, AccessibilityIcon, BoltIcon, GearIcon } from "../../site/icons";
 import type { HeadFC } from "gatsby";
 import Layout from "../../@lekoarts/gatsby-theme-minimal-blog/components/layout";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
-import { Card, Link, Section } from "../../ui";
+import { Card, Link, Section, AnchorNav } from "../../ui";
 
 const pathname = "/services/";
 const pageTitle = "Website Services for Small Businesses in Northwest Illinois | Bradley Matera";
@@ -55,8 +58,10 @@ const serviceCards = [
   },
 ];
 
+const serviceIcons = [MonitorIcon, CodeIcon, SearchIcon, ToolsIcon, AccessibilityIcon, BoltIcon, GearIcon];
+
 const ServicesPage = () => (
-  <Layout>
+  <Layout className="business-page service-page">
     <nav className="breadcrumbs" aria-label="Breadcrumb">
       <ol className="breadcrumbs__list">
         <li className="breadcrumbs__item">
@@ -69,8 +74,10 @@ const ServicesPage = () => (
     </nav>
 
     <Section
+      id="section-services"
       eyebrow="Services"
       titleAs="h1"
+      visual={<BrandArtwork variant="digital-architecture" eager />}
       title={
         <>
           <strong>Website services</strong> for small businesses in Northwest Illinois.
@@ -94,10 +101,11 @@ const ServicesPage = () => (
         </>
       }
     >
+    <AnchorNav className="business-section-nav" items={[{"id": "section-compare-packages", "label": "Compare packages"}, {"id": "section-how-it-works", "label": "How it works"}, {"id": "section-common-questions", "label": "Common questions"}, {"id": "section-ready-to-start", "label": "Ready to start?"}]} />
       <div className="grid-three">
-        {serviceCards.map((service) => (
+        {serviceCards.map((service, index) => (
           <Link key={service.href} to={service.href} className="service-card">
-            <img src={`/service-images/${service.image}`} alt={service.title} className="service-card__image" loading="lazy" />
+            <span className="service-card__symbol" aria-hidden="true">{React.createElement(serviceIcons[index], { size: 28 })}</span>
             <div className="service-card__body">
               <h2 className="service-card__title">{service.title}</h2>
               <p className="service-card__desc">{service.desc}</p>
@@ -109,6 +117,7 @@ const ServicesPage = () => (
     </Section>
 
     <Section
+      id="section-compare-packages"
       eyebrow="Compare packages"
       title="Which package fits your business?"
       description={
@@ -117,14 +126,14 @@ const ServicesPage = () => (
         </p>
       }
     >
-      <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Package comparison table">
-        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+      <TableScroll label="Package comparison table">
+<table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
           <thead>
             <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
-              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
-              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Starter — $447</th>
-              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Growth — $797</th>
-              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Premium — $1,497</th>
+              <th scope="col" style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
+              <th scope="col" style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Starter — $447</th>
+              <th scope="col" style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Growth — $797</th>
+              <th scope="col" style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Premium — $1,497</th>
             </tr>
           </thead>
           <tbody>
@@ -202,7 +211,7 @@ const ServicesPage = () => (
             </tr>
           </tbody>
         </table>
-      </div>
+</TableScroll>
       <div className="card-actions" style={{ marginTop: "1.5rem" }}>
         <Link data-variant="primary" to="/pricing/">See full pricing</Link>
         <Link data-variant="ghost" to="/contact/">Get a free plan</Link>
@@ -210,6 +219,7 @@ const ServicesPage = () => (
     </Section>
 
     <Section
+      id="section-how-it-works"
       eyebrow="How it works"
       title="From first call to live site"
     >
@@ -235,7 +245,9 @@ const ServicesPage = () => (
       </div>
     </Section>
 
-    <Section eyebrow="Common questions" title="Frequently asked questions about website services">
+    <Section
+      id="section-common-questions"
+      eyebrow="Common questions" title="Frequently asked questions about website services">
       <div className="grid-two">
         <Card variant="outline">
           <h3 className="feature-card__title">How much do website services cost?</h3>
@@ -268,6 +280,7 @@ const ServicesPage = () => (
     </Section>
 
     <Section
+      id="section-ready-to-start"
       eyebrow="Ready to start?"
       title="Get a free consultation"
       description={

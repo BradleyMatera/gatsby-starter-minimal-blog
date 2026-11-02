@@ -3,7 +3,9 @@ title: "OBJ Parser"
 slug: "/projects/obj-parser"
 ---
 
-import { Section, Card, AnchorNav, Link } from "../../../src/ui";
+import { Section, Card, Link } from "../../../src/ui";
+
+import ProjectEvidence from "../../../src/features/projects/components/ProjectEvidence";
 
 <Section
   eyebrow="Project Write-up"
@@ -11,26 +13,15 @@ import { Section, Card, AnchorNav, Link } from "../../../src/ui";
   description="A small Zig project that reads Wavefront OBJ files and optionally reads MTL material files, converting them to an optimized binary format with verification tools. Built to learn Zig's explicit memory management and binary-safe parsing. MIT licensed."
 />
 
-<AnchorNav
-  items={[
-    { id: "overview", label: "Problem" },
-    { id: "approach", label: "Solution" },
-    { id: "role", label: "My Role" },
-    { id: "impact", label: "What's in the Repo" },
-    { id: "artifacts", label: "Tech Stack" },
-  ]}
-/>
+<ProjectEvidence pathname="/projects/obj-parser/" />
+
 
 <Section id="overview" eyebrow="Problem" title="Learning Zig's memory model through real parsing">
-  <p>
-    I wanted to learn Zig's explicit memory management and binary-safe parsing by building something real — not a toy example. Parsing Wavefront OBJ files and converting them to an optimized binary format was a good fit: it requires reading text formats, handling materials, managing memory explicitly, and writing binary output that can be verified.
-  </p>
+  <p>I wanted to learn Zig's explicit memory management and binary-safe parsing by building something real — not a toy example. Parsing Wavefront OBJ files and converting them to an optimized binary format was a good fit: it requires reading text formats, handling materials, managing memory explicitly, and writing binary output that can be verified.</p>
 </Section>
 
 <Section id="approach" eyebrow="Solution" title="What I built">
-  <p>
-    A small Zig project that reads Wavefront OBJ files, optionally reads MTL material files, and converts them to an optimized binary format with verification tools. The parser handles face vertex parsing and demonstrates core concepts including OBJ file format handling, binary format design, memory management, and parsing techniques.
-  </p>
+  <p>A small Zig project that reads Wavefront OBJ files, optionally reads MTL material files, and converts them to an optimized binary format with verification tools. The parser handles face vertex parsing and demonstrates core concepts including OBJ file format handling, binary format design, memory management, and parsing techniques.</p>
   <div className="grid-two">
     <Card>
       <h3 className="feature-card__title">Parsing & conversion</h3>

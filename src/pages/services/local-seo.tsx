@@ -1,9 +1,12 @@
+import TableScroll from "../../features/demos/TableScroll";
 import * as React from "react";
+import BrandArtwork from "../../site/components/BrandArtwork";
+import ServiceVisual from "../../features/services/ServiceVisual";
 import type { HeadFC } from "gatsby";
 import Layout from "../../@lekoarts/gatsby-theme-minimal-blog/components/layout";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
-import { Card, Link, Section } from "../../ui";
+import { Card, Link, Section, FAQAccordion, AnchorNav } from "../../ui";
 import { SERVICE_AREA_CITIES, CITY_IMAGES } from "../../shared/city-data";
 
 const pathname = "/services/local-seo/";
@@ -50,7 +53,7 @@ const faqs = [
 ];
 
 const LocalSeoPage = () => (
-  <Layout>
+  <Layout className="business-page service-page">
     <nav className="breadcrumbs" aria-label="Breadcrumb">
       <ol className="breadcrumbs__list">
         <li className="breadcrumbs__item">
@@ -66,8 +69,10 @@ const LocalSeoPage = () => (
     </nav>
 
     <Section
+      id="section-local-seo"
       eyebrow="Local SEO"
       titleAs="h1"
+      visual={<BrandArtwork variant="local-discovery" eager />}
       title={
         <>
           <strong>Local SEO Services</strong> for Northwest Illinois Businesses
@@ -92,6 +97,8 @@ const LocalSeoPage = () => (
         </>
       }
     >
+    <AnchorNav className="business-section-nav" items={[{"id": "section-what-s-included", "label": "What's included"}, {"id": "section-how-it-works", "label": "How it works"}, {"id": "section-service-area", "label": "Service area"}, {"id": "section-compare", "label": "Compare"}, {"id": "section-faq", "label": "FAQ"}, {"id": "section-ready-to-start", "label": "Ready to start?"}]} />
+      <ServiceVisual kind="local-seo" />
       <div className="grid-three">
         <div className="pkg-card">
           <img src="/package-images/seo-price.svg" alt="Starting at $67/month illustration" className="pkg-card__bg" loading="lazy" />
@@ -133,6 +140,7 @@ const LocalSeoPage = () => (
     </Section>
 
     <Section
+      id="section-what-s-included"
       eyebrow="What's included"
       title="Deliverables"
       description={
@@ -151,6 +159,7 @@ const LocalSeoPage = () => (
     </Section>
 
     <Section
+      id="section-how-it-works"
       eyebrow="How it works"
       title="From audit to ranking"
     >
@@ -186,6 +195,7 @@ const LocalSeoPage = () => (
     </Section>
 
     <Section
+      id="section-service-area"
       eyebrow="Service area"
       title="Local SEO in your city"
       description={
@@ -207,6 +217,7 @@ const LocalSeoPage = () => (
     </Section>
 
     <Section
+      id="section-compare"
       eyebrow="Compare"
       title="Which option fits your business?"
       description={
@@ -215,14 +226,14 @@ const LocalSeoPage = () => (
         </p>
       }
     >
-      <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Local SEO comparison table">
-        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+      <TableScroll label="Local SEO comparison table">
+<table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
           <thead>
             <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
-              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
-              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Basic — $67/mo</th>
-              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Growth — $97/mo</th>
-              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Premium — custom</th>
+              <th scope="col" style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
+              <th scope="col" style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Basic — $67/mo</th>
+              <th scope="col" style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Growth — $97/mo</th>
+              <th scope="col" style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Premium — custom</th>
             </tr>
           </thead>
           <tbody>
@@ -270,24 +281,19 @@ const LocalSeoPage = () => (
             </tr>
           </tbody>
         </table>
-      </div>
+</TableScroll>
     </Section>
 
     <Section
+      id="section-faq"
       eyebrow="FAQ"
       title="Common questions about local SEO"
     >
-      <div className="grid-three">
-        {faqs.map((faq) => (
-          <Card key={faq.q} variant="outline">
-            <h3 className="feature-card__title">{faq.q}</h3>
-            <p className="feature-card__body">{faq.a}</p>
-          </Card>
-        ))}
-      </div>
+      <FAQAccordion items={faqs.map(faq => ({ question: faq.q, answer: faq.a }))} />
     </Section>
 
     <Section
+      id="section-ready-to-start"
       eyebrow="Ready to start?"
       title="Get a free consultation"
       description={

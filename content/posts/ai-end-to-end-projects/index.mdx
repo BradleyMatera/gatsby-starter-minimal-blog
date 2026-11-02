@@ -7,6 +7,10 @@ description: "A strict, verifiable workflow for building end-to-end projects wit
 theme: "Process"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/ai-end-to-end-projects.json";
+
+
 AI can speed you up, but it can also lie. This post is not a tutorial and it is not a flex. It is just me explaining how I actually build end-to-end projects with AI, based on what I have really done, what I have actually struggled with, and how I have learned to make systems work instead of just talking about them.
 
 If you only look at my repos, it can look like I am cranking out full-stack apps, dashboards, WebGPU demos, AWS deployments, Docker setups, CI pipelines, auth flows, and UI systems nonstop. That part is real. The part that is not real is the idea that I sit down and type perfect solutions from memory like a textbook engineer. That has never been me.
@@ -23,8 +27,7 @@ I do not have a computer science background. I do not write algorithms from memo
 
 Once a system exists, I am comfortable inside it. I can follow requests, state, data flow, permissions, logs, and deployment pipelines. That is the foundation I build on.
 
-{/* visual-break:ai-end-to-end-projects:1 */}
-![AI workflow checkpoint illustration for this section.](/assets/visuals/blog/ai-end-to-end-projects-break-1.png)
+<ArticleVisual spec={articleVisuals.figures[0]} />
 
 ## How I actually start projects
 
@@ -92,8 +95,7 @@ I learn by doing. I learned AWS by living in consoles, labs, logs, and runbooks 
 
 This loop fits how my brain works. Touch the system. Break the system. Fix the system. Repeat.
 
-{/* visual-break:ai-end-to-end-projects:2 */}
-![Automation loop checkpoint illustration for this section.](/assets/visuals/blog/ai-end-to-end-projects-break-2.png)
+<ArticleVisual spec={articleVisuals.figures[1]} />
 
 ## Closing
 

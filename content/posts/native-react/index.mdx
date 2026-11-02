@@ -7,6 +7,9 @@ description: "A minimal React Native prototype you can verify: create a fresh pr
 theme: "Mobile"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/native-react.json";
+
 Mobile prototypes only matter if they run on an actual simulator or device. A repo that “looks right” but will not boot is just text.
 
 This post is a small React Native prototype you can verify. The goal is not to build an app. The goal is to create a fresh project, change one file, and prove you can see your change on screen. Once you can do that, everything else becomes normal incremental work instead of guesswork.
@@ -19,8 +22,7 @@ You are building the smallest possible React Native app that prints a single lin
 
 React Native is just React code running inside a native shell ([Source](https://reactnative.dev/docs/getting-started)). The “native” part is real. iOS builds use Xcode ([Source](https://developer.apple.com/xcode/)). Android builds use Gradle and the Android toolchain ([Source](https://developer.android.com/studio)). The JavaScript is still yours, but the last mile is a real native app.
 
-{/* visual-break:native-react:1 */}
-![AI workflow checkpoint illustration for this section.](/assets/visuals/blog/native-react-break-1.png)
+<ArticleVisual spec={articleVisuals.figures[0]} />
 
 ## What you need and why you need it
 
@@ -178,6 +180,8 @@ A lot of beginners think “it ran” means “the command finished.” In React
 
 So after you see the screen once, change the text to something else, save, and confirm the app updates. That is your proof that Metro is serving your bundle correctly and the app is connected.
 
+<ArticleVisual spec={articleVisuals.figures[1]} />
+
 ## Common failures that look like React Native but are not
 
 React Native errors are usually symptoms, not causes. Here are the ones that show up the most.
@@ -278,9 +282,6 @@ This is still minimal, but it proves something more than static rendering. It pr
 The React Native docs have two different setup paths (Expo and React Native CLI). This post is the React Native CLI path because it forces you to prove the native toolchain works.
 
 https://reactnative.dev/docs/environment-setup
-
-{/* visual-break:native-react:2 */}
-![Automation loop checkpoint illustration for this section.](/assets/visuals/blog/native-react-break-2.png)
 
 ## Closing
 

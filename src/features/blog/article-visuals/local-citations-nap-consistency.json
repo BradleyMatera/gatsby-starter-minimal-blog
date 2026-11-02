@@ -1,0 +1,65 @@
+{
+  "slug": "/local-citations-nap-consistency",
+  "title": "Local Citations and NAP Consistency for Small Businesses",
+  "cover": {
+    "src": "/images/blog/local-citations-nap-consistency/cover.png",
+    "mobile": "/images/blog/local-citations-nap-consistency/cover-720.webp",
+    "alt": "Conceptual miniature storefronts connected to one reference plaque for consistent business identity"
+  },
+  "figures": [
+    {
+      "id": "canonical-identity",
+      "kind": "layers",
+      "title": "One business identity, three fields",
+      "summary": "Record reference values before comparing public listings.",
+      "items": [
+        {
+          "label": "Name",
+          "detail": "Use the actual legal name or DBA."
+        },
+        {
+          "label": "Address",
+          "detail": "Keep the real location and chosen format consistent where applicable."
+        },
+        {
+          "label": "Phone",
+          "detail": "Use one current primary business number."
+        },
+        {
+          "label": "Directory record",
+          "detail": "Compare each public listing against the reference."
+        }
+      ],
+      "caption": "The article's NAP fields and reference-record approach; no ranking outcome is predicted."
+    },
+    {
+      "id": "citation-cleanup",
+      "kind": "flow",
+      "title": "Audit, correct, and verify citations",
+      "summary": "Public records need a follow-up check after correction.",
+      "items": [
+        {
+          "label": "Set the reference",
+          "detail": "Write down the canonical business details."
+        },
+        {
+          "label": "Find mentions",
+          "detail": "Search business names, current numbers and old numbers."
+        },
+        {
+          "label": "Track mismatches",
+          "detail": "Save URLs and the current versus correct values."
+        },
+        {
+          "label": "Fix by priority",
+          "detail": "Work through major platforms and relevant directories."
+        },
+        {
+          "label": "Re-check",
+          "detail": "Confirm corrections remain in place."
+        }
+      ],
+      "caption": "A condensed version of the article's cleanup process, excluding anecdotal ranking claims."
+    }
+  ]
+}

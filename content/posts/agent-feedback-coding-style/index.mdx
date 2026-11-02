@@ -7,6 +7,10 @@ description: "The exact loop: build with a GPT coding agent, validate through a 
 theme: "Process"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/coding-style-gpt-agent-external-reviewer.json";
+
+
 I did not land on this coding style by accident. It came from shipping too fast, missing layout bugs, trusting local assumptions, and getting vague feedback that did not map to exact fixes.
 
 The process only started working when I split the work into two loops:
@@ -61,6 +65,8 @@ GPT coding agent applies fixes + verifies build
 
 The key is that the reviewer is not reading source first. It reviews rendered output like a user would. This is the same principle behind [browser-based end-to-end testing](https://www.cypress.io/) tools like Cypress and Playwright, which assert against the rendered DOM rather than source files.
 
+<ArticleVisual spec={articleVisuals.figures[0]} />
+
 ## The build loop inside the repo
 
 The GPT coding agent handles implementation end to end:
@@ -106,6 +112,8 @@ I stopped asking for generic “thoughts” and asked for structured findings:
 This made the feedback directly actionable.
 
 A good example is layout overlap. “Cards feel messy” is not enough. “Card A spills over Card B when content expands and grid rows do not auto-size” is fixable.
+
+<ArticleVisual spec={articleVisuals.figures[1]} />
 
 ## Quality gates before calling a change done
 
@@ -195,8 +203,7 @@ If you want this exact style, copy this minimal sequence:
 
 The point is not “use more AI.” The point is role separation: one agent builds, another audits from the outside.
 
-{/* visual-break:agent-feedback-coding-style:2 */}
-![Delivery workflow checkpoint illustration for this section.](/assets/visuals/blog/agent-feedback-coding-style-break-2.png)
+
 
 ## Closing
 

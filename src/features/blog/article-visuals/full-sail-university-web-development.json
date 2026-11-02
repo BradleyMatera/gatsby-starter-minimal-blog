@@ -1,0 +1,61 @@
+{
+  "slug": "/full-sail-university-web-development",
+  "title": "Full Sail University Web Development: What Formal Training Actually Gave Me",
+  "cover": {
+    "src": "/images/blog/full-sail-university-web-development/cover.png",
+    "mobile": "/images/blog/full-sail-university-web-development/cover-720.webp",
+    "alt": "Four connected model-making platforms represent starting, building, reviewing and presenting a project."
+  },
+  "figures": [
+    {
+      "id": "monthly-course",
+      "kind": "timeline",
+      "title": "The monthly project rhythm",
+      "summary": "The author describes a repeating four-stage course cycle.",
+      "items": [
+        {
+          "label": "Week 1",
+          "detail": "Read the new topic's documentation and begin scaffolding."
+        },
+        {
+          "label": "Week 2",
+          "detail": "Build the core implementation and debug the first obstacles."
+        },
+        {
+          "label": "Week 3",
+          "detail": "Refine the project and prepare the presentation."
+        },
+        {
+          "label": "Week 4",
+          "detail": "Deliver, present, receive feedback and move to the next topic."
+        }
+      ],
+      "caption": "A visual summary of the author's program experience, not a current university timetable."
+    },
+    {
+      "id": "classroom-transfer",
+      "kind": "comparison",
+      "title": "What transferred into later work",
+      "summary": "Compare each classroom habit with its later expression.",
+      "items": [
+        {
+          "label": "Start",
+          "detail": "Class: begin a new project. Later: get an unfamiliar repository running."
+        },
+        {
+          "label": "Unblock",
+          "detail": "Class: read documentation under a deadline. Later: investigate a deployment or service."
+        },
+        {
+          "label": "Present",
+          "detail": "Class: demonstrate working software. Later: explain a project in a README or write-up."
+        },
+        {
+          "label": "Iterate",
+          "detail": "Class: respond to instructor feedback. Later: respond to maintainers and reviewers."
+        }
+      ],
+      "caption": "The article's recurring habits, rather than a claim that any credential alone establishes engineering expertise."
+    }
+  ]
+}

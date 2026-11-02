@@ -104,122 +104,14 @@ const TIMELINE: TimelineEntry[] = [
   },
 ];
 
-const ChevronIcon: React.FC<{ expanded: boolean }> = ({ expanded }) => (
-  <svg
-    width="14"
-    height="14"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2.5"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    style={{
-      transform: expanded ? "rotate(180deg)" : "rotate(0deg)",
-      transition: "transform 0.3s cubic-bezier(.22,.9,.2,1)",
-      flexShrink: 0,
-    }}
-  >
-    <polyline points="6 9 12 15 18 9" />
-  </svg>
+const ExperienceTimeline: React.FC = () => (
+  <section id="experience-timeline" className="recruiter-section" aria-labelledby="recruiter-experience-heading">
+    <div className="recruiter-section__header"><span className="recruiter-section__eyebrow">Experience</span><h2 id="recruiter-experience-heading" className="recruiter-section__title">Career <span className="recruiter-title-accent">Timeline</span></h2><p className="recruiter-section__subtitle">From military service to cloud engineering. Every step built the engineer I am today.</p></div>
+    <div className="recruiter-experience-list">{TIMELINE.map((entry, index) => <article className="recruiter-experience-row" key={`${entry.title}-${entry.org}`}>
+      <div className="recruiter-experience-row__period"><span>{entry.period}</span><span className="recruiter-tag">{entry.type}</span></div>
+      <div><h3>{entry.title}</h3><p>{entry.org}</p><details className="recruiter-details" open={index === 1}><summary>Responsibilities and experience</summary><ul>{entry.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}</ul><ul className="recruiter-tag-list">{entry.tags.map((tag) => <li className="recruiter-tag" key={tag}>{tag}</li>)}</ul></details></div>
+    </article>)}</div>
+  </section>
 );
-
-const ExperienceTimeline: React.FC = () => {
-  const [expandedIndex, setExpandedIndex] = React.useState<number | null>(1); // open AWS by default
-
-  const toggle = (index: number) => {
-    setExpandedIndex((current) => (current === index ? null : index));
-  };
-
-  return (
-    <section id="experience-timeline" className="recruiter-section recruiter-section--media reveal-section">
-      {/* Background media layer */}
-      <div className="recruiter-section__media" aria-hidden="true">
-        <img
-          className="recruiter-section__video recruiter-ken-burns"
-          src="/career-timeline.webp"
-          alt="Career timeline graphic — background for the experience timeline section"
-          aria-hidden="true"
-        />
-        <div className="recruiter-section__media-overlay" />
-      </div>
-
-      <div className="recruiter-section__content">
-        <div className="recruiter-section__header">
-          <div className="recruiter-section__eyebrow">Experience</div>
-          <h2 className="recruiter-section__title">
-            Career <span className="recruiter-gradient-text">Timeline</span>
-          </h2>
-          <p className="recruiter-section__subtitle">
-            From military service to cloud engineering. Every step built the engineer I am today.
-          </p>
-        </div>
-
-        <div className="recruiter-timeline">
-        <div className="recruiter-timeline__line" />
-
-        {TIMELINE.map((entry, index) => {
-          const isExpanded = expandedIndex === index;
-          const isLeft = index % 2 === 0;
-
-          return (
-            <article
-              key={index}
-              className={`recruiter-timeline__item ${isLeft ? "recruiter-timeline__item--left" : "recruiter-timeline__item--right"}`}
-            >
-              <button
-                type="button"
-                className={`recruiter-timeline__card ${isExpanded ? "recruiter-timeline__card--active" : ""}`}
-                onClick={() => toggle(index)}
-                aria-expanded={isExpanded}
-              >
-                <div className="recruiter-timeline__meta">
-                  <span className="recruiter-timeline__period">{entry.period}</span>
-                  <span className="recruiter-timeline__type">{entry.type}</span>
-                </div>
-
-                <div className="recruiter-timeline__header-row">
-                  <div className="recruiter-timeline__role">
-                    <h3 className="recruiter-timeline__title">{entry.title}</h3>
-                    <span className="recruiter-timeline__org">{entry.org}</span>
-                  </div>
-                  <span className="recruiter-timeline__chevron">
-                    <ChevronIcon expanded={isExpanded} />
-                  </span>
-                </div>
-
-                <div
-                  className="recruiter-timeline__details"
-                  style={{
-                    maxHeight: isExpanded ? 400 : 0,
-                    opacity: isExpanded ? 1 : 0,
-                  }}
-                >
-                  <ul className="recruiter-timeline__highlights">
-                    {entry.highlights.map((h, i) => (
-                      <li key={i}>
-                        <span className="recruiter-timeline__bullet" />
-                        {h}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="recruiter-timeline__tags">
-                    {entry.tags.map((tag) => (
-                      <span key={tag} className="recruiter-tag">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </button>
-            </article>
-          );
-        })}
-      </div>
-    </div>
-    </section>
-  );
-};
 
 export default ExperienceTimeline;

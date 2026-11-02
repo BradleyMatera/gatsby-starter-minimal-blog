@@ -22,25 +22,27 @@ import {
   TrackableSection,
 } from "../features/recruiter/components";
 import "../styles/recruiter.css";
+import { ShopifySpotlight } from "../features/shopify";
 
 const RecruiterPage = () => {
   return (
     <RecruiterLayout>
       <TrackableSection id="hero"><RecruiterHero /></TrackableSection>
-      <TrackableSection id="why"><PrivacyBanner /><WhyThisExists /></TrackableSection>
-      <TrackableSection id="roles"><RolesExplorer /></TrackableSection>
-      <TrackableSection id="contributions"><ContributionsShowcase /></TrackableSection>
-      <TrackableSection id="resources"><ResourceLibrary /></TrackableSection>
-      <TrackableSection id="experience"><ExperienceTimeline /></TrackableSection>
       <TrackableSection id="projects"><ProjectExplorer /></TrackableSection>
       <TrackableSection id="skills"><SkillsExplorer /></TrackableSection>
+      <TrackableSection id="roles"><RolesExplorer /></TrackableSection>
+      <TrackableSection id="experience"><ExperienceTimeline /></TrackableSection>
       <TrackableSection id="aws"><AWSSection /></TrackableSection>
+      <TrackableSection id="contributions"><ContributionsShowcase /></TrackableSection>
+      <TrackableSection id="leadership"><LeadershipSection /></TrackableSection>
+      <TrackableSection id="resources"><ResourceLibrary /></TrackableSection>
+      <ShopifySpotlight context={{ path: "/recruiter/", intent: "interview-audio", title: "Interview audio equipment" }} placement="recruiter-resources" variant="compact" limit={2} />
+      <TrackableSection id="interview"><InterviewResources /></TrackableSection>
       <TrackableSection id="certifications"><CertificationsWall /></TrackableSection>
       <TrackableSection id="writing"><TechnicalWriting /></TrackableSection>
+      <TrackableSection id="why"><PrivacyBanner /><WhyThisExists /></TrackableSection>
       <TrackableSection id="faq"><RecruiterFAQ /></TrackableSection>
-      <TrackableSection id="leadership"><LeadershipSection /></TrackableSection>
       <TrackableSection id="contact"><ContactCTA /></TrackableSection>
-      <TrackableSection id="interview"><InterviewResources /></TrackableSection>
     </RecruiterLayout>
   );
 };

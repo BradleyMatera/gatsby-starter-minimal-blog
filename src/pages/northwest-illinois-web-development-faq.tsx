@@ -3,7 +3,7 @@ import type { HeadFC } from "gatsby";
 import Layout from "../@lekoarts/gatsby-theme-minimal-blog/components/layout";
 import Seo from "../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
-import { Card, Link, Section } from "../ui";
+import { Link, Section, FAQAccordion } from "../ui";
 
 const pathname = "/northwest-illinois-web-development-faq/";
 const pageTitle = "Northwest Illinois Web Development FAQ";
@@ -44,7 +44,7 @@ const faqs = [
 ];
 
 const LocalFaqPage = () => (
-  <Layout>
+  <Layout className="business-page northwest-illinois-web-development-faq-page">
     <nav className="breadcrumbs" aria-label="Breadcrumb">
       <ol className="breadcrumbs__list">
         <li className="breadcrumbs__item">
@@ -76,14 +76,7 @@ const LocalFaqPage = () => (
         </>
       }
     >
-      <div className="grid-two">
-        {faqs.map((faq) => (
-          <Card key={faq.question} variant="outline">
-            <h2 className="feature-card__title">{faq.question}</h2>
-            <p className="feature-card__body">{faq.answer}</p>
-          </Card>
-        ))}
-      </div>
+      <FAQAccordion items={faqs.map(faq => ({ question: faq.question, answer: faq.answer }))} />
     </Section>
 
     <Section
@@ -93,10 +86,10 @@ const LocalFaqPage = () => (
       <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.9rem" }}>
         <thead>
           <tr>
-            <th style={{ textAlign: "left", padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Feature</th>
-            <th style={{ padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Starter ($447)</th>
-            <th style={{ padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Growth ($797)</th>
-            <th style={{ padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Premium ($1,497)</th>
+            <th scope="col" style={{ textAlign: "left", padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Feature</th>
+            <th scope="col" style={{ padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Starter ($447)</th>
+            <th scope="col" style={{ padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Growth ($797)</th>
+            <th scope="col" style={{ padding: "0.5rem", borderBottom: "2px solid currentColor" }}>Premium ($1,497)</th>
           </tr>
         </thead>
         <tbody>

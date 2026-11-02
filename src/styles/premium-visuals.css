@@ -1,0 +1,150 @@
+.matera-site .section-shell { margin-block: min(var(--space-section), 52px); }
+.matera-site .section-shell__header { margin-bottom: 24px; }
+.matera-site .section-shell__header--visual { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr); align-items: stretch; gap: 28px; max-width: none; }
+.section-shell__copy, .section-shell__visual { min-width: 0; }
+.brand-artwork { display: block; position: relative; overflow: hidden; isolation: isolate; border-radius: 16px; background: #101a2b; }
+.matera-site .brand-artwork img { display: block; width: 100%; height: 100%; object-fit: cover; margin: 0; border-radius: inherit; }
+.section-shell__visual .brand-artwork { height: 100%; min-height: 320px; }
+.matera-site .business-page .section-shell__header--visual { max-width: none; }
+.matera-site .business-page .section-shell:first-of-type { margin-top: 20px; }
+.matera-site .business-page .section-shell:first-of-type .section-title { max-width: 24ch; font-size: clamp(2.1rem, 3.4vw, 3.45rem); }
+.matera-site .business-page .section-shell + .section-shell { padding: 28px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 18px; }
+.matera-site .business-page .section-shell:nth-of-type(even) { background: var(--color-surface-alt); }
+.matera-site .business-page .section-shell__header p { margin-bottom: 14px; }
+.matera-site .business-page .section-shell__header .section-title { margin-top: 6px; margin-bottom: 16px; }
+.matera-site .business-page .service-visual { margin-block: 24px; }
+.matera-site .business-page .feature-list li { margin-bottom: 8px; }
+.matera-site .business-page .pkg-card__body { padding: 24px; }
+.matera-site .business-page .pkg-card__bg, .matera-site .contact-page .pkg-card__bg { display: block; width: 100%; height: 170px; object-fit: contain; background: #0d1117; margin: 0; border-radius: 0; }
+.matera-site .pricing-page .pricing-packages { gap: 20px; }
+.matera-site .pricing-page .pricing-package-art { height: 150px; border-radius: 0; }
+.matera-site .pricing-page .pricing-packages .pkg-card { overflow: hidden; border: 1px solid var(--color-border-strong); }
+.matera-site .pricing-page .pricing-packages .pkg-card:nth-child(2) { border: 2px solid var(--color-accent); }
+.matera-site .pricing-page .pricing-package-name { margin-bottom: 12px; }
+.matera-site .pricing-page .pricing-packages .pkg-card__body { padding: 24px; }
+.matera-site .pricing-page .pricing-package-price { font-size: clamp(2.25rem, 4vw, 3.25rem); }
+.pricing-explainer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items: start; }
+.matera-site .pricing-page #section-what-s-not-included .section-content { background: url('/images/brand/engineering-craft-720.webp') right center / 46% auto no-repeat; border-radius: 16px; }
+.matera-site .pricing-page #section-what-s-not-included .surface-card { width: 54%; }
+.matera-site .pricing-page #section-deposit-guarantee { padding-right: 35%; background: var(--color-surface) url('/images/brand/digital-architecture-720.webp') right center / 30% 100% no-repeat; }
+.matera-site .pricing-page #section-explore-more .grid-two { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.matera-site .pricing-page #section-explore-more .feature-card__title { font-size: 1.15rem; margin-bottom: 12px; }
+.matera-site .pricing-page #section-explore-more .surface-card { padding: 20px; }
+.matera-site .hero-ba { margin: 28px 0 24px; padding: 28px; border: 1px solid var(--color-border); border-radius: 22px; background: var(--color-surface); overflow: hidden; }
+.matera-site .hero-ba__inner { gap: 28px; }
+.matera-site .hero-ba__title { font-size: clamp(2.3rem, 4.1vw, 4rem); max-width: 15ch; margin-block: 16px 20px; }
+.matera-site .hero-ba__visual { padding: 28px 20px 20px; background: #101a2b url('/images/brand/digital-architecture.webp') center / cover; border-radius: 16px; }
+.matera-site .hero-ba__below { background: #101a2b; color: #fff; padding: 12px; border-radius: 10px; margin-top: 16px; }
+:root[data-theme] .matera-site .hero-ba__below :is(.hero-ba__tabs-label,.hero-ba__demo-link) { color: #fff; }
+.matera-site .home-trust-strip { margin: 24px 0 36px; padding: 20px 24px; border: 1px solid var(--color-border); border-radius: 16px; background: var(--color-surface-alt); }
+.matera-site .u-home-hero > .home-snap > .section-shell { margin-block: 40px; }
+.matera-site .u-home-hero .feature-card { overflow: hidden; padding: 0 24px 24px; }
+.matera-site .u-home-hero .feature-card::before { content: ''; display: block; height: 150px; margin: 0 -24px 24px; background: url('/images/brand/web-design-studio-720.webp') center / cover; }
+.matera-site .u-home-hero .feature-card:nth-child(2)::before { background-image: url('/images/brand/local-discovery-720.webp'); }
+.matera-site .u-home-hero .feature-card:nth-child(3)::before { background-image: url('/images/brand/website-repair-720.webp'); }
+.matera-site .u-home-hero .feature-card__icon { margin-bottom: 12px; }
+.matera-site .home-demo-card { border: 1px solid var(--color-border); border-radius: 16px; background: var(--color-surface); overflow: hidden; }
+.matera-site .home-demo-card__preview { border-radius: 0; }
+.matera-site .home-demo-card__body { padding: 24px; }
+.matera-site .city-card { height: auto; min-height: 0; display: flex; flex-direction: column; align-items: stretch; }
+.matera-site .city-card__image { display: block; width: 100%; height: 190px; object-fit: cover; margin: 0; border-radius: 0; }
+.matera-site .city-card__overlay { position: static; flex: 1; padding: 20px; background: #15243a; }
+.matera-site .city-card__title, .matera-site .city-card__link { color: #fff !important; text-shadow: none; }
+.matera-site .footer { margin-top: 48px; padding-top: 40px; }
+.matera-site .footer-inner { gap: 32px; padding-bottom: 32px; }
+.matera-site .site-main.editorial-page { padding-top: 32px; }
+.matera-site .editorial-page .editorial-header { margin-bottom: 28px; }
+.matera-site .editorial-about .editorial-about-intro { position: relative; overflow: hidden; padding: 28px; grid-template-columns: minmax(0, 1fr) 260px; gap: 32px; border-radius: 20px; background: #101a2b url('/images/brand/digital-architecture.webp') right center / cover; }
+.matera-site .editorial-about .editorial-about-intro > div { position: relative; background: var(--color-surface); padding: 28px; border-radius: 14px; color: var(--color-text); }
+.matera-site .editorial-about .editorial-about-intro > div p { color: var(--color-text); }
+.matera-site .editorial-about .editorial-about-intro img { width: 260px; height: 300px; border: 5px solid #f6f5f1; border-radius: 14px; }
+.matera-site .editorial-about .about-section { margin-bottom: 32px; padding: 24px; border: 1px solid var(--color-border); border-radius: 16px; background: var(--color-surface); }
+.matera-site .editorial-about .about-section:nth-child(even) { background: var(--color-surface-alt); }
+.matera-site .editorial-about .about-section--profile .about-profile__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(230px, .48fr); gap: 28px; align-items: stretch; }
+.matera-site .editorial-about .about-profile__grid .brand-artwork { height: 100%; min-height: 300px; }
+.matera-site .editorial-about .what-i-build-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.matera-site .editorial-about .build-card { padding: 0 24px 24px; overflow: hidden; background: var(--color-surface); }
+.matera-site .editorial-about .build-card > .about-project-preview { width: calc(100% + 48px); max-width: none; height: 175px; object-fit: cover; object-position: top; margin: 0 -24px 20px; border-radius: 0; }
+.matera-site .editorial-about .build-card p { font-size: 1rem; }
+.matera-site .editorial-about .about-icon-divider { margin-block: 24px; border-radius: 16px; background: #101a2b; }
+.matera-site .editorial-about .how-i-work-grid, .matera-site .editorial-about .about-cta__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.matera-site .editorial-about .how-i-work-grid .feature-card { padding: 24px; }
+.matera-site .editorial-about .certification-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.matera-site .editorial-about .certification-card { padding: 20px; border: 1px solid var(--color-border); background: var(--color-surface); border-radius: 12px; }
+.matera-site .editorial-about .about-section--cta { border-top: 6px solid var(--color-accent); }
+.matera-site .premium-store-link { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px 16px; padding: 10px 24px; min-height: 48px; background: #101a2b; color: #fff; font-size: .875rem; line-height: 1.5; border-bottom: 1px solid #45658d; }
+:root[data-theme] .matera-site .premium-store-link a { display: inline-flex; align-items: center; min-height: 44px; gap: 10px; color: #fff; text-decoration: underline; }
+.matera-site .premium-store-link span { color: #d8e5ff; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .brand-artwork img { transition: transform 600ms cubic-bezier(.2,.65,.25,1); }
+  .brand-artwork:hover img { transform: scale(1.035); }
+  .matera-site .home-demo-card, .matera-site .pricing-packages .pkg-card { transition: transform 220ms ease, box-shadow 220ms ease; }
+  .matera-site .home-demo-card:hover, .matera-site .pricing-packages .pkg-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px #101a2b18; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .brand-artwork[data-reveal] { transition: opacity 500ms ease, transform 650ms cubic-bezier(.2,.65,.25,1); }
+  .brand-artwork[data-reveal="waiting"] { opacity: 0; transform: translateY(14px); }
+  .brand-artwork[data-reveal="visible"] { opacity: 1; transform: none; }
+}
+@media (max-width: 1000px) {
+ .matera-site .section-shell__header--visual { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 20px; }
+ .matera-site .business-page .section-shell:first-of-type .section-title { font-size: 2.2rem; }
+ .matera-site .editorial-about .about-section--profile .about-profile__grid { grid-template-columns: 1fr; }
+ .matera-site .editorial-about .about-profile__grid .brand-artwork { min-height: 0; height: 240px; }
+}
+@media (max-width: 767px) {
+ .matera-site .section-shell__header--visual { grid-template-columns: 1fr; }
+ .section-shell__visual .brand-artwork { min-height: 0; height: 230px; }
+ .matera-site .business-page .section-shell + .section-shell { padding: 20px; }
+ .matera-site .hero-ba { padding: 20px; margin-top: 20px; }
+ .matera-site .hero-ba__visual { padding: 16px 12px 12px; }
+ .matera-site .hero-ba__title { font-size: clamp(2.15rem, 8vw, 3.2rem); }
+ .matera-site .home-trust-strip { padding: 20px; }
+ .pricing-explainer-grid, .matera-site .pricing-page #section-explore-more .grid-two { grid-template-columns: 1fr; }
+ .matera-site .pricing-page #section-what-s-not-included .section-content { background: none; }
+ .matera-site .pricing-page #section-what-s-not-included .surface-card { width: 100%; }
+ .matera-site .pricing-page #section-deposit-guarantee { padding: 20px; background-image: none; }
+ .matera-site .editorial-about .editorial-about-intro { padding: 20px; grid-template-columns: 1fr; gap: 20px; }
+ .matera-site .editorial-about .editorial-about-intro > div { padding: 20px; }
+ .matera-site .editorial-about .editorial-about-intro img { width: 100%; height: 280px; }
+ .matera-site .editorial-about :is(.what-i-build-grid,.how-i-work-grid,.about-cta__grid,.certification-cards) { grid-template-columns: 1fr; }
+ .matera-site .editorial-about .about-section { padding: 20px; }
+ .matera-site .premium-store-link { padding: 6px 20px; gap: 0 12px; }
+ .matera-site .premium-store-link span { font-size: .8rem; }
+}
+@media print { .brand-artwork, .premium-store-link { display: none; } }
+.matera-site .section-shell { width: 100%; max-width: none; }
+.matera-site .business-section-nav { width: 100%; flex-direction: row; justify-content: flex-start; align-items: center; margin-bottom: 24px; gap: 8px 20px; }
+.matera-site .business-section-nav .inpage-nav__links { width: auto; flex: 1; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; gap: 4px 20px; }
+.matera-site .business-section-nav .inpage-nav__link { padding-block: 4px; }
+.matera-site .premium-store-link { padding-block: 0; }
+.matera-site .editorial-about .editorial-reading { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+.matera-site .editorial-about .editorial-reading__body { grid-column: 1; grid-row: 2; }
+.matera-site .editorial-about .editorial-reading__contents { position: static; grid-column: 1; grid-row: 1; max-height: none; padding: 16px 20px; border: 1px solid var(--color-border); background: var(--color-surface-alt); border-radius: 12px; }
+.matera-site .editorial-about .editorial-reading__contents ol { display: flex; flex-wrap: wrap; gap: 0 20px; }
+.matera-site .editorial-about .editorial-reading__contents .editorial-reading__nested { display: none; }
+.matera-site .editorial-about .editorial-reading__contents a { min-height: 44px; display: inline-flex; align-items: center; }
+.matera-site .editorial-about .editorial-reading__body .about-profile__bio p { margin-bottom: 1.5em; }
+.matera-site .editorial-about .editorial-reading__body h2 { margin-top: 0; }
+.matera-site .shopify-spotlight { border-top: 5px solid var(--color-accent); background: var(--color-surface-alt); margin-block: 32px; }
+@media (max-width: 767px) { .matera-site .business-section-nav { gap: 4px 12px; } .matera-site .business-section-nav .inpage-nav__label { width: 100%; } }
+:root .matera-site .site-main.editorial-page { padding-top: 32px; padding-bottom: 32px; }
+.matera-site .editorial-about .editorial-header h1 { font-size: 2rem; margin: 0; }
+.matera-site .editorial-about .editorial-header { margin-bottom: 16px; }
+.matera-site .editorial-about .editorial-reading__contents { padding-block: 4px; }
+.matera-site .editorial-about .editorial-reading__contents .editorial-filters { margin: 0; border: 0; }
+.matera-site .editorial-about .editorial-about-intro { margin-block: 0 28px; }
+.matera-site .editorial-about .editorial-reading__body > .u-page-content { margin: 0; padding: 0; }
+.matera-site .editorial-page .editorial-article-card { overflow: hidden; padding: 0 24px 24px; }
+.matera-site .editorial-article-card .topic-artwork { height: 200px; border-radius: 0; margin: 0 -24px 24px; }
+.matera-site .editorial-post .editorial-header { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr); gap: 0 28px; max-width: none; }
+.matera-site .editorial-post .editorial-header > :not(.topic-artwork) { grid-column: 1; }
+.matera-site .editorial-post .editorial-header > .breadcrumbs { grid-column: 1 / -1; margin-bottom: 16px; }
+.matera-site .editorial-post .editorial-header h1 { font-size: clamp(2rem, 3.1vw, 3rem); line-height: 1.15; }
+.matera-site .editorial-post .editorial-header > .topic-artwork { grid-column: 2; grid-row: 2 / span 4; align-self: center; min-height: 0; height: auto; }
+.matera-site .editorial-post .editorial-header > .topic-artwork img { height: auto; object-fit: contain; }
+.matera-site .editorial-post .editorial-header > .topic-artwork:hover img { transform: none; }
+@media(max-width:767px) { .matera-site .editorial-post .editorial-header { grid-template-columns: 1fr; } .matera-site .editorial-post .editorial-header > .topic-artwork { grid-column: 1; grid-row: auto; height: auto; min-height: 0; margin-top: 20px; } }
+.pricing-page .table-scroll__viewport { width: 100%; border: 1px solid var(--color-border); border-radius: 12px; background: var(--color-surface); }
+.matera-site .pricing-page .pricing-comparison-table { min-width: 640px; margin-top: 0 !important; }
+@media (max-width: 767px) { .section-shell__header--visual .section-shell__visual { grid-row: 1; } .section-shell__header--visual .section-shell__copy { grid-row: 2; } .section-shell__visual .brand-artwork { height: 180px; } }

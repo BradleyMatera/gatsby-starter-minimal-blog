@@ -7,6 +7,9 @@ description: "A focused WebGPU triangle demo rebuild: isolate one issue at a tim
 theme: "Graphics"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/rebuilt-webgpu-triangle-demo.json";
+
 Small WebGPU demos break for boring reasons. Most of the time it is not the API that is wrong — it is a missing adapter check, a pipeline misconfiguration, or a render loop that forgets to clear the canvas. This post is a clean fix pass for a broken triangle demo. The goal is to isolate one issue at a time and prove the fix works before moving on.
 
 The original demo I was rebuilding had three concrete problems. First, it called `navigator.gpu.requestAdapter()` without checking the return value, so on any browser without WebGPU enabled it silently produced a null adapter and threw a confusing `TypeError` several lines later when the code tried to call `requestDevice()` on it. Second, the WGSL shader used entry point names (`main` for both vertex and fragment) that did not match the `entryPoint` strings in the pipeline descriptor, so the pipeline compiled but drew nothing. Third, the render loop called `pass.draw(3)` but never set `loadOp: "clear"` on the color attachment, which left the canvas in an undefined state on some drivers and produced a black or flickering surface.
@@ -23,15 +26,14 @@ By the end, you will:
 
 > “Fix one thing, then verify it, then move on.”
 
-{/* visual-break:rebuilt-webgpu-triangle-demo:1 */}
-![Rendering pipeline checkpoint illustration for this section.](/assets/visuals/blog/rebuilt-webgpu-triangle-demo-break-1.png)
-
 ## What you need
 
 - A WebGPU-capable browser.
 - A minimal WebGPU demo project, even if it is currently broken.
 
 If you do not have a project yet, start with a single `index.html` and a `main.js` that requests a WebGPU adapter. Everything else in this post builds on that.
+
+<ArticleVisual spec={articleVisuals.figures[0]} />
 
 ## Step 1: Confirm the adapter and device
 
@@ -148,6 +150,8 @@ frame();
 - Symptom: triangle flickers.  
   **Fix:** ensure you use `loadOp: "clear"` and submit the command buffer.
 
+<ArticleVisual spec={articleVisuals.figures[1]} />
+
 ## Verify it worked
 
 - A triangle appears.
@@ -161,9 +165,6 @@ frame();
 | Nothing renders | Shader entry points mismatch | Align entry point names in code and shader |
 | Canvas is black | No clear color or draw call | Add `clearValue` and `draw(3)` |
 | Device lost errors | Driver issues | Reload and try again |
-
-{/* visual-break:rebuilt-webgpu-triangle-demo:2 */}
-![Graphics systems checkpoint illustration for this section.](/assets/visuals/blog/rebuilt-webgpu-triangle-demo-break-2.png)
 
 ## What to add next
 

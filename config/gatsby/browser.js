@@ -11,6 +11,8 @@ import "../../src/styles/themes/neumorphism.css";
 import "../../src/styles/themes/retrofuturism.css";
 import "../../src/styles/themes/brutalism.css";
 import "../../src/styles/demos.css";
+import "../../src/styles/brand-system.css";
+import "../../src/styles/premium-visuals.css";
 
 import * as React from "react";
 import { StyleLabProvider } from "../../src/site/components";
@@ -42,7 +44,7 @@ export const shouldUpdateScroll = ({ routerProps: { location }, prevRouterProps 
   if (location.hash) {
     const el = document.querySelector(location.hash);
     if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      el.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
       return false;
     }
     // Element not yet rendered — let onRouteUpdate handle it
@@ -65,7 +67,7 @@ export const onRouteUpdate = ({ location }) => {
     setTimeout(() => {
       const el = document.querySelector(location.hash);
       if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        el.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
       }
     }, 100);
   }

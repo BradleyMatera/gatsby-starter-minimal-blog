@@ -3,7 +3,7 @@ import { Link } from "gatsby";
 import useSiteMetadata from "../hooks/use-site-metadata";
 import useMinimalBlogConfig from "../hooks/use-minimal-blog-config";
 import replaceSlashes from "../utils/replaceSlashes";
-import { BrandLogo } from "../../../site/components";
+import { BrandLogo, StyleLabToggle, ThemeToggle } from "../../../site/components";
 import {
   SELLER_IDENTITY_LINE,
   SELLER_DISCLOSURE_SHORT,
@@ -15,7 +15,7 @@ import {
 
 const Footer = () => {
   const { siteHeadline } = useSiteMetadata();
-  const { navigation: nav, externalLinks, basePath } = useMinimalBlogConfig();
+  const { externalLinks, basePath } = useMinimalBlogConfig();
   const [currentYear] = React.useState(() => new Date().getFullYear());
 
   return (
@@ -43,13 +43,11 @@ const Footer = () => {
           <div>
             <p className="footer-nav__title">Explore</p>
             <ul>
-              {nav?.map((item) => (
-                <li key={item.slug}>
-                  <Link to={replaceSlashes(`/${basePath}/${item.slug}`)}>{item.title}</Link>
-                </li>
-              ))}
-              <li><Link to="/demos/">Website demos</Link></li>
-              <li><Link to="/service-areas/">Service areas</Link></li>
+              {[
+                ["/services/", "Services"], ["/work/", "Selected work"], ["/pricing/", "Pricing"],
+                ["/demos/", "Website demos"], ["/service-areas/", "Service areas"], ["/about/", "About Bradley"],
+                ["/recruiter/", "Recruiter hub"], ["/projects/", "Engineering projects"], ["/store/", "Digital store"], ["/support/", "Support"],
+              ].map(([path, label]) => <li key={path}><Link to={path}>{label}</Link></li>)}
             </ul>
           </div>
           {externalLinks && externalLinks.length > 0 ? (
@@ -69,16 +67,15 @@ const Footer = () => {
         </div>
       </div>
 
+      <div className="footer-appearance"><span>Make yourself comfortable</span><ThemeToggle /><StyleLabToggle /></div>
       <div className="footer-bottom footer-bottom--compact">
         <span suppressHydrationWarning>&copy; {currentYear} Matera Digital — {SELLER_IDENTITY_LINE}</span>
         <span className="footer-legal-links">
-          {POLICY_LINKS.map((link, i) => (
+          {POLICY_LINKS.map((link) => (
             <React.Fragment key={link.path}>
-              {i > 0 && " · "}
               <Link to={link.path} style={{ color: "inherit", textDecoration: "underline" }}>{link.label}</Link>
             </React.Fragment>
           ))}
-          {" · "}
           <Link to="/image-credits/" style={{ color: "inherit", textDecoration: "underline" }}>Image credits</Link>
         </span>
       </div>

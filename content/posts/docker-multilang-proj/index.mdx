@@ -7,6 +7,10 @@ description: "How I containerized a small multi-language project with Node, Pyth
 theme: "DevOps"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/containerizing-multi-language-projects-with-docker-a-practical-guide.json";
+
+
 Most Docker tutorials are either too abstract or too production-heavy. This is the small multi-service stack I built to understand how containers actually wire together: a Node API, a Python worker, and a static web front end, all started with one command.
 
 ## Why three languages in one project
@@ -27,8 +31,9 @@ To containerize a multi-language project, create a separate Dockerfile for each 
 | Worker | Python | Polls the API and logs results | none |
 | Web | Nginx | Serves a static page that displays data | 8080 |
 
-{/* visual-break:docker-multilang-proj:1 */}
-![Cloud architecture checkpoint illustration for this section.](/assets/visuals/blog/docker-multilang-proj-break-1.png)
+
+
+<ArticleVisual spec={articleVisuals.figures[0]} />
 
 ## The API
 
@@ -180,8 +185,7 @@ Verify:
 - `curl http://localhost:3001/sorted` returns sorted data.
 - Compose logs show the worker printing arrays.
 
-{/* visual-break:docker-multilang-proj:2 */}
-![Cloud operations checkpoint illustration for this section.](/assets/visuals/blog/docker-multilang-proj-break-2.png)
+
 
 ## What I learned
 
@@ -205,6 +209,8 @@ The optimizations were standard but worth stating explicitly:
 **Multi-stage builds for the API.** I split the API Dockerfile into a build stage and a runtime stage. The build stage installs all dependencies and compiles; the runtime stage copies only the built output and production dependencies into a clean `node:18-alpine` image. The final image dropped from 180MB to 95MB.
 
 **`.dockerignore` files.** Without a `.dockerignore`, Docker sends the entire build context — including `node_modules`, `.git`, and local test files — to the daemon. Adding a `.dockerignore` with `node_modules`, `.git`, and `*.log` reduced the build context from 140MB to 2MB, which sped up the first step of every build.
+
+<ArticleVisual spec={articleVisuals.figures[1]} />
 
 ## Common pitfalls and how I solved them
 

@@ -1,0 +1,65 @@
+{
+  "slug": "/github-pages-deployments-confusing",
+  "title": "GitHub Pages Deployments That Stop Being Confusing",
+  "cover": {
+    "src": "/images/blog/github-pages-deployments-confusing/cover.png",
+    "mobile": "/images/blog/github-pages-deployments-confusing/cover-720.webp",
+    "alt": "Asset tiles follow a folded route through a nested project doorway while a root-level route misses the entrance."
+  },
+  "figures": [
+    {
+      "id": "pages-two-paths",
+      "kind": "comparison",
+      "title": "Two ways to publish the same kind of artifact",
+      "summary": "Both approaches deliver static files; the configured source and handoff differ.",
+      "items": [
+        {
+          "label": "Publish source",
+          "detail": "Branch approach: a selected branch. Actions approach: a workflow artifact."
+        },
+        {
+          "label": "Handoff",
+          "detail": "Branch approach: push the output folder. Actions approach: upload the output folder as a Pages artifact."
+        },
+        {
+          "label": "Settings",
+          "detail": "Choose the Pages source that matches the approach being used."
+        },
+        {
+          "label": "Output",
+          "detail": "In both approaches, publish the directory containing the intended entry HTML and assets."
+        }
+      ],
+      "caption": "A comparison of the two deployment approaches in this article, not a claim that every Pages site uses a repository subpath."
+    },
+    {
+      "id": "pages-checks",
+      "kind": "checklist",
+      "title": "Trace a missing asset before republishing",
+      "summary": "Check the deployed paths and artifact instead of assuming a successful job proves the page works.",
+      "items": [
+        {
+          "label": "Base path",
+          "detail": "Inspect generated asset URLs for the location where this site is served."
+        },
+        {
+          "label": "Output folder",
+          "detail": "Confirm the chosen build folder contains the expected entry HTML."
+        },
+        {
+          "label": "Pages source",
+          "detail": "Confirm repository settings match branch or Actions deployment."
+        },
+        {
+          "label": "Live request",
+          "detail": "Open the live URL and inspect failed CSS or JavaScript requests."
+        },
+        {
+          "label": "Workflow log",
+          "detail": "Inspect upload and deployment steps when the published output is wrong."
+        }
+      ],
+      "caption": "A verification map drawn from the article's configuration and troubleshooting sections."
+    }
+  ]
+}

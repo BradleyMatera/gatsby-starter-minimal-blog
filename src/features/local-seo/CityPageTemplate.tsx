@@ -14,6 +14,10 @@ import {
   SELLER_PHONE_HREF,
 } from "../../site/legal/business-identity";
 import { COUNTY_SOURCES, MUNICIPAL_SOURCES } from "./city-references";
+import { getCityArtProfile } from "./city-visuals";
+import LocalIllustration from "./LocalIllustration";
+import { NEW_CITY_CONFIGS } from "./city-configs";
+import "./local-pages.css";
 
 export type CityPageConfig = {
   city: string;
@@ -64,6 +68,7 @@ const chooseDemo = (industries: string[] = []): DemoChoice => {
 };
 
 const money = (amount: number) => `$${amount.toLocaleString("en-US")}`;
+const cityImageBySlug = new Map(NEW_CITY_CONFIGS.map((place) => [place.slug, place.cityImage]));
 
 export const createCityPage = (config: CityPageConfig) => {
   const { city, state, stateAbbrev, slug, distance, industries = [], allCitySlugs, county, cityImage } = config;
@@ -73,7 +78,9 @@ export const createCityPage = (config: CityPageConfig) => {
   const nearbyCities = Array.from({ length: 4 }, (_, offset) => allCitySlugs[(placeIndex + offset + 1) % allCitySlugs.length]);
   const municipality = MUNICIPAL_SOURCES[slug];
   const countySource = COUNTY_SOURCES[county];
-  const demo = chooseDemo(industries);
+  const artwork = getCityArtProfile(slug);
+  const visual = artwork.industry;
+  const demo = visual === "supplier" ? demoChoices.manufacturing : visual === "appointment" ? demoChoices.retail : visual === "visit" ? demoChoices.restaurant : visual === "catalog" ? demoChoices.agriculture : chooseDemo(industries);
   const proximity = distance === "local to the area"
     ? distance
     : `about ${distance.replace(/^about\s+/, "")} from Durand`;
@@ -111,7 +118,7 @@ export const createCityPage = (config: CityPageConfig) => {
 
   const CityPage: React.FC = () => (
     <Layout>
-      <div className="city-sales-page">
+      <div className={`city-sales-page local-editorial city-visual--${visual} local-region--${artwork.region}`} style={{ "--city-photo": `url(/city-images/${cityImage})` } as React.CSSProperties}>
         <nav className="breadcrumbs" aria-label="Breadcrumb">
           <ol className="breadcrumbs__list">
             <li className="breadcrumbs__item"><Link to="/">Home</Link></li>
@@ -142,26 +149,38 @@ export const createCityPage = (config: CityPageConfig) => {
             </>
           }
         >
-          <img
-            src={`/city-images/${cityImage}`}
-            alt={`${city}, ${state} community view`}
-            className="city-sales-hero__image"
-            loading="eager"
-          />
-          <ul className="city-trust-bar" aria-label="Project commitments">
-            <li>Built directly by Bradley</li>
-            <li>{NO_CONTRACTS_REPLACEMENT}</li>
-            <li>30-day build-bug warranty</li>
-          </ul>
+          <div className="city-visual-stage">
+            <span className="city-visual-stage__orbit" aria-hidden="true" />
+            <figure className="city-editorial-photo"><img
+              src={`/city-images/${cityImage}`}
+              alt={`${city}, ${state} community view`}
+              className="city-sales-hero__image"
+              loading="eager"
+            /><figcaption><span>{city}, {stateAbbrev}</span><strong>{county}</strong><Link to="/image-credits/">Local photograph · image credits</Link></figcaption></figure>
+            <Link className="city-preview-inset" to={`/demos/${demo.slug}/`} aria-label={`Explore the ${demo.name} fictional website concept`}>
+              <span className="city-preview-inset__bar"><span aria-hidden="true">● ● ●</span> Website concept</span>
+              <img src={`/images/demos/previews/${demo.slug}.webp`} alt="" loading="eager" />
+              <span className="city-preview-inset__caption">Fictional business · explore the design <span aria-hidden="true">↗</span></span>
+            </Link>
+          </div>
         </Section>
+        <ul className="city-trust-bar" aria-label="Project commitments">
+          <li><span aria-hidden="true">01</span>Built directly by Bradley</li>
+          <li><span aria-hidden="true">02</span>{NO_CONTRACTS_REPLACEMENT}</li>
+          <li><span aria-hidden="true">03</span>30-day build-bug warranty</li>
+        </ul>
+        <nav className="city-page-nav" aria-label="On this city page"><span>Explore the plan</span><a href="#website-services">Services</a><a href="#website-concept">Design example</a><a href="#website-packages">Packages</a><a href="#website-process">Process</a><a href="#website-questions">Questions</a></nav>
 
         <Section
+          id="website-services"
+          className="city-services-section"
           eyebrow="Choose the right starting point"
           title={`What does your ${city} business need the website to do?`}
           description={<p>Start with the business problem. The technology and page count follow from that decision.</p>}
         >
           <div className="grid-three city-service-grid">
             <article className="pkg-card">
+              <div className="city-service-media"><LocalIllustration kind={artwork.design} /><span>01 / Website design</span></div>
               <div className="pkg-card__body">
                 <h3 className="pkg-card__title">Win more of the right inquiries</h3>
                 <p className="pkg-card__desc">A focused new site with clear services, proof, calls to action, mobile layouts, analytics, and a contact path visitors can finish.</p>
@@ -169,6 +188,7 @@ export const createCityPage = (config: CityPageConfig) => {
               </div>
             </article>
             <article className="pkg-card">
+              <div className="city-service-media city-service-media--local"><LocalIllustration kind="search" /><img className="city-service-media__place" src={`/city-images/${cityImage}`} alt="" loading="lazy" /><span>02 / Local search</span></div>
               <div className="pkg-card__body">
                 <h3 className="pkg-card__title">Build local search foundations</h3>
                 <p className="pkg-card__desc">Useful service pages, accurate business details, structured data, technical cleanup, and Google Business Profile alignment without a ranking guarantee.</p>
@@ -176,6 +196,7 @@ export const createCityPage = (config: CityPageConfig) => {
               </div>
             </article>
             <article className="pkg-card">
+              <div className="city-service-media"><LocalIllustration kind="refresh" /><span>03 / Website repair</span></div>
               <div className="pkg-card__body">
                 <h3 className="pkg-card__title">Fix the site you already own</h3>
                 <p className="pkg-card__desc">Repair broken forms, confusing navigation, stale dependencies, deployment problems, content gaps, and mobile usability issues.</p>
@@ -191,7 +212,12 @@ export const createCityPage = (config: CityPageConfig) => {
           title={`A ${city} page should help a customer verify the business`}
           description={<p>Local SEO works best when the website and public profiles describe the real business consistently. City names should reflect where you genuinely operate, not pretend locations.</p>}
         >
-          <div className="grid-two">
+          <div className="city-context-layout">
+            <aside className="city-place-panel">
+              <div className="city-place-panel__photo" aria-hidden="true" />
+              <div><span>{state}</span><h3>{city}</h3><p>{county}</p><Link to="/service-areas/">Explore the region <span aria-hidden="true">↗</span></Link></div>
+            </aside>
+            <div className="grid-two">
             <div className="pkg-card">
               <div className="pkg-card__body">
                 <h3 className="pkg-card__title">Details customers should be able to confirm</h3>
@@ -211,16 +237,19 @@ export const createCityPage = (config: CityPageConfig) => {
                 <ul className="feature-list">{businessTypes.map((item) => <li key={item}>{item}</li>)}</ul>
               </div>
             </div>
+            </div>
           </div>
         </Section>
 
         <Section
+          id="website-concept"
+          className="city-concept-section"
           eyebrow="See the standard"
           title="A complete concept is more useful than a vague portfolio tile"
           description={<p>The example below is explicitly fictional. It demonstrates structure and interaction, not a client result or endorsement.</p>}
         >
           <article className="city-demo-proof">
-            <img src={`/images/demos/${demo.slug}/hero.jpg`} alt={`Fictional ${demo.industry} website concept for ${demo.name}`} loading="lazy" />
+            <img src={`/images/demos/previews/${demo.slug}.webp`} alt={`${demo.name} concept website preview — fictional business`} loading="lazy" />
             <div className="city-demo-proof__body">
               <span className="city-demo-proof__label">Concept demo — fictional business</span>
               <h3>{demo.name}</h3>
@@ -234,6 +263,8 @@ export const createCityPage = (config: CityPageConfig) => {
         </Section>
 
         <Section
+          id="website-packages"
+          className="city-packages-section"
           eyebrow="Transparent website packages"
           title="Pick a starting scope before you book a call"
           description={<p>These public package definitions are used across the site so price, revisions, timing, and warranty language stay consistent.</p>}
@@ -261,8 +292,11 @@ export const createCityPage = (config: CityPageConfig) => {
         </Section>
 
         <Section
+          id="website-process"
+          className="city-process-section"
           eyebrow="A practical four-step process"
           title={`From first conversation to a working ${city} business website`}
+          description={<LocalIllustration kind={artwork.process} caption="A clear plan. A shared preview. An agreed launch." className="city-process-art" />}
         >
           <ol className="city-process-grid">
             <li><strong>Diagnose:</strong> Identify the customer, conversion goal, current problems, and what must be true at launch.</li>
@@ -272,12 +306,10 @@ export const createCityPage = (config: CityPageConfig) => {
           </ol>
         </Section>
 
-        <Section eyebrow="Straight answers" title={`Website design questions from ${city} business owners`}>
+        <Section id="website-questions" className="city-questions-section" eyebrow="Straight answers" title={`Website design questions from ${city} business owners`}>
           <div className="grid-two city-faq-grid">
             {faqItems.map((item) => (
-              <article className="pkg-card" key={item.question}>
-                <div className="pkg-card__body"><h3 className="pkg-card__title">{item.question}</h3><p className="pkg-card__desc">{item.answer}</p></div>
-              </article>
+              <details className="city-faq-item" key={item.question}><summary>{item.question}</summary><p>{item.answer}</p></details>
             ))}
           </div>
         </Section>
@@ -285,7 +317,7 @@ export const createCityPage = (config: CityPageConfig) => {
         <Section
           className="city-verification"
           eyebrow="Fact-check this page"
-          title="Independent local references and nearby service areas"
+          title="Independent local references and regional service areas"
           description={<p>These public links help verify place names and government boundaries. They are references, not endorsements of Bradley Matera or Matera Digital.</p>}
         >
           <div className="grid-two">
@@ -299,8 +331,8 @@ export const createCityPage = (config: CityPageConfig) => {
               </ul>
             </div>
             <div>
-              <h3>Nearby service-area pages</h3>
-              <ul className="city-source-list">{nearbyCities.map((place) => <li key={place.slug}><Link to={`/${place.slug}/`}>Website design in {place.label}</Link></li>)}</ul>
+              <h3>More service-area pages</h3>
+              <ul className="city-regional-cards">{nearbyCities.map((place) => <li key={place.slug}><Link to={`/${place.slug}/`}>{cityImageBySlug.has(place.slug) && <img src={`/city-images/${cityImageBySlug.get(place.slug)}`} alt="" loading="lazy" />}<span>Website design in {place.label}<span aria-hidden="true">↗</span></span></Link></li>)}</ul>
             </div>
           </div>
         </Section>
@@ -316,7 +348,7 @@ export const createCityPage = (config: CityPageConfig) => {
               <a data-variant="ghost" className="link" href={SELLER_PHONE_HREF}>Call {SELLER_PHONE}</a>
             </>
           }
-        ><p className="city-final-cta__note">No obligation. No ranking guarantee. Scope, price, timeline, and ownership terms are documented before work begins.</p></Section>
+        ><LocalIllustration kind={artwork.industry} className="city-final-cta__art" caption="A design direction, shaped around your business." /><p className="city-final-cta__note">No obligation. No ranking guarantee. Scope, price, timeline, and ownership terms are documented before work begins.</p></Section>
       </div>
     </Layout>
   );

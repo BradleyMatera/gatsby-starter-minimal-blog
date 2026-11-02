@@ -7,6 +7,9 @@ description: "A practical security and maintenance checklist for small business 
 theme: "Technical"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/security-maintenance-checklist.json";
+
 Your website is not a brochure you build once and forget. It is software running on a server, and software needs maintenance. The sites that get hacked are almost never the ones with sophisticated attackers. They are the ones that nobody updated for eight months.
 
 ## The short answer
@@ -81,6 +84,8 @@ You should be able to look back and see who logged in, what they changed, and wh
 - **Frequency:** Review monthly. Review immediately if you suspect a problem.
 - **Action:** Most CMS platforms have logging plugins. For static sites, your hosting provider's access logs are the place to look.
 
+<ArticleVisual spec={articleVisuals.figures[0]} />
+
 ## Tools for each task
 
 You do not need enterprise software. These are the tools I use or recommend for small business sites:
@@ -91,6 +96,8 @@ You do not need enterprise software. These are the tools I use or recommend for 
 - **Uptime monitoring:** [UptimeRobot](https://uptimerobot.com/) (free tier covers 50 monitors at 5-minute intervals). Set it to ping your homepage and your contact form endpoint.
 - **Security scanning:** [Wordfence](https://www.wordfence.com/) for WordPress malware scans. [Snyk](https://snyk.io/) or [GitHub Security Advisories](https://docs.github.com/en/code-security/security-advisories) for dependency vulnerabilities in Node projects.
 - **Spam protection:** [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/) (free, privacy-friendly) or [hCaptcha](https://www.hcaptcha.com/). Both are drop-in replacements for reCAPTCHA without the privacy concerns.
+
+<ArticleVisual spec={articleVisuals.figures[1]} />
 
 ## What happens if you ignore maintenance
 

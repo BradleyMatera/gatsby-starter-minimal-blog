@@ -1,0 +1,69 @@
+{
+  "slug": "/exploring-zig-efficient-parsing",
+  "title": "Zig OBJ Parsing: A Small, Fast Parser You Can Verify",
+  "cover": {
+    "src": "/images/blog/exploring-zig-efficient-parsing/cover.png",
+    "mobile": "/images/blog/exploring-zig-efficient-parsing/cover-720.webp",
+    "alt": "A precision token separator turns geometric input clusters into three glass vertices in a bounded memory tray."
+  },
+  "figures": [
+    {
+      "id": "obj-parser-loop",
+      "kind": "flow",
+      "title": "From a line to a vertex",
+      "summary": "The small example makes each transformation visible.",
+      "items": [
+        {
+          "label": "Read",
+          "detail": "Read one line from the sample OBJ file into the buffer."
+        },
+        {
+          "label": "Inspect",
+          "detail": "Skip empty lines and select the records the example handles."
+        },
+        {
+          "label": "Tokenize",
+          "detail": "Walk the line's space-separated tokens."
+        },
+        {
+          "label": "Convert",
+          "detail": "Parse three coordinate tokens as floating-point values."
+        },
+        {
+          "label": "Store",
+          "detail": "Append a vertex to the dynamic list."
+        },
+        {
+          "label": "Print",
+          "detail": "Print stored vertices so the output can be checked."
+        }
+      ],
+      "caption": "The example's processing loop, not a complete OBJ-format implementation."
+    },
+    {
+      "id": "parser-review",
+      "kind": "checklist",
+      "title": "What a small passing sample proves",
+      "summary": "Matching the sample output is one check; broader inputs still need deliberate verification.",
+      "items": [
+        {
+          "label": "Known input",
+          "detail": "Compare the printed vertices with the supplied sample."
+        },
+        {
+          "label": "Missing tokens",
+          "detail": "Review the example's forced token unwraps before accepting incomplete records."
+        },
+        {
+          "label": "Resource lifetime",
+          "detail": "Keep file and list cleanup explicit around their use."
+        },
+        {
+          "label": "Format boundaries",
+          "detail": "Test additional record types and delimiter cases before expanding the parser's scope."
+        }
+      ],
+      "caption": "A review map grounded in the code and limitations discussed in the article. No performance comparison is implied."
+    }
+  ]
+}

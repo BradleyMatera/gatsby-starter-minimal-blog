@@ -1,0 +1,69 @@
+{
+  "slug": "/sell-your-skills-with-a-small-project",
+  "title": "Sell Your Skills With One Small Project",
+  "cover": {
+    "src": "/images/blog/sell-your-skills-with-a-small-project/cover.png",
+    "mobile": "/images/blog/sell-your-skills-with-a-small-project/cover-720.webp",
+    "alt": "One finished mechanical switch on a small plinth, representing a focused skill demonstration"
+  },
+  "figures": [
+    {
+      "id": "small-project-scope",
+      "kind": "flow",
+      "title": "One skill becomes one inspectable project",
+      "summary": "Scope is part of the evidence.",
+      "items": [
+        {
+          "label": "Choose the skill",
+          "detail": "Identify the specific behavior to demonstrate."
+        },
+        {
+          "label": "Set the constraint",
+          "detail": "Exclude tools or features that hide that behavior."
+        },
+        {
+          "label": "Build the smallest demo",
+          "detail": "Keep the result narrow enough to understand."
+        },
+        {
+          "label": "Deploy and verify",
+          "detail": "Open the public URL outside your local environment."
+        },
+        {
+          "label": "Explain the decision",
+          "detail": "Document what you chose and learned."
+        }
+      ],
+      "caption": "The article's small-project pattern; a defined success criterion is not presented as a measured benchmark."
+    },
+    {
+      "id": "readme-proof-parts",
+      "kind": "checklist",
+      "title": "Make the README easy to inspect",
+      "summary": "A reviewer should not need to hunt for the working example.",
+      "items": [
+        {
+          "label": "Live link",
+          "detail": "Put the running demo near the top."
+        },
+        {
+          "label": "Source link",
+          "detail": "Keep the implementation next to the demo."
+        },
+        {
+          "label": "Goal",
+          "detail": "Name the single skill the project demonstrates."
+        },
+        {
+          "label": "Constraint",
+          "detail": "State what was deliberately excluded."
+        },
+        {
+          "label": "Learning",
+          "detail": "Explain a specific trade-off or problem encountered."
+        }
+      ],
+      "caption": "The README structure and presentation guidance from this article."
+    }
+  ]
+}

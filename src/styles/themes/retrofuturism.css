@@ -13,7 +13,7 @@
 :root[data-visual-theme="retrofuturism"] .style-lab {
   border: 1px solid rgba(0, 240, 255, 0.35) !important;
   border-radius: 4px !important;
-  background: rgba(18, 13, 28, 0.85) !important;
+  background: #120d1c !important;
   box-shadow: 0 0 12px rgba(0, 240, 255, 0.12) !important;
   backdrop-filter: blur(6px);
 }
@@ -33,21 +33,21 @@
   letter-spacing: 0.04em;
 }
 
-:root[data-visual-theme="retrofuturism"] button,
+:root[data-visual-theme="retrofuturism"] button:not(.demo-page *),
 :root[data-visual-theme="retrofuturism"] .hero-actions a,
 :root[data-visual-theme="retrofuturism"] .style-lab__mode-btn,
 :root[data-visual-theme="retrofuturism"] .style-lab__preset {
   border: 1px solid rgba(0, 240, 255, 0.5) !important;
   border-radius: 2px !important;
-  background: rgba(0, 240, 255, 0.08) !important;
+  background: #12313c !important;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   font-size: 0.75rem;
 }
 
-:root[data-visual-theme="retrofuturism"] button:hover,
+:root[data-visual-theme="retrofuturism"] button:not(.demo-page *):hover,
 :root[data-visual-theme="retrofuturism"] .hero-actions a:hover {
-  background: rgba(0, 240, 255, 0.16) !important;
+  background: #193d47 !important;
   box-shadow: 0 0 14px rgba(0, 240, 255, 0.25) !important;
 }
 

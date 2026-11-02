@@ -7,6 +7,9 @@ description: "Practical guide to tracking the local search actions that matter: 
 theme: "Local SEO"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/measure-calls-forms-direction-requests.json";
+
 Traffic is a vanity metric for local businesses. You can have 5,000 monthly visitors and zero calls. You can have 800 visitors and a full schedule. The difference is not traffic. It is whether you are measuring the actions that actually lead to revenue. This guide covers how to track calls, form submissions, and direction requests so you know whether your local SEO is working.
 
 ## The short answer
@@ -47,6 +50,8 @@ GBP insights also tracks:
 - Booking clicks (if you use booking features)
 
 These are secondary metrics. Track them but do not obsess over them.
+
+<ArticleVisual spec={articleVisuals.figures[0]} />
 
 ## Tools you need
 
@@ -171,6 +176,8 @@ The tools I have actually used and can recommend:
 - **Formspark or Netlify Forms** — if your site is static, these handle form submissions and can fire GA4 events on success without a backend.
 
 I start most clients with GBP forwarding numbers and GA4 form tracking through GTM. That covers 80% of what matters for free. CallRail gets added when the business is spending money on ads or needs to know which directory is actually driving calls.
+
+<ArticleVisual spec={articleVisuals.figures[1]} />
 
 ## How to use this data to improve the website
 

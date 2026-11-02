@@ -7,6 +7,10 @@ description: "A precise fix for a Gatsby nav dropdown that stays open: add a doc
 theme: "Debugging"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/gatsby-nav-bar-haunted.json";
+
+
 My nav dropdown stayed open when it should have closed. It felt haunted because the UI kept acting like it was still open even after I clicked somewhere else. The bug was not styling. It was not Gatsby. It was state that never got reset.
 
 This post is a start-to-finish fix you can actually verify inside this repo. The goal is simple: when a dropdown is open, it must close when you click outside of it, and it must also close if the nav itself becomes hidden or collapsed. If either of those are missing, you get the classic "ghost menu" where state says open even though the user is done with it.
@@ -23,8 +27,7 @@ Here is exactly what I saw. I opened the dropdown menu on desktop, clicked elsew
 
 The worst version: open the dropdown, navigate to another page via a Gatsby Link, come back, and the dropdown was open again. That one made it feel genuinely haunted because I had not touched anything. The component had just survived the route transition with its state intact.
 
-{/* visual-break:gatsby-nav-bar-haunted:1 */}
-![Debugging process checkpoint illustration for this section.](/assets/visuals/blog/gatsby-nav-bar-haunted-break-1.png)
+<ArticleVisual spec={articleVisuals.figures[0]} />
 
 ## The fix in one sentence
 
@@ -161,8 +164,7 @@ I am not including those changes here because the post is about the stuck dropdo
 
 - https://react.dev/reference/react/useEffect
 
-{/* visual-break:gatsby-nav-bar-haunted:2 */}
-![Troubleshooting checkpoint illustration for this section.](/assets/visuals/blog/gatsby-nav-bar-haunted-break-2.png)
+<ArticleVisual spec={articleVisuals.figures[1]} />
 
 ## Lessons about debugging Gatsby component shadowing
 

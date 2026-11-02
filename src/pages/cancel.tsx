@@ -9,10 +9,11 @@ const CancelPage = () => (
     <div className="store-shell">
       <header className="store-header">
         <h1 className="store-title">Checkout canceled</h1>
-        <p className="store-subtitle">No payment was processed. You can try again anytime.</p>
+        <p className="store-subtitle">You returned from checkout. Check your customer portal or receipt for payment status before trying again.</p>
       </header>
       <div className="store-actions">
-        <Link className="store-link" to="/store/">Back to store</Link>
+        <Link className="store-button" to="/store/">Back to store</Link>
+        <Link className="store-link" to="/purchases/">Check purchases</Link>
         <Link className="store-link" to="/support/">Support & refunds</Link>
       </div>
     </div>

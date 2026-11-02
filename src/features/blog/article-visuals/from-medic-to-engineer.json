@@ -1,0 +1,61 @@
+{
+  "slug": "/from-medic-to-engineer",
+  "title": "From Combat Medic to Software Engineer: Translating a Non-Traditional Background",
+  "cover": {
+    "src": "/images/blog/from-medic-to-engineer/cover.png",
+    "mobile": "/images/blog/from-medic-to-engineer/cover-720.webp",
+    "alt": "An unmarked field pouch and bandage connect by a documentation ribbon to an electronics diagnostic tray."
+  },
+  "figures": [
+    {
+      "id": "transferable-loop",
+      "kind": "flow",
+      "title": "The operational loop that carried over",
+      "summary": "The article connects past experience to present engineering behaviors.",
+      "items": [
+        {
+          "label": "Assess",
+          "detail": "Identify the problem and its scope before acting."
+        },
+        {
+          "label": "Stabilize",
+          "detail": "Address the immediate issue with a focused intervention."
+        },
+        {
+          "label": "Hand off",
+          "detail": "Communicate the current state to the next person or team."
+        },
+        {
+          "label": "Document",
+          "detail": "Record what happened, what was tried and what worked."
+        }
+      ],
+      "caption": "A reflection on transferable work habits, not medical guidance or a claim that the two roles are interchangeable."
+    },
+    {
+      "id": "career-evidence",
+      "kind": "layers",
+      "title": "Make the transition inspectable",
+      "summary": "Pair an engineering claim with an artifact another person can examine.",
+      "items": [
+        {
+          "label": "Troubleshooting",
+          "detail": "Lab notes and logs show the path from symptom to diagnosis."
+        },
+        {
+          "label": "Systems work",
+          "detail": "A repository and deployment show how components connect."
+        },
+        {
+          "label": "Team contribution",
+          "detail": "Pull requests and issues show bounded changes and review."
+        },
+        {
+          "label": "Communication",
+          "detail": "Write-ups explain the failure, fix and remaining limits."
+        }
+      ],
+      "caption": "The evidence types described in this article. Readers can follow the proof links below to examine the work."
+    }
+  ]
+}

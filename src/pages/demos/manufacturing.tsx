@@ -3,12 +3,14 @@ import type { HeadFC } from "gatsby";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
 import DemoLayout from "../../features/demos/DemoLayout";
+import DemoNavigation from "../../features/demos/DemoNavigation";
+import DemoJourney from "../../features/demos/DemoJourney";
 import GoogleMapsEmbed from "../../features/demos/GoogleMapsEmbed";
 import SocialLinks, { SocialLink } from "../../features/demos/SocialLinks";
 import ReviewBadges from "../../features/demos/ReviewBadges";
 import IntegrationsSection, { Integration } from "../../features/demos/IntegrationsSection";
 import FAQSection, { FAQItem } from "../../features/demos/FAQSection";
-import { StarIcon, MapPinIcon, PhoneIcon, GearIcon, ShieldIcon, CheckIcon, ClockIcon, BoltIcon, DownloadIcon, AlertIcon } from "../../site/icons";
+import { StarIcon, MapPinIcon, PhoneIcon, GearIcon, ShieldIcon, ClockIcon, BoltIcon, AlertIcon } from "../../site/icons";
 
 const pathname = "/demos/manufacturing/";
 const pageTitle = "Sterling Metalworks — Metal Fabrication Website Concept Demo (Fictional)";
@@ -169,133 +171,13 @@ const StarRating: React.FC = () => (
   <div className="demo-testimonial__stars" aria-label="5 out of 5 stars">{[0,1,2,3,4].map((i) => <StarIcon key={i} size={18} />)}</div>
 );
 
-const QuoteForm: React.FC = () => {
-  const [material, setMaterial] = React.useState("Mild Steel (A36)");
-  const [thickness, setThickness] = React.useState("0.125");
-  const [quantity, setQuantity] = React.useState("100");
-  const [tolerance, setTolerance] = React.useState("±0.005");
-  const [finish, setFinish] = React.useState("Powder Coat");
-  const [industry, setIndustry] = React.useState("Agricultural");
-  const [volume, setVolume] = React.useState("One-time");
-  const [fileName, setFileName] = React.useState("");
-  const [submitted, setSubmitted] = React.useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
-
-  if (submitted) {
-    return (
-      <div className="demo-quote-form__success">
-        <CheckIcon size={48} />
-        <h3>Quote Request Received (Illustrative)</h3>
-        <p>This is a demo form — nothing was submitted. In a production site, the form would send RFQ details to a CRM or email queue for review and follow-up.</p>
-        <p><strong>Material:</strong> {material}<br /><strong>Thickness:</strong> {thickness}"<br /><strong>Quantity:</strong> {quantity} pcs<br /><strong>Tolerance:</strong> {tolerance}"<br /><strong>Finish:</strong> {finish}<br /><strong>Industry:</strong> {industry}<br /><strong>Annual Volume:</strong> {volume}<br /><strong>CAD File:</strong> {fileName || "None uploaded"}</p>
-        <button className="demo-btn demo-btn--ghost" onClick={() => setSubmitted(false)}>Submit another quote</button>
-      </div>
-    );
-  }
-
-  return (
-    <form className="demo-quote-form" onSubmit={handleSubmit}>
-      <div className="demo-form-row">
-        <label className="demo-form-label" htmlFor="material">Material Type</label>
-        <select id="material" className="demo-form-select" value={material} onChange={(e) => setMaterial(e.target.value)}>
-          <option>Mild Steel (A36)</option>
-          <option>Mild Steel (A1018)</option>
-          <option>Cold Rolled Steel (1008)</option>
-          <option>Stainless Steel (304)</option>
-          <option>Stainless Steel (316)</option>
-          <option>Stainless Steel (17-4 PH)</option>
-          <option>Aluminum (6061)</option>
-          <option>Aluminum (5052)</option>
-          <option>Aluminum (7075)</option>
-          <option>Brass (C360)</option>
-          <option>Copper (C110)</option>
-        </select>
-      </div>
-      <div className="demo-form-row">
-        <label className="demo-form-label" htmlFor="thickness">Material Thickness (inches)</label>
-        <input id="thickness" className="demo-form-input" type="text" value={thickness} onChange={(e) => setThickness(e.target.value)} placeholder="e.g. 0.125" />
-      </div>
-      <div className="demo-form-row">
-        <label className="demo-form-label" htmlFor="quantity">Quantity (pieces)</label>
-        <input id="quantity" className="demo-form-input" type="text" value={quantity} onChange={(e) => setQuantity(e.target.value)} placeholder="e.g. 100" />
-      </div>
-      <div className="demo-form-row">
-        <label className="demo-form-label" htmlFor="tolerance">Tolerance Required (inches)</label>
-        <select id="tolerance" className="demo-form-select" value={tolerance} onChange={(e) => setTolerance(e.target.value)}>
-          <option>±0.030</option>
-          <option>±0.010</option>
-          <option>±0.005</option>
-          <option>±0.002</option>
-          <option>±0.0005</option>
-        </select>
-      </div>
-      <div className="demo-form-row">
-        <label className="demo-form-label" htmlFor="finish">Finish Required</label>
-        <select id="finish" className="demo-form-select" value={finish} onChange={(e) => setFinish(e.target.value)}>
-          <option>None (raw material)</option>
-          <option>Deburr Only</option>
-          <option>Powder Coat</option>
-          <option>Primer + Paint</option>
-          <option>Galvanized (hot-dip)</option>
-          <option>Zinc Plating</option>
-          <option>Anodize (Type II)</option>
-          <option>Passivate (stainless)</option>
-        </select>
-      </div>
-      <div className="demo-form-row">
-        <label className="demo-form-label" htmlFor="industry">Industry</label>
-        <select id="industry" className="demo-form-select" value={industry} onChange={(e) => setIndustry(e.target.value)}>
-          <option>Agricultural</option>
-          <option>Automotive</option>
-          <option>Food Processing</option>
-          <option>Construction</option>
-          <option>Other</option>
-        </select>
-      </div>
-      <div className="demo-form-row">
-        <label className="demo-form-label" htmlFor="volume">Annual Volume</label>
-        <select id="volume" className="demo-form-select" value={volume} onChange={(e) => setVolume(e.target.value)}>
-          <option>One-time</option>
-          <option>100–1,000 / year</option>
-          <option>1,000–10,000 / year</option>
-          <option>10,000+ / year</option>
-        </select>
-      </div>
-      <div className="demo-form-row">
-        <label className="demo-form-label" htmlFor="cadfile">Upload CAD File (STEP, DWG, PDF)</label>
-        <div className="demo-form-file-upload">
-          <DownloadIcon size={20} />
-          <input id="cadfile" className="demo-form-input" type="file" accept=".step,.stp,.iges,.igs,.dwg,.dxf,.pdf" onChange={(e) => setFileName(e.target.files?.[0]?.name ?? "")} />
-          <span className="demo-form-file-name">{fileName || "No file selected — or email to quotes@sterlingmetalworks-demo.com"}</span>
-        </div>
-      </div>
-      <div className="demo-form-row">
-        <label className="demo-form-label" htmlFor="email">Email Address</label>
-        <input id="email" className="demo-form-input" type="email" required placeholder="you@company.com" />
-      </div>
-      <div className="demo-form-row">
-        <label className="demo-form-label" htmlFor="phone">Phone Number</label>
-        <input id="phone" className="demo-form-input" type="tel" placeholder="(815) 555-0000" />
-      </div>
-      <div className="demo-form-row">
-        <label className="demo-form-label" htmlFor="notes">Project Notes / Drawing Reference</label>
-        <textarea id="notes" className="demo-form-textarea" rows={3} placeholder="Brief description of the part, or reference a drawing file you'll email separately." />
-      </div>
-      <button type="submit" className="demo-btn demo-btn--primary">Request Quote</button>
-      <p className="demo-form-note">This is a demo RFQ form. It does not submit, store data, or upload files. A production site would connect to a CRM, email service, or secure file portal.</p>
-    </form>
-  );
-};
+const QuoteForm: React.FC = () => <DemoJourney kind="manufacturing" />;
 
 const ManufacturingDemo: React.FC = () => (
   <DemoLayout
     demoName="Sterling Metalworks"
     industry="Manufacturing / Metal Fabrication"
-    themeColor="#ff5c35"
+    themeColor="#ff916f"
     designSystem="industrial"
     pageClassName="demo-flagship demo-flagship--manufacturing"
   >
@@ -304,11 +186,11 @@ const ManufacturingDemo: React.FC = () => (
         <span className="mfg-mark" aria-hidden="true">SM</span>
         <span><strong>Sterling</strong><small>Metalworks</small></span>
       </a>
-      <div className="flagship-nav__links">
+      <DemoNavigation>
         <a href="#capabilities">Capabilities</a>
         <a href="#quality">Quality</a>
         <a href="#quote" className="demo-btn demo-btn--primary">Start an RFQ</a>
-      </div>
+      </DemoNavigation>
     </nav>
 
     <section className="mfg-hero" id="top">
@@ -317,8 +199,8 @@ const ManufacturingDemo: React.FC = () => (
         <h1>Built to the drawing.<br /><span>Ready for the line.</span></h1>
         <p className="mfg-hero__lede">A high-clarity digital front door for an exacting fabrication partner. CNC machining, laser cutting, forming, welding, and finishing—from first article to repeat production.</p>
         <div className="demo-hero__actions">
-          <a href="#quote" className="demo-btn demo-btn--primary">Upload a drawing <span aria-hidden="true">↗</span></a>
-          <a href="tel:8155550420" className="demo-btn demo-btn--ghost"><PhoneIcon size={18} /> (815) 555-0420</a>
+          <a href="#quote" className="demo-btn demo-btn--primary">Prepare an RFQ <span aria-hidden="true">↗</span></a>
+          <a href="#demo-disclosure" aria-label="Fictional demo phone; view disclosure" className="demo-btn demo-btn--ghost"><PhoneIcon size={18} /> (815) 555-0420</a>
         </div>
         <ul className="mfg-proof-list" aria-label="Example shop capabilities">
           <li><span>01</span> Prototype to production</li>
@@ -327,7 +209,7 @@ const ManufacturingDemo: React.FC = () => (
         </ul>
       </div>
       <div className="mfg-hero__visual">
-        <img src="/images/demos/manufacturing/hero.jpg" alt="Welder fabricating a steel assembly in a modern metal shop" />
+        <img src="/images/demos/manufacturing/cnc-machining.jpg" alt="Illustrative close-up of precision machining equipment" />
         <div className="mfg-hero__crosshair" aria-hidden="true" />
         <div className="mfg-hero__status">
           <span>RFQ intake</span>
@@ -681,7 +563,7 @@ const ManufacturingDemo: React.FC = () => (
       <div className="demo-contact__inner">
         <h2 className="demo-contact__title">Have a Part to Quote?</h2>
         <p className="demo-contact__text">Call (815) 555-0420 or email quotes@sterlingmetalworks-demo.com. We'll turn your drawings around fast — harvest season or not.</p>
-        <a href="tel:8155550420" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0420</a>
+        <a href="#demo-disclosure" aria-label="Fictional demo phone; view disclosure" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0420</a>
         <div style={{ marginTop: "1.5rem" }}>
           <SocialLinks links={socialLinks} />
         </div>

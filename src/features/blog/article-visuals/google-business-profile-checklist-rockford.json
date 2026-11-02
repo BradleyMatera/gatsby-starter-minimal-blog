@@ -1,0 +1,65 @@
+{
+  "slug": "/google-business-profile-checklist-rockford",
+  "title": "Google Business Profile Checklist for Rockford-Area Businesses",
+  "cover": {
+    "src": "/images/blog/google-business-profile-checklist-rockford/cover.png",
+    "mobile": "/images/blog/google-business-profile-checklist-rockford/cover-720.webp",
+    "alt": "A conceptual brick storefront on an abstract map is surrounded by a location pin, photo cards and a clock."
+  },
+  "figures": [
+    {
+      "id": "profile-information",
+      "kind": "checklist",
+      "title": "Keep customer-facing details consistent",
+      "summary": "The information review starts with facts customers use to find and contact the business.",
+      "items": [
+        {
+          "label": "Name",
+          "detail": "Use the business name customers recognize from signage and the website."
+        },
+        {
+          "label": "Contact",
+          "detail": "Check the primary phone number against the website and directory listings."
+        },
+        {
+          "label": "Location",
+          "detail": "Represent the real location and service area accurately."
+        },
+        {
+          "label": "Hours",
+          "detail": "Keep opening information aligned with actual availability."
+        },
+        {
+          "label": "Category",
+          "detail": "Choose a category that describes the work the business really performs."
+        }
+      ],
+      "caption": "A factual information checklist from the article, not a ranking guarantee or a statement of current verification options."
+    },
+    {
+      "id": "profile-upkeep",
+      "kind": "layers",
+      "title": "A useful profile needs upkeep",
+      "summary": "These maintenance areas help keep the business information useful to customers.",
+      "items": [
+        {
+          "label": "Photos",
+          "detail": "Show the real exterior, workspace, team or completed work."
+        },
+        {
+          "label": "Reviews",
+          "detail": "Read customer feedback and respond professionally."
+        },
+        {
+          "label": "Updates",
+          "detail": "Review announcements and offers for continuing accuracy."
+        },
+        {
+          "label": "Service details",
+          "detail": "Revisit the services and areas described when the business changes."
+        }
+      ],
+      "caption": "Ongoing content checks drawn from the article. Features available in the business account should be confirmed before use."
+    }
+  ]
+}

@@ -1,9 +1,12 @@
+import TableScroll from "../../features/demos/TableScroll";
 import * as React from "react";
+import BrandArtwork from "../../site/components/BrandArtwork";
+import ServiceVisual from "../../features/services/ServiceVisual";
 import type { HeadFC } from "gatsby";
 import Layout from "../../@lekoarts/gatsby-theme-minimal-blog/components/layout";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
-import { Card, Link, Section } from "../../ui";
+import { Card, Link, Section, FAQAccordion, AnchorNav } from "../../ui";
 
 const pathname = "/services/website-repair/";
 const pageTitle = "Website Repair and Troubleshooting | Bradley Matera";
@@ -43,7 +46,7 @@ const faqs = [
 ];
 
 const WebsiteRepairPage = () => (
-  <Layout>
+  <Layout className="business-page service-page">
     <nav className="breadcrumbs" aria-label="Breadcrumb">
       <ol className="breadcrumbs__list">
         <li className="breadcrumbs__item">
@@ -59,8 +62,10 @@ const WebsiteRepairPage = () => (
     </nav>
 
     <Section
+      id="section-repair"
       eyebrow="Repair"
       titleAs="h1"
+      visual={<BrandArtwork variant="website-repair" eager />}
       title={
         <>
           <strong>Website Repair</strong> and Troubleshooting
@@ -85,6 +90,8 @@ const WebsiteRepairPage = () => (
         </>
       }
     >
+    <AnchorNav className="business-section-nav" items={[{"id": "section-common-issues", "label": "Common issues"}, {"id": "section-how-it-works", "label": "How it works"}, {"id": "section-repair-vs-rebuild", "label": "Repair vs. rebuild"}, {"id": "section-compare", "label": "Compare"}, {"id": "section-faq", "label": "FAQ"}, {"id": "section-ready-to-start", "label": "Ready to start?"}]} />
+      <ServiceVisual kind="website-repair" />
       <div className="grid-three">
         <div className="pkg-card">
           <img src="/package-images/repair-hourly.svg" alt="$65/hour illustration" className="pkg-card__bg" loading="lazy" />
@@ -126,6 +133,7 @@ const WebsiteRepairPage = () => (
     </Section>
 
     <Section
+      id="section-common-issues"
       eyebrow="Common issues"
       title="What I fix"
       description={
@@ -144,6 +152,7 @@ const WebsiteRepairPage = () => (
     </Section>
 
     <Section
+      id="section-how-it-works"
       eyebrow="How it works"
       title="From broken to fixed"
     >
@@ -179,6 +188,7 @@ const WebsiteRepairPage = () => (
     </Section>
 
     <Section
+      id="section-repair-vs-rebuild"
       eyebrow="Repair vs. rebuild"
       title="Which makes sense for you?"
       description={
@@ -225,6 +235,7 @@ const WebsiteRepairPage = () => (
     </Section>
 
     <Section
+      id="section-compare"
       eyebrow="Compare"
       title="Which option fits your business?"
       description={
@@ -233,14 +244,14 @@ const WebsiteRepairPage = () => (
         </p>
       }
     >
-      <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Website repair comparison table">
-        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+      <TableScroll label="Website repair comparison table">
+<table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
           <thead>
             <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
-              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
-              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Hourly — $65/hr</th>
-              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Half-day — $260</th>
-              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Full refresh — $597</th>
+              <th scope="col" style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
+              <th scope="col" style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Hourly — $65/hr</th>
+              <th scope="col" style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Half-day — $260</th>
+              <th scope="col" style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Full refresh — $597</th>
             </tr>
           </thead>
           <tbody>
@@ -300,24 +311,19 @@ const WebsiteRepairPage = () => (
             </tr>
           </tbody>
         </table>
-      </div>
+</TableScroll>
     </Section>
 
     <Section
+      id="section-faq"
       eyebrow="FAQ"
       title="Common questions about repair"
     >
-      <div className="grid-three">
-        {faqs.map((faq) => (
-          <Card key={faq.q} variant="outline">
-            <h3 className="feature-card__title">{faq.q}</h3>
-            <p className="feature-card__body">{faq.a}</p>
-          </Card>
-        ))}
-      </div>
+      <FAQAccordion items={faqs.map(faq => ({ question: faq.q, answer: faq.a }))} />
     </Section>
 
     <Section
+      id="section-ready-to-start"
       eyebrow="Ready to start?"
       title="Get a free consultation"
       description={

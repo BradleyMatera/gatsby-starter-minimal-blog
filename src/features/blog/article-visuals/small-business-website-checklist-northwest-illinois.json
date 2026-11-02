@@ -1,0 +1,59 @@
+{
+  "slug": "small-business-website-checklist-northwest-illinois",
+  "title": "A Small-Business Website Checklist for Northwest Illinois",
+  "cover": {
+    "src": "/images/blog/small-business-website-checklist-northwest-illinois/cover.png",
+    "mobile": "/images/blog/small-business-website-checklist-northwest-illinois/cover-720.webp",
+    "alt": "Concept illustration of a local contractor planning a clear mobile business website at a workbench."
+  },
+  "figures": [
+    {
+      "id": "visitor-questions",
+      "kind": "flow",
+      "title": "Three answers a visitor should find immediately",
+      "summary": "The homepage should connect the business offering to an obvious next step.",
+      "items": [
+        {
+          "label": "What you do",
+          "detail": "Name the service in plain language rather than relying on a slogan."
+        },
+        {
+          "label": "Who and where you help",
+          "detail": "Identify the customer and the towns or counties actually served."
+        },
+        {
+          "label": "How to contact you",
+          "detail": "Offer one clear form, email, or phone call to move forward."
+        }
+      ],
+      "caption": "The article's core clarity check, presented as a visitor's path through the homepage."
+    },
+    {
+      "id": "mobile-inspection",
+      "kind": "checklist",
+      "title": "Run the mobile check before decorating",
+      "summary": "Test the customer path on an actual phone.",
+      "items": [
+        {
+          "label": "Read every page",
+          "detail": "Look for cramped text, clipped images, and horizontal scrolling."
+        },
+        {
+          "label": "Try the controls",
+          "detail": "Make links and buttons easy to tap without zooming."
+        },
+        {
+          "label": "Submit the contact form",
+          "detail": "Confirm that the form works through the complete mobile flow."
+        },
+        {
+          "label": "Review speed",
+          "detail": "Use PageSpeed Insights to identify critical issues."
+        }
+      ],
+      "caption": "A compact version of the mobile audit checklist in this article.",
+      "sourceLabel": "Google PageSpeed Insights",
+      "sourceHref": "https://pagespeed.web.dev/"
+    }
+  ]
+}

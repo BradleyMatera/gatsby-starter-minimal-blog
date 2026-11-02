@@ -1,4 +1,6 @@
+import TableScroll from "../../features/demos/TableScroll";
 import * as React from "react";
+import "../../features/demos/work-gallery.css";
 import type { HeadFC } from "gatsby";
 import Layout from "../../@lekoarts/gatsby-theme-minimal-blog/components/layout";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
@@ -12,6 +14,7 @@ const pageDescription =
 
 const ExamplePage = () => (
   <Layout>
+    <div className="work-case-study">
     <nav className="breadcrumbs" aria-label="Breadcrumb">
       <ol className="breadcrumbs__list">
         <li className="breadcrumbs__item"><Link to="/">Home</Link></li>
@@ -46,6 +49,7 @@ const ExamplePage = () => (
         </>
       }
     >
+      <figure className="work-case-preview"><img src="/images/demos/previews/hvac.webp" alt="Illustrative hvac website concept" width={1440} height={1000} loading="eager" /><figcaption>Concept website · fictional business · <Link to="/demos/hvac/">Explore the interactive demo</Link></figcaption></figure>
       <div className="grid-three">
         <div className="pkg-card">
           <img src="/package-images/work-industry.svg" alt="Industry illustration" className="pkg-card__bg" loading="lazy" />
@@ -71,8 +75,10 @@ const ExamplePage = () => (
       </div>
     </Section>
 
-    <Section eyebrow="Project specs" title="Project specifications at a glance">
-      <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="NorthStar HVAC project specs table">
+    <nav className="work-story-nav" aria-label="Example walkthrough"><a href="#project-specs">Specifications</a><a href="#project-problem">The problem</a><a href="#project-build">The build</a><a href="#project-details">Technical details</a></nav>
+
+    <Section id="project-specs" eyebrow="Project specs" title="Project specifications at a glance">
+      <TableScroll label="NorthStar HVAC project specs table">
         <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
           <thead>
             <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
@@ -111,10 +117,10 @@ const ExamplePage = () => (
             </tr>
           </tbody>
         </table>
-      </div>
+      </TableScroll>
     </Section>
 
-    <Section eyebrow="The problem" title="Common HVAC website problems">
+    <Section id="project-problem" eyebrow="The problem" title="Common HVAC website problems">
       <Card variant="outline">
         <p className="feature-card__body">
           Many established HVAC businesses operate for years without a website, relying on phone book ads, word of mouth, and repeat customers. As fewer people use the phone book, these businesses lose jobs to competitors who appear in Google searches for terms like "HVAC repair near me" and "furnace installation [city]."
@@ -164,7 +170,7 @@ const ExamplePage = () => (
       </Card>
     </Section>
 
-    <Section eyebrow="What changed" title="What this example includes">
+    <Section id="project-build" eyebrow="What changed" title="What this example includes">
       <Card variant="outline">
         <p className="feature-card__body">
           A 7-page Gatsby static site with service area pages, a financing calculator, seasonal promotion pages, and an emergency contact system. The site is designed to capture both winter heating and summer cooling demand.
@@ -181,7 +187,7 @@ const ExamplePage = () => (
       </Card>
     </Section>
 
-    <Section eyebrow="Technical work" title="Accessibility, performance, and SEO">
+    <Section id="project-details" eyebrow="Technical work" title="Accessibility, performance, and SEO">
       <div className="grid-three">
         <div className="pkg-card">
           <img src="/package-images/speed-lcp.svg" alt="Performance illustration" className="pkg-card__bg" loading="lazy" />
@@ -262,6 +268,7 @@ const ExamplePage = () => (
         <Link data-variant="ghost" to="/pricing/">See pricing</Link>
       </div>
     </Section>
+    </div>
   </Layout>
 );
 

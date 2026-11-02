@@ -7,6 +7,10 @@ description: "Core Web Vitals explained for small business owners. LCP, INP, CLS
 theme: "Technical"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/core-web-vitals-small-businesses.json";
+
+
 Core Web Vitals are Google's three measurements of how a page feels to a real person loading it. They are not a vanity metric. They affect search rankings and they affect whether visitors stay on your site or leave. For a small business, the difference between a 2-second load and a 6-second load is the difference between a phone call and a bounce.
 
 ## The short answer
@@ -69,6 +73,8 @@ CLS measures how much the page layout moves around as it loads. If you have ever
 - Use `font-display: swap` or `font-display: optional` so text renders immediately with a fallback font.
 - Do not inject banners or popups above existing content after the page has loaded.
 
+<ArticleVisual spec={articleVisuals.figures[0]} />
+
 ## Lab data vs field data
 
 This is where most people get confused. You will see different numbers depending on where you look.
@@ -87,6 +93,8 @@ If you are a small business owner and not a developer, here is the priority orde
 2. **Remove unused third-party scripts.** Go through every script on your site and ask whether you actually need it. Most small business sites have tracking scripts they never look at.
 3. **Test on a real phone.** Not your laptop. Open your site on a mid-range Android device on cellular data. If it feels slow, it is slow.
 4. **Check Search Console.** Google Search Console shows you the field data for your site. It tells you which URLs are failing and which metrics need work.
+
+<ArticleVisual spec={articleVisuals.figures[1]} />
 
 ## Real scores from real projects
 

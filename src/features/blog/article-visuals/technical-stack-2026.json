@@ -1,0 +1,65 @@
+{
+  "slug": "technical-stack-2026",
+  "title": "What I Actually Use: My 2026 Technical Stack Inventory",
+  "cover": {
+    "src": "/images/blog/technical-stack-2026/cover.png",
+    "mobile": "/images/blog/technical-stack-2026/cover-720.webp",
+    "alt": "Concept illustration of a carefully organized developer toolkit with modules for code, design, content, and deployment."
+  },
+  "figures": [
+    {
+      "id": "default-stack",
+      "kind": "layers",
+      "title": "The working stack, from content to deployment",
+      "summary": "These are the responsibilities assigned to the tools in this inventory.",
+      "items": [
+        {
+          "label": "Language and runtime",
+          "detail": "TypeScript and JavaScript run through the Node.js ecosystem."
+        },
+        {
+          "label": "Content and interface",
+          "detail": "MDX feeds the Gatsby content site; React supplies reusable UI."
+        },
+        {
+          "label": "Design control",
+          "detail": "CSS variables hold theme tokens, with Tailwind and Theme UI supporting styling."
+        },
+        {
+          "label": "Delivery",
+          "detail": "Git and GitHub track changes; Netlify hosts builds and supporting services."
+        }
+      ],
+      "caption": "A responsibility map of the author's stated stack, not a recommendation for every project."
+    },
+    {
+      "id": "switching-triggers",
+      "kind": "comparison",
+      "title": "When the default stack changes",
+      "summary": "The project need determines the exception.",
+      "items": [
+        {
+          "label": "Tiny landing page",
+          "detail": "Plain HTML or Vite avoids a full content-site setup."
+        },
+        {
+          "label": "App-like interaction",
+          "detail": "Next.js or Vite with React supports more dynamic behavior."
+        },
+        {
+          "label": "Background work",
+          "detail": "The inventory considers Docker on a VPS or AWS Lambda instead of short hosting functions."
+        },
+        {
+          "label": "Small data prototype",
+          "detail": "A JSON file or Supabase may be enough for the first version."
+        },
+        {
+          "label": "Native mobile experiment",
+          "detail": "React Native is the author's current experiment path."
+        }
+      ],
+      "caption": "Exceptions taken from the article's own inventory; tool choices are contextual."
+    }
+  ]
+}

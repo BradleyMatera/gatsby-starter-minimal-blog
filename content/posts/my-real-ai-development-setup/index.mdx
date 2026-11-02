@@ -7,6 +7,9 @@ description: "A breakdown of the AI development tools I actually use: editors, t
 theme: "Process"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/my-real-ai-development-setup.json";
+
 Most posts about AI tooling either sound like marketing or sound like someone trying to show off a stack. This is neither. This post is simply a description of the tools I have actually used, what each one is, what it is good at, what it is bad at, and why I choose one over another depending on the situation.
 
 There is no “workflow philosophy” here. No productivity system. No grand claims. Just a straightforward breakdown of editors, AI agents, local models, hosted models, and autocomplete tools, and what each of them is useful for in practice.
@@ -23,8 +26,7 @@ Terminal tools are the stuff that proves whether anything is real. Running build
 
 Models are the brains. Local models (like Qwen through Ollama) are fast and cheap, and they are good for constant small tasks. Bigger hosted models (like Claude) are slower and cost more, but they handle wider context and messier reasoning better. Model choice matters because the same tool behaves differently depending on what brain you attach to it.
 
-{/* visual-break:my-real-ai-development-setup:1 */}
-![AI workflow checkpoint illustration for this section.](/assets/visuals/blog/my-real-ai-development-setup-break-1.png)
+<ArticleVisual spec={articleVisuals.figures[0]} />
 
 ## VS Code
 
@@ -119,6 +121,8 @@ Before the table, this is the clearest way I know how to say it. Tools are the i
 
 After the table, the most important detail is that you still do the verification step the same way every time. Run the app. Run the build. Read the logs. Check the browser. The model can help you interpret output, but it cannot replace output.
 
+<ArticleVisual spec={articleVisuals.figures[1]} />
+
 ## What I actually want people to take from this
 
 These tools are useful when they reduce friction and stay grounded in the repo. They are annoying when they add noise, invent patterns, or make changes you cannot review.
@@ -126,9 +130,6 @@ These tools are useful when they reduce friction and stay grounded in the repo. 
 If you are trying to decide what to use, the best starting point is not buying an AI IDE. The best starting point is deciding whether you need repo-aware edits, fast local help, or deeper reasoning. Once you know which kind of problem you are solving, the tool choice becomes obvious.
 
 ![Reality wins](https://media.giphy.com/media/3o7TKtnuHOHHUjR38Y/giphy.gif)
-
-{/* visual-break:my-real-ai-development-setup:2 */}
-![Automation loop checkpoint illustration for this section.](/assets/visuals/blog/my-real-ai-development-setup-break-2.png)
 
 ## Closing
 

@@ -4,7 +4,9 @@ slug: "/projects/interactive-pokedex"
 theme: "Front-End & Full-Stack"
 ---
 
-import { Section, Card, AnchorNav, Link } from "../../../src/ui";
+import { Section, Card, Link } from "../../../src/ui";
+
+import ProjectEvidence from "../../../src/features/projects/components/ProjectEvidence";
 
 <Section
   eyebrow="Project Write-up"
@@ -12,26 +14,15 @@ import { Section, Card, AnchorNav, Link } from "../../../src/ui";
   description="Next.js 16 static export that builds a Pokédex for the first 151 Pokémon with client-side search and filtering. Build-time data fetch from PokéAPI, prerendered detail pages, Tailwind CSS v4 + NextUI. Hosted on GitHub Pages."
 />
 
-<AnchorNav
-  items={[
-    { id: "overview", label: "Problem" },
-    { id: "approach", label: "Solution" },
-    { id: "role", label: "My Role" },
-    { id: "impact", label: "What's in the Repo" },
-    { id: "artifacts", label: "Tech Stack" },
-  ]}
-/>
+<ProjectEvidence pathname="/projects/interactive-pokedex/" />
+
 
 <Section id="overview" eyebrow="Problem" title="User need">
-  <p>
-    I wanted to learn how to combine Next.js App Router with static export (<code>output: "export"</code>) for GitHub Pages. A Pokédex was a good fit — fixed dataset (151 Pokémon), public API, and enough complexity to exercise build-time data fetching, prerendered detail pages, and client-side search.
-  </p>
+  <p>I wanted to learn how to combine Next.js App Router with static export (<code>output: "export"</code>) for GitHub Pages. A Pokédex was a good fit — fixed dataset (151 Pokémon), public API, and enough complexity to exercise build-time data fetching, prerendered detail pages, and client-side search.</p>
 </Section>
 
 <Section id="approach" eyebrow="Solution" title="What I built">
-  <p>
-    A Next.js 16 app that fetches PokéAPI data at build time and exports a static site to GitHub Pages. The list view uses client-side search and filtering via <code>PokemonProvider</code> and <code>ItemProvider</code> context. Each Pokémon has a prerendered detail page with sprites, stats, moves (first 10), evolution chains, and item interactions — no runtime API calls needed on navigation.
-  </p>
+  <p>A Next.js 16 app that fetches PokéAPI data at build time and exports a static site to GitHub Pages. The list view uses client-side search and filtering via <code>PokemonProvider</code> and <code>ItemProvider</code> context. Each Pokémon has a prerendered detail page with sprites, stats, moves (first 10), evolution chains, and item interactions — no runtime API calls needed on navigation.</p>
   <div className="grid-two">
     <Card>
       <h3 className="feature-card__title">User interface</h3>
@@ -55,18 +46,6 @@ import { Section, Card, AnchorNav, Link } from "../../../src/ui";
         <li>GitHub Actions workflow publishes <code>out/</code> to Pages on push to main</li>
       </ul>
     </Card>
-  </div>
-  <div className="image-tug" aria-label="Interactive Pokédex visuals">
-    <div className="image-tug__layer image-tug__layer--back">
-      <picture>
-        <source type="image/avif" srcSet="/project-diagrams.avif" />
-        <source type="image/webp" srcSet="/project-diagrams.webp" />
-        <img src="/project-diagrams.png" alt="" width="1536" height="1024" loading="lazy" decoding="async" />
-      </picture>
-    </div>
-    <div className="image-tug__layer image-tug__layer--front">
-      <img src="/assets/visuals/projects/interactive-pokedex.png" alt="Interactive Pokédex project visual" width="1536" height="1024" loading="lazy" decoding="async" />
-    </div>
   </div>
 </Section>
 

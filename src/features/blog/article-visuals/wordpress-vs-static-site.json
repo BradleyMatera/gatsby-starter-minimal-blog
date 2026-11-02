@@ -1,0 +1,65 @@
+{
+  "slug": "wordpress-vs-static-site",
+  "title": "When WordPress Is Appropriate and When a Static Site Is Better",
+  "cover": {
+    "src": "/images/blog/wordpress-vs-static-site/cover.png",
+    "mobile": "/images/blog/wordpress-vs-static-site/cover-720.webp",
+    "alt": "Concept illustration of a modular publishing workstation and a prebuilt-page delivery workstation, presented as equally valid choices."
+  },
+  "figures": [
+    {
+      "id": "platform-fit",
+      "kind": "comparison",
+      "title": "Choose around the team's workflow",
+      "summary": "Match the platform to editing habits, functionality, and ongoing support.",
+      "items": [
+        {
+          "label": "Frequent nontechnical editing",
+          "detail": "A WordPress dashboard may suit a team that needs to publish directly."
+        },
+        {
+          "label": "Mostly fixed content",
+          "detail": "A static build may suit occasional developer-managed changes."
+        },
+        {
+          "label": "Required functionality",
+          "detail": "Compare suitable plugins with the integrations or custom work a static approach needs."
+        },
+        {
+          "label": "Ongoing ownership",
+          "detail": "Identify who will maintain updates, backups, deployments, and external services."
+        }
+      ],
+      "caption": "A decision framework from the article, not a blanket performance or security rating."
+    },
+    {
+      "id": "wordpress-static-migration",
+      "kind": "flow",
+      "title": "Migration includes more than page text",
+      "summary": "Preserve the useful content and behavior when changing how the site is delivered.",
+      "items": [
+        {
+          "label": "Export",
+          "detail": "Retrieve the WordPress content and collect its media files."
+        },
+        {
+          "label": "Convert",
+          "detail": "Map the content into the new format and repair image references."
+        },
+        {
+          "label": "Preserve destinations",
+          "detail": "Keep useful slugs and map changing URLs to their new locations."
+        },
+        {
+          "label": "Transfer metadata",
+          "detail": "Carry relevant titles and descriptions into the new content model."
+        },
+        {
+          "label": "Rebuild interactions",
+          "detail": "Replace plugin-dependent forms and verify their complete flow."
+        }
+      ],
+      "caption": "The article's migration checklist. Scope and timing depend on the content and integrations involved."
+    }
+  ]
+}

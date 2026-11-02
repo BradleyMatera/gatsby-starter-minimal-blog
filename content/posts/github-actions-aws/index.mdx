@@ -7,6 +7,10 @@ description: "The minimal GitHub Actions CI workflow I drop into JavaScript proj
 theme: "DevOps"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/github-actions-aws.json";
+
+
 CI only matters if it runs something real. Most tutorials show either bloated pipelines or toy examples that verify nothing. I prefer one workflow, one runner, two commands, and a green check.
 
 This post is the workflow file I use as a baseline.
@@ -24,8 +28,7 @@ Here is what GitHub Actions gives you out of the box:
 - **Pass/fail reporting** — a green check or red X visible on every commit
 - **Job logs** — full stdout/stderr for every step, viewable in the Actions tab
 
-{/* visual-break:github-actions-aws:1 */}
-![Cloud architecture checkpoint illustration for this section.](/assets/visuals/blog/github-actions-aws-break-1.png)
+
 
 ## The workflow file
 
@@ -62,6 +65,8 @@ Here is what each step in the workflow does:
 - **`npm install`** — installs all dependencies from `package.json`
 - **`npm run lint`** — runs your linter (e.g. ESLint) to catch style and syntax errors
 - **`npm run build`** — runs your production build to verify the project compiles cleanly
+
+<ArticleVisual spec={articleVisuals.figures[0]} />
 
 ## Extending it with AWS
 
@@ -129,6 +134,8 @@ Here is the verification loop:
 
 The fix is always to make local and CI more similar, not to weaken the checks.
 
+<ArticleVisual spec={articleVisuals.figures[1]} />
+
 ## Debugging AWS-specific failures
 
 Once the deploy step is in place, a new class of failures shows up:
@@ -149,8 +156,7 @@ On the AWS side, S3 storage for a static site is negligible — a few cents a mo
 - **GitHub Pages.** Free and built-in, but no CDN configuration and no custom headers. Fine for docs, not for a production site.
 - **Self-hosted runners.** Only worth it if you are burning through the free minutes or need access to private network resources. For everything I do, the hosted runners are fine.
 
-{/* visual-break:github-actions-aws:2 */}
-![Cloud operations checkpoint illustration for this section.](/assets/visuals/blog/github-actions-aws-break-2.png)
+
 
 ## Closing
 

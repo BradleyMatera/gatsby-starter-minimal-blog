@@ -1,0 +1,65 @@
+{
+  "slug": "/containerization-and-orchestration",
+  "title": "Containerization and Orchestration: A Small Lab You Can Run",
+  "cover": {
+    "src": "/images/blog/containerization-and-orchestration/cover.png",
+    "mobile": "/images/blog/containerization-and-orchestration/cover-720.webp",
+    "alt": "Conceptual exploded view of a small application packaged into a container and connected to a response check."
+  },
+  "figures": [
+    {
+      "id": "container-lab-file-map",
+      "kind": "layers",
+      "title": "Four files, four responsibilities",
+      "summary": "Each artifact in the lab has one job in the path from source code to a running service.",
+      "items": [
+        {
+          "label": "index.js",
+          "detail": "Defines the HTTP service and its health endpoint."
+        },
+        {
+          "label": "package.json",
+          "detail": "Declares dependencies and the start command."
+        },
+        {
+          "label": "Dockerfile",
+          "detail": "Packages the application and its runtime into an image."
+        },
+        {
+          "label": "Compose file",
+          "detail": "Defines how to build and run the service with a mapped port."
+        }
+      ],
+      "caption": "A file map of the small lab shown in the article; no cluster is required for this example."
+    },
+    {
+      "id": "container-lab-proof",
+      "kind": "flow",
+      "title": "Separate the artifact from the running proof",
+      "summary": "Building an image and receiving a response are different checks.",
+      "items": [
+        {
+          "label": "Run locally",
+          "detail": "Confirm the health route responds before packaging."
+        },
+        {
+          "label": "Build the image",
+          "detail": "Create the container artifact from the Dockerfile."
+        },
+        {
+          "label": "Start with Compose",
+          "detail": "Run that artifact through the repeatable configuration."
+        },
+        {
+          "label": "Request health",
+          "detail": "Call the mapped endpoint and inspect its response."
+        },
+        {
+          "label": "Stop the lab",
+          "detail": "End the running session when the check is complete."
+        }
+      ],
+      "caption": "The verification sequence in this post. A running process alone is not the health-response check."
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "slug": "/review-testimonial-placement",
+  "title": "Where to Place Reviews and Testimonials on Your Website",
+  "cover": {
+    "src": "/images/blog/review-testimonial-placement/cover.png",
+    "mobile": "/images/blog/review-testimonial-placement/cover-720.webp",
+    "alt": "Blank ceramic speech bubbles placed beside decision points along a miniature visitor path"
+  },
+  "figures": [
+    {
+      "id": "review-placement-map",
+      "kind": "timeline",
+      "title": "Match the review to the visitor's question",
+      "summary": "Different pages need different kinds of reassurance.",
+      "items": [
+        {
+          "label": "Homepage",
+          "detail": "Brief attributed excerpts introduce the business."
+        },
+        {
+          "label": "Service page",
+          "detail": "Relevant reviews address that specific service."
+        },
+        {
+          "label": "Contact page",
+          "detail": "Short comments about communication sit near the form."
+        },
+        {
+          "label": "Review library",
+          "detail": "A dedicated page offers more detail and source links."
+        }
+      ],
+      "caption": "The article's four placement roles; this is an information map, not conversion-test data."
+    },
+    {
+      "id": "review-authenticity",
+      "kind": "checklist",
+      "title": "Make the testimonial verifiable",
+      "summary": "Preserve the customer's meaning and make the source clear.",
+      "items": [
+        {
+          "label": "Specific detail",
+          "detail": "Use a genuine account of the service or experience."
+        },
+        {
+          "label": "Attribution",
+          "detail": "Show the permitted name and source."
+        },
+        {
+          "label": "Permission",
+          "detail": "Ask before publishing direct feedback with a customer's identity."
+        },
+        {
+          "label": "Source link",
+          "detail": "Give visitors a way to inspect the original."
+        },
+        {
+          "label": "Faithful excerpt",
+          "detail": "Do not remove criticism or rewrite the meaning."
+        }
+      ],
+      "caption": "Authenticity checks drawn from the article's usefulness and avoidance guidance."
+    }
+  ]
+}

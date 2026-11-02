@@ -7,6 +7,9 @@ description: "How I built an embeddable AI chat widget for my portfolio using va
 theme: "AI"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/projecthub-embeddable-ai-recruiter-free-tiers.json";
+
 I built a chat widget for my portfolio. One script tag, drop it on a page, and recruiters can ask questions about my projects, my AWS internship, what I actually know, and what kind of roles I'm looking for. I named the assistant Scout.
 
 ```html
@@ -69,6 +72,8 @@ cat data.js utils.js logic.js ui.js > ProjectHub.js
 Each tab gets its own session ID. The widget keeps around ten recent turns in memory and sends the last five to the server. Scout asks for the visitor's name once per tab and stores it in `sessionStorage`. I didn't want permanent identity tracking. This is a recruiter assistant, not a surveillance tool.
 
 When someone hits Clear Memory, the transcript, session ID, name, and local context all reset. The backend doesn't keep a database of conversations either. Memory lives in process and can disappear on restart. That is fine for this use case, and it keeps the VM small.
+
+<ArticleVisual spec={articleVisuals.figures[0]} />
 
 ## Mobile UX
 
@@ -194,6 +199,8 @@ A 200 status doesn't mean the answer is good. Every generated response gets clea
 - **Context-bound fact checking**: Reject answers that introduce facts not in the supplied context.
 
 I have a cleanup function called `removeSlop()` because I got tired of Scout saying things like "Absolutely!" or "Bradley is a dynamic and passionate professional who leverages cutting-edge technologies." That is not how I talk. It also doesn't help a recruiter make a decision. If a provider fails validation, the router tries the next one. If all of them fail, the grounded answer is already waiting.
+
+<ArticleVisual spec={articleVisuals.figures[1]} />
 
 ## Graceful degradation
 

@@ -1,6 +1,6 @@
 import * as React from "react";
 import ObscuredContact from "./ObscuredContact";
-import { GitHubIcon, LinkedInIcon, ResumeIcon, DownloadIcon } from "../../../site/icons";
+import { GitHubIcon, LinkedInIcon, ResumeIcon } from "../../../site/icons";
 
 /* --------------------------------------------------------------------------
    Contact CTA — Final call-to-action for recruiters.

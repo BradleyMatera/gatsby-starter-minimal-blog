@@ -3,7 +3,9 @@ title: "Convo-AI"
 slug: "/projects/convo-ai"
 ---
 
-import { Section, Card, AnchorNav, Link } from "../../../src/ui";
+import { Section, Card, Link } from "../../../src/ui";
+
+import ProjectEvidence from "../../../src/features/projects/components/ProjectEvidence";
 
 <Section
   eyebrow="Project Write-up"
@@ -11,26 +13,15 @@ import { Section, Card, AnchorNav, Link } from "../../../src/ui";
   description="A local-first, voice-enabled conversational AI assistant that listens with faster-whisper, thinks with local Ollama LLM, remembers with RAG over SQLite, and speaks with Coqui TTS (XTTS v2). No cloud API keys, no telemetry. Python 3.8+, FastAPI WebSocket server, React + Tailwind web UI, Docker support."
 />
 
-<AnchorNav
-  items={[
-    { id: "overview", label: "Problem" },
-    { id: "approach", label: "Solution" },
-    { id: "role", label: "My Role" },
-    { id: "impact", label: "What's in the Repo" },
-    { id: "artifacts", label: "Tech Stack" },
-  ]}
-/>
+<ProjectEvidence pathname="/projects/convo-ai/" />
+
 
 <Section id="overview" eyebrow="Problem" title="User need">
-  <p>
-    I wanted a conversational AI assistant that worked entirely locally — no cloud API keys, no telemetry, no data leaving my machine. It needed to listen to voice input, think with a local LLM, remember context across conversations with RAG, and speak responses back out loud. The kind of thing you could run on your own hardware and trust.
-  </p>
+  <p>I wanted a conversational AI assistant that worked entirely locally — no cloud API keys, no telemetry, no data leaving my machine. It needed to listen to voice input, think with a local LLM, remember context across conversations with RAG, and speak responses back out loud. The kind of thing you could run on your own hardware and trust.</p>
 </Section>
 
 <Section id="approach" eyebrow="Solution" title="What I built">
-  <p>
-    Convo-AI is a local-first, voice-enabled conversational AI assistant with a full pipeline: it listens with faster-whisper, thinks with a local Ollama LLM, remembers with RAG over SQLite, and speaks with Coqui TTS (XTTS v2). No cloud API keys and no telemetry. The server is a FastAPI WebSocket backend in Python, with a Python CLI client and a React + Tailwind web UI. Configuration lives in <code>config.json</code> for voice model, speed and pitch, WebSocket URL, and LLM settings.
-  </p>
+  <p>Convo-AI is a local-first, voice-enabled conversational AI assistant with a full pipeline: it listens with faster-whisper, thinks with a local Ollama LLM, remembers with RAG over SQLite, and speaks with Coqui TTS (XTTS v2). No cloud API keys and no telemetry. The server is a FastAPI WebSocket backend in Python, with a Python CLI client and a React + Tailwind web UI. Configuration lives in <code>config.json</code> for voice model, speed and pitch, WebSocket URL, and LLM settings.</p>
   <div className="grid-two">
     <Card>
       <h3 className="feature-card__title">Voice pipeline</h3>

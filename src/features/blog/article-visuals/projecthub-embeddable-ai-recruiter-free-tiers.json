@@ -1,0 +1,65 @@
+{
+  "slug": "/projecthub-embeddable-ai-recruiter-free-tiers",
+  "title": "How I Built ProjectHub: An Embeddable AI Recruiter Assistant That Runs on Free Tiers",
+  "cover": {
+    "src": "/images/blog/projecthub-embeddable-ai-recruiter-free-tiers/cover.png",
+    "mobile": "/images/blog/projecthub-embeddable-ai-recruiter-free-tiers/cover-720.webp",
+    "alt": "Glass speech sculpture anchored to archival cards with optional provider bulbs above"
+  },
+  "figures": [
+    {
+      "id": "widget-session-boundary",
+      "kind": "timeline",
+      "title": "Session context follows the tab",
+      "summary": "A short conversation context supports follow-up questions.",
+      "items": [
+        {
+          "label": "Open",
+          "detail": "Create a session ID for the tab."
+        },
+        {
+          "label": "Ask",
+          "detail": "Send the message with recent context."
+        },
+        {
+          "label": "Continue",
+          "detail": "Use recent turns to interpret follow-ups."
+        },
+        {
+          "label": "Clear",
+          "detail": "Reset the transcript, ID, name and local context."
+        }
+      ],
+      "caption": "The frontend session lifecycle described in the article, not a permanent account database."
+    },
+    {
+      "id": "response-validation-gates",
+      "kind": "layers",
+      "title": "A response still needs validation",
+      "summary": "Provider success alone is not enough.",
+      "items": [
+        {
+          "label": "Clean wording",
+          "detail": "Remove preambles and filler."
+        },
+        {
+          "label": "Check scope",
+          "detail": "Reject answers that are too short or unrelated."
+        },
+        {
+          "label": "Check support",
+          "detail": "Reject unsupported numbers and inflated experience claims."
+        },
+        {
+          "label": "Retry",
+          "detail": "Try another provider after failed validation."
+        },
+        {
+          "label": "Fall back",
+          "detail": "Keep the grounded answer available."
+        }
+      ],
+      "caption": "Validation and fallback behavior described in the write-up; no perfect-accuracy claim is implied."
+    }
+  ]
+}

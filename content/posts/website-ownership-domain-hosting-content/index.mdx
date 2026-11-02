@@ -7,6 +7,11 @@ description: "What you actually own when you hire someone to build your website.
 theme: "Web Design"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/website-ownership-domain-hosting-content.json";
+
+
+
 When you hire someone to build your website, you own four things: the domain name, the hosting account, the content (text and images), and the source code. If any of those are in someone else's account or name, you do not fully own your website. Vendor lock-in happens when a developer controls one or more of these layers and you cannot leave without starting over.
 
 This is the most common problem I see with small business owners. They paid someone to build a site, that person disappeared, and now the business owner cannot update their site, cannot access their domain, and cannot move to a new developer without rebuilding everything. This post explains how to avoid that.
@@ -55,6 +60,8 @@ The source code is the actual code that builds your website. For a Gatsby site, 
 
 **How I handle it:** The source code lives in a Git repository. When the project is done, I transfer the repository to your GitHub account or give you a full archive. The code is yours. If you hire a different developer later, they can clone the repo and take over. I use open-source frameworks (Gatsby, React) so any competent developer can work with the codebase.
 
+<ArticleVisual spec={articleVisuals.figures[0]} />
+
 ## Questions to ask before hiring anyone
 
 Before you sign a contract or pay a deposit, ask these questions:
@@ -96,6 +103,8 @@ Ask your developer for the Git repository. If they say "it is on our platform" a
 ### Content
 
 Do you have the original text files and images somewhere outside the website? If the only copy of your content lives inside a CMS you cannot access, you do not fully own your content. Export it now.
+
+<ArticleVisual spec={articleVisuals.figures[1]} />
 
 ## What happens when you do not own your website
 

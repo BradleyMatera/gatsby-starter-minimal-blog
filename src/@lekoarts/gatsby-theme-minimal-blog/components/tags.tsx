@@ -2,6 +2,8 @@ import * as React from "react";
 import { Link } from "gatsby";
 import Seo from "./seo";
 import Layout from "./layout";
+import { useUrlState } from "../../../features/blog/useUrlState";
+import "../../../styles/editorial.css";
 
 type TagsData = {
   allPost: {
@@ -69,129 +71,45 @@ const TAG_CATEGORIES: Record<string, string> = {
 
 const Tags = ({ data }: { data: TagsData }) => {
   const groups = data.allPost.group;
-  const sortedGroups = [...groups].sort((a, b) => b.totalCount - a.totalCount);
-  const totalArticles = groups.reduce((sum, g) => sum + g.totalCount, 0);
-
-  // Group tags by category
-  const categorized: Record<string, typeof sortedGroups> = {};
-  const uncategorized: typeof sortedGroups = [];
-  sortedGroups.forEach((g) => {
-    const cat = TAG_CATEGORIES[g.fieldValue.toLowerCase()];
-    if (cat) {
-      if (!categorized[cat]) categorized[cat] = [];
-      categorized[cat].push(g);
-    } else {
-      uncategorized.push(g);
-    }
-  });
-
-  const categoryNames = Object.keys(categorized).sort();
-
+  const [filters, setFilters] = useUrlState({ q: "" });
+  const totalArticles = groups.reduce((sum, group) => sum + group.totalCount, 0);
+  const visible = [...groups].filter((group) => `${group.fieldValue} ${TAG_CATEGORIES[group.fieldValue.toLowerCase()] || "Other topics"}`.toLowerCase().includes(filters.q.trim().toLowerCase()))
+    .sort((a, b) => b.totalCount - a.totalCount || a.fieldValue.localeCompare(b.fieldValue));
+  const categories = Array.from(new Set(visible.map((group) => TAG_CATEGORIES[group.fieldValue.toLowerCase()] || "Other topics"))).sort();
   return (
-    <Layout>
-      <section className="tags-page" sx={{ maxWidth: `900px`, margin: `0 auto`, padding: `4rem 1.5rem` }}>
-        <h1 sx={{ fontSize: `2.5rem`, marginBottom: `0.5rem` }}>All Tags</h1>
-
-        {/* Direct answer for AEO — question heading + 40-70 word answer */}
-        <h2 sx={{ fontSize: `1.25rem`, marginTop: `1rem`, marginBottom: `0.5rem` }}>What topics does Bradley Matera write about?</h2>
-        <p className="direct-answer" sx={{ fontSize: `1.125rem`, opacity: 0.8, marginBottom: `1rem`, lineHeight: 1.6 }}>
-          Bradley Matera&apos;s portfolio covers {groups.length} topic tags across {totalArticles} articles, organized into categories like Cloud, DevOps, Frontend, Security, Career, and Local SEO. Each article includes real project examples, code snippets, and verification steps from a web developer in Northwest Illinois.
-        </p>
-
-        <p sx={{ fontSize: `1rem`, opacity: 0.65, marginBottom: `2rem` }}>
-          Browse all {groups.length} topic tags from Bradley Matera&apos;s portfolio, organizing articles by subject area including web development, AI, cloud engineering, React, AWS, DevOps, and career insights from Northwest Illinois.
-        </p>
-
-        {/* Comparison table of all tags for AEO extraction */}
-        <h2 sx={{ fontSize: `1.5rem`, marginBottom: `1rem` }}>Which tags have the most articles?</h2>
-        <table sx={{ width: `100%`, borderCollapse: `collapse`, marginBottom: `2rem`, fontSize: `0.9rem` }}>
-          <thead>
-            <tr>
-              <th sx={{ textAlign: `left`, padding: `0.5rem`, borderBottom: `2px solid`, borderColor: `border` }}>Tag</th>
-              <th sx={{ textAlign: `left`, padding: `0.5rem`, borderBottom: `2px solid`, borderColor: `border` }}>Category</th>
-              <th sx={{ textAlign: `right`, padding: `0.5rem`, borderBottom: `2px solid`, borderColor: `border` }}>Articles</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sortedGroups.map((group) => (
-              <tr key={group.fieldValue}>
-                <td sx={{ padding: `0.5rem`, borderBottom: `1px solid`, borderColor: `border` }}>
-                  <Link
-                    to={`/tags/${group.fieldValue.toLowerCase().replace(/\s+/g, "-")}/`}
-                    sx={{ color: `primary`, textDecoration: `none` }}
-                  >
-                    {group.fieldValue}
-                  </Link>
-                </td>
-                <td sx={{ padding: `0.5rem`, borderBottom: `1px solid`, borderColor: `border`, opacity: 0.7 }}>
-                  {TAG_CATEGORIES[group.fieldValue.toLowerCase()] || "General"}
-                </td>
-                <td sx={{ padding: `0.5rem`, borderBottom: `1px solid`, borderColor: `border`, textAlign: `right`, opacity: 0.7 }}>
-                  {group.totalCount}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-
-        {/* Categorized tag clouds for content depth */}
-        <h2 sx={{ fontSize: `1.5rem`, marginTop: `2rem`, marginBottom: `0.5rem` }}>What categories are the tags organized into?</h2>
-        <p sx={{ fontSize: `1rem`, opacity: 0.7, marginBottom: `1.5rem` }}>
-          Tags are grouped into {categoryNames.length} categories: {categoryNames.join(", ")}. Click any tag to see all articles tagged with that topic.
-        </p>
-        {categoryNames.map((cat) => (
-          <React.Fragment key={cat}>
-            <h3 sx={{ fontSize: `1.25rem`, marginTop: `2rem`, marginBottom: `1rem` }}>{cat}</h3>
-            <ul sx={{ listStyle: `none`, padding: 0, display: `flex`, flexWrap: `wrap`, gap: `0.75rem`, marginBottom: `1rem` }}>
-              {categorized[cat].map((group) => (
+    <Layout className="editorial-page editorial-library">
+      <section className="tags-page">
+        <header className="editorial-header">
+          <h1>All Tags</h1>
+          <h2>What topics does Bradley Matera write about?</h2>
+          <p className="direct-answer">
+            Bradley Matera&apos;s portfolio covers {groups.length} topic tags across {totalArticles} articles, organized into categories like Cloud, DevOps, Frontend, Security, Career, and Local SEO. Each article includes real project examples, code snippets, and verification steps from a web developer in Northwest Illinois.
+          </p>
+          <p>Browse all {groups.length} topic tags from Bradley Matera&apos;s portfolio, organizing articles by subject area including web development, AI, cloud engineering, React, AWS, DevOps, and career insights from Northwest Illinois.</p>
+        </header>
+        <form className="editorial-search" role="search" onSubmit={(event) => event.preventDefault()}>
+          <label htmlFor="topic-search">Search topics</label>
+          <input id="topic-search" type="search" value={filters.q} onChange={(event) => setFilters({ q: event.target.value }, true)} />
+        </form>
+        <div className="editorial-control-actions">
+          <p role="status">{visible.length} of {groups.length} topics</p>
+          <button type="button" disabled={!filters.q} onClick={() => setFilters({ q: "" })}>Clear search</button>
+        </div>
+        {categories.length ? categories.map((category) => (
+          <section className="editorial-topic-group" key={category}>
+            <h2>{category}</h2>
+            <ul className="editorial-topic-list">
+              {visible.filter((group) => (TAG_CATEGORIES[group.fieldValue.toLowerCase()] || "Other topics") === category).map((group) => (
                 <li key={group.fieldValue}>
-                  <Link
-                    to={`/tags/${group.fieldValue.toLowerCase().replace(/\s+/g, "-")}/`}
-                    sx={{
-                      display: `inline-block`,
-                      padding: `0.5rem 1rem`,
-                      borderRadius: `999px`,
-                      border: `1px solid`,
-                      borderColor: `border`,
-                      textDecoration: `none`,
-                      fontSize: `0.95rem`,
-                      "&:hover": { borderColor: `primary`, color: `primary` },
-                    }}
-                  >
-                    {group.fieldValue} <span sx={{ opacity: 0.5, fontSize: `0.8em` }}>({group.totalCount})</span>
+                  <Link to={`/tags/${group.fieldValue.toLowerCase().replace(/\s+/g, "-")}/`}>
+                    <span>{group.fieldValue}</span>
+                    <span>{group.totalCount} {group.totalCount === 1 ? "article" : "articles"} <span aria-hidden="true">→</span></span>
                   </Link>
                 </li>
               ))}
             </ul>
-          </React.Fragment>
-        ))}
-
-        {uncategorized.length > 0 && (
-          <>
-            <h3 sx={{ fontSize: `1.25rem`, marginTop: `2rem`, marginBottom: `1rem` }}>General</h3>
-            <ul sx={{ listStyle: `none`, padding: 0, display: `flex`, flexWrap: `wrap`, gap: `0.75rem` }}>
-              {uncategorized.map((group) => (
-                <li key={group.fieldValue}>
-                  <Link
-                    to={`/tags/${group.fieldValue.toLowerCase().replace(/\s+/g, "-")}/`}
-                    sx={{
-                      display: `inline-block`,
-                      padding: `0.5rem 1rem`,
-                      borderRadius: `999px`,
-                      border: `1px solid`,
-                      borderColor: `border`,
-                      textDecoration: `none`,
-                      fontSize: `0.95rem`,
-                      "&:hover": { borderColor: `primary`, color: `primary` },
-                    }}
-                  >
-                    {group.fieldValue} <span sx={{ opacity: 0.5, fontSize: `0.8em` }}>({group.totalCount})</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </>
-        )}
+          </section>
+        )) : <p>No topics match your search.</p>}
       </section>
     </Layout>
   );

@@ -1,16 +1,20 @@
-﻿// src/pages/404.tsx
+// src/pages/404.tsx
 import React from 'react';
-import type { HeadFC } from 'gatsby';
+import { Link, type HeadFC } from 'gatsby';
 import Layout from '../@lekoarts/gatsby-theme-minimal-blog/components/layout';
 import Seo from '../@lekoarts/gatsby-theme-minimal-blog/components/seo';
-import { ThreeScene } from '../site/components';
+import '../styles/editorial.css';
 
 const NotFoundPage = () => (
-  <Layout>
-    <div style={{ textAlign: 'center', padding: '4rem 1rem' }}>
+  <Layout className="editorial-page editorial-not-found">
+    <div className="editorial-not-found__content">
       <h1>404: Not Found</h1>
       <p>Sorry, that page doesn't exist.</p>
-      <ThreeScene />
+      <div className="card-actions">
+        <Link to="/" data-variant="primary">Home</Link>
+        <Link to="/projects/" data-variant="ghost">Projects</Link>
+        <Link to="/contact/" data-variant="ghost">Contact</Link>
+      </div>
     </div>
   </Layout>
 );

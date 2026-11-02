@@ -22,15 +22,11 @@ import { Section, Card, AnchorNav, Link } from "../../../src/ui";
 />
 
 <Section id="overview" eyebrow="Problem" title="User need">
-  <p>
-    I wanted a way for recruiters visiting my portfolio to ask questions about my projects and experience without me being on the other end of a contact form. The widget needed to be embeddable with a single script tag, cost nothing to run, and keep working even if one AI provider went down or hit a rate limit.
-  </p>
+  <p>I wanted a way for recruiters visiting my portfolio to ask questions about my projects and experience without me being on the other end of a contact form. The widget needed to be embeddable with a single script tag, cost nothing to run, and keep working even if one AI provider went down or hit a rate limit.</p>
 </Section>
 
 <Section id="approach" eyebrow="Solution" title="What I built">
-  <p>
-    ProjectHub is an embeddable AI chat widget powered by "Scout", a free multi-provider recruiter assistant. The frontend is vanilla JavaScript served from GitHub Pages, embedded with a single script tag. The backend is a Node.js server on a Google Cloud e2-micro VM, with Caddy and Let's Encrypt handling HTTPS. A JSON knowledge base lives in the GitHub repo with bidirectional sync, and Scout rotates across five AI providers — Groq, Cloudflare Workers AI, GitHub Models, Google Gemini, and xAI Grok — with automatic failover.
-  </p>
+  <p>ProjectHub is an embeddable AI chat widget powered by "Scout", a free multi-provider recruiter assistant. The frontend is vanilla JavaScript served from GitHub Pages, embedded with a single script tag. The backend is a Node.js server on a Google Cloud e2-micro VM, with Caddy and Let's Encrypt handling HTTPS. A JSON knowledge base lives in the GitHub repo with bidirectional sync, and Scout rotates across five AI providers — Groq, Cloudflare Workers AI, GitHub Models, Google Gemini, and xAI Grok — with automatic failover.</p>
   <div className="grid-two">
     <Card>
       <h3 className="feature-card__title">Widget & backend</h3>

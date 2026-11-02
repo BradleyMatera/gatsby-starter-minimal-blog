@@ -1,4 +1,6 @@
 import * as React from "react";
+import { projectMedia } from "../../projects/projectMedia";
+import { useRecruiterFilter } from "../hooks/useRecruiterFilter";
 
 /* --------------------------------------------------------------------------
    Project Explorer — All projects consolidated from the old /projects page.
@@ -214,270 +216,67 @@ const PROJECTS: Project[] = [
 
 const CATEGORIES = ["All", "Cloud", "Full-Stack", "Frontend", "AI Systems", "Open Source", "Graphics", "Education", "Tools", "Systems"];
 
+const PROJECT_PAGES: Record<string, string> = {
+  "aws-metadata-workflow": "aws-serverless-metadata-workflow", "car-match": "car-match",
+  projecthub: "projecthub", pokedex: "interactive-pokedex", ciris: "ciris-ai",
+  "animal-sounds": "animal-sounds", "convo-ai": "convo-ai", "triangle-shader": "triangle-shader-lab",
+  "cheese-math": "cheesemath", "obj-parser": "obj-parser", "ethics-frontend": "securelearn-lms",
+};
+
 const ProjectExplorer: React.FC = () => {
-  const [activeProject, setActiveProject] = React.useState<string | null>(null);
-  const [activeCategory, setActiveCategory] = React.useState("All");
-
-  const filtered = React.useMemo(
-    () =>
-      activeCategory === "All"
-        ? PROJECTS
-        : PROJECTS.filter((p) => p.category === activeCategory),
-    [activeCategory]
-  );
-
+  const [category, setCategory] = useRecruiterFilter("project-category");
+  const activeCategory = CATEGORIES.includes(category) ? category : "All";
+  const filtered = activeCategory === "All" ? PROJECTS : PROJECTS.filter((project) => project.category === activeCategory);
   return (
-    <section id="project-explorer" className="recruiter-section recruiter-section--media reveal-section">
-      {/* Background media layer */}
-      <div className="recruiter-section__media" aria-hidden="true">
-        <img
-          className="recruiter-section__video recruiter-ken-burns"
-          src="/featured-work.webp"
-          alt="Featured work showcase — background for the project explorer section"
-          aria-hidden="true"
-        />
-        <div className="recruiter-section__media-overlay" />
+    <section id="project-explorer" className="recruiter-section" aria-labelledby="recruiter-projects-heading">
+      <div className="recruiter-section__header">
+        <span className="recruiter-section__eyebrow">Projects</span>
+        <h2 id="recruiter-projects-heading" className="recruiter-section__title">Project <span className="recruiter-title-accent">Explorer</span></h2>
+        <p className="recruiter-section__subtitle">All live demos, repos, and case studies in one place. Open a write-up or explore the details below.</p>
       </div>
-
-      <div className="recruiter-section__content">
-        <div className="recruiter-section__header">
-          <span className="recruiter-section__eyebrow">Projects</span>
-          <h2 className="recruiter-section__title">
-            Project <span className="recruiter-title-accent">Explorer</span>
-          </h2>
-          <p className="recruiter-section__subtitle">
-            All live demos, repos, and case studies in one place. Tap a card to expand details.
-          </p>
-        </div>
-
-        {/* Category filter */}
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "0.5rem",
-            justifyContent: "center",
-            marginBottom: "2rem",
-          }}
-        >
-        {CATEGORIES.map((cat) => (
-          <button
-            key={cat}
-            onClick={() => {
-              setActiveCategory(cat);
-              setActiveProject(null);
-            }}
-            className="recruiter-btn magnetic-btn"
-            style={{
-              padding: "0.5rem 1rem",
-              fontSize: "0.8125rem",
-              borderRadius: 9999,
-              border: "1px solid",
-              borderColor:
-                activeCategory === cat ? "var(--r-accent)" : "var(--r-border)",
-              background:
-                activeCategory === cat
-                  ? "var(--r-accent-light)"
-                  : "var(--r-surface-raised)",
-              color:
-                activeCategory === cat
-                  ? "var(--r-accent)"
-                  : "var(--r-text-secondary)",
-              cursor: "pointer",
-              transition: "all 0.2s ease",
-            }}
-          >
-            {cat}
-          </button>
-        ))}
+      <div className="recruiter-filter-bar">
+        <label htmlFor="recruiter-project-category">Project focus</label>
+        <select id="recruiter-project-category" value={activeCategory} onChange={(event) => setCategory(event.target.value)}>
+          {CATEGORIES.map((item) => <option key={item}>{item}</option>)}
+        </select>
+        <p role="status" aria-live="polite">{filtered.length} of {PROJECTS.length} projects</p>
+        {activeCategory !== "All" && <button type="button" onClick={() => setCategory("All")}>Reset filter</button>}
       </div>
-
-      <div
-        className="recruiter-grid reveal-child recruiter-grid--2"
-        style={{ maxWidth: 1100, margin: "0 auto" }}
-      >
-        {filtered.map((project) => {
-          const isActive = activeProject === project.id;
-
+      <div className="recruiter-project-grid">
+        {filtered.map((project, index) => {
+          const page = PROJECT_PAGES[project.id];
+          const writeup = page ? `/projects/${page}/` : project.caseStudy;
+          const media = projectMedia[writeup || project.demo || ""];
           return (
-            <div
-              key={project.id}
-              className="recruiter-card"
-              style={{
-                cursor: "pointer",
-                transition: "border-color 0.2s ease",
-                borderColor: isActive ? "var(--r-accent)" : undefined,
-              }}
-              onClick={() => setActiveProject(isActive ? null : project.id)}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  setActiveProject(isActive ? null : project.id);
-                }
-              }}
-              aria-expanded={isActive}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "flex-start",
-                  justifyContent: "space-between",
-                  marginBottom: "0.5rem",
-                }}
-              >
-                <div>
-                  <h3
-                    style={{
-                      fontSize: "1.0625rem",
-                      fontWeight: 700,
-                      marginBottom: "0.125rem",
-                      color: "var(--r-text)",
-                    }}
-                  >
-                    {project.name}
-                  </h3>
-                  <div
-                    style={{
-                      fontSize: "0.8125rem",
-                      color: "var(--r-accent)",
-                      fontWeight: 600,
-                    }}
-                  >
-                    {project.tagline}
-                  </div>
-                </div>
-                <span
-                  style={{
-                    fontSize: "0.6875rem",
-                    padding: "0.125rem 0.5rem",
-                    borderRadius: 9999,
-                    background: "var(--r-accent-light)",
-                    color: "var(--r-accent)",
-                    fontWeight: 600,
-                    flexShrink: 0,
-                  }}
-                >
-                  {project.category}
-                </span>
+            <article className="recruiter-project-card" key={project.id}>
+              {media?.src && <figure className="recruiter-project-card__media">
+                <a className="recruiter-project-card__image-link" href={media.src} target="_blank" rel="noopener noreferrer" aria-label={`View full-size ${media.kind.toLowerCase()}: ${project.name}`}>
+                  <span className="recruiter-project-card__image-label"><span>{media.kind}</span><span aria-hidden="true">↗</span></span>
+                  <img src={media.src} alt={media.alt} width="1440" height="900" loading={index < 3 ? "eager" : "lazy"} decoding="async" />
+                </a>
+                <figcaption>{media.caption}</figcaption>
+              </figure>}
+              <div className="recruiter-project-card__heading">
+                <span className="recruiter-tag">{project.category}</span>
+                <h3>{project.name}</h3>
+                <p>{project.tagline}</p>
               </div>
-
-              <p
-                style={{
-                  fontSize: "0.875rem",
-                  color: "var(--r-text-secondary)",
-                  lineHeight: 1.6,
-                  marginBottom: "0.875rem",
-                  display: "-webkit-box",
-                  WebkitLineClamp: 3,
-                  WebkitBoxOrient: "vertical",
-                  overflow: "hidden",
-                }}
-              >
-                {project.description}
-              </p>
-
-              {/* Inline expand */}
-              {isActive && (
-                <div
-                  style={{
-                    marginTop: "0.875rem",
-                    paddingTop: "0.875rem",
-                    borderTop: "1px solid var(--r-border)",
-                  }}
-                >
-                  {/* Metrics */}
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: "1.5rem",
-                      marginBottom: "1rem",
-                    }}
-                  >
-                    {project.metrics.map((m) => (
-                      <div key={m.label}>
-                        <div
-                          style={{
-                            fontSize: "1rem",
-                            fontWeight: 700,
-                            color: "var(--r-text)",
-                          }}
-                        >
-                          {m.value}
-                        </div>
-                        <div
-                          style={{
-                            fontSize: "0.6875rem",
-                            color: "var(--r-text-muted)",
-                          }}
-                        >
-                          {m.label}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Tech */}
-                  <div
-                    style={{
-                      display: "flex",
-                      flexWrap: "wrap",
-                      gap: "0.375rem",
-                      marginBottom: "1rem",
-                    }}
-                  >
-                    {project.tech.map((t) => (
-                      <span key={t} className="recruiter-tag">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Links */}
-              <div style={{ display: "flex", gap: "0.625rem", marginTop: "0.75rem", flexWrap: "wrap" }}>
-                {project.github && (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="recruiter-btn magnetic-btn recruiter-btn--secondary"
-                    style={{ padding: "0.5rem 1rem", fontSize: "0.8125rem" }}
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    GitHub →
-                  </a>
-                )}
-                {project.caseStudy && (
-                  <a
-                    href={project.caseStudy}
-                    className="recruiter-btn magnetic-btn recruiter-btn--secondary"
-                    style={{ padding: "0.5rem 1rem", fontSize: "0.8125rem" }}
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    Write-up →
-                  </a>
-                )}
-                {project.demo && (
-                  <a
-                    href={project.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="recruiter-btn magnetic-btn recruiter-btn--primary"
-                    style={{ padding: "0.5rem 1rem", fontSize: "0.8125rem" }}
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    Live Demo →
-                  </a>
-                )}
+              <div className="recruiter-actions recruiter-project-card__actions">
+                {writeup && <a href={writeup} className="recruiter-btn recruiter-btn--primary" aria-label={`Read ${project.name} case study`}>Case study →</a>}
+                {project.demo && <a href={project.demo} className="recruiter-text-link" target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.name} demo in a new tab`}>Demo ↗</a>}
+                {project.github && <a href={project.github} className="recruiter-text-link" target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.name} source in a new tab`}>Source ↗</a>}
               </div>
-            </div>
+              <details className="recruiter-details">
+                <summary>Details and technical stack</summary>
+                <p>{project.description}</p>
+                <dl className="recruiter-project-facts">{project.metrics.map((metric) => <div key={metric.label}><dt>{metric.label}</dt><dd>{metric.value}</dd></div>)}</dl>
+                <ul className="recruiter-tag-list" aria-label="Technical stack">{project.tech.map((tech) => <li key={tech} className="recruiter-tag">{tech}</li>)}</ul>
+                {project.caseStudy && project.caseStudy !== writeup && <a href={project.caseStudy}>Related write-up →</a>}
+              </details>
+            </article>
           );
         })}
       </div>
-    </div>
     </section>
   );
 };

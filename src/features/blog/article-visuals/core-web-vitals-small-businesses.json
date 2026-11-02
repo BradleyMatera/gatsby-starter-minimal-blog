@@ -1,0 +1,57 @@
+{
+  "slug": "/core-web-vitals-small-businesses",
+  "title": "Core Web Vitals for Small Businesses: What Actually Matters",
+  "cover": {
+    "src": "/images/blog/core-web-vitals-small-businesses/cover.png",
+    "mobile": "/images/blog/core-web-vitals-small-businesses/cover-720.webp",
+    "alt": "Sculptural mobile page with a reserved image frame, responsive button mechanism and stabilizing feet."
+  },
+  "figures": [
+    {
+      "id": "vitals-mechanisms",
+      "kind": "comparison",
+      "title": "Three different kinds of friction",
+      "summary": "Each metric points to a different part of the visitor's experience.",
+      "items": [
+        {
+          "label": "Main content",
+          "detail": "LCP concerns when the main visible content appears. Image size and render-blocking resources are useful places to investigate."
+        },
+        {
+          "label": "Interaction",
+          "detail": "INP concerns the response to input. Long JavaScript tasks and unnecessary scripts can delay that response."
+        },
+        {
+          "label": "Layout stability",
+          "detail": "CLS concerns unexpected movement. Reserved image and embed space helps keep existing content in place."
+        }
+      ],
+      "caption": "A conceptual map of the three metrics discussed above, not a measurement of this site."
+    },
+    {
+      "id": "vitals-priority",
+      "kind": "flow",
+      "title": "A practical first pass",
+      "summary": "Start with the assets and scripts, then check the experience and the field report.",
+      "items": [
+        {
+          "label": "Prepare images",
+          "detail": "Resize and compress images; include their dimensions."
+        },
+        {
+          "label": "Review scripts",
+          "detail": "Remove unused third-party code and inspect noncritical loading."
+        },
+        {
+          "label": "Try a phone",
+          "detail": "Use the page on a real mobile device and connection."
+        },
+        {
+          "label": "Check field data",
+          "detail": "Use Search Console to identify affected URLs and remaining issues."
+        }
+      ],
+      "caption": "The article's suggested order for an initial review. A lab test and field data answer different questions."
+    }
+  ]
+}

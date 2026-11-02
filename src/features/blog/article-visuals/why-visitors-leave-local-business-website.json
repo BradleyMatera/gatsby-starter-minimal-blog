@@ -1,0 +1,65 @@
+{
+  "slug": "why-visitors-leave-local-business-website",
+  "title": "Why Visitors Leave a Local Business Website",
+  "cover": {
+    "src": "/images/blog/why-visitors-leave-local-business-website/cover.png",
+    "mobile": "/images/blog/why-visitors-leave-local-business-website/cover-720.webp",
+    "alt": "Concept illustration of a website maze with blocked visitor paths beside one clear route to a contact doorway."
+  },
+  "figures": [
+    {
+      "id": "visitor-friction-review",
+      "kind": "checklist",
+      "title": "Review the visitor's path",
+      "summary": "Look for friction at each stage of reaching and understanding the business.",
+      "items": [
+        {
+          "label": "Arrival",
+          "detail": "Check image weight, unnecessary scripts, and mobile loading behavior."
+        },
+        {
+          "label": "Understanding",
+          "detail": "Make the service, audience, and area clear in the first screen."
+        },
+        {
+          "label": "Using the page",
+          "detail": "Test readable text, comfortable taps, and reflow on a phone."
+        },
+        {
+          "label": "Finding proof",
+          "detail": "Show authentic work, relevant credentials, and attributable reviews."
+        },
+        {
+          "label": "Making contact",
+          "detail": "Keep contact details and the intended action easy to find."
+        }
+      ],
+      "caption": "A qualitative review framework from the article, not a measured conversion result."
+    },
+    {
+      "id": "visitor-first-fixes",
+      "kind": "flow",
+      "title": "Start with three practical checks",
+      "summary": "The article prioritizes loading, clarity, and a reachable contact action.",
+      "items": [
+        {
+          "label": "Reduce unnecessary weight",
+          "detail": "Compress images and review scripts that do not support the visitor's task."
+        },
+        {
+          "label": "Clarify the headline",
+          "detail": "State what the business does and whom it serves."
+        },
+        {
+          "label": "Make contact obvious",
+          "detail": "Show a usable phone link and a straightforward alternative contact route."
+        },
+        {
+          "label": "Verify the result",
+          "detail": "Test the actual phone experience and observe whether the intended tasks work."
+        }
+      ],
+      "caption": "A suggested improvement sequence. Measure your own site before drawing conclusions about visitor behavior."
+    }
+  ]
+}

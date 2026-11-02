@@ -1,0 +1,65 @@
+{
+  "slug": "/coding-style-gpt-agent-external-reviewer",
+  "title": "How We Built This Coding Style With a GPT Agent and an External Reviewer",
+  "cover": {
+    "src": "/images/blog/coding-style-gpt-agent-external-reviewer/cover.png",
+    "mobile": "/images/blog/coding-style-gpt-agent-external-reviewer/cover-720.webp",
+    "alt": "Conceptual dual-view inspection of the same website model, representing building and independent review."
+  },
+  "figures": [
+    {
+      "id": "two-agent-review-loop",
+      "kind": "flow",
+      "title": "One build, two viewpoints",
+      "summary": "The review loop starts from rendered behavior and feeds concrete fixes back into implementation.",
+      "items": [
+        {
+          "label": "Build in the repo",
+          "detail": "The coding agent edits the implementation."
+        },
+        {
+          "label": "Run the site",
+          "detail": "The local server exposes the actual rendered pages."
+        },
+        {
+          "label": "Review externally",
+          "detail": "The reviewer inspects the page as a visitor would."
+        },
+        {
+          "label": "Scope the finding",
+          "detail": "Name the page, section, problem, and proposed fix."
+        },
+        {
+          "label": "Fix and verify",
+          "detail": "Apply a narrow change and rerun checks."
+        }
+      ],
+      "caption": "A schematic of the workflow described in this article, not a claim of autonomous quality assurance."
+    },
+    {
+      "id": "review-finding-template",
+      "kind": "checklist",
+      "title": "A finding that can become a fix",
+      "summary": "Specific feedback reduces the translation required between review and implementation.",
+      "items": [
+        {
+          "label": "What is broken?",
+          "detail": "Describe the present behavior, such as overlap or an unclear action."
+        },
+        {
+          "label": "Where is it?",
+          "detail": "Identify the page, section, and relevant viewport."
+        },
+        {
+          "label": "Why does it matter?",
+          "detail": "Explain the effect on readability, trust, or use."
+        },
+        {
+          "label": "What should change?",
+          "detail": "Propose one concrete adjustment that can be checked."
+        }
+      ],
+      "caption": "The structured review format described in the post. Outcome scores are intentionally not charted."
+    }
+  ]
+}

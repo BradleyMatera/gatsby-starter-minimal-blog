@@ -1,9 +1,12 @@
+import TableScroll from "../../features/demos/TableScroll";
 import * as React from "react";
+import BrandArtwork from "../../site/components/BrandArtwork";
+import ServiceVisual from "../../features/services/ServiceVisual";
 import type { HeadFC } from "gatsby";
 import Layout from "../../@lekoarts/gatsby-theme-minimal-blog/components/layout";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
-import { Card, Link, Section } from "../../ui";
+import { Card, Link, Section, FAQAccordion, AnchorNav } from "../../ui";
 
 const pathname = "/services/website-care-plans/";
 const pageTitle = "Website Care Plans and Maintenance | Bradley Matera";
@@ -89,7 +92,7 @@ const faqs = [
 ];
 
 const WebsiteCarePlansPage = () => (
-  <Layout>
+  <Layout className="business-page service-page">
     <nav className="breadcrumbs" aria-label="Breadcrumb">
       <ol className="breadcrumbs__list">
         <li className="breadcrumbs__item">
@@ -105,8 +108,10 @@ const WebsiteCarePlansPage = () => (
     </nav>
 
     <Section
+      id="section-care-plans"
       eyebrow="Care Plans"
       titleAs="h1"
+      visual={<BrandArtwork variant="care-monitoring" eager />}
       title={
         <>
           <strong>Website Care Plans</strong> and Maintenance
@@ -131,6 +136,8 @@ const WebsiteCarePlansPage = () => (
         </>
       }
     >
+    <AnchorNav className="business-section-nav" items={[{"id": "section-compare-plans", "label": "Compare plans"}, {"id": "section-what-s-covered", "label": "What's covered"}, {"id": "section-compare", "label": "Compare"}, {"id": "section-faq", "label": "FAQ"}, {"id": "section-ready-to-start", "label": "Ready to start?"}]} />
+      <ServiceVisual kind="website-care-plans" />
       <div className="grid-three">
         {careTiers.map((tier) => (
           <div key={tier.name} className="pkg-card">
@@ -155,6 +162,7 @@ const WebsiteCarePlansPage = () => (
     </Section>
 
     <Section
+      id="section-compare-plans"
       eyebrow="Compare plans"
       title="Care plan comparison"
       description={
@@ -188,6 +196,7 @@ const WebsiteCarePlansPage = () => (
     </Section>
 
     <Section
+      id="section-what-s-covered"
       eyebrow="What's covered"
       title="What care plans include"
     >
@@ -250,6 +259,7 @@ const WebsiteCarePlansPage = () => (
     </Section>
 
     <Section
+      id="section-compare"
       eyebrow="Compare"
       title="Which option fits your business?"
       description={
@@ -258,14 +268,14 @@ const WebsiteCarePlansPage = () => (
         </p>
       }
     >
-      <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Website care plans comparison table">
-        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+      <TableScroll label="Website care plans comparison table">
+<table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
           <thead>
             <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
-              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
-              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Essential — $37/mo</th>
-              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Growth — $67/mo</th>
-              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Search — $97/mo</th>
+              <th scope="col" style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
+              <th scope="col" style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Essential — $37/mo</th>
+              <th scope="col" style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Growth — $67/mo</th>
+              <th scope="col" style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Search — $97/mo</th>
             </tr>
           </thead>
           <tbody>
@@ -325,27 +335,19 @@ const WebsiteCarePlansPage = () => (
             </tr>
           </tbody>
         </table>
-      </div>
+</TableScroll>
     </Section>
 
     <Section
+      id="section-faq"
       eyebrow="FAQ"
       title="Common questions about care plans"
     >
-      <div className="grid-three">
-        {faqs.map((faq) => (
-          <div key={faq.q} className="pkg-card">
-            <img src="/package-images/why-fixed.svg" alt={`${faq.q} illustration`} className="pkg-card__bg" loading="lazy" />
-            <div className="pkg-card__body">
-              <h3 className="pkg-card__title">{faq.q}</h3>
-              <p className="pkg-card__desc">{faq.a}</p>
-            </div>
-          </div>
-        ))}
-      </div>
+      <FAQAccordion items={faqs.map(faq => ({ question: faq.q, answer: faq.a }))} />
     </Section>
 
     <Section
+      id="section-ready-to-start"
       eyebrow="Ready to start?"
       title="Get a free consultation"
       description={

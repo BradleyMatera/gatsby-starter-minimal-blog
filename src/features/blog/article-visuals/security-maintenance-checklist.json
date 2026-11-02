@@ -1,0 +1,69 @@
+{
+  "slug": "/security-maintenance-checklist",
+  "title": "Website Security and Maintenance Checklist",
+  "cover": {
+    "src": "/images/blog/security-maintenance-checklist/cover.png",
+    "mobile": "/images/blog/security-maintenance-checklist/cover-720.webp",
+    "alt": "Watchmaker's maintenance bench with a separate spare mechanism for recovery"
+  },
+  "figures": [
+    {
+      "id": "maintenance-cadence",
+      "kind": "timeline",
+      "title": "Turn maintenance into recurring checks",
+      "summary": "Different tasks run at different intervals in the article's schedule.",
+      "items": [
+        {
+          "label": "Continuous",
+          "detail": "Monitor availability and keep spam protection active."
+        },
+        {
+          "label": "Daily or weekly",
+          "detail": "Run backups appropriate to the site's data-change rate."
+        },
+        {
+          "label": "Weekly",
+          "detail": "Review updates and test changes."
+        },
+        {
+          "label": "Monthly",
+          "detail": "Check certificates, security scans and activity logs."
+        },
+        {
+          "label": "Quarterly",
+          "detail": "Review accounts and remove unnecessary access."
+        }
+      ],
+      "caption": "The maintenance cadence proposed in this article; adapt it to the system's actual risk and recovery needs."
+    },
+    {
+      "id": "recovery-readiness",
+      "kind": "checklist",
+      "title": "A backup needs a recovery check",
+      "summary": "Having a file is different from knowing the site can be restored.",
+      "items": [
+        {
+          "label": "Separate copy",
+          "detail": "Store backups away from the live server."
+        },
+        {
+          "label": "Recent data",
+          "detail": "Confirm the backup contains the content and data you need."
+        },
+        {
+          "label": "Restore rehearsal",
+          "detail": "Test the recovery process instead of assuming it works."
+        },
+        {
+          "label": "Working deployment",
+          "detail": "Verify the restored site or static build actually runs."
+        },
+        {
+          "label": "Reachable alert",
+          "detail": "Make sure an outage reaches the person responsible."
+        }
+      ],
+      "caption": "Recovery and monitoring checks derived from the article's backup and uptime sections."
+    }
+  ]
+}

@@ -3,6 +3,8 @@ import type { HeadFC } from "gatsby";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
 import DemoLayout from "../../features/demos/DemoLayout";
+import DemoNavigation from "../../features/demos/DemoNavigation";
+import DemoJourney from "../../features/demos/DemoJourney";
 import GoogleMapsEmbed from "../../features/demos/GoogleMapsEmbed";
 import SocialLinks, { SocialLink } from "../../features/demos/SocialLinks";
 import ReviewBadges from "../../features/demos/ReviewBadges";
@@ -77,18 +79,28 @@ const StarRating: React.FC = () => (
   <div className="demo-testimonial__stars" aria-label="5 out of 5 stars">{[0,1,2,3,4].map((i) => <StarIcon key={i} size={18} />)}</div>
 );
 
-const RealEstateDemo: React.FC = () => (
-  <DemoLayout demoName="Rockford Heritage Realty" industry="Real Estate" themeColor="#ad7f3a" designSystem="luxury" pageClassName="demo-flagship demo-flagship--realty">
+const RealEstateDemo: React.FC = () => {
+  const [location, setLocation] = React.useState("Any Area");
+  const [price, setPrice] = React.useState("Any Price");
+  const [beds, setBeds] = React.useState("Any");
+  const filteredListings = listings.filter((listing) => {
+    const amount = Number(listing.price.replace(/[^0-9]/g, ""));
+    const matchesPrice = price === "Any Price" || (price === "Under $150K" && amount < 150000) || (price === "$150K - $250K" && amount >= 150000 && amount < 250000) || (price === "$250K - $400K" && amount >= 250000 && amount < 400000) || (price === "$400K+" && amount >= 400000);
+    return (location === "Any Area" || listing.address.includes(location)) && matchesPrice && (beds === "Any" || listing.beds >= Number(beds[0]));
+  });
+  const resetFilters = () => { setLocation("Any Area"); setPrice("Any Price"); setBeds("Any"); };
+  return (
+  <DemoLayout demoName="Rockford Heritage Realty" industry="Real Estate" themeColor="#664713" designSystem="luxury" pageClassName="demo-flagship demo-flagship--realty">
     <nav className="flagship-nav realty-nav" aria-label="Rockford Heritage Realty navigation">
       <a className="flagship-nav__brand" href="#realty-top" aria-label="Rockford Heritage Realty home">
         <span className="realty-mark" aria-hidden="true">RH</span>
         <span><strong>Rockford Heritage</strong><small>Realty · Northern Illinois</small></span>
       </a>
-      <div className="flagship-nav__links">
+      <DemoNavigation>
         <a href="#listings">Properties</a>
         <a href="#listings">Neighborhoods</a>
         <a href="#listings" className="demo-btn demo-btn--primary">Begin a search</a>
-      </div>
+      </DemoNavigation>
     </nav>
 
     <section className="realty-hero" id="realty-top">
@@ -114,17 +126,17 @@ const RealEstateDemo: React.FC = () => (
       <div className="demo-search-bar">
         <div className="demo-form__field" style={{ margin: 0 }}>
           <label className="demo-form__label" htmlFor="search-location">Location</label>
-          <select id="search-location" className="demo-form__select"><option>Any Area</option><option>Rockford</option><option>Loves Park</option><option>Roscoe</option><option>Byron</option><option>Rockton</option></select>
+          <select value={location} onChange={(event) => setLocation(event.target.value)} id="search-location" className="demo-form__select"><option>Any Area</option><option>Rockford</option><option>Loves Park</option><option>Roscoe</option><option>Byron</option><option>Rockton</option></select>
         </div>
         <div className="demo-form__field" style={{ margin: 0 }}>
           <label className="demo-form__label" htmlFor="search-price">Price Range</label>
-          <select id="search-price" className="demo-form__select"><option>Any Price</option><option>Under $150K</option><option>$150K - $250K</option><option>$250K - $400K</option><option>$400K+</option></select>
+          <select value={price} onChange={(event) => setPrice(event.target.value)} id="search-price" className="demo-form__select"><option>Any Price</option><option>Under $150K</option><option>$150K - $250K</option><option>$250K - $400K</option><option>$400K+</option></select>
         </div>
         <div className="demo-form__field" style={{ margin: 0 }}>
           <label className="demo-form__label" htmlFor="search-beds">Bedrooms</label>
-          <select id="search-beds" className="demo-form__select"><option>Any</option><option>2+</option><option>3+</option><option>4+</option><option>5+</option></select>
+          <select value={beds} onChange={(event) => setBeds(event.target.value)} id="search-beds" className="demo-form__select"><option>Any</option><option>2+</option><option>3+</option><option>4+</option><option>5+</option></select>
         </div>
-        <button type="button" className="demo-form__submit" aria-live="polite" onClick={(event) => { event.currentTarget.textContent = "6 sample homes found"; }} style={{ width: "auto", padding: "0.75rem 1.5rem", margin: 0, display: "flex", alignItems: "center", gap: "0.5rem" }}><SearchIcon size={18} /> Search</button>
+        <button type="button" className="demo-btn demo-btn--ghost" onClick={resetFilters}>Reset filters</button>
       </div>
     </div>
 
@@ -132,9 +144,11 @@ const RealEstateDemo: React.FC = () => (
     <section className="demo-section" id="listings">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Featured Listings</h2>
+        <p className="demo-results-count" role="status">{filteredListings.length} fictional sample {filteredListings.length === 1 ? "home" : "homes"} match your choices.</p>
+        {filteredListings.length === 0 && <div className="demo-empty-state"><p>No sample homes match these filters.</p><button className="demo-btn demo-btn--ghost" onClick={resetFilters}>Show all sample homes</button></div>}
         <p className="demo-section__subtitle">Illustrative sample listings, prices, addresses, and scores. A production site would display live MLS data through a board-approved IDX feed.</p>
         <div className="demo-listings">
-          {listings.map((l) => (
+          {filteredListings.map((l) => (
             <div key={l.title} className="demo-listing-detail">
               <div className="demo-listing-detail__images">
                 <div className="demo-listing-detail__image demo-listing-detail__image--exterior" style={{ backgroundImage: `url(/images/demos/real-estate/${l.img}.jpg)` }}>
@@ -183,7 +197,7 @@ const RealEstateDemo: React.FC = () => (
               </tr>
             </thead>
             <tbody>
-              {listings.map((l) => (
+              {filteredListings.map((l) => (
                 <tr key={l.title} style={{ borderBottom: "1px solid var(--demo-border)" }}>
                   <td style={{ padding: "0.75rem" }}>{l.title}</td>
                   <td style={{ padding: "0.75rem" }}>{l.price}</td>
@@ -308,12 +322,12 @@ const RealEstateDemo: React.FC = () => (
           <div className="demo-split-cta__card">
             <h3 className="demo-split-cta__title">Thinking of Selling?</h3>
             <p className="demo-split-cta__desc">Get a free home valuation in 24 hours. See what your home is worth in today's market.</p>
-            <a href="tel:8155550567" className="demo-split-cta__btn"><HouseIcon size={18} /> Get My Home Value</a>
+            <a href="#demo-disclosure" aria-label="Fictional demo phone; view disclosure" className="demo-split-cta__btn"><HouseIcon size={18} /> Get My Home Value</a>
           </div>
           <div className="demo-split-cta__card">
             <h3 className="demo-split-cta__title">Ready to Buy?</h3>
             <p className="demo-split-cta__desc">Free buyer consultation. We'll help you find the right home and negotiate the best price.</p>
-            <a href="tel:8155550567" className="demo-split-cta__btn"><PhoneIcon size={18} /> Talk to an Agent</a>
+            <a href="#demo-disclosure" aria-label="Fictional demo phone; view disclosure" className="demo-split-cta__btn"><PhoneIcon size={18} /> Talk to an Agent</a>
           </div>
         </div>
       </div>
@@ -328,6 +342,8 @@ const RealEstateDemo: React.FC = () => (
       </div>
     </section>
 
+    <section className="demo-section demo-section--alt" id="sample-request"><div className="demo-section__inner"><h2 className="demo-section__title">Try the sample experience</h2><DemoJourney kind="real-estate" /></div></section>
+
     <FAQSection faqs={faqs} />
 
     <IntegrationsSection industry="real estate" integrations={integrations} />
@@ -337,7 +353,7 @@ const RealEstateDemo: React.FC = () => (
       <div className="demo-contact__inner">
         <h2 className="demo-contact__title">Let's Find Your Next Home</h2>
         <p className="demo-contact__text">Call (815) 555-0567 to speak with an agent today. Free consultations for buyers and sellers.</p>
-        <a href="tel:8155550567" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0567</a>
+        <a href="#demo-disclosure" aria-label="Fictional demo phone; view disclosure" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0567</a>
         <div style={{ marginTop: "1.5rem" }}><SocialLinks links={socialLinks} /></div>
         <div className="demo-contact__info">
           <div className="demo-contact__info-item"><MapPinIcon size={20} /><span className="demo-contact__info-label">Office</span><span>789 E State St, Rockford, IL</span></div>
@@ -357,6 +373,7 @@ const RealEstateDemo: React.FC = () => (
     </footer>
   </DemoLayout>
 );
+};
 
 export default RealEstateDemo;
 

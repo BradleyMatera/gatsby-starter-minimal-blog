@@ -1,0 +1,69 @@
+{
+  "slug": "what-belongs-above-the-fold",
+  "title": "What Belongs Above the Fold on a Small Business Website",
+  "cover": {
+    "src": "/images/blog/what-belongs-above-the-fold/cover.png",
+    "mobile": "/images/blog/what-belongs-above-the-fold/cover-720.webp",
+    "alt": "Concept illustration of a folded paper website showing five clearly prioritized interface elements."
+  },
+  "figures": [
+    {
+      "id": "fold-five-answers",
+      "kind": "layers",
+      "title": "Five questions the first screen should answer",
+      "summary": "Give a new visitor enough context to choose a next step.",
+      "items": [
+        {
+          "label": "What?",
+          "detail": "State the specific service or product."
+        },
+        {
+          "label": "Who?",
+          "detail": "Name the customers the offer serves."
+        },
+        {
+          "label": "Where?",
+          "detail": "Show the actual service area."
+        },
+        {
+          "label": "Cost?",
+          "detail": "Provide relevant pricing context or estimate information."
+        },
+        {
+          "label": "Next?",
+          "detail": "Make the primary action obvious."
+        }
+      ],
+      "caption": "The article's five-part content framework. The final arrangement depends on the screen and business."
+    },
+    {
+      "id": "fold-mobile-check",
+      "kind": "checklist",
+      "title": "Check the hierarchy on a real phone",
+      "summary": "Small screens reveal which elements deserve priority.",
+      "items": [
+        {
+          "label": "Headline first",
+          "detail": "Keep the service and audience understandable without relying on an image."
+        },
+        {
+          "label": "Compact context",
+          "detail": "Group service area and pricing context beneath the headline."
+        },
+        {
+          "label": "One clear action",
+          "detail": "Make the intended next step prominent and easy to tap."
+        },
+        {
+          "label": "Useful imagery",
+          "detail": "Use a compressed image that supports the offer instead of pushing it out of view."
+        },
+        {
+          "label": "Device check",
+          "detail": "Review the first screen and scrolling behavior on an actual phone."
+        }
+      ],
+      "caption": "A mobile review checklist from the article; the fold varies with device, browser, and text settings."
+    }
+  ]
+}

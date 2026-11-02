@@ -7,6 +7,10 @@ description: "A teardown of common website problems and the measurable changes t
 theme: "Conversion"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/before-after-teardown-measurable-changes.json";
+
+
 This post tears down four common small business website problems and shows the measurable changes that fixed them: slow load times, confusing navigation, missing calls to action, and broken contact forms. For each one I show what was wrong, what changed, and the result. Some numbers are measured from analytics. Some are projected based on benchmarks. I label which is which.
 
 I am not going to pretend every redesign produces a 300% increase in conversions. Some changes have a big impact. Some have a small one. The point of a teardown is to show what actually changed and why, not to sell you on a magic bullet.
@@ -108,6 +112,8 @@ An accounting firm's form had 9 required fields, visible reCAPTCHA with image ch
 
 The mobile bug fix was the biggest factor here. Nearly half of mobile submissions were failing silently. Fixing that alone would have doubled submissions. Reducing fields and removing the captcha challenge accounted for the rest of the increase.
 
+<ArticleVisual spec={articleVisuals.figures[0]} />
+
 ## What patterns show up across all four teardowns?
 
 Four patterns emerged: speed matters more than design, clear navigation beats clever navigation, calls to action are not optional, and forms should be short and functional. The biggest wins came from removing friction — compressing images, reducing nav items, adding a single button, and fixing a form bug — not from adding features or redesigning from scratch.
@@ -128,6 +134,8 @@ Measured results come from comparing analytics data before and after a change ov
 **Projected** means I estimated based on benchmarks or partial data. The electrician's phone call increase is projected because call tracking was not in place before the redesign. I can see form submissions went up and infer calls did too, but I cannot prove it with data.
 
 Any time you see conversion numbers from a case study, ask whether they are measured or projected. A lot of case study numbers are projections presented as measurements.
+
+<ArticleVisual spec={articleVisuals.figures[1]} />
 
 ## What is the bottom line on website teardowns?
 

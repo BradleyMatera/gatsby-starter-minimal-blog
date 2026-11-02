@@ -7,6 +7,16 @@ description: "Exact steps to find a stuck service worker that refuses to let you
 theme: "Debugging"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/service-worker-held-site-hostage.json";
+
+
+
+
+
+
+
+
 How a single cached file made my entire GitHub Pages site refuse to update, why it happened, and exactly how to fix it if it ever happens to you. Service workers are a browser API designed for offline-first web apps ([MDN: Service Worker API](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)), but when left unmanaged they can serve stale content indefinitely.
 
 ## What actually happened
@@ -18,9 +28,6 @@ GitHub Actions passed every time. The artifact had the correct static export. My
 Then I hit the live URL with `curl` and it returned the correct new markup. But the browser still showed the old one. So at that point the server and the browser disagreed. When that happens, something in the middle is lying to you.
 
 And that something was a service worker I did not even know existed.
-
-{/* visual-break:service-worker-held-site-hostage:1 */}
-![Security flow checkpoint illustration for this section.](/assets/visuals/blog/service-worker-held-site-hostage-break-1.png)
 
 ## What the actual root problem was
 
@@ -34,8 +41,7 @@ The browser trusted the service worker more than the server.
 
 This is the exact kind of bug that does not feel logical until you understand how aggressive service worker caching is.
 
-{/* visual-break:service-worker-held-site-hostage:2 */}
-![Verification and access checkpoint illustration for this section.](/assets/visuals/blog/service-worker-held-site-hostage-break-2.png)
+<ArticleVisual spec={articleVisuals.figures[0]} />
 
 ## The fix that finally worked
 
@@ -84,6 +90,8 @@ If Incognito shows the new version but your normal browser does not, that is alm
 ### 3. Check DevTools
 
 Look for an active service worker. If you see one and you did not explicitly write it, that is probably the issue.
+
+<ArticleVisual spec={articleVisuals.figures[1]} />
 
 ## Why this problem happens to many developers
 

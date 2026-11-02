@@ -1,0 +1,65 @@
+{
+  "slug": "/native-react",
+  "title": "React Native Prototype: A Small, Verifiable Start",
+  "cover": {
+    "src": "/images/blog/native-react/cover.png",
+    "mobile": "/images/blog/native-react/cover-720.webp",
+    "alt": "Exploded-view smartphone sculpture representing the native shell, JavaScript layer and visible device output"
+  },
+  "figures": [
+    {
+      "id": "native-delivery-chain",
+      "kind": "flow",
+      "title": "The whole chain must reach the screen",
+      "summary": "A finished command is different from a working prototype.",
+      "items": [
+        {
+          "label": "Project scaffold",
+          "detail": "Create the JavaScript project and native platform shells."
+        },
+        {
+          "label": "Native toolchain",
+          "detail": "Build the selected platform with its configured tools."
+        },
+        {
+          "label": "Metro bundle",
+          "detail": "Serve JavaScript to the running app."
+        },
+        {
+          "label": "Device screen",
+          "detail": "See the edited content on a simulator or device."
+        },
+        {
+          "label": "Edit again",
+          "detail": "Save a second change and confirm the update."
+        }
+      ],
+      "caption": "The baseline feedback loop taught by this prototype walkthrough."
+    },
+    {
+      "id": "native-failure-layers",
+      "kind": "comparison",
+      "title": "Diagnose the layer that failed",
+      "summary": "Similar startup failures can have different causes.",
+      "items": [
+        {
+          "label": "Bundle missing",
+          "detail": "Check that Metro runs and the app can connect."
+        },
+        {
+          "label": "iOS build blocked",
+          "detail": "Check Xcode and command-line configuration."
+        },
+        {
+          "label": "Android target absent",
+          "detail": "Start an emulator or confirm the device is visible."
+        },
+        {
+          "label": "Gradle failure",
+          "detail": "Read the first error for SDK, Java or dependency problems."
+        }
+      ],
+      "caption": "Troubleshooting categories from the article; check current tool versions in its official documentation links."
+    }
+  ]
+}

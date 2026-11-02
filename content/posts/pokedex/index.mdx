@@ -7,6 +7,9 @@ description: "A minimal static Pokedex build with vanilla JavaScript and PokéAP
 theme: "Front-End"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/interactive-pokedex.json";
+
 This is a static Pokedex demo you can host anywhere because it is just HTML, CSS, and JavaScript. There is no server code in this repo. The “data” comes from the free PokéAPI at runtime, which means the site itself is static, but the page still does real network work in the browser. That difference matters, because it changes what can break and how you verify things.
 
 ![Searching for Pokemon](https://media.giphy.com/media/WTTyM6pD9rl4VjG1R1/giphy.gif)
@@ -19,8 +22,7 @@ You are building one page that does four things in a clean loop. It loads a list
 
 If you are coming from web dev basics, think of this as the smallest possible version of an e-commerce grid. The API is your database. The cards are your product tiles. The search input is your filter UI.
 
-{/* visual-break:pokedex:1 */}
-![AI workflow checkpoint illustration for this section.](/assets/visuals/blog/pokedex-break-1.png)
+<ArticleVisual spec={articleVisuals.figures[0]} />
 
 ## The one API you need
 
@@ -514,6 +516,8 @@ Fourth, break it on purpose. Turn off your network (or block the request in DevT
 
 ![Searching again… because it always breaks once](https://media.giphy.com/media/6bIFzrUUhr9A7o4wWy/giphy.gif)
 
+<ArticleVisual spec={articleVisuals.figures[1]} />
+
 ## Common problems and what they usually mean
 
 If the grid is empty but there is no error, you probably rendered an empty array. That can happen if `results` is not there because the list request failed or returned a different shape. Log the list response once: `console.log(listData)`.
@@ -533,9 +537,6 @@ If you want another improvement that stays honest, add a type filter. You alread
 ## Related links
 
 - https://pokeapi.co/
-
-{/* visual-break:pokedex:2 */}
-![Automation loop checkpoint illustration for this section.](/assets/visuals/blog/pokedex-break-2.png)
 
 ## Closing
 

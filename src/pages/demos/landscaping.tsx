@@ -2,7 +2,10 @@ import * as React from "react";
 import type { HeadFC } from "gatsby";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
+import DemoImageComparison from "../../features/demos/DemoImageComparison";
 import DemoLayout from "../../features/demos/DemoLayout";
+import DemoNavigation from "../../features/demos/DemoNavigation";
+import DemoJourney from "../../features/demos/DemoJourney";
 import GoogleMapsEmbed from "../../features/demos/GoogleMapsEmbed";
 import SocialLinks, { SocialLink } from "../../features/demos/SocialLinks";
 import ReviewBadges from "../../features/demos/ReviewBadges";
@@ -115,17 +118,17 @@ const StarRating: React.FC = () => (
 );
 
 const LandscapingDemo: React.FC = () => (
-  <DemoLayout demoName="GreenScape Pro" industry="Landscaping" themeColor="#cb5b2d" designSystem="organic" pageClassName="demo-flagship demo-flagship--landscape">
+  <DemoLayout demoName="GreenScape Pro" industry="Landscaping" themeColor="#813015" designSystem="organic" pageClassName="demo-flagship demo-flagship--landscape">
     <nav className="flagship-nav landscape-nav" aria-label="GreenScape Pro navigation">
       <a className="flagship-nav__brand" href="#landscape-top" aria-label="GreenScape Pro home">
         <span className="landscape-mark" aria-hidden="true"><LeafIcon size={25} /></span>
         <span><strong>GreenScape</strong><small>Design · build · maintain</small></span>
       </a>
-      <div className="flagship-nav__links">
+      <DemoNavigation>
         <a href="#gallery">Projects</a>
-        <a href="#quote">Process</a>
-        <a href="#quote" className="demo-btn demo-btn--primary">Plan my yard</a>
-      </div>
+        <a href="#sample-request">Process</a>
+        <a href="#sample-request" className="demo-btn demo-btn--primary">Plan my yard</a>
+      </DemoNavigation>
     </nav>
 
     <section className="landscape-hero" id="landscape-top">
@@ -134,7 +137,7 @@ const LandscapingDemo: React.FC = () => (
         <h1>Make the outside<br /><span>feel like home.</span></h1>
         <p className="landscape-hero__lede">Thoughtful landscapes for Northern Illinois homes—from the first site walk to the final stone, planting bed, and seasonal visit.</p>
         <div className="demo-hero__actions">
-          <a href="#quote" className="demo-btn demo-btn--primary">Start a project</a>
+          <a href="#sample-request" className="demo-btn demo-btn--primary">Start a project</a>
           <a href="#gallery" className="demo-btn demo-btn--ghost">See transformations</a>
         </div>
         <div className="landscape-hero__proof"><strong>One accountable crew.</strong><span>Design, installation, and care under one roof.</span></div>
@@ -200,42 +203,21 @@ const LandscapingDemo: React.FC = () => (
         <p className="demo-section__subtitle">Illustrative project transformations. Photos are selected to show representative work and may not depict the same property before and after.</p>
         <div className="demo-before-after">
           <div className="demo-before-after__item">
-            <div className="demo-before-after__images">
-              <div className="demo-before-after__before" style={{ backgroundImage: "url(/images/demos/landscaping/before-1.jpg)" }}>
-                <span className="demo-before-after__label">Before</span>
-              </div>
-              <div className="demo-before-after__after" style={{ backgroundImage: "url(/images/demos/landscaping/after-1.jpg)" }}>
-                <span className="demo-before-after__label">After</span>
-              </div>
-            </div>
+            <DemoImageComparison before="/images/demos/landscaping/before-1.jpg" after="/images/demos/landscaping/after-1.jpg" title="Overgrown Yard Cleanup" />
             <div className="demo-before-after__body">
               <h3 className="demo-before-after__title">Overgrown Yard Cleanup</h3>
               <p className="demo-before-after__desc">Removed overgrown weeds, installed new garden beds, edging, and fresh mulch.</p>
             </div>
           </div>
           <div className="demo-before-after__item">
-            <div className="demo-before-after__images">
-              <div className="demo-before-after__before" style={{ backgroundImage: "url(/images/demos/landscaping/before-2.jpg)" }}>
-                <span className="demo-before-after__label">Before</span>
-              </div>
-              <div className="demo-before-after__after" style={{ backgroundImage: "url(/images/demos/landscaping/after-2.jpg)" }}>
-                <span className="demo-before-after__label">After</span>
-              </div>
-            </div>
+            <DemoImageComparison before="/images/demos/landscaping/before-2.jpg" after="/images/demos/landscaping/after-2.jpg" title="Patio & Fire Pit Installation" />
             <div className="demo-before-after__body">
               <h3 className="demo-before-after__title">Patio & Fire Pit Installation</h3>
               <p className="demo-before-after__desc">Built paver patio with fire pit, seating wall, and landscape lighting.</p>
             </div>
           </div>
           <div className="demo-before-after__item">
-            <div className="demo-before-after__images">
-              <div className="demo-before-after__before" style={{ backgroundImage: "url(/images/demos/landscaping/before-3.jpg)" }}>
-                <span className="demo-before-after__label">Before</span>
-              </div>
-              <div className="demo-before-after__after" style={{ backgroundImage: "url(/images/demos/landscaping/after-3.jpg)" }}>
-                <span className="demo-before-after__label">After</span>
-              </div>
-            </div>
+            <DemoImageComparison before="/images/demos/landscaping/before-3.jpg" after="/images/demos/landscaping/after-3.jpg" title="Lawn Restoration" />
             <div className="demo-before-after__body">
               <h3 className="demo-before-after__title">Lawn Restoration</h3>
               <p className="demo-before-after__desc">Aerated, overseeded, and fertilized. Transformed patchy dirt into lush green lawn.</p>
@@ -451,6 +433,8 @@ const LandscapingDemo: React.FC = () => (
       </div>
     </section>
 
+    <section className="demo-section demo-section--alt" id="sample-request"><div className="demo-section__inner"><h2 className="demo-section__title">Try the sample experience</h2><DemoJourney kind="landscaping" /></div></section>
+
     <FAQSection faqs={faqs} />
 
     {/* Service Area + Google Maps */}
@@ -472,7 +456,7 @@ const LandscapingDemo: React.FC = () => (
       <div className="demo-contact__inner">
         <h2 className="demo-contact__title">Get a Free Quote</h2>
         <p className="demo-contact__text">Call us at (815) 555-0456 for a free, no-obligation estimate. We'll come to your property, take measurements, and send you a detailed quote within 5 days.</p>
-        <a href="tel:8155550456" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0456</a>
+        <a href="#demo-disclosure" aria-label="Fictional demo phone; view disclosure" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0456</a>
         <div style={{ marginTop: "1.5rem" }}><SocialLinks links={socialLinks} /></div>
         <div className="demo-contact__info">
           <div className="demo-contact__info-item"><MapPinIcon size={20} /><span className="demo-contact__info-label">Service Area</span><span>Rockford & NW Illinois</span></div>

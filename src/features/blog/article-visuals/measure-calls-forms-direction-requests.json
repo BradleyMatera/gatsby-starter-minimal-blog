@@ -1,0 +1,65 @@
+{
+  "slug": "/measure-calls-forms-direction-requests",
+  "title": "How to Measure Calls, Forms, and Direction Requests",
+  "cover": {
+    "src": "/images/blog/measure-calls-forms-direction-requests/cover.png",
+    "mobile": "/images/blog/measure-calls-forms-direction-requests/cover-720.webp",
+    "alt": "Three-channel brass sculpture representing phone calls, forms and direction requests"
+  },
+  "figures": [
+    {
+      "id": "lead-signal-map",
+      "kind": "comparison",
+      "title": "Three actions, three questions",
+      "summary": "Measure intent without treating every click as a completed lead.",
+      "items": [
+        {
+          "label": "Phone activity",
+          "detail": "Separate a telephone-link click from a confirmed connected call."
+        },
+        {
+          "label": "Successful forms",
+          "detail": "Count the success state, then compare submissions with real leads."
+        },
+        {
+          "label": "Direction requests",
+          "detail": "Track requests for visits and check practical location information."
+        },
+        {
+          "label": "Source context",
+          "detail": "Keep the originating channel so results can be interpreted."
+        }
+      ],
+      "caption": "Signals and cautions from the article; this graphic contains no business performance data."
+    },
+    {
+      "id": "measurement-review-loop",
+      "kind": "flow",
+      "title": "Use measurement to choose the next fix",
+      "summary": "Review the records and test a concrete change.",
+      "items": [
+        {
+          "label": "Validate events",
+          "detail": "Test form success and confirm the event appears."
+        },
+        {
+          "label": "Clean the data",
+          "detail": "Separate spam and test submissions from real enquiries."
+        },
+        {
+          "label": "Compare periods",
+          "detail": "Review monthly movement with seasonal context."
+        },
+        {
+          "label": "Inspect friction",
+          "detail": "Check contact visibility, form effort and location details."
+        },
+        {
+          "label": "Review again",
+          "detail": "Observe the next period rather than assuming an improvement."
+        }
+      ],
+      "caption": "The article's measurement-to-action loop, without its illustrative conversion benchmarks."
+    }
+  ]
+}

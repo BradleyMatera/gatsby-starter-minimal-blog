@@ -7,6 +7,10 @@ description: "Three small demo projects, the real failures behind each one, and 
 theme: "Process"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/what-i-learned-three-simple-projects.json";
+
+
 In 2025 I focused on building small, focused projects to sharpen specific skills. Large applications often hide the root cause of a problem behind layers of abstraction. By isolating issues in smaller codebases, I could confront and fix the actual misunderstanding instead of patching around it. This approach is consistent with the [Next.js App Router documentation](https://nextjs.org/docs/app), which recommends isolating features to reduce build and routing complexity.
 
 This post walks through three of those projects: AnimalSounds, CheeseMath, and EthicsFrontEndDemo. For each one I will explain the real failure, what I changed, and why the lesson stuck.
@@ -75,8 +79,7 @@ export default nextConfig;
 
 This keeps asset routing logic identical across environments while the build pipeline rewrites paths dynamically.
 
-{/* visual-break:what-i-learned-three-simple-projects:1 */}
-![Execution process checkpoint illustration for this section.](/assets/visuals/blog/what-i-learned-three-simple-projects-break-1.png)
+<ArticleVisual spec={articleVisuals.figures[0]} />
 
 ## Project 2: CheeseMath (Jest tests)
 
@@ -175,8 +178,7 @@ I scrapped the Flexbox approach for the main container and implemented CSS Grid 
 
 Using `grid-template-columns` with `auto-fit` and `minmax` lets the browser handle space distribution ([MDN: grid-template-columns](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns)). It automatically decides how many columns fit and wraps to the next row when the minimum width is violated. That eliminated multiple media queries and manual margin calculations, proving Grid is the better engine for macro layouts.
 
-{/* visual-break:what-i-learned-three-simple-projects:2 */}
-![Delivery workflow checkpoint illustration for this section.](/assets/visuals/blog/what-i-learned-three-simple-projects-break-2.png)
+<ArticleVisual spec={articleVisuals.figures[1]} />
 
 ## What all three taught me
 

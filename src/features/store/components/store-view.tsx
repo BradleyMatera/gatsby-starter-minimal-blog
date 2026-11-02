@@ -80,9 +80,9 @@ export const getBuyLabel = (product: Product, variant: "list" | "detail" = "list
     if (product.affiliate_source === "amazon") {
       return variant === "detail" ? "View on Amazon" : "See on Amazon";
     }
-    return "Buy now";
+    return "View at retailer";
   }
-  return "Buy";
+  return "Continue to checkout";
 };
 
 export const getProductBadge = (product: Product) => {
@@ -101,7 +101,16 @@ export const getProductImage = (product: Product) => {
   return fallbackImages.default;
 };
 
-export const getProductAlt = (product: Product) => product.image_alt || product.name;
+export const isCategoryIllustration = (product: Product) => getProductImage(product).startsWith("/store/");
+export const getProductAlt = (product: Product) => isCategoryIllustration(product) ? `${product.category || "Product"} category illustration` : product.image_alt || product.name;
+export const getCatalogQuery = () => {
+  if (typeof window === "undefined") return "";
+  const source = new URLSearchParams(window.location.search);
+  const query = new URLSearchParams();
+  ["section", "collection", "q"].forEach((key) => { const value = source.get(key); if (value) query.set(key, value); });
+  return query.size ? `?${query}` : "";
+};
+export const getProductDetailUrl = (product: Product, query = getCatalogQuery()) => `/store/${product.slug}/${query}`;
 
 const getAmazonAsin = (product: Product) => {
   if (!product.affiliate_url) return null;
@@ -118,7 +127,7 @@ export const renderAmazonMeta = (product: Product) => {
   const asin = getAmazonAsin(product);
   return (
     <div className="store-asin-row">
-      <span className="store-pill store-pill--accent">Ships from Amazon</span>
+      <span className="store-pill store-pill--accent">Check availability at Amazon</span>
       {asin && <span className="store-asin-code">ASIN {asin}</span>}
     </div>
   );
@@ -126,9 +135,10 @@ export const renderAmazonMeta = (product: Product) => {
 
 type StoreHeroProps = {
   amazonAnchorId: string;
+  onBrowseAmazon?: () => void;
 };
 
-export const StoreHero: React.FC<StoreHeroProps> = ({ amazonAnchorId }) => (
+export const StoreHero: React.FC<StoreHeroProps> = ({ amazonAnchorId, onBrowseAmazon }) => (
   <header className="store-header store-hero">
     <div>
       <h1 className="store-title">Store</h1>
@@ -136,7 +146,7 @@ export const StoreHero: React.FC<StoreHeroProps> = ({ amazonAnchorId }) => (
       <p className="store-disclosure">{disclosureText}</p>
       <p className="store-legal">{legalText}</p>
       <div className="store-cta">
-        <a className="store-button" href={`#${amazonAnchorId}`}>Browse Brad&apos;s Amazon Picks</a>
+        <a className="store-button" href={`#${amazonAnchorId}`} onClick={onBrowseAmazon}>Browse Brad&apos;s Amazon Picks</a>
         <Link className="store-link" to="/purchases/">Customer portal</Link>
         <Link className="store-link" to="/support/">Support</Link>
       </div>
@@ -185,35 +195,31 @@ export const StorePrimaryTabs: React.FC<StorePrimaryTabsProps> = ({
 
 type ProductGridProps = {
   items: Product[];
+  catalogQuery?: string;
   getGoUrl: (slug: string) => string;
 };
 
-export const ProductGrid: React.FC<ProductGridProps> = ({ items, getGoUrl }) => (
+export const ProductGrid: React.FC<ProductGridProps> = ({ items, getGoUrl, catalogQuery }) => (
   <div className="store-grid store-grid--spaced">
     {items.map((product) => (
-      <div key={product.id} className="store-card">
-        <div className="store-card__image">
-          <img src={getProductImage(product)} alt={getProductAlt(product)} loading="lazy" />
-        </div>
+      <article key={product.id} className="store-card">
+        <Link className="store-card__image" to={getProductDetailUrl(product, catalogQuery)} aria-label={`View ${product.name} details`}><img src={getProductImage(product)} alt={getProductAlt(product)} loading="lazy" width="640" height="480" /></Link>
         <div className="store-card__body">
-          <div>
-            <h3>{product.name}</h3>
-            <div className="store-pill-group store-pill-group--tight">
-              <span className="store-pill">{getProductBadge(product)}</span>
-              {product.badge && <span className="store-pill store-pill--accent">{product.badge}</span>}
-            </div>
+          <div><div className="store-pill-group store-pill-group--tight"><span className="store-pill">{getProductBadge(product)}</span>{product.badge && <span className="store-pill store-pill--accent">{product.badge}</span>}</div>
+            <h3><Link to={getProductDetailUrl(product, catalogQuery)}>{product.name}</Link></h3>
             <p className="store-meta">{product.description}</p>
+            {isCategoryIllustration(product) && <p className="store-image-note">Category illustration; see details before purchase.</p>}
             {renderAmazonMeta(product)}
           </div>
           <div className="store-price">{formatPrice(product)}</div>
+          <p className="store-destination">{product.product_type === "affiliate" ? "Sold and checked out by a third-party retailer." : "Digital download · checkout with Stripe"}</p>
           <div className="store-actions">
-            <a className="store-button" href={getGoUrl(product.slug)}>
-              {getBuyLabel(product, "list")}
-            </a>
-            <Link className="store-link" to={`/store/${product.slug}`}>Details</Link>
+            <Link className="store-button" to={getProductDetailUrl(product, catalogQuery)}>View details</Link>
+            {product.product_type === "affiliate" && <a className="store-link" href={getGoUrl(product.slug)} rel="sponsored">{getBuyLabel(product, "list")} ↗</a>}
           </div>
+          {product.product_type !== "affiliate" && <Link className="store-link" to="/digital-product-license/">Digital product license</Link>}
         </div>
-      </div>
+      </article>
     ))}
   </div>
 );

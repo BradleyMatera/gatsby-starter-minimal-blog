@@ -1,112 +1,45 @@
 import * as React from "react";
-import { Link } from "gatsby";
+import { projectMedia } from "../../projects/projectMedia";
 
-const RecruiterHero3D = React.lazy(() => import("./RecruiterHero3D"));
-
-/* --------------------------------------------------------------------------
-   Recruiter Hero — Warm editorial hero with a background video/image layer.
-   -------------------------------------------------------------------------- */
-
-const RecruiterHero: React.FC = () => {
-  return (
-    <section id="recruiter-hero" className="recruiter-hero reveal-section">
-      {/* Background media layer */}
-      <div className="recruiter-hero__media" aria-hidden="true">
-        <img
-          className="recruiter-hero__video recruiter-ken-burns"
-          src="/hero-amazon-2000.webp"
-          alt="Amazon warehouse interior — background image for the recruiter hub hero section"
-          aria-hidden="true"
-        />
-        <div className="recruiter-hero__media-overlay" />
+const RecruiterHero: React.FC = () => (
+  <section id="recruiter-hero" className="recruiter-hero" aria-labelledby="recruiter-heading">
+    <div className="recruiter-hero__content">
+      <span className="recruiter-hero__eyebrow">Bradley Matera / Recruiter Resource Hub</span>
+      <h1 id="recruiter-heading" className="recruiter-hero__headline">
+        Everything a recruiter needs.<br />
+        <span className="recruiter-title-accent">Without the back and forth.</span>
+      </h1>
+      <p className="recruiter-hero__subheadline">
+        I&apos;ve gathered every resource, project, document, certification,
+        technical explanation, timeline, and portfolio item into one curated
+        experience designed specifically for hiring teams.
+      </p>
+      <div className="recruiter-actions">
+        <a href="/documents/resumes/matera-bradley-Junior-Software-Engineer.pdf" className="recruiter-btn recruiter-btn--primary">Open resume <span className="recruiter-file-type">PDF</span></a>
+        <a href="#contact-cta" className="recruiter-btn recruiter-btn--secondary">Schedule Interview</a>
+        <a href="#project-explorer" className="recruiter-text-link">Explore projects →</a>
       </div>
-
-      <div className="recruiter-hero__content">
-        <span className="recruiter-hero__eyebrow">Recruiter Resource Hub</span>
-
-        <h1 className="recruiter-hero__headline">
-          Everything a recruiter needs.
-          <br />
-          <span className="recruiter-title-accent">Without the back and forth.</span>
-        </h1>
-
-        <p className="recruiter-hero__subheadline">
-          I&apos;ve gathered every resource, project, document, certification,
-          technical explanation, timeline, and portfolio item into one curated
-          experience designed specifically for hiring teams.
-        </p>
-
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "0.75rem",
-            justifyContent: "center",
-          }}
-        >
-          <Link to="#why-this-exists" className="recruiter-btn magnetic-btn recruiter-btn--primary">
-            Explore Recruiter Hub
-          </Link>
-          <Link to="#interview-resources" className="recruiter-btn magnetic-btn recruiter-btn--secondary">
-            Download Resume
-          </Link>
-          <Link to="#contact-cta" className="recruiter-btn magnetic-btn recruiter-btn--secondary">
-            Schedule Interview
-          </Link>
-        </div>
-
-        {/* Trust badges */}
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            gap: "1.5rem",
-            marginTop: "3rem",
-          }}
-        >
-          <TrustBadge label="Developer" />
-          <TrustBadge label="B.S. Web Development" />
-          <TrustBadge label="AWS Certified" />
-          <TrustBadge label="Cloud Support Trained" />
-        </div>
-      </div>
-
-      <div className="recruiter-hero__accent-3d" aria-hidden="true">
-        <React.Suspense fallback={<div className="recruiter-hero-3d" />}>
-          <RecruiterHero3D />
-        </React.Suspense>
-      </div>
-    </section>
-  );
-};
-
-const TrustBadge: React.FC<{ label: string }> = ({ label }) => (
-  <span
-    style={{
-      display: "inline-flex",
-      alignItems: "center",
-      gap: "0.375rem",
-      padding: "0.375rem 0.875rem",
-      borderRadius: 9999,
-      fontSize: "0.75rem",
-      fontWeight: 600,
-      color: "var(--r-text-secondary)",
-      background: "var(--r-surface)",
-      border: "1px solid var(--r-border)",
-    }}
-  >
-    <span
-      style={{
-        width: 6,
-        height: 6,
-        borderRadius: "50%",
-        background: "var(--r-accent)",
-        display: "inline-block",
-      }}
-    />
-    {label}
-  </span>
+      <ul className="recruiter-hero__credentials" aria-label="Background">
+        {["Developer", "B.S. Web Development", "AWS Certified", "Cloud Support Trained"].map((label) => <li key={label}>{label}</li>)}
+      </ul>
+    </div>
+    <div className="recruiter-hero__visual">
+    <figure className="recruiter-hero__portrait">
+      <img src="/brand/bradley-matera-portrait.webp" alt="Bradley Matera" width="320" height="320" loading="eager" />
+      <figcaption><strong>Bradley Matera</strong><span>Projects, experience, and the evidence behind them.</span></figcaption>
+    </figure>
+    <nav className="recruiter-hero__work" aria-label="Featured project previews">
+      {[
+        { route: "/projects/aws-serverless-metadata-workflow/", label: "Cloud systems" },
+        { route: "/projects/interactive-pokedex/", label: "Interfaces" },
+        { route: "/projects/triangle-shader-lab/", label: "Graphics" },
+      ].map(({ route, label }) => <a key={route} href={route}>
+        <img src={projectMedia[route].src} alt="" width="240" height="150" loading="eager" />
+        <span>{label}<span aria-hidden="true">↗</span></span>
+      </a>)}
+    </nav>
+    </div>
+  </section>
 );
 
 export default RecruiterHero;

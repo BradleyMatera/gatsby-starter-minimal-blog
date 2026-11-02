@@ -130,42 +130,12 @@ const AWSSection: React.FC = () => {
         </p>
       </div>
 
-      {/* Animated connection lines SVG */}
-      <div style={{ maxWidth: 1100, margin: "0 auto 2rem", position: "relative" }}>
-        <svg
-          viewBox="0 0 1100 200"
-          style={{ width: "100%", height: "auto", opacity: 0.2 }}
-          aria-hidden="true"
-        >
-          <defs>
-            <linearGradient id="awsLine" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#FF9900" stopOpacity="0.3" />
-              <stop offset="50%" stopColor="#60a5fa" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#a78bfa" stopOpacity="0.3" />
-            </linearGradient>
-          </defs>
-          {[...Array(6)].map((_, i) => (
-            <line
-              key={i}
-              x1={100 + i * 180}
-              y1="20"
-              x2={280 + i * 180}
-              y2="180"
-              stroke="url(#awsLine)"
-              strokeWidth="1"
-              strokeDasharray="4 4"
-            >
-              <animate
-                attributeName="stroke-dashoffset"
-                from="100"
-                to="0"
-                dur={`${3 + i * 0.5}s`}
-                repeatCount="indefinite"
-              />
-            </line>
-          ))}
-        </svg>
-      </div>
+      <figure className="recruiter-architecture-figure">
+        <a href="/projects/aws-serverless-metadata-workflow/" aria-label="Read the AWS Serverless Metadata Workflow case study">
+          <img src="/images/projects/aws-workflow-diagram.svg" alt="Architecture illustration: S3 uploads invoke a Python Lambda that normalizes metadata into DynamoDB, with retries, an SQS failure queue and CloudWatch alarms" width="1200" height="750" loading="lazy" />
+        </a>
+        <figcaption><span>Architecture illustration of the public metadata-workflow reconstruction.</span><a href="/projects/aws-serverless-metadata-workflow/">Explore the implementation →</a></figcaption>
+      </figure>
 
       <div className="recruiter-grid reveal-child recruiter-grid--3" style={{ maxWidth: 1100, margin: "0 auto" }}>
         {AWS_SERVICES.map((service) => (

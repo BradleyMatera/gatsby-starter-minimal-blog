@@ -1,0 +1,61 @@
+{
+  "slug": "/contact-form-friction-checklist",
+  "title": "Contact Form Friction Checklist for Small Businesses",
+  "cover": {
+    "src": "/images/blog/contact-form-friction-checklist/cover.png",
+    "mobile": "/images/blog/contact-form-friction-checklist/cover-720.webp",
+    "alt": "Conceptual contact form with a clear route through a few inputs to a confirmed message."
+  },
+  "figures": [
+    {
+      "id": "form-friction-comparison",
+      "kind": "comparison",
+      "title": "Make each stage easier to complete",
+      "summary": "The useful comparison is between the visitor’s obstacle and the interface change that removes it.",
+      "items": [
+        {
+          "label": "Information requested",
+          "detail": "A long set of required details → only the information needed to begin a reply."
+        },
+        {
+          "label": "Typing on a phone",
+          "detail": "A generic keyboard for every field → input types suited to email, phone, or URL."
+        },
+        {
+          "label": "Next action",
+          "detail": "An ambiguous button → a clear label that explains what will happen."
+        },
+        {
+          "label": "After sending",
+          "detail": "A silently cleared form → a visible confirmation of the outcome."
+        }
+      ],
+      "caption": "A qualitative map of the friction described in this article, without charting its audit percentages."
+    },
+    {
+      "id": "form-conversation-path",
+      "kind": "flow",
+      "title": "The form’s job is to start a conversation",
+      "summary": "Keep the path visible from the first input to the final acknowledgement.",
+      "items": [
+        {
+          "label": "Identify",
+          "detail": "Give the responder a name and a usable contact method."
+        },
+        {
+          "label": "Explain",
+          "detail": "Provide the message or service need."
+        },
+        {
+          "label": "Send",
+          "detail": "Use a clearly labeled action."
+        },
+        {
+          "label": "Confirm",
+          "detail": "Show the visitor what happened and what to expect next."
+        }
+      ],
+      "caption": "A simplified visitor journey derived from the form checklist."
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+.table-scroll { min-width: 0; max-width: 100%; margin-block: 1rem; }
+.table-scroll__viewport { overflow-x: auto; max-width: 100%; }
+.table-scroll__controls { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; margin-bottom: 0.75rem; font-size: 0.8rem; }
+.table-scroll__controls button { min-height: 44px; padding: 0.5rem 0.75rem; background: transparent; color: inherit; border: 1px solid currentColor; border-radius: 4px; font: inherit; cursor: pointer; }
+.table-scroll__controls button:focus-visible { outline: 3px solid currentColor; outline-offset: 3px; }

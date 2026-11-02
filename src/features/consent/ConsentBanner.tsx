@@ -30,6 +30,7 @@ export const hasAnalyticsConsent = (): boolean => getConsent() === "granted";
 
 const ConsentBanner: React.FC = () => {
   const [visible, setVisible] = React.useState(false);
+  const bannerRef = React.useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
@@ -48,6 +49,20 @@ const ConsentBanner: React.FC = () => {
     }
   }, []);
 
+  React.useEffect(() => {
+    const root = document.documentElement;
+    const banner = bannerRef.current;
+    if (!visible || !banner) return;
+    const measure = () => root.style.setProperty("--consent-space", `${banner.getBoundingClientRect().height + 16}px`);
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(banner);
+    return () => {
+      observer.disconnect();
+      root.style.setProperty("--consent-space", "0px");
+    };
+  }, [visible, mounted]);
+
   const handleAccept = () => {
     setConsent("granted");
     setVisible(false);
@@ -61,68 +76,12 @@ const ConsentBanner: React.FC = () => {
   if (!mounted || !visible) return null;
 
   return (
-    <div
-      role="dialog"
-      aria-label="Analytics consent"
-      aria-live="polite"
-      style={{
-        position: "fixed",
-        bottom: 0,
-        left: 0,
-        right: 0,
-        zIndex: 9999,
-        background: "var(--color-page-bg, #fff)",
-        color: "var(--color-text, #111)",
-        borderTop: "2px solid var(--color-border, #ccc)",
-        padding: "1rem 1.5rem",
-        display: "flex",
-        flexWrap: "wrap",
-        alignItems: "center",
-        justifyContent: "space-between",
-        gap: "1rem",
-        fontSize: "0.9rem",
-        boxShadow: "0 -2px 10px rgba(0,0,0,0.1)",
-      }}
-    >
-      <p style={{ margin: 0, flex: "1 1 300px" }}>
-        This site uses aggregated or pseudonymous analytics to understand traffic patterns.
-        No advertising tracking. See the{" "}
-        <a href="/privacy/" style={{ color: "inherit", textDecoration: "underline" }}>
-          Privacy Policy
-        </a>{" "}
-        for details.
-      </p>
-      <div style={{ display: "flex", gap: "0.5rem", flexShrink: 0 }}>
-        <button
-          type="button"
-          onClick={handleDecline}
-          style={{
-            padding: "0.5rem 1rem",
-            border: "1px solid var(--color-border, #ccc)",
-            background: "transparent",
-            color: "inherit",
-            borderRadius: "4px",
-            cursor: "pointer",
-            font: "inherit",
-          }}
-        >
-          Decline
-        </button>
-        <button
-          type="button"
-          onClick={handleAccept}
-          style={{
-            padding: "0.5rem 1rem",
-            border: "none",
-            background: "var(--color-accent, #333)",
-            color: "var(--color-text-inverse, #fff)",
-            borderRadius: "4px",
-            cursor: "pointer",
-            font: "inherit",
-          }}
-        >
-          Accept
-        </button>
+    <div ref={bannerRef} className="consent-banner" role="region" aria-label="Analytics consent">
+      <p>This site uses aggregated or pseudonymous analytics to understand traffic patterns.
+        No advertising tracking. See the <a href="/privacy/">Privacy Policy</a> for details.</p>
+      <div className="consent-banner__actions">
+        <button type="button" onClick={handleDecline}>Decline</button>
+        <button type="button" className="consent-banner__accept" onClick={handleAccept}>Accept</button>
       </div>
     </div>
   );

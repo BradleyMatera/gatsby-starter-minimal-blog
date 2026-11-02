@@ -1,3 +1,5 @@
+import TableScroll from "../../features/demos/TableScroll";
+import "../../features/demos/demo-gallery.css";
 import * as React from "react";
 import type { HeadFC } from "gatsby";
 import { Link } from "gatsby";
@@ -136,8 +138,17 @@ const DEMOS: DemoEntry[] = [
   },
 ];
 
-const DemosIndex: React.FC = () => (
+const categories: Record<string, string> = { restaurant: "Food & hospitality", landscaping: "Home services", hvac: "Home services", "auto-repair": "Home services", "real-estate": "Professional services", "beauty-salon": "Personal services", manufacturing: "Industry & agriculture", agriculture: "Industry & agriculture", "law-firm": "Professional services", dental: "Professional services" };
+const tasks: Record<string, string> = { restaurant: "Booking", landscaping: "Quotes", hvac: "Service requests", "auto-repair": "Booking", "real-estate": "Catalogs", "beauty-salon": "Booking", manufacturing: "Quotes", agriculture: "Catalogs", "law-firm": "Appointments", dental: "Appointments" };
+
+const DemosIndex: React.FC = () => {
+  const [category, setCategory] = React.useState("All industries");
+  const [task, setTask] = React.useState("All tasks");
+  const filtered = DEMOS.filter((demo) => (category === "All industries" || categories[demo.slug] === category) && (task === "All tasks" || tasks[demo.slug] === task));
+  const reset = () => { setCategory("All industries"); setTask("All tasks"); };
+  return (
   <Layout>
+    <div className="demo-showroom">
     <Section
       eyebrow="Portfolio Demos"
       title="See what your website could look like"
@@ -150,14 +161,15 @@ const DemosIndex: React.FC = () => (
         </p>
       }
     >
-      {/* Direct answer for AEO — question heading + 40-70 word answer */}
-      <h2 className="sr-only">What demo websites are available?</h2>
-      <p className="direct-answer" style={{ fontSize: "1.125rem", opacity: 0.8, marginBottom: "2rem", lineHeight: 1.6 }}>
-        Ten full demo websites are available: a restaurant with online ordering, a landscaping company with quote forms, an HVAC company with financing calculator, an auto repair shop with VIN lookup, a real estate office with mortgage calculator, a beauty salon with online booking, a metal fabrication shop with quote forms, an agricultural services company with equipment sales, a law firm with consultation booking, and a dental practice with online scheduling. Each demo starts at $447 and can be customized with your branding.
-      </p>
+      <div className="demo-showroom__filters" role="search" aria-label="Find a website demo">
+        <div><label htmlFor="demo-industry">Industry</label><select id="demo-industry" value={category} onChange={(event) => setCategory(event.target.value)}>{["All industries", ...Array.from(new Set(Object.values(categories)))].map((value) => <option key={value}>{value}</option>)}</select></div>
+        <div><label htmlFor="demo-task">Primary task</label><select id="demo-task" value={task} onChange={(event) => setTask(event.target.value)}>{["All tasks", ...Array.from(new Set(Object.values(tasks)))].map((value) => <option key={value}>{value}</option>)}</select></div>
+        <button type="button" onClick={reset}>Reset filters</button>
+      </div>
+      <p className="demo-showroom__count" role="status">{filtered.length} of 10 concept demos · fictional businesses</p>
+      {filtered.length === 0 && <div className="demo-showroom__empty"><p>No demos match both choices.</p><button type="button" onClick={reset}>Show all demos</button></div>}
       <div className="demo-gallery__grid">
-        {DEMOS.map((demo) => {
-          const { Icon } = demo;
+        {filtered.map((demo) => {
           return (
             <Link
               key={demo.slug}
@@ -165,17 +177,14 @@ const DemosIndex: React.FC = () => (
               className="demo-card"
               style={{ ["--demo-accent" as string]: demo.color } as React.CSSProperties}
             >
-              <div
-                className="demo-card__preview"
-                style={{ backgroundImage: `url(${demo.heroImage})` }}
-              >
-                <div className="demo-card__preview-overlay" style={{ background: `linear-gradient(135deg, ${demo.color}aa, ${demo.color}55)` }}>
-                  <Icon size={48} />
-                </div>
+              <div className="demo-card__preview">
+                <div className="demo-card__browser" aria-hidden="true"><span>● ● ●</span><span>{demo.name}</span></div>
+                <img src={`/images/demos/previews/${demo.slug}.webp`} alt={`${demo.name} concept website preview`} width={1440} height={1000} loading="lazy" />
               </div>
               <div className="demo-card__body">
-                <div className="demo-card__industry">{demo.industry}</div>
+                <div className="demo-card__industry">{demo.industry} · Concept demo</div>
                 <h2 className="demo-card__name">{demo.name}</h2>
+                <span className="demo-card__explore">Explore demo <span aria-hidden="true">↗</span></span>
                 <p className="demo-card__desc">{demo.description}</p>
                 <div className="demo-card__features">
                   {demo.features.map((f) => (
@@ -186,7 +195,11 @@ const DemosIndex: React.FC = () => (
             </Link>
           );
         })}
-      </div>
+      </div>      <details className="demo-showroom__details"><summary>About these ten concepts</summary>      <h2 className="sr-only">What demo websites are available?</h2>
+      <p className="direct-answer" style={{ fontSize: "1.125rem", opacity: 0.8, marginBottom: "2rem", lineHeight: 1.6 }}>
+        Ten full demo websites are available: a restaurant with online ordering, a landscaping company with quote forms, an HVAC company with financing calculator, an auto repair shop with VIN lookup, a real estate office with mortgage calculator, a beauty salon with online booking, a metal fabrication shop with quote forms, an agricultural services company with equipment sales, a law firm with consultation booking, and a dental practice with online scheduling. Each demo starts at $447 and can be customized with your branding.
+      </p>
+      <p>All bookings, appointments, inventory and quotes are illustrative local simulations. No order or request is sent to these fictional businesses.</p></details>
     </Section>
 
     <Section
@@ -235,7 +248,7 @@ const DemosIndex: React.FC = () => (
       eyebrow="Compare"
       title="Which demo fits your business?"
     >
-      <table>
+      <TableScroll label="Compare all demos"><table>
         <thead>
           <tr>
             <th>Demo</th>
@@ -254,10 +267,12 @@ const DemosIndex: React.FC = () => (
             </tr>
           ))}
         </tbody>
-      </table>
+      </table></TableScroll>
     </Section>
+    </div>
   </Layout>
 );
+};
 
 export default DemosIndex;
 

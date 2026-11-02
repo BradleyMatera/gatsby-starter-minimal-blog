@@ -2,12 +2,14 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { useStyleLab } from "./StyleLabProvider";
 import {
+  darkDefaultVariables, lightDefaultVariables, resolvedMode,
   fontOptions,
   shadowPresets,
   transitionPresets,
   type StyleLabMode,
   type StyleVariableOverrides,
 } from "../lib/styleLabPresets";
+import { colorContrast } from "../lib/colorContrast";
 import { CloseIcon } from "../icons";
 
 const variableLabels: Record<string, string> = {
@@ -63,6 +65,9 @@ const colorKeys = [
 
 // Parse an rgba(...) string into { r, g, b, a }.
 const parseRgba = (value: string): { r: number; g: number; b: number; a: number } | null => {
+  if (/^#[0-9a-f]{8}$/i.test(value)) return {
+    r: parseInt(value.slice(1, 3), 16), g: parseInt(value.slice(3, 5), 16), b: parseInt(value.slice(5, 7), 16), a: parseInt(value.slice(7, 9), 16) / 255,
+  };
   const match = value.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*([\d.]+))?\s*\)/);
   if (!match) return null;
   return {
@@ -94,7 +99,7 @@ const toColorInputValue = (value: string): string => {
   return "#000000";
 };
 
-const isRgba = (value: string) => value.startsWith("rgba(");
+const isRgba = (value: string) => value.startsWith("rgba(") || /^#[0-9a-f]{8}$/i.test(value);
 
 const updateAlpha = (value: string, alpha: number): string => {
   const rgba = parseRgba(value);
@@ -153,9 +158,9 @@ const ColorField: React.FC<{ variableKey: string; currentValue: string }> = ({ v
 
   return (
     <div className="style-lab__field style-lab__field--color">
-      <label className="style-lab__label">{variableLabels[variableKey] || variableKey}</label>
+      <label htmlFor={`style-${variableKey}`} className="style-lab__label">{variableLabels[variableKey] || variableKey}</label>
       <div className="style-lab__color-row">
-        <input type="color" value={hex} onChange={handleColorChange} aria-label={`${variableLabels[variableKey] || variableKey} color`} />
+        <input id={`style-${variableKey}`} type="color" value={hex} onChange={handleColorChange} aria-label={`${variableLabels[variableKey] || variableKey} color`} />
         <code className="style-lab__value">{currentValue}</code>
       </div>
       {usesAlpha && (
@@ -188,10 +193,10 @@ const RangeField: React.FC<{ variableKey: string; currentValue: string; min: num
   return (
     <div className="style-lab__field style-lab__field--range">
       <div className="style-lab__range-header">
-        <label className="style-lab__label">{variableLabels[variableKey] || variableKey}</label>
+        <label htmlFor={`style-${variableKey}`} className="style-lab__label">{variableLabels[variableKey] || variableKey}</label>
         <span className="style-lab__value">{val}{unit}</span>
       </div>
-      <input type="range" min={min} max={max} step={step} value={val} onChange={handleChange} aria-label={variableLabels[variableKey] || variableKey} />
+      <input id={`style-${variableKey}`} type="range" min={min} max={max} step={step} value={val} onChange={handleChange} aria-label={variableLabels[variableKey] || variableKey} />
     </div>
   );
 };
@@ -205,8 +210,9 @@ const SelectField: React.FC<{ variableKey: string; currentValue: string; options
 
   return (
     <div className="style-lab__field">
-      <label className="style-lab__label">{variableLabels[variableKey] || variableKey}</label>
+      <label htmlFor={`style-${variableKey}`} className="style-lab__label">{variableLabels[variableKey] || variableKey}</label>
       <select
+        id={`style-${variableKey}`}
         className="style-lab__select"
         value={currentValue}
         onChange={(e) => setVariable(variableKey, e.target.value)}
@@ -227,8 +233,9 @@ const FontField: React.FC<{ variableKey: string; currentValue: string }> = ({ va
 
   return (
     <div className="style-lab__field">
-      <label className="style-lab__label">{variableLabels[variableKey] || variableKey}</label>
+      <label htmlFor={`style-${variableKey}`} className="style-lab__label">{variableLabels[variableKey] || variableKey}</label>
       <select
+        id={`style-${variableKey}`}
         className="style-lab__select"
         value={currentValue}
         onChange={(e) => setVariable(variableKey, e.target.value)}
@@ -252,28 +259,24 @@ type StyleLabPanelProps = {
 const StyleLabPanel: React.FC<StyleLabPanelProps> = ({ isOpen, onClose }) => {
   const { activePresetId, customVariables, mode, applyPreset, setCustomMode, resetAll, allPresets } = useStyleLab();
   const activePreset = allPresets.find((p) => p.id === activePresetId) || allPresets[0];
-  const currentVariables: StyleVariableOverrides = { ...activePreset.variables, ...customVariables };
+  const currentVariables: StyleVariableOverrides = { ...(activePresetId ? activePreset.variables : resolvedMode(mode) === "light" ? lightDefaultVariables : darkDefaultVariables), ...customVariables };
+  const textContrast = colorContrast(currentVariables["--color-text"], currentVariables["--color-page-bg"]);
+  const linkContrast = colorContrast(currentVariables["--color-link"], currentVariables["--color-page-bg"]);
+  const contrastOkay = textContrast !== null && linkContrast !== null && Math.min(textContrast, linkContrast) >= 7;
+  const dialogRef = React.useRef<HTMLDialogElement>(null);
 
-  // Close on Escape.
   React.useEffect(() => {
-    if (!isOpen) return;
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+    if (!isOpen || !dialogRef.current) return;
+    const opener = document.activeElement as HTMLElement | null;
+    const dialog = dialogRef.current;
+    const overflow = document.body.style.overflow;
+    dialog.showModal();
+    document.body.style.overflow = "hidden";
+    return () => {
+      dialog.close();
+      document.body.style.overflow = overflow;
+      opener?.focus();
     };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [isOpen, onClose]);
-
-  // Lock body scroll when open.
-  React.useEffect(() => {
-    if (typeof document === "undefined") return;
-    if (isOpen) {
-      const original = document.body.style.overflow;
-      document.body.style.overflow = "hidden";
-      return () => {
-        document.body.style.overflow = original;
-      };
-    }
   }, [isOpen]);
 
   const shadowOptions = Object.entries(shadowPresets).map(([key, value]) => ({ label: key.charAt(0).toUpperCase() + key.slice(1), value }));
@@ -283,8 +286,7 @@ const StyleLabPanel: React.FC<StyleLabPanelProps> = ({ isOpen, onClose }) => {
 
   const panel = (
     <>
-      <div className="style-lab__backdrop" onClick={onClose} aria-hidden="true" />
-      <div className="style-lab" role="dialog" aria-modal="true" aria-labelledby="style-lab-title">
+      <dialog ref={dialogRef} className="style-lab" aria-labelledby="style-lab-title" onCancel={onClose}>
         <div className="style-lab__header">
           <div className="style-lab__title-row">
             <span className="style-lab__icon" aria-hidden="true">
@@ -296,7 +298,7 @@ const StyleLabPanel: React.FC<StyleLabPanelProps> = ({ isOpen, onClose }) => {
                 <path d="m21 3-7 7" />
               </svg>
             </span>
-            <h2 id="style-lab-title" className="style-lab__title">Customize This Website!</h2>
+            <h2 id="style-lab-title" className="style-lab__title">Appearance</h2>
           </div>
           <button type="button" className="style-lab__close" onClick={onClose} aria-label="Close style lab">
             <CloseIcon size={22} />
@@ -340,6 +342,8 @@ const StyleLabPanel: React.FC<StyleLabPanelProps> = ({ isOpen, onClose }) => {
           </Section>
 
           <Section title="Colors">
+            <p className="style-lab__contrast" role="status">{contrastOkay ? "Strong text contrast" : "Low text contrast — adjust your colors or reset the palette"}{textContrast !== null && ` · Text ${textContrast.toFixed(1)}:1`}{linkContrast !== null && ` · Links ${linkContrast.toFixed(1)}:1`}</p>
+            <p className="style-lab__hint">Custom colors change your view only. Keep text and backgrounds distinct. Reset to default restores the original palette.</p>
             <div className="style-lab__grid style-lab__grid--colors">
               {colorKeys.map((key) => (
                 <ColorField key={key} variableKey={key} currentValue={currentVariables[key] || ""} />
@@ -356,8 +360,8 @@ const StyleLabPanel: React.FC<StyleLabPanelProps> = ({ isOpen, onClose }) => {
 
           <Section title="Typography">
             <div className="style-lab__grid style-lab__grid--ranges">
-              <RangeField variableKey="--text-base" currentValue={currentVariables["--text-base"]} min={0.75} max={1.35} step={0.01} unit="rem" />
-              <RangeField variableKey="--heading-h1-size" currentValue={currentVariables["--heading-h1-size"]} min={1.25} max={3.5} step={0.05} unit="rem" />
+              <RangeField variableKey="--text-base" currentValue={currentVariables["--text-base"]} min={1} max={1.35} step={0.01} unit="rem" />
+              <RangeField variableKey="--heading-h1-size" currentValue={currentVariables["--heading-h1-size"]} min={2} max={5} step={0.05} unit="rem" />
               <RangeField variableKey="--heading-h2-size" currentValue={currentVariables["--heading-h2-size"]} min={1.1} max={2.8} step={0.05} unit="rem" />
               <RangeField variableKey="--heading-h3-size" currentValue={currentVariables["--heading-h3-size"]} min={1} max={2.2} step={0.05} unit="rem" />
             </div>
@@ -379,7 +383,7 @@ const StyleLabPanel: React.FC<StyleLabPanelProps> = ({ isOpen, onClose }) => {
             Done
           </button>
         </div>
-      </div>
+      </dialog>
     </>
   );
 

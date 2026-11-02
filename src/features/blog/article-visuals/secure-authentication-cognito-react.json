@@ -1,0 +1,65 @@
+{
+  "slug": "/secure-authentication-cognito-react",
+  "title": "Cognito Authentication With React: A Small, Verifiable Setup",
+  "cover": {
+    "src": "/images/blog/secure-authentication-cognito-react/cover.png",
+    "mobile": "/images/blog/secure-authentication-cognito-react/cover-720.webp",
+    "alt": "Transparent architectural authentication gateway with account tiles and three distinct token paths"
+  },
+  "figures": [
+    {
+      "id": "cognito-account-lifecycle",
+      "kind": "timeline",
+      "title": "Account state changes before tokens are useful",
+      "summary": "The article separates registration, confirmation, sign-in and refresh.",
+      "items": [
+        {
+          "label": "Sign up",
+          "detail": "Create the account in an unconfirmed state."
+        },
+        {
+          "label": "Confirm",
+          "detail": "Complete the email confirmation step."
+        },
+        {
+          "label": "Sign in",
+          "detail": "Authenticate and receive the configured token set."
+        },
+        {
+          "label": "Refresh",
+          "detail": "Obtain new session tokens while refresh conditions remain valid."
+        }
+      ],
+      "caption": "The account lifecycle explained in the article; token presence alone does not authorize a backend request."
+    },
+    {
+      "id": "cognito-check-boundaries",
+      "kind": "checklist",
+      "title": "Check the boundaries before adding more UI",
+      "summary": "Configuration and session behavior need independent checks.",
+      "items": [
+        {
+          "label": "Public client",
+          "detail": "Do not put a client secret in browser code."
+        },
+        {
+          "label": "Pool configuration",
+          "detail": "Match the app client and regional user-pool identifiers."
+        },
+        {
+          "label": "Known test user",
+          "detail": "Verify a small sign-in path before expanding registration."
+        },
+        {
+          "label": "Session state",
+          "detail": "Handle signed-out and expired-session states deliberately."
+        },
+        {
+          "label": "Backend verification",
+          "detail": "Validate tokens and their expiry before trusting API requests."
+        }
+      ],
+      "caption": "Checks described in the setup and security sections; decoding a JWT is inspection, not signature verification."
+    }
+  ]
+}

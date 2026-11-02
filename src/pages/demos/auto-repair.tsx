@@ -3,6 +3,8 @@ import type { HeadFC } from "gatsby";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
 import DemoLayout from "../../features/demos/DemoLayout";
+import DemoNavigation from "../../features/demos/DemoNavigation";
+import DemoJourney from "../../features/demos/DemoJourney";
 import GoogleMapsEmbed from "../../features/demos/GoogleMapsEmbed";
 import SocialLinks, { SocialLink } from "../../features/demos/SocialLinks";
 import ReviewBadges from "../../features/demos/ReviewBadges";
@@ -95,37 +97,34 @@ const StarRating: React.FC = () => (
 
 const VinLookup: React.FC = () => {
   const [vin, setVin] = React.useState("");
-  const [result, setResult] = React.useState<null | { year: string; make: string; model: string }>(null);
-  const handleLookup = () => {
-    if (vin.length >= 17) setResult({ year: "2019", make: "Toyota", model: "Camry SE" });
-    else if (vin.length > 0) setResult({ year: "—", make: "VIN must be 17 characters", model: "" });
+  const [message, setMessage] = React.useState("");
+  const sample = "1HGCM82633A123456";
+  const lookup = (event: React.FormEvent) => {
+    event.preventDefault();
+    setMessage(vin === sample ? "Sample result: 2019 Toyota Camry SE. This is fictional example data, not a decoded vehicle record." : vin.length !== 17 ? "Enter the 17-character sample VIN, or choose Load sample VIN." : "This VIN is not in the local sample data. Choose Load sample VIN to try the demonstration.");
   };
-  return (
-    <div className="demo-vin-lookup">
-      <label htmlFor="vin-input"><h3 className="demo-vin-lookup__title">VIN Lookup</h3></label>
-      <p className="demo-vin-lookup__desc">Enter any 17-character VIN to see an illustrative vehicle lookup. A production site would call the free NHTSA VIN Decoder API for real data.</p>
-      <div className="demo-vin-lookup__row">
-        <input id="vin-input" className="demo-vin-lookup__input" type="text" placeholder="1HGCM82633A123456" maxLength={17} value={vin} onChange={(e) => setVin(e.target.value.toUpperCase())} />
-        <button type="button" className="demo-vin-lookup__btn" onClick={handleLookup}>Look Up</button>
-      </div>
-      {result && <div style={{ marginTop: "1rem", padding: "0.75rem", background: "var(--demo-bg)", borderRadius: "var(--demo-radius)" }}><strong>Vehicle (illustrative):</strong> {result.year} {result.make} {result.model}</div>}
-      <div className="demo-vin-lookup__note">This is a mock VIN lookup for demonstration. Results are fictional. Production sites use the free NHTSA VIN Decoder API to auto-fill year, make, model, and engine info.</div>
-    </div>
-  );
+  return <form className="demo-vin-lookup" onSubmit={lookup}>
+    <h3 className="demo-vin-lookup__title">VIN Lookup</h3>
+    <p className="demo-vin-lookup__desc">Try a local example. This demonstration does not decode real vehicles or contact an external service.</p>
+    <label htmlFor="vin-input">Sample VIN</label>
+    <div className="demo-vin-lookup__row"><input id="vin-input" className="demo-vin-lookup__input" type="text" value={vin} maxLength={17} onChange={(event) => { setVin(event.target.value.toUpperCase()); setMessage(""); }} aria-describedby="vin-result" /><button className="demo-vin-lookup__btn" type="submit">Look up sample</button></div>
+    <div className="demo-journey__actions"><button type="button" className="demo-btn demo-btn--ghost" onClick={() => { setVin(sample); setMessage(""); }}>Load sample VIN</button><button type="button" className="demo-btn demo-btn--ghost" onClick={() => { setVin(""); setMessage(""); }}>Reset</button></div>
+    <p id="vin-result" role="status">{message}</p>
+  </form>;
 };
 
 const AutoRepairDemo: React.FC = () => (
-  <DemoLayout demoName="Northside Auto Repair" industry="Auto Repair" themeColor="#ff5a2d" designSystem="garage" pageClassName="demo-flagship demo-flagship--auto">
+  <DemoLayout demoName="Northside Auto Repair" industry="Auto Repair" themeColor="#ff9474" designSystem="garage" pageClassName="demo-flagship demo-flagship--auto">
     <nav className="flagship-nav auto-nav" aria-label="Northside Auto Repair navigation">
       <a className="flagship-nav__brand" href="#auto-top" aria-label="Northside Auto Repair home">
         <span className="auto-mark" aria-hidden="true">N</span>
         <span><strong>Northside</strong><small>Independent auto repair</small></span>
       </a>
-      <div className="flagship-nav__links">
+      <DemoNavigation>
         <a href="#services">Service menu</a>
         <a href="#book">Appointments</a>
         <a href="#book" className="demo-btn demo-btn--primary">Book service</a>
-      </div>
+      </DemoNavigation>
     </nav>
 
     <section className="auto-hero" id="auto-top">
@@ -135,7 +134,7 @@ const AutoRepairDemo: React.FC = () => (
         <p className="auto-hero__lede">Diagnostics explained in plain language, estimates in writing, and repairs documented before the keys come back to you.</p>
         <div className="demo-hero__actions">
           <a href="#book" className="demo-btn demo-btn--primary">Book an inspection</a>
-          <a href="tel:8155550321" className="demo-btn demo-btn--ghost"><PhoneIcon size={19} /> (815) 555-0321</a>
+          <a href="#demo-disclosure" aria-label="Fictional demo phone; view disclosure" className="demo-btn demo-btn--ghost"><PhoneIcon size={19} /> (815) 555-0321</a>
         </div>
         <ul className="auto-hero__proof"><li>Written estimate</li><li>Digital inspection</li><li>Warranty documented</li></ul>
       </div>
@@ -372,31 +371,9 @@ const AutoRepairDemo: React.FC = () => (
     <section className="demo-section demo-section--alt" id="book">
       <div className="demo-section__inner">
         <h2 className="demo-section__title">Book an Appointment</h2>
-        <p className="demo-section__subtitle">Fill out the form and we'll confirm by text or email within 1 business hour.</p>
-        <ol style={{ maxWidth: "600px", margin: "0 auto 2rem", paddingLeft: "1.5rem", color: "var(--demo-text-muted)", fontSize: "0.9375rem", lineHeight: 1.8 }}>
-          <li>Enter your vehicle make, model, and year — or use the VIN lookup above to auto-fill.</li>
-          <li>Select the service you need from the dropdown (oil change, brakes, diagnostics, etc.).</li>
-          <li>Choose your preferred date and time for drop-off.</li>
-          <li>Provide your name and phone number — we will text or email confirmation within 1 business hour.</li>
-          <li>Drop off your vehicle at the scheduled time. Most repairs are completed same-day.</li>
-        </ol>
-        <div className="demo-booking-form">
-          <div className="demo-form__row">
-            <div className="demo-form__field"><label className="demo-form__label" htmlFor="appt-make">Vehicle Make</label><input id="appt-make" className="demo-form__input" type="text" placeholder="e.g. Toyota" /></div>
-            <div className="demo-form__field"><label className="demo-form__label" htmlFor="appt-model">Vehicle Model</label><input id="appt-model" className="demo-form__input" type="text" placeholder="e.g. Camry" /></div>
-          </div>
-          <div className="demo-form__row">
-            <div className="demo-form__field"><label className="demo-form__label" htmlFor="appt-year">Year</label><input id="appt-year" className="demo-form__input" type="text" placeholder="e.g. 2019" /></div>
-            <div className="demo-form__field"><label className="demo-form__label" htmlFor="appt-service">Service Needed</label><select id="appt-service" className="demo-form__select"><option>Oil Change</option><option>Brake Service</option><option>Check Engine Light</option><option>AC / Heating</option><option>Tire Service</option><option>Other (describe below)</option></select></div>
-          </div>
-          <div className="demo-form__field"><label className="demo-form__label" htmlFor="appt-name">Your Name</label><input id="appt-name" className="demo-form__input" type="text" placeholder="First and last name" /></div>
-          <div className="demo-form__row">
-            <div className="demo-form__field"><label className="demo-form__label" htmlFor="appt-phone">Phone</label><input id="appt-phone" className="demo-form__input" type="tel" placeholder="(815) 555-0000" /></div>
-            <div className="demo-form__field"><label className="demo-form__label" htmlFor="appt-email">Email</label><input id="appt-email" className="demo-form__input" type="email" placeholder="you@example.com" /></div>
-          </div>
-          <div className="demo-form__field"><label className="demo-form__label" htmlFor="appt-problem">Describe the Problem</label><input id="appt-problem" className="demo-form__input" type="text" placeholder="e.g. Brakes squeaking when stopping" /></div>
-          <button type="button" className="demo-form__submit" aria-live="polite" onClick={(event) => { event.currentTarget.textContent = "Demo request ready — no data sent"; }}>Request Appointment</button>
-        </div>
+        <p className="demo-section__subtitle">Explore a sample appointment. Nothing is sent to a repair shop.</p>
+
+        <DemoJourney kind="auto-repair" />
       </div>
     </section>
 
@@ -416,7 +393,7 @@ const AutoRepairDemo: React.FC = () => (
       <div className="demo-contact__inner">
         <h2 className="demo-contact__title">Have Questions?</h2>
         <p className="demo-contact__text">Call (815) 555-0321 and talk to a real mechanic. Free estimates on all work, no appointment needed for estimates.</p>
-        <a href="tel:8155550321" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0321</a>
+        <a href="#demo-disclosure" aria-label="Fictional demo phone; view disclosure" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0321</a>
         <div style={{ marginTop: "1.5rem" }}><SocialLinks links={socialLinks} /></div>
         <div className="demo-contact__info">
           <div className="demo-contact__info-item"><MapPinIcon size={20} /><span className="demo-contact__info-label">Address</span><span>456 North Ave, Rockford, IL</span></div>

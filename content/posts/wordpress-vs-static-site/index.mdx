@@ -7,6 +7,9 @@ description: "Honest comparison of WordPress and static sites for small business
 theme: "Technical"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/wordpress-vs-static-site.json";
+
 WordPress runs about 43% of the web. Static sites are a smaller but growing segment. If you are trying to decide which one your small business site should use, the honest answer is: it depends on what you need. There is no universally correct choice, and anyone who tells you one is always better is selling something.
 
 ## The short answer
@@ -65,6 +68,8 @@ Static sites make sense when:
 - No plugin ecosystem (custom features require custom development)
 - E-commerce requires a third-party service (Snipcart, Stripe checkout links, or a headless commerce API)
 - Less community support for non-developers
+
+<ArticleVisual spec={articleVisuals.figures[0]} />
 
 ## The comparison at a glance
 
@@ -140,6 +145,8 @@ If you are moving from WordPress to a static site, the migration path is straigh
 5. **Rebuild forms.** WordPress form plugins (Contact Form 7, Gravity Forms) do not carry over. Replace them with a form service (Netlify Forms, Formspree) or a serverless function.
 
 A typical migration takes 1-3 days for a small site (under 50 pages) and a week or more for larger content archives.
+
+<ArticleVisual spec={articleVisuals.figures[1]} />
 
 ## The middle ground: headless WordPress
 

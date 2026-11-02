@@ -62,56 +62,11 @@ const FAQS: FAQ[] = [
   },
 ];
 
-const RecruiterFAQ: React.FC = () => {
-  const [openIndex, setOpenIndex] = React.useState<number | null>(0);
-
-  return (
-    <section id="recruiter-faq" className="recruiter-section" data-static-visibility="true">
-      <div className="recruiter-section__header">
-        <div className="recruiter-section__eyebrow">FAQ</div>
-        <h2 className="recruiter-section__title">
-          Recruiter <span className="recruiter-gradient-text">Questions</span>, Answered
-        </h2>
-        <p className="recruiter-section__subtitle">
-          Every common question, answered upfront. No need to email back and forth.
-        </p>
-      </div>
-
-      <div style={{ maxWidth: 768, margin: "0 auto" }}>
-        {FAQS.map((faq, index) => {
-          const isOpen = openIndex === index;
-
-          return (
-            <div key={index} className="recruiter-faq__item">
-              <button
-                className="recruiter-faq__question"
-                onClick={() => setOpenIndex(isOpen ? null : index)}
-                aria-expanded={isOpen}
-              >
-                <span>{faq.question}</span>
-                <span
-                  style={{
-                    fontSize: "1.25rem",
-                    transition: "transform 0.2s ease",
-                    transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
-                    color: isOpen ? "var(--recruiter-purple)" : "var(--recruiter-text-muted)",
-                  }}
-                >
-                  ⌄
-                </span>
-              </button>
-
-              {isOpen && (
-                <div className="recruiter-faq__answer">
-                  {faq.answer}
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
-    </section>
-  );
-};
+const RecruiterFAQ: React.FC = () => (
+  <section id="recruiter-faq" className="recruiter-section" aria-labelledby="recruiter-faq-heading">
+    <div className="recruiter-section__header"><span className="recruiter-section__eyebrow">FAQ</span><h2 id="recruiter-faq-heading" className="recruiter-section__title">Recruiter <span className="recruiter-title-accent">Questions</span>, Answered</h2><p className="recruiter-section__subtitle">Every common question, answered upfront. No need to email back and forth.</p></div>
+    <div className="recruiter-faq-list">{FAQS.map((faq) => <details key={faq.question} className="recruiter-details recruiter-faq__item"><summary>{faq.question}</summary><p>{faq.answer}</p></details>)}</div>
+  </section>
+);
 
 export default RecruiterFAQ;

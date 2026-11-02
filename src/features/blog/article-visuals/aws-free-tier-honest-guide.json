@@ -1,0 +1,61 @@
+{
+  "slug": "/aws-free-tier-honest-guide",
+  "title": "AWS Free Tier: What Actually Costs Money",
+  "cover": {
+    "src": "/images/blog/aws-free-tier-honest-guide/cover.png",
+    "mobile": "/images/blog/aws-free-tier-honest-guide/cover-720.webp",
+    "alt": "Conceptual still life of a powered-down server, a connected storage cartridge, and a cost alert bell."
+  },
+  "figures": [
+    {
+      "id": "free-tier-cost-surfaces",
+      "kind": "layers",
+      "title": "The resource layers worth checking",
+      "summary": "An application can stop running while related storage or transfer activity still deserves attention.",
+      "items": [
+        {
+          "label": "Compute",
+          "detail": "Inspect instances and the resources associated with them."
+        },
+        {
+          "label": "Databases",
+          "detail": "Check database instances and retained storage."
+        },
+        {
+          "label": "Object storage",
+          "detail": "Review accumulated uploads and old build artifacts."
+        },
+        {
+          "label": "Functions",
+          "detail": "Inspect invocation patterns, duration, and configuration."
+        },
+        {
+          "label": "Transfer",
+          "detail": "Look for downloads and activity between regions."
+        }
+      ],
+      "caption": "Resource categories from this article. Current allowances and prices are intentionally not reproduced."
+    },
+    {
+      "id": "free-tier-awareness-checks",
+      "kind": "checklist",
+      "title": "Three checks before walking away",
+      "summary": "Cost visibility requires both an inventory of resources and a way to notice unexpected usage.",
+      "items": [
+        {
+          "label": "Know what exists",
+          "detail": "Review running instances, databases, storage, and any resources in other regions."
+        },
+        {
+          "label": "Confirm the alert",
+          "detail": "Check that the budget and email notification are configured."
+        },
+        {
+          "label": "Review the cost view",
+          "detail": "Group recent costs by service and investigate unfamiliar entries."
+        }
+      ],
+      "caption": "Budget alerts notify; they do not stop charges or guarantee that usage remains free."
+    }
+  ]
+}

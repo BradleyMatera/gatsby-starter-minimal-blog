@@ -1,0 +1,65 @@
+{
+  "slug": "/certifications-continuous-learning",
+  "title": "Certifications and Continuous Learning: A Simple Track",
+  "cover": {
+    "src": "/images/blog/certifications-continuous-learning/cover.png",
+    "mobile": "/images/blog/certifications-continuous-learning/cover-720.webp",
+    "alt": "Conceptual learning path unfolding from a book through practice and hands-on experimentation."
+  },
+  "figures": [
+    {
+      "id": "certification-study-loop",
+      "kind": "flow",
+      "title": "Practice, inspect the gap, and test again",
+      "summary": "The study method linked questions to documentation and practical exposure.",
+      "items": [
+        {
+          "label": "Practice",
+          "detail": "Attempt a practice exam without notes."
+        },
+        {
+          "label": "Inspect misses",
+          "detail": "Identify which concept or service caused confusion."
+        },
+        {
+          "label": "Use a reference",
+          "detail": "Read official documentation or a focused explanation."
+        },
+        {
+          "label": "Apply the idea",
+          "detail": "Connect the concept to work in a guided lab."
+        },
+        {
+          "label": "Retest",
+          "detail": "Check whether the gap is actually closed."
+        }
+      ],
+      "caption": "The study loop described by the author; no exam specifications or current passing requirements are reproduced."
+    },
+    {
+      "id": "certification-boundaries",
+      "kind": "comparison",
+      "title": "Familiarity is useful; ownership is a separate claim",
+      "summary": "The article draws a boundary between knowledge gained and experience not established by a credential.",
+      "items": [
+        {
+          "label": "Navigation",
+          "detail": "Practiced: finding services and reading configuration. Not established: managing large production environments."
+        },
+        {
+          "label": "Troubleshooting",
+          "detail": "Practiced: tracing lab failures. Not established: handling live customer incidents."
+        },
+        {
+          "label": "Permissions",
+          "detail": "Practiced: understanding roles and actions. Not established: designing enterprise-wide access strategy."
+        },
+        {
+          "label": "Delivery",
+          "detail": "Practiced: sustained study and completion. Not established: senior engineering judgment or project ownership."
+        }
+      ],
+      "caption": "A qualitative responsibility boundary from this article, not a ranking of certifications."
+    }
+  ]
+}

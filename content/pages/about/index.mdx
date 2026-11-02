@@ -3,23 +3,24 @@ title: "About"
 slug: "/about"
 ---
 
-import { Section, AnchorNav, Link } from "../../../src/ui";
-import { HeroBanner } from "../../../src/site/components";
+import { ShopifySpotlight } from "../../../src/features/shopify";
+import BrandArtwork from "../../../src/site/components/BrandArtwork";
+
+import { Section, Link } from "../../../src/ui";
 import { SkillCategory } from "../../../src/features/about/components";
 import { MonitorIcon, ServerIcon, CloudIcon, BrainIcon } from "../../../src/site/icons";
 
-<div className="about-hero">
-  <HeroBanner
-    title="Hi, I'm Brad Matera"
-    subtitle="I like building things and figuring out how they work."
-    ctaText="Let's talk"
-    ctaLink="/contact/"
-    titleAs="h2"
-  />
+<div className="about-hero editorial-about-intro">
+  <div>
+    <h2>Hi, I'm Brad Matera</h2>
+    <p>I like building things and figuring out how they work.</p>
+    <Link to="/contact/" data-variant="primary">Let's talk</Link>
+  </div>
+  <img src="/brand/bradley-matera-portrait.webp" alt="Bradley Matera" width="320" height="320" decoding="async" />
 </div>
 
 <div className="about-layout">
-  <main className="about-layout__main">
+  <div className="about-layout__main">
     <section className="about-section about-section--profile" id="path-so-far">
       <div className="about-section__inner">
         <div className="about-profile__grid">
@@ -28,25 +29,16 @@ import { MonitorIcon, ServerIcon, CloudIcon, BrainIcon } from "../../../src/site
               <div className="about-profile__text">
                 <h2 className="section-title"><strong>How I got into tech</strong> - Tinkering first, school later</h2>
                 <div className="about-profile__bio">
-                  <p>
-                    I built my first PC when I was around 12. It was an old Gateway machine, and that is where a lot of this started. I spent a lot of time messing with HTML pages, installing game mods, and figuring out what broke when you changed things.
-                  </p>
-                  <p>
-                    I did not go straight into software after high school. I spent years working in different fields, including the Army as a medic and later in operations, logistics, case management, and rescue work. Those jobs were intense, but they taught me how to stay calm when things get messy and how important clear documentation is.
-                  </p>
-                  <p>
-                    I came back to tech seriously in 2023 when I enrolled in the Web Development program at Full Sail University. I graduated on October 31, 2025 with a Bachelor of Science in Web Development, finished as the salutatorian of the program, and graduated with a 3.64 GPA.
-                  </p>
-                  <p>
-                    That is the version of me this page is meant to reflect. I am not trying to sound like a senior engineer. What I can say honestly is that I have been building a lot since March 2024, and GitHub has become the place where I work through ideas, test them, and keep a record of what I learned.
-                  </p>
-                  <p>
-                    If you are here because you searched for a web developer in Durand, Davis, or nearby Northwest Illinois, I also put together a separate <Link to="/web-developer-durand-davis-illinois/">local work page</Link> so the service area, proof, and fit are easy to scan without digging through the rest of the portfolio.
-                  </p>
+                  <p>I built my first PC when I was around 12. It was an old Gateway machine, and that is where a lot of this started. I spent a lot of time messing with HTML pages, installing game mods, and figuring out what broke when you changed things.</p>
+                  <p>I did not go straight into software after high school. I spent years working in different fields, including the Army as a medic and later in operations, logistics, case management, and rescue work. Those jobs were intense, but they taught me how to stay calm when things get messy and how important clear documentation is.</p>
+                  <p>I came back to tech seriously in 2023 when I enrolled in the Web Development program at Full Sail University. I graduated on October 31, 2025 with a Bachelor of Science in Web Development, finished as the salutatorian of the program, and graduated with a 3.64 GPA.</p>
+                  <p>That is the version of me this page is meant to reflect. I am not trying to sound like a senior engineer. What I can say honestly is that I have been building a lot since March 2024, and GitHub has become the place where I work through ideas, test them, and keep a record of what I learned.</p>
+                  <p>If you are here because you searched for a web developer in Durand, Davis, or nearby Northwest Illinois, I also put together a separate <Link to="/web-developer-durand-davis-illinois/">local work page</Link> so the service area, proof, and fit are easy to scan without digging through the rest of the portfolio.</p>
                 </div>
               </div>
             </div>
           </div>
+          <BrandArtwork variant="about-workshop" />
         </div>
       </div>
     </section>
@@ -54,48 +46,34 @@ import { MonitorIcon, ServerIcon, CloudIcon, BrainIcon } from "../../../src/site
     <section className="about-section about-section--build" id="what-i-build">
       <div className="about-section__inner">
         <h2 className="section-title"><strong>What I'm doing now</strong> - A running lab, not just a few side projects</h2>
-        <p className="section-subtitle">
-          I started my GitHub in March 2024 and have been using it like a lab notebook ever since. I build projects, break them, refactor them, and document what I learn so I can reproduce it later.
-        </p>
+        <p className="section-subtitle">I started my GitHub in March 2024 and have been using it like a lab notebook ever since. I build projects, break them, refactor them, and document what I learn so I can reproduce it later.</p>
         <div className="what-i-build-grid">
           <div className="build-card">
+            <img className="about-project-preview" src="/images/projects/interactive-pokedex.png" alt="Frontend project preview" loading="lazy" width="720" height="450" />
             <SkillCategory icon={<MonitorIcon />} title="Frontend">
-              <p>
-                Front-end work takes up a lot of that activity. Projects like the Pokédex, AnimalSounds, portfolio rewrites, and other React or Next.js experiments gave me a reason to keep improving layout, interaction design, accessibility, and the kind of cleanup that only shows up once something is actually running.
-              </p>
-              <p>
-                I like this side of development because the feedback loop is fast. If the layout is off, if the states are confusing, or if the mobile version falls apart, I can see it immediately and fix it.
-              </p>
+              <p>Front-end work takes up a lot of that activity. Projects like the Pokédex, AnimalSounds, portfolio rewrites, and other React or Next.js experiments gave me a reason to keep improving layout, interaction design, accessibility, and the kind of cleanup that only shows up once something is actually running.</p>
+              <p>I like this side of development because the feedback loop is fast. If the layout is off, if the states are confusing, or if the mobile version falls apart, I can see it immediately and fix it.</p>
             </SkillCategory>
           </div>
           <div className="build-card">
+            <img className="about-project-preview" src="/images/projects/car-match.png" alt="Backend project preview" loading="lazy" width="720" height="450" />
             <SkillCategory icon={<ServerIcon />} title="Backend">
-              <p>
-                Backend work is a big part of that lab too. Projects like Car-Match pushed me into Express, auth, APIs, moderation and logging ideas, and the kind of data flow problems that make more sense once you try wiring the pieces together yourself.
-              </p>
-              <p>
-                I do not frame those as production systems. I frame them as real learning reps. Each one teaches me something about structure, debugging, deployment, or how small backend decisions ripple through the rest of the app.
-              </p>
+              <p>Backend work is a big part of that lab too. Projects like Car-Match pushed me into Express, auth, APIs, moderation and logging ideas, and the kind of data flow problems that make more sense once you try wiring the pieces together yourself.</p>
+              <p>I do not frame those as production systems. I frame them as real learning reps. Each one teaches me something about structure, debugging, deployment, or how small backend decisions ripple through the rest of the app.</p>
             </SkillCategory>
           </div>
           <div className="build-card">
+            <img className="about-project-preview" src="/images/projects/aws-serverless-metadata-workflow.png" alt="Cloud & Systems project preview" loading="lazy" width="720" height="450" />
             <SkillCategory icon={<CloudIcon />} title="Cloud & Systems">
-              <p>
-                Cloud and deployment work show up all through my GitHub history too. That includes Docker experiments, static and server-rendered site deployments, CI/CD passes, and server-side setups that taught me how the code changes once it has to run somewhere real.
-              </p>
-              <p>
-                The AWS internship in summer 2025 helped reinforce that. After that, I kept building labs and write-ups around serverless workflows, deployment, and cost tracking because that is one of the fastest ways for me to understand how the stack actually behaves.
-              </p>
+              <p>Cloud and deployment work show up all through my GitHub history too. That includes Docker experiments, static and server-rendered site deployments, CI/CD passes, and server-side setups that taught me how the code changes once it has to run somewhere real.</p>
+              <p>The AWS internship in summer 2025 helped reinforce that. After that, I kept building labs and write-ups around serverless workflows, deployment, and cost tracking because that is one of the fastest ways for me to understand how the stack actually behaves.</p>
             </SkillCategory>
           </div>
           <div className="build-card">
+            <img className="about-project-preview" src="/images/projects/convo-ai.png" alt="Applied AI project preview" loading="lazy" width="720" height="450" />
             <SkillCategory icon={<BrainIcon />} title="Applied AI">
-              <p>
-                AI, local model setups, WebGPU demos, dev tooling, and lower-level experiments are part of the same pattern. I use them to test ideas quickly, see what is actually useful, and get out of the tutorial mindset.
-              </p>
-              <p>
-                Since creating my GitHub account, I have made over a thousand contributions in 2024 alone and kept building through 2025 and 2026. The main thing that history shows is not that I know everything. It shows that I work by trying a lot of things, learning fast, and keeping the useful parts.
-              </p>
+              <p>AI, local model setups, WebGPU demos, dev tooling, and lower-level experiments are part of the same pattern. I use them to test ideas quickly, see what is actually useful, and get out of the tutorial mindset.</p>
+              <p>Since creating my GitHub account, I have made over a thousand contributions in 2024 alone and kept building through 2025 and 2026. The main thing that history shows is not that I know everything. It shows that I work by trying a lot of things, learning fast, and keeping the useful parts.</p>
             </SkillCategory>
           </div>
         </div>
@@ -160,33 +138,21 @@ import { MonitorIcon, ServerIcon, CloudIcon, BrainIcon } from "../../../src/site
       title="Credentials"
     >
       <div className="about-section__inner">
-        <p className="section-subtitle">
-          The core school, internship, and certification details that are easiest to verify.
-        </p>
+        <p className="section-subtitle">The core school, internship, and certification details that are easiest to verify.</p>
         <div className="how-i-work-grid">
           <article className="about-panel about-panel--work feature-card how-i-work__focus">
             <div className="about-work__panel">
               <h3 className="feature-card__title"><strong>Degree</strong> - Full Sail University</h3>
-              <p>
-                Bachelor of Science in Web Development, awarded October 31, 2025.
-              </p>
-              <p>
-                I graduated as the salutatorian of the Web Development program with a 3.64 GPA.
-              </p>
-              <p>
-                Coursework included web architecture, interface programming, database systems, server-side languages, cloud application development, secure application development, and deployment of web applications.
-              </p>
+              <p>Bachelor of Science in Web Development, awarded October 31, 2025.</p>
+              <p>I graduated as the salutatorian of the Web Development program with a 3.64 GPA.</p>
+              <p>Coursework included web architecture, interface programming, database systems, server-side languages, cloud application development, secure application development, and deployment of web applications.</p>
             </div>
           </article>
           <article className="about-panel about-panel--work feature-card how-i-work__collaboration">
             <div className="about-work__panel">
               <h3 className="feature-card__title"><strong>Recent experience</strong> - AWS internship</h3>
-              <p>
-                In summer 2025 I interned at Amazon as a Cloud Support Engineer intern, where I worked in training environments and practiced cloud troubleshooting workflows.
-              </p>
-              <p>
-                That experience gave me more hands-on exposure to cloud systems, documentation, and the kind of troubleshooting process that makes more sense once you have to explain it to someone else.
-              </p>
+              <p>In summer 2025 I interned at Amazon as a Cloud Support Engineer intern, where I worked in training environments and practiced cloud troubleshooting workflows.</p>
+              <p>That experience gave me more hands-on exposure to cloud systems, documentation, and the kind of troubleshooting process that makes more sense once you have to explain it to someone else.</p>
             </div>
           </article>
         </div>
@@ -276,6 +242,8 @@ import { MonitorIcon, ServerIcon, CloudIcon, BrainIcon } from "../../../src/site
       </picture>
     </div>
 
+    <ShopifySpotlight context={{ path: "/about/", intent: "maker-workspace", title: "Bradley Matera: hands-on development and maker projects" }} placement="about-maker" />
+
     <Section
       className="section-surface about-section"
       id="outside"
@@ -283,12 +251,8 @@ import { MonitorIcon, ServerIcon, CloudIcon, BrainIcon } from "../../../src/site
     >
       <div className="about-section__inner">
         <div className="about-outside__content">
-          <p>
-            Outside of work, I am still usually messing with something. That might mean reading docs for fun, pulling apart a tool to see how it works, spending time with family, or helping with rescue work.
-          </p>
-          <p>
-            I like hobbies that turn into experiments. That has been true since I was younger and it is still true now. The difference is that now a lot of those experiments end up as public repos, blog posts, or project notes instead of staying on my hard drive.
-          </p>
+          <p>Outside of work, I am still usually messing with something. That might mean reading docs for fun, pulling apart a tool to see how it works, spending time with family, or helping with rescue work.</p>
+          <p>I like hobbies that turn into experiments. That has been true since I was younger and it is still true now. The difference is that now a lot of those experiments end up as public repos, blog posts, or project notes instead of staying on my hard drive.</p>
         </div>
       </div>
     </Section>
@@ -302,9 +266,7 @@ import { MonitorIcon, ServerIcon, CloudIcon, BrainIcon } from "../../../src/site
           <div className="about-cta__grid">
             <div className="about-cta__left">
               <h3 className="feature-card__title"><strong>Let's talk</strong> - Open to junior roles, freelance work, and collaborations</h3>
-              <p>
-                I am looking for opportunities to grow and collaborate. If you need someone eager to learn, build useful things, and communicate clearly, whether that is a small freelance job or a junior developer role, I would like to talk.
-              </p>
+              <p>I am looking for opportunities to grow and collaborate. If you need someone eager to learn, build useful things, and communicate clearly, whether that is a small freelance job or a junior developer role, I would like to talk.</p>
               <ul className="feature-list about-cta__list">
                 <li><strong>Email:</strong> bradmatera@gmail.com</li>
                 <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/bradmatera" target="_blank" rel="noopener noreferrer">/in/bradmatera</a></li>
@@ -323,15 +285,6 @@ import { MonitorIcon, ServerIcon, CloudIcon, BrainIcon } from "../../../src/site
         </div>
       </div>
     </Section>
-  </main>
-  <aside className="about-layout__aside">
-    <AnchorNav
-      items={[
-        { id: "path-so-far", label: "Path so far" },
-        { id: "what-i-build", label: "What I'm doing now" },
-        { id: "credentials", label: "Credentials" },
-        { id: "outside", label: "Outside of work" },
-      ]}
-    />
-  </aside>
+  </div>
+
 </div>

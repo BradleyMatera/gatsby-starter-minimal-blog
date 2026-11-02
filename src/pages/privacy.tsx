@@ -1,4 +1,6 @@
 import * as React from "react";
+import ReadingLayout from "../features/blog/components/ReadingLayout";
+import "../styles/editorial.css";
 import type { HeadFC } from "gatsby";
 import Layout from "../@lekoarts/gatsby-theme-minimal-blog/components/layout";
 import Seo from "../@lekoarts/gatsby-theme-minimal-blog/components/seo";
@@ -19,7 +21,7 @@ const pageDescription =
   "How Bradley F. Matera collects, uses, and retains your information. Contact-form data, order metadata, analytics, hosting, email, and payment processors.";
 
 const PrivacyPage = () => (
-  <Layout>
+  <Layout className="editorial-page editorial-policy">
     <nav className="breadcrumbs" aria-label="Breadcrumb">
       <ol className="breadcrumbs__list">
         <li className="breadcrumbs__item">
@@ -78,6 +80,8 @@ const PrivacyPage = () => (
         </Card>
       </div>
     </Section>
+    <ReadingLayout pageKey={pathname}>
+
 
     <Section eyebrow="Quick reference" title="What data we collect">
       <Card variant="outline">
@@ -284,6 +288,7 @@ const PrivacyPage = () => (
         Effective date: {POLICY_LAST_UPDATED}. Last updated: {POLICY_LAST_UPDATED}.
       </p>
     </Section>
+    </ReadingLayout>
   </Layout>
 );
 

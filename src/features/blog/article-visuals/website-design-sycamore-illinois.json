@@ -1,0 +1,61 @@
+{
+  "slug": "website-design-sycamore-illinois",
+  "title": "Website Design in Sycamore, Illinois: A DeKalb County Guide",
+  "cover": {
+    "src": "/images/blog/website-design-sycamore-illinois/cover.png",
+    "mobile": "/images/blog/website-design-sycamore-illinois/cover-720.webp",
+    "alt": "Concept illustration of a fictional office-and-boutique brand moodboard for a local website; not a Sycamore landmark or business photograph."
+  },
+  "figures": [
+    {
+      "id": "local-identity",
+      "kind": "layers",
+      "title": "Build local identity from real business information",
+      "summary": "The guide favors useful specificity over generic stock content.",
+      "items": [
+        {
+          "label": "Actual business imagery",
+          "detail": "Use genuine photos when representing the business or its work."
+        },
+        {
+          "label": "Specific service content",
+          "detail": "Explain what the business offers instead of repeating boilerplate."
+        },
+        {
+          "label": "Honest area coverage",
+          "detail": "Describe service in Sycamore, DeKalb, or surrounding areas only when accurate."
+        },
+        {
+          "label": "Consistent public facts",
+          "detail": "Align the website, profiles, and directory contact details."
+        }
+      ],
+      "caption": "Content layers drawn from this guide. The cover remains a clearly labeled concept illustration."
+    },
+    {
+      "id": "agreement-review",
+      "kind": "comparison",
+      "title": "Separate the commitments before hiring",
+      "summary": "The hiring checklist covers more than the initial price.",
+      "items": [
+        {
+          "label": "One-time build",
+          "detail": "Confirm what the total project scope includes."
+        },
+        {
+          "label": "Ongoing care",
+          "detail": "Ask what the monthly fee covers and what is extra."
+        },
+        {
+          "label": "Account ownership",
+          "detail": "Verify control of domain and hosting access and the exit process."
+        },
+        {
+          "label": "Review and delivery",
+          "detail": "Request live examples and clarify accessibility checks, content needs, and timing."
+        }
+      ],
+      "caption": "A grouped version of the article's questions, intended to make proposals easier to compare."
+    }
+  ]
+}

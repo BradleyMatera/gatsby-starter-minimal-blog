@@ -1,0 +1,57 @@
+{
+  "slug": "/job-hunting-is-poopie",
+  "title": "Job Hunting Is Rough: A Practical Reset",
+  "cover": {
+    "src": "/images/blog/job-hunting-is-poopie/cover.png",
+    "mobile": "/images/blog/job-hunting-is-poopie/cover-720.webp",
+    "alt": "Conceptual empty stairwell with a worn tool bag and a distant open door, representing an uncertain career transition"
+  },
+  "figures": [
+    {
+      "id": "capability-inventory",
+      "kind": "comparison",
+      "title": "A practical inventory, not a seniority claim",
+      "summary": "The essay distinguishes working skills from foundations still being developed.",
+      "items": [
+        {
+          "label": "Read and trace",
+          "detail": "Understand existing JavaScript, React, HTML, CSS and Python."
+        },
+        {
+          "label": "Diagnose and deploy",
+          "detail": "Use logs, developer tools and documentation to move systems forward."
+        },
+        {
+          "label": "Keep practicing",
+          "detail": "Strengthen algorithms and writing code from an empty page."
+        }
+      ],
+      "caption": "Bradley's self-assessment in this essay, not a hiring-market statistic."
+    },
+    {
+      "id": "two-kinds-of-work",
+      "kind": "layers",
+      "title": "Make the work visible while building the skill",
+      "summary": "These efforts continue in parallel throughout the reflection.",
+      "items": [
+        {
+          "label": "Build",
+          "detail": "Keep creating projects another person can open and inspect."
+        },
+        {
+          "label": "Learn",
+          "detail": "Use repetition to strengthen foundations beyond one course."
+        },
+        {
+          "label": "Connect",
+          "detail": "Start conversations and follow up so people can encounter the work."
+        },
+        {
+          "label": "Stay honest",
+          "detail": "Describe current abilities without implying a guaranteed outcome."
+        }
+      ],
+      "caption": "Themes from the connections section and closing reflection; no success rate is encoded."
+    }
+  ]
+}

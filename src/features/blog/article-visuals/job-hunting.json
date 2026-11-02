@@ -1,0 +1,57 @@
+{
+  "slug": "/job-hunting",
+  "title": "Job Search Notes That Actually Help",
+  "cover": {
+    "src": "/images/blog/job-hunting/cover.png",
+    "mobile": "/images/blog/job-hunting/cover-720.webp",
+    "alt": "Conceptual organized job-search folders with a blank calendar grid and a linked resume sheet"
+  },
+  "figures": [
+    {
+      "id": "search-files",
+      "kind": "layers",
+      "title": "Three records make the search inspectable",
+      "summary": "Each artifact answers a different question about an application.",
+      "items": [
+        {
+          "label": "Tracker",
+          "detail": "Company, role, dates, status, source and follow-up live in one row."
+        },
+        {
+          "label": "Resume and posting",
+          "detail": "Dated files preserve what was sent and what the role required."
+        },
+        {
+          "label": "Weekly note",
+          "detail": "Record what moved, what stalled and one change for next week."
+        }
+      ],
+      "caption": "The local file structure recommended by this article; no application outcomes are implied."
+    },
+    {
+      "id": "application-feedback-loop",
+      "kind": "flow",
+      "title": "Keep each application in the loop",
+      "summary": "Follow-up and review turn a list of applications into useful feedback.",
+      "items": [
+        {
+          "label": "Apply and log",
+          "detail": "Add the tracker row in the same session as the application."
+        },
+        {
+          "label": "Save evidence",
+          "detail": "Link the exact resume version and saved job posting."
+        },
+        {
+          "label": "Schedule contact",
+          "detail": "Record a follow-up date and update the last-touch field."
+        },
+        {
+          "label": "Review weekly",
+          "detail": "Use actual movement to choose one change for the next week."
+        }
+      ],
+      "caption": "The workflow described in the tracker, versioning, follow-up and weekly-review sections."
+    }
+  ]
+}

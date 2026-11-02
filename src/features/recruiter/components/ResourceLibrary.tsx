@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useRecruiterFilter } from "../hooks/useRecruiterFilter";
 import { DocumentIcon, ImageIcon, LinkIcon } from "../../../site/icons";
 
 /* --------------------------------------------------------------------------
@@ -246,233 +247,53 @@ const CATEGORIES = [
 ];
 
 const ResourceLibrary: React.FC = () => {
-  const [search, setSearch] = React.useState("");
-  const [activeCategory, setActiveCategory] = React.useState("All");
-
-  const filtered = React.useMemo(() => {
-    return RESOURCES.filter((r) => {
-      const matchesCategory = activeCategory === "All" || r.category === activeCategory;
-      const matchesSearch =
-        search.trim() === "" ||
-        r.title.toLowerCase().includes(search.toLowerCase()) ||
-        r.description.toLowerCase().includes(search.toLowerCase());
-      return matchesCategory && matchesSearch;
-    });
-  }, [search, activeCategory]);
-
+  const [search, setSearch] = useRecruiterFilter("document-search", "");
+  const [category, setCategory] = useRecruiterFilter("document-category");
+  const [previewOpen, setPreviewOpen] = React.useState(false);
+  const activeCategory = CATEGORIES.includes(category) ? category : "All";
+  const query = search.trim().toLowerCase();
+  const filtered = RESOURCES.filter((resource) => (activeCategory === "All" || resource.category === activeCategory) && (!query || `${resource.title} ${resource.description}`.toLowerCase().includes(query)));
+  const reset = () => { setSearch(""); setCategory("All"); };
   return (
-    <section id="resource-library" className="recruiter-section reveal-section">
+    <section id="resource-library" className="recruiter-section" aria-labelledby="recruiter-documents-heading">
       <div className="recruiter-section__header">
-        <div className="recruiter-section__eyebrow">Document Library</div>
-        <h2 className="recruiter-section__title">
-          All Documents, <span className="recruiter-gradient-text">One Place</span>
-        </h2>
-        <p className="recruiter-section__subtitle">
-          Every resume, transcript, and certificate — viewable in your browser. No downloads required.
-        </p>
+        <span className="recruiter-section__eyebrow">Document Library</span>
+        <h2 id="recruiter-documents-heading" className="recruiter-section__title">All Documents, <span className="recruiter-title-accent">One Place</span></h2>
+        <p className="recruiter-section__subtitle">Every resume, transcript, and certificate — viewable in your browser. No downloads required.</p>
       </div>
-
-      {/* Search */}
-      <div className="recruiter-search">
-        <svg
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="var(--recruiter-text-muted)"
-          strokeWidth="2"
-          style={{ position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)", pointerEvents: "none" }}
-        >
-          <circle cx="11" cy="11" r="8" />
-          <path d="m21 21-4.3-4.3" />
-        </svg>
-        <input
-          type="text"
-          className="recruiter-search__input"
-          placeholder="Search documents..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          aria-label="Search documents"
-        />
-      </div>
-
-      {/* Category tabs */}
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "0.5rem",
-          justifyContent: "center",
-          marginBottom: "2rem",
-        }}
-      >
-        {CATEGORIES.map((cat) => (
-          <button
-            key={cat}
-            onClick={() => setActiveCategory(cat)}
-            className="recruiter-btn magnetic-btn"
-            style={{
-              padding: "0.5rem 1rem",
-              fontSize: "0.8125rem",
-              borderRadius: 9999,
-              border: "1px solid",
-              borderColor:
-                activeCategory === cat
-                  ? "var(--recruiter-purple)"
-                  : "var(--recruiter-border)",
-              background:
-                activeCategory === cat
-                  ? "rgba(167,139,250,0.12)"
-                  : "rgba(255,255,255,0.04)",
-              color:
-                activeCategory === cat
-                  ? "var(--recruiter-purple)"
-                  : "var(--recruiter-text-secondary)",
-              cursor: "pointer",
-              transition: "all 0.2s ease",
-            }}
-          >
-            {cat}
-          </button>
-        ))}
-      </div>
-
-      {/* Document count */}
-      <div style={{ textAlign: "center", marginBottom: "1.5rem", fontSize: "0.875rem", color: "var(--recruiter-text-muted)" }}>
-        Showing {filtered.length} of {RESOURCES.length} documents
-      </div>
-
-      {/* Grid */}
-      <div className="recruiter-grid reveal-child recruiter-grid--3" style={{ maxWidth: 1100, margin: "0 auto" }}>
-        {filtered.map((resource) => (
-          <DocumentCard key={resource.id} resource={resource} />
-        ))}
-      </div>
-
-      {filtered.length === 0 && (
-        <div style={{ textAlign: "center", padding: "3rem", color: "var(--recruiter-text-muted)" }}>
-          No documents match your search. Try a different keyword.
+      <div className="recruiter-resume-feature">
+        <div><span className="recruiter-tag">Start here / PDF</span><h3>{RESOURCES[0].title}</h3><p>{RESOURCES[0].description}</p></div>
+        <div className="recruiter-actions">
+          <a href={RESOURCES[0].path} className="recruiter-btn recruiter-btn--primary">Open resume</a>
+          <a href={RESOURCES[0].path} download className="recruiter-btn recruiter-btn--secondary">Download</a>
+          <button type="button" className="recruiter-text-link recruiter-resume-preview-toggle" aria-expanded={previewOpen} aria-controls="recruiter-resume-preview" onClick={() => setPreviewOpen(!previewOpen)}>{previewOpen ? "Close preview" : "Preview on this page"}</button>
         </div>
-      )}
+      </div>
+      {previewOpen && <div id="recruiter-resume-preview" className="recruiter-resume-preview"><p>The preview may depend on your browser. <a href={RESOURCES[0].path}>Open the PDF directly</a>.</p><object data={RESOURCES[0].path} type="application/pdf" aria-label="Junior Software Engineer resume"><p><a href={RESOURCES[0].path}>Open resume PDF</a></p></object></div>}
+      <div className="recruiter-filter-bar recruiter-filter-bar--documents">
+        <div className="recruiter-filter-field"><label htmlFor="recruiter-document-search">Search documents</label><input id="recruiter-document-search" type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Role, certificate, or transcript" /></div>
+        <div className="recruiter-filter-field"><label htmlFor="recruiter-document-category">Document type</label><select id="recruiter-document-category" value={activeCategory} onChange={(event) => setCategory(event.target.value)}>{CATEGORIES.map((item) => <option key={item}>{item}</option>)}</select></div>
+        <button type="button" onClick={reset} disabled={!search && activeCategory === "All"}>Reset</button>
+      </div>
+      <p className="recruiter-result-count" role="status" aria-live="polite">Showing {filtered.length} of {RESOURCES.length} documents</p>
+      <div className="recruiter-document-list">
+        {CATEGORIES.filter((group) => group !== "All").map((group) => {
+          const items = filtered.filter((resource) => resource.category === group);
+          return items.length ? <section key={group} aria-label={group}><h3 className="recruiter-document-group">{group}</h3>{items.map((resource) => <DocumentCard key={resource.id} resource={resource} />)}</section> : null;
+        })}
+      </div>
+      {filtered.length === 0 && <div className="recruiter-empty-state"><h3>No documents match your search.</h3><p>Try a different keyword or clear the filters.</p><button type="button" className="recruiter-btn recruiter-btn--secondary" onClick={reset}>Show all documents</button></div>}
     </section>
   );
 };
 
 const DocumentCard: React.FC<{ resource: Resource }> = ({ resource }) => {
-  const isViewable = resource.type === "pdf" || resource.type === "image";
   const href = resource.type === "link" ? resource.url : resource.path;
-
-  return (
-    <div
-      className="recruiter-glass reveal-child"
-      style={{
-        padding: "1.25rem",
-        display: "flex",
-        flexDirection: "column",
-        gap: "0.75rem",
-        transition: "transform 0.2s ease, border-color 0.2s ease",
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.transform = "translateY(-2px)";
-        e.currentTarget.style.borderColor = "rgba(167,139,250,0.25)";
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = "translateY(0)";
-        e.currentTarget.style.borderColor = "";
-      }}
-    >
-      <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", flexWrap: "wrap" }}>
-        {resource.badge && (
-          <span
-            style={{
-              fontSize: "0.6875rem",
-              fontWeight: 700,
-              textTransform: "uppercase",
-              letterSpacing: "0.05em",
-              padding: "0.25rem 0.5rem",
-              borderRadius: 4,
-              background: "rgba(167,139,250,0.15)",
-              color: "var(--recruiter-purple)",
-            }}
-          >
-            {resource.badge}
-          </span>
-        )}
-        <span
-          style={{
-            fontSize: "0.75rem",
-            color: "var(--recruiter-text-muted)",
-            textTransform: "uppercase",
-            letterSpacing: "0.05em",
-          }}
-        >
-          {resource.type === "pdf" ? (
-            <span className="resource-type-badge">
-              <DocumentIcon size={14} /> PDF
-            </span>
-          ) : resource.type === "image" ? (
-            <span className="resource-type-badge">
-              <ImageIcon size={14} /> Image
-            </span>
-          ) : (
-            <span className="resource-type-badge">
-              <LinkIcon size={14} /> Link
-            </span>
-          )}
-        </span>
-      </div>
-
-      <h3 style={{ fontSize: "0.9375rem", fontWeight: 700, color: "var(--recruiter-text)", margin: 0, lineHeight: 1.35 }}>
-        {resource.title}
-      </h3>
-
-      <p
-        style={{
-          fontSize: "0.8125rem",
-          color: "var(--recruiter-text-secondary)",
-          lineHeight: 1.55,
-          flex: 1,
-          margin: 0,
-        }}
-      >
-        {resource.description}
-      </p>
-
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginTop: "auto",
-          paddingTop: "0.75rem",
-          borderTop: "1px solid var(--recruiter-border)",
-        }}
-      >
-        <span style={{ fontSize: "0.75rem", color: "var(--recruiter-text-muted)" }}>
-          {resource.category}
-        </span>
-        <a
-          href={href || "#"}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="recruiter-btn magnetic-btn"
-          style={{
-            padding: "0.375rem 0.875rem",
-            fontSize: "0.8125rem",
-            borderRadius: "0.5rem",
-            background: "rgba(96,165,250,0.12)",
-            color: "var(--recruiter-blue)",
-            border: "none",
-            cursor: "pointer",
-            textDecoration: "none",
-            display: "inline-block",
-          }}
-        >
-          {isViewable ? "View →" : "Open →"}
-        </a>
-      </div>
-    </div>
-  );
+  return <article className="recruiter-document-row">
+    <div className="recruiter-document-row__icon" aria-hidden="true">{resource.type === "pdf" ? <DocumentIcon size={24} /> : resource.type === "image" ? <ImageIcon size={24} /> : <LinkIcon size={24} />}</div>
+    <div><span className="recruiter-document-row__type">{resource.type}{resource.badge ? ` · ${resource.badge}` : ""}</span><h4>{resource.title}</h4><p>{resource.description}</p></div>
+    <div className="recruiter-actions"><a href={href} className="recruiter-text-link" target="_blank" rel="noopener noreferrer" aria-label={`Open ${resource.title} in a new tab`}>Open ↗</a>{resource.path && <a href={resource.path} download className="recruiter-text-link" aria-label={`Download ${resource.title}`}>Download ↓</a>}</div>
+  </article>;
 };
 
 export default ResourceLibrary;

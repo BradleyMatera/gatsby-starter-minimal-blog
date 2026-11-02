@@ -16,10 +16,10 @@ const FAQSection: React.FC<FAQSectionProps> = ({ faqs, title = "Frequently Asked
       <h2 className="demo-section__title">{title}</h2>
       <div className="demo-faq">
         {faqs.map((f, i) => (
-          <div key={i} className="demo-faq__item">
-            <h3 className="demo-faq__question">{f.q}</h3>
+          <details key={i} className="demo-faq__item demo-disclosure">
+            <summary>{f.q}</summary>
             <p className="demo-faq__answer">{f.a}</p>
-          </div>
+          </details>
         ))}
       </div>
     </div>

@@ -1,9 +1,11 @@
+import TableScroll from "../features/demos/TableScroll";
 import * as React from "react";
+import "../features/demos/work-gallery.css";
 import type { HeadFC } from "gatsby";
 import Layout from "../@lekoarts/gatsby-theme-minimal-blog/components/layout";
 import Seo from "../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
-import { Card, Link, Section } from "../ui";
+import { Link, Section } from "../ui";
 
 const pathname = "/work/";
 const pageTitle = "Website Work and Examples | Bradley Matera";
@@ -16,11 +18,19 @@ const demoCards = [
   { title: "HVAC", desc: "Financing calculator, service areas, booking form.", href: "/demos/hvac/", img: "/package-images/work-hvac.svg" },
   { title: "Auto Repair", desc: "VIN lookup, service menu, reviews, appointments.", href: "/demos/auto-repair/", img: "/package-images/city-demo-auto.svg" },
   { title: "Real Estate", desc: "Property listings, agent profiles, search filters.", href: "/demos/real-estate/", img: "/package-images/city-demo-realestate.svg" },
+  { title: "Manufacturing", desc: "Capabilities, material specifications and a sample RFQ.", href: "/demos/manufacturing/", img: "" },
+  { title: "Agriculture", desc: "Sample inventory, equipment finance and service requests.", href: "/demos/agriculture/", img: "" },
+  { title: "Law firm", desc: "Practice information and a sample consultation interface.", href: "/demos/law-firm/", img: "" },
+  { title: "Dental", desc: "Patient information and an illustrative appointment journey.", href: "/demos/dental/", img: "" },
   { title: "Salon", desc: "Service menu, stylist bios, gallery, online booking.", href: "/demos/beauty-salon/", img: "/package-images/city-demo-salon.svg" },
 ];
 
-const WorkPage = () => (
+const WorkPage = () => {
+  const [industry, setIndustry] = React.useState("All industries");
+  const filteredDemos = demoCards.filter((demo) => industry === "All industries" || demo.title === industry);
+  return (
   <Layout>
+    <div className="work-showcase">
     <nav className="breadcrumbs" aria-label="Breadcrumb">
       <ol className="breadcrumbs__list">
         <li className="breadcrumbs__item">
@@ -64,7 +74,7 @@ const WorkPage = () => (
           <div className="pkg-card__body">
             <h2 className="pkg-card__title">Live demo websites</h2>
             <p className="pkg-card__desc">
-              Full clickable sample websites for six industries. Not templates — real, working sites you can explore.
+              Full clickable sample websites for ten industries. Not templates — real, working sites you can explore.
             </p>
             <div className="card-actions">
               <Link data-variant="ghost" to="/demos/">See all demos</Link>
@@ -107,10 +117,11 @@ const WorkPage = () => (
         </p>
       }
     >
-      <div className="grid-three">
-        {demoCards.map((demo) => (
+      <div className="work-filter"><label htmlFor="work-industry">Explore an industry</label><select id="work-industry" value={industry} onChange={(event) => setIndustry(event.target.value)}><option>All industries</option>{demoCards.map((demo) => <option key={demo.title}>{demo.title}</option>)}</select><button type="button" onClick={() => setIndustry("All industries")}>Reset</button><p role="status">{filteredDemos.length} concept {filteredDemos.length === 1 ? "demo" : "demos"}</p></div>
+      <div className="work-preview-grid">
+        {filteredDemos.map((demo) => (
           <div key={demo.title} className="pkg-card">
-            <img src={demo.img} alt={`${demo.title} website example illustration`} className="pkg-card__bg" loading="lazy" />
+            <img src={`/images/demos/previews/${demo.href.split("/")[2]}.webp`} alt={`${demo.title} concept website preview — fictional business`} className="work-preview-image" loading="lazy" />
             <div className="pkg-card__body">
               <h3 className="pkg-card__title">{demo.title} Website</h3>
               <p className="pkg-card__desc">{demo.desc}</p>
@@ -136,7 +147,7 @@ const WorkPage = () => (
         </p>
       }
     >
-      <div style={{ overflowX: "auto", marginBottom: "2rem" }} tabIndex={0} role="region" aria-label="Work examples comparison table">
+      <TableScroll label="Work examples comparison table">
         <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
           <thead>
             <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
@@ -171,7 +182,7 @@ const WorkPage = () => (
             </tr>
           </tbody>
         </table>
-      </div>
+      </TableScroll>
       <div className="grid-three">
         <div className="pkg-card">
           <img src="/package-images/work-landscaping.svg" alt="Landscaping website example illustration" className="pkg-card__bg" loading="lazy" />
@@ -245,8 +256,10 @@ const WorkPage = () => (
         <Link data-variant="ghost" to="/pricing/">See pricing</Link>
       </div>
     </Section>
+    </div>
   </Layout>
 );
+};
 
 export default WorkPage;
 

@@ -114,7 +114,7 @@ const HeroBeforeAfter = ({
   // Native wheel listener for reliable scroll-after-stop
   React.useEffect(() => {
     const el = viewportRef.current;
-    if (!el) return;
+    if (!el || !allowVerticalScroll) return;
     const handler = (e: WheelEvent) => {
       if (!stoppedRef.current) {
         setStopped(true);
@@ -134,7 +134,7 @@ const HeroBeforeAfter = ({
 
   // Main animation loop: horizontal sweep + vertical scroll
   React.useEffect(() => {
-    if (reducedMotion || stopped) {
+    if (reducedMotion || stopped || !autoAnimate) {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       rafRef.current = null;
       return;
@@ -187,7 +187,7 @@ const HeroBeforeAfter = ({
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       rafRef.current = null;
     };
-  }, [allowVerticalScroll, reducedMotion, stopped, activeIdx, viewportH, imageHeight]);
+  }, [allowVerticalScroll, reducedMotion, stopped, autoAnimate, activeIdx, viewportH, imageHeight]);
 
   // Auto-rotate between examples
   React.useEffect(() => {
@@ -297,19 +297,6 @@ const HeroBeforeAfter = ({
     touchModeRef.current = "none";
   };
 
-  // Mouse wheel = scroll up/down after stopped
-  const onWheel = (e: React.WheelEvent) => {
-    if (!allowVerticalScroll) return;
-    if (!stopped) {
-      setStopped(true);
-      return;
-    }
-    const ms = Math.max(0, imageHeight - (viewportRef.current?.clientHeight ?? viewportH));
-    let ns = scrollRef.current + e.deltaY;
-    ns = Math.max(0, Math.min(ms, ns));
-    setScrollY(ns); scrollRef.current = ns;
-  };
-
   // Keyboard on the divider
   const onKeyDown = (e: React.KeyboardEvent) => {
     setStopped(true);
@@ -378,7 +365,6 @@ const HeroBeforeAfter = ({
               onPointerUp={onPointerUp}
               onPointerCancel={onPointerUp}
               onPointerLeave={onPointerUp}
-              onWheel={allowVerticalScroll ? onWheel : undefined}
             >
               <img
                 className="hero-ba__img hero-ba__img--before"
@@ -411,6 +397,7 @@ const HeroBeforeAfter = ({
                 aria-valuemin={0}
                 aria-valuemax={100}
                 aria-valuenow={Math.round(pos)}
+                aria-valuetext={`${Math.round(pos)}% before, ${100 - Math.round(pos)}% after`}
                 onKeyDown={onKeyDown}
               >
                 <span className="hero-ba__handle" aria-hidden="true">
@@ -467,7 +454,7 @@ const HeroBeforeAfter = ({
                     </div>
                   </>
                 ) : (
-                  <div className="hero-ba__tabs-label">Featured transformation</div>
+                  <div className="hero-ba__tabs-label">Concept demo · fictional business</div>
                 )}
                 {active.demoLink ? (
                   <Link className="hero-ba__demo-link" to={active.demoLink}>

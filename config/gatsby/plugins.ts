@@ -7,6 +7,10 @@ const shouldAnalyseBundle = process.env.ANALYSE_BUNDLE;
 
 export const plugins: Array<PluginRef> = [
   {
+    resolve: `gatsby-plugin-catch-links`,
+    options: { excludePattern: `^/\\.netlify/functions/` },
+  },
+  {
     resolve: `@lekoarts/gatsby-theme-minimal-blog`,
     options: {
       navigation,

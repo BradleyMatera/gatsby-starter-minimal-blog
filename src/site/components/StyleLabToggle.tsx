@@ -3,6 +3,9 @@ import StyleLabPanel from "./StyleLabPanel";
 
 const StyleLabToggle: React.FC = () => {
   const [open, setOpen] = React.useState(false);
+  const [ready, setReady] = React.useState(false);
+
+  React.useEffect(() => setReady(true), []);
 
   return (
     <>
@@ -10,8 +13,9 @@ const StyleLabToggle: React.FC = () => {
         type="button"
         className="style-lab-toggle"
         onClick={() => setOpen(true)}
-        aria-label="Customize This Website! — Open Style Lab"
+        aria-label="Open appearance settings"
         aria-haspopup="dialog"
+        disabled={!ready}
       >
         <span className="style-lab-toggle__icon" aria-hidden="true">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -22,7 +26,7 @@ const StyleLabToggle: React.FC = () => {
             <path d="m21 3-7 7" />
           </svg>
         </span>
-        <span className="style-lab-toggle__label">Customize This Website!</span>
+        <span className="style-lab-toggle__label">Appearance</span>
       </button>
       <StyleLabPanel isOpen={open} onClose={() => setOpen(false)} />
     </>

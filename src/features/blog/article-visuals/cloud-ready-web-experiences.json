@@ -1,0 +1,61 @@
+{
+  "slug": "/cloud-ready-web-experiences",
+  "title": "Cloud Ready Web Checks: A Small, Honest Prelaunch Checklist",
+  "cover": {
+    "src": "/images/blog/cloud-ready-web-experiences/cover.png",
+    "mobile": "/images/blog/cloud-ready-web-experiences/cover-720.webp",
+    "alt": "Conceptual browser tile passing through a prelaunch inspection frame toward an open doorway."
+  },
+  "figures": [
+    {
+      "id": "prelaunch-repo-artifacts",
+      "kind": "layers",
+      "title": "Keep the release checks in three places",
+      "summary": "The checklist works because the steps are written down and share repeatable commands.",
+      "items": [
+        {
+          "label": "Prelaunch checklist",
+          "detail": "Lists the build, lint, route, interaction, and fallback checks."
+        },
+        {
+          "label": "Smoke-check notes",
+          "detail": "Names the few actions to confirm on the deployed URL."
+        },
+        {
+          "label": "Package scripts",
+          "detail": "Provide a consistent command for build and lint."
+        }
+      ],
+      "caption": "The three repository artifacts described in the article, shown by responsibility."
+    },
+    {
+      "id": "prelaunch-verification-flow",
+      "kind": "flow",
+      "title": "From local checks to a verified release",
+      "summary": "A successful local run is one stage of the release, not the final proof.",
+      "items": [
+        {
+          "label": "Build",
+          "detail": "Run the production build locally."
+        },
+        {
+          "label": "Lint",
+          "detail": "Run the project’s static checks."
+        },
+        {
+          "label": "Deploy",
+          "detail": "Publish the checked build through the normal deployment path."
+        },
+        {
+          "label": "Smoke check",
+          "detail": "Open the real URL and exercise the main action, important interaction, and fallback route."
+        },
+        {
+          "label": "Record",
+          "detail": "Note what changed, what was verified, and any checks skipped."
+        }
+      ],
+      "caption": "A release sequence drawn from this post. It does not claim that a build alone proves the deployed system works."
+    }
+  ]
+}

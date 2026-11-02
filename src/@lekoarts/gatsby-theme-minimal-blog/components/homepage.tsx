@@ -29,43 +29,6 @@ const Homepage = () => {
   const [showMobileCta, setShowMobileCta] = React.useState(false);
 
   React.useEffect(() => {
-    const root = heroRef.current;
-    if (!root) return;
-    const sections = root.querySelectorAll(".section-shell");
-    if (sections.length === 0) return;
-
-    // Fallback: if IntersectionObserver isn't available, show everything
-    if (typeof IntersectionObserver === "undefined") {
-      root.classList.add("no-io");
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
-    );
-
-    sections.forEach((s) => observer.observe(s));
-
-    // Safety timeout: show everything after 4s no matter what
-    const safety = window.setTimeout(() => {
-      sections.forEach((s) => s.classList.add("is-visible"));
-    }, 4000);
-
-    return () => {
-      observer.disconnect();
-      window.clearTimeout(safety);
-    };
-  }, []);
-
-  React.useEffect(() => {
     const primaryActions = heroRef.current?.querySelector(".hero-ba__actions");
     if (!primaryActions || typeof IntersectionObserver === "undefined") return;
 

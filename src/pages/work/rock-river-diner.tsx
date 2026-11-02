@@ -1,4 +1,6 @@
+import TableScroll from "../../features/demos/TableScroll";
 import * as React from "react";
+import "../../features/demos/work-gallery.css";
 import type { HeadFC } from "gatsby";
 import Layout from "../../@lekoarts/gatsby-theme-minimal-blog/components/layout";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
@@ -12,6 +14,7 @@ const pageDescription =
 
 const ExamplePage = () => (
   <Layout>
+    <div className="work-case-study">
     <nav className="breadcrumbs" aria-label="Breadcrumb">
       <ol className="breadcrumbs__list">
         <li className="breadcrumbs__item"><Link to="/">Home</Link></li>
@@ -44,6 +47,7 @@ const ExamplePage = () => (
         </>
       }
     >
+      <figure className="work-case-preview"><img src="/images/demos/previews/restaurant.webp" alt="Illustrative restaurant website concept" width={1440} height={1000} loading="eager" /><figcaption>Concept website · fictional business · <Link to="/demos/restaurant/">Explore the interactive demo</Link></figcaption></figure>
       <div className="grid-three">
         <div className="pkg-card">
           <img src="/package-images/work-industry.svg" alt="Industry illustration" className="pkg-card__bg" loading="lazy" />
@@ -69,8 +73,10 @@ const ExamplePage = () => (
       </div>
     </Section>
 
-    <Section eyebrow="Project specs" title="Project specifications at a glance">
-      <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Rock River Diner project specs table">
+    <nav className="work-story-nav" aria-label="Example walkthrough"><a href="#project-specs">Specifications</a><a href="#project-problem">The problem</a><a href="#project-build">The build</a><a href="#project-details">Technical details</a></nav>
+
+    <Section id="project-specs" eyebrow="Project specs" title="Project specifications at a glance">
+      <TableScroll label="Rock River Diner project specs table">
         <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
           <thead>
             <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
@@ -109,10 +115,10 @@ const ExamplePage = () => (
             </tr>
           </tbody>
         </table>
-      </div>
+      </TableScroll>
     </Section>
 
-    <Section eyebrow="The problem" title="Common restaurant website problems">
+    <Section id="project-problem" eyebrow="The problem" title="Common restaurant website problems">
       <Card variant="outline">
         <p className="feature-card__body">
           Many independent restaurants have WordPress websites that were built years ago and have become slow and difficult to maintain. Common issues include long mobile load times, menus published as PDFs that do not display well on phones, and reservation or contact forms that silently fail without the owner knowing. Over time, accumulated plugins can conflict with each other and create security and performance problems.
@@ -162,7 +168,7 @@ const ExamplePage = () => (
       </Card>
     </Section>
 
-    <Section eyebrow="What changed" title="What a rebuild looks like">
+    <Section id="project-build" eyebrow="What changed" title="What a rebuild looks like">
       <Card variant="outline">
         <p className="feature-card__body">
           The site is rebuilt as a 4-page Gatsby static site, replacing the WordPress installation entirely. The new site includes a mobile-first menu, a working reservation form, a photo gallery, and hours/location information visible above the fold on every page.
@@ -176,7 +182,7 @@ const ExamplePage = () => (
       </Card>
     </Section>
 
-    <Section eyebrow="Technical work" title="Accessibility, performance, and SEO">
+    <Section id="project-details" eyebrow="Technical work" title="Accessibility, performance, and SEO">
       <div className="grid-three">
         <div className="pkg-card">
           <img src="/package-images/speed-lcp.svg" alt="Performance illustration" className="pkg-card__bg" loading="lazy" />
@@ -223,6 +229,7 @@ const ExamplePage = () => (
         <Link data-variant="ghost" to="/pricing/">See pricing</Link>
       </div>
     </Section>
+    </div>
   </Layout>
 );
 

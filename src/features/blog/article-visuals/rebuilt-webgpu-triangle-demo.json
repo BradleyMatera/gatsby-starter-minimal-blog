@@ -1,0 +1,65 @@
+{
+  "slug": "/rebuilt-webgpu-triangle-demo",
+  "title": "Rebuilding a WebGPU Triangle Demo: A Clean Fix Pass",
+  "cover": {
+    "src": "/images/blog/rebuilt-webgpu-triangle-demo/cover.png",
+    "mobile": "/images/blog/rebuilt-webgpu-triangle-demo/cover-720.webp",
+    "alt": "Precision optical rail projecting a single orange triangle, representing a staged WebGPU repair"
+  },
+  "figures": [
+    {
+      "id": "webgpu-debug-order",
+      "kind": "checklist",
+      "title": "Check dependencies before the draw call",
+      "summary": "A later rendering symptom can originate in an earlier setup stage.",
+      "items": [
+        {
+          "label": "Adapter",
+          "detail": "Confirm the browser returns a usable adapter."
+        },
+        {
+          "label": "Device",
+          "detail": "Request a device only after the adapter check succeeds."
+        },
+        {
+          "label": "Shader entries",
+          "detail": "Match the vertex and fragment entry names in shader and pipeline."
+        },
+        {
+          "label": "Frame attachment",
+          "detail": "Explicitly clear and store the current canvas texture."
+        }
+      ],
+      "caption": "The three repair areas described in this lab, separated into their dependency checks."
+    },
+    {
+      "id": "webgpu-frame-cycle",
+      "kind": "flow",
+      "title": "One frame, from clear to submit",
+      "summary": "The render loop repeats the same explicit sequence.",
+      "items": [
+        {
+          "label": "Encode",
+          "detail": "Create a command encoder for the frame."
+        },
+        {
+          "label": "Clear",
+          "detail": "Begin a pass on the current texture with a clear operation."
+        },
+        {
+          "label": "Draw",
+          "detail": "Set the pipeline and draw the triangle."
+        },
+        {
+          "label": "Submit",
+          "detail": "End the pass and submit the finished command buffer."
+        },
+        {
+          "label": "Repeat",
+          "detail": "Schedule the next frame."
+        }
+      ],
+      "caption": "The command sequence in the article's frame function; no performance improvement is inferred."
+    }
+  ]
+}

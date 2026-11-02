@@ -7,6 +7,10 @@ description: "How I built a tiny OBJ vertex parser in Zig to understand manual m
 theme: "Systems"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/exploring-zig-efficient-parsing.json";
+
+
 Parsing is reading bytes, splitting tokens, converting types, and verifying output. If the output is predictable, the parser is correct. I built a small OBJ vertex parser in Zig because Zig makes allocation and errors explicit, which forces you to understand what the parser is actually doing.
 
 ## Why Zig is interesting for parsing
@@ -47,8 +51,7 @@ It reads a `.obj` file, extracts `v` vertex lines, parses the three floats, stor
 | `data/sample.obj` | Known test input |
 | `src/main.zig` | The parser |
 
-{/* visual-break:exploring-zig-efficient-parsing:1 */}
-![Execution process checkpoint illustration for this section.](/assets/visuals/blog/exploring-zig-efficient-parsing-break-1.png)
+<ArticleVisual spec={articleVisuals.figures[0]} />
 
 ## Setup
 
@@ -130,8 +133,7 @@ v 1.0 0.0 0.0
 
 If the output matches the input exactly, the parser works for this input.
 
-{/* visual-break:exploring-zig-efficient-parsing:2 */}
-![Delivery workflow checkpoint illustration for this section.](/assets/visuals/blog/exploring-zig-efficient-parsing-break-2.png)
+<ArticleVisual spec={articleVisuals.figures[1]} />
 
 ## Why this is useful
 

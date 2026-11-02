@@ -7,6 +7,16 @@ description: "A practical website checklist for small businesses in Northwest Il
 theme: "Local"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/small-business-website-checklist-northwest-illinois.json";
+
+
+
+
+
+
+
+
 Most small-business websites I look at are not broken because they lack a fancy feature. They are broken because a visitor cannot figure out three basic things: what the business does, who it helps, and how to contact it.
 
 Research backs this up: Google's research on mobile user experience found that users form judgments about a company's credibility in as little as 50 milliseconds, and 57% of users say they will not recommend a business with a poorly designed mobile site ([Google mobile experience research](https://www.thinkwithgoogle.com/consumer-insights/consumer-trends/mobile-experience-statistics/)).
@@ -64,6 +74,8 @@ Within a few seconds, the homepage should make clear:
 
 If the first screen is all slogans and no service description, the visitor has to work too hard. Most will not.
 
+<ArticleVisual spec={articleVisuals.figures[0]} />
+
 ## 2. Say where you work plainly
 
 If you serve Durand, Davis, or nearby Illinois communities, say it directly. Do not make people guess whether you are local, remote, or in another state.
@@ -93,6 +105,8 @@ Quick mobile audit checklist:
 - **Test that the contact form works** on mobile
 - **Run the site through [Google PageSpeed Insights](https://pagespeed.web.dev/)** and address critical issues
 - **Check that images are not so large** they push content off-screen
+
+<ArticleVisual spec={articleVisuals.figures[1]} />
 
 ## 5. Give every page one job
 

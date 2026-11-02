@@ -1,0 +1,15 @@
+{
+  "description": "Decorative website planning illustrations. Not geographic maps, client results, or representations of actual local businesses.",
+  "sources": {
+    "local-supplier-studio.svg": "city-demo-manufacturing.svg",
+    "local-catalog-studio.svg": "city-demo-agriculture.svg",
+    "local-visit-studio.svg": "city-demo-restaurant.svg",
+    "local-appointment-studio.svg": "city-demo-salon.svg",
+    "local-home-studio.svg": "city-small-business.svg",
+    "local-service-studio.svg": "city-demo-hvac.svg",
+    "local-refresh-studio.svg": "city-website-repair.svg",
+    "local-search-studio.svg": "city-location-pin.svg",
+    "local-collaboration-studio.svg": "city-step-call.svg",
+    "local-launch-studio.svg": "city-step-launch.svg"
+  }
+}

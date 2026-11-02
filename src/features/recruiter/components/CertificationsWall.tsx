@@ -1,5 +1,6 @@
 import * as React from "react";
 
+
 /* --------------------------------------------------------------------------
    Certifications Wall — Beautiful certificate grid with verification.
    -------------------------------------------------------------------------- */
@@ -74,174 +75,15 @@ const CERTIFICATIONS: Certification[] = [
   },
 ];
 
-const CertificationsWall: React.FC = () => {
-  const [expandedId, setExpandedId] = React.useState<string | null>(null);
-
-  return (
-    <section id="certifications" className="recruiter-section recruiter-section--media reveal-section">
-      {/* Background media layer */}
-      <div className="recruiter-section__media" aria-hidden="true">
-        <img
-          className="recruiter-section__video recruiter-ken-burns"
-          src="/quick-snapshot.webp"
-          alt="Quick snapshot of certifications — background for the certifications wall section"
-          aria-hidden="true"
-        />
-        <div className="recruiter-section__media-overlay" />
-      </div>
-
-      <div className="recruiter-section__content">
-        <div className="recruiter-section__header">
-          <div className="recruiter-section__eyebrow">Credentials</div>
-          <h2 className="recruiter-section__title">
-            Certifications <span className="recruiter-title-accent">Wall</span>
-          </h2>
-          <p className="recruiter-section__subtitle">
-            Verified credentials with links. Every certification includes skills gained and verification details.
-          </p>
-        </div>
-
-        <div className="recruiter-grid reveal-child recruiter-grid--2" style={{ maxWidth: 900, margin: "0 auto" }}>
-        {CERTIFICATIONS.map((cert) => {
-          const isExpanded = expandedId === cert.id;
-
-          return (
-            <div
-              key={cert.id}
-              className="recruiter-card"
-              style={{
-                padding: "2rem",
-                cursor: "pointer",
-                borderLeft: `3px solid ${cert.color}`,
-                transition: "all 0.3s ease",
-              }}
-              onClick={() => setExpandedId(isExpanded ? null : cert.id)}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  setExpandedId(isExpanded ? null : cert.id);
-                }
-              }}
-              aria-expanded={isExpanded}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "flex-start",
-                  gap: "1rem",
-                }}
-              >
-                <div
-                  style={{
-                    width: 56,
-                    height: 56,
-                    borderRadius: 12,
-                    background: "var(--r-accent-light)",
-                    border: "1px solid var(--r-border)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "0.875rem",
-                    fontWeight: 800,
-                    color: cert.color,
-                    flexShrink: 0,
-                  }}
-                >
-                  {cert.icon}
-                </div>
-                <div style={{ flex: 1 }}>
-                  <h3
-                    style={{
-                      fontSize: "1.0625rem",
-                      fontWeight: 700,
-                      marginBottom: "0.25rem",
-                      color: "var(--recruiter-text)",
-                    }}
-                  >
-                    {cert.name}
-                  </h3>
-                  <div
-                    style={{
-                      fontSize: "0.8125rem",
-                      color: "var(--recruiter-text-secondary)",
-                      display: "flex",
-                      gap: "0.75rem",
-                      flexWrap: "wrap",
-                    }}
-                  >
-                    <span>{cert.issuer}</span>
-                    <span style={{ color: "var(--recruiter-border)" }}>|</span>
-                    <span>{cert.date}</span>
-                  </div>
-                </div>
-              </div>
-
-              {isExpanded && (
-                <div style={{ marginTop: "1.25rem", paddingTop: "1.25rem", borderTop: "1px solid var(--recruiter-border)" }}>
-                  <div
-                    style={{
-                      fontSize: "0.8125rem",
-                      color: "var(--recruiter-text-muted)",
-                      marginBottom: "0.5rem",
-                    }}
-                  >
-                    Credential ID: <code style={{ color: "var(--recruiter-text-secondary)" }}>{cert.credentialId}</code>
-                  </div>
-                  <div style={{ marginBottom: "1rem" }}>
-                    <a
-                      href={cert.verifyUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="recruiter-btn magnetic-btn recruiter-btn--primary"
-                      style={{
-                        padding: "0.5rem 1rem",
-                        fontSize: "0.8125rem",
-                      }}
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      Verify Credential →
-                    </a>
-                  </div>
-                  <div
-                    style={{
-                      fontSize: "0.75rem",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.05em",
-                      color: "var(--recruiter-text-muted)",
-                      marginBottom: "0.5rem",
-                    }}
-                  >
-                    Skills Gained
-                  </div>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.375rem" }}>
-                    {cert.skills.map((skill) => (
-                      <span key={skill} className="recruiter-tag">
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              <div
-                style={{
-                  fontSize: "0.75rem",
-                  color: "var(--recruiter-text-muted)",
-                  marginTop: "0.75rem",
-                  textAlign: "right",
-                }}
-              >
-                {isExpanded ? "Show less ↑" : "Show more ↓"}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-    </section>
-  );
-};
+const CertificationsWall: React.FC = () => (
+  <section id="certifications" className="recruiter-section" aria-labelledby="recruiter-credentials-heading">
+    <div className="recruiter-section__header"><span className="recruiter-section__eyebrow">Credentials</span><h2 id="recruiter-credentials-heading" className="recruiter-section__title">Certifications <span className="recruiter-title-accent">Wall</span></h2><p className="recruiter-section__subtitle">Verified credentials with links. Every certification includes skills gained and verification details.</p></div>
+    <div className="recruiter-credential-list">{CERTIFICATIONS.map((cert) => <article key={cert.id} className="recruiter-credential">
+      <div className="recruiter-credential__issuer" aria-hidden="true">{cert.icon}</div>
+      <div><h3>{cert.name}</h3><p>{cert.issuer} · {cert.date}</p><details className="recruiter-details"><summary>Credential details and skills</summary><p>Credential ID: <code>{cert.credentialId}</code></p><ul className="recruiter-tag-list">{cert.skills.map((skill) => <li className="recruiter-tag" key={skill}>{skill}</li>)}</ul></details></div>
+      <a href={cert.verifyUrl} target="_blank" rel="noopener noreferrer" className="recruiter-btn recruiter-btn--secondary" aria-label={`Verify ${cert.name} in a new tab`}>Verify credential ↗</a>
+    </article>)}</div>
+  </section>
+);
 
 export default CertificationsWall;

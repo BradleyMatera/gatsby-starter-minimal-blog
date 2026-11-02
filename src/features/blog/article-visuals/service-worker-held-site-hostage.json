@@ -1,0 +1,59 @@
+{
+  "slug": "service-worker-held-site-hostage",
+  "title": "Service Worker Held My Site Hostage: How I Removed It",
+  "cover": {
+    "src": "/images/blog/service-worker-held-site-hostage/cover.png",
+    "mobile": "/images/blog/service-worker-held-site-hostage/cover-720.webp",
+    "alt": "Concept illustration of a stale browser cache intercepting a newly deployed website."
+  },
+  "figures": [
+    {
+      "id": "cache-path",
+      "kind": "layers",
+      "title": "Why the server and browser disagreed",
+      "summary": "The deployed files were correct; a browser-side layer kept returning the old interface.",
+      "items": [
+        {
+          "label": "Server output",
+          "detail": "curl returned the newly deployed HTML."
+        },
+        {
+          "label": "Registered service worker",
+          "detail": "An older activated worker intercepted browser requests."
+        },
+        {
+          "label": "Cached response",
+          "detail": "The browser continued displaying the previous interface."
+        }
+      ],
+      "caption": "A simplified view of the specific stale-cache incident described in this article.",
+      "sourceLabel": "MDN: Using Service Workers",
+      "sourceHref": "https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers"
+    },
+    {
+      "id": "debugging-order",
+      "kind": "flow",
+      "title": "Separate deployment problems from browser cache",
+      "summary": "Compare independent views of the same URL before rebuilding again.",
+      "items": [
+        {
+          "label": "Check server HTML",
+          "detail": "Fetch the live URL with curl and compare the markup."
+        },
+        {
+          "label": "Try a fresh session",
+          "detail": "Compare the normal browser with an Incognito session."
+        },
+        {
+          "label": "Inspect the worker",
+          "detail": "Check DevTools → Application → Service Workers."
+        },
+        {
+          "label": "Unregister and verify",
+          "detail": "Remove the stale registration and reload to confirm the new build."
+        }
+      ],
+      "caption": "These are the investigation and recovery steps used in this post; unregistering is a debugging action."
+    }
+  ]
+}

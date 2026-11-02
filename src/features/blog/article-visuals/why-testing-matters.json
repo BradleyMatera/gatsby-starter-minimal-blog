@@ -1,0 +1,65 @@
+{
+  "slug": "why-testing-matters",
+  "title": "Testing That I Actually Run: A Small Pyramid",
+  "cover": {
+    "src": "/images/blog/why-testing-matters/cover.png",
+    "mobile": "/images/blog/why-testing-matters/cover-720.webp",
+    "alt": "Concept illustration of a stable testing pyramid with a broad block foundation, a few integration pieces, and a small inspection lens."
+  },
+  "figures": [
+    {
+      "id": "small-testing-stack",
+      "kind": "layers",
+      "title": "The testing stack used in this article",
+      "summary": "Keep the automated foundation focused and the release check manageable.",
+      "items": [
+        {
+          "label": "Pure logic",
+          "detail": "Use Vitest for deterministic formatters, parsers, and permission checks."
+        },
+        {
+          "label": "Module boundaries",
+          "detail": "Add a small number of integration tests with mocked network responses."
+        },
+        {
+          "label": "Release smoke check",
+          "detail": "Manually check the main user flow, mobile menu, and links."
+        },
+        {
+          "label": "Continuous integration",
+          "detail": "Run the fast automated suite away from the developer's laptop."
+        }
+      ],
+      "caption": "The author's approach for personal projects; it is not a universal replacement for end-to-end testing."
+    },
+    {
+      "id": "testing-release-loop",
+      "kind": "flow",
+      "title": "From an edge case to a release check",
+      "summary": "Use repeatable checks where they provide practical confidence.",
+      "items": [
+        {
+          "label": "Implement",
+          "detail": "Get the function working in a scratch file or REPL."
+        },
+        {
+          "label": "Test the boundary",
+          "detail": "Cover meaningful null, empty, type, and exact-match cases."
+        },
+        {
+          "label": "Run locally",
+          "detail": "Check the focused suite before committing."
+        },
+        {
+          "label": "Run in CI",
+          "detail": "Repeat the automated checks after pushing."
+        },
+        {
+          "label": "Inspect the release",
+          "detail": "Walk the smoke checklist in the target browsers."
+        }
+      ],
+      "caption": "The workflow described in the article. Manual and automated checks cover different risks."
+    }
+  ]
+}

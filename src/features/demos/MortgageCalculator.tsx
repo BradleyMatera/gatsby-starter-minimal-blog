@@ -1,116 +1,39 @@
 import * as React from "react";
 
-/**
- * Real working mortgage calculator — pure JavaScript, no API needed.
- * Uses standard amortization formula: M = P * [r(1+r)^n] / [(1+r)^n - 1]
- * In production, this could integrate with a real-time mortgage rate API
- * like Freddie Mac PMMS or Zillow's API for live rate data.
- */
+const initial = { homePrice: "285000", downPayment: "57000", rate: "6.75", term: "30" };
 const MortgageCalculator: React.FC = () => {
-  const [homePrice, setHomePrice] = React.useState(285000);
-  const [downPayment, setDownPayment] = React.useState(57000);
-  const [rate, setRate] = React.useState(6.75);
-  const [term, setTerm] = React.useState(30);
-
+  const [values, setValues] = React.useState(initial);
+  const homePrice = Number(values.homePrice);
+  const downPayment = Number(values.downPayment);
+  const rate = Number(values.rate);
+  const term = Number(values.term);
+  const errors: Record<string, string> = {};
+  if (!values.homePrice || !Number.isFinite(homePrice) || homePrice <= 0 || homePrice > 100000000) errors.homePrice = "Enter a price between $1 and $100,000,000.";
+  if (!values.downPayment || !Number.isFinite(downPayment) || downPayment < 0 || downPayment > homePrice) errors.downPayment = "Enter a down payment from $0 to the home price.";
+  if (!values.rate || !Number.isFinite(rate) || rate < 0 || rate > 30) errors.rate = "Enter an illustrative annual rate from 0% to 30%.";
+  const valid = Object.keys(errors).length === 0;
   const principal = homePrice - downPayment;
   const monthlyRate = rate / 100 / 12;
-  const numPayments = term * 12;
-
-  const monthlyPayment =
-    monthlyRate === 0
-      ? principal / numPayments
-      : (principal * monthlyRate * Math.pow(1 + monthlyRate, numPayments)) /
-        (Math.pow(1 + monthlyRate, numPayments) - 1);
-
-  const totalPaid = monthlyPayment * numPayments;
-  const totalInterest = totalPaid - principal;
-
-  const formatCurrency = (n: number) =>
-    n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
-
-  return (
-    <div className="demo-mortgage-calc">
-      <h3 className="demo-mortgage-calc__title">Mortgage Calculator</h3>
-      <p className="demo-mortgage-calc__subtitle">
-        Estimate your monthly payment. Live rate data available via Freddie Mac PMMS API or Zillow API.
-      </p>
-
-      <div className="demo-mortgage-calc__form">
-        <div className="demo-form__field">
-          <label className="demo-form__label" htmlFor="homePrice">Home Price</label>
-          <input
-            className="demo-form__input"
-            id="homePrice"
-            type="number"
-            value={homePrice}
-            onChange={(e) => setHomePrice(Number(e.target.value))}
-            step="5000"
-          />
-        </div>
-        <div className="demo-form__field">
-          <label className="demo-form__label" htmlFor="downPayment">Down Payment</label>
-          <input
-            className="demo-form__input"
-            id="downPayment"
-            type="number"
-            value={downPayment}
-            onChange={(e) => setDownPayment(Number(e.target.value))}
-            step="5000"
-          />
-        </div>
-        <div className="demo-form__row">
-          <div className="demo-form__field">
-            <label className="demo-form__label" htmlFor="rate">Interest Rate (%)</label>
-            <input
-              className="demo-form__input"
-              id="rate"
-              type="number"
-              value={rate}
-              onChange={(e) => setRate(Number(e.target.value))}
-              step="0.05"
-            />
-          </div>
-          <div className="demo-form__field">
-            <label className="demo-form__label" htmlFor="term">Loan Term (years)</label>
-            <select
-              className="demo-form__select"
-              id="term"
-              value={term}
-              onChange={(e) => setTerm(Number(e.target.value))}
-            >
-              <option value={15}>15 years</option>
-              <option value={20}>20 years</option>
-              <option value={30}>30 years</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <div className="demo-mortgage-calc__results">
-        <div className="demo-mortgage-calc__result">
-          <div className="demo-mortgage-calc__result-label">Monthly Payment</div>
-          <div className="demo-mortgage-calc__result-value">{formatCurrency(monthlyPayment)}<span className="demo-mortgage-calc__result-unit">/mo</span></div>
-        </div>
-        <div className="demo-mortgage-calc__result">
-          <div className="demo-mortgage-calc__result-label">Loan Amount</div>
-          <div className="demo-mortgage-calc__result-value-sm">{formatCurrency(principal)}</div>
-        </div>
-        <div className="demo-mortgage-calc__result">
-          <div className="demo-mortgage-calc__result-label">Total Interest</div>
-          <div className="demo-mortgage-calc__result-value-sm">{formatCurrency(totalInterest)}</div>
-        </div>
-        <div className="demo-mortgage-calc__result">
-          <div className="demo-mortgage-calc__result-label">Total Paid</div>
-          <div className="demo-mortgage-calc__result-value-sm">{formatCurrency(totalPaid)}</div>
-        </div>
-      </div>
-
-      <div className="demo-mortgage-calc__disclaimer">
-        Estimate only. Does not include taxes, insurance, or PMI. For exact rates, contact a lender.
-        Live rate data: Freddie Mac Primary Mortgage Market Survey API (free) or Zillow API.
-      </div>
+  const payments = term * 12;
+  const monthly = valid ? monthlyRate === 0 ? principal / payments : principal * monthlyRate / (1 - Math.pow(1 + monthlyRate, -payments)) : 0;
+  const currency = (value: number) => value.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+  const fields = [{ key: "homePrice", label: "Home price", min: 1, max: 100000000 }, { key: "downPayment", label: "Down payment", min: 0, max: homePrice }, { key: "rate", label: "Illustrative annual interest rate (%)", min: 0, max: 30 }] as const;
+  return <div className="demo-mortgage-calc">
+    <h3 className="demo-mortgage-calc__title">Mortgage Calculator</h3>
+    <p className="demo-mortgage-calc__subtitle">Explore a sample estimate using your chosen price, down payment and rate. No live rates or loan application.</p>
+    <div className="demo-mortgage-calc__form">
+      {fields.map((field) => <div className="demo-form__field" key={field.key}>
+        <label className="demo-form__label" htmlFor={field.key}>{field.label}</label>
+        <input className="demo-form__input" id={field.key} type="number" step={field.key === "rate" ? "0.05" : "1"} min={field.min} max={field.max} value={values[field.key]} onChange={(event) => setValues({ ...values, [field.key]: event.target.value })} aria-invalid={Boolean(errors[field.key])} aria-describedby={errors[field.key] ? `${field.key}-error` : undefined} />
+        {errors[field.key] && <p id={`${field.key}-error`}>{errors[field.key]}</p>}
+      </div>)}
+      <div className="demo-form__field"><label className="demo-form__label" htmlFor="term">Loan term (years)</label><select className="demo-form__select" id="term" value={values.term} onChange={(event) => setValues({ ...values, term: event.target.value })}>{[15, 20, 30].map((years) => <option key={years} value={years}>{years} years</option>)}</select></div>
     </div>
-  );
+    <div className="demo-mortgage-calc__results" aria-live="polite" aria-atomic="true">
+      {valid ? <><div className="demo-mortgage-calc__result"><div className="demo-mortgage-calc__result-label">Estimated monthly principal and interest</div><output className="demo-mortgage-calc__result-value" htmlFor="homePrice downPayment rate term">{currency(monthly)}<span className="demo-mortgage-calc__result-unit">/mo</span></output></div><div className="demo-mortgage-calc__result"><div className="demo-mortgage-calc__result-label">Loan amount</div><div className="demo-mortgage-calc__result-value-sm">{currency(principal)}</div></div><div className="demo-mortgage-calc__result"><div className="demo-mortgage-calc__result-label">Total interest</div><div className="demo-mortgage-calc__result-value-sm">{currency(monthly * payments - principal)}</div></div></> : <p>Complete the valid amounts above to see an estimate.</p>}
+    </div>
+    <button type="button" className="demo-btn demo-btn--ghost" onClick={() => setValues(initial)}>Reset sample values</button>
+    <p className="demo-mortgage-calc__disclaimer">Illustrative fixed-rate calculation only. Excludes taxes, insurance, fees and PMI. This is not a rate offer, eligibility check or financial advice.</p>
+  </div>;
 };
-
 export default MortgageCalculator;

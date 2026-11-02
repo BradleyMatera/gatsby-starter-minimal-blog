@@ -69,6 +69,9 @@ const formatMoney = (amountCents: number, currency = "USD") => {
 };
 
 const PurchasesPage = () => {
+  const [identityError, setIdentityError] = React.useState(false);
+  const [identityAttempt, setIdentityAttempt] = React.useState(0);
+  const [now, setNow] = React.useState(0);
   const [identity, setIdentity] = React.useState<IdentityWidget | null>(null);
   const [user, setUser] = React.useState<IdentityUser | null>(null);
   const [status, setStatus] = React.useState<"idle" | "loading" | "error" | "success">("idle");
@@ -81,6 +84,7 @@ const PurchasesPage = () => {
 
   React.useEffect(() => {
     if (typeof window === "undefined") return;
+    setIdentityError(false);
     let widget: IdentityWidget | null = null;
     let mounted = true;
 
@@ -122,7 +126,7 @@ const PurchasesPage = () => {
       };
     };
 
-    const cleanupPromise = initIdentity();
+    const cleanupPromise = initIdentity().catch(() => { if (mounted) setIdentityError(true); });
 
     return () => {
       mounted = false;
@@ -132,7 +136,7 @@ const PurchasesPage = () => {
         });
       }
     };
-  }, []);
+  }, [identityAttempt]);
 
   const loadOrders = async (options: { token?: string }) => {
     setStatus("loading");
@@ -170,11 +174,19 @@ const PurchasesPage = () => {
   };
 
   React.useEffect(() => {
+    setOrders([]);
+    setDownloadsByOrder({});
     if (!user) return;
     user.jwt().then((token) => {
       loadOrders({ token });
-    });
+    }).catch(() => { setStatus("error"); setMessage("Your sign-in could not be verified. Please sign in again."); });
   }, [user]);
+
+  React.useEffect(() => {
+    setNow(Date.now());
+    const timer = window.setInterval(() => setNow(Date.now()), 30000);
+    return () => window.clearInterval(timer);
+  }, []);
 
   const handleLogin = () => {
     if (typeof window !== "undefined") {
@@ -313,7 +325,7 @@ const PurchasesPage = () => {
                   onClick={handleLogin}
                   disabled={!identity}
                 >
-                  {identity ? "Sign in" : "Loading sign-in…"}
+                  {identityError ? "Sign-in unavailable" : identity ? "Sign in" : "Loading sign-in…"}
                 </button>
                 <button
                   className="store-button store-button--ghost"
@@ -328,8 +340,10 @@ const PurchasesPage = () => {
           </div>
         </div>
 
+        {identityError && <div className="store-status store-error" role="alert"><p>Sign-in could not load. Please try again.</p><button type="button" className="store-button" onClick={() => setIdentityAttempt((value) => value + 1)}>Retry sign-in</button></div>}
+        {status === "loading" && <div className="store-status" role="status">Loading your orders…</div>}
         {message && (
-          <div className={`store-status store-status--spaced-md ${status === "error" ? "store-error" : ""}`}>
+          <div role={status === "error" ? "alert" : "status"} className={`store-status store-status--spaced-md ${status === "error" ? "store-error" : ""}`}>
             {message}
             {status === "error" && (
               <div className="u-mt-3">
@@ -340,18 +354,18 @@ const PurchasesPage = () => {
         )}
 
         {actionMessage && (
-          <div className="store-status store-status--spaced-sm">
+          <div className="store-status store-status--spaced-sm" role="status" aria-live="polite">
             {actionMessage}
           </div>
         )}
 
-        {orders.length > 0 && (
+        {user && status === "success" && orders.length > 0 && (
           <div className="store-orders">
             <h2 className="store-section-title">Your order history</h2>
             <p className="store-section-description">
               A summary of every order linked to your account. Expand an order below to re-download files or resend a receipt.
             </p>
-            <table className="data-table">
+            <details className="store-comparison"><summary>Order summary table</summary><div className="store-table-scroll" role="region" aria-label="Order summary"><table className="data-table">
               <caption>Order summary</caption>
               <thead>
                 <tr>
@@ -377,7 +391,7 @@ const PurchasesPage = () => {
                   );
                 })}
               </tbody>
-            </table>
+            </table></div></details>
 
             <h3 className="store-section-title">Order details and downloads</h3>
             {orders.map((order) => {
@@ -422,7 +436,7 @@ const PurchasesPage = () => {
                       disabled={isBusy || order.status !== "paid"}
                       onClick={() => handleGetDownloads(order.id)}
                     >
-                      {order.status !== "paid" ? "Downloads unavailable" : "Get downloads"}
+                      {isBusy ? "Working…" : order.status !== "paid" ? "Downloads unavailable" : downloads.length ? "Refresh download links" : "Get downloads"}
                     </button>
                     <button
                       className="store-button store-button--ghost"
@@ -433,22 +447,16 @@ const PurchasesPage = () => {
                       Email receipt
                     </button>
                   </div>
+                  {order.status === "refunded" && <p className="store-meta">This order was refunded. Downloads are unavailable.</p>}
                   {downloads.length > 0 && (
                     <div className="store-downloads">
                       {downloads.map((download) => (
                         <div key={`${order.id}-${download.product_id}`} className="store-download-item">
                           <div><strong>{download.name}</strong></div>
                           <div className="store-meta">Quantity: {download.quantity}</div>
-                          <a
-                            href={normalizeDownloadUrl(download.download_url)}
-                            download
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            Download
-                          </a>
+                          {download.expires_at * 1000 > now ? <a href={normalizeDownloadUrl(download.download_url)} download target="_blank" rel="noreferrer">Download {download.name}</a> : <p className="store-status" role="status">This link has expired. Choose Refresh download links above.</p>}
                           <div className="store-meta">
-                            Link expires at {new Date(download.expires_at * 1000).toLocaleTimeString()}
+                            Link expires {new Date(download.expires_at * 1000).toLocaleString()}
                           </div>
                         </div>
                       ))}

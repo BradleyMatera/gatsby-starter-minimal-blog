@@ -1,9 +1,12 @@
+import TableScroll from "../../features/demos/TableScroll";
 import * as React from "react";
+import BrandArtwork from "../../site/components/BrandArtwork";
+import ServiceVisual from "../../features/services/ServiceVisual";
 import type { HeadFC } from "gatsby";
 import Layout from "../../@lekoarts/gatsby-theme-minimal-blog/components/layout";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
-import { Card, Link, Section } from "../../ui";
+import { Card, Link, Section, FAQAccordion, AnchorNav } from "../../ui";
 
 const pathname = "/services/website-accessibility/";
 const pageTitle = "Website Accessibility Services — WCAG 2.2 AA Compliance | Bradley Matera";
@@ -53,7 +56,7 @@ const faqs = [
 ];
 
 const WebsiteAccessibilityPage = () => (
-  <Layout>
+  <Layout className="business-page service-page">
     <nav className="breadcrumbs" aria-label="Breadcrumb">
       <ol className="breadcrumbs__list">
         <li className="breadcrumbs__item">
@@ -69,8 +72,10 @@ const WebsiteAccessibilityPage = () => (
     </nav>
 
     <Section
+      id="section-accessibility"
       eyebrow="Accessibility"
       titleAs="h1"
+      visual={<BrandArtwork variant="accessible-interface" eager />}
       title={
         <>
           <strong>Website Accessibility</strong> Services
@@ -95,6 +100,8 @@ const WebsiteAccessibilityPage = () => (
         </>
       }
     >
+    <AnchorNav className="business-section-nav" items={[{"id": "section-what-s-covered", "label": "What's covered"}, {"id": "section-how-it-works", "label": "How it works"}, {"id": "section-why-it-matters", "label": "Why it matters"}, {"id": "section-compare", "label": "Compare"}, {"id": "section-faq", "label": "FAQ"}, {"id": "section-ready-to-start", "label": "Ready to start?"}]} />
+      <ServiceVisual kind="website-accessibility" />
       <div className="grid-three">
         <div className="pkg-card">
           <img src="/package-images/a11y-wcag.svg" alt="WCAG 2.2 AA illustration" className="pkg-card__bg" loading="lazy" />
@@ -136,6 +143,7 @@ const WebsiteAccessibilityPage = () => (
     </Section>
 
     <Section
+      id="section-what-s-covered"
       eyebrow="What's covered"
       title="What the audit checks"
       description={
@@ -154,6 +162,7 @@ const WebsiteAccessibilityPage = () => (
     </Section>
 
     <Section
+      id="section-how-it-works"
       eyebrow="How it works"
       title="From audit to compliance"
     >
@@ -189,6 +198,7 @@ const WebsiteAccessibilityPage = () => (
     </Section>
 
     <Section
+      id="section-why-it-matters"
       eyebrow="Why it matters"
       title="Who benefits from accessibility"
     >
@@ -215,6 +225,7 @@ const WebsiteAccessibilityPage = () => (
     </Section>
 
     <Section
+      id="section-compare"
       eyebrow="Compare"
       title="Which option fits your business?"
       description={
@@ -223,14 +234,14 @@ const WebsiteAccessibilityPage = () => (
         </p>
       }
     >
-      <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Website accessibility comparison table">
-        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
+      <TableScroll label="Website accessibility comparison table">
+<table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.95rem" }}>
           <thead>
             <tr style={{ borderBottom: "2px solid var(--color-border)" }}>
-              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
-              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Audit only — $297</th>
-              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Audit + fixes — $65/hr</th>
-              <th style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Full compliance — $897+</th>
+              <th scope="col" style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Feature</th>
+              <th scope="col" style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Audit only — $297</th>
+              <th scope="col" style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Audit + fixes — $65/hr</th>
+              <th scope="col" style={{ textAlign: "left", padding: "0.75rem", fontWeight: 600 }}>Full compliance — $897+</th>
             </tr>
           </thead>
           <tbody>
@@ -284,24 +295,19 @@ const WebsiteAccessibilityPage = () => (
             </tr>
           </tbody>
         </table>
-      </div>
+</TableScroll>
     </Section>
 
     <Section
+      id="section-faq"
       eyebrow="FAQ"
       title="Common questions about accessibility"
     >
-      <div className="grid-three">
-        {faqs.map((faq) => (
-          <Card key={faq.q} variant="outline">
-            <h3 className="feature-card__title">{faq.q}</h3>
-            <p className="feature-card__body">{faq.a}</p>
-          </Card>
-        ))}
-      </div>
+      <FAQAccordion items={faqs.map(faq => ({ question: faq.q, answer: faq.a }))} />
     </Section>
 
     <Section
+      id="section-ready-to-start"
       eyebrow="Ready to start?"
       title="Get a free consultation"
       description={

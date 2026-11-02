@@ -3,7 +3,7 @@ import type { HeadFC } from "gatsby";
 import Layout from "../@lekoarts/gatsby-theme-minimal-blog/components/layout";
 import Seo from "../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
-import { Card, Link, Section } from "../ui";
+import { Card, Link, Section, AnchorNav } from "../ui";
 import {
   SELLER_PHONE,
   SELLER_PHONE_HREF,
@@ -19,7 +19,7 @@ const pageDescription =
   "What is included in every website build: mobile responsive, SEO, contact form, hosting setup, analytics, 30-day warranty, care plans, and hourly work scope.";
 
 const ServiceScopePage = () => (
-  <Layout>
+  <Layout className="business-page service-scope-page">
     <nav className="breadcrumbs" aria-label="Breadcrumb">
       <ol className="breadcrumbs__list">
         <li className="breadcrumbs__item">
@@ -32,6 +32,7 @@ const ServiceScopePage = () => (
     </nav>
 
     <Section
+      id="section-legal"
       eyebrow="Legal"
       titleAs="h1"
       title={
@@ -58,6 +59,7 @@ const ServiceScopePage = () => (
         </>
       }
     >
+    <AnchorNav className="business-section-nav" items={[{"id": "section-every-build", "label": "Every build"}, {"id": "section-what-s-included", "label": "What's included"}, {"id": "section-not-included", "label": "Not included"}, {"id": "section-packages", "label": "Packages"}, {"id": "section-comparison", "label": "Comparison"}, {"id": "section-care-plans", "label": "Care plans"}, {"id": "section-hourly-work", "label": "Hourly work"}, {"id": "section-travel", "label": "Travel"}, {"id": "section-response-times", "label": "Response times"}, {"id": "section-ready-to-start", "label": "Ready to start?"}]} />
       <div className="grid-three">
         <div className="pkg-card">
           <img src="/package-images/scope-included.svg" alt="Mobile responsive illustration" className="pkg-card__bg" loading="lazy" />
@@ -90,6 +92,7 @@ const ServiceScopePage = () => (
     </Section>
 
     <Section
+      id="section-every-build"
       eyebrow="Every build"
       title="What's included in every build"
     >
@@ -112,6 +115,7 @@ const ServiceScopePage = () => (
     </Section>
 
     <Section
+      id="section-what-s-included"
       eyebrow="What's included"
       title="Every project includes these fundamentals"
       description={
@@ -137,6 +141,7 @@ const ServiceScopePage = () => (
     </Section>
 
     <Section
+      id="section-not-included"
       eyebrow="Not included"
       title="What's NOT included"
     >
@@ -161,6 +166,7 @@ const ServiceScopePage = () => (
     </Section>
 
     <Section
+      id="section-packages"
       eyebrow="Packages"
       title="Package inclusions"
       description={
@@ -205,6 +211,7 @@ const ServiceScopePage = () => (
     </Section>
 
     <Section
+      id="section-comparison"
       eyebrow="Comparison"
       title="Package comparison: what's included vs. not included"
       description={
@@ -339,6 +346,7 @@ const ServiceScopePage = () => (
     </Section>
 
     <Section
+      id="section-care-plans"
       eyebrow="Care plans"
       title="Care plan scope"
       description={
@@ -379,6 +387,7 @@ const ServiceScopePage = () => (
     </Section>
 
     <Section
+      id="section-hourly-work"
       eyebrow="Hourly work"
       title="Hourly work scope"
     >
@@ -393,6 +402,7 @@ const ServiceScopePage = () => (
     </Section>
 
     <Section
+      id="section-travel"
       eyebrow="Travel"
       title="Travel policy"
     >
@@ -410,6 +420,7 @@ const ServiceScopePage = () => (
     </Section>
 
     <Section
+      id="section-response-times"
       eyebrow="Response times"
       title="Response time targets"
     >
@@ -445,6 +456,7 @@ const ServiceScopePage = () => (
     </Section>
 
     <Section
+      id="section-ready-to-start"
       eyebrow="Ready to start?"
       title="Get a free consultation"
       description={

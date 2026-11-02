@@ -7,6 +7,10 @@ description: "A practical checklist to reduce contact form friction. Fewer field
 theme: "Conversion"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/contact-form-friction-checklist.json";
+
+
 Most contact forms lose submissions because they ask for too much information, use inputs that are painful to fill out on a phone, have unclear submit buttons, or block real users with aggressive captcha. Fix these friction points and form submissions go up. This checklist covers the six most common problems and how to fix each one.
 
 Your contact form is the point where a visitor becomes a lead. Every extra field, every confusing label, every unnecessary step is a place where someone gives up and leaves. I have reviewed forms for small businesses that had 15 required fields and wondered why they got one submission a month.
@@ -59,6 +63,8 @@ On a phone, the keyboard that appears depends on the input type. If your email f
 - Set `inputmode` attributes where appropriate.
 
 This is a 5-minute fix that makes a real difference on mobile, where most of your form submissions come from.
+
+<ArticleVisual spec={articleVisuals.figures[0]} />
 
 ## What should the submit button say?
 
@@ -116,6 +122,8 @@ The checklist covers six friction points: too many fields, required fields that 
 | Submit button | Gray "Submit" | Action text, contrasting color | Medium |
 | Confirmation | No feedback after submit | Clear success message | High |
 | Captcha | Visible image challenge | Invisible captcha or honeypot | High |
+
+<ArticleVisual spec={articleVisuals.figures[1]} />
 
 ## What does a good contact form look like?
 

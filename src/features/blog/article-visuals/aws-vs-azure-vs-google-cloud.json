@@ -1,0 +1,57 @@
+{
+  "slug": "/aws-vs-azure-vs-google-cloud",
+  "title": "AWS vs. Azure vs. Google Cloud: A 2026 Free Tier Comparison From Real Use",
+  "cover": {
+    "src": "/images/blog/aws-vs-azure-vs-google-cloud/cover.png",
+    "mobile": "/images/blog/aws-vs-azure-vs-google-cloud/cover-720.webp",
+    "alt": "Conceptual triptych of three hosting environments with different connected resources to inspect."
+  },
+  "figures": [
+    {
+      "id": "provider-resource-checks",
+      "kind": "comparison",
+      "title": "Different providers, the same resource questions",
+      "summary": "Compare the same concerns before relying on a provider’s free offering.",
+      "items": [
+        {
+          "label": "Compute",
+          "detail": "Which instance is active, and does its configuration match the intended plan?"
+        },
+        {
+          "label": "Storage",
+          "detail": "Which disks, database storage, and objects remain after testing?"
+        },
+        {
+          "label": "Location",
+          "detail": "Which region holds each resource, and is it eligible for the offer being used?"
+        },
+        {
+          "label": "Visibility",
+          "detail": "Are billing alerts configured and recent costs being reviewed?"
+        }
+      ],
+      "caption": "A comparison framework based on the article. It does not reproduce time-sensitive quotas or prices."
+    },
+    {
+      "id": "provider-cleanup-checks",
+      "kind": "checklist",
+      "title": "The three surprises became three checks",
+      "summary": "The author’s reported billing mistakes point to specific resource-lifecycle questions.",
+      "items": [
+        {
+          "label": "AWS: retained volume",
+          "detail": "After removing compute, inspect any remaining unattached disks."
+        },
+        {
+          "label": "Azure: disk selection",
+          "detail": "Confirm the selected disk tier against the current service offer."
+        },
+        {
+          "label": "GCP: location",
+          "detail": "Confirm the resource’s region against the current eligibility list."
+        }
+      ],
+      "caption": "Personal examples described in the article, presented without estimated savings or current pricing claims."
+    }
+  ]
+}

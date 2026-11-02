@@ -5,7 +5,7 @@ description: "Project write-ups by Bradley Matera covering AWS serverless archit
 ---
 
 import { Link } from "gatsby"
-import { ProjectCard } from "../../../src/features/projects/components"
+import { ProjectCard, ProjectCollection } from "../../../src/features/projects/components"
 
 <section className="projects-index">
 
@@ -13,7 +13,7 @@ import { ProjectCard } from "../../../src/features/projects/components"
 
 Each project below is a write-up of what I built, why, the tech stack, and what I learned. These aren't inflated case studies — they're honest notes on real applications with real GitHub repos you can verify. I include what worked, what didn't, and what I'd do differently.
 
-<div className="project-grid">
+<ProjectCollection>
 
 <ProjectCard
   title="AWS Serverless Metadata Workflow"
@@ -157,7 +157,7 @@ Each project below is a write-up of what I built, why, the tech stack, and what 
   ]}
 />
 
-</div>
+</ProjectCollection>
 
 ---
 

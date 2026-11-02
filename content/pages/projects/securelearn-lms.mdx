@@ -3,7 +3,9 @@ title: "SecureLearn LMS"
 slug: "/projects/securelearn-lms"
 ---
 
-import { Section, Card, AnchorNav, Link } from "../../../src/ui";
+import { Section, Card, Link } from "../../../src/ui";
+
+import ProjectEvidence from "../../../src/features/projects/components/ProjectEvidence";
 
 <Section
   eyebrow="Project Write-up"
@@ -11,26 +13,15 @@ import { Section, Card, AnchorNav, Link } from "../../../src/ui";
   description="A Next.js 16 learning management system that teaches developers secrets management through structured modules, hands-on terminal-based labs, quizzes, and verifiable certificates. Built with HeroUI, TypeScript, Tailwind, and Docker. Created for a Full Sail University course."
 />
 
-<AnchorNav
-  items={[
-    { id: "overview", label: "Problem" },
-    { id: "approach", label: "Solution" },
-    { id: "role", label: "My Role" },
-    { id: "impact", label: "What's in the Repo" },
-    { id: "artifacts", label: "Tech Stack" },
-  ]}
-/>
+<ProjectEvidence pathname="/projects/securelearn-lms/" />
+
 
 <Section id="overview" eyebrow="Problem" title="Developers need to learn secrets management">
-  <p>
-    Developers routinely hardcode secrets, share credentials, and misuse environment variables — mistakes that have led to real-world security breaches. There was a need for a structured, interactive curriculum that takes developers from the basics of hardcoded secrets all the way to enterprise-grade solutions, with hands-on labs and verifiable completion certificates.
-  </p>
+  <p>Developers routinely hardcode secrets, share credentials, and misuse environment variables — mistakes that have led to real-world security breaches. There was a need for a structured, interactive curriculum that takes developers from the basics of hardcoded secrets all the way to enterprise-grade solutions, with hands-on labs and verifiable completion certificates.</p>
 </Section>
 
 <Section id="approach" eyebrow="Solution" title="What I built">
-  <p>
-    SecureLearn is an interactive Learning Management System built with Next.js 16 and HeroUI. It provides a structured curriculum with modules and lessons, hands-on terminal-based labs, quizzes after each lesson, and verifiable certificates with unique verification numbers. Role-based dashboards serve students, instructors, and admins. The curriculum covers everything from hardcoded secrets to enterprise-grade solutions, with a best practices guide based on HashiCorp's 5 principles of secrets management and real-world examples drawn from security breaches.
-  </p>
+  <p>SecureLearn is an interactive Learning Management System built with Next.js 16 and HeroUI. It provides a structured curriculum with modules and lessons, hands-on terminal-based labs, quizzes after each lesson, and verifiable certificates with unique verification numbers. Role-based dashboards serve students, instructors, and admins. The curriculum covers everything from hardcoded secrets to enterprise-grade solutions, with a best practices guide based on HashiCorp's 5 principles of secrets management and real-world examples drawn from security breaches.</p>
   <div className="grid-two">
     <Card>
       <h3 className="feature-card__title">Curriculum & labs</h3>

@@ -1,0 +1,61 @@
+{
+  "slug": "website-design-loves-park-illinois",
+  "title": "Website Design in Loves Park, Illinois: A Small Business Guide",
+  "cover": {
+    "src": "/images/blog/website-design-loves-park-illinois/cover.png",
+    "mobile": "/images/blog/website-design-loves-park-illinois/cover-720.webp",
+    "alt": "Concept illustration of a business owner inspecting web-design portfolios and a mobile service page, not a photograph of a Loves Park office."
+  },
+  "figures": [
+    {
+      "id": "provider-site-audit",
+      "kind": "checklist",
+      "title": "Inspect a designer's own website",
+      "summary": "The guide asks buyers to examine visible working evidence before a sales conversation.",
+      "items": [
+        {
+          "label": "Mobile experience",
+          "detail": "Open the site on a phone and inspect loading, reading, and controls."
+        },
+        {
+          "label": "Measured checks",
+          "detail": "Use Lighthouse to inspect performance, accessibility, and SEO findings."
+        },
+        {
+          "label": "Keyboard navigation",
+          "detail": "Try reaching links and buttons without a mouse."
+        },
+        {
+          "label": "Accessibility information",
+          "detail": "Look for a clear statement and a specific testing approach."
+        },
+        {
+          "label": "Maintained content",
+          "detail": "Review whether the published work and information appear cared for."
+        }
+      ],
+      "caption": "A practical version of the evaluation steps in this guide; a single score is not a complete assessment."
+    },
+    {
+      "id": "provider-fit",
+      "kind": "comparison",
+      "title": "Choose the working relationship the project needs",
+      "summary": "The article distinguishes delivery needs rather than assuming one provider type fits everyone.",
+      "items": [
+        {
+          "label": "Agency-style support",
+          "detail": "Consider a team when the project needs marketing production, account management, or multiple stakeholders."
+        },
+        {
+          "label": "Direct solo collaboration",
+          "detail": "Consider a solo developer for a defined scope and direct access to the person building it."
+        },
+        {
+          "label": "Questions for either",
+          "detail": "Compare the written scope, ownership, evidence, ongoing care, and exit arrangements."
+        }
+      ],
+      "caption": "Provider-fit considerations from the article's agency-versus-solo discussion."
+    }
+  ]
+}

@@ -7,6 +7,9 @@ description: "How I scope, build, and document a small demo that proves one spec
 theme: "Portfolio"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/sell-your-skills-with-a-small-project.json";
+
 A resume lists claims. A deployed demo is evidence. When I want to show that I can do something, I build a tiny project around that one skill, ship it to a public URL, and write a README that explains the decisions.
 
 This post is the pattern I use to do that.
@@ -34,8 +37,7 @@ Here is how I pick the skill and constraint for a demo:
 4. **Time-box the build** to a single sitting so scope creep is physically impossible.
 5. **Write the README before you ship** so the decisions are fresh.
 
-{/* visual-break:sell-your-skills-small-project:1 */}
-![Career progression checkpoint illustration for this section.](/assets/visuals/blog/sell-your-skills-small-project-break-1.png)
+<ArticleVisual spec={articleVisuals.figures[0]} />
 
 ## The demo
 
@@ -141,6 +143,8 @@ No external libraries.
 - Native `filter` is fast enough for this size of dataset.
 - Re-rendering the full list on every keystroke is acceptable at 500 items but would need virtualization at larger sizes.
 ```
+
+<ArticleVisual spec={articleVisuals.figures[1]} />
 
 ## What makes a small project better than a tutorial
 

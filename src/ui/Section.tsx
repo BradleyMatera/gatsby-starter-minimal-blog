@@ -10,10 +10,11 @@ type SectionProps = {
   description?: React.ReactNode;
   titleAs?: keyof JSX.IntrinsicElements;
   actions?: React.ReactNode;
+  visual?: React.ReactNode;
   className?: string;
   disableReveal?: boolean;
   revealDelay?: number;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 const Section = ({
@@ -23,6 +24,7 @@ const Section = ({
   description,
   titleAs: TitleTag = "h2",
   actions,
+  visual,
   className,
   disableReveal = false,
   revealDelay = 0,
@@ -43,6 +45,13 @@ const Section = ({
     descriptionMarkup = description;
   }
 
+  const headerContent = <>
+    {eyebrow ? <span className="eyebrow">{eyebrow}</span> : null}
+    {title ? <TitleTag className="section-title">{title}</TitleTag> : null}
+    {descriptionMarkup}
+    {actions ? <div className="hero-actions">{actions}</div> : null}
+  </>;
+
   return (
     <section
       id={id}
@@ -50,11 +59,8 @@ const Section = ({
       className={sectionClassName}
     >
       {(eyebrow || title || description || actions) && (
-        <header className="section-shell__header">
-          {eyebrow ? <span className="eyebrow">{eyebrow}</span> : null}
-          {title ? <TitleTag className="section-title">{title}</TitleTag> : null}
-          {descriptionMarkup}
-          {actions ? <div className="hero-actions">{actions}</div> : null}
+        <header className={joinClasses("section-shell__header", visual ? "section-shell__header--visual" : undefined)}>
+          {visual ? <><div className="section-shell__copy">{headerContent}</div><div className="section-shell__visual">{visual}</div></> : headerContent}
         </header>
       )}
       <div className="section-content">

@@ -7,6 +7,15 @@ description: "A hands-on WebGPU triangle guide with exact steps, honest gotchas,
 theme: "Graphics"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/webgpu-getting-started.json";
+
+
+
+
+
+
+
 The first WebGPU triangle is the hardest one.
 
 Not because the API is complicated, but because the pipeline has so many small gates. Adapter, device, canvas context, format, shader entry points, render pass, draw call — if any one of them is off, you get a blank canvas and no useful error.
@@ -27,9 +36,6 @@ By the end you will have:
 
 > One honest triangle is worth more than a thousand copied demos.
 
-{/* visual-break:webgpu-getting-started:1 */}
-![Rendering pipeline checkpoint illustration for this section.](/assets/visuals/blog/webgpu-getting-started-break-1.png)
-
 ## WebGPU in five words
 
 At its core, WebGPU is:
@@ -41,6 +47,8 @@ At its core, WebGPU is:
 - **Render pass:** the command that actually draws.
 
 If those five pieces line up, you get a triangle. If one is missing or mismatched, you get silence.
+
+<ArticleVisual spec={articleVisuals.figures[0]} />
 
 ## What you need
 
@@ -203,15 +211,14 @@ If all three are true, you have a solid baseline. Every later feature — unifor
 | Flickering triangle | Missing or wrong `loadOp` | Set `loadOp: "clear"` |
 | Shader compile error | Wrong entry point name or WGSL syntax | Copy the exact names from the shader |
 
+<ArticleVisual spec={articleVisuals.figures[1]} />
+
 ## Quick cheat sheet
 
 1. Request adapter and device.
 2. Configure the canvas context.
 3. Build a minimal pipeline.
 4. Draw three vertices in a render pass.
-
-{/* visual-break:webgpu-getting-started:2 */}
-![Graphics systems checkpoint illustration for this section.](/assets/visuals/blog/webgpu-getting-started-break-2.png)
 
 ## Next steps
 

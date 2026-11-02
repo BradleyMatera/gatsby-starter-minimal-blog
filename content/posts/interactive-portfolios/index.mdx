@@ -7,6 +7,9 @@ description: "A practical guide to building an interactive portfolio that stays 
 theme: "Portfolio"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/interactive-portfolios-recruiter-expectations.json";
+
 Portfolios should be readable first and interactive second. Not because interaction is bad, but because the person viewing your site is usually scanning, not exploring. If the first ten seconds is motion, hidden panels, and clever transitions, you are making your best content harder to access.
 
 What I actually mean by "interactive portfolio" is simple. It is a normal portfolio that still works as plain HTML, and then you add one or two small interactions that make it feel alive without hiding the important parts. If you can turn off JavaScript and still understand who you are, what you built, and how to contact you, you are in a good spot.
@@ -19,14 +22,13 @@ This guide builds one small interactive section the safe way. You will end with 
 
 Here is the standard I use: a recruiter should be able to answer three questions without clicking anything. Who is this person. What have they built. How do I contact them. If those answers require a toggle, a tab, or a hover effect, the structure is wrong.
 
-{/* visual-break:interactive-portfolios:1 */}
-![Project layout checkpoint illustration for this section.](/assets/visuals/blog/interactive-portfolios-break-1.png)
-
 ## What counts as "safe" interaction
 
 Safe interaction is interaction that adds convenience or flavor, not interaction that gates information. A theme toggle is safe because it does not hide your projects. A "show more details" panel is usually safe if the summary is still visible. A filter for projects can be safe if an "All" view exists and nothing disappears permanently.
 
 Unsafe interaction is anything that replaces the readable base. If your Projects section is only visible after a tab click, or your contact info is inside an accordion, you are betting your entire portfolio on someone choosing to interact. Most people will not.
+
+<ArticleVisual spec={articleVisuals.figures[0]} />
 
 ## Build the readable base first
 
@@ -230,6 +232,8 @@ Third, readability without JavaScript. Turn off scripts or use a browser extensi
 
 ![Keyboard navigation](https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif)
 
+<ArticleVisual spec={articleVisuals.figures[1]} />
+
 ## The part recruiters actually care about
 
 Most reviewers are not judging your animation skills. They are judging whether you can communicate clearly, structure information, and ship something that does not break. If your portfolio makes them work to find basic facts, you are losing points for the wrong reason.
@@ -237,9 +241,6 @@ Most reviewers are not judging your animation skills. They are judging whether y
 The fastest win is always the same: make the first screen boring in the best way. Name, role, one sentence, projects, contact. Then add the small interaction after the essentials are already visible.
 
 ![Fixing bugs](https://media.giphy.com/media/oaDcc0LTCuIAiGYrzn/giphy.gif)
-
-{/* visual-break:interactive-portfolios:2 */}
-![Portfolio structure checkpoint illustration for this section.](/assets/visuals/blog/interactive-portfolios-break-2.png)
 
 ## Closing
 

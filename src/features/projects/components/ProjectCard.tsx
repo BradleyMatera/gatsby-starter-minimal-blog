@@ -1,9 +1,11 @@
 import * as React from "react";
 import joinClasses from "../../../utils/joinClasses";
 import Link from "../../../ui/Link";
-import { useScrollReveal } from "../../../site/hooks/useScrollReveal";
 import MetricBadge from "./MetricBadge";
 import ExternalLinkIcon from "../../../site/icons/ExternalLinkIcon";
+import { ProjectGraphic } from "./ProjectEvidence";
+import { projectMedia } from "../projectMedia";
+import "../../../styles/editorial.css";
 
 type ProjectLink = {
   label: string;
@@ -12,7 +14,7 @@ type ProjectLink = {
   external?: boolean;
 };
 
-type ProjectCardProps = {
+export type ProjectCardProps = {
   title: string;
   meta?: string;
   summary?: React.ReactNode;
@@ -45,80 +47,49 @@ const ProjectCard = ({
   links,
   className,
 }: ProjectCardProps) => {
-  const { ref, revealed } = useScrollReveal(0, { initiallyVisible: true });
-  const articleClassName = joinClasses(
-    "project-card",
-    "reveal-card",
-    "u-reveal",
-    className,
-    revealed ? "is-revealed" : undefined
-  );
+  const articleClassName = joinClasses("project-card", "editorial-project-card", className);
+  const projectPath = links?.find((link) => link.href.startsWith("/projects/"))?.href;
+  const media = projectPath ? projectMedia[projectPath] : undefined;
+  const image = media?.src || (media?.steps ? undefined : thumbnail);
   const hasDetails = Boolean(summaryDetails);
   const previewContent = summaryPreview ?? summary;
   const previewClassName = hasDetails ? "project-card__summary" : "project-card__description";
-  const hasThumbnail = Boolean(thumbnail);
+  const hasThumbnail = Boolean(image);
   const orderedLinks = React.useMemo(() => {
     if (!links || links.length === 0) return [];
     const rank = (link: ProjectLink) => {
       const label = link.label.toLowerCase();
       const href = link.href.toLowerCase();
-      if (label.includes("github") || href.includes("github.com")) return 0;
-      if (label.includes("live demo")) return 1;
-      if (label.includes("case study")) return 2;
+      if (href.startsWith("/projects/") || label.includes("case study") || link.variant === "primary") return 0;
+      if (label.includes("live demo") || label.includes("live project")) return 1;
+      if (label.includes("github") || href.includes("github.com")) return 2;
       return 3;
     };
     return [...links].sort((a, b) => rank(a) - rank(b));
   }, [links]);
 
-  const handleMouseMove = (event: React.MouseEvent<HTMLElement>) => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      return;
-    }
-    const target = event.currentTarget;
-    const rect = target.getBoundingClientRect();
-    const x = (event.clientX - rect.left) / rect.width - 0.5;
-    const y = (event.clientY - rect.top) / rect.height - 0.5;
-    const rotateX = `${Math.max(-8, Math.min(8, -y * 10))}deg`;
-    const rotateY = `${Math.max(-8, Math.min(8, x * 10))}deg`;
-    target.style.setProperty("--tilt-x", rotateX);
-    target.style.setProperty("--tilt-y", rotateY);
-  };
-
-  const handleMouseLeave = (event: React.MouseEvent<HTMLElement>) => {
-    const target = event.currentTarget;
-    target.style.setProperty("--tilt-x", "0deg");
-    target.style.setProperty("--tilt-y", "0deg");
-  };
-
   return (
     <article
-      ref={ref as React.RefObject<HTMLElement>}
       className={articleClassName}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
     >
       <div className={joinClasses("project-card__frame", hasThumbnail ? "u-flex-col u-gap-3" : undefined)}>
-        {thumbnail ? (
+        {image ? (
           <div className="project-card__thumbnail u-w-full u-flex-none">
             <img
-              src={thumbnail}
-              alt={thumbnailAlt ?? `${title} project thumbnail`}
+              src={image}
+              alt={media?.src ? media.alt : thumbnailAlt ?? `${title} project illustration`}
               loading="lazy"
               decoding="async"
-              width="104"
-              height="104"
-              className="u-project-thumb"
+              width="1440"
+              height="960"
+              className="editorial-project-card__image"
             />
+            {media ? <p className="editorial-media-caption">{media.caption}</p> : null}
           </div>
-        ) : null}
+        ) : media?.steps ? <div><ProjectGraphic media={media} /><p className="editorial-media-caption">{media.caption}</p></div> : null}
         <div className="project-card__content">
-          {/* Title - Top horizontal bar (F-pattern first fixation) */}
           <h3 className="project-card__title">{title}</h3>
-
-          {/* Meta hook - Quick non-technical summary */}
           {meta ? <p className="project-card__meta">{meta}</p> : null}
-
-          {/* Metrics badges */}
           {metrics && metrics.length > 0 ? (
             <div className="project-card__metrics">
               {metrics.map((metric) => (
@@ -126,15 +97,11 @@ const ProjectCard = ({
               ))}
             </div>
           ) : null}
-
-          {/* Impact - Bolded outcome/result */}
           {impact ? (
             <p className="project-card__impact">
               <strong>{impactPrefix}:</strong> {impact}
             </p>
           ) : null}
-
-          {/* Description - Body content */}
           {previewContent ? (
             <div className={previewClassName}>
               {previewContent}
@@ -153,8 +120,6 @@ const ProjectCard = ({
               <div className="project-card__details-body">{summaryDetails}</div>
             </details>
           ) : null}
-
-          {/* CTAs - Call to action links */}
           {orderedLinks.length > 0 ? (
             <div className="card-actions">
               {orderedLinks.map((link) => (

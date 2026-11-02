@@ -1,0 +1,65 @@
+{
+  "slug": "/designing-systems-that-actually-ship",
+  "title": "Designing Systems That Actually Ship: A Small Template",
+  "cover": {
+    "src": "/images/blog/designing-systems-that-actually-ship/cover.png",
+    "mobile": "/images/blog/designing-systems-that-actually-ship/cover-720.webp",
+    "alt": "A folded design document becomes a bounded modular structure with an input path and an inspection gate."
+  },
+  "figures": [
+    {
+      "id": "design-questions",
+      "kind": "layers",
+      "title": "Connect the plan to the repository",
+      "summary": "Four small pieces turn a general idea into a design another person can inspect.",
+      "items": [
+        {
+          "label": "Problem",
+          "detail": "State what the system is intended to solve."
+        },
+        {
+          "label": "Inputs",
+          "detail": "Identify what can enter the system and through which boundary."
+        },
+        {
+          "label": "Outputs",
+          "detail": "Describe the result the system must produce."
+        },
+        {
+          "label": "File map",
+          "detail": "Point each responsibility to an actual location in the codebase."
+        }
+      ],
+      "caption": "The document's core questions. The file map connects the written design to implementation."
+    },
+    {
+      "id": "design-verification",
+      "kind": "checklist",
+      "title": "Make the design testable",
+      "summary": "Review the document before using it to drive implementation.",
+      "items": [
+        {
+          "label": "Artifact",
+          "detail": "The design document exists and can be read."
+        },
+        {
+          "label": "Paths",
+          "detail": "Every listed code path exists in the repository."
+        },
+        {
+          "label": "Boundaries",
+          "detail": "Inside and outside responsibilities are explicit and do not overlap."
+        },
+        {
+          "label": "Data flow",
+          "detail": "The described movement of data maps to real folders."
+        },
+        {
+          "label": "Completion",
+          "detail": "Each done-when statement has a command, test or browser check."
+        }
+      ],
+      "caption": "These checks follow the article's verification questions; they do not establish that a project has passed them."
+    }
+  ]
+}

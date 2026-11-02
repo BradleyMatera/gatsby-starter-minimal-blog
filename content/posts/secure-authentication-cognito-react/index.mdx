@@ -7,6 +7,9 @@ description: "A minimal AWS Cognito and React authentication setup without pre-b
 theme: "Cloud"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/secure-authentication-cognito-react.json";
+
 Authentication is not magic. It is configuration, tokens, and clear verification checks. This is the minimal [AWS Cognito](https://docs.aws.amazon.com/cognito/) plus [React](https://react.dev) setup I run when I need to understand the flow.
 
 It avoids pre-built [Amplify UI](https://ui.docs.amplify.aws/) components so I can see exactly what is happening.
@@ -76,6 +79,8 @@ const idToken = session.tokens?.idToken?.toString();
 
 The `idToken` is a JWT you can decode at [jwt.io](https://jwt.io) to inspect the claims. That is how you verify the flow worked end to end.
 
+<ArticleVisual spec={articleVisuals.figures[0]} />
+
 ## The moving parts
 
 - **User pool:** the directory of users. ([Cognito user pools docs](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html))
@@ -91,9 +96,6 @@ The `idToken` is a JWT you can decode at [jwt.io](https://jwt.io) to inspect the
 | App client | Identifies your frontend app to the pool | Inside the user pool | You |
 | ID token | Carries user identity claims to your app | Returned to the browser after sign-in | Cognito issues it; your app consumes it |
 | Amplify Auth | Handles sign-in calls and token storage | Client-side (npm package) | You (via npm) |
-
-{/* visual-break:secure-authentication-cognito-react:1 */}
-![Cloud architecture checkpoint illustration for this section.](/assets/visuals/blog/secure-authentication-cognito-react-break-1.png)
 
 ## Step 1: create the user pool
 
@@ -162,14 +164,13 @@ To verify the config is correct:
 - Confirm there are no errors about missing region or invalid User Pool ID.
 - Check that the Amplify version installed matches the v6 config shape shown above. ([Amplify v6 migration guide](https://docs.amplify.aws/react/prev/upgrade-guide/))
 
-{/* visual-break:secure-authentication-cognito-react:2 */}
-![Cloud operations checkpoint illustration for this section.](/assets/visuals/blog/secure-authentication-cognito-react-break-2.png)
-
 ## Common mistakes I have made
 
 - Forgetting to uncheck the client secret. Browser apps cannot use secrets. ([Client secret docs](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-client-apps.html))
 - Using the wrong region in the User Pool ID.
 - Skipping the test user and trying to build sign-up first. Create a user manually, verify login works, then add registration.
+
+<ArticleVisual spec={articleVisuals.figures[1]} />
 
 ## Pitfalls and security considerations
 

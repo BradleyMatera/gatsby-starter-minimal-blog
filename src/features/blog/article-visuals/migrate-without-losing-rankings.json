@@ -1,0 +1,57 @@
+{
+  "slug": "/migrate-without-losing-rankings",
+  "title": "How to Migrate a Website Without Losing Rankings",
+  "cover": {
+    "src": "/images/blog/migrate-without-losing-rankings/cover.png",
+    "mobile": "/images/blog/migrate-without-losing-rankings/cover-720.webp",
+    "alt": "Conceptual miniature library volumes moving across a bridge along individually mapped routes"
+  },
+  "figures": [
+    {
+      "id": "migration-stages",
+      "kind": "timeline",
+      "title": "A migration has three distinct stages",
+      "summary": "Preserve an evidence trail before changing the site.",
+      "items": [
+        {
+          "label": "Before launch",
+          "detail": "Inventory URLs, save baseline data and map old pages to their destinations."
+        },
+        {
+          "label": "During launch",
+          "detail": "Test redirects, preserve core content and update internal links."
+        },
+        {
+          "label": "After launch",
+          "detail": "Submit the sitemap, crawl again and investigate indexing or routing errors."
+        }
+      ],
+      "caption": "The article's preparation, launch and monitoring sequence; no recovery timeline is guaranteed."
+    },
+    {
+      "id": "redirect-decisions",
+      "kind": "comparison",
+      "title": "Match the route to what happened to the content",
+      "summary": "Record the destination of every old page.",
+      "items": [
+        {
+          "label": "Unchanged URL",
+          "detail": "Keep the route when the page remains there."
+        },
+        {
+          "label": "Moved page",
+          "detail": "Point the old URL to its relevant new equivalent."
+        },
+        {
+          "label": "Consolidated content",
+          "detail": "Choose the destination that covers the former page's subject."
+        },
+        {
+          "label": "Verification",
+          "detail": "Check the response status and final location."
+        }
+      ],
+      "caption": "Decision cases from the redirect map and testing examples."
+    }
+  ]
+}

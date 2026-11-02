@@ -31,13 +31,13 @@ const DemoBanner: React.FC<DemoBannerProps> = ({
           <span>{backLabel}</span>
         </Link>
         <div className="demo-banner__info">
-          <span className="demo-banner__badge">DEMO</span>
+          <span className="demo-banner__badge">Concept demo, fictional business</span>
           <span className="demo-banner__text">
-            <strong>{demoName}</strong> — concept demo, fictional business. Built by Bradley Matera.
+            <strong>{demoName}</strong> · Built by Bradley Matera.
           </span>
         </div>
-        <Link to="/contact/" className="demo-banner__cta">
-          Get a site like this →
+        <Link to={`/contact/?source=demo&industry=${encodeURIComponent(industry)}`} className="demo-banner__cta">
+          Discuss this design
         </Link>
       </div>
     </div>

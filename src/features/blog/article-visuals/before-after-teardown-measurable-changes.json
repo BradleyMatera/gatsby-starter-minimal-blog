@@ -1,0 +1,61 @@
+{
+  "slug": "/before-after-teardown-measurable-changes",
+  "title": "Before and After Teardown: Measurable Website Changes",
+  "cover": {
+    "src": "/images/blog/before-after-teardown-measurable-changes/cover.png",
+    "mobile": "/images/blog/before-after-teardown-measurable-changes/cover-720.webp",
+    "alt": "Conceptual paired website panels showing a cluttered path simplified into a clear action and form."
+  },
+  "figures": [
+    {
+      "id": "teardown-friction-map",
+      "kind": "comparison",
+      "title": "Four kinds of friction, four concrete changes",
+      "summary": "The shared lesson is to identify a specific obstacle before choosing a redesign treatment.",
+      "items": [
+        {
+          "label": "Heavy pages",
+          "detail": "Oversized media and extra scripts → compressed assets, fewer scripts, and deferred offscreen images."
+        },
+        {
+          "label": "Unclear navigation",
+          "detail": "Ambiguous labels and buried destinations → plain labels and direct paths."
+        },
+        {
+          "label": "Missing next step",
+          "detail": "Service information without an action → an explicit contact or estimate route."
+        },
+        {
+          "label": "Broken forms",
+          "detail": "Unnecessary fields and silent failures → fewer inputs, working submission, and confirmation."
+        }
+      ],
+      "caption": "A schematic summary of the changes discussed in this post; it does not add or independently verify outcome metrics."
+    },
+    {
+      "id": "teardown-evidence-check",
+      "kind": "checklist",
+      "title": "Check the evidence behind an outcome",
+      "summary": "A before-and-after claim is easier to assess when the measurement method is explicit.",
+      "items": [
+        {
+          "label": "Name the source",
+          "detail": "Identify the analytics, test result, or submission record supporting the number."
+        },
+        {
+          "label": "Use comparable windows",
+          "detail": "State the before and after periods being compared."
+        },
+        {
+          "label": "Label estimates",
+          "detail": "Keep projected results distinct from measured results."
+        },
+        {
+          "label": "Record the change",
+          "detail": "Explain what changed so readers can judge the connection to the outcome."
+        }
+      ],
+      "caption": "The article distinguishes measured and projected results; this checklist makes that distinction visible."
+    }
+  ]
+}

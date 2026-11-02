@@ -1,0 +1,71 @@
+{
+  "slug": "/obj-parser",
+  "title": "OBJ Parser Lab: Count Vertices and Faces in Zig",
+  "cover": {
+    "src": "/images/blog/obj-parser/cover.png",
+    "mobile": "/images/blog/obj-parser/cover-720.webp",
+    "alt": "Geometric specimen with four copper corner nodes and two triangular surfaces representing OBJ records"
+  },
+  "figures": [
+    {
+      "id": "sample-record-counts",
+      "kind": "bar-chart",
+      "title": "The sample contains four record types",
+      "summary": "Only position vertices and faces enter the two main counters.",
+      "items": [
+        {
+          "label": "Position v",
+          "detail": "Four position records.",
+          "value": 4
+        },
+        {
+          "label": "Texture vt",
+          "detail": "Four texture-coordinate records; excluded from v.",
+          "value": 4
+        },
+        {
+          "label": "Normal vn",
+          "detail": "One normal record; excluded from v.",
+          "value": 1
+        },
+        {
+          "label": "Face f",
+          "detail": "Two triangular face records.",
+          "value": 2
+        }
+      ],
+      "caption": "Counts taken directly from data/sample.obj in Step 1; fixture data, not a benchmark.",
+      "unit": "records",
+      "unitSingular": "record"
+    },
+    {
+      "id": "parser-validation-path",
+      "kind": "flow",
+      "title": "Validate before counting",
+      "summary": "Cleanup and exact token matching prevent silent miscounts.",
+      "items": [
+        {
+          "label": "Clean",
+          "detail": "Trim line endings and whitespace; ignore blanks and comments."
+        },
+        {
+          "label": "Classify",
+          "detail": "Distinguish v from vt and vn."
+        },
+        {
+          "label": "Validate",
+          "detail": "Parse coordinates and face indices before accepting records."
+        },
+        {
+          "label": "Count",
+          "detail": "Increment only after the checks succeed."
+        },
+        {
+          "label": "Report",
+          "detail": "Attach line numbers and input to failures."
+        }
+      ],
+      "caption": "The lab's hardening sequence; index range checking remains a proposed next step."
+    }
+  ]
+}

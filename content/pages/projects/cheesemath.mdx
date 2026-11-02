@@ -3,7 +3,9 @@ title: "CheeseMath"
 slug: "/projects/cheesemath"
 ---
 
-import { Section, Card, AnchorNav, Link } from "../../../src/ui";
+import { Section, Card, Link } from "../../../src/ui";
+
+import ProjectEvidence from "../../../src/features/projects/components/ProjectEvidence";
 
 <Section
   eyebrow="Project Write-up"
@@ -11,26 +13,15 @@ import { Section, Card, AnchorNav, Link } from "../../../src/ui";
   description="An advanced calculator suite with two versions in one repo: an original React 18 app with AnimeJS, Jest unit tests, and Selenium E2E tests, and a modern rebuild in Next.js 16 with TypeScript, Bun, NextUI, Tailwind CSS, and Framer Motion. Features math tools, string manipulation, regex analyzer, and credit card validation."
 />
 
-<AnchorNav
-  items={[
-    { id: "overview", label: "Problem" },
-    { id: "approach", label: "Solution" },
-    { id: "role", label: "My Role" },
-    { id: "impact", label: "What's in the Repo" },
-    { id: "artifacts", label: "Tech Stack" },
-  ]}
-/>
+<ProjectEvidence pathname="/projects/cheesemath/" />
+
 
 <Section id="overview" eyebrow="Problem" title="Learning to write tests for my own code">
-  <p>
-    I wanted to learn Jest by writing unit tests for my own code — not a tutorial example, but something I built from scratch. An advanced calculator suite gave me enough complexity to exercise real test cases: math operations, string manipulation, regex analysis, and credit card validation. The project grew into two versions: the original React 18 app and a modern Next.js 16 rebuild.
-  </p>
+  <p>I wanted to learn Jest by writing unit tests for my own code — not a tutorial example, but something I built from scratch. An advanced calculator suite gave me enough complexity to exercise real test cases: math operations, string manipulation, regex analysis, and credit card validation. The project grew into two versions: the original React 18 app and a modern Next.js 16 rebuild.</p>
 </Section>
 
 <Section id="approach" eyebrow="Solution" title="What I built">
-  <p>
-    CheeseMath is an advanced calculator suite with two versions in one repo. The original is a React 18 app with AnimeJS animations, Jest unit tests, Selenium E2E tests, and coverage reports. The rebuild is a modern Next.js 16 app with TypeScript, Bun, NextUI, Tailwind CSS, and Framer Motion. Both versions include math tools, string manipulation, a regex analyzer, and credit card validation.
-  </p>
+  <p>CheeseMath is an advanced calculator suite with two versions in one repo. The original is a React 18 app with AnimeJS animations, Jest unit tests, Selenium E2E tests, and coverage reports. The rebuild is a modern Next.js 16 app with TypeScript, Bun, NextUI, Tailwind CSS, and Framer Motion. Both versions include math tools, string manipulation, a regex analyzer, and credit card validation.</p>
   <div className="grid-two">
     <Card>
       <h3 className="feature-card__title">Original (React 18)</h3>

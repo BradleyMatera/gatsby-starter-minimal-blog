@@ -3,6 +3,8 @@ import type { HeadFC } from "gatsby";
 import Seo from "../../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
 import DemoLayout from "../../features/demos/DemoLayout";
+import DemoNavigation from "../../features/demos/DemoNavigation";
+import DemoJourney from "../../features/demos/DemoJourney";
 import GoogleMapsEmbed from "../../features/demos/GoogleMapsEmbed";
 import SocialLinks, { SocialLink } from "../../features/demos/SocialLinks";
 import ReviewBadges from "../../features/demos/ReviewBadges";
@@ -145,14 +147,6 @@ const coverageSummaries = [
   { name: "BlueCross BlueShield", network: "Dental Blue", summary: "Preventive care is often covered at 100%. Basic and major services may have coinsurance and deductible." },
 ];
 
-const urgentCareGuide = [
-  { issue: "Knocked-out tooth", guidance: "Call (815) 555-0387 immediately. Keep the tooth in milk or saliva. Do not scrub the root. Seek emergency dental care as quickly as possible." },
-  { issue: "Severe toothache", guidance: "Call for a same-day appointment if available. Rinse with warm salt water and use a cold compress. Avoid placing aspirin on the gums." },
-  { issue: "Broken or chipped tooth", guidance: "Call for a same-day or next-day appointment. Save any pieces, avoid chewing on that side, and rinse gently with warm water." },
-  { issue: "Lost filling or crown", guidance: "Call for a same-day or next-day appointment. Temporary dental cement may help protect the area until you are seen." },
-  { issue: "Swelling or abscess", guidance: "Call (815) 555-0387 as soon as possible. Dental infections can spread. Do not apply heat. Seek care the same day." },
-  { issue: "Uncontrolled bleeding", guidance: "If bleeding does not stop with firm pressure, call 911 or go to the nearest emergency room. For minor bleeding, apply gauze with firm pressure." },
-];
 
 const smileExamples = [
   { title: "Clear Aligner Result", desc: "Illustrative example of a crowded-to-straight transformation. Individual results vary.", img: "happy-patient-1", label: "Example" },
@@ -218,7 +212,7 @@ const CoverageSummary: React.FC = () => {
         <div className="demo-quote-form__success" style={{ marginTop: "1rem" }}>
           <AlertIcon size={36} />
           <h3>Let Us Check for You</h3>
-          <p>Call <a href="tel:8155550387">(815) 555-0387</a> with your insurance card — we work with many plans and can verify your coverage.</p>
+          <p>Call <a href="#demo-disclosure" aria-label="Fictional demo phone; view disclosure">(815) 555-0387</a> with your insurance card — we work with many plans and can verify your coverage.</p>
         </div>
       )}
       <p style={{ fontSize: "0.8rem", textAlign: "center", marginTop: "1rem", opacity: 0.7 }}>This is a demo summary. It is not a guarantee of coverage or eligibility.</p>
@@ -226,141 +220,15 @@ const CoverageSummary: React.FC = () => {
   );
 };
 
-const UrgentCareGuide: React.FC = () => {
-  const [selected, setSelected] = React.useState<string | null>(null);
-  const triage = urgentCareGuide.find((t) => t.issue === selected);
+const UrgentCareGuide: React.FC = () => (
+  <div className="demo-journey" role="note">
+    <h3>This is a fictional practice</h3>
+    <p>This interface does not assess symptoms, provide care or contact a dental team. Do not use the sample appointment tool for an urgent care request.</p>
+    <p>The demonstration shows how a real practice could make its verified contact information easy to find.</p>
+  </div>
+);
 
-  return (
-    <div style={{ maxWidth: "700px", margin: "0 auto" }}>
-      <p style={{ textAlign: "center", marginBottom: "1.5rem" }}>Select your concern to see general first-aid guidance. This is not a substitute for professional care.</p>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem", justifyContent: "center", marginBottom: "1.5rem" }}>
-        {urgentCareGuide.map((t) => (
-          <button
-            key={t.issue}
-            type="button"
-            className="demo-btn"
-            style={{
-              background: selected === t.issue ? "var(--demo-accent)" : "transparent",
-              color: selected === t.issue ? "#fff" : "var(--demo-text)",
-              border: "1px solid var(--demo-accent)",
-              padding: "0.5rem 1rem",
-              fontSize: "0.9rem"
-            }}
-            onClick={() => setSelected(t.issue)}
-          >
-            {t.issue}
-          </button>
-        ))}
-      </div>
-      {triage && (
-        <div className="demo-quote-form__success" style={{ borderColor: triage.issue === "Knocked-out tooth" || triage.issue === "Swelling or abscess" || triage.issue === "Uncontrolled bleeding" ? "#c0392b" : "var(--demo-accent)" }}>
-          <AlertIcon size={36} />
-          <h3>{triage.issue}</h3>
-          <p>{triage.guidance}</p>
-          {triage.issue !== "Uncontrolled bleeding" && (
-            <a href="tel:8155550387" className="demo-btn demo-btn--primary" style={{ marginTop: "1rem" }}><PhoneIcon size={18} /> Call (815) 555-0387</a>
-          )}
-        </div>
-      )}
-      <p style={{ fontSize: "0.8rem", textAlign: "center", marginTop: "1.5rem", opacity: 0.7 }}>This guide is for general information only. For serious injuries, call 911 or visit an emergency room.</p>
-    </div>
-  );
-};
-
-const ScheduleForm: React.FC = () => {
-  const [patientType, setPatientType] = React.useState("new");
-  const [reason, setReason] = React.useState("exam");
-  const [anxiety, setAnxiety] = React.useState("none");
-  const [insurance, setInsurance] = React.useState("");
-  const [date, setDate] = React.useState("");
-  const [submitted, setSubmitted] = React.useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
-
-  if (submitted) {
-    return (
-      <div className="demo-quote-form__success">
-        <CheckIcon size={48} />
-        <h3>Appointment Request Received (Illustrative)</h3>
-        <p>In a live practice, the front desk would call to confirm within one business day and verify insurance. For urgent dental concerns, call (815) 555-0387.</p>
-        <p><strong>Patient type:</strong> {patientType}<br /><strong>Reason:</strong> {reason}<br /><strong>Anxiety needs:</strong> {anxiety}<br /><strong>Insurance:</strong> {insurance || "To be verified"}<br /><strong>Preferred Date:</strong> {date || "To be scheduled"}</p>
-        <p style={{ fontSize: "0.8rem", marginTop: "1rem", opacity: 0.8 }}>This is a demo form. It does not submit to a real dental practice.</p>
-        <button className="demo-btn demo-btn--ghost" onClick={() => setSubmitted(false)}>Request another appointment</button>
-      </div>
-    );
-  }
-
-  return (
-    <form className="demo-quote-form" onSubmit={handleSubmit}>
-      <div className="demo-form-row">
-        <label className="demo-form-label" htmlFor="patient-type">Patient Type</label>
-        <select id="patient-type" className="demo-form-select" value={patientType} onChange={(e) => setPatientType(e.target.value)}>
-          <option value="new">New patient — first visit</option>
-          <option value="existing">Existing patient — routine care</option>
-          <option value="child">Child under 12</option>
-          <option value="emergency">Urgent / emergency</option>
-          <option value="cosmetic">Cosmetic consultation</option>
-        </select>
-      </div>
-      <div className="demo-form-row">
-        <label className="demo-form-label" htmlFor="reason">Reason for Visit</label>
-        <select id="reason" className="demo-form-select" value={reason} onChange={(e) => setReason(e.target.value)}>
-          <option value="exam">Exam & cleaning</option>
-          <option value="pain">Tooth pain / urgent</option>
-          <option value="cosmetic">Whitening or aligners</option>
-          <option value="crown">Crown / bridge / filling</option>
-          <option value="child">Child checkup</option>
-        </select>
-      </div>
-      <div className="demo-form-row">
-        <label className="demo-form-label" htmlFor="anxiety">Dental Anxiety or Accessibility Needs</label>
-        <select id="anxiety" className="demo-form-select" value={anxiety} onChange={(e) => setAnxiety(e.target.value)}>
-          <option value="none">None</option>
-          <option value="mild">Mild — explain steps as we go</option>
-          <option value="moderate">Moderate — extra time and breaks</option>
-          <option value="high">High — discuss comfort options first</option>
-          <option value="mobility">Mobility / wheelchair access</option>
-        </select>
-      </div>
-      <div className="demo-form-row">
-        <label className="demo-form-label" htmlFor="patient-name">Full Name</label>
-        <input id="patient-name" className="demo-form-input" type="text" required placeholder="Your name" />
-      </div>
-      <div className="demo-form-row">
-        <label className="demo-form-label" htmlFor="patient-phone">Phone Number</label>
-        <input id="patient-phone" className="demo-form-input" type="tel" required placeholder="(815) 555-0000" />
-      </div>
-      <div className="demo-form-row">
-        <label className="demo-form-label" htmlFor="patient-email">Email Address</label>
-        <input id="patient-email" className="demo-form-input" type="email" required placeholder="you@email.com" />
-      </div>
-      <div className="demo-form-row">
-        <label className="demo-form-label" htmlFor="insurance">Insurance Provider (optional)</label>
-        <select id="insurance" className="demo-form-select" value={insurance} onChange={(e) => setInsurance(e.target.value)}>
-          <option value="">Select if applicable</option>
-          <option>Delta Dental</option>
-          <option>Cigna</option>
-          <option>MetLife</option>
-          <option>Aetna</option>
-          <option>Guardian</option>
-          <option>United Concordia</option>
-          <option>Humana</option>
-          <option>BlueCross BlueShield</option>
-          <option>No insurance / Self-pay</option>
-        </select>
-      </div>
-      <div className="demo-form-row">
-        <label className="demo-form-label" htmlFor="preferred-date">Preferred Date &amp; Time</label>
-        <input id="preferred-date" className="demo-form-input" type="text" value={date} onChange={(e) => setDate(e.target.value)} placeholder="e.g. Wednesday morning, March 20" />
-      </div>
-      <button type="submit" className="demo-btn demo-btn--primary">Request Appointment</button>
-      <p className="demo-form-note">This is a demo form. It does not submit to a real practice. For urgent dental issues, call (815) 555-0387.</p>
-    </form>
-  );
-};
+const ScheduleForm: React.FC = () => <DemoJourney kind="dental" />;
 
 const DentalDemo: React.FC = () => (
   <DemoLayout
@@ -375,12 +243,12 @@ const DentalDemo: React.FC = () => (
         <span className="dental-mark" aria-hidden="true">rr</span>
         <span><strong>Rock River</strong><small>Family Dental · Dixon</small></span>
       </a>
-      <div className="flagship-nav__links">
+      <DemoNavigation>
         <a href="#dental-services">Services</a>
         <a href="#new-patient">New patients</a>
         <a href="#dental-team">Our team</a>
         <a href="#schedule" className="demo-btn demo-btn--primary">Book a visit</a>
-      </div>
+      </DemoNavigation>
     </nav>
 
     <section className="dental-hero" id="dental-top">
@@ -390,7 +258,7 @@ const DentalDemo: React.FC = () => (
         <p className="dental-hero__lede">A modern family practice designed around calm explanations and clear costs. Know what your first exam, X-rays, cleaning, and estimated out-of-pocket amount look like before you sit in the chair.</p>
         <div className="demo-hero__actions">
           <a href="#schedule" className="demo-btn demo-btn--primary">Schedule online</a>
-          <a href="tel:8155550387" className="demo-btn demo-btn--ghost"><PhoneIcon size={18} /> (815) 555-0387</a>
+          <a href="#demo-disclosure" aria-label="Fictional demo phone; view disclosure" className="demo-btn demo-btn--ghost"><PhoneIcon size={18} /> (815) 555-0387</a>
         </div>
         <ul className="dental-comfort-list" aria-label="Patient experience highlights">
           <li><CheckIcon size={18} /> Transparent estimates</li>
@@ -421,7 +289,7 @@ const DentalDemo: React.FC = () => (
       <p><span>03</span><strong>Complete</strong> family dentistry</p>
     </div>
 
-    <div className="demo-emergency-banner dental-urgent"><AlertIcon size={20} /> Urgent dental concern? Illustrative same-day slots may be available · Call (815) 555-0387 early</div>
+    <div className="demo-emergency-banner dental-urgent"><AlertIcon size={20} /> Fictional dental concept — no appointments or emergency care are provided here.</div>
 
     <div className="demo-emergency-banner dental-disclosure">
       <DocumentIcon size={18} /> <strong>Concept demonstration:</strong> Rock River Family Dental is fictional. Team members, testimonials, prices, availability, insurance, and smile photos are illustrative.
@@ -724,7 +592,7 @@ const DentalDemo: React.FC = () => (
       <div className="demo-contact__inner">
         <h2 className="demo-contact__title">Ready to book your first visit?</h2>
         <p className="demo-contact__text">Call (815) 555-0387 or schedule online. We're accepting new patients and most insurance plans. Same-day urgent care available when possible.</p>
-        <a href="tel:8155550387" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0387</a>
+        <a href="#demo-disclosure" aria-label="Fictional demo phone; view disclosure" className="demo-btn demo-btn--primary"><PhoneIcon size={20} /> Call (815) 555-0387</a>
         <div style={{ marginTop: "1.5rem" }}>
           <SocialLinks links={socialLinks} />
         </div>

@@ -3,7 +3,10 @@ import type { HeadFC } from "gatsby";
 import Layout from "../@lekoarts/gatsby-theme-minimal-blog/components/layout";
 import Seo from "../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
-import { Card, Link, Section } from "../ui";
+import { Card, Link, Section, FAQAccordion, AnchorNav } from "../ui";
+import BrandArtwork from "../site/components/BrandArtwork";
+import { ShopifySpotlight } from "../features/shopify";
+import TableScroll from "../features/demos/TableScroll";
 import {
   SELLER_LEGAL_NAME,
   SELLER_DISCLOSURE_SHORT,
@@ -89,7 +92,7 @@ const internalLinks = [
 ];
 
 const PricingPage = () => (
-  <Layout>
+  <Layout className="business-page pricing-page">
     <nav className="breadcrumbs" aria-label="Breadcrumb">
       <ol className="breadcrumbs__list">
         <li className="breadcrumbs__item">
@@ -102,8 +105,10 @@ const PricingPage = () => (
     </nav>
 
     <Section
+      id="section-pricing"
       eyebrow="Pricing"
       titleAs="h1"
+      visual={<BrandArtwork variant="pricing-toolkit" eager />}
       title={
         <>
           <strong>Straightforward pricing.</strong> No surprise invoices.
@@ -135,11 +140,12 @@ const PricingPage = () => (
         </>
       }
     >
-      <div className="grid-three">
+    <AnchorNav className="business-section-nav" items={[{"id": "section-already-have-a-site", "label": "Already have a site?"}, {"id": "section-ongoing-care", "label": "Ongoing care"}, {"id": "section-what-s-not-included", "label": "What's not included"}, {"id": "section-how-pricing-works", "label": "How pricing works"}, {"id": "section-deposit-guarantee", "label": "Deposit guarantee"}, {"id": "section-faq", "label": "FAQ"}, {"id": "section-still-deciding", "label": "Still deciding?"}, {"id": "section-explore-more", "label": "Explore more"}]} />
+      <div className="grid-three pricing-packages">
         <div className="pkg-card">
-          <img src="/package-images/starter-presence.svg" alt="Starter Presence package illustration" className="pkg-card__bg" loading="lazy" />
+          <BrandArtwork variant="digital-architecture" className="pricing-package-art" />
           <div className="pkg-card__body">
-            <h2 className="pkg-card__title">{starterPkg.name} — ${starterPkg.buildPrice} build + ${starterPkg.monthlyPrice}/month</h2>
+            <h2 className="pkg-card__title"><span className="pricing-package-name">{starterPkg.name}</span><span className="pricing-package-price">${starterPkg.buildPrice}</span><span className="pricing-package-recurring">build + ${starterPkg.monthlyPrice}/month</span></h2>
             <p className="pkg-card__desc">For: New businesses or solo operators who need a clean website</p>
             <ul className="feature-list">
               {starterPkg.features.map((feature) => (
@@ -152,9 +158,9 @@ const PricingPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/local-growth.svg" alt="Local Growth package illustration" className="pkg-card__bg" loading="lazy" />
+          <BrandArtwork variant="growth-systems" className="pricing-package-art" />
           <div className="pkg-card__body">
-            <h2 className="pkg-card__title">{growthPkg.name} — ${growthPkg.buildPrice} build + ${growthPkg.monthlyPrice}/month</h2>
+            <h2 className="pkg-card__title"><span className="pricing-package-name">{growthPkg.name}</span><span className="pricing-package-price">${growthPkg.buildPrice}</span><span className="pricing-package-recurring">build + ${growthPkg.monthlyPrice}/month</span></h2>
             <p className="pkg-card__desc">For: Established service businesses ready to compete online</p>
             <p className="pkg-card__desc"><strong>Best value for established businesses</strong></p>
             <ul className="feature-list">
@@ -168,9 +174,9 @@ const PricingPage = () => (
           </div>
         </div>
         <div className="pkg-card">
-          <img src="/package-images/lead-engine.svg" alt="Lead Engine package illustration" className="pkg-card__bg" loading="lazy" />
+          <BrandArtwork variant="engineering-craft" className="pricing-package-art" />
           <div className="pkg-card__body">
-            <h2 className="pkg-card__title">{leadEnginePkg.name} — from ${leadEnginePkg.buildPrice.toLocaleString()} build + ${leadEnginePkg.monthlyPrice}/month</h2>
+            <h2 className="pkg-card__title"><span className="pricing-package-name">{leadEnginePkg.name}</span><span className="pricing-package-price"><small>from </small>${leadEnginePkg.buildPrice.toLocaleString()}</span><span className="pricing-package-recurring">build + ${leadEnginePkg.monthlyPrice}/month</span></h2>
             <p className="pkg-card__desc">For: Businesses ready to dominate their local market</p>
             <ul className="feature-list">
               {leadEnginePkg.features.map((feature) => (
@@ -185,6 +191,7 @@ const PricingPage = () => (
       </div>
 
       <h2 className="section-title" style={{ marginTop: "2rem" }}>Pricing comparison at a glance</h2>
+      <TableScroll label="Compare website packages">
       <table className="pricing-comparison-table" style={{ width: "100%", borderCollapse: "collapse", marginTop: "1rem" }}>
         <thead>
           <tr>
@@ -205,9 +212,13 @@ const PricingPage = () => (
           <tr><td style={{ padding: "0.5rem" }}>E-commerce</td><td style={{ textAlign: "center" }}>No</td><td style={{ textAlign: "center" }}>No</td><td style={{ textAlign: "center" }}>Custom quoted</td></tr>
         </tbody>
       </table>
+      </TableScroll>
     </Section>
 
+    <ShopifySpotlight context={{ path: "/pricing/", intent: "budget-workspace", title: "Small-business website budget" }} placement="pricing-options" />
+
     <Section
+      id="section-already-have-a-site"
       eyebrow="Already have a site?"
       title="Refresh or targeted help"
       description={
@@ -250,6 +261,7 @@ const PricingPage = () => (
     </Section>
 
     <Section
+      id="section-ongoing-care"
       eyebrow="Ongoing care"
       title="Website care plans"
       description={
@@ -313,6 +325,7 @@ const PricingPage = () => (
     </Section>
 
     <Section
+      id="section-what-s-not-included"
       eyebrow="What's not included"
       title="À la carte items"
       description={
@@ -332,6 +345,7 @@ const PricingPage = () => (
     </Section>
 
     <Section
+      id="section-how-pricing-works"
       eyebrow="How pricing works"
       title="Transparent pricing, no surprises"
       description={
@@ -340,7 +354,7 @@ const PricingPage = () => (
         </p>
       }
     >
-      <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+      <div className="pricing-explainer-grid">
         <div className="pkg-card">
           <img src="/package-images/why-fixed.svg" alt="Why prices are fixed, not hourly illustration" className="pkg-card__bg" loading="lazy" />
           <div className="pkg-card__body">
@@ -397,6 +411,7 @@ const PricingPage = () => (
     </Section>
 
     <Section
+      id="section-deposit-guarantee"
       eyebrow="Deposit guarantee"
       title="Deposit refund guarantee"
       description={
@@ -417,6 +432,7 @@ const PricingPage = () => (
     />
 
     <Section
+      id="section-faq"
       eyebrow="FAQ"
       title="Common pricing questions"
       description={
@@ -426,17 +442,11 @@ const PricingPage = () => (
         </p>
       }
     >
-      <div className="grid-two">
-        {faqs.map((faq) => (
-          <Card key={faq.question} variant="outline">
-            <h3 className="feature-card__title">{faq.question}</h3>
-            <p className="feature-card__body">{faq.answer}</p>
-          </Card>
-        ))}
-      </div>
+      <FAQAccordion items={faqs.map(faq => ({ question: faq.question, answer: faq.answer }))} />
     </Section>
 
     <Section
+      id="section-still-deciding"
       eyebrow="Still deciding?"
       title="Not sure which tier is right for you?"
       description={
@@ -454,6 +464,7 @@ const PricingPage = () => (
     />
 
     <Section
+      id="section-explore-more"
       eyebrow="Explore more"
       title="Related pages"
       description={

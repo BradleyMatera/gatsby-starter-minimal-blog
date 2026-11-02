@@ -1,0 +1,65 @@
+{
+  "slug": "/service-area-business-seo-no-storefront",
+  "title": "Service-Area Business SEO Without a Storefront",
+  "cover": {
+    "src": "/images/blog/service-area-business-seo-no-storefront/cover.png",
+    "mobile": "/images/blog/service-area-business-seo-no-storefront/cover-720.webp",
+    "alt": "Miniature service van traveling toward customer homes from a private operating base"
+  },
+  "figures": [
+    {
+      "id": "service-area-identity",
+      "kind": "comparison",
+      "title": "Public coverage and private verification serve different roles",
+      "summary": "A mobile service business visits the customer.",
+      "items": [
+        {
+          "label": "Public profile",
+          "detail": "Describe the service and actual areas covered."
+        },
+        {
+          "label": "Operating address",
+          "detail": "Use genuine business information for verification; do not invent a storefront."
+        },
+        {
+          "label": "Customer destination",
+          "detail": "Make it clear that the service happens at the customer's location."
+        },
+        {
+          "label": "Website detail",
+          "detail": "Explain local work and practical coverage limits."
+        }
+      ],
+      "caption": "The article's service-area model; this graphic is not a map or a claim of ranking eligibility."
+    },
+    {
+      "id": "service-area-page-value",
+      "kind": "layers",
+      "title": "Make the city page useful on its own",
+      "summary": "Local detail should survive beyond a replaced place name.",
+      "items": [
+        {
+          "label": "Specific introduction",
+          "detail": "Explain the work actually performed in that location."
+        },
+        {
+          "label": "Relevant services",
+          "detail": "Describe what is offered there."
+        },
+        {
+          "label": "Local questions",
+          "detail": "Answer coverage and practical service questions."
+        },
+        {
+          "label": "Genuine evidence",
+          "detail": "Use relevant work or reviews without inventing customers."
+        },
+        {
+          "label": "Connected next step",
+          "detail": "Link service details and neighboring areas clearly."
+        }
+      ],
+      "caption": "Content layers from the article's local-page structure, excluding its anecdotal client results."
+    }
+  ]
+}

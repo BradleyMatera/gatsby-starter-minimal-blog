@@ -5,7 +5,7 @@ type MetricBadgeProps = {
 };
 
 const MetricBadge = ({ text }: MetricBadgeProps) => (
-  <span className="metric-badge" role="status" aria-label={text}>
+  <span className="metric-badge">
     {text}
   </span>
 );

@@ -24,109 +24,13 @@ const PHONE_CODES = toCharCodes("(360) 970-0581");
 
 const ObscuredContact: React.FC = () => {
   const [revealed, setRevealed] = React.useState(false);
-  const [email, setEmail] = React.useState("");
-  const [phone, setPhone] = React.useState("");
-
-  const handleReveal = React.useCallback(() => {
-    if (!revealed) {
-      setEmail(fromCharCodes(EMAIL_CODES));
-      setPhone(fromCharCodes(PHONE_CODES));
-    }
-    setRevealed((prev) => !prev);
-  }, [revealed]);
-
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        gap: "1.5rem",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      {/* Email */}
-      <div style={{ textAlign: "center" }}>
-        <div
-          style={{
-            fontSize: "0.75rem",
-            color: "var(--recruiter-text-muted)",
-            marginBottom: "0.25rem",
-          }}
-        >
-          Email
-        </div>
-        <button
-          onClick={handleReveal}
-          aria-label={revealed ? "Hide email address" : "Reveal email address"}
-          style={{
-            background: revealed
-              ? "rgba(34,197,94,0.08)"
-              : "rgba(139,92,246,0.08)",
-            border: revealed
-              ? "1px solid rgba(34,197,94,0.25)"
-              : "1px solid rgba(139,92,246,0.25)",
-            borderRadius: "0.5rem",
-            padding: "0.5rem 1rem",
-            cursor: "pointer",
-            color: revealed ? "var(--r-success)" : "var(--r-info)",
-            fontFamily: "system-ui, -apple-system, sans-serif",
-            fontSize: "0.9375rem",
-            fontWeight: 500,
-            transition: "all 0.2s ease",
-          }}
-        >
-          {revealed ? email || "▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓�▓▓" : "Reveal Email"}
-        </button>
-      </div>
-
-      {/* Divider */}
-      <div
-        style={{
-          width: "1px",
-          height: "2rem",
-          background: "rgba(148,163,184,0.15)",
-          flexShrink: 0,
-        }}
-      />
-
-      {/* Phone */}
-      <div style={{ textAlign: "center" }}>
-        <div
-          style={{
-            fontSize: "0.75rem",
-            color: "var(--recruiter-text-muted)",
-            marginBottom: "0.25rem",
-          }}
-        >
-          Phone
-        </div>
-        <button
-          onClick={handleReveal}
-          aria-label={revealed ? "Hide phone number" : "Reveal phone number"}
-          style={{
-            background: revealed
-              ? "rgba(34,197,94,0.08)"
-              : "rgba(139,92,246,0.08)",
-            border: revealed
-              ? "1px solid rgba(34,197,94,0.25)"
-              : "1px solid rgba(139,92,246,0.25)",
-            borderRadius: "0.5rem",
-            padding: "0.5rem 1rem",
-            cursor: "pointer",
-            color: revealed ? "var(--r-success)" : "var(--r-info)",
-            fontFamily: "system-ui, -apple-system, sans-serif",
-            fontSize: "0.9375rem",
-            fontWeight: 500,
-            transition: "all 0.2s ease",
-          }}
-        >
-          {revealed ? phone || "▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓" : "Reveal Phone"}
-        </button>
-      </div>
-    </div>
-  );
+  const email = revealed ? fromCharCodes(EMAIL_CODES) : "";
+  const phone = revealed ? fromCharCodes(PHONE_CODES) : "";
+  return <div className="recruiter-contact-reveal">
+    <button type="button" className="recruiter-btn recruiter-btn--secondary" aria-expanded={revealed} aria-controls="recruiter-contact-details" onClick={() => setRevealed(!revealed)}>{revealed ? "Hide contact details" : "Reveal contact details"}</button>
+    <div id="recruiter-contact-details" aria-live="polite">{revealed && <div className="recruiter-actions"><a className="recruiter-text-link" href={`mailto:${email}`}>{email}</a><a className="recruiter-text-link" href={`tel:${phone.replace(/[^+\d]/g, "")}`}>{phone}</a></div>}</div>
+    <noscript><p>Please use the LinkedIn link above to get in touch.</p></noscript>
+  </div>;
 };
 
 export default ObscuredContact;
-

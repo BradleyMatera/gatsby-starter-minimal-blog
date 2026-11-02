@@ -1,0 +1,61 @@
+{
+  "slug": "website-design-monroe-wisconsin",
+  "title": "Website Design in Monroe, Wisconsin: A Green County Guide",
+  "cover": {
+    "src": "/images/blog/website-design-monroe-wisconsin/cover.png",
+    "mobile": "/images/blog/website-design-monroe-wisconsin/cover-720.webp",
+    "alt": "Concept illustration of a fictional Wisconsin artisan cheese shop planning its online catalogue; not an actual Monroe business or landmark."
+  },
+  "figures": [
+    {
+      "id": "distinct-business-content",
+      "kind": "checklist",
+      "title": "Make the site reflect the actual business",
+      "summary": "The guide argues for specific business information instead of generic template content.",
+      "items": [
+        {
+          "label": "Real business photographs",
+          "detail": "Show the actual products, work, premises, or team where appropriate."
+        },
+        {
+          "label": "Specific services",
+          "detail": "Describe what customers can buy or request in plain language."
+        },
+        {
+          "label": "Useful location details",
+          "detail": "Explain the real location or service area without borrowing a false local identity."
+        },
+        {
+          "label": "Clear contact path",
+          "detail": "Make it easy to ask a question, call, or plan a visit."
+        }
+      ],
+      "caption": "Content priorities drawn from the Monroe guide. The generated cover is a concept illustration, not business evidence."
+    },
+    {
+      "id": "cross-state-clarity",
+      "kind": "flow",
+      "title": "Keep cross-state service information consistent",
+      "summary": "If the business serves both Wisconsin and Illinois, describe that actual coverage clearly.",
+      "items": [
+        {
+          "label": "Define real coverage",
+          "detail": "Identify the communities the business genuinely serves."
+        },
+        {
+          "label": "Update the website",
+          "detail": "Use helpful service-area information rather than duplicate city-name pages."
+        },
+        {
+          "label": "Align public profiles",
+          "detail": "Match the stated coverage and contact details across listings."
+        },
+        {
+          "label": "Review customer questions",
+          "detail": "Make it easy for someone near the state line to confirm eligibility for service."
+        }
+      ],
+      "caption": "A planning flow based on the article's Wisconsin-specific local SEO note; it is not a claim that every Monroe business serves Illinois."
+    }
+  ]
+}

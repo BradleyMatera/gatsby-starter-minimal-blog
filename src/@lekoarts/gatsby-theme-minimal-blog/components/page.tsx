@@ -3,7 +3,9 @@ import type { HeadFC, PageProps } from "gatsby"
 import { jsx, Heading } from "theme-ui"
 import Layout from "./layout"
 import Seo from "./seo"
-import { buildProfessionalServiceSchema, localBreadcrumb, serviceAreaDescription } from "../../../site/seo/local-seo"
+import ReadingLayout from "../../../features/blog/components/ReadingLayout"
+import "../../../styles/editorial.css"
+import { buildProfessionalServiceSchema, serviceAreaDescription } from "../../../site/seo/local-seo"
 
 export type MBPageProps = {
   page: {
@@ -26,12 +28,23 @@ const Page: React.FC<React.PropsWithChildren<PageProps<MBPageProps>>> = ({ data:
     )
   }
 
+  const pathname = page.slug.endsWith("/") ? page.slug : `${page.slug}/`
+  const isProject = pathname.startsWith("/projects/") && pathname !== "/projects/"
+  const isRole = pathname.startsWith("/roles/")
+  const isAbout = pathname === "/about/"
+  const isReadingPage = ["/support/", "/image-credits/"].includes(pathname)
+  const isEditorial = isProject || isRole || isAbout || isReadingPage || ["/projects/", "/contributions/", "/open-source-contributions/"].includes(pathname)
+
   return (
-    <Layout>
-      <Heading as="h1" variant="styles.h1">
-        {page.title}
-      </Heading>
-      <section className="u-page-content">{children}</section>
+    <Layout className={isEditorial ? `editorial-page ${isProject ? "editorial-case-study" : isRole ? "editorial-role" : isAbout ? "editorial-about" : isReadingPage ? "editorial-policy" : "editorial-portfolio"}` : undefined}>
+      <header className={isEditorial ? "editorial-header" : undefined}>
+        <Heading as="h1" variant="styles.h1">{page.title}</Heading>
+      </header>
+      {isEditorial && pathname !== "/projects/" ? (
+        <ReadingLayout pageKey={pathname}>
+          <section className="u-page-content">{children}</section>
+        </ReadingLayout>
+      ) : <section className="u-page-content">{children}</section>}
     </Layout>
   )
 }

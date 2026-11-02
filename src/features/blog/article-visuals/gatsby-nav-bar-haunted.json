@@ -1,0 +1,65 @@
+{
+  "slug": "/gatsby-nav-bar-haunted",
+  "title": "Gatsby Nav Bar Haunted: Fixing a Stuck Dropdown",
+  "cover": {
+    "src": "/images/blog/gatsby-nav-bar-haunted/cover.png",
+    "mobile": "/images/blog/gatsby-nav-bar-haunted/cover-720.webp",
+    "alt": "A navigation drawer's latch connects to an outside touchpad and a folding frame, illustrating explicit close behavior."
+  },
+  "figures": [
+    {
+      "id": "dropdown-transitions",
+      "kind": "comparison",
+      "title": "Give open state an exit",
+      "summary": "The article separates the events that change the dropdown's boolean state.",
+      "items": [
+        {
+          "label": "Toggle button",
+          "detail": "Existing behavior: the button can change the open state."
+        },
+        {
+          "label": "Outside press",
+          "detail": "Added behavior: a document listener checks the container and closes the dropdown."
+        },
+        {
+          "label": "Nav hidden",
+          "detail": "Added behavior: the visibility effect forces the dropdown closed."
+        },
+        {
+          "label": "Keyboard exit",
+          "detail": "Follow-up work: the article recommends Escape-to-close and a focus review."
+        }
+      ],
+      "caption": "A transition inventory, including the keyboard behavior identified as a follow-up rather than implemented in the example."
+    },
+    {
+      "id": "dropdown-retest",
+      "kind": "flow",
+      "title": "Repeat the interactions that failed",
+      "summary": "Check the fix through a sequence that crosses both dismissal paths.",
+      "items": [
+        {
+          "label": "Open",
+          "detail": "Use the dropdown toggle."
+        },
+        {
+          "label": "Press outside",
+          "detail": "Confirm the dropdown closes."
+        },
+        {
+          "label": "Open again",
+          "detail": "Confirm the toggle still behaves normally."
+        },
+        {
+          "label": "Collapse nav",
+          "detail": "Hide the surrounding navigation."
+        },
+        {
+          "label": "Expand nav",
+          "detail": "Confirm stale open state has not returned."
+        }
+      ],
+      "caption": "The article's repeatable browser check. A successful pointer check does not replace keyboard testing."
+    }
+  ]
+}

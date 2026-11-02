@@ -1,0 +1,65 @@
+{
+  "slug": "/balancing-school-work-projects",
+  "title": "Balancing Work, School, and Projects: A Simple Schedule",
+  "cover": {
+    "src": "/images/blog/balancing-school-work-projects/cover.png",
+    "mobile": "/images/blog/balancing-school-work-projects/cover-720.webp",
+    "alt": "Conceptual folded ribbon alternating bursts of coding activity with calm gaps for rest."
+  },
+  "figures": [
+    {
+      "id": "work-pattern-comparison",
+      "kind": "comparison",
+      "title": "Two work rhythms, compared on the same dimensions",
+      "summary": "The article describes the author’s experience rather than prescribing one schedule for everyone.",
+      "items": [
+        {
+          "label": "Timing",
+          "detail": "A steady routine uses recurring blocks; the sprint pattern varies with interest and available time."
+        },
+        {
+          "label": "Motivation",
+          "detail": "The routine emphasizes habit; the sprint pattern emphasizes intrinsic interest."
+        },
+        {
+          "label": "Pauses",
+          "detail": "The routine has planned breaks; the sprint pattern allows longer gaps between active periods."
+        },
+        {
+          "label": "Risk",
+          "detail": "Rigid blocks can feel forced; interest-driven work can leave long gaps when momentum fades."
+        }
+      ],
+      "caption": "A qualitative comparison from the post, not a measured productivity ranking."
+    },
+    {
+      "id": "shipping-sprint-sequence",
+      "kind": "flow",
+      "title": "A sprint still needs a finish line",
+      "summary": "When a project matters enough to ship, the article describes a concrete sequence.",
+      "items": [
+        {
+          "label": "Pick a result",
+          "detail": "Choose one feature or fix."
+        },
+        {
+          "label": "Make room",
+          "detail": "Use the available evening or weekend time."
+        },
+        {
+          "label": "Focus",
+          "detail": "Close distractions and work on that slice."
+        },
+        {
+          "label": "Check the live result",
+          "detail": "Deploy and test the real URL."
+        },
+        {
+          "label": "Pause",
+          "detail": "Ship the change and step back."
+        }
+      ],
+      "caption": "The author’s stated shipping pattern. Rest is part of the cycle, not a failed work session."
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "slug": "website-redesign-checklist",
+  "title": "Website Redesign Checklist for Small Businesses",
+  "cover": {
+    "src": "/images/blog/website-redesign-checklist/cover.png",
+    "mobile": "/images/blog/website-redesign-checklist/cover-720.webp",
+    "alt": "Concept illustration of website page tiles moving along brass tracks between an existing and redesigned structure."
+  },
+  "figures": [
+    {
+      "id": "redesign-preservation",
+      "kind": "flow",
+      "title": "Carry useful assets into the redesign",
+      "summary": "Decide what happens to existing pages before rebuilding them.",
+      "items": [
+        {
+          "label": "Inventory",
+          "detail": "List existing pages, incoming traffic, search queries, and backlinks."
+        },
+        {
+          "label": "Classify",
+          "detail": "Mark each page to keep, update, merge, or remove."
+        },
+        {
+          "label": "Map",
+          "detail": "Pair changing URLs with relevant destinations and preserve useful content."
+        },
+        {
+          "label": "Verify",
+          "detail": "Test redirects, internal links, and retained content on the new site."
+        }
+      ],
+      "caption": "A preservation workflow distilled from the article; it does not promise a ranking outcome."
+    },
+    {
+      "id": "redesign-monitoring",
+      "kind": "timeline",
+      "title": "Keep measurement connected to launch",
+      "summary": "Use the same baseline to make post-launch checks meaningful.",
+      "items": [
+        {
+          "label": "Before launch",
+          "detail": "Record traffic and search performance, then test the staging site."
+        },
+        {
+          "label": "Launch",
+          "detail": "Deploy redirects, check tracking, and submit the new sitemap."
+        },
+        {
+          "label": "First week",
+          "detail": "Review crawl errors and confirm old URLs reach their intended destinations."
+        },
+        {
+          "label": "Following months",
+          "detail": "Compare like-for-like periods and investigate unexpected changes."
+        }
+      ],
+      "caption": "Monitoring checkpoints from the checklist, not a guaranteed recovery schedule."
+    }
+  ]
+}

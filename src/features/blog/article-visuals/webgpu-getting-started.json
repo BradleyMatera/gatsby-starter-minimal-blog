@@ -1,0 +1,67 @@
+{
+  "slug": "webgpu-getting-started",
+  "title": "WebGPU Triangle Demo: Start, Fix, and Keep It Honest",
+  "cover": {
+    "src": "/images/blog/webgpu-getting-started/cover.png",
+    "mobile": "/images/blog/webgpu-getting-started/cover-720.webp",
+    "alt": "Concept illustration of a blue triangle emerging from aligned optical gates representing the WebGPU rendering pipeline."
+  },
+  "figures": [
+    {
+      "id": "rendering-pipeline",
+      "kind": "flow",
+      "title": "The gates between a blank canvas and one triangle",
+      "summary": "Each stage depends on the preceding setup being valid.",
+      "items": [
+        {
+          "label": "Adapter and device",
+          "detail": "Request GPU access and the device that creates resources."
+        },
+        {
+          "label": "Canvas context",
+          "detail": "Configure the canvas using the preferred format."
+        },
+        {
+          "label": "Shader and pipeline",
+          "detail": "Connect the WGSL entry points to the same output format."
+        },
+        {
+          "label": "Render pass",
+          "detail": "Clear the target, bind the pipeline, and draw three vertices."
+        },
+        {
+          "label": "Submit and repeat",
+          "detail": "Submit the command buffer and schedule the next frame."
+        }
+      ],
+      "caption": "A simplified map of the minimal pipeline implemented in the article.",
+      "sourceLabel": "WebGPU specification",
+      "sourceHref": "https://www.w3.org/TR/webgpu/"
+    },
+    {
+      "id": "triangle-diagnostics",
+      "kind": "comparison",
+      "title": "Use the symptom to choose the next check",
+      "summary": "The common failures point to different stages of the pipeline.",
+      "items": [
+        {
+          "label": "No GPU API",
+          "detail": "Check browser support and adapter availability before changing shaders."
+        },
+        {
+          "label": "Blank canvas",
+          "detail": "Compare the canvas format with the pipeline target format."
+        },
+        {
+          "label": "Flicker",
+          "detail": "Verify the render pass clears the previous frame."
+        },
+        {
+          "label": "Shader error",
+          "detail": "Check WGSL syntax and exact entry-point names."
+        }
+      ],
+      "caption": "The troubleshooting map from this lab guide; browser support should be checked against current documentation."
+    }
+  ]
+}

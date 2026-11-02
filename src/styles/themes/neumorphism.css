@@ -21,7 +21,7 @@
   transform: translateY(-4px);
 }
 
-:root[data-visual-theme="neumorphism"] button,
+:root[data-visual-theme="neumorphism"] button:not(.demo-page *),
 :root[data-visual-theme="neumorphism"] .hero-actions a,
 :root[data-visual-theme="neumorphism"] .style-lab__mode-btn,
 :root[data-visual-theme="neumorphism"] .style-lab__preset {
@@ -33,7 +33,7 @@
   border: none !important;
 }
 
-:root[data-visual-theme="neumorphism"] button:hover,
+:root[data-visual-theme="neumorphism"] button:not(.demo-page *):hover,
 :root[data-visual-theme="neumorphism"] .hero-actions a:hover,
 :root[data-visual-theme="neumorphism"] .style-lab__mode-btn:hover,
 :root[data-visual-theme="neumorphism"] .style-lab__preset:hover {

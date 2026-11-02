@@ -1,0 +1,69 @@
+{
+  "slug": "/ai-end-to-end-projects",
+  "title": "End to End Projects With AI: A Strict, Verifiable Workflow",
+  "cover": {
+    "src": "/images/blog/ai-end-to-end-projects/cover.png",
+    "mobile": "/images/blog/ai-end-to-end-projects/cover-720.webp",
+    "alt": "Conceptual workbench illustration of an AI-assisted build assembled and checked by a human."
+  },
+  "figures": [
+    {
+      "id": "ai-build-ownership",
+      "kind": "comparison",
+      "title": "What AI drafts, and what the builder verifies",
+      "summary": "The same task has two responsibilities: producing a starting point and proving that it works.",
+      "items": [
+        {
+          "label": "Structure",
+          "detail": "AI proposes folders and scaffolding; the builder checks that the layout is understandable."
+        },
+        {
+          "label": "Logic",
+          "detail": "AI drafts behavior; the builder tests real inputs and edge cases."
+        },
+        {
+          "label": "Debugging",
+          "detail": "AI suggests fixes from supplied errors; the builder examines logs and runtime behavior."
+        },
+        {
+          "label": "Deployment",
+          "detail": "AI drafts configuration; the builder runs the build and checks the live system."
+        }
+      ],
+      "caption": "A responsibility comparison from the article. A plausible draft is not evidence of a working system."
+    },
+    {
+      "id": "ai-build-loop",
+      "kind": "flow",
+      "title": "The runnable-slice loop",
+      "summary": "Each cycle ends with observed behavior rather than the amount of generated code.",
+      "items": [
+        {
+          "label": "Describe",
+          "detail": "State one concrete behavior in plain language."
+        },
+        {
+          "label": "Draft",
+          "detail": "Create a small entry point, route, page, or rendering slice."
+        },
+        {
+          "label": "Run and inspect",
+          "detail": "Reproduce the failure and read the actual output."
+        },
+        {
+          "label": "Change one thing",
+          "detail": "Apply a narrow fix and rerun the local system."
+        },
+        {
+          "label": "Deploy and verify",
+          "detail": "Repeat the checks in the live environment."
+        },
+        {
+          "label": "Document",
+          "detail": "Record the working path before the next iteration."
+        }
+      ],
+      "caption": "The repeated build-and-debug sequence described in this post."
+    }
+  ]
+}

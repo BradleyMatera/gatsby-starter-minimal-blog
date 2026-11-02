@@ -7,6 +7,9 @@ description: "A step-by-step guide to migrating a website without losing search 
 theme: "Technical"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/migrate-without-losing-rankings.json";
+
 A website migration is the most common way businesses destroy their own search rankings. Not because migrations are inherently dangerous, but because most people treat them as a design project and forget about SEO until after launch.
 
 ## The short answer
@@ -48,6 +51,8 @@ Rules for the redirect map:
 - If a page is being deleted, redirect it to the most relevant parent page, not the homepage.
 - If a page's URL is not changing, no redirect is needed.
 - Do not redirect everything to the homepage. That wastes the link equity.
+
+<ArticleVisual spec={articleVisuals.figures[0]} />
 
 ## During the migration
 
@@ -120,6 +125,8 @@ Compare your post-migration rankings to the pre-migration baseline.
 - **Redirecting everything to the homepage.** This tells Google nothing about where the content actually went.
 - **Not testing before launch.** Redirects that point to the wrong place are only caught if you test them.
 - **Ignoring it after launch.** The post-launch monitoring is where you catch problems before they become permanent ranking losses.
+
+<ArticleVisual spec={articleVisuals.figures[1]} />
 
 ## Specific redirect patterns that work
 

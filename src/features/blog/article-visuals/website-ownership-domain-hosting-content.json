@@ -1,0 +1,61 @@
+{
+  "slug": "website-ownership-domain-hosting-content",
+  "title": "Website Ownership: Domain, Hosting, Content, and Source Code",
+  "cover": {
+    "src": "/images/blog/website-ownership-domain-hosting-content/cover.png",
+    "mobile": "/images/blog/website-ownership-domain-hosting-content/cover-720.webp",
+    "alt": "Concept illustration of an open case holding four website assets and an owner's key."
+  },
+  "figures": [
+    {
+      "id": "ownership-layers",
+      "kind": "layers",
+      "title": "Four layers to account for",
+      "summary": "Website control involves separate assets and accounts.",
+      "items": [
+        {
+          "label": "Domain",
+          "detail": "Know which registrar account holds the address and who can manage it."
+        },
+        {
+          "label": "Hosting",
+          "detail": "Confirm account ownership, billing access, and collaborator permissions."
+        },
+        {
+          "label": "Content",
+          "detail": "Keep original files and records of the rights to use them."
+        },
+        {
+          "label": "Source code",
+          "detail": "Confirm what the agreement delivers and how the files can be exported."
+        }
+      ],
+      "caption": "An asset inventory from the article. Your agreement and third-party licenses define the applicable rights."
+    },
+    {
+      "id": "ownership-verification",
+      "kind": "checklist",
+      "title": "Verify access before you need a handoff",
+      "summary": "Test the practical access behind each ownership promise.",
+      "items": [
+        {
+          "label": "Sign in",
+          "detail": "Confirm you can access the domain and hosting accounts yourself."
+        },
+        {
+          "label": "Check account details",
+          "detail": "Review the contact, billing, and administrator information."
+        },
+        {
+          "label": "Retrieve the source",
+          "detail": "Confirm the repository or agreed export can actually be downloaded."
+        },
+        {
+          "label": "Keep independent copies",
+          "detail": "Store text, images, and relevant license records outside the live website."
+        }
+      ],
+      "caption": "A practical access check, not a determination of legal ownership. See the linked terms and service scope."
+    }
+  ]
+}

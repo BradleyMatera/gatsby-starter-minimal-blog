@@ -1,50 +1,20 @@
+import TableScroll from "../features/demos/TableScroll";
 import * as React from "react";
 import type { HeadFC } from "gatsby";
 import Layout from "../@lekoarts/gatsby-theme-minimal-blog/components/layout";
 import Seo from "../@lekoarts/gatsby-theme-minimal-blog/components/seo";
 import useSiteMetadata from "../@lekoarts/gatsby-theme-minimal-blog/hooks/use-site-metadata";
-import { Card, Link, Section } from "../ui";
+import { Link, Section } from "../ui";
+import { NEW_CITY_CONFIGS } from "../features/local-seo/city-configs";
+import LocalIllustration from "../features/local-seo/LocalIllustration";
+import "../features/local-seo/local-pages.css";
 
 const pathname = "/service-areas/";
 const pageTitle = "Service Areas — Northwest Illinois and Southern Wisconsin | Bradley Matera";
 const pageDescription =
   "Web development service areas in Northwest Illinois and Southern Wisconsin. Durand, Rockford, Freeport, Beloit WI, Janesville WI. Remote and in-person.";
 
-const cityCards = [
-  { title: "Durand & Davis", href: "/web-developer-durand-davis-illinois/", image: "durand-davis.jpg" },
-  { title: "Rockford", href: "/web-developer-rockford-illinois/", image: "rockford.jpg" },
-  { title: "Freeport", href: "/web-developer-freeport-illinois/", image: "freeport.jpg" },
-  { title: "Pecatonica", href: "/web-developer-pecatonica-illinois/", image: "pecatonica.jpg" },
-  { title: "Winnebago", href: "/web-developer-winnebago-illinois/", image: "winnebago.jpg" },
-  { title: "Loves Park", href: "/web-developer-loves-park-illinois/", image: "loves-park.jpg" },
-  { title: "Machesney Park", href: "/web-developer-machesney-park-illinois/", image: "machesney-park.jpg" },
-  { title: "Byron", href: "/web-developer-byron-illinois/", image: "byron.jpg" },
-  { title: "Rockton", href: "/web-developer-rockton-illinois/", image: "rockton.jpg" },
-  { title: "Roscoe", href: "/web-developer-roscoe-illinois/", image: "roscoe.jpg" },
-  { title: "South Beloit", href: "/web-developer-south-beloit-illinois/", image: "south-beloit.jpg" },
-  { title: "Beloit, WI", href: "/web-developer-beloit-wisconsin/", image: "beloit-wi.jpg" },
-  { title: "Janesville, WI", href: "/web-developer-janesville-wisconsin/", image: "janesville-wi.jpg" },
-  { title: "Belvidere", href: "/web-developer-belvidere-illinois/", image: "belvidere.jpg" },
-  { title: "Cherry Valley", href: "/web-developer-cherry-valley-illinois/", image: "cherry-valley.jpg" },
-  { title: "Oregon", href: "/web-developer-oregon-illinois/", image: "oregon.jpg" },
-  { title: "Mount Morris", href: "/web-developer-mount-morris-illinois/", image: "mount-morris.jpg" },
-  { title: "Rochelle", href: "/web-developer-rochelle-illinois/", image: "rochelle.jpg" },
-  { title: "Polo", href: "/web-developer-polo-illinois/", image: "polo.jpg" },
-  { title: "Forreston", href: "/web-developer-forreston-illinois/", image: "forreston.jpg" },
-  { title: "DeKalb", href: "/web-developer-dekalb-illinois/", image: "dekalb.jpg" },
-  { title: "Sycamore", href: "/web-developer-sycamore-illinois/", image: "sycamore.jpg" },
-  { title: "Sterling", href: "/web-developer-sterling-illinois/", image: "sterling.jpg" },
-  { title: "Rock Falls", href: "/web-developer-rock-falls-illinois/", image: "rock-falls.jpg" },
-  { title: "Dixon", href: "/web-developer-dixon-illinois/", image: "dixon.jpg" },
-  { title: "Amboy", href: "/web-developer-amboy-illinois/", image: "amboy.jpg" },
-  { title: "Ashton", href: "/web-developer-ashton-illinois/", image: "ashton.jpg" },
-  { title: "Monroe, WI", href: "/web-developer-monroe-wisconsin/", image: "monroe-wi.jpg" },
-  { title: "Brodhead, WI", href: "/web-developer-brodhead-wisconsin/", image: "brodhead-wi.jpg" },
-  { title: "Evansville, WI", href: "/web-developer-evansville-wisconsin/", image: "evansville-wi.jpg" },
-  { title: "Edgerton, WI", href: "/web-developer-edgerton-wisconsin/", image: "edgerton-wi.jpg" },
-  { title: "Milton, WI", href: "/web-developer-milton-wisconsin/", image: "milton-wi.jpg" },
-  { title: "Clinton, WI", href: "/web-developer-clinton-wisconsin/", image: "clinton-wi.jpg" },
-];
+const cityCards = NEW_CITY_CONFIGS.slice().sort((a, b) => a.city.localeCompare(b.city));
 
 const industries = [
   "Restaurants and cafes",
@@ -57,8 +27,14 @@ const industries = [
   "Retail and specialty shops",
 ];
 
-const ServiceAreasPage = () => (
+const ServiceAreasPage = () => {
+  const [query, setQuery] = React.useState("");
+  const [state, setState] = React.useState("all");
+  const filtered = cityCards.filter((city) => (state === "all" || city.stateAbbrev === state) && `${city.city} ${city.county}`.toLowerCase().includes(query.trim().toLowerCase()));
+  const reset = () => { setQuery(""); setState("all"); };
+  return (
   <Layout>
+    <div className="local-editorial service-area-directory">
     <nav className="breadcrumbs" aria-label="Breadcrumb">
       <ol className="breadcrumbs__list">
         <li className="breadcrumbs__item">
@@ -71,6 +47,7 @@ const ServiceAreasPage = () => (
     </nav>
 
     <Section
+      className="area-directory-hero"
       eyebrow="Service Areas"
       titleAs="h1"
       title={
@@ -96,28 +73,41 @@ const ServiceAreasPage = () => (
         </>
       }
     >
-      <div className="grid-three">
-        {cityCards.map((city) => (
-          <Link key={city.href} to={city.href} className="city-card" style={{ backgroundImage: `url(/city-images/${city.image})` }}>
-            <div className="city-card__overlay">
-              <h2 className="city-card__title">{city.title}</h2>
-              <span className="city-card__link">{city.title} web developer →</span>
-            </div>
-          </Link>
-        ))}
+      <div className="area-region-mosaic" aria-label="Views from the service region">
+        <figure><img src="/city-images/rockford.jpg" alt="Rockford, Illinois community view" loading="eager" /><figcaption>Rockford, Illinois</figcaption></figure>
+        <figure><img src="/city-images/durand-davis.jpg" alt="Durand and Davis, Illinois community view" loading="eager" /><figcaption>Durand &amp; Davis, Illinois</figcaption></figure>
+        <figure><img src="/city-images/beloit-wi.jpg" alt="Beloit, Wisconsin community view" loading="eager" /><figcaption>Beloit, Wisconsin</figcaption></figure>
+        <div className="area-region-mosaic__index"><strong>33</strong><span>Service-area pages<br />Illinois + Wisconsin</span></div>
+      </div>
+    </Section>
+
+    <Section id="area-search" className="area-directory-results" eyebrow="Find your community" title="Explore the service areas">
+      <div className="area-filters" role="search" aria-label="Find a service area">
+        <div><label htmlFor="area-query">Find a city or county</label><input id="area-query" type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="City or county" /></div>
+        <div><label htmlFor="area-state">State</label><select id="area-state" value={state} onChange={(event) => setState(event.target.value)}><option value="all">Illinois and Wisconsin</option><option value="IL">Illinois</option><option value="WI">Wisconsin</option></select></div>
+        <button type="button" onClick={reset}>Reset filters</button>
+      </div>
+      <p className="area-result-count" role="status">{filtered.length} of {cityCards.length} service areas</p>
+      {filtered.length === 0 && <div className="area-empty"><p>No service areas match that search.</p><button type="button" onClick={reset}>Show all service areas</button></div>}
+      <div className="area-directory-grid">
+        {filtered.map((city) => <Link key={city.slug} to={`/${city.slug}/`} className="area-directory-card">
+          <img src={`/city-images/${city.cityImage}`} alt="" loading="lazy" width={480} height={320} />
+          <div><p>{city.state} · {city.county}</p><h2>{city.city}</h2><span>Explore website services <span aria-hidden="true">↗</span></span></div>
+        </Link>)}
       </div>
     </Section>
 
     <Section
+      className="area-comparison-section"
       eyebrow="Service areas at a glance"
       title="Cities served, distance, and county"
       description={
         <p>
-          All service areas are within a 55-minute drive of Durand, Illinois. Most work is done remotely with in-person meetings available when needed.
+          Most work is done remotely with in-person meetings available when needed. Travel times below are estimates from Durand, Illinois.
         </p>
       }
     >
-      <div style={{ overflowX: "auto" }} tabIndex={0} role="region" aria-label="Service areas comparison table">
+      <TableScroll label="Service areas comparison table">
         <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.9rem" }}>
           <thead>
             <tr>
@@ -129,25 +119,14 @@ const ServiceAreasPage = () => (
             </tr>
           </thead>
           <tbody>
-            <tr><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Durand & Davis</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>IL</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Winnebago</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Home base</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}><Link to="/web-developer-durand-davis-illinois/">View</Link></td></tr>
-            <tr><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Rockford</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>IL</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Winnebago</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>25 min</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}><Link to="/web-developer-rockford-illinois/">View</Link></td></tr>
-            <tr><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Freeport</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>IL</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Stephenson</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>30 min</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}><Link to="/web-developer-freeport-illinois/">View</Link></td></tr>
-            <tr><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Pecatonica</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>IL</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Winnebago</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>15 min</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}><Link to="/web-developer-pecatonica-illinois/">View</Link></td></tr>
-            <tr><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Winnebago</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>IL</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Winnebago</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>10 min</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}><Link to="/web-developer-winnebago-illinois/">View</Link></td></tr>
-            <tr><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Loves Park</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>IL</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Winnebago</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>20 min</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}><Link to="/web-developer-loves-park-illinois/">View</Link></td></tr>
-            <tr><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Machesney Park</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>IL</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Winnebago</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>22 min</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}><Link to="/web-developer-machesney-park-illinois/">View</Link></td></tr>
-            <tr><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Byron</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>IL</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Ogle</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>15 min</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}><Link to="/web-developer-byron-illinois/">View</Link></td></tr>
-            <tr><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Rockton</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>IL</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Winnebago</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>35 min</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}><Link to="/web-developer-rockton-illinois/">View</Link></td></tr>
-            <tr><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Roscoe</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>IL</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Winnebago</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>30 min</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}><Link to="/web-developer-roscoe-illinois/">View</Link></td></tr>
-            <tr><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>South Beloit</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>IL</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Winnebago</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>35 min</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}><Link to="/web-developer-south-beloit-illinois/">View</Link></td></tr>
-            <tr><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Beloit</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>WI</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Rock</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>40 min</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}><Link to="/web-developer-beloit-wisconsin/">View</Link></td></tr>
-            <tr><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Janesville</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>WI</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>Rock</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}>55 min</td><td style={{ padding: "0.75rem", borderBottom: "1px solid var(--color-border)" }}><Link to="/web-developer-janesville-wisconsin/">View</Link></td></tr>
+            {cityCards.map((city) => <tr key={city.slug}><td>{city.city}</td><td>{city.stateAbbrev}</td><td>{city.county}</td><td>{city.distance}</td><td><Link to={`/${city.slug}/`} aria-label={`Website services in ${city.city}`}>View page</Link></td></tr>)}
           </tbody>
         </table>
-      </div>
+      </TableScroll>
     </Section>
 
     <Section
+      className="area-working-section"
       eyebrow="Service radius"
       title="How Bradley works with local businesses"
       description={
@@ -156,6 +135,7 @@ const ServiceAreasPage = () => (
         </p>
       }
     >
+      <LocalIllustration kind="collaboration" className="area-working-visual" caption="Direct collaboration · shared previews · clear next steps" />
       <div className="card-actions">
         <Link data-variant="primary" to="/contact/">Request a consultation</Link>
         <Link data-variant="ghost" to="/for-business/">See services</Link>
@@ -163,6 +143,7 @@ const ServiceAreasPage = () => (
     </Section>
 
     <Section
+      className="area-industries-section"
       eyebrow="Industries"
       title="Industries served"
       description={
@@ -171,6 +152,7 @@ const ServiceAreasPage = () => (
         </p>
       }
     >
+      <div className="area-industry-art" aria-hidden="true"><LocalIllustration kind="catalog" /><LocalIllustration kind="supplier" /><LocalIllustration kind="visit" /></div>
       <ul className="feature-list">
         {industries.map((industry) => (
           <li key={industry}>{industry}</li>
@@ -182,6 +164,7 @@ const ServiceAreasPage = () => (
     </Section>
 
     <Section
+      className="area-final-cta"
       eyebrow="Ready to start?"
       title="Get a free consultation"
       description={
@@ -198,8 +181,10 @@ const ServiceAreasPage = () => (
         <Link data-variant="ghost" to="/pricing/">See pricing</Link>
       </div>
     </Section>
+    </div>
   </Layout>
 );
+};
 
 export default ServiceAreasPage;
 

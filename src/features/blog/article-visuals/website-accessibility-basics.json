@@ -1,0 +1,63 @@
+{
+  "slug": "website-accessibility-basics",
+  "title": "Website Accessibility Basics for Small Businesses",
+  "cover": {
+    "src": "/images/blog/website-accessibility-basics/cover.png",
+    "mobile": "/images/blog/website-accessibility-basics/cover-720.webp",
+    "alt": "Concept illustration of keyboard navigation connecting readable, labeled website controls on an inclusive design workbench."
+  },
+  "figures": [
+    {
+      "id": "four-principles",
+      "kind": "layers",
+      "title": "Four principles behind an accessible page",
+      "summary": "The article organizes accessibility around how people perceive, use, and understand content.",
+      "items": [
+        {
+          "label": "Perceivable",
+          "detail": "Provide text alternatives, captions, and sufficient contrast."
+        },
+        {
+          "label": "Operable",
+          "detail": "Make controls work by keyboard without trapping focus."
+        },
+        {
+          "label": "Understandable",
+          "detail": "Use clear language, predictable navigation, and useful form guidance."
+        },
+        {
+          "label": "Robust",
+          "detail": "Use appropriate HTML and assistive-technology-compatible structure."
+        }
+      ],
+      "caption": "The POUR framework described in this article, summarized without making a legal compliance determination."
+    },
+    {
+      "id": "practical-checks",
+      "kind": "checklist",
+      "title": "Three practical ways to test the experience",
+      "summary": "Combine hands-on checks rather than relying on a single automated score.",
+      "items": [
+        {
+          "label": "Keyboard path",
+          "detail": "Try Tab, Shift+Tab, Enter, Space, and relevant arrow-key controls."
+        },
+        {
+          "label": "Screen reader pass",
+          "detail": "Check whether headings, labels, and controls communicate their purpose."
+        },
+        {
+          "label": "Contrast review",
+          "detail": "Measure text and background combinations with a contrast checker."
+        },
+        {
+          "label": "Automated scan",
+          "detail": "Use axe or WAVE to identify additional structural issues for review."
+        }
+      ],
+      "caption": "The article's testing methods work together; an automated pass alone does not establish full accessibility.",
+      "sourceLabel": "WAVE accessibility evaluation",
+      "sourceHref": "https://wave.webaim.org/"
+    }
+  ]
+}

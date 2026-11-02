@@ -1,0 +1,57 @@
+{
+  "slug": "/containerizing-multi-language-projects-with-docker-a-practical-guide",
+  "title": "Docker Multilang: One Compose File, Three Runtimes",
+  "cover": {
+    "src": "/images/blog/containerizing-multi-language-projects-with-docker-a-practical-guide/cover.png",
+    "mobile": "/images/blog/containerizing-multi-language-projects-with-docker-a-practical-guide/cover-720.webp",
+    "alt": "Conceptual three-part system with distinct API, worker, and web runtime structures on a shared network base."
+  },
+  "figures": [
+    {
+      "id": "multilang-service-roles",
+      "kind": "layers",
+      "title": "Three runtimes with separate jobs",
+      "summary": "Compose groups the services, while each runtime keeps its own purpose and build context.",
+      "items": [
+        {
+          "label": "Node API",
+          "detail": "Returns random and sorted-number data through its HTTP routes."
+        },
+        {
+          "label": "Python worker",
+          "detail": "Calls the API by its service name and logs the returned arrays."
+        },
+        {
+          "label": "Nginx web",
+          "detail": "Serves the static page the browser uses to request data."
+        }
+      ],
+      "caption": "The roles are taken from the supplied lab code, not a claim about a larger production architecture."
+    },
+    {
+      "id": "multilang-boundary-checks",
+      "kind": "checklist",
+      "title": "Check the boundaries between services",
+      "summary": "Most of the documented failures occur where one environment or process meets another.",
+      "items": [
+        {
+          "label": "Build inputs",
+          "detail": "Confirm the lockfile exists before the Dockerfile copies it."
+        },
+        {
+          "label": "Browser origin",
+          "detail": "Check whether a direct API call needs CORS handling or a same-origin proxy."
+        },
+        {
+          "label": "Host ports",
+          "detail": "Check for an existing process using the mapped port."
+        },
+        {
+          "label": "Readiness",
+          "detail": "Distinguish a started container from an API ready to accept the worker’s request."
+        }
+      ],
+      "caption": "Failure points described in the article. Reported build-time improvements are not reproduced as benchmark graphics."
+    }
+  ]
+}

@@ -7,6 +7,10 @@ description: "A repeatable learning loop for building small demos: ship a tiny p
 theme: "Process"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/how-i-learn-by-doing.json";
+
+
 I learn faster by shipping small, real things than by planning large, imaginary ones. This post describes the actual loop I use when I want to understand a tool or idea: I build a tiny working demo, put it somewhere public, then write down exactly what broke and what I changed. Nothing here is aspirational. Every step ends in a file, a command, or a URL you can verify.
 
 The point of this loop is not productivity theater. The point is to force contact with real environments: the browser, the build output, the deployment host, and the mistakes that only appear once something is live.
@@ -25,8 +29,7 @@ Here are the three artifacts that make the loop complete:
 
 This post walks through a concrete example using a single static HTML page. The example is intentionally simple because the mechanics of building, verifying, and deploying are the part that matters. The same loop applies to larger stacks later.
 
-{/* visual-break:how-i-learn-by-doing:1 */}
-![Execution process checkpoint illustration for this section.](/assets/visuals/blog/how-i-learn-by-doing-break-1.png)
+<ArticleVisual spec={articleVisuals.figures[0]} />
 
 ## A real starting point: one tiny demo
 
@@ -197,8 +200,7 @@ This process forces three real interactions: writing code that runs, deploying t
 
 Over time the demos get larger, the stacks change, and the deployment targets evolve. The loop stays the same: build something small, verify locally, deploy publicly, record what actually broke. That repetition is the real curriculum.
 
-{/* visual-break:how-i-learn-by-doing:2 */}
-![Delivery workflow checkpoint illustration for this section.](/assets/visuals/blog/how-i-learn-by-doing-break-2.png)
+<ArticleVisual spec={articleVisuals.figures[1]} />
 
 ## Closing
 

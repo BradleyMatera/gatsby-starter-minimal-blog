@@ -1,0 +1,61 @@
+{
+  "slug": "/my-real-ai-development-setup",
+  "title": "My Real AI Development Setup: Tools and Checks",
+  "cover": {
+    "src": "/images/blog/my-real-ai-development-setup/cover.png",
+    "mobile": "/images/blog/my-real-ai-development-setup/cover-720.webp",
+    "alt": "Conceptual modular tool chest separating navigation instruments, model cores and a testing jig"
+  },
+  "figures": [
+    {
+      "id": "ai-tool-roles",
+      "kind": "layers",
+      "title": "Separate the interface from the reasoning engine",
+      "summary": "Roles explain the setup more clearly than product names alone.",
+      "items": [
+        {
+          "label": "Editor",
+          "detail": "Navigate the repository, make changes and inspect diffs."
+        },
+        {
+          "label": "Agent layer",
+          "detail": "Read context and propose scoped changes."
+        },
+        {
+          "label": "Model and runner",
+          "detail": "Supply reasoning locally or through a hosted service."
+        },
+        {
+          "label": "Terminal and browser",
+          "detail": "Run the build, inspect logs and check actual behavior."
+        }
+      ],
+      "caption": "Roles in Bradley's tool inventory, not a benchmark or universal product ranking."
+    },
+    {
+      "id": "ai-verification-loop",
+      "kind": "flow",
+      "title": "A proposal needs a verification loop",
+      "summary": "Output still needs to fit the repository and its behavior.",
+      "items": [
+        {
+          "label": "Define the scope",
+          "detail": "Choose a small change with a clear result."
+        },
+        {
+          "label": "Use repo context",
+          "detail": "Inspect affected files and existing patterns."
+        },
+        {
+          "label": "Review the diff",
+          "detail": "Check for unrelated edits and inconsistent patterns."
+        },
+        {
+          "label": "Run and observe",
+          "detail": "Build, test and inspect the app."
+        }
+      ],
+      "caption": "The verification discipline repeated throughout the article."
+    }
+  ]
+}

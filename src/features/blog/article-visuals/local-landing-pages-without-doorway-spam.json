@@ -1,0 +1,61 @@
+{
+  "slug": "/local-landing-pages-without-doorway-spam",
+  "title": "Local Landing Pages Without Doorway Page Spam",
+  "cover": {
+    "src": "/images/blog/local-landing-pages-without-doorway-spam/cover.png",
+    "mobile": "/images/blog/local-landing-pages-without-doorway-spam/cover-720.webp",
+    "alt": "Paper neighborhood diorama contrasting varied local detail with repeated empty facades"
+  },
+  "figures": [
+    {
+      "id": "local-page-value",
+      "kind": "comparison",
+      "title": "Useful local detail versus a name swap",
+      "summary": "A page should answer real questions about work in that specific place.",
+      "items": [
+        {
+          "label": "Local context",
+          "detail": "Describe relevant neighborhoods, conditions and service details."
+        },
+        {
+          "label": "Real examples",
+          "detail": "Use jobs and evidence that actually belong to that city."
+        },
+        {
+          "label": "Specific questions",
+          "detail": "Answer travel, coverage and local-service questions."
+        },
+        {
+          "label": "Template warning",
+          "detail": "A changed city name does not create standalone value."
+        }
+      ],
+      "caption": "The article's distinction between a useful city page and a near-duplicate doorway pattern."
+    },
+    {
+      "id": "local-page-structure",
+      "kind": "layers",
+      "title": "Give each city page a complete local story",
+      "summary": "These content layers help a visitor decide whether the service fits.",
+      "items": [
+        {
+          "label": "Service and city",
+          "detail": "Open with a specific service and an honest reason for serving the area."
+        },
+        {
+          "label": "Relevant work",
+          "detail": "Explain available services and show genuine local examples."
+        },
+        {
+          "label": "Practical answers",
+          "detail": "Add local FAQs, coverage limits and travel details."
+        },
+        {
+          "label": "Evidence and next step",
+          "detail": "Use relevant reviews, nearby links and a clear contact action."
+        }
+      ],
+      "caption": "A condensed structure from the article's city-page template; fabricated addresses and reviews do not belong in it."
+    }
+  ]
+}

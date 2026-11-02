@@ -7,6 +7,14 @@ description: "WCAG 2.2 AA basics for small business owners. Keyboard navigation,
 theme: "Technical"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/website-accessibility-basics.json";
+
+
+
+
+
+
 Website accessibility is not a nice-to-have. It is a legal requirement, a business obligation, and a practical way to make sure every visitor can use your site. For small businesses, the risk is not theoretical. ADA lawsuits over inaccessible websites are filed every day, and they target small companies as often as large ones.
 
 ## The short answer
@@ -41,6 +49,8 @@ If you focus on the handful of criteria that fail most often on small business s
 - **4.1.3 Status Messages** — success and error messages are announced to assistive technology without moving focus.
 
 These nine criteria are where most small business sites break. Fix them first and you have addressed the bulk of what plaintiffs' attorneys scan for.
+
+<ArticleVisual spec={articleVisuals.figures[0]} />
 
 ## The most common accessibility failures
 
@@ -144,6 +154,8 @@ For a broader audit, use the WAVE browser extension. It scans a page and reports
 - **Lighthouse accessibility audit** — built into Chrome DevTools under the Lighthouse tab. It runs axe under the hood and scores the page 0-100. The score is not the point, but the list of failed checks is useful, and it packages accessibility alongside performance and SEO so you see the overlap.
 
 Run axe DevTools and WAVE on every page. They will not catch everything (no automated tool catches more than about 30-40% of issues), but they catch the mechanical failures that get sites sued.
+
+<ArticleVisual spec={articleVisuals.figures[1]} />
 
 ## When to get help
 

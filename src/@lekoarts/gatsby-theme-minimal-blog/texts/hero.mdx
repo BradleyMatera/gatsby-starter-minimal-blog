@@ -1,6 +1,7 @@
 import { Section, Link } from "../../../ui";
 import { HeroBeforeAfter } from "../../../site/components";
 import { UtensilsIcon, LeafIcon, GearIcon } from "../../../site/icons";
+import { ShopifySpotlight } from "../../../features/shopify";
 
 <>
 
@@ -24,7 +25,7 @@ import { UtensilsIcon, LeafIcon, GearIcon } from "../../../site/icons";
         label: "Auto Repair",
         browserUrl: "northside-auto-repair.com",
         beforeImage: "/assets/visuals/hero/before-after/before-auto-repair-fold.webp",
-        afterImage: "/assets/visuals/hero/before-after/after-auto-repair-fold.webp",
+        afterImage: "/images/demos/previews/auto-repair.webp",
         demoLink: "/demos/auto-repair/",
       },
     ]}
@@ -95,7 +96,7 @@ import { UtensilsIcon, LeafIcon, GearIcon } from "../../../site/icons";
 >
   <div className="grid-three home-demo-grid">
     <Link to="/demos/restaurant/" className="home-demo-card" style={{ "--home-demo-accent": "#c9a227" }}>
-      <div className="home-demo-card__preview" style={{ backgroundImage: "url(/images/demos/restaurant/hero.jpg)" }}>
+      <div className="home-demo-card__preview" style={{ backgroundImage: "url(/images/demos/previews/restaurant.webp)" }}>
         <div className="home-demo-card__overlay" style={{ background: "linear-gradient(135deg, #c9a227aa, #c9a22755)" }}>
           <UtensilsIcon size={32} />
         </div>
@@ -113,7 +114,7 @@ import { UtensilsIcon, LeafIcon, GearIcon } from "../../../site/icons";
       </div>
     </Link>
     <Link to="/demos/landscaping/" className="home-demo-card" style={{ "--home-demo-accent": "#4a7c3a" }}>
-      <div className="home-demo-card__preview" style={{ backgroundImage: "url(/images/demos/landscaping/hero.jpg)" }}>
+      <div className="home-demo-card__preview" style={{ backgroundImage: "url(/images/demos/previews/landscaping.webp)" }}>
         <div className="home-demo-card__overlay" style={{ background: "linear-gradient(135deg, #4a7c3aaa, #4a7c3a55)" }}>
           <LeafIcon size={32} />
         </div>
@@ -131,7 +132,7 @@ import { UtensilsIcon, LeafIcon, GearIcon } from "../../../site/icons";
       </div>
     </Link>
     <Link to="/demos/hvac/" className="home-demo-card" style={{ "--home-demo-accent": "#e85d04" }}>
-      <div className="home-demo-card__preview" style={{ backgroundImage: "url(/images/demos/hvac/hero.jpg)" }}>
+      <div className="home-demo-card__preview" style={{ backgroundImage: "url(/images/demos/previews/hvac.webp)" }}>
         <div className="home-demo-card__overlay" style={{ background: "linear-gradient(135deg, #e85d04aa, #e85d0455)" }}>
           <GearIcon size={32} />
         </div>
@@ -151,6 +152,8 @@ import { UtensilsIcon, LeafIcon, GearIcon } from "../../../site/icons";
   </div>
 </Section>
 
+<ShopifySpotlight context={{ path: "/", intent: "business-workspace", title: "Small-business workspace" }} placement="home-services" />
+
 <Section
   eyebrow="Service area"
   title="Northwest Illinois and Southern Wisconsin"
@@ -158,19 +161,22 @@ import { UtensilsIcon, LeafIcon, GearIcon } from "../../../site/icons";
   actions={<Link data-variant="ghost" to="/service-areas/">See all service areas</Link>}
 >
   <div className="grid-three">
-    <Link to="/web-developer-rockford-illinois/" className="city-card" style={{ backgroundImage: "url(/city-images/rockford.jpg)" }}>
+    <Link to="/web-developer-rockford-illinois/" className="city-card">
+      <img className="city-card__image" src="/city-images/rockford.jpg" alt="" loading="lazy" decoding="async" width="1200" height="800" />
       <div className="city-card__overlay">
         <h3 className="city-card__title">Rockford, IL</h3>
         <span className="city-card__link">Rockford web developer →</span>
       </div>
     </Link>
-    <Link to="/web-developer-freeport-illinois/" className="city-card" style={{ backgroundImage: "url(/city-images/freeport.jpg)" }}>
+    <Link to="/web-developer-freeport-illinois/" className="city-card">
+      <img className="city-card__image" src="/city-images/freeport.jpg" alt="" loading="lazy" decoding="async" width="1200" height="800" />
       <div className="city-card__overlay">
         <h3 className="city-card__title">Freeport, IL</h3>
         <span className="city-card__link">Freeport web developer →</span>
       </div>
     </Link>
-    <Link to="/web-developer-durand-davis-illinois/" className="city-card" style={{ backgroundImage: "url(/city-images/durand-davis.jpg)" }}>
+    <Link to="/web-developer-durand-davis-illinois/" className="city-card">
+      <img className="city-card__image" src="/city-images/durand-davis.jpg" alt="" loading="lazy" decoding="async" width="1200" height="800" />
       <div className="city-card__overlay">
         <h3 className="city-card__title">Durand & Davis, IL</h3>
         <span className="city-card__link">Durand/Davis web developer →</span>

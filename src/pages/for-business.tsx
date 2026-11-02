@@ -1,4 +1,5 @@
 import * as React from "react";
+import BrandArtwork from "../site/components/BrandArtwork";
 import type { HeadFC } from "gatsby";
 import Layout from "../@lekoarts/gatsby-theme-minimal-blog/components/layout";
 import Seo from "../@lekoarts/gatsby-theme-minimal-blog/components/seo";
@@ -23,7 +24,7 @@ const demoCards = [
 const cityCards = SERVICE_AREA_CITIES.map((c) => ({ ...c, image: CITY_IMAGES[c.href] }));
 
 const ForBusinessPage = () => (
-  <Layout>
+  <Layout className="business-page for-business-page">
     <nav className="breadcrumbs" aria-label="Breadcrumb">
       <ol className="breadcrumbs__list">
         <li className="breadcrumbs__item">
@@ -38,6 +39,7 @@ const ForBusinessPage = () => (
     <Section
       eyebrow="For Business"
       titleAs="h1"
+      visual={<BrandArtwork variant="digital-architecture" eager />}
       title={
         <>
           <strong>Websites that get you</strong> more customers.

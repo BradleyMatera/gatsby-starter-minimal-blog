@@ -1,0 +1,63 @@
+{
+  "slug": "small-business-website-cost-illinois",
+  "title": "How Much Does a Small Business Website Cost in Illinois?",
+  "cover": {
+    "src": "/images/blog/small-business-website-cost-illinois/cover.png",
+    "mobile": "/images/blog/small-business-website-cost-illinois/cover-720.webp",
+    "alt": "Concept illustration of a website project budget organized into build, ongoing care, and optional scope."
+  },
+  "figures": [
+    {
+      "id": "cost-layers",
+      "kind": "layers",
+      "title": "Separate the project into cost layers",
+      "summary": "A build quote is only one part of the website budget.",
+      "items": [
+        {
+          "label": "Domain registration",
+          "detail": "Keep the domain in the business owner's account."
+        },
+        {
+          "label": "Website build",
+          "detail": "Confirm the pages and features covered by the one-time scope."
+        },
+        {
+          "label": "Hosting and care",
+          "detail": "Understand ongoing hosting, updates, monitoring, and backup responsibilities."
+        },
+        {
+          "label": "Optional extras",
+          "detail": "Scope content, photography, commerce, and marketing separately when needed."
+        }
+      ],
+      "caption": "Cost categories from this article. Check the current pricing page and written scope for applicable amounts.",
+      "sourceLabel": "Current website pricing",
+      "sourceHref": "/pricing/"
+    },
+    {
+      "id": "budget-workflow",
+      "kind": "flow",
+      "title": "Build a complete first-year budget",
+      "summary": "Account for recurring costs and the materials required to finish the site.",
+      "items": [
+        {
+          "label": "Choose a build scope",
+          "detail": "Start with the pages and functions the business actually needs."
+        },
+        {
+          "label": "Add ongoing costs",
+          "detail": "Include a year of care and the domain renewal."
+        },
+        {
+          "label": "Identify missing materials",
+          "detail": "Plan for writing, photos, email hosting, or branding where relevant."
+        },
+        {
+          "label": "Allow for changes",
+          "detail": "Discuss likely additions before approving the final estimate."
+        }
+      ],
+      "caption": "A planning sequence drawn from the budgeting and hidden-cost sections; it is not a new price quote."
+    }
+  ]
+}

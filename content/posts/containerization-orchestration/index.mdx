@@ -7,6 +7,10 @@ description: "A start-to-finish containerization lab: build a Docker image, run 
 theme: "DevOps"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/containerization-and-orchestration.json";
+
+
 Containerization is only confusing when the example is too big. If you keep the stack small, the ideas become obvious: build an image, run it, confirm it responds. Orchestration at this scale is just a repeatable run command written down so you do not have to remember it.
 
 This post is a start-to-finish lab. Every file and command is real and copy-paste ready. If you follow it exactly, you will end with a running container, started through Compose, responding to a health check. No placeholders. No skipped steps. No abstract explanation without a working result.
@@ -26,8 +30,7 @@ Before touching anything, here is the end state so the steps make sense.
 
 Once these exist, you will be able to build the image, run the container, and confirm it responds.
 
-{/* visual-break:containerization-orchestration:1 */}
-![Cloud architecture checkpoint illustration for this section.](/assets/visuals/blog/containerization-orchestration-break-1.png)
+<ArticleVisual spec={articleVisuals.figures[0]} />
 
 ## Prerequisites
 
@@ -260,8 +263,7 @@ Three things that bit me in real deployments:
 | `curl` connection refused | Port mapping missing or container not running | Confirm `3000:3000` in compose and container logs |
 | Docker build fails on lockfile | `package-lock.json` missing | Run `npm install` before building image |
 
-{/* visual-break:containerization-orchestration:2 */}
-![Cloud operations checkpoint illustration for this section.](/assets/visuals/blog/containerization-orchestration-break-2.png)
+<ArticleVisual spec={articleVisuals.figures[1]} />
 
 ## Closing
 

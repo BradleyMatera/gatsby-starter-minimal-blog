@@ -1,0 +1,61 @@
+{
+  "slug": "/jwt-ctf-lab",
+  "title": "JWT CTF Lab: Build, Decode, and Verify Tokens",
+  "cover": {
+    "src": "/images/blog/jwt-ctf-lab/cover.png",
+    "mobile": "/images/blog/jwt-ctf-lab/cover-720.webp",
+    "alt": "Conceptual three-part glass token with a gear, paper packet and signature seal"
+  },
+  "figures": [
+    {
+      "id": "jwt-three-parts",
+      "kind": "layers",
+      "title": "Three token parts; two different questions",
+      "summary": "Readable claims are not automatically trusted claims.",
+      "items": [
+        {
+          "label": "Header",
+          "detail": "Describes token type and signing algorithm."
+        },
+        {
+          "label": "Payload",
+          "detail": "Contains readable claims; base64url is not encryption."
+        },
+        {
+          "label": "Signature",
+          "detail": "Binds the header and payload to a signing key."
+        },
+        {
+          "label": "Verification",
+          "detail": "Checks the signature, accepted algorithm and validity conditions."
+        }
+      ],
+      "caption": "Token structure and the verification boundary described in this lab."
+    },
+    {
+      "id": "jwt-failure-matrix",
+      "kind": "checklist",
+      "title": "Prove the verifier rejects broken tokens",
+      "summary": "The lab tests failure paths alongside a valid token.",
+      "items": [
+        {
+          "label": "Valid token",
+          "detail": "Verify an unmodified token with the expected key and algorithm."
+        },
+        {
+          "label": "Changed payload",
+          "detail": "Editing a claim while keeping the old signature must fail verification."
+        },
+        {
+          "label": "Wrong secret",
+          "detail": "A correctly shaped token still fails with the wrong verification key."
+        },
+        {
+          "label": "Expired token",
+          "detail": "Verify the same token after expiration rather than issuing a new one."
+        }
+      ],
+      "caption": "Four verification cases from the lab; decoding can still display rejected claims."
+    }
+  ]
+}

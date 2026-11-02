@@ -7,6 +7,10 @@ description: "The prelaunch checklist I run before deploying any web project: bu
 theme: "Process"
 ---
 
+import ArticleVisual from "../../../src/features/blog/components/ArticleVisual";
+import articleVisuals from "../../../src/features/blog/article-visuals/cloud-ready-web-experiences.json";
+
+
 A "cloud ready" web launch is not a certification. It just means I can build, deploy, and verify the basics without guessing. Most launch problems are boring: the build fails in CI, lint was skipped, an env var is missing, a page 404s, a form does nothing, or the deployed site is serving old assets.
 
 This is the checklist I run before I ship.
@@ -43,8 +47,7 @@ I keep this in the repo so it survives beyond my memory:
 | `docs/smoke-check.md` | The few manual clicks I confirm on the deployed URL |
 | `package.json` scripts | One consistent way to run build and lint |
 
-{/* visual-break:cloud-ready-web-experiences:1 */}
-![Cloud architecture checkpoint illustration for this section.](/assets/visuals/blog/cloud-ready-web-experiences-break-1.png)
+<ArticleVisual spec={articleVisuals.figures[0]} />
 
 ## Prelaunch checklist
 
@@ -79,8 +82,7 @@ Pick whatever matches your stack. The point is to have one way to run build and 
 
 After deploying, I repeat those same three clicks on the live URL. Local success does not always match production.
 
-{/* visual-break:cloud-ready-web-experiences:2 */}
-![Cloud operations checkpoint illustration for this section.](/assets/visuals/blog/cloud-ready-web-experiences-break-2.png)
+<ArticleVisual spec={articleVisuals.figures[1]} />
 
 ## A concrete example: this site
 

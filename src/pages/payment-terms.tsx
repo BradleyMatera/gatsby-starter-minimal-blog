@@ -1,4 +1,6 @@
 import * as React from "react";
+import ReadingLayout from "../features/blog/components/ReadingLayout";
+import "../styles/editorial.css";
 import type { HeadFC } from "gatsby";
 import Layout from "../@lekoarts/gatsby-theme-minimal-blog/components/layout";
 import Seo from "../@lekoarts/gatsby-theme-minimal-blog/components/seo";
@@ -21,7 +23,7 @@ const pageDescription =
   "Payment terms for Bradley F. Matera. Accepted methods, deposits, final balances, monthly billing, receipts, refunds, chargebacks, and payment security.";
 
 const PaymentTermsPage = () => (
-  <Layout>
+  <Layout className="editorial-page editorial-policy">
     <nav className="breadcrumbs" aria-label="Breadcrumb">
       <ol className="breadcrumbs__list">
         <li className="breadcrumbs__item">
@@ -80,6 +82,8 @@ const PaymentTermsPage = () => (
         </Card>
       </div>
     </Section>
+    <ReadingLayout pageKey={pathname}>
+
 
     <Section eyebrow="Quick reference" title="Payment schedule">
       <Card variant="outline">
@@ -281,6 +285,7 @@ const PaymentTermsPage = () => (
         Effective date: {POLICY_LAST_UPDATED}. Last updated: {POLICY_LAST_UPDATED}.
       </p>
     </Section>
+    </ReadingLayout>
   </Layout>
 );
 

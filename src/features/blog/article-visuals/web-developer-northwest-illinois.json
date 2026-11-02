@@ -1,0 +1,63 @@
+{
+  "slug": "web-developer-northwest-illinois",
+  "title": "What I Actually Help With as a Web Developer in Northwest Illinois",
+  "cover": {
+    "src": "/images/blog/web-developer-northwest-illinois/cover.png",
+    "mobile": "/images/blog/web-developer-northwest-illinois/cover-720.webp",
+    "alt": "Concept illustration of a developer assembling a business website in a fictional regional workshop, not an actual Illinois location."
+  },
+  "figures": [
+    {
+      "id": "focused-scope",
+      "kind": "comparison",
+      "title": "Match the website problem to the work",
+      "summary": "The article describes focused website and front-end projects with a clear scope.",
+      "items": [
+        {
+          "label": "Unclear offer",
+          "detail": "Restructure service pages and content so visitors understand the business."
+        },
+        {
+          "label": "Rough mobile experience",
+          "detail": "Improve layout, navigation, and front-end usability."
+        },
+        {
+          "label": "Fragile codebase",
+          "detail": "Investigate Gatsby, React, or Next.js issues before adding features."
+        },
+        {
+          "label": "Small new feature",
+          "detail": "Define a contained full-stack task and its expected behavior."
+        }
+      ],
+      "caption": "Examples of the stated service fit, without promising unlimited project capacity."
+    },
+    {
+      "id": "evidence-path",
+      "kind": "flow",
+      "title": "Evaluate the fit through visible evidence",
+      "summary": "Use the linked pages to check the work before starting a conversation.",
+      "items": [
+        {
+          "label": "Check the service area",
+          "detail": "Read the local service page for the geographic context."
+        },
+        {
+          "label": "Review projects",
+          "detail": "Look at the published case studies and the work they describe."
+        },
+        {
+          "label": "Meet the developer",
+          "detail": "Use the About page to understand Bradley's background."
+        },
+        {
+          "label": "Compare scope and price",
+          "detail": "Review public pricing, then contact Bradley with the actual problem."
+        }
+      ],
+      "caption": "The proof-first path linked in this article.",
+      "sourceLabel": "Project case studies",
+      "sourceHref": "/projects/"
+    }
+  ]
+}

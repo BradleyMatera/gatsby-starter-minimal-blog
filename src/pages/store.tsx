@@ -7,7 +7,6 @@ import {
   AmazonCollectionTabs,
   collectionOrder,
   ComparisonSection,
-  FeaturedSection,
   formatPrice,
   Product,
   ProductGrid,
@@ -38,12 +37,15 @@ const getGoUrl = (slug: string) => {
 };
 
 const useProducts = () => {
+  const [attempt, setAttempt] = React.useState(0);
   const [products, setProducts] = React.useState<Product[]>([]);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     let isMounted = true;
+    setLoading(true);
+    setError(null);
     const load = async () => {
       try {
         const res = await fetch(getFunctionsUrl("list_products"));
@@ -59,7 +61,7 @@ const useProducts = () => {
         if (isMounted) {
           const message = err instanceof Error ? err.message : "Unable to load products.";
           const localApiHint =
-            "Local API unavailable. Run `npm run dev` (Netlify dev) and open http://localhost:8888/store/.";
+            "The catalog is temporarily unavailable. Try again shortly.";
           const lower = message.toLowerCase();
           const isNetworkError =
             lower.includes("failed to fetch") ||
@@ -77,100 +79,59 @@ const useProducts = () => {
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [attempt]);
 
-  return { products, loading, error };
+  return { products, loading, error, retry: () => setAttempt((value) => value + 1) };
 };
 
 const StoreIndex: React.FC<RouteComponentProps> = () => {
-  const { products, loading, error } = useProducts();
-
-  const directProducts = products.filter((product) => product.product_type !== "affiliate");
-  const amazonProducts = products.filter(
-    (product) => product.product_type === "affiliate" && product.affiliate_source === "amazon",
-  );
-  const partnerProducts = products.filter(
-    (product) => product.product_type === "affiliate" && product.affiliate_source !== "amazon",
-  );
-
-  const storeTabs = React.useMemo(
-    () =>
-      [
-        amazonProducts.length > 0
-          ? { key: "amazon", label: "Brad's Amazon Picks", count: amazonProducts.length }
-          : null,
-        { key: "direct", label: "Digital downloads", count: directProducts.length },
-        partnerProducts.length > 0
-          ? { key: "partner", label: "Partner picks", count: partnerProducts.length }
-          : null,
-      ].filter(Boolean) as StoreTab[],
-    [amazonProducts.length, directProducts.length, partnerProducts.length],
-  );
-
-  const defaultStoreTab = React.useMemo(
-    () => storeTabs.find((tab) => tab.key === "amazon")?.key || storeTabs[0]?.key || "direct",
-    [storeTabs],
-  );
-
-  const [activeStoreTab, setActiveStoreTab] = React.useState(defaultStoreTab);
+  const { products, loading, error, retry } = useProducts();
+  const [query, setQuery] = React.useState("");
+  const [activeStoreTab, setActiveStoreTab] = React.useState("direct");
+  const [activeAmazonTab, setActiveAmazonTab] = React.useState("all");
+  const [filtersReady, setFiltersReady] = React.useState(false);
+  const storeTabs: StoreTab[] = [
+    { key: "direct", label: "Digital downloads", count: products.filter((item) => item.product_type !== "affiliate").length },
+    { key: "amazon", label: "Brad's Amazon Picks", count: products.filter((item) => item.product_type === "affiliate" && item.affiliate_source === "amazon").length },
+    { key: "partner", label: "Partner picks", count: products.filter((item) => item.product_type === "affiliate" && item.affiliate_source !== "amazon").length },
+  ];
   React.useEffect(() => {
-    if (!storeTabs.find((tab) => tab.key === activeStoreTab)) {
-      setActiveStoreTab(defaultStoreTab);
-    }
-  }, [storeTabs, activeStoreTab, defaultStoreTab]);
-
-  const featuredProducts = [...products]
-    .filter((product) => product.featured_rank !== null && product.featured_rank !== undefined)
-    .filter((product) => {
-      if (activeStoreTab === "direct") return product.product_type !== "affiliate";
-      if (activeStoreTab === "partner") {
-        return product.product_type === "affiliate" && product.affiliate_source !== "amazon";
-      }
-      return product.product_type === "affiliate" && product.affiliate_source === "amazon";
-    })
-    .sort((a, b) => (a.featured_rank ?? 999) - (b.featured_rank ?? 999));
-
-  // Avoid showing the same direct download twice when there are very few direct products.
-  const shouldShowFeatured = activeStoreTab !== "direct";
-
-  const amazonTabs = React.useMemo(() => {
-    const amazonCollections = Array.from(
-      new Set(amazonProducts.map((product) => product.collection).filter(Boolean)),
-    ) as string[];
-    const orderedCollections = [
-      ...collectionOrder.filter((name) => amazonCollections.includes(name)),
-      ...amazonCollections.filter((name) => !collectionOrder.includes(name)),
-    ];
-    return [
-      { key: "all", label: "All picks" },
-      ...orderedCollections.map((label) => ({ key: slugify(label), label })),
-    ];
-  }, [amazonProducts]);
-
-  const [activeAmazonTab, setActiveAmazonTab] = React.useState(amazonTabs[0]?.key ?? "all");
-
+    const sync = () => {
+      const params = new URLSearchParams(window.location.search);
+      const section = params.get("section");
+      setActiveStoreTab(section === "amazon" || section === "partner" ? section : "direct");
+      setActiveAmazonTab(params.get("collection") || "all");
+      setQuery(params.get("q") || "");
+      setFiltersReady(true);
+    };
+    sync();
+    window.addEventListener("popstate", sync);
+    window.addEventListener("gatsby-route-update", sync);
+    return () => {
+      window.removeEventListener("popstate", sync);
+      window.removeEventListener("gatsby-route-update", sync);
+    };
+  }, []);
   React.useEffect(() => {
-    if (!amazonTabs.find((tab) => tab.key === activeAmazonTab)) {
-      setActiveAmazonTab(amazonTabs[0]?.key ?? "all");
-    }
-  }, [amazonTabs, activeAmazonTab]);
-
-  const amazonCounts = amazonProducts.reduce<Record<string, number>>((acc, product) => {
-    if (product.collection) {
-      const key = slugify(product.collection);
-      acc[key] = (acc[key] || 0) + 1;
-    }
-    return acc;
-  }, {});
-
-  const activeCollectionLabel = amazonTabs.find((tab) => tab.key === activeAmazonTab)?.label;
-  const filteredAmazonProducts =
-    activeAmazonTab === "all" || !activeCollectionLabel
-      ? amazonProducts
-      : amazonProducts.filter((product) => product.collection === activeCollectionLabel);
-
+    if (!filtersReady) return;
+    const url = new URL(window.location.href);
+    [["section", activeStoreTab, "direct"], ["collection", activeAmazonTab, "all"], ["q", query, ""]].forEach(([key, value, fallback]) => {
+      if (value === fallback) url.searchParams.delete(key); else url.searchParams.set(key, value);
+    });
+    window.history.replaceState(window.history.state, "", url);
+  }, [activeStoreTab, activeAmazonTab, query, filtersReady]);
+  const matches = (product: Product) => `${product.name} ${product.description} ${product.category || ""}`.toLowerCase().includes(query.trim().toLowerCase());
+  const directProducts = products.filter((item) => item.product_type !== "affiliate" && matches(item));
+  const amazonProducts = products.filter((item) => item.product_type === "affiliate" && item.affiliate_source === "amazon");
+  const partnerProducts = products.filter((item) => item.product_type === "affiliate" && item.affiliate_source !== "amazon" && matches(item));
+  const collections = Array.from(new Set(amazonProducts.map((item) => item.collection).filter(Boolean))) as string[];
+  const ordered = [...collectionOrder.filter((item) => collections.includes(item)), ...collections.filter((item) => !collectionOrder.includes(item))];
+  const amazonTabs = [{ key: "all", label: "All picks" }, ...ordered.map((label) => ({ key: slugify(label), label }))];
+  const collection = amazonTabs.some((tab) => tab.key === activeAmazonTab) ? activeAmazonTab : "all";
+  const amazonCounts = amazonProducts.reduce<Record<string, number>>((counts, item) => { if (item.collection) { const key = slugify(item.collection); counts[key] = (counts[key] || 0) + 1; } return counts; }, {});
+  const filteredAmazonProducts = amazonProducts.filter((item) => matches(item) && (collection === "all" || slugify(item.collection || "") === collection));
+  const visibleProducts = activeStoreTab === "direct" ? directProducts : activeStoreTab === "amazon" ? filteredAmazonProducts : partnerProducts;
   const productMap = new Map(products.map((product) => [product.slug, product]));
-
   const comparisonCards = [
     {
       slug: "logitech-g502-hero-mouse",
@@ -193,39 +154,35 @@ const StoreIndex: React.FC<RouteComponentProps> = () => {
     .map((card) => ({ ...card, product: productMap.get(card.slug) }))
     .filter((card): card is typeof card & { product: Product } => Boolean(card.product));
 
-  const getStorePanelId = React.useCallback((tabKey: string) => {
-    if (tabKey === "amazon") return "brads-amazon-picks";
-    return `store-panel-${tabKey}`;
-  }, []);
 
-  const handlePrimaryTabsKeyDown = React.useCallback(
-    (event: React.KeyboardEvent<HTMLElement>) => {
-      if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
-      event.preventDefault();
-
-      const currentIndex = storeTabs.findIndex((tab) => tab.key === activeStoreTab);
-      if (currentIndex === -1 || storeTabs.length === 0) return;
-
-      let nextIndex = currentIndex;
-      if (event.key === "ArrowRight") nextIndex = (currentIndex + 1) % storeTabs.length;
-      if (event.key === "ArrowLeft") nextIndex = (currentIndex - 1 + storeTabs.length) % storeTabs.length;
-      if (event.key === "Home") nextIndex = 0;
-      if (event.key === "End") nextIndex = storeTabs.length - 1;
-
-      const nextTabKey = storeTabs[nextIndex]?.key;
-      if (!nextTabKey) return;
-      setActiveStoreTab(nextTabKey);
-      requestAnimationFrame(() => {
-        document.getElementById(`store-tab-${nextTabKey}`)?.focus();
-      });
-    },
-    [storeTabs, activeStoreTab],
-  );
-
-  return (
-    <div className="store-shell">
-      <StoreHero amazonAnchorId="brads-amazon-picks" />
-
+  const getStorePanelId = (key: string) => key === "amazon" ? "brads-amazon-picks" : `store-panel-${key}`;
+  const handlePrimaryTabsKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
+    if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+    event.preventDefault();
+    const current = storeTabs.findIndex((tab) => tab.key === activeStoreTab);
+    const next = event.key === "Home" ? 0 : event.key === "End" ? storeTabs.length - 1 : (current + (event.key === "ArrowRight" ? 1 : -1) + storeTabs.length) % storeTabs.length;
+    setActiveStoreTab(storeTabs[next].key);
+    document.getElementById(`store-tab-${storeTabs[next].key}`)?.focus();
+  };
+  const resetFilters = () => { setQuery(""); setActiveAmazonTab("all"); };
+  const catalogQuery = `?${new URLSearchParams({ section: activeStoreTab, collection, q: query })}`;
+  return <div className="store-shell">
+    <StoreHero amazonAnchorId="brads-amazon-picks" onBrowseAmazon={() => setActiveStoreTab("amazon")} />
+    {loading && <div className="store-status" role="status">Loading products…</div>}
+    {error && <div className="store-status store-error" role="alert"><h2>The catalog could not load.</h2><p>{error}</p><div className="store-actions"><button type="button" className="store-button" onClick={retry}>Try again</button><Link className="store-link" to="/support/">Support</Link></div></div>}
+    {!loading && !error && <div id="products" className="store-sections">
+      <StorePrimaryTabs tabs={storeTabs} activeTab={activeStoreTab} getPanelId={getStorePanelId} onTabChange={setActiveStoreTab} onTabKeyDown={handlePrimaryTabsKeyDown} />
+      <div className="store-filter-bar"><div><label htmlFor="store-search">Search this section</label><input id="store-search" type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Product, topic, or category" /></div><button className="store-button store-button--ghost" type="button" onClick={resetFilters} disabled={!query && collection === "all"}>Reset filters</button><p role="status" aria-live="polite">{visibleProducts.length} {visibleProducts.length === 1 ? "product" : "products"} shown</p></div>
+      {storeTabs.map((tab) => <section key={tab.key} id={getStorePanelId(tab.key)} role="tabpanel" aria-labelledby={`store-tab-${tab.key}`} hidden={activeStoreTab !== tab.key} tabIndex={0} className="store-section">
+        <h2 className="store-section-title">{tab.label}</h2>
+        <p className="store-section-description">{tab.key === "direct" ? "Instant digital downloads sold directly by Bradley Matera." : tab.key === "amazon" ? "Hand-picked Amazon gear I actually recommend. Checkout happens on Amazon, and using these links supports my work at no extra cost." : "Affiliate products from trusted partner stores."}</p>
+        {tab.key === "amazon" && <AmazonCollectionTabs tabs={amazonTabs} counts={amazonCounts} totalCount={amazonProducts.length} activeTab={collection} onChange={setActiveAmazonTab} />}
+        {activeStoreTab === tab.key && (visibleProducts.length ? <ProductGrid items={visibleProducts} getGoUrl={getGoUrl} catalogQuery={catalogQuery} /> : <div className="store-empty"><h3>{query || collection !== "all" ? "No products match these filters." : "No products in this section yet."}</h3><p>{query || collection !== "all" ? "Try a different keyword or reset the filters." : "Check another section or come back soon."}</p>{(query || collection !== "all") && <button type="button" className="store-button store-button--ghost" onClick={resetFilters}>Show all in this section</button>}</div>)}
+        {activeStoreTab === tab.key && visibleProducts.length > 0 && <details className="store-comparison"><summary>Compare this section</summary><div className="store-table-scroll" role="region" aria-label="Product comparison"><table className="data-table"><caption>Price, category, and purchase destination</caption><thead><tr><th scope="col">Product</th><th scope="col">Price</th><th scope="col">Category</th><th scope="col">Purchase</th></tr></thead><tbody>{visibleProducts.map((product) => <tr key={product.id}><td data-label="Product"><Link to={`/store/${product.slug}/`}>{product.name}</Link></td><td data-label="Price">{formatPrice(product)}</td><td data-label="Category">{product.collection || product.category || "Digital download"}</td><td data-label="Purchase">{product.product_type === "affiliate" ? "Third-party retailer" : <Link to="/digital-product-license/">Digital product license</Link>}</td></tr>)}</tbody></table></div></details>}
+      </section>)}
+      <ComparisonSection visible={activeStoreTab === "amazon" && !query && collection === "all"} items={comparisonItems} getGoUrl={getGoUrl} />
+    </div>}
+    <section className="store-buying-guide" aria-label="How the store works">
       <h2 className="store-question-heading" style={{ fontSize: "1.25rem", margin: "2rem 0 0.5rem", maxWidth: "42rem" }}>
         What can I buy in Bradley Matera&apos;s store?
       </h2>
@@ -243,155 +200,8 @@ const StoreIndex: React.FC<RouteComponentProps> = () => {
         <li><strong>Need help?</strong> Contact me via the <Link to="/support/">support page</Link> for refunds or download issues.</li>
       </ul>
 
-      {loading && <div className="store-status">Loading products…</div>}
-
-      {error && (
-        <div className="store-status store-error">
-          {error} If this keeps happening, reach out via the <Link className="store-link" to="/support/">support page</Link>.
-        </div>
-      )}
-
-      {!loading && !error && products.length === 0 && (
-        <div className="store-status">No products are available right now. Check back soon.</div>
-      )}
-
-      {!loading && !error && products.length > 0 && (
-        <div id="products" className="store-sections">
-          <StorePrimaryTabs
-            tabs={storeTabs}
-            activeTab={activeStoreTab}
-            getPanelId={getStorePanelId}
-            onTabChange={setActiveStoreTab}
-            onTabKeyDown={handlePrimaryTabsKeyDown}
-          />
-
-          {shouldShowFeatured && <FeaturedSection products={featuredProducts} getGoUrl={getGoUrl} />}
-
-          <section
-            id="store-panel-direct"
-            role="tabpanel"
-            aria-labelledby="store-tab-direct"
-            aria-hidden={activeStoreTab !== "direct"}
-            hidden={activeStoreTab !== "direct"}
-            tabIndex={0}
-            className="store-section"
-          >
-              <h2 className="store-section-title">Digital downloads</h2>
-              <p className="store-section-description">
-                Instant digital downloads sold directly by Bradley Matera.
-              </p>
-              {directProducts.length > 0 ? (
-                <ProductGrid items={directProducts} getGoUrl={getGoUrl} />
-              ) : (
-                <div className="store-empty">
-                  No direct downloads yet. New digital releases are coming soon.
-                </div>
-              )}
-
-              {directProducts.length > 0 && (
-                <table className="data-table">
-                  <caption>Digital product comparison — price, format, and license</caption>
-                  <thead>
-                    <tr>
-                      <th scope="col">Product</th>
-                      <th scope="col">Price</th>
-                      <th scope="col">Format</th>
-                      <th scope="col">License</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {directProducts.map((product) => (
-                      <tr key={product.id}>
-                        <td data-label="Product">
-                          <Link to={`/store/${product.slug}`}>{product.name}</Link>
-                        </td>
-                        <td data-label="Price">{formatPrice(product)}</td>
-                        <td data-label="Format">Digital download</td>
-                        <td data-label="License">Personal use</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              )}
-          </section>
-
-          {amazonProducts.length > 0 && (
-            <section
-              id="brads-amazon-picks"
-              role="tabpanel"
-              aria-labelledby="store-tab-amazon"
-              aria-hidden={activeStoreTab !== "amazon"}
-              hidden={activeStoreTab !== "amazon"}
-              tabIndex={0}
-              className="store-section"
-            >
-              <h2 className="store-section-title">Brad&apos;s Amazon Picks</h2>
-              <p className="store-section-description">
-                Hand-picked Amazon gear I actually recommend. Checkout happens on Amazon, and using these links supports my work at no extra cost.
-              </p>
-              <AmazonCollectionTabs
-                tabs={amazonTabs}
-                counts={amazonCounts}
-                totalCount={amazonProducts.length}
-                activeTab={activeAmazonTab}
-                onChange={setActiveAmazonTab}
-              />
-              <ProductGrid items={filteredAmazonProducts} getGoUrl={getGoUrl} />
-
-              {filteredAmazonProducts.length > 0 && (
-                <table className="data-table" style={{ marginTop: "2rem" }}>
-                  <caption>Amazon product comparison — price, category, and rating</caption>
-                  <thead>
-                    <tr>
-                      <th scope="col">Product</th>
-                      <th scope="col">Price</th>
-                      <th scope="col">Category</th>
-                      <th scope="col">Featured</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {filteredAmazonProducts.map((product) => (
-                      <tr key={product.id}>
-                        <td data-label="Product">
-                          <Link to={`/store/${product.slug}`}>{product.name}</Link>
-                        </td>
-                        <td data-label="Price">{formatPrice(product)}</td>
-                        <td data-label="Category">{product.collection || "General"}</td>
-                        <td data-label="Featured">{product.featured_rank !== null && product.featured_rank !== undefined ? "Yes" : "—"}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              )}
-            </section>
-          )}
-          <ComparisonSection
-            visible={activeStoreTab === "amazon"}
-            items={comparisonItems}
-            getGoUrl={getGoUrl}
-          />
-
-          {partnerProducts.length > 0 && (
-            <section
-              id="store-panel-partner"
-              role="tabpanel"
-              aria-labelledby="store-tab-partner"
-              aria-hidden={activeStoreTab !== "partner"}
-              hidden={activeStoreTab !== "partner"}
-              tabIndex={0}
-              className="store-section"
-            >
-              <h2 className="store-section-title">Partner picks</h2>
-              <p className="store-section-description">
-                Affiliate products from trusted partner stores.
-              </p>
-              <ProductGrid items={partnerProducts} getGoUrl={getGoUrl} />
-            </section>
-          )}
-        </div>
-      )}
-    </div>
-  );
+    </section>
+  </div>;
 };
 
 const StorePage = () => {

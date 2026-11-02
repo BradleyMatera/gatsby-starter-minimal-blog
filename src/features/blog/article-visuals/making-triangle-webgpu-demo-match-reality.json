@@ -1,0 +1,65 @@
+{
+  "slug": "/making-triangle-webgpu-demo-match-reality",
+  "title": "WebGPU Demo Honesty Audit: Make the Write Up Match the Repo",
+  "cover": {
+    "src": "/images/blog/making-triangle-webgpu-demo-match-reality/cover.png",
+    "mobile": "/images/blog/making-triangle-webgpu-demo-match-reality/cover-720.webp",
+    "alt": "Blue triangular prism and its matching reflection on a forensic inspection bench"
+  },
+  "figures": [
+    {
+      "id": "claim-proof-decision",
+      "kind": "flow",
+      "title": "Turn each feature claim into a decision",
+      "summary": "Start with what the repository demonstrates.",
+      "items": [
+        {
+          "label": "Inspect the code",
+          "detail": "Make a short list of implemented behavior."
+        },
+        {
+          "label": "Extract the claim",
+          "detail": "Identify the sentence that implies a feature or result."
+        },
+        {
+          "label": "Attach proof",
+          "detail": "Link the exact file, function, demo or measurement artifact."
+        },
+        {
+          "label": "Keep or narrow",
+          "detail": "Keep supported wording; rewrite partial claims to match the evidence."
+        },
+        {
+          "label": "Cut or label future",
+          "detail": "Remove unsupported claims or clearly separate planned work."
+        }
+      ],
+      "caption": "The audit workflow from the article, rather than a claim that every feature exists in the demo."
+    },
+    {
+      "id": "audit-final-check",
+      "kind": "checklist",
+      "title": "Verify the write-up like a new reader",
+      "summary": "The final pass tests the evidence trail, not the polish of the prose.",
+      "items": [
+        {
+          "label": "Feature trace",
+          "detail": "Every feature statement maps to inspectable implementation."
+        },
+        {
+          "label": "Working link",
+          "detail": "Each proof URL opens the intended destination."
+        },
+        {
+          "label": "Measured result",
+          "detail": "A performance number has a repeatable report or log."
+        },
+        {
+          "label": "Present versus future",
+          "detail": "Implemented behavior and next experiments are clearly separated."
+        }
+      ],
+      "caption": "The article's final verification criteria for an honest WebGPU project write-up."
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "slug": "website-design-dixon-illinois",
+  "title": "Website Design in Dixon, Illinois: A Lee County Business Guide",
+  "cover": {
+    "src": "/images/blog/website-design-dixon-illinois/cover.png",
+    "mobile": "/images/blog/website-design-dixon-illinois/cover-720.webp",
+    "alt": "Concept illustration of a fictional river-and-rural service network for a county business website; not a map or photograph of Dixon."
+  },
+  "figures": [
+    {
+      "id": "county-customer-path",
+      "kind": "flow",
+      "title": "Help a county-wide customer recognize the fit",
+      "summary": "The article frames Dixon businesses as serving both town and surrounding communities.",
+      "items": [
+        {
+          "label": "Recognize the business",
+          "detail": "Use specific service descriptions and authentic business context."
+        },
+        {
+          "label": "Confirm the service area",
+          "detail": "Explain which surrounding communities the business actually serves."
+        },
+        {
+          "label": "Check the details",
+          "detail": "Keep contact information consistent with public business profiles."
+        },
+        {
+          "label": "Take the next step",
+          "detail": "Make the inquiry or phone-call path easy to use on mobile."
+        }
+      ],
+      "caption": "A customer journey based on the guide's county-wide service discussion, not a geographic map."
+    },
+    {
+      "id": "content-ready-project",
+      "kind": "timeline",
+      "title": "Prepare the materials that keep a website project moving",
+      "summary": "The guide identifies missing content as a common source of delay.",
+      "items": [
+        {
+          "label": "Define the page scope",
+          "detail": "Agree on the services, pages, and functionality to include."
+        },
+        {
+          "label": "Gather the content",
+          "detail": "Supply page text, usable photos, and the business logo."
+        },
+        {
+          "label": "Confirm responsibilities",
+          "detail": "Establish who reviews the work and what the monthly plan includes."
+        },
+        {
+          "label": "Review the written timeline",
+          "detail": "Confirm milestones and dependencies before work begins."
+        }
+      ],
+      "caption": "A preparation sequence distilled from the scope and timeline sections. Actual schedules depend on the written agreement."
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "slug": "/freelancer-vs-agency-local-business",
+  "title": "Freelancer vs Agency for a Local Business Website",
+  "cover": {
+    "src": "/images/blog/freelancer-vs-agency-local-business/cover.png",
+    "mobile": "/images/blog/freelancer-vs-agency-local-business/cover-720.webp",
+    "alt": "A small shop model sits between a single builder's tool station and three coordinated specialist stations."
+  },
+  "figures": [
+    {
+      "id": "hiring-fit",
+      "kind": "comparison",
+      "title": "Match the working structure to the job",
+      "summary": "Compare the same needs on both sides before choosing a provider.",
+      "items": [
+        {
+          "label": "Scope",
+          "detail": "Freelancer: one coordinated build. Agency: several specialized workstreams."
+        },
+        {
+          "label": "Communication",
+          "detail": "Freelancer: direct builder contact. Agency: a named project or account contact."
+        },
+        {
+          "label": "Marketing",
+          "detail": "Freelancer: foundation or advice. Agency: capacity for ongoing specialist campaigns."
+        },
+        {
+          "label": "Brand work",
+          "detail": "Freelancer: confirm the designer's capabilities. Agency: confirm the proposed brand team's role."
+        }
+      ],
+      "caption": "The article's qualitative comparison. Verify the actual provider's scope and capabilities rather than inferring them from a label."
+    },
+    {
+      "id": "hiring-checks",
+      "kind": "checklist",
+      "title": "Checks that apply to either choice",
+      "summary": "The provider's structure does not replace practical due diligence.",
+      "items": [
+        {
+          "label": "Live work",
+          "detail": "Visit completed websites and try them on a phone."
+        },
+        {
+          "label": "References",
+          "detail": "Ask previous clients about delivery and communication."
+        },
+        {
+          "label": "Written scope",
+          "detail": "Read what is included, excluded and billed separately."
+        },
+        {
+          "label": "Ownership",
+          "detail": "Confirm control of the domain, hosting, content and source."
+        },
+        {
+          "label": "After launch",
+          "detail": "Clarify how changes, maintenance and support are handled."
+        }
+      ],
+      "caption": "A shared hiring checklist drawn from the article, without repeating its illustrative price ranges as current quotes."
+    }
+  ]
+}
