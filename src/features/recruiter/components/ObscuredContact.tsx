@@ -20,7 +20,7 @@ const toCharCodes = (str: string): number[] =>
   bradmatera@gmail.com
 */
 const EMAIL_CODES = toCharCodes("bradmatera@gmail.com");
-const PHONE_CODES = toCharCodes("(360) 970-0581");
+const PHONE_CODES = toCharCodes("(608) 313-5373");
 
 const ObscuredContact: React.FC = () => {
   const [revealed, setRevealed] = React.useState(false);

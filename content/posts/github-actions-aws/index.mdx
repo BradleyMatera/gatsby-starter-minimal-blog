@@ -126,7 +126,7 @@ Here is the verification loop:
 
 | Symptom | Likely cause | Fix |
 |---------|-------------|-----|
-| Workflow never runs | Default branch is not `main` | Update the `branches` filter or rename your branch ([Source](https://docs.github.com/en/repositories/configuring-a-repository/managing-branches-in-your-repository)) |
+| Workflow never runs | Default branch is not `main` | Update the `branches` filter or rename your branch ([Source](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/renaming-a-branch)) |
 | `npm install` fails | `package-lock.json` missing or out of sync | Run `npm install` locally and commit the lock file ([Source](https://docs.npmjs.com/cli/v10/configuring-npm/package-lock-json)) |
 | Passes locally, fails in CI | Different Node version or missing env var | Pin `node-version` in `setup-node` and add required secrets ([Source](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsenv)) |
 | Lint passes locally, fails in CI | Different ESLint config or plugin version | Ensure `.eslintrc` and all plugins are committed to the repo |
@@ -172,6 +172,6 @@ A CI setup is not measured by complexity. It is measured by whether it runs my r
 - [GitHub Actions — Workflow syntax (env)](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsenv)
 - [GitHub Actions — actions/checkout](https://github.com/actions/checkout)
 - [GitHub Actions — actions/setup-node](https://github.com/actions/setup-node)
-- [GitHub — Managing branches in your repository](https://docs.github.com/en/repositories/configuring-a-repository/managing-branches-in-your-repository)
+- [GitHub — Managing branches in your repository](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/renaming-a-branch)
 - [npm — package-lock.json docs](https://docs.npmjs.com/cli/v10/configuring-npm/package-lock-json)
 - [npm — Using npm scripts](https://docs.npmjs.com/cli/v10/using-npm/scripts)

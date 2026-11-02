@@ -8,6 +8,7 @@ import {
   collectionOrder,
   ComparisonSection,
   formatPrice,
+  getProductDetailUrl,
   Product,
   ProductGrid,
   StoreProductRoute,
@@ -28,12 +29,15 @@ const getFunctionsBase = () => {
 
 const getFunctionsUrl = (path: string) => {
   const base = getFunctionsBase();
+  if (base && ["list_products", "get_product"].includes(path.split("?")[0])) {
+    return `https://bradleymatera.dev/.netlify/functions/${path}`;
+  }
   return base ? `${base}/.netlify/functions/${path}` : `/.netlify/functions/${path}`;
 };
 
 const getGoUrl = (slug: string) => {
   const base = getFunctionsBase();
-  return base ? `${base}/go/${slug}` : `/go/${slug}`;
+  return base ? `https://bradleymatera.dev/go/${slug}` : `/go/${slug}`;
 };
 
 const useProducts = () => {
@@ -99,16 +103,18 @@ const StoreIndex: React.FC<RouteComponentProps> = () => {
     const sync = () => {
       const params = new URLSearchParams(window.location.search);
       const section = params.get("section");
-      setActiveStoreTab(section === "amazon" || section === "partner" ? section : "direct");
+      setActiveStoreTab(window.location.hash === "#brads-amazon-picks" ? "amazon" : section === "amazon" || section === "partner" ? section : "direct");
       setActiveAmazonTab(params.get("collection") || "all");
       setQuery(params.get("q") || "");
       setFiltersReady(true);
     };
     sync();
     window.addEventListener("popstate", sync);
+    window.addEventListener("hashchange", sync);
     window.addEventListener("gatsby-route-update", sync);
     return () => {
       window.removeEventListener("popstate", sync);
+      window.removeEventListener("hashchange", sync);
       window.removeEventListener("gatsby-route-update", sync);
     };
   }, []);
@@ -118,6 +124,7 @@ const StoreIndex: React.FC<RouteComponentProps> = () => {
     [["section", activeStoreTab, "direct"], ["collection", activeAmazonTab, "all"], ["q", query, ""]].forEach(([key, value, fallback]) => {
       if (value === fallback) url.searchParams.delete(key); else url.searchParams.set(key, value);
     });
+    if (activeStoreTab !== "amazon" && url.hash === "#brads-amazon-picks") url.hash = "";
     window.history.replaceState(window.history.state, "", url);
   }, [activeStoreTab, activeAmazonTab, query, filtersReady]);
   const matches = (product: Product) => `${product.name} ${product.description} ${product.category || ""}`.toLowerCase().includes(query.trim().toLowerCase());
@@ -155,7 +162,7 @@ const StoreIndex: React.FC<RouteComponentProps> = () => {
     .filter((card): card is typeof card & { product: Product } => Boolean(card.product));
 
 
-  const getStorePanelId = (key: string) => key === "amazon" ? "brads-amazon-picks" : `store-panel-${key}`;
+  const getStorePanelId = (key: string) => `store-panel-${key}`;
   const handlePrimaryTabsKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
     if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
     event.preventDefault();
@@ -168,6 +175,7 @@ const StoreIndex: React.FC<RouteComponentProps> = () => {
   const catalogQuery = `?${new URLSearchParams({ section: activeStoreTab, collection, q: query })}`;
   return <div className="store-shell">
     <StoreHero amazonAnchorId="brads-amazon-picks" onBrowseAmazon={() => setActiveStoreTab("amazon")} />
+    <div id="brads-amazon-picks" tabIndex={-1}>
     {loading && <div className="store-status" role="status">Loading products…</div>}
     {error && <div className="store-status store-error" role="alert"><h2>The catalog could not load.</h2><p>{error}</p><div className="store-actions"><button type="button" className="store-button" onClick={retry}>Try again</button><Link className="store-link" to="/support/">Support</Link></div></div>}
     {!loading && !error && <div id="products" className="store-sections">
@@ -178,10 +186,11 @@ const StoreIndex: React.FC<RouteComponentProps> = () => {
         <p className="store-section-description">{tab.key === "direct" ? "Instant digital downloads sold directly by Bradley Matera." : tab.key === "amazon" ? "Hand-picked Amazon gear I actually recommend. Checkout happens on Amazon, and using these links supports my work at no extra cost." : "Affiliate products from trusted partner stores."}</p>
         {tab.key === "amazon" && <AmazonCollectionTabs tabs={amazonTabs} counts={amazonCounts} totalCount={amazonProducts.length} activeTab={collection} onChange={setActiveAmazonTab} />}
         {activeStoreTab === tab.key && (visibleProducts.length ? <ProductGrid items={visibleProducts} getGoUrl={getGoUrl} catalogQuery={catalogQuery} /> : <div className="store-empty"><h3>{query || collection !== "all" ? "No products match these filters." : "No products in this section yet."}</h3><p>{query || collection !== "all" ? "Try a different keyword or reset the filters." : "Check another section or come back soon."}</p>{(query || collection !== "all") && <button type="button" className="store-button store-button--ghost" onClick={resetFilters}>Show all in this section</button>}</div>)}
-        {activeStoreTab === tab.key && visibleProducts.length > 0 && <details className="store-comparison"><summary>Compare this section</summary><div className="store-table-scroll" role="region" aria-label="Product comparison"><table className="data-table"><caption>Price, category, and purchase destination</caption><thead><tr><th scope="col">Product</th><th scope="col">Price</th><th scope="col">Category</th><th scope="col">Purchase</th></tr></thead><tbody>{visibleProducts.map((product) => <tr key={product.id}><td data-label="Product"><Link to={`/store/${product.slug}/`}>{product.name}</Link></td><td data-label="Price">{formatPrice(product)}</td><td data-label="Category">{product.collection || product.category || "Digital download"}</td><td data-label="Purchase">{product.product_type === "affiliate" ? "Third-party retailer" : <Link to="/digital-product-license/">Digital product license</Link>}</td></tr>)}</tbody></table></div></details>}
+        {activeStoreTab === tab.key && visibleProducts.length > 0 && <details className="store-comparison"><summary>Compare this section</summary><div className="store-table-scroll" role="region" aria-label="Product comparison"><table className="data-table"><caption>Price, category, and purchase destination</caption><thead><tr><th scope="col">Product</th><th scope="col">Price</th><th scope="col">Category</th><th scope="col">Purchase</th></tr></thead><tbody>{visibleProducts.map((product) => <tr key={product.id}><td data-label="Product"><Link to={getProductDetailUrl(product, catalogQuery)}>{product.name}</Link></td><td data-label="Price">{formatPrice(product)}</td><td data-label="Category">{product.collection || product.category || "Digital download"}</td><td data-label="Purchase">{product.product_type === "affiliate" ? "Third-party retailer" : <Link to="/digital-product-license/">Digital product license</Link>}</td></tr>)}</tbody></table></div></details>}
       </section>)}
       <ComparisonSection visible={activeStoreTab === "amazon" && !query && collection === "all"} items={comparisonItems} getGoUrl={getGoUrl} />
     </div>}
+    </div>
     <section className="store-buying-guide" aria-label="How the store works">
       <h2 className="store-question-heading" style={{ fontSize: "1.25rem", margin: "2rem 0 0.5rem", maxWidth: "42rem" }}>
         What can I buy in Bradley Matera&apos;s store?

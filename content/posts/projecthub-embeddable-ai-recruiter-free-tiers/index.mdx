@@ -132,7 +132,7 @@ The rule is simple: if a fact isn't in there, Scout doesn't present it as a fact
 
 ## Why I didn't just pipe every question to an LLM
 
-Because LLMs hallucinate resume facts. They will confidently say you have production experience you don't have. They will smooth over gaps. They will make you sound more senior than you are. For a recruiter assistant, that is dangerous. Research on LLM hallucinations shows that models can fabricate plausible-sounding but incorrect details with high confidence ([Google Research: Hallucinations in LLMs](https://research.google/blog/reducing-hallucinations-in-large-language-models/)).
+Because LLMs hallucinate resume facts. They will confidently say you have production experience you don't have. They will smooth over gaps. They will make you sound more senior than you are. For a recruiter assistant, that is dangerous. Research on LLM hallucinations shows that models can fabricate plausible-sounding but incorrect details with high confidence ([Google Research: Improving LLM grounding](https://research.google/blog/effective-large-language-model-adaptation-for-improved-grounding/)).
 
 So the system computes a deterministic answer first. Only open-ended questions that don't need exact facts go to the provider network. Many important questions never touch an LLM at all. That grounded-first approach is what keeps Scout honest.
 
@@ -297,7 +297,7 @@ npm run judge-poc
 
 ## The analytics dashboard
 
-The analytics section is the only part of the project that uses a build step. It runs on Vite ([Vite documentation](https://vitejs.dev/guide/)) with Carbon Charts ([Carbon Charts](https://carbondesignsystem.com/data-visualization/charts/)), Carbon Web Components, and Carbon Styles. Source files are `analytics/main.js` and `analytics/style.css`, and the production bundle lives in `analytics/dist/`. Those built assets are committed so GitHub Pages can serve them. I keep the build toolchain up to date; a recent dependency upgrade moved Vite to 8.1.4 and cleared the active `npm audit` advisories.
+The analytics section is the only part of the project that uses a build step. It runs on Vite ([Vite documentation](https://vitejs.dev/guide/)) with Carbon Charts ([Carbon Charts](https://charts.carbondesignsystem.com/)), Carbon Web Components, and Carbon Styles. Source files are `analytics/main.js` and `analytics/style.css`, and the production bundle lives in `analytics/dist/`. Those built assets are committed so GitHub Pages can serve them. I keep the build toolchain up to date; a recent dependency upgrade moved Vite to 8.1.4 and cleared the active `npm audit` advisories.
 
 The dashboard pulls from Scout's `/health` endpoint, the GitHub repository API, and the GitHub contributors API. It shows API status, uptime, total requests, grounded versus generated replies, cache usage, learned-answer usage, provider success rates, provider latency, cooldown states, daily quota usage, recent pipelines, referrers, topic breakdowns, requests by hour, knowledge gaps, recent sessions, Think Mode status, and repo stats.
 
@@ -385,6 +385,6 @@ You can see it live at [ProjectHub and Scout](https://bradleymatera.github.io/Pr
 - [MDN: CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) — Cross-Origin Resource Sharing specification.
 - [MDN: JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) — JavaScript language reference.
 - [Vite documentation](https://vitejs.dev/guide/) — Frontend build tool used for the analytics dashboard.
-- [Carbon Charts](https://carbondesignsystem.com/data-visualization/charts/) — IBM Carbon Design System data visualization components.
+- [Carbon Charts](https://charts.carbondesignsystem.com/) — IBM Carbon Design System data visualization components.
 - [Retrieval-Augmented Generation paper (Lewis et al., 2020)](https://arxiv.org/abs/2005.11401) — Original RAG research paper.
-- [Google Research: Reducing Hallucinations in LLMs](https://research.google/blog/reducing-hallucinations-in-large-language-models/) — Research on LLM hallucination mitigation.
+- [Google Research: Effective LLM adaptation for improved grounding](https://research.google/blog/effective-large-language-model-adaptation-for-improved-grounding/) — Research on LLM hallucination mitigation.

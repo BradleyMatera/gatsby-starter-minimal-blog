@@ -1,15 +1,11 @@
 import * as React from "react";
 import { ShopifySpotlight } from "../../features/shopify";
-import { excludedPromotionPath } from "../../features/shopify/catalog-core";
+import { excludedPromotionPath, STORE_ORIGIN } from "../../features/shopify/catalog-core";
 
 export const ShopPromotionBanner = () => (
   <div className="premium-store-link">
     <span>Also from Matera Digital</span>
-    <a href="/.netlify/functions/shopify-outbound" onClick={(event) => {
-      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-      event.preventDefault();
-      window.location.assign(event.currentTarget.href);
-    }}>Explore the shop <span aria-hidden="true">↗</span></a>
+    <a href={`${STORE_ORIGIN}/`}>Explore the shop <span aria-hidden="true">↗</span></a>
     <span>Tech, workspace essentials & everyday finds</span>
   </div>
 );

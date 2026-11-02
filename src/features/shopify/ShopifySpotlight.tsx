@@ -1,5 +1,5 @@
 import * as React from "react";
-import { CATALOG_TTL_MS, MERCHANT_NAME, STORE_ORIGIN, catalogContextKey, getPromotionTopic, loadPromotionCatalog, rankProducts, resolveDestination, type ShopifyCatalog, type ShopifyContext } from "./catalog-core";
+import { CATALOG_TTL_MS, MERCHANT_NAME, STORE_ORIGIN, catalogContextKey, getPromotionTopic, loadPromotionCatalog, productDestination, rankProducts, resolveDestination, type ShopifyCatalog, type ShopifyContext } from "./catalog-core";
 import "./shopify.css";
 
 const cached = new Map<string, { catalog: ShopifyCatalog; expiresAt: number }>();
@@ -90,7 +90,7 @@ const ShopifySpotlight = ({ context = {}, variant = "section", limit = 3, offset
                 <h3>{product.title}</h3>
                 <p className="shopify-product__price">{price} <span>{variantPrice.currencyCode}</span></p>
                 <p className="shopify-product__option">Price for an available option.</p>
-                <a className="shopify-product__link" href={catalog?.source === "direct" ? `${STORE_ORIGIN}/` : `/.netlify/functions/shopify-outbound?handle=${encodeURIComponent(product.handle)}`} rel="sponsored noopener noreferrer" onClick={(event) => { void openProduct(event, product.handle); }} aria-label={`View ${product.title} in the shop`}>
+                <a className="shopify-product__link" href={catalog?.source === "direct" ? productDestination(product) || `${STORE_ORIGIN}/` : `/.netlify/functions/shopify-outbound?handle=${encodeURIComponent(product.handle)}`} rel="sponsored noopener noreferrer" onClick={(event) => { void openProduct(event, product.handle); }} aria-label={`View ${product.title} in the shop`}>
                   {opening === product.handle ? "Checking availability…" : "View in shop"} <span aria-hidden="true">↗</span>
                 </a>
               </div>

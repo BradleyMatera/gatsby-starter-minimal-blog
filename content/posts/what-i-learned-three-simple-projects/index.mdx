@@ -36,7 +36,7 @@ The initial scope was simple: a DOM manipulation exercise that triggers HTML5 `<
 
 After deployment, the app worked on desktop Chrome but failed silently on iOS Safari. It tried to instantiate the `AudioContext` and preload assets on `window.onload`.
 
-Mobile browsers enforce strict autoplay policies. (See [Apple's WebKit autoplay policy documentation](https://webkit.org/blog/6784/new-video-policies-for-ios/) and [Chrome's autoplay policy](https://developer.chrome.com/blog/autoplay/).) The `AudioContext` starts in a `suspended` state on WebKit browsers ([MDN: AudioContext — suspended state](https://developer.mozilla.org/en-US/docs/Web/API/AudioContext#suspended_state)). It cannot transition to `running` until a distinct user interaction event, usually `touchend` or `click`, occurs. My code was trying to play audio before that handshake happened, so the browser rejected the request.
+Mobile browsers enforce strict autoplay policies. (See [Apple's WebKit autoplay policy documentation](https://webkit.org/blog/6784/new-video-policies-for-ios/) and [Chrome's autoplay policy](https://developer.chrome.com/blog/autoplay/).) The `AudioContext` starts in a `suspended` state on WebKit browsers ([MDN: Resuming suspended audio](https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/resume)). It cannot transition to `running` until a distinct user interaction event, usually `touchend` or `click`, occurs. My code was trying to play audio before that handshake happened, so the browser rejected the request.
 
 ### Resolution
 
@@ -203,7 +203,7 @@ Small projects are not practice dummies. They are the fastest way to find the re
 - [Next.js App Router documentation](https://nextjs.org/docs/app)
 - [Next.js basePath configuration](https://nextjs.org/docs/app/api-reference/next-config-js/basePath)
 - [MDN — HTML5 audio element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio)
-- [MDN — AudioContext suspended state](https://developer.mozilla.org/en-US/docs/Web/API/AudioContext#suspended_state)
+- [MDN — Resuming suspended audio](https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/resume)
 - [Apple WebKit autoplay policy documentation](https://webkit.org/blog/6784/new-video-policies-for-ios/)
 - [Chrome autoplay policy](https://developer.chrome.com/blog/autoplay/)
 - [Google Web Audio API best practices](https://developer.chrome.com/blog/web-audio-autoplay/)

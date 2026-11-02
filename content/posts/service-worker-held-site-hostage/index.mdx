@@ -35,7 +35,7 @@ A stale service worker was still registered in the browser from an earlier versi
 
 A service worker sits between the browser and the network. It can intercept requests and decide what to return ([MDN: Using Service Workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers)). My service worker had cached the old version of the site and never let go of it. So even though the server was sending the new version, the browser ignored it.
 
-Service workers have a lifecycle with distinct phases — registration, installation, activation, and termination ([MDN: Service Worker Lifecycle](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Life_cycle)). The key problem is that an activated service worker persists across browser sessions and continues intercepting requests even after you navigate away and come back. Unless you explicitly unregister it or the service worker code itself calls `self.skipWaiting()` combined with a cache-busting strategy, the old cached content wins every time.
+Service workers have a lifecycle with distinct phases — registration, installation, activation, and termination ([MDN: Service Worker Lifecycle](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers)). The key problem is that an activated service worker persists across browser sessions and continues intercepting requests even after you navigate away and come back. Unless you explicitly unregister it or the service worker code itself calls `self.skipWaiting()` combined with a cache-busting strategy, the old cached content wins every time.
 
 The browser trusted the service worker more than the server.
 
@@ -111,7 +111,7 @@ Service workers can hold a website hostage if you are not careful.
 
 Since hitting this issue, here is what I changed in my workflow:
 
-- I never generate a service worker unless I know why I need it. Service workers should be added deliberately, not auto-generated ([MDN: Service Worker Lifecycle](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Life_cycle)).
+- I never generate a service worker unless I know why I need it. Service workers should be added deliberately, not auto-generated ([MDN: Service Worker Lifecycle](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers)).
 - I always check DevTools when a deploy looks stuck.
 - I test live sites in Incognito to avoid cache issues.
 - I keep build processes simple until I fully understand what is happening.
@@ -137,7 +137,7 @@ This bug taught me more about how the browser actually works than almost anythin
 
 - [MDN: Service Worker API](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) — Official documentation on the Service Worker API.
 - [MDN: Using Service Workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers) — Guide to registering and using service workers.
-- [MDN: Service Worker Lifecycle](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Life_cycle) — The registration, installation, activation, and termination lifecycle.
+- [MDN: Service Worker Lifecycle](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers) — The registration, installation, activation, and termination lifecycle.
 - [Chrome DevTools documentation](https://developer.chrome.com/docs/devtools) — Official guide to Chrome DevTools including the Application tab.
 - [GitHub Pages documentation](https://docs.github.com/en/pages) — Official GitHub Pages hosting guide.
 - [GitHub Actions documentation](https://docs.github.com/en/actions) — Official documentation for CI/CD workflows on GitHub.

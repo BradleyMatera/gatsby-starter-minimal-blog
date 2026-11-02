@@ -10,23 +10,23 @@ interface ReviewBadgesProps {
   yelpUrl?: string;
 }
 
-/**
- * Mock Google Business and Yelp review badges.
- * In production, these would use:
- * - Google Places API to fetch live review data (free tier: $200 monthly credit)
- * - Yelp Fusion API to fetch live reviews (free tier: 500 calls/day)
- * The badges link to the real business profiles where customers can read and leave reviews.
- */
+const ReviewBadge = ({ href, className, children }: { href?: string; className: string; children: React.ReactNode }) =>
+  href && /^https?:\/\//.test(href) ? (
+    <a href={href} target="_blank" rel="noopener noreferrer" className={className}>{children}</a>
+  ) : (
+    <div className={className}>{children}</div>
+  );
+
 const ReviewBadges: React.FC<ReviewBadgesProps> = ({
   googleRating,
   googleReviewCount,
   yelpRating,
   yelpReviewCount,
-  googleUrl = "#",
-  yelpUrl = "#",
+  googleUrl,
+  yelpUrl,
 }) => (
   <div className="demo-review-badges">
-    <a href={googleUrl} target="_blank" rel="noopener noreferrer" className="demo-review-badge demo-review-badge--google">
+    <ReviewBadge href={googleUrl} className="demo-review-badge demo-review-badge--google">
       <div className="demo-review-badge__icon"><GoogleIcon size={28} /></div>
       <div className="demo-review-badge__body">
         <div className="demo-review-badge__platform">Google Reviews</div>
@@ -40,8 +40,8 @@ const ReviewBadges: React.FC<ReviewBadgesProps> = ({
         </div>
         <div className="demo-review-badge__count">{googleReviewCount} reviews</div>
       </div>
-    </a>
-    <a href={yelpUrl} target="_blank" rel="noopener noreferrer" className="demo-review-badge demo-review-badge--yelp">
+    </ReviewBadge>
+    <ReviewBadge href={yelpUrl} className="demo-review-badge demo-review-badge--yelp">
       <div className="demo-review-badge__icon"><YelpIcon size={28} /></div>
       <div className="demo-review-badge__body">
         <div className="demo-review-badge__platform">Yelp</div>
@@ -55,7 +55,7 @@ const ReviewBadges: React.FC<ReviewBadgesProps> = ({
         </div>
         <div className="demo-review-badge__count">{yelpReviewCount} reviews</div>
       </div>
-    </a>
+    </ReviewBadge>
   </div>
 );
 
